@@ -1,0 +1,10 @@
+https://medium.com/@brijesh.vicky/steps-to-use-flatbuffers-abbd7addeeb9
+
+install cmake
+add to path that entering cmake in console does something
+cd flattbuffers
+cmake -G "Visual Studio 14 // for vs 2017
+open ALL_BUILD.vcxproj
+set to release
+build all
+result in Yathsou\flatbuffers\Release
