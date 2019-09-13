@@ -13,10 +13,57 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\flatbuffers">
+      <UniqueIdentifier>{0f879891-d3a5-4baf-8917-66503f9b82a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="flatbuffers\base.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\code_generators.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\flatbuffers.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\flatc.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\flexbuffers.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\grpc.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\hash.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\idl.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\minireflect.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\reflection.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\reflection_generated.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\registry.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\stl_emulation.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
+    <ClInclude Include="flatbuffers\util.h">
+      <Filter>Header Files\flatbuffers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
