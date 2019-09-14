@@ -71,6 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir);$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -121,6 +122,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Architecture\Decisions.h" />
     <ClInclude Include="Lib\nop\base\array.h" />
     <ClInclude Include="Lib\nop\base\encoding.h" />
     <ClInclude Include="Lib\nop\base\encoding_byte.h" />
@@ -183,8 +185,23 @@
     <ClInclude Include="Lib\nop\utility\stream_reader.h" />
     <ClInclude Include="Lib\nop\utility\stream_writer.h" />
     <ClInclude Include="Lib\nop\value.h" />
+    <ClInclude Include="Serial\Building.h" />
+    <ClInclude Include="Serial\ConstructionSite.h" />
+    <ClInclude Include="Serial\Destructible.h" />
+    <ClInclude Include="Serial\Entity.h" />
+    <ClInclude Include="Serial\ExtractionPoint.h" />
+    <ClInclude Include="Serial\MoveableEntity.h" />
+    <ClInclude Include="Serial\MovementCommand.h" />
+    <ClInclude Include="Serial\Owned.h" />
+    <ClInclude Include="Serial\Player.h" />
+    <ClInclude Include="Serial\Projectile.h" />
+    <ClInclude Include="Serial\Quaternion.h" />
+    <ClInclude Include="Serial\Ressource.h" />
     <ClInclude Include="Serial\Unit.h" />
     <ClInclude Include="Serial\Vector3.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Architecture\SerialDesign.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

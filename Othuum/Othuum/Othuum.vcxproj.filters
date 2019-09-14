@@ -19,6 +19,9 @@
     <Filter Include="Serial">
       <UniqueIdentifier>{2130c330-b440-4045-a097-425220871a7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Architecture">
+      <UniqueIdentifier>{2d48d53c-682d-4d07-a5ab-67969328448f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -218,5 +221,49 @@
     <ClInclude Include="Serial\Vector3.h">
       <Filter>Serial</Filter>
     </ClInclude>
+    <ClInclude Include="Serial\Ressource.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Building.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\ConstructionSite.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\MovementCommand.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Player.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Projectile.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\ExtractionPoint.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Architecture\Decisions.h">
+      <Filter>Architecture</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Quaternion.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Entity.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\MoveableEntity.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Owned.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Destructible.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Architecture\SerialDesign.txt">
+      <Filter>Architecture</Filter>
+    </Text>
   </ItemGroup>
 </Project>
