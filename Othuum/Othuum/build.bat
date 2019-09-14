@@ -1,1 +1,1 @@
-./flatc --cpp -o Generated generators/Unit.fbs
+flatc --cpp -o Generated generators/Unit.fbs
