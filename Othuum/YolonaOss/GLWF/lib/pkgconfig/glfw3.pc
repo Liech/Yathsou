@@ -1,0 +1,13 @@
+prefix=C:/Users/Niki/CMakeBuilds/1a706e42-d4cf-8532-bb5b-5c9bc02f6080/build/x64-Release/install
+exec_prefix=${prefix}
+includedir=${prefix}/include
+libdir=${exec_prefix}/lib
+
+Name: GLFW
+Description: A multi-platform library for OpenGL, window and input
+Version: 3.2.1
+URL: http://www.glfw.org/
+Requires.private: 
+Libs: -L${libdir} -lglfw3
+Libs.private:  -lgdi32
+Cflags: -I${includedir}

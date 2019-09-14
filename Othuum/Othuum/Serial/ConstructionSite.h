@@ -12,6 +12,6 @@ namespace Serial {
   struct ConstructionSite : Entity, Owned, Destructible {
     std::array<size_t, Decisions::numberOfRessources()> neededRessources;    
 
-    NOP_STRUCTURE(ConstructionSite, position, orientation,modelID,ownerID, health,neededRessources);
+    NOP_STRUCTURE(ConstructionSite, position, orientation,modelID,ownerID, health,neededRessources, landscapeID);
   };
 }

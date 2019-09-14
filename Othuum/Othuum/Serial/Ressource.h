@@ -13,6 +13,6 @@ namespace Serial {
   struct Ressource : Entity, Destructible{
     std::array<size_t, Decisions::numberOfRessources()> ressources;
 
-    NOP_STRUCTURE(Ressource, position,orientation,modelID, ressources,health);
+    NOP_STRUCTURE(Ressource, position,orientation,modelID, ressources,health,landscapeID);
   };
 }

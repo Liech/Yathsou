@@ -4,7 +4,7 @@
 #include "Lib/nop/serializer.h"
 #include "Lib/nop/utility/stream_writer.h"
 #include "Lib/nop/structure.h"
-
+#include "YolonaOss/YolonaOss.h"
 int main() { 
   std::cout << "Purge" << std::endl;
   Serial::Unit x;
@@ -13,4 +13,8 @@ int main() {
   nop::Serializer<Writer> serializer;
   serializer.Write(x);
   Serial::Player p;
+
+  YolonaOss os;
+  int xxx;
+  std::cin >> xxx;
 } 

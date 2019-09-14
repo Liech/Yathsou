@@ -9,5 +9,7 @@ namespace Serial {
     Vector3    position;
     Quaternion orientation;
     size_t     modelID;
+    size_t     landscapeID;
+    size_t     entityID;
   };
 }

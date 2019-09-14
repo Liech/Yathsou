@@ -27,6 +27,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicalModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lib\nop\base\array.h">
@@ -259,6 +262,15 @@
     </ClInclude>
     <ClInclude Include="Serial\Destructible.h">
       <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Gamestate.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Landscape.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

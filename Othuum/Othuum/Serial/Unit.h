@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Lib/nop/structure.h"
+#include "../Lib/nop/structure.h"
 #include "Vector3.h"
 #include "MoveableEntity.h"
 #include "Owned.h"
