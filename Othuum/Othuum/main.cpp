@@ -1,13 +1,14 @@
 #include <iostream>
-#include "Generated/Unit_generated.h"
+#include "Serial/Unit.h"
+#include "Lib/nop/serializer.h"
+#include "Lib/nop/utility/stream_writer.h"
+#include "Lib/nop/structure.h"
 
 int main() { 
   std::cout << "Purge" << std::endl;
-  flatbuffers::FlatBufferBuilder builder;
-  
-  Yathsou::Vec3 p(0, 0, 0);
-  auto unit = Yathsou::CreateUnit(builder, &p);  
-  builder.Finish(unit);
-  auto UNIT = Yathsou::GetUnit(builder.GetBufferPointer());
-  UNIT->pos() = p;
+  Serial::Unit x;
+  x.position.Y = 2;
+  using Writer = nop::StreamWriter<std::stringstream>;
+  nop::Serializer<Writer> serializer;
+  serializer.Write(x);
 } 

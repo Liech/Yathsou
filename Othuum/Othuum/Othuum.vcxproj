@@ -69,7 +69,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -104,7 +106,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Generated;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -118,23 +121,70 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="flatbuffers\base.h" />
-    <ClInclude Include="flatbuffers\code_generators.h" />
-    <ClInclude Include="flatbuffers\flatbuffers.h" />
-    <ClInclude Include="flatbuffers\flatc.h" />
-    <ClInclude Include="flatbuffers\flexbuffers.h" />
-    <ClInclude Include="flatbuffers\grpc.h" />
-    <ClInclude Include="flatbuffers\hash.h" />
-    <ClInclude Include="flatbuffers\idl.h" />
-    <ClInclude Include="flatbuffers\minireflect.h" />
-    <ClInclude Include="flatbuffers\reflection.h" />
-    <ClInclude Include="flatbuffers\reflection_generated.h" />
-    <ClInclude Include="flatbuffers\registry.h" />
-    <ClInclude Include="flatbuffers\stl_emulation.h" />
-    <ClInclude Include="flatbuffers\util.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="generators\Unit.fbs" />
+    <ClInclude Include="Lib\nop\base\array.h" />
+    <ClInclude Include="Lib\nop\base\encoding.h" />
+    <ClInclude Include="Lib\nop\base\encoding_byte.h" />
+    <ClInclude Include="Lib\nop\base\enum.h" />
+    <ClInclude Include="Lib\nop\base\handle.h" />
+    <ClInclude Include="Lib\nop\base\logical_buffer.h" />
+    <ClInclude Include="Lib\nop\base\macros.h" />
+    <ClInclude Include="Lib\nop\base\map.h" />
+    <ClInclude Include="Lib\nop\base\members.h" />
+    <ClInclude Include="Lib\nop\base\optional.h" />
+    <ClInclude Include="Lib\nop\base\pair.h" />
+    <ClInclude Include="Lib\nop\base\reference_wrapper.h" />
+    <ClInclude Include="Lib\nop\base\result.h" />
+    <ClInclude Include="Lib\nop\base\serializer.h" />
+    <ClInclude Include="Lib\nop\base\string.h" />
+    <ClInclude Include="Lib\nop\base\table.h" />
+    <ClInclude Include="Lib\nop\base\tuple.h" />
+    <ClInclude Include="Lib\nop\base\utility.h" />
+    <ClInclude Include="Lib\nop\base\value.h" />
+    <ClInclude Include="Lib\nop\base\variant.h" />
+    <ClInclude Include="Lib\nop\base\vector.h" />
+    <ClInclude Include="Lib\nop\protocol.h" />
+    <ClInclude Include="Lib\nop\rpc\interface.h" />
+    <ClInclude Include="Lib\nop\rpc\simple_method_receiver.h" />
+    <ClInclude Include="Lib\nop\rpc\simple_method_sender.h" />
+    <ClInclude Include="Lib\nop\serializer.h" />
+    <ClInclude Include="Lib\nop\status.h" />
+    <ClInclude Include="Lib\nop\structure.h" />
+    <ClInclude Include="Lib\nop\table.h" />
+    <ClInclude Include="Lib\nop\traits\function_traits.h" />
+    <ClInclude Include="Lib\nop\traits\is_comparable.h" />
+    <ClInclude Include="Lib\nop\traits\is_detected.h" />
+    <ClInclude Include="Lib\nop\traits\is_fungible.h" />
+    <ClInclude Include="Lib\nop\traits\is_template_base_of.h" />
+    <ClInclude Include="Lib\nop\traits\void.h" />
+    <ClInclude Include="Lib\nop\types\detail\logical_buffer.h" />
+    <ClInclude Include="Lib\nop\types\detail\member_pointer.h" />
+    <ClInclude Include="Lib\nop\types\detail\variant.h" />
+    <ClInclude Include="Lib\nop\types\enum_flags.h" />
+    <ClInclude Include="Lib\nop\types\file_handle.h" />
+    <ClInclude Include="Lib\nop\types\handle.h" />
+    <ClInclude Include="Lib\nop\types\optional.h" />
+    <ClInclude Include="Lib\nop\types\result.h" />
+    <ClInclude Include="Lib\nop\types\thread_local.h" />
+    <ClInclude Include="Lib\nop\types\variant.h" />
+    <ClInclude Include="Lib\nop\utility\backtrace.h" />
+    <ClInclude Include="Lib\nop\utility\bounded_reader.h" />
+    <ClInclude Include="Lib\nop\utility\bounded_writer.h" />
+    <ClInclude Include="Lib\nop\utility\buffer_reader.h" />
+    <ClInclude Include="Lib\nop\utility\buffer_writer.h" />
+    <ClInclude Include="Lib\nop\utility\compiler.h" />
+    <ClInclude Include="Lib\nop\utility\constexpr_buffer_writer.h" />
+    <ClInclude Include="Lib\nop\utility\die.h" />
+    <ClInclude Include="Lib\nop\utility\endian.h" />
+    <ClInclude Include="Lib\nop\utility\fd_reader.h" />
+    <ClInclude Include="Lib\nop\utility\fd_writer.h" />
+    <ClInclude Include="Lib\nop\utility\pedantic_buffer_reader.h" />
+    <ClInclude Include="Lib\nop\utility\pedantic_buffer_writer.h" />
+    <ClInclude Include="Lib\nop\utility\sip_hash.h" />
+    <ClInclude Include="Lib\nop\utility\stream_reader.h" />
+    <ClInclude Include="Lib\nop\utility\stream_writer.h" />
+    <ClInclude Include="Lib\nop\value.h" />
+    <ClInclude Include="Serial\Unit.h" />
+    <ClInclude Include="Serial\Vector3.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

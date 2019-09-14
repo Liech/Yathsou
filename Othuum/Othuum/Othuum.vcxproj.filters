@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\flatbuffers">
-      <UniqueIdentifier>{0f879891-d3a5-4baf-8917-66503f9b82a8}</UniqueIdentifier>
+    <Filter Include="libnop">
+      <UniqueIdentifier>{48e6329e-56bf-44b5-af41-46fbbbde0079}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Generators">
-      <UniqueIdentifier>{cf7f815b-d601-4fce-a52e-0efeba272a41}</UniqueIdentifier>
+    <Filter Include="Serial">
+      <UniqueIdentifier>{2130c330-b440-4045-a097-425220871a7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -26,52 +26,197 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="flatbuffers\base.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\array.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\code_generators.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\encoding.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\flatbuffers.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\encoding_byte.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\flatc.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\enum.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\flexbuffers.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\handle.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\grpc.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\logical_buffer.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\hash.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\macros.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\idl.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\map.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\minireflect.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\members.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\reflection.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\optional.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\reflection_generated.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\pair.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\registry.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\reference_wrapper.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\stl_emulation.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\result.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="flatbuffers\util.h">
-      <Filter>Header Files\flatbuffers</Filter>
+    <ClInclude Include="Lib\nop\base\serializer.h">
+      <Filter>libnop</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="generators\Unit.fbs">
-      <Filter>Generators</Filter>
-    </None>
+    <ClInclude Include="Lib\nop\base\string.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\base\table.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\base\tuple.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\base\utility.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\base\value.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\base\variant.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\base\vector.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\protocol.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\rpc\interface.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\rpc\simple_method_receiver.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\rpc\simple_method_sender.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\serializer.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\status.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\structure.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\table.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\traits\function_traits.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\traits\is_comparable.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\traits\is_detected.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\traits\is_fungible.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\traits\is_template_base_of.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\traits\void.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\types\detail\logical_buffer.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\types\detail\member_pointer.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\types\detail\variant.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\types\enum_flags.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\types\file_handle.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\types\handle.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\types\optional.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\types\result.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\types\thread_local.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\types\variant.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\backtrace.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\bounded_reader.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\bounded_writer.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\buffer_reader.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\buffer_writer.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\compiler.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\constexpr_buffer_writer.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\die.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\endian.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\fd_reader.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\fd_writer.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\pedantic_buffer_reader.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\pedantic_buffer_writer.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\sip_hash.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\stream_reader.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\utility\stream_writer.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\nop\value.h">
+      <Filter>libnop</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Unit.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Vector3.h">
+      <Filter>Serial</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
