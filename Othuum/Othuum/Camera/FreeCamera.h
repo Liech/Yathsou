@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-
+#include "YolonaOss/glm/vec2.hpp"
 class Window;
 class Camera;
 
@@ -15,4 +15,5 @@ private:
   std::shared_ptr<Camera> _camera;
 
   double                  _lastTime = 0;
+  glm::vec2               _lastCursorPos; 
 };

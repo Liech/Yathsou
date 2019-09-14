@@ -19,15 +19,14 @@ public:
   double                     getTime();
   void                       setCursorStatus(CursorStatus);
   std::pair<double, double>  getCursorPos();
-  std::pair<double, double>  getCursorMovement();
-  void                       setCatchCursor(bool Catch);
+  void                       setCursorPos(std::pair<double, double>);
+
+  int getWidth() { return _width; }
+  int getHeight() { return _height; }
 
 private:
   int _width  = 1920;
   int _height = 1080;
   GLFWwindow* _window = nullptr;
-  bool _catchCursor = false;
-  std::pair<double, double> _lastCursorPos;
-  std::pair<double, double> _cursorMovement;
 };
 

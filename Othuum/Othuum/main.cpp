@@ -5,6 +5,7 @@
 #include "YolonaOss/Drawables/Background.h"
 #include "DrawCubes.h"
 #include "Camera/FreeCamera.h"
+#include "Camera/RTSCamera.h"
 
 int main() { 
   Window w(1920, 1080);
@@ -16,10 +17,11 @@ int main() {
   spec.height = 1080;
 
   std::shared_ptr<Camera> camera;
-  FreeCamera freeCam(&w);
+  RTSCamera freeCam(&w);
 
   w.Startup = [&list, &spec, &camera,&freeCam]() {  
     camera = std::make_shared<Camera>("Camera", spec.width, spec.height);
+    camera->setTarget(camera->getPosition() - glm::vec3(0, 0, 1));
     freeCam.load(camera);
     list.addDrawable(std::make_shared<DrawCubes>(camera));
 
@@ -33,6 +35,8 @@ int main() {
     //camera->setPosition(glm::vec3(camX, 4,camZ));
     freeCam.update();
     list.draw();
+    glm::vec3 dir = camera->getPosition() - camera->getTarget();
+    std::cout << dir.x << " " << dir.y << " " <<dir.z << std::endl;
   };
 
   w.run();

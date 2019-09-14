@@ -124,18 +124,11 @@ void Window::run() {
   glViewport(0, 0, _width, _height);
   glDepthFunc(GL_LESS);
 
-  _lastCursorPos = getCursorPos();
   // Game loop
   while (!glfwWindowShouldClose(_window))
   {
     // Check if any events have been activated (key pressed, mouse moved etc.) and call corresponding response functions
     glfwPollEvents();
-
-    std::pair<double, double> currentCursorPos = getCursorPos();
-    _cursorMovement = std::pair<double, double>(currentCursorPos.first - _lastCursorPos.first, currentCursorPos.second - _lastCursorPos.second);
-    if (_catchCursor)
-      glfwSetCursorPos(_window, _width / 2, _height / 2);
-    _lastCursorPos = getCursorPos();
 
     Update();
 
@@ -168,12 +161,10 @@ std::pair<double, double> Window::getCursorPos() {
   glfwGetCursorPos(_window, &xpos, &ypos);
   return std::make_pair(xpos, ypos);
 }
-std::pair<double, double> Window::getCursorMovement() {
-  return _cursorMovement;
-}
 
-void Window::setCatchCursor(bool Catch) {
-  _catchCursor = Catch;
+
+void Window::setCursorPos(std::pair<double, double> cursorPos) {
+  glfwSetCursorPos(_window, cursorPos.first ,cursorPos.second);
 }
 
 double Window::getTime() {

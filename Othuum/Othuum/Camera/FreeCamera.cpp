@@ -3,6 +3,7 @@
 #include "YolonaOss/OpenGL/Window.h"
 #include "YolonaOss/OpenGL/Camera.h"
 #include "YolonaOss/glm/ext/matrix_transform.hpp"
+#include "YolonaOss/glm/vec2.hpp"
 
 #include <iostream>
 
@@ -14,7 +15,7 @@ FreeCamera::FreeCamera(Window* window) {
 void FreeCamera::load(std::shared_ptr<Camera> camera) {
   _camera = camera;
   _window->setCursorStatus(CursorStatus::HIDDEN);
-  _window->setCatchCursor(true);
+  _lastCursorPos = glm::vec2((float)_window->getCursorPos().first, (float)_window->getCursorPos().second);
 }
 
 void FreeCamera::update() {
@@ -43,9 +44,12 @@ void FreeCamera::update() {
     _camera->setPosition(_camera->getPosition() + offset);
     _camera->setTarget(_camera->getTarget() + offset);
   }
+  int cx = _window->getCursorPos().first;
+  int cy = _window->getCursorPos().second;
+  glm::vec2 cursorMovement = glm::vec2(cx,cy) - glm::vec2(_lastCursorPos);
+  _window->setCursorPos(std::make_pair(_window->getWidth() / 2, _window->getHeight() / 2));
+  _lastCursorPos = glm::vec2((float)_window->getCursorPos().first, (float)_window->getCursorPos().second);
 
-  glm::vec2 cursorMovement(_window->getCursorMovement().first, _window->getCursorMovement().second);
-  
   glm::vec4 lookDir = glm::vec4(glm::normalize(_camera->getTarget() - _camera->getPosition()),1);
   glm::mat4 rotationMat(1);
   rotationMat = glm::rotate(rotationMat, 0.001f * -cursorMovement.x, glm::vec3(0.0, 1.0, 0.0));
