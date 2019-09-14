@@ -42,18 +42,3 @@ void Camera::setPosition(glm::vec3 v) {
 std::vector<Uniform*> Camera::getUniforms() {
   return std::vector<Uniform*> {&_view, &_projection, &_cameraPos, &_invViewProj};
 }
-
-void Camera::updateFreeCamera(Window* win) {
-  //int state = glfwGetKey(win->getglwfWindow(), GLFW_KEY_E);
-
-  double currentTime = glfwGetTime();
-  double deltaTime = currentTime - _lastFrame;
-  _lastFrame = currentTime;
-
-  //if (state == GLFW_PRESS)
-  {
-    
-    //setPosition(getPosition()+glm::vec3(0.00001*deltaTime,0,0));
-  }
-
-}

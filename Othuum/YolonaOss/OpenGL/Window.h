@@ -17,6 +17,8 @@ public:
 
   GLFWwindow* getglwfWindow() { return _window; }
 
+  double getTime();
+
 private:
   int _width  = 1920;
   int _height = 1080;

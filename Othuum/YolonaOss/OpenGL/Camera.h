@@ -4,8 +4,6 @@
 #include "../glm/glm.hpp"
 #include <vector>
 
-class Window;
-
 class Camera {  
 public:
   
@@ -23,8 +21,6 @@ public:
   void setFOV(float v) { _fov = v; }
 
   std::vector<Uniform*> getUniforms();
-
-  void updateFreeCamera(Window* win);
 
 private:
   float _fov = 45;
