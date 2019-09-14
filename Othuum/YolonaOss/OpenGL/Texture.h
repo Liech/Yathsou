@@ -1,7 +1,7 @@
 #pragma once
 
-#include "structs/MultiDimensionalArray.h"
-#include "structs/Color.h"
+#include "../structs/MultiDimensionalArray.h"
+#include "../structs/Color.h"
 #include "glad/glad.h"
 #include "Uniform.h"
 

@@ -2,7 +2,7 @@
 
 #include "Uniform.h"
 #include "glad/glad.h"
-#include "glm/glm.hpp"
+#include "../glm/glm.hpp"
 
 #include <vector>
 #include <string>

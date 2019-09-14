@@ -1,6 +1,6 @@
 #pragma once
 
-#include "OpenGL/Drawable.h"
+#include "Drawable.h"
 #include <vector>
 #include <memory>
 

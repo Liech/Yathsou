@@ -136,6 +136,7 @@ void Window::run() {
 
     // Swap the screen buffers
     glfwSwapBuffers(window);
+
   }
 
   // Terminates GLFW, clearing any resources allocated by GLFW.

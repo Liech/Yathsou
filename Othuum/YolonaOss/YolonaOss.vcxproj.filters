@@ -28,14 +28,23 @@
     <Filter Include="Source Files\OpenGL">
       <UniqueIdentifier>{d59a3443-b2a0-44ad-8dc9-3fba3475f199}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libs\glad">
-      <UniqueIdentifier>{ab292a58-eb87-45a6-a701-8b08218ca75c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\structs">
       <UniqueIdentifier>{b514ad2b-947a-46f8-8d77-fb2de76bfe3b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\structs">
       <UniqueIdentifier>{c6f4617f-c959-437d-9ee3-46a7f0506013}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Examples">
+      <UniqueIdentifier>{69c394c4-c278-4721-b68f-9afdadb4cd39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Drawables">
+      <UniqueIdentifier>{75805108-fbc2-4ec7-9686-babdf63263e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Drawables">
+      <UniqueIdentifier>{eb62e8d4-9b4a-4c70-b987-0f956e1eef46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\glad">
+      <UniqueIdentifier>{657570c7-80a5-4001-a278-f02391375f8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -834,6 +843,18 @@
     <ClInclude Include="structs\Color.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\RenderTriangle.h">
+      <Filter>Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\BasicTriangle.h">
+      <Filter>Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawables\Background.h">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\RotatingCube.h">
+      <Filter>Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -887,9 +908,6 @@
     <ClCompile Include="OpenGL\Camera.cpp">
       <Filter>Source Files\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="glad\src\glad.c">
-      <Filter>libs\glad</Filter>
-    </ClCompile>
     <ClCompile Include="structs\NMTree.cpp">
       <Filter>Source Files\structs</Filter>
     </ClCompile>
@@ -898,6 +916,21 @@
     </ClCompile>
     <ClCompile Include="structs\Color.cpp">
       <Filter>Source Files\structs</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\RenderTriangle.cpp">
+      <Filter>Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\BasicTriangle.cpp">
+      <Filter>Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawables\Background.cpp">
+      <Filter>Source Files\Drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\RotatingCube.cpp">
+      <Filter>Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="..\glad\src\glad.c">
+      <Filter>libs\glad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

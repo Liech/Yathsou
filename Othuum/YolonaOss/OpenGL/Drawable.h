@@ -1,6 +1,6 @@
 #pragma once
 
-#include "OpenGL/DrawSpecification.h"
+#include "DrawSpecification.h"
 
 class Drawable
 {
