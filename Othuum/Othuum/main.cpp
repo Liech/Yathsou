@@ -4,6 +4,8 @@
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include "YolonaOss/Drawables/Background.h"
 #include "DrawCubes.h"
+#include "Camera/FreeCamera.h"
+
 int main() { 
   Window w(1920, 1080);
 
@@ -14,18 +16,22 @@ int main() {
   spec.height = 1080;
 
   std::shared_ptr<Camera> camera;
-  w.Startup = [&list, &spec, &camera]() {  
+  FreeCamera freeCam(&w);
+
+  w.Startup = [&list, &spec, &camera,&freeCam]() {  
     camera = std::make_shared<Camera>("Camera", spec.width, spec.height);
+    freeCam.load(camera);
     list.addDrawable(std::make_shared<DrawCubes>(camera));
 
     list.load(&spec);
   };
 
-  w.Update = [&list, &camera, &w]() {  
+  w.Update = [&list, &camera, &w, &freeCam]() {  
     float radius = 4.0f;
-    float camX = sin(w.getTime()) * radius;
-    float camZ = cos(w.getTime()) * radius;
-    camera->setPosition(glm::vec3(camX, 4,camZ));
+    //float camX = sin(w.getTime()) * radius;
+    //float camZ = cos(w.getTime()) * radius;
+    //camera->setPosition(glm::vec3(camX, 4,camZ));
+    freeCam.update();
     list.draw();
   };
 

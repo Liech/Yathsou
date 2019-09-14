@@ -90,9 +90,9 @@ void Window::run() {
   glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
   // Create a GLFWwindow object that we can use for GLFW's functions
-  GLFWwindow* window = glfwCreateWindow(_width, _height, "GL", NULL, NULL);
-  glfwMakeContextCurrent(window);
-  if (window == NULL)
+  _window = glfwCreateWindow(_width, _height, "GL", NULL, NULL);
+  glfwMakeContextCurrent(_window);
+  if (_window == NULL)
   {
     std::cout << "Failed to create GLFW window" << std::endl;
     glfwTerminate();
@@ -100,8 +100,7 @@ void Window::run() {
   }
 
   // Set the required callback functions
-  glfwSetKeyCallback(window, key_callback);
-  _window = window;
+  glfwSetKeyCallback(_window, key_callback);
 
   //if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
   //{
@@ -125,17 +124,23 @@ void Window::run() {
   glViewport(0, 0, _width, _height);
   glDepthFunc(GL_LESS);
 
-
+  _lastCursorPos = getCursorPos();
   // Game loop
-  while (!glfwWindowShouldClose(window))
+  while (!glfwWindowShouldClose(_window))
   {
     // Check if any events have been activated (key pressed, mouse moved etc.) and call corresponding response functions
     glfwPollEvents();
 
+    std::pair<double, double> currentCursorPos = getCursorPos();
+    _cursorMovement = std::pair<double, double>(currentCursorPos.first - _lastCursorPos.first, currentCursorPos.second - _lastCursorPos.second);
+    if (_catchCursor)
+      glfwSetCursorPos(_window, _width / 2, _height / 2);
+    _lastCursorPos = getCursorPos();
+
     Update();
 
     // Swap the screen buffers
-    glfwSwapBuffers(window);
+    glfwSwapBuffers(_window);
 
   }
 
@@ -148,6 +153,27 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
   std::cout << key << std::endl;
   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     glfwSetWindowShouldClose(window, GL_TRUE);
+}
+
+KeyStatus Window::getKeyStatus(KeyboardKey key) {
+  return (KeyStatus)((int)glfwGetKey(_window, (int)key));
+}
+
+void Window::setCursorStatus(CursorStatus status) {
+  glfwSetInputMode(_window,GLFW_CURSOR, (int)status);
+}
+
+std::pair<double, double> Window::getCursorPos() {
+  double xpos, ypos;
+  glfwGetCursorPos(_window, &xpos, &ypos);
+  return std::make_pair(xpos, ypos);
+}
+std::pair<double, double> Window::getCursorMovement() {
+  return _cursorMovement;
+}
+
+void Window::setCatchCursor(bool Catch) {
+  _catchCursor = Catch;
 }
 
 double Window::getTime() {

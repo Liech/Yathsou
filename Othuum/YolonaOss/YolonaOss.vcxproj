@@ -419,6 +419,7 @@
     <ClInclude Include="OpenGL\DrawableList.h" />
     <ClInclude Include="OpenGL\DrawSpecification.h" />
     <ClInclude Include="OpenGL\IBO.h" />
+    <ClInclude Include="OpenGL\Keys.h" />
     <ClInclude Include="OpenGL\PositionColorNormalVertex.h" />
     <ClInclude Include="OpenGL\PositionColorVertex.h" />
     <ClInclude Include="OpenGL\PositionTextureVertex.h" />

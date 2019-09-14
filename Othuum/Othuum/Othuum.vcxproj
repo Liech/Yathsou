@@ -142,12 +142,16 @@
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera\FreeCamera.cpp" />
+    <ClCompile Include="Camera\RTSCamera.cpp" />
     <ClCompile Include="DrawCubes.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PhysicalModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Architecture\Decisions.h" />
+    <ClInclude Include="Camera\FreeCamera.h" />
+    <ClInclude Include="Camera\RTSCamera.h" />
     <ClInclude Include="DrawCubes.h" />
     <ClInclude Include="Lib\nop\base\array.h" />
     <ClInclude Include="Lib\nop\base\encoding.h" />

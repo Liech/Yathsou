@@ -855,6 +855,9 @@
     <ClInclude Include="Examples\RotatingCube.h">
       <Filter>Examples</Filter>
     </ClInclude>
+    <ClInclude Include="OpenGL\Keys.h">
+      <Filter>Header Files\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
