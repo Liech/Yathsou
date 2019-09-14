@@ -16,6 +16,9 @@
     <Filter Include="Header Files\flatbuffers">
       <UniqueIdentifier>{0f879891-d3a5-4baf-8917-66503f9b82a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Generators">
+      <UniqueIdentifier>{cf7f815b-d601-4fce-a52e-0efeba272a41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -65,5 +68,10 @@
     <ClInclude Include="flatbuffers\util.h">
       <Filter>Header Files\flatbuffers</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="generators\Unit.fbs">
+      <Filter>Generators</Filter>
+    </None>
   </ItemGroup>
 </Project>
