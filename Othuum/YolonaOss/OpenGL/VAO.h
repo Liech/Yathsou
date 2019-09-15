@@ -29,7 +29,7 @@ public:
       AttributeDescription bind = bindings[i];
       glEnableVertexAttribArray(i);
       glBindBuffer(GL_ARRAY_BUFFER, vbo->getID());
-      glVertexAttribPointer(i, bind.size, GL_FLOAT, GL_FALSE, stride,(GLvoid*) currentOffset);
+      glVertexAttribPointer(i, bind.size, GL_FLOAT, GL_FALSE, (GLsizei)stride,(GLvoid*) currentOffset);
       currentOffset += bind.getSize();
     }
   }
@@ -57,7 +57,7 @@ public:
 
   void bind() override{
     glBindVertexArray(_vao);
-    glDrawArrays(GL_TRIANGLES, 0, _vbo->getSize());
+    glDrawArrays(GL_TRIANGLES, 0, (GLsizei)_vbo->getSize());
   }
 
   GLuint getID() override {

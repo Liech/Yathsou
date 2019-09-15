@@ -1,0 +1,7 @@
+license stuff needed for:
+freetype
+glwf
+libnop
+glm
+glad
+lodepng

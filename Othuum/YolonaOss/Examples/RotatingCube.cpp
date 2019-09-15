@@ -3,7 +3,7 @@
 
 #include "GLFW/glfw3.h"
 
-#include "../glad/include/glad/glad.h"
+#include "glad/glad.h"
 void RotatingCube::load(DrawSpecification *d)
 {
   _spec = d;
@@ -104,8 +104,8 @@ void main() {
 void RotatingCube::draw()
 {
   float radius = 4.0f;
-  float camX = sin(glfwGetTime()) * radius;
-  float camZ = cos(glfwGetTime()) * radius;
+  float camX = (float)sin(glfwGetTime()) * radius;
+  float camZ = (float)cos(glfwGetTime()) * radius;
   _camera->setPosition(glm::vec3(camX, 0.1, camZ));
 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

@@ -2,12 +2,12 @@
 
 #include "YolonaOss/OpenGL/Window.h"
 #include "YolonaOss/OpenGL/Camera.h"
-#include "YolonaOss/glm/ext/matrix_transform.hpp"
-#include "YolonaOss/glm/vec2.hpp"
+#include "glm/ext/matrix_transform.hpp"
+#include "glm/vec2.hpp"
 
 #include <iostream>
 
-FreeCamera::FreeCamera(Window* window) {
+FreeCamera::FreeCamera(Window* window) : _lastCursorPos(0,0){
   _window = window;
   _lastTime = _window->getTime();
 }
@@ -27,7 +27,7 @@ void FreeCamera::update() {
   bool q = _window->getKeyStatus(KeyboardKey::KEY_Q) == KeyStatus::PRESS;
   bool e = _window->getKeyStatus(KeyboardKey::KEY_E) == KeyStatus::PRESS;
 
-  float delta = (time - _lastTime);
+  float delta = (float)(time - _lastTime);
   glm::vec3 toTarget = glm::normalize(_camera->getTarget() - _camera->getPosition());
   ////toTarget /= toTarget.length();
   glm::vec3 toSide = glm::cross(toTarget, _camera->getUp());
@@ -44,8 +44,8 @@ void FreeCamera::update() {
     _camera->setPosition(_camera->getPosition() + offset);
     _camera->setTarget(_camera->getTarget() + offset);
   }
-  int cx = _window->getCursorPos().first;
-  int cy = _window->getCursorPos().second;
+  int cx = (int)_window->getCursorPos().first;
+  int cy = (int)_window->getCursorPos().second;
   glm::vec2 cursorMovement = glm::vec2(cx,cy) - glm::vec2(_lastCursorPos);
   _window->setCursorPos(std::make_pair(_window->getWidth() / 2, _window->getHeight() / 2));
   _lastCursorPos = glm::vec2((float)_window->getCursorPos().first, (float)_window->getCursorPos().second);

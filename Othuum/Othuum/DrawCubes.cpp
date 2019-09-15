@@ -1,10 +1,8 @@
 #include "DrawCubes.h"
 
 
-#include "YolonaOss/GLWF/include/GLFW/glfw3.h"
-
-#include "../glad/include/glad/glad.h"
-#include "YolonaOss/glm/ext/matrix_transform.hpp"
+#include "glad/glad.h"
+#include "glm/ext/matrix_transform.hpp"
 
 
 DrawCubes::DrawCubes(std::shared_ptr<Camera> camera) {

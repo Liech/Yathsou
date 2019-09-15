@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Uniform.h"
-#include "../glm/glm.hpp"
+#include "glm/glm.hpp"
 #include <vector>
 
 class Camera {  

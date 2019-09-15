@@ -3,6 +3,7 @@
 #include "YolonaOss/OpenGL/DrawableList.h"
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include "YolonaOss/Drawables/Background.h"
+#include "YolonaOss/Examples/TextRender.h"
 #include "DrawCubes.h"
 #include "Camera/FreeCamera.h"
 #include "Camera/RTSCamera.h"
@@ -24,6 +25,7 @@ int main() {
     camera->setTarget(camera->getPosition() - glm::vec3(0, 0, 1));
     freeCam.load(camera);
     list.addDrawable(std::make_shared<DrawCubes>(camera));
+    list.addDrawable(std::make_shared<TextRender>());
 
     list.load(&spec);
   };

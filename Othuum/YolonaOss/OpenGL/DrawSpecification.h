@@ -8,8 +8,8 @@ public:
     _window = w;
   }
 
-  int width;
-  int height;
+  int width  = 1920;
+  int height = 1080;
 
   Window* getWindow() {
     return _window;

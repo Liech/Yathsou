@@ -1,0 +1,27 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robustes Dateikopieren fÅr Windows                              
+-------------------------------------------------------------------------------
+
+  Gestartet: Sonntag, 15. September 2019 17:59:12
+   Quelle : F:\Projects\Yathsou\Othuum\YolonaOss\Data\
+     Ziel : F:\Projects\Yathsou\Othuum\x64\Debug\YolonaOssData\
+
+    Dateien : *.*
+	    
+  Optionen: *.* /S /DCOPY:DA /COPY:DAT /Z /R:1000000 /W:30 
+
+------------------------------------------------------------------------------
+
+	                   0	F:\Projects\Yathsou\Othuum\YolonaOss\Data\
+	                   1	F:\Projects\Yathsou\Othuum\YolonaOss\Data\fonts\
+
+------------------------------------------------------------------------------
+
+           Insgesamt   KopiertöbersprungenKeine öbereinstimmung    FEHLER    Extras
+Verzeich.:         2         0         2         0         0         0
+  Dateien:         1         0         1         0         0         0
+    Bytes:   304.3 k         0   304.3 k         0         0         0
+   Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
+   Beendet: Sonntag, 15. September 2019 17:59:12
+

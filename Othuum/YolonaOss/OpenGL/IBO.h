@@ -35,7 +35,7 @@ public:
     // Draw the triangles !
     glDrawElements(
       GL_TRIANGLES,      // mode
-      _size,    // count
+      (GLsizei)_size,    // count
       GL_UNSIGNED_INT,   // type
       (void*)0           // element array buffer offset
     );

@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "YolonaOss/glm/vec2.hpp"
+#include "glm/vec2.hpp"
 class Window;
 class Camera;
 

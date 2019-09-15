@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 #include <string>
+#include <stdexcept>
 
 struct AttributeDescription {
   enum class DataType {
@@ -22,6 +23,7 @@ struct AttributeDescription {
     default:
       break;
     }
+	throw std::runtime_error("Unkown DataType");
   }
 
   std::string getTypeAsString() {

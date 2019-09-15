@@ -14,11 +14,11 @@ ShaderProgram::ShaderProgram(VAO_I* vao, std::vector<Uniform*> uniforms, std::st
   size_t uniformLocations = 0;
   for (int i = 0; i < _uniform.size(); i++) {
     if (_uniform[i]->isBuffer()) {
-      _uniform[i]->setLocation(ssboLocations);
+      _uniform[i]->setLocation((int)ssboLocations);
       ssboLocations++;
     }
     else {
-      _uniform[i]->setLocation(uniformLocations);
+      _uniform[i]->setLocation((int)uniformLocations);
       uniformLocations++;
     }
     _uniformIsActive[i] = false;
