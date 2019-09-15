@@ -7,9 +7,11 @@
 
 class Texture : public Uniform{
 public:
-  Texture(std::string name, MultiDimensionalArray<Color,2>* tex);
+  Texture(std::string name, MultiDimensionalArray<Color, 2> * tex);
+  Texture(std::string name, GLuint tex);
   ~Texture();
 
+  void setTextureID(GLuint tex);
   void bind() override;
   virtual std::string getType() override { return "sampler2D"; }
 

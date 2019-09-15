@@ -40,9 +40,21 @@ ShaderProgram::ShaderProgram(VAO_I* vao, std::vector<Uniform*> uniforms, std::st
   }
   m += std::to_string(line) + " " + s.substr(currentStart, s.length() - 1);
 
+  std::string s2(vssrc);
+  std::string m2 = "";
+  currentStart = 0;
+  line = 1;
+  for (int i = 0; i < s2.length(); i++) {
+    if (s2[i] == '\n') {
+      m2 += std::to_string(line) + " " + s2.substr(currentStart, i - currentStart) + "\n";
+      currentStart = i + 1;
+      line++;
+    }
+  }
+  m2 += std::to_string(line) + " " + s2.substr(currentStart, s2.length() - 1);
 
 
-  std::cout <<std::endl<< "SHADER VS" <<std::endl<< vssrc << std::endl;
+  std::cout <<std::endl<< "SHADER VS" <<std::endl<< m2 << std::endl;
   std::cout <<std::endl<< "SHADER FS" <<std::endl<< m << std::endl;
 
   const char* vs_src = vssrc.c_str();

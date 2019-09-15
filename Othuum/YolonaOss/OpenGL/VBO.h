@@ -28,6 +28,16 @@ public:
     return _size;
   }
 
+  void setData(std::vector<Struct> content) {
+    if (_size != content.size())
+      throw std::runtime_error("Size different");
+
+    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, content.size() * sizeof(Struct), content.data());
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+  }
+
 private:
   GLuint _vbo;
   size_t _size;
