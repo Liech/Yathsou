@@ -39,7 +39,7 @@ void RTSCamera::update() {
   if (a) offset += toSide   * -delta;
   if (d) offset += toSide   * delta;
 
-
+  offset += toTarget * _window->getMouseWheelMovement();
 
   _camera->setPosition(_camera->getPosition() + offset);
   _camera->setTarget(_camera->getTarget() + offset);

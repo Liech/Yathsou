@@ -36,7 +36,7 @@ int main() {
     freeCam.update();
     list.draw();
     glm::vec3 dir = camera->getPosition() - camera->getTarget();
-    std::cout << dir.x << " " << dir.y << " " <<dir.z << std::endl;
+    //std::cout << dir.x << " " << dir.y << " " <<dir.z << std::endl;
   };
 
   w.run();

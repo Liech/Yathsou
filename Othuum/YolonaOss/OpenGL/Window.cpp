@@ -4,6 +4,8 @@
 #include <GLFW/glfw3.h>
 #include <string>
 
+Window* win;
+
 Window::Window(int width, int height)
 {
   _width = width;
@@ -91,6 +93,7 @@ void Window::run() {
 
   // Create a GLFWwindow object that we can use for GLFW's functions
   _window = glfwCreateWindow(_width, _height, "GL", NULL, NULL);
+  win = this;
   glfwMakeContextCurrent(_window);
   if (_window == NULL)
   {
@@ -101,7 +104,10 @@ void Window::run() {
 
   // Set the required callback functions
   glfwSetKeyCallback(_window, key_callback);
-
+  glfwSetScrollCallback(_window, [](GLFWwindow* window, double xoffset, double yoffset)
+  {
+    win->_mouseWheelMovement += yoffset;
+  });
   //if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
   //{
   //  std::cout << "Failed to initialize OpenGL context" << std::endl;
@@ -127,6 +133,7 @@ void Window::run() {
   // Game loop
   while (!glfwWindowShouldClose(_window))
   {
+    _mouseWheelMovement = 0;
     // Check if any events have been activated (key pressed, mouse moved etc.) and call corresponding response functions
     glfwPollEvents();
 
@@ -143,7 +150,7 @@ void Window::run() {
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-  std::cout << key << std::endl;
+  //std::cout << key << std::endl;
   if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
     glfwSetWindowShouldClose(window, GL_TRUE);
 }
@@ -169,4 +176,8 @@ void Window::setCursorPos(std::pair<double, double> cursorPos) {
 
 double Window::getTime() {
   return glfwGetTime();
+}
+
+float Window::getMouseWheelMovement() {
+  return _mouseWheelMovement;
 }
