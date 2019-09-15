@@ -25,8 +25,10 @@ void TextRender::load(DrawSpecification *d)
   if (error) { throw std::runtime_error(":("); }
   std::filesystem::path cwd = std::filesystem::current_path();
   std::cout << cwd.string() << std::endl;
+  
+  std::string path = cwd.string() + "/" + "YolonaOssData/fonts/arial.ttf";
   error = FT_New_Face(library,
-    "F:/Projects/Yathsou/Othuum/x64/Debug/YolonaOssData/fonts/arial.ttf",
+    path.c_str(),
     0,
     &face);
   if (error == FT_Err_Unknown_File_Format)
