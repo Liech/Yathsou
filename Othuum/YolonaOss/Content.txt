@@ -1,0 +1,8 @@
+Data  is copied to dist folder
+Debug, x64 is visual studio stuff
+Drawables contains plug&play render stuff
+Examples contains source code using all other stuff (in an propably outdated way)
+Lib contains third party libs
+Opengl contains basic opengl steering
+renderer uses opengl folder to render basic stuff simple way
+structs contain naked simple data structures

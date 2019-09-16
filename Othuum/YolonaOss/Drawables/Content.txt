@@ -1,0 +1,7 @@
+
+LAYER 3
+
+Should contain plug&play elements that fullfill a complete purpose.
+They should use the renderer folder
+
+E.g. Button, GUI Texture, BoundingBox, AxesHandle

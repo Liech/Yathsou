@@ -1,0 +1,7 @@
+
+LAYER 2
+
+Contains tools to render a specific thing.
+They don't have to be fast, but simple
+
+E.g. Text, a Line, a Mesh

@@ -188,10 +188,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <Text Include="OpenGL\Content.txt" />
     <Text Include="ReadMe.txt" />
+    <Text Include="Renderer\Content.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Drawables\Background.h" />
+    <ClInclude Include="Drawables\Button.h" />
     <ClInclude Include="Examples\BasicTriangle.h" />
     <ClInclude Include="Examples\RenderTriangle.h" />
     <ClInclude Include="Examples\RotatingCube.h" />
@@ -214,6 +217,7 @@
     <ClInclude Include="OpenGL\VAO.h" />
     <ClInclude Include="OpenGL\VBO.h" />
     <ClInclude Include="OpenGL\Window.h" />
+    <ClInclude Include="Renderer\TextRenderer.h" />
     <ClInclude Include="structs\Color.h" />
     <ClInclude Include="structs\MultiDimensionalArray.h" />
     <ClInclude Include="structs\NMTree.h" />
@@ -221,6 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Drawables\Background.cpp" />
+    <ClCompile Include="Drawables\Button.cpp" />
     <ClCompile Include="Examples\BasicTriangle.cpp" />
     <ClCompile Include="Examples\RenderTriangle.cpp" />
     <ClCompile Include="Examples\RotatingCube.cpp" />
@@ -239,6 +244,7 @@
     <ClCompile Include="OpenGL\VAO.cpp" />
     <ClCompile Include="OpenGL\VBO.cpp" />
     <ClCompile Include="OpenGL\Window.cpp" />
+    <ClCompile Include="Renderer\TextRenderer.cpp" />
     <ClCompile Include="structs\Color.cpp" />
     <ClCompile Include="structs\MultiDimensionalArray.cpp" />
     <ClCompile Include="structs\NMTree.cpp" />

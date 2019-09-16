@@ -40,9 +40,21 @@
     <Filter Include="libs\glad">
       <UniqueIdentifier>{fff341f0-f95d-4d31-b751-31f161e0b9c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{7bd0a0fc-dff9-4718-ac99-51d0f2b65503}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{d92bea21-6bab-4afa-bfe7-3af6a31b768b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+    <Text Include="OpenGL\Content.txt">
+      <Filter>Header Files\OpenGL</Filter>
+    </Text>
+    <Text Include="Renderer\Content.txt">
+      <Filter>Header Files\Renderer</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="YolonaOss.h">
@@ -126,6 +138,12 @@
     <ClInclude Include="Examples\TextRender.h">
       <Filter>Examples</Filter>
     </ClInclude>
+    <ClInclude Include="Drawables\Button.h">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\TextRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -196,6 +214,12 @@
     </ClCompile>
     <ClCompile Include="Examples\TextRender.cpp">
       <Filter>Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawables\Button.cpp">
+      <Filter>Source Files\Drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\TextRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

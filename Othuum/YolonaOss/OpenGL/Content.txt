@@ -1,0 +1,7 @@
+
+LAYER 1
+
+Contains lowest possible level of rendering.
+Should be general purpose reusable feature wrappers
+
+e.g. VertexBufferObject, Uniform Variable...
