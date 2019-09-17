@@ -7,8 +7,8 @@
 class DrawableList : public Drawable
 {
 public:
-  DrawableList();
-  ~DrawableList();
+  DrawableList() {}
+  virtual ~DrawableList()override {}
 
   void addDrawable(std::shared_ptr<Drawable> draw);
   virtual void load(DrawSpecification*) override;

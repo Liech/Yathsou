@@ -8,6 +8,8 @@
 #include "Camera/FreeCamera.h"
 #include "Camera/RTSCamera.h"
 
+LaunchYolonaOss
+
 int main() { 
   Window w(1920, 1080);
 

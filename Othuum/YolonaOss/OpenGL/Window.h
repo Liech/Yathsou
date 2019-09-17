@@ -2,7 +2,12 @@
 
 #include <functional>
 #include "Keys.h"
-struct GLFWwindow;
+struct GLFWwindow; 
+
+#include "../Renderer/TextRenderer.h"
+#include "../structs/Factory.h"
+
+#define LaunchYolonaOss REGISTER(Drawable, TextRenderer, "TextRenderer", { "PreDrawCall" })
 
 class Window
 {

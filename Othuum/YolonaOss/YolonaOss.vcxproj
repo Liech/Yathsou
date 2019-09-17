@@ -219,6 +219,7 @@
     <ClInclude Include="OpenGL\Window.h" />
     <ClInclude Include="Renderer\TextRenderer.h" />
     <ClInclude Include="structs\Color.h" />
+    <ClInclude Include="structs\Factory.h" />
     <ClInclude Include="structs\MultiDimensionalArray.h" />
     <ClInclude Include="structs\NMTree.h" />
     <ClInclude Include="YolonaOss.h" />
@@ -246,6 +247,7 @@
     <ClCompile Include="OpenGL\Window.cpp" />
     <ClCompile Include="Renderer\TextRenderer.cpp" />
     <ClCompile Include="structs\Color.cpp" />
+    <ClCompile Include="structs\Factory.cpp" />
     <ClCompile Include="structs\MultiDimensionalArray.cpp" />
     <ClCompile Include="structs\NMTree.cpp" />
     <ClCompile Include="YolonaOss.cpp" />

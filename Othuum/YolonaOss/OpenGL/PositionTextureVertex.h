@@ -8,7 +8,10 @@
 struct PositionTextureVertex {
   glm::vec3 position;
   glm::vec2 texture;
-  PositionTextureVertex() {};
+  PositionTextureVertex() {
+    position = glm::vec3(0, 0, 0);
+    texture = glm::vec2(0, 0);
+  };
   PositionTextureVertex(glm::vec3 Position, glm::vec2 Texture) {
     position = Position;
     texture = Texture;

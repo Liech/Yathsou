@@ -5,8 +5,8 @@
 class Drawable
 {
 public:
-  Drawable();
-  ~Drawable();
+  Drawable() {}
+  virtual ~Drawable() {}
 
   virtual void load(DrawSpecification*) = 0;
   virtual void draw() = 0;

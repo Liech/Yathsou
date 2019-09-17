@@ -2,15 +2,6 @@
 
 
 
-DrawableList::DrawableList()
-{
-}
-
-
-DrawableList::~DrawableList()
-{
-}
-
 void DrawableList::addDrawable(std::shared_ptr<Drawable> drawable) {
   _drawables.push_back(drawable);
 }

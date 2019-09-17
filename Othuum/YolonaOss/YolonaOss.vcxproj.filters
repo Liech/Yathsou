@@ -144,6 +144,9 @@
     <ClInclude Include="Renderer\TextRenderer.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="structs\Factory.h">
+      <Filter>Header Files\structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -220,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\TextRenderer.cpp">
       <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="structs\Factory.cpp">
+      <Filter>Source Files\structs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
