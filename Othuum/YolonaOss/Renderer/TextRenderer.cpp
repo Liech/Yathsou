@@ -47,6 +47,15 @@ void TextRenderer::drawText(std::string text, float x, float y, float scale, glm
   }
 }
 
+glm::vec2 getTextSize(std::string text, float scale) {
+  throw std::runtime_error("Not yet implemented");
+}
+
+glm::vec2 getFittingScale(std::string text, float scale) {
+  throw std::runtime_error("Not yet implemented");
+}
+
+
 void TextRenderer::startTextRender() {
   if (_inRenderProcess == true)
     throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");

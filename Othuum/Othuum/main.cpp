@@ -27,6 +27,7 @@ int main() {
     freeCam.load(camera);
     list.addDrawable(std::make_shared<DrawCubes>(camera));
     list.addDrawable(std::make_shared<FPS>());
+    list.addDrawable(std::make_shared<TextRender>());
 
     list.load(&spec);
   };

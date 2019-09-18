@@ -21,13 +21,14 @@ class UniformVec3;
 class TextRenderer : public Loadable {
 REGISTER(Loadable, TextRenderer, "TextRenderer", { "PreDrawCall" })
 public:
-  TextRenderer() {}
-  virtual ~TextRenderer() {}
-  static void startTextRender();
-  static void endTextRender();
-  static void drawText(std::string text, float x,float y, float scale, glm::vec3 color);
-
-  virtual void load(DrawSpecification*) override;
+                   TextRenderer() {}
+  virtual          ~TextRenderer() {}
+  static void      startTextRender();
+  static void      endTextRender();
+  static void      drawText(std::string text, float x,float y, float scale, glm::vec3 color);
+  static glm::vec2 getTextSize(std::string text, float scale);
+  static glm::vec2 getFittingScale(std::string text, float scale);
+  virtual void     load(DrawSpecification*) override;
   
 private:
   struct Character {

@@ -211,6 +211,7 @@
     <ClInclude Include="OpenGL\PositionColorNormalVertex.h" />
     <ClInclude Include="OpenGL\PositionColorVertex.h" />
     <ClInclude Include="OpenGL\PositionTextureVertex.h" />
+    <ClInclude Include="OpenGL\PositionVertex.h" />
     <ClInclude Include="OpenGL\Rendertarget.h" />
     <ClInclude Include="OpenGL\ShaderProgram.h" />
     <ClInclude Include="OpenGL\SSBO.h" />
@@ -219,6 +220,7 @@
     <ClInclude Include="OpenGL\VAO.h" />
     <ClInclude Include="OpenGL\VBO.h" />
     <ClInclude Include="OpenGL\Window.h" />
+    <ClInclude Include="Renderer\RectangleRenderer.h" />
     <ClInclude Include="Renderer\TextRenderer.h" />
     <ClInclude Include="structs\Color.h" />
     <ClInclude Include="structs\Factory.h" />
@@ -248,6 +250,7 @@
     <ClCompile Include="OpenGL\VAO.cpp" />
     <ClCompile Include="OpenGL\VBO.cpp" />
     <ClCompile Include="OpenGL\Window.cpp" />
+    <ClCompile Include="Renderer\RectangleRenderer.cpp" />
     <ClCompile Include="Renderer\TextRenderer.cpp" />
     <ClCompile Include="structs\Color.cpp" />
     <ClCompile Include="YolonaOss.cpp" />
