@@ -9,7 +9,7 @@ class Texture : public Uniform{
 public:
   Texture(std::string name, MultiDimensionalArray<Color, 2> * tex);
   Texture(std::string name, GLuint tex);
-  ~Texture();
+  virtual ~Texture() override;
 
   void setTextureID(GLuint tex);
   void bind() override;

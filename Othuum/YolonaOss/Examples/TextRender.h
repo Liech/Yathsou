@@ -34,27 +34,5 @@ public:
   // Inherited via Drawable
   virtual void load(DrawSpecification *) override;
   virtual void draw() override;
-
-private:  
-  DrawSpecification* _spec;
-  GLuint program;
-
-  std::unique_ptr<ShaderProgram>  _shader;
-  GLuint vao;
-
-  std::unique_ptr<UniformMat4> _projection;
-  std::unique_ptr<UniformVec3> _textColor;
-  std::unique_ptr<Texture> _fontTexture;
-  
-
-  void freetype();
-  void makeShader();
-  void RenderText(std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
-
-  std::string vertex_shader_source;
-  std::string fragment_shader_source;
-  std::unique_ptr<VBO<PositionTextureVertex>> _vbo;
-  std::unique_ptr<VAO<PositionTextureVertex>> _vao;
-  std::map<GLchar, Character> _characters;
 };
 
