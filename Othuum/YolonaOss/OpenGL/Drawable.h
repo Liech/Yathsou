@@ -1,8 +1,9 @@
 #pragma once
 
 #include "DrawSpecification.h"
+#include "Loadable.h"
 
-class Drawable
+class Drawable : public Loadable
 {
 public:
   Drawable() {}

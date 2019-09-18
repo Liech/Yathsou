@@ -5,15 +5,7 @@
 #include <string>
 #include "structs/Factory.h"
 #include "Drawable.h"
-
-
-//#include <map>
-//#include <memory>
-//InitFactory(Drawable)
-
-//template<typename Drawable> std::map<std::string, Factory<Drawable>::InstantiatorFun> Factory<Drawable>::registry;
-//template<typename Drawable> std::map<std::string, std::set<std::string>>              Factory<Drawable>::tagMap;
-
+#include "Loadable.h"
 
 Window* win;
 
@@ -144,9 +136,9 @@ void Window::run() {
   DrawSpecification spec(this);
   spec.width = 1920;
   spec.height = 1080;
-  std::vector<std::shared_ptr<Drawable>> preRenderList;
-  for (auto renderStep : Factory<Drawable>::getNamesByTag("PreDrawCall")) {
-    preRenderList.push_back(Factory<Drawable>::make(renderStep));
+  std::vector<std::shared_ptr<Loadable>> preRenderList;
+  for (auto renderStep : Factory<Loadable>::getNamesByTag("PreDrawCall")) {
+    preRenderList.push_back(Factory<Loadable>::make(renderStep));
   }
   for (auto renderStep : preRenderList)
     renderStep->load(&spec);
@@ -154,8 +146,6 @@ void Window::run() {
   // Game loop
   while (!glfwWindowShouldClose(_window))
   {
-    for (auto renderStep : preRenderList)
-      renderStep->draw();
     _mouseWheelMovement = 0;
     // Check if any events have been activated (key pressed, mouse moved etc.) and call corresponding response functions
     glfwPollEvents();

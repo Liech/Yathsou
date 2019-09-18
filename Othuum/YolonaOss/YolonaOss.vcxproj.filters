@@ -147,6 +147,9 @@
     <ClInclude Include="structs\Factory.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
+    <ClInclude Include="OpenGL\Loadable.h">
+      <Filter>Header Files\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -191,12 +194,6 @@
     <ClCompile Include="OpenGL\Camera.cpp">
       <Filter>Source Files\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="structs\NMTree.cpp">
-      <Filter>Source Files\structs</Filter>
-    </ClCompile>
-    <ClCompile Include="structs\MultiDimensionalArray.cpp">
-      <Filter>Source Files\structs</Filter>
-    </ClCompile>
     <ClCompile Include="structs\Color.cpp">
       <Filter>Source Files\structs</Filter>
     </ClCompile>
@@ -223,9 +220,6 @@
     </ClCompile>
     <ClCompile Include="Renderer\TextRenderer.cpp">
       <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="structs\Factory.cpp">
-      <Filter>Source Files\structs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

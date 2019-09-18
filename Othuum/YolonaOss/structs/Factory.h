@@ -15,7 +15,8 @@
 //be careful. register commands in static libraries are ignored. 
 //use manual registrationcalls instead: Factory<BaseType>::Register<SpecificType>();
 #define REGISTER(BaseType,SpecificType,Name, Tags)\
- Factory<BaseType>::Registrator<SpecificType> RegisterTextRenderer(Name, Tags);
+   static inline Factory<BaseType>::Registrator<SpecificType> Registrator{ Name, Tags };
+
 
 template<typename BaseClass>
 class Factory {    

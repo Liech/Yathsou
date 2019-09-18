@@ -1,15 +1,27 @@
 #pragma once
 
 //#include "structs/Factory.h"
-#include "../OpenGL/Drawable.h"
+#include "../OpenGL/Loadable.h"
 #include <iostream>
-class TextRenderer : public Drawable {
+#include "../structs/Factory.h"
+#include "glm/glm.hpp"
+
+class TextRenderer : public Loadable {
+REGISTER(Loadable, TextRenderer, "TextRenderer", { "PreDrawCall" })
 public:
   TextRenderer() {}
   virtual ~TextRenderer() {}
 
-  virtual void load(DrawSpecification*) override { std::cout << "Hello Dependency injection madness" << std::endl; };
-  virtual void draw() override{};
+  static void drawText(std::string text, float x,float y, float scale, glm::vec3 color);
 
-//  static inline Factory<Drawable>::Registrator<TextRenderer> RegisterTextRenderer("TextRenderer", {});
+  virtual void load(DrawSpecification*) override { 
+    std::cout << "Load Text Renderer" << std::endl; 
+    //if (_alreadyLoaded)
+    //  throw std::runtime_error("TextRenderer Twice Initialized.");
+    //_alreadyLoaded = true;
+  };
+  
+private:
+  //static bool _alreadyLoaded = false;
+
 };
