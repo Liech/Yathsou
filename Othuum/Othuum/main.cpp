@@ -7,7 +7,7 @@
 #include "DrawCubes.h"
 #include "Camera/FreeCamera.h"
 #include "Camera/RTSCamera.h"
-
+#include "YolonaOss/Drawables/FPS.h"
 
 int main() { 
   Window w(1920, 1080);
@@ -26,7 +26,7 @@ int main() {
     camera->setTarget(camera->getPosition() - glm::vec3(0, 0, 1));
     freeCam.load(camera);
     list.addDrawable(std::make_shared<DrawCubes>(camera));
-    list.addDrawable(std::make_shared<TextRender>());
+    list.addDrawable(std::make_shared<FPS>());
 
     list.load(&spec);
   };

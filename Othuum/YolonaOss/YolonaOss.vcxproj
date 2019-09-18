@@ -195,6 +195,7 @@
   <ItemGroup>
     <ClInclude Include="Drawables\Background.h" />
     <ClInclude Include="Drawables\Button.h" />
+    <ClInclude Include="Drawables\FPS.h" />
     <ClInclude Include="Examples\BasicTriangle.h" />
     <ClInclude Include="Examples\RenderTriangle.h" />
     <ClInclude Include="Examples\RotatingCube.h" />
@@ -228,6 +229,7 @@
   <ItemGroup>
     <ClCompile Include="Drawables\Background.cpp" />
     <ClCompile Include="Drawables\Button.cpp" />
+    <ClCompile Include="Drawables\FPS.cpp" />
     <ClCompile Include="Examples\BasicTriangle.cpp" />
     <ClCompile Include="Examples\RenderTriangle.cpp" />
     <ClCompile Include="Examples\RotatingCube.cpp" />
