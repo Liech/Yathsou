@@ -8,6 +8,7 @@
 #include "Camera/FreeCamera.h"
 #include "Camera/RTSCamera.h"
 #include "YolonaOss/Drawables/FPS.h"
+#include "YolonaOss/Drawables/Widgets/Button.h"
 
 int main() { 
   Window w(1920, 1080);
@@ -28,6 +29,9 @@ int main() {
     list.addDrawable(std::make_shared<DrawCubes>(camera));
     list.addDrawable(std::make_shared<FPS>());
     list.addDrawable(std::make_shared<TextRender>());
+
+    std::shared_ptr<Button> b = std::make_shared<Button>("Hello", glm::vec2(400, 400), glm::vec2(200, 50), []() {std::cout << "Hello!" << std::endl; });
+    list.addDrawable(b);
 
     list.load(&spec);
   };

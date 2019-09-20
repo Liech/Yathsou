@@ -25,9 +25,9 @@ public:
   virtual          ~TextRenderer() {}
   static void      startTextRender();
   static void      endTextRender();
-  static void      drawText(std::string text, float x,float y, float scale, glm::vec3 color);
+  static void      drawText(std::string text, float x, float y, float scale, glm::vec3 color);
+  static void      drawText(std::string text, glm::vec2 pos, float scale, glm::vec3 color);
   static glm::vec2 getTextSize(std::string text, float scale);
-  static glm::vec2 getFittingScale(std::string text, float scale);
   virtual void     load(DrawSpecification*) override;
   
 private:
@@ -54,5 +54,6 @@ private:
   static inline bool       _alreadyLoaded = false;
   static inline bool       _inRenderProcess = false;
   static RenderVars _vars;
+  static inline int        _maxHeight = 0;
 
 };

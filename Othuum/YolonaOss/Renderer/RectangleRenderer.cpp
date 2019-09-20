@@ -30,7 +30,7 @@ void RectangleRenderer::drawRectangle(glm::vec2 pos, glm::vec2 size, glm::vec3 c
     PositionVertex(glm::vec3(xpos + w, ypos,    0)),
     PositionVertex(glm::vec3(xpos + w, ypos + h,0))
   };
-
+  _vars.color->bind();
   // Render glyph texture over quad
   _vars.vbo->setData(vertices);
 
@@ -42,6 +42,7 @@ void RectangleRenderer::startTextRender() {
     throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
   _inRenderProcess = true;
   glEnable(GL_BLEND);
+  glDisable(GL_DEPTH_TEST);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   _vars.shader->bind();
 }
@@ -51,6 +52,7 @@ void RectangleRenderer::endTextRender() {
     throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in endTextRender");
   _inRenderProcess = false;
   glDisable(GL_BLEND);
+  glEnable(GL_DEPTH_TEST);
 }
 
 void RectangleRenderer::load(DrawSpecification* spec) {

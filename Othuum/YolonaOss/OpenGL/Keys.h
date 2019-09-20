@@ -12,6 +12,10 @@ enum class KeyStatus {
  REPEAT                 = 2,
 };
 
+enum class MouseKey {
+  Left, Right, Middle
+};
+
  enum class KeyboardKey {
   KEY_SPACE            = 32 ,
   KEY_APOSTROPHE       = 39 ,

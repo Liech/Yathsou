@@ -9,6 +9,9 @@
 #include <filesystem>
 TextRenderer::RenderVars TextRenderer::_vars;
 
+void TextRenderer::drawText(std::string text, glm::vec2 pos, float scale, glm::vec3 color) {
+  drawText(text, pos[0], pos[1], scale, color);
+}
 void TextRenderer::drawText(std::string text, float x, float y, float scale, glm::vec3 color) {
   if (_inRenderProcess == false)
     throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
@@ -47,20 +50,24 @@ void TextRenderer::drawText(std::string text, float x, float y, float scale, glm
   }
 }
 
-glm::vec2 getTextSize(std::string text, float scale) {
-  throw std::runtime_error("Not yet implemented");
-}
+glm::vec2 TextRenderer::getTextSize(std::string text, float scale) {
+  glm::vec2 result(0,0);
+  std::string::const_iterator c;
+  for (c = text.begin(); c != text.end(); c++) {
+    Character ch = _vars.characters[*c];
+    result[0] += (ch.Advance >> 6) * scale;
+  }
+  result[1] = (float)_maxHeight;
 
-glm::vec2 getFittingScale(std::string text, float scale) {
-  throw std::runtime_error("Not yet implemented");
+  return result;
 }
-
 
 void TextRenderer::startTextRender() {
   if (_inRenderProcess == true)
     throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
   _inRenderProcess = true;
   glEnable(GL_BLEND);
+  glDisable(GL_DEPTH_TEST);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   _vars.shader->bind();
 }
@@ -70,6 +77,7 @@ void TextRenderer::endTextRender() {
     throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in endTextRender");
   _inRenderProcess = false;
   glDisable(GL_BLEND);
+  glEnable(GL_DEPTH_TEST);
 }
 
 void TextRenderer::load(DrawSpecification* spec) {
@@ -137,6 +145,7 @@ void TextRenderer::makeFreetype() {
       glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
       face->glyph->advance.x
     };
+    _maxHeight = (int)std::max(character.Size[1], _maxHeight);
     _vars.characters.insert(std::pair<GLchar, Character>(c, character));
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
