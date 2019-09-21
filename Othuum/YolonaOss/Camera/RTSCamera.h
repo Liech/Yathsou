@@ -2,6 +2,8 @@
 
 #include <memory>
 #include "glm/vec2.hpp"
+#include "Camera.h"
+#include "../structs/Factory.h"
 
 
 namespace YolonaOss {
@@ -9,16 +11,18 @@ namespace YolonaOss {
     class Window;
     class Camera;
   }
-  class RTSCamera {
-  public:
-    RTSCamera(GL::Window* window);
-    void load(std::shared_ptr<GL::Camera> camera);
-    void update();
+  namespace Camera {
+    class RTSCamera : public Camera {
+      REGISTER(Camera,RTSCamera,"RTSCamera",{"Camera"})
+    public:
+      virtual void load(std::shared_ptr<GL::Camera> camera, GL::Window* window) override;
+      virtual void update() override;
 
-  private:
-    GL::Window* _window;
-    std::shared_ptr<GL::Camera> _camera;
+    private:
+      GL::Window* _window;
+      std::shared_ptr<GL::Camera> _camera;
 
-    double                  _lastTime = 0;
-  };
+      double                  _lastTime = 0;
+    };
+  }
 }

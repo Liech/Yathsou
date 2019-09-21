@@ -6,6 +6,8 @@
 #include <set>
 #include <map>
 
+#include <iostream>
+
 //some sort of dependencie injection stuff
 //needs at least c++ magic lvl 17 to understand
 //i had lvl 5 when i wrote this
@@ -26,6 +28,7 @@ namespace YolonaOss {
     class Registrator {
     public:
       Registrator(const std::string name, const std::set<std::string> tags) {
+        std::cout << name<<std::endl;
         Factory<BaseClass>::Register(name, tags, &Registrator<T>::create);
       }
     private:

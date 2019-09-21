@@ -13,7 +13,7 @@ namespace YolonaOss {
     GL::DrawableList list;
     list.addDrawable(std::make_shared<Background>());
     list.addDrawable(std::make_shared<BasicTriangle>());
-    GL::DrawSpecification spec(&w);
+    GL::DrawSpecification spec(&w,std::shared_ptr<GL::Camera>());
     spec.width = 1920;
     spec.height = 1080;
 

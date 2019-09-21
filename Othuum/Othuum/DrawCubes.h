@@ -17,7 +17,6 @@ using namespace YolonaOss;
 class DrawCubes : public GL::Drawable
 {
 public:
-  DrawCubes(std::shared_ptr<GL::Camera> camera);
 
   // Inherited via Drawable
   virtual void load(GL::DrawSpecification *) override;

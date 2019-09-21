@@ -8,6 +8,9 @@
 #include "Loadable.h"
 #include "structs/Database.h"
 #include "Drawables/Widgets/Widget.h"
+#include "Camera.h"
+#include "Updateable.h"
+
 namespace YolonaOss {
   namespace GL {
     Window* win;
@@ -138,14 +141,23 @@ namespace YolonaOss {
       glViewport(0, 0, _width, _height);
       glDepthFunc(GL_LESS);
 
-      DrawSpecification spec(this);
-      spec.width = 1920;
-      spec.height = 1080;
-      std::vector<std::shared_ptr<Loadable>> preRenderList;
-      for (auto renderStep : Factory<Loadable>::getNamesByTag("PreDrawCall")) {
-        preRenderList.push_back(Factory<Loadable>::make(renderStep));
+      std::shared_ptr<GL::Camera> camera = std::make_shared<GL::Camera>("Camera", _width, _height);
+      DrawSpecification spec(this,camera);
+      spec.width = _width;
+      spec.height = _height;
+      std::vector<std::shared_ptr<Loadable>> loadList;
+      std::vector<std::shared_ptr<Updateable>> updateList;
+      for (auto renderStep : Factory<Loadable>::getNamesByTag("Main"))
+        loadList.push_back(Factory<Loadable>::make(renderStep));
+      for (auto renderStep : Database<std::shared_ptr<GL::Drawable>>::getByTag("Main")) {
+        loadList.push_back(renderStep);
       }
-      for (auto renderStep : preRenderList)
+      for (auto renderStep : Factory<Updateable>::getNamesByTag("Main")) {
+        std::shared_ptr< Updateable> current = Factory<Updateable>::make(renderStep);
+        updateList.push_back(current);
+        loadList.push_back(current);
+      }
+      for (auto renderStep : loadList)
         renderStep->load(&spec);
 
       // Game loop
@@ -155,7 +167,12 @@ namespace YolonaOss {
         // Check if any events have been activated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
 
+        for (auto update : updateList)
+          update->update();
+
         Update();
+        for (auto draw : Database<std::shared_ptr<GL::Drawable>>::getByTag("Main"))
+          draw->draw();
 
         // Swap the screen buffers
         glfwSwapBuffers(_window);

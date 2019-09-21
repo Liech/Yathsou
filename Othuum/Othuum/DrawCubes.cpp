@@ -6,12 +6,9 @@
 
 using namespace YolonaOss::GL;
 
-DrawCubes::DrawCubes(std::shared_ptr<GL::Camera> camera) {
-  _camera = camera;
-}
-
 void DrawCubes::load(GL::DrawSpecification *d)
 {
+  _camera = d->getCam();
   _spec = d;
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);

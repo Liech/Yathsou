@@ -22,7 +22,7 @@ namespace YolonaOss {
     class UniformVec3;
   }
   class TextRenderer : public GL::Loadable {
-    REGISTER(Loadable, TextRenderer, "TextRenderer", { "PreDrawCall" })
+    REGISTER(Loadable, TextRenderer, "TextRenderer", { "Main" })
   public:
     TextRenderer() {}
     virtual          ~TextRenderer() {}

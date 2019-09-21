@@ -22,7 +22,7 @@ namespace YolonaOss {
   }
 
   class RectangleRenderer : public GL::Loadable {
-    REGISTER(Loadable, RectangleRenderer, "RectangleRenderer", { "PreDrawCall" })
+    REGISTER(Loadable, RectangleRenderer, "RectangleRenderer", { "Main" })
   public:
     RectangleRenderer() {}
     virtual ~RectangleRenderer() {}

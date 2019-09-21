@@ -194,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\Camera.h" />
+    <ClInclude Include="Camera\CameraSystem.h" />
     <ClInclude Include="Camera\FreeCamera.h" />
     <ClInclude Include="Camera\RTSCamera.h" />
     <ClInclude Include="Drawables\Background.h" />
@@ -220,6 +221,7 @@
     <ClInclude Include="OpenGL\SSBO.h" />
     <ClInclude Include="OpenGL\Texture.h" />
     <ClInclude Include="OpenGL\Uniform.h" />
+    <ClInclude Include="OpenGL\Updateable.h" />
     <ClInclude Include="OpenGL\VAO.h" />
     <ClInclude Include="OpenGL\VBO.h" />
     <ClInclude Include="OpenGL\Window.h" />
@@ -234,6 +236,7 @@
     <ClInclude Include="YolonaOss.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera\CameraSystem.cpp" />
     <ClCompile Include="Camera\FreeCamera.cpp" />
     <ClCompile Include="Camera\RTSCamera.cpp" />
     <ClCompile Include="Drawables\Background.cpp" />
@@ -254,6 +257,7 @@
     <ClCompile Include="OpenGL\SSBO.cpp" />
     <ClCompile Include="OpenGL\Texture.cpp" />
     <ClCompile Include="OpenGL\Uniform.cpp" />
+    <ClCompile Include="OpenGL\Updateable.cpp" />
     <ClCompile Include="OpenGL\VAO.cpp" />
     <ClCompile Include="OpenGL\VBO.cpp" />
     <ClCompile Include="OpenGL\Window.cpp" />
