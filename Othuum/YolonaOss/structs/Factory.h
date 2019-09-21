@@ -6,8 +6,6 @@
 #include <set>
 #include <map>
 
-#include <iostream>
-
 //some sort of dependencie injection stuff
 //needs at least c++ magic lvl 17 to understand
 //i had lvl 5 when i wrote this
@@ -18,17 +16,21 @@
 //use manual registrationcalls instead: Factory<BaseType>::Register<SpecificType>();
 #define REGISTER(BaseType,SpecificType,Name, Tags)\
    static inline YolonaOss::Factory<BaseType>::Registrator<SpecificType> Registrator{ Name, Tags };
-
+#define CLASSNAME(type) #type
 
 namespace YolonaOss {
+  class IFactory {
+    virtual std::set<std::string> _getAll() = 0;
+    virtual std::set<std::string> _getNamesByTag(std::string tag) = 0;
+  };
+
   template<typename BaseClass>
-  class Factory {
+  class Factory : public IFactory {    
   public:
     template <typename T>
     class Registrator {
     public:
       Registrator(const std::string name, const std::set<std::string> tags) {
-        std::cout << name<<std::endl;
         Factory<BaseClass>::Register(name, tags, &Registrator<T>::create);
       }
     private:
@@ -55,7 +57,16 @@ namespace YolonaOss {
         tagMap[t].insert(name);
     }
 
+
+
   public:
+    static std::set<std::string> getAll() {
+      std::set<std::string> result;
+      for (std::pair<std::string, Factory<BaseClass>::InstantiatorFun> f : Factory<BaseClass>::registry)
+        result.insert(f.first);
+      return result;
+    }
+
     static std::set<std::string> getNamesByTag(std::string tag) {
       if (tagMap.count(tag) == 0)
         return {};
@@ -63,6 +74,14 @@ namespace YolonaOss {
     }
     static std::shared_ptr<BaseClass> make(std::string name) {
       return registry[name]();
+    }
+
+    std::set<std::string> _getAll() {
+      return Factory<BaseClass>::getAll();
+    }
+
+    std::set<std::string> _getNamesByTag(std::string tag) {
+      return Factory<BaseClass>::getNamesByTag(tag);
     }
   };
 }

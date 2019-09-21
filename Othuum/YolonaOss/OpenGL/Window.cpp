@@ -146,16 +146,13 @@ namespace YolonaOss {
       spec.width = _width;
       spec.height = _height;
       std::vector<std::shared_ptr<Loadable>> loadList;
-      std::vector<std::shared_ptr<Updateable>> updateList;
       for (auto renderStep : Factory<Loadable>::getNamesByTag("Main"))
         loadList.push_back(Factory<Loadable>::make(renderStep));
       for (auto renderStep : Database<std::shared_ptr<GL::Drawable>>::getByTag("Main")) {
         loadList.push_back(renderStep);
       }
-      for (auto renderStep : Factory<Updateable>::getNamesByTag("Main")) {
-        std::shared_ptr< Updateable> current = Factory<Updateable>::make(renderStep);
-        updateList.push_back(current);
-        loadList.push_back(current);
+      for (auto renderStep : Database<std::shared_ptr <Updateable>>::getByTag("Main")) {
+        loadList.push_back(renderStep);
       }
       for (auto renderStep : loadList)
         renderStep->load(&spec);
@@ -167,7 +164,7 @@ namespace YolonaOss {
         // Check if any events have been activated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
 
-        for (auto update : updateList)
+        for (auto update : Database<std::shared_ptr <Updateable>>::getByTag("Main"))
           update->update();
 
         Update();

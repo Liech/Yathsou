@@ -13,19 +13,25 @@
 using namespace YolonaOss;
 
 int main() { 
+
+
   int width = 1920;
   int height = 1080;
   GL::Window w(width, height);
 
-  std::shared_ptr<Button> b = std::make_shared<Button>("Button", BoundingBox2(glm::vec2(400, 400), glm::vec2(200, 50)), []() {std::cout << "Hello!" << std::endl; });
-  Database<std::shared_ptr<Widget>>::add(b, { "MouseClick" });
 
   std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
   list->addDrawable(std::make_shared<Background>());
   list->addDrawable(std::make_shared<DrawCubes>());
   list->addDrawable(std::make_shared<FPS>());
+  Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
+  std::shared_ptr<Camera::CameraSystem> cam = std::make_shared<Camera::CameraSystem>();
+
+  std::shared_ptr<Button> b = std::make_shared<Button>("FreeCam", BoundingBox2(glm::vec2(0, 0), glm::vec2(200, 50)), [cam]() {cam->setCurrentCam("FreeCamera"); });
+  Database<std::shared_ptr<Widget>>::add(b, { "MouseClick" });
   list->addDrawable(b);
-  Database<std::shared_ptr<GL::Drawable>>::add(list, {"Main"});
+
+  Database<std::shared_ptr<GL::Updateable>>::add(cam, { "Main" });
 
   w.run();
 } 

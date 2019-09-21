@@ -26,6 +26,8 @@ namespace YolonaOss {
       std::map<std::string, std::shared_ptr<Camera>> _availableCams;
       std::shared_ptr<Camera>                        _currentCam;
       std::string                                    _currentCamName;
+      GL::DrawSpecification*                         _spec;
+
     };
   }
 }
