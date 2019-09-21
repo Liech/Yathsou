@@ -9,39 +9,41 @@
 
 //SSBO has more capacity (Shader Storage Buffer Object - (texture trans dressing as normal array))
 //UBO  is faster         (normal uniform variable in big)
+namespace YolonaOss {
+  namespace GL {
+    class SSBOvec4 : public Uniform {
+    public:
+      SSBOvec4(std::string name, std::vector<glm::vec4> content);
+      virtual ~SSBOvec4();
 
-class SSBOvec4 : public Uniform {
-public:
-  SSBOvec4(std::string name, std::vector<glm::vec4> content);
-  virtual ~SSBOvec4();
+      virtual std::string toGLSL() override;
+      virtual void bind() override;
+      virtual std::string getType() override { return "vec4"; }
+      void setData(std::vector<glm::vec4> content);
 
-  virtual std::string toGLSL() override;
-  virtual void bind() override;
-  virtual std::string getType() override { return "vec4"; }
-  void setData(std::vector<glm::vec4> content);
+      virtual bool isBuffer() override { return true; }
 
-  virtual bool isBuffer() override { return true; }
+    private:
+      GLuint _ssbo;
+    };
 
-private:
-  GLuint _ssbo;
-};
+    class SSBOuint : public Uniform {
+    public:
+      SSBOuint(std::string name, std::vector<unsigned int> content);
+      virtual ~SSBOuint();
 
-class SSBOuint : public Uniform {
-public:
-  SSBOuint(std::string name, std::vector<unsigned int> content);
-  virtual ~SSBOuint();
+      virtual std::string toGLSL() override;
+      virtual void bind() override;
+      virtual std::string getType() override { return "uint"; }
+      void setData(std::vector<unsigned int> content);
 
-  virtual std::string toGLSL() override;
-  virtual void bind() override;
-  virtual std::string getType() override { return "uint"; }
-  void setData(std::vector<unsigned int> content);
+      virtual bool isBuffer() override { return true; }
 
-  virtual bool isBuffer() override { return true; }
-
-private:
-  GLuint _ssbo;
-};
-
+    private:
+      GLuint _ssbo;
+    };
+  }
+}
 //template<typename Content, std::string structDescription>
 //class SSBO : public Uniform {
 //public:

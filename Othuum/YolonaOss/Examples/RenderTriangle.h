@@ -1,6 +1,8 @@
 #pragma once
 
-class RenderTriangle {
-public:
-  static void run();
-};
+namespace YolonaOss {
+  class RenderTriangle {
+  public:
+    static void run();
+  };
+}

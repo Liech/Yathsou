@@ -10,44 +10,45 @@
 
 //2 render triangle with selfmade api
 
-struct Vector3gl {
-  float x;
-  float y; 
-  float z;
-  Vector3gl() {};
-  Vector3gl(float X, float Y, float Z){
-    x = X;
-    y = Y;
-    z = Z;
-  }
+namespace YolonaOss {
+  struct Vector3gl {
+    float x;
+    float y;
+    float z;
+    Vector3gl() {};
+    Vector3gl(float X, float Y, float Z) {
+      x = X;
+      y = Y;
+      z = Z;
+    }
 
-  std::vector<AttributeDescription> getBinding() {
-    std::vector<AttributeDescription> result;
-    result.push_back(AttributeDescription("position", 3, AttributeDescription::DataType::Float));
-    return result;
-  }
-};
+    std::vector<GL::AttributeDescription> getBinding() {
+      std::vector<GL::AttributeDescription> result;
+      result.push_back(GL::AttributeDescription("position", 3, GL::AttributeDescription::DataType::Float));
+      return result;
+    }
+  };
 
-class BasicTriangle : public Drawable
-{
-public:
-  BasicTriangle();
-  ~BasicTriangle();
+  class BasicTriangle : public GL::Drawable
+  {
+  public:
+    BasicTriangle();
+    ~BasicTriangle();
 
-  // Inherited via Drawable
-  virtual void load(DrawSpecification *) override;
-  virtual void draw() override;
+    // Inherited via Drawable
+    virtual void load(GL::DrawSpecification*) override;
+    virtual void draw() override;
 
-private:  
-  DrawSpecification* _spec;
-  GLuint program;
+  private:
+    GL::DrawSpecification* _spec;
+    GLuint program;
 
-  std::unique_ptr<VBO<Vector3gl>> _vbo;
-  std::unique_ptr<VAO<Vector3gl>> _vao;  
-  std::unique_ptr<ShaderProgram>  _shader;
-  GLuint vao;
-  
-  std::string vertex_shader_source;
-  std::string fragment_shader_source;
-};
+    std::unique_ptr<GL::VBO<Vector3gl>> _vbo;
+    std::unique_ptr<GL::VAO<Vector3gl>> _vao;
+    std::unique_ptr<GL::ShaderProgram>  _shader;
+    GLuint vao;
 
+    std::string vertex_shader_source;
+    std::string fragment_shader_source;
+  };
+}

@@ -4,11 +4,14 @@
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include "YolonaOss/Drawables/Background.h"
 #include "DrawCubes.h"
-#include "Camera/FreeCamera.h"
-#include "Camera/RTSCamera.h"
+#include "YolonaOss/Camera/FreeCamera.h"
+#include "YolonaOss/Camera/RTSCamera.h"
 #include "YolonaOss/Drawables/FPS.h"
 #include "YolonaOss/Drawables/Widgets/Button.h"
 #include "YolonaOss/structs/Database.h"
+using namespace YolonaOss;
+using namespace YolonaOss::GL;
+
 int main() { 
   Window w(1920, 1080);
 

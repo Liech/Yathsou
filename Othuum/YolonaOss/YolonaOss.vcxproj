@@ -193,6 +193,9 @@
     <Text Include="Renderer\Content.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera\Camera.h" />
+    <ClInclude Include="Camera\FreeCamera.h" />
+    <ClInclude Include="Camera\RTSCamera.h" />
     <ClInclude Include="Drawables\Background.h" />
     <ClInclude Include="Drawables\FPS.h" />
     <ClInclude Include="Drawables\Widgets\Button.h" />
@@ -231,6 +234,8 @@
     <ClInclude Include="YolonaOss.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera\FreeCamera.cpp" />
+    <ClCompile Include="Camera\RTSCamera.cpp" />
     <ClCompile Include="Drawables\Background.cpp" />
     <ClCompile Include="Drawables\FPS.cpp" />
     <ClCompile Include="Drawables\Widgets\Button.cpp" />

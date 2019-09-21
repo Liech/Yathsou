@@ -4,25 +4,26 @@
 #include "glad/glad.h"
 #include "glm/ext/matrix_transform.hpp"
 
+using namespace YolonaOss::GL;
 
-DrawCubes::DrawCubes(std::shared_ptr<Camera> camera) {
+DrawCubes::DrawCubes(std::shared_ptr<GL::Camera> camera) {
   _camera = camera;
 }
 
-void DrawCubes::load(DrawSpecification *d)
+void DrawCubes::load(GL::DrawSpecification *d)
 {
   _spec = d;
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
 
-  std::vector<PositionColorNormalVertex> input;
+  std::vector<GL::PositionColorNormalVertex> input;
 
   
   //front
-  input.push_back(PositionColorNormalVertex(glm::vec3(-0.5,-0.5, 0.5),glm::vec4(0, 0, 1, 1),glm::vec3(0,0,1)));
-  input.push_back(PositionColorNormalVertex(glm::vec3( 0.5,-0.5, 0.5),glm::vec4(1, 0, 1, 1),glm::vec3(0,0,1)));
-  input.push_back(PositionColorNormalVertex(glm::vec3( 0.5, 0.5, 0.5),glm::vec4(1, 1, 1, 1),glm::vec3(0,0,1)));
-  input.push_back(PositionColorNormalVertex(glm::vec3(-0.5, 0.5, 0.5),glm::vec4(0, 1, 1, 1),glm::vec3(0,0,1)));
+  input.push_back(GL::PositionColorNormalVertex(glm::vec3(-0.5,-0.5, 0.5),glm::vec4(0, 0, 1, 1),glm::vec3(0,0,1)));
+  input.push_back(GL::PositionColorNormalVertex(glm::vec3( 0.5,-0.5, 0.5),glm::vec4(1, 0, 1, 1),glm::vec3(0,0,1)));
+  input.push_back(GL::PositionColorNormalVertex(glm::vec3( 0.5, 0.5, 0.5),glm::vec4(1, 1, 1, 1),glm::vec3(0,0,1)));
+  input.push_back(GL::PositionColorNormalVertex(glm::vec3(-0.5, 0.5, 0.5),glm::vec4(0, 1, 1, 1),glm::vec3(0,0,1)));
 
   //right
   input.push_back(PositionColorNormalVertex(glm::vec3(0.5, 0.5, 0.5),glm::vec4(1, 1, 1, 1),glm::vec3(1,0,0)));

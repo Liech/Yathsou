@@ -22,9 +22,6 @@
     <Filter Include="Architecture">
       <UniqueIdentifier>{2d48d53c-682d-4d07-a5ab-67969328448f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Camera">
-      <UniqueIdentifier>{9ec4901a-63d0-44fb-acd7-a937329358b2}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -35,12 +32,6 @@
     </ClCompile>
     <ClCompile Include="DrawCubes.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera\RTSCamera.cpp">
-      <Filter>Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera\FreeCamera.cpp">
-      <Filter>Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,12 +277,6 @@
     </ClInclude>
     <ClInclude Include="DrawCubes.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera\RTSCamera.h">
-      <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera\FreeCamera.h">
-      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

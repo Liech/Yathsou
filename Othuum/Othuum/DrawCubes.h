@@ -11,29 +11,29 @@
 #include <time.h>
 #include "YolonaOss/OpenGL/Camera.h"
 #include "YolonaOss/OpenGL/Uniform.h"
-
+using namespace YolonaOss;
 //5 camera
 
-class DrawCubes : public Drawable
+class DrawCubes : public GL::Drawable
 {
 public:
-  DrawCubes(std::shared_ptr<Camera> camera);
+  DrawCubes(std::shared_ptr<GL::Camera> camera);
 
   // Inherited via Drawable
-  virtual void load(DrawSpecification *) override;
+  virtual void load(GL::DrawSpecification *) override;
   virtual void draw() override;
 
 private:
-  DrawSpecification* _spec;
+  GL::DrawSpecification* _spec;
   GLuint program;
 
-  std::unique_ptr<UniformVec3>              _light;
-  std::unique_ptr<UniformMat4>              _model;
-  std::shared_ptr<Camera>                   _camera;
-  std::unique_ptr<IBO>                      _ibo;
-  std::unique_ptr<VBO<PositionColorNormalVertex>> _vbo;
-  std::unique_ptr<VAO<PositionColorNormalVertex>> _vao;
-  std::unique_ptr<ShaderProgram>            _shader;
+  std::unique_ptr<GL::UniformVec3>              _light;
+  std::unique_ptr<GL::UniformMat4>              _model;
+  std::shared_ptr<GL::Camera>                   _camera;
+  std::unique_ptr<GL::IBO>                      _ibo;
+  std::unique_ptr<GL::VBO<GL::PositionColorNormalVertex>> _vbo;
+  std::unique_ptr<GL::VAO<GL::PositionColorNormalVertex>> _vao;
+  std::unique_ptr<GL::ShaderProgram>            _shader;
   std::vector<glm::vec3>                    _positions;
   int drawCall = 0;
 

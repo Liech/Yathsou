@@ -2,14 +2,16 @@
 
 #include "DrawSpecification.h"
 #include "Loadable.h"
+namespace YolonaOss {
+  namespace GL {
+    class Drawable : public Loadable
+    {
+    public:
+      Drawable() {}
+      virtual ~Drawable() {}
 
-class Drawable : public Loadable
-{
-public:
-  Drawable() {}
-  virtual ~Drawable() {}
-
-  virtual void load(DrawSpecification*) = 0;
-  virtual void draw() = 0;
-};
-
+      virtual void load(DrawSpecification*) = 0;
+      virtual void draw() = 0;
+    };
+  }
+}

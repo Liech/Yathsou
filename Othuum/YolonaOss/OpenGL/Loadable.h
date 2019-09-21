@@ -1,10 +1,13 @@
 #pragma once
 
 #include "DrawSpecification.h"
-
-class Loadable {
-public:
-  Loadable() {}
-  virtual ~Loadable() {}
-  virtual void load(DrawSpecification*) = 0;
-};
+namespace YolonaOss {
+  namespace GL {
+    class Loadable {
+    public:
+      Loadable() {}
+      virtual ~Loadable() {}
+      virtual void load(DrawSpecification*) = 0;
+    };
+  }
+}

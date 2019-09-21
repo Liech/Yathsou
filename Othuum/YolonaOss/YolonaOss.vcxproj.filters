@@ -52,6 +52,12 @@
     <Filter Include="Source Files\Drawables\Widgets">
       <UniqueIdentifier>{57802bb8-e4c9-4245-8429-ff0509cb0cd7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Camera">
+      <UniqueIdentifier>{ee6e0cea-51e1-4621-bf28-9655a33413ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Camera">
+      <UniqueIdentifier>{d2efea0a-a514-4fe9-a4a6-365e6e99f6cb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -171,6 +177,15 @@
     <ClInclude Include="structs\BoundingBox.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
+    <ClInclude Include="Camera\FreeCamera.h">
+      <Filter>Header Files\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\RTSCamera.h">
+      <Filter>Header Files\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera\Camera.h">
+      <Filter>Header Files\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -247,6 +262,12 @@
     </ClCompile>
     <ClCompile Include="Drawables\Widgets\Widget.cpp">
       <Filter>Source Files\Drawables\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\FreeCamera.cpp">
+      <Filter>Source Files\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\RTSCamera.cpp">
+      <Filter>Source Files\Camera</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

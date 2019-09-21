@@ -3,18 +3,20 @@
 #include "Drawable.h"
 #include <vector>
 #include <memory>
+namespace YolonaOss {
+  namespace GL {
+    class DrawableList : public Drawable
+    {
+    public:
+      DrawableList() {}
+      virtual ~DrawableList()override {}
 
-class DrawableList : public Drawable
-{
-public:
-  DrawableList() {}
-  virtual ~DrawableList()override {}
+      void addDrawable(std::shared_ptr<Drawable> draw);
+      virtual void load(DrawSpecification*) override;
+      virtual void draw() override;
 
-  void addDrawable(std::shared_ptr<Drawable> draw);
-  virtual void load(DrawSpecification*) override;
-  virtual void draw() override;
-
-private:
-  std::vector<std::shared_ptr<Drawable>> _drawables;
-};
-
+    private:
+      std::vector<std::shared_ptr<Drawable>> _drawables;
+    };
+  }
+}

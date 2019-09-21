@@ -4,14 +4,15 @@
 
 //0: just a background color
 
-class Background : public Drawable
-{
-public:
-  Background();
-  ~Background();
+namespace YolonaOss {
+  class Background : public GL::Drawable
+  {
+  public:
+    Background();
+    ~Background();
 
-  // Inherited via Drawable
-  virtual void load(DrawSpecification*) override;
-  virtual void draw() override;
-};
-
+    // Inherited via Drawable
+    virtual void load(GL::DrawSpecification*) override;
+    virtual void draw() override;
+  };
+}

@@ -4,19 +4,20 @@
 #include <chrono>
 
 
-class FPS : public Drawable
-{
-public:
-  FPS();
-  ~FPS();
+namespace YolonaOss {
+  class FPS : public GL::Drawable
+  {
+  public:
+    FPS();
+    ~FPS();
 
-  // Inherited via Drawable
-  virtual void load(DrawSpecification*) override;
-  virtual void draw() override;
+    // Inherited via Drawable
+    virtual void load(GL::DrawSpecification*) override;
+    virtual void draw() override;
 
-private:  
-  std::chrono::time_point<std::chrono::steady_clock> _lastMeasurement;
-  DrawSpecification*                                 _spec;
-  double                                             _avFPS = 0;
-};
-
+  private:
+    std::chrono::time_point<std::chrono::steady_clock> _lastMeasurement;
+    GL::DrawSpecification*                             _spec;
+    double                                             _avFPS = 0;
+  };
+}
