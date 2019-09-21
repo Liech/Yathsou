@@ -19,7 +19,7 @@ public:
   std::function<void()> Startup = []() {};
   std::function<void()> Update = []() {};
 
-  KeyStatus                  getKeyStatus(KeyboardKey key);
+  KeyStatus                  getKeyStatus(Key key);
   double                     getTime();
   void                       setCursorStatus(CursorStatus);
   std::pair<double, double>  getCursorPos();

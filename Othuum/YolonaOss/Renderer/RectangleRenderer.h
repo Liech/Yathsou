@@ -5,6 +5,7 @@
 #include <iostream>
 #include "../structs/Factory.h"
 #include "glm/glm.hpp"
+#include "../structs/BoundingBox.h"
 #include <memory>
 
 #include <map>
@@ -24,6 +25,7 @@ public:
   static void startTextRender();
   static void endTextRender();
   static void drawRectangle(glm::vec2 pos, glm::vec2 size, glm::vec3 color);
+  static void drawRectangle(BoundingBox2 box, glm::vec3 color);
 
   virtual void load(DrawSpecification*) override;
   

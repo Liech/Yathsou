@@ -42,7 +42,7 @@ private:
   static inline std::map<std::string, std::set<std::string>>                    tagMap;
 
   template<typename T> void Register(const std::string name, const std::set<std::string> tags){
-    Factory<BaseType>::Registrator<T> RegisterTextRenderer(name, tags);
+    Factory<BaseType>::Registrator<T> registerMe(name, tags);
   }
 
   static void Register(const std::string name, const std::set<std::string> tags, Factory<BaseClass>::InstantiatorFun func) {

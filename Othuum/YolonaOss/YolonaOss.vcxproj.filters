@@ -141,9 +141,6 @@
     <ClInclude Include="OpenGL\Keys.h">
       <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="Examples\TextRender.h">
-      <Filter>Examples</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\TextRenderer.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
@@ -167,6 +164,12 @@
     </ClInclude>
     <ClInclude Include="Drawables\Widgets\Widget.h">
       <Filter>Header Files\Drawables\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="structs\Database.h">
+      <Filter>Header Files\structs</Filter>
+    </ClInclude>
+    <ClInclude Include="structs\BoundingBox.h">
+      <Filter>Header Files\structs</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -229,9 +232,6 @@
     </ClCompile>
     <ClCompile Include="Lib\glad\src\glad.c">
       <Filter>libs\glad</Filter>
-    </ClCompile>
-    <ClCompile Include="Examples\TextRender.cpp">
-      <Filter>Examples</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\TextRenderer.cpp">
       <Filter>Source Files\Renderer</Filter>

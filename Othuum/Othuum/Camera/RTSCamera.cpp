@@ -19,10 +19,10 @@ void RTSCamera::load(std::shared_ptr<Camera> camera) {
 void RTSCamera::update() {
   double time = _window->getTime();
   float delta = (float)(time - _lastTime);
-  bool w = _window->getKeyStatus(KeyboardKey::KEY_W) == KeyStatus::PRESS;
-  bool a = _window->getKeyStatus(KeyboardKey::KEY_A) == KeyStatus::PRESS;
-  bool s = _window->getKeyStatus(KeyboardKey::KEY_S) == KeyStatus::PRESS;
-  bool d = _window->getKeyStatus(KeyboardKey::KEY_D) == KeyStatus::PRESS;
+  bool w = _window->getKeyStatus(Key::KEY_W) == KeyStatus::PRESS;
+  bool a = _window->getKeyStatus(Key::KEY_A) == KeyStatus::PRESS;
+  bool s = _window->getKeyStatus(Key::KEY_S) == KeyStatus::PRESS;
+  bool d = _window->getKeyStatus(Key::KEY_D) == KeyStatus::PRESS;
   
   glm::vec3 toTarget = glm::normalize(_camera->getTarget() - _camera->getPosition());
   glm::vec3 toSide = glm::cross(toTarget, _camera->getUp());

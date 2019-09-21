@@ -6,6 +6,8 @@
 #include "structs/Factory.h"
 #include "Drawable.h"
 #include "Loadable.h"
+#include "structs/Database.h"
+#include "Drawables/Widgets/Widget.h"
 
 Window* win;
 
@@ -20,6 +22,7 @@ Window::~Window()
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 void APIENTRY glDebugOutput(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar *message, const void *userParam) {
   std::string msgSource;
@@ -106,6 +109,7 @@ void Window::run() {
   }
 
   // Set the required callback functions
+  glfwSetMouseButtonCallback(_window, mouse_button_callback);
   glfwSetKeyCallback(_window, key_callback);
   glfwSetScrollCallback(_window, [](GLFWwindow* window, double xoffset, double yoffset)
   {
@@ -161,6 +165,27 @@ void Window::run() {
   glfwTerminate();
 }
 
+std::shared_ptr<Widget> pressed = std::shared_ptr<Widget>();
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+  double xpos, ypos;
+  glfwGetCursorPos(window, &xpos, &ypos);
+  glm::vec2 mousePos((float)xpos,(float)(win->getHeight() - ypos));
+
+  std::set<std::shared_ptr<Widget>> clickableWidgets = Database<std::shared_ptr<Widget>>::getByTag("MouseClick");
+  for (auto w : clickableWidgets) {
+    if (w->getPosition().inside(mousePos)) {
+      if (action == (int)KeyStatus::PRESS)
+        pressed = w;
+      else
+        if (action == (int)KeyStatus::RELEASE && pressed == w)
+          w->mouseClick(mousePos - w->getPosition().position,(Key)button);
+    }
+  }
+  if (action == (int)KeyStatus::RELEASE)
+    pressed = std::shared_ptr<Widget>();
+}
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
   //std::cout << key << std::endl;
@@ -168,8 +193,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     glfwSetWindowShouldClose(window, GL_TRUE);
 }
 
-KeyStatus Window::getKeyStatus(KeyboardKey key) {
-  return (KeyStatus)((int)glfwGetKey(_window, (int)key));
+KeyStatus Window::getKeyStatus(Key key) {  
+  if ((int)key <= 7)
+    return (KeyStatus)((int)glfwGetMouseButton(_window, (int)key));
+  else
+    return (KeyStatus)((int)glfwGetKey(_window, (int)key));
 }
 
 void Window::setCursorStatus(CursorStatus status) {

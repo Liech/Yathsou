@@ -18,7 +18,7 @@ void TextRenderer::drawText(std::string text, float x, float y, float scale, glm
 
   // Activate corresponding render state	
   _vars.textColor->setValue(color);
-
+  _vars.textColor->bind();
   // Iterate through all characters
   std::string::const_iterator c;
   for (c = text.begin(); c != text.end(); c++)

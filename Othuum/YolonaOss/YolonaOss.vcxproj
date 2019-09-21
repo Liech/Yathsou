@@ -200,7 +200,6 @@
     <ClInclude Include="Examples\BasicTriangle.h" />
     <ClInclude Include="Examples\RenderTriangle.h" />
     <ClInclude Include="Examples\RotatingCube.h" />
-    <ClInclude Include="Examples\TextRender.h" />
     <ClInclude Include="OpenGL\AttributeDescription.h" />
     <ClInclude Include="OpenGL\Camera.h" />
     <ClInclude Include="OpenGL\Drawable.h" />
@@ -223,7 +222,9 @@
     <ClInclude Include="OpenGL\Window.h" />
     <ClInclude Include="Renderer\RectangleRenderer.h" />
     <ClInclude Include="Renderer\TextRenderer.h" />
+    <ClInclude Include="structs\BoundingBox.h" />
     <ClInclude Include="structs\Color.h" />
+    <ClInclude Include="structs\Database.h" />
     <ClInclude Include="structs\Factory.h" />
     <ClInclude Include="structs\MultiDimensionalArray.h" />
     <ClInclude Include="structs\NMTree.h" />
@@ -237,7 +238,6 @@
     <ClCompile Include="Examples\BasicTriangle.cpp" />
     <ClCompile Include="Examples\RenderTriangle.cpp" />
     <ClCompile Include="Examples\RotatingCube.cpp" />
-    <ClCompile Include="Examples\TextRender.cpp" />
     <ClCompile Include="Lib\glad\src\glad.c" />
     <ClCompile Include="OpenGL\Camera.cpp" />
     <ClCompile Include="OpenGL\Drawable.cpp" />

@@ -6,6 +6,10 @@
 #include "../OpenGL/Window.h"
 RectangleRenderer::RenderVars RectangleRenderer::_vars;
 
+void RectangleRenderer::drawRectangle(BoundingBox2 box, glm::vec3 color) {
+  drawRectangle(box.position, box.size, color);
+}
+
 void RectangleRenderer::drawRectangle(glm::vec2 pos, glm::vec2 size, glm::vec3 color){
   if (_inRenderProcess == false)
     throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");

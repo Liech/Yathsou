@@ -20,12 +20,12 @@ void FreeCamera::load(std::shared_ptr<Camera> camera) {
 
 void FreeCamera::update() {
   double time = _window->getTime();
-  bool w = _window->getKeyStatus(KeyboardKey::KEY_W)== KeyStatus::PRESS;
-  bool a = _window->getKeyStatus(KeyboardKey::KEY_A)== KeyStatus::PRESS;
-  bool s = _window->getKeyStatus(KeyboardKey::KEY_S)== KeyStatus::PRESS;
-  bool d = _window->getKeyStatus(KeyboardKey::KEY_D) == KeyStatus::PRESS;
-  bool q = _window->getKeyStatus(KeyboardKey::KEY_Q) == KeyStatus::PRESS;
-  bool e = _window->getKeyStatus(KeyboardKey::KEY_E) == KeyStatus::PRESS;
+  bool w = _window->getKeyStatus(Key::KEY_W)== KeyStatus::PRESS;
+  bool a = _window->getKeyStatus(Key::KEY_A)== KeyStatus::PRESS;
+  bool s = _window->getKeyStatus(Key::KEY_S)== KeyStatus::PRESS;
+  bool d = _window->getKeyStatus(Key::KEY_D) == KeyStatus::PRESS;
+  bool q = _window->getKeyStatus(Key::KEY_Q) == KeyStatus::PRESS;
+  bool e = _window->getKeyStatus(Key::KEY_E) == KeyStatus::PRESS;
 
   float delta = (float)(time - _lastTime);
   glm::vec3 toTarget = glm::normalize(_camera->getTarget() - _camera->getPosition());

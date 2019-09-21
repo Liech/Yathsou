@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Widget.h"
-#include "glm/glm.hpp"
 #include <string>
 #include <functional>
 
@@ -9,11 +8,9 @@ class Button : public Widget
 {
 public:
   Button();
-  Button(std::string name, glm::vec2 position, glm::vec2 size, std::function<void(void)> clickedFunction) {
-    _position = position;
-    _size     = size;
-    _name     = name;
+  Button(std::string name,BoundingBox2 position , std::function<void(void)> clickedFunction) : Widget(position){
     _clickedFunction = clickedFunction;
+    _name = name;
   }
   ~Button();
 
@@ -23,11 +20,9 @@ public:
 
   virtual void mouseEnter() override;
   virtual void mouseLeave() override;
-  virtual void mouseClick(glm::vec2 position, MouseKey k) override;
+  virtual void mouseClick(glm::vec2 position, Key k) override;
 
 private:
-  glm::vec2                 _position;
-  glm::vec2                 _size    ;
   std::string               _name    ;
   std::function<void(void)> _clickedFunction;
 
