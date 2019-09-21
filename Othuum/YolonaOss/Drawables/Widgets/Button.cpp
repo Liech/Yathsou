@@ -22,15 +22,15 @@ namespace YolonaOss {
 
   void Button::draw()
   {
-    RectangleRenderer::startTextRender();
+    RectangleRenderer::start();
     RectangleRenderer::drawRectangle(getPosition(), _hovered ? glm::vec3(0.8f, 0.8f, 0.8f) : glm::vec3(0.4f, 0.4f, 0.4f));
-    RectangleRenderer::endTextRender();
+    RectangleRenderer::end();
     glm::vec2 textSize = TextRenderer::getTextSize(_name, 1);
     glm::vec2 spacing = (getPosition().size - textSize) / 2.0f;
-    TextRenderer::startTextRender();
+    TextRenderer::start();
     glm::vec2 pos = getPosition().position + spacing;
     TextRenderer::drawText(_name, pos, 1, glm::vec3(0, 0, 0));
-    TextRenderer::endTextRender();
+    TextRenderer::end();
   }
 
   void Button::mouseEnter() {

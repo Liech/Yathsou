@@ -65,7 +65,7 @@ namespace YolonaOss {
     return result;
   }
 
-  void TextRenderer::startTextRender() {
+  void TextRenderer::start() {
     if (_inRenderProcess == true)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
     _inRenderProcess = true;
@@ -75,7 +75,7 @@ namespace YolonaOss {
     _vars.shader->bind();
   }
 
-  void TextRenderer::endTextRender() {
+  void TextRenderer::end() {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in endTextRender");
     _inRenderProcess = false;

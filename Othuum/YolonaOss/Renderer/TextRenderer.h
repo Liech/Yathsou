@@ -26,8 +26,8 @@ namespace YolonaOss {
   public:
     TextRenderer() {}
     virtual          ~TextRenderer() {}
-    static void      startTextRender();
-    static void      endTextRender();
+    static void      start();
+    static void      end();
     static void      drawText(std::string text, float x, float y, float scale, glm::vec3 color);
     static void      drawText(std::string text, glm::vec2 pos, float scale, glm::vec3 color);
     static glm::vec2 getTextSize(std::string text, float scale);

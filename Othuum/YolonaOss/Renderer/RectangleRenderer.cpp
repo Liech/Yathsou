@@ -43,7 +43,7 @@ namespace YolonaOss {
     _vars.vao->bind();
   }
 
-  void RectangleRenderer::startTextRender() {
+  void RectangleRenderer::start() {
     if (_inRenderProcess == true)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
     _inRenderProcess = true;
@@ -53,7 +53,7 @@ namespace YolonaOss {
     _vars.shader->bind();
   }
 
-  void RectangleRenderer::endTextRender() {
+  void RectangleRenderer::end() {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in endTextRender");
     _inRenderProcess = false;

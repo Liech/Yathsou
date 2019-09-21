@@ -23,7 +23,15 @@ namespace YolonaOss {
         b = B;
         a = A;
       }
-
+      PositionColorVertex(glm::vec3 pos, glm::vec4 color) {
+        x = pos[0];
+        y = pos[1];
+        z = pos[2];
+        r = color[0];
+        g = color[1];
+        b = color[2];
+        a = color[3];
+      }
       std::vector<AttributeDescription> getBinding() {
         std::vector<AttributeDescription> result;
         result.push_back(AttributeDescription("position", 3, AttributeDescription::DataType::Float));

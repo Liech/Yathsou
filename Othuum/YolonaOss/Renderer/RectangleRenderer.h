@@ -26,8 +26,8 @@ namespace YolonaOss {
   public:
     RectangleRenderer() {}
     virtual ~RectangleRenderer() {}
-    static void startTextRender();
-    static void endTextRender();
+    static void start();
+    static void end();
     static void drawRectangle(glm::vec2 pos, glm::vec2 size, glm::vec3 color);
     static void drawRectangle(BoundingBox2 box, glm::vec3 color);
 
