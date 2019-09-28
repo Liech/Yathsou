@@ -8,7 +8,7 @@
 #include "Loadable.h"
 #include "structs/Database.h"
 #include "Drawables/Widgets/Widget.h"
-#include "Camera.h"
+#include "../Camera/Camera.h"
 #include "Updateable.h"
 
 namespace YolonaOss {
@@ -142,8 +142,8 @@ namespace YolonaOss {
       glViewport(0, 0, _width, _height);
       glDepthFunc(GL_LESS);
 
-      std::shared_ptr<GL::Camera> camera = std::make_shared<GL::Camera>("Camera", _width, _height);
-      DrawSpecification spec(this,camera);
+      std::shared_ptr<YolonaOss::Camera::Camera> camera = std::make_shared<YolonaOss::Camera::Camera>(_width, _height);
+      DrawSpecification spec(this, camera);
       spec.width = _width;
       spec.height = _height;
       std::vector<std::shared_ptr<Loadable>> loadList;
@@ -168,9 +168,10 @@ namespace YolonaOss {
         for (auto update : Database<std::shared_ptr <Updateable>>::getByTag("Main"))
           update->update();
 
-        Update();
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         for (auto draw : Database<std::shared_ptr<GL::Drawable>>::getByTag("Main"))
           draw->draw();
+        Update();
 
         // Swap the screen buffers
         glfwSwapBuffers(_window);

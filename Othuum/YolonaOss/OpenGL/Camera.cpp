@@ -7,16 +7,18 @@
 #include "OpenGL/Window.h"
 namespace YolonaOss {
   namespace GL {
-    Camera::Camera(std::string name, int width, int height) : _view(name + "View"), _projection(name + "Projection"), _cameraPos(name + "Position"), _invViewProj(name + "inv") {
-      _width = width;
-      _height = height;
+    Camera::Camera(std::string name, int width, int height) : YolonaOss::Camera::Camera(width,height), _view(name + "View"), _projection(name + "Projection"), _cameraPos(name + "Position"), _invViewProj(name + "inv") {
       _lastFrame = glfwGetTime();
+    }
+    Camera::Camera(std::string name, YolonaOss::Camera::Camera* cam) : YolonaOss::Camera::Camera((int)cam->getResolution()[0], (int)cam->getResolution()[1]), _view(name + "View"), _projection(name + "Projection"), _cameraPos(name + "Position"), _invViewProj(name + "inv") {
+      _lastFrame = glfwGetTime();
+      fromCamera(cam);
     }
 
     void Camera::bind()
     {
       //http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
-      glm::mat4 Projection = glm::perspective(glm::radians(_fov), (float)_width / (float)_height, 0.1f, 100.0f);
+      glm::mat4 Projection = glm::perspective(glm::radians(getFOV()), getResolution()[0] / getResolution()[1], 0.1f, 100.0f);
 
       glm::mat4 View = glm::lookAt(
         getPosition(),
@@ -31,13 +33,6 @@ namespace YolonaOss {
       _projection.setValue(Projection);
       _invViewProj.setValue(glm::inverse(mvp));
       _cameraPos.setValue(getPosition());
-    }
-
-    glm::vec3 Camera::getPosition() {
-      return _position;
-    }
-    void Camera::setPosition(glm::vec3 v) {
-      _position = v;
     }
 
     std::vector<Uniform*> Camera::getUniforms() {

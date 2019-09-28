@@ -7,11 +7,8 @@
 #include <string>
 
 namespace YolonaOss {
-  namespace GL {
-    class Camera;
-  }
   namespace Camera {
-    class Camera;
+    class CameraMode;
     class CameraSystem : public GL::Updateable {
       REGISTER(GL::Updateable, CameraSystem, "CameraSystem", { "Main" })
     public:
@@ -23,11 +20,11 @@ namespace YolonaOss {
       void                     setCurrentCam(std::string name);
 
     private:
-      std::map<std::string, std::shared_ptr<Camera>> _availableCams;
-      std::shared_ptr<Camera>                        _currentCam;
-      std::string                                    _currentCamName;
-      GL::DrawSpecification*                         _spec;
-
+      std::map<std::string, std::shared_ptr<CameraMode>> _availableCams;
+      std::shared_ptr<CameraMode>                        _currentCam;
+      std::string                                        _currentCamName;
+      GL::DrawSpecification*                             _spec = nullptr;
+        
     };
   }
 }

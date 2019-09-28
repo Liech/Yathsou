@@ -9,7 +9,7 @@
 
 namespace YolonaOss {
   namespace Camera {
-    void FreeCamera::load(std::shared_ptr<GL::Camera> camera,GL::Window* window) {
+    void FreeCamera::load(std::shared_ptr<YolonaOss::Camera::Camera> camera,GL::Window* window) {
       _camera = camera;
       _window = window;
       _window->setCursorStatus(GL::CursorStatus::HIDDEN);

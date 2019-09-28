@@ -5,26 +5,16 @@
 #include "../OpenGL/DrawSpecification.h"
 #include "BasicTriangle.h"
 #include "../Drawables/Background.h"
+#include "../structs/Database.h"
 
 namespace YolonaOss {
   void RenderTriangle::run() {
     GL::Window w(1920, 1080);
 
-    GL::DrawableList list;
-    list.addDrawable(std::make_shared<Background>());
-    list.addDrawable(std::make_shared<BasicTriangle>());
-    GL::DrawSpecification spec(&w,std::shared_ptr<GL::Camera>());
-    spec.width = 1920;
-    spec.height = 1080;
-
-
-    w.Startup = [&list, &spec]() {
-      list.load(&spec);
-    };
-
-    w.Update = [&list]() {
-      list.draw();
-    };
+    std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
+    list->addDrawable(std::make_shared<Background>());
+    list->addDrawable(std::make_shared<BasicTriangle>());
+    Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
 
     w.run();
   }

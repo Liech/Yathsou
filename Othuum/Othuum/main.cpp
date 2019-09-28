@@ -36,9 +36,9 @@ int main() {
 
   Database<std::shared_ptr<GL::Updateable>>::add(cam, { "Main" });
   w.Update = []() {
-    //BoxRenderer::start();
-    //BoxRenderer::drawBox(glm::vec3(4,4,4),glm::vec3(4,4,4),glm::vec4(0,1,0,1));
-    //BoxRenderer::end();
+    BoxRenderer::start();
+    BoxRenderer::drawBox(glm::vec3(0, 0, 1), glm::vec3(4, 4, 4), glm::vec4(0, 1, 0, 1));
+    BoxRenderer::end();
   };
   w.run();
 } 

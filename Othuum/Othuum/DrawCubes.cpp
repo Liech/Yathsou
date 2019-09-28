@@ -3,12 +3,12 @@
 
 #include "glad/glad.h"
 #include "glm/ext/matrix_transform.hpp"
-
+#include "YolonaOss/Renderer/BoxRenderer.h"
 using namespace YolonaOss::GL;
 
 void DrawCubes::load(GL::DrawSpecification *d)
 {
-  _camera = d->getCam();
+  _camera = std::make_shared<GL::Camera>("Camera",d->getCam().get());
   _spec = d;
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
@@ -80,11 +80,11 @@ in vec3 nrm;
 
 out vec4 frag_color;
 void main() {
-  float ambientStrength = 0.7;  
-  float diffuseStrength = 0.3;
+  float ambientStrength = 0.5;  
+  float diffuseStrength = 0.5;
   float diff = max(dot(nrm, Light), 0.0) * diffuseStrength;
 
-  vec4 result = clr *  diff + clr;
+  vec4 result = clr *  diff + clr * ambientStrength;
   result[3] = 1;
 	frag_color = result;
 }
@@ -107,7 +107,7 @@ void main() {
 
   for (int x = 0; x < 5; x++) {
     for (int y = 0; y < 5; y++) {
-      _positions.push_back((glm::vec3(x / 5.0, y / 5.0, 0) - glm::vec3(0.5,0.5,0)) * 10.0f);
+      _positions.push_back((glm::vec3(x / 5.0, y / 5.0, 0) - glm::vec3(0.5,0.5,1)) * 10.0f);
     }
   }
 }
@@ -115,9 +115,13 @@ void main() {
 void DrawCubes::draw()
 {
 
+  
+  glEnable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LESS);
+  _camera->fromCamera(_spec->getCam().get());
+
   //_camera->setPosition(glm::vec3(camX, 0.1, camZ));
   
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   for (int i = 0; i < _positions.size(); i++) {
     _model->setValue(glm::translate(glm::mat4(1), _positions[i]));
@@ -125,4 +129,6 @@ void DrawCubes::draw()
     _camera->bind();
     _ibo->bind(_vao.get());
   }
+  glDisable(GL_DEPTH_TEST);
+  glDepthFunc(GL_LESS);
 }

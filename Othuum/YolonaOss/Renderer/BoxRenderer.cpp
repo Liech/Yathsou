@@ -9,45 +9,45 @@
 namespace YolonaOss {
   void BoxRenderer::load(GL::DrawSpecification* spec)
   {
+    _camera = std::make_unique<GL::Camera>("Camera", spec->getCam().get());
     _spec = spec;
     std::vector<GL::PositionNormalVertex> input;
 
-
     //front
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, 0.5), glm::vec3(0, 0, 1)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, 0.5) , glm::vec3(0, 0, 1)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, 0.5)  , glm::vec3(0, 0, 1)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, 0.5) , glm::vec3(0, 0, 1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, 0.5), glm::vec3(0, 0, 1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, 0.5) , glm::vec3(0, 0, 1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, 0.5)  , glm::vec3(0, 0, 1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, 0.5) , glm::vec3(0, 0, 1)));
 
     //right
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, 0.5)  , glm::vec3(1, 0, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, -0.5) , glm::vec3(1, 0, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, -0.5), glm::vec3(1, 0, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, 0.5) , glm::vec3(1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, 0.5)  , glm::vec3(1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, -0.5) , glm::vec3(1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, -0.5), glm::vec3(1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, 0.5) , glm::vec3(1, 0, 0)));
 
     //back
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(0, 0, -1)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, -0.5) , glm::vec3(0, 0, -1)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, -0.5)  , glm::vec3(0, 0, -1)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, -0.5) , glm::vec3(0, 0, -1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(0, 0, -1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, -0.5) , glm::vec3(0, 0, -1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, -0.5)  , glm::vec3(0, 0, -1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, -0.5) , glm::vec3(0, 0, -1)));
 
     //left
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(-1, 0, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, 0.5) , glm::vec3(-1, 0, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, 0.5)  , glm::vec3(-1, 0, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, -0.5) , glm::vec3(-1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(-1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, 0.5) , glm::vec3(-1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, 0.5)  , glm::vec3(-1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, -0.5) , glm::vec3(-1, 0, 0)));
 
     //upper
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, 0.5)  , glm::vec3(0, 1, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, 0.5) , glm::vec3(0, 1, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, -0.5), glm::vec3(0, 1, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, -0.5) , glm::vec3(0, 1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, 0.5)  , glm::vec3(0, 1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, 0.5) , glm::vec3(0, 1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, -0.5), glm::vec3(0, 1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, -0.5) , glm::vec3(0, 1, 0)));
 
     //bottom
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(0, -1, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, -0.5) , glm::vec3(0, -1, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, 0.5)  , glm::vec3(0, -1, 0)));
-    _cube.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, 0.5) , glm::vec3(0, -1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(0, -1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, -0.5) , glm::vec3(0, -1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, 0.5)  , glm::vec3(0, -1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, 0.5) , glm::vec3(0, -1, 0)));
 
     //note every face of the cube is on a single line
     _indices = std::vector<int>{
@@ -63,8 +63,8 @@ namespace YolonaOss {
       out vec3 nrm;
       void main() {
       
-        mat4 view = CameraProjection * CameraView;
-        gl_Position = view * Matrix * vec4(position , 1.0);
+        mat4 view = CameraProjection *  CameraView;
+        gl_Position = view * model *vec4(position , 1.0);
         clr = Color;
         nrm = normal;
       }
@@ -76,11 +76,11 @@ namespace YolonaOss {
      
      out vec4 frag_color;
      void main() {
-       float ambientStrength = 0.7;  
-       float diffuseStrength = 0.3;
+       float ambientStrength = 0.5;  
+       float diffuseStrength = 0.5;
        float diff = max(dot(nrm, Light), 0.0) * diffuseStrength;
      
-       vec4 result = clr *  diff + clr;
+       vec4 result = clr *  diff + clr * ambientStrength;
        result[3] = 1;
      	frag_color = result;
      }
@@ -88,13 +88,13 @@ namespace YolonaOss {
 
     std::vector<GL::Uniform*> uniforms;
 
-    std::vector<GL::Uniform*> cameraUniforms = _spec->getCam()->getUniforms();
+    std::vector<GL::Uniform*> cameraUniforms = _camera->getUniforms();
     uniforms.insert(uniforms.end(), cameraUniforms.begin(), cameraUniforms.end());
     _ibo = std::make_unique<GL::IBO>(_indices);
     _light = std::make_unique<GL::UniformVec3>("Light");
-    _light->setValue(glm::normalize(glm::vec3(1, 1, 1)));
+    _light->setValue(glm::normalize(glm::vec3(25, 31, -21)));
     uniforms.push_back(_light.get());
-    _mat = std::make_unique<GL::UniformMat4>("Matrix");
+    _mat = std::make_unique<GL::UniformMat4>("model");
     uniforms.push_back(_mat.get());
     _color = std::make_unique<GL::UniformVec4>("Color");
     uniforms.push_back(_color.get());
@@ -105,22 +105,22 @@ namespace YolonaOss {
 
   void BoxRenderer::start()
   {
+    _camera->fromCamera(_spec->getCam().get());
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     _shader->bind();
-    _spec->getCam()->bind();
+    _camera->bind();
   }
 
   void BoxRenderer::end()
   {
     glDisable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    
+    glDepthFunc(GL_LESS);    
   }
 
-  void BoxRenderer::drawBox(glm::vec3 start, glm::vec3 end, glm::vec4 color) {
+  void BoxRenderer::drawBox(glm::vec3 start, glm::vec3 size, glm::vec4 color) {
     glm::mat4 m = glm::mat4(1);
-    m = glm::scale(m,end);
+    m = glm::scale(m, size);
     m = glm::translate(m,start);
     _mat->setValue(m);
     _mat->bind();

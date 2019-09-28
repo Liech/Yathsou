@@ -105,14 +105,18 @@ void main() {
 
   void RotatingCube::draw()
   {
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
     float radius = 4.0f;
     float camX = (float)sin(glfwGetTime()) * radius;
     float camZ = (float)cos(glfwGetTime()) * radius;
     _camera->setPosition(glm::vec3(camX, 0.1, camZ));
 
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     _shader->bind();
     _camera->bind();
     _ibo->bind(_vao.get());
+    glDisable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
   }
 }

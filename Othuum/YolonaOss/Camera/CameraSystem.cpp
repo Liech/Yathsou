@@ -9,9 +9,9 @@ namespace YolonaOss {
     void CameraSystem::load(GL::DrawSpecification* spec)
     {
       _spec = spec;
-      std::set<std::string> camNames = Factory<Camera>::getNamesByTag("Camera");
+      std::set<std::string> camNames = Factory<CameraMode>::getNamesByTag("Camera");
       for (auto name : camNames) {
-        std::shared_ptr<Camera> cam = Factory<Camera>::make(name);
+        std::shared_ptr<CameraMode> cam = Factory<CameraMode>::make(name);
         _availableCams[name] = cam;
         //cam->load(spec->getCam(), spec->getWindow());
       }

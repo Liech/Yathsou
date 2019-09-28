@@ -9,7 +9,7 @@
 
 namespace YolonaOss {
   namespace Camera {
-    void RTSCamera::load(std::shared_ptr<GL::Camera> camera, GL::Window* window) {
+    void RTSCamera::load(std::shared_ptr<YolonaOss::Camera::Camera> camera, GL::Window* window) {
       _camera = camera;
       _lastTime = _window->getTime();
       _window = window;
