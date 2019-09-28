@@ -192,8 +192,11 @@
     <ClInclude Include="OpenGL\Updateable.h">
       <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\LineRenderer.h">
+    <ClInclude Include="Renderer\BoxRenderer.h">
       <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL\PositionNormalVertex.h">
+      <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -284,7 +287,7 @@
     <ClCompile Include="OpenGL\Updateable.cpp">
       <Filter>Source Files\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="Renderer\LineRenderer.cpp">
+    <ClCompile Include="Renderer\BoxRenderer.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>

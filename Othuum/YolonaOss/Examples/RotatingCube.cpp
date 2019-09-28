@@ -52,7 +52,7 @@ namespace YolonaOss {
     input.push_back(GL::PositionColorNormalVertex(glm::vec3(-0.5, -0.5, 0.5), glm::vec4(0, 0, 1, 1), glm::vec3(0, -1, 0)));
 
     //note every face of the cube is on a single line
-    std::vector<GLuint> indices = {
+    std::vector<int> indices = {
       0,  1,  2,  0,  2,  3,   //front
       4,  5,  6,  4,  6,  7,   //right
       8,  9,  10, 8,  10, 11,  //back
