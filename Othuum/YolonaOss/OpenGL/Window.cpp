@@ -82,8 +82,9 @@ namespace YolonaOss {
         msgSeverity = "HIGH";
         break;
       }
+	  printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
 
-      printf("glDebugMessage:\n%s \n type = %s source = %s severity = %s\n", message, msgType.c_str(), msgSource.c_str(), msgSeverity.c_str());
+	  printf("glDebugMessage:\n%s \n type = %s source = %s severity = %s\n", message, msgType.c_str(), msgSource.c_str(), msgSeverity.c_str());
       if (msgSeverity == "HIGH")
         throw std::runtime_error("OPENGL ERROR:" + std::string(message));
     }

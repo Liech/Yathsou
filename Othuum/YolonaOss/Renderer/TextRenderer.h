@@ -44,7 +44,7 @@ namespace YolonaOss {
       std::unique_ptr<GL::VBO<GL::PositionTextureVertex>> vbo;
       std::unique_ptr<GL::VAO<GL::PositionTextureVertex>> vao;
       std::unique_ptr<GL::ShaderProgram>              shader;
-      GL::DrawSpecification* spec;
+      GL::DrawSpecification* spec = nullptr;
       std::map<char, TextRenderer::Character>     characters;
       std::unique_ptr<GL::UniformMat4>                projection;
       std::unique_ptr<GL::UniformVec3>                textColor;

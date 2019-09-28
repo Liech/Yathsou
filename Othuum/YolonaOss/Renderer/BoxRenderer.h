@@ -15,7 +15,7 @@ namespace YolonaOss {
     class UniformMat4;
   }
   class BoxRenderer : public GL::Loadable {
-    REGISTER(Loadable, BoxRenderer, "BoxRenderer", { "Main" })
+    //REGISTER(Loadable, BoxRenderer, "BoxRenderer", { "Main" })
     // Geerbt über Loadable
     virtual void load(GL::DrawSpecification* spec) override;
   public:

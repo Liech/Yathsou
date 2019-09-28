@@ -11,13 +11,15 @@
 #include "YolonaOss/Drawables/Widgets/Button.h"
 #include "YolonaOss/structs/Database.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
+#include <filesystem>
+
 using namespace YolonaOss;
 
 int main() { 
 
-
-  int width = 1920;
-  int height = 1080;
+  
+  int width = 800;
+  int height = 600;
   GL::Window w(width, height);
 
 
@@ -34,9 +36,9 @@ int main() {
 
   Database<std::shared_ptr<GL::Updateable>>::add(cam, { "Main" });
   w.Update = []() {
-    BoxRenderer::start();
-    BoxRenderer::drawBox(glm::vec3(4,4,4),glm::vec3(4,4,4),glm::vec4(0,1,0,1));
-    BoxRenderer::end();
+    //BoxRenderer::start();
+    //BoxRenderer::drawBox(glm::vec3(4,4,4),glm::vec3(4,4,4),glm::vec4(0,1,0,1));
+    //BoxRenderer::end();
   };
   w.run();
 } 
