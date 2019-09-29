@@ -23,8 +23,8 @@ namespace YolonaOss {
     static void start();
     static void end();
     static void drawLine(glm::vec3 start, glm::vec3 end, float thickness, glm::vec4 color);
-    static void drawBox(glm::vec3 start, glm::vec3 size                  , glm::vec4 color);
-
+    static void drawDot(glm::vec3 start, glm::vec3 size                  , glm::vec4 color);
+    static void draw(glm::mat4 mat, glm::vec4 color);
   private:
     static inline GL::DrawSpecification*                                    _spec; 
     static inline std::vector<int>                                          _indices;

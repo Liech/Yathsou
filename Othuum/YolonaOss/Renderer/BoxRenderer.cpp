@@ -12,42 +12,43 @@ namespace YolonaOss {
     _camera = std::make_unique<GL::Camera>("Camera", spec->getCam().get());
     _spec = spec;
     std::vector<GL::PositionNormalVertex> input;
-
+    float start = 0;
+    float end = 1;
     //front
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, 0.5), glm::vec3(0, 0, 1)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, 0.5) , glm::vec3(0, 0, 1)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, 0.5)  , glm::vec3(0, 0, 1)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, 0.5) , glm::vec3(0, 0, 1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, start, end), glm::vec3(0, 0, 1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, start, end) , glm::vec3(0, 0, 1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, end, end)  , glm::vec3(0, 0, 1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, end, end) , glm::vec3(0, 0, 1)));
 
     //right
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, 0.5)  , glm::vec3(1, 0, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, -0.5) , glm::vec3(1, 0, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, -0.5), glm::vec3(1, 0, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, 0.5) , glm::vec3(1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, end, end)  , glm::vec3(1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, end, start) , glm::vec3(1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, start, start), glm::vec3(1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, start, end) , glm::vec3(1, 0, 0)));
 
     //back
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(0, 0, -1)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, -0.5) , glm::vec3(0, 0, -1)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, -0.5)  , glm::vec3(0, 0, -1)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, -0.5) , glm::vec3(0, 0, -1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, start, start), glm::vec3(0, 0, -1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, start, start) , glm::vec3(0, 0, -1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, end, start)  , glm::vec3(0, 0, -1)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, end, start) , glm::vec3(0, 0, -1)));
 
     //left
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(-1, 0, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, 0.5) , glm::vec3(-1, 0, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, 0.5)  , glm::vec3(-1, 0, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, -0.5) , glm::vec3(-1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, start, start), glm::vec3(-1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, start, end) , glm::vec3(-1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, end, end)  , glm::vec3(-1, 0, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, end, start) , glm::vec3(-1, 0, 0)));
 
     //upper
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, 0.5)  , glm::vec3(0, 1, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, 0.5) , glm::vec3(0, 1, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, 0.5, -0.5), glm::vec3(0, 1, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, 0.5, -0.5) , glm::vec3(0, 1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, end, end)  , glm::vec3(0, 1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, end, end) , glm::vec3(0, 1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, end, start), glm::vec3(0, 1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, end, start) , glm::vec3(0, 1, 0)));
 
     //bottom
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, -0.5), glm::vec3(0, -1, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, -0.5) , glm::vec3(0, -1, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(0.5, -0.5, 0.5)  , glm::vec3(0, -1, 0)));
-    input.push_back(GL::PositionNormalVertex(glm::vec3(-0.5, -0.5, 0.5) , glm::vec3(0, -1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, start, start), glm::vec3(0, -1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, start, start) , glm::vec3(0, -1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(end, start, end)  , glm::vec3(0, -1, 0)));
+    input.push_back(GL::PositionNormalVertex(glm::vec3(start, start, end) , glm::vec3(0, -1, 0)));
 
     //note every face of the cube is on a single line
     _indices = std::vector<int>{
@@ -118,10 +119,7 @@ namespace YolonaOss {
     glDepthFunc(GL_LESS);    
   }
 
-  void BoxRenderer::drawBox(glm::vec3 start, glm::vec3 size, glm::vec4 color) {
-    glm::mat4 m = glm::mat4(1);
-    m = glm::scale(m, size);
-    m = glm::translate(m,start);
+  void BoxRenderer::draw(glm::mat4 m, glm::vec4 color) {
     _mat->setValue(m);
     _mat->bind();
     _color->setValue(color);
@@ -129,9 +127,28 @@ namespace YolonaOss {
     _ibo->bind(_vao.get());
   }
 
+  void BoxRenderer::drawDot(glm::vec3 start, glm::vec3 size, glm::vec4 color) {
+    glm::mat4 m = glm::mat4(1);
+    m = glm::translate(m,start);
+    m = glm::scale(m, size);
+    m = glm::translate(m, glm::vec3(-0.5f, -0.5f, -0.5f));
+    draw(m, color);
+  }
+
   void BoxRenderer::drawLine(glm::vec3 start, glm::vec3 end, float thickness, glm::vec4 color)
   {
-    _ibo->bind(_vao.get());
+    glm::mat4 m = glm::mat4(1);
+    m = glm::translate(m, start);
+
+    glm::vec3 dir = glm::normalize(end - start);
+    float angle = std::atan2(dir[0], dir[2]);
+    m = glm::rotate(m,angle, glm::vec3(0, 1.0, 0));    
+    float angleZ = -std::asin(dir[1]);
+    m = glm::rotate(m,angleZ, glm::vec3(1.0, 0.0, 0.0));
+
+    m = glm::scale(m, glm::vec3(thickness,thickness,glm::length(end-start)));
+    m = glm::translate(m, glm::vec3(-0.5, -0.5, 0));
+    draw(m, color);
   }
 
 }
