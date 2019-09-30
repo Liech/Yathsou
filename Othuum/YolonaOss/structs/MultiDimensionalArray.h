@@ -61,6 +61,7 @@ namespace YolonaOss {
 
     Type& get(input_<Is>... vals) { return _data[transform(vals...)]; }
     Type  get(input_<Is>... vals) const { return _data[transform(vals...)]; }
+    Type  getValue(input_<Is>... vals) const { return _data[transform(vals...)]; }
 
     Type& get(std::array<size_t, Dimension> vals) { return _data[transformA(vals)]; }
     Type  get(std::array<size_t, Dimension> vals) const { return _data[transformA(vals)]; }
@@ -70,6 +71,9 @@ namespace YolonaOss {
     }
     Type get_linear(size_t pos) const {
       return _data[pos];
+    }
+    void set_linear(size_t pos, Type t) {
+      _data[pos] = t;
     }
 
     void fill(Type t) {
@@ -161,8 +165,9 @@ namespace YolonaOss {
       for (int chunk = 0; chunk < chunks; chunk++) {
         size_t min = chunk * chunkSize;
         size_t max = (chunk + 1) * chunkSize;
-        for (size_t i = min; i < max && i < getSize(); i++)
-          result->get_linear(i) = func(get_linear(i));
+        for (size_t i = min; i < max && i < getSize(); i++) {
+           result->set_linear(i, func(this->get_linear(i)));
+        }
       }
       return result;
     }

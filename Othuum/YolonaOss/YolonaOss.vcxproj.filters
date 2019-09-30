@@ -58,6 +58,15 @@
     <Filter Include="Source Files\Camera">
       <UniqueIdentifier>{d2efea0a-a514-4fe9-a4a6-365e6e99f6cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Util">
+      <UniqueIdentifier>{13d1ddaa-7ffc-4ad6-9b95-cfc9c7950fda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util">
+      <UniqueIdentifier>{8ba11f31-72b5-423f-8d98-610e537b1514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs\lodepng">
+      <UniqueIdentifier>{5247ac49-1909-4ecb-aeab-2ca8f37127a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -198,6 +207,21 @@
     <ClInclude Include="OpenGL\PositionNormalVertex.h">
       <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="Examples\Texture2Tree.h">
+      <Filter>Examples</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Slicer.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\ImageIO.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\lodepng\lodepng.h">
+      <Filter>libs\lodepng</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\lodepng\lodepng_util.h">
+      <Filter>libs\lodepng</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -292,6 +316,21 @@
     </ClCompile>
     <ClCompile Include="Camera\Camera.cpp">
       <Filter>Source Files\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\Texture2Tree.cpp">
+      <Filter>Examples</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Slicer.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\ImageIO.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Lib\lodepng\lodepng_util.cpp">
+      <Filter>libs\lodepng</Filter>
+    </ClCompile>
+    <ClCompile Include="Lib\lodepng\lodepng.cpp">
+      <Filter>libs\lodepng</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

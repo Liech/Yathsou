@@ -1,9 +1,7 @@
 #include "BoxRenderer.h"
 #include "glad/glad.h"
-#include "../OpenGL/Camera.h"
 #include "../OpenGL/PositionNormalVertex.h"
 #include "../OpenGL/IBO.h"
-#include "../OpenGL/ShaderProgram.h"
 #include "../OpenGL/Uniform.h"
 #include <glm/gtc/matrix_transform.hpp>
 namespace YolonaOss {

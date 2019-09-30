@@ -19,6 +19,9 @@ namespace YolonaOss {
     unsigned char& blue() { return _color[2]; }
     unsigned char& alpha() { return _color[3]; }
 
+    unsigned char getRed()   const { return _color[0]; }
+    unsigned char getGreen() const { return _color[1]; }
+    unsigned char getBlue()  const { return _color[2]; }
 
     static Color random();
 

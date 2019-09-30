@@ -6,14 +6,14 @@
 #include "../OpenGL/VAO.h"
 #include "../structs/Factory.h"
 #include "../OpenGL/PositionNormalVertex.h"
+#include "../OpenGL/Camera.h"
+#include "../OpenGL/ShaderProgram.h"
 namespace YolonaOss {
   namespace GL {
-    class ShaderProgram;
     class IBO;
     class UniformVec3;
     class UniformVec4;
     class UniformMat4;
-    class Camera;
   }
   class BoxRenderer : public GL::Loadable {
     REGISTER(Loadable, BoxRenderer, "BoxRenderer", { "Main" })
