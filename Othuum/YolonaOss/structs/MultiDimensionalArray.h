@@ -59,21 +59,21 @@ namespace YolonaOss {
     virtual ~MultiDimensionalArray() {
     };
 
-    Type& get(input_<Is>... vals) { return _data[transform(vals...)]; }
-    Type  get(input_<Is>... vals) const { return _data[transform(vals...)]; }
-    Type  getValue(input_<Is>... vals) const { return _data[transform(vals...)]; }
+    Type& getRef(input_<Is>... vals) { return _data[transform(vals...)]; }
+    Type  getVal(input_<Is>... vals) const { return _data[transform(vals...)]; }
 
-    Type& get(std::array<size_t, Dimension> vals) { return _data[transformA(vals)]; }
-    Type  get(std::array<size_t, Dimension> vals) const { return _data[transformA(vals)]; }
 
-    Type& get_linear(size_t pos) {
+    Type& getRef(std::array<size_t, Dimension> vals) { return _data[transformA(vals)]; }
+    Type  getVal(std::array<size_t, Dimension> vals) { return _data[transformA(vals)]; }
+
+    Type& get_linearRef(size_t pos) {
       return _data[pos];
     }
-    Type get_linear(size_t pos) const {
+    Type get_linearVal(size_t pos) const {
       return _data[pos];
     }
-    void set_linear(size_t pos, Type t) {
-      _data[pos] = t;
+    void set_linear(size_t pos, const Type val) {
+      _data[pos] = val;
     }
 
     void fill(Type t) {
@@ -155,10 +155,10 @@ namespace YolonaOss {
     }
 
     template<typename Type2>
-    std::unique_ptr<MultiDimensionalArray<Type2, Dimension>> map(std::function<Type2(Type const&)> func) {
+    std::shared_ptr<MultiDimensionalArray<Type2, Dimension>> map(std::function<Type2(Type const&)> func) {
       std::vector<size_t> dimension;
       for (size_t i = 0; i < Dimension; i++) dimension.push_back(_dimension[i]);
-      std::unique_ptr<MultiDimensionalArray<Type2, Dimension>> result = std::make_unique<MultiDimensionalArray<Type2, Dimension>>(dimension);
+      std::shared_ptr<MultiDimensionalArray<Type2, Dimension>> result = std::make_shared<MultiDimensionalArray<Type2, Dimension>>(dimension);
       int chunkSize = 1000;
       int chunks = (int)getSize() / chunkSize;
 #pragma omp parallel for
@@ -166,7 +166,8 @@ namespace YolonaOss {
         size_t min = chunk * chunkSize;
         size_t max = (chunk + 1) * chunkSize;
         for (size_t i = min; i < max && i < getSize(); i++) {
-           result->set_linear(i, func(this->get_linear(i)));
+          Type2 c = func(this->get_linearVal(i));
+          result->set_linear(i,c);
         }
       }
       return result;
@@ -183,7 +184,7 @@ namespace YolonaOss {
         if (max > getSize())
           max = getSize();
         for (size_t i = min; i < max; i++)
-          func(i, get_linear(i));
+          func(i, get_linearRef(i));
       }
     }
 
@@ -196,7 +197,7 @@ namespace YolonaOss {
         size_t min = chunk * chunkSize;
         size_t max = (chunk + 1) * chunkSize;
         for (size_t i = min; i < max && i < getSize(); i++)
-          func(transformToCoordiante(i), get_linear(i));
+          func(transformToCoordiante(i), get_linearRef(i));
       }
     }
 
@@ -207,7 +208,7 @@ namespace YolonaOss {
       assert(Dimension == 2);
       for (size_t y = 0; y < getDimension(1); y++) {
         for (size_t x = 0; x < getDimension(0); x++)
-          std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << get(x, y);
+          std::cout << std::left << std::setw(numWidth) << std::setfill(separator) << getVal(x, y);
         std::cout << std::endl;
       }
 

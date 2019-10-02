@@ -44,7 +44,7 @@ namespace YolonaOss {
         _size *= ArraySize;
 
       if (_size == 1) {
-        _content = description->get_linear(0);
+        _content = description->get_linearVal(0);
         return;
       }
       for (size_t dim = 0; dim < Dimension; dim++)
@@ -77,12 +77,35 @@ namespace YolonaOss {
       _childs = nullptr;
     }
 
+    struct Leaf {
+      std::array<size_t, Dimension> position;
+      size_t                        size;
+      Content                       value;
+    };
+    std::vector<Leaf> getLeafs() {
+      if (_childs == nullptr) {
+        Leaf f;
+        f.position = _position;
+        f.size     = _size;
+        f.value    = _content;
+        return { f };
+      }
+      else {
+        std::vector<Leaf> result;
+        for (size_t i = 0; i < _childs->getSize(); i++) {
+          auto subResult = _childs->get_linearRef(i).getLeafs();
+          result.insert(result.end(), subResult.begin(), subResult.end());
+        }
+        return result;
+      }
+    }
+
     std::vector<Content> toFlat(Content isNodeValue) {
       if (_childs) {
         std::vector<Content> result;
         result.push_back(isNodeValue);
         for (int64_t i = 0; i < _childs->getSize(); i++) {
-          auto sub = _childs->get_linear(i).toFlat(isNodeValue);
+          auto sub = _childs->get_linearVal(i).toFlat(isNodeValue);
           result.insert(result.end(), sub.begin(), sub.end());
         }
         return result;
@@ -103,23 +126,23 @@ namespace YolonaOss {
             _content = defaultValue;
             return;
           }
-        _content = description->get(_position);
+        _content = description->getVal(_position);
       }
       else {
         createChildren();
-        for (int i = 0; i < 8; i++)
-          assert(_childs->get_linear(i)._size == _size / ArraySize);
+        for (int i = 0; i < _childs->getSize(); i++)
+          assert(_childs->get_linearRef(i)._size == _size / ArraySize);
 #pragma omp parallel for  
-        for (int i = 0; i < 8; i++) {
-          _childs->get_linear(i).recursiveFill(description);
+        for (int i = 0; i < _childs->getSize(); i++) {
+          _childs->get_linearRef(i).recursiveFill(description);
         }
 
         bool allSame = true;
-        Content compare = _childs->get_linear(0)._content;
+        Content compare = _childs->get_linearRef(0)._content;
         Content merged = compare;
 
-        for (int64_t i = 1; i < _childs->getSize(); i++) {
-          Content current = _childs->get_linear(i)._content;
+        for (uint64_t i = 1; i < _childs->getSize(); i++) {
+          Content current = _childs->get_linearRef(i)._content;
           if (compare != current)
             allSame = false;
 
@@ -133,7 +156,7 @@ namespace YolonaOss {
 
         bool allLeafs = true;
         for (size_t i = 0; i < _childs->getSize(); i++)
-          if (_childs->get_linear(i)._childs) {
+          if (_childs->get_linearRef(i)._childs) {
             allLeafs = false;
             break;
           }

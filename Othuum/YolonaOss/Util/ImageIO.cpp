@@ -23,7 +23,7 @@ namespace YolonaOss {
     image.resize(width * height * 4);
     for (unsigned y = 0; y < height; y++)
       for (unsigned x = 0; x < width; x++) {
-        Color& c = img.get(x, y);
+        Color& c = img.getVal(x, y);
         image[4 * width * y + 4 * x + 0] = (unsigned char)c.r();
         image[4 * width * y + 4 * x + 1] = (unsigned char)c.g();
         image[4 * width * y + 4 * x + 2] = (unsigned char)c.b();
@@ -49,7 +49,7 @@ namespace YolonaOss {
 
     for (unsigned y = 0; y < height; y++)
       for (unsigned x = 0; x < width; x++) {
-        Color& c = result->get(x, y);
+        Color& c = result->getRef(x, y);
         c.r() = image[4 * width * y + 4 * x + 0];
         c.g() = image[4 * width * y + 4 * x + 1];
         c.b() = image[4 * width * y + 4 * x + 2];
@@ -68,9 +68,9 @@ namespace YolonaOss {
     size_t height = 512;
     MultiDimensionalArray<Color, 2> m(width, height);
     for (int x = 0; x < width; x++)
-      m.get(x, 0) = Color(0, 0, 255);
+      m.getRef(x, 0) = Color(0, 0, 255);
     for (int y = 0; y < height; y++)
-      m.get(0, y) = Color(255, 255, 255);
+      m.getRef(0, y) = Color(255, 255, 255);
     ImageIO::writeImage("Test/ImageIO.png", m);
   }
 }

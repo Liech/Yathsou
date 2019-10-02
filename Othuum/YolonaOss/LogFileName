@@ -1,0 +1,35 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robustes Dateikopieren fÅr Windows                              
+-------------------------------------------------------------------------------
+
+  Gestartet: Donnerstag, 3. Oktober 2019 00:42:03
+   Quelle : F:\Projects\Yathsou\Othuum\YolonaOss\Data\
+     Ziel : F:\Projects\Yathsou\Othuum\x64\Release\YolonaOssData\
+
+    Dateien : *.*
+	    
+  Optionen: *.* /S /DCOPY:DA /COPY:DAT /Z /R:1000000 /W:30 
+
+------------------------------------------------------------------------------
+
+	 Neues Verz.       0	F:\Projects\Yathsou\Othuum\YolonaOss\Data\
+	 Neues Verz.       1	F:\Projects\Yathsou\Othuum\YolonaOss\Data\fonts\
+	    Neue Datei		  311636	arial.ttf  0%   42%   84%   99%   99%  100%  
+	 Neues Verz.       2	F:\Projects\Yathsou\Othuum\YolonaOss\Data\textures\
+	    Neue Datei		  297816	Map.png  0%   43%   87%   99%   99%  100%  
+	    Neue Datei		   28642	SmallMap.png  0%   99%   99%  100%  
+
+------------------------------------------------------------------------------
+
+           Insgesamt   KopiertöbersprungenKeine öbereinstimmung    FEHLER    Extras
+Verzeich.:         3         3         0         0         0         0
+  Dateien:         3         3         0         0         0         0
+    Bytes:   623.1 k   623.1 k         0         0         0         0
+   Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+Geschwindigkeit:             5500810 Bytes/Sek.
+Geschwindigkeit:             314.758 Megabytes/Min.
+   Beendet: Donnerstag, 3. Oktober 2019 00:42:03
+
