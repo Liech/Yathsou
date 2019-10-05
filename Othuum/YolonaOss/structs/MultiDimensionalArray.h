@@ -36,6 +36,7 @@ namespace YolonaOss {
         counter++;
       }
       _data.resize(getSize());
+      assert(getSize() != 0);
     }
 
     MultiDimensionalArray(std::vector<size_t> dim) {
@@ -46,13 +47,15 @@ namespace YolonaOss {
         _size *= dim[i];
       }
       _data.resize(getSize());
+      assert(getSize() != 0);
     }
 
     MultiDimensionalArray(const  MultiDimensionalArray<Type, Dimension>& copy) {
       _size = copy._size;
-      _data = new Type[getSize()];
+      _data.resize(getSize());
       std::memcpy(_data.data(), copy._data.data(), (sizeof _data) * getSize());
       std::memcpy(&_dimension, &copy._dimension, (sizeof _dimension) * Dimension);
+      assert(getSize() != 0);
     }
 
 
@@ -63,8 +66,14 @@ namespace YolonaOss {
     Type  getVal(input_<Is>... vals) const { return _data[transform(vals...)]; }
 
 
-    Type& getRef(std::array<size_t, Dimension> vals) { return _data[transformA(vals)]; }
-    Type  getVal(std::array<size_t, Dimension> vals) { return _data[transformA(vals)]; }
+    Type& getRef(std::array<size_t, Dimension> vals) { 
+      auto pos = transformA(vals);
+      return _data[pos]; 
+    }
+    Type  getVal(std::array<size_t, Dimension> vals) {
+      auto pos = transformA(vals);
+      return _data[pos];     
+    }
 
     Type& get_linearRef(size_t pos) {
       return _data[pos];

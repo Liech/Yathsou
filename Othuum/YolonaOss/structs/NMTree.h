@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MultiDimensionalArray.h"
-#include <optional>
+#include <set>
 
 //NM Tree means N^M Tree
 //I don't know whats the real name is
@@ -19,6 +19,9 @@ namespace YolonaOss {
 
   enum class TreeMergeBehavior {
     Sum, Max, Min, Avg, Default
+  };
+  enum class NMTreeDirection {
+    Positive, Negative
   };
 
   template <typename Content, size_t ArraySize, size_t Dimension, TreeMergeBehavior Merge, Content defaultValue>
@@ -52,16 +55,26 @@ namespace YolonaOss {
       recursiveFill(description);
     }
 
-    ~NMTree() {
+    virtual ~NMTree() {
       if (_childs)
         delete _childs;
+      //for (int i = 0; i < Dimension; i++) {
+      //  for (auto n : _neighbourhood[i * 2])
+      //    if (n->_neighbourhood[i * 2 + 1].find(this) != n->_neighbourhood[i * 2 + 1].end())
+      //      n->_neighbourhood[i * 2 + 1].erase(this);
+      //  for (auto n : _neighbourhood[i * 2+1])
+      //    if (n->_neighbourhood[i * 2].find(this) != n->_neighbourhood[i * 2].end())
+      //      n->_neighbourhood[i * 2].erase(this);
+      //}
     }
 
     void createChildren() {
+      assert(_childs == nullptr);
       std::vector<size_t> size;
       size.resize(Dimension);
       std::fill(size.begin(), size.end(), ArraySize);
       _childs = new MultiDimensionalArray<NMTree<Content, ArraySize, Dimension, Merge, defaultValue>, Dimension>(size);
+           
       _childs->apply([this](std::array<size_t, Dimension> pos, NMTree<Content, ArraySize, Dimension, Merge, defaultValue>& child) {
         child._size = _size / ArraySize;
         child._content = _content;
@@ -70,6 +83,62 @@ namespace YolonaOss {
           newPosition[i] = _position[i] + pos[i] * child._size;
         child._position = newPosition;
         });
+    }
+    void initNeighbourgraph() {
+      if (_childs != nullptr)
+        for(size_t i = 0;i < _childs->getSize();i++)
+          _childs->get_linearRef(i).initNeighbourgraph(this);
+    }
+    void initNeighbourgraph(NMTree<Content, ArraySize, Dimension, Merge, defaultValue>* parent) {
+      // Neighboorhood ---------------------------------
+      //for (int dim = 0; dim < Dimension; dim++) {
+      //  if (getPosition()[dim] != 0) { //inside
+      //    std::array<size_t, Dimension> neighbourPos = getPosition();
+      //    neighbourPos[dim] -= 1;
+      //    _neighbourhood[dim * 2].insert(&(_childs->getRef(neighbourPos)));
+      //  }
+
+      //}
+      //  else //border
+      //  {
+      //    for (auto n : this->_neighbourhood[dim * 2]) {
+      //      //check for intersections
+      //      bool validNeighbour = true;
+      //      for (int i = 0; i < Dimension; i++) {
+      //        if (i == dim) continue;
+      //        if (n->_position[i] > (child._position[i] + child._size)) 
+      //          { validNeighbour = false; break; }
+      //        if ((n->_position[i] + n->_size) < child._position[i]) 
+      //          { validNeighbour = false; break; }
+      //      }
+      //      if (!validNeighbour) continue;
+
+      //      child._neighbourhood[dim * 2].insert(n);
+      //      if (n->_neighbourhood[dim * 2+1].count(this))
+      //        n->_neighbourhood[dim * 2+1].erase(this);
+      //      n->_neighbourhood[dim * 2+1].insert(&child);
+      //    }
+      //  }
+
+      //  ////Neighboorhood ++++++++++++++++++++++++++++++++
+      //  if (pos[dim] < ArraySize - 1) {
+      //    std::array<size_t, Dimension> neighbourPos = pos;
+      //    neighbourPos[dim] += 1;
+      //    child._neighbourhood[dim * 2 + 1].insert(&(_childs->getRef(neighbourPos)));
+      //  }
+      //  //else {
+      //  //  for (auto n : this->_neighbourhood[i * 2 + 1]) {
+      //  //    child._neighbourhood [i * 2+1].insert(n);
+      //  //    if (n->_neighbourhood[i * 2+1].count(this))
+      //  //      n->_neighbourhood  [i * 2+1].erase(this);
+      //  //    n->_neighbourhood    [i * 2+1].insert(&child);
+      //  //  }
+      //  //}
+      //}
+    }
+
+    std::set< NMTree<Content, ArraySize, Dimension, Merge, defaultValue>* > getNeighbours(size_t dimension, NMTreeDirection dir) {
+      return _neighbourhood[dimension * 2 + (dir == NMTreeDirection::Positive) ? 1 : 0];
     }
 
     void killChildren() {
@@ -81,6 +150,8 @@ namespace YolonaOss {
       std::array<size_t, Dimension> position;
       size_t                        size;
       Content                       value;
+      NMTree<Content, ArraySize, Dimension, Merge, defaultValue>* link;
+
     };
     std::vector<Leaf> getLeafs() {
       if (_childs == nullptr) {
@@ -88,6 +159,7 @@ namespace YolonaOss {
         f.position = _position;
         f.size     = _size;
         f.value    = _content;
+        f.link     = this;
         return { f };
       }
       else {
@@ -117,6 +189,7 @@ namespace YolonaOss {
 
     Content getContent() { return _content; }
     size_t getSize() { return _size; }
+    std::array<size_t, Dimension> getPosition() { return _position; }
   private:
     void recursiveFill(MultiDimensionalArray<Content, Dimension>* description) {
       assert(_size > 0);
@@ -170,10 +243,12 @@ namespace YolonaOss {
       }
     }
 
-
-    std::array<size_t, Dimension>                                                                _position;
-    size_t                                                                                       _size = 1;
-    Content                                                                                      _content;
-    MultiDimensionalArray<NMTree<Content, ArraySize, Dimension, Merge, defaultValue>, Dimension>* _childs = nullptr;
+    //dim0-,dim0+,dim1-,dim1+,dim2-,dim3+,....
+    //x-,x+,y-,y+,z-,z+
+    std::array< std::set<NMTree<Content, ArraySize, Dimension, Merge, defaultValue>* > , 2 * Dimension>    _neighbourhood; //at least for 4 dimensions correct. 
+    std::array<size_t, Dimension>                                                                          _position;
+    size_t                                                                                                 _size = 1;
+    Content                                                                                                _content;
+    MultiDimensionalArray<NMTree<Content, ArraySize, Dimension, Merge, defaultValue>, Dimension>*          _childs = nullptr;
   };
 }

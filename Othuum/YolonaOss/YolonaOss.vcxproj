@@ -239,6 +239,7 @@
     <ClInclude Include="structs\Factory.h" />
     <ClInclude Include="structs\MultiDimensionalArray.h" />
     <ClInclude Include="structs\NMTree.h" />
+    <ClInclude Include="structs\NMTreeWitNeighbours.h" />
     <ClInclude Include="Util\ImageIO.h" />
     <ClInclude Include="Util\Slicer.h" />
     <ClInclude Include="YolonaOss.h" />
