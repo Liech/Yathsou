@@ -225,6 +225,9 @@
     <ClInclude Include="structs\NMTreeWitNeighbours.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
+    <ClInclude Include="structs\NMTreeNeighbourIndex.h">
+      <Filter>Header Files\structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">

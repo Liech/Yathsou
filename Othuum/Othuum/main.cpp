@@ -19,10 +19,10 @@ using namespace YolonaOss;
 int main() { 
 
   
-  //int width = 800;
-  //int height = 600;
-  int width = 1920;
-  int height = 1080;
+  int width = 800;
+  int height = 600;
+  //int width = 1920;
+  //int height = 1080;
   GL::Window w(width, height);
 
 

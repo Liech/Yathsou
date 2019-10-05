@@ -169,7 +169,7 @@ namespace YolonaOss {
       for (size_t i = 0; i < Dimension; i++) dimension.push_back(_dimension[i]);
       std::shared_ptr<MultiDimensionalArray<Type2, Dimension>> result = std::make_shared<MultiDimensionalArray<Type2, Dimension>>(dimension);
       int chunkSize = 1000;
-      int chunks = (int)getSize() / chunkSize;
+      int chunks = ((int)getSize() / chunkSize) +1;
 #pragma omp parallel for
       for (int chunk = 0; chunk < chunks; chunk++) {
         size_t min = chunk * chunkSize;
@@ -184,8 +184,8 @@ namespace YolonaOss {
 
     void apply(std::function<void(size_t, Type&)> func) {
       int chunkSize = 1000;
-      int chunks = (int)getSize() / chunkSize;
-      if (chunks == 0) chunks = 1;
+      int chunks = ((int)getSize() / chunkSize)+1;
+      //if (chunks == 0) chunks = 1;
 #pragma omp parallel for
       for (int chunk = 0; chunk < chunks; chunk++) {
         size_t min = chunk * chunkSize;
@@ -199,8 +199,8 @@ namespace YolonaOss {
 
     void apply(std::function<void(std::array<size_t, Dimension>, Type&)> func) {
       int chunkSize = 1000;
-      int chunks = (int)getSize() / chunkSize;
-      if (chunks == 0) chunks = 1;
+      int chunks = ((int)getSize() / chunkSize)+1;
+      //if (chunks == 0) chunks = 1;
 #pragma omp parallel for
       for (int chunk = 0; chunk < chunks; chunk++) {
         size_t min = chunk * chunkSize;

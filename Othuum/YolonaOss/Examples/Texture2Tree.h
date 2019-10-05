@@ -3,6 +3,7 @@
 #include "../OpenGL/Drawable.h"
 #include "../structs/MultiDimensionalArray.h"
 #include "../structs/NMTree.h"
+#include "../structs/NMTreeNeighbourIndex.h"
 #include <memory>
 
 namespace YolonaOss {
@@ -16,7 +17,8 @@ namespace YolonaOss {
     virtual void draw() override;
 
   private:
-    std::shared_ptr<MultiDimensionalArray<bool, 2>> _map;
-    std::shared_ptr<NMTree<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max, false>> _tree;
+    std::shared_ptr<MultiDimensionalArray<bool, 2>>                                         _map;
+    std::shared_ptr<NMTree<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max, false>>           _tree;
+    std::shared_ptr<NMTreeNeighbourIndex<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max, false>> _index;
   };
 }
