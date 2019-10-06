@@ -2,7 +2,7 @@
 
 #include "MultiDimensionalArray.h"
 #include <set>
-
+#include "../Util/Slicer.h"
 //NM Tree means N^M Tree
 //I don't know whats the real name is
 //2^3 Tree is formaly known as Octree
@@ -14,16 +14,16 @@
 //and it should be fully compatible to the MultiDimensionalarray, which was also born out of the desire to mindfuck
 //So this code will be not easy to read, not even for me. Forgive me
 
-// To make it even more fun the prefix CN comes from Cardinal Neighbour Tree, which is great for calculating dijkstra on the leafs
-//https://pdfs.semanticscholar.org/cec7/b45bca54d2ce5424bf9e7c61e954153f1ce0.pdf
-//Cardinal Neighbor Quadtree: a New Quadtree-based Structure for Constant - Time Neighbor Finding
-//Safwan W. Qasem, Ameur A. Touir
+
 
 //maybe 3 and 4 dimensions are neccessary. For voxel animations?
 namespace YolonaOss {
 
   enum class TreeMergeBehavior {
     Sum, Max, Min, Avg, Default
+  };
+  enum class NMTreeDirection {
+    Positive, Negative
   };
 
   template <typename Content, size_t ArraySize, size_t Dimension, TreeMergeBehavior Merge, Content defaultValue>
@@ -64,7 +64,7 @@ namespace YolonaOss {
 
     ~NMTree() {
       if (_childs)
-        delete _childs;
+        killChildren();
     }
 
     void createChildren() {
@@ -72,20 +72,23 @@ namespace YolonaOss {
       std::vector<size_t> size;
       size.resize(Dimension);
       std::fill(size.begin(), size.end(), ArraySize);
-      _childs = new MultiDimensionalArray<Tree, Dimension>(size);
-           
-      _childs->apply([this](std::array<size_t, Dimension> pos, Tree& child) {
-        child._size = _size / ArraySize;
-        child._content = _content;
-        child._parent = this;
+      _childs = new MultiDimensionalArray<Tree*, Dimension>(size);
+      for (size_t i = 0; i < _childs->getSize(); i++)
+        _childs->get_linearRef(i) = new Tree();
+      _childs->apply([this](std::array<size_t, Dimension> pos, Tree*& child) {
+        child->_size = _size / ArraySize;
+        child->_content = _content;
+        child->_parent = this;
         std::array<size_t, Dimension> newPosition;
         for (int i = 0; i < Dimension; i++)
-          newPosition[i] = _position[i] + pos[i] * child._size;
-        child._position = newPosition;
+          newPosition[i] = _position[i] + pos[i] * child->_size;
+        child->_position = newPosition;
         });
     }
 
     void killChildren() {
+      for (size_t i = 0; i < _childs->getSize(); i++)
+        delete _childs->get_linearVal(i);
       delete _childs;
       _childs = nullptr;
     }
@@ -109,7 +112,7 @@ namespace YolonaOss {
       else {
         std::vector<Leaf> result;
         for (size_t i = 0; i < _childs->getSize(); i++) {
-          auto subResult = _childs->get_linearRef(i).getLeafs();
+          auto subResult = _childs->get_linearVal(i)->getLeafs();
           result.insert(result.end(), subResult.begin(), subResult.end());
         }
         return result;
@@ -131,12 +134,29 @@ namespace YolonaOss {
       }
     }
 
+    Tree* getLeaf(std::array<size_t, Dimension> position) {
+      if (isLeaf()) 
+        return this;
+      std::array<size_t, Dimension> converted;      
+      for (size_t i = 0; i < Dimension; i++)
+        converted[i] = (position[i] - getPosition()[0]) / (getSize() / ArraySize);
+      return getLeaf(getChild(converted));
+    }
+
     Content getContent() { return _content; }
     size_t getSize() { return _size; }
     std::array<size_t, Dimension> getPosition() { return _position; }
     Tree* getParent() { return _parent; }
     bool  isLeaf() { return _childs == nullptr; }
-    Tree* getChild(std::array<size_t, Dimension> pos) { return &_childs->getRef(pos); }
+    Tree* getChild(std::array<size_t, Dimension> pos) { return _childs->getVal(pos); }
+    std::set<Tree*> getSide(size_t dimension, NMTreeDirection direction) {
+      auto slicePlane = Slicer::slice<Tree*, Dimension>(_childs, dimension, ((direction == NMTreeDirection::Negative) ? 0 : (ArraySize - 1)));
+      std::set<Tree*> result;
+      for (size_t i = 0; i < slicePlane->getSize(); i++)
+        result.insert(slicePlane->get_linearVal(i));
+      return result;
+    }
+
   private:
     void recursiveFill(MultiDimensionalArray<Content, Dimension>* description) {
       assert(_size > 0);
@@ -151,18 +171,18 @@ namespace YolonaOss {
       else {
         createChildren();
         for (int i = 0; i < _childs->getSize(); i++)
-          assert(_childs->get_linearRef(i)._size == _size / ArraySize);
+          assert(_childs->get_linearVal(i)->_size == _size / ArraySize);
 #pragma omp parallel for  
         for (int i = 0; i < _childs->getSize(); i++) {
-          _childs->get_linearRef(i).recursiveFill(description);
+          _childs->get_linearVal(i)->recursiveFill(description);
         }
 
         bool allSame = true;
-        Content compare = _childs->get_linearRef(0)._content;
+        Content compare = _childs->get_linearVal(0)->_content;
         Content merged = compare;
 
         for (uint64_t i = 1; i < _childs->getSize(); i++) {
-          Content current = _childs->get_linearRef(i)._content;
+          Content current = _childs->get_linearVal(i)->_content;
           if (compare != current)
             allSame = false;
 
@@ -176,7 +196,7 @@ namespace YolonaOss {
 
         bool allLeafs = true;
         for (size_t i = 0; i < _childs->getSize(); i++)
-          if (_childs->get_linearRef(i)._childs) {
+          if (_childs->get_linearVal(i)->_childs) {
             allLeafs = false;
             break;
           }
@@ -193,7 +213,7 @@ namespace YolonaOss {
     std::array<size_t, Dimension>            _position;
     size_t                                   _size = 1;
     Content                                  _content;
-    MultiDimensionalArray<Tree, Dimension>*  _childs = nullptr;
+    MultiDimensionalArray<Tree*, Dimension>*  _childs = nullptr;
     Tree*                                    _parent;
   };
 }

@@ -4,12 +4,19 @@
 #include <map>
 #include "NMTree.h"
 
+//This class indexes all leaves.
+//the basic idea is from this paper
+//https://pdfs.semanticscholar.org/cec7/b45bca54d2ce5424bf9e7c61e954153f1ce0.pdf
+//Cardinal Neighbor Quadtree: a New Quadtree-based Structure for Constant - Time Neighbor Finding
+//Safwan W. Qasem, Ameur A. Touir
+//because of lazyness it works a little bit differernt
+//for greater and equal sized neighbours one neighbour is saved
+//for smaller and therefor more neighbours the neighbour with the same size is saved
+//on request of all neighbours, when they are smaller, the non leaf node is expanded to the correct border
 
 
 namespace YolonaOss {
-  enum class NMTreeDirection {
-    Positive, Negative
-  };
+
 
   template <typename Content, size_t ArraySize, size_t Dimension, TreeMergeBehavior Merge, Content defaultValue>
   class NMTreeNeighbourIndex {
@@ -25,43 +32,68 @@ namespace YolonaOss {
       int64_t numberOfBatches = (leafs.size() / batchSize) + 1;
       std::vector<std::vector<Neighbourhood>> result;
       result.resize(numberOfBatches);
-      //#pragma omp parallel for  
+      //get one neighbour
+      #pragma omp parallel for  
       for (int64_t batch = 0; batch < batchSize; batch++) {
         for (size_t i = batchSize * batch; i < batchSize * (batch+1) && i<leafs.size(); i++) {
           Neighbourhood n;
           n._target = leafs[i].link;
           for (size_t dim = 0; dim < Dimension; dim++){
             for (auto dir : { NMTreeDirection::Negative,NMTreeDirection::Positive }) {
-              n.get(dim, dir) = getCardinalNeighbour(n._target, dim, dir);
+              n.get(dim, dir) = getNeighbour(n._target, dim, dir);
             }
           }
           result[batch].push_back(n);
         }
       }
 
+      //merge everything
       for (size_t batch = 0; batch < result.size(); batch++) {
         for (size_t i = 0; i < result[batch].size(); i++)
           _neighbourhood[result[batch][i]._target] = result[batch][i];
       }
     }
 
-    std::vector<Tree*> getNeighbours(Tree* node, size_t dimension, NMTreeDirection dir) {
-      std::vector<Tree*> result;
-
-      result.push_back(_neighbourhood[node].get(dimension, dir));
-      size_t maxPos = node->getPosition()[dimension] + node->getSize();
-      if (result[0] == nullptr) return {};
-      //Tree* current = result[0];
-      //while (current->getPosition()[dimension] < maxPos) {
-      //  Tree* next = _neighbourhood[current].get(dimension,)
-      //}
-      //all neighbours coming soon TM
+    std::set<Tree*> getAllNeighbours(Tree* node) {
+      std::set<Tree*> result;
+      for(size_t dimension = 0;dimension < Dimension;dimension++)
+        for(auto dir : {NMTreeDirection::Negative, NMTreeDirection::Positive}){
+          std::set<Tree*> subresult = getNeighbours(node, dimension, dir);
+          result.insert(subresult.begin(), subresult.end());
+        }
       return result;
+    }
+
+    std::set<Tree*> getNeighbours(Tree* node, size_t dimension, NMTreeDirection dir) {
+      std::set<Tree*> result;
+
+      Tree* first = _neighbourhood[node].get(dimension, dir);
+      if (first == nullptr) 
+        return {};
+      else if (first->isLeaf())
+        return { first };
+      else {
+        std::vector<Tree*> result;
+        result.push_back(first);
+        size_t currentPosition = 0;
+        //expand border slices
+        while (currentPosition < result.size()) {
+          if (!result[currentPosition]->isLeaf()) {
+            Tree* current = result[currentPosition];
+            result.erase(result.begin() + currentPosition);
+            std::set<Tree*> side = current->getSide(dimension, (dir == NMTreeDirection::Negative)?NMTreeDirection::Positive:NMTreeDirection::Negative);
+            result.insert(result.begin(),side.begin(), side.end());
+            continue;
+          }
+          currentPosition++;
+        }
+        return std::set<Tree*>(result.begin(), result.end());
+      }
     }
 
   private:
 
-    Tree* getCardinalNeighbour(Tree* node, size_t dimension, NMTreeDirection dir) {
+    Tree* getNeighbour(Tree* node, size_t dimension, NMTreeDirection dir) {
       Tree* root = nullptr;
       std::vector<std::array<size_t, Dimension>> pathToNeighbour = getPathToNeighbour(node, dimension, dir, root);
       if (pathToNeighbour.size() == 0) return nullptr;
@@ -75,16 +107,7 @@ namespace YolonaOss {
           current = next;
         }
       }
-      while (!current->isLeaf()) {
-        //traverse even deeper. Idea of cn is to take the most - node possible as representative.
-        //all other nodes are reachable by going + in neighbourhood
-        std::array<size_t, Dimension> childPos;
-        for (size_t i = 0; i < Dimension; i++)
-          childPos[i] = 0;
-        childPos[dimension] = (dir == NMTreeDirection::Negative) ? ArraySize - 1 : 0;
-        Tree* next = current->getChild(childPos);
-        current = next;
-      }
+      //not leafs are expanded to real neighbours in the question function to save memory
       return current;
     }
 
@@ -142,73 +165,3 @@ namespace YolonaOss {
     Tree*                           _root;
   };
 }
-
-
-/*
-    void initNeighbourgraph() {
-      if (_childs != nullptr)
-        for(size_t i = 0;i < _childs->getSize();i++)
-          _childs->get_linearRef(i).initNeighbourgraph(this);
-    }
-
-
-  void initNeighbourgraph(NMTree<Content, ArraySize, Dimension, Merge, defaultValue>* parent) {
-    // Neighboorhood ---------------------------------
-    std::array<size_t, Dimension> myPos = getPosition();
-    for (size_t i = 0; i < Dimension; i++) myPos[i] = (myPos[i] - parent->getPosition()[i]) / getSize();
-    if (parent != nullptr) {
-      for (int dim = 0; dim < Dimension; dim++) {
-        if (myPos[dim] != 0) { //inside
-          std::array<size_t, Dimension> neighbourPos = myPos;
-          neighbourPos[dim] -= 1;
-          addNeighbour(dim, YolonaOss::NMTreeDirection::Negative, &parent->_childs->getRef(neighbourPos));
-        }
-        if (getPosition()[dim] < ArraySize - 1) {
-          std::array<size_t, Dimension> neighbourPos = myPos;
-          neighbourPos[dim] += 1;
-          addNeighbour(dim, YolonaOss::NMTreeDirection::Positive, &parent->_childs->getRef(neighbourPos));
-        }
-
-        //border
-        //if (myPos[dim] >= ArraySize - 1)
-        //{
-        //  for (auto n : parent->getNeighbours(dim, NMTreeDirection::Positive)) {
-        //    //check for intersections
-        //    bool validNeighbour = true;
-        //    for (int i = 0; i < Dimension; i++) {
-        //      if (i == dim) continue;
-        //      if (n->getPosition()[i] > (getPosition()[i] + getSize()))
-        //      {
-        //        validNeighbour = false; break;
-        //      }
-        //      if ((n->getPosition()[i] + n->getSize()) < getPosition()[i])
-        //      {
-        //        validNeighbour = false; break;
-        //      }
-        //    }
-        //    if (!validNeighbour) continue;
-
-        //    addNeighbour(dim, NMTreeDirection::Positive, n);
-        //  }
-
-        //}
-
-        //  ////Neighboorhood ++++++++++++++++++++++++++++++++
-        //  //else {
-        //  //  for (auto n : this->_neighbourhood[i * 2 + 1]) {
-        //  //    child._neighbourhood [i * 2+1].insert(n);
-        //  //    if (n->_neighbourhood[i * 2+1].count(this))
-        //  //      n->_neighbourhood  [i * 2+1].erase(this);
-        //  //    n->_neighbourhood    [i * 2+1].insert(&child);
-        //  //  }
-        //  //}
-        //}
-      }
-    }
-    if (_childs != nullptr)
-      for (int i = 0; i < _childs->getSize(); i++)
-        _childs->get_linearRef(i).initNeighbourgraph(this);
-  }
-
-
-*/
