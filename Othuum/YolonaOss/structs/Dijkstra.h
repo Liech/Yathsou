@@ -10,14 +10,14 @@
 //result is a gradient for each entry
 //std::set<NodeType*> getNeighbours(NodeType* T) should return all neighbours of T
 //double getDistance(NodeType* A, NodeType* B) should return the distance between a and b
-template<typename NodeType, typename getNeighbours, typename getDistance>
+template<typename NodeType>
 class Dijkstra { //TODO: check spelling
 public:
-  Dijkstra(NodeType* startNode) {
+  Dijkstra(NodeType* startNode, std::function<double(NodeType*,NodeType*)> getDistance,std::function<std::set<NodeType*>(NodeType*)> getNeighbours) {
     _startNode = startNode;
 
     struct Edge {
-      Edge(NodeType* a, NodeType* b, double currentDistance) {
+      Edge(NodeType* a, NodeType* b, double currentDistance, std::function<double(NodeType*, NodeType*)> getDistance, std::function<std::set<NodeType*>(NodeType*)> getNeighbours) {
         A = a;
         B = b;
         Distance = getDistance(a, b) + currentDistance;
@@ -31,7 +31,9 @@ public:
     {
       std::set<NodeType*> startNeighbours = getNeighbours(_startNode);
       for (auto s : startNeighbours) {
-        todo.push_back(Edge(_startNode, s,0));
+        Edge e = Edge(_startNode, s, 0, getDistance, getNeighbours);
+        if (!std::isinf(e.Distance))
+          todo.push_back(e);
       }
     }
     
@@ -43,10 +45,17 @@ public:
       Edge current = todo[0];
       todo.erase(todo.begin());
       done.insert(current.B);
+      assert(!std::isinf(current.Distance));
       _gradient[current.B] = current.Distance;
       for (auto s : getNeighbours(current.B)) {
-        if (done.count(s) == 0)
-          todo.push_back(Edge(current.B, s, current.Distance));
+        if (done.count(s) == 0) {
+          Edge e = Edge(current.B, s, current.Distance, getDistance, getNeighbours);
+          done.insert(s);
+          if (std::isinf(e.Distance))
+            continue;
+          todo.push_back(e);
+          _maxValue = std::max(_maxValue, current.Distance);
+        }
       }
     }    
   }
@@ -58,7 +67,9 @@ public:
       return std::numeric_limits<double>::infinity();
     return _gradient[node];
   }
-
+  double getMaxValue() {
+    return _maxValue;
+  }
 private:
 
   NodeType*                   _startNode;

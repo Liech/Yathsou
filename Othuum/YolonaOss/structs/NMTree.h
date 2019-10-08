@@ -140,7 +140,8 @@ namespace YolonaOss {
       std::array<size_t, Dimension> converted;      
       for (size_t i = 0; i < Dimension; i++)
         converted[i] = (position[i] - getPosition()[0]) / (getSize() / ArraySize);
-      return getLeaf(getChild(converted));
+      Tree* t = getChild(converted);
+      return t->getLeaf(position);
     }
 
     Content getContent() { return _content; }
