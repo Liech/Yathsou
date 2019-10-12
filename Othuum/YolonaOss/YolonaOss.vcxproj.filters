@@ -222,9 +222,6 @@
     <ClInclude Include="Lib\lodepng\lodepng_util.h">
       <Filter>libs\lodepng</Filter>
     </ClInclude>
-    <ClInclude Include="structs\NMTreeWitNeighbours.h">
-      <Filter>Header Files\structs</Filter>
-    </ClInclude>
     <ClInclude Include="structs\NMTreeNeighbourIndex.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>

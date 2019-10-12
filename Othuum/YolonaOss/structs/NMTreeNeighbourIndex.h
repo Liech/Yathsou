@@ -116,11 +116,11 @@ namespace YolonaOss {
       std::vector<std::array<size_t, Dimension>> input;
       getOwnPath(node,input, root);
       std::vector<std::array<size_t, Dimension>> result;
-      size_t currentPosition = 0;
-      for (; currentPosition < input.size(); currentPosition++) {
+      
+      for (size_t currentPosition = 0; currentPosition < input.size(); currentPosition++) {
         if (input[currentPosition][dimension] == 0 && dir == NMTreeDirection::Negative) {
           std::array<size_t, Dimension> newPath = input[currentPosition];
-          newPath[dimension] += ArraySize - 1;
+          newPath[dimension] = ArraySize - 1;
           result.push_back(newPath);
         }
         else if (input[currentPosition][dimension] == ArraySize - 1 && dir == NMTreeDirection::Positive) {
@@ -156,9 +156,17 @@ namespace YolonaOss {
     struct Neighbourhood {
       //dim0-,dim0+,dim1-,dim1+,dim2-,dim3+,....
       //x-,x+,y-,y+,z-,z+
-      Tree*& get(size_t dimension, NMTreeDirection dir) { return _neighbourhood[2 * dimension + (dir == NMTreeDirection::Negative) ? 0 : 1]; }
+      Tree*& get(size_t dimension, NMTreeDirection dir) { 
+        size_t index = 2 * dimension + ((dir == NMTreeDirection::Negative) ? 0 : 1);
+        return _neighbourhood[index]; 
+      }
       std::array<Tree*, 2 * Dimension> _neighbourhood; //at least for 4 dimensions correct. 
       Tree*                            _target;
+
+      Neighbourhood() {
+        for (size_t i = 0; i < 2 * Dimension; i++)
+          _neighbourhood[i] = nullptr;
+      }
     };
 
     std::map< Tree*, Neighbourhood> _neighbourhood;
