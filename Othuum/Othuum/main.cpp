@@ -13,6 +13,8 @@
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "YolonaOss/Examples/Texture2Tree.h"
 #include <filesystem>
+#include "YolonaOss/OpenGL/DrawSpecification.h"
+#include <glm/gtx/intersect.hpp>
 
 using namespace YolonaOss;
 
@@ -29,7 +31,7 @@ int main() {
   std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
   list->addDrawable(std::make_shared<Background>());
   //list->addDrawable(std::make_shared<DrawCubes>());
-  list->addDrawable(std::make_shared<Texture2Tree>());
+  //list->addDrawable(std::make_shared<Texture2Tree>());
   list->addDrawable(std::make_shared<FPS>());
   Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
   std::shared_ptr<Camera::CameraSystem> cam = std::make_shared<Camera::CameraSystem>();
@@ -39,19 +41,31 @@ int main() {
   list->addDrawable(b);
 
   Database<std::shared_ptr<GL::Updateable>>::add(cam, { "Main" });
-  w.Update = [&w]() {
-    //BoxRenderer::start();
-    //float radius = 4.0f;
-    //float camX = (float)sin(w.getTime()) * radius;
-    //float camY = (float)cos(w.getTime()/2) * radius;
-    //float camZ = (float)cos(w.getTime()) * radius;
-    //glm::vec3 a(2,0,0);
-    //glm::vec3 b(camX, camY,camZ);
-    //BoxRenderer::drawDot(glm::vec3(0,0,0), glm::vec3(0.2f, 0.2f, 0.2f), glm::vec4(0, 0, 0, 1));
-    //BoxRenderer::drawDot(a, glm::vec3(0.2f, 0.2f, 0.2f), glm::vec4(1, 1, 0, 1));
-    //BoxRenderer::drawDot(b, glm::vec3(0.2f, 0.2f, 0.2f), glm::vec4(0.9, 1, 0, 1));
-    //BoxRenderer::drawLine(a, b,0.1f, glm::vec4(0, 1, 0, 1));
-    //BoxRenderer::end();
+  glm::vec3 start, end;
+  std::function<void(double, double)> f = [&w, &start, &end, cam](double, double) {
+    glm::vec3 pick = w.getSpec()->getCam()->getPickRay(&w);
+    glm::vec3 pos = w.getSpec()->getCam()->getPosition();
+    //end = start + pick + pick + pick;
+
+    float distance = 0;
+    bool intersects = glm::intersectRayPlane(pos,
+      pick,
+      glm::vec3(0,0,0),
+      glm::vec3(0, 1, 0),
+      distance
+    );
+    if (intersects)
+      start = pos + pick * distance;
+  };
+  //Database < std::function<void(double, double)>*>::add(&f, { "MouseClick" });
+
+  w.Update = [&w, &start,&end,f]() {
+    f(0, 0);
+    BoxRenderer::start();
+    BoxRenderer::drawDot(start, glm::vec3(0.2f, 0.2f, 0.2f), glm::vec4(1, 1, 0, 1));
+    //BoxRenderer::drawDot(end, glm::vec3(0.2f, 0.2f, 0.2f), glm::vec4(0.9, 1, 0, 1));
+    //BoxRenderer::drawLine(start, end,0.1f, glm::vec4(0, 1, 0, 1));
+    BoxRenderer::end();
   };
   w.run();
 } 

@@ -10,6 +10,7 @@
 #include "Drawables/Widgets/Widget.h"
 #include "../Camera/Camera.h"
 #include "Updateable.h"
+#include <functional>
 
 namespace YolonaOss {
   namespace GL {
@@ -146,6 +147,7 @@ namespace YolonaOss {
 
       std::shared_ptr<YolonaOss::Camera::Camera> camera = std::make_shared<YolonaOss::Camera::Camera>(_width, _height);
       DrawSpecification spec(this, camera);
+      _spec = &spec;
       spec.width = _width;
       spec.height = _height;
       std::vector<std::shared_ptr<Loadable>> loadList;
@@ -201,6 +203,9 @@ namespace YolonaOss {
               w->mouseClick(mousePos - w->getPosition().position, (Key)button);
         }
       }
+      std::set<std::function<void(double,double)>*> functions = Database<std::function<void(double, double)>*>::getByTag("MouseClick");
+      for (auto f : functions)
+        (*f)(xpos, ypos);
       if (action == (int)KeyStatus::RELEASE)
         pressed = std::shared_ptr<Widget>();
     }

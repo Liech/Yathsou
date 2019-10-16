@@ -20,6 +20,8 @@ namespace YolonaOss {
       std::function<void()> Startup = []() {};
       std::function<void()> Update = []() {};
 
+      DrawSpecification* getSpec() { return _spec; }
+
       KeyStatus                  getKeyStatus(Key key);
       double                     getTime();
       void                       setCursorStatus(CursorStatus);
@@ -35,6 +37,7 @@ namespace YolonaOss {
       int _height = 1080;
       GLFWwindow* _window = nullptr;
       float _mouseWheelMovement = 0;
+      DrawSpecification* _spec;
     };
   }
 }

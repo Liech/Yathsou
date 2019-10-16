@@ -28,6 +28,7 @@ namespace YolonaOss {
       float     getFOV() { return _fov; }
       void      setFOV(float v) { _fov = v; }
 
+      glm::vec3 getPickRay(GL::Window*);
 
       void fromCamera(YolonaOss::Camera::Camera* cam);
     private:

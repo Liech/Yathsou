@@ -45,17 +45,18 @@ namespace YolonaOss {
       //leaf.value = leaf.link->getContent();
 
       float clr = 0.3f;// (rand() % 255) / 255.0f;
-      glm::vec4 col = glm::vec4(0.5f + clr / 2.0f, 0.5f + clr / 2.0f, 0.5f + clr / 2.0f, 1);
+      glm::vec4 col = glm::vec4(clr,clr,clr, 1)*0.1f + glm::vec4(0.9,0.9,0.9,1);
+      col[3] = 1;
       if (!leaf.value) {
-        col = glm::vec4(0.5f, 0.5f + clr / 2.0f, 0.5f + clr / 2.0f, 1);
+        col = glm::vec4(0,0,0, 1);
       }
       double distance = _path->getGradient(leaf.link) / (_path->getMaxValue()  / 4.0);
       if (isinf(distance))
-        col = glm::vec4(0,0,0, 1);
+        col = col;
       else if (distance == 0)
         col = glm::vec4(1,0,0,1);
       else
-        col = glm::vec4(1 * 1.0/distance,1  * 1.0 / distance, 1 * 1.0 / distance , 1);
+        col = glm::vec4(col[0]/distance,col[1] / distance,col[2] / distance , 1);
       glm::vec3 size = glm::vec3(leaf.size* scaling, 0.1f, leaf.size * scaling);
       glm::vec3 pos = glm::vec3(leaf.position[0] * scaling, 0, leaf.position[1] * scaling);
       BoxRenderer::drawBox(pos, size, col);

@@ -15,7 +15,6 @@ namespace YolonaOss {
 
       void bind();
 
-
       std::vector<Uniform*> getUniforms();
 
     private:
