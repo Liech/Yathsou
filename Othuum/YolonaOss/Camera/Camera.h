@@ -28,7 +28,14 @@ namespace YolonaOss {
       float     getFOV() { return _fov; }
       void      setFOV(float v) { _fov = v; }
 
-      glm::vec3 getPickRay(GL::Window*);
+      glm::mat4 getProjectionMatrix();
+      glm::mat4 getViewMatrix();
+
+      glm::vec3 getPickRay(float X, float Y);
+      glm::vec3 Camera::viewToWorldCoordTransform(int mouse_x, int mouse_y);
+
+      float getNearPlane() { return 0.1f; }
+      float getFarPlane() { return 100.0f; }
 
       void fromCamera(YolonaOss::Camera::Camera* cam);
     private:

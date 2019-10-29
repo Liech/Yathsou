@@ -18,13 +18,9 @@ namespace YolonaOss {
     void Camera::bind()
     {
       //http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
-      glm::mat4 Projection = glm::perspective(glm::radians(getFOV()), getResolution()[0] / getResolution()[1], 0.1f, 100.0f);
+      glm::mat4 Projection = getProjectionMatrix();
 
-      glm::mat4 View = glm::lookAt(
-        getPosition(),
-        getTarget(),
-        getUp()
-      );
+      glm::mat4 View = getViewMatrix();
 
       glm::mat4 Model = glm::mat4(1.0f);
       glm::mat4 mvp = Projection * View;

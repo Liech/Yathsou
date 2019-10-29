@@ -129,9 +129,11 @@ namespace YolonaOss {
     glm::mat4 m = glm::mat4(1);
     m = glm::translate(m, start);
     m = glm::scale(m, size);
+    //m = glm::scale(m, glm::vec3(0.5f,0.5f,0.5f));
     m = glm::translate(m, glm::vec3(-0.5f, -0.5f, -0.5f));
     draw(m, color);
   }
+
   void BoxRenderer::drawBox(glm::vec3 start, glm::vec3 size, glm::vec4 color) {
     glm::mat4 m = glm::mat4(1);
     m = glm::translate(m, start);

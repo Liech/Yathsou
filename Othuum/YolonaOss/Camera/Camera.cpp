@@ -1,7 +1,8 @@
 #include "Camera.h"
 #include "../OpenGL/Window.h"
 #include <glm/gtc/matrix_transform.hpp>
-
+#include <glm/ext/matrix_projection.hpp>
+#include <iostream>
 namespace YolonaOss {
   namespace Camera {
     Camera::Camera(int width, int height) {
@@ -18,23 +19,60 @@ namespace YolonaOss {
       _height   = cam->_height  ;
     }
 
-    glm::vec3 Camera::getPickRay(GL::Window* window) {
-      //https://stackoverflow.com/questions/29997209/opengl-c-mouse-ray-picking-glmunproject
-      // these positions must be in range [-1, 1] (!!!), not [0, width] and [0, height]
-      auto mouse = window->getCursorPos();
-      float mouseX = mouse.first  / ((float)window->getWidth()  * 0.5f) - 1.0f;
-      float mouseY = mouse.second / ((float)window->getHeight() * 0.5f) - 1.0f;
+    glm::mat4 Camera::getProjectionMatrix() {
+      return glm::perspective(glm::radians(getFOV()), getResolution()[0] / getResolution()[1], getNearPlane(), getFarPlane());
+    }
 
-      glm::mat4 proj = glm::perspective(glm::radians(getFOV()), getResolution()[0] / getResolution()[1], 0.1f, 100.0f);
-      glm::mat4 view = glm::lookAt(getPosition(), getTarget(), getUp())* glm::mat4(1.0f);
+    glm::mat4 Camera::getViewMatrix() {
+      return glm::lookAt(getPosition(),getTarget(),getUp());
+    }
 
-      glm::mat4 invVP = glm::inverse(proj * view);
-      glm::vec4 screenPos = glm::vec4(mouseX, -mouseY, 1.0f, 1.0f);
-      glm::vec4 worldPos = invVP * screenPos;
+    // SCREEN SPACE: mouse_x and mouse_y are screen space
+    glm::vec3 Camera::viewToWorldCoordTransform(int mouse_x, int mouse_y) {
+    // NORMALISED DEVICE SPACE
+    double x = 2.0 * mouse_x / getResolution()[0] - 1;
+    double y = 2.0 * mouse_y / getResolution()[1] - 1;
 
-      glm::vec3 dir = glm::normalize(glm::vec3(worldPos));
+    // HOMOGENEOUS SPACE
+    glm::vec4 screenPos = glm::vec4(x, -y, -1.0f, 1.0f);
 
-      return dir;
+    // Projection/Eye Space
+    glm::mat4 ProjectView = getProjectionMatrix() * getViewMatrix();
+    glm::mat4 viewProjectionInverse = inverse(ProjectView);
+
+    glm::vec4 worldPos = viewProjectionInverse * screenPos;
+    return glm::vec3(worldPos);
+  }
+
+    glm::vec3 Camera::getPickRay(float X, float Y) {
+      glm::vec3 worldMouse =  viewToWorldCoordTransform(X, Y);
+      glm::vec3 pos = getPosition();
+      return worldMouse;
+      ////world space, notice z=0.0f      
+      //glm::vec2 mouse = glm::vec2(X,Y);
+      //glm::mat4 proj = glm::perspective(glm::radians(getFOV()), getResolution()[0] / getResolution()[1], getNearPlane(), getFarPlane());
+
+      //glm::mat4 view = glm::lookAt(
+      //  getPosition(),
+      //  getTarget(),
+      //  getUp()
+      //);
+
+      //glm::vec3 mouse_world_nearplane = glm::unProject(
+      //  glm::vec3(mouse.x * getResolution()[0], mouse.y * getResolution()[1], getNearPlane()),
+      //  view, //view matrix
+      //  proj,
+      //  glm::vec4(0, 0, getResolution()[0], getResolution()[1]));
+
+      ////world space, notice z=1.0f
+      //glm::vec3 mouse_world_farplane = glm::unProject(
+      //  glm::vec3(mouse.x * getResolution()[0], mouse.y * getResolution()[1], getFarPlane()),
+      //  view, //view matrix
+      //  proj,
+      //  glm::vec4(0, 0, getResolution()[0], getResolution()[1]));
+      //glm::vec3 worldPos = glm::normalize(mouse_world_farplane);
+      //std::cout << worldPos[0] << " " << worldPos[1] << " " << worldPos[2] << std::endl;
+      //return worldPos*1.0f;
     }
   }
 }

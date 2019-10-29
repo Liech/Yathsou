@@ -15,7 +15,7 @@
 #include <filesystem>
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include <glm/gtx/intersect.hpp>
-
+#include <iomanip>
 using namespace YolonaOss;
 
 int main() { 
@@ -30,7 +30,7 @@ int main() {
 
   std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
   list->addDrawable(std::make_shared<Background>());
-  //list->addDrawable(std::make_shared<DrawCubes>());
+  list->addDrawable(std::make_shared<DrawCubes>());
   //list->addDrawable(std::make_shared<Texture2Tree>());
   list->addDrawable(std::make_shared<FPS>());
   Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
@@ -43,27 +43,43 @@ int main() {
   Database<std::shared_ptr<GL::Updateable>>::add(cam, { "Main" });
   glm::vec3 start, end;
   std::function<void(double, double)> f = [&w, &start, &end, cam](double, double) {
-    glm::vec3 pick = w.getSpec()->getCam()->getPickRay(&w);
+    //glm::vec3 pick = w.getSpec()->getCam()->getPickRay(&w, w.getCursorPos().first, w.getCursorPos().second);
     glm::vec3 pos = w.getSpec()->getCam()->getPosition();
-    //end = start + pick + pick + pick;
+    
 
-    float distance = 0;
-    bool intersects = glm::intersectRayPlane(pos,
-      pick,
-      glm::vec3(0,0,0),
-      glm::vec3(0, 1, 0),
-      distance
-    );
-    if (intersects)
-      start = pos + pick * distance;
+    //float distance = 0;
+    //bool intersects = glm::intersectRayPlane(pos,
+    //  pick,
+    //  glm::vec3(0,0,0),
+    //  glm::vec3(0,1,0),
+    //  distance
+    //);
+    ////if (intersects) {
+    //  end = pos + pick;
+    //  start = pos;
+    /////}
   };
-  //Database < std::function<void(double, double)>*>::add(&f, { "MouseClick" });
+  Database < std::function<void(double, double)>*>::add(&f, { "MouseClick" });
 
   w.Update = [&w, &start,&end,f]() {
-    f(0, 0);
+    //f(0, 0);
+    glm::vec3 viewDir = glm::normalize(w.getSpec()->getCam()->getTarget() - w.getSpec()->getCam()->getPosition());
+    glm::vec3 dir = w.getSpec()->getCam()->getPickRay(w.getCursorPos().first, w.getCursorPos().second);
+    
+    std::cout << "center: " << viewDir[0] << "/" << viewDir[1] << "/" << viewDir[2] << "   " << dir[0] << "/" << dir[1] << "/" << dir[2] << std::endl<<std::setprecision(2) << std::setfill('0');
+    //std::cout << "view  : " <<  << std::endl<<std::setprecision(2) << std::setfill('0');;
+    //w.getSpec()->getCam()->getPickRay(&w, w.getCursorPos().first, w.getCursorPos().second);
     BoxRenderer::start();
-    BoxRenderer::drawDot(start, glm::vec3(0.2f, 0.2f, 0.2f), glm::vec4(1, 1, 0, 1));
-    //BoxRenderer::drawDot(end, glm::vec3(0.2f, 0.2f, 0.2f), glm::vec4(0.9, 1, 0, 1));
+    //BoxRenderer::drawDot(pos + (dir-pos)* -1.0f, glm::vec3(0.05f, 0.05f, 0.05f), glm::vec4(0, 0, 0, 1));
+    BoxRenderer::drawDot(w.getSpec()->getCam()->getTarget(), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0, 0, 0, 1));
+    BoxRenderer::drawDot(glm::vec3(0), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 1, 1));
+    
+    //BoxRenderer::drawDot(w.getSpec()->getCam()->getPickRay(&w, 0, 0), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
+    //BoxRenderer::drawDot(w.getSpec()->getCam()->getPickRay(&w, 1920, 0), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
+    //BoxRenderer::drawDot(w.getSpec()->getCam()->getPickRay(&w, 0, 1080), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
+    //BoxRenderer::drawDot(w.getSpec()->getCam()->getPickRay(&w, 1920, 1080), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
+    //BoxRenderer::drawDot(w.getSpec()->getCam()->getPickRay(&w, 1920/2, 1080/2), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
+    //BoxRenderer::drawDot(dir, glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
     //BoxRenderer::drawLine(start, end,0.1f, glm::vec4(0, 1, 0, 1));
     BoxRenderer::end();
   };
