@@ -21,10 +21,10 @@ using namespace YolonaOss;
 int main() { 
 
   
-  //int width = 800;
-  //int height = 600;
-  int width = 1920;
-  int height = 1080;
+  int width = 800;
+  int height = 600;
+  //int width = 1920;
+  //int height = 1080;
   GL::Window w(width, height);
 
 
@@ -61,24 +61,24 @@ int main() {
   };
   Database < std::function<void(double, double)>*>::add(&f, { "MouseClick" });
 
-  w.Update = [&w, &start,&end,f]() {
+  w.Update = [&w, &start,&end,f, width, height]() {
     //f(0, 0);
     glm::vec3 viewDir = glm::normalize(w.getSpec()->getCam()->getTarget() - w.getSpec()->getCam()->getPosition());
     glm::vec3 dir = w.getSpec()->getCam()->getPickRay(w.getCursorPos().first, w.getCursorPos().second);
-    
+    glm::vec3 pos = w.getSpec()->getCam()->getPosition();
     std::cout << "center: " << viewDir[0] << "/" << viewDir[1] << "/" << viewDir[2] << "   " << dir[0] << "/" << dir[1] << "/" << dir[2] << std::endl<<std::setprecision(2) << std::setfill('0');
     //std::cout << "view  : " <<  << std::endl<<std::setprecision(2) << std::setfill('0');;
     //w.getSpec()->getCam()->getPickRay(&w, w.getCursorPos().first, w.getCursorPos().second);
     BoxRenderer::start();
     //BoxRenderer::drawDot(pos + (dir-pos)* -1.0f, glm::vec3(0.05f, 0.05f, 0.05f), glm::vec4(0, 0, 0, 1));
-    BoxRenderer::drawDot(w.getSpec()->getCam()->getTarget(), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0, 0, 0, 1));
+    //BoxRenderer::drawDot(w.getSpec()->getCam()->getTarget(), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0, 0, 0, 1));
     BoxRenderer::drawDot(glm::vec3(0), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 1, 1));
-    
-    //BoxRenderer::drawDot(w.getSpec()->getCam()->getPickRay(&w, 0, 0), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
-    //BoxRenderer::drawDot(w.getSpec()->getCam()->getPickRay(&w, 1920, 0), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
-    //BoxRenderer::drawDot(w.getSpec()->getCam()->getPickRay(&w, 0, 1080), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
-    //BoxRenderer::drawDot(w.getSpec()->getCam()->getPickRay(&w, 1920, 1080), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
-    //BoxRenderer::drawDot(w.getSpec()->getCam()->getPickRay(&w, 1920/2, 1080/2), glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
+    BoxRenderer::drawDot(pos + dir, glm::vec3(0.05f, 0.05f, 0.05f), glm::vec4(0.9, 1, 0, 1));
+    BoxRenderer::drawDot(pos + w.getSpec()->getCam()->getPickRay(0, 0)          , glm::vec3(0.05f, 0.05f, 0.05f), glm::vec4(0.9, 1, 0, 1));
+    BoxRenderer::drawDot(pos + w.getSpec()->getCam()->getPickRay(width, 0)       , glm::vec3(0.05f, 0.05f, 0.05f), glm::vec4(0.9, 1, 0, 1));
+    BoxRenderer::drawDot(pos + w.getSpec()->getCam()->getPickRay(0, height)       , glm::vec3(0.05f, 0.05f, 0.05f), glm::vec4(0.9, 1, 0, 1));
+    BoxRenderer::drawDot(pos + w.getSpec()->getCam()->getPickRay(width, height)    , glm::vec3(0.05f, 0.05f, 0.05f), glm::vec4(0.9, 1, 0, 1));
+    BoxRenderer::drawDot(pos + w.getSpec()->getCam()->getPickRay(width/2, height/2), glm::vec3(0.05f, 0.05f, 0.05f), glm::vec4(0.9, 1, 0, 1));
     //BoxRenderer::drawDot(dir, glm::vec3(0.01f, 0.01f, 0.01f), glm::vec4(0.9, 1, 0, 1));
     //BoxRenderer::drawLine(start, end,0.1f, glm::vec4(0, 1, 0, 1));
     BoxRenderer::end();

@@ -32,17 +32,17 @@ namespace YolonaOss {
       glm::mat4 getViewMatrix();
 
       glm::vec3 getPickRay(float X, float Y);
-      glm::vec3 Camera::viewToWorldCoordTransform(int mouse_x, int mouse_y);
-
+      glm::vec3 viewToWorldCoordTransform(int mouse_x, int mouse_y);
+      glm::vec3 unproject(float x, float y, glm::mat4 world, glm::mat4 view, glm::mat4 proj);
       float getNearPlane() { return 0.1f; }
       float getFarPlane() { return 100.0f; }
 
       void fromCamera(YolonaOss::Camera::Camera* cam);
     private:
-      float _fov = 45;
-      glm::vec3 _position = glm::vec3(4, 3, 3);
+      float _fov = 45; 
+      glm::vec3 _position = glm::vec3(1, 0, 1);
       glm::vec3 _up = glm::vec3(0, 1, 0);
-      glm::vec3 _target = glm::vec3(4, 0, 0);
+      glm::vec3 _target = glm::vec3(0, 0, 0);
       int _width ;
       int _height;
     };
