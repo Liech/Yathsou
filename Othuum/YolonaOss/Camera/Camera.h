@@ -40,7 +40,7 @@ namespace YolonaOss {
       void fromCamera(YolonaOss::Camera::Camera* cam);
     private:
       float _fov = 45; 
-      glm::vec3 _position = glm::vec3(1, 0, 1);
+      glm::vec3 _position = glm::vec3(4, 3, 3);
       glm::vec3 _up = glm::vec3(0, 1, 0);
       glm::vec3 _target = glm::vec3(0, 0, 0);
       int _width ;

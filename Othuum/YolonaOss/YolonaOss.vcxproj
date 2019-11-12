@@ -208,6 +208,9 @@
     <ClInclude Include="Examples\Texture2Tree.h" />
     <ClInclude Include="Lib\lodepng\lodepng.h" />
     <ClInclude Include="Lib\lodepng\lodepng_util.h" />
+    <ClInclude Include="Navigation\Navigation.h" />
+    <ClInclude Include="Navigation\NavigationAgent.h" />
+    <ClInclude Include="Navigation\NavigationMap.h" />
     <ClInclude Include="OpenGL\AttributeDescription.h" />
     <ClInclude Include="OpenGL\Camera.h" />
     <ClInclude Include="OpenGL\Drawable.h" />
@@ -241,6 +244,7 @@
     <ClInclude Include="structs\MultiDimensionalArray.h" />
     <ClInclude Include="structs\NMTree.h" />
     <ClInclude Include="structs\NMTreeNeighbourIndex.h" />
+    <ClInclude Include="Util\Geometry.h" />
     <ClInclude Include="Util\ImageIO.h" />
     <ClInclude Include="Util\Slicer.h" />
     <ClInclude Include="YolonaOss.h" />
@@ -261,6 +265,9 @@
     <ClCompile Include="Lib\glad\src\glad.c" />
     <ClCompile Include="Lib\lodepng\lodepng.cpp" />
     <ClCompile Include="Lib\lodepng\lodepng_util.cpp" />
+    <ClCompile Include="Navigation\Navigation.cpp" />
+    <ClCompile Include="Navigation\NavigationAgent.cpp" />
+    <ClCompile Include="Navigation\NavigationMap.cpp" />
     <ClCompile Include="OpenGL\Camera.cpp" />
     <ClCompile Include="OpenGL\Drawable.cpp" />
     <ClCompile Include="OpenGL\DrawableList.cpp" />
@@ -279,6 +286,7 @@
     <ClCompile Include="Renderer\RectangleRenderer.cpp" />
     <ClCompile Include="Renderer\TextRenderer.cpp" />
     <ClCompile Include="structs\Color.cpp" />
+    <ClCompile Include="Util\Geometry.cpp" />
     <ClCompile Include="Util\ImageIO.cpp" />
     <ClCompile Include="Util\Slicer.cpp" />
     <ClCompile Include="YolonaOss.cpp" />

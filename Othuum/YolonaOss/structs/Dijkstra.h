@@ -5,6 +5,7 @@
 #include <limits>
 #include <vector>
 #include <algorithm>
+#include <functional>
 
 //solve dijkstra on arbitrary graph
 //result is a gradient for each entry

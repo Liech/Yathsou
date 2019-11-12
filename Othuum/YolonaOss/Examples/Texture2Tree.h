@@ -25,5 +25,11 @@ namespace YolonaOss {
     std::shared_ptr<Tree>                           _tree;
     std::shared_ptr<TreeI>                          _index;
     std::shared_ptr < Dijkstra<Tree>>               _path; 
+
+    GL::DrawSpecification*                          _spec;
+    std::function<void(double, double)>             _mouseClick;
+
+    void mouseClick(double x, double y);
+    glm::vec3 metaPos = glm::vec3(0, 0, 0);
   };
 }

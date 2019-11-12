@@ -128,7 +128,7 @@ namespace YolonaOss {
           result.insert(result.end(), sub.begin(), sub.end());
         }
         return result;
-      }
+      } 
       else {
         return { _content };
       }
@@ -139,7 +139,7 @@ namespace YolonaOss {
         return this;
       std::array<size_t, Dimension> converted;      
       for (size_t i = 0; i < Dimension; i++)
-        converted[i] = (position[i] - getPosition()[0]) / (getSize() / ArraySize);
+        converted[i] = (position[i] - getPosition()[i]) / (getSize() / ArraySize);
       Tree* t = getChild(converted);
       return t->getLeaf(position);
     }

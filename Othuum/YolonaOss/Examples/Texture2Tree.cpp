@@ -5,9 +5,12 @@
 #include "../Renderer/BoxRenderer.h"
 #include <iostream>
 #include <limits>
+#include "../structs/Database.h"
+#include "../Util/Geometry.h"
 
+float scaling = 0.2f;
 namespace YolonaOss {
-  void YolonaOss::Texture2Tree::load(GL::DrawSpecification*)
+  void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec)
   {
     auto map = ImageIO::readImage("YolonaOssData/textures/TinyMap.png");
     _map   = map->map<bool>([](Color const& c) 
@@ -28,6 +31,35 @@ namespace YolonaOss {
       },
         [this](Tree* n) { return _index->getAllNeighbours(n); }
     );
+
+    _spec = spec;
+    _mouseClick = [this](double x, double y) {mouseClick(x, y); };
+    Database < std::function<void(double, double)>*>::add(&_mouseClick , { "MouseClick" });
+
+  }
+
+  void YolonaOss::Texture2Tree::mouseClick(double x, double y) {
+    glm::vec3 camPos = _spec->getCam()->getPosition();
+    glm::vec3 pickDir = _spec->getCam()->getPickRay(x, y);
+    Intersection sect = Geometry::intersectRayPlane(camPos, pickDir, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+    if (sect.doesIntersect) {
+      metaPos = sect.location;
+      if (sect.location.x < 0 || sect.location.y < 0 || sect.location.x > _tree->getSize() || sect.location.y > _tree->getSize())
+        return;
+      _path = std::make_shared< Dijkstra<Tree> >(
+        _tree->getLeaf({ (size_t)(sect.location[0] / scaling),(size_t)(sect.location[2] / scaling)}),
+        [](Tree* a, Tree* b) {
+          bool A = a->getContent();
+          bool B = b->getContent();
+          if (!A || !B)
+            return std::numeric_limits<double>::infinity();
+          else
+            return 1.0;
+        },
+        [this](Tree* n) { return _index->getAllNeighbours(n); }
+        );
+
+    }
   }
 
   void YolonaOss::Texture2Tree::draw()
@@ -35,7 +67,6 @@ namespace YolonaOss {
     BoxRenderer::start();
     srand(10);
     auto leafs = _tree->getLeafs();
-    float scaling = 0.2f;
     for (auto leaf : leafs)
     {
       //Tree::Leaf leaf;
@@ -82,6 +113,8 @@ namespace YolonaOss {
       }
       
     }
+
+    BoxRenderer::drawDot(metaPos, glm::vec3(0.1f), glm::vec4(1, 0, 1, 1));
     BoxRenderer::end();
   }
 }

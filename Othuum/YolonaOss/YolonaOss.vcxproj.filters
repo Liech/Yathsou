@@ -67,6 +67,12 @@
     <Filter Include="libs\lodepng">
       <UniqueIdentifier>{5247ac49-1909-4ecb-aeab-2ca8f37127a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Navigation">
+      <UniqueIdentifier>{d833a28b-b0a2-4dd6-9085-275f4e9715c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Navigation">
+      <UniqueIdentifier>{12f2700a-9def-4975-a21f-ba0d3915d9c1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -228,6 +234,18 @@
     <ClInclude Include="structs\Dijkstra.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
+    <ClInclude Include="Util\Geometry.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\Navigation.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\NavigationAgent.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\NavigationMap.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -337,6 +355,18 @@
     </ClCompile>
     <ClCompile Include="Lib\lodepng\lodepng.cpp">
       <Filter>libs\lodepng</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Geometry.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation\NavigationAgent.cpp">
+      <Filter>Source Files\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation\NavigationMap.cpp">
+      <Filter>Source Files\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation\Navigation.cpp">
+      <Filter>Source Files\Navigation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
