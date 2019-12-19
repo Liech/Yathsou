@@ -246,6 +246,15 @@
     <ClInclude Include="Navigation\NavigationMap.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
+    <ClInclude Include="Navigation\DirectDistanceMap.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\DijkstraMap.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="structs\AABB.h">
+      <Filter>Header Files\structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -367,6 +376,15 @@
     </ClCompile>
     <ClCompile Include="Navigation\Navigation.cpp">
       <Filter>Source Files\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation\DirectDistanceMap.cpp">
+      <Filter>Source Files\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation\DijkstraMap.cpp">
+      <Filter>Source Files\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="structs\AABB.cpp">
+      <Filter>Source Files\structs</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

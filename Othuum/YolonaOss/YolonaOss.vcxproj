@@ -208,6 +208,8 @@
     <ClInclude Include="Examples\Texture2Tree.h" />
     <ClInclude Include="Lib\lodepng\lodepng.h" />
     <ClInclude Include="Lib\lodepng\lodepng_util.h" />
+    <ClInclude Include="Navigation\DijkstraMap.h" />
+    <ClInclude Include="Navigation\DirectDistanceMap.h" />
     <ClInclude Include="Navigation\Navigation.h" />
     <ClInclude Include="Navigation\NavigationAgent.h" />
     <ClInclude Include="Navigation\NavigationMap.h" />
@@ -236,6 +238,7 @@
     <ClInclude Include="Renderer\BoxRenderer.h" />
     <ClInclude Include="Renderer\RectangleRenderer.h" />
     <ClInclude Include="Renderer\TextRenderer.h" />
+    <ClInclude Include="structs\AABB.h" />
     <ClInclude Include="structs\BoundingBox.h" />
     <ClInclude Include="structs\Color.h" />
     <ClInclude Include="structs\Database.h" />
@@ -265,6 +268,8 @@
     <ClCompile Include="Lib\glad\src\glad.c" />
     <ClCompile Include="Lib\lodepng\lodepng.cpp" />
     <ClCompile Include="Lib\lodepng\lodepng_util.cpp" />
+    <ClCompile Include="Navigation\DijkstraMap.cpp" />
+    <ClCompile Include="Navigation\DirectDistanceMap.cpp" />
     <ClCompile Include="Navigation\Navigation.cpp" />
     <ClCompile Include="Navigation\NavigationAgent.cpp" />
     <ClCompile Include="Navigation\NavigationMap.cpp" />
@@ -285,6 +290,7 @@
     <ClCompile Include="Renderer\BoxRenderer.cpp" />
     <ClCompile Include="Renderer\RectangleRenderer.cpp" />
     <ClCompile Include="Renderer\TextRenderer.cpp" />
+    <ClCompile Include="structs\AABB.cpp" />
     <ClCompile Include="structs\Color.cpp" />
     <ClCompile Include="Util\Geometry.cpp" />
     <ClCompile Include="Util\ImageIO.cpp" />

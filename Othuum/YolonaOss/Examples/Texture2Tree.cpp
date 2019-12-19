@@ -7,9 +7,14 @@
 #include <limits>
 #include "../structs/Database.h"
 #include "../Util/Geometry.h"
-
+#include "Navigation/DirectDistanceMap.h"
 float scaling = 0.2f;
 namespace YolonaOss {
+
+  Texture2Tree::Texture2Tree() :_agent(glm::vec2(0, 0)) {
+    _agent.setMap(std::make_shared<DirectDistanceMap<2>>());
+  }
+
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec)
   {
     auto map = ImageIO::readImage("YolonaOssData/textures/TinyMap.png");
@@ -43,8 +48,9 @@ namespace YolonaOss {
     glm::vec3 pickDir = _spec->getCam()->getPickRay(x, y);
     Intersection sect = Geometry::intersectRayPlane(camPos, pickDir, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     if (sect.doesIntersect) {
+      _agent.setTarget(glm::vec2(sect.location[0], sect.location[2]));
       metaPos = sect.location;
-      if (sect.location.x < 0 || sect.location.y < 0 || sect.location.x > _tree->getSize() || sect.location.y > _tree->getSize())
+      if (sect.location.x < 0 || sect.location.z < 0 || sect.location.x >= _tree->getSize() || sect.location.z >= _tree->getSize())
         return;
       _path = std::make_shared< Dijkstra<Tree> >(
         _tree->getLeaf({ (size_t)(sect.location[0] / scaling),(size_t)(sect.location[2] / scaling)}),
@@ -64,9 +70,11 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::draw()
   {
+    _agent.updatePosition();
     BoxRenderer::start();
     srand(10);
     auto leafs = _tree->getLeafs();
+    //if (false)
     for (auto leaf : leafs)
     {
       //Tree::Leaf leaf;
@@ -93,7 +101,7 @@ namespace YolonaOss {
       BoxRenderer::drawBox(pos, size, col);
       //if (!(leaf.position[0] == 1 && leaf.position[1] == 1))
         //continue;
-
+      if (false)
       for (int dim = 0; dim < 2; dim++) {
         for (auto dir : { NMTreeDirection::Positive,NMTreeDirection::Negative })
           for (auto neighb : _index->getNeighbours(leaf.link, dim, dir)) {
@@ -115,6 +123,7 @@ namespace YolonaOss {
     }
 
     BoxRenderer::drawDot(metaPos, glm::vec3(0.1f), glm::vec4(1, 0, 1, 1));
+    BoxRenderer::drawDot(glm::vec3(_agent.getPosition().x,0.1f,_agent.getPosition().y), glm::vec3(0.1f), glm::vec4(1, 1, 0, 1));
     BoxRenderer::end();
   }
 }

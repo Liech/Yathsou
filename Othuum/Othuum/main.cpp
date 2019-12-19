@@ -21,10 +21,10 @@ using namespace YolonaOss;
 int main() { 
 
   
-  int width = 800;
-  int height = 600;
-  //int width = 1920;
-  //int height = 1080;
+  //int width = 800;
+  //int height = 600;
+  int width = 1420;
+  int height = 880;
   GL::Window w(width, height);
 
 
@@ -36,9 +36,9 @@ int main() {
   Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
   std::shared_ptr<Camera::CameraSystem> cam = std::make_shared<Camera::CameraSystem>();
 
-  std::shared_ptr<Button> b = std::make_shared<Button>("FreeCam", BoundingBox2(glm::vec2(0, 0), glm::vec2(200, 50)), [cam]() {cam->setCurrentCam("FreeCamera"); });
-  Database<std::shared_ptr<Widget>>::add(b, { "MouseClick" });
-  list->addDrawable(b);
+  //std::shared_ptr<Button> b = std::make_shared<Button>("FreeCam", BoundingBox2(glm::vec2(0, 0), glm::vec2(200, 50)), [cam]() {cam->setCurrentCam("FreeCamera"); });
+  //Database<std::shared_ptr<Widget>>::add(b, { "MouseClick" });
+  //list->addDrawable(b);
 
   Database<std::shared_ptr<GL::Updateable>>::add(cam, { "Main" });
   glm::vec3 start, end;

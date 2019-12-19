@@ -6,6 +6,7 @@
 #include "../structs/NMTreeNeighbourIndex.h"
 #include "../structs/Dijkstra.h"
 #include <memory>
+#include "../Navigation/NavigationAgent.h"
 
 namespace YolonaOss {
   namespace GL {
@@ -17,6 +18,7 @@ namespace YolonaOss {
   class Texture2Tree : public GL::Drawable {
     // Geerbt über Drawable
   public:
+    Texture2Tree();
     virtual void load(GL::DrawSpecification*) override;
     virtual void draw() override;
 
@@ -28,6 +30,7 @@ namespace YolonaOss {
 
     GL::DrawSpecification*                          _spec;
     std::function<void(double, double)>             _mouseClick;
+    NavigationAgent<2>                              _agent;
 
     void mouseClick(double x, double y);
     glm::vec3 metaPos = glm::vec3(0, 0, 0);
