@@ -7,6 +7,6 @@ namespace YolonaOss {
   class NavigationMap {
   public:
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
-    virtual vec getDirectionSuggestion(const vec currentPosition, const vec target) = 0;
+    virtual vec getDirectionSuggestion(const vec currentPosition, const vec target) = 0;    
   };
 }

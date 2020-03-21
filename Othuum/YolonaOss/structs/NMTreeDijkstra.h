@@ -13,12 +13,12 @@ namespace YolonaOss {
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
     using self = typedef NMTreeDijkstra<Dimension>;
   public:
-    NMTreeDijkstra(vec start, Tree* root, std::function<double(Tree*)> weight)
+    NMTreeDijkstra(vec start, Tree* root,std::shared_ptr<TreeI> index, std::function<double(Tree*)> weight)
     {
       _root = root;
       _getWeight = weight;
       _start = start;
-      _treeIndex = std::make_unique<TreeI>(root);
+      _treeIndex = index;
       _treeIndex->init();
       _dijkstra = std::make_unique<Dijkstra<Tree>>(root->getLeaf(Util<Dimension>::vec2Array(start)), [this](Tree* A, Tree* B) { return getDijkstraDistance(A, B); }, [this](Tree* node) { return getDijkstraNeighbours(node); });
     }
@@ -27,10 +27,12 @@ namespace YolonaOss {
       Tree* current = _root->getLeaf(Util<Dimension>::vec2Array(currentPosition));
       auto next = _dijkstra->getNext(current);
       if (next == nullptr)
-        return vec();
+        return glm::normalize(vec(_start - currentPosition));
       vec nextCenter = Util<Dimension>::array2Vec(next->getPosition());
-      for(int i = 0;i < Dimension;i++) nextCenter+=next->getSize() / 2.0;
-      return glm::normalize(nextCenter- currentPosition);
+      for(int i = 0;i < Dimension;i++) 
+        nextCenter[i] += (float)next->getSize() / 2.0;
+      vec suggestion = glm::normalize(nextCenter - currentPosition);
+      return suggestion;
     }
 
     std::vector<Tree*> getPath(vec currentPosition) {
@@ -49,7 +51,13 @@ namespace YolonaOss {
 
   private:
     double getDijkstraDistance(Tree* A, Tree* B) {
-      return glm::distance(Util<2>::array2Vec(A->getPosition()),Util<Dimension>::array2Vec(B->getPosition())) * std::max(_getWeight(A), _getWeight(B));
+      vec a = Util<2>::array2Vec(A->getPosition());
+      vec b = Util<Dimension>::array2Vec(B->getPosition());
+      for (int i = 0; i < Dimension; i++)
+        a[i] += (float)A->getSize() / 2.0;
+      for (int i = 0; i < Dimension; i++)
+        b[i] += (float)B->getSize() / 2.0;
+      return glm::distance(a,b) * std::max(_getWeight(A), _getWeight(B));
     }
 
     std::set<Tree*> getDijkstraNeighbours(Tree* node) {
@@ -64,7 +72,7 @@ namespace YolonaOss {
     std::function<double(Tree*)> _getWeight;
     vec _start;
     std::unique_ptr< Dijkstra<NMTree<bool,2, Dimension, YolonaOss::TreeMergeBehavior::Max, false>>> _dijkstra;
-    std::unique_ptr<TreeI> _treeIndex;
+    std::shared_ptr<TreeI> _treeIndex;
     Tree* _root;
   };
 }

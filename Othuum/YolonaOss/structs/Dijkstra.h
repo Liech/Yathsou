@@ -92,6 +92,7 @@ namespace YolonaOss {
     NodeType* _startNode;
     std::map<NodeType*, double> _gradient;
     std::map<NodeType*, NodeType*> _next;
+    
     double                      _maxValue;
   };
 

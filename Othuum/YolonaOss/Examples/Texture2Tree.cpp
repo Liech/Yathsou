@@ -28,7 +28,7 @@ namespace YolonaOss {
     _index->init();
 
 
-    _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(glm::vec2(12,12), _tree.get(), [](Tree * node) {return 1; }));
+    _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(glm::vec2(12,12), _tree.get(), _index, [](Tree * node) {return 1; }));
 
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); };
@@ -45,7 +45,7 @@ namespace YolonaOss {
       if (sect.location.x < 0 || sect.location.z < 0 || sect.location.x >= _tree->getSize() || sect.location.z >= _tree->getSize())
         return;
       auto target = glm::vec2(sect.location[0], sect.location[2]);
-      _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(target, _tree.get(), [](Tree* node) {return 1; }));
+      _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(target, _tree.get(),_index, [](Tree* node) {return 1; }));
 
       _agentMap->setDijkstra(_path);
       _agent.setTarget(target);
