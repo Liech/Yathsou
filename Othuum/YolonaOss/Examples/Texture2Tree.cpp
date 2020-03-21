@@ -46,8 +46,9 @@ namespace YolonaOss {
         return;
       auto target = glm::vec2(sect.location[0], sect.location[2]);
       _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(target, _tree.get(),_index, [](Tree* node) {return 1; }));
-
+      
       _agentMap->setDijkstra(_path);
+      _agentMap->setTarget(target);
       _agent.setTarget(target);
 
     }

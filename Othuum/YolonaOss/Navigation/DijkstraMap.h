@@ -12,18 +12,24 @@ namespace YolonaOss {
   public:
     DijkstraMap() {
     }
+    
+    virtual void setTarget(const vec target) override
+    {
+      _target = target;
+    }
 
     void setDijkstra(std::shared_ptr<DijkstraI<Dimension>> di) {
       _dijkstra = di;
     }
 
-    virtual vec getDirectionSuggestion(const vec currentPosition, const vec target) override {
-      if (!_dijkstra) return glm::normalize(target - currentPosition);
+    virtual vec getDirectionSuggestion(const vec currentPosition) override {
+      if (!_dijkstra) return glm::normalize(_target - currentPosition);
       return _dijkstra->getDirectionSuggestion(currentPosition);
     }
   private:
 
   private:
     std::shared_ptr<DijkstraI<Dimension>> _dijkstra = nullptr;
+    vec                                   _target;
   };
 }

@@ -20,7 +20,7 @@ namespace YolonaOss {
     void updatePosition() {
       if (_map == nullptr)
         throw std::runtime_error("No Map Assigned");
-      vec dir = _map->getDirectionSuggestion(_position, _target);
+      vec dir = _map->getDirectionSuggestion(_position);
       float dist = glm::distance(_target, _position);
       if (dist < 0.01f)
         return;

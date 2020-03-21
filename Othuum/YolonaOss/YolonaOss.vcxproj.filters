@@ -261,6 +261,9 @@
     <ClInclude Include="structs\NMTreeDijkstra.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
+    <ClInclude Include="Navigation\DiscomfortGridMap.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -394,6 +397,9 @@
     </ClCompile>
     <ClCompile Include="Util\Util.cpp">
       <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation\DiscomfortGridMap.cpp">
+      <Filter>Source Files\Navigation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
