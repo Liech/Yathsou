@@ -255,6 +255,12 @@
     <ClInclude Include="structs\AABB.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
+    <ClInclude Include="Util\Util.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="structs\NMTreeDijkstra.h">
+      <Filter>Header Files\structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -385,6 +391,9 @@
     </ClCompile>
     <ClCompile Include="structs\AABB.cpp">
       <Filter>Source Files\structs</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Util.cpp">
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

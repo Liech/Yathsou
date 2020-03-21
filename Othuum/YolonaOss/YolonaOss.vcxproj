@@ -246,10 +246,12 @@
     <ClInclude Include="structs\Factory.h" />
     <ClInclude Include="structs\MultiDimensionalArray.h" />
     <ClInclude Include="structs\NMTree.h" />
+    <ClInclude Include="structs\NMTreeDijkstra.h" />
     <ClInclude Include="structs\NMTreeNeighbourIndex.h" />
     <ClInclude Include="Util\Geometry.h" />
     <ClInclude Include="Util\ImageIO.h" />
     <ClInclude Include="Util\Slicer.h" />
+    <ClInclude Include="Util\Util.h" />
     <ClInclude Include="YolonaOss.h" />
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +297,7 @@
     <ClCompile Include="Util\Geometry.cpp" />
     <ClCompile Include="Util\ImageIO.cpp" />
     <ClCompile Include="Util\Slicer.cpp" />
+    <ClCompile Include="Util\Util.cpp" />
     <ClCompile Include="YolonaOss.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

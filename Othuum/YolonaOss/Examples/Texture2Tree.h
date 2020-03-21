@@ -4,11 +4,13 @@
 #include "../structs/MultiDimensionalArray.h"
 #include "../structs/NMTree.h"
 #include "../structs/NMTreeNeighbourIndex.h"
-#include "../structs/Dijkstra.h"
+#include "../structs/NMTreeDijkstra.h"
 #include <memory>
 #include "../Navigation/NavigationAgent.h"
 
 namespace YolonaOss {
+  template<size_t Dimension> class DijkstraMap;
+
   namespace GL {
     class DrawSpecification;
   }
@@ -26,7 +28,8 @@ namespace YolonaOss {
     std::shared_ptr<MultiDimensionalArray<bool, 2>> _map;
     std::shared_ptr<Tree>                           _tree;
     std::shared_ptr<TreeI>                          _index;
-    std::shared_ptr < Dijkstra<Tree>>               _path; 
+    std::shared_ptr < DijkstraI<2>>                 _path = nullptr;
+    std::shared_ptr< DijkstraMap<2> >               _agentMap;
 
     GL::DrawSpecification*                          _spec;
     std::function<void(double, double)>             _mouseClick;

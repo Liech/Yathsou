@@ -143,7 +143,7 @@ namespace YolonaOss {
       Tree* t = getChild(converted);
       return t->getLeaf(position);
     }
-
+    
     Content getContent() { return _content; }
     size_t getSize() { return _size; }
     std::array<size_t, Dimension> getPosition() { return _position; }

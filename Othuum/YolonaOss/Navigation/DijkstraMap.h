@@ -10,22 +10,24 @@ namespace YolonaOss {
   class DijkstraMap :public NavigationMap<Dimension> {
     using self = typedef DijkstraMap<Dimension>;
   public:
-    DijkstraMap(vec start, std::shared_ptr<AABBHierarchyNetwork<Dimension>> root) {
-      _dijkstra = new std::shared_ptr<AABBDijkstra<Dimension>>(start, root, self::getWeight);
+    DijkstraMap() {
+    }
+
+    void setDijkstra(std::shared_ptr<DijkstraI<Dimension>> di) {
+      _dijkstra = di;
     }
 
     virtual vec getDirectionSuggestion(const vec currentPosition, const vec target) override {
-      vec dir = glm::normalize(target - currentPosition);
-      if (std::isnan(dir[0]))
-        return vec();
-      return dir;
+      if (!_dijkstra) return vec();
+      return _dijkstra->getDirectionSuggestion(currentPosition);
+      //vec dir = glm::normalize(target - currentPosition);
+      //if (std::isnan(dir[0]))
+      //  return vec();
+      //return dir;
     }
   private:
-    static double getWeight(AABBHierarchyNetwork<Dimension>* node) {
-      return 1;
-    }
 
   private:
-    std::shared_ptr<AABBDijkstra<Dimension>> _dijkstra;
+    std::shared_ptr<DijkstraI<Dimension>> _dijkstra = nullptr;
   };
 }

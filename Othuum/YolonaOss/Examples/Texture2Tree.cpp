@@ -7,12 +7,15 @@
 #include <limits>
 #include "../structs/Database.h"
 #include "../Util/Geometry.h"
-#include "Navigation/DirectDistanceMap.h"
+#include "Navigation/DijkstraMap.h"
+#include "Util/Util.h"
+
 float scaling = 0.2f;
 namespace YolonaOss {
 
   Texture2Tree::Texture2Tree() :_agent(glm::vec2(0, 0)) {
-    _agent.setMap(std::make_shared<DirectDistanceMap<2>>());
+    _agentMap = std::make_shared<DijkstraMap<2>>();
+    _agent.setMap(_agentMap);
   }
 
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec)
@@ -24,52 +27,35 @@ namespace YolonaOss {
     _index = std::make_shared<NMTreeNeighbourIndex<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max, false>>(_tree.get());
     _index->init();
 
-    _path = std::make_shared< Dijkstra<Tree> >(
-        _tree->getLeaf({ 12,12 }),
-        [](Tree* a, Tree* b) { 
-        bool A = a->getContent();
-        bool B = b->getContent();
-        if (!A || !B)
-          return std::numeric_limits<double>::infinity();
-        else 
-          return 1.0;
-      },
-        [this](Tree* n) { return _index->getAllNeighbours(n); }
-    );
+
+    _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(glm::vec2(12,12), _tree.get(), [](Tree * node) {return 1; }));
 
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); };
     Database < std::function<void(double, double)>*>::add(&_mouseClick , { "MouseClick" });
 
-  }
+  } 
 
   void YolonaOss::Texture2Tree::mouseClick(double x, double y) {
     glm::vec3 camPos = _spec->getCam()->getPosition();
     glm::vec3 pickDir = _spec->getCam()->getPickRay(x, y);
     Intersection sect = Geometry::intersectRayPlane(camPos, pickDir, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     if (sect.doesIntersect) {
-      _agent.setTarget(glm::vec2(sect.location[0], sect.location[2]));
       metaPos = sect.location;
       if (sect.location.x < 0 || sect.location.z < 0 || sect.location.x >= _tree->getSize() || sect.location.z >= _tree->getSize())
         return;
-      _path = std::make_shared< Dijkstra<Tree> >(
-        _tree->getLeaf({ (size_t)(sect.location[0] / scaling),(size_t)(sect.location[2] / scaling)}),
-        [](Tree* a, Tree* b) {
-          bool A = a->getContent();
-          bool B = b->getContent();
-          if (!A || !B)
-            return std::numeric_limits<double>::infinity();
-          else
-            return 1.0;
-        },
-        [this](Tree* n) { return _index->getAllNeighbours(n); }
-        );
+      auto target = glm::vec2(sect.location[0], sect.location[2]);
+      _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(target, _tree.get(), [](Tree* node) {return 1; }));
+
+      _agentMap->setDijkstra(_path);
+      _agent.setTarget(target);
 
     }
   }
 
   void YolonaOss::Texture2Tree::draw()
   {
+    if (!_path) return;
     _agent.updatePosition();
     BoxRenderer::start();
     srand(10);
@@ -77,11 +63,6 @@ namespace YolonaOss {
     //if (false)
     for (auto leaf : leafs)
     {
-      //Tree::Leaf leaf;
-      //leaf.link = _tree->getLeaf({ 12,12 });
-      //leaf.position = leaf.link->getPosition();
-      //leaf.size = leaf.link->getSize();
-      //leaf.value = leaf.link->getContent();
 
       float clr = 0.3f;// (rand() % 255) / 255.0f;
       glm::vec4 col = glm::vec4(clr,clr,clr, 1)*0.1f + glm::vec4(0.9,0.9,0.9,1);
@@ -89,10 +70,10 @@ namespace YolonaOss {
       if (!leaf.value) {
         col = glm::vec4(0,0,0, 1);
       }
-      double distance = _path->getGradient(leaf.link) / (_path->getMaxValue()  / 4.0);
+      double distance = _path->getDistance(Util<2>::array2Vec(leaf.position) * scaling);
       if (isinf(distance))
         col = col;
-      else if (distance == 0)
+      else if (distance < 0.3)
         col = glm::vec4(1,0,0,1);
       else
         col = glm::vec4(col[0]/distance,col[1] / distance,col[2] / distance , 1);

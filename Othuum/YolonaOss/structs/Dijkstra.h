@@ -9,12 +9,20 @@
 #include "AABB.h"
 
 namespace YolonaOss {
+  template<size_t Dimension>
+  class DijkstraI {
+    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+  public:
+    virtual vec    getDirectionSuggestion(vec currentPosition) = 0;
+    virtual double getDistance(vec postion)                    = 0;
+  };
+
   //solve dijkstra on arbitrary graph
   //result is a gradient for each entry
   //std::set<NodeType*> getNeighbours(NodeType* T) should return all neighbours of T
   //double getDistance(NodeType* A, NodeType* B) should return the distance between a and b
   template<typename NodeType>
-  class Dijkstra { //TODO: check spelling
+  class Dijkstra {
   public:
     Dijkstra(NodeType* startNode, std::function<double(NodeType*, NodeType*)> getDistance, std::function<std::set<NodeType*>(NodeType*)> getNeighbours) {
       _startNode = startNode;
@@ -41,6 +49,7 @@ namespace YolonaOss {
       }
 
       _gradient[_startNode] = 0;
+      _next[_startNode] = nullptr;
       done.insert(_startNode);
 
       while (todo.size() != 0) {
@@ -50,6 +59,7 @@ namespace YolonaOss {
         done.insert(current.B);
         assert(!std::isinf(current.Distance));
         _gradient[current.B] = current.Distance;
+        _next[current.B] = current.A;
         for (auto s : getNeighbours(current.B)) {
           if (done.count(s) == 0) {
             Edge e = Edge(current.B, s, current.Distance, getDistance, getNeighbours);
@@ -61,6 +71,10 @@ namespace YolonaOss {
           }
         }
       }
+    }
+
+    NodeType* getNext(NodeType* node) {
+      return _next[node];
     }
 
     double getGradient(NodeType* node) {
@@ -77,26 +91,8 @@ namespace YolonaOss {
 
     NodeType* _startNode;
     std::map<NodeType*, double> _gradient;
+    std::map<NodeType*, NodeType*> _next;
     double                      _maxValue;
   };
 
-  template<size_t Dimension>
-  class AABBDijkstra : public Dijkstra<AABBHierarchyNetwork<Dimension>>{
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
-    using self = typedef AABBDijkstra<Dimension>;
-  public:
-    AABBDijkstra(vec start, AABBHierarchyNetwork<Dimension>* root, std::function<double(AABBHierarchyNetwork<Dimension>*)> weight) : Dijkstra<AABBHierarchyNetwork<Dimension>>(network.getLeaf(root),self::getDistance,self::getNeighbours) {
-      _getWeight = weight;
-    }
-  private:
-    static double getDistance(AABBHierarchyNetwork<Dimension>* A, AABBHierarchyNetwork<Dimension>* B) {
-      return glm::distance(A->getCenter() - B->getCenter()) * std::max(_getWeight(A), _getWeight(B));
-    }
-
-    static std::set<AABBHierarchyNetwork<Dimension>*> getNeighbours(AABBHierarchyNetwork<Dimension>* node) {
-      return node->getNeighbours();
-    }
-  private:
-    std::function<double(AABBHierarchyNetwork<Dimension>*)> _getWeight;
-  };
 }
