@@ -33,6 +33,16 @@ namespace YolonaOss {
       return glm::normalize(nextCenter- currentPosition);
     }
 
+    std::vector<Tree*> getPath(vec currentPosition) {
+      Tree* current = _root->getLeaf(Util<Dimension>::vec2Array(currentPosition));
+      std::vector<Tree*> result;
+      while (current) {
+        result.push_back(current);
+        current = _dijkstra->getNext(current);
+      }
+      return result;
+    }
+
     virtual double getDistance(vec postion) override {
       return glm::distance(_start, postion);
     }
@@ -43,7 +53,12 @@ namespace YolonaOss {
     }
 
     std::set<Tree*> getDijkstraNeighbours(Tree* node) {
-      return _treeIndex->getAllNeighbours(node);
+      auto all = _treeIndex->getAllNeighbours(node);
+      std::set<Tree*> result;
+      for (auto single : all)
+        if (single->getContent())
+          result.insert(single);
+      return result;
     }
   private:
     std::function<double(Tree*)> _getWeight;

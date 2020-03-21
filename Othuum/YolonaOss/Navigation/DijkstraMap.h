@@ -18,7 +18,7 @@ namespace YolonaOss {
     }
 
     virtual vec getDirectionSuggestion(const vec currentPosition, const vec target) override {
-      if (!_dijkstra) return vec();
+      if (!_dijkstra) return glm::normalize(target - currentPosition);
       return _dijkstra->getDirectionSuggestion(currentPosition);
       //vec dir = glm::normalize(target - currentPosition);
       //if (std::isnan(dir[0]))

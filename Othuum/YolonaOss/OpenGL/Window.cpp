@@ -204,11 +204,13 @@ namespace YolonaOss {
         }
       }
       std::set<std::function<void(double, double)>*> functions = Database<std::function<void(double, double)>*>::getByTag("MouseClick");
-      for (auto f : functions)
-        (*f)(xpos, ypos);
-      std::set<std::function<void(double, double)>> functions2 = Database<std::function<void(double, double)>>::getByTag("MouseClick");
-      for (auto f : functions2)
-        f(xpos, ypos);
+      if(action == (int)KeyStatus::PRESS) {
+        for (auto f : functions)
+          (*f)(xpos, ypos);
+        std::set<std::function<void(double, double)>> functions2 = Database<std::function<void(double, double)>>::getByTag("MouseClick");
+        for (auto f : functions2)
+          f(xpos, ypos);
+      }
       if (action == (int)KeyStatus::RELEASE)
         pressed = std::shared_ptr<Widget>();
     }

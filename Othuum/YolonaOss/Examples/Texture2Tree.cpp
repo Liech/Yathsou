@@ -10,10 +10,10 @@
 #include "Navigation/DijkstraMap.h"
 #include "Util/Util.h"
 
-float scaling = 0.2f;
+float scaling = 1;
 namespace YolonaOss {
 
-  Texture2Tree::Texture2Tree() :_agent(glm::vec2(0, 0)) {
+  Texture2Tree::Texture2Tree() :_agent(glm::vec2(3, 3)) {
     _agentMap = std::make_shared<DijkstraMap<2>>();
     _agent.setMap(_agentMap);
   }
@@ -60,6 +60,10 @@ namespace YolonaOss {
     BoxRenderer::start();
     srand(10);
     auto leafs = _tree->getLeafs();
+    
+    auto DjPath = (std::dynamic_pointer_cast<NMTreeDijkstra<2>>(_path))->getPath(_agent.getPosition());
+    std::set<Tree*> DjPathSet(DjPath.begin(), DjPath.end());
+
     //if (false)
     for (auto leaf : leafs)
     {
@@ -71,8 +75,11 @@ namespace YolonaOss {
         col = glm::vec4(0,0,0, 1);
       }
       double distance = _path->getDistance(Util<2>::array2Vec(leaf.position) * scaling);
+      
       if (isinf(distance))
         col = col;
+      else if (DjPathSet.count(leaf.link))
+        col = glm::vec4(0, 0, 1,1);
       else if (distance < 0.3)
         col = glm::vec4(1,0,0,1);
       else
