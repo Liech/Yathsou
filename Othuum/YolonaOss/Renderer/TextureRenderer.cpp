@@ -77,8 +77,8 @@ namespace YolonaOss {
     
      void main()
      {    
-         vec4 sampled = vec4(1.0, 1.0, 1.0, texture(shownTexture, TexCoords).r);
-         color = vec4(textureColor, 1.0) * sampled;
+         vec4 sampled = texture(shownTexture, TexCoords);
+         color = vec4(textureColor.r * sampled.r,textureColor.g * sampled.g,textureColor.b * sampled.b, 1.0 * sampled.a);
      }  
     )";
 
