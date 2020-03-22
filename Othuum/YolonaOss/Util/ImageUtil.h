@@ -16,20 +16,40 @@ namespace YolonaOss {
 
 
     template<typename SCALAR, size_t Dimension>
-    static std::unique_ptr<MultiDimensionalArray<SCALAR, Dimension>> scale(MultiDimensionalArray<SCALAR, Dimension>* input, std::array<size_t, Dimension> newResolution) {      
+    static SCALAR sum(MultiDimensionalArray<SCALAR, Dimension>* input) {
+      return input->reduce(0, [](SCALAR A, SCALAR B) {return A + B; });
+    }
+
+    template<typename SCALAR, size_t Dimension>
+    static std::unique_ptr<MultiDimensionalArray<SCALAR, Dimension>> scaleUp(MultiDimensionalArray<SCALAR, Dimension>* input, std::array<size_t, Dimension> newResolution) {      
       std::unique_ptr<MultiDimensionalArray<SCALAR, Dimension>> result = std::make_unique<MultiDimensionalArray<SCALAR, Dimension>>(newResolution);
       std::array<double, Dimension> scaleFactor;
       for (size_t i = 0; i < Dimension; i++)
         scaleFactor[i] = (double)input->getDimension(i) / (double)result->getDimension(i);      
       
       result->apply([input, scaleFactor](std::array<size_t, Dimension> resultPos, SCALAR& val) {
-        std::array<double, Dimension> inputPos;
-        for (size_t i = 0; i < Dimension; i++)
-          inputPos[i] = scaleFactor[i] * (double)resultPos[i];
-
-
+        std::array<double, Dimension> inputPerc;
+        std::array<size_t, Dimension> inputIndex;
+        for (size_t i = 0; i < Dimension; i++) {
+          inputPerc[i] = scaleFactor[i] * (double)resultPos[i];
+          inputIndex[i] = std::floor(inputPerc[i]);
+          inputPerc[i] -= inputIndex[i]; // value between 0 and 1
+        }
+        val = NLinearInterpolateRecursive(input, inputIndex, inputPerc);
       });
     }
+  private:
+    template<typename SCALAR, size_t Dimension>
+    static SCALAR NLinearInterpolateRecursive(MultiDimensionalArray<SCALAR, Dimension>* input, std::array<size_t, Dimension> position, std::array<double, Dimension> perc, size_t currentDimension = Dimension) {
+      if (Dimension == 0)
+        return input->get_value(position);
+      else {
+        std::array<size_t, Dimension> nextPos = position;
+        nextPos[currentDimension]++;
+        return NLinearInterpolateRecursive(input, position, perc, currentDimension - 1) * perc[currentDimension] + NLinearInterpolateRecursive(input,nextPos,perc,currentDimension-1) * (1.0-perc[currentDimension]);
+      }
+    }
+  public:
 
     template<typename SCALAR, size_t Dimension> 
     static std::unique_ptr<MultiDimensionalArray<Color, Dimension>>  toGrayscale(MultiDimensionalArray<SCALAR, Dimension>* input, SCALAR Min, SCALAR Max) {

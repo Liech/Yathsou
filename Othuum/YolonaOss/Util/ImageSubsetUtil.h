@@ -5,9 +5,21 @@
 #include <vector>
 
 namespace YolonaOss {
-  class Slicer {
+  class ImageSubsetUtil {
   public:
-    template <typename Type, int Dimension>
+    template <typename Type, size_t Dimension>
+    static std::unique_ptr<MultiDimensionalArray<Type, Dimension>> sub(MultiDimensionalArray<Type, Dimension>* input, std::array<size_t, Dimension> start, std::array<size_t, Dimension> size) {
+      std::unique_ptr<MultiDimensionalArray<Type, Dimension>> result = std::make_unique<MultiDimensionalArray<Type, Dimension>>(size);
+      result->apply([input,start](std::array<size_t, Dimension> resultPos, Type& val) {
+        std::array<size_t, Dimension> pos = start;
+        for (size_t i = 0; i < Dimension; i++)
+          pos[i] += resultPos[i];
+        val = input->getVal(pos);
+      });
+      return result;
+    }
+
+    template <typename Type, size_t Dimension>
     static std::unique_ptr<MultiDimensionalArray<Type, Dimension - 1>> slice(MultiDimensionalArray<Type, Dimension> * input, size_t slicePlane, size_t sliceNumber) {
       std::vector<size_t> newDim;
       for (size_t i = 0; i < Dimension; i++)
@@ -26,15 +38,13 @@ namespace YolonaOss {
       size_t startDepth = slicePlane == 0 ? 1 : 0;
       for (size_t i = 0; i < input->getDimension(startDepth); i++) {
         starter[startDepth] = i;
-        recurse<Type, Dimension>(input, *result, slicePlane, sliceNumber, starter, startDepth + 1);
+        recurse_slice<Type, Dimension>(input, *result, slicePlane, sliceNumber, starter, startDepth + 1);
       }
       return result;
     }
-
   private:
-
-    template <typename Type, int Dimension>
-    static void recurse(MultiDimensionalArray<Type, Dimension>* input, MultiDimensionalArray<Type, Dimension - 1> & output,
+    template <typename Type, size_t Dimension>
+    static void recurse_slice(MultiDimensionalArray<Type, Dimension>* input, MultiDimensionalArray<Type, Dimension - 1> & output,
       size_t deletedDimension, size_t sliceNumber, std::array<size_t, Dimension> currentCoordinate, size_t currentDimension) {
       if (deletedDimension == currentDimension) {
         currentCoordinate[deletedDimension] = sliceNumber;
@@ -56,7 +66,7 @@ namespace YolonaOss {
       else {
         for (size_t i = 0; i < input->getDimension(currentDimension); i++) {
           currentCoordinate[currentDimension] = i;
-          recurse<Type, Dimension>(input, output, deletedDimension, sliceNumber, currentCoordinate, currentDimension + 1);
+          recurse_slice<Type, Dimension>(input, output, deletedDimension, sliceNumber, currentCoordinate, currentDimension + 1);
         }
       }
     }

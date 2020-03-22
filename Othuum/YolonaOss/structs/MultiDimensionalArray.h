@@ -6,7 +6,7 @@
 #include <functional>
 #include <memory>
 #include <iomanip>
-
+#include <numeric>
 
 namespace YolonaOss {
   enum memoryLayout {
@@ -226,6 +226,10 @@ namespace YolonaOss {
         for (size_t i = min; i < max && i < getSize(); i++)
           func(transformToCoordiante(i), get_linearRef(i));
       }
+    }
+
+    Type reduce(Type startVal, std::function<Type(const Type, const Type)> binOp) {
+      std::reduce(std::execution::par, _data.begin(), _data.end(), startVal,binOp);
     }
 
     void write() {

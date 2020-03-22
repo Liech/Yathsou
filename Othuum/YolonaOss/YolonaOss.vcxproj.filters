@@ -216,9 +216,6 @@
     <ClInclude Include="Examples\Texture2Tree.h">
       <Filter>Examples</Filter>
     </ClInclude>
-    <ClInclude Include="Util\Slicer.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
     <ClInclude Include="Util\ImageIO.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
@@ -271,6 +268,9 @@
       <Filter>Examples</Filter>
     </ClInclude>
     <ClInclude Include="Util\ImageUtil.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\ImageSubsetUtil.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
@@ -371,9 +371,6 @@
     <ClCompile Include="Examples\Texture2Tree.cpp">
       <Filter>Examples</Filter>
     </ClCompile>
-    <ClCompile Include="Util\Slicer.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
     <ClCompile Include="Util\ImageIO.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
@@ -417,6 +414,9 @@
       <Filter>Examples</Filter>
     </ClCompile>
     <ClCompile Include="Util\ImageUtil.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\ImageSubsetUtil.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
