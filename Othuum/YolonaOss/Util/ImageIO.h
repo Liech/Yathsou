@@ -14,6 +14,7 @@ namespace YolonaOss {
 
     static void                                              writeImage(std::string filename, const MultiDimensionalArray<Color, 2> & img);
     static std::unique_ptr<MultiDimensionalArray<Color, 2>>  readImage(std::string filename);
+    static std::unique_ptr<MultiDimensionalArray<Color, 2>>  createEmpty(size_t width, size_t height);
 
 
     static void                                              TEST_readwrite();
