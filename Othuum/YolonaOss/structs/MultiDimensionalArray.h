@@ -39,6 +39,17 @@ namespace YolonaOss {
       assert(getSize() != 0);
     }
 
+    MultiDimensionalArray(std::array<size_t,Dimension> dim) {
+      assert(dim.size() == Dimension);
+      _size = 1;
+      for (int i = 0; i < Dimension; i++) {
+        _dimension[i] = dim[i];
+        _size *= dim[i];
+      }
+      _data.resize(getSize());
+      assert(getSize() != 0);
+    }
+
     MultiDimensionalArray(std::vector<size_t> dim) {
       assert(dim.size() == Dimension);
       _size = 1;
@@ -155,6 +166,13 @@ namespace YolonaOss {
 
     size_t getSize() const {
       return _size;
+    }
+
+    std::vector<size_t> getDimensionVector() const {
+      std::vector<size_t> result;
+      for (int i = 0; i < Dimension; i++)
+        result[i] = getDimension(i);
+      return result;
     }
 
     size_t getDimension(size_t dimension) const {

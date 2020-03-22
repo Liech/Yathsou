@@ -253,6 +253,7 @@
     <ClInclude Include="structs\NMTreeNeighbourIndex.h" />
     <ClInclude Include="Util\Geometry.h" />
     <ClInclude Include="Util\ImageIO.h" />
+    <ClInclude Include="Util\ImageUtil.h" />
     <ClInclude Include="Util\Slicer.h" />
     <ClInclude Include="Util\Util.h" />
     <ClInclude Include="YolonaOss.h" />
@@ -302,6 +303,7 @@
     <ClCompile Include="structs\Color.cpp" />
     <ClCompile Include="Util\Geometry.cpp" />
     <ClCompile Include="Util\ImageIO.cpp" />
+    <ClCompile Include="Util\ImageUtil.cpp" />
     <ClCompile Include="Util\Slicer.cpp" />
     <ClCompile Include="Util\Util.cpp" />
     <ClCompile Include="YolonaOss.cpp" />

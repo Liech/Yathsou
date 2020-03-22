@@ -30,6 +30,7 @@ namespace YolonaOss {
     std::shared_ptr<TreeI>                          _index;
     std::shared_ptr < DijkstraI<2>>                 _path = nullptr;
     std::shared_ptr< DijkstraMap<2> >               _agentMap;
+    
 
     GL::DrawSpecification*                          _spec;
     std::function<void(double, double)>             _mouseClick;

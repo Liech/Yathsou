@@ -35,12 +35,6 @@ namespace YolonaOss {
       throw std::runtime_error("encoder error " + std::to_string(error) + ": " + lodepng_error_text(error) + "\n");
   }
 
-
-  std::unique_ptr<MultiDimensionalArray<Color, 2>>  createEmpty(size_t width, size_t height) {
-    std::unique_ptr<MultiDimensionalArray<Color, 2>> result = std::make_unique<MultiDimensionalArray<Color, 2>>(width, height);
-    return result;
-  }
-
   std::unique_ptr<MultiDimensionalArray<Color, 2>> ImageIO::readImage(std::string filename) {
     std::vector<unsigned char> image; //the raw pixels
     unsigned int width, height;
