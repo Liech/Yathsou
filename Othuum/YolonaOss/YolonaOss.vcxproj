@@ -203,6 +203,7 @@
     <ClInclude Include="Drawables\Widgets\Button.h" />
     <ClInclude Include="Drawables\Widgets\Widget.h" />
     <ClInclude Include="Examples\BasicTriangle.h" />
+    <ClInclude Include="Examples\RenderTexture.h" />
     <ClInclude Include="Examples\RenderTriangle.h" />
     <ClInclude Include="Examples\RotatingCube.h" />
     <ClInclude Include="Examples\Texture2Tree.h" />
@@ -239,6 +240,7 @@
     <ClInclude Include="Renderer\BoxRenderer.h" />
     <ClInclude Include="Renderer\RectangleRenderer.h" />
     <ClInclude Include="Renderer\TextRenderer.h" />
+    <ClInclude Include="Renderer\TextureRenderer.h" />
     <ClInclude Include="structs\AABB.h" />
     <ClInclude Include="structs\BoundingBox.h" />
     <ClInclude Include="structs\Color.h" />
@@ -265,6 +267,7 @@
     <ClCompile Include="Drawables\Widgets\Button.cpp" />
     <ClCompile Include="Drawables\Widgets\Widget.cpp" />
     <ClCompile Include="Examples\BasicTriangle.cpp" />
+    <ClCompile Include="Examples\RenderTexture.cpp" />
     <ClCompile Include="Examples\RenderTriangle.cpp" />
     <ClCompile Include="Examples\RotatingCube.cpp" />
     <ClCompile Include="Examples\Texture2Tree.cpp" />
@@ -294,6 +297,7 @@
     <ClCompile Include="Renderer\BoxRenderer.cpp" />
     <ClCompile Include="Renderer\RectangleRenderer.cpp" />
     <ClCompile Include="Renderer\TextRenderer.cpp" />
+    <ClCompile Include="Renderer\TextureRenderer.cpp" />
     <ClCompile Include="structs\AABB.cpp" />
     <ClCompile Include="structs\Color.cpp" />
     <ClCompile Include="Util\Geometry.cpp" />

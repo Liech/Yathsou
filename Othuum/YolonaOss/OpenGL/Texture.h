@@ -12,7 +12,8 @@ namespace YolonaOss {
       Texture(std::string name, GLuint tex);
       virtual ~Texture() override;
 
-      void setTextureID(GLuint tex);
+      void   setTextureID(GLuint tex);
+      GLuint getTextureID() { return _texture; }
       void bind() override;
       virtual std::string getType() override { return "sampler2D"; }
 

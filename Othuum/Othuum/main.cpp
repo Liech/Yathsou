@@ -12,6 +12,7 @@
 #include "YolonaOss/structs/Database.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "YolonaOss/Examples/Texture2Tree.h"
+#include "YolonaOss/Examples/RenderTexture.h"
 #include <filesystem>
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include <glm/gtx/intersect.hpp>
@@ -31,6 +32,7 @@ int main() {
   std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
   list->addDrawable(std::make_shared<Background>());
   //list->addDrawable(std::make_shared<DrawCubes>()); 
+  list->addDrawable(std::make_shared<RenderTexture>());
   list->addDrawable(std::make_shared<Texture2Tree>());
   list->addDrawable(std::make_shared<FPS>());
   Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });

@@ -264,6 +264,12 @@
     <ClInclude Include="Navigation\DiscomfortGridMap.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\TextureRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Examples\RenderTexture.h">
+      <Filter>Examples</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -400,6 +406,12 @@
     </ClCompile>
     <ClCompile Include="Navigation\DiscomfortGridMap.cpp">
       <Filter>Source Files\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\TextureRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Examples\RenderTexture.cpp">
+      <Filter>Examples</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
