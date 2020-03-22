@@ -26,7 +26,7 @@ namespace YolonaOss {
 
     static void start();
     static void end();
-    static void drawTexture(GL::Texture texture, glm::mat4 world, glm::vec4 color = glm::vec4(1,1,1,1));
+    static void drawTexture(GL::Texture* texture, glm::mat4 world, glm::vec4 color = glm::vec4(1,1,1,1));
 
   private:
     struct RenderVars {

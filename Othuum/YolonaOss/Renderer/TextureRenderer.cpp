@@ -17,15 +17,16 @@ namespace YolonaOss {
       GL::PositionTextureVertex(glm::vec3(1, 0, 0),glm::vec2(1.0, 1.0)),
       GL::PositionTextureVertex(glm::vec3(1, 1, 0),glm::vec2(1.0, 0.0))
     };
+    makeShader();
   }
 
-  void TextureRenderer::drawTexture(GL::Texture texture, glm::mat4 world, glm::vec4 color) {
+  void TextureRenderer::drawTexture(GL::Texture* texture, glm::mat4 world, glm::vec4 color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
     _vars.color->setValue(color);
     _vars.model->setValue(world);
-    _vars.shownTexture->setTextureID(texture.getTextureID());
+    _vars.shownTexture->setTextureID(texture->getTextureID());
 
     _vars.color->bind();
     _vars.model->bind();
@@ -85,7 +86,9 @@ namespace YolonaOss {
     _vars.shownTexture = std::make_unique<GL::Texture>    ("shownTexture", 0);
     _vars.color        = std::make_unique<GL::UniformVec3>("textureColor"   );
     _vars.model        = std::make_unique<GL::UniformMat4>("model"          );
-
+    
+    std::vector<GL::Uniform*> cameraUniforms = _vars.camera->getUniforms();
+    uniforms.insert(uniforms.end(), cameraUniforms.begin(), cameraUniforms.end());
     uniforms.push_back(_vars.shownTexture.get());
     uniforms.push_back(_vars.model.get());
     uniforms.push_back(_vars.color.get());

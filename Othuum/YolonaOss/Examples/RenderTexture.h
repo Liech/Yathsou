@@ -15,6 +15,10 @@
 //5 camera
 
 namespace YolonaOss {
+  namespace GL
+  {
+    class Texture;
+  }
   class RenderTexture : public GL::Drawable
   {
   public:
@@ -24,18 +28,7 @@ namespace YolonaOss {
     virtual void draw() override;
 
   private:
-    GL::DrawSpecification* _spec;
-    GLuint program;
-
-    std::unique_ptr<GL::UniformVec3>              _light;
-    std::unique_ptr<GL::Camera>                   _camera;
-    std::unique_ptr<GL::IBO>                      _ibo;
-    std::unique_ptr<GL::VBO<GL::PositionColorNormalVertex>> _vbo;
-    std::unique_ptr<GL::VAO<GL::PositionColorNormalVertex>> _vao;
-    std::unique_ptr<GL::ShaderProgram>            _shader;
     int drawCall = 0;
-
-    std::string vertex_shader_source;
-    std::string fragment_shader_source;
+    std::unique_ptr<GL::Texture> _texture;
   };
 }
