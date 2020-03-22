@@ -2,7 +2,7 @@
 
 #include "MultiDimensionalArray.h"
 #include <set>
-#include "../Util/Slicer.h"
+#include "../Util/ImageSubsetUtil.h"
 //NM Tree means N^M Tree
 //I don't know whats the real name is
 //2^3 Tree is formaly known as Octree
@@ -151,7 +151,7 @@ namespace YolonaOss {
     bool  isLeaf() { return _childs == nullptr; }
     Tree* getChild(std::array<size_t, Dimension> pos) { return _childs->getVal(pos); }
     std::set<Tree*> getSide(size_t dimension, NMTreeDirection direction) {
-      auto slicePlane = Slicer::slice<Tree*, Dimension>(_childs, dimension, ((direction == NMTreeDirection::Negative) ? 0 : (ArraySize - 1)));
+      auto slicePlane = ImageSubsetUtil::slice<Tree*, Dimension>(_childs, dimension, ((direction == NMTreeDirection::Negative) ? 0 : (ArraySize - 1)));
       std::set<Tree*> result;
       for (size_t i = 0; i < slicePlane->getSize(); i++)
         result.insert(slicePlane->get_linearVal(i));
