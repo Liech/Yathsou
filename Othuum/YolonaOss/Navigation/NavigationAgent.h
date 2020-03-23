@@ -22,7 +22,7 @@ namespace YolonaOss {
         throw std::runtime_error("No Map Assigned");
       vec dir = _map->getDirectionSuggestion(_position);
       float dist = glm::distance(_target, _position);
-      if (dist < 0.01f)
+      if (dist < 0.01f || glm::length(dir) < 0.01)
         return;
       _position = _position + dir * 0.01f;       
     }
@@ -33,6 +33,10 @@ namespace YolonaOss {
 
     void setTarget(vec position) {
       _target = position;
+    }
+
+    void setPosition(vec position) {
+      _position = position;
     }
 
     vec getPosition() {

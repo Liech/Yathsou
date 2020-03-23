@@ -27,7 +27,7 @@ namespace YolonaOss {
     virtual vec getDirectionSuggestion(const vec currentPosition) override {
       if (!_discomfortMap) 
         return vec();
-      vec scaled = currentPosition * _scale;
+      vec scaled = _scale * currentPosition;
       
       std::array<size_t, Dimension> index;
       for (int i = 0; i < Dimension; i++)
@@ -35,17 +35,17 @@ namespace YolonaOss {
       return getDirectionSuggestion_recurse(index);
     }
   private:
-    vec getDirectionSuggestion_recurse(std::array<size_t, Dimension> position, vec dir = vec(), size_t currentDimension = Dimension) {
-      vec result;
-      for (size_t i = -1; i <= 1; i++) {
+    vec getDirectionSuggestion_recurse(std::array<size_t, Dimension> position, vec dir = vec(), size_t currentDimension = Dimension-1) {
+      vec result = vec(0.0);
+      for (int i = -1; i <= 1; i++) {
         auto newP = position;
         if ((!(newP[currentDimension] == 0 && i == -1)) && (!(newP[currentDimension] == _discomfortMap->getDimension(currentDimension)-1 && i==1)))
           newP[currentDimension] += i;          
         dir[currentDimension] = i;
         if (currentDimension != 0)
-          result += scan(newP,dir, Dimension - 1);
+          result += getDirectionSuggestion_recurse(newP,dir, currentDimension - 1);
         else {          
-          double val = _discomfortMap[newP];
+          float val = _discomfortMap->getVal(newP);
           result += dir * -val;
         }        
       }
@@ -54,7 +54,7 @@ namespace YolonaOss {
 
   private:
     std::shared_ptr<MultiDimensionalArray<double,Dimension>> _discomfortMap = nullptr;
-    double                                                   _scale = 1;
+    float                                                   _scale = 1;
     vec                                                      _target;
   };
 }

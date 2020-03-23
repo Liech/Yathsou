@@ -17,7 +17,7 @@
 
 float scaling = 1;
 namespace YolonaOss {
-
+  
   Texture2Tree::Texture2Tree() :_agent(glm::vec2(3, 3)) {
     _agentMap = std::make_shared<DijkstraMap<2>>();
     _agent.setMap(_agentMap);
@@ -43,10 +43,11 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::makeDiscomfort() {
     std::array<size_t, 2> dim;
-    dim[0] = _map->getDimension(0) * 2;
-    dim[1] = _map->getDimension(1) * 2;
+    dim[0] = _map->getDimension(0) * _disMapScale;
+    dim[1] = _map->getDimension(1) * _disMapScale;
     double maxDistance = glm::distance(glm::vec2(0, 0), glm::vec2(dim[0] / 2, dim[1] / 2));
-    auto scaled = ImageUtil::scaleUp<double, 2>(_map->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);    
+    auto scaled = ImageUtil::scaleUp<double, 2>(_map->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);
+    scaled->apply([](size_t pos, double& val) {val = 1.0 - val; });
     _discomfortMap = std::shared_ptr<MultiDimensionalArray<double,2>>(std::move(scaled));
 
     //_discomfortMap = std::make_shared<MultiDimensionalArray<double, 2>>(dim);
@@ -54,7 +55,9 @@ namespace YolonaOss {
     //  double distance = glm::distance(glm::vec2(pos[0], pos[1]), glm::vec2(dim[0] / 2, dim[1] / 2));
     //  val = 1.0 - distance / maxDistance;
     //});
-    
+    _agentDisMap = std::make_shared<DiscomfortGridMap<2>>((double)_disMapScale);
+    _agentDisMap->setMap(_discomfortMap);
+    _agent.setMap(_agentDisMap);
   }
 
   void YolonaOss::Texture2Tree::renderDiscomfort() {
@@ -66,7 +69,7 @@ namespace YolonaOss {
     world = glm::translate(world, -glm::vec3(0, _map->getDimension(1), -0.3));
     world = glm::scale(world, glm::vec3(_map->getDimension(0), _map->getDimension(1), 1));
 
-    TextureRenderer::drawTexture(grayscale.get(), world,glm::vec4(1,0,1,0.4));
+    TextureRenderer::drawTexture(grayscale.get(), world,glm::vec4(1,1,1,0.2));
     TextureRenderer::end();
   }
 
@@ -83,8 +86,10 @@ namespace YolonaOss {
       
       _agentMap->setDijkstra(_path);
       _agentMap->setTarget(target);
-      _agent.setTarget(target);
-
+      ///_agent.setTarget(target);
+      
+      _agent.setTarget(glm::vec2(0,0));
+      _agent.setPosition(target);
     }
   }
 
