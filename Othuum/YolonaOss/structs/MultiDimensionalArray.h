@@ -64,6 +64,8 @@ namespace YolonaOss {
     MultiDimensionalArray(const  MultiDimensionalArray<Type, Dimension>& copy) {
       _size = copy._size;
       _data.resize(getSize());
+      for(size_t i = 0;i < Dimension;i++)
+        _dimension[i] = copy._dimension[i];
       std::memcpy(_data.data(), copy._data.data(), (sizeof _data) * getSize());
       std::memcpy(&_dimension, &copy._dimension, (sizeof _dimension) * Dimension);
       assert(getSize() != 0);

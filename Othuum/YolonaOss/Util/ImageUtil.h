@@ -37,15 +37,18 @@ namespace YolonaOss {
         }
         val = NLinearInterpolateRecursive(input, inputIndex, inputPerc);
       });
+      return result;
     }
   private:
     template<typename SCALAR, size_t Dimension>
-    static SCALAR NLinearInterpolateRecursive(MultiDimensionalArray<SCALAR, Dimension>* input, std::array<size_t, Dimension> position, std::array<double, Dimension> perc, size_t currentDimension = Dimension) {
-      if (Dimension == 0)
-        return input->get_value(position);
+    static SCALAR NLinearInterpolateRecursive(MultiDimensionalArray<SCALAR, Dimension>* input, std::array<size_t, Dimension> position, std::array<double, Dimension> perc, size_t currentDimension = Dimension - 1) {
+      if (currentDimension == 0)
+        return input->getVal(position);
       else {
         std::array<size_t, Dimension> nextPos = position;
         nextPos[currentDimension]++;
+        if (nextPos[currentDimension] >= input->getDimension(currentDimension))
+          nextPos[currentDimension] = input->getDimension(currentDimension)-1;
         return NLinearInterpolateRecursive(input, position, perc, currentDimension - 1) * perc[currentDimension] + NLinearInterpolateRecursive(input,nextPos,perc,currentDimension-1) * (1.0-perc[currentDimension]);
       }
     }

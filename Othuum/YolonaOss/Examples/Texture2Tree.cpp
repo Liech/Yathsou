@@ -39,18 +39,21 @@ namespace YolonaOss {
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); };
     Database < std::function<void(double, double)>*>::add(&_mouseClick , { "MouseClick" });
-  } 
+  }
 
   void YolonaOss::Texture2Tree::makeDiscomfort() {
     std::array<size_t, 2> dim;
-    dim[0] = _map->getDimension(0) * 4;
-    dim[1] = _map->getDimension(1) * 4;
+    dim[0] = _map->getDimension(0) * 2;
+    dim[1] = _map->getDimension(1) * 2;
     double maxDistance = glm::distance(glm::vec2(0, 0), glm::vec2(dim[0] / 2, dim[1] / 2));
-    _discomfortMap = std::make_shared<MultiDimensionalArray<double, 2>>(dim);
-    _discomfortMap->apply([dim,maxDistance](std::array<size_t, 2> pos, double& val) {
-      double distance = glm::distance(glm::vec2(pos[0], pos[1]), glm::vec2(dim[0] / 2, dim[1] / 2));
-      val = 1.0 - distance / maxDistance;
-    });
+    auto scaled = ImageUtil::scaleUp<double, 2>(_map->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);    
+    _discomfortMap = std::shared_ptr<MultiDimensionalArray<double,2>>(std::move(scaled));
+
+    //_discomfortMap = std::make_shared<MultiDimensionalArray<double, 2>>(dim);
+    //_discomfortMap->apply([dim,maxDistance](std::array<size_t, 2> pos, double& val) {
+    //  double distance = glm::distance(glm::vec2(pos[0], pos[1]), glm::vec2(dim[0] / 2, dim[1] / 2));
+    //  val = 1.0 - distance / maxDistance;
+    //});
     
   }
 
