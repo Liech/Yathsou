@@ -212,6 +212,7 @@
     <ClInclude Include="Navigation\DijkstraMap.h" />
     <ClInclude Include="Navigation\DirectDistanceMap.h" />
     <ClInclude Include="Navigation\DiscomfortGridMap.h" />
+    <ClInclude Include="Navigation\MapGroup.h" />
     <ClInclude Include="Navigation\Navigation.h" />
     <ClInclude Include="Navigation\NavigationAgent.h" />
     <ClInclude Include="Navigation\NavigationMap.h" />
@@ -278,6 +279,7 @@
     <ClCompile Include="Navigation\DijkstraMap.cpp" />
     <ClCompile Include="Navigation\DirectDistanceMap.cpp" />
     <ClCompile Include="Navigation\DiscomfortGridMap.cpp" />
+    <ClCompile Include="Navigation\MapGroup.cpp" />
     <ClCompile Include="Navigation\Navigation.cpp" />
     <ClCompile Include="Navigation\NavigationAgent.cpp" />
     <ClCompile Include="Navigation\NavigationMap.cpp" />

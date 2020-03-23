@@ -69,7 +69,7 @@ namespace YolonaOss {
     world = glm::translate(world, -glm::vec3(0, _map->getDimension(1), -0.3));
     world = glm::scale(world, glm::vec3(_map->getDimension(0), _map->getDimension(1), 1));
 
-    TextureRenderer::drawTexture(grayscale.get(), world,glm::vec4(1,1,1,0.2));
+    TextureRenderer::drawTexture(grayscale.get(), world,glm::vec4(1,1,1,0.11));
     TextureRenderer::end();
   }
 

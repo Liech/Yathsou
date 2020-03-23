@@ -273,6 +273,9 @@
     <ClInclude Include="Util\ImageSubsetUtil.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
+    <ClInclude Include="Navigation\MapGroup.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -418,6 +421,9 @@
     </ClCompile>
     <ClCompile Include="Util\ImageSubsetUtil.cpp">
       <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation\MapGroup.cpp">
+      <Filter>Source Files\Navigation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
