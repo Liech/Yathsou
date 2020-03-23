@@ -7,6 +7,33 @@
 namespace YolonaOss {
   class ImageSubsetUtil {
   public:
+
+
+    //func is function that converts distance to actual value. E.g. for color interpolation
+    //example for adding circle on doublefield
+    //[](double distance, const Type old) {return old + distance; }
+    template<typename Type, size_t Dimension>
+    static void drawCircle(MultiDimensionalArray<Type, Dimension>* input, std::array<double, Dimension> center, double radius, std::function<Type(double distance, Type val)> func) {
+      std::array<size_t, Dimension> start;
+      std::array<size_t, Dimension> size;
+      
+      for (size_t i = 0; i < Dimension; i++) {
+        start[i] = std::floor(center[i] - radius);
+        size[i] = std::ceil(radius * 2);
+      }
+      input->applySubset(start,size, [center, radius,func](std::array<size_t,Dimension> position, Type& value) {
+        double distance = 0;
+        for (size_t i = 0; i < Dimension; i++)
+          distance += ((double)center[i] - (double)position[i]) * ((double)center[i] - (double)position[i]);
+        distance = std::sqrt(distance);
+        if (distance > radius)
+          return;
+        distance /= radius;
+        Type v = value;
+        value = func(distance, v);
+      });
+    }
+
     template <typename Type, size_t Dimension>
     static std::unique_ptr<MultiDimensionalArray<Type, Dimension>> sub(MultiDimensionalArray<Type, Dimension>* input, std::array<size_t, Dimension> start, std::array<size_t, Dimension> size) {
       std::unique_ptr<MultiDimensionalArray<Type, Dimension>> result = std::make_unique<MultiDimensionalArray<Type, Dimension>>(size);

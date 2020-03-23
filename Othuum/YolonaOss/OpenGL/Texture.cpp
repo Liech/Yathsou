@@ -21,9 +21,7 @@ namespace YolonaOss {
     }
 
     void Texture::bind() {
-      //glActiveTexture(GL_TEXTURE0 + _texture);
       glBindTexture(GL_TEXTURE_2D, _texture);
-      //glBindSampler(getLocation(), _texture);
     }
   }
 }

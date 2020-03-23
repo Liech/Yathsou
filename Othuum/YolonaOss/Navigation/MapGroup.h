@@ -18,20 +18,20 @@ namespace YolonaOss {
     virtual vec getDirectionSuggestion(const vec currentPosition) override {
       vec dir(0.0);
       for (size_t i = 0; i < _maps.size(); i++)
-        dir += _maps[i]->getDirectionSuggestion(currentPosition) * _influence;
+        dir += _influence[i] * _maps[i]->getDirectionSuggestion(currentPosition);
       if (std::isnan(dir[0]))
         return vec();
       return dir;
     }
 
-    void addMap(std::shared_ptr<NavigationMap<Dimension>> map, double influence) {
+    void addMap(std::shared_ptr<NavigationMap<Dimension>> map, float influence) {
       _influence.push_back(influence);
       _maps.push_back(map);
     }
 
   private:
-    vec                                                     _target   ;
-    std::vector < std::shared_ptr<NavigationMap<Dimension>> _maps     ;
-    std::vector < double >                                  _influence;
+    vec                                                      _target   ;
+    std::vector < std::shared_ptr<NavigationMap<Dimension>>> _maps     ;
+    std::vector < float >                                   _influence;
   };
 }

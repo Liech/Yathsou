@@ -11,6 +11,7 @@
 namespace YolonaOss {
   template<size_t Dimension> class DijkstraMap;
   template<size_t Dimension> class DiscomfortGridMap;
+  template<size_t Dimension> class MapGroup;
   namespace GL {
     class DrawSpecification;
   }
@@ -31,6 +32,7 @@ namespace YolonaOss {
     std::shared_ptr < DijkstraI<2>>                   _path = nullptr;
     std::shared_ptr< DijkstraMap<2> >                 _agentMap;
     std::shared_ptr< DiscomfortGridMap<2> >           _agentDisMap;
+    std::shared_ptr< MapGroup<2> >                    _mapGroup;
 
 
     std::shared_ptr<MultiDimensionalArray<double, 2>> _discomfortMap;    
@@ -39,7 +41,7 @@ namespace YolonaOss {
     std::function<void(double, double)>             _mouseClick;
     NavigationAgent<2>                              _agent;
 
-    const int _disMapScale = 4;
+    const int _disMapScale = 10;
 
     void renderDiscomfort();
     void makeDiscomfort();

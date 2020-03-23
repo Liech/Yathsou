@@ -59,6 +59,8 @@ namespace YolonaOss {
       std::unique_ptr<MultiDimensionalArray<Color, Dimension>> result = std::make_unique<MultiDimensionalArray<Color, Dimension>>(input->getDimensionVector());
       result->apply([Min,Max,input](size_t pos, Color& val) {
         double v = (input->get_linearVal(pos) - Min) / (Max - Min);
+        if (v < 0) v = 0;
+        if (v > 1) v = 1;
         val = Color(std::numeric_limits<unsigned char>::max() * v, std::numeric_limits<unsigned char>::max() * v, std::numeric_limits<unsigned char>::max() * v);
       });
       return result;

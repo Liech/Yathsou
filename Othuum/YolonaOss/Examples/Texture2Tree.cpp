@@ -9,6 +9,7 @@
 #include "../Util/Geometry.h"
 #include "Navigation/DijkstraMap.h"
 #include "Navigation/DiscomfortGridMap.h"
+#include "Navigation/MapGroup.h"
 #include "Util/Util.h"
 #include "Renderer/TextureRenderer.h"
 #include "Util/ImageUtil.h"
@@ -19,8 +20,10 @@ float scaling = 1;
 namespace YolonaOss {
   
   Texture2Tree::Texture2Tree() :_agent(glm::vec2(3, 3)) {
+    _mapGroup = std::make_shared<MapGroup<2>>();
     _agentMap = std::make_shared<DijkstraMap<2>>();
-    _agent.setMap(_agentMap);
+    _mapGroup->addMap(_agentMap,0.8);
+    _agent.setMap(_mapGroup);
   }
 
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec)
@@ -49,15 +52,13 @@ namespace YolonaOss {
     auto scaled = ImageUtil::scaleUp<double, 2>(_map->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);
     scaled->apply([](size_t pos, double& val) {val = 1.0 - val; });
     _discomfortMap = std::shared_ptr<MultiDimensionalArray<double,2>>(std::move(scaled));
+    ImageSubsetUtil::drawCircle<double,2>(_discomfortMap.get(), { 40,40 }, 20.0, [](double distance, double val) 
+      {return val + (1-distance) * 0.1; });
 
-    //_discomfortMap = std::make_shared<MultiDimensionalArray<double, 2>>(dim);
-    //_discomfortMap->apply([dim,maxDistance](std::array<size_t, 2> pos, double& val) {
-    //  double distance = glm::distance(glm::vec2(pos[0], pos[1]), glm::vec2(dim[0] / 2, dim[1] / 2));
-    //  val = 1.0 - distance / maxDistance;
-    //});
+
     _agentDisMap = std::make_shared<DiscomfortGridMap<2>>((double)_disMapScale);
     _agentDisMap->setMap(_discomfortMap);
-    _agent.setMap(_agentDisMap);
+    _mapGroup->addMap(_agentDisMap, 0.2);
   }
 
   void YolonaOss::Texture2Tree::renderDiscomfort() {
@@ -85,11 +86,10 @@ namespace YolonaOss {
       _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(target, _tree.get(),_index, [](Tree* node) {return 1; }));
       
       _agentMap->setDijkstra(_path);
-      _agentMap->setTarget(target);
-      ///_agent.setTarget(target);
+      _mapGroup->setTarget(target);
       
-      _agent.setTarget(glm::vec2(0,0));
-      _agent.setPosition(target);
+      _agent.setTarget(target);
+      //_agent.setPosition(target);
     }
   }
 
@@ -153,6 +153,6 @@ namespace YolonaOss {
     BoxRenderer::drawDot(metaPos, glm::vec3(0.1f), glm::vec4(1, 0, 1, 1));
     BoxRenderer::drawDot(glm::vec3(_agent.getPosition().x,0.1f,_agent.getPosition().y), glm::vec3(0.1f), glm::vec4(1, 1, 0, 1));
     BoxRenderer::end();
-    renderDiscomfort();
+    //renderDiscomfort();
   }
 }

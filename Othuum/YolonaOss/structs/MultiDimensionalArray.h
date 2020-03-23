@@ -230,6 +230,51 @@ namespace YolonaOss {
       }
     }
 
+    //on subset
+    void applySubset(std::array<size_t, Dimension> start, std::array<size_t, Dimension> size, std::function<void(std::array<size_t, Dimension>, Type&)> func) {
+      for (size_t i = 0; i < Dimension; i++)
+        if (start[i] + size[i] >= getDimension(i)) 
+          size[i] = getDimension(i) - start[i] - 1;
+
+      size_t xSize;
+      size_t startDimension;
+      if constexpr (Layout == Reversed)
+        startDimension = Dimension - 1;
+      else 
+        startDimension = 0;
+      xSize = size[startDimension];
+
+      #pragma omp parallel for
+      for (int64_t x = 0; x < xSize; x++) {
+        std::array<size_t, Dimension> currentPosition = start;
+        currentPosition[startDimension] = start[startDimension] + x;
+        apply_recursive(start, size, func, currentPosition, startDimension);
+      }
+    }
+    private:
+    void apply_recursive(const std::array<size_t, Dimension> start, const std::array<size_t, Dimension> size, std::function<void(std::array<size_t, Dimension>, Type&)> func, std::array<size_t, Dimension> currentPosition, size_t currentDimension) {
+      if ((Layout == Reversed && currentDimension == 0) || (Layout == Normal && currentDimension == Dimension - 1)) {
+        for (size_t i = 0; i < size[currentDimension]; i++) {
+          std::array<size_t, Dimension> pos = currentPosition;
+          pos[currentDimension] += i;
+          size_t index = transformA(pos);
+          func(pos, get_linearRef(index));
+        }
+      }
+      else
+      {
+        for (size_t i = 0; i < size[currentDimension]; i++) {
+          std::array<size_t, Dimension> pos = currentPosition;
+          pos[currentDimension] += i;
+          if constexpr (Layout == Reversed)
+            apply_recursive(start, size, func, pos, currentDimension - 1);
+          else
+            apply_recursive(start, size, func, pos, currentDimension + 1);
+        }
+      }
+    }
+    public:
+
     Type reduce(Type startVal, std::function<Type(const Type, const Type)> binOp) {
       std::reduce(std::execution::par, _data.begin(), _data.end(), startVal,binOp);
     }

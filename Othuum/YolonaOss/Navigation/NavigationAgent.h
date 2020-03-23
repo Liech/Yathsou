@@ -24,7 +24,11 @@ namespace YolonaOss {
       float dist = glm::distance(_target, _position);
       if (dist < 0.01f || glm::length(dir) < 0.01)
         return;
-      _position = _position + dir * 0.01f;       
+      dir = glm::normalize(dir);
+      vec movement = dir * 0.1f;
+      if (glm::length(movement) > dist)
+        movement = glm::normalize(movement) * dist;
+      _position = _position + movement;       
     }
 
     void setMap(std::shared_ptr<NavigationMap<Dimension>> map) {
