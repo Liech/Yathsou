@@ -20,6 +20,11 @@ namespace YolonaOss {
     makeShader();
   }
 
+  void TextureRenderer::drawTexture(MultiDimensionalArray<Color, 2> * texture, glm::mat4 world, glm::vec4 color) {
+    GL::Texture t("temporaryTextureRendererTexture", texture);
+    drawTexture(&t, world, color);
+  }
+
   void TextureRenderer::drawTexture(GL::Texture* texture, glm::mat4 world, glm::vec4 color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
@@ -41,6 +46,7 @@ namespace YolonaOss {
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
     _inRenderProcess = true;
     _vars.camera->fromCamera(_vars.spec->getCam().get());
+    glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -78,13 +84,14 @@ namespace YolonaOss {
      void main()
      {    
          vec4 sampled = texture(shownTexture, TexCoords);
-         color = vec4(textureColor.r * sampled.r,textureColor.g * sampled.g,textureColor.b * sampled.b, 1.0 * sampled.a);
+         color = vec4(textureColor.r * sampled.r,textureColor.g * sampled.g,textureColor.b * sampled.b, textureColor.a *  sampled.a);
      }  
     )";
 
     std::vector<GL::Uniform*> uniforms;
     _vars.shownTexture = std::make_unique<GL::Texture>    ("shownTexture", 0);
-    _vars.color        = std::make_unique<GL::UniformVec3>("textureColor"   );
+    _vars.shownTexture->setBindable(false);
+    _vars.color        = std::make_unique<GL::UniformVec4>("textureColor"   );
     _vars.model        = std::make_unique<GL::UniformMat4>("model"          );
     
     std::vector<GL::Uniform*> cameraUniforms = _vars.camera->getUniforms();

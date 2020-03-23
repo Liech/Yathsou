@@ -8,7 +8,12 @@
 #include "../structs/Database.h"
 #include "../Util/Geometry.h"
 #include "Navigation/DijkstraMap.h"
+#include "Navigation/DiscomfortGridMap.h"
 #include "Util/Util.h"
+#include "Renderer/TextureRenderer.h"
+#include "Util/ImageUtil.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/ext/scalar_constants.hpp>
 
 float scaling = 1;
 namespace YolonaOss {
@@ -21,11 +26,12 @@ namespace YolonaOss {
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec)
   {
     auto map = ImageIO::readImage("YolonaOssData/textures/TinyMap.png");
-    _map   = map->map<bool>([](Color const& c) 
+    _map   = map->map<bool>([](Color const& c)
       { return (bool)(c.getRed() < 125); });
     _tree  = std::make_shared<NMTree<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max, false> >(_map.get());
     _index = std::make_shared<NMTreeNeighbourIndex<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max, false>>(_tree.get());
     _index->init();
+    makeDiscomfort();
 
 
     _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(glm::vec2(12,12), _tree.get(), _index, [](Tree * node) {return 1; }));
@@ -33,8 +39,33 @@ namespace YolonaOss {
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); };
     Database < std::function<void(double, double)>*>::add(&_mouseClick , { "MouseClick" });
-
   } 
+
+  void YolonaOss::Texture2Tree::makeDiscomfort() {
+    std::array<size_t, 2> dim;
+    dim[0] = _map->getDimension(0) * 4;
+    dim[1] = _map->getDimension(1) * 4;
+    double maxDistance = glm::distance(glm::vec2(0, 0), glm::vec2(dim[0] / 2, dim[1] / 2));
+    _discomfortMap = std::make_shared<MultiDimensionalArray<double, 2>>(dim);
+    _discomfortMap->apply([dim,maxDistance](std::array<size_t, 2> pos, double& val) {
+      double distance = glm::distance(glm::vec2(pos[0], pos[1]), glm::vec2(dim[0] / 2, dim[1] / 2));
+      val = 1.0 - distance / maxDistance;
+    });
+    
+  }
+
+  void YolonaOss::Texture2Tree::renderDiscomfort() {
+    auto grayscale = ImageUtil::toGrayscale<double, 2>(_discomfortMap.get(), 0, 1);
+    //grayscale->apply([](size_t t, Color& v) {v = Color(v.r(), v.g(), v.b(),v.b() / 8); });
+    TextureRenderer::start();
+    glm::mat4 world(1.0);
+    world = glm::rotate(world, -glm::pi<float>() / 2.0f, glm::vec3(1, 0, 0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
+    world = glm::translate(world, -glm::vec3(0, _map->getDimension(1), -0.3));
+    world = glm::scale(world, glm::vec3(_map->getDimension(0), _map->getDimension(1), 1));
+
+    TextureRenderer::drawTexture(grayscale.get(), world,glm::vec4(1,0,1,0.4));
+    TextureRenderer::end();
+  }
 
   void YolonaOss::Texture2Tree::mouseClick(double x, double y) {
     glm::vec3 camPos = _spec->getCam()->getPosition();
@@ -114,5 +145,6 @@ namespace YolonaOss {
     BoxRenderer::drawDot(metaPos, glm::vec3(0.1f), glm::vec4(1, 0, 1, 1));
     BoxRenderer::drawDot(glm::vec3(_agent.getPosition().x,0.1f,_agent.getPosition().y), glm::vec3(0.1f), glm::vec4(1, 1, 0, 1));
     BoxRenderer::end();
+    renderDiscomfort();
   }
 }

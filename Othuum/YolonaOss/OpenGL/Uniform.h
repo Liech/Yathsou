@@ -15,13 +15,16 @@ namespace YolonaOss {
       void setLocation(int location) { assert(_location == -1); _location = location; };
       int  getLocation() { return _location; };
       bool isActive() { return _location == -1; }
+      bool isBindable() { return _bindable; }
+      void setBindable(bool val) { _bindable = val; }
       virtual void bind() = 0;
       virtual std::string toGLSL();
       virtual std::string getType() = 0;
       virtual bool isBuffer() { return false; }
     private:
       std::string _name;
-      int _location = -1;
+      int         _location = -1;
+      bool        _bindable = true;
     };
 
     class UniformFloat : public Uniform {

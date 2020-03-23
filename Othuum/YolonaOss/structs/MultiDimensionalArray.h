@@ -171,7 +171,7 @@ namespace YolonaOss {
     std::vector<size_t> getDimensionVector() const {
       std::vector<size_t> result;
       for (int i = 0; i < Dimension; i++)
-        result[i] = getDimension(i);
+        result.push_back(getDimension(i));
       return result;
     }
 

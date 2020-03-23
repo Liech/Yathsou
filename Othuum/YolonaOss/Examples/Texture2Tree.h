@@ -25,17 +25,21 @@ namespace YolonaOss {
     virtual void draw() override;
 
   private:
-    std::shared_ptr<MultiDimensionalArray<bool, 2>> _map;
-    std::shared_ptr<Tree>                           _tree;
-    std::shared_ptr<TreeI>                          _index;
-    std::shared_ptr < DijkstraI<2>>                 _path = nullptr;
-    std::shared_ptr< DijkstraMap<2> >               _agentMap;
-    
+    std::shared_ptr<MultiDimensionalArray<bool, 2>>   _map;
+    std::shared_ptr<Tree>                             _tree;
+    std::shared_ptr<TreeI>                            _index;
+    std::shared_ptr < DijkstraI<2>>                   _path = nullptr;
+    std::shared_ptr< DijkstraMap<2> >                 _agentMap;
+
+
+    std::shared_ptr<MultiDimensionalArray<double, 2>> _discomfortMap;    
 
     GL::DrawSpecification*                          _spec;
     std::function<void(double, double)>             _mouseClick;
     NavigationAgent<2>                              _agent;
 
+    void renderDiscomfort();
+    void makeDiscomfort();
     void mouseClick(double x, double y);
     glm::vec3 metaPos = glm::vec3(0, 0, 0);
   };

@@ -26,7 +26,8 @@ namespace YolonaOss {
 
     static void start();
     static void end();
-    static void drawTexture(GL::Texture* texture, glm::mat4 world, glm::vec4 color = glm::vec4(1,1,1,1));
+    static void drawTexture(GL::Texture* texture, glm::mat4 world, glm::vec4 color = glm::vec4(1, 1, 1, 1));
+    static void drawTexture(MultiDimensionalArray<Color,2>* texture, glm::mat4 world, glm::vec4 color = glm::vec4(1, 1, 1, 1));
 
   private:
     struct RenderVars {
@@ -35,7 +36,7 @@ namespace YolonaOss {
       std::unique_ptr<GL::ShaderProgram>              shader;
       GL::DrawSpecification*                          spec = nullptr;
       std::unique_ptr<GL::UniformMat4>                model;
-      std::unique_ptr<GL::UniformVec3>                color;
+      std::unique_ptr<GL::UniformVec4>                color;
       std::unique_ptr<GL::Texture    >                shownTexture;
       std::unique_ptr<GL::Camera>                     camera;
       std::vector<GL::PositionTextureVertex>          vertices;

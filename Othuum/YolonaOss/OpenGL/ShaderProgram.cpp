@@ -111,7 +111,8 @@ namespace YolonaOss {
   void ShaderProgram::bind() {
     glUseProgram(_program);
     for (int i = 0; i < _uniform.size(); i++)
-      if (_uniformIsActive[i]) _uniform[i]->bind();
+      if (_uniformIsActive[i] && _uniform[i]->isBindable()) 
+        _uniform[i]->bind();
   }
 
   ShaderProgram::~ShaderProgram()
