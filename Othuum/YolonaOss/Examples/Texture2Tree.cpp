@@ -52,9 +52,9 @@ namespace YolonaOss {
     auto scaled = ImageUtil::scaleUp<double, 2>(_map->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);
     scaled->apply([](size_t pos, double& val) {val = 1.0 - val; });
     _discomfortMap = std::shared_ptr<MultiDimensionalArray<double,2>>(std::move(scaled));
-    ImageSubsetUtil::drawCircle<double,2>(_discomfortMap.get(), { 40,40 }, 20.0, [](double distance, double val) 
-      {return val + (1-distance) * 0.1; });
-
+    //ImageSubsetUtil::drawCircle<double,2>(_discomfortMap.get(), { 40,40 }, 20.0, [](double distance, double val) {return val + (1-distance) * 0.1; });
+    double radius = 20;
+    ImageSubsetUtil::drawCapsule<double, 2>(_discomfortMap.get(), { 40.0,40.0 }, {120,70}, radius, [radius](double distance, double val) {return val + (1.0-( (distance) / radius))*0.01; });
 
     _agentDisMap = std::make_shared<DiscomfortGridMap<2>>((double)_disMapScale);
     _agentDisMap->setMap(_discomfortMap);
@@ -153,6 +153,6 @@ namespace YolonaOss {
     BoxRenderer::drawDot(metaPos, glm::vec3(0.1f), glm::vec4(1, 0, 1, 1));
     BoxRenderer::drawDot(glm::vec3(_agent.getPosition().x,0.1f,_agent.getPosition().y), glm::vec3(0.1f), glm::vec4(1, 1, 0, 1));
     BoxRenderer::end();
-    //renderDiscomfort();
+    renderDiscomfort();
   }
 }

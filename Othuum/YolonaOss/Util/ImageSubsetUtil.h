@@ -8,6 +8,78 @@ namespace YolonaOss {
   class ImageSubsetUtil {
   public:
 
+    template<typename Type, size_t Dimension>
+    static void drawCapsule(MultiDimensionalArray<Type, Dimension>* input, std::array<double, Dimension> start, std::array<double, Dimension> end, double radius, std::function<Type(double distance, Type val)> func) {
+      std::array<size_t, Dimension> min;
+      std::array<size_t, Dimension> size;
+      for (size_t currentDimension = 0; currentDimension < Dimension; currentDimension++) {
+        size_t minD = std::min(start[currentDimension], end[currentDimension]);
+        size_t maxD = std::max(start[currentDimension], end[currentDimension]);
+        if (radius > minD)
+          minD = 0;
+        else
+          minD -= std::ceil(radius);
+        maxD += std::ceil(radius);
+        if (radius + maxD >= input->getDimension(currentDimension))
+          maxD = input->getDimension(currentDimension) - 1;
+        min[currentDimension] = minD;
+        size[currentDimension] = maxD-minD;
+      }
+
+      input->applySubset(min, size, [start, end, radius, func](std::array<size_t, Dimension> position, Type& value) {
+        std::array<double, Dimension> dPos;
+        for (size_t i = 0; i < Dimension; i++) dPos[i] = position[i];
+        double distance = distancePoint2LineSegment(dPos,start,end);
+        if (distance > radius)
+          return;
+        Type v = value;
+        value = func(distance, v);
+      });
+    }
+  private:
+    template<size_t Dimension>
+    static double distancePoint2LineSegment(std::array<double,Dimension> p, std::array<double,Dimension> a, std::array<double, Dimension> b) {
+      //https://www.randygaul.net/2014/07/23/distance-point-to-line-segment/
+      typedef std::array<double, Dimension> vec;
+      auto Subtract = [](vec A, vec B) {
+        vec result = A;
+        for (size_t i = 0; i < Dimension; i++)
+          result[i] -= B[i];
+        return result;
+      };
+      auto Multiply = [](vec A, double B) {
+        vec result = A;
+        for (size_t i = 0; i < Dimension; i++)
+          result[i] *= B;
+        return result;
+      };
+      auto Dot = [](vec A, vec B) {
+        double result = 0;
+        for (size_t i = 0; i < Dimension; i++)
+          result += A[i] * B[i];
+        return result;
+      };
+
+      vec n = Subtract(b,a);
+      vec pa = Subtract(a, p);
+      double c = Dot(n, pa);
+      // Closest point is a
+      if (c > 0.0f)
+        return Dot(pa, pa);
+      vec bp = Subtract(p,b);
+
+      // Closest point is b
+      if (Dot(n, bp) > 0.0f)
+        return Dot(bp, bp);
+
+      // Closest point is between a and b
+      vec m = Multiply(n, (c / Dot(n, n)));
+      vec e = Subtract(pa,m);
+
+      return Dot(e, e);
+    }
+
+  public:
 
     //func is function that converts distance to actual value. E.g. for color interpolation
     //example for adding circle on doublefield
@@ -28,7 +100,6 @@ namespace YolonaOss {
         distance = std::sqrt(distance);
         if (distance > radius)
           return;
-        distance /= radius;
         Type v = value;
         value = func(distance, v);
       });
