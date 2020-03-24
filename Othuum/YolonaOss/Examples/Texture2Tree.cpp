@@ -8,7 +8,7 @@
 #include "../structs/Database.h"
 #include "../Util/Geometry.h"
 #include "Navigation/DijkstraMap.h"
-#include "Navigation/DiscomfortGridMap.h"
+#include "Navigation/GradientGridMap.h"
 #include "Navigation/MapGroup.h"
 #include "Util/Util.h"
 #include "Renderer/TextureRenderer.h"
@@ -56,7 +56,7 @@ namespace YolonaOss {
     double radius = 20;
     ImageSubsetUtil::drawCapsule<double, 2>(_discomfortMap.get(), { 40.0,40.0 }, {120,70}, radius, [radius](double distance, double val) {return val + (1.0-( (distance) / radius))*0.01; });
 
-    _agentDisMap = std::make_shared<DiscomfortGridMap<2>>((double)_disMapScale);
+    _agentDisMap = std::make_shared<GradientGridMap<2>>((double)_disMapScale);
     _agentDisMap->setMap(_discomfortMap);
     _mapGroup->addMap(_agentDisMap, 0.2);
   }
@@ -153,6 +153,6 @@ namespace YolonaOss {
     BoxRenderer::drawDot(metaPos, glm::vec3(0.1f), glm::vec4(1, 0, 1, 1));
     BoxRenderer::drawDot(glm::vec3(_agent.getPosition().x,0.1f,_agent.getPosition().y), glm::vec3(0.1f), glm::vec4(1, 1, 0, 1));
     BoxRenderer::end();
-    renderDiscomfort();
+    //renderDiscomfort();
   }
 }

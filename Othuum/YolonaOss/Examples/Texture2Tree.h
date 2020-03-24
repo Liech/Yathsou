@@ -10,7 +10,7 @@
 
 namespace YolonaOss {
   template<size_t Dimension> class DijkstraMap;
-  template<size_t Dimension> class DiscomfortGridMap;
+  template<size_t Dimension> class GradientGridMap;
   template<size_t Dimension> class MapGroup;
   namespace GL {
     class DrawSpecification;
@@ -26,13 +26,13 @@ namespace YolonaOss {
     virtual void draw() override;
 
   private:
-    std::shared_ptr<MultiDimensionalArray<bool, 2>>   _map;
-    std::shared_ptr<Tree>                             _tree;
-    std::shared_ptr<TreeI>                            _index;
+    std::shared_ptr<MultiDimensionalArray<bool, 2>>   _map           ;
+    std::shared_ptr<Tree>                             _tree          ;
+    std::shared_ptr<TreeI>                            _index         ;
     std::shared_ptr < DijkstraI<2>>                   _path = nullptr;
-    std::shared_ptr< DijkstraMap<2> >                 _agentMap;
-    std::shared_ptr< DiscomfortGridMap<2> >           _agentDisMap;
-    std::shared_ptr< MapGroup<2> >                    _mapGroup;
+    std::shared_ptr< DijkstraMap<2> >                 _agentMap      ;
+    std::shared_ptr< GradientGridMap<2> >             _agentDisMap   ;
+    std::shared_ptr< MapGroup<2> >                    _mapGroup      ;
 
 
     std::shared_ptr<MultiDimensionalArray<double, 2>> _discomfortMap;    

@@ -258,9 +258,6 @@
     <ClInclude Include="structs\NMTreeDijkstra.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
-    <ClInclude Include="Navigation\DiscomfortGridMap.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\TextureRenderer.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
@@ -274,6 +271,12 @@
       <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="Navigation\MapGroup.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\GradientGridMap.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\DiscomfortArea.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
   </ItemGroup>
@@ -407,9 +410,6 @@
     <ClCompile Include="Util\Util.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Navigation\DiscomfortGridMap.cpp">
-      <Filter>Source Files\Navigation</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\TextureRenderer.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
@@ -423,6 +423,9 @@
       <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="Navigation\MapGroup.cpp">
+      <Filter>Source Files\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Navigation\GradientGridMap.cpp">
       <Filter>Source Files\Navigation</Filter>
     </ClCompile>
   </ItemGroup>

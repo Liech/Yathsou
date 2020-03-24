@@ -8,10 +8,10 @@
 
 namespace YolonaOss {
   template <size_t Dimension>
-  class DiscomfortGridMap :public NavigationMap<Dimension> {
-    using self = typedef DiscomfortGridMap<Dimension>;
+  class GradientGridMap :public NavigationMap<Dimension> {
+    using self = typedef GradientGridMap<Dimension>;
   public:
-    DiscomfortGridMap(double scale) {
+    GradientGridMap(double scale) {
       _scale = scale;
     }
 
