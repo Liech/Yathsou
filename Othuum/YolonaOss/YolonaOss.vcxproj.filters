@@ -73,6 +73,12 @@
     <Filter Include="Header Files\Navigation">
       <UniqueIdentifier>{12f2700a-9def-4975-a21f-ba0d3915d9c1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\RTSComponents">
+      <UniqueIdentifier>{a74b1207-35bd-4151-95fb-4db37c5139c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RTSComponents">
+      <UniqueIdentifier>{dd693bb5-5311-487b-a7c3-6f6e4ca53973}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -285,6 +291,12 @@
     <ClInclude Include="Navigation\DiscomfortGridMap.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
+    <ClInclude Include="RTSComponents\Landscape.h">
+      <Filter>Header Files\RTSComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="RTSComponents\Unit.h">
+      <Filter>Header Files\RTSComponents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -433,6 +445,12 @@
     </ClCompile>
     <ClCompile Include="Navigation\GradientGridMap.cpp">
       <Filter>Source Files\Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="RTSComponents\Landscape.cpp">
+      <Filter>Source Files\RTSComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="RTSComponents\Unit.cpp">
+      <Filter>Source Files\RTSComponents</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

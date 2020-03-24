@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -245,6 +245,8 @@
     <ClInclude Include="Renderer\RectangleRenderer.h" />
     <ClInclude Include="Renderer\TextRenderer.h" />
     <ClInclude Include="Renderer\TextureRenderer.h" />
+    <ClInclude Include="RTSComponents\Landscape.h" />
+    <ClInclude Include="RTSComponents\Unit.h" />
     <ClInclude Include="structs\AABB.h" />
     <ClInclude Include="structs\BoundingBox.h" />
     <ClInclude Include="structs\Color.h" />
@@ -304,6 +306,8 @@
     <ClCompile Include="Renderer\RectangleRenderer.cpp" />
     <ClCompile Include="Renderer\TextRenderer.cpp" />
     <ClCompile Include="Renderer\TextureRenderer.cpp" />
+    <ClCompile Include="RTSComponents\Landscape.cpp" />
+    <ClCompile Include="RTSComponents\Unit.cpp" />
     <ClCompile Include="structs\AABB.cpp" />
     <ClCompile Include="structs\Color.cpp" />
     <ClCompile Include="Util\Geometry.cpp" />
