@@ -212,6 +212,8 @@
     <ClInclude Include="Navigation\DijkstraMap.h" />
     <ClInclude Include="Navigation\DirectDistanceMap.h" />
     <ClInclude Include="Navigation\DiscomfortArea.h" />
+    <ClInclude Include="Navigation\DiscomfortGrid.h" />
+    <ClInclude Include="Navigation\DiscomfortGridMap.h" />
     <ClInclude Include="Navigation\GradientGridMap.h" />
     <ClInclude Include="Navigation\MapGroup.h" />
     <ClInclude Include="Navigation\Navigation.h" />

@@ -279,6 +279,12 @@
     <ClInclude Include="Navigation\DiscomfortArea.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
+    <ClInclude Include="Navigation\DiscomfortGrid.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\DiscomfortGridMap.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
