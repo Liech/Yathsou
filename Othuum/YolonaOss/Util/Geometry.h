@@ -1,7 +1,7 @@
 #pragma once
 
 #include "glm/vec3.hpp"
-
+#include <array>
 
 struct Intersection {
   Intersection(glm::vec3 loc, float dist, bool does);

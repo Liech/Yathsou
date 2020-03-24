@@ -30,7 +30,7 @@ namespace YolonaOss {
       input->applySubset(min, size, [start, end, radius, func](std::array<size_t, Dimension> position, Type& value) {
         std::array<double, Dimension> dPos;
         for (size_t i = 0; i < Dimension; i++) dPos[i] = position[i];
-        double distance = Geometry::distancePoint2LineSegment(dPos,start,end);
+        double distance = GeometryND<Dimension>::distancePoint2LineSegment(dPos,start,end);
         if (distance > radius)
           return;
         Type v = value;
