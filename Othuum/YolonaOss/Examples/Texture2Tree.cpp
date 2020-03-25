@@ -19,56 +19,27 @@
 float scaling = 1;
 namespace YolonaOss {
   
-  Texture2Tree::Texture2Tree() :_agent(glm::vec2(3, 3)) {
-    _mapGroup = std::make_shared<MapGroup<2>>();
-    _agentMap = std::make_shared<DijkstraMap<2>>();
-    _mapGroup->addMap(_agentMap,0.8);
-    _agent.setMap(_mapGroup);
+  Texture2Tree::Texture2Tree() {
   }
 
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec)
   {
-    auto map = ImageIO::readImage("YolonaOssData/textures/TinyMap.png");
-    _map   = map->map<bool>([](Color const& c)
-      { return (bool)(c.getRed() < 125); });
-    _tree  = std::make_shared<NMTree<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max, false> >(_map.get());
-    _index = std::make_shared<NMTreeNeighbourIndex<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max, false>>(_tree.get());
-    _index->init();
-    makeDiscomfort();
-
-
-    _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(glm::vec2(12,12), _tree.get(), _index, [](Tree * node) {return 1; }));
+    _landscape = std::make_unique<Landscape<2>>("YolonaOssData/textures/TinyMap.png");
+    _unit = std::make_unique<Unit     <2>>(_landscape.get());
 
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); };
     Database < std::function<void(double, double)>*>::add(&_mouseClick , { "MouseClick" });
   }
 
-  void YolonaOss::Texture2Tree::makeDiscomfort() {
-    std::array<size_t, 2> dim;
-    dim[0] = _map->getDimension(0) * _disMapScale;
-    dim[1] = _map->getDimension(1) * _disMapScale;
-    double maxDistance = glm::distance(glm::vec2(0, 0), glm::vec2(dim[0] / 2, dim[1] / 2));
-    auto scaled = ImageUtil::scaleUp<double, 2>(_map->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);
-    scaled->apply([](size_t pos, double& val) {val = 1.0 - val; });
-    _discomfortMap = std::shared_ptr<MultiDimensionalArray<double,2>>(std::move(scaled));
-    //ImageSubsetUtil::drawCircle<double,2>(_discomfortMap.get(), { 40,40 }, 20.0, [](double distance, double val) {return val + (1-distance) * 0.1; });
-    double radius = 20;
-    ImageSubsetUtil::drawCapsule<double, 2>(_discomfortMap.get(), { 40.0,40.0 }, {120,70}, radius, [radius](double distance, double val) {return val + (1.0-( (distance) / radius))*0.01; });
-
-    _agentDisMap = std::make_shared<GradientGridMap<2>>((double)_disMapScale);
-    _agentDisMap->setMap(_discomfortMap);
-    _mapGroup->addMap(_agentDisMap, 0.2);
-  }
-
   void YolonaOss::Texture2Tree::renderDiscomfort() {
-    auto grayscale = ImageUtil::toGrayscale<double, 2>(_discomfortMap.get(), 0, 1);
+    auto grayscale = ImageUtil::toGrayscale<double, 2>(_landscape->_staticDiscomfort.get(), 0, 1);
     //grayscale->apply([](size_t t, Color& v) {v = Color(v.r(), v.g(), v.b(),v.b() / 8); });
     TextureRenderer::start();
     glm::mat4 world(1.0);
     world = glm::rotate(world, -glm::pi<float>() / 2.0f, glm::vec3(1, 0, 0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
-    world = glm::translate(world, -glm::vec3(0, _map->getDimension(1), -0.3));
-    world = glm::scale(world, glm::vec3(_map->getDimension(0), _map->getDimension(1), 1));
+    world = glm::translate(world, -glm::vec3(0, _landscape->_landscape->getDimension(1), -0.3));
+    world = glm::scale(world, glm::vec3(_landscape->_landscape->getDimension(0), _landscape->_landscape->getDimension(1), 1));
 
     TextureRenderer::drawTexture(grayscale.get(), world,glm::vec4(1,1,1,0.11));
     TextureRenderer::end();
@@ -80,29 +51,23 @@ namespace YolonaOss {
     Intersection sect = Geometry::intersectRayPlane(camPos, pickDir, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     if (sect.doesIntersect) {
       metaPos = sect.location;
-      if (sect.location.x < 0 || sect.location.z < 0 || sect.location.x >= _tree->getSize() || sect.location.z >= _tree->getSize())
+      if (sect.location.x < 0 || sect.location.z < 0 || sect.location.x >= _landscape->_tree->getSize() || sect.location.z >= _landscape->_tree->getSize())
         return;
       auto target = glm::vec2(sect.location[0], sect.location[2]);
-      _path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<2> >(target, _tree.get(),_index, [](Tree* node) {return 1; }));
       
-      _agentMap->setDijkstra(_path);
-      _mapGroup->setTarget(target);
-      
-      _agent.setTarget(target);
-      //_agent.setPosition(target);
+      _unit->setTarget(target);
     }
   }
 
   void YolonaOss::Texture2Tree::draw()
   {
-    if (!_path) return;
-    _agent.updatePosition();
+    _unit->_navigationAgent->updatePosition();
     BoxRenderer::start();
     srand(10);
-    auto leafs = _tree->getLeafs();
+    auto leafs = _landscape->_tree->getLeafs();
     
-    auto DjPath = (std::dynamic_pointer_cast<NMTreeDijkstra<2>>(_path))->getPath(_agent.getPosition());
-    std::set<Tree*> DjPathSet(DjPath.begin(), DjPath.end());
+    //auto DjPath = (std::dynamic_pointer_cast<NMTreeDijkstra<2>>(_landscape->_path))->getPath(_unit->_navigationAgent->getPosition());
+    //std::set<Tree*> DjPathSet(DjPath.begin(), DjPath.end());
 
     //if (false)
     for (auto leaf : leafs)
@@ -114,12 +79,12 @@ namespace YolonaOss {
       if (!leaf.value) {
         col = glm::vec4(0,0,0, 1);
       }
-      double distance = _path->getDistance(Util<2>::array2Vec(leaf.position) * scaling);
+      double distance = 0.5;// _landscape->_path->getDistance(Util<2>::array2Vec(leaf.position) * scaling);
       
       if (isinf(distance))
         col = col;
-      else if (DjPathSet.count(leaf.link))
-        col = glm::vec4(0, 0, 1,1);
+      //else if (DjPathSet.count(leaf.link))
+      //  col = glm::vec4(0, 0, 1,1);
       else if (distance < 0.3)
         col = glm::vec4(1,0,0,1);
       else
@@ -132,7 +97,7 @@ namespace YolonaOss {
       if (false)
       for (int dim = 0; dim < 2; dim++) {
         for (auto dir : { NMTreeDirection::Positive,NMTreeDirection::Negative })
-          for (auto neighb : _index->getNeighbours(leaf.link, dim, dir)) {
+          for (auto neighb : _landscape->_index->getNeighbours(leaf.link, dim, dir)) {
             glm::vec3 start = glm::vec3(neighb->getPosition()[0] + neighb->getSize() / 2.0f, 0.5f, neighb->getPosition()[1] + neighb->getSize() / 2.0f);
             glm::vec3 end = glm::vec3(leaf.position[0] + leaf.size / 2.0f, 0.5f, leaf.position[1] + leaf.size / 2.0f);
             glm::vec4 c = glm::vec4(1, 0, 0, 1);
@@ -151,7 +116,7 @@ namespace YolonaOss {
     }
 
     BoxRenderer::drawDot(metaPos, glm::vec3(0.1f), glm::vec4(1, 0, 1, 1));
-    BoxRenderer::drawDot(glm::vec3(_agent.getPosition().x,0.1f,_agent.getPosition().y), glm::vec3(0.1f), glm::vec4(1, 1, 0, 1));
+    BoxRenderer::drawDot(glm::vec3(_unit->_navigationAgent->getPosition().x,0.1f, _unit->_navigationAgent->getPosition().y), glm::vec3(0.6f), glm::vec4(1, 0, 0, 1));
     BoxRenderer::end();
     //renderDiscomfort();
   }

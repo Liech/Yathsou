@@ -7,6 +7,8 @@
 #include "../structs/NMTreeDijkstra.h"
 #include <memory>
 #include "../Navigation/NavigationAgent.h"
+#include "../RTSComponents/Landscape.h"
+#include "../RTSComponents/Unit.h"
 
 namespace YolonaOss {
   template<size_t Dimension> class DijkstraMap;
@@ -26,25 +28,15 @@ namespace YolonaOss {
     virtual void draw() override;
 
   private:
-    std::shared_ptr<MultiDimensionalArray<bool, 2>>   _map           ;
-    std::shared_ptr<Tree>                             _tree          ;
-    std::shared_ptr<TreeI>                            _index         ;
-    std::shared_ptr < DijkstraI<2>>                   _path = nullptr;
-    std::shared_ptr< DijkstraMap<2> >                 _agentMap      ;
-    std::shared_ptr< GradientGridMap<2> >             _agentDisMap   ;
-    std::shared_ptr< MapGroup<2> >                    _mapGroup      ;
+    std::unique_ptr<Landscape<2>>                     _landscape;
+    std::unique_ptr<Unit<2>>                          _unit;
 
-
-    std::shared_ptr<MultiDimensionalArray<double, 2>> _discomfortMap;    
 
     GL::DrawSpecification*                          _spec;
     std::function<void(double, double)>             _mouseClick;
-    NavigationAgent<2>                              _agent;
 
-    const int _disMapScale = 10;
 
     void renderDiscomfort();
-    void makeDiscomfort();
     void mouseClick(double x, double y);
     glm::vec3 metaPos = glm::vec3(0, 0, 0);
   };
