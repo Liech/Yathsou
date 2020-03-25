@@ -25,7 +25,9 @@ namespace YolonaOss {
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec)
   {
     _landscape = std::make_unique<Landscape<2>>("YolonaOssData/textures/TinyMap.png");
-    _unit = std::make_unique<Unit     <2>>(_landscape.get());
+    _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(3.0 ,3.0  )));
+    _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(13.0,10.0 )));
+    _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(5.0 ,2.0  )));
 
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); };
@@ -55,69 +57,44 @@ namespace YolonaOss {
         return;
       auto target = glm::vec2(sect.location[0], sect.location[2]);
       
-      _unit->setTarget(target);
+      auto m = _landscape->getMap(target);
+      for(size_t i= 0;i < _unit.size();i++)
+        _unit[i]->setTarget(target, m);
     }
   }
 
   void YolonaOss::Texture2Tree::draw()
   {
-    _unit->_navigationAgent->updatePosition();
+    for (size_t i = 0; i < _unit.size(); i++)
+      _unit[i]->_navigationAgent->updatePosition();
     BoxRenderer::start();
-    srand(10);
     auto leafs = _landscape->_tree->getLeafs();
     
-    //auto DjPath = (std::dynamic_pointer_cast<NMTreeDijkstra<2>>(_landscape->_path))->getPath(_unit->_navigationAgent->getPosition());
-    //std::set<Tree*> DjPathSet(DjPath.begin(), DjPath.end());
-
-    //if (false)
     for (auto leaf : leafs)
     {
-
-      float clr = 0.3f;// (rand() % 255) / 255.0f;
+      float clr = 0.3f;
       glm::vec4 col = glm::vec4(clr,clr,clr, 1)*0.1f + glm::vec4(0.9,0.9,0.9,1);
       col[3] = 1;
       if (!leaf.value) {
         col = glm::vec4(0,0,0, 1);
       }
-      double distance = 0.5;// _landscape->_path->getDistance(Util<2>::array2Vec(leaf.position) * scaling);
+      double distance = 0.5;
       
       if (isinf(distance))
         col = col;
-      //else if (DjPathSet.count(leaf.link))
-      //  col = glm::vec4(0, 0, 1,1);
       else if (distance < 0.3)
         col = glm::vec4(1,0,0,1);
       else
         col = glm::vec4(col[0]/distance,col[1] / distance,col[2] / distance , 1);
       glm::vec3 size = glm::vec3(leaf.size* scaling, 0.1f, leaf.size * scaling);
       glm::vec3 pos = glm::vec3(leaf.position[0] * scaling, 0, leaf.position[1] * scaling);
-      BoxRenderer::drawBox(pos, size, col);
-      //if (!(leaf.position[0] == 1 && leaf.position[1] == 1))
-        //continue;
-      if (false)
-      for (int dim = 0; dim < 2; dim++) {
-        for (auto dir : { NMTreeDirection::Positive,NMTreeDirection::Negative })
-          for (auto neighb : _landscape->_index->getNeighbours(leaf.link, dim, dir)) {
-            glm::vec3 start = glm::vec3(neighb->getPosition()[0] + neighb->getSize() / 2.0f, 0.5f, neighb->getPosition()[1] + neighb->getSize() / 2.0f);
-            glm::vec3 end = glm::vec3(leaf.position[0] + leaf.size / 2.0f, 0.5f, leaf.position[1] + leaf.size / 2.0f);
-            glm::vec4 c = glm::vec4(1, 0, 0, 1);
-            if (dir == NMTreeDirection::Positive) 
-              c = glm::vec4(1, 0, 0, 1);
-            else
-              c = glm::vec4(0, 0, 1, 1);
-            glm::vec3 s = glm::vec3(0, 0, 0);
-            if (dir == NMTreeDirection::Negative)
-              s = glm::vec3(0.01f, 0.01f, 0.01f);
-            //c = 
-            BoxRenderer::drawLine(start * scaling+s, end * scaling+s, 0.01f, c);
-          }
-      }
-      
+      BoxRenderer::drawBox(pos, size, col);     
     }
 
     BoxRenderer::drawDot(metaPos, glm::vec3(0.1f), glm::vec4(1, 0, 1, 1));
-    BoxRenderer::drawDot(glm::vec3(_unit->_navigationAgent->getPosition().x,0.1f, _unit->_navigationAgent->getPosition().y), glm::vec3(0.6f), glm::vec4(1, 0, 0, 1));
+
+    for (size_t i = 0; i < _unit.size(); i++)
+      BoxRenderer::drawDot(glm::vec3(_unit[i]->getPosition().x,0.1f, _unit[i]->getPosition().y), glm::vec3(0.6f), glm::vec4(1, 0, 0, 1));
     BoxRenderer::end();
-    //renderDiscomfort();
   }
 }

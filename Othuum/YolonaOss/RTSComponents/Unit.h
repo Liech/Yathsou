@@ -11,21 +11,22 @@ namespace YolonaOss{
   class Unit{
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
   public:
-    Unit(Landscape<Dimension>* landscape) {
-      _landscape = landscape;
-      _navigationAgent = std::make_shared<NavigationAgent<2>>(glm::vec2(3, 3));
-      _navigationAgent->setMap(_landscape->getMap(vec(0.0)));
+    Unit(vec v) {
+      _navigationAgent = std::make_shared<NavigationAgent<2>>(v);
 
     }
 
-    void setTarget(vec target) {
-      _navigationAgent->setMap(_landscape->getMap(target));
+    void setTarget(vec target, std::shared_ptr<NavigationMap<Dimension>> map) {
+      _navigationAgent->setMap(map);
       _navigationAgent->setTarget(target);
+    }
+
+    vec getPosition() {
+      return _navigationAgent->getPosition();
     }
 
     public:
       std::shared_ptr<DiscomfortArea<Dimension>>  _discomfortArea ;
       std::shared_ptr<NavigationAgent<Dimension>> _navigationAgent;
-      Landscape<Dimension>*                       _landscape;
   };
 }

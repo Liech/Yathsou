@@ -31,7 +31,7 @@ namespace YolonaOss{
         std::shared_ptr<DijkstraMap<Dimension>> navigation = std::make_shared<DijkstraMap<Dimension>>();
         result->addMap(_staticMap, 0.2);
         result->addMap(navigation, 0.8);
-        auto path = std::dynamic_pointer_cast<DijkstraI<2>>(std::make_shared< NMTreeDijkstra<Dimension> >(target, _tree.get(), _index, [](Tree* node) {return 1; }));
+        auto path = std::dynamic_pointer_cast<DijkstraI<Dimension>>(std::make_shared< NMTreeDijkstra<Dimension> >(target, _tree.get(), _index, [](Tree* node) {return 1; }));
         navigation->setDijkstra(path);        
         result->setTarget(target);
         return result;

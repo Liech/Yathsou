@@ -29,7 +29,7 @@ namespace YolonaOss {
 
   private:
     std::unique_ptr<Landscape<2>>                     _landscape;
-    std::unique_ptr<Unit<2>>                          _unit;
+    std::vector<std::shared_ptr<Unit<2>>>             _unit     ; 
 
 
     GL::DrawSpecification*                          _spec;
