@@ -1,13 +1,15 @@
 #pragma once
 
-#include "structs/MultiDimensionalArray.h"
+#include "../structs/MultiDimensionalArray.h"
 #include "DiscomfortArea.h"
 #include <set>
-#include "Util/Geometry.h"
+#include "../Util/Geometry.h"
+#include "../Util/Util.h"
 
 namespace YolonaOss {
   template<size_t Dimension>
   class DiscomfortGrid {
+    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
   public:
     DiscomfortGrid(std::array<size_t, Dimension> dimension, double scale) : _discomfortField(dimension) {
       _discomfortField.fill(0);
@@ -15,11 +17,14 @@ namespace YolonaOss {
     }
 
     std::array<double, Dimension> getGradient(std::array<double, Dimension> position) {
-      vec scaled = _scale * currentPosition;
+      vec scaled = _scale * Util<Dimension>::array2Vec(position);
       std::array<size_t, Dimension> index;
-      for (int i = 0; i < Dimension; i++)
+      for (size_t i = 0; i < Dimension; i++)
         index[i] = scaled[i] > 0 ? (size_t)scaled[i] : 0;
-      return getDirectionSuggestion_recurse(index);
+      std::array<double, Dimension> dir;
+      for (size_t i = 0; i < Dimension; i++)
+        dir[i] = 0;
+      return getDirectionSuggestion_recurse(index,dir);
     }
 
     double getDiscomfort(std::array<double, Dimension> position) {
@@ -51,11 +56,11 @@ namespace YolonaOss {
         result[i] = 0;
       for (int i = -1; i <= 1; i++) {
         auto newP = position;
-        if ((!(newP[currentDimension] == 0 && i == -1)) && (!(newP[currentDimension] == _discomfortMap->getDimension(currentDimension) - 1 && i == 1)))
+        if ((!(newP[currentDimension] == 0 && i == -1)) && (!(newP[currentDimension] == _discomfortField.getDimension(currentDimension) - 1 && i == 1)))
           newP[currentDimension] += i;
         dir[currentDimension] = i;
         if (currentDimension != 0)
-          result += getDirectionSuggestion_recurse(newP, dir, currentDimension - 1);
+          result = GeometryND<Dimension>::Add(result,getDirectionSuggestion_recurse(newP, dir, currentDimension - 1));
         else {
           float val = _discomfortField.getVal(newP);
           result = GeometryND<Dimension>::Add(result, GeometryND<Dimension>::Multiply(dir, -val));
@@ -65,7 +70,7 @@ namespace YolonaOss {
     }
 
 
-    double                                      _scale;
+    float                                       _scale;
     MultiDimensionalArray<double, Dimension>    _discomfortField;
     std::set<std::shared_ptr<DiscomfortArea<Dimension>>>   _discomfortAreas;
   };

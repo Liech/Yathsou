@@ -27,6 +27,13 @@ public:
       result[i] -= B[i];
     return result;
   }
+  
+  static vec Add(vec A, vec B) {
+    vec result = A;
+    for (size_t i = 0; i < Dimension; i++)
+      result[i] += B[i];
+    return result;
+  }
 
   static vec Multiply (vec A, double B) {
     vec result = A;

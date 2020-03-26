@@ -20,11 +20,11 @@ namespace YolonaOss {
       _start = start;
       _treeIndex = index;
       _treeIndex->init();
-      _dijkstra = std::make_unique<Dijkstra<Tree>>(root->getLeaf(Util<Dimension>::vec2Array(start)), [this](Tree* A, Tree* B) { return getDijkstraDistance(A, B); }, [this](Tree* node) { return getDijkstraNeighbours(node); });
+      _dijkstra = std::make_unique<Dijkstra<Tree>>(root->getLeaf(Util<Dimension>::vec2Array<size_t>(start)), [this](Tree* A, Tree* B) { return getDijkstraDistance(A, B); }, [this](Tree* node) { return getDijkstraNeighbours(node); });
     }
 
     virtual vec getDirectionSuggestion(vec currentPosition) override {
-      Tree* current = _root->getLeaf(Util<Dimension>::vec2Array(currentPosition));
+      Tree* current = _root->getLeaf(Util<Dimension>::vec2Array<size_t>(currentPosition));
       auto next = _dijkstra->getNext(current);
       if (next == nullptr)
         return glm::normalize(vec(_start - currentPosition));

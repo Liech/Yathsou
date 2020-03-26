@@ -7,14 +7,13 @@
 #include <limits>
 #include "../structs/Database.h"
 #include "../Util/Geometry.h"
-#include "Navigation/DijkstraMap.h"
-#include "Navigation/GradientGridMap.h"
 #include "Navigation/MapGroup.h"
 #include "Util/Util.h"
 #include "Renderer/TextureRenderer.h"
 #include "Util/ImageUtil.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/ext/scalar_constants.hpp>
+#include "../Navigation/LinearDiscomfort.h"
 
 float scaling = 1;
 namespace YolonaOss {
@@ -28,6 +27,10 @@ namespace YolonaOss {
     _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(3.0 ,3.0  )));
     _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(13.0,10.0 )));
     _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(5.0 ,2.0  )));
+    _unit[0]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
+    _unit[1]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
+    _unit[2]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
+
 
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); };

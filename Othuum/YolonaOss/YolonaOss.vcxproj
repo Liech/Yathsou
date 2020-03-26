@@ -215,6 +215,7 @@
     <ClInclude Include="Navigation\DiscomfortGrid.h" />
     <ClInclude Include="Navigation\DiscomfortGridMap.h" />
     <ClInclude Include="Navigation\GradientGridMap.h" />
+    <ClInclude Include="Navigation\LinearDiscomfort.h" />
     <ClInclude Include="Navigation\MapGroup.h" />
     <ClInclude Include="Navigation\Navigation.h" />
     <ClInclude Include="Navigation\NavigationAgent.h" />

@@ -297,6 +297,9 @@
     <ClInclude Include="RTSComponents\Unit.h">
       <Filter>Header Files\RTSComponents</Filter>
     </ClInclude>
+    <ClInclude Include="Navigation\LinearDiscomfort.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
