@@ -45,7 +45,7 @@ namespace YolonaOss {
     void updateDiscomfort() {
       _discomfortField.fill(0);
       for (auto area : _discomfortAreas) {
-        area->addDiscomfort(&_discomfortField, _scale);
+        area->addDiscomfort(&_discomfortField);
       }
     }
 
@@ -69,7 +69,7 @@ namespace YolonaOss {
       return result;
     }
 
-
+  public:
     float                                       _scale;
     MultiDimensionalArray<double, Dimension>    _discomfortField;
     std::set<std::shared_ptr<DiscomfortArea<Dimension>>>   _discomfortAreas;

@@ -49,19 +49,21 @@ namespace YolonaOss {
       std::array<size_t, Dimension> size;
       
       for (size_t i = 0; i < Dimension; i++) {
-        start[i] = std::floor(center[i] - radius);
+        double v = center[i] - radius;
+        start[i] = v<0?0:std::floor(v);
         size[i] = std::ceil(radius * 2);
       }
-      input->applySubset(start,size, [center, radius,func](std::array<size_t,Dimension> position, Type& value) {
-        double distance = 0;
-        for (size_t i = 0; i < Dimension; i++)
-          distance += ((double)center[i] - (double)position[i]) * ((double)center[i] - (double)position[i]);
-        distance = std::sqrt(distance);
-        if (distance > radius)
-          return;
-        Type v = value;
-        value = func(distance, v);
-      });
+      input->getRef(start) = 1;
+      //input->applySubset(start,size, [center, radius,func](std::array<size_t,Dimension> position, Type& value) {
+      //  double distance = 0;
+      //  for (size_t i = 0; i < Dimension; i++)
+      //    distance += ((double)center[i] - (double)position[i]) * ((double)center[i] - (double)position[i]);
+      //  distance = std::sqrt(distance);
+      //  if (distance > radius)
+      //    return;
+      //  Type v = value;
+      //  value = func(distance, v);
+      //});
     }
 
     template <typename Type, size_t Dimension>

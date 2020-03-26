@@ -30,7 +30,9 @@ namespace YolonaOss {
     _unit[0]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
     _unit[1]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
     _unit[2]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
-
+    _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[0]->_discomfortArea);
+    _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[1]->_discomfortArea);
+    _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[2]->_discomfortArea);
 
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); };
@@ -38,7 +40,7 @@ namespace YolonaOss {
   }
 
   void YolonaOss::Texture2Tree::renderDiscomfort() {
-    auto grayscale = ImageUtil::toGrayscale<double, 2>(_landscape->_staticDiscomfort.get(), 0, 1);
+    auto grayscale = ImageUtil::toGrayscale<double, 2>(&_landscape->_dynamicDiscomfort->_discomfortField, 0, 1);
     //grayscale->apply([](size_t t, Color& v) {v = Color(v.r(), v.g(), v.b(),v.b() / 8); });
     TextureRenderer::start();
     glm::mat4 world(1.0);
@@ -46,7 +48,7 @@ namespace YolonaOss {
     world = glm::translate(world, -glm::vec3(0, _landscape->_landscape->getDimension(1), -0.3));
     world = glm::scale(world, glm::vec3(_landscape->_landscape->getDimension(0), _landscape->_landscape->getDimension(1), 1));
 
-    TextureRenderer::drawTexture(grayscale.get(), world,glm::vec4(1,1,1,0.11));
+    TextureRenderer::drawTexture(grayscale.get(), world,glm::vec4(1,0,0,0.5));
     TextureRenderer::end();
   }
 
@@ -68,8 +70,11 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::draw()
   {
-    for (size_t i = 0; i < _unit.size(); i++)
+    for (size_t i = 0; i < _unit.size(); i++) {
       _unit[i]->_navigationAgent->updatePosition();
+      _unit[i]->_discomfortArea->setPosition(_unit[i]->_navigationAgent->getPosition());
+    }
+    _landscape->_dynamicDiscomfort->updateDiscomfort();
     BoxRenderer::start();
     auto leafs = _landscape->_tree->getLeafs();
     
@@ -99,5 +104,6 @@ namespace YolonaOss {
     for (size_t i = 0; i < _unit.size(); i++)
       BoxRenderer::drawDot(glm::vec3(_unit[i]->getPosition().x,0.1f, _unit[i]->getPosition().y), glm::vec3(0.6f), glm::vec4(1, 0, 0, 1));
     BoxRenderer::end();
+    renderDiscomfort();
   }
 }

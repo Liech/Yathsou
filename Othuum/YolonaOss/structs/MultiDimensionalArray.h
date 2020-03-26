@@ -254,7 +254,7 @@ namespace YolonaOss {
     private:
     void apply_recursive(const std::array<size_t, Dimension> start, const std::array<size_t, Dimension> size, std::function<void(std::array<size_t, Dimension>, Type&)> func, std::array<size_t, Dimension> currentPosition, size_t currentDimension) {
       if ((Layout == Reversed && currentDimension == 0) || (Layout == Normal && currentDimension == Dimension - 1)) {
-        for (size_t i = 0; i < size[currentDimension]; i++) {
+        for (int64_t i = 0; i < size[currentDimension]; i++) {
           std::array<size_t, Dimension> pos = currentPosition;
           pos[currentDimension] += i;
           size_t index = transformA(pos);
@@ -263,7 +263,7 @@ namespace YolonaOss {
       }
       else
       {
-        for (size_t i = 0; i < size[currentDimension]; i++) {
+        for (int64_t i = 0; i < size[currentDimension]; i++) {
           std::array<size_t, Dimension> pos = currentPosition;
           pos[currentDimension] += i;
           if constexpr (Layout == Reversed)

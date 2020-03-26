@@ -258,6 +258,7 @@
     <ClInclude Include="structs\NMTree.h" />
     <ClInclude Include="structs\NMTreeDijkstra.h" />
     <ClInclude Include="structs\NMTreeNeighbourIndex.h" />
+    <ClInclude Include="structs\SpatialHash.h" />
     <ClInclude Include="Util\Geometry.h" />
     <ClInclude Include="Util\ImageIO.h" />
     <ClInclude Include="Util\ImageSubsetUtil.h" />
