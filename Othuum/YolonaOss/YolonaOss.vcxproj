@@ -254,6 +254,7 @@
     <ClInclude Include="structs\Database.h" />
     <ClInclude Include="structs\Dijkstra.h" />
     <ClInclude Include="structs\Factory.h" />
+    <ClInclude Include="structs\GridHash.h" />
     <ClInclude Include="structs\MultiDimensionalArray.h" />
     <ClInclude Include="structs\NMTree.h" />
     <ClInclude Include="structs\NMTreeDijkstra.h" />

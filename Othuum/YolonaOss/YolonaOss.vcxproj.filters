@@ -303,6 +303,9 @@
     <ClInclude Include="structs\SpatialHash.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
+    <ClInclude Include="structs\GridHash.h">
+      <Filter>Header Files\structs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
