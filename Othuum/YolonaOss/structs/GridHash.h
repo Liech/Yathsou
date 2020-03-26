@@ -22,11 +22,20 @@ namespace YolonaOss {
     }
 
     virtual void addObject(std::shared_ptr<ObjectWithAABB<Dimension>> object) {
-      std::array<double, Dimension> min;
-      std::array<double, Dimension> max;
-      for (size_t i = 0; i < Dimension; i++) {
+      std::array<size_t, Dimension> start;
+      std::array<size_t, Dimension> size;
+      AABB<Dimension> bounds = object->getAABB();
 
+      for (size_t i = 0; i < Dimension; i++) {
+        start[i] = std::floor((bounds.getPosition()[i] - _area.getPosition()[i]) / _gridSize);
+        max[i] = std::ceil((bounds.getPosition()[i] +bounds.getSize() - _area.getPosition()[i]) / _gridSize) - start[i];
       }
+      std::set<std::array<size_t, Dimension>> indexes;
+      _data->applySubset(start, min, [object,indexes](std::array<size_t, Dimension> index, std::set<ObjectWithAABB<Dimension>>& data) {
+        indexes.insert(index);
+        data.insert(object);
+      });
+      _updateIndex[object] = indexes;
     }
 
     virtual void removeObject(std::shared_ptr<ObjectWithAABB<Dimension>> object) {
