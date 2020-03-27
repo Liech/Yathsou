@@ -9,19 +9,38 @@ namespace YolonaOss {
   class AABB {
   public:
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
-    virtual vec   getPosition() = 0;
-    virtual vec   getSize() = 0;
+    
+    vec   getPosition() {
+      return _position;
+    }
 
-    virtual vec getCenter() {
+    vec   getSize() {
+      return _size;
+    }
+
+    void setSize(vec size) {
+      _size = size;
+    }
+
+    void setPosition(vec pos) {
+      _position = position;
+    }
+
+    bool isInside(vec pos) {
+      for (size_t i = 0; i < Dimension; i++) {
+        if (pos[i] < getPosition()[i] || pos[i] > getPosition()[i] + getSize()[i])
+          return false;        
+      }
+      return true;
+    }
+
+    vec getCenter() {
       return getPosition() + getSize() / 2.0;
     }
+
+  private:
+    vec _position;
+    vec _size;
   };
 
-  template <size_t Dimension>
-  class AABBHierarchyNetwork : public AABB<Dimension>{
-    using self = AABBHierarchyNetwork<Dimension>;
-
-    virtual self* getLeaf(vec position)    = 0; //for non hierarchical data just return this
-    virtual std::set<self*> getNeighbours() = 0;    
-  };
 }

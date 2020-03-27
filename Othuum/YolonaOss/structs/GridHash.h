@@ -44,10 +44,35 @@ namespace YolonaOss {
         _data->getRef(i).erase(object);
     }
 
-    virtual std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> findObjects(vec  position) = 0;
-    virtual std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> findObjects(AABB position) = 0;
+    virtual std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> findObjects(vec  position) {
+      std::array<size_t, Dimension> index;
+      for (size_t i = 0; i < Dimension; i++) {
+        index[i] = std::floor((position[i] - _area.getPosition()[i]) / _gridSize);
+      }
+      auto candidates = _data->getRef(index);
+      std::set < std::shared_ptr<ObjectWithAABB<Dimension>> result;
+      for (auto candidate : candidates) {
+        if (candidate->getAABB().isInside(position))
+          result.insert(candidate);
+      }
+      return result;
+    }
+
+    virtual std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> findObjects(AABB position) {
+      std::array<size_t, Dimension> start;
+      std::array<size_t, Dimension> size;
+      AABB<Dimension> bounds = object->getAABB();
+
+      for (size_t i = 0; i < Dimension; i++) {
+        start[i] = std::floor((bounds.getPosition()[i] - _area.getPosition()[i]) / _gridSize);
+        max[i] = std::ceil((bounds.getPosition()[i] + bounds.getSize() - _area.getPosition()[i]) / _gridSize) - start[i];
+      }
+
+    }
 
   private:
+
+
     std::unique_ptr<MultiDimensionalArray<std::set<ObjectWithAABB<Dimension>>, Dimension>>         _data       ;
     std::map< std::shared_ptr<ObjectWithAABB<Dimension>>, std::set<std::array<size_t, Dimension>>> _updateIndex;
     AABB<Dimension>                                                                                _area       ;
