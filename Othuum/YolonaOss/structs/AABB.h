@@ -34,6 +34,11 @@ namespace YolonaOss {
       return true;
     }
 
+    bool intersects(AABB<Dimension> d) {
+      throw std::runtime_error("Not yet implemented");
+      return true;
+    }
+
     vec getCenter() {
       return getPosition() + getSize() / 2.0;
     }

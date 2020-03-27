@@ -5,6 +5,7 @@
 #include <set>
 #include "../Util/Geometry.h"
 #include "../Util/Util.h"
+#include "../structs/GridHash.h"
 
 namespace YolonaOss {
   template<size_t Dimension>
@@ -70,8 +71,9 @@ namespace YolonaOss {
     }
 
   public:
-    float                                       _scale;
-    MultiDimensionalArray<double, Dimension>    _discomfortField;
+    std::unique_ptr<GridHash<Dimension>>                   _grid;
+    float                                                  _scale;
+    MultiDimensionalArray<double, Dimension>               _discomfortField;
     std::set<std::shared_ptr<DiscomfortArea<Dimension>>>   _discomfortAreas;
   };
 }

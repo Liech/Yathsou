@@ -2,10 +2,11 @@
 
 #include "SpatialHash.h"
 #include <map>
+#include "../Util/Util.h"
 
 namespace YolonaOss {
   template<size_t Dimension>
-  class GridHash : public SpatialHash{
+  class GridHash : public SpatialHash<Dimension>{
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
   public:
     GridHash(AABB<Dimension> area, double gridSize) {
@@ -22,20 +23,25 @@ namespace YolonaOss {
     }
 
     virtual void addObject(std::shared_ptr<ObjectWithAABB<Dimension>> object) {
-      std::array<size_t, Dimension> start;
-      std::array<size_t, Dimension> size;
-      AABB<Dimension> bounds = object->getAABB();
+      throw std::runtime_error("Not yet implemented");
+      //std::array<size_t, Dimension> start;
+      //std::array<size_t, Dimension> size;
+      //AABB<Dimension> bounds = object->getAABB();
 
-      for (size_t i = 0; i < Dimension; i++) {
-        start[i] = std::floor((bounds.getPosition()[i] - _area.getPosition()[i]) / _gridSize);
-        max[i] = std::ceil((bounds.getPosition()[i] +bounds.getSize() - _area.getPosition()[i]) / _gridSize) - start[i];
-      }
-      std::set<std::array<size_t, Dimension>> indexes;
-      _data->applySubset(start, min, [object,indexes](std::array<size_t, Dimension> index, std::set<ObjectWithAABB<Dimension>>& data) {
-        indexes.insert(index);
-        data.insert(object);
-      });
-      _updateIndex[object] = indexes;
+      //for (size_t i = 0; i < Dimension; i++) {
+      //  start[i] = std::floor((bounds.getPosition()[i] - _area.getPosition()[i]) / _gridSize);
+      //  size[i] = std::ceil((bounds.getPosition()[i] + bounds.getSize() - _area.getPosition()[i]) / _gridSize) - start[i];
+      //}
+      //std::set<std::array<size_t, Dimension>>> indexes;
+      //std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> result;
+      //Util<Dimension>::apply(start, size, [object,shis](std::array<size_t, Dimension> index) {
+      //  #pragma omp critical{     
+      //    indexes.insert(index);
+      //  }
+      //  _data->getRef(index).insert(object);        
+      //  });
+
+      //_updateIndex[object] = indexes;
     }
 
     virtual void removeObject(std::shared_ptr<ObjectWithAABB<Dimension>> object) {
@@ -50,7 +56,7 @@ namespace YolonaOss {
         index[i] = std::floor((position[i] - _area.getPosition()[i]) / _gridSize);
       }
       auto candidates = _data->getRef(index);
-      std::set < std::shared_ptr<ObjectWithAABB<Dimension>> result;
+      std::set < std::shared_ptr<ObjectWithAABB<Dimension>>> result;
       for (auto candidate : candidates) {
         if (candidate->getAABB().isInside(position))
           result.insert(candidate);
@@ -58,22 +64,39 @@ namespace YolonaOss {
       return result;
     }
 
-    virtual std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> findObjects(AABB position) {
+    virtual std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> findObjects(AABB<Dimension> position) {
       std::array<size_t, Dimension> start;
       std::array<size_t, Dimension> size;
-      AABB<Dimension> bounds = object->getAABB();
+      AABB<Dimension> bounds = getAABB();
 
       for (size_t i = 0; i < Dimension; i++) {
         start[i] = std::floor((bounds.getPosition()[i] - _area.getPosition()[i]) / _gridSize);
-        max[i] = std::ceil((bounds.getPosition()[i] + bounds.getSize() - _area.getPosition()[i]) / _gridSize) - start[i];
+        size[i] = std::ceil((bounds.getPosition()[i] + bounds.getSize()[i] - _area.getPosition()[i]) / (float)_gridSize) - start[i];
       }
-
+      std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> result;
+      Util<Dimension>::apply(start, size, [result,this, position](std::array<size_t, Dimension> index) {
+        auto candidates = _data->getRef(index);
+        std::set < std::shared_ptr<ObjectWithAABB<Dimension>>> result;
+        for (auto candidate : candidates) {
+          if (candidate->getAABB().intersects(position)) {
+            #pragma omp critical
+            {
+              result.insert(candidate);
+            }
+          }
+        }
+      });
+      return result;
     }
 
+
+    virtual AABB<Dimension> getAABB() override{
+      return _area;
+    }
   private:
 
 
-    std::unique_ptr<MultiDimensionalArray<std::set<ObjectWithAABB<Dimension>>, Dimension>>         _data       ;
+    std::unique_ptr<MultiDimensionalArray<std::set<std::shared_ptr<ObjectWithAABB<Dimension>>>, Dimension>>         _data       ;
     std::map< std::shared_ptr<ObjectWithAABB<Dimension>>, std::set<std::array<size_t, Dimension>>> _updateIndex;
     AABB<Dimension>                                                                                _area       ;
     size_t                                                                                         _gridSize   ;

@@ -21,8 +21,7 @@ namespace YolonaOss {
   Texture2Tree::Texture2Tree() {
   }
 
-  void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec)
-  {
+  void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec) {
     _landscape = std::make_unique<Landscape<2>>("YolonaOssData/textures/TinyMap.png");
     _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(3.0 ,3.0  )));
     _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(13.0,10.0 )));
