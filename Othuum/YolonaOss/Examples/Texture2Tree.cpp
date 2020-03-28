@@ -23,15 +23,12 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec) {
     _landscape = std::make_unique<Landscape<2>>("YolonaOssData/textures/TinyMap.png");
-    _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(3.0 ,3.0  )));
-    _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(13.0,10.0 )));
-    _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(5.0 ,2.0  )));
-    _unit[0]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
-    _unit[1]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
-    _unit[2]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
-    _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[0]->_discomfortArea);
-    _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[1]->_discomfortArea);
-    _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[2]->_discomfortArea);
+
+    for (size_t i = 0; i < 4; i++) {
+      _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(4,4  )));
+      _unit[i]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
+      _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[i]->_discomfortArea);
+    }
 
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); };

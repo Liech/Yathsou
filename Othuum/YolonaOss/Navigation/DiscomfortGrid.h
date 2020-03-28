@@ -25,7 +25,12 @@ namespace YolonaOss {
       for (size_t i = 0; i < Dimension; i++)one[i] = 1;
       for (auto index : Util<Dimension>::getRange(min, size)) {
         vec v = Util<Dimension>::array2Vec<size_t>(index) - one;
-        _surrounding.push_back(v);
+        bool nonZero = false;
+        for (size_t i = 0; i < Dimension; i++)
+          if (index[i] != 1)
+            nonZero = true;
+        if ( nonZero)
+          _surrounding.push_back(v);
       }
       _grid = std::dynamic_pointer_cast<SpatialHash<Dimension>>(std::make_shared< GridHash<Dimension> >(AABB<Dimension>(vec(0),Util<Dimension>::array2Vec(dimension)), 3.0));
     }

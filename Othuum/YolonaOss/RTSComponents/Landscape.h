@@ -31,9 +31,9 @@ namespace YolonaOss{
         std::shared_ptr<MapGroup<Dimension>>          result     = std::make_shared<MapGroup<Dimension>>();
         std::shared_ptr<DijkstraMap<Dimension>>       navigation = std::make_shared<DijkstraMap<Dimension>>();
         std::shared_ptr<DiscomfortGridMap<Dimension>> dynamic    = std::make_shared<DiscomfortGridMap<Dimension>>(_dynamicDiscomfort);
-        result->addMap(_staticMap, 0.2);
-        result->addMap(navigation, 0.8);
-        result->addMap(dynamic, 0.2);
+        result->addMap(_staticMap, 0.4);
+        result->addMap(navigation, 0.3);
+        result->addMap(dynamic, 0.3);
         auto path = std::dynamic_pointer_cast<DijkstraI<Dimension>>(std::make_shared< NMTreeDijkstra<Dimension> >(target, _tree.get(), _index, [](Tree* node) {return 1; }));
         navigation->setDijkstra(path);        
         result->setTarget(target);

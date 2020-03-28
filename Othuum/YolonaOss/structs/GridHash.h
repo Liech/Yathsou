@@ -6,11 +6,12 @@
 
 namespace YolonaOss {
   template<size_t Dimension>
-  class GridHash : public SpatialHash<Dimension>{
+  class GridHash : public SpatialHash<Dimension> {
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
   public:
     GridHash(AABB<Dimension> area, double gridSize) {
       _gridSize = gridSize;
+      _area = area;
       std::array<size_t, Dimension> dim;
       for (size_t i = 0; i < Dimension; i++)
         dim[i] = std::ceil(area.getSize()[i] / gridSize);
@@ -28,9 +29,11 @@ namespace YolonaOss {
       AABB<Dimension> bounds = object->getAABB();
 
       for (size_t i = 0; i < Dimension; i++) {
-        start[i] = std::floor((bounds.getPosition()[i] - _area.getPosition()[i]) / _gridSize);
+        double d = std::floor((std::max((double)bounds.getPosition()[i],0.0) - _area.getPosition()[i]) / (double)_gridSize);
+        start[i] = d;
         size[i] = std::ceil((bounds.getPosition()[i] + bounds.getSize()[i] - _area.getPosition()[i]) / _gridSize) - start[i];
       }
+
       std::set<std::array<size_t, Dimension>> indexes;
       std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> result;
       Util<Dimension>::apply(start, size, [object, &indexes,this](std::array<size_t, Dimension> index) {

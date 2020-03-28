@@ -83,6 +83,7 @@ namespace YolonaOss {
       auto pos = transformA(vals);
       return _data[pos]; 
     }
+
     Type  getVal(std::array<size_t, Dimension> vals) {
       auto pos = transformA(vals);
       return _data[pos];     

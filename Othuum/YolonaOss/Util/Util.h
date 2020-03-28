@@ -41,9 +41,16 @@ public:
           next.dimension = current.dimension + 1;
           next.index = current.index;
           next.index[current.dimension] += i;
+          todo.push(next);
         }
       else
-        result.push_back(current.index);
+      {
+        for (size_t i = 0; i < size[current.dimension]; i++) {
+          std::array<size_t, Dimension> r = current.index;
+          r[current.dimension] = current.index[current.dimension] + i;
+          result.push_back(r);
+        }
+      }
     }
     return result;
   }
