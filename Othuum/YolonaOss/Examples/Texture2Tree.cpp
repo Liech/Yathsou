@@ -39,16 +39,16 @@ namespace YolonaOss {
   }
 
   void YolonaOss::Texture2Tree::renderDiscomfort() {
-    auto grayscale = ImageUtil::toGrayscale<double, 2>(&_landscape->_dynamicDiscomfort->_discomfortField, 0, 1);
-    //grayscale->apply([](size_t t, Color& v) {v = Color(v.r(), v.g(), v.b(),v.b() / 8); });
-    TextureRenderer::start();
-    glm::mat4 world(1.0);
-    world = glm::rotate(world, -glm::pi<float>() / 2.0f, glm::vec3(1, 0, 0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
-    world = glm::translate(world, -glm::vec3(0, _landscape->_landscape->getDimension(1), -0.3));
-    world = glm::scale(world, glm::vec3(_landscape->_landscape->getDimension(0), _landscape->_landscape->getDimension(1), 1));
+    //auto grayscale = ImageUtil::toGrayscale<double, 2>(&_landscape->_dynamicDiscomfort->_discomfortField, 0, 1);
+    ////grayscale->apply([](size_t t, Color& v) {v = Color(v.r(), v.g(), v.b(),v.b() / 8); });
+    //TextureRenderer::start();
+    //glm::mat4 world(1.0);
+    //world = glm::rotate(world, -glm::pi<float>() / 2.0f, glm::vec3(1, 0, 0)); // where x, y, z is axis of rotation (e.g. 0 1 0)
+    //world = glm::translate(world, -glm::vec3(0, _landscape->_landscape->getDimension(1), -0.3));
+    //world = glm::scale(world, glm::vec3(_landscape->_landscape->getDimension(0), _landscape->_landscape->getDimension(1), 1));
 
-    TextureRenderer::drawTexture(grayscale.get(), world,glm::vec4(1,0,0,0.5));
-    TextureRenderer::end();
+    //TextureRenderer::drawTexture(grayscale.get(), world,glm::vec4(1,0,0,0.5));
+    //TextureRenderer::end();
   }
 
   void YolonaOss::Texture2Tree::mouseClick(double x, double y) {

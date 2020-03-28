@@ -10,6 +10,12 @@ namespace YolonaOss {
   public:
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
     
+    AABB() {}
+    AABB(vec start, vec size) {
+      _position = start;
+      _size = size;
+    }
+
     vec   getPosition() {
       return _position;
     }
@@ -23,7 +29,7 @@ namespace YolonaOss {
     }
 
     void setPosition(vec pos) {
-      _position = position;
+      _position = pos;
     }
 
     bool isInside(vec pos) {

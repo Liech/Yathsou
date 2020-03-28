@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../structs/MultiDimensionalArray.h"
+#include "../structs/SpatialHash.h"
 #include "../Util/Geometry.h"
 #include "../Util/ImageSubsetUtil.h"
 #include "../Util/Util.h"
@@ -8,7 +9,7 @@
 
 namespace YolonaOss {
   template<size_t Dimension>
-  class DiscomfortArea {
+  class DiscomfortArea : public ObjectWithAABB<Dimension>{
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
   public:
     virtual double calcRadius() = 0;
@@ -24,10 +25,24 @@ namespace YolonaOss {
       _position = position;
     }
 
+    virtual AABB<Dimension> getAABB() override {
+      vec start = _position;
+      vec size(1.0);
+      for (size_t i = 0; i < Dimension; i++) {
+        start[i] -= _radius;
+        size[i] = _radius * 2;
+      }
+      AABB<Dimension> result;
+      result.setPosition(start);
+      result.setSize(size);
+      return result; 
+    }
+
     double getDiscomfort(vec position) {
-      double distance = GeometryND<Dimension>::distancePoint2LineSegment(position, _position, _futurePosition);
+      double distance = glm::distance(position, _position);
       if (distance > _radius) return 0;
-      return distance2Discomfort(value);
+      return distance2Discomfort(distance);
+      return 1;
     }
 
     void addDiscomfort(MultiDimensionalArray<double, Dimension>* field) {

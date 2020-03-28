@@ -2,6 +2,7 @@
 
 #include "glm/vec3.hpp"
 #include <array>
+#include <glm/glm.hpp>
 
 struct Intersection {
   Intersection(glm::vec3 loc, float dist, bool does);

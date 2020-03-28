@@ -24,7 +24,7 @@ namespace YolonaOss {
       for (int i = 0; i < Dimension; i++)
         pos[i] = currentPosition[i];
 
-      return Util<Dimension>::array2Vec<double>(_grid->getGradient(Util<Dimension>::vec2Array<double>(currentPosition)));
+      return _grid->getGradient(currentPosition);
     }
   private:
 

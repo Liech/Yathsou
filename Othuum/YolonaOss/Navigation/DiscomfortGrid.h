@@ -12,68 +12,63 @@ namespace YolonaOss {
   class DiscomfortGrid {
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
   public:
-    DiscomfortGrid(std::array<size_t, Dimension> dimension, double scale) : _discomfortField(dimension) {
-      _discomfortField.fill(0);
+    DiscomfortGrid(std::array<size_t, Dimension> dimension, double scale){
       _scale = scale;
-    }
 
-    std::array<double, Dimension> getGradient(std::array<double, Dimension> position) {
-      vec scaled = _scale * Util<Dimension>::array2Vec(position);
-      std::array<size_t, Dimension> index;
-      for (size_t i = 0; i < Dimension; i++)
-        index[i] = scaled[i] > 0 ? (size_t)scaled[i] : 0;
-      std::array<double, Dimension> dir;
-      for (size_t i = 0; i < Dimension; i++)
-        dir[i] = 0;
-      return getDirectionSuggestion_recurse(index,dir);
-    }
-
-    double getDiscomfort(std::array<double, Dimension> position) {
-      std::array<size_t, Dimension> index;
-      for (size_t i = 0; i < Dimension; i++)
-        index[i] = (double)position[i] * _scale;
-      return _discomfortField.getVal(position);
-    }
-
-    void addDiscomfortArea(std::shared_ptr<DiscomfortArea<Dimension>> area) {
-      _discomfortAreas.insert(area);
-    }
-
-    void removeDiscomfortArea(std::shared_ptr<DiscomfortArea<Dimension>> area) {
-      _discomfortAreas.erase(area);
-    }
-
-    void updateDiscomfort() {
-      _discomfortField.fill(0);
-      for (auto area : _discomfortAreas) {
-        area->addDiscomfort(&_discomfortField);
+      std::array<size_t, Dimension> min;
+      std::array<size_t, Dimension> size;
+      for (size_t i = 0; i < Dimension; i++) {
+        min[i] = 0;
+        size[i] = 3;
       }
+      vec one;
+      for (size_t i = 0; i < Dimension; i++)one[i] = 1;
+      for (auto index : Util<Dimension>::getRange(min, size)) {
+        vec v = Util<Dimension>::array2Vec<size_t>(index) - one;
+        _surrounding.push_back(v);
+      }
+      _grid = std::dynamic_pointer_cast<SpatialHash<Dimension>>(std::make_shared< GridHash<Dimension> >(AABB<Dimension>(vec(0),Util<Dimension>::array2Vec(dimension)), 3.0));
     }
 
-  private:
-    std::array<double, Dimension> getDirectionSuggestion_recurse(std::array<size_t, Dimension> position, std::array<double, Dimension> dir, size_t currentDimension = Dimension - 1) {
-      std::array<double, Dimension> result;
-      for (size_t i = 0; i < Dimension; i++)
-        result[i] = 0;
-      for (int i = -1; i <= 1; i++) {
-        auto newP = position;
-        if ((!(newP[currentDimension] == 0 && i == -1)) && (!(newP[currentDimension] == _discomfortField.getDimension(currentDimension) - 1 && i == 1)))
-          newP[currentDimension] += i;
-        dir[currentDimension] = i;
-        if (currentDimension != 0)
-          result = GeometryND<Dimension>::Add(result,getDirectionSuggestion_recurse(newP, dir, currentDimension - 1));
-        else {
-          float val = _discomfortField.getVal(newP);
-          result = GeometryND<Dimension>::Add(result, GeometryND<Dimension>::Multiply(dir, -val));
-        }
+    vec getGradient(vec position) {
+      vec result(0);
+      for (auto dir : _surrounding) {
+        float dis = getDiscomfort(position + dir);
+        result += dis * dir;
       }
       return result;
     }
 
+    double getDiscomfort(vec position) {
+      auto objs = _grid->findObjects(position);
+      double result = 0;
+      for (auto obj : objs) {
+        std::shared_ptr<DiscomfortArea<Dimension>> cast = std::dynamic_pointer_cast<DiscomfortArea<Dimension>>(obj);
+        result += cast->getDiscomfort(position);
+      }
+      return result;
+    }
+
+    void addDiscomfortArea(std::shared_ptr<DiscomfortArea<Dimension>> area) {
+      _discomfortAreas.insert(area);
+      _grid->addObject(area);
+    }
+
+    void removeDiscomfortArea(std::shared_ptr<DiscomfortArea<Dimension>> area) {
+      _discomfortAreas.erase(area);
+      _grid->removeObject(area);
+    }
+
+    void updateDiscomfort() {
+      for (auto area : _discomfortAreas) {
+        _grid->updateObject(area);
+      }
+    }
+
   public:
-    std::unique_ptr<GridHash<Dimension>>                   _grid;
-    float                                                  _scale;
-    MultiDimensionalArray<double, Dimension>               _discomfortField;
+    std::vector<vec>                                       _surrounding    ;
+    std::shared_ptr<SpatialHash<Dimension>>                _grid           ;
+    float                                                  _scale          ;
     std::set<std::shared_ptr<DiscomfortArea<Dimension>>>   _discomfortAreas;
   };
 }

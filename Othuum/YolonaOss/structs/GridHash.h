@@ -14,7 +14,7 @@ namespace YolonaOss {
       std::array<size_t, Dimension> dim;
       for (size_t i = 0; i < Dimension; i++)
         dim[i] = std::ceil(area.getSize()[i] / gridSize);
-      _data = std::make_unique<MultiDimensionalArray<std::set<ObjectWithAABB<Dimension>>, Dimension>>(dim);
+      _data = std::make_unique<MultiDimensionalArray<std::set<std::shared_ptr<ObjectWithAABB<Dimension>>>, Dimension>>(dim);
     }
 
     virtual void updateObject(std::shared_ptr<ObjectWithAABB<Dimension>> object) override {
@@ -23,25 +23,25 @@ namespace YolonaOss {
     }
 
     virtual void addObject(std::shared_ptr<ObjectWithAABB<Dimension>> object) {
-      throw std::runtime_error("Not yet implemented");
-      //std::array<size_t, Dimension> start;
-      //std::array<size_t, Dimension> size;
-      //AABB<Dimension> bounds = object->getAABB();
+      std::array<size_t, Dimension> start;
+      std::array<size_t, Dimension> size;
+      AABB<Dimension> bounds = object->getAABB();
 
-      //for (size_t i = 0; i < Dimension; i++) {
-      //  start[i] = std::floor((bounds.getPosition()[i] - _area.getPosition()[i]) / _gridSize);
-      //  size[i] = std::ceil((bounds.getPosition()[i] + bounds.getSize() - _area.getPosition()[i]) / _gridSize) - start[i];
-      //}
-      //std::set<std::array<size_t, Dimension>>> indexes;
-      //std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> result;
-      //Util<Dimension>::apply(start, size, [object,shis](std::array<size_t, Dimension> index) {
-      //  #pragma omp critical{     
-      //    indexes.insert(index);
-      //  }
-      //  _data->getRef(index).insert(object);        
-      //  });
+      for (size_t i = 0; i < Dimension; i++) {
+        start[i] = std::floor((bounds.getPosition()[i] - _area.getPosition()[i]) / _gridSize);
+        size[i] = std::ceil((bounds.getPosition()[i] + bounds.getSize()[i] - _area.getPosition()[i]) / _gridSize) - start[i];
+      }
+      std::set<std::array<size_t, Dimension>> indexes;
+      std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> result;
+      Util<Dimension>::apply(start, size, [object, &indexes,this](std::array<size_t, Dimension> index) {
+        #pragma omp critical
+        {     
+          indexes.insert(index);
+        }
+        _data->getRef(index).insert(object);   
+        });
 
-      //_updateIndex[object] = indexes;
+      _updateIndex[object] = indexes;
     }
 
     virtual void removeObject(std::shared_ptr<ObjectWithAABB<Dimension>> object) {
@@ -96,9 +96,9 @@ namespace YolonaOss {
   private:
 
 
-    std::unique_ptr<MultiDimensionalArray<std::set<std::shared_ptr<ObjectWithAABB<Dimension>>>, Dimension>>         _data       ;
-    std::map< std::shared_ptr<ObjectWithAABB<Dimension>>, std::set<std::array<size_t, Dimension>>> _updateIndex;
-    AABB<Dimension>                                                                                _area       ;
-    size_t                                                                                         _gridSize   ;
+    std::unique_ptr<MultiDimensionalArray<std::set<std::shared_ptr<ObjectWithAABB<Dimension>>>, Dimension>>  _data       ;
+    std::map< std::shared_ptr<ObjectWithAABB<Dimension>>, std::set<std::array<size_t, Dimension>>>           _updateIndex;
+    AABB<Dimension>                                                                                          _area       ;
+    size_t                                                                                                   _gridSize   ;
   };
 }
