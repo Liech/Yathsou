@@ -25,7 +25,7 @@ namespace YolonaOss {
     _landscape = std::make_unique<Landscape<2>>("YolonaOssData/textures/TinyMap.png");
 
     for (size_t i = 0; i < 4; i++) {
-      _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(4,4  )));
+      _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(4+ i,4  )));
       _unit[i]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
       _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[i]->_discomfortArea);
     }

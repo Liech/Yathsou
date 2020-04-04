@@ -42,7 +42,6 @@ namespace YolonaOss {
       double distance = glm::distance(position, _position);
       if (distance > _radius) return 0;
       return distance2Discomfort(distance);
-      return 1;
     }
 
     void addDiscomfort(MultiDimensionalArray<double, Dimension>* field) {

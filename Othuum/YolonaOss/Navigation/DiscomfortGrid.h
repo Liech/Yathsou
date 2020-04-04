@@ -41,7 +41,12 @@ namespace YolonaOss {
         float dis = getDiscomfort(position + dir);
         result += dis * dir;
       }
-      return result;
+      //std::cout << "vec: ";
+      //for (size_t i = 0; i < Dimension; i++)
+      //  std::cout << result[i] << " / ";
+      //std::cout << std::endl;
+      if (glm::length(result) == 0) return result;
+      return glm::normalize(result);
     }
 
     double getDiscomfort(vec position) {

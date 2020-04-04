@@ -4,6 +4,7 @@
 #include <vector>
 
 namespace YolonaOss {
+  //takes a number of maps and sums the direction suggestion weighted
   template <size_t Dimension>
   class MapGroup : public NavigationMap<Dimension> {
   public:

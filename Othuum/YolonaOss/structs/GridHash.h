@@ -56,7 +56,7 @@ namespace YolonaOss {
     virtual std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> findObjects(vec  position) {
       std::array<size_t, Dimension> index;
       for (size_t i = 0; i < Dimension; i++) {
-        index[i] = std::floor((position[i] - _area.getPosition()[i]) / _gridSize);
+        index[i] = std::floor((std::max(position[i],0.0f) - _area.getPosition()[i]) / _gridSize);
       }
       auto candidates = _data->getRef(index);
       std::set < std::shared_ptr<ObjectWithAABB<Dimension>>> result;
