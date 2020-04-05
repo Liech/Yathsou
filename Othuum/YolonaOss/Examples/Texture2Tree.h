@@ -10,6 +10,7 @@
 #include "../RTSComponents/Landscape.h"
 #include "../RTSComponents/Unit.h"
 #include "../OpenGL/DrawableList.h"
+#include "../Drawables/Widgets/ListLayout.h"
 
 namespace YolonaOss {
   template<size_t Dimension> class DijkstraMap;
@@ -36,9 +37,11 @@ namespace YolonaOss {
     GL::DrawSpecification*                          _spec = nullptr;
     std::function<bool(double, double)>             _mouseClick;
     GL::DrawableList                                _drawableList;
+    std::shared_ptr<Widgets::ListLayout>            _layout;
 
     void renderDiscomfort();
     void mouseClick(double x, double y);
+    void addSlider(std::string text, double min, double max, double start, std::function<void(double)> valueChanged);
     glm::vec3 metaPos = glm::vec3(0, 0, 0);
   };
 }

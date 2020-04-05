@@ -10,7 +10,7 @@ namespace YolonaOss {
     {
     public:
       Slider();
-      Slider(std::string name, BoundingBox2 position, double min, double max, double startValue, std::function<void(double)> valueChangedCall);
+      Slider(BoundingBox2 position, double min, double max, double startValue, std::function<void(double)> valueChangedCall);
       ~Slider();
 
       // Inherited via Drawable
@@ -21,6 +21,9 @@ namespace YolonaOss {
       virtual void mouseLeave() override;
       virtual void mouseMove(glm::vec2 position) override;
       virtual bool mouseStatusChanged(glm::vec2 position, GL::Key k, GL::KeyStatus status) override;
+
+      double getValue() { return _currentValue; }
+      double setValue(double value) { _currentValue = value; }
 
     private:
       BoundingBox2 getSliderLocation();
@@ -34,7 +37,6 @@ namespace YolonaOss {
       const float minSliderWidth = 15;
 
 
-      std::string                 _name;
       std::function<void(double)> _valueChangedCall;
       double                      _min;
       double                      _max;

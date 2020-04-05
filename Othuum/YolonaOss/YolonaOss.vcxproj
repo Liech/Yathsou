@@ -201,6 +201,8 @@
     <ClInclude Include="Drawables\Background.h" />
     <ClInclude Include="Drawables\FPS.h" />
     <ClInclude Include="Drawables\Widgets\Button.h" />
+    <ClInclude Include="Drawables\Widgets\Label.h" />
+    <ClInclude Include="Drawables\Widgets\ListLayout.h" />
     <ClInclude Include="Drawables\Widgets\Slider.h" />
     <ClInclude Include="Drawables\Widgets\Widget.h" />
     <ClInclude Include="Examples\BasicTriangle.h" />
@@ -276,6 +278,8 @@
     <ClCompile Include="Drawables\Background.cpp" />
     <ClCompile Include="Drawables\FPS.cpp" />
     <ClCompile Include="Drawables\Widgets\Button.cpp" />
+    <ClCompile Include="Drawables\Widgets\Label.cpp" />
+    <ClCompile Include="Drawables\Widgets\ListLayout.cpp" />
     <ClCompile Include="Drawables\Widgets\Slider.cpp" />
     <ClCompile Include="Drawables\Widgets\Widget.cpp" />
     <ClCompile Include="Examples\BasicTriangle.cpp" />

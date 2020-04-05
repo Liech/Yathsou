@@ -10,11 +10,9 @@ namespace YolonaOss {
   namespace Widgets {
     Slider::Slider() : Widget()
     {
-      _name = "Def";
     }
-    Slider::Slider(std::string name, BoundingBox2 position, double min, double max, double startValue, std::function<void(double)> valueChangedCall) : Widget(position) {
+    Slider::Slider(BoundingBox2 position, double min, double max, double startValue, std::function<void(double)> valueChangedCall) : Widget(position) {
       _valueChangedCall = valueChangedCall;
-      _name = name;
       _currentValue = startValue;
       _min = min;
       _max = max;
@@ -39,15 +37,15 @@ namespace YolonaOss {
       RectangleRenderer::drawRectangle(getSliderLocation(), _hovered ? glm::vec3(0.0f, 0.8f, 0.8f) : glm::vec3(0.0f, 0.4f, 0.4f));
 
       RectangleRenderer::end();
-      glm::vec2 textSize = TextRenderer::getTextSize(_name, 1);
+      std::stringstream ss;
+      ss << std::fixed << std::setprecision(1) << _currentValue;
+      std::string mystring = ss.str();
+      glm::vec2 textSize = TextRenderer::getTextSize(mystring, 1);
       glm::vec2 spacing = (getPosition().size - textSize) / 2.0f;
       spacing[0] = 0;
       TextRenderer::start();
       glm::vec2 pos = getPosition().position + spacing;
 
-      std::stringstream ss;
-      ss << std::fixed << std::setprecision(1) << _currentValue;
-      std::string mystring = ss.str();
       TextRenderer::drawText(mystring, pos, 1, glm::vec3(0, 0, 0));
       TextRenderer::end();
     }

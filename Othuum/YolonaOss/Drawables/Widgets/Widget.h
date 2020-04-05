@@ -23,6 +23,10 @@ namespace YolonaOss {
       virtual void mouseMove(glm::vec2 position) {};
       virtual bool mouseStatusChanged(glm::vec2 position, GL::Key key, GL::KeyStatus status) { return false; };
 
+      virtual glm::vec2 getSizeHint() { return glm::vec2(100, 50); };
+
+      virtual void load(GL::DrawSpecification*) override{}
+
       BoundingBox2 getPosition() const;
       void setPosition(BoundingBox2 pos);
     private:

@@ -15,20 +15,14 @@
 #include <glm/ext/scalar_constants.hpp>
 #include "../Navigation/LinearDiscomfort.h"
 #include "../Drawables/Widgets/Slider.h"
+#include "../Drawables/Widgets/ListLayout.h"
+#include "../Drawables/Widgets/Label.h"
 
 float scaling = 1;
 namespace YolonaOss {
   
   Texture2Tree::Texture2Tree() {
-    std::shared_ptr<Widgets::Slider> b = std::make_shared<Widgets::Slider>("Slider", BoundingBox2(glm::vec2(0, 50), glm::vec2(200, 50)), 0, 1, 0.1f, [this](double val) {
-      for (auto u : _unit) {
-        u->setSpeed(val);
-      }
-      
-      
-      });
-    //Database<std::shared_ptr<Widget>>::add(b, { "MouseClick" });
-    _drawableList.addDrawable(b);
+
 
   }
 
@@ -44,6 +38,16 @@ namespace YolonaOss {
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); return true; };
     Database < std::function<bool(double, double)>*>::add(&_mouseClick , { "MouseClick" });
+
+
+    _layout = std::make_shared<Widgets::ListLayout>(BoundingBox2(glm::vec2(0, 50), glm::vec2(350, spec->height-50)));
+    _drawableList.addDrawable(_layout);
+
+    addSlider("Speed", 0, 1, 0.1f, [this](double val) {
+      for (auto u : _unit) {
+        u->setSpeed(val);
+      }
+      });
   }
 
   void YolonaOss::Texture2Tree::renderDiscomfort() {
@@ -113,5 +117,15 @@ namespace YolonaOss {
     BoxRenderer::end();
     renderDiscomfort();
     _drawableList.draw();
+  }
+
+  void Texture2Tree::addSlider(std::string text, double min, double max, double start, std::function<void(double)> valueChanged) {
+    std::shared_ptr<Widgets::Slider> a = std::make_shared<Widgets::Slider>(BoundingBox2(glm::vec2(0, 50), glm::vec2(200, 50)), min, max, start, valueChanged);
+    std::shared_ptr<Widgets::Label>  b = std::make_shared<Widgets::Label>(text, BoundingBox2(glm::vec2(0, 50), glm::vec2(150, 50)));
+    auto layout = std::make_shared<Widgets::ListLayout>(BoundingBox2(glm::vec2(0, 50), glm::vec2(350, 50)));
+    layout->setHorizontal(true);
+    layout->addWidget(b);
+    layout->addWidget(a);
+    _layout->addWidget(layout);
   }
 }
