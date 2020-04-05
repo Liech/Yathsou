@@ -72,4 +72,35 @@ public:
 
     return Dot(e, e);
   }
+
+  static float getAngle(vec A, vec B) {
+    //https://stackoverflow.com/questions/2827393/angles-between-two-n-dimensional-vectors-in-python/13849249#13849249
+    return std::acos(std::clamp(glm::dot(A, B), -1.0f, 1.0f));
+  }
+
+  //ok, more or less heavy shit in n-Dimensions :s
+  //https://math.stackexchange.com/questions/2371022/cross-product-in-higher-dimensions
+  //gets an orthogonal vector to the set of vectors. You should enter Dimension-1 Vectors
+  //2D: 1 vector -> (-y,x)
+  //3D: 2 vectors-> 
+  //                (c_P[0] = v_A[1] * v_B[2] - v_A[2] * v_B[1],
+  //                c_P[1] = -(v_A[0] * v_B[2] - v_A[2] * v_B[0]),
+  //                c_P[2] = v_A[0] * v_B[1] - v_A[1] * v_B[0])
+  //(https://www.tutorialspoint.com/cplusplus-program-to-compute-cross-product-of-two-vectors)
+  //4D...: 
+  //   determinant juggling
+  static vec Cross(std::array<Dimension-1,vec> input) {
+    //matrix[row][column]
+    vec result;
+    for (size_t currentDimension = 0; currentDimension < Dimension; currentDimension++) {
+      glm::mat<Dimension - 1, Dimension - 1, float> matrix;
+      for (size_t row = 0; row < Dimension - 1; row++) {
+        for (size_t column = 0; column < Dimension - 1)
+          matrix[row][column] = input[column][column + currentDimension<=column?1:0];
+      }
+      result[currentDimension] = glm::determinant(matrix);
+    }
+    return result;
+  }
+
 };

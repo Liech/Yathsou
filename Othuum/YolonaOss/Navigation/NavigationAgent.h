@@ -4,6 +4,9 @@
 #include <iostream>
 #include "NavigationMap.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 namespace YolonaOss {
 
   template <size_t Dimension>
@@ -47,14 +50,25 @@ namespace YolonaOss {
       return _position;
     }
 
+    vec getOrientation() {
+      return _orientation;
+    }
+
+    void setOrientation(vec orientation) {
+      _orientation = orientation;
+    }
+
     void setSpeed(float speed) {
       _speed = speed;
     }
 
   private:   
-    float                          _speed = 0.1f;
-    vec                            _position;
-    vec                            _target;
-    std::shared_ptr<NavigationMap<Dimension>> _map;
+    float                                     _speed = 0.1f               ;
+    float                                     _turnSpeed = M_PI * 2 / 10.0;
+
+    vec                                       _position                   ;
+    vec                                       _target                     ;
+    vec                                       _orientation                ;
+    std::shared_ptr<NavigationMap<Dimension>> _map                        ;
   };
 }
