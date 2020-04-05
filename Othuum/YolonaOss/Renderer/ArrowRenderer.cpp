@@ -19,7 +19,7 @@ namespace YolonaOss {
     float start = 0;
     float end = 1;
 
-    glm::vec3 a = glm::vec3(0, 1, 0);
+    glm::vec3 a = glm::vec3(0, -1, 0);
 
     const float stepsize = (M_PI*2.0f) / 8.0f;
     for (float currentAngle = 0; currentAngle < M_PI*2; currentAngle += stepsize) {

@@ -14,8 +14,9 @@ namespace YolonaOss {
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
 
   public:
-    NavigationAgent(vec pos) {      
+    NavigationAgent(vec pos, vec orientation) {      
       _position = pos;
+      _orientation = orientation;
       _target = pos;
       _map = nullptr;
     }
@@ -28,9 +29,10 @@ namespace YolonaOss {
       if (dist < 0.01f || glm::length(dir) < 0.01)
         return;
       dir = glm::normalize(dir);
-      vec movement = dir * _speed;
+      _orientation = GeometryND<Dimension>::slerp(_orientation, dir, 0.2f);
+      vec movement = _orientation * _speed;
       if (glm::length(movement) > dist)
-        movement = glm::normalize(movement) * dist;
+        movement = glm::normalize(movement) * dist * 0.5f;
       _position = _position + movement;       
     }
 

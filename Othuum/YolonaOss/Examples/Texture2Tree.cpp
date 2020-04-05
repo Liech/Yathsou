@@ -30,8 +30,8 @@ namespace YolonaOss {
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec) {
     _landscape = std::make_unique<Landscape<2>>("YolonaOssData/textures/TinyMap.png");
 
-    for (size_t i = 0; i < 4; i++) {
-      _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(4+ i,4  )));
+    for (size_t i = 0; i < 40; i++) {
+      _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(4+ i,4  ), glm::vec2(1,0)));
       _unit[i]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
       _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[i]->_discomfortArea);
     }
@@ -115,7 +115,7 @@ namespace YolonaOss {
     BoxRenderer::end();
     ArrowRenderer::start();
     for (size_t i = 0; i < _unit.size(); i++)
-      ArrowRenderer::drawArrow(glm::vec3(_unit[i]->getPosition().x,0.5f, _unit[i]->getPosition().y), glm::vec3(1,0.2,1),0.5f, glm::vec4(1, 0, 0, 1));
+      ArrowRenderer::drawArrow(glm::vec3(_unit[i]->getPosition().x,0.5f, _unit[i]->getPosition().y), glm::vec3(_unit[i]->getOrientation()[0],0,_unit[i]->getOrientation()[1]),0.5f, glm::vec4(1, 0, 0, 1));
     ArrowRenderer::end();
     renderDiscomfort();
     _drawableList.draw();

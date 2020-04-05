@@ -4,6 +4,9 @@
 #include <array>
 #include <glm/glm.hpp>
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 struct Intersection {
   Intersection(glm::vec3 loc, float dist, bool does);
 
@@ -22,7 +25,8 @@ public:
 template<size_t Dimension>
 class GeometryND {
 public:
-  typedef std::array<double, Dimension> vec;
+  using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+
 
   static vec Subtract(vec A, vec B) {
     vec result = A;
@@ -73,9 +77,28 @@ public:
     return Dot(e, e);
   }
 
+  static vec slerp(vec p0, vec p1, double t) {
+    //https://en.wikipedia.org/wiki/Slerp
+    float omega = std::acos(std::clamp(glm::dot(p0, p1),-1.0f,1.0f));
+    if (std::abs(omega) < 1e-4)
+      return p0;
+    if (std::abs(omega+M_PI) < 1e-4)
+      assert(false);
+    if (std::abs(omega-M_PI) < 1e-4)
+      assert(false);
+    float a = std::sin((1.0 - t) * omega) / sin(omega);
+    float b = std::sin(t * omega)         / sin(omega);
+    vec result = p0 * a + p1 * b;
+    for (size_t i = 0; i < Dimension; i++)
+      assert(std::isfinite(result[i]));
+    return glm::normalize(result);
+  }
+
   static float getAngle(vec A, vec B) {
     //https://stackoverflow.com/questions/2827393/angles-between-two-n-dimensional-vectors-in-python/13849249#13849249
-    return std::acos(std::clamp(glm::dot(A, B), -1.0f, 1.0f));
+    A = glm::normalize(A);
+    B = glm::normalize(B);
+    return std::acos(std::clamp(Dot(A, B), -1.0f, 1.0f));
   }
 
   //ok, more or less heavy shit in n-Dimensions :s
@@ -89,7 +112,7 @@ public:
   //(https://www.tutorialspoint.com/cplusplus-program-to-compute-cross-product-of-two-vectors)
   //4D...: 
   //   determinant juggling
-  static vec Cross(std::array<Dimension-1,vec> input) {
+  static vec Cross(std::array<vec,Dimension-1> input) {
     //matrix[row][column]
     vec result;
     for (size_t currentDimension = 0; currentDimension < Dimension; currentDimension++) {

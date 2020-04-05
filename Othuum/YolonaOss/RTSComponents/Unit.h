@@ -11,8 +11,8 @@ namespace YolonaOss{
   class Unit{
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
   public:
-    Unit(vec v) {
-      _navigationAgent = std::make_shared<NavigationAgent<2>>(v);
+    Unit(vec position, vec orientation) {
+      _navigationAgent = std::make_shared<NavigationAgent<2>>(position, orientation);
 
     }
 
@@ -27,6 +27,10 @@ namespace YolonaOss{
 
     vec getPosition() {
       return _navigationAgent->getPosition();
+    }
+
+    vec getOrientation() {
+      return _navigationAgent->getOrientation();
     }
 
     public:
