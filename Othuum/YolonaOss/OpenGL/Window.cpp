@@ -92,6 +92,21 @@ namespace YolonaOss {
         throw std::runtime_error("OPENGL ERROR:" + std::string(message));
     }
 
+    void Window::mouseMovementCalls() {
+      double xpos, ypos;
+      glfwGetCursorPos(_window, &xpos, &ypos);
+      glm::vec2 mousePos((float)xpos, (float)(win->getHeight() - ypos));
+
+      if (mousePos != _oldMousePos) {
+        std::set<Widgets::Widget*> moveWidgets = Database<Widgets::Widget*>::getByTag("MouseMove");
+        for (auto w : moveWidgets) {
+          if (w->getPosition().inside(mousePos)) {
+            w->mouseMove(mousePos - w->getPosition().position);
+          }
+        }
+      }
+      _oldMousePos = mousePos;
+    }
 
     void Window::run() {
       std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
@@ -168,7 +183,7 @@ namespace YolonaOss {
         _mouseWheelMovement = 0;
         // Check if any events have been activated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
-
+        mouseMovementCalls();
         for (auto update : Database<std::shared_ptr <Updateable>>::getByTag("Main"))
           update->update();
 
@@ -186,14 +201,14 @@ namespace YolonaOss {
       glfwTerminate();
     }
 
-    std::shared_ptr<Widget> pressed = std::shared_ptr<Widget>();
+    Widgets::Widget* pressed = nullptr;
     void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     {
       double xpos, ypos;
       glfwGetCursorPos(window, &xpos, &ypos);
       glm::vec2 mousePos((float)xpos, (float)(win->getHeight() - ypos));
 
-      std::set<std::shared_ptr<Widget>> clickableWidgets = Database<std::shared_ptr<Widget>>::getByTag("MouseClick");
+      std::set<Widgets::Widget*> clickableWidgets = Database<Widgets::Widget*>::getByTag("MouseClick");
       for (auto w : clickableWidgets) {
         if (w->getPosition().inside(mousePos)) {
           if (action == (int)KeyStatus::PRESS)
@@ -212,7 +227,7 @@ namespace YolonaOss {
           f(xpos, ypos);
       }
       if (action == (int)KeyStatus::RELEASE)
-        pressed = std::shared_ptr<Widget>();
+        pressed = nullptr;
     }
 
     void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)

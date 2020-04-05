@@ -9,11 +9,12 @@
 #include "../Navigation/NavigationAgent.h"
 #include "../RTSComponents/Landscape.h"
 #include "../RTSComponents/Unit.h"
+#include "../OpenGL/DrawableList.h"
 
 namespace YolonaOss {
   template<size_t Dimension> class DijkstraMap;
   template<size_t Dimension> class GradientGridMap;
-  template<size_t Dimension> class MapGroup;
+  template<size_t Dimension> class MapGroup; 
   namespace GL {
     class DrawSpecification;
   }
@@ -32,9 +33,9 @@ namespace YolonaOss {
     std::vector<std::shared_ptr<Unit<2>>>             _unit     ; 
 
 
-    GL::DrawSpecification*                          _spec;
+    GL::DrawSpecification*                          _spec = nullptr;
     std::function<void(double, double)>             _mouseClick;
-
+    GL::DrawableList                                _drawableList;
 
     void renderDiscomfort();
     void mouseClick(double x, double y);

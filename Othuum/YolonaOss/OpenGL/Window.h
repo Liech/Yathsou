@@ -33,7 +33,10 @@ namespace YolonaOss {
       int getHeight() { return _height; }
 
     private:
-      int _width = 1920;
+      void mouseMovementCalls();
+
+      glm::vec2 _oldMousePos;
+        int _width = 1920;
       int _height = 1080;
       GLFWwindow* _window = nullptr;
       float _mouseWheelMovement = 0;

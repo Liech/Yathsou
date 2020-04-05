@@ -14,11 +14,16 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/ext/scalar_constants.hpp>
 #include "../Navigation/LinearDiscomfort.h"
+#include "../Drawables/Widgets/Slider.h"
 
 float scaling = 1;
 namespace YolonaOss {
   
   Texture2Tree::Texture2Tree() {
+    std::shared_ptr<Widgets::Slider> b = std::make_shared<Widgets::Slider>("Slider", BoundingBox2(glm::vec2(0, 50), glm::vec2(200, 50)),0,10,5, [](double val) {});
+    //Database<std::shared_ptr<Widget>>::add(b, { "MouseClick" });
+    _drawableList.addDrawable(b);
+
   }
 
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec) {
@@ -101,5 +106,6 @@ namespace YolonaOss {
       BoxRenderer::drawDot(glm::vec3(_unit[i]->getPosition().x,0.1f, _unit[i]->getPosition().y), glm::vec3(0.6f), glm::vec4(1, 0, 0, 1));
     BoxRenderer::end();
     renderDiscomfort();
+    _drawableList.draw();
   }
 }

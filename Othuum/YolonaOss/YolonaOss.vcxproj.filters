@@ -306,6 +306,9 @@
     <ClInclude Include="structs\GridHash.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
+    <ClInclude Include="Drawables\Widgets\Slider.h">
+      <Filter>Header Files\Drawables\Widgets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -460,6 +463,9 @@
     </ClCompile>
     <ClCompile Include="RTSComponents\Unit.cpp">
       <Filter>Source Files\RTSComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawables\Widgets\Slider.cpp">
+      <Filter>Source Files\Drawables\Widgets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
