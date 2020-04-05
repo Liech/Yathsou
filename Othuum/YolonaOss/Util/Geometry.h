@@ -80,12 +80,26 @@ public:
   static vec slerp(vec p0, vec p1, double t) {
     //https://en.wikipedia.org/wiki/Slerp
     float omega = std::acos(std::clamp(glm::dot(p0, p1),-1.0f,1.0f));
-    if (std::abs(omega) < 1e-4)
+    if (std::abs(omega) < 1e-4) //identical direction
       return p0;
-    if (std::abs(omega+M_PI) < 1e-4)
-      assert(false);
-    if (std::abs(omega-M_PI) < 1e-4)
-      assert(false);
+    if (std::abs(omega - M_PI) < 1e-4 || std::abs(omega + M_PI) < 1e-4) //opposite direction, anything is correct, as long it is not on the same vector, so choose a near one
+    {
+      vec a;
+      vec b;
+      for (size_t i = 0; i < Dimension; i++) {
+        a[i] = i;
+        b[i] = Dimension-i;
+      }
+      a = glm::normalize(a);
+      b = glm::normalize(b);
+      float A = glm::dot(p0, a);
+      float B = glm::dot(p0, b);
+      if (A == M_PI || A == 0) 
+        a = b;
+      return slerp(slerp(p0, a, 0.001f),p1,t);
+    }
+
+      
     float a = std::sin((1.0 - t) * omega) / sin(omega);
     float b = std::sin(t * omega)         / sin(omega);
     vec result = p0 * a + p1 * b;

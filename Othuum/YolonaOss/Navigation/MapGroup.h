@@ -25,9 +25,14 @@ namespace YolonaOss {
       return dir;
     }
 
-    void addMap(std::shared_ptr<NavigationMap<Dimension>> map, float influence) {
+    size_t addMap(std::shared_ptr<NavigationMap<Dimension>> map, float influence) {
       _influence.push_back(influence);
       _maps.push_back(map);
+      return _maps.size() - 1;
+    }
+
+    void setWeight(size_t mapId, float influence) {
+      _influence[mapId] = influence;
     }
 
   private:

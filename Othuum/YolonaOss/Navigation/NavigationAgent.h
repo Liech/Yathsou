@@ -39,6 +39,10 @@ namespace YolonaOss {
     void setMap(std::shared_ptr<NavigationMap<Dimension>> map) {
       _map = map;
     }
+    
+    std::shared_ptr<NavigationMap<Dimension>> getMap() {
+      return _map;
+    }
 
     void setTarget(vec position) {
       _target = position;

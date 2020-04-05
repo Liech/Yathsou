@@ -49,6 +49,21 @@ namespace YolonaOss {
         u->setSpeed(val);
       }
       });
+    addSlider("land", 0, 1, 0.4f, [this](double val) {
+      for (auto u : _unit) {
+        std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(0, val);
+      }
+      });
+    addSlider("navi", 0, 1, 0.4f, [this](double val) {
+      for (auto u : _unit) {
+        std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(1, val);
+      }
+      });
+    addSlider("unit", 0, 1, 0.4f, [this](double val) {
+      for (auto u : _unit) {
+        std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(2, val);
+      }
+      });
   }
 
   void YolonaOss::Texture2Tree::renderDiscomfort() {
