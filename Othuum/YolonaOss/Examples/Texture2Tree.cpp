@@ -17,6 +17,7 @@
 #include "../Drawables/Widgets/Slider.h"
 #include "../Drawables/Widgets/ListLayout.h"
 #include "../Drawables/Widgets/Label.h"
+#include "../Renderer/ArrowRenderer.h"
 
 float scaling = 1;
 namespace YolonaOss {
@@ -111,10 +112,11 @@ namespace YolonaOss {
     }
 
     BoxRenderer::drawDot(metaPos, glm::vec3(0.1f), glm::vec4(1, 0, 1, 1));
-
-    for (size_t i = 0; i < _unit.size(); i++)
-      BoxRenderer::drawDot(glm::vec3(_unit[i]->getPosition().x,0.1f, _unit[i]->getPosition().y), glm::vec3(0.6f), glm::vec4(1, 0, 0, 1));
     BoxRenderer::end();
+    ArrowRenderer::start();
+    for (size_t i = 0; i < _unit.size(); i++)
+      ArrowRenderer::drawArrow(glm::vec3(_unit[i]->getPosition().x,0.5f, _unit[i]->getPosition().y), glm::vec3(1,0.2,1),0.5f, glm::vec4(1, 0, 0, 1));
+    ArrowRenderer::end();
     renderDiscomfort();
     _drawableList.draw();
   }

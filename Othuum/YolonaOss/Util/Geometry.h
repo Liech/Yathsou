@@ -15,6 +15,8 @@ struct Intersection {
 class Geometry {
 public:
   static Intersection intersectRayPlane(const glm::vec3 rayOrigin,const glm::vec3 rayDirection,const glm::vec3 planeOrigin,const glm::vec3 planeNormal);
+  static glm::vec3 getNormal(glm::vec3 a, glm::vec3 b, glm::vec3 c);
+  static float getAngle(glm::vec3 a, glm::vec3 b);
 };
 
 template<size_t Dimension>
