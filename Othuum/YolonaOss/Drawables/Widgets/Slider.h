@@ -19,9 +19,8 @@ namespace YolonaOss {
 
       virtual void mouseEnter() override;
       virtual void mouseLeave() override;
-      virtual void mouseClick(glm::vec2 position, GL::Key k) override;
       virtual void mouseMove(glm::vec2 position) override;
-      virtual void mouseStatusChanged(glm::vec2 position, GL::Key k, GL::KeyStatus status);
+      virtual bool mouseStatusChanged(glm::vec2 position, GL::Key k, GL::KeyStatus status) override;
 
     private:
       BoundingBox2 getSliderLocation();

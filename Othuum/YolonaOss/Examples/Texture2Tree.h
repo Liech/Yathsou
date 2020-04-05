@@ -34,7 +34,7 @@ namespace YolonaOss {
 
 
     GL::DrawSpecification*                          _spec = nullptr;
-    std::function<void(double, double)>             _mouseClick;
+    std::function<bool(double, double)>             _mouseClick;
     GL::DrawableList                                _drawableList;
 
     void renderDiscomfort();

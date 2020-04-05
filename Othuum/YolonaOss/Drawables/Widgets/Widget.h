@@ -19,9 +19,9 @@ namespace YolonaOss {
 
       virtual void mouseEnter() {};
       virtual void mouseLeave() {};
-      virtual void mouseClick(glm::vec2 position, GL::Key k) {};
+      virtual bool mouseClick(glm::vec2 position, GL::Key k) { return false; };
       virtual void mouseMove(glm::vec2 position) {};
-      virtual void mouseStatusChanged(glm::vec2 position, GL::Key key, GL::KeyStatus status) {};
+      virtual bool mouseStatusChanged(glm::vec2 position, GL::Key key, GL::KeyStatus status) { return false; };
 
       BoundingBox2 getPosition() const;
       void setPosition(BoundingBox2 pos);

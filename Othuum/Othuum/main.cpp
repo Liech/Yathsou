@@ -44,26 +44,8 @@ int main() {
 
     Database<std::shared_ptr<GL::Updateable>>::add(cam, { "Main" });
     glm::vec3 start, end;
-    std::function<void(double, double)> f = [&w, &start, &end, cam](double, double) {
-      //glm::vec3 pick = w.getSpec()->getCam()->getPickRay(&w, w.getCursorPos().first, w.getCursorPos().second);
-      glm::vec3 pos = w.getSpec()->getCam()->getPosition();
 
-
-      //float distance = 0;
-      //bool intersects = glm::intersectRayPlane(pos,
-      //  pick,
-      //  glm::vec3(0,0,0),
-      //  glm::vec3(0,1,0),
-      //  distance
-      //);
-      ////if (intersects) {
-      //  end = pos + pick;
-      //  start = pos;
-      /////}
-    };
-    Database < std::function<void(double, double)>*>::add(&f, { "MouseClick" });
-
-    w.Update = [&w, &start, &end, f, width, height]() {
+    w.Update = [&w, &start, &end, width, height]() {
       //f(0, 0);
       glm::vec3 viewDir = glm::normalize(w.getSpec()->getCam()->getTarget() - w.getSpec()->getCam()->getPosition());
       glm::vec3 dir = w.getSpec()->getCam()->getPickRay(w.getCursorPos().first, w.getCursorPos().second);

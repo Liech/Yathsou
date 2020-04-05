@@ -42,8 +42,8 @@ namespace YolonaOss {
     }
 
     _spec = spec;
-    _mouseClick = [this](double x, double y) {mouseClick(x, y); };
-    Database < std::function<void(double, double)>*>::add(&_mouseClick , { "MouseClick" });
+    _mouseClick = [this](double x, double y) {mouseClick(x, y); return true; };
+    Database < std::function<bool(double, double)>*>::add(&_mouseClick , { "MouseClick" });
   }
 
   void YolonaOss::Texture2Tree::renderDiscomfort() {

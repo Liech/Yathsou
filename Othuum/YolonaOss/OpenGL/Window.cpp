@@ -211,7 +211,9 @@ namespace YolonaOss {
       std::set<Widgets::Widget*> mouseStatusWidgets = Database<Widgets::Widget*>::getByTag("MouseStatus");
       KeyStatus status = (KeyStatus)action;
       for (auto w : mouseStatusWidgets) {
-        w->mouseStatusChanged(mousePos - w->getPosition().position, (Key)button, status);
+        bool stop = w->mouseStatusChanged(mousePos - w->getPosition().position, (Key)button, status);
+        if (stop)
+          return;
       }
 
       std::set<Widgets::Widget*> clickableWidgets = Database<Widgets::Widget*>::getByTag("MouseClick");
@@ -220,17 +222,26 @@ namespace YolonaOss {
           if (status == KeyStatus::PRESS)
             pressed = w;
           else
-            if (action == (int)KeyStatus::RELEASE && pressed == w)
-              w->mouseClick(mousePos - w->getPosition().position, (Key)button);
+            if (action == (int)KeyStatus::RELEASE && pressed == w) {
+              bool stop = w->mouseClick(mousePos - w->getPosition().position, (Key)button);
+              if (stop)
+                return;
+            }
         }
       }
-      std::set<std::function<void(double, double)>*> functions = Database<std::function<void(double, double)>*>::getByTag("MouseClick");
+      std::set<std::function<bool(double, double)>*> functions = Database<std::function<bool(double, double)>*>::getByTag("MouseClick");
       if(action == (int)KeyStatus::PRESS) {
-        for (auto f : functions)
-          (*f)(xpos, ypos);
-        std::set<std::function<void(double, double)>> functions2 = Database<std::function<void(double, double)>>::getByTag("MouseClick");
-        for (auto f : functions2)
-          f(xpos, ypos);
+        for (auto f : functions) {
+          bool stop = (*f)(xpos, ypos);
+          if (stop)
+            return;
+        }
+        std::set<std::function<bool(double, double)>> functions2 = Database<std::function<bool(double, double)>>::getByTag("MouseClick");
+        for (auto f : functions2) {
+          bool stop = f(xpos, ypos);
+          if (stop)
+            return;
+        }
       }
       if (action == (int)KeyStatus::RELEASE)
         pressed = nullptr;

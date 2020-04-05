@@ -79,9 +79,6 @@ namespace YolonaOss {
       _hovered = false;
     };
 
-    void Slider::mouseClick(glm::vec2 position, GL::Key k) {
-    };
-
     void Slider::mouseMove(glm::vec2 position) {
       BoundingBox2 myPos = getPosition();
       if (_pressed) {
@@ -95,19 +92,26 @@ namespace YolonaOss {
       }
     }
 
-    void Slider::mouseStatusChanged(glm::vec2 position, GL::Key k, GL::KeyStatus status) {
+    bool Slider::mouseStatusChanged(glm::vec2 position, GL::Key k, GL::KeyStatus status) {
       if (k == GL::Key::MOUSE_BUTTON_1) {
         if (status == GL::KeyStatus::PRESS && !_pressed) {
           BoundingBox2 b = getSliderLocation();
           b.position -= getPosition().position;
-          if (b.inside(position))
+          if (b.inside(position)) {
             _pressed = true;
+            return true;
+          }
 
         }
         if (status == GL::KeyStatus::RELEASE && _pressed) {
           _pressed = false;
+          return true;
         }
       }
+
+      BoundingBox2 c = getPosition();
+      c.position -= getPosition().position;
+      return c.inside(position);
     }
 
   }
