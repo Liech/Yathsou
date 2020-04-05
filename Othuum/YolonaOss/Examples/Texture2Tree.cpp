@@ -20,7 +20,13 @@ float scaling = 1;
 namespace YolonaOss {
   
   Texture2Tree::Texture2Tree() {
-    std::shared_ptr<Widgets::Slider> b = std::make_shared<Widgets::Slider>("Slider", BoundingBox2(glm::vec2(0, 50), glm::vec2(200, 50)),0,10,5, [](double val) {});
+    std::shared_ptr<Widgets::Slider> b = std::make_shared<Widgets::Slider>("Slider", BoundingBox2(glm::vec2(0, 50), glm::vec2(200, 50)), 0, 1, 0.1f, [this](double val) {
+      for (auto u : _unit) {
+        u->setSpeed(val);
+      }
+      
+      
+      });
     //Database<std::shared_ptr<Widget>>::add(b, { "MouseClick" });
     _drawableList.addDrawable(b);
 

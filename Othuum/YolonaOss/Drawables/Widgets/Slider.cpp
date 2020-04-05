@@ -18,7 +18,7 @@ namespace YolonaOss {
       _currentValue = startValue;
       _min = min;
       _max = max;
-      Database<Widgets::Widget*>::add(this, { "MouseClick","MouseMove" });
+      Database<Widgets::Widget*>::add(this, { "MouseMove","MouseStatus" });
     }
 
     Slider::~Slider()
@@ -80,10 +80,6 @@ namespace YolonaOss {
     };
 
     void Slider::mouseClick(glm::vec2 position, GL::Key k) {
-      BoundingBox2 b = getSliderLocation();
-      b.position -= getPosition().position;
-      if (b.inside(position))
-        _pressed = !_pressed;
     };
 
     void Slider::mouseMove(glm::vec2 position) {
@@ -95,7 +91,24 @@ namespace YolonaOss {
         _currentValue = _min + ((position[0] - min) / (max-min)) * (_max - _min);
         if (_currentValue < _min) _currentValue = _min;
         if (_currentValue > _max) _currentValue = _max;
+        _valueChangedCall(_currentValue);
       }
     }
+
+    void Slider::mouseStatusChanged(glm::vec2 position, GL::Key k, GL::KeyStatus status) {
+      if (k == GL::Key::MOUSE_BUTTON_1) {
+        if (status == GL::KeyStatus::PRESS && !_pressed) {
+          BoundingBox2 b = getSliderLocation();
+          b.position -= getPosition().position;
+          if (b.inside(position))
+            _pressed = true;
+
+        }
+        if (status == GL::KeyStatus::RELEASE && _pressed) {
+          _pressed = false;
+        }
+      }
+    }
+
   }
 }

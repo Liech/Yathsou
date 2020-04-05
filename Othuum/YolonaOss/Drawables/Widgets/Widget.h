@@ -21,6 +21,7 @@ namespace YolonaOss {
       virtual void mouseLeave() {};
       virtual void mouseClick(glm::vec2 position, GL::Key k) {};
       virtual void mouseMove(glm::vec2 position) {};
+      virtual void mouseStatusChanged(glm::vec2 position, GL::Key key, GL::KeyStatus status) {};
 
       BoundingBox2 getPosition() const;
       void setPosition(BoundingBox2 pos);

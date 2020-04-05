@@ -25,7 +25,7 @@ namespace YolonaOss {
       if (dist < 0.01f || glm::length(dir) < 0.01)
         return;
       dir = glm::normalize(dir);
-      vec movement = dir * 0.1f;
+      vec movement = dir * _speed;
       if (glm::length(movement) > dist)
         movement = glm::normalize(movement) * dist;
       _position = _position + movement;       
@@ -47,7 +47,12 @@ namespace YolonaOss {
       return _position;
     }
 
+    void setSpeed(float speed) {
+      _speed = speed;
+    }
+
   private:   
+    float                          _speed = 0.1f;
     vec                            _position;
     vec                            _target;
     std::shared_ptr<NavigationMap<Dimension>> _map;

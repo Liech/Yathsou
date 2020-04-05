@@ -208,10 +208,16 @@ namespace YolonaOss {
       glfwGetCursorPos(window, &xpos, &ypos);
       glm::vec2 mousePos((float)xpos, (float)(win->getHeight() - ypos));
 
+      std::set<Widgets::Widget*> mouseStatusWidgets = Database<Widgets::Widget*>::getByTag("MouseStatus");
+      KeyStatus status = (KeyStatus)action;
+      for (auto w : mouseStatusWidgets) {
+        w->mouseStatusChanged(mousePos - w->getPosition().position, (Key)button, status);
+      }
+
       std::set<Widgets::Widget*> clickableWidgets = Database<Widgets::Widget*>::getByTag("MouseClick");
       for (auto w : clickableWidgets) {
         if (w->getPosition().inside(mousePos)) {
-          if (action == (int)KeyStatus::PRESS)
+          if (status == KeyStatus::PRESS)
             pressed = w;
           else
             if (action == (int)KeyStatus::RELEASE && pressed == w)

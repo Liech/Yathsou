@@ -21,6 +21,10 @@ namespace YolonaOss{
       _navigationAgent->setTarget(target);
     }
 
+    void setSpeed(float speed) {
+      _navigationAgent->setSpeed(speed);
+    }
+
     vec getPosition() {
       return _navigationAgent->getPosition();
     }
