@@ -69,7 +69,7 @@ namespace YolonaOss {
 
 
   private:
-    double                        _radius = 2;
+    double                        _radius = 1;
     float                         _scale;
     vec _lastPosition;
     vec _position;

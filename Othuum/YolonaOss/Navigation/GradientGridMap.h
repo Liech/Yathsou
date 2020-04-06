@@ -30,8 +30,11 @@ namespace YolonaOss {
       vec scaled = _scale * currentPosition;
       
       std::array<size_t, Dimension> index;
-      for (int i = 0; i < Dimension; i++)
-        index[i] = scaled[i]>0?(size_t)scaled[i]:0;
+      for (int i = 0; i < Dimension; i++) {
+        size_t t = scaled[i] > 0 ? (size_t)scaled[i] : 0;
+        size_t s = _discomfortMap->getDimension(i) - 1;
+        index[i] = std::clamp(t, (size_t)0, s);
+      }
       return getDirectionSuggestion_recurse(index);
     }
   private:

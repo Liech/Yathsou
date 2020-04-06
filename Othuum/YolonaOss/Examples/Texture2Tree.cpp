@@ -19,6 +19,8 @@
 #include "../Drawables/Widgets/Label.h"
 #include "../Renderer/ArrowRenderer.h"
 
+#include <functional>
+
 float scaling = 1;
 namespace YolonaOss {
   
@@ -32,7 +34,7 @@ namespace YolonaOss {
 
     for (size_t i = 0; i < 40; i++) {
       _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(4+ i,4  ), glm::vec2(1,0)));
-      _unit[i]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(20, _landscape->_disMapScale));
+      _unit[i]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(0.5, _landscape->_disMapScale));
       _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[i]->_discomfortArea);
     }
 
@@ -44,25 +46,45 @@ namespace YolonaOss {
     _layout = std::make_shared<Widgets::ListLayout>(BoundingBox2(glm::vec2(0, 50), glm::vec2(350, spec->height-50)));
     _drawableList.addDrawable(_layout);
 
+    for (size_t i = 0; i < 20; i++)
+      _config[i] = 0;
+
     addSlider("Speed", 0, 1, 0.1f, [this](double val) {
       for (auto u : _unit) {
         u->setSpeed(val);
       }
       });
-    addSlider("land", 0, 1, 0.4f, [this](double val) {
+    addSlider("land", 0, 1, 0.0f, [this](double val) {
       for (auto u : _unit) {
-        std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(0, val);
+        if (u->_navigationAgent->getMap())
+          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(0, val);
       }
+      _config[0] = val;
+      _landscape->setConfig(_config);
       });
-    addSlider("navi", 0, 1, 0.4f, [this](double val) {
+    addSlider("navi", 0, 1, 0.0f, [this](double val) {
       for (auto u : _unit) {
-        std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(1, val);
+        if (u->_navigationAgent->getMap())
+          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(1, val);
       }
+      _config[1] = val;
+      _landscape->setConfig(_config);
       });
-    addSlider("unit", 0, 1, 0.4f, [this](double val) {
+    addSlider("unit", 0, 1, 0.0f, [this](double val) {
       for (auto u : _unit) {
-        std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(2, val);
+        if (u->_navigationAgent->getMap())
+          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(2, val);
       }
+      _config[2] = val;
+      _landscape->setConfig(_config);
+      });
+    addSlider("direct", 0, 1, 0.0f, [this](double val) {
+      for (auto u : _unit) {
+        if (u->_navigationAgent->getMap()) 
+          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(3, val);
+      }
+      _config[3] = val;
+      _landscape->setConfig(_config);
       });
   }
 

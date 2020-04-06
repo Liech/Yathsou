@@ -24,7 +24,7 @@ namespace YolonaOss {
       for (int i = 0; i < Dimension; i++)
         pos[i] = currentPosition[i];
 
-      return _grid->getGradient(currentPosition);
+      return -_grid->getGradient(currentPosition);
     }
   private:
 

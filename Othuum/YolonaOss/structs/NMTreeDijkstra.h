@@ -24,6 +24,13 @@ namespace YolonaOss {
     }
 
     virtual vec getDirectionSuggestion(vec currentPosition) override {
+      for (size_t i = 0; i < Dimension; i++) {
+        if (currentPosition[i] < 0) 
+          return vec(0.0);
+        if (currentPosition[i] >= _root->getSize())
+          return vec(0.0);
+      }
+
       Tree* current = _root->getLeaf(Util<Dimension>::vec2Array<size_t>(currentPosition));
       auto next = _dijkstra->getNext(current);
       if (next == nullptr)

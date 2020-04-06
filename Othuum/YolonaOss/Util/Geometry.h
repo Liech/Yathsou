@@ -94,7 +94,7 @@ public:
       b = glm::normalize(b);
       float A = glm::dot(p0, a);
       float B = glm::dot(p0, b);
-      if (A == M_PI || A == 0) 
+      if (A == M_PI || A == 0 || A == 1) 
         a = b;
       return slerp(slerp(p0, a, 0.001f),p1,t);
     }

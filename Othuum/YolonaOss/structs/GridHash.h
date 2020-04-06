@@ -31,7 +31,8 @@ namespace YolonaOss {
       for (size_t i = 0; i < Dimension; i++) {
         double d = std::floor((std::max((double)bounds.getPosition()[i],0.0) - _area.getPosition()[i]) / (double)_gridSize);
         start[i] = d;
-        size[i] = std::ceil((bounds.getPosition()[i] + bounds.getSize()[i] - _area.getPosition()[i]) / _gridSize) - start[i];
+        size[i] = (size_t)std::clamp(std::ceil((double)((bounds.getPosition()[i] + bounds.getSize()[i] - _area.getPosition()[i]) / (float)_gridSize) - start[i]),0.0,100000000.0);
+
       }
 
       std::set<std::array<size_t, Dimension>> indexes;

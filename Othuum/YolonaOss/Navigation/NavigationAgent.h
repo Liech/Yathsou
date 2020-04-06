@@ -31,8 +31,9 @@ namespace YolonaOss {
       dir = glm::normalize(dir);
       _orientation = GeometryND<Dimension>::slerp(_orientation, dir, 0.2f);
       vec movement = _orientation * _speed;
+      float dot = glm::dot(_orientation, dir);
       if (glm::length(movement) > dist)
-        movement = glm::normalize(movement) * dist * 0.5f;
+        movement = glm::normalize(movement) * dist * 0.5f * ((dot<0)?0:dot);
       _position = _position + movement;       
     }
 

@@ -43,5 +43,6 @@ namespace YolonaOss {
     void mouseClick(double x, double y);
     void addSlider(std::string text, double min, double max, double start, std::function<void(double)> valueChanged);
     glm::vec3 metaPos = glm::vec3(0, 0, 0);
+    std::array<float, 20> _config;
   };
 }
