@@ -25,6 +25,10 @@ namespace YolonaOss {
       _position = position;
     }
 
+    void setRadius(float radius) {
+      _radius = radius;
+    }
+
     virtual AABB<Dimension> getAABB() override {
       vec start = _position;
       vec size(1.0);
@@ -69,7 +73,7 @@ namespace YolonaOss {
 
 
   private:
-    double                        _radius = 1;
+    double                        _radius = 0.5f;
     float                         _scale;
     vec _lastPosition;
     vec _position;

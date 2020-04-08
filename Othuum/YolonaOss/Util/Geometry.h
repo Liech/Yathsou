@@ -94,9 +94,9 @@ public:
       b = glm::normalize(b);
       float A = glm::dot(p0, a);
       float B = glm::dot(p0, b);
-      if (A == M_PI || A == 0 || A == 1) 
+      if (A == M_PI || std::abs(A) < 1e-4 || std::abs(A-1) < 1e-4) 
         a = b;
-      return slerp(slerp(p0, a, 0.001f),p1,t);
+      return slerp(slerp(p0, a, 0.01f),p1,t);
     }
 
       

@@ -8,6 +8,7 @@
 #include "../Navigation/DijkstraMap.h"
 #include "../Navigation/GradientGridMap.h"
 #include "../Navigation/DiscomfortGridMap.h"
+#include "../Navigation/ComfortGridMap.h"
 #include "../Navigation/DirectDistanceMap.h"
 #include "../structs/MultiDimensionalArray.h"
 #include "../structs/NMTree.h"
@@ -34,11 +35,13 @@ namespace YolonaOss{
       std::shared_ptr<NavigationMap<Dimension>> getMap(vec target) {
         std::shared_ptr<MapGroup<Dimension>>          result     = std::make_shared<MapGroup<Dimension>>();
         std::shared_ptr<DijkstraMap<Dimension>>       navigation = std::make_shared<DijkstraMap<Dimension>>();
-        std::shared_ptr<DiscomfortGridMap<Dimension>> dynamic    = std::make_shared<DiscomfortGridMap<Dimension>>(_dynamicDiscomfort);
+        std::shared_ptr<DiscomfortGridMap<Dimension>> discomfort = std::make_shared<DiscomfortGridMap<Dimension>>(_dynamicDiscomfort);
+        std::shared_ptr<ComfortGridMap<Dimension>>    comfort    = std::make_shared<ComfortGridMap<Dimension>>(_dynamicDiscomfort);
         result->addMap(_staticMap, _config[0]);
         result->addMap(navigation, _config[1]);
-        result->addMap(dynamic, _config[2]);
+        result->addMap(discomfort, _config[2]);
         result->addMap(std::make_shared<DirectDistanceMap<Dimension>>(), _config[3]);
+        result->addMap(comfort, _config[4]);
         auto path = std::dynamic_pointer_cast<DijkstraI<Dimension>>(std::make_shared< NMTreeDijkstra<Dimension> >(target, _tree.get(), _index, [](Tree* node) {return 1; }));
         navigation->setDijkstra(path);        
         result->setTarget(target);

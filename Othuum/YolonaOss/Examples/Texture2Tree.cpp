@@ -54,6 +54,11 @@ namespace YolonaOss {
         u->setSpeed(val);
       }
       });
+    addSlider("dist", 0, 1, 0.1f, [this](double val) {
+      for (auto u : _unit) {
+        u->_discomfortArea->setRadius(val);
+      }
+      });
     addSlider("land", 0, 1, 0.0f, [this](double val) {
       for (auto u : _unit) {
         if (u->_navigationAgent->getMap())
@@ -70,7 +75,15 @@ namespace YolonaOss {
       _config[1] = val;
       _landscape->setConfig(_config);
       });
-    addSlider("unit", 0, 1, 0.0f, [this](double val) {
+    addSlider("direct", 0, 1, 0.0f, [this](double val) {
+      for (auto u : _unit) {
+        if (u->_navigationAgent->getMap())
+          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(3, val);
+      }
+      _config[3] = val;
+      _landscape->setConfig(_config);
+      });
+    addSlider("shy", 0, 1, 0.0f, [this](double val) {
       for (auto u : _unit) {
         if (u->_navigationAgent->getMap())
           std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(2, val);
@@ -78,10 +91,10 @@ namespace YolonaOss {
       _config[2] = val;
       _landscape->setConfig(_config);
       });
-    addSlider("direct", 0, 1, 0.0f, [this](double val) {
+    addSlider("cuddle", 0, 1, 0.0f, [this](double val) {
       for (auto u : _unit) {
-        if (u->_navigationAgent->getMap()) 
-          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(3, val);
+        if (u->_navigationAgent->getMap())
+          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(4, val);
       }
       _config[3] = val;
       _landscape->setConfig(_config);
@@ -150,9 +163,17 @@ namespace YolonaOss {
 
     BoxRenderer::drawDot(metaPos, glm::vec3(0.1f), glm::vec4(1, 0, 1, 1));
     BoxRenderer::end();
+    //BoxRenderer::start();
+    //for (size_t i = 0; i < _unit.size(); i++) {
+    //  BoxRenderer::drawDot(glm::vec3(_unit[i]->getPosition().x, 0.5f, _unit[i]->getPosition().y), glm::vec3(1)*0.1f,glm::vec4(1, 0, 0, 1));
+    //}
+    //BoxRenderer::end();
     ArrowRenderer::start();
-    for (size_t i = 0; i < _unit.size(); i++)
-      ArrowRenderer::drawArrow(glm::vec3(_unit[i]->getPosition().x,0.5f, _unit[i]->getPosition().y), glm::vec3(_unit[i]->getOrientation()[0],0,_unit[i]->getOrientation()[1]),0.5f, glm::vec4(1, 0, 0, 1));
+    for (size_t i = 0; i < _unit.size(); i++) {
+      glm::vec3 ori = glm::vec3(_unit[i]->getOrientation()[0], 0   , _unit[i]->getOrientation()[1]);
+      glm::vec3 pos = glm::vec3(_unit[i]->getPosition().x    , 0.5f, _unit[i]->getPosition().y    );
+      ArrowRenderer::drawArrow(pos-ori*0.5f, ori, 0.5f, glm::vec4(1, 0, 0, 1));
+    }
     ArrowRenderer::end();
     renderDiscomfort();
     _drawableList.draw();

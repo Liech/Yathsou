@@ -318,6 +318,9 @@
     <ClInclude Include="Renderer\ArrowRenderer.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Navigation\ComfortGridMap.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">

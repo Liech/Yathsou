@@ -28,7 +28,7 @@ namespace YolonaOss {
       float dist = glm::distance(_target, _position);
       if (dist < 0.01f || glm::length(dir) < 0.01)
         return;
-      dir = glm::normalize(dir);
+      //dir = glm::normalize(dir);
       _orientation = GeometryND<Dimension>::slerp(_orientation, dir, 0.2f);
       vec movement = _orientation * _speed;
       float dot = glm::dot(_orientation, dir);
