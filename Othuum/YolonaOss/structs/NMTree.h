@@ -9,11 +9,10 @@
 //this link proposes HyperOctree and Orthtree, which would only describe 2^N trees.
 //https://math.stackexchange.com/questions/644032/name-of-the-generalization-of-quadtree-and-octree
 
-//It is not neccessary for my purpose that it has n dimensions, therefor it is not really tested
+//It is not neccessary for my purpose that it has n dimensions (I only need 2 and 3), therefor it is not really tested
 //Im just interested in the mindfuck of building it ultra generic
 //and it should be fully compatible to the MultiDimensionalarray, which was also born out of the desire to mindfuck
 //So this code will be not easy to read, not even for me. Forgive me
-
 
 
 //maybe 3 and 4 dimensions are neccessary. For voxel animations?
@@ -26,21 +25,24 @@ namespace YolonaOss {
     Positive, Negative
   };
 
-  template <typename Content, size_t ArraySize, size_t Dimension, TreeMergeBehavior Merge, Content defaultValue>
+  template <typename Content, size_t ArraySize, size_t Dimension, TreeMergeBehavior Merge, /*Content defaultValue,*/ typename Scalar = size_t>
   class NMTree final {
-    using Tree = NMTree<Content, ArraySize, Dimension, Merge, defaultValue>;
+    using Tree = NMTree<Content, ArraySize, Dimension, Merge/*, defaultValue*/, Scalar>;
   public:
     NMTree(Tree* parent = nullptr) {
       _parent = parent;
     }
 
-    NMTree(Content value, std::array<size_t, Dimension> position, Tree* parent = nullptr) {
+    NMTree(Content value, std::array<Scalar, Dimension> position, Tree* parent = nullptr) {
       _parent = parent;
       _position = position;
       _content = value;
     }
 
+    
     NMTree(MultiDimensionalArray<Content, Dimension>* description, Tree* parent = nullptr) {
+      static_assert(!std::is_same<double, Scalar>());
+      static_assert(!std::is_same<float, Scalar>());
       _parent = parent;
       //find suitable size for enclosing tree    
       size_t maxDim = 0;
@@ -79,7 +81,7 @@ namespace YolonaOss {
         child->_size = _size / ArraySize;
         child->_content = _content;
         child->_parent = this;
-        std::array<size_t, Dimension> newPosition;
+        std::array<Scalar, Dimension> newPosition;
         for (int i = 0; i < Dimension; i++)
           newPosition[i] = _position[i] + pos[i] * child->_size;
         child->_position = newPosition;
@@ -94,10 +96,10 @@ namespace YolonaOss {
     }
 
     struct Leaf {
-      std::array<size_t, Dimension> position;
-      size_t                        size;
+      std::array<Scalar, Dimension> position;
+      Scalar                        size;
       Content                       value;
-      NMTree<Content, ArraySize, Dimension, Merge, defaultValue>* link;
+      NMTree<Content, ArraySize, Dimension, Merge, /*defaultValue, */Scalar>* link;
 
     };
     std::vector<Leaf> getLeafs() {
@@ -134,19 +136,20 @@ namespace YolonaOss {
       }
     }
 
-    Tree* getLeaf(std::array<size_t, Dimension> position) {
+    Tree* getLeaf(std::array<Scalar, Dimension> position) {
       if (isLeaf()) 
         return this;
-      std::array<size_t, Dimension> converted;      
+      std::array<size_t, Dimension> converted;
       for (size_t i = 0; i < Dimension; i++)
         converted[i] = (position[i] - getPosition()[i]) / (getSize() / ArraySize);
       Tree* t = getChild(converted);
       return t->getLeaf(position);
     }
     
+    void setContent(Content c) { _content = c; }
     Content getContent() { return _content; }
-    size_t getSize() { return _size; }
-    std::array<size_t, Dimension> getPosition() { return _position; }
+    Scalar getSize() { return _size; }
+    std::array<Scalar, Dimension> getPosition() { return _position; }
     Tree* getParent() { return _parent; }
     bool  isLeaf() { return _childs == nullptr; }
     Tree* getChild(std::array<size_t, Dimension> pos) { return _childs->getVal(pos); }
@@ -164,7 +167,7 @@ namespace YolonaOss {
       if (_size == 1) {
         for (size_t dim = 0; dim < Dimension; dim++)
           if (_position[dim] >= description->getDimension(dim)) {
-            _content = defaultValue;
+            //_content = defaultValue;
             return;
           }
         _content = description->getVal(_position);
@@ -211,10 +214,10 @@ namespace YolonaOss {
       }
     }
 
-    std::array<size_t, Dimension>            _position;
-    size_t                                   _size = 1;
-    Content                                  _content;
-    MultiDimensionalArray<Tree*, Dimension>*  _childs = nullptr;
-    Tree*                                    _parent;
+    std::array<Scalar, Dimension>             _position          ;
+    Scalar                                    _size     = 1      ;
+    Content                                   _content           ;
+    MultiDimensionalArray<Tree*, Dimension>*  _childs   = nullptr;
+    Tree*                                     _parent            ;
   };
 }

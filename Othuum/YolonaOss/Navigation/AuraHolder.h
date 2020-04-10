@@ -1,18 +1,21 @@
 #pragma once
 
 #include "../structs/MultiDimensionalArray.h"
-#include "DiscomfortArea.h"
+#include "Aura.h"
 #include <set>
 #include "../Util/Geometry.h"
 #include "../Util/Util.h"
 #include "../structs/GridHash.h"
+#include "../structs/NMTreeSpatialHash.h"
 
 namespace YolonaOss {
+  //You can place Auras in this and query the current aura gradient or value of an arbitrary position
+  //Auras are areas that are notified by units. E.g. to recognize friends are near, or too near. See Flocking
   template<size_t Dimension>
-  class DiscomfortGrid {
+  class AuraHolder {
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
   public:
-    DiscomfortGrid(std::array<size_t, Dimension> dimension, double scale){
+    AuraHolder(std::array<size_t, Dimension> dimension, double scale){
       _scale = scale;
 
       std::array<size_t, Dimension> min;
@@ -53,25 +56,25 @@ namespace YolonaOss {
       auto objs = _grid->findObjects(position);
       double result = 0;
       for (auto obj : objs) {
-        std::shared_ptr<DiscomfortArea<Dimension>> cast = std::dynamic_pointer_cast<DiscomfortArea<Dimension>>(obj);
-        result += cast->getDiscomfort(position);
+        std::shared_ptr<Aura<Dimension>> cast = std::dynamic_pointer_cast<Aura<Dimension>>(obj);
+        //result += cast->getDiscomfort(position);
       }
       return result;
     }
 
-    void addDiscomfortArea(std::shared_ptr<DiscomfortArea<Dimension>> area) {
-      _discomfortAreas.insert(area);
-      _grid->addObject(area);
+    void addDiscomfortArea(std::shared_ptr<Aura<Dimension>> area) {
+      _aura.insert(area);
+      //_grid->addObject(area);
     }
 
-    void removeDiscomfortArea(std::shared_ptr<DiscomfortArea<Dimension>> area) {
-      _discomfortAreas.erase(area);
+    void removeDiscomfortArea(std::shared_ptr<Aura<Dimension>> area) {
+      _aura.erase(area);
       _grid->removeObject(area);
     }
 
-    void updateDiscomfort() {
-      for (auto area : _discomfortAreas) {
-        _grid->updateObject(area);
+    void updateAuras() {
+      for (auto area : _aura) {
+        //_grid->updateObject(area);
       }
     }
 
@@ -79,6 +82,7 @@ namespace YolonaOss {
     std::vector<vec>                                       _surrounding    ;
     std::shared_ptr<SpatialHash<Dimension>>                _grid           ;
     float                                                  _scale          ;
-    std::set<std::shared_ptr<DiscomfortArea<Dimension>>>   _discomfortAreas;
+    std::set<std::shared_ptr<Aura<Dimension>>>             _aura           ;
+    NMTreeSpatialHash<Aura<Dimension>, Dimension>          _tree           ;
   };
 }

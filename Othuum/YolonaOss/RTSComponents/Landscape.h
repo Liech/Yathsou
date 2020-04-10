@@ -7,8 +7,8 @@
 #include "../Navigation/MapGroup.h"
 #include "../Navigation/DijkstraMap.h"
 #include "../Navigation/GradientGridMap.h"
-#include "../Navigation/DiscomfortGridMap.h"
-#include "../Navigation/ComfortGridMap.h"
+#include "../Navigation/DiscomfortMap.h"
+#include "../Navigation/ComfortMap.h"
 #include "../Navigation/DirectDistanceMap.h"
 #include "../structs/MultiDimensionalArray.h"
 #include "../structs/NMTree.h"
@@ -20,8 +20,8 @@ namespace YolonaOss{
   template<size_t Dimension>
   class Landscape{
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
-    using Tree = NMTree<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max, false>;
-    using TreeI = NMTreeNeighbourIndex<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max, false>;
+    using Tree = NMTree<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max>;
+    using TreeI = NMTreeNeighbourIndex<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max>;
   public:
     const int _disMapScale = 10;
     public:
@@ -35,8 +35,8 @@ namespace YolonaOss{
       std::shared_ptr<NavigationMap<Dimension>> getMap(vec target) {
         std::shared_ptr<MapGroup<Dimension>>          result     = std::make_shared<MapGroup<Dimension>>();
         std::shared_ptr<DijkstraMap<Dimension>>       navigation = std::make_shared<DijkstraMap<Dimension>>();
-        std::shared_ptr<DiscomfortGridMap<Dimension>> discomfort = std::make_shared<DiscomfortGridMap<Dimension>>(_dynamicDiscomfort);
-        std::shared_ptr<ComfortGridMap<Dimension>>    comfort    = std::make_shared<ComfortGridMap<Dimension>>(_dynamicDiscomfort);
+        std::shared_ptr<DiscomfortMap<Dimension>> discomfort = std::make_shared<DiscomfortMap<Dimension>>(_dynamicDiscomfort);
+        std::shared_ptr<ComfortMap<Dimension>>    comfort    = std::make_shared<ComfortMap<Dimension>>(_dynamicDiscomfort);
         result->addMap(_staticMap, _config[0]);
         result->addMap(navigation, _config[1]);
         result->addMap(discomfort, _config[2]);
@@ -60,11 +60,11 @@ namespace YolonaOss{
       auto scaled = ImageUtil::scaleUp<double, Dimension>(_landscape->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);
       scaled->apply([](size_t pos, double& val) {val = 1.0 - val; });
       _staticDiscomfort = std::shared_ptr<MultiDimensionalArray<double, 2>>(std::move(scaled));
-      _dynamicDiscomfort = std::make_shared < DiscomfortGrid<Dimension>>(dim,_disMapScale);
+      _dynamicDiscomfort = std::make_shared < AuraHolder<Dimension>>(dim,_disMapScale);
       _staticMap = std::make_shared<GradientGridMap<Dimension>>((double)_disMapScale);
       _staticMap->setMap(_staticDiscomfort);
-      _tree = std::make_shared<NMTree<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max, false> >(_landscape.get());
-      _index = std::make_shared<NMTreeNeighbourIndex<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max, false>>(_tree.get());
+      _tree = std::make_shared<Tree>(_landscape.get());
+      _index = std::make_shared<NMTreeNeighbourIndex<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max>>(_tree.get());
       _index->init();
     }
 
@@ -73,7 +73,7 @@ namespace YolonaOss{
       std::shared_ptr<MultiDimensionalArray<bool, Dimension>>   _landscape        ;
       std::shared_ptr<MultiDimensionalArray<double, Dimension>> _staticDiscomfort ;
       std::shared_ptr< GradientGridMap<Dimension> >             _staticMap        ;
-      std::shared_ptr<DiscomfortGrid<Dimension>>                _dynamicDiscomfort;
+      std::shared_ptr<AuraHolder<Dimension>>                    _dynamicDiscomfort;
 
       std::shared_ptr<Tree>                                     _tree             ;
       std::shared_ptr<TreeI>                                    _index            ;

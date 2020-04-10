@@ -19,8 +19,8 @@ namespace YolonaOss {
   namespace GL {
     class DrawSpecification;
   }
-  using Tree = NMTree<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max, false>;
-  using TreeI = NMTreeNeighbourIndex<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max, false>;
+  using Tree = NMTree<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max>;
+  using TreeI = NMTreeNeighbourIndex<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max>;
 
   class Texture2Tree : public GL::Drawable {
     // Geerbt über Drawable

@@ -13,7 +13,6 @@
 #include "Util/ImageUtil.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/ext/scalar_constants.hpp>
-#include "../Navigation/LinearDiscomfort.h"
 #include "../Drawables/Widgets/Slider.h"
 #include "../Drawables/Widgets/ListLayout.h"
 #include "../Drawables/Widgets/Label.h"
@@ -34,7 +33,7 @@ namespace YolonaOss {
 
     for (size_t i = 0; i < 40; i++) {
       _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(4+ i,4  ), glm::vec2(1,0)));
-      _unit[i]->_discomfortArea = std::dynamic_pointer_cast<DiscomfortArea<2>>( std::make_shared<LinearDiscomfort<2>>(0.5, _landscape->_disMapScale));
+      _unit[i]->_discomfortArea = std::dynamic_pointer_cast<Aura<2>>( std::make_shared<Aura<2>>(_landscape->_disMapScale));
       _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[i]->_discomfortArea);
     }
 
@@ -136,7 +135,7 @@ namespace YolonaOss {
       _unit[i]->_navigationAgent->updatePosition();
       _unit[i]->_discomfortArea->setPosition(_unit[i]->_navigationAgent->getPosition());
     }
-    _landscape->_dynamicDiscomfort->updateDiscomfort();
+    _landscape->_dynamicDiscomfort->updateAuras();
     BoxRenderer::start();
     auto leafs = _landscape->_tree->getLeafs();
     

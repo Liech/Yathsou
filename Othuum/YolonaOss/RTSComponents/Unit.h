@@ -1,7 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "../Navigation/DiscomfortArea.h"
+#include "../Navigation/Aura.h"
 #include "../Navigation/NavigationAgent.h"
 #include "Landscape.h"
 #include <memory>
@@ -34,7 +34,7 @@ namespace YolonaOss{
     }
 
     public:
-      std::shared_ptr<DiscomfortArea<Dimension>>  _discomfortArea ;
+      std::shared_ptr<Aura<Dimension>>            _discomfortArea ;
       std::shared_ptr<NavigationAgent<Dimension>> _navigationAgent;
   };
 }

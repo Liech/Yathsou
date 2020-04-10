@@ -18,9 +18,9 @@
 namespace YolonaOss {
 
 
-  template <typename Content, size_t ArraySize, size_t Dimension, TreeMergeBehavior Merge, Content defaultValue>
+  template <typename Content, size_t ArraySize, size_t Dimension, TreeMergeBehavior Merge, typename Scalar = size_t>
   class NMTreeNeighbourIndex {
-    using Tree = NMTree<Content, ArraySize, Dimension, Merge, defaultValue>;
+    using Tree = NMTree<Content, ArraySize, Dimension, Merge, Scalar>;
   public:
     NMTreeNeighbourIndex(Tree* root) {
       _root = root;

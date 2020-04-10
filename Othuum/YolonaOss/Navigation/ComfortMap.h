@@ -2,15 +2,15 @@
 
 #include <memory>
 #include "NavigationMap.h"
-#include "DiscomfortGrid.h"
+#include "AuraHolder.h"
 #include "../Util/Util.h"
 
 namespace YolonaOss {
   template <size_t Dimension>
-  class ComfortGridMap :public NavigationMap<Dimension> {
-    using self = typedef DiscomfortGridMap<Dimension>;
+  class ComfortMap :public NavigationMap<Dimension> {
+    using self = typedef ComfortMap<Dimension>;
   public:
-    ComfortGridMap(std::shared_ptr<DiscomfortGrid<Dimension>> grid) {
+    ComfortMap(std::shared_ptr<AuraHolder<Dimension>> grid) {
       _grid = grid;
     }
 
@@ -29,7 +29,7 @@ namespace YolonaOss {
   private:
 
   private:
-    std::shared_ptr<DiscomfortGrid<Dimension>> _grid;
-    vec                                        _target;
+    std::shared_ptr<AuraHolder<Dimension>> _grid;
+    vec                                    _target;
   };
 }

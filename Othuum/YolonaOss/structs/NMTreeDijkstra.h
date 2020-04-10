@@ -8,8 +8,8 @@ namespace YolonaOss {
 
   template<size_t Dimension>
   class NMTreeDijkstra : public DijkstraI<Dimension> {
-    using Tree = NMTree<bool, 2, Dimension, YolonaOss::TreeMergeBehavior::Max, false>;
-    using TreeI = NMTreeNeighbourIndex<bool, 2, Dimension, YolonaOss::TreeMergeBehavior::Max, false>;
+    using Tree = NMTree<bool, 2, Dimension, YolonaOss::TreeMergeBehavior::Max>;
+    using TreeI = NMTreeNeighbourIndex<bool, 2, Dimension, YolonaOss::TreeMergeBehavior::Max>;
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
     using self = typedef NMTreeDijkstra<Dimension>;
   public:
@@ -78,7 +78,7 @@ namespace YolonaOss {
   private:
     std::function<double(Tree*)> _getWeight;
     vec _start;
-    std::unique_ptr< Dijkstra<NMTree<bool,2, Dimension, YolonaOss::TreeMergeBehavior::Max, false>>> _dijkstra;
+    std::unique_ptr< Dijkstra<NMTree<bool,2, Dimension, YolonaOss::TreeMergeBehavior::Max>>> _dijkstra;
     std::shared_ptr<TreeI> _treeIndex;
     Tree* _root;
   };

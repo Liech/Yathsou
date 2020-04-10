@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MultiDimensionalArray.h"
+#include <memory>
 #include "AABB.h"
 
 namespace YolonaOss {
