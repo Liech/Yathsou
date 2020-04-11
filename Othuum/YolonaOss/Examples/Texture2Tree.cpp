@@ -47,56 +47,23 @@ namespace YolonaOss {
     for (size_t i = 0; i < 20; i++)
       _config[i] = 0;
 
-    addSlider("Speed", 0, 1, 0.1f, [this](double val) {
-      for (auto u : _unit) {
-        u->setSpeed(val);
-      }
-      });
-    addSlider("dist", 0, 1, 0.1f, [this](double val) {
-      for (auto u : _unit) {
-        u->_aura->setRadius(val);
-      }
-      });
-    addSlider("land", 0, 1, 0.0f, [this](double val) {
-      for (auto u : _unit) {
-        if (u->_navigationAgent->getMap())
-          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(0, val);
-      }
-      _config[0] = val;
-      _landscape->setConfig(_config);
-      });
-    addSlider("navi", 0, 1, 0.0f, [this](double val) {
-      for (auto u : _unit) {
-        if (u->_navigationAgent->getMap())
-          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(1, val);
-      }
-      _config[1] = val;
-      _landscape->setConfig(_config);
-      });
-    addSlider("direct", 0, 1, 0.0f, [this](double val) {
-      for (auto u : _unit) {
-        if (u->_navigationAgent->getMap())
-          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(3, val);
-      }
-      _config[3] = val;
-      _landscape->setConfig(_config);
-      });
-    addSlider("shy", 0, 1, 0.0f, [this](double val) {
-      for (auto u : _unit) {
-        if (u->_navigationAgent->getMap())
-          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(2, val);
-      }
-      _config[2] = val;
-      _landscape->setConfig(_config);
-      });
-    addSlider("cuddle", 0, 1, 0.0f, [this](double val) {
-      for (auto u : _unit) {
-        if (u->_navigationAgent->getMap())
-          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(4, val);
-      }
-      _config[3] = val;
-      _landscape->setConfig(_config);
-      });
+
+    //addSlider("Speed", 0, 1, 0.1f, [this](double val) {
+    //  for (auto u : _unit) {
+    //    u->setSpeed(val);
+    //  }
+    //  });
+    //addSlider("dist", 0, 1, 0.1f, [this](double val) {
+    //  for (auto u : _unit) {
+    //    u->_aura->setRadius(val);
+    //  }
+    //  });
+    addSlider("land"  , 0, 0, 1, 0.0f);
+    addSlider("navi"  , 1, 0, 1, 0.0f);
+    addSlider("direct", 2, 0, 1, 0.0f);
+    addSlider("shy"   , 3, 0, 1, 0.0f);
+    addSlider("cuddle", 4, 0, 1, 0.0f);
+    addSlider("align" , 5, 0, 1, 0.0f);
   }
 
   void YolonaOss::Texture2Tree::renderDiscomfort() {
@@ -133,7 +100,9 @@ namespace YolonaOss {
     for (size_t i = 0; i < _unit.size(); i++) {
       _unit[i]->_navigationAgent->updatePosition();
       _unit[i]->_aura->setPosition(_unit[i]->_navigationAgent->getPosition());
+      _unit[i]->_aura->setOrientation(_unit[i]->_navigationAgent->getOrientation());
     }
+
     _landscape->_unitAuras->updateAuras();
     BoxRenderer::start();
     auto leafs = _landscape->_tree->getLeafs();
@@ -177,8 +146,17 @@ namespace YolonaOss {
     _drawableList.draw();
   }
 
-  void Texture2Tree::addSlider(std::string text, double min, double max, double start, std::function<void(double)> valueChanged) {
-    std::shared_ptr<Widgets::Slider> a = std::make_shared<Widgets::Slider>(BoundingBox2(glm::vec2(0, 50), glm::vec2(200, 50)), min, max, start, valueChanged);
+  void Texture2Tree::addSlider(std::string text, int id, double min, double max, double start) {
+    auto v = [this, id](double val) { 
+      for (auto u : _unit) {
+        if (u->_navigationAgent->getMap())
+          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(5, val);
+      }
+      _config[id] = val;
+      _landscape->setConfig(_config);
+    };
+
+    std::shared_ptr<Widgets::Slider> a = std::make_shared<Widgets::Slider>(BoundingBox2(glm::vec2(0, 50), glm::vec2(200, 50)), min, max, start, v);
     std::shared_ptr<Widgets::Label>  b = std::make_shared<Widgets::Label>(text, BoundingBox2(glm::vec2(0, 50), glm::vec2(150, 50)));
     auto layout = std::make_shared<Widgets::ListLayout>(BoundingBox2(glm::vec2(0, 50), glm::vec2(350, 50)));
     layout->setHorizontal(true);

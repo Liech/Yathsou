@@ -321,6 +321,9 @@
     <ClInclude Include="structs\NMTreeSpatialHash.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
+    <ClInclude Include="Navigation\AligmentMap.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">

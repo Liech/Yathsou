@@ -212,6 +212,7 @@
     <ClInclude Include="Examples\Texture2Tree.h" />
     <ClInclude Include="Lib\lodepng\lodepng.h" />
     <ClInclude Include="Lib\lodepng\lodepng_util.h" />
+    <ClInclude Include="Navigation\AligmentMap.h" />
     <ClInclude Include="Navigation\Aura.h" />
     <ClInclude Include="Navigation\AuraHolder.h" />
     <ClInclude Include="Navigation\ComfortMap.h" />

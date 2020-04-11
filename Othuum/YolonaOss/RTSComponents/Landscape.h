@@ -10,6 +10,7 @@
 #include "../Navigation/DiscomfortMap.h"
 #include "../Navigation/ComfortMap.h"
 #include "../Navigation/DirectDistanceMap.h"
+#include "../Navigation/AligmentMap.h"
 #include "../structs/MultiDimensionalArray.h"
 #include "../structs/NMTree.h"
 #include "../structs/NMTreeNeighbourIndex.h"
@@ -33,15 +34,18 @@ namespace YolonaOss{
       }
 
       std::shared_ptr<NavigationMap<Dimension>> getMap(vec target) {
-        std::shared_ptr<MapGroup<Dimension>>          result     = std::make_shared<MapGroup<Dimension>>();
-        std::shared_ptr<DijkstraMap<Dimension>>       navigation = std::make_shared<DijkstraMap<Dimension>>();
-        std::shared_ptr<DiscomfortMap<Dimension>> discomfort = std::make_shared<DiscomfortMap<Dimension>>(_unitAuras);
-        std::shared_ptr<ComfortMap<Dimension>>    comfort    = std::make_shared<ComfortMap<Dimension>>(_unitAuras);
-        result->addMap(_staticMap, _config[0]);
-        result->addMap(navigation, _config[1]);
-        result->addMap(discomfort, _config[2]);
-        result->addMap(std::make_shared<DirectDistanceMap<Dimension>>(), _config[3]);
-        result->addMap(comfort, _config[4]);
+        std::shared_ptr<MapGroup<Dimension>>         result     = std::make_shared<MapGroup         <Dimension>>(          );
+        std::shared_ptr<DijkstraMap<Dimension>>      navigation = std::make_shared<DijkstraMap      <Dimension>>(          );
+        std::shared_ptr<DiscomfortMap<Dimension>>    discomfort = std::make_shared<DiscomfortMap    <Dimension>>(_unitAuras);
+        std::shared_ptr<ComfortMap<Dimension>>       comfort    = std::make_shared<ComfortMap       <Dimension>>(_unitAuras);
+        std::shared_ptr<AligmentMap<Dimension>>      alignment  = std::make_shared<AligmentMap      <Dimension>>(_unitAuras);
+        std::shared_ptr<DirectDistanceMap<Dimension>> direct    = std::make_shared<DirectDistanceMap<Dimension>>(          );
+        result->addMap(_staticMap  , _config[0]);
+        result->addMap(navigation  , _config[1]);
+        result->addMap(direct      , _config[2]);
+        result->addMap(discomfort  , _config[3]);
+        result->addMap(comfort     , _config[4]);
+        result->addMap(alignment   , _config[5]);
         auto path = std::dynamic_pointer_cast<DijkstraI<Dimension>>(std::make_shared< NMTreeDijkstra<Dimension> >(target, _tree.get(), _index, [](Tree* node) {return 1; }));
         navigation->setDijkstra(path);        
         result->setTarget(target);

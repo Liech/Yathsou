@@ -22,6 +22,14 @@ namespace YolonaOss {
       return _position;
     }
 
+    vec getOrientation() {
+      return _orientation;
+    }
+
+    void setOrientation(vec orientation) {
+      _orientation = orientation;
+    }
+
     void setPosition(vec position) {
       _position = position;
     }
@@ -39,5 +47,6 @@ namespace YolonaOss {
   private:
     double                        _radius = 0.5f;
     vec                           _position     ;
+    vec                           _orientation  ;
   };
 }

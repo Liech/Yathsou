@@ -7,10 +7,10 @@
 
 namespace YolonaOss {
   template <size_t Dimension>
-  class ComfortMap :public NavigationMap<Dimension> {
-    using self = typedef ComfortMap<Dimension>;
+  class AligmentMap :public NavigationMap<Dimension> {
+    using self = typedef DiscomfortMap<Dimension>;
   public:
-    ComfortMap(std::shared_ptr<AuraHolder<Dimension>> grid) {
+    AligmentMap(std::shared_ptr<AuraHolder<Dimension>> grid) {
       _auras = grid;
     }
 
@@ -23,16 +23,15 @@ namespace YolonaOss {
       auto auras = _auras->findAuras(currentPosition, 2);
       vec avg(0.0);
       for (auto aura : auras) {
-        avg += aura->getPosition();
+        avg += glm::normalize(aura->getOrientation());
       }
-      avg /= (float)auras.size();
-      return avg;
+
+      return glm::normalize(avg);
     }
-
   private:
 
   private:
-    std::shared_ptr<AuraHolder<Dimension>> _auras;
-    vec                                    _target;
+    std::shared_ptr<AuraHolder<Dimension>>     _auras  ;
+    vec                                        _target;
   };
 }
