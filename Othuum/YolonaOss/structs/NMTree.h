@@ -39,6 +39,13 @@ namespace YolonaOss {
       _content = value;
     }
 
+    NMTree(Content value, std::array<Scalar, Dimension> position, Scalar size, Tree* parent = nullptr) {
+      _parent = parent;
+      _position = position;
+      _content = value;
+      _size = size;
+    }
+
     
     NMTree(MultiDimensionalArray<Content, Dimension>* description, Tree* parent = nullptr) {
       static_assert(!std::is_same<double, Scalar>());
@@ -146,13 +153,24 @@ namespace YolonaOss {
       return t->getLeaf(position);
     }
     
+    std::vector<Tree*> getAllChilds() {
+      std::vector<Tree*> result;
+      for (size_t i = 0; i < _childs->getSize(); i++) {
+        result.push_back(_childs->get_linearRef(i));
+      }
+      return result;
+    }
+
     void setContent(Content c) { _content = c; }
     Content getContent() { return _content; }
     Scalar getSize() { return _size; }
     std::array<Scalar, Dimension> getPosition() { return _position; }
     Tree* getParent() { return _parent; }
     bool  isLeaf() { return _childs == nullptr; }
-    Tree* getChild(std::array<size_t, Dimension> pos) { return _childs->getVal(pos); }
+    Tree* getChild(std::array<size_t, Dimension> pos) {
+      assert(pos[0] != 18446744073709551537);
+      return _childs->getVal(pos); 
+    }
     std::set<Tree*> getSide(size_t dimension, NMTreeDirection direction) {
       auto slicePlane = ImageSubsetUtil::slice<Tree*, Dimension>(_childs, dimension, ((direction == NMTreeDirection::Negative) ? 0 : (ArraySize - 1)));
       std::set<Tree*> result;

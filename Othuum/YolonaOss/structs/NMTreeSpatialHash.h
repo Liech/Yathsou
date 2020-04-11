@@ -20,66 +20,164 @@ namespace YolonaOss {
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
     using content_ptr = std::shared_ptr<std::set < std::shared_ptr<Content>>>;
     using Tree = NMTree < content_ptr, ArraySize, Dimension, TreeMergeBehavior::Avg, double >;
-    const size_t numberOfObjects = 10;
+    
+    const int numberOfObjects = 7;
+    const int numberOfObjectsTolerance = 1;
   public:
 
-    virtual AABB<Dimension> getAABB() override {
-      AABB<Dimension> result;
-      result.setPosition(_position);
-      result.setSize(vec(1.0f) * (float)_tree->getSize() * _scale);
-      return result;
+    NMTreeSpatialHash(AABB<Dimension> location) {
+      double size = location.getSize()[0];
+      for (size_t i = 0; i < Dimension; i++)
+        assert(size == location.getSize()[i]);
+
+      std::array<double, Dimension> pos;
+      for (size_t i = 0; i < Dimension; i++)
+        pos[i] = location.getPosition()[i];
+
+      _tree = std::make_unique<Tree>(nullptr,pos, size);
     }
 
-    virtual void updateObject(std::shared_ptr<Content > object)  {
+    virtual AABB<Dimension> getAABB() override {
+      return tree2AABB(_tree.get());
+    }
+
+    void updateObject(std::shared_ptr<Content > object)  {
+      if (tree2AABB(_removeMap[object]).isInside(object->getPosition()))
+        return;
       removeObject(object);
       addObject(object);
     }
 
-    virtual void addObject(std::shared_ptr<Content > object)  {
+    void addObject(std::shared_ptr<Content > object)  {
       addObject(object, _tree.get());
-    }
-
-    virtual void removeObject(std::shared_ptr<Content > object)  {
-      assert(_removeMap.count(object) != 0);
-      for (auto s : _removeMap[object]){
-        content_ptr p = s->getContent();
-        p.get()->erase(object);
-        restoreBalance(s); 
-        _removeMap.erase(object);
+      if (_removeMap.count(object) == 0) {
+        _outer.insert(object);
       }
     }
 
-    virtual std::set<content_ptr> findObjects(vec  position)  {
-      return {};
+    void removeObject(std::shared_ptr<Content > object)  {
+      if (_removeMap.count(object) == 0) {
+        if (_outer.count(object) == 0)
+          throw std::runtime_error("Not found");
+        _outer.erase(object);
+        return;
+      }
+      Tree* tree = _removeMap[object];
+      content_ptr p = tree->getContent();
+      p.get()->erase(object);
+      _removeMap.erase(object);
+      restoreBalance(tree);
     }
 
-    virtual std::set<content_ptr> findObjects(AABB<Dimension> position)  {
-      return {};
+    std::set<std::shared_ptr<Content>> findRadius(vec pos, float radius) {
+      std::set<std::shared_ptr<Content>> result = findRadius(pos, radius, _tree);
+      for (auto r : _outer) {
+        if (glm::distance(pos, r->getPosition()) < radius)
+          result.insert(r);
+      }
+      return result;
     }
+
 
   private:
-    void restoreBalance(Tree* current) {
-       
+
+    AABB<Dimension> tree2AABB(Tree* tree) {
+      AABB<Dimension> result;
+      vec pos;
+      auto posPre = tree->getPosition();
+      for (size_t i = 0; i < Dimension; i++)
+        pos[i] = posPre[i];
+      result.setPosition(pos);
+      result.setSize(vec(1.0f) * (float)tree->getSize());
+      return result;
     }
+
+    std::set<std::shared_ptr<Content>> findRadius(vec pos, float radius, Tree* current) {
+      AABB<Dimension> currentLocation = tree2AABB(current);
+      bool intersects = currentLocation.intersectsCircle(pos, radius);
+      if (!intersects)
+        return {};
+      else {
+        if (current->isLeaf()) {
+          if (current->getContent() == nullptr) 
+            return {};
+          else {
+            std::set<std::shared_ptr<Content>> result;
+            for (auto s : *current->getContent()) {
+              vec p = s->getPosition();
+              if (glm::distance(pos, p) < radius)
+                result.insert(s);
+            }
+            return result;
+          }
+        }
+        else {
+          std::set<std::shared_ptr<Content>> result;
+          for (auto c : current->getAllChilds()) {
+            auto subResult = findRadius(pos, radius, c);
+            if(subResult.size() != 0)
+              result.insert(subResult.begin(), subResult.end());
+          }
+          return result;
+        }
+      }
+    }
+
+    void restoreBalance(Tree* current) {      
+      Tree* parent = current->getParent();
+      if (parent == nullptr)
+        return;
+      std::vector<Tree::Leaf> leaves = parent->getLeafs();
+      content_ptr all = std::make_shared<std::set<std::shared_ptr<Content>>>();
+      for (Tree::Leaf leaf : leaves) {        
+        if (leaf.link->getContent() == nullptr)
+          continue;
+        for (auto f : *leaf.link->getContent()) {
+          all->insert(f);
+        }
+      }
+      if (all->size() < numberOfObjects - numberOfObjectsTolerance) {
+        parent->killChildren();
+        parent->setContent(all);
+        for (auto a : *all) {
+          _removeMap[a] = parent;
+        }
+        restoreBalance(parent);
+      }
+    }    
 
     void addObject(std::shared_ptr<Content> object, Tree* current) {
       if (current->isLeaf()) {
-        if (current->getContent() == nullptr) {
+        if (current->getContent() == nullptr) { //not used yet
           content_ptr ptr = std::make_shared < std::set<std::shared_ptr<Content>> >();
           current->setContent(ptr);
+          current->getContent()->insert(object);
+          assert(_removeMap.count(object) == 0);
+          _removeMap[object] = current;
         }
-        else if (current->getContent()->size() > numberOfObjects) {
+        else if (current->getContent()->size() > numberOfObjects + numberOfObjectsTolerance && current->getSize() > 1e-5) { //full
           current->getContent()->insert(object);
           current->createChildren();
-          for (auto s : *current->getContent())
-            addObject(s, current);
-          current->setContent(nullptr);          
+          auto toReassign = current->getContent();
+          current->setContent(nullptr);
+          for (auto c : current->getAllChilds())
+            c->setContent(nullptr);
+          for (auto s : *toReassign) {
+            _removeMap.erase(s);
+            if (!tree2AABB(current).isInside(s->getPosition()))
+              addObject(s);         //state is not uptodate
+            else
+              addObject(s, current);//state is uptodate
+          }
           return;
         }
-        current->getContent()->insert(object);
-        _removeMap[object].insert(current);
+        else { //ok
+          current->getContent()->insert(object);
+          assert(_removeMap.count(object) == 0);
+          _removeMap[object] = current;
+        }
       }
-      else {
+      else { // is node
         vec p = object->getPosition();
         std::array<double, Dimension> v;
         for (size_t i = 0; i < Dimension; i++)
@@ -89,9 +187,8 @@ namespace YolonaOss {
       }
     }
 
-    vec                                                  _position ;
-    float                                                _scale    ;
     std::unique_ptr < Tree >                             _tree     ;
-    std::map< std::shared_ptr<Content>, std::set<Tree*>> _removeMap;
+    std::map< std::shared_ptr<Content>, Tree*>           _removeMap;
+    std::set < std::shared_ptr<Content>>                 _outer    ;
   };
 }

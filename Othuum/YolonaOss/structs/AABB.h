@@ -15,6 +15,10 @@ namespace YolonaOss {
       _position = start;
       _size = size;
     }
+    AABB(vec start, float size) {
+      _position = start;
+      _size = vec(1.0) * size;
+    }
 
     vec   getPosition() {
       return _position;
@@ -43,6 +47,15 @@ namespace YolonaOss {
     bool intersects(AABB<Dimension> d) {
       throw std::runtime_error("Not yet implemented");
       return true;
+    }
+
+    bool intersectsCircle(vec pos, float radius) {
+      vec newPos;
+      for (size_t i = 0; i < Dimension; i++) {
+        newPos[i] = std::clamp(pos[i], _position[i], _position[i] + _size[i]);
+      }
+      float dist = glm::distance(pos, newPos);
+      return dist < radius;
     }
 
     vec getCenter() {

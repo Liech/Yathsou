@@ -35,8 +35,8 @@ namespace YolonaOss{
       std::shared_ptr<NavigationMap<Dimension>> getMap(vec target) {
         std::shared_ptr<MapGroup<Dimension>>          result     = std::make_shared<MapGroup<Dimension>>();
         std::shared_ptr<DijkstraMap<Dimension>>       navigation = std::make_shared<DijkstraMap<Dimension>>();
-        std::shared_ptr<DiscomfortMap<Dimension>> discomfort = std::make_shared<DiscomfortMap<Dimension>>(_dynamicDiscomfort);
-        std::shared_ptr<ComfortMap<Dimension>>    comfort    = std::make_shared<ComfortMap<Dimension>>(_dynamicDiscomfort);
+        std::shared_ptr<DiscomfortMap<Dimension>> discomfort = std::make_shared<DiscomfortMap<Dimension>>(_unitAuras);
+        std::shared_ptr<ComfortMap<Dimension>>    comfort    = std::make_shared<ComfortMap<Dimension>>(_unitAuras);
         result->addMap(_staticMap, _config[0]);
         result->addMap(navigation, _config[1]);
         result->addMap(discomfort, _config[2]);
@@ -60,7 +60,7 @@ namespace YolonaOss{
       auto scaled = ImageUtil::scaleUp<double, Dimension>(_landscape->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);
       scaled->apply([](size_t pos, double& val) {val = 1.0 - val; });
       _staticDiscomfort = std::shared_ptr<MultiDimensionalArray<double, 2>>(std::move(scaled));
-      _dynamicDiscomfort = std::make_shared < AuraHolder<Dimension>>(dim,_disMapScale);
+      _unitAuras = std::make_shared < AuraHolder<Dimension>>(AABB<Dimension>(vec(0.0),dim[0]));
       _staticMap = std::make_shared<GradientGridMap<Dimension>>((double)_disMapScale);
       _staticMap->setMap(_staticDiscomfort);
       _tree = std::make_shared<Tree>(_landscape.get());
@@ -73,7 +73,7 @@ namespace YolonaOss{
       std::shared_ptr<MultiDimensionalArray<bool, Dimension>>   _landscape        ;
       std::shared_ptr<MultiDimensionalArray<double, Dimension>> _staticDiscomfort ;
       std::shared_ptr< GradientGridMap<Dimension> >             _staticMap        ;
-      std::shared_ptr<AuraHolder<Dimension>>                    _dynamicDiscomfort;
+      std::shared_ptr<AuraHolder<Dimension>>                    _unitAuras        ;
 
       std::shared_ptr<Tree>                                     _tree             ;
       std::shared_ptr<TreeI>                                    _index            ;

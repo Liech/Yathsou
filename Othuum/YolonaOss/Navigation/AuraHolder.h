@@ -15,73 +15,31 @@ namespace YolonaOss {
   class AuraHolder {
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
   public:
-    AuraHolder(std::array<size_t, Dimension> dimension, double scale){
-      _scale = scale;
+    AuraHolder(AABB<Dimension> location) : _tree(location){
 
-      std::array<size_t, Dimension> min;
-      std::array<size_t, Dimension> size;
-      for (size_t i = 0; i < Dimension; i++) {
-        min[i] = 0;
-        size[i] = 3;
-      }
-      vec one;
-      for (size_t i = 0; i < Dimension; i++)one[i] = 1;
-      for (auto index : Util<Dimension>::getRange(min, size)) {
-        vec v = Util<Dimension>::array2Vec<size_t>(index) - one;
-        bool nonZero = false;
-        for (size_t i = 0; i < Dimension; i++)
-          if (index[i] != 1)
-            nonZero = true;
-        if ( nonZero)
-          _surrounding.push_back(v);
-      }
-      _grid = std::dynamic_pointer_cast<SpatialHash<Dimension>>(std::make_shared< GridHash<Dimension> >(AABB<Dimension>(vec(0),Util<Dimension>::array2Vec(dimension)), 3.0));
     }
 
-    vec getGradient(vec position) {
-      vec result(0);
-      for (auto dir : _surrounding) {
-        float dis = getDiscomfort(position + dir);
-        result += dis * dir;
-      }
-      //std::cout << "vec: ";
-      //for (size_t i = 0; i < Dimension; i++)
-      //  std::cout << result[i] << " / ";
-      //std::cout << std::endl;
-      if (glm::length(result) == 0) return result;
-      return glm::normalize(result);
+    std::set<std::shared_ptr<Aura<Dimension>>> findAuras(vec pos, float radius) {
+      return _tree.findRadius(pos, radius);
     }
 
-    double getDiscomfort(vec position) {
-      auto objs = _grid->findObjects(position);
-      double result = 0;
-      for (auto obj : objs) {
-        std::shared_ptr<Aura<Dimension>> cast = std::dynamic_pointer_cast<Aura<Dimension>>(obj);
-        //result += cast->getDiscomfort(position);
-      }
-      return result;
-    }
-
-    void addDiscomfortArea(std::shared_ptr<Aura<Dimension>> area) {
+    void addAura(std::shared_ptr<Aura<Dimension>> area) {
       _aura.insert(area);
-      //_grid->addObject(area);
+      _tree.addObject(area);
     }
 
-    void removeDiscomfortArea(std::shared_ptr<Aura<Dimension>> area) {
+    void removeAura(std::shared_ptr<Aura<Dimension>> area) {
       _aura.erase(area);
-      _grid->removeObject(area);
+      _tree.removeObject(area);
     }
 
     void updateAuras() {
       for (auto area : _aura) {
-        //_grid->updateObject(area);
+        _tree.updateObject(area);
       }
     }
 
   public:
-    std::vector<vec>                                       _surrounding    ;
-    std::shared_ptr<SpatialHash<Dimension>>                _grid           ;
-    float                                                  _scale          ;
     std::set<std::shared_ptr<Aura<Dimension>>>             _aura           ;
     NMTreeSpatialHash<Aura<Dimension>, Dimension>          _tree           ;
   };

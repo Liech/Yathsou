@@ -14,9 +14,8 @@ namespace YolonaOss {
     using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
   public:
 
-    Aura(double scale) {
-      _scale = scale;
-      for (size_t i = 0; i < Dimension; i++) _position[i] = 0;
+    Aura(vec position) {
+      _position = position;
     }
 
     vec getPosition() {
@@ -39,7 +38,6 @@ namespace YolonaOss {
 
   private:
     double                        _radius = 0.5f;
-    float                         _scale        ;
     vec                           _position     ;
   };
 }

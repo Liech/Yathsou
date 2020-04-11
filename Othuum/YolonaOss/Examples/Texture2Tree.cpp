@@ -33,8 +33,7 @@ namespace YolonaOss {
 
     for (size_t i = 0; i < 40; i++) {
       _unit.push_back(std::make_shared<Unit     <2>>(glm::vec2(4+ i,4  ), glm::vec2(1,0)));
-      _unit[i]->_discomfortArea = std::dynamic_pointer_cast<Aura<2>>( std::make_shared<Aura<2>>(_landscape->_disMapScale));
-      _landscape->_dynamicDiscomfort->addDiscomfortArea(_unit[i]->_discomfortArea);
+      _landscape->_unitAuras->addAura(_unit[i]->_aura);
     }
 
     _spec = spec;
@@ -55,7 +54,7 @@ namespace YolonaOss {
       });
     addSlider("dist", 0, 1, 0.1f, [this](double val) {
       for (auto u : _unit) {
-        u->_discomfortArea->setRadius(val);
+        u->_aura->setRadius(val);
       }
       });
     addSlider("land", 0, 1, 0.0f, [this](double val) {
@@ -133,9 +132,9 @@ namespace YolonaOss {
   {
     for (size_t i = 0; i < _unit.size(); i++) {
       _unit[i]->_navigationAgent->updatePosition();
-      _unit[i]->_discomfortArea->setPosition(_unit[i]->_navigationAgent->getPosition());
+      _unit[i]->_aura->setPosition(_unit[i]->_navigationAgent->getPosition());
     }
-    _landscape->_dynamicDiscomfort->updateAuras();
+    _landscape->_unitAuras->updateAuras();
     BoxRenderer::start();
     auto leafs = _landscape->_tree->getLeafs();
     

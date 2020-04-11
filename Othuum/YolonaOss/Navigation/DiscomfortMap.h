@@ -20,11 +20,8 @@ namespace YolonaOss {
     }
 
     virtual vec getDirectionSuggestion(const vec currentPosition) override {     
-      std::array<double, Dimension> pos;
-      for (int i = 0; i < Dimension; i++)
-        pos[i] = currentPosition[i];
-
-      return -_grid->getGradient(currentPosition);
+      //_grid->find
+      return -vec(0);
     }
   private:
 
