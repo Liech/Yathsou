@@ -11,7 +11,7 @@ namespace YolonaOss {
     using self = typedef DiscomfortMap<Dimension>;
   public:
     DiscomfortMap(std::shared_ptr<AuraHolder<Dimension>> grid) {
-      _grid = grid;
+      _auras = grid;
     }
 
     virtual void setTarget(const vec target) override
@@ -20,13 +20,18 @@ namespace YolonaOss {
     }
 
     virtual vec getDirectionSuggestion(const vec currentPosition) override {     
-      //_grid->find
-      return -vec(0);
+      auto auras = _auras->findAuras(currentPosition, 2);
+      vec avg(0.0);
+      for (auto aura : auras) {
+        avg += aura->getPosition() - currentPosition;
+      }
+
+      return -avg;
     }
   private:
 
   private:
-    std::shared_ptr<AuraHolder<Dimension>>     _grid  ;
+    std::shared_ptr<AuraHolder<Dimension>>     _auras  ;
     vec                                        _target;
   };
 }

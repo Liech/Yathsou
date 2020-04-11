@@ -42,14 +42,15 @@ namespace YolonaOss {
     }
 
     void updateObject(std::shared_ptr<Content > object)  {
-      if (tree2AABB(_removeMap[object]).isInside(object->getPosition()))
+      if (_removeMap.count(object) != 0 && tree2AABB(_removeMap[object]).isInside(object->getPosition()))//nullptr
         return;
       removeObject(object);
       addObject(object);
     }
 
     void addObject(std::shared_ptr<Content > object)  {
-      addObject(object, _tree.get());
+      if (tree2AABB(_tree.get()).isInside(object->getPosition()))
+        addObject(object, _tree.get());
       if (_removeMap.count(object) == 0) {
         _outer.insert(object);
       }
@@ -70,7 +71,7 @@ namespace YolonaOss {
     }
 
     std::set<std::shared_ptr<Content>> findRadius(vec pos, float radius) {
-      std::set<std::shared_ptr<Content>> result = findRadius(pos, radius, _tree);
+      std::set<std::shared_ptr<Content>> result = findRadius(pos, radius, _tree.get());
       for (auto r : _outer) {
         if (glm::distance(pos, r->getPosition()) < radius)
           result.insert(r);
