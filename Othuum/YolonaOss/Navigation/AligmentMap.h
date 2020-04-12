@@ -23,14 +23,14 @@ namespace YolonaOss {
       auto agents = _agents->findAgents(obj->getPosition(), 2);
       vec avg(0.0);
       if (agents.size() == 1)
-        return obj->getOrientation();
+        return obj->getVelocity();
       for (auto agent : agents) {
         if (obj == agent.get())
           continue;
-        avg += glm::normalize(agent->getOrientation());
+        avg += agent->getVelocity();
       }
-
-      return glm::normalize(avg);
+      avg /= agents.size() - 1;
+      return avg;
     }
   private:
 

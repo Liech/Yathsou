@@ -28,7 +28,7 @@ namespace YolonaOss{
     }
 
     vec getOrientation() {
-      return _navigationAgent->getOrientation();
+      return glm::normalize(_navigationAgent->getVelocity());
     }
 
     public:

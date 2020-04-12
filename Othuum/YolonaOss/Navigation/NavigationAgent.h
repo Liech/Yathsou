@@ -14,18 +14,21 @@ namespace YolonaOss {
     using vec = glm::vec<Dimension, float, glm::defaultp>;
 
   public:
-    NavigationAgent(vec pos, vec orientation) {      
-      _position = pos;
-      _orientation = orientation;
-      _target = pos;
-      _map = nullptr;
+    NavigationAgent(vec pos, vec velocity) {      
+      _position    = pos        ;
+      _velocity    = velocity   ;
+      _target      = pos        ;
+      _map         = nullptr    ;
     }
 
     void updatePosition() {
       if (_map == nullptr)
         return;
       vec dir = _map->getDirectionSuggestion(this);
-      float dist = glm::distance(_target, _position);
+      applyForce(dir);
+
+
+/*      float dist = glm::distance(_target, _position);
       if (dist < 0.01f || glm::length(dir) < 0.01)
         return;
       _orientation = GeometryND<Dimension>::slerp(_orientation, dir, 0.2f);
@@ -34,8 +37,8 @@ namespace YolonaOss {
       if (glm::length(movement) > dist)
         movement = glm::normalize(movement) * dist;
       else
-        movement = movement * 0.5f * ((dot < 0) ? 0 : dot);
-      _position = _position + dir * 0.1f;       
+        movement = movement * 0.5f * ((dot < 0) ? 0 : dot);*/
+      _position = _position + _velocity;       
     }
 
     void setMap(std::shared_ptr<NavigationMap<Dimension>> map) {
@@ -58,25 +61,40 @@ namespace YolonaOss {
       return _position;
     }
 
-    vec getOrientation() {
-      return _orientation;
+    vec getVelocity() {
+      return _velocity;
     }
 
-    void setOrientation(vec orientation) {
-      _orientation = orientation;
+    void setOrientation(vec velocity) {
+      _velocity = velocity;
     }
 
     void setSpeed(float speed) {
-      _speed = speed;
+      _maxSpeed = speed;
+    }
+
+    void setForce(float speed) {
+      _maxForce = speed;
     }
 
   private:   
-    float                                     _speed = 0.1f                          ;
-    float                                     _turnSpeed = (float)M_PI * 2.0f / 10.0f;
+    void applyForce(vec velocity) {
+      if (glm::length(velocity) == 0)
+        return;
+      else if (glm::length(velocity) > _maxForce)
+        _velocity += glm::normalize(velocity) * std::clamp(glm::length(velocity), 0.0f, _maxForce);
+      else
+        _velocity += velocity;
+      if (glm::length(_velocity) > _maxSpeed)
+        _velocity = glm::normalize(_velocity) * std::clamp(glm::length(_velocity), 0.0f, _maxSpeed);
+    }
+
+    float                                     _maxSpeed = 0.1f                       ;
+    float                                     _maxForce = 0.05f                      ;
 
     vec                                       _position                              ;
     vec                                       _target                                ;
-    vec                                       _orientation                           ;
+    vec                                       _velocity                              ;
     std::shared_ptr<NavigationMap<Dimension>> _map                                   ;
   };
 }

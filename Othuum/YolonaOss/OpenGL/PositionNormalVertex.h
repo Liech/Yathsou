@@ -9,7 +9,7 @@ namespace YolonaOss {
     struct PositionNormalVertex {
       glm::vec3 position;
       glm::vec3 normal;
-      PositionNormalVertex() {};
+      PositionNormalVertex() :position(0.0f), normal(0.0f) {};
       PositionNormalVertex(glm::vec3 Position, glm::vec3 Normal) {
         position = Position;
         normal = Normal;
