@@ -21,10 +21,10 @@ namespace YolonaOss {
       _map = nullptr;
     }
 
-    void updatePosition() {
+    void updatePosition(std::shared_ptr<Aura<Dimension>> obj) {
       if (_map == nullptr)
         return;
-      vec dir = _map->getDirectionSuggestion(_position);
+      vec dir = _map->getDirectionSuggestion(obj);
       float dist = glm::distance(_target, _position);
       if (dist < 0.01f || glm::length(dir) < 0.01)
         return;
@@ -33,8 +33,10 @@ namespace YolonaOss {
       vec movement = _orientation * _speed;
       float dot = glm::dot(_orientation, dir);
       if (glm::length(movement) > dist)
-        movement = glm::normalize(movement) * dist * 0.5f * ((dot<0)?0:dot);
-      _position = _position + movement;       
+        movement = glm::normalize(movement) * dist;
+      else
+        movement = movement * 0.5f * ((dot < 0) ? 0 : dot);
+      _position = _position + dir * 0.1f;       
     }
 
     void setMap(std::shared_ptr<NavigationMap<Dimension>> map) {

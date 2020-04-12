@@ -24,10 +24,10 @@ namespace YolonaOss {
       _discomfortMap = dm;
     }
 
-    virtual vec getDirectionSuggestion(const vec currentPosition) override {
+    virtual vec getDirectionSuggestion(std::shared_ptr<Aura<Dimension>> obj) override {
       if (!_discomfortMap) 
         return vec();
-      vec scaled = _scale * currentPosition;
+      vec scaled = _scale * obj->getPosition();
       
       std::array<size_t, Dimension> index;
       for (int i = 0; i < Dimension; i++) {
@@ -35,7 +35,11 @@ namespace YolonaOss {
         size_t s = _discomfortMap->getDimension(i) - 1;
         index[i] = std::clamp(t, (size_t)0, s);
       }
-      return getDirectionSuggestion_recurse(index);
+
+      vec result = glm::normalize(getDirectionSuggestion_recurse(index));
+      if (std::isnan(result[0]))
+        return vec(0.0);
+      return result;
     }
   private:
     vec getDirectionSuggestion_recurse(std::array<size_t, Dimension> position, vec dir = vec(), size_t currentDimension = Dimension-1) {

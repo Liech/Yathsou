@@ -19,14 +19,22 @@ namespace YolonaOss {
       _target = target;
     }
 
-    virtual vec getDirectionSuggestion(const vec currentPosition) override {     
-      auto auras = _auras->findAuras(currentPosition, 2);
+    virtual vec getDirectionSuggestion(std::shared_ptr<Aura<Dimension>> obj) override {
+      auto auras = _auras->findAuras(obj->getPosition(), 3);
       vec avg(0.0);
       for (auto aura : auras) {
+        if (obj == aura)
+          continue;
         avg += aura->getPosition();
       }
-      avg /= (float)auras.size();
-      return avg;
+      if (auras.size() == 1) 
+        return vec(0.0);
+      avg /= (float)auras.size()-1;
+      vec result = glm::normalize(avg - obj->getPosition());
+      if (std::isnan(result[0]))
+        return vec(0.0);
+
+      return result;
     }
 
   private:

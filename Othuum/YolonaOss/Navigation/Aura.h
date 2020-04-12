@@ -46,7 +46,7 @@ namespace YolonaOss {
 
   private:
     double                        _radius = 0.5f;
-    vec                           _position     ;
-    vec                           _orientation  ;
+    vec                           _position      = vec(0.0);
+    vec                           _orientation   = vec(0.0);
   };
 }

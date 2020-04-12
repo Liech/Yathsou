@@ -22,9 +22,15 @@ namespace YolonaOss {
       _dijkstra = di;
     }
 
-    virtual vec getDirectionSuggestion(const vec currentPosition) override {
-      if (!_dijkstra) return glm::normalize(_target - currentPosition);
-      return _dijkstra->getDirectionSuggestion(currentPosition);
+    virtual vec getDirectionSuggestion(std::shared_ptr<Aura<Dimension>> obj) override {
+      vec result;
+      if (!_dijkstra)
+        result = glm::normalize(_target - obj->getPosition());
+      else
+        result = glm::normalize(_dijkstra->getDirectionSuggestion(obj->getPosition()));
+      if (std::isnan(result[0]))
+        return vec(0.0);
+      return result;
     }
   private:
 
