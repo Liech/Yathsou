@@ -9,7 +9,7 @@ namespace YolonaOss {
 
     int  ListLayout::addWidget(std::shared_ptr<Widget> w) {
       _widgets.push_back(w);
-      return _widgets.size() - 1;
+      return (int)(_widgets.size() - 1);
     }
 
     void ListLayout::removeWidget(int w) {

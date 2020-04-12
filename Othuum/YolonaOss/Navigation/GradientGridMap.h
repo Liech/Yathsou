@@ -24,7 +24,7 @@ namespace YolonaOss {
       _discomfortMap = dm;
     }
 
-    virtual vec getDirectionSuggestion(NavigationAgent<Dimension>* obj) override {
+    virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       if (!_discomfortMap) 
         return vec();
       vec scaled = _scale * obj->getPosition();

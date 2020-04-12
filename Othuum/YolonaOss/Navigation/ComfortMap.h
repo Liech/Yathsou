@@ -19,7 +19,7 @@ namespace YolonaOss {
       _target = target;
     }
 
-    virtual vec getDirectionSuggestion(NavigationAgent<Dimension>* obj) override {
+    virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       auto agents = _agents->findAgents(obj->getPosition(), 3);
       vec avg(0.0);
       for (auto agent : agents) {

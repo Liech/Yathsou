@@ -24,20 +24,8 @@ namespace YolonaOss {
     void updatePosition() {
       if (_map == nullptr)
         return;
-      vec dir = _map->getDirectionSuggestion(this);
-      applyForce(dir);
-
-
-/*      float dist = glm::distance(_target, _position);
-      if (dist < 0.01f || glm::length(dir) < 0.01)
-        return;
-      _orientation = GeometryND<Dimension>::slerp(_orientation, dir, 0.2f);
-      vec movement = _orientation * _speed;
-      float dot = glm::dot(_orientation, dir);
-      if (glm::length(movement) > dist)
-        movement = glm::normalize(movement) * dist;
-      else
-        movement = movement * 0.5f * ((dot < 0) ? 0 : dot);*/
+      vec dir = _map->getVelocitySuggestion(this);
+      applyForce(dir - _velocity);
       _position = _position + _velocity;       
     }
 

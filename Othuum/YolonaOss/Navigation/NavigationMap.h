@@ -12,6 +12,6 @@ namespace YolonaOss {
   public:
     using vec = glm::vec<Dimension, float, glm::defaultp>;
     virtual void setTarget(const vec targetPosition) = 0;
-    virtual vec getDirectionSuggestion(NavigationAgent<Dimension>* agent) = 0;
+    virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* agent) = 0;
   };
 }

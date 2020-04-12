@@ -22,7 +22,7 @@ namespace YolonaOss {
       _dijkstra = di;
     }
 
-    virtual vec getDirectionSuggestion(NavigationAgent<Dimension>* obj) override {
+    virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       vec result;
       if (!_dijkstra)
         result = glm::normalize(_target - obj->getPosition());
