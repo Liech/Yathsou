@@ -213,16 +213,14 @@
     <ClInclude Include="Lib\lodepng\lodepng.h" />
     <ClInclude Include="Lib\lodepng\lodepng_util.h" />
     <ClInclude Include="Navigation\AligmentMap.h" />
-    <ClInclude Include="Navigation\Aura.h" />
-    <ClInclude Include="Navigation\AuraHolder.h" />
     <ClInclude Include="Navigation\ComfortMap.h" />
     <ClInclude Include="Navigation\DijkstraMap.h" />
     <ClInclude Include="Navigation\DirectDistanceMap.h" />
     <ClInclude Include="Navigation\DiscomfortMap.h" />
     <ClInclude Include="Navigation\GradientGridMap.h" />
     <ClInclude Include="Navigation\MapGroup.h" />
-    <ClInclude Include="Navigation\Navigation.h" />
     <ClInclude Include="Navigation\NavigationAgent.h" />
+    <ClInclude Include="Navigation\NavigationAgentManager.h" />
     <ClInclude Include="Navigation\NavigationMap.h" />
     <ClInclude Include="OpenGL\AttributeDescription.h" />
     <ClInclude Include="OpenGL\Camera.h" />
@@ -297,7 +295,6 @@
     <ClCompile Include="Navigation\DirectDistanceMap.cpp" />
     <ClCompile Include="Navigation\GradientGridMap.cpp" />
     <ClCompile Include="Navigation\MapGroup.cpp" />
-    <ClCompile Include="Navigation\Navigation.cpp" />
     <ClCompile Include="Navigation\NavigationAgent.cpp" />
     <ClCompile Include="Navigation\NavigationMap.cpp" />
     <ClCompile Include="OpenGL\Camera.cpp" />

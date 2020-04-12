@@ -98,7 +98,7 @@ namespace YolonaOss {
       std::vector<std::array<size_t, Dimension>> pathToNeighbour = getPathToNeighbour(node, dimension, dir, root);
       if (pathToNeighbour.size() == 0) return nullptr;
       Tree* current = root;
-      for (int i = pathToNeighbour.size()-1; i >= 0; i--) {
+      for (int64_t i = (int64_t)(pathToNeighbour.size()-1); i >= 0; i--) {
         if (current->isLeaf()) {
           return current;
         }

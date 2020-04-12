@@ -8,7 +8,7 @@ namespace YolonaOss {
   template <size_t Dimension>
   class AABB {
   public:
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
     
     AABB() {}
     AABB(vec start, vec size) {
@@ -38,7 +38,7 @@ namespace YolonaOss {
 
     bool isInside(vec pos) {
       for (size_t i = 0; i < Dimension; i++) {
-        if (pos[i] < getPosition()[i] || pos[i] > getPosition()[i] + getSize()[i])
+        if (pos[(int)i] < getPosition()[i] || pos[(int)i] > getPosition()[i] + getSize()[i])
           return false;        
       }
       return true;
@@ -52,7 +52,7 @@ namespace YolonaOss {
     bool intersectsCircle(vec pos, float radius) {
       vec newPos;
       for (size_t i = 0; i < Dimension; i++) {
-        newPos[i] = std::clamp(pos[i], _position[i], _position[i] + _size[i]);
+        newPos[(int)i] = std::clamp(pos[i], _position[(int)i], _position[(int)i] + _size[(int)i]);
       }
       float dist = glm::distance(pos, newPos);
       return dist < radius;

@@ -16,7 +16,7 @@ namespace YolonaOss {
       }
     }
 
-    virtual vec getDirectionSuggestion(std::shared_ptr<Aura<Dimension>> obj) override {
+    virtual vec getDirectionSuggestion(NavigationAgent<Dimension>* obj) override {
       vec dir(0.0);
       for (size_t i = 0; i < _maps.size(); i++)
         dir += _influence[i] * _maps[i]->getDirectionSuggestion(obj);

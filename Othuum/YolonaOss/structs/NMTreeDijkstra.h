@@ -8,10 +8,10 @@ namespace YolonaOss {
 
   template<size_t Dimension>
   class NMTreeDijkstra : public DijkstraI<Dimension> {
-    using Tree = NMTree<bool, 2, Dimension, YolonaOss::TreeMergeBehavior::Max>;
+    using Tree  = NMTree<bool, 2, Dimension, YolonaOss::TreeMergeBehavior::Max>;
     using TreeI = NMTreeNeighbourIndex<bool, 2, Dimension, YolonaOss::TreeMergeBehavior::Max>;
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
-    using self = typedef NMTreeDijkstra<Dimension>;
+    using vec   = glm::vec<Dimension, float, glm::defaultp>;
+    using self  = NMTreeDijkstra<Dimension>;
   public:
     NMTreeDijkstra(vec start, Tree* root,std::shared_ptr<TreeI> index, std::function<double(Tree*)> weight)
     {
@@ -25,10 +25,10 @@ namespace YolonaOss {
 
     virtual vec getDirectionSuggestion(vec currentPosition) override {
       for (size_t i = 0; i < Dimension; i++) {
-        if (currentPosition[i] < 0) 
-          return vec(0.0);
-        if (currentPosition[i] >= _root->getSize())
-          return vec(0.0);
+        if (currentPosition[(int)i] < 0)
+          return vec(0.0f);
+        if (currentPosition[(int)i] >= _root->getSize())
+          return vec(0.0f);
       }
 
       Tree* current = _root->getLeaf(Util<Dimension>::vec2Array<size_t>(currentPosition));

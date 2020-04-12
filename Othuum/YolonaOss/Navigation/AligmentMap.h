@@ -2,16 +2,16 @@
 
 #include <memory>
 #include "NavigationMap.h"
-#include "AuraHolder.h"
+#include "NavigationAgentManager.h"
 #include "../Util/Util.h"
 
 namespace YolonaOss {
   template <size_t Dimension>
   class AligmentMap :public NavigationMap<Dimension> {
-    using self = typedef DiscomfortMap<Dimension>;
+    using self = DiscomfortMap<Dimension>;
   public:
-    AligmentMap(std::shared_ptr<AuraHolder<Dimension>> grid) {
-      _auras = grid;
+    AligmentMap(std::shared_ptr<NavigationAgentManager<Dimension>> agents) {
+      _agents = agents;
     }
 
     virtual void setTarget(const vec target) override
@@ -19,15 +19,15 @@ namespace YolonaOss {
       _target = target;
     }
 
-    virtual vec getDirectionSuggestion(std::shared_ptr<Aura<Dimension>> obj) override {
-      auto auras = _auras->findAuras(obj->getPosition(), 2);
+    virtual vec getDirectionSuggestion(NavigationAgent<Dimension>* obj) override {
+      auto agents = _agents->findAgents(obj->getPosition(), 2);
       vec avg(0.0);
-      if (auras.size() == 1)
+      if (agents.size() == 1)
         return obj->getOrientation();
-      for (auto aura : auras) {
-        if (obj == aura)
+      for (auto agent : agents) {
+        if (obj == agent.get())
           continue;
-        avg += glm::normalize(aura->getOrientation());
+        avg += glm::normalize(agent->getOrientation());
       }
 
       return glm::normalize(avg);
@@ -35,7 +35,7 @@ namespace YolonaOss {
   private:
 
   private:
-    std::shared_ptr<AuraHolder<Dimension>>     _auras  ;
-    vec                                        _target;
+    std::shared_ptr<NavigationAgentManager<Dimension>>     _agents;
+    vec                                                    _target;
   };
 }

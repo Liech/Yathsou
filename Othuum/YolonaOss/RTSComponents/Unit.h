@@ -1,7 +1,6 @@
 #pragma once
 
 #include <glm/glm.hpp>
-#include "../Navigation/Aura.h"
 #include "../Navigation/NavigationAgent.h"
 #include "Landscape.h"
 #include <memory>
@@ -9,11 +8,10 @@
 namespace YolonaOss{
   template<size_t Dimension>
   class Unit{
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     Unit(vec position, vec orientation) {
       _navigationAgent = std::make_shared<NavigationAgent<2>>(position, orientation);
-      _aura            = std::make_shared<Aura<Dimension>>   (position)             ;
     }
 
     void setTarget(vec target, std::shared_ptr<NavigationMap<Dimension>> map) {
@@ -34,7 +32,6 @@ namespace YolonaOss{
     }
 
     public:
-      std::shared_ptr<Aura<Dimension>>            _aura           ;
       std::shared_ptr<NavigationAgent<Dimension>> _navigationAgent;
   };
 }

@@ -8,7 +8,7 @@
 namespace YolonaOss {
   template <size_t Dimension>
   class DijkstraMap :public NavigationMap<Dimension> {
-    using self = typedef DijkstraMap<Dimension>;
+    using self = DijkstraMap<Dimension>;
   public:
     DijkstraMap() {
     }
@@ -22,7 +22,7 @@ namespace YolonaOss {
       _dijkstra = di;
     }
 
-    virtual vec getDirectionSuggestion(std::shared_ptr<Aura<Dimension>> obj) override {
+    virtual vec getDirectionSuggestion(NavigationAgent<Dimension>* obj) override {
       vec result;
       if (!_dijkstra)
         result = glm::normalize(_target - obj->getPosition());

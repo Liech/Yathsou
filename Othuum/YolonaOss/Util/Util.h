@@ -9,7 +9,7 @@
 template<size_t Dimension>
 class Util {
 public:
-  using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+  using vec = glm::vec<Dimension, float, glm::defaultp>;
 
   static void apply(std::array<size_t, Dimension> start, std::array<size_t, Dimension> size, std::function<void(std::array<size_t,Dimension> index)> func) {
     std::vector<std::array<size_t, Dimension>> indices = Util<Dimension>::getRange(start, size);   
@@ -59,14 +59,14 @@ public:
   static vec array2Vec(std::array<t, Dimension> val) {
     vec result;
     for (size_t i = 0; i < Dimension; i++)
-      result[i] = val[i];
+      result[i] = (float)val[i];
     return result;
   }
   template<typename t>
   static std::array<t, Dimension> vec2Array(vec val) {
     std::array<t, Dimension> result;
     for (size_t i = 0; i < Dimension; i++)
-      result[i] = val[i];
+      result[i] = (t)val[i];
     return result;
   }
 };

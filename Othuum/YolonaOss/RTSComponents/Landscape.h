@@ -20,7 +20,7 @@
 namespace YolonaOss{
   template<size_t Dimension>
   class Landscape{
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
     using Tree = NMTree<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max>;
     using TreeI = NMTreeNeighbourIndex<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max>;
   public:
@@ -34,12 +34,12 @@ namespace YolonaOss{
       }
 
       std::shared_ptr<NavigationMap<Dimension>> getMap(vec target) {
-        std::shared_ptr<MapGroup<Dimension>>         result     = std::make_shared<MapGroup         <Dimension>>(          );
-        std::shared_ptr<DijkstraMap<Dimension>>      navigation = std::make_shared<DijkstraMap      <Dimension>>(          );
-        std::shared_ptr<DiscomfortMap<Dimension>>    discomfort = std::make_shared<DiscomfortMap    <Dimension>>(_unitAuras);
-        std::shared_ptr<ComfortMap<Dimension>>       comfort    = std::make_shared<ComfortMap       <Dimension>>(_unitAuras);
-        std::shared_ptr<AligmentMap<Dimension>>      alignment  = std::make_shared<AligmentMap      <Dimension>>(_unitAuras);
-        std::shared_ptr<DirectDistanceMap<Dimension>> direct    = std::make_shared<DirectDistanceMap<Dimension>>(          );
+        std::shared_ptr<MapGroup<Dimension>>         result     = std::make_shared<MapGroup         <Dimension>>(           );
+        std::shared_ptr<DijkstraMap<Dimension>>      navigation = std::make_shared<DijkstraMap      <Dimension>>(           );
+        std::shared_ptr<DiscomfortMap<Dimension>>    discomfort = std::make_shared<DiscomfortMap    <Dimension>>(_unitAgents);
+        std::shared_ptr<ComfortMap<Dimension>>       comfort    = std::make_shared<ComfortMap       <Dimension>>(_unitAgents);
+        std::shared_ptr<AligmentMap<Dimension>>      alignment  = std::make_shared<AligmentMap      <Dimension>>(_unitAgents);
+        std::shared_ptr<DirectDistanceMap<Dimension>> direct    = std::make_shared<DirectDistanceMap<Dimension>>(           );
         result->addMap(_staticMap  , _config[0]);
         result->addMap(navigation  , _config[1]);
         result->addMap(direct      , _config[2]);
@@ -64,7 +64,7 @@ namespace YolonaOss{
       auto scaled = ImageUtil::scaleUp<double, Dimension>(_landscape->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);
       scaled->apply([](size_t pos, double& val) {val = 1.0 - val; });
       _staticDiscomfort = std::shared_ptr<MultiDimensionalArray<double, 2>>(std::move(scaled));
-      _unitAuras = std::make_shared < AuraHolder<Dimension>>(AABB<Dimension>(vec(0.0),dim[0]));
+      _unitAgents = std::make_shared < NavigationAgentManager<Dimension>>(AABB<Dimension>(vec(0.0f),(float)dim[0]));
       _staticMap = std::make_shared<GradientGridMap<Dimension>>((double)_disMapScale);
       _staticMap->setMap(_staticDiscomfort);
       _tree = std::make_shared<Tree>(_landscape.get());
@@ -77,7 +77,7 @@ namespace YolonaOss{
       std::shared_ptr<MultiDimensionalArray<bool, Dimension>>   _landscape        ;
       std::shared_ptr<MultiDimensionalArray<double, Dimension>> _staticDiscomfort ;
       std::shared_ptr< GradientGridMap<Dimension> >             _staticMap        ;
-      std::shared_ptr<AuraHolder<Dimension>>                    _unitAuras        ;
+      std::shared_ptr<NavigationAgentManager<Dimension>>        _unitAgents       ;
 
       std::shared_ptr<Tree>                                     _tree             ;
       std::shared_ptr<TreeI>                                    _index            ;

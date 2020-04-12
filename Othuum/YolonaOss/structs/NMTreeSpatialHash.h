@@ -10,14 +10,14 @@ namespace YolonaOss {
   
   template<size_t Dimension>
   class ObjectWithPosition {
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     virtual vec getPosition() = 0;
   };
 
   template<typename Content, size_t Dimension,  size_t ArraySize = 2>
   class NMTreeSpatialHash : public ObjectWithAABB <Dimension>{
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
     using content_ptr = std::shared_ptr<std::set < std::shared_ptr<Content>>>;
     using Tree = NMTree < content_ptr, ArraySize, Dimension, TreeMergeBehavior::Avg, double >;
     
@@ -87,7 +87,7 @@ namespace YolonaOss {
       vec pos;
       auto posPre = tree->getPosition();
       for (size_t i = 0; i < Dimension; i++)
-        pos[i] = posPre[i];
+        pos[(int)i] = (float)posPre[(int)i];
       result.setPosition(pos);
       result.setSize(vec(1.0f) * (float)tree->getSize());
       return result;
@@ -182,7 +182,7 @@ namespace YolonaOss {
         vec p = object->getPosition();
         std::array<double, Dimension> v;
         for (size_t i = 0; i < Dimension; i++)
-          v[i] = p[i];
+          v[i] = p[(int)i];
         current = current->getLeaf(v);
         addObject(object, current);
       }

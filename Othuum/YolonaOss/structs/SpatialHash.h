@@ -13,7 +13,7 @@ namespace YolonaOss {
 
   template<size_t Dimension>
   class SpatialHash : public ObjectWithAABB <Dimension>{
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     virtual void updateObject(std::shared_ptr<ObjectWithAABB<Dimension>> object) = 0;
     virtual void addObject   (std::shared_ptr<ObjectWithAABB<Dimension>> object) = 0;

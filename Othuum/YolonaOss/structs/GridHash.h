@@ -7,7 +7,7 @@
 namespace YolonaOss {
   template<size_t Dimension>
   class GridHash : public SpatialHash<Dimension> {
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     GridHash(AABB<Dimension> area, double gridSize) {
       _gridSize = gridSize;

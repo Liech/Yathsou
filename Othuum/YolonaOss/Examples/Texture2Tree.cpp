@@ -35,7 +35,7 @@ namespace YolonaOss {
       auto u = std::make_shared<Unit     <2>>(glm::vec2(4 + i, 4), glm::vec2(0, 1));
       
       _unit.push_back(u);
-      _landscape->_unitAuras->addAura(_unit[i]->_aura);
+      _landscape->_unitAgents->addAgent(_unit[i]->_navigationAgent);
       
     }
 
@@ -84,7 +84,7 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::mouseClick(double x, double y) {
     glm::vec3 camPos = _spec->getCam()->getPosition();
-    glm::vec3 pickDir = _spec->getCam()->getPickRay(x, y);
+    glm::vec3 pickDir = _spec->getCam()->getPickRay((float)x, (float)y);
     Intersection sect = Geometry::intersectRayPlane(camPos, pickDir, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     if (sect.doesIntersect) {
       metaPos = sect.location;
@@ -102,13 +102,11 @@ namespace YolonaOss {
   void YolonaOss::Texture2Tree::draw()
   {
     #pragma omp parallel for
-    for (int64_t i = 0; i < _unit.size(); i++) {
-      _unit[i]->_navigationAgent->updatePosition(_unit[i]->_aura);
-      _unit[i]->_aura->setPosition(_unit[i]->_navigationAgent->getPosition());
-      _unit[i]->_aura->setOrientation(_unit[i]->_navigationAgent->getOrientation());
+    for (int64_t i = 0; i < (int64_t)_unit.size(); i++) {
+      _unit[i]->_navigationAgent->updatePosition();
     }
 
-    _landscape->_unitAuras->updateAuras();
+    _landscape->_unitAgents->updateAgents();
     BoxRenderer::start();
     auto leafs = _landscape->_tree->getLeafs();
     
@@ -155,9 +153,9 @@ namespace YolonaOss {
     auto v = [this, id](double val) { 
       for (auto u : _unit) {
         if (u->_navigationAgent->getMap())
-          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(id, val);
+          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(id, (float)val);
       }
-      _config[id] = val;
+      _config[id] = (float)val;
       _landscape->setConfig(_config);
     };
 

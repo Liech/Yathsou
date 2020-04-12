@@ -12,7 +12,7 @@ namespace YolonaOss {
       _target = target; 
     }
 
-    virtual vec getDirectionSuggestion(std::shared_ptr<Aura<Dimension>> obj) override {
+    virtual vec getDirectionSuggestion(NavigationAgent<Dimension>* obj) override {
       vec dir = glm::normalize(_target - obj->getPosition());
       if (std::isnan(dir[0]))
         return vec();

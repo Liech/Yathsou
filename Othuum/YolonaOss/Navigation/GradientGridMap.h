@@ -9,7 +9,7 @@
 namespace YolonaOss {
   template <size_t Dimension>
   class GradientGridMap :public NavigationMap<Dimension> {
-    using self = typedef GradientGridMap<Dimension>;
+    using self = GradientGridMap<Dimension>;
   public:
     GradientGridMap(double scale) {
       _scale = scale;
@@ -24,7 +24,7 @@ namespace YolonaOss {
       _discomfortMap = dm;
     }
 
-    virtual vec getDirectionSuggestion(std::shared_ptr<Aura<Dimension>> obj) override {
+    virtual vec getDirectionSuggestion(NavigationAgent<Dimension>* obj) override {
       if (!_discomfortMap) 
         return vec();
       vec scaled = _scale * obj->getPosition();
@@ -48,11 +48,11 @@ namespace YolonaOss {
         auto newP = position;
         if ((!(newP[currentDimension] == 0 && i == -1)) && (!(newP[currentDimension] == _discomfortMap->getDimension(currentDimension)-1 && i==1)))
           newP[currentDimension] += i;          
-        dir[currentDimension] = i;
+        dir[(int)currentDimension] = i;
         if (currentDimension != 0)
           result += getDirectionSuggestion_recurse(newP,dir, currentDimension - 1);
         else {          
-          float val = _discomfortMap->getVal(newP);
+          float val = (float)_discomfortMap->getVal(newP);
           result += dir * -val;
         }        
       }

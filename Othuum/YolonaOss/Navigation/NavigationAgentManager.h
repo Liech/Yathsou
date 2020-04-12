@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../structs/MultiDimensionalArray.h"
-#include "Aura.h"
+#include "NavigationAgent.h"
 #include <set>
 #include "../Util/Geometry.h"
 #include "../Util/Util.h"
@@ -12,35 +12,35 @@ namespace YolonaOss {
   //You can place Auras in this and query the current aura gradient or value of an arbitrary position
   //Auras are areas that are notified by units. E.g. to recognize friends are near, or too near. See Flocking
   template<size_t Dimension>
-  class AuraHolder {
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+  class NavigationAgentManager {
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
-    AuraHolder(AABB<Dimension> location) : _tree(location){
+    NavigationAgentManager(AABB<Dimension> location) : _tree(location){
 
     }
 
-    std::set<std::shared_ptr<Aura<Dimension>>> findAuras(vec pos, float radius) {
+    std::set<std::shared_ptr<NavigationAgent<Dimension>>> findAgents(vec pos, float radius) {
       return _tree.findRadius(pos, radius);
     }
 
-    void addAura(std::shared_ptr<Aura<Dimension>> area) {
-      _aura.insert(area);
-      _tree.addObject(area);
+    void addAgent(std::shared_ptr<NavigationAgent<Dimension>> agent) {
+      _agents.insert(agent);
+      _tree.addObject(agent);
     }
 
-    void removeAura(std::shared_ptr<Aura<Dimension>> area) {
-      _aura.erase(area);
-      _tree.removeObject(area);
+    void removeAgent(std::shared_ptr<NavigationAgent<Dimension>> agent) {
+      _agents.erase(agent);
+      _tree.removeObject(agent);
     }
 
-    void updateAuras() {
-      for (auto area : _aura) {
-        _tree.updateObject(area);
+    void updateAgents() {
+      for (auto agent : _agents) {
+        _tree.updateObject(agent);
       }
     }
 
   public:
-    std::set<std::shared_ptr<Aura<Dimension>>>             _aura           ;
-    NMTreeSpatialHash<Aura<Dimension>, Dimension>          _tree           ;
+    std::set<std::shared_ptr<NavigationAgent<Dimension>>>             _agents         ;
+    NMTreeSpatialHash<NavigationAgent<Dimension>, Dimension>          _tree           ;
   };
 }

@@ -25,7 +25,7 @@ public:
 template<size_t Dimension>
 class GeometryND {
 public:
-  using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+  using vec = glm::vec<Dimension, float, glm::defaultp>;
 
 
   static vec Subtract(vec A, vec B) {
@@ -101,11 +101,11 @@ public:
     }
 
       
-    float a = std::sin((1.0 - t) * omega) / sin(omega);
-    float b = std::sin(t * omega)         / sin(omega);
+    float a = (float)(std::sin((1.0 - t) * omega) / sin(omega));
+    float b = (float)(std::sin(t * omega)         / sin(omega));
     vec result = p0 * a + p1 * b;
     for (size_t i = 0; i < Dimension; i++)
-      assert(std::isfinite(result[i]));
+      assert(std::isfinite(result[(int)i]));
     return glm::normalize(result);
   }
 

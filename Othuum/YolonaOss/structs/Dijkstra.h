@@ -11,7 +11,7 @@
 namespace YolonaOss {
   template<size_t Dimension>
   class DijkstraI {
-    using vec = typedef glm::vec<Dimension, float, glm::defaultp>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     virtual vec    getDirectionSuggestion(vec currentPosition) = 0;
     virtual double getDistance(vec postion)                    = 0;

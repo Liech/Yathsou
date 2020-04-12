@@ -48,7 +48,7 @@ int main() {
     w.Update = [&w, &start, &end, width, height]() {
       //f(0, 0);
       glm::vec3 viewDir = glm::normalize(w.getSpec()->getCam()->getTarget() - w.getSpec()->getCam()->getPosition());
-      glm::vec3 dir = w.getSpec()->getCam()->getPickRay((float)w.getCursorPos().first, w.getCursorPos().second);
+      glm::vec3 dir = w.getSpec()->getCam()->getPickRay((float)w.getCursorPos().first, (float)w.getCursorPos().second);
       glm::vec3 pos = w.getSpec()->getCam()->getPosition();
       //std::cout << "center: " << viewDir[0] << "/" << viewDir[1] << "/" << viewDir[2] << "   " << dir[0] << "/" << dir[1] << "/" << dir[2] << std::endl<<std::setprecision(2) << std::setfill('0');
       //std::cout << "view  : " <<  << std::endl<<std::setprecision(2) << std::setfill('0');;

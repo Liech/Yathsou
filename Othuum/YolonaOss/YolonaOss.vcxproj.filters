@@ -240,9 +240,6 @@
     <ClInclude Include="Util\Geometry.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Navigation\Navigation.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
     <ClInclude Include="Navigation\NavigationAgent.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
@@ -306,22 +303,19 @@
     <ClInclude Include="Renderer\ArrowRenderer.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Navigation\Aura.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
     <ClInclude Include="Navigation\ComfortMap.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
     <ClInclude Include="Navigation\DiscomfortMap.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
-    <ClInclude Include="Navigation\AuraHolder.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
     <ClInclude Include="structs\NMTreeSpatialHash.h">
       <Filter>Header Files\structs</Filter>
     </ClInclude>
     <ClInclude Include="Navigation\AligmentMap.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
+    <ClInclude Include="Navigation\NavigationAgentManager.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
   </ItemGroup>
@@ -438,9 +432,6 @@
       <Filter>Source Files\Navigation</Filter>
     </ClCompile>
     <ClCompile Include="Navigation\NavigationMap.cpp">
-      <Filter>Source Files\Navigation</Filter>
-    </ClCompile>
-    <ClCompile Include="Navigation\Navigation.cpp">
       <Filter>Source Files\Navigation</Filter>
     </ClCompile>
     <ClCompile Include="Navigation\DirectDistanceMap.cpp">

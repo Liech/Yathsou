@@ -21,7 +21,7 @@ namespace YolonaOss {
 
     glm::vec3 a = glm::vec3(0, -1, 0);
 
-    const float stepsize = (M_PI*2.0f) / 8.0f;
+    const float stepsize = ((float)M_PI*2.0f) / 8.0f;
     for (float currentAngle = 0; currentAngle < M_PI*2; currentAngle += stepsize) {
       glm::vec3 b = glm::vec3(std::sin(currentAngle), 0, std::cos(currentAngle));
       glm::vec3 c = glm::vec3(std::sin(currentAngle + stepsize), 0, std::cos(currentAngle + stepsize));
@@ -31,9 +31,9 @@ namespace YolonaOss {
       input.push_back(GL::PositionNormalVertex(b, normal));
       input.push_back(GL::PositionNormalVertex(c, normal));
 
-      _indices.push_back(input.size() - 3);
-      _indices.push_back(input.size() - 2);
-      _indices.push_back(input.size() - 1);
+      _indices.push_back((int)(input.size() - 3));
+      _indices.push_back((int)(input.size() - 2));
+      _indices.push_back((int)(input.size() - 1));
     }
 
     std::string vertex_shader_source = R"(
