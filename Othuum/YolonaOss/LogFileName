@@ -3,7 +3,7 @@
    ROBOCOPY     ::     Robustes Dateikopieren fÅr Windows                              
 -------------------------------------------------------------------------------
 
-  Gestartet: Montag, 13. April 2020 11:01:12
+  Gestartet: Montag, 13. April 2020 13:48:57
    Quelle : F:\Projects\Yathsou\Othuum\YolonaOss\Data\
      Ziel : F:\Projects\Yathsou\Othuum\x64\Release\YolonaOssData\
 
@@ -16,19 +16,13 @@
 	                   0	F:\Projects\Yathsou\Othuum\YolonaOss\Data\
 	                   1	F:\Projects\Yathsou\Othuum\YolonaOss\Data\fonts\
 	                   4	F:\Projects\Yathsou\Othuum\YolonaOss\Data\textures\
-	    Neue Datei		     179	test1.png  0%  100%  
-	    Neue Datei		    1396	TinyMap.png  0%  100%  
 
 ------------------------------------------------------------------------------
 
            Insgesamt   KopiertöbersprungenKeine öbereinstimmung    FEHLER    Extras
 Verzeich.:         3         0         3         0         0         0
-  Dateien:         5         2         3         0         0         0
-    Bytes:   624.6 k     1.5 k   623.1 k         0         0         0
+  Dateien:         5         0         5         0         0         0
+    Bytes:   624.6 k         0   624.6 k         0         0         0
    Zeiten:   0:00:00   0:00:00                       0:00:00   0:00:00
-
-
-Geschwindigkeit:             1575000 Bytes/Sek.
-Geschwindigkeit:              90.122 Megabytes/Min.
-   Beendet: Montag, 13. April 2020 11:01:12
+   Beendet: Montag, 13. April 2020 13:48:57
 

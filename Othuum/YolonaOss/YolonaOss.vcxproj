@@ -173,6 +173,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/freetype/include;$(ProjectDir)</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
