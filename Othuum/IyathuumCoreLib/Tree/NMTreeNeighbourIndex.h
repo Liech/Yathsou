@@ -15,7 +15,7 @@
 //on request of all neighbours, when they are smaller, the non leaf node is expanded to the correct border
 
 
-namespace YolonaOss {
+namespace Iyathuum {
 
 
   template <typename Content, size_t ArraySize, size_t Dimension, TreeMergeBehavior Merge, typename Scalar = size_t>
@@ -111,7 +111,7 @@ namespace YolonaOss {
       return current;
     }
 
-    std::vector<std::array<size_t, Dimension>> getPathToNeighbour(Tree* node, size_t dimension, YolonaOss::NMTreeDirection dir, Tree*& root) {
+    std::vector<std::array<size_t, Dimension>> getPathToNeighbour(Tree* node, size_t dimension, Iyathuum::NMTreeDirection dir, Tree*& root) {
       //modifys the path so that it should point to its neighbour at the same height
       std::vector<std::array<size_t, Dimension>> input;
       getOwnPath(node,input, root);

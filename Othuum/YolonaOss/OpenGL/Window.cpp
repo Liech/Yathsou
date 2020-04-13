@@ -3,14 +3,15 @@
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 #include <string>
-#include "structs/Factory.h"
+#include "IyathuumCoreLib/Singleton/Factory.h"
 #include "Drawable.h"
 #include "Loadable.h"
-#include "structs/Database.h"
+#include "IyathuumCoreLib/Singleton/Database.h"
 #include "Drawables/Widgets/Widget.h"
 #include "../Camera/Camera.h"
 #include "Updateable.h"
 #include <functional>
+#include "Util/Util.h"
 
 namespace YolonaOss {
   namespace GL {
@@ -98,10 +99,10 @@ namespace YolonaOss {
       glm::vec2 mousePos((float)xpos, (float)(win->getHeight() - ypos));
 
       if (mousePos != _oldMousePos) {
-        std::set<Widgets::Widget*> moveWidgets = Database<Widgets::Widget*>::getByTag("MouseMove");
+        std::set<Widgets::Widget*> moveWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseMove");
         for (auto w : moveWidgets) {
-          if (w->getPosition().inside(mousePos)) {
-            w->mouseMove(mousePos - w->getPosition().position);
+          if (w->getPosition().isInside(Util<2>::vec2Array<double>(mousePos))) {
+            w->mouseMove(mousePos - Util<2>::array2Vec(w->getPosition().getPosition()));
           }
         }
       }
@@ -166,12 +167,12 @@ namespace YolonaOss {
       spec.width = _width;
       spec.height = _height;
       std::vector<std::shared_ptr<Loadable>> loadList;
-      for (auto renderStep : Factory<Loadable>::getNamesByTag("Main"))
-        loadList.push_back(Factory<Loadable>::make(renderStep));
-      for (auto renderStep : Database<std::shared_ptr<GL::Drawable>>::getByTag("Main")) {
+      for (auto renderStep : Iyathuum::Factory<Loadable>::getNamesByTag("Main"))
+        loadList.push_back(Iyathuum::Factory<Loadable>::make(renderStep));
+      for (auto renderStep : Iyathuum::Database<std::shared_ptr<GL::Drawable>>::getByTag("Main")) {
         loadList.push_back(renderStep);
       }
-      for (auto renderStep : Database<std::shared_ptr <Updateable>>::getByTag("Main")) {
+      for (auto renderStep : Iyathuum::Database<std::shared_ptr <Updateable>>::getByTag("Main")) {
         loadList.push_back(renderStep);
       }
       for (auto renderStep : loadList)
@@ -184,11 +185,11 @@ namespace YolonaOss {
         // Check if any events have been activated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
         mouseMovementCalls();
-        for (auto update : Database<std::shared_ptr <Updateable>>::getByTag("Main"))
+        for (auto update : Iyathuum::Database<std::shared_ptr <Updateable>>::getByTag("Main"))
           update->update();
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        for (auto draw : Database<std::shared_ptr<GL::Drawable>>::getByTag("Main"))
+        for (auto draw : Iyathuum::Database<std::shared_ptr<GL::Drawable>>::getByTag("Main"))
           draw->draw();
         Update();
 
@@ -208,35 +209,35 @@ namespace YolonaOss {
       glfwGetCursorPos(window, &xpos, &ypos);
       glm::vec2 mousePos((float)xpos, (float)(win->getHeight() - ypos));
 
-      std::set<Widgets::Widget*> mouseStatusWidgets = Database<Widgets::Widget*>::getByTag("MouseStatus");
+      std::set<Widgets::Widget*> mouseStatusWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseStatus");
       KeyStatus status = (KeyStatus)action;
       for (auto w : mouseStatusWidgets) {
-        bool stop = w->mouseStatusChanged(mousePos - w->getPosition().position, (Key)button, status);
+        bool stop = w->mouseStatusChanged(mousePos - Util<2>::array2Vec(w->getPosition().getPosition()), (Key)button, status);
         if (stop)
           return;
       }
 
-      std::set<Widgets::Widget*> clickableWidgets = Database<Widgets::Widget*>::getByTag("MouseClick");
+      std::set<Widgets::Widget*> clickableWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseClick");
       for (auto w : clickableWidgets) {
-        if (w->getPosition().inside(mousePos)) {
+        if (w->getPosition().isInside(Util<2>::vec2Array<double>( mousePos))) {
           if (status == KeyStatus::PRESS)
             pressed = w;
           else
             if (action == (int)KeyStatus::RELEASE && pressed == w) {
-              bool stop = w->mouseClick(mousePos - w->getPosition().position, (Key)button);
+              bool stop = w->mouseClick(mousePos - Util<2>::array2Vec(w->getPosition().getPosition()), (Key)button);
               if (stop)
                 return;
             }
         }
       }
-      std::set<std::function<bool(double, double)>*> functions = Database<std::function<bool(double, double)>*>::getByTag("MouseClick");
+      std::set<std::function<bool(double, double)>*> functions = Iyathuum::Database<std::function<bool(double, double)>*>::getByTag("MouseClick");
       if(action == (int)KeyStatus::PRESS) {
         for (auto f : functions) {
           bool stop = (*f)(xpos, ypos);
           if (stop)
             return;
         }
-        std::set<std::function<bool(double, double)>> functions2 = Database<std::function<bool(double, double)>>::getByTag("MouseClick");
+        std::set<std::function<bool(double, double)>> functions2 = Iyathuum::Database<std::function<bool(double, double)>>::getByTag("MouseClick");
         for (auto f : functions2) {
           bool stop = f(xpos, ypos);
           if (stop)

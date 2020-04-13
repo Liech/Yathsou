@@ -1,9 +1,10 @@
 #include "ListLayout.h"
 #include "../../Renderer/RectangleRenderer.h"
+#include "IyathuumCoreLib/Util/Geometry.h"
 
 namespace YolonaOss {
   namespace Widgets {
-    ListLayout::ListLayout(BoundingBox2 position) : Widget(position) {
+    ListLayout::ListLayout(Iyathuum::AABB<2> position) : Widget(position) {
 
     }
 
@@ -23,15 +24,16 @@ namespace YolonaOss {
 
       glm::vec2 offset(0.0);
       if (_widgets.size() > 0)
-        offset += glm::vec2(0,_widgets[0]->getPosition().size[1]);
+        offset += glm::vec2(0,_widgets[0]->getPosition().getSize()[1]);
 
       for (auto w : _widgets) {
-        BoundingBox2 pos = w->getPosition();
-        pos.position = getPosition().position + glm::vec2(0,getPosition().size[1]) + glm::vec2(offset[0],-offset[1]);
+        Iyathuum::AABB<2> pos = w->getPosition();
+        pos.setPosition(Iyathuum::Geometry<2>::add(Iyathuum::Geometry<2>::add(getPosition().getPosition() , {0, getPosition().getSize()[1]}) ,{offset[0], -offset[1]}));
+      
         if (_horizontal)
-          offset += glm::vec2(pos.size[0] + spacing, 0);
+          offset += glm::vec2(pos.getSize()[0] + spacing, 0);
         else
-          offset += glm::vec2(0, pos.size[1] + spacing);
+          offset += glm::vec2(0, pos.getSize()[1] + spacing);
         w->setPosition(pos);
         w->draw();
       }

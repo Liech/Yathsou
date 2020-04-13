@@ -2,10 +2,9 @@
 
 #include <stdexcept>
 
-#include "../structs/Color.h"
-#include "../Lib/lodepng/lodepng.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 
-namespace YolonaOss {
+namespace Iyathuum {
   ImageUtil::ImageUtil()
   {
   }

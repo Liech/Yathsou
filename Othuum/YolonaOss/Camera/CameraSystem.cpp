@@ -1,7 +1,7 @@
 #include "CameraSystem.h"
 
 #include "../OpenGL/DrawSpecification.h"
-#include "../structs/Database.h"
+#include "IyathuumCoreLib/Singleton/Database.h"
 #include "Camera.h"
 
 namespace YolonaOss {
@@ -9,9 +9,9 @@ namespace YolonaOss {
     void CameraSystem::load(GL::DrawSpecification* spec)
     {
       _spec = spec;
-      std::set<std::string> camNames = Factory<CameraMode>::getNamesByTag("Camera");
+      std::set<std::string> camNames = Iyathuum::Factory<CameraMode>::getNamesByTag("Camera");
       for (auto name : camNames) {
-        std::shared_ptr<CameraMode> cam = Factory<CameraMode>::make(name);
+        std::shared_ptr<CameraMode> cam = Iyathuum::Factory<CameraMode>::make(name);
         _availableCams[name] = cam;
         //cam->load(spec->getCam(), spec->getWindow());
       }

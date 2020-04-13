@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../structs/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 #include <memory>
 #include <vector>
 #include "Geometry.h"
 
-namespace YolonaOss {
+namespace Iyathuum {
   class ImageSubsetUtil {
   public:
 

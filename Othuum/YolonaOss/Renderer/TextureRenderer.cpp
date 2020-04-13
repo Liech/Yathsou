@@ -20,7 +20,7 @@ namespace YolonaOss {
     makeShader();
   }
 
-  void TextureRenderer::drawTexture(MultiDimensionalArray<Color, 2> * texture, glm::mat4 world, glm::vec4 color) {
+  void TextureRenderer::drawTexture(Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2> * texture, glm::mat4 world, glm::vec4 color) {
     GL::Texture t("temporaryTextureRendererTexture", texture);
     drawTexture(&t, world, color);
   }

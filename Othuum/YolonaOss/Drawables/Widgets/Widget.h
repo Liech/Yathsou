@@ -2,17 +2,17 @@
 
 #include "../../OpenGL/Drawable.h"
 #include "../../OpenGL/Keys.h"
-#include "../..//structs/BoundingBox.h"
+#include "IyathuumCoreLib/BaseTypes/AABB.h"
 
 namespace YolonaOss {
   namespace Widgets {
     class Widget : public GL::Drawable {
     public:
-      Widget(BoundingBox2 position) {
+      Widget(Iyathuum::AABB<2> position) {
         _position = position;
       }
       Widget() {
-        _position = BoundingBox2(glm::vec2(0, 0), glm::vec2(100, 100));
+        _position = Iyathuum::AABB<2>({ 0,0 }, { 100, 100 });
       }
 
       virtual ~Widget() {};
@@ -27,10 +27,10 @@ namespace YolonaOss {
 
       virtual void load(GL::DrawSpecification*) override{}
 
-      BoundingBox2 getPosition() const;
-      void setPosition(BoundingBox2 pos);
+      Iyathuum::AABB<2> getPosition() const;
+      void setPosition(Iyathuum::AABB<2> pos);
     private:
-      BoundingBox2 _position;
+      Iyathuum::AABB<2> _position;
     };
   }
 }

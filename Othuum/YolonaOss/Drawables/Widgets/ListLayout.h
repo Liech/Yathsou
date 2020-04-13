@@ -7,7 +7,7 @@ namespace YolonaOss {
   namespace Widgets {
     class ListLayout : public Widget {
     public:
-              ListLayout(BoundingBox2 position);
+              ListLayout(Iyathuum::AABB<2> position);
               int  addWidget(std::shared_ptr<Widget> w);
               void removeWidget(int w);
       virtual void draw() override;

@@ -114,7 +114,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/freetype/include;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
@@ -125,7 +125,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>(Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z) ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
@@ -170,7 +170,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/freetype/include;$(ProjectDir)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
@@ -182,7 +182,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>(Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z  /Log:LogFileName) ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
@@ -252,23 +252,8 @@
     <ClInclude Include="Renderer\TextureRenderer.h" />
     <ClInclude Include="RTSComponents\Landscape.h" />
     <ClInclude Include="RTSComponents\Unit.h" />
-    <ClInclude Include="structs\AABB.h" />
-    <ClInclude Include="structs\BoundingBox.h" />
-    <ClInclude Include="structs\Color.h" />
-    <ClInclude Include="structs\Database.h" />
-    <ClInclude Include="structs\Dijkstra.h" />
-    <ClInclude Include="structs\Factory.h" />
-    <ClInclude Include="structs\GridHash.h" />
-    <ClInclude Include="structs\MultiDimensionalArray.h" />
-    <ClInclude Include="structs\NMTree.h" />
-    <ClInclude Include="structs\NMTreeDijkstra.h" />
-    <ClInclude Include="structs\NMTreeNeighbourIndex.h" />
-    <ClInclude Include="structs\NMTreeSpatialHash.h" />
-    <ClInclude Include="structs\SpatialHash.h" />
     <ClInclude Include="Util\Geometry.h" />
     <ClInclude Include="Util\ImageIO.h" />
-    <ClInclude Include="Util\ImageSubsetUtil.h" />
-    <ClInclude Include="Util\ImageUtil.h" />
     <ClInclude Include="Util\Util.h" />
     <ClInclude Include="YolonaOss.h" />
   </ItemGroup>
@@ -319,12 +304,8 @@
     <ClCompile Include="Renderer\TextureRenderer.cpp" />
     <ClCompile Include="RTSComponents\Landscape.cpp" />
     <ClCompile Include="RTSComponents\Unit.cpp" />
-    <ClCompile Include="structs\AABB.cpp" />
-    <ClCompile Include="structs\Color.cpp" />
     <ClCompile Include="Util\Geometry.cpp" />
     <ClCompile Include="Util\ImageIO.cpp" />
-    <ClCompile Include="Util\ImageSubsetUtil.cpp" />
-    <ClCompile Include="Util\ImageUtil.cpp" />
     <ClCompile Include="Util\Util.cpp" />
     <ClCompile Include="YolonaOss.cpp" />
   </ItemGroup>

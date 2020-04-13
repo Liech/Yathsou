@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../structs/MultiDimensionalArray.h"
-#include "../structs/Color.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 #include "glad/glad.h"
 #include "Uniform.h"
 #include "../OpenGL/DrawableList.h"

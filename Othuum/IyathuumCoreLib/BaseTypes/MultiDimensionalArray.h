@@ -7,8 +7,10 @@
 #include <memory>
 #include <iomanip>
 #include <numeric>
+#include <execution>
+#include <iostream>
 
-namespace YolonaOss {
+namespace Iyathuum {
   enum memoryLayout {
     Reversed, Normal
   };
@@ -17,8 +19,8 @@ namespace YolonaOss {
   class MultiDimensionalArray;
 
 
-  //Just takes care of the data storage. Should not contain any comfort features to keep it clean
-  //This should be done by helper classes like matrix or slicer
+  //Just takes care of the data storage. Should not contain any comfort features
+  //This should be done by helper classes
   template <typename Type, size_t Dimension, memoryLayout Layout, size_t... Is>
   class MultiDimensionalArray<Type, Dimension, Layout, std::index_sequence<Is...> >
   {

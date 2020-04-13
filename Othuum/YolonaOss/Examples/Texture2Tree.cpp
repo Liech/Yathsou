@@ -1,16 +1,16 @@
 #include "Texture2Tree.h"
 #include "../OpenGL/DrawSpecification.h"
 #include "../Util/ImageIO.h"
-#include "../structs/NMTree.h"
 #include "../Renderer/BoxRenderer.h"
 #include <iostream>
 #include <limits>
-#include "../structs/Database.h"
+#include "IyathuumCoreLib/Singleton/Database.h"
+#include "IyathuumCoreLib/Tree/NMTree.h"
+#include "IyathuumCoreLib/Util/ImageUtil.h"
 #include "../Util/Geometry.h"
 #include "Navigation/MapGroup.h"
 #include "Util/Util.h"
 #include "Renderer/TextureRenderer.h"
-#include "Util/ImageUtil.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/ext/scalar_constants.hpp>
 #include "../Drawables/Widgets/Slider.h"
@@ -43,10 +43,10 @@ namespace YolonaOss {
 
     _spec = spec;
     _mouseClick = [this](double x, double y) {mouseClick(x, y); return true; };
-    Database < std::function<bool(double, double)>*>::add(&_mouseClick , { "MouseClick" });
+    Iyathuum::Database < std::function<bool(double, double)>*>::add(&_mouseClick , { "MouseClick" });
 
 
-    _layout = std::make_shared<Widgets::ListLayout>(BoundingBox2(glm::vec2(0, 50), glm::vec2(350, spec->height-50)));
+    _layout = std::make_shared<Widgets::ListLayout>(Iyathuum::AABB<2>({ 0.0, 50.0 }, { 350.0, (double)(spec->height - 50)}));
     _drawableList.addDrawable(_layout);
 
     for (size_t i = 0; i < 20; i++)
@@ -150,9 +150,9 @@ namespace YolonaOss {
       _landscape->setConfig(_config);
     };
 
-    std::shared_ptr<Widgets::Slider> a = std::make_shared<Widgets::Slider>(BoundingBox2(glm::vec2(0, 50), glm::vec2(200, 50)), min, max, _config[id], v);
-    std::shared_ptr<Widgets::Label>  b = std::make_shared<Widgets::Label>(text, BoundingBox2(glm::vec2(0, 50), glm::vec2(150, 50)));
-    auto layout = std::make_shared<Widgets::ListLayout>(BoundingBox2(glm::vec2(0, 50), glm::vec2(350, 50)));
+    std::shared_ptr<Widgets::Slider> a = std::make_shared<Widgets::Slider>(Iyathuum::AABB<2>({ 0, 50 }, { 200, 50 }), min, max, _config[id], v);
+    std::shared_ptr<Widgets::Label>  b = std::make_shared<Widgets::Label>(text, Iyathuum::AABB<2>({ 0, 50 }, { 150, 50 }));
+    auto layout = std::make_shared<Widgets::ListLayout>(Iyathuum::AABB<2>({ 0, 50 }, { 350, 50 }));
     layout->setHorizontal(true);
     layout->addWidget(b);
     layout->addWidget(a);

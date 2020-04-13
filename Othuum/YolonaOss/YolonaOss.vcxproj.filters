@@ -22,12 +22,6 @@
     <Filter Include="Source Files\OpenGL">
       <UniqueIdentifier>{d59a3443-b2a0-44ad-8dc9-3fba3475f199}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\structs">
-      <UniqueIdentifier>{b514ad2b-947a-46f8-8d77-fb2de76bfe3b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\structs">
-      <UniqueIdentifier>{c6f4617f-c959-437d-9ee3-46a7f0506013}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Examples">
       <UniqueIdentifier>{69c394c4-c278-4721-b68f-9afdadb4cd39}</UniqueIdentifier>
     </Filter>
@@ -144,15 +138,6 @@
     <ClInclude Include="OpenGL\DrawableList.h">
       <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="structs\NMTree.h">
-      <Filter>Header Files\structs</Filter>
-    </ClInclude>
-    <ClInclude Include="structs\MultiDimensionalArray.h">
-      <Filter>Header Files\structs</Filter>
-    </ClInclude>
-    <ClInclude Include="structs\Color.h">
-      <Filter>Header Files\structs</Filter>
-    </ClInclude>
     <ClInclude Include="Examples\RenderTriangle.h">
       <Filter>Examples</Filter>
     </ClInclude>
@@ -171,9 +156,6 @@
     <ClInclude Include="Renderer\TextRenderer.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="structs\Factory.h">
-      <Filter>Header Files\structs</Filter>
-    </ClInclude>
     <ClInclude Include="OpenGL\Loadable.h">
       <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
@@ -191,12 +173,6 @@
     </ClInclude>
     <ClInclude Include="Drawables\Widgets\Widget.h">
       <Filter>Header Files\Drawables\Widgets</Filter>
-    </ClInclude>
-    <ClInclude Include="structs\Database.h">
-      <Filter>Header Files\structs</Filter>
-    </ClInclude>
-    <ClInclude Include="structs\BoundingBox.h">
-      <Filter>Header Files\structs</Filter>
     </ClInclude>
     <ClInclude Include="Camera\FreeCamera.h">
       <Filter>Header Files\Camera</Filter>
@@ -231,12 +207,6 @@
     <ClInclude Include="Lib\lodepng\lodepng_util.h">
       <Filter>libs\lodepng</Filter>
     </ClInclude>
-    <ClInclude Include="structs\NMTreeNeighbourIndex.h">
-      <Filter>Header Files\structs</Filter>
-    </ClInclude>
-    <ClInclude Include="structs\Dijkstra.h">
-      <Filter>Header Files\structs</Filter>
-    </ClInclude>
     <ClInclude Include="Util\Geometry.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
@@ -252,26 +222,14 @@
     <ClInclude Include="Navigation\DijkstraMap.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
-    <ClInclude Include="structs\AABB.h">
-      <Filter>Header Files\structs</Filter>
-    </ClInclude>
     <ClInclude Include="Util\Util.h">
       <Filter>Header Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="structs\NMTreeDijkstra.h">
-      <Filter>Header Files\structs</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\TextureRenderer.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Examples\RenderTexture.h">
       <Filter>Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\ImageUtil.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Util\ImageSubsetUtil.h">
-      <Filter>Header Files\Util</Filter>
     </ClInclude>
     <ClInclude Include="Navigation\MapGroup.h">
       <Filter>Header Files\Navigation</Filter>
@@ -284,12 +242,6 @@
     </ClInclude>
     <ClInclude Include="RTSComponents\Unit.h">
       <Filter>Header Files\RTSComponents</Filter>
-    </ClInclude>
-    <ClInclude Include="structs\SpatialHash.h">
-      <Filter>Header Files\structs</Filter>
-    </ClInclude>
-    <ClInclude Include="structs\GridHash.h">
-      <Filter>Header Files\structs</Filter>
     </ClInclude>
     <ClInclude Include="Drawables\Widgets\Slider.h">
       <Filter>Header Files\Drawables\Widgets</Filter>
@@ -308,9 +260,6 @@
     </ClInclude>
     <ClInclude Include="Navigation\DiscomfortMap.h">
       <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="structs\NMTreeSpatialHash.h">
-      <Filter>Header Files\structs</Filter>
     </ClInclude>
     <ClInclude Include="Navigation\AligmentMap.h">
       <Filter>Header Files\Navigation</Filter>
@@ -361,9 +310,6 @@
     </ClCompile>
     <ClCompile Include="OpenGL\Camera.cpp">
       <Filter>Source Files\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="structs\Color.cpp">
-      <Filter>Source Files\structs</Filter>
     </ClCompile>
     <ClCompile Include="Examples\RenderTriangle.cpp">
       <Filter>Examples</Filter>
@@ -440,9 +386,6 @@
     <ClCompile Include="Navigation\DijkstraMap.cpp">
       <Filter>Source Files\Navigation</Filter>
     </ClCompile>
-    <ClCompile Include="structs\AABB.cpp">
-      <Filter>Source Files\structs</Filter>
-    </ClCompile>
     <ClCompile Include="Util\Util.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
@@ -451,12 +394,6 @@
     </ClCompile>
     <ClCompile Include="Examples\RenderTexture.cpp">
       <Filter>Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\ImageUtil.cpp">
-      <Filter>Source Files\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Util\ImageSubsetUtil.cpp">
-      <Filter>Source Files\Util</Filter>
     </ClCompile>
     <ClCompile Include="Navigation\MapGroup.cpp">
       <Filter>Source Files\Navigation</Filter>

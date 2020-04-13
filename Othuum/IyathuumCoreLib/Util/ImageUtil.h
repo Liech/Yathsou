@@ -2,10 +2,10 @@
 
 #include <array>
 #include <memory>
-#include "../structs/MultiDimensionalArray.h"
-#include "../structs/Color.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 
-namespace YolonaOss {
+namespace Iyathuum {
   class ImageUtil
   {
   public:

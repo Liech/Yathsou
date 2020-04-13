@@ -1,7 +1,8 @@
 #pragma once
 
 #include "../OpenGL/Loadable.h"
-#include "../structs/Factory.h"
+#include "IyathuumCoreLib/Singleton/Factory.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 #include "../OpenGL/Texture.h"
 #include "../OpenGL/VAO.h"
 #include "../OpenGL/VBO.h"
@@ -27,7 +28,7 @@ namespace YolonaOss {
     static void start();
     static void end();
     static void drawTexture(GL::Texture* texture, glm::mat4 world, glm::vec4 color = glm::vec4(1, 1, 1, 1));
-    static void drawTexture(MultiDimensionalArray<Color,2>* texture, glm::mat4 world, glm::vec4 color = glm::vec4(1, 1, 1, 1));
+    static void drawTexture(Iyathuum::MultiDimensionalArray<Iyathuum::Color,2>* texture, glm::mat4 world, glm::vec4 color = glm::vec4(1, 1, 1, 1));
 
   private:
     struct RenderVars {

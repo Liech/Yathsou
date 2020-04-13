@@ -3,9 +3,9 @@
 //#include "structs/Factory.h"
 #include "../OpenGL/Loadable.h"
 #include <iostream>
-#include "../structs/Factory.h"
+#include "IyathuumCoreLib/Singleton/Factory.h"
 #include "glm/glm.hpp"
-#include "../structs/BoundingBox.h"
+#include "IyathuumCoreLib/BaseTypes/AABB.h"
 #include <memory>
 
 #include <map>
@@ -29,7 +29,7 @@ namespace YolonaOss {
     static void start();
     static void end();
     static void drawRectangle(glm::vec2 pos, glm::vec2 size, glm::vec3 color);
-    static void drawRectangle(BoundingBox2 box, glm::vec3 color);
+    static void drawRectangle(Iyathuum::AABB<2> box, glm::vec3 color);
 
     virtual void load(GL::DrawSpecification*) override;
 

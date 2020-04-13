@@ -5,7 +5,7 @@
 #include "../OpenGL/DrawSpecification.h"
 #include "BasicTriangle.h"
 #include "../Drawables/Background.h"
-#include "../structs/Database.h"
+#include "IyathuumCoreLib/Singleton/Database.h"
 
 namespace YolonaOss {
   void RenderTriangle::run() {
@@ -14,7 +14,7 @@ namespace YolonaOss {
     std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
     list->addDrawable(std::make_shared<Background>());
     list->addDrawable(std::make_shared<BasicTriangle>());
-    Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
+    Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
 
     w.run();
   }

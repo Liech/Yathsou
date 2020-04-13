@@ -13,5 +13,90 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Util">
+      <UniqueIdentifier>{fd0cb3d2-96db-4589-a405-d305838e2dda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Util">
+      <UniqueIdentifier>{eedc239b-ad02-47b1-a71f-69cd48dc21c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tree">
+      <UniqueIdentifier>{5782e835-523f-4c38-a430-42c2a63fdde7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Tree">
+      <UniqueIdentifier>{313c7603-4115-483c-91b3-2fa284898098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Singleton">
+      <UniqueIdentifier>{f2bb9b46-0884-4cad-b4cc-6d24194f7338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Singleton">
+      <UniqueIdentifier>{d130643e-7494-4f8f-ada2-5e28998e9a4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BaseTypes">
+      <UniqueIdentifier>{6a906b2b-75fe-411b-998b-f80769964eae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BaseTypes">
+      <UniqueIdentifier>{ee0a04e4-3e32-4fe1-82d8-159be973a0d7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Util\ImageSubsetUtil.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\ImageUtil.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree\NMTreeSpatialHash.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree\SpatialHash.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree\Dijkstra.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree\GridHash.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree\NMTree.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree\NMTreeDijkstra.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Tree\NMTreeNeighbourIndex.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton\Factory.h">
+      <Filter>Header Files\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton\Database.h">
+      <Filter>Header Files\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTypes\Color.h">
+      <Filter>Header Files\BaseTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTypes\MultiDimensionalArray.h">
+      <Filter>Header Files\BaseTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTypes\AABB.h">
+      <Filter>Header Files\BaseTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Geometry.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Util\ImageSubsetUtil.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\ImageUtil.cpp">
+      <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseTypes\Color.cpp">
+      <Filter>Source Files\BaseTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseTypes\AABB.cpp">
+      <Filter>Source Files\BaseTypes</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,23 +1,22 @@
 #pragma once
 
 #include "SpatialHash.h"
-#include "AABB.h"
+#include "IyathuumCoreLib/BaseTypes/AABB.h"
 #include "NMTree.h"
 #include <set>
-#include "../Util/Util.h"
 
-namespace YolonaOss {
+namespace Iyathuum {
   
   template<size_t Dimension>
   class ObjectWithPosition {
-    using vec = glm::vec<Dimension, float, glm::defaultp>;
+    using vec = std::array<double,Dimension>;
   public:
     virtual vec getPosition() = 0;
   };
 
   template<typename Content, size_t Dimension,  size_t ArraySize = 2>
   class NMTreeSpatialHash : public ObjectWithAABB <Dimension>{
-    using vec = glm::vec<Dimension, float, glm::defaultp>;
+    using vec = std::array<double,Dimension>;
     using content_ptr = std::shared_ptr<std::set < std::shared_ptr<Content>>>;
     using Tree = NMTree < content_ptr, ArraySize, Dimension, TreeMergeBehavior::Avg, double >;
     
@@ -42,14 +41,20 @@ namespace YolonaOss {
     }
 
     void updateObject(std::shared_ptr<Content > object)  {
-      if (_removeMap.count(object) != 0 && tree2AABB(_removeMap[object]).isInside(object->getPosition()))//nullptr
+      vec p;
+      for (size_t i = 0; i < Dimension; i++)
+        p[i] = object->getPosition()[i];
+      if (_removeMap.count(object) != 0 && tree2AABB(_removeMap[object]).isInside(p))//nullptr
         return;
       removeObject(object);
       addObject(object);
     }
 
     void addObject(std::shared_ptr<Content > object)  {
-      if (tree2AABB(_tree.get()).isInside(object->getPosition()))
+      vec p;
+      for (size_t i = 0; i < Dimension; i++)
+        p[i] = object->getPosition()[i];
+      if (tree2AABB(_tree.get()).isInside(p))
         addObject(object, _tree.get());
       if (_removeMap.count(object) == 0) {
         _outer.insert(object);
@@ -73,7 +78,10 @@ namespace YolonaOss {
     std::set<std::shared_ptr<Content>> findRadius(vec pos, float radius) {
       std::set<std::shared_ptr<Content>> result = findRadius(pos, radius, _tree.get());
       for (auto r : _outer) {
-        if (glm::distance(pos, r->getPosition()) < radius)
+        vec p;
+        for (size_t i = 0; i < Dimension; i++)
+          p[i] = r->getPosition()[i];
+        if (Geometry<Dimension>::length(Geometry<Dimension>::subtract(pos, p)) < radius)
           result.insert(r);
       }
       return result;
@@ -89,7 +97,10 @@ namespace YolonaOss {
       for (size_t i = 0; i < Dimension; i++)
         pos[(int)i] = (float)posPre[(int)i];
       result.setPosition(pos);
-      result.setSize(vec(1.0f) * (float)tree->getSize());
+      vec siz;
+      for (size_t i = 0; i < Dimension; i++)
+        siz[i] = tree->getSize();
+      result.setSize(siz);
       return result;
     }
 
@@ -105,8 +116,10 @@ namespace YolonaOss {
           else {
             std::set<std::shared_ptr<Content>> result;
             for (auto s : *current->getContent()) {
-              vec p = s->getPosition();
-              if (glm::distance(pos, p) < radius)
+              vec p;
+              for(size_t i = 0;i < Dimension;i++)
+                p[i] = s->getPosition()[i];
+              if (Geometry<Dimension>::length(Geometry<Dimension>::subtract(pos, p)) < radius)
                 result.insert(s);
             }
             return result;
@@ -165,7 +178,10 @@ namespace YolonaOss {
             c->setContent(nullptr);
           for (auto s : *toReassign) {
             _removeMap.erase(s);
-            if (!tree2AABB(current).isInside(s->getPosition()))
+            vec p;
+            for (size_t i = 0; i < Dimension; i++)
+              p[i] = s->getPosition()[i];
+            if (!tree2AABB(current).isInside(p))
               addObject(s);         //state is not uptodate
             else
               addObject(s, current);//state is uptodate
@@ -179,12 +195,13 @@ namespace YolonaOss {
         }
       }
       else { // is node
-        vec p = object->getPosition();
-        std::array<double, Dimension> v;
-        for (size_t i = 0; i < Dimension; i++)
-          v[i] = p[(int)i];
-        current = current->getLeaf(v);
-        addObject(object, current);
+        vec p;
+        for (size_t i = 0; i < Dimension; i++) {
+          p[i] = object->getPosition()[i];
+        }
+
+        auto next = current->getLeaf(p);
+        addObject(object, next);
       }
     }
 

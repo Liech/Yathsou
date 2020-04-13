@@ -1,10 +1,10 @@
 #pragma once
 
 #include "../OpenGL/Drawable.h"
-#include "../structs/MultiDimensionalArray.h"
-#include "../structs/NMTree.h"
-#include "../structs/NMTreeNeighbourIndex.h"
-#include "../structs/NMTreeDijkstra.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/Tree/NMTree.h"
+#include "IyathuumCoreLib/Tree/NMTreeNeighbourIndex.h"
+#include "IyathuumCoreLib/Tree/NMTreeDijkstra.h"
 #include <memory>
 #include "../Navigation/NavigationAgent.h"
 #include "../RTSComponents/Landscape.h"
@@ -19,8 +19,8 @@ namespace YolonaOss {
   namespace GL {
     class DrawSpecification;
   }
-  using Tree = NMTree<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max>;
-  using TreeI = NMTreeNeighbourIndex<bool, 2, 2, YolonaOss::TreeMergeBehavior::Max>;
+  using Tree =  Iyathuum::NMTree<bool, 2, 2, Iyathuum::TreeMergeBehavior::Max>;
+  using TreeI = Iyathuum::NMTreeNeighbourIndex<bool, 2, 2, Iyathuum::TreeMergeBehavior::Max>;
 
   class Texture2Tree : public GL::Drawable {
     // Geerbt über Drawable

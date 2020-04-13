@@ -3,11 +3,11 @@
 namespace YolonaOss {
   namespace Widgets {
 
-    BoundingBox2 Widget::getPosition() const {
+    Iyathuum::AABB<2> Widget::getPosition() const {
       return _position;
     }
 
-    void Widget::setPosition(BoundingBox2 pos) {
+    void Widget::setPosition(Iyathuum::AABB<2> pos) {
       _position = pos;
     }
   }

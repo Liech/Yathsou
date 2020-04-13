@@ -4,12 +4,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "../OpenGL/DrawSpecification.h"
 #include "../OpenGL/Window.h"
+#include "Util/Util.h"
 
 namespace YolonaOss {
   RectangleRenderer::RenderVars RectangleRenderer::_vars;
 
-  void RectangleRenderer::drawRectangle(BoundingBox2 box, glm::vec3 color) {
-    drawRectangle(box.position, box.size, color);
+  void RectangleRenderer::drawRectangle(Iyathuum::AABB<2> box, glm::vec3 color) {
+    drawRectangle(Util<2>::array2Vec(box.getPosition()), Util<2>::array2Vec(box.getSize()), color);
   }
 
   void RectangleRenderer::drawRectangle(glm::vec2 pos, glm::vec2 size, glm::vec3 color) {

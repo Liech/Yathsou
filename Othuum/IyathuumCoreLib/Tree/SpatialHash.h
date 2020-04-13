@@ -1,9 +1,9 @@
 #pragma once
 
 #include <memory>
-#include "AABB.h"
+#include "IyathuumCoreLib/BaseTypes/AABB.h"
 
-namespace YolonaOss {
+namespace Iyathuum {
   
   template<size_t Dimension>
   class ObjectWithAABB {
@@ -13,7 +13,7 @@ namespace YolonaOss {
 
   template<size_t Dimension>
   class SpatialHash : public ObjectWithAABB <Dimension>{
-    using vec = glm::vec<Dimension, float, glm::defaultp>;
+    using vec = std::array<double,Dimension>;
   public:
     virtual void updateObject(std::shared_ptr<ObjectWithAABB<Dimension>> object) = 0;
     virtual void addObject   (std::shared_ptr<ObjectWithAABB<Dimension>> object) = 0;

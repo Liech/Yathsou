@@ -2,8 +2,8 @@
 
 #include <memory>
 #include "NavigationMap.h"
-#include "../structs/Dijkstra.h"
-#include "../structs/AABB.h"
+#include "IyathuumCoreLib/Tree/Dijkstra.h"
+#include "IyathuumCoreLib/BaseTypes/AABB.h"
 
 namespace YolonaOss {
   template <size_t Dimension>
@@ -18,7 +18,7 @@ namespace YolonaOss {
       _target = target;
     }
 
-    void setDijkstra(std::shared_ptr<DijkstraI<Dimension>> di) {
+    void setDijkstra(std::shared_ptr<Iyathuum::DijkstraI<Dimension>> di) {
       _dijkstra = di;
     }
 
@@ -27,7 +27,7 @@ namespace YolonaOss {
       if (!_dijkstra)
         result = glm::normalize(_target - obj->getPosition());
       else
-        result = glm::normalize(_dijkstra->getDirectionSuggestion(obj->getPosition()));
+        result = glm::normalize(Util<2>::array2Vec<double>(_dijkstra->getDirectionSuggestion(Util<2>::vec2Array<double>(obj->getPosition()))));
       if (std::isnan(result[0]))
         return vec(0.0);
       return result * obj->getMaxSpeed() - obj->getVelocity();
@@ -35,7 +35,7 @@ namespace YolonaOss {
   private:
 
   private:
-    std::shared_ptr<DijkstraI<Dimension>> _dijkstra = nullptr;
-    vec                                   _target;
+    std::shared_ptr<Iyathuum::DijkstraI<Dimension>> _dijkstra = nullptr;
+    vec                                             _target;
   };
 }

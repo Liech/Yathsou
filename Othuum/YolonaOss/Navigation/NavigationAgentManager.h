@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../structs/MultiDimensionalArray.h"
 #include "NavigationAgent.h"
 #include <set>
 #include "../Util/Geometry.h"
 #include "../Util/Util.h"
-#include "../structs/GridHash.h"
-#include "../structs/NMTreeSpatialHash.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/Tree/GridHash.h"
+#include "IyathuumCoreLib/Tree/NMTreeSpatialHash.h"
 
 namespace YolonaOss {
   //You can place Auras in this and query the current aura gradient or value of an arbitrary position
@@ -15,12 +15,12 @@ namespace YolonaOss {
   class NavigationAgentManager {
     using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
-    NavigationAgentManager(AABB<Dimension> location) : _tree(location){
+    NavigationAgentManager(Iyathuum::AABB<Dimension> location) : _tree(location){
 
     }
 
     std::set<std::shared_ptr<NavigationAgent<Dimension>>> findAgents(vec pos, float radius) {
-      return _tree.findRadius(pos, radius);
+      return _tree.findRadius(Util<Dimension>::vec2Array<double>(pos), radius);
     }
 
     void addAgent(std::shared_ptr<NavigationAgent<Dimension>> agent) {
@@ -40,7 +40,7 @@ namespace YolonaOss {
     }
 
   public:
-    std::set<std::shared_ptr<NavigationAgent<Dimension>>>             _agents         ;
-    NMTreeSpatialHash<NavigationAgent<Dimension>, Dimension>          _tree           ;
+    std::set<std::shared_ptr<NavigationAgent<Dimension>>>               _agents         ;
+    Iyathuum::NMTreeSpatialHash<NavigationAgent<Dimension>, Dimension>  _tree           ;
   };
 }

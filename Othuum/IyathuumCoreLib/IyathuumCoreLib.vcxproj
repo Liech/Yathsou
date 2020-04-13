@@ -88,6 +88,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +132,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,6 +142,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BaseTypes\AABB.h" />
+    <ClInclude Include="BaseTypes\Color.h" />
+    <ClInclude Include="BaseTypes\MultiDimensionalArray.h" />
+    <ClInclude Include="Singleton\Database.h" />
+    <ClInclude Include="Singleton\Factory.h" />
+    <ClInclude Include="Tree\Dijkstra.h" />
+    <ClInclude Include="Tree\GridHash.h" />
+    <ClInclude Include="Tree\NMTree.h" />
+    <ClInclude Include="Tree\NMTreeDijkstra.h" />
+    <ClInclude Include="Tree\NMTreeNeighbourIndex.h" />
+    <ClInclude Include="Tree\NMTreeSpatialHash.h" />
+    <ClInclude Include="Tree\SpatialHash.h" />
+    <ClInclude Include="Util\Geometry.h" />
+    <ClInclude Include="Util\ImageSubsetUtil.h" />
+    <ClInclude Include="Util\ImageUtil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BaseTypes\AABB.cpp" />
+    <ClCompile Include="BaseTypes\Color.cpp" />
+    <ClCompile Include="Util\ImageSubsetUtil.cpp" />
+    <ClCompile Include="Util\ImageUtil.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

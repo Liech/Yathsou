@@ -2,9 +2,9 @@
 
 #include <memory>
 #include "NavigationMap.h"
-#include "../structs/Dijkstra.h"
-#include "../structs/AABB.h"
-#include "../structs/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/Tree/Dijkstra.h"
+#include "IyathuumCoreLib/BaseTypes/AABB.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 
 namespace YolonaOss {
   template <size_t Dimension>
@@ -20,7 +20,7 @@ namespace YolonaOss {
       _target = target;
     }
 
-    void setMap(std::shared_ptr<MultiDimensionalArray<double,Dimension>> dm) {
+    void setMap(std::shared_ptr<Iyathuum::MultiDimensionalArray<double,Dimension>> dm) {
       _discomfortMap = dm;
     }
 
@@ -58,8 +58,8 @@ namespace YolonaOss {
     }
 
   private:
-    std::shared_ptr<MultiDimensionalArray<double,Dimension>> _discomfortMap = nullptr;
-    float                                                   _scale = 1;
-    vec                                                      _target;
+    std::shared_ptr<Iyathuum::MultiDimensionalArray<double,Dimension>> _discomfortMap = nullptr;
+    float                                                              _scale = 1;
+    vec                                                                _target;
   };
 }

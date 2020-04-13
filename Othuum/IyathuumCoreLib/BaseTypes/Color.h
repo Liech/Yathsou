@@ -2,7 +2,8 @@
 
 #include <array>
 
-namespace YolonaOss {
+namespace Iyathuum {
+  //RGBA color
   class Color
   {
   public:

@@ -15,10 +15,10 @@
 //be careful. register commands in static libraries are ignored. 
 //use manual registrationcalls instead: Factory<BaseType>::Register<SpecificType>();
 #define REGISTER(BaseType,SpecificType,Name, Tags)\
-   static inline YolonaOss::Factory<BaseType>::Registrator<SpecificType> Registrator{ Name, Tags };
+   static inline Iyathuum::Factory<BaseType>::Registrator<SpecificType> Registrator{ Name, Tags };
 #define CLASSNAME(type) #type
 
-namespace YolonaOss {
+namespace Iyathuum {
   class IFactory {
     virtual std::set<std::string> _getAll() = 0;
     virtual std::set<std::string> _getNamesByTag(std::string tag) = 0;

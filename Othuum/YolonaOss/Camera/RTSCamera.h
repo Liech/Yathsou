@@ -3,7 +3,7 @@
 #include <memory>
 #include "glm/vec2.hpp"
 #include "Camera.h"
-#include "../structs/Factory.h"
+#include "IyathuumCoreLib/Singleton/Factory.h"
 
 
 namespace YolonaOss {

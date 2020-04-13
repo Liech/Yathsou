@@ -4,24 +4,26 @@
 #include "glad/glad.h"
 #include "../../Renderer/RectangleRenderer.h"
 #include "../../Renderer/TextRenderer.h"
-#include "structs/Database.h"
+#include "IyathuumCoreLib/Singleton/Database.h"
+#include "IyathuumCoreLib/Util/Geometry.h"
+#include "Util/Util.h"
 
 namespace YolonaOss {
   namespace Widgets {
     Slider::Slider() : Widget()
     {
     }
-    Slider::Slider(BoundingBox2 position, double min, double max, double startValue, std::function<void(double)> valueChangedCall) : Widget(position) {
+    Slider::Slider(Iyathuum::AABB<2> position, double min, double max, double startValue, std::function<void(double)> valueChangedCall) : Widget(position) {
       _valueChangedCall = valueChangedCall;
       _currentValue = startValue;
       _min = min;
       _max = max;
-      Database<Widgets::Widget*>::add(this, { "MouseMove","MouseStatus" });
+      Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseMove","MouseStatus" });
     }
 
     Slider::~Slider()
     {
-      Database<Widgets::Widget*>::remove(this);
+      Iyathuum::Database<Widgets::Widget*>::remove(this);
     }
 
     void Slider::load(GL::DrawSpecification*)
@@ -41,31 +43,31 @@ namespace YolonaOss {
       ss << std::fixed << std::setprecision(1) << _currentValue;
       std::string mystring = ss.str();
       glm::vec2 textSize = TextRenderer::getTextSize(mystring, 1);
-      glm::vec2 spacing = (getPosition().size - textSize) / 2.0f;
+      glm::vec2 spacing = (Util<2>::array2Vec(getPosition().getSize()) - textSize) / 2.0f;
       spacing[0] = 0;
       TextRenderer::start();
-      glm::vec2 pos = getPosition().position + spacing;
+      glm::vec2 pos = Util<2>::array2Vec(getPosition().getPosition()) + spacing;
 
       TextRenderer::drawText(mystring, pos, 1, glm::vec3(0, 0, 0));
       TextRenderer::end();
     }
 
-    BoundingBox2 Slider::getSliderLocation() {
-      BoundingBox2 result;
-      BoundingBox2 myPos = getPosition();
-      float sliderW = myPos.size[0] * sliderWidth;
-      result.position = myPos.position + glm::vec2(myPos.size[0] * leftPad + (myPos.size[0] * (1.0f - (leftPad + rightPad)) * (_currentValue-_min) / (_max-_min)) ,(1.0f - sliderHeight)* 0.5f * myPos.size[1]);
-      result.size     = glm::vec2(sliderW > minSliderWidth?sliderW:minSliderWidth,myPos.size[1] * sliderHeight);
-      result.position[0] -= sliderW * 0.5f;
+    Iyathuum::AABB<2> Slider::getSliderLocation() {
+      Iyathuum::AABB<2> result;
+      Iyathuum::AABB<2> myPos = getPosition();
+      float sliderW = myPos.getSize()[0] * sliderWidth;
+      result.setPosition(Iyathuum::Geometry<2>::add(myPos.getPosition() , {myPos.getSize()[0] * leftPad + (myPos.getSize()[0] * (1.0f - (leftPad + rightPad)) * (_currentValue - _min) / (_max - _min)), (1.0f - sliderHeight) * 0.5f * myPos.getSize()[1]}));
+      result.setSize({ sliderW > minSliderWidth ? sliderW : minSliderWidth,myPos.getSize()[1] * sliderHeight });
+      result.setPosition({ result.getPosition()[0] - sliderW * 0.5f,result.getPosition()[1] });
       return result;
     }
 
-    BoundingBox2 Slider::getBarLocation() {
-      BoundingBox2 result;
-      BoundingBox2 myPos = getPosition();
-      float sliderW = myPos.size[0] * sliderWidth;
-      result.position = myPos.position + glm::vec2(myPos.size[0] * leftPad , (1.0f - barHeight) * 0.5f * myPos.size[1]);
-      result.size = glm::vec2(myPos.size[0] * (1.0f - (leftPad + rightPad)), barHeight * myPos.size[1]);
+    Iyathuum::AABB<2> Slider::getBarLocation() {
+      Iyathuum::AABB<2> result;
+      Iyathuum::AABB<2> myPos = getPosition();
+      float sliderW = myPos.getSize()[0] * sliderWidth;
+      result.setPosition(Iyathuum::Geometry<2>::add(myPos.getPosition() , {myPos.getSize()[0] * leftPad, (1.0f - barHeight) * 0.5f * myPos.getSize()[1]}));
+      result.setSize({ myPos.getSize()[0] * (1.0f - (leftPad + rightPad)), barHeight * myPos.getSize()[1] });
       return result;
     }
 
@@ -78,10 +80,10 @@ namespace YolonaOss {
     };
 
     void Slider::mouseMove(glm::vec2 position) {
-      BoundingBox2 myPos = getPosition();
+      Iyathuum::AABB<2> myPos = getPosition();
       if (_pressed) {
-        float min = leftPad * myPos.size[0];
-        float max = myPos.size[0] - rightPad * myPos.size[0];
+        float min = leftPad * myPos.getSize()[0];
+        float max = myPos.getSize()[0] - rightPad * myPos.getSize()[0];
 
         _currentValue = _min + ((position[0] - min) / (max-min)) * (_max - _min);
         if (_currentValue < _min) _currentValue = _min;
@@ -93,9 +95,9 @@ namespace YolonaOss {
     bool Slider::mouseStatusChanged(glm::vec2 position, GL::Key k, GL::KeyStatus status) {
       if (k == GL::Key::MOUSE_BUTTON_1) {
         if (status == GL::KeyStatus::PRESS && !_pressed) {
-          BoundingBox2 b = getSliderLocation();
-          b.position -= getPosition().position;
-          if (b.inside(position)) {
+          Iyathuum::AABB<2> b = getSliderLocation();
+          b.setPosition( Iyathuum::Geometry<2>::subtract(b.getPosition() , getPosition().getPosition()));
+          if (b.isInside({ position[0],position[1] })) {
             _pressed = true;
             return true;
           }
@@ -107,9 +109,9 @@ namespace YolonaOss {
         }
       }
 
-      BoundingBox2 c = getPosition();
-      c.position -= getPosition().position;
-      return c.inside(position);
+      Iyathuum::AABB<2> c = getPosition();
+      c.setPosition(Iyathuum::Geometry<2>::subtract(c.getPosition(),getPosition().getPosition()));
+      return c.isInside({ position[0] ,position[1]});
     }
 
   }

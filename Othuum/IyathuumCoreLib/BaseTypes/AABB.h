@@ -1,30 +1,30 @@
 #pragma once
-//Axis Aligned Bounding Box
 
-#include <glm/glm.hpp>
-#include <set>
+#include <array>
 
-namespace YolonaOss {
+namespace Iyathuum {
+  //Axis Aligned Bounding Box
   template <size_t Dimension>
   class AABB {
   public:
-    using vec = glm::vec<Dimension, float, glm::defaultp>;
+    using vec = std::array<double,Dimension>;
     
     AABB() {}
     AABB(vec start, vec size) {
       _position = start;
       _size = size;
     }
-    AABB(vec start, float size) {
+    AABB(vec start, double size) {
       _position = start;
-      _size = vec(1.0) * size;
+      for (size_t i = 0; i < Dimension; i++)
+        _size[i] = size;
     }
 
-    vec   getPosition() {
+    vec getPosition() {
       return _position;
     }
 
-    vec   getSize() {
+    vec getSize() {
       return _size;
     }
 
@@ -38,7 +38,7 @@ namespace YolonaOss {
 
     bool isInside(vec pos) {
       for (size_t i = 0; i < Dimension; i++) {
-        if (pos[(int)i] < getPosition()[i] || pos[(int)i] > getPosition()[i] + getSize()[i])
+        if (pos[i] < getPosition()[i] || pos[i] >= getPosition()[i] + getSize()[i])
           return false;        
       }
       return true;
@@ -49,17 +49,23 @@ namespace YolonaOss {
       return true;
     }
 
-    bool intersectsCircle(vec pos, float radius) {
+    bool intersectsCircle(vec pos, double radius) {
       vec newPos;
       for (size_t i = 0; i < Dimension; i++) {
-        newPos[(int)i] = std::clamp(pos[i], _position[(int)i], _position[(int)i] + _size[(int)i]);
+        newPos[i] = std::clamp(pos[i], _position[i], _position[i] + _size[i]);
       }
-      float dist = glm::distance(pos, newPos);
+      double dist = 0; 
+      for (size_t i = 0; i < Dimension; i++)
+        dist += (pos[i] - newPos[i]) * (pos[i] - newPos[i]);
+      dist = std::sqrt(dist);      
       return dist < radius;
     }
 
     vec getCenter() {
-      return getPosition() + getSize() / 2.0;
+      std::array<double, Dimension> result;
+      for (size_t i = 0; i < Dimension; i++)
+        result[i] = getPosition()[i] + getSize()[i] / 2.0;
+      return result;
     }
 
   private:

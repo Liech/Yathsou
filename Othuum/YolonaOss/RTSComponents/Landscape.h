@@ -11,18 +11,20 @@
 #include "../Navigation/ComfortMap.h"
 #include "../Navigation/DirectDistanceMap.h"
 #include "../Navigation/AligmentMap.h"
-#include "../structs/MultiDimensionalArray.h"
-#include "../structs/NMTree.h"
-#include "../structs/NMTreeNeighbourIndex.h"
-#include "../structs/Dijkstra.h"
-#include "../structs/NMTreeDijkstra.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/Tree/NMTree.h"
+#include "IyathuumCoreLib/Tree/NMTreeNeighbourIndex.h"
+#include "IyathuumCoreLib/Tree/Dijkstra.h"
+#include "IyathuumCoreLib/Tree/NMTreeDijkstra.h"
+#include "IyathuumCoreLib/Util/ImageUtil.h"
+#include "../Util/Util.h"
 
 namespace YolonaOss{
   template<size_t Dimension>
   class Landscape{
-    using vec = glm::vec<Dimension, float, glm::defaultp>;
-    using Tree = NMTree<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max>;
-    using TreeI = NMTreeNeighbourIndex<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max>;
+    using vec   = glm::vec<Dimension, float, glm::defaultp>;
+    using Tree  = Iyathuum::NMTree<bool, Dimension, 2, Iyathuum::TreeMergeBehavior::Max>;
+    using TreeI = Iyathuum::NMTreeNeighbourIndex<bool, Dimension, 2, Iyathuum::TreeMergeBehavior::Max>;
   public:
     const int _disMapScale = 10;
     public:
@@ -46,7 +48,7 @@ namespace YolonaOss{
         result->addMap(discomfort  , _config[3]);
         result->addMap(comfort     , _config[4]);
         result->addMap(alignment   , _config[5]);
-        auto path = std::dynamic_pointer_cast<DijkstraI<Dimension>>(std::make_shared< NMTreeDijkstra<Dimension> >(target, _tree.get(), _index, [](Tree* node) {return 1; }));
+        auto path = std::dynamic_pointer_cast<Iyathuum::DijkstraI<Dimension>>(std::make_shared< Iyathuum::NMTreeDijkstra<Dimension> >(Util<Dimension>::vec2Array<double>(target), _tree.get(), _index, [](Tree* node) {return 1; }));
         navigation->setDijkstra(path);        
         result->setTarget(target);
         return result;
@@ -55,32 +57,32 @@ namespace YolonaOss{
   private:
     void loadLandscape(std::string filename) {
       auto map = ImageIO::readImage(filename);
-      _landscape = map->map<bool>([](Color const& c) { return (bool)(c.getRed() < 125); });
+      _landscape = map->map<bool>([](Iyathuum::Color const& c) { return (bool)(c.getRed() < 125); });
 
       std::array<size_t, 2> dim;
       dim[0] = _landscape->getDimension(0) * _disMapScale;
       dim[1] = _landscape->getDimension(1) * _disMapScale;
       double maxDistance = glm::distance(glm::vec2(0, 0), glm::vec2(dim[0] / 2, dim[1] / 2));
-      auto scaled = ImageUtil::scaleUp<double, Dimension>(_landscape->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);
+      auto scaled = Iyathuum::ImageUtil::scaleUp<double, Dimension>(_landscape->map<double>([](const bool& val) {return val ? 1.0 : 0.0; }).get(), dim);
       scaled->apply([](size_t pos, double& val) {val = 1.0 - val; });
-      _staticDiscomfort = std::shared_ptr<MultiDimensionalArray<double, 2>>(std::move(scaled));
-      _unitAgents = std::make_shared < NavigationAgentManager<Dimension>>(AABB<Dimension>(vec(0.0f),(float)dim[0]));
+      _staticDiscomfort = std::shared_ptr<Iyathuum::MultiDimensionalArray<double, 2>>(std::move(scaled));
+      _unitAgents = std::make_shared < NavigationAgentManager<Dimension>>(Iyathuum::AABB<Dimension>(Iyathuum::Geometry<Dimension>::value(0), Iyathuum::Geometry<Dimension>::value(dim[0])));
       _staticMap = std::make_shared<GradientGridMap<Dimension>>((double)_disMapScale);
       _staticMap->setMap(_staticDiscomfort);
       _tree = std::make_shared<Tree>(_landscape.get(), false);
-      _index = std::make_shared<NMTreeNeighbourIndex<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max>>(_tree.get());
+      _index = std::make_shared<Iyathuum::NMTreeNeighbourIndex<bool, Dimension, 2, Iyathuum::TreeMergeBehavior::Max>>(_tree.get());
       _index->init();
     }
 
     private:
     public:
-      std::shared_ptr<MultiDimensionalArray<bool, Dimension>>   _landscape        ;
-      std::shared_ptr<MultiDimensionalArray<double, Dimension>> _staticDiscomfort ;
-      std::shared_ptr< GradientGridMap<Dimension> >             _staticMap        ;
-      std::shared_ptr<NavigationAgentManager<Dimension>>        _unitAgents       ;
-
-      std::shared_ptr<Tree>                                     _tree             ;
-      std::shared_ptr<TreeI>                                    _index            ;
+      std::shared_ptr<Iyathuum::MultiDimensionalArray<bool, Dimension>>   _landscape        ;
+      std::shared_ptr<Iyathuum::MultiDimensionalArray<double, Dimension>> _staticDiscomfort ;
+      std::shared_ptr< GradientGridMap<Dimension> >                       _staticMap        ;
+      std::shared_ptr<NavigationAgentManager<Dimension>>                  _unitAgents       ;
+                                                                         
+      std::shared_ptr<Tree>                                               _tree             ;
+      std::shared_ptr<TreeI>                                              _index            ;
 
       std::array<float, 20> _config; //temporary
   };

@@ -5,7 +5,7 @@
 struct GLFWwindow; 
 
 #include "../Renderer/TextRenderer.h"
-#include "../structs/Factory.h"
+#include "IyathuumCoreLib/Singleton/Factory.h"
 
 namespace YolonaOss {
   namespace GL {

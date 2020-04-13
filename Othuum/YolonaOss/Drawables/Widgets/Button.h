@@ -10,7 +10,7 @@ namespace YolonaOss {
     {
     public:
       Button();
-      Button(std::string name, BoundingBox2 position, std::function<void(void)> clickedFunction);
+      Button(std::string name, Iyathuum::AABB<2> position, std::function<void(void)> clickedFunction);
       ~Button();
 
       // Inherited via Drawable

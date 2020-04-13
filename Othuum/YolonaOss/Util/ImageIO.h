@@ -2,8 +2,8 @@
 
 #include <array>
 #include <memory>
-#include "../structs/MultiDimensionalArray.h"
-#include "../structs/Color.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 
 namespace YolonaOss {
   class ImageIO
@@ -12,8 +12,8 @@ namespace YolonaOss {
     ImageIO();
     ~ImageIO();
 
-    static void                                              writeImage(std::string filename, const MultiDimensionalArray<Color, 2> & img);
-    static std::unique_ptr<MultiDimensionalArray<Color, 2>>  readImage(std::string filename);
+    static void                                              writeImage(std::string filename, const Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2> & img);
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readImage(std::string filename);
 
 
     static void                                              TEST_readwrite();

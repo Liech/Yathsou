@@ -9,7 +9,7 @@ namespace YolonaOss {
     {
     public:
       Label();
-      Label(std::string name, BoundingBox2 position);
+      Label(std::string name, Iyathuum::AABB<2> position);
       ~Label();
 
       // Inherited via Drawable

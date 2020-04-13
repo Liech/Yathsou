@@ -3,7 +3,7 @@
 //#include "structs/Factory.h"
 #include "../OpenGL/Loadable.h"
 #include <iostream>
-#include "../structs/Factory.h"
+#include "IyathuumCoreLib/Singleton/Factory.h"
 #include "glm/glm.hpp"
 #include <memory>
 

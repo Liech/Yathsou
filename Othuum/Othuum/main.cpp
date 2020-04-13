@@ -10,7 +10,7 @@
 #include "YolonaOss/Camera/CameraSystem.h"
 #include "YolonaOss/Drawables/FPS.h"
 #include "YolonaOss/Drawables/Widgets/Button.h"
-#include "YolonaOss/structs/Database.h"
+#include "IyathuumCoreLib/Singleton/Database.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "YolonaOss/Examples/Texture2Tree.h"
 #include "YolonaOss/Examples/RenderTexture.h"
@@ -35,15 +35,15 @@ int main() {
     //list->addDrawable(std::make_shared<DrawCubes>()); 
     //list->addDrawable(std::make_shared<RenderTexture>());
     list->addDrawable(std::make_shared<FPS>());
-    Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
+    Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
     std::shared_ptr<Camera::CameraSystem> cam = std::make_shared<Camera::CameraSystem>();
 
     list->addDrawable(std::make_shared<Texture2Tree>());
-    std::shared_ptr<Widgets::Button> b = std::make_shared<Widgets::Button>("FreeCam", BoundingBox2(glm::vec2(0, 0), glm::vec2(200, 50)), [cam]() {cam->setCurrentCam("FreeCamera"); });
+    std::shared_ptr<Widgets::Button> b = std::make_shared<Widgets::Button>("FreeCam", Iyathuum::AABB<2>({ 0.0, 0.0 }, { 200.0, 50.0 }), [cam]() {cam->setCurrentCam("FreeCamera"); });
     list->addDrawable(b);
 
 
-    Database<std::shared_ptr<GL::Updateable>>::add(cam, { "Main" });
+    Iyathuum::Database<std::shared_ptr<GL::Updateable>>::add(cam, { "Main" });
     glm::vec3 start, end;
 
     w.Update = [&w, &start, &end, width, height]() {
@@ -66,6 +66,6 @@ int main() {
     };
     w.run();
   }
-  DatabaseTerminator::terminateAll();
+  Iyathuum::DatabaseTerminator::terminateAll();
   std::cout << "Programm Termination" << std::endl;
 } 

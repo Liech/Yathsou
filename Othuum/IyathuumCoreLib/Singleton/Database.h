@@ -8,12 +8,9 @@
 #include <stdexcept>
 #include <functional>
 
-//Objects can enter themselves here to get some sort of service by other objects
-//Very modular, very good at obscuring code structures
-//e.g. menu is registered as toplevel gui item
-//menu system fuels all registered menus with input
-
-namespace YolonaOss {
+namespace Iyathuum {
+  //Objects can enter themselves here to get some sort of service by other objects
+  //Very modular, very good at obscuring code structures
   class DatabaseTerminator {
   public:
     static inline std::vector<std::function<void()>> toTerminate;

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "MultiDimensionalArray.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 #include <set>
-#include "../Util/ImageSubsetUtil.h"
+#include "IyathuumCoreLib/Util/ImageSubsetUtil.h"
 //NM Tree means N^M Tree
 //I don't know whats the real name is
 //2^3 Tree is formaly known as Octree
@@ -16,7 +16,7 @@
 
 
 //maybe 3 and 4 dimensions are neccessary. For voxel animations?
-namespace YolonaOss {
+namespace Iyathuum {
 
   enum class TreeMergeBehavior {
     Sum, Max, Min, Avg, Default

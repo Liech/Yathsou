@@ -4,7 +4,7 @@
 #include "glm/glm.hpp"
 #include "../OpenGL/VBO.h"
 #include "../OpenGL/VAO.h"
-#include "../structs/Factory.h"
+#include "IyathuumCoreLib/Singleton/Factory.h"
 #include "../OpenGL/PositionNormalVertex.h"
 #include "../OpenGL/Camera.h"
 #include "../OpenGL/ShaderProgram.h"

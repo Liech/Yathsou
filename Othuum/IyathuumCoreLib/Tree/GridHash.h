@@ -2,12 +2,14 @@
 
 #include "SpatialHash.h"
 #include <map>
-#include "../Util/Util.h"
+#include "IyathuumCoreLib/BaseTypes/AABB.h"
 
-namespace YolonaOss {
+
+namespace Iyathuum {
+  //spatial hash, which puts everything into regular grid bins
   template<size_t Dimension>
   class GridHash : public SpatialHash<Dimension> {
-    using vec = glm::vec<Dimension, float, glm::defaultp>;
+    using vec = std::array<double,Dimension>;
   public:
     GridHash(AABB<Dimension> area, double gridSize) {
       _gridSize = gridSize;

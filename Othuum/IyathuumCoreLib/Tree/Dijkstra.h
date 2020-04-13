@@ -1,17 +1,18 @@
 #pragma once
 
+#include <array>
 #include <map>
 #include <set>
 #include <limits>
 #include <vector>
 #include <algorithm>
 #include <functional>
-#include "AABB.h"
+#include "IyathuumCoreLib/BaseTypes/AABB.h"
 
-namespace YolonaOss {
+namespace Iyathuum {
   template<size_t Dimension>
   class DijkstraI {
-    using vec = glm::vec<Dimension, float, glm::defaultp>;
+    using vec = std::array<double,Dimension>;
   public:
     virtual vec    getDirectionSuggestion(vec currentPosition) = 0;
     virtual double getDistance(vec postion)                    = 0;

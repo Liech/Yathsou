@@ -1,7 +1,7 @@
 #include "Color.h"
 #include <assert.h>
 #include <stdlib.h>
-namespace YolonaOss {
+namespace Iyathuum {
 
   Color::Color()
   {

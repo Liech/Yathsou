@@ -10,7 +10,7 @@ namespace YolonaOss {
     {
     public:
       Slider();
-      Slider(BoundingBox2 position, double min, double max, double startValue, std::function<void(double)> valueChangedCall);
+      Slider(Iyathuum::AABB<2> position, double min, double max, double startValue, std::function<void(double)> valueChangedCall);
       ~Slider();
 
       // Inherited via Drawable
@@ -26,8 +26,8 @@ namespace YolonaOss {
       double setValue(double value) { _currentValue = value; }
 
     private:
-      BoundingBox2 getSliderLocation();
-      BoundingBox2 getBarLocation();
+      Iyathuum::AABB<2> getSliderLocation();
+      Iyathuum::AABB<2> getBarLocation();
 
       const float leftPad      = 0.4f;
       const float rightPad     = 0.05f;

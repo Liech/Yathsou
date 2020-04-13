@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../OpenGL/Updateable.h"
-#include "../structs/Factory.h"
+#include "IyathuumCoreLib/Singleton/Factory.h"
 #include <map>
 #include <vector>
 #include <string>
