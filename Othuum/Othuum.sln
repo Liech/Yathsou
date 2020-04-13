@@ -1,14 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Othuum", "Othuum\Othuum.vcxproj", "{CD140090-7BA2-46E0-918F-3E0E0756DA62}"
 	ProjectSection(ProjectDependencies) = postProject
+		{EB425155-6A92-4E25-9862-64F4A82C853C} = {EB425155-6A92-4E25-9862-64F4A82C853C}
 		{E6F78C96-EEC7-40E0-A401-F0C3CD022AC8} = {E6F78C96-EEC7-40E0-A401-F0C3CD022AC8}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YolonaOss", "YolonaOss\YolonaOss.vcxproj", "{E6F78C96-EEC7-40E0-A401-F0C3CD022AC8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SelenNavigationLib", "SelenNavigationLib\SelenNavigationLib.vcxproj", "{EB425155-6A92-4E25-9862-64F4A82C853C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IyathuumCoreLib", "IyathuumCoreLib\IyathuumCoreLib.vcxproj", "{030C3B7E-3682-4A03-8188-D46921B837DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,6 +39,22 @@ Global
 		{E6F78C96-EEC7-40E0-A401-F0C3CD022AC8}.Release|x64.Build.0 = Release|x64
 		{E6F78C96-EEC7-40E0-A401-F0C3CD022AC8}.Release|x86.ActiveCfg = Release|Win32
 		{E6F78C96-EEC7-40E0-A401-F0C3CD022AC8}.Release|x86.Build.0 = Release|Win32
+		{EB425155-6A92-4E25-9862-64F4A82C853C}.Debug|x64.ActiveCfg = Debug|x64
+		{EB425155-6A92-4E25-9862-64F4A82C853C}.Debug|x64.Build.0 = Debug|x64
+		{EB425155-6A92-4E25-9862-64F4A82C853C}.Debug|x86.ActiveCfg = Debug|Win32
+		{EB425155-6A92-4E25-9862-64F4A82C853C}.Debug|x86.Build.0 = Debug|Win32
+		{EB425155-6A92-4E25-9862-64F4A82C853C}.Release|x64.ActiveCfg = Release|x64
+		{EB425155-6A92-4E25-9862-64F4A82C853C}.Release|x64.Build.0 = Release|x64
+		{EB425155-6A92-4E25-9862-64F4A82C853C}.Release|x86.ActiveCfg = Release|Win32
+		{EB425155-6A92-4E25-9862-64F4A82C853C}.Release|x86.Build.0 = Release|Win32
+		{030C3B7E-3682-4A03-8188-D46921B837DA}.Debug|x64.ActiveCfg = Debug|x64
+		{030C3B7E-3682-4A03-8188-D46921B837DA}.Debug|x64.Build.0 = Debug|x64
+		{030C3B7E-3682-4A03-8188-D46921B837DA}.Debug|x86.ActiveCfg = Debug|Win32
+		{030C3B7E-3682-4A03-8188-D46921B837DA}.Debug|x86.Build.0 = Debug|Win32
+		{030C3B7E-3682-4A03-8188-D46921B837DA}.Release|x64.ActiveCfg = Release|x64
+		{030C3B7E-3682-4A03-8188-D46921B837DA}.Release|x64.Build.0 = Release|x64
+		{030C3B7E-3682-4A03-8188-D46921B837DA}.Release|x86.ActiveCfg = Release|Win32
+		{030C3B7E-3682-4A03-8188-D46921B837DA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
