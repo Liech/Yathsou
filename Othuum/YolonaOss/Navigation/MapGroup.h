@@ -18,8 +18,10 @@ namespace YolonaOss {
 
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       vec dir(0.0);
-      for (size_t i = 0; i < _maps.size(); i++)
-        dir += _influence[i] * _maps[i]->getVelocitySuggestion(obj);
+      for (size_t i = 0; i < _maps.size(); i++) {
+        if (_influence[i] > 0)
+          dir += _influence[i] * _maps[i]->getVelocitySuggestion(obj);
+      }    
       if (std::isnan(dir[0]))
         return vec();
       return dir;

@@ -36,10 +36,8 @@ namespace YolonaOss {
         index[i] = std::clamp(t, (size_t)0, s);
       }
 
-      vec result = glm::normalize(getDirectionSuggestion_recurse(index));
-      if (std::isnan(result[0]))
-        return vec(0.0);
-      return result;
+      vec result = getDirectionSuggestion_recurse(index);
+      return result - obj->getVelocity();
     }
   private:
     vec getDirectionSuggestion_recurse(std::array<size_t, Dimension> position, vec dir = vec(), size_t currentDimension = Dimension-1) {

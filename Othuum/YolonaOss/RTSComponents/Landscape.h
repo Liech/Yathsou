@@ -67,7 +67,7 @@ namespace YolonaOss{
       _unitAgents = std::make_shared < NavigationAgentManager<Dimension>>(AABB<Dimension>(vec(0.0f),(float)dim[0]));
       _staticMap = std::make_shared<GradientGridMap<Dimension>>((double)_disMapScale);
       _staticMap->setMap(_staticDiscomfort);
-      _tree = std::make_shared<Tree>(_landscape.get());
+      _tree = std::make_shared<Tree>(_landscape.get(), false);
       _index = std::make_shared<NMTreeNeighbourIndex<bool, Dimension, 2, YolonaOss::TreeMergeBehavior::Max>>(_tree.get());
       _index->init();
     }

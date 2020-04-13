@@ -21,7 +21,7 @@ namespace YolonaOss {
     using content_ptr = std::shared_ptr<std::set < std::shared_ptr<Content>>>;
     using Tree = NMTree < content_ptr, ArraySize, Dimension, TreeMergeBehavior::Avg, double >;
     
-    const int numberOfObjects = 7;
+    const int numberOfObjects = 4;
     const int numberOfObjectsTolerance = 1;
   public:
 

@@ -31,12 +31,14 @@ namespace YolonaOss {
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec) {
     _landscape = std::make_unique<Landscape<2>>("YolonaOssData/textures/TinyMap.png");
 
-    for (size_t i = 0; i < 40; i++) {
-      auto u = std::make_shared<Unit     <2>>(glm::vec2(4 + i, 4), glm::vec2(0, 1));
-      
-      _unit.push_back(u);
-      _landscape->_unitAgents->addAgent(_unit[i]->_navigationAgent);
-      
+    int amount = 20;
+    float distance = 1.0f;
+    for(size_t x = 0; x < amount; x++){
+      for (size_t i = 0; i < amount; i++) {
+        auto u = std::make_shared<Unit     <2>>(glm::vec2(4 + i * distance, 4 + x* distance), glm::vec2(0, 0.1f));
+        _unit.push_back(u);
+        _landscape->_unitAgents->addAgent(_unit[_unit.size()-1]->_navigationAgent);
+      }
     }
 
     _spec = spec;
@@ -49,18 +51,7 @@ namespace YolonaOss {
 
     for (size_t i = 0; i < 20; i++)
       _config[i] = 0;
-    _config[3] = 0.5f;
 
-    //addSlider("Speed", 0, 1, 0.1f, [this](double val) {
-    //  for (auto u : _unit) {
-    //    u->setSpeed(val);
-    //  }
-    //  });
-    //addSlider("dist", 0, 1, 0.1f, [this](double val) {
-    //  for (auto u : _unit) {
-    //    u->_aura->setRadius(val);
-    //  }
-    //  });
     addSlider("land"  , 0, 0, 1);
     addSlider("navi"  , 1, 0, 1);
     addSlider("direct", 2, 0, 1);

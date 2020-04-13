@@ -14,12 +14,18 @@ namespace YolonaOss {
 
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       vec dir = glm::normalize(_target - obj->getPosition());
-      if (std::isnan(dir[0]))
-        return vec();
-      return dir;
+      float len = glm::length(_target- obj->getPosition());
+      if (len < 0.5f)
+        return -obj->getVelocity();
+      else if (len < arrivalRadius)
+        return dir * obj->getMaxSpeed() * (len / arrivalRadius) - obj->getVelocity();
+      else
+        return dir * obj->getMaxSpeed() - obj->getVelocity();
     }
 
   private:
+    const float arrivalRadius = 3;
     vec _target;
+    
   };
 }

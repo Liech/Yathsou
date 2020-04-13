@@ -28,10 +28,15 @@ namespace YolonaOss{
     }
 
     vec getOrientation() {
-      return glm::normalize(_navigationAgent->getVelocity());
+
+      if (glm::length(_navigationAgent->getVelocity())< 1e-5)
+        return lastVelocity;
+      lastVelocity = glm::normalize(_navigationAgent->getVelocity());
+      return lastVelocity;
     }
 
     public:
       std::shared_ptr<NavigationAgent<Dimension>> _navigationAgent;
+      vec lastVelocity = glm::normalize(vec(1.0));
   };
 }

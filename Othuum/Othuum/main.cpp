@@ -4,6 +4,7 @@
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include "YolonaOss/Drawables/Background.h"
 #include "DrawCubes.h"
+#include "YolonaOss/Camera/Camera.h"
 #include "YolonaOss/Camera/FreeCamera.h"
 #include "YolonaOss/Camera/RTSCamera.h"
 #include "YolonaOss/Camera/CameraSystem.h"

@@ -74,6 +74,8 @@ namespace YolonaOss {
     }
 
     NodeType* getNext(NodeType* node) {
+      if (_next.count(node) == 0)
+        return nullptr;
       return _next[node];
     }
 

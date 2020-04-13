@@ -20,7 +20,8 @@ namespace YolonaOss {
     }
 
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
-      auto agents = _agents->findAgents(obj->getPosition(), 3);
+      float radius = 4;
+      auto agents = _agents->findAgents(obj->getPosition(), radius);
       vec avg(0.0);
       for (auto agent : agents) {
         if (obj == agent.get())
@@ -30,11 +31,15 @@ namespace YolonaOss {
       if (agents.size() == 1)
         return vec(0.0);
       avg /= (float)agents.size()-1;
-      vec result = glm::normalize(avg - obj->getPosition());
-      if (std::isnan(result[0]))
+      vec result = avg - obj->getPosition();
+      float len = glm::length(result);
+      if (len > obj->getMaxForce())
+        result = glm::normalize(result) * obj->getMaxForce() / len;
+      if (len == 0)
         return vec(0.0);
 
-      return result;
+
+      return result - obj->getVelocity();
     }
 
   private:

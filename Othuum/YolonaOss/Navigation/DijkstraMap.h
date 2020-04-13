@@ -30,7 +30,7 @@ namespace YolonaOss {
         result = glm::normalize(_dijkstra->getDirectionSuggestion(obj->getPosition()));
       if (std::isnan(result[0]))
         return vec(0.0);
-      return result;
+      return result * obj->getMaxSpeed() - obj->getVelocity();
     }
   private:
 

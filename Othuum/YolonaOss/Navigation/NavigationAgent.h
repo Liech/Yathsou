@@ -25,7 +25,7 @@ namespace YolonaOss {
       if (_map == nullptr)
         return;
       vec dir = _map->getVelocitySuggestion(this);
-      applyForce(dir - _velocity);
+      applyForce(dir);
       _position = _position + _velocity;       
     }
 
@@ -53,16 +53,20 @@ namespace YolonaOss {
       return _velocity;
     }
 
-    void setOrientation(vec velocity) {
-      _velocity = velocity;
-    }
-
     void setSpeed(float speed) {
       _maxSpeed = speed;
     }
 
     void setForce(float speed) {
       _maxForce = speed;
+    }
+
+    float getMaxSpeed() {
+      return _maxSpeed;
+    }
+
+    float getMaxForce() {
+      return _maxForce;
     }
 
   private:   
@@ -77,8 +81,8 @@ namespace YolonaOss {
         _velocity = glm::normalize(_velocity) * std::clamp(glm::length(_velocity), 0.0f, _maxSpeed);
     }
 
-    float                                     _maxSpeed = 0.1f                       ;
-    float                                     _maxForce = 0.05f                      ;
+    float                                     _maxSpeed = 0.3f                       ;
+    float                                     _maxForce = 0.01f                      ;
 
     vec                                       _position                              ;
     vec                                       _target                                ;

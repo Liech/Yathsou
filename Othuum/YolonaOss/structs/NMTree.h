@@ -47,10 +47,11 @@ namespace YolonaOss {
     }
 
     
-    NMTree(MultiDimensionalArray<Content, Dimension>* description, Tree* parent = nullptr) {
+    NMTree(MultiDimensionalArray<Content, Dimension>* description, Content startValue, Tree* parent = nullptr) {
       static_assert(!std::is_same<double, Scalar>());
       static_assert(!std::is_same<float, Scalar>());
       _parent = parent;
+      _content = startValue;
       //find suitable size for enclosing tree    
       size_t maxDim = 0;
       for (size_t dim = 0; dim < Dimension; dim++) {
