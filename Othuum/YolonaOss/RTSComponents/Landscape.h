@@ -17,6 +17,7 @@
 #include "IyathuumCoreLib/Tree/Dijkstra.h"
 #include "IyathuumCoreLib/Tree/NMTreeDijkstra.h"
 #include "IyathuumCoreLib/Util/ImageUtil.h"
+#include "../Navigation/InfectiousArrivalMapGroup.h"
 #include "../Util/Util.h"
 
 namespace YolonaOss{
@@ -35,19 +36,22 @@ namespace YolonaOss{
         _config = config;
       }
 
+      std::shared_ptr<InfectiousArrivalMapGroup<Dimension>> arrival = nullptr;
       std::shared_ptr<NavigationMap<Dimension>> getMap(vec target) {
-        std::shared_ptr<MapGroup<Dimension>>         result     = std::make_shared<MapGroup         <Dimension>>(           );
-        std::shared_ptr<DijkstraMap<Dimension>>      navigation = std::make_shared<DijkstraMap      <Dimension>>(           );
-        std::shared_ptr<DiscomfortMap<Dimension>>    discomfort = std::make_shared<DiscomfortMap    <Dimension>>(_unitAgents);
-        std::shared_ptr<ComfortMap<Dimension>>       comfort    = std::make_shared<ComfortMap       <Dimension>>(_unitAgents);
-        std::shared_ptr<AligmentMap<Dimension>>      alignment  = std::make_shared<AligmentMap      <Dimension>>(_unitAgents);
-        std::shared_ptr<DirectDistanceMap<Dimension>> direct    = std::make_shared<DirectDistanceMap<Dimension>>(           );
-        result->addMap(_staticMap  , _config[0]);
-        result->addMap(navigation  , _config[1]);
-        result->addMap(direct      , _config[2]);
-        result->addMap(discomfort  , _config[3]);
-        result->addMap(comfort     , _config[4]);
-        result->addMap(alignment   , _config[5]);
+        std::shared_ptr<MapGroup<Dimension>>                  result     = std::make_shared<MapGroup                 <Dimension>>(           );
+        std::shared_ptr<DijkstraMap<Dimension>>               navigation = std::make_shared<DijkstraMap              <Dimension>>(           );
+        std::shared_ptr<DiscomfortMap<Dimension>>             discomfort = std::make_shared<DiscomfortMap            <Dimension>>(_unitAgents);
+        std::shared_ptr<ComfortMap<Dimension>>                comfort    = std::make_shared<ComfortMap               <Dimension>>(_unitAgents);
+        std::shared_ptr<AligmentMap<Dimension>>               alignment  = std::make_shared<AligmentMap              <Dimension>>(_unitAgents);
+        std::shared_ptr<DirectDistanceMap<Dimension>>         direct     = std::make_shared<DirectDistanceMap        <Dimension>>(           );
+        /*std::shared_ptr<InfectiousArrivalMapGroup<Dimension>>*/ arrival    = std::make_shared<InfectiousArrivalMapGroup<Dimension>>(_unitAgents);
+        result ->addMap(_staticMap  , _config[0]);
+        arrival->addMap(navigation  , _config[1]);
+        arrival->addMap(direct      , _config[2]);
+        result ->addMap(arrival     , 1         );        
+        result ->addMap(discomfort  , _config[3]);
+        result ->addMap(comfort     , _config[4]);
+        result ->addMap(alignment   , _config[5]);
         auto path = std::dynamic_pointer_cast<Iyathuum::DijkstraI<Dimension>>(std::make_shared< Iyathuum::NMTreeDijkstra<Dimension> >(Util<Dimension>::vec2Array<double>(target), _tree.get(), _index, [](Tree* node) {return 1; }));
         navigation->setDijkstra(path);        
         result->setTarget(target);

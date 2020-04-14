@@ -133,7 +133,10 @@ namespace YolonaOss {
     for (size_t i = 0; i < _unit.size(); i++) {
       glm::vec3 ori = glm::vec3(_unit[i]->getOrientation()[0], 0   , _unit[i]->getOrientation()[1]);
       glm::vec3 pos = glm::vec3(_unit[i]->getPosition().x    , 0.5f, _unit[i]->getPosition().y    );
-      ArrowRenderer::drawArrow(pos-ori*0.5f, ori, 0.5f, glm::vec4(1, 0, 0, 1));
+      glm::vec4 c = glm::vec4(1, 0, 0, 1);
+      if (_landscape->arrival && _landscape->arrival->isArrived(_unit[i]->_navigationAgent.get()))
+        c = glm::vec4(0, 1, 0, 1);
+      ArrowRenderer::drawArrow(pos-ori*0.5f, ori, 0.5f, c);
     }
     ArrowRenderer::end();
     renderDiscomfort();

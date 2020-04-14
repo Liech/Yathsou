@@ -1,0 +1,28 @@
+Layer 1: Only External dependencies
+  IyathuumCoreLib
+    * Without dependencies
+    * Without dimension restrictions
+    * absolut base
+  VishalaNetworkLib
+    * depends on libnop
+    * if possible without other dependencies (except network related low level libs)
+    * offers network synchronisation
+Layer 2: External, Layer 1 dependencies
+  SCUUtilityLib
+    * depends on glm, lodepng, Iyathuum
+    * is allowed to depend on more low libs
+    * offers Utility
+Layer 3: External, Layer 1 and Layer 2 dependencies
+  AhwassaGraphicsLib
+    * depends on GLWF, glad, SCU, freetype
+    * offers opengl
+  SelenNavigationLib
+    * depends on SCU, Iyathuum
+    * Offers navigation and flocking
+Layer 4:
+  YolonaOssRTSLib
+    * depends on Selen, Vishala, SCU
+    * offers basic rts components
+Layer 5: No External dependencies, only internal
+  Othuum.exe
+    * combines everything to a game

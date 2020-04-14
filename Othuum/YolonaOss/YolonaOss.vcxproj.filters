@@ -267,6 +267,9 @@
     <ClInclude Include="Navigation\NavigationAgentManager.h">
       <Filter>Header Files\Navigation</Filter>
     </ClInclude>
+    <ClInclude Include="Navigation\InfectiousArrivalMapGroup.h">
+      <Filter>Header Files\Navigation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">

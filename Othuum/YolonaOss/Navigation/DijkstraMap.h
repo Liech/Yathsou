@@ -32,7 +32,6 @@ namespace YolonaOss {
         return vec(0.0);
       return result * obj->getMaxSpeed() - obj->getVelocity();
     }
-  private:
 
   private:
     std::shared_ptr<Iyathuum::DijkstraI<Dimension>> _dijkstra = nullptr;

@@ -37,9 +37,9 @@ namespace YolonaOss {
       _influence[mapId] = influence;
     }
 
-  private:
+  protected:
     vec                                                      _target   ;
     std::vector < std::shared_ptr<NavigationMap<Dimension>>> _maps     ;
-    std::vector < float >                                   _influence;
+    std::vector < float >                                    _influence;
   };
 }

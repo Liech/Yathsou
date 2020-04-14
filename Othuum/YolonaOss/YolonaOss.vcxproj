@@ -219,6 +219,7 @@
     <ClInclude Include="Navigation\DirectDistanceMap.h" />
     <ClInclude Include="Navigation\DiscomfortMap.h" />
     <ClInclude Include="Navigation\GradientGridMap.h" />
+    <ClInclude Include="Navigation\InfectiousArrivalMapGroup.h" />
     <ClInclude Include="Navigation\MapGroup.h" />
     <ClInclude Include="Navigation\NavigationAgent.h" />
     <ClInclude Include="Navigation\NavigationAgentManager.h" />
