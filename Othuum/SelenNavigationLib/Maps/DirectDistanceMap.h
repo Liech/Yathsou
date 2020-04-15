@@ -1,11 +1,14 @@
 #pragma once
 
-#include "NavigationMap.h"
+#include "SelenNavigationLib/NavigationMap.h"
+#include "SelenNavigationLib/NavigationAgent.h"
+#include "IyathuumCoreLib/Util/Geometry.h"
 
-
-namespace YolonaOss {
+namespace Selen {
   template <size_t Dimension>
   class DirectDistanceMap : public NavigationMap<Dimension> {
+    using vec = std::array<double, Dimension>;
+    using Math = Iyathuum::Geometry<Dimension>;
   public:
     virtual void setTarget(const vec target) override
     {
@@ -13,14 +16,14 @@ namespace YolonaOss {
     }
 
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
-      vec dir = glm::normalize(_target - obj->getPosition());
-      float len = glm::length(_target- obj->getPosition());
+      vec dir = Math::normalize(Math::subtract(_target , obj->getPosition()));
+      float len = Math::length(Math::subtract(_target , obj->getPosition()));
       if (len < 0.5f)
-        return -obj->getVelocity();
+        return Math::invert(obj->getVelocity());
       else if (len < arrivalRadius)
-        return dir * obj->getMaxSpeed() * (len / arrivalRadius) - obj->getVelocity();
+        return Math::subtract(Math::multiply(dir , obj->getMaxSpeed() * (len / arrivalRadius)) , obj->getVelocity());
       else
-        return dir * obj->getMaxSpeed() - obj->getVelocity();
+        return Math::subtract(Math::multiply(dir , obj->getMaxSpeed()), obj->getVelocity());
     }
 
   private:

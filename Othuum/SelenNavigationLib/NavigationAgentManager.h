@@ -2,25 +2,23 @@
 
 #include "NavigationAgent.h"
 #include <set>
-#include "../Util/Geometry.h"
-#include "../Util/Util.h"
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 #include "IyathuumCoreLib/Tree/GridHash.h"
 #include "IyathuumCoreLib/Tree/NMTreeSpatialHash.h"
 
-namespace YolonaOss {
+namespace Selen {
   //You can place Auras in this and query the current aura gradient or value of an arbitrary position
   //Auras are areas that are notified by units. E.g. to recognize friends are near, or too near. See Flocking
   template<size_t Dimension>
   class NavigationAgentManager {
-    using vec = glm::vec<Dimension, float, glm::defaultp>;
+    using vec = std::array<double,Dimension>;
   public:
     NavigationAgentManager(Iyathuum::AABB<Dimension> location) : _tree(location){
 
     }
 
     std::set<std::shared_ptr<NavigationAgent<Dimension>>> findAgents(vec pos, float radius) {
-      return _tree.findRadius(Util<Dimension>::vec2Array<double>(pos), radius);
+      return _tree.findRadius(pos, radius);
     }
 
     void addAgent(std::shared_ptr<NavigationAgent<Dimension>> agent) {

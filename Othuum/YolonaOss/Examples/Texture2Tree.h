@@ -6,7 +6,7 @@
 #include "IyathuumCoreLib/Tree/NMTreeNeighbourIndex.h"
 #include "IyathuumCoreLib/Tree/NMTreeDijkstra.h"
 #include <memory>
-#include "../Navigation/NavigationAgent.h"
+#include "SelenNavigationLib/NavigationAgent.h"
 #include "../RTSComponents/Landscape.h"
 #include "../RTSComponents/Unit.h"
 #include "../OpenGL/DrawableList.h"

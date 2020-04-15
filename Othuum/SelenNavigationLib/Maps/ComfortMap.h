@@ -1,14 +1,14 @@
 #pragma once
 
 #include <memory>
-#include "NavigationMap.h"
-#include "NavigationAgentManager.h"
-#include "../Util/Util.h"
+#include "SelenNavigationLib/NavigationMap.h"
+#include "SelenNavigationLib/NavigationAgentManager.h"
 
-namespace YolonaOss {
+namespace Selen {
   template <size_t Dimension>
   class ComfortMap :public NavigationMap<Dimension> {
     using self = ComfortMap<Dimension>;
+    using Math = Iyathuum::Geometry<Dimension>;
   public:
     ComfortMap(std::shared_ptr<NavigationAgentManager<Dimension>> agents) {
       _agents = agents;
@@ -22,24 +22,24 @@ namespace YolonaOss {
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       float radius = 4;
       auto agents = _agents->findAgents(obj->getPosition(), radius);
-      vec avg(0.0);
+      vec avg = Math::value(0);
       for (auto agent : agents) {
         if (obj == agent.get())
           continue;
-        avg += agent->getPosition();
+        avg = Math::add(avg,agent->getPosition());
       }
       if (agents.size() == 1)
-        return vec(0.0);
-      avg /= (float)agents.size()-1;
-      vec result = avg - obj->getPosition();
-      float len = glm::length(result);
+        return Math::value(0);
+      avg = Math::divide(avg, (float)agents.size()-1);
+      vec result = Math::subtract(avg , obj->getPosition());
+      float len = Math::length(result);
       if (len > obj->getMaxForce())
-        result = glm::normalize(result) * obj->getMaxForce() / len;
+        result = Math::multiply(Math::normalize(result) , obj->getMaxForce() / len);
       if (len == 0)
-        return vec(0.0);
+        return Math::value(0);
 
 
-      return result - obj->getVelocity();
+      return Math::subtract(result , obj->getVelocity());
     }
 
   private:

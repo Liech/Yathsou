@@ -11,6 +11,14 @@ namespace Iyathuum {
   public:
     using vec = std::array<double, Dimension>;
 
+
+    static vec invert(vec v) {
+      vec result;
+      for (size_t i = 0; i < Dimension; i++)
+        result[i] = -v[i];
+      return result;
+    }
+
     template<typename A, typename B>
     static std::array<A, Dimension> convert(std::array<B, Dimension> val) {
       std::array<A, Dimension> result;
@@ -60,6 +68,13 @@ namespace Iyathuum {
       vec result = A;
       for (size_t i = 0; i < Dimension; i++)
         result[i] *= B;
+      return result;
+    }
+
+    static vec divide(vec A, double B) {
+      vec result = A;
+      for (size_t i = 0; i < Dimension; i++)
+        result[i] /= B;
       return result;
     }
 

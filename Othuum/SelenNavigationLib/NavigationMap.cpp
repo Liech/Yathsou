@@ -1,6 +1,6 @@
 #include "NavigationMap.h"
 
-namespace YolonaOss {
+namespace Selen {
 
 
 }

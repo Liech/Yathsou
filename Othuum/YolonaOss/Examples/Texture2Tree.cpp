@@ -8,7 +8,7 @@
 #include "IyathuumCoreLib/Tree/NMTree.h"
 #include "IyathuumCoreLib/Util/ImageUtil.h"
 #include "../Util/Geometry.h"
-#include "Navigation/MapGroup.h"
+#include "SelenNavigationLib/MapGroup.h"
 #include "Util/Util.h"
 #include "Renderer/TextureRenderer.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -147,7 +147,7 @@ namespace YolonaOss {
     auto v = [this, id](double val) { 
       for (auto u : _unit) {
         if (u->_navigationAgent->getMap())
-          std::dynamic_pointer_cast<MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(id, (float)val);
+          std::dynamic_pointer_cast<Selen::MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(id, (float)val);
       }
       _config[id] = (float)val;
       _landscape->setConfig(_config);

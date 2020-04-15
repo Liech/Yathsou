@@ -1,15 +1,18 @@
 #pragma once
 
 #include <memory>
-#include "NavigationMap.h"
+#include "SelenNavigationLib/NavigationMap.h"
 #include "IyathuumCoreLib/Tree/Dijkstra.h"
 #include "IyathuumCoreLib/BaseTypes/AABB.h"
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/Util/Geometry.h"
 
-namespace YolonaOss {
+namespace Selen {
   template <size_t Dimension>
   class GradientGridMap :public NavigationMap<Dimension> {
     using self = GradientGridMap<Dimension>;
+    using vec  = std::array<double, Dimension>;
+    using Math = Iyathuum::Geometry<Dimension>;
   public:
     GradientGridMap(double scale) {
       _scale = scale;
@@ -27,7 +30,7 @@ namespace YolonaOss {
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       if (!_discomfortMap) 
         return vec();
-      vec scaled = _scale * obj->getPosition();
+      vec scaled = Math::multiply(obj->getPosition(), _scale);
       
       std::array<size_t, Dimension> index;
       for (int i = 0; i < Dimension; i++) {
@@ -37,21 +40,21 @@ namespace YolonaOss {
       }
 
       vec result = getDirectionSuggestion_recurse(index);
-      return result - obj->getVelocity();
+      return Math::subtract(result , obj->getVelocity());
     }
   private:
     vec getDirectionSuggestion_recurse(std::array<size_t, Dimension> position, vec dir = vec(), size_t currentDimension = Dimension-1) {
-      vec result = vec(0.0);
+      vec result = Math::value(0);
       for (int i = -1; i <= 1; i++) {
         auto newP = position;
         if ((!(newP[currentDimension] == 0 && i == -1)) && (!(newP[currentDimension] == _discomfortMap->getDimension(currentDimension)-1 && i==1)))
           newP[currentDimension] += i;          
         dir[(int)currentDimension] = i;
         if (currentDimension != 0)
-          result += getDirectionSuggestion_recurse(newP,dir, currentDimension - 1);
+          result = Math::add(result, getDirectionSuggestion_recurse(newP,dir, currentDimension - 1));
         else {          
           float val = (float)_discomfortMap->getVal(newP);
-          result += dir * -val;
+          result = Math::add(result, Math::multiply(dir , -val));
         }        
       }
       return result;

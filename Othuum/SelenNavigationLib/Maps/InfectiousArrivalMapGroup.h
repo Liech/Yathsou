@@ -1,14 +1,16 @@
 #pragma once
 
-#include "MapGroup.h"
+#include "SelenNavigationLib/MapGroup.h"
+#include "IyathuumCoreLib/Util/Geometry.h"
 
-namespace YolonaOss {
+namespace Selen {
 
   //only asks submaps for guidance when the unit is not yet arrived
   //if a unit is near enough to the target it is marked as arrived
   //if a unit is near an unit of this map that has arrived it is marked as arrived too
   template <size_t Dimension>
   class InfectiousArrivalMapGroup : public MapGroup<Dimension> {
+    using Math = Iyathuum::Geometry<Dimension>;
   public:
     InfectiousArrivalMapGroup(std::shared_ptr<NavigationAgentManager<Dimension>> agents) : MapGroup<Dimension>(){
       _agents = agents;
@@ -22,11 +24,11 @@ namespace YolonaOss {
 
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       if (_arrivedUnits.count(obj)) {
-        return -obj->getVelocity();
+        return Math::invert( obj->getVelocity());
       }
-      else if (glm::length(_target - obj->getPosition()) < 0.5f) {
+      else if (Math::length(Math::subtract(_target , obj->getPosition())) < 0.5f) {
         _arrivedUnits.insert(obj);
-        return -obj->getVelocity();
+        return Math::invert(obj->getVelocity());
       }
       else {
         const float radius = 1;
@@ -34,7 +36,7 @@ namespace YolonaOss {
         for (auto a : agents)
           if (isArrived(a.get())) {
             _arrivedUnits.insert(obj);
-            return -obj->getVelocity();
+            return Math::invert(obj->getVelocity());
           }
       }
 

@@ -125,7 +125,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>(Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z) ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
@@ -182,7 +182,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>(Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z  /Log:LogFileName) ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
@@ -213,17 +213,6 @@
     <ClInclude Include="Examples\Texture2Tree.h" />
     <ClInclude Include="Lib\lodepng\lodepng.h" />
     <ClInclude Include="Lib\lodepng\lodepng_util.h" />
-    <ClInclude Include="Navigation\AligmentMap.h" />
-    <ClInclude Include="Navigation\ComfortMap.h" />
-    <ClInclude Include="Navigation\DijkstraMap.h" />
-    <ClInclude Include="Navigation\DirectDistanceMap.h" />
-    <ClInclude Include="Navigation\DiscomfortMap.h" />
-    <ClInclude Include="Navigation\GradientGridMap.h" />
-    <ClInclude Include="Navigation\InfectiousArrivalMapGroup.h" />
-    <ClInclude Include="Navigation\MapGroup.h" />
-    <ClInclude Include="Navigation\NavigationAgent.h" />
-    <ClInclude Include="Navigation\NavigationAgentManager.h" />
-    <ClInclude Include="Navigation\NavigationMap.h" />
     <ClInclude Include="OpenGL\AttributeDescription.h" />
     <ClInclude Include="OpenGL\Camera.h" />
     <ClInclude Include="OpenGL\Drawable.h" />
@@ -278,12 +267,6 @@
     <ClCompile Include="Lib\glad\src\glad.c" />
     <ClCompile Include="Lib\lodepng\lodepng.cpp" />
     <ClCompile Include="Lib\lodepng\lodepng_util.cpp" />
-    <ClCompile Include="Navigation\DijkstraMap.cpp" />
-    <ClCompile Include="Navigation\DirectDistanceMap.cpp" />
-    <ClCompile Include="Navigation\GradientGridMap.cpp" />
-    <ClCompile Include="Navigation\MapGroup.cpp" />
-    <ClCompile Include="Navigation\NavigationAgent.cpp" />
-    <ClCompile Include="Navigation\NavigationMap.cpp" />
     <ClCompile Include="OpenGL\Camera.cpp" />
     <ClCompile Include="OpenGL\Drawable.cpp" />
     <ClCompile Include="OpenGL\DrawableList.cpp" />

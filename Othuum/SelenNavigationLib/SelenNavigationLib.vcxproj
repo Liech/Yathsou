@@ -88,6 +88,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,6 +136,8 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -146,6 +150,25 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MapGroup.h" />
+    <ClInclude Include="Maps\AligmentMap.h" />
+    <ClInclude Include="Maps\ComfortMap.h" />
+    <ClInclude Include="Maps\DijkstraMap.h" />
+    <ClInclude Include="Maps\DirectDistanceMap.h" />
+    <ClInclude Include="Maps\DiscomfortMap.h" />
+    <ClInclude Include="Maps\GradientGridMap.h" />
+    <ClInclude Include="Maps\InfectiousArrivalMapGroup.h" />
+    <ClInclude Include="NavigationAgent.h" />
+    <ClInclude Include="NavigationAgentManager.h" />
+    <ClInclude Include="NavigationMap.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MapGroup.cpp" />
+    <ClCompile Include="Maps\DijkstraMap.cpp" />
+    <ClCompile Include="Maps\DirectDistanceMap.cpp" />
+    <ClCompile Include="Maps\GradientGridMap.cpp" />
+    <ClCompile Include="NavigationAgent.cpp" />
+    <ClCompile Include="NavigationMap.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

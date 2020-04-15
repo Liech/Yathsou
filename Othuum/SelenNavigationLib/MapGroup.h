@@ -1,13 +1,19 @@
 #pragma once
 
 #include "NavigationMap.h"
+
 #include <vector>
 
-namespace YolonaOss {
+#include "IyathuumCoreLib/Util/Geometry.h"
+
+namespace Selen {
   //takes a number of maps and sums the direction suggestion weighted
   template <size_t Dimension>
   class MapGroup : public NavigationMap<Dimension> {
+    using Math = Iyathuum::Geometry<Dimension>;
   public:
+    using vec = std::array<double, Dimension>;
+
     virtual void setTarget(const vec target) override
     {
       _target = target; 
@@ -17,10 +23,11 @@ namespace YolonaOss {
     }
 
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
-      vec dir(0.0);
+      vec dir = Math::value(0);
+
       for (size_t i = 0; i < _maps.size(); i++) {
         if (_influence[i] > 0)
-          dir += _influence[i] * _maps[i]->getVelocitySuggestion(obj);
+          dir = Math::add(dir,Math::multiply(_maps[i]->getVelocitySuggestion(obj), _influence[i]));
       }    
       if (std::isnan(dir[0]))
         return vec();

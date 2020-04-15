@@ -61,12 +61,6 @@
     <Filter Include="libs\lodepng">
       <UniqueIdentifier>{5247ac49-1909-4ecb-aeab-2ca8f37127a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Navigation">
-      <UniqueIdentifier>{d833a28b-b0a2-4dd6-9085-275f4e9715c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Navigation">
-      <UniqueIdentifier>{12f2700a-9def-4975-a21f-ba0d3915d9c1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\RTSComponents">
       <UniqueIdentifier>{a74b1207-35bd-4151-95fb-4db37c5139c9}</UniqueIdentifier>
     </Filter>
@@ -210,18 +204,6 @@
     <ClInclude Include="Util\Geometry.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Navigation\NavigationAgent.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="Navigation\NavigationMap.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="Navigation\DirectDistanceMap.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="Navigation\DijkstraMap.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
     <ClInclude Include="Util\Util.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
@@ -230,12 +212,6 @@
     </ClInclude>
     <ClInclude Include="Examples\RenderTexture.h">
       <Filter>Examples</Filter>
-    </ClInclude>
-    <ClInclude Include="Navigation\MapGroup.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="Navigation\GradientGridMap.h">
-      <Filter>Header Files\Navigation</Filter>
     </ClInclude>
     <ClInclude Include="RTSComponents\Landscape.h">
       <Filter>Header Files\RTSComponents</Filter>
@@ -254,21 +230,6 @@
     </ClInclude>
     <ClInclude Include="Renderer\ArrowRenderer.h">
       <Filter>Header Files\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Navigation\ComfortMap.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="Navigation\DiscomfortMap.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="Navigation\AligmentMap.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="Navigation\NavigationAgentManager.h">
-      <Filter>Header Files\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="Navigation\InfectiousArrivalMapGroup.h">
-      <Filter>Header Files\Navigation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -377,18 +338,6 @@
     <ClCompile Include="Util\Geometry.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
-    <ClCompile Include="Navigation\NavigationAgent.cpp">
-      <Filter>Source Files\Navigation</Filter>
-    </ClCompile>
-    <ClCompile Include="Navigation\NavigationMap.cpp">
-      <Filter>Source Files\Navigation</Filter>
-    </ClCompile>
-    <ClCompile Include="Navigation\DirectDistanceMap.cpp">
-      <Filter>Source Files\Navigation</Filter>
-    </ClCompile>
-    <ClCompile Include="Navigation\DijkstraMap.cpp">
-      <Filter>Source Files\Navigation</Filter>
-    </ClCompile>
     <ClCompile Include="Util\Util.cpp">
       <Filter>Source Files\Util</Filter>
     </ClCompile>
@@ -397,12 +346,6 @@
     </ClCompile>
     <ClCompile Include="Examples\RenderTexture.cpp">
       <Filter>Examples</Filter>
-    </ClCompile>
-    <ClCompile Include="Navigation\MapGroup.cpp">
-      <Filter>Source Files\Navigation</Filter>
-    </ClCompile>
-    <ClCompile Include="Navigation\GradientGridMap.cpp">
-      <Filter>Source Files\Navigation</Filter>
     </ClCompile>
     <ClCompile Include="RTSComponents\Landscape.cpp">
       <Filter>Source Files\RTSComponents</Filter>
