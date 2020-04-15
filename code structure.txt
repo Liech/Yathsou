@@ -7,15 +7,19 @@ Layer 1: Only External dependencies
     * depends on libnop
     * if possible without other dependencies (except network related low level libs)
     * offers network synchronisation
+  HyalatohDatabaseLib
+    * depends on whatever the supreme commander forged alliance forever database and the game files needs
+    * offers scfa faf db access
+    * offers scfa asset access
+  AhwassaGraphicsLib
+    * depends on GLWF, glad, freetype, glm
+    * offers opengl
 Layer 2: External, Layer 1 dependencies
   SCUUtilityLib
     * depends on glm, lodepng, Iyathuum
     * is allowed to depend on more low libs
     * offers Utility
 Layer 3: External, Layer 1 and Layer 2 dependencies
-  AhwassaGraphicsLib
-    * depends on GLWF, glad, SCU, freetype
-    * offers opengl
   SelenNavigationLib
     * depends on SCU, Iyathuum
     * Offers navigation and flocking
