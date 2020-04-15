@@ -19,9 +19,13 @@ Layer 3: External, Layer 1 and Layer 2 dependencies
   SelenNavigationLib
     * depends on SCU, Iyathuum
     * Offers navigation and flocking
+  SuthanusArtilleryLib
+    * depends on SCU, Iyathuum
+    * Offers Bullet dynamics, Damage and aim calculations
 Layer 4:
   YolonaOssRTSLib
-    * depends on Selen, Vishala, SCU
+    * depends on nearly everything
+      * does not depend on graphic
     * offers basic rts components
 Layer 5: No External dependencies, only internal
   Othuum.exe
