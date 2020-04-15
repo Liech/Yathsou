@@ -16,7 +16,10 @@
 #include "../Drawables/Widgets/Slider.h"
 #include "../Drawables/Widgets/ListLayout.h"
 #include "../Drawables/Widgets/Label.h"
+#include "../Drawables/Widgets/Button.h"
 #include "../Renderer/ArrowRenderer.h"
+#include "VishalaNetworkLib/FileWriter.h"
+#include "VishalaNetworkLib/FileReader.h"
 
 #include <functional>
 
@@ -45,7 +48,7 @@ namespace YolonaOss {
     _mouseClick = [this](double x, double y) {mouseClick(x, y); return true; };
     Iyathuum::Database < std::function<bool(double, double)>*>::add(&_mouseClick , { "MouseClick" });
 
-
+     
     _layout = std::make_shared<Widgets::ListLayout>(Iyathuum::AABB<2>({ 0.0, 50.0 }, { 350.0, (double)(spec->height - 50)}));
     _drawableList.addDrawable(_layout);
 
@@ -58,6 +61,15 @@ namespace YolonaOss {
     addSlider("shy"   , 3, 0, 1);
     addSlider("cuddle", 4, 0, 1);
     addSlider("align" , 5, 0, 1);
+
+    std::shared_ptr<Widgets::Button> saveButton = std::make_shared<Widgets::Button>("Save", Iyathuum::AABB<2>({ 0.0, 0.0 }, { 350.0, 50.0 }), []() {
+      
+    });
+    std::shared_ptr<Widgets::Button> loadButton = std::make_shared<Widgets::Button>("Load", Iyathuum::AABB<2>({ 0.0, 0.0 }, { 350.0, 50.0 }), []() {
+      
+    });
+    _layout->addWidget(saveButton);
+    _layout->addWidget(loadButton);
   }
 
   void YolonaOss::Texture2Tree::renderDiscomfort() {
