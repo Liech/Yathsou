@@ -40,6 +40,14 @@ namespace Selen {
       return _maps.size() - 1;
     }
 
+    std::shared_ptr<NavigationMap<Dimension>> getMap(size_t id) {
+      return _maps[id];
+    }
+
+    size_t numberOfMaps() {
+      return _maps.size();
+    }
+
     void setWeight(size_t mapId, float influence) {
       _influence[mapId] = influence;
     }

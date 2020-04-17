@@ -4,7 +4,7 @@ Layer 1: Only External dependencies
     * Without dimension restrictions
     * absolut base
   VishalaNetworkLib
-    * depends on libnop
+    * depends on libnop, boost.asio
     * if possible without other dependencies (except network related low level libs)
     * offers network synchronisation
   HyalatohDatabaseLib

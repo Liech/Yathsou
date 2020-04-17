@@ -216,12 +216,18 @@
     <ClInclude Include="nop\utility\stream_writer.h">
       <Filter>libnop</Filter>
     </ClInclude>
+    <ClInclude Include="enetTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="enetTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

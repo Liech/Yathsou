@@ -23,7 +23,7 @@ namespace YolonaOss {
       virtual bool mouseStatusChanged(glm::vec2 position, GL::Key k, GL::KeyStatus status) override;
 
       double getValue() { return _currentValue; }
-      double setValue(double value) { _currentValue = value; }
+      void   setValue(double value, bool emit = true);
 
     private:
       Iyathuum::AABB<2> getSliderLocation();

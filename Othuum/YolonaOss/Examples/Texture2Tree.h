@@ -7,10 +7,12 @@
 #include "IyathuumCoreLib/Tree/NMTreeDijkstra.h"
 #include <memory>
 #include "SelenNavigationLib/NavigationAgent.h"
+#include "SelenNavigationLib/NavigationMap.h"
 #include "../RTSComponents/Landscape.h"
 #include "../RTSComponents/Unit.h"
 #include "../OpenGL/DrawableList.h"
 #include "../Drawables/Widgets/ListLayout.h"
+
 
 namespace YolonaOss {
   template<size_t Dimension> class DijkstraMap;
@@ -18,6 +20,9 @@ namespace YolonaOss {
   template<size_t Dimension> class MapGroup; 
   namespace GL {
     class DrawSpecification;
+  }
+  namespace Widgets {
+    class Slider;
   }
   using Tree =  Iyathuum::NMTree<bool, 2, 2, Iyathuum::TreeMergeBehavior::Max>;
   using TreeI = Iyathuum::NMTreeNeighbourIndex<bool, 2, 2, Iyathuum::TreeMergeBehavior::Max>;
@@ -32,7 +37,7 @@ namespace YolonaOss {
   private:
     std::unique_ptr<Landscape<2>>                     _landscape;
     std::vector<std::shared_ptr<Unit<2>>>             _unit     ; 
-
+    std::vector < std::shared_ptr<Selen::NavigationMap<2>>> _mapsForSlider;
 
     GL::DrawSpecification*                          _spec = nullptr;
     std::function<bool(double, double)>             _mouseClick;
@@ -41,7 +46,7 @@ namespace YolonaOss {
 
     void renderDiscomfort();
     void mouseClick(double x, double y);
-    void addSlider(std::string text, int id, double min, double max);
+    std::shared_ptr<Widgets::Slider> addSlider(std::string text, int id, double min, double max);
     glm::vec3 metaPos = glm::vec3(0, 0, 0);
     std::array<float, 20> _config;
   };

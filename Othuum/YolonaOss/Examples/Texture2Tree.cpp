@@ -55,18 +55,26 @@ namespace YolonaOss {
     for (size_t i = 0; i < 20; i++)
       _config[i] = 0;
 
-    addSlider("land"  , 0, 0, 1);
-    addSlider("navi"  , 1, 0, 1);
-    addSlider("direct", 2, 0, 1);
-    addSlider("shy"   , 3, 0, 1);
-    addSlider("cuddle", 4, 0, 1);
-    addSlider("align" , 5, 0, 1);
+    std::vector< std::shared_ptr<Widgets::Slider>> sliders;
 
-    std::shared_ptr<Widgets::Button> saveButton = std::make_shared<Widgets::Button>("Save", Iyathuum::AABB<2>({ 0.0, 0.0 }, { 350.0, 50.0 }), []() {
-      
+    sliders.push_back(addSlider("land"  , 0, 0, 1));
+    sliders.push_back(addSlider("navi"  , 1, 0, 1));
+    sliders.push_back(addSlider("direct", 2, 0, 1));
+    sliders.push_back(addSlider("shy"   , 3, 0, 1));
+    sliders.push_back(addSlider("cuddle", 4, 0, 1));
+    sliders.push_back(addSlider("align" , 5, 0, 1));
+
+    std::shared_ptr<Widgets::Button> saveButton = std::make_shared<Widgets::Button>("Save", Iyathuum::AABB<2>({ 0.0, 0.0 }, { 350.0, 50.0 }), [sliders,this]() {
+      Vishala::FileWriter w("SliderSettings.bin");
+      for (int i = 0; i < sliders.size(); i++) {
+        w.write(sliders[i]->getValue());
+      }      
     });
-    std::shared_ptr<Widgets::Button> loadButton = std::make_shared<Widgets::Button>("Load", Iyathuum::AABB<2>({ 0.0, 0.0 }, { 350.0, 50.0 }), []() {
-      
+    std::shared_ptr<Widgets::Button> loadButton = std::make_shared<Widgets::Button>("Load", Iyathuum::AABB<2>({ 0.0, 0.0 }, { 350.0, 50.0 }), [sliders,this]() {
+      Vishala::FileReader r("SliderSettings.bin");
+      for (int i = 0; i < sliders.size(); i++) {
+        sliders[i]->setValue(r.read<double>());
+      }
     });
     _layout->addWidget(saveButton);
     _layout->addWidget(loadButton);
@@ -155,11 +163,21 @@ namespace YolonaOss {
     _drawableList.draw();
   }
 
-  void Texture2Tree::addSlider(std::string text, int id, double min, double max) {
+  std::shared_ptr<Widgets::Slider> Texture2Tree::addSlider(std::string text, int id, double min, double max) {
     auto v = [this, id](double val) { 
       for (auto u : _unit) {
-        if (u->_navigationAgent->getMap())
-          std::dynamic_pointer_cast<Selen::MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(id, (float)val);
+        if (u->_navigationAgent->getMap()) {
+          if (id == 0)
+            std::dynamic_pointer_cast<Selen::MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(id, (float)val);
+          else if (id == 1 || id == 2) {
+            auto arrival = std::dynamic_pointer_cast<Selen::MapGroup<2>>(u->_navigationAgent->getMap())->getMap(1);
+            std::dynamic_pointer_cast<Selen::InfectiousArrivalMapGroup<2>>(arrival)->setWeight(id-1, (float)val);
+          }
+          else
+            std::dynamic_pointer_cast<Selen::MapGroup<2>>(u->_navigationAgent->getMap())->setWeight(id-1, (float)val);
+        }
+
+          
       }
       _config[id] = (float)val;
       _landscape->setConfig(_config);
@@ -172,5 +190,6 @@ namespace YolonaOss {
     layout->addWidget(b);
     layout->addWidget(a);
     _layout->addWidget(layout);
+    return a;
   }
 }

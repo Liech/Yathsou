@@ -5,3 +5,4 @@ libnop   -> includes changed
 glm
 glad
 lodepng
+cpp-netlib

@@ -114,5 +114,10 @@ namespace YolonaOss {
       return c.isInside({ position[0] ,position[1]});
     }
 
+    void Slider::setValue(double value, bool emit) { 
+      _currentValue = value;
+      if (emit)
+        _valueChangedCall(value);
+    }
   }
 }
