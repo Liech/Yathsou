@@ -1,9 +1,9 @@
-license stuff needed for:      | 
-freetype                       | Font
-glwf                           | WindowManager
-libnop   -> includes changed   | Serialization
-glm                            | Math
-glad                           | OpenGL
-lodepng                        | Load/Save PNG
-enet                           | Network Library
-nlohmann/json                  | Human Readable Config Files
+license stuff needed for:      |            | 
+freetype                       |            | Font
+glwf                           |            | WindowManager
+libnop   -> includes changed   |vishala     | Serialization
+glm                            |            | Math
+glad                           |            | OpenGL
+lodepng                        |            | Load/Save PNG
+enet                           |vishala     | Network Library
+nlohmann/json                  |vishala     | Human Readable Config Files
