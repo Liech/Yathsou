@@ -2,13 +2,11 @@
 
 #include <string>
 
-namespace nlohmann {
-  class json;
-}
+#include "json_fwd.hpp"
 
 namespace Iavish {
   struct ServerConfiguration {
-    int port;
+    int port = 6112;
 
     nlohmann::json toJson();
     void           fromJson(nlohmann::json);

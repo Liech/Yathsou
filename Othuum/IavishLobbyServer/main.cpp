@@ -1,9 +1,14 @@
 #include "VishalaNetworkLib/enetTest.h"
 #include "json.hpp"
 
+#include "ServerConfiguration.h"
+#include "VishalaNetworkLib/Server.h"
+
 int main() {
-  enetTest t;
-  t.work();
-  nlohmann::json j;
+  Iavish::ServerConfiguration config;
+  config.fromFile("ServerConfiguration.json");
+
+  Vishala::Server server;
+
 
 }

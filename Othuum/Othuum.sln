@@ -32,6 +32,9 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AhwassaGraphicsLib", "AhwassaGraphicsLib\AhwassaGraphicsLib.vcxproj", "{62844E10-BEDE-4454-88CC-1F614B008B75}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IavishLobbyServer", "IavishLobbyServer\IavishLobbyServer.vcxproj", "{57207F8F-AD3A-4005-B69F-8E69BC446B8D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{87FBFD7F-DB98-4BD5-9AC1-37645A685488} = {87FBFD7F-DB98-4BD5-9AC1-37645A685488}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "exe", "exe", "{B445D9C6-8AB1-4097-AA0A-18D555102E17}"
 EndProject

@@ -1,8 +1,9 @@
 #include "ServerConfiguration.h"
 
-#include "json.hpp"
 #include <fstream>
 #include <filesystem>
+
+#include "json.hpp"
 
 namespace Iavish {
 
@@ -25,8 +26,10 @@ namespace Iavish {
   }
 
   void ServerConfiguration::fromFile(std::string filename) {
-    if (!std::filesystem::exists(filename))
+    if (!std::filesystem::exists(filename)) {
+      toFile(filename);
       return;
+    }
     std::ifstream t(filename);
     std::string content((std::istreambuf_iterator<char>(t)),
       std::istreambuf_iterator<char>());

@@ -223,11 +223,13 @@
     <ClInclude Include="nop\utility\stream_writer.h" />
     <ClInclude Include="nop\value.h" />
     <ClInclude Include="Serializable\Message.h" />
+    <ClInclude Include="Server.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="enetTest.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FileWriter.cpp" />
+    <ClCompile Include="Server.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
