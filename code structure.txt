@@ -19,6 +19,10 @@ Layer 2: External, Layer 1 dependencies
     * depends on glm, lodepng, Iyathuum
     * is allowed to depend on more low libs
     * offers Utility
+  IavishLobbyServer.exe
+    * depends on Vishala
+    * offers lobby server
+    * should run on linux too
 Layer 3: External, Layer 1 and Layer 2 dependencies
   SelenNavigationLib
     * depends on SCU, Iyathuum
