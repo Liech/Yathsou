@@ -7,27 +7,24 @@ Layer 1: Only External dependencies
     * depends on libnop, boost.asio
     * if possible without other dependencies (except network related low level libs)
     * offers network synchronisation
-  HyalatohDatabaseLib
+  HyalatohDatabaseLib NOT IMPLEMENTED
     * depends on whatever the supreme commander forged alliance forever database and the game files needs
     * offers scfa faf db access
     * offers scfa asset access
-  AhwassaGraphicsLib
+  AhwassaGraphicsLib NOT IMPLEMENTED
     * depends on GLWF, glad, freetype, glm
     * offers opengl
 Layer 2: External, Layer 1 dependencies
-  SCUUtilityLib
+  SCUUtilityLib NOT IMPLEMENTED
     * depends on glm, lodepng, Iyathuum
     * is allowed to depend on more low libs
     * offers Utility
-  IavishLobbyServer.exe
-    * depends on Vishala
-    * offers lobby server
-    * should run on linux too
+
 Layer 3: External, Layer 1 and Layer 2 dependencies
   SelenNavigationLib
     * depends on SCU, Iyathuum
     * Offers navigation and flocking
-  SuthanusArtilleryLib
+  SuthanusArtilleryLib NOT IMPLEMENTED
     * depends on SCU, Iyathuum
     * Offers Bullet dynamics, Damage and aim calculations
 Layer 4:
@@ -35,6 +32,11 @@ Layer 4:
     * depends on nearly everything
       * does not depend on graphic
     * offers basic rts components
-Layer 5: No External dependencies, only internal
+exe: No External dependencies, only internal
   Othuum.exe
+    * depends on everything
     * combines everything to a game
+  IavishLobbyServer.exe
+    * depends on Vishala, json
+    * offers lobby server
+    * should run on linux too

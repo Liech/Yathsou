@@ -33,6 +33,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AhwassaGraphicsLib", "Ahwas
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IavishLobbyServer", "IavishLobbyServer\IavishLobbyServer.vcxproj", "{57207F8F-AD3A-4005-B69F-8E69BC446B8D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "exe", "exe", "{B445D9C6-8AB1-4097-AA0A-18D555102E17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Layer1", "Layer1", "{08AA4BEF-E82A-4260-A5BD-DA0B8B5D6BD4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -100,6 +104,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CD140090-7BA2-46E0-918F-3E0E0756DA62} = {B445D9C6-8AB1-4097-AA0A-18D555102E17}
+		{030C3B7E-3682-4A03-8188-D46921B837DA} = {08AA4BEF-E82A-4260-A5BD-DA0B8B5D6BD4}
+		{87FBFD7F-DB98-4BD5-9AC1-37645A685488} = {08AA4BEF-E82A-4260-A5BD-DA0B8B5D6BD4}
+		{57207F8F-AD3A-4005-B69F-8E69BC446B8D} = {B445D9C6-8AB1-4097-AA0A-18D555102E17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66AC159F-D2F5-48EA-ACFD-17E3536CBC6F}

@@ -1,8 +1,9 @@
-license stuff needed for:
-freetype
-glwf
-libnop   -> includes changed
-glm
-glad
-lodepng
-cpp-netlib
+license stuff needed for:      | 
+freetype                       | Font
+glwf                           | WindowManager
+libnop   -> includes changed   | Serialization
+glm                            | Math
+glad                           | OpenGL
+lodepng                        | Load/Save PNG
+enet                           | Network Library
+nlohmann/json                  | Human Readable Config Files
