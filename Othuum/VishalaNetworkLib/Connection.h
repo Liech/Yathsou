@@ -2,6 +2,7 @@
 
 #include <functional>
 #include <vector>
+#include <map>
 
 #include "enet/enet.h"
 
@@ -11,24 +12,28 @@ namespace Vishala {
      Connection();
     ~Connection();
 
-    void start ();
-    void stop  ();
-    void update();
+    void   start ();
+    void   stop  ();
+    void   update();
+    size_t connect(int port, std::string ip); //returns -1 on failure
+    void   send(size_t target, uint8_t channel, uint8_t* package, size_t length, bool reliable = true);
 
-    void setChannelCount          (size_t numberOfChannels);
+    //config
+    void setChannelCount          (uint8_t numberOfChannels);
     void setMaximumConnectionCount(size_t max);
     void setAcceptConnection      (bool accept);
     void setPort                  (int port);
-
-    void setNewConnectionCallback (                std::function<void(size_t clientnumber                                 )> func);
-    void setDisconnectCallback    (                std::function<void(size_t clientnumber                                 )> func);
-    void setRecievedCallback      (size_t channel, std::function<void(size_t clientNumber, uint8_t* package, size_t length)> func);
+    
+    //config                     
+    void setNewConnectionCallback (                 std::function<void(size_t clientnumber                                 )> func);
+    void setDisconnectCallback    (                 std::function<void(size_t clientnumber                                 )> func);
+    void setRecievedCallback      (uint8_t channel, std::function<void(size_t clientNumber, uint8_t* package, size_t length)> func);
 
 
   private:
     ENetHost*   _connection             = nullptr;
     int         _numberOfConnections    = 1      ;
-    int         _numberOfChannels       = 1      ;
+    uint8_t     _numberOfChannels       = 1      ;
     int         _port                   = 6112   ;
     bool        _acceptsConnections     = true   ;
 
@@ -37,5 +42,8 @@ namespace Vishala {
     std::function<void(size_t  clientNumber)>                                               _newConnection;
     std::function<void(size_t  clientNumber)>                                               _disconnect   ;
     std::vector<std::function<void(size_t  clientNumber, uint8_t* package, size_t length)>> _recived      ;
+    std::map<size_t, ENetPeer*>                                                             _peers        ;
+
+    static inline size_t numberOfConnectsions = 0;
   };
 }

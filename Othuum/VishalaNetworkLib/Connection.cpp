@@ -2,13 +2,21 @@
 
 #include <cassert>
 #include <stdexcept>
+#include <chrono>
+#include <thread>
 
 namespace Vishala {
   Connection::Connection() {
-    
+    setChannelCount(1);
+    if (numberOfConnectsions == 0)
+      enet_initialize();
+    numberOfConnectsions++;
   }
 
   Connection::~Connection() {
+    numberOfConnectsions--;
+    if (numberOfConnectsions == 0)
+      enet_deinitialize();
     if (_connection != nullptr) {
       enet_host_destroy(_connection);
       delete _connection;
@@ -32,6 +40,14 @@ namespace Vishala {
 
   void Connection::stop() {
     assert(_connection != nullptr);
+    for (auto p : _peers)
+      enet_peer_disconnect(p.second, 0);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+
+    for (auto p : _peers)
+      enet_peer_reset(p.second);
+
     enet_host_destroy(_connection);
     delete _connection;
     _connection = nullptr;
@@ -44,6 +60,7 @@ namespace Vishala {
       {
       case ENetEventType::ENET_EVENT_TYPE_CONNECT:
         event.peer->data = (void*)_clientNameCounter;
+        _peers[_clientNameCounter] = event.peer;
         _newConnection(*((size_t*)event.peer->data));
         _clientNameCounter++;
         break;
@@ -54,12 +71,41 @@ namespace Vishala {
 
       case ENetEventType::ENET_EVENT_TYPE_DISCONNECT:
         _disconnect((size_t)event.peer->data);
+        _peers.erase((size_t)event.peer->data);
         event.peer->data = NULL;
       }
     }
   }
 
-  void Connection::setChannelCount(size_t numberOfChannels) {
+  size_t Connection::connect(int port, std::string ip) {
+    ENetAddress address;
+    enet_address_set_host(&address, ip.c_str());
+    address.port = port;
+    ENetPeer* peer = nullptr;
+    peer = enet_host_connect(_connection, &address, _numberOfChannels, 0);
+    if (peer == NULL)
+      return 18446744073709551615;
+    ENetEvent event;
+    if (enet_host_service(_connection, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT)
+    {
+      _newConnection(_clientNameCounter);
+      _peers[_clientNameCounter] = peer;
+      peer->data = (void*)_clientNameCounter;
+      _clientNameCounter++;
+      return _clientNameCounter-1;
+    }
+    else {
+      enet_peer_reset(peer);
+      return 18446744073709551615;
+    }    
+  }
+
+  void Connection::send(size_t target,uint8_t channel, uint8_t* package, size_t length, bool reliable) {
+    ENetPacket* packet = enet_packet_create(package, length, reliable?ENET_PACKET_FLAG_RELIABLE:0);
+    enet_peer_send(_peers[target], channel, packet);
+  }
+
+  void Connection::setChannelCount(uint8_t numberOfChannels) {
     assert(_connection == nullptr);
     _numberOfChannels = numberOfChannels;
     _recived.resize(numberOfChannels);
@@ -92,7 +138,7 @@ namespace Vishala {
     _disconnect = func;
   }
 
-  void Connection::setRecievedCallback(size_t channel, std::function<void(size_t  clientNumber, uint8_t* package, size_t length)> func) {
+  void Connection::setRecievedCallback(uint8_t channel, std::function<void(size_t  clientNumber, uint8_t* package, size_t length)> func) {
     assert(_connection == nullptr);
     _recived[channel] = func;
   }

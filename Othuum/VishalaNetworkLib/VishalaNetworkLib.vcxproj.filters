@@ -219,9 +219,6 @@
     <ClInclude Include="nop\utility\stream_writer.h">
       <Filter>libnop</Filter>
     </ClInclude>
-    <ClInclude Include="enetTest.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="enet\protocol.h">
       <Filter>enet</Filter>
     </ClInclude>
@@ -249,9 +246,6 @@
     <ClInclude Include="enet\list.h">
       <Filter>enet</Filter>
     </ClInclude>
-    <ClInclude Include="Server.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Connection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -261,12 +255,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FileWriter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="enetTest.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Server.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Connection.cpp">
