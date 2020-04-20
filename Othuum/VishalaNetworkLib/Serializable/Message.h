@@ -6,8 +6,8 @@
 
 namespace Vishala {
   struct Message {
-    std::string message ;
     size_t      playerID;
+    std::string message ;
     NOP_STRUCTURE(playerID, message);
   };
 }

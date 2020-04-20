@@ -5,7 +5,9 @@
 #include "VishalaNetworkLib/BinaryPackage.h"
 #include "ServerConfiguration.h"
 #include "VishalaNetworkLib/Connection.h"
+#include "VishalaNetworkLib/Serializable/Message.h"
 
+Vishala::Connection c;
 class s {
 public:
   void connect(size_t clientnumber) {
@@ -17,15 +19,17 @@ public:
   }
 
   void message(size_t clientNumber, std::unique_ptr<Vishala::BinaryPackage> package) {
+    Vishala::Message msg = package->read<Vishala::Message>();    
     std::cout << "Client Message: " << clientNumber << " - " << std::endl;
+    c.send(0, 0, std::move(package));
   }
 };
 
 int main() {
+  std::cout << "IAVISH LOBBY SERVER" << std::endl;
   Iavish::ServerConfiguration config;
   config.fromFile("ServerConfiguration.json");
   s msg;
-  Vishala::Connection c;
   c.setPort(config.port);
   c.setNewConnectionCallback([&msg](size_t clientnumber) {msg.connect(clientnumber); });
   c.setDisconnectCallback([&msg](size_t clientnumber) {msg.disconnect(clientnumber); });

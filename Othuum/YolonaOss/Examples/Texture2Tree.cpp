@@ -20,7 +20,8 @@
 #include "../Renderer/ArrowRenderer.h"
 #include "VishalaNetworkLib/FileWriter.h"
 #include "VishalaNetworkLib/FileReader.h"
-
+#include "VishalaNetworkLib/BinaryPackage.h"
+#include "VishalaNetworkLib/Serializable/Message.h"
 #include <functional>
 
 float scaling = 1;
@@ -33,6 +34,26 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec) {
     _landscape = std::make_unique<Landscape<2>>("YolonaOssData/textures/TinyMap.png");
+    _connection.setAcceptConnection(false);
+    _connection.setChannelCount(1);
+    _connection.setPort(6112 + 1);
+    _connection.setDisconnectCallback([](size_t num) { std::cout << "DISCONNECT" << std::endl; });
+    _connection.setNewConnectionCallback([](size_t num) { std::cout << "CONNECT" << std::endl; });
+    _connection.setRecievedCallback(0, [this](size_t num, std::unique_ptr<Vishala::BinaryPackage> package) {
+      Vishala::Message msg = package->read<Vishala::Message>();
+      std::cout << msg.playerID << ": " <<msg.message <<std::endl;
+      _connection.send(0, 0, std::move(package));
+    });
+    _connection.start();
+    _connection.connect(6112, "localhost");
+
+    std::unique_ptr<Vishala::BinaryPackage> welcome = std::make_unique<Vishala::BinaryPackage>();
+    Vishala::Message MSG;
+    MSG.message = "Hello world";
+    MSG.playerID = 0;
+    welcome->write(MSG);
+    welcome->startRead();
+    _connection.send(0, 0, std::move(welcome));
 
     int amount = 20;
     float distance = 1.0f;
@@ -112,6 +133,7 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::draw()
   {
+    _connection.update();
     #pragma omp parallel for
     for (int64_t i = 0; i < (int64_t)_unit.size(); i++) {
       _unit[i]->_navigationAgent->updatePosition();

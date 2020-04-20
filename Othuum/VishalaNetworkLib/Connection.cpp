@@ -21,7 +21,6 @@ namespace Vishala {
       enet_deinitialize();
     if (_connection != nullptr) {
       enet_host_destroy(_connection);
-      delete _connection;
     }
   }
 
@@ -64,15 +63,15 @@ namespace Vishala {
       {
         event.peer->data = (void*)_clientNameCounter;
         _peers[_clientNameCounter] = event.peer;
-        _newConnection(*((size_t*)event.peer->data));
+        _newConnection((size_t)event.peer->data);
         _clientNameCounter++;
         break;
       }
       case ENetEventType::ENET_EVENT_TYPE_RECEIVE:
       {
         std::unique_ptr< BinaryPackage > package = std::make_unique<BinaryPackage>();
-        //package->writeBinary((unsigned char*)event.packet->data, event.packet->dataLength);
-        //package->startRead();
+        package->writeBinary((unsigned char*)event.packet->data, event.packet->dataLength);
+        package->startRead();
         _recived[event.channelID]((size_t)event.peer->data, std::move(package));
         enet_packet_destroy(event.packet);
         break;

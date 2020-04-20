@@ -12,6 +12,7 @@
 #include "../RTSComponents/Unit.h"
 #include "../OpenGL/DrawableList.h"
 #include "../Drawables/Widgets/ListLayout.h"
+#include "VishalaNetworkLib/Connection.h"
 
 
 namespace YolonaOss {
@@ -49,5 +50,6 @@ namespace YolonaOss {
     std::shared_ptr<Widgets::Slider> addSlider(std::string text, int id, double min, double max);
     glm::vec3 metaPos = glm::vec3(0, 0, 0);
     std::array<float, 20> _config;
+    Vishala::Connection _connection;
   };
 }
