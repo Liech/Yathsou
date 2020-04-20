@@ -5,6 +5,8 @@
 #include <chrono>
 #include <thread>
 
+#include "BinaryPackage.h"
+
 namespace Vishala {
   Connection::Connection() {
     setChannelCount(1);
@@ -59,20 +61,28 @@ namespace Vishala {
       switch (event.type)
       {
       case ENetEventType::ENET_EVENT_TYPE_CONNECT:
+      {
         event.peer->data = (void*)_clientNameCounter;
         _peers[_clientNameCounter] = event.peer;
         _newConnection(*((size_t*)event.peer->data));
         _clientNameCounter++;
         break;
+      }
       case ENetEventType::ENET_EVENT_TYPE_RECEIVE:
-        _recived[event.channelID]((size_t)event.peer->data, event.packet->data, event.packet->dataLength);
+      {
+        std::unique_ptr< BinaryPackage > package = std::make_unique<BinaryPackage>();
+        //package->writeBinary((unsigned char*)event.packet->data, event.packet->dataLength);
+        //package->startRead();
+        _recived[event.channelID]((size_t)event.peer->data, std::move(package));
         enet_packet_destroy(event.packet);
         break;
-
+      }
       case ENetEventType::ENET_EVENT_TYPE_DISCONNECT:
+      {
         _disconnect((size_t)event.peer->data);
         _peers.erase((size_t)event.peer->data);
         event.peer->data = NULL;
+      }
       }
     }
   }
@@ -100,8 +110,8 @@ namespace Vishala {
     }    
   }
 
-  void Connection::send(size_t target,uint8_t channel, uint8_t* package, size_t length, bool reliable) {
-    ENetPacket* packet = enet_packet_create(package, length, reliable?ENET_PACKET_FLAG_RELIABLE:0);
+  void Connection::send(size_t target,uint8_t channel, std::unique_ptr< BinaryPackage > package, bool reliable) {
+    ENetPacket* packet = enet_packet_create(package->getBinary().data(), package->getBinary().size(), reliable?ENET_PACKET_FLAG_RELIABLE:0);
     enet_peer_send(_peers[target], channel, packet);
   }
 
@@ -110,7 +120,7 @@ namespace Vishala {
     _numberOfChannels = numberOfChannels;
     _recived.resize(numberOfChannels);
     for (size_t i = 0; i < _numberOfChannels; i++)
-      _recived[i] = [](size_t  clientNumber, uint8_t* package, size_t length) {};
+      _recived[i] = [](size_t  clientNumber, std::unique_ptr< BinaryPackage > package) {};
   }
 
   void Connection::setMaximumConnectionCount(size_t max) {
@@ -138,7 +148,7 @@ namespace Vishala {
     _disconnect = func;
   }
 
-  void Connection::setRecievedCallback(uint8_t channel, std::function<void(size_t  clientNumber, uint8_t* package, size_t length)> func) {
+  void Connection::setRecievedCallback(uint8_t channel, std::function<void(size_t  clientNumber, std::unique_ptr< BinaryPackage > package)> func) {
     assert(_connection == nullptr);
     _recived[channel] = func;
   }

@@ -7,6 +7,9 @@
 #include "enet/enet.h"
 
 namespace Vishala {
+
+  class BinaryPackage;
+
   class Connection {
   public:
      Connection();
@@ -16,7 +19,7 @@ namespace Vishala {
     void   stop  ();
     void   update();
     size_t connect(int port, std::string ip); //returns -1 on failure
-    void   send(size_t target, uint8_t channel, uint8_t* package, size_t length, bool reliable = true);
+    void   send(size_t target, uint8_t channel, std::unique_ptr< BinaryPackage >, bool reliable = true);
 
     //config
     void setChannelCount          (uint8_t numberOfChannels);
@@ -27,7 +30,7 @@ namespace Vishala {
     //config                     
     void setNewConnectionCallback (                 std::function<void(size_t clientnumber                                 )> func);
     void setDisconnectCallback    (                 std::function<void(size_t clientnumber                                 )> func);
-    void setRecievedCallback      (uint8_t channel, std::function<void(size_t clientNumber, uint8_t* package, size_t length)> func);
+    void setRecievedCallback      (uint8_t channel, std::function<void(size_t clientNumber, std::unique_ptr<BinaryPackage> )> func);
 
 
   private:
@@ -41,7 +44,7 @@ namespace Vishala {
     
     std::function<void(size_t  clientNumber)>                                               _newConnection;
     std::function<void(size_t  clientNumber)>                                               _disconnect   ;
-    std::vector<std::function<void(size_t  clientNumber, uint8_t* package, size_t length)>> _recived      ;
+    std::vector<std::function<void(size_t  clientNumber, std::unique_ptr< BinaryPackage >)>> _recived      ;
     std::map<size_t, ENetPeer*>                                                             _peers        ;
 
     static inline size_t numberOfConnectsions = 0;

@@ -58,10 +58,10 @@ struct LogicalBufferStaticConstraints {
   static_assert(
       std::is_integral<SizeType>::value,
       "The size member of a logical buffer pair must be an integral type.");
-  static_assert(ArrayTraits<BufferType>::Length <=
-                    std::numeric_limits<SizeType>::max(),
-                "The size member of a logical buffer pair must have sufficient "
-                "range to count the elements of the array member.");
+  //static_assert(ArrayTraits<BufferType>::Length <=
+  //                  std::numeric_limits<SizeType>::max(),
+  //              "The size member of a logical buffer pair must have sufficient "
+  //              "range to count the elements of the array member.");
 };
 
 // Captures references to the array and size members of a user-defined structure

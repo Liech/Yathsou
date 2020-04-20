@@ -18,13 +18,10 @@
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include <glm/gtx/intersect.hpp>
 #include <iomanip>
-#include "VishalaNetworkLib/enetTest.h"
 using namespace YolonaOss;
 
 int main() { 
   {
-    enetTest t;
-    t.work();
     //int width = 800;
     //int height = 600;
     int width = 1420;

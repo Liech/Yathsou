@@ -1,6 +1,8 @@
 
 #include <iostream>
+#include <memory>
 
+#include "VishalaNetworkLib/BinaryPackage.h"
 #include "ServerConfiguration.h"
 #include "VishalaNetworkLib/Connection.h"
 
@@ -14,7 +16,7 @@ public:
     std::cout << "Client Disconnect: " << clientnumber << std::endl;
   }
 
-  void message(size_t clientNumber, uint8_t* package, size_t length) {
+  void message(size_t clientNumber, std::unique_ptr<Vishala::BinaryPackage> package) {
     std::cout << "Client Message: " << clientNumber << " - " << std::endl;
   }
 };
@@ -27,7 +29,7 @@ int main() {
   c.setPort(config.port);
   c.setNewConnectionCallback([&msg](size_t clientnumber) {msg.connect(clientnumber); });
   c.setDisconnectCallback([&msg](size_t clientnumber) {msg.disconnect(clientnumber); });
-  c.setRecievedCallback(0,[&msg](size_t clientNumber, uint8_t* package, size_t length) {msg.message(clientNumber,package,length); });
+  c.setRecievedCallback(0,[&msg](size_t clientNumber, std::unique_ptr<Vishala::BinaryPackage> package) {msg.message(clientNumber, std::move(package)); });
   c.start();
 
   while (true) c.update();
