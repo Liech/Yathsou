@@ -91,6 +91,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,6 +123,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,7 +150,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BinaryPackage.h" />
     <ClInclude Include="Connection.h" />
     <ClInclude Include="enet\callbacks.h" />
     <ClInclude Include="enet\enet.h" />
@@ -159,77 +160,15 @@
     <ClInclude Include="enet\unix.h" />
     <ClInclude Include="enet\utility.h" />
     <ClInclude Include="enet\win32.h" />
-    <ClInclude Include="FileReader.h" />
-    <ClInclude Include="FileWriter.h" />
-    <ClInclude Include="nop\base\array.h" />
-    <ClInclude Include="nop\base\encoding.h" />
-    <ClInclude Include="nop\base\encoding_byte.h" />
-    <ClInclude Include="nop\base\enum.h" />
-    <ClInclude Include="nop\base\handle.h" />
-    <ClInclude Include="nop\base\logical_buffer.h" />
-    <ClInclude Include="nop\base\macros.h" />
-    <ClInclude Include="nop\base\map.h" />
-    <ClInclude Include="nop\base\members.h" />
-    <ClInclude Include="nop\base\optional.h" />
-    <ClInclude Include="nop\base\pair.h" />
-    <ClInclude Include="nop\base\reference_wrapper.h" />
-    <ClInclude Include="nop\base\result.h" />
-    <ClInclude Include="nop\base\serializer.h" />
-    <ClInclude Include="nop\base\string.h" />
-    <ClInclude Include="nop\base\table.h" />
-    <ClInclude Include="nop\base\tuple.h" />
-    <ClInclude Include="nop\base\utility.h" />
-    <ClInclude Include="nop\base\value.h" />
-    <ClInclude Include="nop\base\variant.h" />
-    <ClInclude Include="nop\base\vector.h" />
-    <ClInclude Include="nop\protocol.h" />
-    <ClInclude Include="nop\rpc\interface.h" />
-    <ClInclude Include="nop\rpc\simple_method_receiver.h" />
-    <ClInclude Include="nop\rpc\simple_method_sender.h" />
-    <ClInclude Include="nop\serializer.h" />
-    <ClInclude Include="nop\status.h" />
-    <ClInclude Include="nop\structure.h" />
-    <ClInclude Include="nop\table.h" />
-    <ClInclude Include="nop\traits\function_traits.h" />
-    <ClInclude Include="nop\traits\is_comparable.h" />
-    <ClInclude Include="nop\traits\is_detected.h" />
-    <ClInclude Include="nop\traits\is_fungible.h" />
-    <ClInclude Include="nop\traits\is_template_base_of.h" />
-    <ClInclude Include="nop\traits\void.h" />
-    <ClInclude Include="nop\types\detail\logical_buffer.h" />
-    <ClInclude Include="nop\types\detail\member_pointer.h" />
-    <ClInclude Include="nop\types\detail\variant.h" />
-    <ClInclude Include="nop\types\enum_flags.h" />
-    <ClInclude Include="nop\types\file_handle.h" />
-    <ClInclude Include="nop\types\handle.h" />
-    <ClInclude Include="nop\types\optional.h" />
-    <ClInclude Include="nop\types\result.h" />
-    <ClInclude Include="nop\types\thread_local.h" />
-    <ClInclude Include="nop\types\variant.h" />
-    <ClInclude Include="nop\utility\backtrace.h" />
-    <ClInclude Include="nop\utility\bounded_reader.h" />
-    <ClInclude Include="nop\utility\bounded_writer.h" />
-    <ClInclude Include="nop\utility\buffer_reader.h" />
-    <ClInclude Include="nop\utility\buffer_writer.h" />
-    <ClInclude Include="nop\utility\compiler.h" />
-    <ClInclude Include="nop\utility\constexpr_buffer_writer.h" />
-    <ClInclude Include="nop\utility\die.h" />
-    <ClInclude Include="nop\utility\endian.h" />
-    <ClInclude Include="nop\utility\fd_reader.h" />
-    <ClInclude Include="nop\utility\fd_writer.h" />
-    <ClInclude Include="nop\utility\pedantic_buffer_reader.h" />
-    <ClInclude Include="nop\utility\pedantic_buffer_writer.h" />
-    <ClInclude Include="nop\utility\sip_hash.h" />
-    <ClInclude Include="nop\utility\stream_reader.h" />
-    <ClInclude Include="nop\utility\stream_writer.h" />
-    <ClInclude Include="nop\value.h" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="json_fwd.hpp" />
     <ClInclude Include="Serializable\Message.h" />
+    <ClInclude Include="Serialization.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BinaryPackage.cpp" />
     <ClCompile Include="Connection.cpp" />
-    <ClCompile Include="FileReader.cpp" />
-    <ClCompile Include="FileWriter.cpp" />
+    <ClCompile Include="Serializable\Message.cpp" />
+    <ClCompile Include="Serialization.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

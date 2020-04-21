@@ -21,15 +21,15 @@
     <ClCompile Include="ServerConfiguration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ConnectionTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="json.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ServerConfiguration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="json_fwd.hpp">
+    <ClInclude Include="ConnectionTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

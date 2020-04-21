@@ -16,208 +16,16 @@
     <Filter Include="Header Files\Serializable">
       <UniqueIdentifier>{5ead0f30-6bb6-403b-9c9c-f503e152eec2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="libnop">
-      <UniqueIdentifier>{d6f4485d-3fce-4a67-84bd-5bb925d32bf7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="enet">
       <UniqueIdentifier>{d4926f6b-fa89-4250-9dc4-d57f63375447}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Serializable">
+      <UniqueIdentifier>{e558ec99-078e-4e31-9171-b6249333b289}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FileWriter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Serializable\Message.h">
       <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\protocol.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\serializer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\status.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\structure.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\table.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\value.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\array.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\encoding.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\encoding_byte.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\enum.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\handle.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\logical_buffer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\macros.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\map.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\members.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\optional.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\pair.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\reference_wrapper.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\result.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\serializer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\string.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\table.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\tuple.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\utility.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\value.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\variant.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\base\vector.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\rpc\interface.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\rpc\simple_method_receiver.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\rpc\simple_method_sender.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\traits\function_traits.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\traits\is_comparable.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\traits\is_detected.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\traits\is_fungible.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\traits\is_template_base_of.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\traits\void.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\types\detail\logical_buffer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\types\detail\member_pointer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\types\detail\variant.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\types\enum_flags.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\types\file_handle.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\types\handle.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\types\optional.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\types\result.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\types\thread_local.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\types\variant.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\backtrace.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\bounded_reader.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\bounded_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\buffer_reader.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\buffer_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\compiler.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\constexpr_buffer_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\die.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\endian.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\fd_reader.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\fd_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\pedantic_buffer_reader.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\pedantic_buffer_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\sip_hash.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\stream_reader.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="nop\utility\stream_writer.h">
-      <Filter>libnop</Filter>
     </ClInclude>
     <ClInclude Include="enet\protocol.h">
       <Filter>enet</Filter>
@@ -249,22 +57,25 @@
     <ClInclude Include="Connection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BinaryPackage.h">
+    <ClInclude Include="Serialization.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="json_fwd.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FileReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FileWriter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Connection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BinaryPackage.cpp">
+    <ClCompile Include="Serialization.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable\Message.cpp">
+      <Filter>Source Files\Serializable</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

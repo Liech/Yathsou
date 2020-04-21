@@ -3,8 +3,6 @@
 #include <fstream>
 #include <filesystem>
 
-#include "json.hpp"
-
 namespace Iavish {
 
   nlohmann::json ServerConfiguration::toJson() {
@@ -17,23 +15,13 @@ namespace Iavish {
     port = from["Port"];
   }
 
-  void ServerConfiguration::toFile(std::string filename) {
-    std::ofstream stream;
-    stream.open(filename);
-    nlohmann::json j = toJson();
-    stream << j.dump(4);
-    stream.close();
+  std::vector<unsigned char> ServerConfiguration::toBinary() {
+    std::vector<unsigned char> result;
+    val2bin<int>(result,port);
+    return result;
   }
 
-  void ServerConfiguration::fromFile(std::string filename) {
-    if (!std::filesystem::exists(filename)) {
-      toFile(filename);
-      return;
-    }
-    std::ifstream t(filename);
-    std::string content((std::istreambuf_iterator<char>(t)),
-      std::istreambuf_iterator<char>());
-    t.close();
-    fromJson(nlohmann::json::parse(content));
+  void ServerConfiguration::fromBinary(std::vector<unsigned char> data,size_t position) {
+    port = bin2val<int>(data, position);
   }
 }

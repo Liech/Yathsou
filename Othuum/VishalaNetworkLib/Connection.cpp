@@ -5,8 +5,6 @@
 #include <chrono>
 #include <thread>
 
-#include "BinaryPackage.h"
-
 namespace Vishala {
   Connection::Connection() {
     setChannelCount(1);
@@ -70,8 +68,7 @@ namespace Vishala {
       case ENetEventType::ENET_EVENT_TYPE_RECEIVE:
       {
         std::unique_ptr< BinaryPackage > package = std::make_unique<BinaryPackage>();
-        package->writeBinary((unsigned char*)event.packet->data, event.packet->dataLength);
-        package->startRead();
+        package->data = std::vector<unsigned char>(event.packet->data, event.packet->data + event.packet->dataLength);
         _recived[event.channelID]((size_t)event.peer->data, std::move(package));
         enet_packet_destroy(event.packet);
         break;
@@ -110,7 +107,7 @@ namespace Vishala {
   }
 
   void Connection::send(size_t target,uint8_t channel, std::unique_ptr< BinaryPackage > package, bool reliable) {
-    ENetPacket* packet = enet_packet_create(package->getBinary().data(), package->getBinary().size(), reliable?ENET_PACKET_FLAG_RELIABLE:0);
+    ENetPacket* packet = enet_packet_create(package->data.data(), package->data.size(), reliable?ENET_PACKET_FLAG_RELIABLE:0);
     enet_peer_send(_peers[target], channel, packet);
   }
 

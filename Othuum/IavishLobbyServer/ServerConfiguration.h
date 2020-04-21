@@ -1,16 +1,15 @@
 #pragma once
 
 #include <string>
-
-#include "json_fwd.hpp"
+#include "VishalaNetworkLib/Serialization.h"
 
 namespace Iavish {
-  struct ServerConfiguration {
+  struct ServerConfiguration : public Vishala::Serialization{
     int port = 6112;
 
-    nlohmann::json toJson();
-    void           fromJson(nlohmann::json);
-    void           toFile(std::string filename);
-    void           fromFile(std::string filename);
+    virtual nlohmann::json             toJson()                                       override;
+    virtual void                       fromJson(nlohmann::json)                       override;
+    virtual std::vector<unsigned char> toBinary()                                     override;
+    virtual void                       fromBinary(std::vector<unsigned char>,size_t)  override;
   };
 }

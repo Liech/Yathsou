@@ -8,7 +8,11 @@
 
 namespace Vishala {
 
-  class BinaryPackage;
+
+  struct BinaryPackage {
+    std::vector<unsigned char> data        ;
+    size_t                     position = 0;
+  };
 
   class Connection {
   public:

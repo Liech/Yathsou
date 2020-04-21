@@ -18,11 +18,9 @@
 #include "../Drawables/Widgets/Label.h"
 #include "../Drawables/Widgets/Button.h"
 #include "../Renderer/ArrowRenderer.h"
-#include "VishalaNetworkLib/FileWriter.h"
-#include "VishalaNetworkLib/FileReader.h"
-#include "VishalaNetworkLib/BinaryPackage.h"
 #include "VishalaNetworkLib/Serializable/Message.h"
 #include <functional>
+#include <future>
 
 float scaling = 1;
 namespace YolonaOss {
@@ -31,29 +29,61 @@ namespace YolonaOss {
 
 
   }
-
+  std::future<int> thread;
+  std::future<int> thread2;
   void YolonaOss::Texture2Tree::load(GL::DrawSpecification* spec) {
     _landscape = std::make_unique<Landscape<2>>("YolonaOssData/textures/TinyMap.png");
-    _connection.setAcceptConnection(false);
-    _connection.setChannelCount(1);
-    _connection.setPort(6112 + 1);
-    _connection.setDisconnectCallback([](size_t num) { std::cout << "DISCONNECT" << std::endl; });
-    _connection.setNewConnectionCallback([](size_t num) { std::cout << "CONNECT" << std::endl; });
-    _connection.setRecievedCallback(0, [this](size_t num, std::unique_ptr<Vishala::BinaryPackage> package) {
-      Vishala::Message msg = package->read<Vishala::Message>();
-      std::cout << msg.playerID << ": " <<msg.message <<std::endl;
-      _connection.send(0, 0, std::move(package));
-    });
-    _connection.start();
-    _connection.connect(6112, "localhost");
 
-    std::unique_ptr<Vishala::BinaryPackage> welcome = std::make_unique<Vishala::BinaryPackage>();
-    Vishala::Message MSG;
-    MSG.message = "Hello world";
-    MSG.playerID = 0;
-    welcome->write(MSG);
-    welcome->startRead();
-    _connection.send(0, 0, std::move(welcome));
+    //thread = std::async(std::launch::async, [this] {
+    //  _connection.setAcceptConnection(true);
+    //  _connection.setChannelCount(1);
+    //  _connection.setPort(6112);
+    //  _connection.setDisconnectCallback([](size_t num) { std::cout << "DISCONNECT" << std::endl; });
+    //  _connection.setNewConnectionCallback([](size_t num) { std::cout << "CONNECT" << std::endl; });
+    //  _connection.setRecievedCallback(0, [this](size_t num, std::unique_ptr<Vishala::BinaryPackage> package) {
+    //    Vishala::Message msg;
+    //    msg.fromBinary(package->data, package->position);
+    //    std::cout << msg.playerID << ": " << msg.message << std::endl;
+    //    package->position = 0;
+    //    _connection.send(0, 0, std::move(package));
+    //    });
+    //  _connection.start();
+    //  while (true)
+    //    _connection.update();
+    //  return 0;
+    //  });
+    //thread2 = std::async(std::launch::async, [this] {
+    //  _connection2.setAcceptConnection(false);
+    //  _connection2.setChannelCount(1);
+    //  _connection2.setPort(6112 + 1);
+    //  _connection2.setDisconnectCallback([](size_t num) { std::cout << "DISCONNECT" << std::endl; });
+    //  _connection2.setNewConnectionCallback([](size_t num) { std::cout << "CONNECT" << std::endl; });
+    //  _connection2.setRecievedCallback(0, [this](size_t num, std::unique_ptr<Vishala::BinaryPackage> package) {
+    //    Vishala::Message msg;
+    //    msg.fromBinary(package->data, package->position);
+    //    std::cout << msg.playerID << ": " << msg.message << std::endl;
+    //    package->position = 0;
+    //    _connection.send(0, 0, std::move(package));
+    //    });
+    //  _connection2.start();
+    //  while (true) 
+    //    _connection2.update();
+    //  return 0;
+    //});
+    //std::this_thread::sleep_for(std::chrono::seconds(1));
+    //_connection.connect(6112 + 1, "localhost");
+    //std::this_thread::sleep_for(std::chrono::seconds(1));
+    //std::this_thread::sleep_for(std::chrono::seconds(1));
+
+    //std::unique_ptr<Vishala::BinaryPackage> welcome = std::make_unique<Vishala::BinaryPackage>();
+    //Vishala::Message MSG;
+    //MSG.message = 1;//"Hello world";
+    //MSG.playerID = 0;
+    //welcome->data = MSG.toBinary();
+    ////welcome->write(MSG);
+    ////welcome->startRead();
+    ////auto bin = welcome->getBinary();
+    //_connection.send(0, 0, std::move(welcome));
 
     int amount = 20;
     float distance = 1.0f;
@@ -85,20 +115,6 @@ namespace YolonaOss {
     sliders.push_back(addSlider("cuddle", 4, 0, 1));
     sliders.push_back(addSlider("align" , 5, 0, 1));
 
-    std::shared_ptr<Widgets::Button> saveButton = std::make_shared<Widgets::Button>("Save", Iyathuum::AABB<2>({ 0.0, 0.0 }, { 350.0, 50.0 }), [sliders,this]() {
-      Vishala::FileWriter w("SliderSettings.bin");
-      for (int i = 0; i < sliders.size(); i++) {
-        w.write(sliders[i]->getValue());
-      }      
-    });
-    std::shared_ptr<Widgets::Button> loadButton = std::make_shared<Widgets::Button>("Load", Iyathuum::AABB<2>({ 0.0, 0.0 }, { 350.0, 50.0 }), [sliders,this]() {
-      Vishala::FileReader r("SliderSettings.bin");
-      for (int i = 0; i < sliders.size(); i++) {
-        sliders[i]->setValue(r.read<double>());
-      }
-    });
-    _layout->addWidget(saveButton);
-    _layout->addWidget(loadButton);
   }
 
   void YolonaOss::Texture2Tree::renderDiscomfort() {
@@ -133,7 +149,7 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::draw()
   {
-    _connection.update();
+    //_connection.update();
     #pragma omp parallel for
     for (int64_t i = 0; i < (int64_t)_unit.size(); i++) {
       _unit[i]->_navigationAgent->updatePosition();
