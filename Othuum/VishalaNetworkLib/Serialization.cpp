@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <filesystem>
+#include <bitset>
 
 namespace Vishala {
   void Serialization::toBinFile(std::string filename) {
@@ -60,4 +61,38 @@ namespace Vishala {
     data.push_back((value >> 8)  & 0xFF);
     data.push_back( value        & 0xFF);
   }
+
+  template <>
+  std::string Serialization::bin2val<std::string>(std::vector<unsigned char>& data, size_t& position) {
+    return std::string((char*)data.data(), data.size());
+  }
+
+  template<>
+  void Serialization::val2bin<std::string>(std::vector<unsigned char>& data, std::string& value) {
+    data.insert(data.end(), value.data(), value.data() + value.length() + 1);
+  }
+
+  template <>
+  float Serialization::bin2val<float>(std::vector<unsigned char>& data, size_t& position) {
+    int  a = bin2val<int>(data, position);
+    int* b = &a;
+    float* c = (float*)b;
+    return *c;
+  }
+
+  template<>
+  void Serialization::val2bin<float>(std::vector<unsigned char>& data, float& value) {
+    float* a = &value;
+    int*   b = (int*)a;
+    int    c = *b;
+    val2bin<int>(data,c);
+  }
+
+  template<>
+  void Serialization::val2bin<Serialization*>(std::vector<unsigned char>& data, Serialization*& value) {
+    auto result = value->toBinary();
+    data.insert(data.end(), result.begin(), result.end());
+  }
+
+
 }
