@@ -39,6 +39,6 @@ int main() {
   //c.setRecievedCallback(0,[&msg](size_t clientNumber, std::unique_ptr<Vishala::BinaryPackage> package) {msg.message(clientNumber, std::move(package)); });
   //c.start();
 
-  //while (true) c.update();
+  //while (true);
 
 }

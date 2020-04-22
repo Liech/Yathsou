@@ -150,6 +150,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="atomicops.h" />
+    <ClInclude Include="concurrentqueue.h" />
     <ClInclude Include="Connection.h" />
     <ClInclude Include="enet\callbacks.h" />
     <ClInclude Include="enet\enet.h" />
@@ -162,6 +164,7 @@
     <ClInclude Include="enet\win32.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="json_fwd.hpp" />
+    <ClInclude Include="readerwriterqueue.h" />
     <ClInclude Include="Serializable\Message.h" />
     <ClInclude Include="Serialization.h" />
   </ItemGroup>
