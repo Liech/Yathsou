@@ -3,8 +3,10 @@
 #include <functional>
 #include <vector>
 #include <map>
+#include <future>
 
 #include "enet/enet.h"
+#include "concurrentqueue.h"
 
 namespace Vishala {
 
@@ -15,6 +17,27 @@ namespace Vishala {
   };
 
   class Connection {
+    class NetReciveEvent {
+    public:
+      ENetEventType              type                 ;
+      std::vector<unsigned char> data                 ;
+      size_t                     player               ;
+      size_t                     channel              ;      
+      bool                       newConnection = false;
+      std::string                targetIP             ;
+      bool                       connectionSuccess    ;
+    };
+    class NetSendEvent {
+    public:
+      enum class Type { disconnect, send, connect };
+      NetSendEvent::Type               type    ;
+      std::vector<unsigned char>       data    ;
+      size_t                           channel ;
+      size_t                           target  ;
+      bool                             reliable;
+      std::string                      ip      ;
+      int                              port    ;
+    };
   public:
      Connection();
     ~Connection();
@@ -22,7 +45,7 @@ namespace Vishala {
     void   start ();
     void   stop  ();
     void   update();
-    size_t connect(int port, std::string ip); //returns -1 on failure
+    void   connect(int port, std::string ip); //returns -1 on failure
     void   send(size_t target, uint8_t channel, std::unique_ptr< BinaryPackage >, bool reliable = true);
 
     //config
@@ -32,12 +55,15 @@ namespace Vishala {
     void setPort                  (int port);
     
     //config                     
-    void setNewConnectionCallback (                 std::function<void(size_t clientnumber                                 )> func);
-    void setDisconnectCallback    (                 std::function<void(size_t clientnumber                                 )> func);
-    void setRecievedCallback      (uint8_t channel, std::function<void(size_t clientNumber, std::unique_ptr<BinaryPackage> )> func);
+    void setNewConnectionCallback    (                 std::function<void(size_t clientnumber                                 )> func);
+    void setConnectionFailedCallback (                 std::function<void(std::string name                                    )> func);
+    void setDisconnectCallback       (                 std::function<void(size_t clientnumber                                 )> func);
+    void setRecievedCallback         (uint8_t channel, std::function<void(size_t clientNumber, std::unique_ptr<BinaryPackage> )> func);
 
 
   private:
+    void threadRun();
+
     ENetHost*   _connection             = nullptr;
     int         _numberOfConnections    = 1      ;
     uint8_t     _numberOfChannels       = 1      ;
@@ -46,10 +72,14 @@ namespace Vishala {
 
     size_t      _clientNameCounter      = 0      ;
     
-    std::function<void(size_t  clientNumber)>                                               _newConnection;
-    std::function<void(size_t  clientNumber)>                                               _disconnect   ;
-    std::vector<std::function<void(size_t  clientNumber, std::unique_ptr< BinaryPackage >)>> _recived      ;
-    std::map<size_t, ENetPeer*>                                                             _peers        ;
+    std::function<void(size_t  clientNumber)>                                               _newConnection    ;
+    std::function<void(std::string ip)>                                                     _connectionFailed ;
+    std::function<void(size_t  clientNumber)>                                               _disconnect       ;
+    std::vector<std::function<void(size_t  clientNumber, std::unique_ptr< BinaryPackage >)>> _recived         ;
+    std::map<size_t, ENetPeer*>                                                             _peers            ;
+    std::future<void>                                                                       _thread           ;
+    moodycamel::ConcurrentQueue<NetReciveEvent>                                             _threadQueueRecive;
+    moodycamel::ConcurrentQueue<NetSendEvent>                                               _threadQueueSend  ;
 
     static inline size_t numberOfConnectsions = 0;
   };

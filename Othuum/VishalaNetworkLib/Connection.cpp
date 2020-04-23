@@ -5,6 +5,7 @@
 #include <chrono>
 #include <thread>
 
+
 namespace Vishala {
   Connection::Connection() {
     setChannelCount(1);
@@ -35,12 +36,101 @@ namespace Vishala {
     }
     if (_connection == NULL)
       throw std::runtime_error("Error Creating Host");
+    _thread = std::async(std::launch::async, [this]() {threadRun(); });
+  }
+
+  void Connection::threadRun() {
+    while (true) {
+      NetSendEvent toSend;
+      if (_threadQueueSend.try_dequeue(toSend)) {
+        if (toSend.type == NetSendEvent::Type::send) {
+          ENetPacket* packet = enet_packet_create(toSend.data.data(), toSend.data.size(), toSend.reliable ? ENET_PACKET_FLAG_RELIABLE : 0);
+          enet_peer_send(_peers[toSend.target], toSend.channel, packet);
+        }
+        else if (toSend.type == NetSendEvent::Type::connect) {
+          ENetAddress address;
+          enet_address_set_host(&address, toSend.ip.c_str());
+          address.port = toSend.port;
+          ENetPeer* peer = nullptr;
+          peer = enet_host_connect(_connection, &address, _numberOfChannels, 0);
+          if (peer != NULL)
+          {
+            ENetEvent event;
+            if (enet_host_service(_connection, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT)
+            {
+              NetReciveEvent newCon;
+              newCon.newConnection      = true              ;
+              newCon.connectionSuccess  = true              ;
+              newCon.targetIP           = toSend.ip         ;
+              newCon.player             = _clientNameCounter;
+              _threadQueueRecive.enqueue(newCon);
+              _peers[_clientNameCounter] = peer;
+              peer->data = (void*)_clientNameCounter;
+              _clientNameCounter++;
+            }
+            else {
+              enet_peer_reset(peer);
+              NetReciveEvent newCon;
+              newCon.newConnection = true;
+              newCon.connectionSuccess = false;
+              newCon.targetIP = toSend.ip;
+              _threadQueueRecive.enqueue(newCon);
+            }
+          }
+          else {
+            NetReciveEvent newCon;
+            newCon.newConnection = true;
+            newCon.connectionSuccess = false;
+            newCon.targetIP = toSend.ip;
+            _threadQueueRecive.enqueue(newCon);
+          }
+        }
+        else {
+          for (auto p : _peers)
+            enet_peer_disconnect(p.second, 0);
+        }
+      }
+
+      ENetEvent event;
+      if (enet_host_service(_connection, &event, 0) > 0) {
+        NetReciveEvent msg;
+        msg.type = event.type;
+        msg.channel = event.channelID;
+        switch (event.type)
+        {
+        case ENetEventType::ENET_EVENT_TYPE_CONNECT:
+        {
+          event.peer->data = (void*)_clientNameCounter;
+          _peers[_clientNameCounter] = event.peer;
+          msg.player = _clientNameCounter;
+          _clientNameCounter++;
+          break;
+        }
+        case ENetEventType::ENET_EVENT_TYPE_RECEIVE:
+        {
+          msg.data = std::vector<unsigned char>(event.packet->data, event.packet->data + event.packet->dataLength);
+          msg.player = (size_t)event.peer->data;
+          enet_packet_destroy(event.packet);
+          break;
+        }
+        case ENetEventType::ENET_EVENT_TYPE_DISCONNECT:
+        {
+          msg.player = (size_t)event.peer->data;
+          event.peer->data = NULL;
+          _peers.erase((size_t)event.peer->data);
+        }
+        }
+        _threadQueueRecive.enqueue(msg);
+      }
+    }
   }
 
   void Connection::stop() {
     assert(_connection != nullptr);
-    for (auto p : _peers)
-      enet_peer_disconnect(p.second, 0);
+
+    NetSendEvent toSend;
+    toSend.type     = NetSendEvent::Type::disconnect;
+    _threadQueueSend.enqueue(toSend);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 
@@ -53,62 +143,56 @@ namespace Vishala {
   }
 
   void Connection::update() {
-    ENetEvent event;
-    while (enet_host_service(_connection, &event, 0) > 0) {
-      switch (event.type)
-      {
-      case ENetEventType::ENET_EVENT_TYPE_CONNECT:
-      {
-        event.peer->data = (void*)_clientNameCounter;
-        _peers[_clientNameCounter] = event.peer;
-        _newConnection((size_t)event.peer->data);
-        _clientNameCounter++;
-        break;
+    NetReciveEvent event;
+    while (_threadQueueRecive.try_dequeue(event)) {
+      if (event.newConnection) {
+        if (event.connectionSuccess) {
+          _newConnection(event.player);
+        }
+        else {
+          _connectionFailed(event.targetIP);
+        }
       }
-      case ENetEventType::ENET_EVENT_TYPE_RECEIVE:
-      {
-        std::unique_ptr< BinaryPackage > package = std::make_unique<BinaryPackage>();
-        package->data = std::vector<unsigned char>(event.packet->data, event.packet->data + event.packet->dataLength);
-        _recived[event.channelID]((size_t)event.peer->data, std::move(package));
-        enet_packet_destroy(event.packet);
-        break;
-      }
-      case ENetEventType::ENET_EVENT_TYPE_DISCONNECT:
-      {
-        _disconnect((size_t)event.peer->data);
-        _peers.erase((size_t)event.peer->data);
-        event.peer->data = NULL;
-      }
+      else {
+        switch (event.type)
+        {
+        case ENetEventType::ENET_EVENT_TYPE_CONNECT:
+        {
+          _newConnection(event.player);
+          break;
+        }
+        case ENetEventType::ENET_EVENT_TYPE_RECEIVE:
+        {
+          std::unique_ptr< BinaryPackage > package = std::make_unique<BinaryPackage>();
+          package->data = event.data;
+          _recived[event.channel](event.player, std::move(package));
+          break;
+        }
+        case ENetEventType::ENET_EVENT_TYPE_DISCONNECT:
+        {
+          _disconnect(event.player);
+        }
+        }
       }
     }
   }
 
-  size_t Connection::connect(int port, std::string ip) {
-    ENetAddress address;
-    enet_address_set_host(&address, ip.c_str());
-    address.port = port;
-    ENetPeer* peer = nullptr;
-    peer = enet_host_connect(_connection, &address, _numberOfChannels, 0);
-    if (peer == NULL)
-      return 18446744073709551615;
-    ENetEvent event;
-    if (enet_host_service(_connection, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT)
-    {
-      _newConnection(_clientNameCounter);
-      _peers[_clientNameCounter] = peer;
-      peer->data = (void*)_clientNameCounter;
-      _clientNameCounter++;
-      return _clientNameCounter-1;
-    }
-    else {
-      enet_peer_reset(peer);
-      return 18446744073709551615;
-    }    
+  void Connection::connect(int port, std::string ip) {
+    NetSendEvent toSend;
+    toSend.type     = NetSendEvent::Type::connect;
+    toSend.ip       = ip                         ;
+    toSend.port     = port                       ;
+    _threadQueueSend.enqueue(toSend);
   }
 
   void Connection::send(size_t target,uint8_t channel, std::unique_ptr< BinaryPackage > package, bool reliable) {
-    ENetPacket* packet = enet_packet_create(package->data.data(), package->data.size(), reliable?ENET_PACKET_FLAG_RELIABLE:0);
-    enet_peer_send(_peers[target], channel, packet);
+    NetSendEvent toSend;
+    toSend.channel  = channel                 ;
+    toSend.target   = target                  ;
+    toSend.reliable = reliable                ;
+    toSend.type     = NetSendEvent::Type::send;
+    toSend.data     = package->data           ;
+    _threadQueueSend.enqueue(toSend);
   }
 
   void Connection::setChannelCount(uint8_t numberOfChannels) {
@@ -147,5 +231,10 @@ namespace Vishala {
   void Connection::setRecievedCallback(uint8_t channel, std::function<void(size_t  clientNumber, std::unique_ptr< BinaryPackage > package)> func) {
     assert(_connection == nullptr);
     _recived[channel] = func;
+  }
+
+  void Connection::setConnectionFailedCallback(std::function<void(std::string ip)> func) {
+    assert(_connection == nullptr);
+    _connectionFailed = func;
   }
 }
