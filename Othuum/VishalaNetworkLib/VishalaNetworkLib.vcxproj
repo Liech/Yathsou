@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="atomicops.h" />
+    <ClInclude Include="BinaryPackage.h" />
     <ClInclude Include="concurrentqueue.h" />
     <ClInclude Include="Connection.h" />
     <ClInclude Include="enet\callbacks.h" />

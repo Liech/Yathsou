@@ -8,14 +8,9 @@
 #include "enet/enet.h"
 #include "concurrentqueue.h"
 
+#include "BinaryPackage.h"
+
 namespace Vishala {
-
-
-  struct BinaryPackage {
-    std::vector<unsigned char> data        ;
-    size_t                     position = 0;
-  };
-
   class Connection {
     class NetReciveEvent {
     public:

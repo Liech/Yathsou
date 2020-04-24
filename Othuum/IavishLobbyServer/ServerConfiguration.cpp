@@ -15,13 +15,13 @@ namespace Iavish {
     port = from["Port"];
   }
 
-  std::vector<unsigned char> ServerConfiguration::toBinary() {
-    std::vector<unsigned char> result;
+  Vishala::BinaryPackage ServerConfiguration::toBinary() {
+    Vishala::BinaryPackage result;
     val2bin<int>(result,port);
     return result;
   }
 
-  void ServerConfiguration::fromBinary(std::vector<unsigned char> data,size_t position) {
-    port = bin2val<int>(data, position);
+  void ServerConfiguration::fromBinary(Vishala::BinaryPackage& data) {
+    port = bin2val<int>(data);
   }
 }

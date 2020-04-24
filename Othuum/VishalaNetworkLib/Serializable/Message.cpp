@@ -13,15 +13,15 @@ namespace Vishala {
     message  = from["message"] ;
   }
 
-  std::vector<unsigned char> Message::toBinary() {
-    std::vector<unsigned char> result;
+  BinaryPackage Message::toBinary() {
+    BinaryPackage result;
     val2bin<int>(result, playerID);
     val2bin<int>(result, message );
     return result;
   }
 
-  void Message::fromBinary(std::vector<unsigned char> data, size_t position) {
-    playerID = bin2val<int>(data, position);
-    message  = bin2val<int>(data, position);
+  void Message::fromBinary(BinaryPackage& data) {
+    playerID = bin2val<int>(data);
+    message  = bin2val<int>(data);
   }
 }

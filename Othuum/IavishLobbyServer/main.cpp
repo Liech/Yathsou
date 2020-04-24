@@ -20,7 +20,7 @@ public:
 
   void message(size_t clientNumber, std::unique_ptr<Vishala::BinaryPackage> package) {
     Vishala::Message msg;
-    msg.fromBinary(package->data, package->position);
+    msg.fromBinary(*package);
     std::cout << "Client Message: " << clientNumber << " - " << std::endl;
     c.send(0, 0, std::move(package));
   }
