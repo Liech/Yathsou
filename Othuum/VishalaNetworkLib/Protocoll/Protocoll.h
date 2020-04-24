@@ -26,6 +26,7 @@ namespace Vishala {
 
             void sendMessage(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package);
             void connect(int port, std::string ip);
+            //use nullptr for statemachine end
             void handOver(std::shared_ptr<Protocoll> next);
   private:
     void init(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection);

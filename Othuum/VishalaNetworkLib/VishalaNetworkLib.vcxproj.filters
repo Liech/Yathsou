@@ -108,9 +108,6 @@
     <ClInclude Include="Protocoll\EnterGameLobby.h">
       <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
-    <ClInclude Include="Protocoll\EnterLobby.h">
-      <Filter>Header Files\Protocoll</Filter>
-    </ClInclude>
     <ClInclude Include="Protocoll\Protocoll.h">
       <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
@@ -146,6 +143,12 @@
     </ClInclude>
     <ClInclude Include="BinaryPackage.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\EnterLobby_Client.h">
+      <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\EnterLobby_Server.h">
+      <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,9 +188,6 @@
     <ClCompile Include="Protocoll\EnterGameLobby.cpp">
       <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
-    <ClCompile Include="Protocoll\EnterLobby.cpp">
-      <Filter>Source Files\Protocoll</Filter>
-    </ClCompile>
     <ClCompile Include="Protocoll\Protocoll.cpp">
       <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
@@ -220,6 +220,12 @@
     </ClCompile>
     <ClCompile Include="Serializable\LobbyGame.cpp">
       <Filter>Source Files\Serializable</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\EnterLobby_Server.cpp">
+      <Filter>Source Files\Protocoll</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\EnterLobby_Client.cpp">
+      <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

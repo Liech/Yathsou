@@ -166,7 +166,8 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="json_fwd.hpp" />
     <ClInclude Include="Protocoll\EnterGameLobby.h" />
-    <ClInclude Include="Protocoll\EnterLobby.h" />
+    <ClInclude Include="Protocoll\EnterLobby_Client.h" />
+    <ClInclude Include="Protocoll\EnterLobby_Server.h" />
     <ClInclude Include="Protocoll\Protocoll.h" />
     <ClInclude Include="Protocoll\SitInGameLobby.h" />
     <ClInclude Include="Protocoll\SitInLobby.h" />
@@ -193,7 +194,8 @@
   <ItemGroup>
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="Protocoll\EnterGameLobby.cpp" />
-    <ClCompile Include="Protocoll\EnterLobby.cpp" />
+    <ClCompile Include="Protocoll\EnterLobby_Client.cpp" />
+    <ClCompile Include="Protocoll\EnterLobby_Server.cpp" />
     <ClCompile Include="Protocoll\Protocoll.cpp" />
     <ClCompile Include="Protocoll\SitInGameLobby.cpp" />
     <ClCompile Include="Protocoll\SitInLobby.cpp" />

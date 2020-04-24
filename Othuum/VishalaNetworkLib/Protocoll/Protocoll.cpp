@@ -32,9 +32,14 @@ namespace Vishala {
   }
 
   void Protocoll::handOver(std::shared_ptr<Protocoll> next) {
-    next->init(_next, std::move(_connection));
-    _connection = nullptr;
-    next->_next(next);
+    if (next != nullptr) {
+      next->init(_next, std::move(_connection));
+      _connection = nullptr;
+      next->_next(next);
+    }
+    else {
+      _next(nullptr);
+    }
   }
 
   void Protocoll::init(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection) {
