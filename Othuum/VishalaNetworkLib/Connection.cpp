@@ -219,22 +219,18 @@ namespace Vishala {
   }
 
   void Connection::setNewConnectionCallback(std::function<void(size_t clientnumber)> func) {
-    assert(_connection == nullptr);
     _newConnection = func;
   }
 
   void Connection::setDisconnectCallback(std::function<void(size_t clientnumber)> func) {
-    assert(_connection == nullptr);
     _disconnect = func;
   }
 
   void Connection::setRecievedCallback(uint8_t channel, std::function<void(size_t  clientNumber, std::unique_ptr< BinaryPackage > package)> func) {
-    assert(_connection == nullptr);
     _recived[channel] = func;
   }
 
   void Connection::setConnectionFailedCallback(std::function<void(std::string ip)> func) {
-    assert(_connection == nullptr);
     _connectionFailed = func;
   }
 }

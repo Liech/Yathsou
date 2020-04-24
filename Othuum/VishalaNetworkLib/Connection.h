@@ -43,6 +43,8 @@ namespace Vishala {
     void   connect(int port, std::string ip); //returns -1 on failure
     void   send(size_t target, uint8_t channel, std::unique_ptr< BinaryPackage >, bool reliable = true);
 
+    size_t getChannelCount() { return _numberOfChannels; }
+
     //config
     void setChannelCount          (uint8_t numberOfChannels);
     void setMaximumConnectionCount(size_t max);
