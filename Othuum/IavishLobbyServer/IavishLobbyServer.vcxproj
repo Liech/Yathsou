@@ -148,11 +148,9 @@
   <ItemGroup>
     <ClCompile Include="ConnectionTest.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="ServerConfiguration.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectionTest.h" />
-    <ClInclude Include="ServerConfiguration.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

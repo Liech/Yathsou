@@ -3,7 +3,7 @@
 #include <fstream>
 #include <filesystem>
 
-namespace Iavish {
+namespace Vishala {
 
   nlohmann::json ServerConfiguration::toJson() {
     nlohmann::json result;
@@ -15,13 +15,13 @@ namespace Iavish {
     port = from["Port"];
   }
 
-  Vishala::BinaryPackage ServerConfiguration::toBinary() {
-    Vishala::BinaryPackage result;
+  BinaryPackage ServerConfiguration::toBinary() {
+    BinaryPackage result;
     val2bin<int>(result,port);
     return result;
   }
 
-  void ServerConfiguration::fromBinary(Vishala::BinaryPackage& data) {
+  void ServerConfiguration::fromBinary(BinaryPackage& data) {
     port = bin2val<int>(data);
   }
 }

@@ -150,6 +150,12 @@
     <ClInclude Include="Protocoll\EnterLobby_Server.h">
       <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
+    <ClInclude Include="Lobby.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerConfiguration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Connection.cpp">
@@ -226,6 +232,12 @@
     </ClCompile>
     <ClCompile Include="Protocoll\EnterLobby_Client.cpp">
       <Filter>Source Files\Protocoll</Filter>
+    </ClCompile>
+    <ClCompile Include="Lobby.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerConfiguration.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
