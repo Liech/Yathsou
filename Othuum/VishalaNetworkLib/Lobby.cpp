@@ -12,6 +12,7 @@ namespace Vishala {
     _connection = std::make_unique<Connection>();
     _connection->setAcceptConnection(true);
     _connection->setChannelCount(1);
+    _connection->setMaximumConnectionCount(64);
     _connection->setPort(configurationFile.welcomePort);
     _connection->setConnectionFailedCallback(  [this](std::string name) {/*Lobby don't initiate connections*/});
     _connection->setDisconnectCallback      (  [this](size_t client   ) {disconnect(client);     });

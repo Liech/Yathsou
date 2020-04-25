@@ -4,10 +4,7 @@
 
 #include <cassert>
 
-namespace Vishala {
-  Protocoll::Protocoll() {
-  }
-  
+namespace Vishala {  
   Protocoll::Protocoll(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection) {
     init(nextProtocollInvoked, std::move(connection));
   }
@@ -52,5 +49,13 @@ namespace Vishala {
       for (size_t i = 0; i < _connection->getChannelCount(); i++)
         _connection->setRecievedCallback(i, [this,i](size_t  clientNumber, std::unique_ptr< BinaryPackage > package) {messageRecived(clientNumber, i,std::move(package)); });
     }
+  }
+
+  int Protocoll::getPort() {
+    return _connection->getPort();
+  }
+
+  void Protocoll::replaceConnection(std::unique_ptr<Connection> newConnection) {
+    _connection = std::move(newConnection);
   }
 }

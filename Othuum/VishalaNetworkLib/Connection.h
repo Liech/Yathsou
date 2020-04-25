@@ -45,6 +45,7 @@ namespace Vishala {
     void   send(size_t target, uint8_t channel, std::unique_ptr< BinaryPackage >, bool reliable = true);
 
     size_t getChannelCount() { return _numberOfChannels; }
+    int    getPort()         { return _port; }
 
     //config
     void setChannelCount          (uint8_t numberOfChannels);

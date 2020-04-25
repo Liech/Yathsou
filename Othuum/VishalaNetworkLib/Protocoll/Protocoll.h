@@ -14,10 +14,10 @@ namespace Vishala {
   //decides upon invokation of next state
   class Protocoll {
   public:
-                 Protocoll();
                  Protocoll(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection);
             bool isActive();
     virtual void update();
+            int  getPort();
   protected:
     virtual void messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package) = 0;
     virtual void newConnection(size_t clientnumber, std::string ip, int port)                          = 0;
@@ -28,6 +28,8 @@ namespace Vishala {
             void connect(int port, std::string ip);
             //use nullptr for statemachine end
             void handOver(std::shared_ptr<Protocoll> next);
+            void replaceConnection(std::unique_ptr<Connection> newConnection);
+
   private:
     void init(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection);
     
