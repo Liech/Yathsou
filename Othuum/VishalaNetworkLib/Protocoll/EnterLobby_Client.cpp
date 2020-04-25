@@ -6,7 +6,7 @@ namespace Vishala {
   {
   }
 
-  void EnterLobby_Client::newConnection(size_t clientnumber)
+  void EnterLobby_Client::newConnection(size_t clientnumber, std::string ip, int port)
   {
   }
 

@@ -46,9 +46,9 @@ namespace Vishala {
     _next = nextProtocollInvoked;
     if (connection != nullptr) {
       _connection = std::move(connection);
-      _connection->setConnectionFailedCallback([this](std::string name) {connectionFailed(name); });
-      _connection->setDisconnectCallback      ([this](size_t player)    {disconnect(player);     });
-      _connection->setNewConnectionCallback   ([this](size_t player)    {newConnection(player);  });
+      _connection->setConnectionFailedCallback([this](std::string name)                           {connectionFailed(name);         });
+      _connection->setDisconnectCallback      ([this](size_t player)                              {disconnect(player);             });
+      _connection->setNewConnectionCallback   ([this](size_t player, std::string ip, int port)    {newConnection(player,ip,port);  });
       for (size_t i = 0; i < _connection->getChannelCount(); i++)
         _connection->setRecievedCallback(i, [this,i](size_t  clientNumber, std::unique_ptr< BinaryPackage > package) {messageRecived(clientNumber, i,std::move(package)); });
     }

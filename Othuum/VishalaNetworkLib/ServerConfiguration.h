@@ -5,7 +5,8 @@
 
 namespace Vishala {
   struct ServerConfiguration : public Serialization {
-    int port = 6112;
+    int                welcomePort = 6112;
+    std::array<int, 2> portRange   = { 6113,7000 };
 
     virtual nlohmann::json          toJson()                            override;
     virtual void                    fromJson(nlohmann::json)            override;

@@ -32,7 +32,7 @@ namespace Iavish {
     c.setPort(6556);
     c.setChannelCount(1);
     c.setDisconnectCallback([](size_t number) {std::cout << "DISCONNECT A" << std::endl; });
-    c.setNewConnectionCallback([](size_t number) {std::cout << "CONNECT A" << std::endl; });
+    c.setNewConnectionCallback([](size_t number, std::string ip, int port) {std::cout << "CONNECT A "<< ip <<":" <<port << std::endl; });
     c.setRecievedCallback(0, [this](size_t number, std::unique_ptr<Vishala::BinaryPackage> package) { 
       std::cout << "RECIEVE A" << std::endl;
       Vishala::BinaryPackage ptr = *package;
@@ -61,7 +61,7 @@ namespace Iavish {
     c.setPort(6557);
     c.setChannelCount(1);
     c.setDisconnectCallback([](size_t number) {std::cout << "DISCONNECT B" << std::endl; });
-    c.setNewConnectionCallback([](size_t number) {std::cout << "CONNECT B" << std::endl; });
+    c.setNewConnectionCallback([](size_t number, std::string ip, int port) {std::cout << "CONNECT B" << ip << ":" << port << std::endl; });
     c.setRecievedCallback(0, [this](size_t number, std::unique_ptr<Vishala::BinaryPackage> package) {
       Vishala::BinaryPackage ptr = *package;
       std::cout << "RECIEVE B" << std::endl; 

@@ -20,6 +20,7 @@ namespace Vishala {
       size_t                     channel              ;      
       bool                       newConnection = false;
       std::string                targetIP             ;
+      int                        port                 ;
       bool                       connectionSuccess    ;
     };
     class NetSendEvent {
@@ -52,7 +53,7 @@ namespace Vishala {
     void setPort                  (int port);
     
     //config                     
-    void setNewConnectionCallback    (                 std::function<void(size_t clientnumber                                 )> func);
+    void setNewConnectionCallback    (                 std::function<void(size_t clientnumber, std::string ip, int port       )> func);
     void setConnectionFailedCallback (                 std::function<void(std::string name                                    )> func);
     void setDisconnectCallback       (                 std::function<void(size_t clientnumber                                 )> func);
     void setRecievedCallback         (uint8_t channel, std::function<void(size_t clientNumber, std::unique_ptr<BinaryPackage> )> func);
@@ -69,7 +70,7 @@ namespace Vishala {
 
     size_t      _clientNameCounter      = 0      ;
     
-    std::function<void(size_t  clientNumber)>                                               _newConnection    ;
+    std::function<void(size_t  clientNumber,std::string ip, int port)>                      _newConnection    ;
     std::function<void(std::string ip)>                                                     _connectionFailed ;
     std::function<void(size_t  clientNumber)>                                               _disconnect       ;
     std::vector<std::function<void(size_t  clientNumber, std::unique_ptr< BinaryPackage >)>> _recived         ;

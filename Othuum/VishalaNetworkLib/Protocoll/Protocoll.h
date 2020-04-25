@@ -20,7 +20,7 @@ namespace Vishala {
     virtual void update();
   protected:
     virtual void messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package) = 0;
-    virtual void newConnection(size_t clientnumber)                                                    = 0;
+    virtual void newConnection(size_t clientnumber, std::string ip, int port)                          = 0;
     virtual void connectionFailed(std::string name)                                                    = 0;
     virtual void disconnect(size_t clientnumber)                                                       = 0;
 

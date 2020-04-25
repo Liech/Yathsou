@@ -44,7 +44,7 @@ namespace Vishala {
     std::array<type, SIZE> bin2arr(BinaryPackage& data) {
       std::array<type, SIZE> result;
       for (int i = 0; i < SIZE; i++)
-        result.push_back(bin2val<type>(data));
+        result[i] = bin2val<type>(data);
       return result;
     }
 

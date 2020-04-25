@@ -63,6 +63,7 @@ namespace Vishala {
               newCon.connectionSuccess  = true              ;
               newCon.targetIP           = toSend.ip         ;
               newCon.player             = _clientNameCounter;
+              newCon.port               = peer->address.port;
               _threadQueueRecive.enqueue(newCon);
               _peers[_clientNameCounter] = peer;
               peer->data = (void*)_clientNameCounter;
@@ -79,9 +80,10 @@ namespace Vishala {
           }
           else {
             NetReciveEvent newCon;
-            newCon.newConnection = true;
-            newCon.connectionSuccess = false;
-            newCon.targetIP = toSend.ip;
+            newCon.newConnection     = true              ;
+            newCon.connectionSuccess = false             ;
+            newCon.targetIP          = toSend.ip         ;
+            newCon.port              = peer->address.port;
             _threadQueueRecive.enqueue(newCon);
           }
         }
@@ -147,7 +149,7 @@ namespace Vishala {
     while (_threadQueueRecive.try_dequeue(event)) {
       if (event.newConnection) {
         if (event.connectionSuccess) {
-          _newConnection(event.player);
+          _newConnection(event.player, event.targetIP, event.port);
         }
         else {
           _connectionFailed(event.targetIP);
@@ -158,7 +160,7 @@ namespace Vishala {
         {
         case ENetEventType::ENET_EVENT_TYPE_CONNECT:
         {
-          _newConnection(event.player);
+          _newConnection(event.player, event.targetIP,event.port);
           break;
         }
         case ENetEventType::ENET_EVENT_TYPE_RECEIVE:
@@ -218,7 +220,7 @@ namespace Vishala {
     _port = port;
   }
 
-  void Connection::setNewConnectionCallback(std::function<void(size_t clientnumber)> func) {
+  void Connection::setNewConnectionCallback(std::function<void(size_t clientnumber, std::string ip, int port)> func) {
     _newConnection = func;
   }
 
