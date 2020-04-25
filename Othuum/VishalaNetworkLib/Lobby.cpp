@@ -4,7 +4,7 @@
 #include "BinaryPackage.h"
 #include "ServerConfiguration.h"
 #include "Protocoll/Protocoll.h"
-#include "Protocoll/EnterLobby_Server.h"
+#include "Protocoll/LobbyChaperone.h"
 
 namespace Vishala {
   Lobby::Lobby(ServerConfiguration configurationFile)
@@ -37,9 +37,9 @@ namespace Vishala {
     newConnection->setPort(port);
     newConnection->start();
 
-    std::shared_ptr< EnterLobby_Server > startProtocoll = std::make_shared<EnterLobby_Server>(
+    std::shared_ptr< LobbyChaperone > startProtocoll = std::make_shared<LobbyChaperone>( ip, incomingPort,
       [this, clientnumber](std::shared_ptr<Protocoll> newProtocoll) { protocollReplaced(clientnumber, newProtocoll); }
-      , std::move(newConnection), ip, incomingPort);
+      , std::move(newConnection));
 
     std::shared_ptr< Protocoll > cast = std::dynamic_pointer_cast<Protocoll>(startProtocoll);
     _protocolls[clientnumber] = cast;

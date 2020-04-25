@@ -168,8 +168,8 @@
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="LoginInstructions.h" />
     <ClInclude Include="Protocoll\EnterGameLobby.h" />
-    <ClInclude Include="Protocoll\EnterLobby_Client.h" />
-    <ClInclude Include="Protocoll\EnterLobby_Server.h" />
+    <ClInclude Include="Protocoll\EnterLobby.h" />
+    <ClInclude Include="Protocoll\LobbyChaperone.h" />
     <ClInclude Include="Protocoll\LobbyConnector.h" />
     <ClInclude Include="Protocoll\Protocoll.h" />
     <ClInclude Include="Protocoll\SitInGameLobby.h" />
@@ -196,12 +196,13 @@
     <ClInclude Include="ServerConfiguration.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryPackage.cpp" />
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="LoginInstructions.cpp" />
     <ClCompile Include="Protocoll\EnterGameLobby.cpp" />
-    <ClCompile Include="Protocoll\EnterLobby_Client.cpp" />
-    <ClCompile Include="Protocoll\EnterLobby_Server.cpp" />
+    <ClCompile Include="Protocoll\EnterLobby.cpp" />
+    <ClCompile Include="Protocoll\LobbyChaperone.cpp" />
     <ClCompile Include="Protocoll\LobbyConnector.cpp" />
     <ClCompile Include="Protocoll\Protocoll.cpp" />
     <ClCompile Include="Protocoll\SitInGameLobby.cpp" />

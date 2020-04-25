@@ -5,6 +5,8 @@
 #include <memory>
 #include <functional>
 
+#include "Connection.h"
+
 namespace Vishala {
   class Connection;
 
@@ -14,6 +16,7 @@ namespace Vishala {
   //decides upon invokation of next state
   class Protocoll {
   public:
+                 Protocoll(){}
                  Protocoll(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection);
             bool isActive();
     virtual void update();
@@ -34,6 +37,6 @@ namespace Vishala {
     void init(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection);
     
     std::function<void(std::shared_ptr<Protocoll>)> _next;
-    std::unique_ptr<Connection>                     _connection = nullptr;
+    std::unique_ptr<Connection>                     _connection;
   };
 }

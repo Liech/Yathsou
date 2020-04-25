@@ -1,11 +1,10 @@
 #include "Protocoll.h"
 
-#include "Connection.h"
 
 #include <cassert>
 
 namespace Vishala {  
-  Protocoll::Protocoll(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection) {
+  Protocoll::Protocoll(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection) : _connection(nullptr){
     init(nextProtocollInvoked, std::move(connection));
   }
 

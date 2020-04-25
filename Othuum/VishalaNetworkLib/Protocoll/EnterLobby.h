@@ -3,7 +3,7 @@
 #include "Protocoll.h"
 
 namespace Vishala {
-  class EnterLobby_Client : public Protocoll {
+  class EnterLobby : public Protocoll {
   public:
     virtual void messageRecived  (size_t player, size_t channel, std::unique_ptr<BinaryPackage> package) override;
     virtual void newConnection   (size_t clientnumber, std::string ip, int port                        ) override;

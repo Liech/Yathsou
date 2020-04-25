@@ -22,11 +22,11 @@
     <Filter Include="Source Files\Serializable">
       <UniqueIdentifier>{e558ec99-078e-4e31-9171-b6249333b289}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Protocoll">
-      <UniqueIdentifier>{c48ea18f-b859-416c-9692-17c4433208f9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Protocoll">
       <UniqueIdentifier>{bb0edbd3-0e20-4335-a66c-b53500b96b67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Protocoll">
+      <UniqueIdentifier>{c48ea18f-b859-416c-9692-17c4433208f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,12 +144,6 @@
     <ClInclude Include="BinaryPackage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Protocoll\EnterLobby_Client.h">
-      <Filter>Header Files\Protocoll</Filter>
-    </ClInclude>
-    <ClInclude Include="Protocoll\EnterLobby_Server.h">
-      <Filter>Header Files\Protocoll</Filter>
-    </ClInclude>
     <ClInclude Include="Lobby.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -161,6 +155,12 @@
     </ClInclude>
     <ClInclude Include="LoginInstructions.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\LobbyChaperone.h">
+      <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\EnterLobby.h">
+      <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -233,12 +233,6 @@
     <ClCompile Include="Serializable\LobbyGame.cpp">
       <Filter>Source Files\Serializable</Filter>
     </ClCompile>
-    <ClCompile Include="Protocoll\EnterLobby_Server.cpp">
-      <Filter>Source Files\Protocoll</Filter>
-    </ClCompile>
-    <ClCompile Include="Protocoll\EnterLobby_Client.cpp">
-      <Filter>Source Files\Protocoll</Filter>
-    </ClCompile>
     <ClCompile Include="Lobby.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -250,6 +244,15 @@
     </ClCompile>
     <ClCompile Include="LoginInstructions.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\LobbyChaperone.cpp">
+      <Filter>Source Files\Protocoll</Filter>
+    </ClCompile>
+    <ClCompile Include="BinaryPackage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\EnterLobby.cpp">
+      <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
