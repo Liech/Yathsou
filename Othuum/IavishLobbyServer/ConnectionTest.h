@@ -2,7 +2,7 @@
 
 #include <future>
 #include "VishalaNetworkLib/Connection.h"
-#include "VishalaNetworkLib/concurrentqueue.h"
+#include "VishalaNetworkLib/lib/concurrentqueue.h"
 
 namespace Iavish {
   class ConnectionTest {

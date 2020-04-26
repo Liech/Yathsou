@@ -28,6 +28,12 @@
     <Filter Include="Header Files\Protocoll">
       <UniqueIdentifier>{c48ea18f-b859-416c-9692-17c4433208f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{96f8fb38-e20f-4595-8306-f89f95221df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\enet">
+      <UniqueIdentifier>{5e462b94-b0ed-408a-9373-428f5b48ca47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Serializable\Message.h">
@@ -150,17 +156,53 @@
     <ClInclude Include="ServerConfiguration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Protocoll\LobbyConnector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LoginInstructions.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Protocoll\LobbyChaperone.h">
       <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
     <ClInclude Include="Protocoll\EnterLobby.h">
       <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\LobbyConnector.h">
+      <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\LoginInstructions.h">
+      <Filter>Header Files\Serializable</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\json.hpp">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\json_fwd.hpp">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\concurrentqueue.h">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\enet\types.h">
+      <Filter>lib\enet</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\enet\unix.h">
+      <Filter>lib\enet</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\enet\utility.h">
+      <Filter>lib\enet</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\enet\win32.h">
+      <Filter>lib\enet</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\enet\callbacks.h">
+      <Filter>lib\enet</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\enet\enet.h">
+      <Filter>lib\enet</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\enet\list.h">
+      <Filter>lib\enet</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\enet\protocol.h">
+      <Filter>lib\enet</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\enet\time.h">
+      <Filter>lib\enet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -239,12 +281,6 @@
     <ClCompile Include="ServerConfiguration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Protocoll\LobbyConnector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LoginInstructions.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Protocoll\LobbyChaperone.cpp">
       <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
@@ -253,6 +289,12 @@
     </ClCompile>
     <ClCompile Include="Protocoll\EnterLobby.cpp">
       <Filter>Source Files\Protocoll</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\LobbyConnector.cpp">
+      <Filter>Source Files\Protocoll</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable\LoginInstructions.cpp">
+      <Filter>Source Files\Serializable</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

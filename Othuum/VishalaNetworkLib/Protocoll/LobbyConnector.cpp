@@ -1,7 +1,7 @@
 #include "LobbyConnector.h"
 
 #include "Connection.h"
-#include "LoginInstructions.h"
+#include "Serializable/LoginInstructions.h"
 
 namespace Vishala {
   LobbyConnector::LobbyConnector(std::string ip, int port,std::shared_ptr<Protocoll> next,std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection) 

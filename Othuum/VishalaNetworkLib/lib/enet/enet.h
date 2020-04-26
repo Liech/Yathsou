@@ -13,15 +13,15 @@ extern "C"
 #include <stdlib.h>
 
 #ifdef _WIN32
-#include "enet/win32.h"
+#include "lib/enet/win32.h"
 #else
-#include "enet/unix.h"
+#include "lib/enet/unix.h"
 #endif
 
-#include "enet/types.h"
-#include "enet/protocol.h"
-#include "enet/list.h"
-#include "enet/callbacks.h"
+#include "lib/enet/types.h"
+#include "lib/enet/protocol.h"
+#include "lib/enet/list.h"
+#include "lib/enet/callbacks.h"
 
 #define ENET_VERSION_MAJOR 1
 #define ENET_VERSION_MINOR 3
