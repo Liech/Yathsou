@@ -76,6 +76,7 @@ namespace Vishala {
               newCon.connectionSuccess = false;
               newCon.targetIP = toSend.ip;
               _threadQueueRecive.enqueue(newCon);
+              continue;
             }
           }
           else {
@@ -145,6 +146,7 @@ namespace Vishala {
   }
 
   void Connection::update() {
+    assert(_connection != nullptr, "start() not called");
     NetReciveEvent event;
     while (_threadQueueRecive.try_dequeue(event)) {
       if (event.newConnection) {

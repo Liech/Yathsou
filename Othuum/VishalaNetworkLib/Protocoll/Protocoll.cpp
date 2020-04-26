@@ -2,6 +2,7 @@
 
 
 #include <cassert>
+#include <iostream>
 
 namespace Vishala {  
   Protocoll::Protocoll(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection) : _connection(nullptr){
@@ -36,6 +37,7 @@ namespace Vishala {
     else {
       _next(nullptr);
     }
+    next->initialization();
   }
 
   void Protocoll::init(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection) {

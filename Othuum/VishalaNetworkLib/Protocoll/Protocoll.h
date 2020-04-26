@@ -1,11 +1,11 @@
 #pragma once
 
-#include "BinaryPackage.h"
+#include "VishalaNetworkLib/BinaryPackage.h"
 
 #include <memory>
 #include <functional>
 
-#include "Connection.h"
+#include "VishalaNetworkLib/Connection.h"
 
 namespace Vishala {
   class Connection;
@@ -21,11 +21,13 @@ namespace Vishala {
             bool isActive();
     virtual void update();
             int  getPort();
+    virtual std::string getName() = 0;
   protected:
     virtual void messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package) = 0;
     virtual void newConnection(size_t clientnumber, std::string ip, int port)                          = 0;
     virtual void connectionFailed(std::string name)                                                    = 0;
     virtual void disconnect(size_t clientnumber)                                                       = 0;
+    virtual void initialization()                                                                      = 0;
 
             void sendMessage(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package);
             void connect(int port, std::string ip);

@@ -6,7 +6,6 @@
 #include "VishalaNetworkLib/Serializable/Message.h"
 
 namespace Iavish {
-
   void ConnectionTest::work() {
     A = std::async(std::launch::async, [this]() {return a();});
     B = std::async(std::launch::async, [this]() {return b();});

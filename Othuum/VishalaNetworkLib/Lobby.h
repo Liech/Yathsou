@@ -6,13 +6,15 @@
 #include <set>
 #include <map>
 
+#include "Connection.h"
+
 namespace Vishala {
-  class Connection;
   class BinaryPackage;
   class ServerConfiguration;
   class Protocoll;
 
   class Lobby {
+  public:
     Lobby(ServerConfiguration configurationFile);
     void update();
 

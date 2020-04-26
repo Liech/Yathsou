@@ -11,11 +11,13 @@ namespace Vishala {
     LobbyConnector(std::string ip, int port,std::shared_ptr<Protocoll> next,std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection);
     virtual void update() override;
 
+    virtual std::string getName() { return "LobbyConnector"; }
   protected:
     virtual void messageRecived  (size_t player, size_t channel, std::unique_ptr<BinaryPackage> package) override;
     virtual void newConnection   (size_t clientnumber, std::string ip, int port                        ) override {}
     virtual void connectionFailed(std::string name                                                     ) override;
     virtual void disconnect      (size_t clientnumber                                                  ) override;
+    virtual void initialization() override {  };
 
   private:
     void secondConnectionEstablished();

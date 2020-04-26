@@ -34,6 +34,12 @@
     <Filter Include="lib\enet">
       <UniqueIdentifier>{5e462b94-b0ed-408a-9373-428f5b48ca47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Protocoll\Unfinished">
+      <UniqueIdentifier>{3c02f21a-5b91-40b0-b64e-f1f38b5dfab9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Serializable\Unfinished">
+      <UniqueIdentifier>{8808618f-96e2-48cd-b895-1218baa10a57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Serializable\Message.h">
@@ -87,62 +93,23 @@
     <ClInclude Include="concurrentqueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Serializable\GameJoinRequestAnswer.h">
-      <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\GameOptionsUpdate.h">
-      <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
     <ClInclude Include="Serializable\LobbyBriefing.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
     <ClInclude Include="Serializable\LobbyStateUpdate.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
-    <ClInclude Include="Serializable\LobbyUpdateRequest.h">
-      <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
     <ClInclude Include="Serializable\SelfBriefing.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
-    <ClInclude Include="Serializable\GameBriefing.h">
-      <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\GameJoinRequest.h">
-      <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
-    <ClInclude Include="Protocoll\EnterGameLobby.h">
-      <Filter>Header Files\Protocoll</Filter>
-    </ClInclude>
     <ClInclude Include="Protocoll\Protocoll.h">
-      <Filter>Header Files\Protocoll</Filter>
-    </ClInclude>
-    <ClInclude Include="Protocoll\SitInGameLobby.h">
       <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
     <ClInclude Include="Protocoll\SitInLobby.h">
       <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
-    <ClInclude Include="Protocoll\StartGame.h">
-      <Filter>Header Files\Protocoll</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\GameRoomPlayer.h">
-      <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\PlayerJoined.h">
-      <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
     <ClInclude Include="SerializationFactory.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\GameDescription.h">
-      <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\NatPierceRequest.h">
-      <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\CreateGameRequest.h">
-      <Filter>Header Files\Serializable</Filter>
     </ClInclude>
     <ClInclude Include="Serializable\LobbyGame.h">
       <Filter>Header Files\Serializable</Filter>
@@ -203,6 +170,45 @@
     </ClInclude>
     <ClInclude Include="lib\enet\time.h">
       <Filter>lib\enet</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\StartGame.h">
+      <Filter>Header Files\Protocoll\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\SitInGameLobby.h">
+      <Filter>Header Files\Protocoll\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\CreateGameRequest.h">
+      <Filter>Header Files\Serializable\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\GameBriefing.h">
+      <Filter>Header Files\Serializable\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\GameDescription.h">
+      <Filter>Header Files\Serializable\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\GameJoinRequest.h">
+      <Filter>Header Files\Serializable\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\GameJoinRequestAnswer.h">
+      <Filter>Header Files\Serializable\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\GameRoomPlayer.h">
+      <Filter>Header Files\Serializable\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\GameOptionsUpdate.h">
+      <Filter>Header Files\Serializable\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\PlayerJoined.h">
+      <Filter>Header Files\Serializable\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\NatPierceRequest.h">
+      <Filter>Header Files\Serializable\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\LobbyUpdateRequest.h">
+      <Filter>Header Files\Serializable\Unfinished</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\EnterGameLobby.h">
+      <Filter>Header Files\Protocoll\Unfinished</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

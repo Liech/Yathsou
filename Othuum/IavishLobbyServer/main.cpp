@@ -6,6 +6,7 @@
 #include "VishalaNetworkLib/Connection.h"
 #include "VishalaNetworkLib/Serializable/Message.h"
 #include "ConnectionTest.h"
+#include "LobbyServer.h"
 
 Vishala::Connection c;
 class s {
@@ -27,8 +28,10 @@ public:
 };
 
 int main() {
-  Iavish::ConnectionTest c;
-  c.work();
+  Iavish::LobbyServer l;
+  l.run();
+  //Iavish::ConnectionTest c;
+  //c.work();
   //std::cout << "IAVISH LOBBY SERVER" << std::endl;
   //Iavish::ServerConfiguration config;
   //config.fromJsonFile("ServerConfiguration.json");

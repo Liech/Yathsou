@@ -12,7 +12,7 @@
 #include "../RTSComponents/Unit.h"
 #include "../OpenGL/DrawableList.h"
 #include "../Drawables/Widgets/ListLayout.h"
-#include "VishalaNetworkLib/Connection.h"
+#include "VishalaNetworkLib/Protocoll/Protocoll.h"
 
 
 namespace YolonaOss {
@@ -39,6 +39,8 @@ namespace YolonaOss {
     std::unique_ptr<Landscape<2>>                     _landscape;
     std::vector<std::shared_ptr<Unit<2>>>             _unit     ; 
     std::vector < std::shared_ptr<Selen::NavigationMap<2>>> _mapsForSlider;
+
+    std::shared_ptr<Vishala::Protocoll> _protocoll;
 
     GL::DrawSpecification*                          _spec = nullptr;
     std::function<bool(double, double)>             _mouseClick;

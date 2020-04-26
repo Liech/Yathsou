@@ -1,5 +1,7 @@
 #include "Lobby.h"
 
+#include <iostream>
+
 #include "Connection.h"
 #include "BinaryPackage.h"
 #include "ServerConfiguration.h"
@@ -19,6 +21,7 @@ namespace Vishala {
     _connection->setRecievedCallback        (0,[this](size_t client, std::unique_ptr<BinaryPackage> package) {/*We don't care for messages in the main channel*/    });
     _connection->setNewConnectionCallback   (  [this](size_t client, std::string ip, int port)    {newConnection(client, ip, port);  });
     _connection->start();    
+    std::cout << "Lobby awaiting connections"<<std::endl;
   }
 
   void Lobby::update()
@@ -30,6 +33,7 @@ namespace Vishala {
 
   void Lobby::newConnection(size_t clientnumber, std::string ip, int incomingPort)
   {
+    std::cout << "Lobby::newConnection " << clientnumber << " - "<< ip << ":" << incomingPort<<std::endl;
     int port = getNextPort();
     std::unique_ptr<Connection> newConnection = std::make_unique<Connection>();
     newConnection->setAcceptConnection(true);
@@ -48,10 +52,12 @@ namespace Vishala {
 
   void Lobby::disconnect(size_t clientnumber)
   {
+    std::cout << "Lobby::disconnect " << clientnumber << std::endl;
     _protocolls.erase(clientnumber);
   }
 
   void Lobby::protocollReplaced(size_t player, std::shared_ptr<Protocoll> next) {
+    std::cout << "Lobby::protocollReplaced " << _protocolls[player]->getName() << " -> " << next->getName() << std::endl;
     _protocolls[player] = next;
   }
 
