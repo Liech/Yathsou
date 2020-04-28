@@ -27,7 +27,8 @@ namespace Vishala {
   void Lobby::update()
   {
     _connection->update();
-    for (auto protocoll : _protocolls)
+    std::vector<std::pair<size_t, std::shared_ptr<Protocoll>>> vec(_protocolls.begin(), _protocolls.end());
+    for (auto protocoll : vec)
       protocoll.second->update();
   }
 

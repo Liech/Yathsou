@@ -87,7 +87,6 @@ namespace Vishala {
             newCon.newConnection     = true              ;
             newCon.connectionSuccess = false             ;
             newCon.targetIP          = toSend.ip         ;
-            newCon.port              = peer->address.port;
             _threadQueueRecive.enqueue(newCon);
           }
         }
@@ -108,7 +107,14 @@ namespace Vishala {
         {
           event.peer->data = (void*)_clientNameCounter;
           _peers[_clientNameCounter] = event.peer;
-          msg.player = _clientNameCounter;
+          msg.player    = _clientNameCounter;
+          
+          char* buffer = new char[256];          
+          int len = enet_address_get_host_ip(&event.peer->address, buffer, 256);
+          msg.port = event.peer->address.port;
+          msg.targetIP = std::string(buffer);
+          delete[] buffer;
+          
           _clientNameCounter++;
           break;
         }

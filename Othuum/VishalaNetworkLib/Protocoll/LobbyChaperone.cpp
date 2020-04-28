@@ -10,6 +10,7 @@ namespace Vishala {
   LobbyChaperone::LobbyChaperone(std::string ip, int port, std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection)
     : Protocoll(nextProtocollInvoked,std::move(connection)){
     _ip = ip;
+    std::cout << "LobbyChaperone: connect: " << ip << ":" << port << std::endl;
     connect(port, ip);
   }
 
