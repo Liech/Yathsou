@@ -68,6 +68,7 @@ namespace Vishala {
     uint8_t     _numberOfChannels       = 1      ;
     int         _port                   = 6112   ;
     bool        _acceptsConnections     = true   ;
+    bool        _destructorCalled       = false  ;
 
     size_t      _clientNameCounter      = 0      ;
     

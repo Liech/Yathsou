@@ -57,8 +57,14 @@ namespace Vishala {
   }
 
   void Lobby::protocollReplaced(size_t player, std::shared_ptr<Protocoll> next) {
-    std::cout << "Lobby::protocollReplaced " << _protocolls[player]->getName() << " -> " << next->getName() << std::endl;
-    _protocolls[player] = next;
+    if (next == nullptr){
+      std::cout << "Lobby::protocollReplaced " << _protocolls[player]->getName() << " -> " << "nothing" << std::endl;
+      _protocolls.erase(player);
+    }
+    else {
+      std::cout << "Lobby::protocollReplaced " << _protocolls[player]->getName() << " -> " << next->getName() << std::endl;
+      _protocolls[player] = next;
+    }
   }
 
   size_t  Lobby::getNextPort() {

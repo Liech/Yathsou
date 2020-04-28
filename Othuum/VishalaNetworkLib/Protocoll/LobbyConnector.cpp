@@ -34,18 +34,20 @@ namespace Vishala {
 
   void LobbyConnector::connectionFailed(std::string name)
   {
+    _secondConnection = nullptr;
     handOver(nullptr);
   }
 
   void LobbyConnector::disconnect(size_t clientnumber)
   {
+    _secondConnection = nullptr;
     handOver(nullptr);
   }
 
   void LobbyConnector::update()
   {
-    Protocoll::update();
     if (_secondConnection != nullptr)
       _secondConnection->update();
+    Protocoll::update();
   }
 }

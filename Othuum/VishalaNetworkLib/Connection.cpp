@@ -15,6 +15,9 @@ namespace Vishala {
   }
 
   Connection::~Connection() {
+    _destructorCalled = true;
+    if (_thread.valid())
+      _thread.wait();
     numberOfConnectsions--;
     if (numberOfConnectsions == 0)
       enet_deinitialize();
@@ -40,7 +43,7 @@ namespace Vishala {
   }
 
   void Connection::threadRun() {
-    while (true) {
+    while (!_destructorCalled) {
       NetSendEvent toSend;
       if (_threadQueueSend.try_dequeue(toSend)) {
         if (toSend.type == NetSendEvent::Type::send) {
@@ -155,6 +158,7 @@ namespace Vishala {
         }
         else {
           _connectionFailed(event.targetIP);
+          return;
         }
       }
       else {
@@ -175,6 +179,7 @@ namespace Vishala {
         case ENetEventType::ENET_EVENT_TYPE_DISCONNECT:
         {
           _disconnect(event.player);
+          return;
         }
         }
       }

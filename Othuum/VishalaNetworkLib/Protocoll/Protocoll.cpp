@@ -33,11 +33,11 @@ namespace Vishala {
       next->init(_next, std::move(_connection));
       _connection = nullptr;
       next->_next(next);
+      next->initialization();
     }
     else {
       _next(nullptr);
     }
-    next->initialization();
   }
 
   void Protocoll::init(std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection) {
@@ -57,6 +57,7 @@ namespace Vishala {
   }
 
   void Protocoll::replaceConnection(std::unique_ptr<Connection> newConnection) {
+    assert(newConnection != nullptr);
     _connection = std::move(newConnection);
   }
 }
