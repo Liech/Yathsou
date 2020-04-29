@@ -48,7 +48,7 @@ namespace Vishala {
 
   template <>
   int Serialization::bin2val<int>(BinaryPackage& data) {
-    unsigned char bytes[] = { data.data[data.position],data.data[data.position+1],data.data[data.position+2],data.data[data.position+3]  };
+    unsigned char bytes[] = { data.data[data.position+3],data.data[data.position+2],data.data[data.position+1],data.data[data.position]  };
     int* pInt = (int*)bytes;
     int result = *pInt;
     data.position += 4;
@@ -65,12 +65,18 @@ namespace Vishala {
 
   template <>
   std::string Serialization::bin2val<std::string>(BinaryPackage& data) {
-    return std::string((char*)data.data.data(), data.data.size());
+    int len = bin2val<int>(data);    
+    char* d = (char*)data.data.data() + data.position;
+    std::string result = std::string(d, len);
+    data.position += len;
+    return result;
   }
 
   template<>
   void Serialization::val2bin<std::string>(BinaryPackage& data, std::string& value) {
-    data.data.insert(data.data.end(), value.data(), value.data() + value.length() + 1);
+    int len = value.length();
+    val2bin<int>(data, len);
+    data.data.insert(data.data.end(), value.data(), value.data() + len);
   }
 
   template <>

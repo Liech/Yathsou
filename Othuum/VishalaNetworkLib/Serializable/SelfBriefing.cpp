@@ -4,7 +4,7 @@ namespace Vishala {
   BinaryPackage  SelfBriefing::toBinary(){
     BinaryPackage result;
     val2bin(result, name );
-    arr2bin(result, color);
+    arr2bin<int,3>(result, color); 
     return result;
   }
 

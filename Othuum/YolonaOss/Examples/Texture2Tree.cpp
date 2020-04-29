@@ -28,17 +28,23 @@ namespace YolonaOss {
   
   Texture2Tree::Texture2Tree() {
     std::unique_ptr<Vishala::Connection> connection = std::make_unique<Vishala::Connection>();
+    int port = 6115;
+    std::string ip = "localhost";
     connection->setAcceptConnection(true);
     connection->setChannelCount(1);
     connection->setMaximumConnectionCount(1);
     connection->setPort(6115);
     connection->start();
-    std::shared_ptr<Vishala::LobbyConnector> connector = std::make_shared<Vishala::LobbyConnector>("localhost", 6112, nullptr,
+    std::shared_ptr<Vishala::LobbyConnector> connector = std::make_shared<Vishala::LobbyConnector>(ip,6112, nullptr,
       [this](std::shared_ptr<Vishala::Protocoll> next) { 
+        if (next == nullptr)
+          std::cout << "Handover to nullptr" << std::endl;
+        else
+          std::cout << "Handover to " << next->getName() << std::endl;
         _protocoll = next;
       }, std::move(connection));
     _protocoll = std::dynamic_pointer_cast<Vishala::Protocoll>(connector);
-    
+    std::cout << "Connect to Lobby: "<< ip <<":"<< 6112 << " with Port "<< port << std::endl;
     
   }
   std::future<int> thread;

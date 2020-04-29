@@ -25,8 +25,9 @@ namespace Vishala {
     bool                        _messageRecived   = false;
     std::unique_ptr<Connection> _secondConnection = nullptr;//connects to the real target, not only to the lobby main port
     std::shared_ptr<Protocoll>  _next;
+    bool                        _disposed         = false;
 
-    int         lobbyPort;
-    std::string lobbyIP;
+    int         _lobbyPort;
+    std::string _lobbyIP;
   };
 }

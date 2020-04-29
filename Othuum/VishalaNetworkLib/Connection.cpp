@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <chrono>
 #include <thread>
+#include <iostream>
 
 
 namespace Vishala {
@@ -28,6 +29,7 @@ namespace Vishala {
 
   void Connection::start() {
     assert(_connection == nullptr);
+    std::cout << "Connection::start() with port " << _port << std::endl;
     if (_acceptsConnections) {
       ENetAddress address;
       address.host = ENET_HOST_ANY;

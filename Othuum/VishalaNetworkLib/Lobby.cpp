@@ -7,6 +7,7 @@
 #include "ServerConfiguration.h"
 #include "Protocoll/Protocoll.h"
 #include "Protocoll/LobbyChaperone.h"
+#include "Serializable/LoginInstructions.h"
 
 namespace Vishala {
   Lobby::Lobby(ServerConfiguration configurationFile)
@@ -36,13 +37,21 @@ namespace Vishala {
   {
     std::cout << "Lobby::newConnection " << clientnumber << " - "<< ip << ":" << incomingPort<<std::endl;
     int port = getNextPort();
+    
+    LoginInstructions instructions;
+    instructions.ip = "SAME";
+    instructions.port = port;
+    std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(instructions.toBinary());
+    _connection->send(clientnumber, 0, std::move(package));
+    
     std::unique_ptr<Connection> newConnection = std::make_unique<Connection>();
     newConnection->setAcceptConnection(true);
     newConnection->setChannelCount(1);
+    newConnection->setMaximumConnectionCount(2);
     newConnection->setPort(port);
     newConnection->start();
 
-    std::shared_ptr< LobbyChaperone > startProtocoll = std::make_shared<LobbyChaperone>( ip, incomingPort,
+    std::shared_ptr< LobbyChaperone > startProtocoll = std::make_shared<LobbyChaperone>( ip, port,
       [this, clientnumber](std::shared_ptr<Protocoll> newProtocoll) { protocollReplaced(clientnumber, newProtocoll); }
       , std::move(newConnection));
 
