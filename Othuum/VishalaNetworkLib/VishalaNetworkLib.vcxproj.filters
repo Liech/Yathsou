@@ -102,12 +102,6 @@
     <ClInclude Include="Serializable\SelfBriefing.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
-    <ClInclude Include="Protocoll\Protocoll.h">
-      <Filter>Header Files\Protocoll</Filter>
-    </ClInclude>
-    <ClInclude Include="Protocoll\SitInLobby.h">
-      <Filter>Header Files\Protocoll</Filter>
-    </ClInclude>
     <ClInclude Include="SerializationFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -124,9 +118,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Protocoll\LobbyChaperone.h">
-      <Filter>Header Files\Protocoll</Filter>
-    </ClInclude>
-    <ClInclude Include="Protocoll\EnterLobby.h">
       <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
     <ClInclude Include="Protocoll\LobbyConnector.h">
@@ -248,13 +239,7 @@
     <ClCompile Include="Protocoll\EnterGameLobby.cpp">
       <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
-    <ClCompile Include="Protocoll\Protocoll.cpp">
-      <Filter>Source Files\Protocoll</Filter>
-    </ClCompile>
     <ClCompile Include="Protocoll\SitInGameLobby.cpp">
-      <Filter>Source Files\Protocoll</Filter>
-    </ClCompile>
-    <ClCompile Include="Protocoll\SitInLobby.cpp">
       <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
     <ClCompile Include="Serializable\GameRoomPlayer.cpp">
@@ -292,9 +277,6 @@
     </ClCompile>
     <ClCompile Include="BinaryPackage.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Protocoll\EnterLobby.cpp">
-      <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
     <ClCompile Include="Protocoll\LobbyConnector.cpp">
       <Filter>Source Files\Protocoll</Filter>

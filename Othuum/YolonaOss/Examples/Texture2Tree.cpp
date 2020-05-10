@@ -30,22 +30,8 @@ namespace YolonaOss {
     std::unique_ptr<Vishala::Connection> connection = std::make_unique<Vishala::Connection>();
     int port = 6115;
     std::string ip = "localhost";
-    connection->setAcceptConnection(true);
-    connection->setChannelCount(1);
-    connection->setMaximumConnectionCount(1);
-    connection->setPort(6115);
-    connection->start();
-    std::shared_ptr<Vishala::LobbyConnector> connector = std::make_shared<Vishala::LobbyConnector>(ip,6112, nullptr,
-      [this](std::shared_ptr<Vishala::Protocoll> next) { 
-        if (next == nullptr)
-          std::cout << "Handover to nullptr" << std::endl;
-        else
-          std::cout << "Handover to " << next->getName() << std::endl;
-        _protocoll = next;
-      }, std::move(connection));
-    _protocoll = std::dynamic_pointer_cast<Vishala::Protocoll>(connector);
     std::cout << "Connect to Lobby: "<< ip <<":"<< 6112 << " with Port "<< port << std::endl;
-    
+    _connector = std::make_shared<Vishala::LobbyConnector>(port, ip, 6112);
   }
   std::future<int> thread;
   std::future<int> thread2;
@@ -116,8 +102,8 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::draw()
   {
-    if (_protocoll != nullptr)
-      _protocoll->update();
+    if (_connector != nullptr)
+      _connector->update();
     //_connection.update();
     #pragma omp parallel for
     for (int64_t i = 0; i < (int64_t)_unit.size(); i++) {

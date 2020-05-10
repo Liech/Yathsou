@@ -9,7 +9,7 @@ namespace Vishala {
   class SelfBriefing : public Serialization{
   public:
     std::string        name ;
-    std::array<int, 3> color;
+    std::array<int, 3> color = { 0,0,0 };
 
     virtual BinaryPackage  toBinary()                         override;
     virtual void           fromBinary(BinaryPackage& Package) override;

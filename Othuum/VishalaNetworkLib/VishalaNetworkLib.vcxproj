@@ -255,12 +255,9 @@
     <ClInclude Include="lib\json_fwd.hpp" />
     <ClInclude Include="Lobby.h" />
     <ClInclude Include="Protocoll\EnterGameLobby.h" />
-    <ClInclude Include="Protocoll\EnterLobby.h" />
     <ClInclude Include="Protocoll\LobbyChaperone.h" />
     <ClInclude Include="Protocoll\LobbyConnector.h" />
-    <ClInclude Include="Protocoll\Protocoll.h" />
     <ClInclude Include="Protocoll\SitInGameLobby.h" />
-    <ClInclude Include="Protocoll\SitInLobby.h" />
     <ClInclude Include="Protocoll\StartGame.h" />
     <ClInclude Include="readerwriterqueue.h" />
     <ClInclude Include="Serializable\CreateGameRequest.h" />
@@ -288,12 +285,9 @@
     <ClCompile Include="Connection.cpp" />
     <ClCompile Include="Lobby.cpp" />
     <ClCompile Include="Protocoll\EnterGameLobby.cpp" />
-    <ClCompile Include="Protocoll\EnterLobby.cpp" />
     <ClCompile Include="Protocoll\LobbyChaperone.cpp" />
     <ClCompile Include="Protocoll\LobbyConnector.cpp" />
-    <ClCompile Include="Protocoll\Protocoll.cpp" />
     <ClCompile Include="Protocoll\SitInGameLobby.cpp" />
-    <ClCompile Include="Protocoll\SitInLobby.cpp" />
     <ClCompile Include="Protocoll\StartGame.cpp" />
     <ClCompile Include="Serializable\CreateGameRequest.cpp" />
     <ClCompile Include="Serializable\GameBriefing.cpp" />

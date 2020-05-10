@@ -3,7 +3,9 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <memory>
 #include "VishalaNetworkLib/Serializable/Message.h"
+#include "VishalaNetworkLib/BinaryPackage.h"
 
 namespace Iavish {
   void ConnectionTest::work() {
@@ -46,7 +48,7 @@ namespace Iavish {
           c.connect(6557,"localhost");
         else {
           std::unique_ptr<Vishala::BinaryPackage> pck = std::make_unique<Vishala::BinaryPackage>(ptr);
-          c.send(0, 0, std::move(pck));
+          //c.send(0, 0, std::move(pck));
         }
       }
       c.update();
@@ -74,7 +76,7 @@ namespace Iavish {
           c.connect(6556, "localhost");
         else {
           std::unique_ptr<Vishala::BinaryPackage> pck = std::make_unique<Vishala::BinaryPackage>(ptr);
-          c.send(0, 0, std::move(pck));
+          //c.send(0, 0, std::move(pck));
         }
       }
       c.update();

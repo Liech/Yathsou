@@ -70,7 +70,7 @@ namespace Iyathuum {
 
   private:
     vec _position;
-    vec _size;
+    vec _size    ;
   };
 
 }

@@ -12,8 +12,7 @@
 #include "../RTSComponents/Unit.h"
 #include "../OpenGL/DrawableList.h"
 #include "../Drawables/Widgets/ListLayout.h"
-#include "VishalaNetworkLib/Protocoll/Protocoll.h"
-
+#include "VishalaNetworkLib/Protocoll/LobbyConnector.h"
 
 namespace YolonaOss {
   template<size_t Dimension> class DijkstraMap;
@@ -40,7 +39,7 @@ namespace YolonaOss {
     std::vector<std::shared_ptr<Unit<2>>>             _unit     ; 
     std::vector < std::shared_ptr<Selen::NavigationMap<2>>> _mapsForSlider;
 
-    std::shared_ptr<Vishala::Protocoll> _protocoll;
+    std::shared_ptr<Vishala::LobbyConnector>        _connector;
 
     GL::DrawSpecification*                          _spec = nullptr;
     std::function<bool(double, double)>             _mouseClick;
@@ -52,7 +51,5 @@ namespace YolonaOss {
     std::shared_ptr<Widgets::Slider> addSlider(std::string text, int id, double min, double max);
     glm::vec3 metaPos = glm::vec3(0, 0, 0);
     std::array<float, 20> _config;
-    Vishala::Connection _connection;
-    Vishala::Connection _connection2;
   };
 }

@@ -1,17 +1,27 @@
 #include "LobbyChaperone.h"
 
-#include "Connection.h"
 #include "Serializable/LobbyBriefing.h"
 #include "Serializable/SelfBriefing.h"
+#include "BinaryPackage.h"
 
 #include <iostream>
 
 namespace Vishala {
-  LobbyChaperone::LobbyChaperone(std::string ip, int port, std::function<void(std::shared_ptr<Protocoll>)> nextProtocollInvoked, std::unique_ptr<Connection> connection)
-    : Protocoll(nextProtocollInvoked,std::move(connection)){
+  LobbyChaperone::LobbyChaperone(std::string ip, int port, size_t playerNumber){
     _ip = ip;
     std::cout << "LobbyChaperone: connect: " << ip << ":" << port << std::endl;
-    connect(port, ip);
+
+    _connection = std::make_unique<Connection>();
+    _connection->setAcceptConnection(true);
+    _connection->setChannelCount(1);
+    _connection->setMaximumConnectionCount(2);
+    _connection->setPort(port);
+    _connection->setConnectionFailedCallback([this](std::string name) {connectionFailed(name); });
+    _connection->setDisconnectCallback([this](size_t client) {disconnect(client); });
+    _connection->setNewConnectionCallback([this](size_t client,std::string ip, int port) {newConnection(client,ip,port); });
+    _connection->setRecievedCallback(0,[this](size_t client, std::unique_ptr<BinaryPackage> package) {messageRecived(client,0,std::move(package)); });
+    _connection->start();
+    _connection->connect(port, ip);
   }
 
   void LobbyChaperone::messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package)
@@ -32,21 +42,21 @@ namespace Vishala {
     LobbyBriefing briefing;
     auto packet = briefing.toBinary();
     std::unique_ptr<BinaryPackage> p = std::make_unique<BinaryPackage>(packet);    
-    sendMessage(0,0,std::move(p));
+    _connection->send(0, 0, std::move(p));
   }
 
   void LobbyChaperone::connectionFailed(std::string name)
   {
-    handOver(nullptr);
+
   }
 
   void LobbyChaperone::disconnect(size_t clientnumber)
   {
-    handOver(nullptr);
+
   }
 
   void LobbyChaperone::update()
   {
-    Protocoll::update();
+    _connection->update();
   }
 }

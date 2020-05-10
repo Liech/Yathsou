@@ -6,7 +6,7 @@ namespace Vishala {
   class LoginInstructions : public Serialization {
   public:
     std::string ip  ;
-    int         port;
+    int         port = 0;
 
     virtual BinaryPackage toBinary() override;
     virtual void fromBinary(BinaryPackage& Package) override;

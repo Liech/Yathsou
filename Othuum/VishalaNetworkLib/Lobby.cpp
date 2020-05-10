@@ -5,7 +5,6 @@
 #include "Connection.h"
 #include "BinaryPackage.h"
 #include "ServerConfiguration.h"
-#include "Protocoll/Protocoll.h"
 #include "Protocoll/LobbyChaperone.h"
 #include "Serializable/LoginInstructions.h"
 
@@ -28,7 +27,7 @@ namespace Vishala {
   void Lobby::update()
   {
     _connection->update();
-    std::vector<std::pair<size_t, std::shared_ptr<Protocoll>>> vec(_protocolls.begin(), _protocolls.end());
+    std::vector<std::pair<size_t, std::shared_ptr<LobbyChaperone>>> vec(_chaperones.begin(), _chaperones.end());
     for (auto protocoll : vec)
       protocoll.second->update();
   }
@@ -44,37 +43,15 @@ namespace Vishala {
     std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(instructions.toBinary());
     _connection->send(clientnumber, 0, std::move(package));
     
-    std::unique_ptr<Connection> newConnection = std::make_unique<Connection>();
-    newConnection->setAcceptConnection(true);
-    newConnection->setChannelCount(1);
-    newConnection->setMaximumConnectionCount(2);
-    newConnection->setPort(port);
-    newConnection->start();
-
-    std::shared_ptr< LobbyChaperone > startProtocoll = std::make_shared<LobbyChaperone>( ip, port,
-      [this, clientnumber](std::shared_ptr<Protocoll> newProtocoll) { protocollReplaced(clientnumber, newProtocoll); }
-      , std::move(newConnection));
-
-    std::shared_ptr< Protocoll > cast = std::dynamic_pointer_cast<Protocoll>(startProtocoll);
-    _protocolls[clientnumber] = cast;
-    _usedPorts[clientnumber] = port;
+    std::shared_ptr< LobbyChaperone > startProtocoll = std::make_shared<LobbyChaperone>( ip, port, _clientCount);
+    std::shared_ptr< LobbyChaperone > cast = std::dynamic_pointer_cast<LobbyChaperone>(startProtocoll);
+    _usedPorts[_clientCount] = port;
+    _clientCount++;
   }
 
   void Lobby::disconnect(size_t clientnumber)
   {
     std::cout << "Lobby::disconnect " << clientnumber << std::endl;
-    _protocolls.erase(clientnumber);
-  }
-
-  void Lobby::protocollReplaced(size_t player, std::shared_ptr<Protocoll> next) {
-    if (next == nullptr){
-      std::cout << "Lobby::protocollReplaced " << _protocolls[player]->getName() << " -> " << "nothing" << std::endl;
-      _protocolls.erase(player);
-    }
-    else {
-      std::cout << "Lobby::protocollReplaced " << _protocolls[player]->getName() << " -> " << next->getName() << std::endl;
-      _protocolls[player] = next;
-    }
   }
 
   size_t  Lobby::getNextPort() {
