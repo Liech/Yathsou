@@ -69,7 +69,7 @@ namespace Vishala {
               newCon.targetIP           = toSend.ip         ;
               newCon.player             = _clientNameCounter;
               newCon.port               = peer->address.port;
-              _threadQueueRecive.enqueue(newCon);
+              //_threadQueueRecive.enqueue(newCon);
               _peers[_clientNameCounter] = peer;
               peer->data = (void*)_clientNameCounter;
               _clientNameCounter++;

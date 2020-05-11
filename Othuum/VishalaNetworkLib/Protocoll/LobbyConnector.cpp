@@ -8,6 +8,7 @@ namespace Vishala {
   LobbyConnector::LobbyConnector(int myPort, std::string ip, int port){    
     _lobbyIP   = ip;
     _lobbyPort = port;
+    _myPort    = myPort;
     _currentStatus = LobbyConnectorStatus::Waiting;
 
     _entryConnection = std::make_unique<Connection>();
@@ -37,7 +38,7 @@ namespace Vishala {
     _finalConnection->setAcceptConnection(true);
     _finalConnection->setChannelCount(1);
     _finalConnection->setMaximumConnectionCount(2);
-    _finalConnection->setPort(_lobbyPort+1);
+    _finalConnection->setPort(_myPort+1);
     _finalConnection->setNewConnectionCallback([this](size_t clientNumber, std::string ip, int port) {
       _currentStatus = LobbyConnectorStatus::ConnectionEstablished;
       std::cout << "LobbyConnectorStatus::ConnectionEstablished" << std::endl;
@@ -47,7 +48,8 @@ namespace Vishala {
       _disposed = true;
       });
     _finalConnection->start();
-    std::cout << "TRY CONNECT" << instructions.ip << ":" << instructions.port << std::endl;
+    std::cout << "LobbyConnectors: " << instructions.ip << ":" << instructions.port << " (myport: " << _myPort + 1<<")" << std::endl;
+
     _finalConnection->connect(instructions.port, instructions.ip);
   }
 

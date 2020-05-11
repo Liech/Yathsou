@@ -3,19 +3,20 @@
 #include "Serializable/LobbyBriefing.h"
 #include "Serializable/SelfBriefing.h"
 #include "BinaryPackage.h"
-
+#include <chrono>
+#include <thread>
 #include <iostream>
 
 namespace Vishala {
-  LobbyChaperone::LobbyChaperone(std::string ip, int port, size_t playerNumber){
+  LobbyChaperone::LobbyChaperone(int myport, std::string ip, int port, size_t playerNumber){
     _ip = ip;
-    std::cout << "LobbyChaperone: connect: " << ip << ":" << port << std::endl;
+    std::cout << "LobbyChaperone: connect: " << ip << ":" << port << " (myPort: "<<myport<<")"<< std::endl;
 
     _connection = std::make_unique<Connection>();
     _connection->setAcceptConnection(true);
     _connection->setChannelCount(1);
     _connection->setMaximumConnectionCount(2);
-    _connection->setPort(port);
+    _connection->setPort(myport);
     _connection->setConnectionFailedCallback([this](std::string name) {connectionFailed(name); });
     _connection->setDisconnectCallback([this](size_t client) {disconnect(client); });
     _connection->setNewConnectionCallback([this](size_t client,std::string ip, int port) {newConnection(client,ip,port); });
@@ -26,6 +27,7 @@ namespace Vishala {
 
   void LobbyChaperone::messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package)
   {
+    std::cout << "MSG" << std::endl;
     if (_state == LobbyChaperone::state::HeIsUnkown) {
       SelfBriefing description;
       description.fromBinary(*package);
@@ -36,22 +38,25 @@ namespace Vishala {
 
   void LobbyChaperone::newConnection(size_t clientnumber, std::string ip, int port)
   {
+    std::cout << "Lobby Chaperone: new connection " << ip<<":"<<port<<std::endl;
     if (ip != _ip)
       throw std::runtime_error("Unexpected IP " + ip);
     _connected = true;
     LobbyBriefing briefing;
     auto packet = briefing.toBinary();
     std::unique_ptr<BinaryPackage> p = std::make_unique<BinaryPackage>(packet);    
-    _connection->send(0, 0, std::move(p));
+    _connection->send(0, 0, std::move(p));   
   }
 
   void LobbyChaperone::connectionFailed(std::string name)
   {
+    std::cout << "Lobby Chaperone: connection failed " << name << std::endl;
 
   }
 
   void LobbyChaperone::disconnect(size_t clientnumber)
   {
+    std::cout << "Lobby Chaperone: connection disconnect " << clientnumber << std::endl;
 
   }
 

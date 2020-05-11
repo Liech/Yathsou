@@ -37,7 +37,9 @@ namespace Vishala {
     bool         _disposed         = false;
 
     int         _lobbyPort;
+    int         _myPort;
     std::string _lobbyIP;
+
 
     std::unique_ptr<Connection> _entryConnection = nullptr;
     std::unique_ptr<Connection> _finalConnection = nullptr; //connects to the real target, not only to the lobby main port

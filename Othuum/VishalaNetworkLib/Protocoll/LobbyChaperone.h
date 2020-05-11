@@ -15,7 +15,7 @@ namespace Vishala {
       HeIsUnkown, HeIsKnown
     };
   public:
-    LobbyChaperone(std::string ip, int port, size_t playerNumber);
+    LobbyChaperone(int myport, std::string ip, int port, size_t playerNumber);
 
     virtual std::string getName() { return "LobbyChaperone"; }
 
