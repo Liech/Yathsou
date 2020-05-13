@@ -5,7 +5,7 @@
 #ifndef __ENET_PROTOCOL_H__
 #define __ENET_PROTOCOL_H__
 
-#include "lib/enet/types.h"
+#include "VishalaNetworkLib/lib/enet/types.h"
 
 enum
 {

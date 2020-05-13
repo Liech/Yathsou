@@ -5,8 +5,8 @@
 #include <map>
 #include <future>
 
-#include "lib/enet/enet.h"
-#include "lib/concurrentqueue.h"
+#include "VishalaNetworkLib/lib/enet/enet.h"
+#include "VishalaNetworkLib/lib/concurrentqueue.h"
 
 #include "BinaryPackage.h"
 

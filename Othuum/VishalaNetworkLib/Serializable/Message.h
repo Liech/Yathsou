@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "VishalaNetworkLib/Serialization.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
 
 namespace Vishala {
   struct Message : Serialization{

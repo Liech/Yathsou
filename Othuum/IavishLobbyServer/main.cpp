@@ -3,7 +3,7 @@
 #include <memory>
 
 
-#include "VishalaNetworkLib/Connection.h"
+#include "VishalaNetworkLib/Core/Connection.h"
 #include "VishalaNetworkLib/Serializable/Message.h"
 #include "ConnectionTest.h"
 #include "LobbyServer.h"

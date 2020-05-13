@@ -4,7 +4,7 @@
 #include <vector>
 #include "GameRoomPlayer.h"
 
-#include "Serialization.h"
+#include "Core/Serialization.h"
 
 namespace Vishala {
   class LobbyGame : public Serialization {

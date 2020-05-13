@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "Serialization.h"
+#include "Core/Serialization.h"
 
 namespace Vishala {
   struct ServerConfiguration : public Serialization {

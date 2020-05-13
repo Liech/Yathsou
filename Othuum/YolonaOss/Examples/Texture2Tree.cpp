@@ -18,7 +18,7 @@
 #include "../Drawables/Widgets/Label.h"
 #include "../Drawables/Widgets/Button.h"
 #include "../Renderer/ArrowRenderer.h"
-#include "VishalaNetworkLib/Connection.h"
+#include "VishalaNetworkLib/Core/Connection.h"
 #include "VishalaNetworkLib/Protocoll/LobbyConnector.h"
 #include <functional>
 #include <future>

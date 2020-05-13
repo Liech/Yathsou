@@ -6,11 +6,12 @@
 #include <set>
 #include <map>
 
-#include "Connection.h"
+#include "VishalaNetworkLib/Core/Connection.h"
 
 namespace Vishala {
   class ServerConfiguration;
   class LobbyChaperone;
+  class Client2LobbyRequest;
 
   class Lobby {
   public:
@@ -20,6 +21,8 @@ namespace Vishala {
   private:
     void    newConnection   (size_t clientnumber, std::string ip, int port      );
     void    disconnect      (size_t clientnumber                                );
+
+    void    chaperone_LobbyRequest(size_t player, Client2LobbyRequest request);
     
     size_t  getNextPort();
 

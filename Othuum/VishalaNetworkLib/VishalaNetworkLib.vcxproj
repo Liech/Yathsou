@@ -226,21 +226,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="atomicops.h" />
-    <ClInclude Include="BinaryPackage.h" />
     <ClInclude Include="concurrentqueue.h" />
-    <ClInclude Include="Connection.h" />
-    <ClInclude Include="enet\callbacks.h" />
-    <ClInclude Include="enet\enet.h" />
-    <ClInclude Include="enet\list.h" />
-    <ClInclude Include="enet\protocol.h" />
-    <ClInclude Include="enet\time.h" />
-    <ClInclude Include="enet\types.h" />
-    <ClInclude Include="enet\unix.h" />
-    <ClInclude Include="enet\utility.h" />
-    <ClInclude Include="enet\win32.h" />
+    <ClInclude Include="Core\BinaryPackage.h" />
+    <ClInclude Include="Core\Connection.h" />
+    <ClInclude Include="Core\Serialization.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="json_fwd.hpp" />
+    <ClInclude Include="lib\atomicops.h" />
     <ClInclude Include="lib\concurrentqueue.h" />
     <ClInclude Include="lib\enet\callbacks.h" />
     <ClInclude Include="lib\enet\enet.h" />
@@ -253,13 +245,12 @@
     <ClInclude Include="lib\enet\win32.h" />
     <ClInclude Include="lib\json.hpp" />
     <ClInclude Include="lib\json_fwd.hpp" />
-    <ClInclude Include="Lobby.h" />
-    <ClInclude Include="Protocoll\EnterGameLobby.h" />
+    <ClInclude Include="lib\readerwriterqueue.h" />
+    <ClInclude Include="Protocoll\GameLobby.h" />
+    <ClInclude Include="Protocoll\Lobby.h" />
     <ClInclude Include="Protocoll\LobbyChaperone.h" />
     <ClInclude Include="Protocoll\LobbyConnector.h" />
-    <ClInclude Include="Protocoll\SitInGameLobby.h" />
-    <ClInclude Include="Protocoll\StartGame.h" />
-    <ClInclude Include="readerwriterqueue.h" />
+    <ClInclude Include="Serializable\Client2LobbyRequest.h" />
     <ClInclude Include="Serializable\CreateGameRequest.h" />
     <ClInclude Include="Serializable\GameBriefing.h" />
     <ClInclude Include="Serializable\GameDescription.h" />
@@ -276,19 +267,16 @@
     <ClInclude Include="Serializable\NatPierceRequest.h" />
     <ClInclude Include="Serializable\PlayerJoined.h" />
     <ClInclude Include="Serializable\SelfBriefing.h" />
-    <ClInclude Include="Serialization.h" />
-    <ClInclude Include="SerializationFactory.h" />
-    <ClInclude Include="ServerConfiguration.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BinaryPackage.cpp" />
-    <ClCompile Include="Connection.cpp" />
-    <ClCompile Include="Lobby.cpp" />
-    <ClCompile Include="Protocoll\EnterGameLobby.cpp" />
+    <ClCompile Include="Core\BinaryPackage.cpp" />
+    <ClCompile Include="Core\Connection.cpp" />
+    <ClCompile Include="Core\Serialization.cpp" />
+    <ClCompile Include="Protocoll\GameLobby.cpp" />
+    <ClCompile Include="Protocoll\Lobby.cpp" />
     <ClCompile Include="Protocoll\LobbyChaperone.cpp" />
     <ClCompile Include="Protocoll\LobbyConnector.cpp" />
-    <ClCompile Include="Protocoll\SitInGameLobby.cpp" />
-    <ClCompile Include="Protocoll\StartGame.cpp" />
+    <ClCompile Include="Serializable\Client2LobbyRequest.cpp" />
     <ClCompile Include="Serializable\CreateGameRequest.cpp" />
     <ClCompile Include="Serializable\GameBriefing.cpp" />
     <ClCompile Include="Serializable\GameDescription.cpp" />
@@ -305,9 +293,6 @@
     <ClCompile Include="Serializable\NatPierceRequest.cpp" />
     <ClCompile Include="Serializable\PlayerJoined.cpp" />
     <ClCompile Include="Serializable\SelfBriefing.cpp" />
-    <ClCompile Include="Serialization.cpp" />
-    <ClCompile Include="SerializationFactory.cpp" />
-    <ClCompile Include="ServerConfiguration.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

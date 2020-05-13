@@ -1,6 +1,6 @@
 #include "LobbyGame.h"
 
-#include "BinaryPackage.h"
+#include "Core/BinaryPackage.h"
 
 namespace Vishala {
 

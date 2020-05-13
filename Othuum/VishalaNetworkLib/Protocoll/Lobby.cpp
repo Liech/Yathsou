@@ -2,11 +2,12 @@
 
 #include <iostream>
 
-#include "Connection.h"
-#include "BinaryPackage.h"
-#include "ServerConfiguration.h"
+#include "Core/Connection.h"
+#include "Core/BinaryPackage.h"
+#include "Serializable/ServerConfiguration.h"
 #include "Protocoll/LobbyChaperone.h"
 #include "Serializable/LoginInstructions.h"
+#include "Serializable/Client2LobbyRequest.h"
 
 namespace Vishala {
   Lobby::Lobby(ServerConfiguration configurationFile)
@@ -43,7 +44,8 @@ namespace Vishala {
     std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(instructions.toBinary());
     _connection->send(clientnumber, 0, std::move(package));
     
-    std::shared_ptr< LobbyChaperone > startProtocoll = std::make_shared<LobbyChaperone>(port, ip, incomingPort + 1, _clientCount);
+    std::shared_ptr< LobbyChaperone > startProtocoll = std::make_shared<LobbyChaperone>(port, ip, incomingPort + 1, _clientCount, 
+      [this](size_t player, Client2LobbyRequest request) {chaperone_LobbyRequest(player, request); });
     std::shared_ptr< LobbyChaperone > cast = std::dynamic_pointer_cast<LobbyChaperone>(startProtocoll);
     _chaperones[_clientCount] = startProtocoll;
     _usedPorts[_clientCount] = port;
@@ -60,5 +62,9 @@ namespace Vishala {
       _currentPort = (_currentPort + 1 - _startPort) % (_endPort - _startPort) + _startPort;
     }
     return _currentPort;
+  }
+
+  void Lobby::chaperone_LobbyRequest(size_t player, Client2LobbyRequest request) {
+
   }
 }

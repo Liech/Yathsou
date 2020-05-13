@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "VishalaNetworkLib/ServerConfiguration.h"
+#include "VishalaNetworkLib/Serialization/ServerConfiguration.h"
 
 namespace Iavish {
   void LobbyServer::run() {

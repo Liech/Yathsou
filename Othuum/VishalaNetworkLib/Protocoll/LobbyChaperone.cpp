@@ -2,14 +2,16 @@
 
 #include "Serializable/LobbyBriefing.h"
 #include "Serializable/SelfBriefing.h"
-#include "BinaryPackage.h"
+#include "Core/BinaryPackage.h"
 #include <chrono>
 #include <thread>
 #include <iostream>
 
 namespace Vishala {
-  LobbyChaperone::LobbyChaperone(int myport, std::string ip, int port, size_t playerNumber){
-    _ip = ip;
+  LobbyChaperone::LobbyChaperone(int myport, std::string ip, int port, size_t playerNumber, std::function<void(size_t, Client2LobbyRequest)> lobbyRequestCall){
+    _ip               = ip              ;
+    _lobbyRequestCall = lobbyRequestCall;
+    _playerNumber     = playerNumber    ;
     std::cout << "LobbyChaperone: connect: " << ip << ":" << port << " (myPort: "<<myport<<")"<< std::endl;
 
     _connection = std::make_unique<Connection>();
@@ -28,12 +30,20 @@ namespace Vishala {
   void LobbyChaperone::messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package)
   {
     std::cout << "MSG" << std::endl;
-    if (_state == LobbyChaperone::state::HeIsUnkown) {
+    if (_state == LobbyChaperone::state::Unintroduced) {
       SelfBriefing description;
       description.fromBinary(*package);
-      _state = LobbyChaperone::state::HeIsKnown;
+      _state = LobbyChaperone::state::Lobby;
       std::cout << "He Is Known Now"<<std::endl;
+      return;
     }
+    else if (_state == LobbyChaperone::state::Lobby){
+      Client2LobbyRequest request;
+      request.fromBinary(*package);
+      if (request.type == Client2LobbyRequest::Type::CreateGame) {
+        _lobbyRequestCall(_playerNumber, request);
+      }
+    }    
   }
 
   void LobbyChaperone::newConnection(size_t clientnumber, std::string ip, int port)

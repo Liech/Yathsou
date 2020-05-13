@@ -13,15 +13,15 @@ extern "C"
 #include <stdlib.h>
 
 #ifdef _WIN32
-#include "lib/enet/win32.h"
+#include "VishalaNetworkLib/lib/enet/win32.h"
 #else
-#include "lib/enet/unix.h"
+#include "VishalaNetworkLib/lib/enet/unix.h"
 #endif
 
-#include "lib/enet/types.h"
-#include "lib/enet/protocol.h"
-#include "lib/enet/list.h"
-#include "lib/enet/callbacks.h"
+#include "VishalaNetworkLib/lib/enet/types.h"
+#include "VishalaNetworkLib/lib/enet/protocol.h"
+#include "VishalaNetworkLib/lib/enet/list.h"
+#include "VishalaNetworkLib/lib/enet/callbacks.h"
 
 #define ENET_VERSION_MAJOR 1
 #define ENET_VERSION_MINOR 3

@@ -1,6 +1,6 @@
 #include "LoginInstructions.h"
 
-#include "BinaryPackage.h"
+#include "Core/BinaryPackage.h"
 
 namespace Vishala {
   BinaryPackage LoginInstructions::toBinary()

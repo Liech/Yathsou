@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Serialization.h"
+#include "Core/Serialization.h"
 
 namespace Vishala {
   class LoginInstructions : public Serialization {

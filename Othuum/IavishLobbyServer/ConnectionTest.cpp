@@ -5,7 +5,7 @@
 #include <thread>
 #include <memory>
 #include "VishalaNetworkLib/Serializable/Message.h"
-#include "VishalaNetworkLib/BinaryPackage.h"
+#include "VishalaNetworkLib/Core/BinaryPackage.h"
 
 namespace Iavish {
   void ConnectionTest::work() {

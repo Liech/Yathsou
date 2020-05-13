@@ -2,12 +2,18 @@
 
 #include <string>
 #include <vector>
-#include "GameRoomPlayer.h"
+
+#include "VishalaNetworkLib/Core/Serialization.h"
+
 
 namespace Vishala {
-  class GameBriefing {
+  class CreateGameRequest : public Serialization {
   public:
-    std::string                 name  ;
-    std::vector<GameRoomPlayer> player;
+    std::string                        gameName;
+    
+    virtual nlohmann::json             toJson()                  override;
+    virtual void                       fromJson(nlohmann::json)  override;
+    virtual BinaryPackage              toBinary()                override;
+    virtual void                       fromBinary(BinaryPackage&) override;
   };
 }

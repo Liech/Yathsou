@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 
-#include "VishalaNetworkLib/Connection.h"
+#include "VishalaNetworkLib/Core/Connection.h"
 
 
 namespace Vishala {

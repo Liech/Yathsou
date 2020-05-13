@@ -1,7 +1,7 @@
 #pragma once
 
 #include <future>
-#include "VishalaNetworkLib/Connection.h"
+#include "VishalaNetworkLib/Core/Connection.h"
 #include "VishalaNetworkLib/lib/concurrentqueue.h"
 
 namespace Iavish {

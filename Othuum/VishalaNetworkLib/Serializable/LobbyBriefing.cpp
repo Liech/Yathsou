@@ -1,6 +1,6 @@
 #include "LobbyBriefing.h"
 
-#include "BinaryPackage.h"
+#include "Core/BinaryPackage.h"
 
 namespace Vishala {
   BinaryPackage LobbyBriefing::toBinary()
