@@ -40,6 +40,8 @@ namespace YolonaOss {
     std::vector < std::shared_ptr<Selen::NavigationMap<2>>> _mapsForSlider;
 
     std::shared_ptr<Vishala::LobbyConnector>        _connector;
+    std::unique_ptr<Vishala::Connection>            _connection = nullptr;
+    
 
     GL::DrawSpecification*                          _spec = nullptr;
     std::function<bool(double, double)>             _mouseClick;

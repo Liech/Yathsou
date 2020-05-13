@@ -102,8 +102,13 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::draw()
   {
-    if (_connector != nullptr)
+    if (_connector != nullptr && _connector->getStatus() == Vishala::LobbyConnectorStatus::Waiting)
       _connector->update();
+    if (_connection != nullptr)
+      _connection->update();
+    if (_connector->getStatus() == Vishala::LobbyConnectorStatus::ConnectionEstablished) {
+      _connection = _connector->extractConnection();
+    }
     //_connection.update();
     #pragma omp parallel for
     for (int64_t i = 0; i < (int64_t)_unit.size(); i++) {

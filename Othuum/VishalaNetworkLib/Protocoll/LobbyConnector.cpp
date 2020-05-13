@@ -3,6 +3,7 @@
 #include "Serializable/LoginInstructions.h"
 #include <iostream>
 #include "BinaryPackage.h"
+#include "Serializable/SelfBriefing.h"
 
 namespace Vishala {
   LobbyConnector::LobbyConnector(int myPort, std::string ip, int port){    
@@ -67,12 +68,14 @@ namespace Vishala {
 
   void LobbyConnector::update()
   {
+    if (_currentStatus == LobbyConnectorStatus::Extracted)
+      throw std::runtime_error("Wrong Status");
     if (_entryConnection != nullptr)
       _entryConnection->update();
     if (_finalConnection != nullptr)
       _finalConnection->update();
   }
-
+   
   LobbyConnectorStatus LobbyConnector::getStatus() {
     return _currentStatus;
   }
@@ -80,6 +83,14 @@ namespace Vishala {
   std::unique_ptr<Connection> LobbyConnector::extractConnection() {
     if (_currentStatus != LobbyConnectorStatus::ConnectionEstablished)
       throw std::runtime_error("Wrong Status");
+
+    SelfBriefing briefing;
+    briefing.color = {rand()%256,rand()%256,rand()%256};
+    briefing.name = "Horst";
+    std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(briefing.toBinary());
+    _finalConnection->send(0, 0, std::move(package));
+    _currentStatus = LobbyConnectorStatus::Extracted;
+
     return std::move(_finalConnection);
   }
 

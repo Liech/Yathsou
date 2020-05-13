@@ -13,7 +13,8 @@ namespace Vishala {
   enum class LobbyConnectorStatus {
     ConnectionFailed,
     ConnectionEstablished,
-    Waiting
+    Waiting,
+    Extracted
   };
 
   //Lobby connector is the initial protocoll invoked to enter a lobby.
@@ -31,7 +32,7 @@ namespace Vishala {
     void connectionFailed(std::string name);
     void disconnect(size_t clientnumber);
 
-    LobbyConnectorStatus _currentStatus;
+    LobbyConnectorStatus _currentStatus = LobbyConnectorStatus::Waiting;
 
     bool         _messageRecived   = false;
     bool         _disposed         = false;
