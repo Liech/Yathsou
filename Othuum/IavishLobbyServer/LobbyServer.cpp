@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "VishalaNetworkLib/Serialization/ServerConfiguration.h"
+#include "VishalaNetworkLib/Serializable/ServerConfiguration.h"
 
 namespace Iavish {
   void LobbyServer::run() {
@@ -10,7 +10,7 @@ namespace Iavish {
     Vishala::ServerConfiguration config;
     config.fromJsonFile("ServerConfiguration.json");
     std::cout << "Init Lobby" << std::endl;
-    _lobby = std::make_unique<Vishala::Lobby>(config);
+    _lobby = std::make_unique<Vishala::Server::Lobby>(config);
     while (true) 
       _lobby->update();
   }

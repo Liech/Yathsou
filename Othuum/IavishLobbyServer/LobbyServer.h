@@ -9,6 +9,6 @@ namespace Iavish {
     void run();
 
   private:
-    std::unique_ptr<Vishala::Lobby> _lobby;
+    std::unique_ptr<Vishala::Server::Lobby> _lobby;
   };
 }

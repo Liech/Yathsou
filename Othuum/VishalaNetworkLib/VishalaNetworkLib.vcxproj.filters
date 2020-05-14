@@ -31,9 +31,6 @@
     <Filter Include="lib\enet">
       <UniqueIdentifier>{5e462b94-b0ed-408a-9373-428f5b48ca47}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Serializable\Unfinished">
-      <UniqueIdentifier>{8808618f-96e2-48cd-b895-1218baa10a57}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{37d7fdde-94cf-4048-8386-fe1565994684}</UniqueIdentifier>
     </Filter>
@@ -65,9 +62,6 @@
     </ClInclude>
     <ClInclude Include="Serializable\LobbyGame.h">
       <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
-    <ClInclude Include="Protocoll\LobbyChaperone.h">
-      <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
     <ClInclude Include="Protocoll\LobbyConnector.h">
       <Filter>Header Files\Protocoll</Filter>
@@ -111,33 +105,6 @@
     <ClInclude Include="lib\enet\time.h">
       <Filter>lib\enet</Filter>
     </ClInclude>
-    <ClInclude Include="Serializable\GameBriefing.h">
-      <Filter>Header Files\Serializable\Unfinished</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\GameDescription.h">
-      <Filter>Header Files\Serializable\Unfinished</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\GameJoinRequest.h">
-      <Filter>Header Files\Serializable\Unfinished</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\GameJoinRequestAnswer.h">
-      <Filter>Header Files\Serializable\Unfinished</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\GameRoomPlayer.h">
-      <Filter>Header Files\Serializable\Unfinished</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\GameOptionsUpdate.h">
-      <Filter>Header Files\Serializable\Unfinished</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\PlayerJoined.h">
-      <Filter>Header Files\Serializable\Unfinished</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\NatPierceRequest.h">
-      <Filter>Header Files\Serializable\Unfinished</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\LobbyUpdateRequest.h">
-      <Filter>Header Files\Serializable\Unfinished</Filter>
-    </ClInclude>
     <ClInclude Include="Serializable\CreateGameRequest.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
@@ -165,21 +132,18 @@
     <ClInclude Include="Protocoll\GameLobby.h">
       <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
+    <ClInclude Include="Protocoll\LobbyPlayer.h">
+      <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\Acknowledgement.h">
+      <Filter>Header Files\Serializable</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\ServerConfiguration.h">
+      <Filter>Header Files\Serializable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Serializable\Message.cpp">
-      <Filter>Source Files\Serializable</Filter>
-    </ClCompile>
-    <ClCompile Include="Serializable\GameBriefing.cpp">
-      <Filter>Source Files\Serializable</Filter>
-    </ClCompile>
-    <ClCompile Include="Serializable\GameJoinRequest.cpp">
-      <Filter>Source Files\Serializable</Filter>
-    </ClCompile>
-    <ClCompile Include="Serializable\GameJoinRequestAnswer.cpp">
-      <Filter>Source Files\Serializable</Filter>
-    </ClCompile>
-    <ClCompile Include="Serializable\GameOptionsUpdate.cpp">
       <Filter>Source Files\Serializable</Filter>
     </ClCompile>
     <ClCompile Include="Serializable\LobbyBriefing.cpp">
@@ -188,22 +152,7 @@
     <ClCompile Include="Serializable\LobbyStateUpdate.cpp">
       <Filter>Source Files\Serializable</Filter>
     </ClCompile>
-    <ClCompile Include="Serializable\LobbyUpdateRequest.cpp">
-      <Filter>Source Files\Serializable</Filter>
-    </ClCompile>
-    <ClCompile Include="Serializable\GameRoomPlayer.cpp">
-      <Filter>Source Files\Protocoll</Filter>
-    </ClCompile>
-    <ClCompile Include="Serializable\PlayerJoined.cpp">
-      <Filter>Source Files\Serializable</Filter>
-    </ClCompile>
     <ClCompile Include="Serializable\SelfBriefing.cpp">
-      <Filter>Source Files\Serializable</Filter>
-    </ClCompile>
-    <ClCompile Include="Serializable\GameDescription.cpp">
-      <Filter>Source Files\Serializable</Filter>
-    </ClCompile>
-    <ClCompile Include="Serializable\NatPierceRequest.cpp">
       <Filter>Source Files\Serializable</Filter>
     </ClCompile>
     <ClCompile Include="Serializable\CreateGameRequest.cpp">
@@ -211,9 +160,6 @@
     </ClCompile>
     <ClCompile Include="Serializable\LobbyGame.cpp">
       <Filter>Source Files\Serializable</Filter>
-    </ClCompile>
-    <ClCompile Include="Protocoll\LobbyChaperone.cpp">
-      <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
     <ClCompile Include="Protocoll\LobbyConnector.cpp">
       <Filter>Source Files\Protocoll</Filter>
@@ -238,6 +184,15 @@
     </ClCompile>
     <ClCompile Include="Protocoll\GameLobby.cpp">
       <Filter>Source Files\Protocoll</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\LobbyPlayer.cpp">
+      <Filter>Source Files\Protocoll</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable\Acknowledgement.cpp">
+      <Filter>Source Files\Serializable</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable\ServerConfiguration.cpp">
+      <Filter>Source Files\Serializable</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

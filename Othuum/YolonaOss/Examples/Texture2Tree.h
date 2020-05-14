@@ -39,14 +39,14 @@ namespace YolonaOss {
     std::vector<std::shared_ptr<Unit<2>>>             _unit     ; 
     std::vector < std::shared_ptr<Selen::NavigationMap<2>>> _mapsForSlider;
 
-    std::shared_ptr<Vishala::LobbyConnector>        _connector;
-    std::unique_ptr<Vishala::Connection>            _connection = nullptr;
-    
-
-    GL::DrawSpecification*                          _spec = nullptr;
-    std::function<bool(double, double)>             _mouseClick;
-    GL::DrawableList                                _drawableList;
-    std::shared_ptr<Widgets::ListLayout>            _layout;
+    std::shared_ptr<Vishala::Client::LobbyConnector> _connector;
+    std::unique_ptr<Vishala::Connection>             _connection = nullptr;
+                                                     
+                                                     
+    GL::DrawSpecification*                           _spec = nullptr;
+    std::function<bool(double, double)>              _mouseClick;
+    GL::DrawableList                                 _drawableList;
+    std::shared_ptr<Widgets::ListLayout>             _layout;
 
     void renderDiscomfort();
     void mouseClick(double x, double y);

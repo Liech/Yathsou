@@ -31,7 +31,7 @@ namespace YolonaOss {
     int port = 6115;
     std::string ip = "localhost";
     std::cout << "Connect to Lobby: "<< ip <<":"<< 6112 << " with Port "<< port << std::endl;
-    _connector = std::make_shared<Vishala::LobbyConnector>(port, ip, 6112);
+    _connector = std::make_shared<Vishala::Client::LobbyConnector>(port, ip, 6112);
   }
   std::future<int> thread;
   std::future<int> thread2;
@@ -102,11 +102,11 @@ namespace YolonaOss {
 
   void YolonaOss::Texture2Tree::draw()
   {
-    if (_connector != nullptr && _connector->getStatus() == Vishala::LobbyConnectorStatus::Waiting)
+    if (_connector != nullptr && _connector->getStatus() == Vishala::Client::LobbyConnectorStatus::Waiting)
       _connector->update();
     if (_connection != nullptr)
       _connection->update();
-    if (_connector->getStatus() == Vishala::LobbyConnectorStatus::ConnectionEstablished) {
+    if (_connector->getStatus() == Vishala::Client::LobbyConnectorStatus::ConnectionEstablished) {
       _connection = _connector->extractConnection();
     }
     //_connection.update();

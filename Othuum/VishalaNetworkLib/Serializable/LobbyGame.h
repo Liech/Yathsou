@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include "GameRoomPlayer.h"
 
 #include "Core/Serialization.h"
 
