@@ -7,6 +7,8 @@ RTS Engine fragments
   * Unecessary versatile basic classes are offered (NDArray, NMTree, NDSpatialHash, ...)
   * Basic OpenGL Renderer are available
   * Flocking & Flowfield Navigation is possible
-* Next Milestones:
   * Network communication
+* Next Milestones:
+  * Lobby & Host protocolls
+  * Network Game Loop
   * Bullet/Damage Physic
