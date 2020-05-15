@@ -6,11 +6,13 @@
 
 #include "Core/Connection.h"
 #include "Serializable/Client2LobbyRequest.h"
+#include "Serializable/Lobby/LobbyModel.h"
 
 namespace Vishala {
-  class BinaryPackage;
-  class Connection;
+  class BinaryPackage   ;
+  class Connection      ;
   class LobbyRequestCall;
+  class LobbyStateUpdate;
 }
 
 namespace Vishala {
@@ -23,7 +25,7 @@ namespace Vishala {
         Unintroduced, Lobby, Host, Joined
       };
     public:
-      LobbyPlayer(int myport, std::string ip, int port, size_t playerNumber, std::function<void(size_t, Client2LobbyRequest)> lobbyRequestCall);
+      LobbyPlayer(int myport, std::string ip, int port, size_t playerNumber, std::shared_ptr<LobbyModel> model);
 
       virtual std::string getName() { return "LobbyChaperone"; }
 
@@ -36,14 +38,18 @@ namespace Vishala {
       void gameHosted(std::shared_ptr<GameLobby> game);
 
     private:
+      LobbyStateUpdate getLobbyStateUpdate();
+
+      void send(Serialization* message);
+
       bool                         _connected = false;
       std::string                  _ip;
       LobbyPlayer::state           _state = state::Unintroduced;
       size_t                       _playerNumber;
 
-      std::unique_ptr<Connection>                     _connection;
-      std::function<void(size_t, Client2LobbyRequest)> _lobbyRequestCall;
-      std::shared_ptr<GameLobby>                      _currentGame = nullptr;
+      std::unique_ptr<Connection>                      _connection           ;
+      std::shared_ptr<LobbyModel>                      _model                ;
+      std::shared_ptr<GameLobby>                       _currentGame = nullptr;
     };
   }
 }

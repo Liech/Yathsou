@@ -9,11 +9,14 @@
 #include "Serializable/LoginInstructions.h"
 #include "Serializable/Client2LobbyRequest.h"
 #include "GameLobby.h"
+#include "Serializable/Lobby/LobbyModel.h"
 
 namespace Vishala {
   namespace Server {
     Lobby::Lobby(ServerConfiguration configurationFile)
     {
+      _model = std::make_shared<LobbyModel>();
+
       _connection = std::make_unique<Connection>();
       _connection->setAcceptConnection(true);
       _connection->setChannelCount(1);
@@ -46,12 +49,11 @@ namespace Vishala {
       std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(instructions.toBinary());
       _connection->send(clientnumber, 0, std::move(package));
 
-      std::shared_ptr< LobbyPlayer > startProtocoll = std::make_shared<LobbyPlayer>(port, ip, incomingPort + 1, _clientCount,
-        [this](size_t player, Client2LobbyRequest request) {chaperone_LobbyRequest(player, request); });
+      std::shared_ptr< LobbyPlayer > startProtocoll = std::make_shared<LobbyPlayer>(port, ip, incomingPort + 1, _model->nextPlayerNumber,_model);
       std::shared_ptr< LobbyPlayer > cast = std::dynamic_pointer_cast<LobbyPlayer>(startProtocoll);
-      _players[_clientCount] = startProtocoll;
-      _usedPorts[_clientCount] = port;
-      _clientCount++;
+      _players[_model->nextPlayerNumber] = startProtocoll;
+      _usedPorts[_model->nextPlayerNumber] = port;
+      _model->nextPlayerNumber++;
     }
 
     void Lobby::disconnect(size_t clientnumber)
@@ -69,10 +71,10 @@ namespace Vishala {
     void Lobby::chaperone_LobbyRequest(size_t player, Client2LobbyRequest request) {
       if (request.type == Client2LobbyRequest::Type::CreateGame) {
         CreateGameRequest content = request.createGame;
-        std::shared_ptr<GameLobby> game = std::make_shared<GameLobby>(content.gameName, _gameCount);
-        _games[_gameCount] = game;
+        std::shared_ptr<GameLobby> game = std::make_shared<GameLobby>(content.gameName, _model->nextGameNumber,_model);
+        _games[_model->nextGameNumber] = game;
         _players[player]->gameHosted(game);
-        _gameCount++;
+        _model->nextGameNumber++;
       }
     }
   }

@@ -39,7 +39,7 @@ namespace Vishala {
       _finalConnection = std::make_unique<Connection>();
       _finalConnection->setAcceptConnection(true);
       _finalConnection->setChannelCount(1);
-      _finalConnection->setMaximumConnectionCount(2);
+      _finalConnection->setMaximumConnectionCount(1);
       _finalConnection->setPort(_myPort + 1);
       _finalConnection->setNewConnectionCallback([this](size_t clientNumber, std::string ip, int port) {
         _currentStatus = LobbyConnectorStatus::ConnectionEstablished;

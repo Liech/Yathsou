@@ -12,9 +12,9 @@
 
 namespace Vishala {
   namespace Server {
-    LobbyPlayer::LobbyPlayer(int myport, std::string ip, int port, size_t playerNumber, std::function<void(size_t, Client2LobbyRequest)> lobbyRequestCall) {
-      _ip = ip;
-      _lobbyRequestCall = lobbyRequestCall;
+    LobbyPlayer::LobbyPlayer(int myport, std::string ip, int port, size_t playerNumber, std::shared_ptr<LobbyModel> model) {
+      _ip    = ip   ;
+      _model = model;
       _playerNumber = playerNumber;
       std::cout << "LobbyChaperone: connect: " << ip << ":" << port << " (myPort: " << myport << ")" << std::endl;
 
@@ -39,13 +39,17 @@ namespace Vishala {
         description.fromBinary(*package);
         _state = LobbyPlayer::state::Lobby;
         std::cout << "He Is Known Now" << std::endl;
+        LobbyBriefing briefing;
+        briefing.lobbyStatus = getLobbyStateUpdate();
+        briefing.playerId    = _playerNumber;
+        send(&briefing);
         return;
       }
       else if (_state == LobbyPlayer::state::Lobby) {
         Client2LobbyRequest request;
         request.fromBinary(*package);
         if (request.type == Client2LobbyRequest::Type::CreateGame) {
-          _lobbyRequestCall(_playerNumber, request);
+          _model->openRequests.push_back(request);
         }
       }
     }
@@ -56,10 +60,6 @@ namespace Vishala {
       if (ip != _ip)
         throw std::runtime_error("Unexpected IP " + ip);
       _connected = true;
-      LobbyBriefing briefing;
-      auto packet = briefing.toBinary();
-      std::unique_ptr<BinaryPackage> p = std::make_unique<BinaryPackage>(packet);
-      _connection->send(0, 0, std::move(p));
     }
 
     void LobbyPlayer::connectionFailed(std::string name)
@@ -87,5 +87,18 @@ namespace Vishala {
       std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(ack.toBinary());
       _connection->send(0, 0, std::move(package));
     }
+
+    LobbyStateUpdate LobbyPlayer::getLobbyStateUpdate() {
+      LobbyStateUpdate result;
+      result.openGames.clear();
+      return result;
+    }
+
+    void LobbyPlayer::send(Serialization* message) {
+      auto packet = message->toBinary();
+      std::unique_ptr<BinaryPackage> p = std::make_unique<BinaryPackage>(packet);
+      _connection->send(0, 0, std::move(p));
+    }
+
   }
 }

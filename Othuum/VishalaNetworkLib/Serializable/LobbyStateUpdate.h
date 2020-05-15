@@ -4,7 +4,7 @@
 #include <array>
 #include <vector>
 
-#include "LobbyGame.h"
+#include "Serializable/Lobby/LobbyGame.h"
 #include "Core/Serialization.h"
 
 namespace Vishala {

@@ -48,7 +48,7 @@ namespace Vishala {
 
   template <>
   int Serialization::bin2val<int>(BinaryPackage& data) {
-    unsigned char bytes[] = { data.data[data.position+3],data.data[data.position+2],data.data[data.position+1],data.data[data.position]  };
+    unsigned char bytes[] = { data.data[data.position + 3],data.data[data.position + 2],data.data[data.position + 1],data.data[data.position] };
     int* pInt = (int*)bytes;
     int result = *pInt;
     data.position += 4;
@@ -59,8 +59,25 @@ namespace Vishala {
   void Serialization::val2bin<int>(BinaryPackage& data, int& value) {
     data.data.push_back((value >> 24) & 0xFF);
     data.data.push_back((value >> 16) & 0xFF);
-    data.data.push_back((value >> 8)  & 0xFF);
-    data.data.push_back( value        & 0xFF);
+    data.data.push_back((value >> 8) & 0xFF);
+    data.data.push_back(value & 0xFF);
+  }
+
+  template <>
+  size_t Serialization::bin2val<size_t>(BinaryPackage& data) {
+    size_t size = sizeof(size_t);
+    std::vector<unsigned char> sub = std::vector<unsigned char>(data.data.begin() + data.position, data.data.begin() + data.position + size);
+    size_t* cast = reinterpret_cast<size_t*>(sub.data());
+    data.position += size;
+    size_t result = *cast;
+    return result;
+  }
+
+  template<>
+  void Serialization::val2bin<size_t>(BinaryPackage& data, size_t& value) {
+    unsigned char const* c = reinterpret_cast<unsigned char const*>(value);
+    size_t size = sizeof(size_t);
+    data.data.insert(data.data.end(), c, c + size);
   }
 
   template <>

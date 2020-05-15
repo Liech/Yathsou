@@ -37,6 +37,12 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{c297c4d4-ad2d-45a6-be6b-66ae8b028ab0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Serializable\Lobby">
+      <UniqueIdentifier>{9f4539c1-1d2c-4576-b205-4e1d7f9d1536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Serializable\Lobby">
+      <UniqueIdentifier>{a5f3c0e8-53e6-44cd-9e4b-c9d4a872ff4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Serializable\Message.h">
@@ -58,9 +64,6 @@
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
     <ClInclude Include="Serializable\SelfBriefing.h">
-      <Filter>Header Files\Serializable</Filter>
-    </ClInclude>
-    <ClInclude Include="Serializable\LobbyGame.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
     <ClInclude Include="Protocoll\LobbyConnector.h">
@@ -141,6 +144,21 @@
     <ClInclude Include="Serializable\ServerConfiguration.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
+    <ClInclude Include="Protocoll\LobbyClient.h">
+      <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\LobbyModel.h">
+      <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\Lobby\LobbyModel.h">
+      <Filter>Header Files\Serializable\Lobby</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\Lobby\LobbyGame.h">
+      <Filter>Header Files\Serializable\Lobby</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\Lobby\LobbyPlayerModel.h">
+      <Filter>Header Files\Serializable\Lobby</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Serializable\Message.cpp">
@@ -156,9 +174,6 @@
       <Filter>Source Files\Serializable</Filter>
     </ClCompile>
     <ClCompile Include="Serializable\CreateGameRequest.cpp">
-      <Filter>Source Files\Serializable</Filter>
-    </ClCompile>
-    <ClCompile Include="Serializable\LobbyGame.cpp">
       <Filter>Source Files\Serializable</Filter>
     </ClCompile>
     <ClCompile Include="Protocoll\LobbyConnector.cpp">
@@ -193,6 +208,18 @@
     </ClCompile>
     <ClCompile Include="Serializable\ServerConfiguration.cpp">
       <Filter>Source Files\Serializable</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\LobbyClient.cpp">
+      <Filter>Source Files\Protocoll</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable\Lobby\LobbyModel.cpp">
+      <Filter>Source Files\Serializable\Lobby</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable\Lobby\LobbyGame.cpp">
+      <Filter>Source Files\Serializable\Lobby</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable\Lobby\LobbyPlayerModel.cpp">
+      <Filter>Source Files\Serializable\Lobby</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

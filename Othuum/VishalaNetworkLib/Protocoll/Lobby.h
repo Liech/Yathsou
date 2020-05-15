@@ -11,6 +11,7 @@
 namespace Vishala {
   class ServerConfiguration;
   class Client2LobbyRequest;
+  class LobbyModel;
 
   namespace Server {
     class LobbyPlayer;
@@ -30,15 +31,14 @@ namespace Vishala {
       size_t  getNextPort();
 
       std::unique_ptr<Connection>                       _connection;
-      std::map<size_t, std::shared_ptr<LobbyPlayer>>    _players;
-      std::map<size_t, size_t>                           _usedPorts;
-      std::map<size_t, std::shared_ptr<GameLobby>>      _games;
+      std::shared_ptr<LobbyModel>                       _model     ;
+      std::map<size_t, std::shared_ptr<LobbyPlayer>>    _players   ;
+      std::map<size_t, size_t>                          _usedPorts ;
+      std::map<size_t, std::shared_ptr<GameLobby>>      _games     ;
 
-      size_t                                            _startPort = 6556;
-      size_t                                            _endPort = 7556;
+      size_t                                            _startPort   = 6556;
+      size_t                                            _endPort     = 7556;
       size_t                                            _currentPort = 6556;
-      size_t                                            _clientCount = 0;
-      size_t                                            _gameCount = 0;
     };
   }
 }
