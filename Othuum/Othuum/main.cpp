@@ -18,18 +18,35 @@
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include <glm/gtx/intersect.hpp>
 #include <iomanip>
+
+#include "MainMenu.h"
+
 using namespace YolonaOss;
 
 int main() { 
   {
-    //int width = 800;
-    //int height = 600;
     int width = 1420;
     int height = 880;
     GL::Window w(width, height);
 
+    std::shared_ptr<MainMenu> mainMenu = std::make_shared<MainMenu>(1420,880);
+    Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(mainMenu, { "Main" });
 
-    std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
+    mainMenu->addButton("HUHU", []() {std::cout << "HUHU" << std::endl; });
+    mainMenu->addButton("HUHU", []() {std::cout << "HUHU" << std::endl; });
+    mainMenu->addButton("HUHU", []() {std::cout << "HUHU" << std::endl; });
+
+    w.Update = [&w, width, height]() {
+
+    };
+    w.run();
+  }
+  Iyathuum::DatabaseTerminator::terminateAll();
+  std::cout << "Programm Termination" << std::endl;
+} 
+
+/*
+std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
     list->addDrawable(std::make_shared<Background>());
     list->addDrawable(std::make_shared<FPS>());
     Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
@@ -39,18 +56,7 @@ int main() {
     std::shared_ptr<Widgets::Button> b = std::make_shared<Widgets::Button>("FreeCam", Iyathuum::AABB<2>({ 0.0, 0.0 }, { 200.0, 50.0 }), [cam]() {cam->setCurrentCam("FreeCamera"); });
     list->addDrawable(b);
 
-
     Iyathuum::Database<std::shared_ptr<GL::Updateable>>::add(cam, { "Main" });
     glm::vec3 start, end;
 
-    w.Update = [&w, &start, &end, width, height]() {
-      //f(0, 0);
-      glm::vec3 viewDir = glm::normalize(w.getSpec()->getCam()->getTarget() - w.getSpec()->getCam()->getPosition());
-      glm::vec3 dir = w.getSpec()->getCam()->getPickRay((float)w.getCursorPos().first, (float)w.getCursorPos().second);
-      glm::vec3 pos = w.getSpec()->getCam()->getPosition();
-    };
-    w.run();
-  }
-  Iyathuum::DatabaseTerminator::terminateAll();
-  std::cout << "Programm Termination" << std::endl;
-} 
+*/

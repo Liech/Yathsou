@@ -1,6 +1,7 @@
 #include "ListLayout.h"
 #include "../../Renderer/RectangleRenderer.h"
 #include "IyathuumCoreLib/Util/Geometry.h"
+#include "Drawables/Widgets/Button.h"
 
 namespace YolonaOss {
   namespace Widgets {
@@ -41,6 +42,12 @@ namespace YolonaOss {
     
     void ListLayout::setHorizontal(bool horizontal) {
       _horizontal = horizontal;
+    }
+
+    std::shared_ptr<Widgets::Button> ListLayout::addButton(std::string name, std::function<void()> onClicked, Iyathuum::AABB<2> size) {
+      std::shared_ptr<Widgets::Button> b = std::make_shared<Widgets::Button>(name, Iyathuum::AABB<2>(std::array<double, 2>{ 0.0, 0.0 }, std::array<double, 2>{ getPosition().getSize()[0], 50.0 }), [onClicked]() { onClicked(); });
+      addWidget(b);
+      return b;
     }
   }
 }

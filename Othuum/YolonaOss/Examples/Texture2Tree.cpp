@@ -41,7 +41,7 @@ namespace YolonaOss {
     int amount = 20;
     float distance = 1.0f;
     for(size_t x = 0; x < amount; x++){
-      for (size_t i = 0; i < amount; i++) {
+      for (size_t i = 0; i < amount; i++){
         auto u = std::make_shared<Unit     <2>>(glm::vec2(4 + i * distance, 4 + x* distance), glm::vec2(0, 0.1f));
         _unit.push_back(u);
         _landscape->_unitAgents->addAgent(_unit[_unit.size()-1]->_navigationAgent);

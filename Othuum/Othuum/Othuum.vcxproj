@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="DrawCubes.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="PhysicalModel.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +220,7 @@
     <ClInclude Include="Lib\nop\utility\stream_reader.h" />
     <ClInclude Include="Lib\nop\utility\stream_writer.h" />
     <ClInclude Include="Lib\nop\value.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="PhysicalModel.h" />
     <ClInclude Include="Serial\Building.h" />
     <ClInclude Include="Serial\ConstructionSite.h" />
