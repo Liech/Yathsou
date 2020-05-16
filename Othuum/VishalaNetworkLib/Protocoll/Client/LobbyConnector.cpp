@@ -39,11 +39,11 @@ namespace Vishala {
       _finalConnection = std::make_unique<Connection>();
       _finalConnection->setAcceptConnection(true);
       _finalConnection->setChannelCount(1);
-      _finalConnection->setMaximumConnectionCount(1);
+      _finalConnection->setMaximumConnectionCount(2);
       _finalConnection->setPort(_myPort + 1);
       _finalConnection->setNewConnectionCallback([this](size_t clientNumber, std::string ip, int port) {
         _currentStatus = LobbyConnectorStatus::ConnectionEstablished;
-        std::cout << "LobbyConnectorStatus::ConnectionEstablished" << std::endl;
+        std::cout << "LobbyConnectorStatus::ConnectionEstablished :)" << std::endl;
         });
       _finalConnection->setConnectionFailedCallback([this](std::string ip) {
         std::cout << "LobbyConnectorStatus::setConnectionFailedCallback" << std::endl;
@@ -84,7 +84,7 @@ namespace Vishala {
     std::unique_ptr<Connection> LobbyConnector::extractConnection() {
       if (_currentStatus != LobbyConnectorStatus::ConnectionEstablished)
         throw std::runtime_error("Wrong Status");
-
+      std::cout << "Extract Connection" << std::endl;
       SelfBriefing briefing;
       briefing.color = { rand() % 256,rand() % 256,rand() % 256 };
       briefing.name = "Horst";

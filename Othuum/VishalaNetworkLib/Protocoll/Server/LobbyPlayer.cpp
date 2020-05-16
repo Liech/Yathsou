@@ -58,7 +58,7 @@ namespace Vishala {
 
     void LobbyPlayer::newConnection(size_t clientnumber, std::string ip, int port)
     {
-      std::cout << "Lobby Chaperone: new connection " << ip << ":" << port << std::endl;
+      std::cout << "Lobby Chaperone: new connection :) " << ip << ":" << port << std::endl;
       if (ip != _ip)
         throw std::runtime_error("Unexpected IP " + ip);
       _connected = true;
@@ -67,7 +67,6 @@ namespace Vishala {
     void LobbyPlayer::connectionFailed(std::string name)
     {
       std::cout << "Lobby Chaperone: connection failed " << name << std::endl;
-
     }
 
     void LobbyPlayer::disconnect(size_t clientnumber)
@@ -102,6 +101,7 @@ namespace Vishala {
       auto packet = message->toBinary();
       std::unique_ptr<BinaryPackage> p = std::make_unique<BinaryPackage>(packet);
       _connection->send(0, 0, std::move(p));
+      std::cout << "SEND" << std::endl;
     }
 
   }
