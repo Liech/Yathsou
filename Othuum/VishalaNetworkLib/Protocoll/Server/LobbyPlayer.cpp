@@ -46,9 +46,11 @@ namespace Vishala {
         return;
       }
       else if (_state == LobbyPlayer::state::Lobby) {
-        Client2LobbyRequest request;
+        std::cout << "Client2Lobby Request" << std::endl;
+        Client2LobbyMessage request;
         request.fromBinary(*package);
-        if (request.type == Client2LobbyRequest::Type::CreateGame) {
+        if (request.type == Client2LobbyMessage::Type::CreateGame) {
+          std::cout << "CreateGame Request" << std::endl;
           _model->openRequests.push_back(request);
         }
       }
@@ -81,6 +83,7 @@ namespace Vishala {
 
     void LobbyPlayer::gameHosted(std::shared_ptr<GameLobby> game)
     {
+      std::cout << "Game Hosted" << std::endl;
       _currentGame = game;
       Acknowledgement ack;
       ack.type = Acknowledgement::Type::GameHosted;

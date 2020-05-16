@@ -5,9 +5,9 @@
 #include "Core/Connection.h"
 #include "Core/BinaryPackage.h"
 #include "Serializable/ServerConfiguration.h"
-#include "Protocoll/LobbyPlayer.h"
+#include "Protocoll/Server/LobbyPlayer.h"
 #include "Serializable/LoginInstructions.h"
-#include "Serializable/Client2LobbyRequest.h"
+#include "Serializable/Client2LobbyMessage.h"
 #include "GameLobby.h"
 #include "Serializable/Lobby/LobbyModel.h"
 
@@ -36,6 +36,12 @@ namespace Vishala {
       std::vector<std::pair<size_t, std::shared_ptr<LobbyPlayer>>> vec(_players.begin(), _players.end());
       for (auto protocoll : vec)
         protocoll.second->update();
+      for (auto request : _model->openRequests) {
+        if (request.type == Client2LobbyMessage::Type::CreateGame)
+          lobbyRequest(0, request);
+      }
+      _model->openRequests.clear();
+
     }
 
     void Lobby::newConnection(size_t clientnumber, std::string ip, int incomingPort)
@@ -68,8 +74,8 @@ namespace Vishala {
       return _currentPort;
     }
 
-    void Lobby::chaperone_LobbyRequest(size_t player, Client2LobbyRequest request) {
-      if (request.type == Client2LobbyRequest::Type::CreateGame) {
+    void Lobby::lobbyRequest(size_t player, Client2LobbyMessage request) {
+      if (request.type == Client2LobbyMessage::Type::CreateGame) {        
         CreateGameRequest content = request.createGame;
         std::shared_ptr<GameLobby> game = std::make_shared<GameLobby>(content.gameName, _model->nextGameNumber,_model);
         _games[_model->nextGameNumber] = game;

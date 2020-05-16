@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "VishalaNetworkLib/Protocoll/Lobby.h"
+#include "VishalaNetworkLib/Protocoll/Server/Lobby.h"
 
 namespace Iavish {
   class LobbyServer {

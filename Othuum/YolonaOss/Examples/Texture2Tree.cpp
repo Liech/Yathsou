@@ -19,7 +19,7 @@
 #include "../Drawables/Widgets/Button.h"
 #include "../Renderer/ArrowRenderer.h"
 #include "VishalaNetworkLib/Core/Connection.h"
-#include "VishalaNetworkLib/Protocoll/LobbyConnector.h"
+#include "VishalaNetworkLib/Protocoll/Client/LobbyConnector.h"
 #include <functional>
 #include <future>
 

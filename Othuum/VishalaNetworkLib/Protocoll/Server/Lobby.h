@@ -10,7 +10,7 @@
 
 namespace Vishala {
   class ServerConfiguration;
-  class Client2LobbyRequest;
+  class Client2LobbyMessage;
   class LobbyModel;
 
   namespace Server {
@@ -26,7 +26,7 @@ namespace Vishala {
       void    newConnection(size_t clientnumber, std::string ip, int port);
       void    disconnect(size_t clientnumber);
 
-      void    chaperone_LobbyRequest(size_t player, Client2LobbyRequest request);
+      void    lobbyRequest(size_t player, Client2LobbyMessage request);
 
       size_t  getNextPort();
 

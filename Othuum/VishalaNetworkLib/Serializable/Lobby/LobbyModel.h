@@ -3,7 +3,7 @@
 #include "Core/Serialization.h"
 #include "LobbyGame.h"
 #include "LobbyPlayerModel.h"
-#include "Serializable/Client2LobbyRequest.h"
+#include "Serializable/Client2LobbyMessage.h"
 #include <vector>
 
 namespace Vishala {
@@ -12,7 +12,7 @@ namespace Vishala {
   public:
     std::vector<LobbyGame>           openGames   ;
     std::vector<LobbyPlayerModel>    players     ;
-    std::vector<Client2LobbyRequest> openRequests;
+    std::vector<Client2LobbyMessage> openRequests;
 
     size_t                           nextPlayerNumber = 0;
     size_t                           nextGameNumber   = 0;

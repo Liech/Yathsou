@@ -12,7 +12,7 @@
 #include "../RTSComponents/Unit.h"
 #include "../OpenGL/DrawableList.h"
 #include "../Drawables/Widgets/ListLayout.h"
-#include "VishalaNetworkLib/Protocoll/LobbyConnector.h"
+#include "VishalaNetworkLib/Protocoll/Client/LobbyConnector.h"
 
 namespace YolonaOss {
   template<size_t Dimension> class DijkstraMap;

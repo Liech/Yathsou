@@ -45,7 +45,7 @@ namespace Vishala {
 
     int numberOfRequests = bin2val<int>(Package);
     for (size_t i = 0; i < numberOfRequests; i++) {
-      Client2LobbyRequest request;
+      Client2LobbyMessage request;
       request.fromBinary(Package);
       openRequests.push_back(request);
     }
@@ -100,7 +100,7 @@ namespace Vishala {
 
     openRequests.clear();
     for (auto game : data["OpenRequests"]) {
-      Client2LobbyRequest g;
+      Client2LobbyMessage g;
       g.fromJson(game);
       openRequests.push_back(g);
     }

@@ -1,21 +1,21 @@
-#include "Client2LobbyRequest.h"
+#include "Client2LobbyMessage.h"
 
 namespace Vishala {
-  Client2LobbyRequest::Client2LobbyRequest() : nothing() {
+  Client2LobbyMessage::Client2LobbyMessage() : nothing() {
 
   }
 
-  Client2LobbyRequest::Client2LobbyRequest(const Client2LobbyRequest& req) {
+  Client2LobbyMessage::Client2LobbyMessage(const Client2LobbyMessage& req) {
     type = req.type;
     if (type == Type::CreateGame)
       createGame = req.createGame;
   }
 
-  Client2LobbyRequest::~Client2LobbyRequest() {
+  Client2LobbyMessage::~Client2LobbyMessage() {
     
   }
 
-  nlohmann::json Client2LobbyRequest::toJson() {
+  nlohmann::json Client2LobbyMessage::toJson() {
     nlohmann::json result;
     result["Type"] = (int)type;
     
@@ -26,7 +26,7 @@ namespace Vishala {
     return result;
   }
 
-  void Client2LobbyRequest::fromJson(nlohmann::json from) {
+  void Client2LobbyMessage::fromJson(nlohmann::json from) {
     int number = from["Type"];
     type = (Type)number;
     if (type == Type::CreateGame)
@@ -35,7 +35,7 @@ namespace Vishala {
       throw std::runtime_error("Unkown Message Type");
   }
 
-  BinaryPackage Client2LobbyRequest::toBinary() {
+  BinaryPackage Client2LobbyMessage::toBinary() {
     BinaryPackage result;
     int number = (int)type;
     val2bin<int>(result, number);
@@ -46,7 +46,7 @@ namespace Vishala {
     return result;
   }
 
-  void Client2LobbyRequest::fromBinary(BinaryPackage& data) {
+  void Client2LobbyMessage::fromBinary(BinaryPackage& data) {
     int number = bin2val<int>(data);
     type = (Type)number;
     if (type == Type::CreateGame)

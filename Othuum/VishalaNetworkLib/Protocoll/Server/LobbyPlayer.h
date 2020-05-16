@@ -5,7 +5,7 @@
 #include <functional>
 
 #include "Core/Connection.h"
-#include "Serializable/Client2LobbyRequest.h"
+#include "Serializable/Client2LobbyMessage.h"
 #include "Serializable/Lobby/LobbyModel.h"
 
 namespace Vishala {
