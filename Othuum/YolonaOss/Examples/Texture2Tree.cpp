@@ -106,8 +106,11 @@ namespace YolonaOss {
       _connector->update();
     if (_connection != nullptr)
       _connection->update();
+    if (_client != nullptr)
+      _client->update();
     if (_connector->getStatus() == Vishala::Client::LobbyConnectorStatus::ConnectionEstablished) {
       _connection = _connector->extractConnection();
+      _client = std::make_shared< Vishala::Client::LobbyClient>(std::move(_connection));
     }
     //_connection.update();
     #pragma omp parallel for

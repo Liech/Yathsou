@@ -3,12 +3,14 @@
 #include <iostream>
 
 #include "Serializable/Client2LobbyMessage.h"
+#include "Serializable/Lobby2ClientMessage.h" 
 
 namespace Vishala {
   namespace Client {
     LobbyClient::LobbyClient(std::unique_ptr<Connection> connection) {
       //First job of the server is to send us a lobby status update in response to the self briefing of the lobby connector. We will wait for this
       _connection = std::move(connection);
+      std::cout << "Lobby Client Initialized" << std::endl;
     }
 
     void LobbyClient::update() {
@@ -20,7 +22,19 @@ namespace Vishala {
     }
 
     void LobbyClient::messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package) {
+      Lobby2ClientMessage msg;
+      msg.fromBinary(*package);
 
+      if (msg.type == Lobby2ClientMessage::Type::Acknowledgment) {
+        if (msg.acknowledgment.type == Acknowledgement::Type::GameHosted) {
+          if (_status == LobbyClient::Status::GameHostRequested) {
+            _status = LobbyClient::Status::GameHosted;
+            std::cout << "Game Host Acknowledgement recived" << std::endl;
+          }
+          else
+            throw std::runtime_error("Unexpected Host Acknowledgement");
+        }
+      }
     }
 
     void LobbyClient::newConnection(size_t clientnumber, std::string ip, int port) {

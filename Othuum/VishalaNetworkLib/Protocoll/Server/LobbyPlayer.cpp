@@ -8,7 +8,7 @@
 #include "Serializable/SelfBriefing.h"
 #include "Core/BinaryPackage.h"
 #include "GameLobby.h"
-#include "Serializable/Acknowledgement.h"
+#include "Serializable/Lobby2ClientMessage.h"
 
 namespace Vishala {
   namespace Server {
@@ -85,9 +85,10 @@ namespace Vishala {
     {
       std::cout << "Game Hosted" << std::endl;
       _currentGame = game;
-      Acknowledgement ack;
-      ack.type = Acknowledgement::Type::GameHosted;
-      std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(ack.toBinary());
+      Lobby2ClientMessage msg;
+      msg.type = Lobby2ClientMessage::Type::Acknowledgment;
+      msg.acknowledgment.type = Acknowledgement::Type::GameHosted;
+      std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(msg.toBinary());
       _connection->send(0, 0, std::move(package));
     }
 

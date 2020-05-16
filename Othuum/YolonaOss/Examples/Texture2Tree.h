@@ -13,6 +13,7 @@
 #include "../OpenGL/DrawableList.h"
 #include "../Drawables/Widgets/ListLayout.h"
 #include "VishalaNetworkLib/Protocoll/Client/LobbyConnector.h"
+#include "VishalaNetworkLib/Protocoll/Client/LobbyClient.h"
 
 namespace YolonaOss {
   template<size_t Dimension> class DijkstraMap;
@@ -40,6 +41,7 @@ namespace YolonaOss {
     std::vector < std::shared_ptr<Selen::NavigationMap<2>>> _mapsForSlider;
 
     std::shared_ptr<Vishala::Client::LobbyConnector> _connector;
+    std::shared_ptr<Vishala::Client::LobbyClient>    _client     = nullptr;
     std::unique_ptr<Vishala::Connection>             _connection = nullptr;
                                                      
                                                      
