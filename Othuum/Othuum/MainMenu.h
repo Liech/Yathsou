@@ -19,7 +19,8 @@ public:
 
   virtual void load(YolonaOss::GL::DrawSpecification*)             override;
   virtual void draw()                                              override;
-          void addButton(std::string name, std::function<void()> onClicked);
+  
+  void                                          addButton(std::string name, std::function<void()>   onClicked  );
 
 private:
   Iyathuum::AABB<2> getAABB();

@@ -17,6 +17,7 @@
 #include <filesystem>
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include <glm/gtx/intersect.hpp>
+#include "YolonaOss/Drawables/Widgets/LineEdit.h"
 #include <iomanip>
 
 #include "MainMenu.h"
@@ -35,6 +36,10 @@ int main() {
     mainMenu->addButton("HUHU", []() {std::cout << "HUHU" << std::endl; });
     mainMenu->addButton("HUHU", []() {std::cout << "HUHU" << std::endl; });
     mainMenu->addButton("HUHU", []() {std::cout << "HUHU" << std::endl; });
+
+
+    std::shared_ptr<YolonaOss::Widgets::LineEdit> lineEdit = std::make_shared<YolonaOss::Widgets::LineEdit>("Kartoffel", Iyathuum::AABB<2>({0,0}, {200,100}));
+    Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(lineEdit, { "Main" });
 
     w.Update = [&w, width, height]() {
 

@@ -205,6 +205,7 @@
     <ClInclude Include="Drawables\FPS.h" />
     <ClInclude Include="Drawables\Widgets\Button.h" />
     <ClInclude Include="Drawables\Widgets\Label.h" />
+    <ClInclude Include="Drawables\Widgets\LineEdit.h" />
     <ClInclude Include="Drawables\Widgets\ListLayout.h" />
     <ClInclude Include="Drawables\Widgets\Slider.h" />
     <ClInclude Include="Drawables\Widgets\Widget.h" />
@@ -258,6 +259,7 @@
     <ClCompile Include="Drawables\FPS.cpp" />
     <ClCompile Include="Drawables\Widgets\Button.cpp" />
     <ClCompile Include="Drawables\Widgets\Label.cpp" />
+    <ClCompile Include="Drawables\Widgets\LineEdit.cpp" />
     <ClCompile Include="Drawables\Widgets\ListLayout.cpp" />
     <ClCompile Include="Drawables\Widgets\Slider.cpp" />
     <ClCompile Include="Drawables\Widgets\Widget.cpp" />

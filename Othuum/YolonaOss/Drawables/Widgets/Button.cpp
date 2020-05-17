@@ -11,6 +11,7 @@ namespace YolonaOss {
     Button::Button() : Widget()
     {
       _name = "Def";
+      Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseClick" });
     }
 
     Button::Button(std::string name, Iyathuum::AABB<2> position, std::function<void(void)> clickedFunction) : Widget(position) {
