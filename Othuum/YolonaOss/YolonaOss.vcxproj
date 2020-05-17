@@ -276,6 +276,7 @@
     <ClCompile Include="OpenGL\DrawableList.cpp" />
     <ClCompile Include="OpenGL\DrawSpecification.cpp" />
     <ClCompile Include="OpenGL\IBO.cpp" />
+    <ClCompile Include="OpenGL\Key.cpp" />
     <ClCompile Include="OpenGL\Rendertarget.cpp" />
     <ClCompile Include="OpenGL\ShaderProgram.cpp" />
     <ClCompile Include="OpenGL\SSBO.cpp" />

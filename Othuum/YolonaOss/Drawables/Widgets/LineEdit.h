@@ -2,6 +2,7 @@
 
 #include "Widget.h"
 #include <string>
+#include "YolonaOss/OpenGL/Keys.h"
 
 namespace YolonaOss {
   namespace Widgets {
@@ -18,6 +19,7 @@ namespace YolonaOss {
       virtual void load(GL::DrawSpecification*)              override;
       virtual void draw()                                    override;
       virtual bool mouseClick(glm::vec2 position, GL::Key k) override;
+      virtual bool keyboardInput(YolonaOss::GL::Key key, YolonaOss::GL::KeyStatus status)     override;
 
 
     private:

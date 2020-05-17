@@ -250,7 +250,10 @@ namespace YolonaOss {
 
     void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
     {
-      //std::cout << key << std::endl;
+      std::set<Widgets::Widget*> inputWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("KeyboardInput");
+      for (auto i : inputWidgets)
+        i->keyboardInput((YolonaOss::GL::Key)key, (YolonaOss::GL::KeyStatus)action);
+
       if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
     }

@@ -371,5 +371,8 @@
     <ClCompile Include="Drawables\Widgets\LineEdit.cpp">
       <Filter>Source Files\Drawables\Widgets</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGL\Key.cpp">
+      <Filter>Source Files\OpenGL</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,4 +1,7 @@
 #pragma once
+
+#include <set>
+
 namespace YolonaOss {
   namespace GL {
     enum class CursorStatus {
@@ -148,6 +151,12 @@ namespace YolonaOss {
       KEY_RIGHT_ALT = 346,
       KEY_RIGHT_SUPER = 347,
       KEY_MENU = 348,
+    };
+
+    class CharacterSets {
+    public:
+      static std::set<Key> InputExtraSymbols;
+      static std::set<Key> AlphanumericKeys;
     };
   }
 }
