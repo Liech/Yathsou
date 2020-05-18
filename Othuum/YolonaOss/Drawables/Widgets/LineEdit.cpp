@@ -67,6 +67,19 @@ namespace YolonaOss {
 
     bool LineEdit::mouseClick(glm::vec2 position, GL::Key k) {
       std::cout << position[0] << "/" << position[1] << std::endl;
+      
+      for (size_t i = 1; i < _text.length()+1; i++) {
+        std::string sub = _text.substr(0, i);
+        glm::vec2 textSize = TextRenderer::getTextSize(sub, 1);
+        Iyathuum::AABB<2> rect;
+        rect.setPosition(std::array<double, 2>{0, 0});
+        rect.setSize(std::array<double, 2>{textSize[0], getPosition().getSize()[1]});
+        if (rect.isInside(std::array<double, 2>{position[0], position[1]})){
+          _cursorPosition = i-1;
+          return true;
+        }
+      }
+      _cursorPosition = _text.length() + 1;
       return true;
     };
 
