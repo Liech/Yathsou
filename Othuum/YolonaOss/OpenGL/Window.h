@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <functional>
 #include "Keys.h"
 struct GLFWwindow; 
@@ -33,9 +34,7 @@ namespace YolonaOss {
       int getHeight() { return _height; }
 
     private:
-      void mouseMovementCalls();
 
-      glm::vec2 _oldMousePos;
         int _width = 1920;
       int _height = 1080;
       GLFWwindow* _window = nullptr;

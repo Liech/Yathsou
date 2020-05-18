@@ -12,6 +12,7 @@
 #include "Updateable.h"
 #include <functional>
 #include "Util/Util.h"
+#include "InputHandling.h"
 
 namespace YolonaOss {
   namespace GL {
@@ -93,21 +94,6 @@ namespace YolonaOss {
         throw std::runtime_error("OPENGL ERROR:" + std::string(message));
     }
 
-    void Window::mouseMovementCalls() {
-      double xpos, ypos;
-      glfwGetCursorPos(_window, &xpos, &ypos);
-      glm::vec2 mousePos((float)xpos, (float)(win->getHeight() - ypos));
-
-      if (mousePos != _oldMousePos) {
-        std::set<Widgets::Widget*> moveWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseMove");
-        for (auto w : moveWidgets) {
-          if (w->getPosition().isInside(Util<2>::vec2Array<double>(mousePos))) {
-            w->mouseMove(mousePos - Util<2>::array2Vec(w->getPosition().getPosition()));
-          }
-        }
-      }
-      _oldMousePos = mousePos;
-    }
 
     void Window::run() {
       std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
@@ -124,6 +110,7 @@ namespace YolonaOss {
       // Create a GLFWwindow object that we can use for GLFW's functions
       _window = glfwCreateWindow(_width, _height, "GL", NULL, NULL);
       win = this;
+      InputHandling::getInstance(). setWindow(_window, win);
       glfwMakeContextCurrent(_window);
       if (_window == NULL)
       {
@@ -176,7 +163,7 @@ namespace YolonaOss {
         loadList.push_back(renderStep);
       }
       for (auto renderStep : loadList)
-        renderStep->load(&spec);
+        renderStep->load(&spec);      
 
       // Game loop
       while (!glfwWindowShouldClose(_window))
@@ -184,7 +171,7 @@ namespace YolonaOss {
         _mouseWheelMovement = 0;
         // Check if any events have been activated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
-        mouseMovementCalls();
+        InputHandling::getInstance().updateEvent();
         for (auto update : Iyathuum::Database<std::shared_ptr <Updateable>>::getByTag("Main"))
           update->update();
 
@@ -193,9 +180,7 @@ namespace YolonaOss {
           draw->draw();
         Update();
 
-        // Swap the screen buffers
         glfwSwapBuffers(_window);
-
       }
 
       // Terminates GLFW, clearing any resources allocated by GLFW.
@@ -205,56 +190,13 @@ namespace YolonaOss {
     Widgets::Widget* pressed = nullptr;
     void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     {
-      double xpos, ypos;
-      glfwGetCursorPos(window, &xpos, &ypos);
-      glm::vec2 mousePos((float)xpos, (float)(win->getHeight() - ypos));
-
-      std::set<Widgets::Widget*> mouseStatusWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseStatus");
-      KeyStatus status = (KeyStatus)action;
-      for (auto w : mouseStatusWidgets) {
-        bool stop = w->mouseStatusChanged(mousePos - Util<2>::array2Vec(w->getPosition().getPosition()), (Key)button, status);
-        if (stop)
-          return;
-      }
-
-      std::set<Widgets::Widget*> clickableWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseClick");
-      for (auto w : clickableWidgets) {
-        if (w->getPosition().isInside(Util<2>::vec2Array<double>( mousePos))) {
-          if (status == KeyStatus::PRESS)
-            pressed = w;
-          else
-            if (action == (int)KeyStatus::RELEASE && pressed == w) {
-              bool stop = w->mouseClick(mousePos - Util<2>::array2Vec(w->getPosition().getPosition()), (Key)button);
-              if (stop)
-                return;
-            }
-        }
-      }
-      std::set<std::function<bool(double, double)>*> functions = Iyathuum::Database<std::function<bool(double, double)>*>::getByTag("MouseClick");
-      if(action == (int)KeyStatus::PRESS) {
-        for (auto f : functions) {
-          bool stop = (*f)(xpos, ypos);
-          if (stop)
-            return;
-        }
-        std::set<std::function<bool(double, double)>> functions2 = Iyathuum::Database<std::function<bool(double, double)>>::getByTag("MouseClick");
-        for (auto f : functions2) {
-          bool stop = f(xpos, ypos);
-          if (stop)
-            return;
-        }
-      }
-      if (action == (int)KeyStatus::RELEASE)
-        pressed = nullptr;
+      InputHandling::getInstance().mouseEvent((Key)button, (KeyStatus)action, mods);
     }
 
     void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
     {
-      std::set<Widgets::Widget*> inputWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("KeyboardInput");
-      for (auto i : inputWidgets)
-        i->keyboardInput((YolonaOss::GL::Key)key, (YolonaOss::GL::KeyStatus)action);
-
-      if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+      InputHandling::getInstance().keyEvent((YolonaOss::GL::Key)key, (YolonaOss::GL::KeyStatus)action, mode);
+      if ((int)key == GLFW_KEY_ESCAPE && (int)action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
     }
 

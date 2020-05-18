@@ -7,6 +7,7 @@
 #include "../../Renderer/TextRenderer.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include "Util/Util.h"
+#include "OpenGL/InputHandling.h"
 
 namespace YolonaOss {
   namespace Widgets {
@@ -35,7 +36,10 @@ namespace YolonaOss {
     void LineEdit::draw()
     {
       RectangleRenderer::start();
-      RectangleRenderer::drawRectangle(getPosition(), glm::vec3(0.9f, 0.9f, 0.9f));
+      if (YolonaOss::GL::InputHandling::getInstance().getCurrentFocus() == this)
+        RectangleRenderer::drawRectangle(getPosition(), glm::vec3(0.6f, 0.6f, 0.6f));
+      else
+        RectangleRenderer::drawRectangle(getPosition(), glm::vec3(0.9f, 0.9f, 0.9f));
       RectangleRenderer::end();
       glm::vec2 textSize = TextRenderer::getTextSize(_text, 1);
       glm::vec2 spacing = (Util<2>::array2Vec(getPosition().getSize()) - textSize) / 2.0f;
@@ -66,46 +70,46 @@ namespace YolonaOss {
       return true;
     };
 
-    bool LineEdit::keyboardInput(YolonaOss::GL::Key key, YolonaOss::GL::KeyStatus status) {      
+    void LineEdit::focusedKeyboardInput(YolonaOss::GL::Key key, YolonaOss::GL::KeyStatus status) {
       auto left   = YolonaOss::GL::Key::KEY_LEFT;
       auto right  = YolonaOss::GL::Key::KEY_RIGHT;
       auto del    = YolonaOss::GL::Key::KEY_DELETE;
       auto remove = YolonaOss::GL::Key::KEY_BACKSPACE;
 
       if (status == YolonaOss::GL::KeyStatus::RELEASE)
-        return true;
+        return;
 
       if (key == del) {
         if (_cursorPosition < _text.size()) {
           _text = _text.substr(0, _cursorPosition) + _text.substr(_cursorPosition + 1);
         }
-        return true;
+        return;
       }
       if (key == remove) {
         if (_cursorPosition > 0) {
           _text = _text.substr(0, _cursorPosition - 1) + _text.substr(_cursorPosition);
           _cursorPosition--;
         }
-        return true;
+        return;
       }
       if (key == left) {
         if (_cursorPosition > 0)
           _cursorPosition--;
-        return true;
+        return;
       }
       if (key == right){
         if(_cursorPosition < _text.size())
           _cursorPosition++;
-        return true;
+        return;
       }
 
       if (!YolonaOss::GL::CharacterSets::AlphanumericKeys.contains(key) &&
         !YolonaOss::GL::CharacterSets::InputExtraSymbols.contains(key))
-        return false;
+        return;
 
       _text = _text.substr(0, _cursorPosition) + (char)key + _text.substr(_cursorPosition);
       _cursorPosition++;
-      return true;
+      return;
     }
 
   }

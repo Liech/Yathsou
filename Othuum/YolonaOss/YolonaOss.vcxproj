@@ -222,6 +222,7 @@
     <ClInclude Include="OpenGL\DrawableList.h" />
     <ClInclude Include="OpenGL\DrawSpecification.h" />
     <ClInclude Include="OpenGL\IBO.h" />
+    <ClInclude Include="OpenGL\InputHandling.h" />
     <ClInclude Include="OpenGL\Keys.h" />
     <ClInclude Include="OpenGL\Loadable.h" />
     <ClInclude Include="OpenGL\PositionColorNormalVertex.h" />
@@ -276,6 +277,7 @@
     <ClCompile Include="OpenGL\DrawableList.cpp" />
     <ClCompile Include="OpenGL\DrawSpecification.cpp" />
     <ClCompile Include="OpenGL\IBO.cpp" />
+    <ClCompile Include="OpenGL\InputHandling.cpp" />
     <ClCompile Include="OpenGL\Key.cpp" />
     <ClCompile Include="OpenGL\Rendertarget.cpp" />
     <ClCompile Include="OpenGL\ShaderProgram.cpp" />
