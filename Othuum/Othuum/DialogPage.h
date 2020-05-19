@@ -13,6 +13,10 @@ namespace YolonaOss {
   }
 }
 
+enum class DialogPageStatus {
+  InProgress,Finished
+};
+
 class DialogPage : public YolonaOss::GL::Drawable {
 public:
   DialogPage(int width, int height);
@@ -23,7 +27,6 @@ public:
   void setVisible(bool visible);
 
   void addButton(std::string name, std::function<void()> onClicked);
-
 private:
   Iyathuum::AABB<2> getAABB();
   const int buttonWidth = 500;

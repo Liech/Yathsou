@@ -30,6 +30,7 @@ namespace Iyathuum {
     static inline std::map<BaseClass, std::set<TagType>>          dataAndTags;
     static inline std::map<TagType, std::set<BaseClass>>          tagMap;
     static inline bool                                            addedToTerminator;
+    static inline bool                                            terminated = false;
   public:
 
     static void add(BaseClass object, const std::set<TagType> tags) {
@@ -46,6 +47,8 @@ namespace Iyathuum {
     }
 
     static void remove(BaseClass object) {
+      if (terminated)
+        return;
       if (!dataAndTags.count(object))
         throw std::runtime_error("Not registered here");
       std::set<TagType> tags = dataAndTags[object];
@@ -63,6 +66,7 @@ namespace Iyathuum {
     static void terminate() {
       dataAndTags.clear();
       tagMap.clear();
+      terminated = true;
     }
 
   };

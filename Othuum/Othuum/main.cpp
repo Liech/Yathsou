@@ -20,7 +20,7 @@
 #include "YolonaOss/Drawables/Widgets/LineEdit.h"
 #include <iomanip>
 
-#include "DialogPage.h"
+#include "MainMenuPage.h"
 
 using namespace YolonaOss;
 
@@ -30,16 +30,9 @@ int main() {
     int height = 880;
     GL::Window w(width, height);
 
-    std::shared_ptr<DialogPage> mainMenu = std::make_shared<DialogPage>(1420,880);
+    std::shared_ptr<MainMenuPage> mainMenu = std::make_shared<MainMenuPage>(width,height);
+
     Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(mainMenu, { "Main" });
-
-    mainMenu->addButton("HUHU", []() {std::cout << "HUHU" << std::endl; });
-    mainMenu->addButton("HUHU", []() {std::cout << "HUHU" << std::endl; });
-    mainMenu->addButton("HUHU", []() {std::cout << "HUHU" << std::endl; });
-
-
-    std::shared_ptr<YolonaOss::Widgets::LineEdit> lineEdit = std::make_shared<YolonaOss::Widgets::LineEdit>("Kartoffel", Iyathuum::AABB<2>({0,0}, {200,100}));
-    Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(lineEdit, { "Main" });
 
     w.Update = [&w, width, height]() {
 
