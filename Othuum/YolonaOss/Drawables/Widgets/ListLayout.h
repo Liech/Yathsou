@@ -17,6 +17,9 @@ namespace YolonaOss {
               void removeWidget(int w);
       virtual void draw() override;
               void setHorizontal(bool horizontal);
+      virtual void setVisible(bool visible) override;
+
+      std::vector<std::shared_ptr<Widget>> getWidgets();
 
     private:
       const float spacing = 0;

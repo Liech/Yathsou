@@ -11,19 +11,19 @@ namespace YolonaOss {
     Button::Button() : Widget()
     {
       _name = "Def";
-      Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseClick" });
+      setVisible(true);
     }
 
     Button::Button(std::string name, Iyathuum::AABB<2> position, std::function<void(void)> clickedFunction) : Widget(position) {
       _clickedFunction = clickedFunction;
       _name = name;
-      Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseClick" });
+      setVisible(true);
     }
 
 
     Button::~Button()
     {
-      Iyathuum::Database<Widgets::Widget*>::remove(this);
+      setVisible(false);
     }
 
     void Button::load(GL::DrawSpecification*)
@@ -33,6 +33,9 @@ namespace YolonaOss {
 
     void Button::draw()
     {
+      if (!isVisible())
+        return;
+
       RectangleRenderer::start();
       RectangleRenderer::drawRectangle(getPosition(), _hovered ? glm::vec3(0.8f, 0.8f, 0.8f) : glm::vec3(0.4f, 0.4f, 0.4f));
       RectangleRenderer::end();
@@ -56,5 +59,14 @@ namespace YolonaOss {
       _clickedFunction();
       return true;
     };
+
+    void Button::setVisible(bool visible) {
+      if (visible && !isVisible())   
+        Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseClick" });
+      else if (!visible && isVisible())
+        Iyathuum::Database<Widgets::Widget*>::remove(this);
+      Widget::setVisible(visible);
+    }
+
   }
 }

@@ -10,5 +10,11 @@ namespace YolonaOss {
     void Widget::setPosition(Iyathuum::AABB<2> pos) {
       _position = pos;
     }
+    
+    void Widget::setVisible(bool visible) {
+      _visible = visible;
+    }
+
+
   }
 }

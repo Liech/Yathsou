@@ -14,18 +14,18 @@ namespace YolonaOss {
     LineEdit::LineEdit() : Widget()
     {
       _text = "Def";
-      Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseClick","KeyboardInput" });     
+      setVisible(true);
     }
 
     LineEdit::LineEdit(std::string text, Iyathuum::AABB<2> position) : Widget(position) {
       _text = text;
-      Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseClick","KeyboardInput" });
+      setVisible(true);
     }
 
 
     LineEdit::~LineEdit()
     {
-      Iyathuum::Database<Widgets::Widget*>::remove(this);
+      setVisible(false);
     }
 
     void LineEdit::load(GL::DrawSpecification*)
@@ -35,6 +35,9 @@ namespace YolonaOss {
 
     void LineEdit::draw()
     {
+      if (!isVisible())
+        return;
+
       RectangleRenderer::start();
       if (YolonaOss::GL::InputHandling::getInstance().getCurrentFocus() == this)
         RectangleRenderer::drawRectangle(getPosition(), glm::vec3(0.6f, 0.6f, 0.6f));
@@ -123,6 +126,15 @@ namespace YolonaOss {
       _text = _text.substr(0, _cursorPosition) + (char)key + _text.substr(_cursorPosition);
       _cursorPosition++;
       return;
+    }
+
+    void LineEdit::setVisible(bool visible) {
+      if (visible && !isVisible())
+        Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseClick","KeyboardInput" });
+      else if (!visible && isVisible())
+        Iyathuum::Database<Widgets::Widget*>::remove(this);
+
+      Widget::setVisible(visible);
     }
 
   }

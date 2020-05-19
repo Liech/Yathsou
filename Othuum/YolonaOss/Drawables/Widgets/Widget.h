@@ -32,9 +32,13 @@ namespace YolonaOss {
       virtual void load(GL::DrawSpecification*) override{}
 
       Iyathuum::AABB<2> getPosition() const;
-      void setPosition(Iyathuum::AABB<2> pos);
+              void setPosition(Iyathuum::AABB<2> pos);
+      virtual void setVisible(bool visible);
+    protected:
+      bool isVisible() { return _visible; }
     private:
       Iyathuum::AABB<2> _position;
+      bool              _visible  = false;
     };
   }
 }

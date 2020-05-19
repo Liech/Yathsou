@@ -6,7 +6,7 @@
 namespace YolonaOss {
   namespace Widgets {
     ListLayout::ListLayout(Iyathuum::AABB<2> position) : Widget(position) {
-
+      setVisible(true);
     }
 
     int  ListLayout::addWidget(std::shared_ptr<Widget> w) {
@@ -19,6 +19,9 @@ namespace YolonaOss {
     }
 
     void ListLayout::draw() {
+      if (!isVisible())
+        return;
+
       RectangleRenderer::start();
       RectangleRenderer::drawRectangle(getPosition(), glm::vec3(0.7f, 0.7f, 0.7f));
       RectangleRenderer::end();
@@ -49,5 +52,17 @@ namespace YolonaOss {
       addWidget(b);
       return b;
     }
+
+    void ListLayout::setVisible(bool visible) {
+      for (auto w : _widgets)
+        setVisible(visible);
+
+      Widget::setVisible(visible);
+    }
+
+    std::vector<std::shared_ptr<Widget>> ListLayout::getWidgets() {
+      return _widgets;
+    }
+
   }
 }

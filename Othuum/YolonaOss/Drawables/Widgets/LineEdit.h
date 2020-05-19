@@ -20,6 +20,7 @@ namespace YolonaOss {
       virtual void draw()                                    override;
       virtual bool mouseClick(glm::vec2 position, GL::Key k) override;
       virtual void focusedKeyboardInput(YolonaOss::GL::Key key, YolonaOss::GL::KeyStatus status) override;
+      virtual void setVisible(bool visible) override;
 
     private:
       std::string _text           = "";

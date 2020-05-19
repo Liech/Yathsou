@@ -11,6 +11,7 @@ namespace YolonaOss {
     Label::Label() : Widget()
     {
       _name = "Def";
+      setVisible(true);
     }
 
     Label::Label(std::string name, Iyathuum::AABB<2> position) : Widget(position) {
@@ -29,6 +30,9 @@ namespace YolonaOss {
 
     void Label::draw()
     {
+      if (!isVisible())
+        return;
+
       RectangleRenderer::start();
       RectangleRenderer::drawRectangle(getPosition(), glm::vec3(0.6f, 0.6f, 0.6f));
       RectangleRenderer::end();

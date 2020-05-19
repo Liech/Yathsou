@@ -24,6 +24,7 @@ namespace YolonaOss {
 
       double getValue() { return _currentValue; }
       void   setValue(double value, bool emit = true);
+      virtual void setVisible(bool visible) override;
 
     private:
       Iyathuum::AABB<2> getSliderLocation();

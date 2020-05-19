@@ -18,12 +18,12 @@ namespace YolonaOss {
       _currentValue = startValue;
       _min = min;
       _max = max;
-      Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseMove","MouseStatus" });
+      setVisible(true);
     }
 
     Slider::~Slider()
     {
-      Iyathuum::Database<Widgets::Widget*>::remove(this);
+      setVisible(false);
     }
 
     void Slider::load(GL::DrawSpecification*)
@@ -33,6 +33,8 @@ namespace YolonaOss {
 
     void Slider::draw()
     {
+      if (!isVisible())
+        return;
       RectangleRenderer::start();
       RectangleRenderer::drawRectangle(getPosition(), _hovered ? glm::vec3(0.8f, 0.8f, 0.8f) : glm::vec3(0.4f, 0.4f, 0.4f));
       RectangleRenderer::drawRectangle(getBarLocation(), _hovered ? glm::vec3(0.2f, 0.2f, 0.2f) : glm::vec3(0.0f, 0.0f, 0.0f));
@@ -119,5 +121,14 @@ namespace YolonaOss {
       if (emit)
         _valueChangedCall(value);
     }
+
+    void Slider::setVisible(bool visible) {      
+      if (visible && !isVisible())
+        Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseMove","MouseStatus" });
+      else if (!visible && isVisible())
+        Iyathuum::Database<Widgets::Widget*>::remove(this);
+      Widget::setVisible(visible);
+    }
+
   }
 }
