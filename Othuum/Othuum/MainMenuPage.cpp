@@ -2,16 +2,33 @@
 
 #include <iostream>
 
-#include "DialogPage.h"
+#include "YolonaOss/OpenGL/Window.h"
 
+MainMenuPage::MainMenuPage(){
+}
 
-MainMenuPage::MainMenuPage(int resolutionX, int resolutionY){
-  _page = std::make_unique<DialogPage>(resolutionX,resolutionY);
-  _page->addButton("HALLODRI", []() {std::cout << "Moin" << std::endl; });
-  _page->addButton("OLA", []() {std::cout << "Una Serviza Por Favor" << std::endl; });
+void MainMenuPage::load(YolonaOss::GL::DrawSpecification* spec) {
+  _page = std::make_unique<DialogPage>(spec->width, spec->height);
+  _page->addButton("Multiplayer", [this]() { startLobbyJoin(); });
+  _page->addButton("Quit"       , [spec]() { spec->getWindow()->close(); });
+}
+
+void MainMenuPage::startLobbyJoin() {
+  _status = MainMenuPageStatus::Multiplayer;
+}
+
+MainMenuPageStatus MainMenuPage::getStatus() {
+  return _status;
 }
 
 void MainMenuPage::draw() {
   _page->draw();
 }
 
+void MainMenuPage::setVisible(bool vis) {
+  _page->setVisible(vis);
+}
+
+void MainMenuPage::reset() {
+  _status = MainMenuPageStatus::Pending;
+}

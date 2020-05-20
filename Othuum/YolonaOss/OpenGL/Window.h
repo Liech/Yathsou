@@ -17,6 +17,7 @@ namespace YolonaOss {
       ~Window();
 
       void run();
+      void close();
 
       std::function<void()> Startup = []() {};
       std::function<void()> Update = []() {};

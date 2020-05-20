@@ -55,7 +55,7 @@ namespace YolonaOss {
 
     void ListLayout::setVisible(bool visible) {
       for (auto w : _widgets)
-        setVisible(visible);
+        w->setVisible(visible);
 
       Widget::setVisible(visible);
     }

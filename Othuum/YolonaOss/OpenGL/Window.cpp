@@ -229,5 +229,9 @@ namespace YolonaOss {
     float Window::getMouseWheelMovement() {
       return _mouseWheelMovement;
     }
+
+    void Window::close() {
+      glfwSetWindowShouldClose(_window, GL_TRUE);
+    }
   }
 }

@@ -4,7 +4,7 @@
 
 #include "YolonaOss/OpenGL/Drawable.h"
 
-class DialogPage;
+#include "DialogPage.h"
 
 namespace YolonaOss {
   namespace GL {
@@ -12,15 +12,25 @@ namespace YolonaOss {
   }
 }
 
+enum class MainMenuPageStatus {
+  Pending, Multiplayer
+};
+
 class MainMenuPage : public YolonaOss::GL::Drawable {
 public:
-  MainMenuPage(int resolutionX, int resolutionY);
+  MainMenuPage();
 
-  virtual void draw()                   override;
-  virtual void load(YolonaOss::GL::DrawSpecification*) override {};
-
+  MainMenuPageStatus getStatus();
+  virtual void       draw()                                  override;
+  virtual void       load(YolonaOss::GL::DrawSpecification*) override;
+  
+  void reset();
+  void setVisible(bool vis);
 
 private:
-  std::unique_ptr<DialogPage> _page;
+  void startLobbyJoin();
 
+private:
+  std::unique_ptr<DialogPage> _page  ;
+  MainMenuPageStatus          _status = MainMenuPageStatus::Pending;
 };

@@ -21,6 +21,7 @@
 #include <iomanip>
 
 #include "MainMenuPage.h"
+#include "JoinLobbyPage.h"
 
 using namespace YolonaOss;
 
@@ -29,13 +30,28 @@ int main() {
     int width = 1420;
     int height = 880;
     GL::Window w(width, height);
+    
+    enum class status { MainMenu, LobbyEntry } stat= status::MainMenu;
 
-    std::shared_ptr<MainMenuPage> mainMenu = std::make_shared<MainMenuPage>(width,height);
+    std::shared_ptr<MainMenuPage > mainMenu   = std::make_shared<MainMenuPage >();
+    std::shared_ptr<JoinLobbyPage> lobbyEntry = std::make_shared<JoinLobbyPage>();
 
-    Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(mainMenu, { "Main" });
+    Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(mainMenu  , { "Main" });
+    Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(lobbyEntry, { "Main" });
 
-    w.Update = [&w, width, height]() {
-
+    w.Update = [mainMenu, lobbyEntry,&stat]() {
+      if (mainMenu->getStatus() == MainMenuPageStatus::Multiplayer && stat == status::MainMenu) {
+        mainMenu->reset();
+        mainMenu  ->setVisible(false);
+        lobbyEntry->setVisible(true);
+        stat = status::LobbyEntry;
+      }
+      else if (lobbyEntry->getStatus() == JoinLobbyPageStatus::Back && stat == status::LobbyEntry) {
+        mainMenu  ->setVisible(true);
+        lobbyEntry->setVisible(false);
+        stat = status::MainMenu;
+        lobbyEntry->reset();
+      }
     };
     w.run();
   }
