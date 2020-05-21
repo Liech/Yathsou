@@ -26,7 +26,8 @@ public:
   
   void setVisible(bool visible);
 
-  void addButton(std::string name, std::function<void()> onClicked);
+  YolonaOss::Widgets::ListLayout& layout();
+
 private:
   Iyathuum::AABB<2> getAABB();
   const int buttonWidth = 500;

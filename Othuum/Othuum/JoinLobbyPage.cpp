@@ -2,11 +2,21 @@
 
 #include <iostream>
 
+#include "YolonaOss/Drawables/Widgets/ListLayout.h"
+
+JoinLobbyPage::JoinLobbyPage(std::shared_ptr<ClientConfiguration> configuration) {
+  _config = configuration;
+}
 
 void JoinLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
-  _page->addButton("LOBBY", []() {std::cout << "Moin" << std::endl; });
-  _page->addButton("Back", [this]() { goBack(); });
+
+  auto sub = _page->layout().addLayout();  
+  sub->setHorizontal(true);
+  sub->addLabel("Name:");
+  
+  _page->layout().addButton("LOBBY", []() {std::cout << "Moin" << std::endl; });
+  _page->layout().addButton("Back", [this]() { goBack(); });
   setVisible(false);
 }
 

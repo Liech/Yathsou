@@ -23,10 +23,6 @@ void DialogPage::draw()
   _layout->draw();
 }
 
-void DialogPage::addButton(std::string name, std::function<void()> onClicked) {
-  _layout->addButton(name, onClicked);
-}
-
 Iyathuum::AABB<2> DialogPage::getAABB() {
   if (_layout == nullptr)
     return Iyathuum::AABB<2>();
@@ -39,4 +35,8 @@ Iyathuum::AABB<2> DialogPage::getAABB() {
 void DialogPage::setVisible(bool visible) {
   _layout->setVisible(visible);
   _visible = visible; 
+}
+
+YolonaOss::Widgets::ListLayout& DialogPage::layout() {
+  return *_layout;
 }

@@ -2,6 +2,7 @@
 #include "../../Renderer/RectangleRenderer.h"
 #include "IyathuumCoreLib/Util/Geometry.h"
 #include "Drawables/Widgets/Button.h"
+#include "Drawables/Widgets/Label.h"
 
 namespace YolonaOss {
   namespace Widgets {
@@ -51,6 +52,18 @@ namespace YolonaOss {
       std::shared_ptr<Widgets::Button> b = std::make_shared<Widgets::Button>(name, Iyathuum::AABB<2>(std::array<double, 2>{ 0.0, 0.0 }, std::array<double, 2>{ getPosition().getSize()[0], 50.0 }), [onClicked]() { onClicked(); });
       addWidget(b);
       return b;
+    }
+
+    std::shared_ptr<Widgets::ListLayout> ListLayout::addLayout() {
+      std::shared_ptr<Widgets::ListLayout> l = std::make_shared<Widgets::ListLayout>(Iyathuum::AABB<2>(std::array<double, 2>{ 0.0, 0.0 }, std::array<double, 2>{ getPosition().getSize()[0], 50.0 }));
+      addWidget(l);
+      return l;
+    }
+
+    std::shared_ptr<Widgets::Label> ListLayout::addLabel(std::string text){
+      std::shared_ptr<Widgets::Label> l = std::make_shared<Widgets::Label>(text,Iyathuum::AABB<2>(std::array<double, 2>{ 0.0, 0.0 }, std::array<double, 2>{ getPosition().getSize()[0], 50.0 }));
+      addWidget(l);
+      return l;
     }
 
     void ListLayout::setVisible(bool visible) {

@@ -150,15 +150,18 @@
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ClientConfiguration.cpp" />
     <ClCompile Include="DialogPage.cpp" />
     <ClCompile Include="DrawCubes.cpp" />
     <ClCompile Include="JoinLobbyPage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenuLogic.cpp" />
     <ClCompile Include="MainMenuPage.cpp" />
     <ClCompile Include="PhysicalModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Architecture\Decisions.h" />
+    <ClInclude Include="ClientConfiguration.h" />
     <ClInclude Include="DialogPage.h" />
     <ClInclude Include="DrawCubes.h" />
     <ClInclude Include="JoinLobbyPage.h" />
@@ -224,6 +227,7 @@
     <ClInclude Include="Lib\nop\utility\stream_reader.h" />
     <ClInclude Include="Lib\nop\utility\stream_writer.h" />
     <ClInclude Include="Lib\nop\value.h" />
+    <ClInclude Include="MainMenuLogic.h" />
     <ClInclude Include="MainMenuPage.h" />
     <ClInclude Include="PhysicalModel.h" />
     <ClInclude Include="Serial\Building.h" />

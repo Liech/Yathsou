@@ -3,14 +3,15 @@
 #include <iostream>
 
 #include "YolonaOss/OpenGL/Window.h"
+#include "YolonaOss/Drawables/Widgets/ListLayout.h"
 
 MainMenuPage::MainMenuPage(){
 }
 
 void MainMenuPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
-  _page->addButton("Multiplayer", [this]() { startLobbyJoin(); });
-  _page->addButton("Quit"       , [spec]() { spec->getWindow()->close(); });
+  _page->layout().addButton("Multiplayer", [this]() { startLobbyJoin(); });
+  _page->layout().addButton("Quit"       , [spec]() { spec->getWindow()->close(); });
 }
 
 void MainMenuPage::startLobbyJoin() {

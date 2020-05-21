@@ -20,40 +20,30 @@
 #include "YolonaOss/Drawables/Widgets/LineEdit.h"
 #include <iomanip>
 
-#include "MainMenuPage.h"
-#include "JoinLobbyPage.h"
+#include "ClientConfiguration.h"
+#include "MainMenuLogic.h"
 
 using namespace YolonaOss;
 
 int main() { 
   {
-    int width = 1420;
-    int height = 880;
+    std::shared_ptr<ClientConfiguration> configuration = std::make_shared<ClientConfiguration>();
+    std::string configFileName = "ClientConfiguration.json";
+    configuration->fromJsonFile(configFileName);
+
+    int width  = configuration->resolution[0];
+    int height = configuration->resolution[1];
     GL::Window w(width, height);
     
-    enum class status { MainMenu, LobbyEntry } stat= status::MainMenu;
+    MainMenuLogic logic(configuration);
 
-    std::shared_ptr<MainMenuPage > mainMenu   = std::make_shared<MainMenuPage >();
-    std::shared_ptr<JoinLobbyPage> lobbyEntry = std::make_shared<JoinLobbyPage>();
+    w.Update = [&logic]() {
+      logic.update();
 
-    Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(mainMenu  , { "Main" });
-    Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(lobbyEntry, { "Main" });
-
-    w.Update = [mainMenu, lobbyEntry,&stat]() {
-      if (mainMenu->getStatus() == MainMenuPageStatus::Multiplayer && stat == status::MainMenu) {
-        mainMenu->reset();
-        mainMenu  ->setVisible(false);
-        lobbyEntry->setVisible(true);
-        stat = status::LobbyEntry;
-      }
-      else if (lobbyEntry->getStatus() == JoinLobbyPageStatus::Back && stat == status::LobbyEntry) {
-        mainMenu  ->setVisible(true);
-        lobbyEntry->setVisible(false);
-        stat = status::MainMenu;
-        lobbyEntry->reset();
-      }
     };
     w.run();
+
+    configuration->toJsonFile(configFileName);
   }
   Iyathuum::DatabaseTerminator::terminateAll();
   std::cout << "Programm Termination" << std::endl;
