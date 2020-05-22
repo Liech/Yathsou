@@ -6,7 +6,7 @@
 
 namespace YolonaOss {
   namespace Widgets {
-    ListLayout::ListLayout(Iyathuum::AABB<2> position) : Widget(position) {
+    ListLayout::ListLayout(Iyathuum::AABB<2> position, Widget* parent) : Widget(position, parent){
       setVisible(true);
     }
 
@@ -24,22 +24,10 @@ namespace YolonaOss {
         return;
 
       RectangleRenderer::start();
-      RectangleRenderer::drawRectangle(getPosition(), glm::vec3(0.7f, 0.7f, 0.7f));
+      RectangleRenderer::drawRectangle(getGlobalPosition(), glm::vec3(0.7f, 0.7f, 0.7f));
       RectangleRenderer::end();
 
-      glm::vec2 offset(0.0);
-      if (_widgets.size() > 0)
-        offset += glm::vec2(0,_widgets[0]->getPosition().getSize()[1]);
-
       for (auto w : _widgets) {
-        Iyathuum::AABB<2> pos = w->getPosition();
-        pos.setPosition(Iyathuum::Geometry<2>::add(Iyathuum::Geometry<2>::add(getPosition().getPosition() , {0, getPosition().getSize()[1]}) ,{offset[0], -offset[1]}));
-      
-        if (_horizontal)
-          offset += glm::vec2(pos.getSize()[0] + spacing, 0);
-        else
-          offset += glm::vec2(0, pos.getSize()[1] + spacing);
-        w->setPosition(pos);
         w->draw();
       }
     }
@@ -49,21 +37,28 @@ namespace YolonaOss {
     }
 
     std::shared_ptr<Widgets::Button> ListLayout::addButton(std::string name, std::function<void()> onClicked, Iyathuum::AABB<2> size) {
-      std::shared_ptr<Widgets::Button> b = std::make_shared<Widgets::Button>(name, Iyathuum::AABB<2>(std::array<double, 2>{ 0.0, 0.0 }, std::array<double, 2>{ getPosition().getSize()[0], 50.0 }), [onClicked]() { onClicked(); });
+      std::shared_ptr<Widgets::Button> b = std::make_shared<Widgets::Button>(name, getElementSize(), [onClicked]() { onClicked(); },this);
       addWidget(b);
       return b;
     }
 
     std::shared_ptr<Widgets::ListLayout> ListLayout::addLayout() {
-      std::shared_ptr<Widgets::ListLayout> l = std::make_shared<Widgets::ListLayout>(Iyathuum::AABB<2>(std::array<double, 2>{ 0.0, 0.0 }, std::array<double, 2>{ getPosition().getSize()[0], 50.0 }));
+      std::shared_ptr<Widgets::ListLayout> l = std::make_shared<Widgets::ListLayout>(getElementSize(),this);
       addWidget(l);
       return l;
     }
 
     std::shared_ptr<Widgets::Label> ListLayout::addLabel(std::string text){
-      std::shared_ptr<Widgets::Label> l = std::make_shared<Widgets::Label>(text,Iyathuum::AABB<2>(std::array<double, 2>{ 0.0, 0.0 }, std::array<double, 2>{ getPosition().getSize()[0], 50.0 }));
+      std::shared_ptr<Widgets::Label> l = std::make_shared<Widgets::Label>(text, getElementSize());
       addWidget(l);
       return l;
+    }
+
+    Iyathuum::AABB<2> ListLayout::getElementSize() {
+      //if (!_horizontal)
+        return Iyathuum::AABB<2>(std::array<double, 2>{ 0.0, 0.0 }, std::array<double, 2>{ getPosition().getSize()[0], 50.0 });
+      //else
+        //return Iyathuum::AABB<2>(std::array<double, 2>{ 0.0, 0.0 }, std::array<double, 2>{ 50.0 , getPosition().getSize()[0]});
     }
 
     void ListLayout::setVisible(bool visible) {
@@ -75,6 +70,33 @@ namespace YolonaOss {
 
     std::vector<std::shared_ptr<Widget>> ListLayout::getWidgets() {
       return _widgets;
+    }
+
+    void ListLayout::adjustSize(){
+      double maxOffset = 0;
+      if (!_horizontal)
+        for (auto w : _widgets)
+          maxOffset += w->getPosition().getSize()[1];
+      double offset = _horizontal?0:maxOffset;
+      double max = 0;
+      for (auto w : _widgets) {
+        w->adjustSize();
+
+        if (!_horizontal) {
+          w->getPosition().setPosition(std::array<double, 2>{0,offset});
+          max = std::max(max,w->getPosition().getSize()[0]);
+          offset -= w->getPosition().getSize()[1];
+        }
+        else {
+          w->getPosition().setPosition(std::array<double, 2>{offset,0});
+          max = std::max(max,w->getPosition().getSize()[1]);
+          offset += w->getPosition().getSize()[0];
+        }         
+      }
+      if (_horizontal)
+        getPosition().setSize(std::array<double, 2>{offset, max});
+      else
+        getPosition().setSize(std::array<double, 2>{max, maxOffset});
     }
 
   }

@@ -12,9 +12,14 @@ void JoinLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
 
   auto sub = _page->layout().addLayout();  
+
   sub->setHorizontal(true);
-  sub->addLabel("Name:");
-  
+  //sub->addLabel("Name:");
+  auto but = sub->addButton("emaN", []() {std::cout << "HUHU" << std::endl; });
+  but->getPosition().setSize({ 250,50 });
+  auto but2 = sub->addButton("eeeemaN", []() {std::cout << "HUHU" << std::endl; });
+  but2->getPosition().setSize({ 250,50 });
+
   _page->layout().addButton("LOBBY", []() {std::cout << "Moin" << std::endl; });
   _page->layout().addButton("Back", [this]() { goBack(); });
   setVisible(false);

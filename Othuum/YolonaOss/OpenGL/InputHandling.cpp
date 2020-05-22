@@ -49,14 +49,14 @@ namespace YolonaOss {
 
       std::set<Widgets::Widget*> mouseStatusWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseStatus");
       for (auto w : mouseStatusWidgets) {
-        bool stop = w->mouseStatusChanged(mousePos - Util<2>::array2Vec(w->getPosition().getPosition()), key, status);
+        bool stop = w->mouseStatusChanged(mousePos - Util<2>::array2Vec(w->getGlobalPosition().getPosition()), key, status);
         if (stop)
           return;
       }
       bool hit = false;
       std::set<Widgets::Widget*> clickableWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseClick");
       for (auto w : clickableWidgets) {
-        if (w->getPosition().isInside(Util<2>::vec2Array<double>(mousePos))) {
+        if (w->getGlobalPosition().isInside(Util<2>::vec2Array<double>(mousePos))) {
           hit = true;
           if (status == KeyStatus::PRESS) {
             _pressedWidget = w;
@@ -64,7 +64,7 @@ namespace YolonaOss {
           }
           else
             if (status == KeyStatus::RELEASE && _pressedWidget == w) {
-              bool stop = w->mouseClick(mousePos - Util<2>::array2Vec(w->getPosition().getPosition()), key);
+              bool stop = w->mouseClick(mousePos - Util<2>::array2Vec(w->getGlobalPosition().getPosition()), key);
               if (stop)
                 return;
             }

@@ -24,7 +24,7 @@ public:
 private:
   void goBack();
 
-  std::unique_ptr<DialogPage> _page  ;
+  std::unique_ptr<DialogPage> _page;
   
   JoinLobbyPageStatus                  _status = JoinLobbyPageStatus::Pending;
   std::shared_ptr<ClientConfiguration> _config;

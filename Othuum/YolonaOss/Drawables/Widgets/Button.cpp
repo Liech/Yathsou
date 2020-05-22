@@ -14,7 +14,7 @@ namespace YolonaOss {
       setVisible(true);
     }
 
-    Button::Button(std::string name, Iyathuum::AABB<2> position, std::function<void(void)> clickedFunction) : Widget(position) {
+    Button::Button(std::string name, Iyathuum::AABB<2> position, std::function<void(void)> clickedFunction, Widget* parent) : Widget(position,parent) {
       _clickedFunction = clickedFunction;
       _name = name;
       setVisible(true);
@@ -37,12 +37,12 @@ namespace YolonaOss {
         return;
 
       RectangleRenderer::start();
-      RectangleRenderer::drawRectangle(getPosition(), _hovered ? glm::vec3(0.8f, 0.8f, 0.8f) : glm::vec3(0.4f, 0.4f, 0.4f));
+      RectangleRenderer::drawRectangle(getGlobalPosition(), _hovered ? glm::vec3(0.8f, 0.8f, 0.8f) : glm::vec3(0.4f, 0.4f, 0.4f));
       RectangleRenderer::end();
       glm::vec2 textSize = TextRenderer::getTextSize(_name, 1);
-      glm::vec2 spacing = (glm::vec2(getPosition().getSize()[0], getPosition().getSize()[1]) - textSize) / 2.0f;
+      glm::vec2 spacing = (glm::vec2(getGlobalPosition().getSize()[0], getGlobalPosition().getSize()[1]) - textSize) / 2.0f;
       TextRenderer::start();
-      glm::vec2 pos = Util<2>::array2Vec(getPosition().getPosition()) + spacing;
+      glm::vec2 pos = Util<2>::array2Vec(getGlobalPosition().getPosition()) + spacing;
       TextRenderer::drawText(_name, pos, 1, glm::vec3(0, 0, 0));
       TextRenderer::end();
     }
