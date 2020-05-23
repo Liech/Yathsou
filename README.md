@@ -8,6 +8,7 @@ RTS Engine fragments
   * Basic OpenGL Renderer are available
   * Flocking & Flowfield Navigation is possible
   * Network communication
+  * GUI System with nested layouts
 * Next Milestones:
   * Lobby & Host protocolls
   * Network Game Loop
