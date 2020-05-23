@@ -154,6 +154,7 @@
     <ClCompile Include="DialogPage.cpp" />
     <ClCompile Include="DrawCubes.cpp" />
     <ClCompile Include="JoinLobbyPage.cpp" />
+    <ClCompile Include="LobbyPage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuLogic.cpp" />
     <ClCompile Include="MainMenuPage.cpp" />
@@ -227,6 +228,7 @@
     <ClInclude Include="Lib\nop\utility\stream_reader.h" />
     <ClInclude Include="Lib\nop\utility\stream_writer.h" />
     <ClInclude Include="Lib\nop\value.h" />
+    <ClInclude Include="LobbyPage.h" />
     <ClInclude Include="MainMenuLogic.h" />
     <ClInclude Include="MainMenuPage.h" />
     <ClInclude Include="PhysicalModel.h" />

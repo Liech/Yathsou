@@ -99,6 +99,8 @@ namespace YolonaOss {
       if (key == del) {
         if (_cursorPosition < _text.size()) {
           _text = _text.substr(0, _cursorPosition) + _text.substr(_cursorPosition + 1);
+          _changed = true;
+          _textChangedCallback(_text);
         }
         return;
       }
@@ -106,6 +108,8 @@ namespace YolonaOss {
         if (_cursorPosition > 0) {
           _text = _text.substr(0, _cursorPosition - 1) + _text.substr(_cursorPosition);
           _cursorPosition--;
+          _changed = true;
+          _textChangedCallback(_text);
         }
         return;
       }
@@ -126,6 +130,8 @@ namespace YolonaOss {
 
       _text = _text.substr(0, _cursorPosition) + (char)key + _text.substr(_cursorPosition);
       _cursorPosition++;
+      _changed = true;
+      _textChangedCallback(_text);
       return;
     }
 
@@ -139,12 +145,24 @@ namespace YolonaOss {
     }
 
     void LineEdit::focusStart() { 
-      _hasFocus = true; 
+      _hasFocus = true;
+      _changed = false;
     }
 
     void LineEdit::focusEnd() { 
       _hasFocus = false;
       _cursorPosition = 0;
+      if (_changed)
+        _finishedEditingCallback(_text);
+      _changed = false;
+    }
+
+    void LineEdit::setTextChangedCallback(std::function<void(std::string)> callback) {
+      _textChangedCallback = callback;
+    }
+
+    void LineEdit::setEditFinishedCallback(std::function<void(std::string)> callback) {
+      _finishedEditingCallback = callback;
     }
 
   }

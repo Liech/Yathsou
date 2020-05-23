@@ -16,13 +16,18 @@ void JoinLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   auto sub = _page->layout().addLayout();  
 
   sub->setHorizontal(true);
-  //sub->addLabel("Name:");
   auto but = sub->addLabel("Nickname:");
   but->getPosition().setSize(std::array<double,2>{ spec->width / 4.0,50.0 });
   auto but2 = sub->addLineEdit(_config->playerName);
   but2->getPosition().setSize(std::array<double, 2>{ spec->width / 4.0,50.0 });
+  but2->setEditFinishedCallback([this](std::string s) {
+    _config->playerName = s;
+    saveConfig();
+  });
 
-  _page->layout().addButton("LOBBY", []() {std::cout << "Moin" << std::endl; });
+  _page->layout().addButton("Join Lobby", [this]() {
+    _status = JoinLobbyPageStatus::Proceed;
+  });
   _page->layout().addButton("Back", [this]() { goBack(); });
   setVisible(false);
 }
@@ -46,3 +51,8 @@ void JoinLobbyPage::goBack() {
 void JoinLobbyPage::reset() {
   _status = JoinLobbyPageStatus::Pending;
 }
+
+void JoinLobbyPage::saveConfig() {
+  _config->toJsonFile("ClientConfiguration.json");
+}
+

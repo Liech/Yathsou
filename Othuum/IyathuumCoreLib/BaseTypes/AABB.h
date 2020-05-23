@@ -9,7 +9,10 @@ namespace Iyathuum {
   public:
     using vec = std::array<double,Dimension>;
     
-    AABB() {}
+    AABB() {
+      _position = vec();
+      _size = vec();
+    }
     AABB(vec start, vec size) {
       _position = start;
       _size = size;

@@ -2,6 +2,7 @@
 
 #include "Widget.h"
 #include <string>
+#include <functional>
 #include "YolonaOss/OpenGL/Keys.h"
 
 namespace YolonaOss {
@@ -15,7 +16,9 @@ namespace YolonaOss {
 
       void        setText(std::string text);
       std::string getText();
-      
+      void        setTextChangedCallback (std::function<void(std::string)> callback);
+      void        setEditFinishedCallback(std::function<void(std::string)> callback);
+
       virtual void load(GL::DrawSpecification*)              override;
       virtual void draw()                                    override;
       virtual bool mouseClick(glm::vec2 position, GL::Key k) override;
@@ -29,6 +32,9 @@ namespace YolonaOss {
       std::string _text           = "";
       int         _cursorPosition = 3 ;
       bool        _hasFocus = false;
+      bool        _changed = false;
+      std::function<void(std::string)> _textChangedCallback     = [](std::string s){};
+      std::function<void(std::string)> _finishedEditingCallback = [](std::string s){};
     };
   }
 }

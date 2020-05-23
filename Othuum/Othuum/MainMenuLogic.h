@@ -5,11 +5,16 @@
 
 class MainMenuPage;
 class JoinLobbyPage;
+class LobbyPage;
 class ClientConfiguration;
 
 class MainMenuLogic {
 public:
-  enum class status { MainMenu, LobbyEntry } stat = status::MainMenu;
+  enum class status { 
+    MainMenu, 
+    LobbyEntry,
+    Lobby
+  } stat = status::MainMenu;
 
   MainMenuLogic(std::shared_ptr<ClientConfiguration> config);
 
@@ -20,4 +25,5 @@ private:
 
   std::shared_ptr<MainMenuPage > _mainMenuPage ;
   std::shared_ptr<JoinLobbyPage> _joinLobbyPage;
+  std::shared_ptr<LobbyPage>     _lobbyPage    ;
 };
