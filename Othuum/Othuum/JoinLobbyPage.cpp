@@ -13,8 +13,8 @@ JoinLobbyPage::JoinLobbyPage(std::shared_ptr<ClientConfiguration> configuration)
 void JoinLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
 
+  _page->layout().addLabel("Join Lobby Page");
   auto sub = _page->layout().addLayout();  
-
   sub->setHorizontal(true);
   auto but = sub->addLabel("Nickname:");
   but->getPosition().setSize(std::array<double,2>{ spec->width / 4.0,50.0 });

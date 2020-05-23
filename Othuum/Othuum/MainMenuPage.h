@@ -13,7 +13,7 @@ namespace YolonaOss {
 }
 
 enum class MainMenuPageStatus {
-  Pending, Multiplayer
+  Pending, Multiplayer, Options
 };
 
 class MainMenuPage : public YolonaOss::GL::Drawable {
@@ -29,6 +29,7 @@ public:
 
 private:
   void startLobbyJoin();
+  void startOptions();
 
 private:
   std::unique_ptr<DialogPage> _page  ;

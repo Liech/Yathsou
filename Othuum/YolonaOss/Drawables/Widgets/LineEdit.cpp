@@ -83,7 +83,7 @@ namespace YolonaOss {
           return true;
         }
       }
-      _cursorPosition = _text.length() + 1;
+      _cursorPosition = _text.length();
       return true;
     };
 

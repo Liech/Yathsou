@@ -10,7 +10,10 @@ MainMenuPage::MainMenuPage(){
 
 void MainMenuPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
-  _page->layout().addButton("Multiplayer", [this]() { startLobbyJoin(); });
+  
+  _page->layout().addLabel("Main Menu Page");
+  _page->layout().addButton("Multiplayer", [this]() { startLobbyJoin();           });
+  _page->layout().addButton("Options"    , [this]() { startOptions();             });
   _page->layout().addButton("Quit"       , [spec]() { spec->getWindow()->close(); });
 }
 
@@ -32,4 +35,8 @@ void MainMenuPage::setVisible(bool vis) {
 
 void MainMenuPage::reset() {
   _status = MainMenuPageStatus::Pending;
+}
+
+void MainMenuPage::startOptions() {
+  _status = MainMenuPageStatus::Options;
 }

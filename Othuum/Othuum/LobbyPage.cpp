@@ -13,6 +13,8 @@ LobbyPage::LobbyPage(std::shared_ptr<ClientConfiguration> configuration) {
 void LobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
 
+  _page->layout().addLabel("Lobby Page");
+  _page->layout().addButton("Host Game", [this]() { hostGame(); });
   _page->layout().addButton("Back", [this]() { goBack(); });
   setVisible(false);
 }
@@ -31,6 +33,10 @@ LobbyPageStatus LobbyPage::getStatus() {
 
 void LobbyPage::goBack() {
   _status = LobbyPageStatus::Back;
+}
+
+void LobbyPage::hostGame() {
+  _status = LobbyPageStatus::Host;
 }
 
 void LobbyPage::reset() {

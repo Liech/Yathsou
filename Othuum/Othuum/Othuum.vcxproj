@@ -153,11 +153,13 @@
     <ClCompile Include="ClientConfiguration.cpp" />
     <ClCompile Include="DialogPage.cpp" />
     <ClCompile Include="DrawCubes.cpp" />
+    <ClCompile Include="HostGamePage.cpp" />
     <ClCompile Include="JoinLobbyPage.cpp" />
     <ClCompile Include="LobbyPage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuLogic.cpp" />
     <ClCompile Include="MainMenuPage.cpp" />
+    <ClCompile Include="OptionsPage.cpp" />
     <ClCompile Include="PhysicalModel.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +167,7 @@
     <ClInclude Include="ClientConfiguration.h" />
     <ClInclude Include="DialogPage.h" />
     <ClInclude Include="DrawCubes.h" />
+    <ClInclude Include="HostGamePage.h" />
     <ClInclude Include="JoinLobbyPage.h" />
     <ClInclude Include="Lib\nop\base\array.h" />
     <ClInclude Include="Lib\nop\base\encoding.h" />
@@ -231,6 +234,7 @@
     <ClInclude Include="LobbyPage.h" />
     <ClInclude Include="MainMenuLogic.h" />
     <ClInclude Include="MainMenuPage.h" />
+    <ClInclude Include="OptionsPage.h" />
     <ClInclude Include="PhysicalModel.h" />
     <ClInclude Include="Serial\Building.h" />
     <ClInclude Include="Serial\ConstructionSite.h" />

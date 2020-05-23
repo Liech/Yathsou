@@ -4,8 +4,10 @@
 
 class ClientConfiguration : public Vishala::Serialization {
 public:
-  std::string        playerName = "Unnamed";
-  std::array<int, 2> resolution = std::array<int, 2> {1024,600};
+  std::string        playerName   = "Unnamed";
+  std::array<int, 2> resolution   = std::array<int, 2> {1024,600};
+  int                hostPort     = 6115; 
+  std::string        lastGameName = "New Game";
 
   virtual nlohmann::json             toJson()                   override;
   virtual void                       fromJson(nlohmann::json)   override;
