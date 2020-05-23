@@ -14,6 +14,8 @@ void JoinLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
 
   _page->layout().addLabel("Join Lobby Page");
+
+
   auto sub = _page->layout().addLayout();  
   sub->setHorizontal(true);
   auto but = sub->addLabel("Nickname:");
@@ -24,6 +26,17 @@ void JoinLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
     _config->playerName = s;
     saveConfig();
   });
+
+  auto subAdress = _page->layout().addLayout();
+  subAdress->setHorizontal(true);
+  auto adressLabel = subAdress->addLabel("Server:");
+  adressLabel->getPosition().setSize(std::array<double, 2>{ spec->width / 4.0, 50.0 });
+  auto adressLine = subAdress->addLineEdit(_config->lobbyServerAdress);
+  adressLine->getPosition().setSize(std::array<double, 2>{ spec->width / 4.0, 50.0 });
+  adressLine->setEditFinishedCallback([this](std::string s) {
+    _config->lobbyServerAdress = s;
+    saveConfig();
+    });
 
   _page->layout().addButton("Join Lobby", [this]() {
     _status = JoinLobbyPageStatus::Proceed;

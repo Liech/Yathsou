@@ -20,6 +20,7 @@ void HostGamePage::load(YolonaOss::GL::DrawSpecification* spec) {
   portLable->getPosition().setSize({spec->width / 4.0, 50.0});
   auto portEdit = subPort->addLineEdit(std::to_string(_config->hostPort));
   portEdit->getPosition().setSize({ spec->width / 4.0, 50.0 });
+  portEdit->setValidator(YolonaOss::Widgets::LineEdit::integerValidator(0, 65535));
 
   auto subName = _page->layout().addLayout();
   subName->setHorizontal(true);

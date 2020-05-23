@@ -157,6 +157,7 @@ namespace YolonaOss {
     public:
       static std::set<Key> InputExtraSymbols;
       static std::set<Key> AlphanumericKeys;
+      static std::set<Key> Numeric;
     };
   }
 }

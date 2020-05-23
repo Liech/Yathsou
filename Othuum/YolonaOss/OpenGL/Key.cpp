@@ -47,5 +47,18 @@ namespace YolonaOss {
       Key::KEY_8,
       Key::KEY_9,
     };
+
+    std::set<Key> CharacterSets::Numeric{
+      Key::KEY_0,
+      Key::KEY_1,
+      Key::KEY_2,
+      Key::KEY_3,
+      Key::KEY_4,
+      Key::KEY_5,
+      Key::KEY_6,
+      Key::KEY_7,
+      Key::KEY_8,
+      Key::KEY_9
+    };
   }
 }

@@ -18,6 +18,7 @@ namespace YolonaOss {
       std::string getText();
       void        setTextChangedCallback (std::function<void(std::string)> callback);
       void        setEditFinishedCallback(std::function<void(std::string)> callback);
+      void        setValidator(std::function<bool(YolonaOss::GL::Key, std::string)> validator);
 
       virtual void load(GL::DrawSpecification*)              override;
       virtual void draw()                                    override;
@@ -26,15 +27,19 @@ namespace YolonaOss {
       virtual void setVisible(bool visible) override;
       virtual void focusStart() override;
       virtual void focusEnd() override;
+      
 
+      static std::function<bool(YolonaOss::GL::Key, std::string)> integerValidator(int min = std::numeric_limits<int>::min(), int max = std::numeric_limits<int>::max());
+      static std::function<bool(YolonaOss::GL::Key, std::string)> defaultValidator();
 
     private:
       std::string _text           = "";
       int         _cursorPosition = 3 ;
       bool        _hasFocus = false;
-      bool        _changed = false;
-      std::function<void(std::string)> _textChangedCallback     = [](std::string s){};
-      std::function<void(std::string)> _finishedEditingCallback = [](std::string s){};
+      bool        _changed  = false;
+      std::function<void(std::string)>        _textChangedCallback     = [](std::string s){};
+      std::function<void(std::string)>        _finishedEditingCallback = [](std::string s){};
+      std::function<bool(YolonaOss::GL::Key, std::string)> _validator               = defaultValidator();
     };
   }
 }

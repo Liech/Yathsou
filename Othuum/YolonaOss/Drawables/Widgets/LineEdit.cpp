@@ -124,11 +124,12 @@ namespace YolonaOss {
         return;
       }
 
-      if (!YolonaOss::GL::CharacterSets::AlphanumericKeys.contains(key) &&
-        !YolonaOss::GL::CharacterSets::InputExtraSymbols.contains(key))
+      std::string newText = _text.substr(0, _cursorPosition) + (char)key + _text.substr(_cursorPosition);;
+
+      if (!_validator(key,newText))
         return;
 
-      _text = _text.substr(0, _cursorPosition) + (char)key + _text.substr(_cursorPosition);
+      _text = newText;
       _cursorPosition++;
       _changed = true;
       _textChangedCallback(_text);
@@ -163,6 +164,25 @@ namespace YolonaOss {
 
     void LineEdit::setEditFinishedCallback(std::function<void(std::string)> callback) {
       _finishedEditingCallback = callback;
+    }
+
+    void LineEdit::setValidator(std::function<bool(YolonaOss::GL::Key,std::string)> validator) {
+      _validator = validator;
+    }
+
+    std::function<bool(YolonaOss::GL::Key, std::string full)> LineEdit::defaultValidator() {
+      return [](YolonaOss::GL::Key key, std::string full) -> bool {
+        return YolonaOss::GL::CharacterSets::AlphanumericKeys.contains(key) ||
+          YolonaOss::GL::CharacterSets::InputExtraSymbols.contains(key);
+      };
+    }
+
+    std::function<bool(YolonaOss::GL::Key, std::string full)> LineEdit::integerValidator(int min, int max) {
+      return [min,max](YolonaOss::GL::Key character, std::string newText) -> bool{
+        bool numeric = YolonaOss::GL::CharacterSets::Numeric.count(character) != 0;
+        int  number = std::atoi(newText.c_str());
+        return numeric && number > min && number < max;
+      };
     }
 
   }
