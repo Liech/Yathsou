@@ -7,6 +7,7 @@
 #include "LobbyPage.h"
 #include "HostGamePage.h"
 #include "OptionsPage.h"
+#include "ErrorPage.h"
 
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
@@ -18,12 +19,14 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config) {
   _joinLobbyPage = std::make_shared<JoinLobbyPage>(config);
   _lobbyPage     = std::make_shared<LobbyPage>    (config);
   _hostPage      = std::make_shared<HostGamePage> (config);
-  _optionsPage   = std::make_shared<OptionsPage> (config);
+  _optionsPage   = std::make_shared<OptionsPage>  (config);
+  _errorPage     = std::make_shared<ErrorPage>    (config);
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_mainMenuPage , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_joinLobbyPage, { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyPage    , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_hostPage     , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_optionsPage  , { "Main" });
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_errorPage    , { "Main" });
 }
 
 void MainMenuLogic::update() {
@@ -43,6 +46,9 @@ void MainMenuLogic::update() {
     _optionsPage->setVisible(false);
     _mainMenuPage->setVisible(true);
     stat = status::MainMenu;
+    if (_optionsPage->requiresRestart()) {
+      showError("Some options may require a restart","Hint");
+    }      
     _optionsPage->reset();
   }
   else if (_joinLobbyPage->getStatus() == JoinLobbyPageStatus::Back && stat == status::LobbyEntry) {
@@ -75,4 +81,27 @@ void MainMenuLogic::update() {
     stat = status::Lobby;
     _hostPage->reset();
   }
+  else if (_errorPage->getStatus() == ErrorPageStatus::Back && stat == status::Error) {
+    _errorPage->setVisible(false);
+    _mainMenuPage->setVisible(true);
+    stat = status::MainMenu;
+    _mainMenuPage->reset();
+  }
+}
+
+void MainMenuLogic::showError(std::string desc,std::string title) {
+  stat = status::Error;
+  _errorPage->setVisible(true);
+  _mainMenuPage ->setVisible(false);
+  _joinLobbyPage->setVisible(false);
+  _lobbyPage    ->setVisible(false);
+  _hostPage     ->setVisible(false);
+  _optionsPage  ->setVisible(false);
+  _mainMenuPage ->reset();
+  _joinLobbyPage->reset();
+  _lobbyPage    ->reset();
+  _hostPage     ->reset();
+  _optionsPage  ->reset();
+  _errorPage->setMessage(desc,title);
+
 }

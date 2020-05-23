@@ -9,6 +9,7 @@ class LobbyPage          ;
 class ClientConfiguration;
 class HostGamePage       ;
 class OptionsPage        ;
+class ErrorPage          ;
 
 class MainMenuLogic {
 public:
@@ -17,7 +18,8 @@ public:
     LobbyEntry,
     Lobby,
     HostGame,
-    Options
+    Options,
+    Error
   } stat = status::MainMenu;
 
   MainMenuLogic(std::shared_ptr<ClientConfiguration> config);
@@ -32,4 +34,7 @@ private:
   std::shared_ptr<LobbyPage>     _lobbyPage    ;
   std::shared_ptr<HostGamePage>  _hostPage     ;
   std::shared_ptr<OptionsPage>   _optionsPage  ;
+  std::shared_ptr<ErrorPage>     _errorPage    ;
+
+  void showError(std::string desc, std::string title);
 };

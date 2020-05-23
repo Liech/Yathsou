@@ -153,6 +153,7 @@
     <ClCompile Include="ClientConfiguration.cpp" />
     <ClCompile Include="DialogPage.cpp" />
     <ClCompile Include="DrawCubes.cpp" />
+    <ClCompile Include="ErrorPage.cpp" />
     <ClCompile Include="HostGamePage.cpp" />
     <ClCompile Include="JoinLobbyPage.cpp" />
     <ClCompile Include="LobbyPage.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="ClientConfiguration.h" />
     <ClInclude Include="DialogPage.h" />
     <ClInclude Include="DrawCubes.h" />
+    <ClInclude Include="ErrorPage.h" />
     <ClInclude Include="HostGamePage.h" />
     <ClInclude Include="JoinLobbyPage.h" />
     <ClInclude Include="Lib\nop\base\array.h" />

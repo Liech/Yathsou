@@ -22,14 +22,20 @@ void OptionsPage::load(YolonaOss::GL::DrawSpecification* spec) {
   resoXEdit->getPosition().setSize({ spec->width / 6.0, 50.0 });
   resoXEdit->setValidator(YolonaOss::Widgets::LineEdit::integerValidator(0, 5000));
   resoXEdit->setEditFinishedCallback([this](std::string content) 
-    { _config->resolution[0] = std::atoi(content.c_str()); });
+    { 
+      _config->resolution[0] = std::atoi(content.c_str()); 
+      _requiresRestart = true;
+    });
   auto resoYEdit = subResolution->addLineEdit(std::to_string(_config->resolution[1]));
   resoYEdit->getPosition().setSize({ spec->width / 6.0, 50.0 });
   resoYEdit->setValidator(YolonaOss::Widgets::LineEdit::integerValidator(0, 5000));
   resoYEdit->setEditFinishedCallback([this](std::string content) 
-    { _config->resolution[1] = std::atoi(content.c_str()); });
+    { 
+      _config->resolution[1] = std::atoi(content.c_str()); 
+      _requiresRestart = true;
+    });
 
-  _page->layout().addButton("Back", [this]() { goBack(); });
+  _page->layout().addButton("OK", [this]() { goBack(); });
   setVisible(false);
 }
 
@@ -51,6 +57,9 @@ void OptionsPage::goBack() {
 
 void OptionsPage::reset() {
   _status = OptionsPageStatus::Pending;
+  _requiresRestart = false;
 }
 
-
+bool OptionsPage::requiresRestart() {
+  return _requiresRestart;
+}

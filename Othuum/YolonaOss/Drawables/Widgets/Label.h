@@ -16,6 +16,7 @@ namespace YolonaOss {
       virtual void load(GL::DrawSpecification*) override;
       virtual void draw() override;
 
+      void setText(std::string text) { _name = text; }
 
     private:
       std::string               _name;

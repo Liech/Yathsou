@@ -19,6 +19,7 @@ public:
   virtual void load(YolonaOss::GL::DrawSpecification*) override;
   void setVisible(bool visible);
   void reset();
+  bool requiresRestart();
 
   OptionsPageStatus getStatus();
 private:
@@ -28,4 +29,5 @@ private:
   
   OptionsPageStatus                    _status = OptionsPageStatus::Pending;
   std::shared_ptr<ClientConfiguration> _config;
+  bool                                 _requiresRestart = false;
 };
