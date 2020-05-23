@@ -8,25 +8,28 @@
 #include "HostGamePage.h"
 #include "OptionsPage.h"
 #include "ErrorPage.h"
+#include "LobbyLoadingPage.h"
 
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
 
 
 MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config) {
-  _config = config;
-  _mainMenuPage = std::make_shared<MainMenuPage >();
-  _joinLobbyPage = std::make_shared<JoinLobbyPage>(config);
-  _lobbyPage     = std::make_shared<LobbyPage>    (config);
-  _hostPage      = std::make_shared<HostGamePage> (config);
-  _optionsPage   = std::make_shared<OptionsPage>  (config);
-  _errorPage     = std::make_shared<ErrorPage>    (config);
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_mainMenuPage , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_joinLobbyPage, { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyPage    , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_hostPage     , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_optionsPage  , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_errorPage    , { "Main" });
+  _config     = config;
+
+  _mainMenuPage     = std::make_shared<MainMenuPage >();
+  _joinLobbyPage    = std::make_shared<JoinLobbyPage>    (config);
+  _lobbyPage        = std::make_shared<LobbyPage>        (config);
+  _hostPage         = std::make_shared<HostGamePage>     (config);
+  _optionsPage      = std::make_shared<OptionsPage>      (config);
+  _errorPage        = std::make_shared<ErrorPage>        (config);
+  _lobbyLoadingPage = std::make_shared<LobbyLoadingPage> (config);
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_mainMenuPage    , { "Main" });
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_joinLobbyPage   , { "Main" });
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyPage       , { "Main" });
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_hostPage        , { "Main" });
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_optionsPage     , { "Main" });
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyLoadingPage, { "Main" });
 }
 
 void MainMenuLogic::update() {
@@ -59,9 +62,25 @@ void MainMenuLogic::update() {
   }
   else if (_joinLobbyPage->getStatus() == JoinLobbyPageStatus::Proceed && stat == status::LobbyEntry) {
     _joinLobbyPage->setVisible(false);
+    _lobbyLoadingPage->setVisible(true);
+    
+    stat = status::LoadLobby;
+    _joinLobbyPage->reset();
+  }
+  else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Proceed && stat == status::LoadLobby) {
+    _lobbyLoadingPage->setVisible(false);
     _lobbyPage->setVisible(true);
     stat = status::Lobby;
-    _joinLobbyPage->reset();
+    _lobbyLoadingPage->reset();
+  }
+  else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Back && stat == status::LoadLobby) {
+    _lobbyLoadingPage->setVisible(false);
+    _joinLobbyPage->setVisible(true);
+    stat = status::LobbyEntry;
+    _lobbyLoadingPage->reset();
+  }
+  else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Error && stat == status::LoadLobby) {
+    showError("Unable to connect to Lobby", "ERROR");
   }
   else if (_lobbyPage->getStatus() == LobbyPageStatus::Back && stat == status::Lobby) {
     _lobbyPage->setVisible(false);

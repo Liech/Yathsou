@@ -156,6 +156,7 @@
     <ClCompile Include="ErrorPage.cpp" />
     <ClCompile Include="HostGamePage.cpp" />
     <ClCompile Include="JoinLobbyPage.cpp" />
+    <ClCompile Include="LobbyLoadingPage.cpp" />
     <ClCompile Include="LobbyPage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuLogic.cpp" />
@@ -233,6 +234,7 @@
     <ClInclude Include="Lib\nop\utility\stream_reader.h" />
     <ClInclude Include="Lib\nop\utility\stream_writer.h" />
     <ClInclude Include="Lib\nop\value.h" />
+    <ClInclude Include="LobbyLoadingPage.h" />
     <ClInclude Include="LobbyPage.h" />
     <ClInclude Include="MainMenuLogic.h" />
     <ClInclude Include="MainMenuPage.h" />
