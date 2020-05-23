@@ -3,6 +3,7 @@
 #include "IyathuumCoreLib/Util/Geometry.h"
 #include "Drawables/Widgets/Button.h"
 #include "Drawables/Widgets/Label.h"
+#include "Drawables/Widgets/LineEdit.h"
 
 namespace YolonaOss {
   namespace Widgets {
@@ -49,9 +50,16 @@ namespace YolonaOss {
     }
 
     std::shared_ptr<Widgets::Label> ListLayout::addLabel(std::string text){
-      std::shared_ptr<Widgets::Label> l = std::make_shared<Widgets::Label>(text, getElementSize());
+      std::shared_ptr<Widgets::Label> l = std::make_shared<Widgets::Label>(text, getElementSize(),this);
       addWidget(l);
       return l;
+    }
+
+    std::shared_ptr<Widgets::LineEdit> ListLayout::addLineEdit(std::string text) {
+      std::shared_ptr<Widgets::LineEdit> l = std::make_shared<Widgets::LineEdit>(text, getElementSize(), this);
+      addWidget(l);
+      return l;
+
     }
 
     Iyathuum::AABB<2> ListLayout::getElementSize() {

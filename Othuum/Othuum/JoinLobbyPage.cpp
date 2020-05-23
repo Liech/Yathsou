@@ -3,6 +3,8 @@
 #include <iostream>
 
 #include "YolonaOss/Drawables/Widgets/ListLayout.h"
+#include "YolonaOss/Drawables/Widgets/Label.h"
+#include "YolonaOss/Drawables/Widgets/LineEdit.h"
 
 JoinLobbyPage::JoinLobbyPage(std::shared_ptr<ClientConfiguration> configuration) {
   _config = configuration;
@@ -15,10 +17,10 @@ void JoinLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
 
   sub->setHorizontal(true);
   //sub->addLabel("Name:");
-  auto but = sub->addButton("emaN", []() {std::cout << "HUHU" << std::endl; });
-  but->getPosition().setSize({ 250,50 });
-  auto but2 = sub->addButton("eeeemaN", []() {std::cout << "HUHU" << std::endl; });
-  but2->getPosition().setSize({ 250,50 });
+  auto but = sub->addLabel("Nickname:");
+  but->getPosition().setSize(std::array<double,2>{ spec->width / 4.0,50.0 });
+  auto but2 = sub->addLineEdit(_config->playerName);
+  but2->getPosition().setSize(std::array<double, 2>{ spec->width / 4.0,50.0 });
 
   _page->layout().addButton("LOBBY", []() {std::cout << "Moin" << std::endl; });
   _page->layout().addButton("Back", [this]() { goBack(); });

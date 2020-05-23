@@ -28,6 +28,8 @@ namespace YolonaOss {
       virtual bool mouseStatusChanged  (glm::vec2 position, GL::Key key, GL::KeyStatus status) { return false; };
       virtual bool keyboardInput       (GL::Key key, GL::KeyStatus status){ return false;};
       virtual void focusedKeyboardInput(YolonaOss::GL::Key key, YolonaOss::GL::KeyStatus status) {};
+      virtual void focusStart() {};
+      virtual void focusEnd  () {};
       virtual void adjustSize() {};
       virtual glm::vec2 getSizeHint() { return glm::vec2(100, 50); };
 

@@ -10,7 +10,7 @@ namespace YolonaOss {
     {
     public:
       LineEdit();
-      LineEdit(std::string name, Iyathuum::AABB<2> position);
+      LineEdit(std::string name, Iyathuum::AABB<2> position, Widget* parent = nullptr);
       ~LineEdit();
 
       void        setText(std::string text);
@@ -21,10 +21,14 @@ namespace YolonaOss {
       virtual bool mouseClick(glm::vec2 position, GL::Key k) override;
       virtual void focusedKeyboardInput(YolonaOss::GL::Key key, YolonaOss::GL::KeyStatus status) override;
       virtual void setVisible(bool visible) override;
+      virtual void focusStart() override;
+      virtual void focusEnd() override;
+
 
     private:
       std::string _text           = "";
       int         _cursorPosition = 3 ;
+      bool        _hasFocus = false;
     };
   }
 }

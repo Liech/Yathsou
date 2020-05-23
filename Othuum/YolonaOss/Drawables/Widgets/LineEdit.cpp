@@ -17,7 +17,7 @@ namespace YolonaOss {
       setVisible(true);
     }
 
-    LineEdit::LineEdit(std::string text, Iyathuum::AABB<2> position) : Widget(position) {
+    LineEdit::LineEdit(std::string text, Iyathuum::AABB<2> position, Widget* parent) : Widget(position, parent) {
       _text = text;
       setVisible(true);
     }
@@ -39,24 +39,25 @@ namespace YolonaOss {
         return;
 
       RectangleRenderer::start();
-      if (YolonaOss::GL::InputHandling::getInstance().getCurrentFocus() == this)
-        RectangleRenderer::drawRectangle(getPosition(), glm::vec3(0.6f, 0.6f, 0.6f));
+      if (_hasFocus)
+        RectangleRenderer::drawRectangle(getGlobalPosition(), glm::vec3(0.6f, 0.6f, 0.6f));
       else
-        RectangleRenderer::drawRectangle(getPosition(), glm::vec3(0.9f, 0.9f, 0.9f));
+        RectangleRenderer::drawRectangle(getGlobalPosition(), glm::vec3(0.9f, 0.9f, 0.9f));
       RectangleRenderer::end();
       glm::vec2 textSize = TextRenderer::getTextSize(_text, 1);
-      glm::vec2 spacing = (Util<2>::array2Vec(getPosition().getSize()) - textSize) / 2.0f;
+      glm::vec2 spacing = (Util<2>::array2Vec(getGlobalPosition().getSize()) - textSize) / 2.0f;
       spacing[0] = 0;
       TextRenderer::start();
-      glm::vec2 pos = Util<2>::array2Vec(getPosition().getPosition()) + spacing;
+      glm::vec2 pos = Util<2>::array2Vec(getGlobalPosition().getPosition()) + spacing;
       TextRenderer::drawText(_text, pos, 1, glm::vec3(0, 0, 0));
       TextRenderer::end();
       RectangleRenderer::start();
       glm::vec2 cursorPos = TextRenderer::getTextSize(_text.substr(0,_cursorPosition), 1);
-      Iyathuum::AABB<2> cursorRect = getPosition();
-      cursorRect.setPosition({ cursorRect.getPosition()[0]+spacing[0]+cursorPos[0]-1 , getPosition().getPosition()[1] });
-      cursorRect.setSize({3,getPosition().getSize()[1]});
-      RectangleRenderer::drawRectangle(cursorRect, glm::vec3(0.8f, 0.4f, 0.4f));
+      Iyathuum::AABB<2> cursorRect = getGlobalPosition();
+      cursorRect.setPosition({ cursorRect.getPosition()[0]+spacing[0]+cursorPos[0]-1 , getGlobalPosition().getPosition()[1] });
+      cursorRect.setSize({3,getGlobalPosition().getSize()[1]});
+      if (_hasFocus)
+        RectangleRenderer::drawRectangle(cursorRect, glm::vec3(0.8f, 0.4f, 0.4f));
       RectangleRenderer::end();
     }
 
@@ -135,6 +136,15 @@ namespace YolonaOss {
         Iyathuum::Database<Widgets::Widget*>::remove(this);
 
       Widget::setVisible(visible);
+    }
+
+    void LineEdit::focusStart() { 
+      _hasFocus = true; 
+    }
+
+    void LineEdit::focusEnd() { 
+      _hasFocus = false;
+      _cursorPosition = 0;
     }
 
   }

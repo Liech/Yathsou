@@ -27,7 +27,13 @@ namespace YolonaOss {
     }
 
     void InputHandling::setFocus(YolonaOss::Widgets::Widget* newFocus) {
+      if (newFocus == _focusedWidget)
+        return;
+      if (_focusedWidget)
+        _focusedWidget->focusEnd();
       _focusedWidget = newFocus;
+      if (_focusedWidget)
+        _focusedWidget->focusStart();
     }
 
     void InputHandling::setWindow(GLFWwindow* window, YolonaOss::GL::Window* yWindow) {
@@ -60,7 +66,7 @@ namespace YolonaOss {
           hit = true;
           if (status == KeyStatus::PRESS) {
             _pressedWidget = w;
-            _focusedWidget = w;
+            setFocus(w);
           }
           else
             if (status == KeyStatus::RELEASE && _pressedWidget == w) {
