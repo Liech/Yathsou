@@ -21,6 +21,7 @@
 #include <iomanip>
 
 #include "ClientConfiguration.h"
+#include "ClientState.h"
 #include "MainMenuLogic.h"
 
 using namespace YolonaOss;
@@ -28,6 +29,7 @@ using namespace YolonaOss;
 int main() { 
   {
     std::shared_ptr<ClientConfiguration> configuration = std::make_shared<ClientConfiguration>();
+    std::shared_ptr<ClientState>         state         = std::make_shared<ClientState>(configuration);
     std::string configFileName = "ClientConfiguration.json";
     configuration->fromJsonFile(configFileName);
 
@@ -35,11 +37,11 @@ int main() {
     int height = configuration->resolution[1];
     GL::Window w(width, height);
     
-    MainMenuLogic logic(configuration);
+    MainMenuLogic logic(configuration,state);
 
-    w.Update = [&logic]() {
+    w.Update = [&logic, state]() {
       logic.update();
-
+      state->update();
     };
     w.run();
 

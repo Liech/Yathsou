@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClientConfiguration.cpp" />
+    <ClCompile Include="ClientState.cpp" />
     <ClCompile Include="DrawCubes.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuLogic.cpp" />

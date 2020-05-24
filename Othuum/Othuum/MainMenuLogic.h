@@ -5,10 +5,11 @@
 #include "VishalaNetworkLib/Core/Connection.h"
 
 
+class ClientConfiguration;
+class ClientState        ;
 class MainMenuPage       ;
 class JoinLobbyPage      ;
 class LobbyPage          ;
-class ClientConfiguration;
 class HostGamePage       ;
 class OptionsPage        ;
 class ErrorPage          ;
@@ -26,12 +27,13 @@ public:
     Error
   } stat = status::MainMenu;
 
-  MainMenuLogic(std::shared_ptr<ClientConfiguration> config);
+  MainMenuLogic(std::shared_ptr<ClientConfiguration> config,std::shared_ptr<ClientState> state);
 
   void update();
 
 private:
-  std::shared_ptr<ClientConfiguration> _config    ;
+  std::shared_ptr<ClientConfiguration> _config     ;
+  std::shared_ptr<ClientState        > _state      ;
   std::shared_ptr<Vishala::Connection> _connection = nullptr;
 
   std::shared_ptr<MainMenuPage >    _mainMenuPage    ;

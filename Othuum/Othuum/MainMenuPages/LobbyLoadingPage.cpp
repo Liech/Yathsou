@@ -6,8 +6,9 @@
 #include "YolonaOss/Drawables/Widgets/Label.h"
 #include "YolonaOss/Drawables/Widgets/LineEdit.h"
 
-LobbyLoadingPage::LobbyLoadingPage(std::shared_ptr<ClientConfiguration> configuration) {
+LobbyLoadingPage::LobbyLoadingPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state) {
   _config = configuration;
+  _state  = state;
 }
 
 void LobbyLoadingPage::load(YolonaOss::GL::DrawSpecification* spec) {
@@ -39,3 +40,7 @@ void LobbyLoadingPage::reset() {
   _status = LobbyLoadingPageStatus::Pending;
 }
 
+void LobbyLoadingPage::start() {
+  std::cout << "Connection to lobby starts" << std::endl;
+  _state->connectToLobby();
+}

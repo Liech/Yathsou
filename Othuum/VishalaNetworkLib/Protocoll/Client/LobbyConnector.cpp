@@ -22,8 +22,13 @@ namespace Vishala {
       _entryConnection->setDisconnectCallback([this](size_t client) {disconnect(client); });
       _entryConnection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {newConnection(client, ip, port); });
       _entryConnection->setRecievedCallback(0, [this](size_t client, std::unique_ptr<BinaryPackage> package) {messageRecived(client, 0, std::move(package)); });
-      _entryConnection->start();
-      _entryConnection->connect(port, ip);
+      try {
+        _entryConnection->start();
+        _entryConnection->connect(port, ip);
+      }
+      catch (std::exception){
+        _currentStatus = LobbyConnectorStatus::ConnectionFailed;
+      }
     }
 
     void LobbyConnector::messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package)
@@ -69,7 +74,7 @@ namespace Vishala {
 
     void LobbyConnector::update()
     {
-      if (_currentStatus == LobbyConnectorStatus::Extracted)
+      if (_currentStatus == LobbyConnectorStatus::Extracted || _currentStatus == LobbyConnectorStatus::ConnectionFailed)
         throw std::runtime_error("Wrong Status");
       if (_entryConnection != nullptr)
         _entryConnection->update();

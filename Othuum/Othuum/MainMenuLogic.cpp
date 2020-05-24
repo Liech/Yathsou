@@ -1,6 +1,7 @@
 #include "MainMenuLogic.h"
 
 #include "ClientConfiguration.h"
+#include "ClientState.h"
 
 #include "MainMenuPages/JoinLobbyPage.h"
 #include "MainMenuPages/MainMenuPage.h"
@@ -14,8 +15,9 @@
 #include "IyathuumCoreLib/Singleton/Database.h"
 
 
-MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config) {
+MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state) {
   _config     = config;
+  _state      = state ;
 
   _mainMenuPage     = std::make_shared<MainMenuPage >();
   _joinLobbyPage    = std::make_shared<JoinLobbyPage>    (config);
@@ -23,13 +25,14 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config) {
   _hostPage         = std::make_shared<HostGamePage>     (config);
   _optionsPage      = std::make_shared<OptionsPage>      (config);
   _errorPage        = std::make_shared<ErrorPage>        (config);
-  _lobbyLoadingPage = std::make_shared<LobbyLoadingPage> (config);
+  _lobbyLoadingPage = std::make_shared<LobbyLoadingPage> (config,state);
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_mainMenuPage    , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_joinLobbyPage   , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyPage       , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_hostPage        , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_optionsPage     , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyLoadingPage, { "Main" });
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_errorPage       , { "Main" });
 }
 
 void MainMenuLogic::update() {
@@ -66,6 +69,7 @@ void MainMenuLogic::update() {
     
     stat = status::LoadLobby;
     _joinLobbyPage->reset();
+    _lobbyLoadingPage->start();
   }
   else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Proceed && stat == status::LoadLobby) {
     _lobbyLoadingPage->setVisible(false);
@@ -78,9 +82,11 @@ void MainMenuLogic::update() {
     _joinLobbyPage->setVisible(true);
     stat = status::LobbyEntry;
     _lobbyLoadingPage->reset();
+    _state->stop();
   }
   else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Error && stat == status::LoadLobby) {
     showError("Unable to connect to Lobby", "ERROR");
+    _state->stop();
   }
   else if (_lobbyPage->getStatus() == LobbyPageStatus::Back && stat == status::Lobby) {
     _lobbyPage->setVisible(false);
@@ -111,16 +117,18 @@ void MainMenuLogic::update() {
 void MainMenuLogic::showError(std::string desc,std::string title) {
   stat = status::Error;
   _errorPage->setVisible(true);
-  _mainMenuPage ->setVisible(false);
-  _joinLobbyPage->setVisible(false);
-  _lobbyPage    ->setVisible(false);
-  _hostPage     ->setVisible(false);
-  _optionsPage  ->setVisible(false);
-  _mainMenuPage ->reset();
-  _joinLobbyPage->reset();
-  _lobbyPage    ->reset();
-  _hostPage     ->reset();
-  _optionsPage  ->reset();
+  _mainMenuPage    ->setVisible(false);
+  _joinLobbyPage   ->setVisible(false);
+  _lobbyPage       ->setVisible(false);
+  _hostPage        ->setVisible(false);
+  _optionsPage     ->setVisible(false);
+  _lobbyLoadingPage->setVisible(false);
+  _mainMenuPage    ->reset();
+  _joinLobbyPage   ->reset();
+  _lobbyPage       ->reset();
+  _hostPage        ->reset();
+  _optionsPage     ->reset();
+  _lobbyLoadingPage->reset();
   _errorPage->setMessage(desc,title);
 
 }
