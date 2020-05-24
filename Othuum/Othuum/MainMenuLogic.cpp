@@ -2,13 +2,13 @@
 
 #include "ClientConfiguration.h"
 
-#include "JoinLobbyPage.h"
-#include "MainMenuPage.h"
-#include "LobbyPage.h"
-#include "HostGamePage.h"
-#include "OptionsPage.h"
-#include "ErrorPage.h"
-#include "LobbyLoadingPage.h"
+#include "MainMenuPages/JoinLobbyPage.h"
+#include "MainMenuPages/MainMenuPage.h"
+#include "MainMenuPages/LobbyPage.h"
+#include "MainMenuPages/HostGamePage.h"
+#include "MainMenuPages/OptionsPage.h"
+#include "MainMenuPages/ErrorPage.h"
+#include "MainMenuPages/LobbyLoadingPage.h"
 
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "IyathuumCoreLib/Singleton/Database.h"

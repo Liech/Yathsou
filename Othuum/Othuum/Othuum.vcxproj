@@ -95,7 +95,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/glm/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(ProjectDir);$(SolutionDir)YolonaOss/Lib/glm/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
@@ -151,27 +151,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClientConfiguration.cpp" />
-    <ClCompile Include="DialogPage.cpp" />
     <ClCompile Include="DrawCubes.cpp" />
-    <ClCompile Include="ErrorPage.cpp" />
-    <ClCompile Include="HostGamePage.cpp" />
-    <ClCompile Include="JoinLobbyPage.cpp" />
-    <ClCompile Include="LobbyLoadingPage.cpp" />
-    <ClCompile Include="LobbyPage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuLogic.cpp" />
-    <ClCompile Include="MainMenuPage.cpp" />
-    <ClCompile Include="OptionsPage.cpp" />
+    <ClCompile Include="MainMenuPages\DialogPage.cpp" />
+    <ClCompile Include="MainMenuPages\ErrorPage.cpp" />
+    <ClCompile Include="MainMenuPages\HostGamePage.cpp" />
+    <ClCompile Include="MainMenuPages\JoinLobbyPage.cpp" />
+    <ClCompile Include="MainMenuPages\LobbyLoadingPage.cpp" />
+    <ClCompile Include="MainMenuPages\LobbyPage.cpp" />
+    <ClCompile Include="MainMenuPages\MainMenuPage.cpp" />
+    <ClCompile Include="MainMenuPages\OptionsPage.cpp" />
     <ClCompile Include="PhysicalModel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Architecture\Decisions.h" />
     <ClInclude Include="ClientConfiguration.h" />
-    <ClInclude Include="DialogPage.h" />
     <ClInclude Include="DrawCubes.h" />
-    <ClInclude Include="ErrorPage.h" />
-    <ClInclude Include="HostGamePage.h" />
-    <ClInclude Include="JoinLobbyPage.h" />
     <ClInclude Include="Lib\nop\base\array.h" />
     <ClInclude Include="Lib\nop\base\encoding.h" />
     <ClInclude Include="Lib\nop\base\encoding_byte.h" />
@@ -234,11 +230,15 @@
     <ClInclude Include="Lib\nop\utility\stream_reader.h" />
     <ClInclude Include="Lib\nop\utility\stream_writer.h" />
     <ClInclude Include="Lib\nop\value.h" />
-    <ClInclude Include="LobbyLoadingPage.h" />
-    <ClInclude Include="LobbyPage.h" />
     <ClInclude Include="MainMenuLogic.h" />
-    <ClInclude Include="MainMenuPage.h" />
-    <ClInclude Include="OptionsPage.h" />
+    <ClInclude Include="MainMenuPages\DialogPage.h" />
+    <ClInclude Include="MainMenuPages\ErrorPage.h" />
+    <ClInclude Include="MainMenuPages\HostGamePage.h" />
+    <ClInclude Include="MainMenuPages\JoinLobbyPage.h" />
+    <ClInclude Include="MainMenuPages\LobbyLoadingPage.h" />
+    <ClInclude Include="MainMenuPages\LobbyPage.h" />
+    <ClInclude Include="MainMenuPages\MainMenuPage.h" />
+    <ClInclude Include="MainMenuPages\OptionsPage.h" />
     <ClInclude Include="PhysicalModel.h" />
     <ClInclude Include="Serial\Building.h" />
     <ClInclude Include="Serial\ConstructionSite.h" />

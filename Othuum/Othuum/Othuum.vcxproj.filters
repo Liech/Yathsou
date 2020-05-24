@@ -22,6 +22,12 @@
     <Filter Include="Architecture">
       <UniqueIdentifier>{2d48d53c-682d-4d07-a5ab-67969328448f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\MainMenuPages">
+      <UniqueIdentifier>{85d258a4-fe2b-4e36-9434-01d278991c1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainMenuPages">
+      <UniqueIdentifier>{57d19823-4a18-4f6e-a617-525f7e4c496d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,35 +39,35 @@
     <ClCompile Include="DrawCubes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DialogPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="JoinLobbyPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenuPage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ClientConfiguration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuLogic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LobbyPage.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MainMenuPages\DialogPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
-    <ClCompile Include="HostGamePage.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MainMenuPages\ErrorPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
-    <ClCompile Include="OptionsPage.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MainMenuPages\HostGamePage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
-    <ClCompile Include="ErrorPage.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MainMenuPages\JoinLobbyPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
-    <ClCompile Include="LobbyLoadingPage.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="MainMenuPages\LobbyLoadingPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuPages\LobbyPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuPages\MainMenuPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuPages\OptionsPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -308,35 +314,35 @@
     <ClInclude Include="DrawCubes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenuPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DialogPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="JoinLobbyPage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ClientConfiguration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MainMenuLogic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LobbyPage.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MainMenuPages\ErrorPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
     </ClInclude>
-    <ClInclude Include="HostGamePage.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MainMenuPages\HostGamePage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
     </ClInclude>
-    <ClInclude Include="OptionsPage.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MainMenuPages\JoinLobbyPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
     </ClInclude>
-    <ClInclude Include="ErrorPage.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MainMenuPages\LobbyLoadingPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
     </ClInclude>
-    <ClInclude Include="LobbyLoadingPage.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="MainMenuPages\LobbyPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\MainMenuPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\DialogPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\OptionsPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
