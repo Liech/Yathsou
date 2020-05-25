@@ -20,6 +20,17 @@ void LobbyLoadingPage::load(YolonaOss::GL::DrawSpecification* spec) {
   setVisible(false);
 }
 
+void LobbyLoadingPage::update() {
+  if (_state->getStatus() == ClientStateStatus::Nothing) {
+    _status = LobbyLoadingPageStatus::Error;
+    return;
+  }
+  else if (_state->getStatus() == ClientStateStatus::Lobby) {
+    finish();
+    return;
+  }
+}
+
 void LobbyLoadingPage::draw() {
   _page->draw();
 }
@@ -31,6 +42,11 @@ void LobbyLoadingPage::setVisible(bool visible) {
 LobbyLoadingPageStatus LobbyLoadingPage::getStatus() {
   return _status;
 }
+
+void LobbyLoadingPage::finish() {
+  _status = LobbyLoadingPageStatus::Proceed;
+}
+
 
 void LobbyLoadingPage::goBack() {
   _status = LobbyLoadingPageStatus::Back;

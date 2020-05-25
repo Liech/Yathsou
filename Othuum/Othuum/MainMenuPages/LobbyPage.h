@@ -6,6 +6,7 @@
 
 #include "DialogPage.h"
 #include "ClientConfiguration.h"
+#include "ClientState.h"
 
 enum class LobbyPageStatus {
   Pending, Back, Host
@@ -13,7 +14,7 @@ enum class LobbyPageStatus {
 
 class LobbyPage : public YolonaOss::GL::Drawable {
 public:
-  LobbyPage(std::shared_ptr<ClientConfiguration> config);
+  LobbyPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state);
 
   virtual void draw()                                  override;
   virtual void load(YolonaOss::GL::DrawSpecification*) override;
@@ -29,4 +30,5 @@ private:
   
   LobbyPageStatus                      _status = LobbyPageStatus::Pending;
   std::shared_ptr<ClientConfiguration> _config;
+  std::shared_ptr<ClientState        > _state;
 };

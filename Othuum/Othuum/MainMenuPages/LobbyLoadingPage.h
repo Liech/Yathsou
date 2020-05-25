@@ -21,10 +21,12 @@ public:
   void setVisible(bool visible);
   void reset();
   void start();
+  void update();
 
   LobbyLoadingPageStatus getStatus();
 private:
   void goBack();
+  void finish();
 
   std::unique_ptr<DialogPage> _page;
   

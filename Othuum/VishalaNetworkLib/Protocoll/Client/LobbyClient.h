@@ -24,6 +24,7 @@ namespace Vishala {
       void disconnect(size_t clientnumber);
 
       void update();
+      void stop();
     private:
       std::unique_ptr<Connection> _connection;
       LobbyClient::Status         _status    = Status::Lobby;

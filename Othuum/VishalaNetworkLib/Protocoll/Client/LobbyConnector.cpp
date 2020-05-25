@@ -100,5 +100,11 @@ namespace Vishala {
       return std::move(_finalConnection);
     }
 
+    void LobbyConnector::stop() {
+      if (_entryConnection)
+        _entryConnection->stop();
+      if (_finalConnection)
+        _finalConnection->stop();
+    }
   }
 }

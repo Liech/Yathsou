@@ -21,11 +21,11 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::s
 
   _mainMenuPage     = std::make_shared<MainMenuPage >();
   _joinLobbyPage    = std::make_shared<JoinLobbyPage>    (config);
-  _lobbyPage        = std::make_shared<LobbyPage>        (config);
   _hostPage         = std::make_shared<HostGamePage>     (config);
   _optionsPage      = std::make_shared<OptionsPage>      (config);
   _errorPage        = std::make_shared<ErrorPage>        (config);
-  _lobbyLoadingPage = std::make_shared<LobbyLoadingPage> (config,state);
+  _lobbyPage        = std::make_shared<LobbyPage>        (config, state);
+  _lobbyLoadingPage = std::make_shared<LobbyLoadingPage> (config, state);
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_mainMenuPage    , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_joinLobbyPage   , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyPage       , { "Main" });
@@ -87,6 +87,9 @@ void MainMenuLogic::update() {
   else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Error && stat == status::LoadLobby) {
     showError("Unable to connect to Lobby", "ERROR");
     _state->stop();
+  }
+  else if (stat == status::LoadLobby) {
+    _lobbyLoadingPage->update();
   }
   else if (_lobbyPage->getStatus() == LobbyPageStatus::Back && stat == status::Lobby) {
     _lobbyPage->setVisible(false);

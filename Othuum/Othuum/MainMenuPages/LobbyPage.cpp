@@ -6,8 +6,9 @@
 #include "YolonaOss/Drawables/Widgets/Label.h"
 #include "YolonaOss/Drawables/Widgets/LineEdit.h"
 
-LobbyPage::LobbyPage(std::shared_ptr<ClientConfiguration> configuration) {
+LobbyPage::LobbyPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state) {
   _config = configuration;
+  _state  = state;
 }
 
 void LobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
@@ -41,6 +42,7 @@ void LobbyPage::hostGame() {
 
 void LobbyPage::reset() {
   _status = LobbyPageStatus::Pending;
+  _state->stop();
 }
 
 

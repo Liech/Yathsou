@@ -146,13 +146,11 @@ namespace Vishala {
     toSend.type     = NetSendEvent::Type::disconnect;
     _threadQueueSend.enqueue(toSend);
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-
+    _thread.wait_until(std::chrono::system_clock::now() + std::chrono::seconds(2));
     for (auto p : _peers)
       enet_peer_reset(p.second);
 
     enet_host_destroy(_connection);
-    delete _connection;
     _connection = nullptr;
   }
 

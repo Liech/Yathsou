@@ -24,6 +24,7 @@ namespace Vishala {
     public:
       LobbyConnector(int myPort, std::string ip, int port);
       void                        update();
+      void                        stop();
       LobbyConnectorStatus        getStatus();
       std::unique_ptr<Connection> extractConnection();
     private:

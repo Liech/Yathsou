@@ -47,9 +47,9 @@ namespace Vishala {
       LobbyPlayer::state           _state = state::Unintroduced;
       size_t                       _playerNumber;
 
-      std::unique_ptr<Connection>                      _connection           ;
-      std::shared_ptr<LobbyModel>                      _model                ;
-      std::shared_ptr<GameLobby>                       _currentGame = nullptr;
+      std::unique_ptr<Connection>  _connection           ;
+      std::shared_ptr<LobbyModel>  _model                ;
+      std::shared_ptr<GameLobby>   _currentGame = nullptr;
     };
   }
 }

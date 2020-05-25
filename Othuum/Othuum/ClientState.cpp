@@ -35,6 +35,10 @@ void ClientState::update() {
 
 void ClientState::stop() {
   _status = ClientStateStatus::Nothing;
+  if (_lobbyConnector)
+    _lobbyConnector->stop();
+  if (_lobbyClient)
+    _lobbyClient->stop();
   _lobbyConnector = nullptr;
   _lobbyClient    = nullptr;
 }

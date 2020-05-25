@@ -62,5 +62,9 @@ namespace Vishala {
       _status = LobbyClient::Status::GameHostRequested;
     }
 
+    void LobbyClient::stop() {
+      if (_connection)
+        _connection->stop();
+    }
   }
 }
