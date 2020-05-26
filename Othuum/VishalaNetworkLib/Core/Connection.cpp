@@ -27,7 +27,7 @@ namespace Vishala {
     }
   }
 
-  void Connection::start() {
+  bool Connection::start() {
     assert(_connection == nullptr);
     std::cout << "Connection::start() with port " << _port << std::endl;
     if (_acceptsConnections) {
@@ -40,8 +40,9 @@ namespace Vishala {
       _connection = enet_host_create(nullptr,_numberOfConnections,_numberOfChannels,0,0);
     }
     if (_connection == NULL)
-      throw std::runtime_error("Error Creating Host");
+      return false;
     _thread = std::async(std::launch::async, [this]() {threadRun(); });
+    return true;
   }
 
   void Connection::threadRun() {
@@ -97,7 +98,8 @@ namespace Vishala {
             enet_peer_disconnect(p.second, 0);
         }
       }
-
+      if (_destructorCalled)
+        return;
       ENetEvent event;
       if (enet_host_service(_connection, &event, 0) > 0) {
         NetReciveEvent msg;
@@ -146,7 +148,7 @@ namespace Vishala {
     toSend.type     = NetSendEvent::Type::disconnect;
     _threadQueueSend.enqueue(toSend);
 
-    _thread.wait_until(std::chrono::system_clock::now() + std::chrono::seconds(2));
+    _thread.wait_until(std::chrono::system_clock::now() + std::chrono::seconds(1));
     for (auto p : _peers)
       enet_peer_reset(p.second);
 

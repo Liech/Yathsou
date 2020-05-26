@@ -26,7 +26,9 @@ namespace Vishala {
       _connection->setDisconnectCallback([this](size_t client) {disconnect(client);     });
       _connection->setRecievedCallback(0, [this](size_t client, std::unique_ptr<BinaryPackage> package) {/*We don't care for messages in the main channel*/    });
       _connection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {newConnection(client, ip, port);  });
-      _connection->start();
+      bool ok = _connection->start();
+      if (!ok)
+        throw std::runtime_error("Port used");
       std::cout << "Lobby awaiting connections" << std::endl;
     }
 
@@ -34,8 +36,14 @@ namespace Vishala {
     {
       _connection->update();
       std::vector<std::pair<size_t, std::shared_ptr<LobbyPlayer>>> vec(_players.begin(), _players.end());
-      for (auto protocoll : vec)
-        protocoll.second->update();
+      for (auto protocoll : vec) {
+        if (protocoll.second->getStatus() != LobbyPlayer::state::Disconnected)
+          protocoll.second->update();
+        else {
+          disconnect(protocoll.first);
+          return;
+        }
+      }
       for (auto request : _model->openRequests) {
         if (request.type == Client2LobbyMessage::Type::CreateGame)
           lobbyRequest(0, request);
@@ -65,6 +73,8 @@ namespace Vishala {
     void Lobby::disconnect(size_t clientnumber)
     {
       std::cout << "Lobby::disconnect " << clientnumber << std::endl;
+      if (_players.count(clientnumber))
+        _players.erase(clientnumber);
     }
 
     size_t  Lobby::getNextPort() {

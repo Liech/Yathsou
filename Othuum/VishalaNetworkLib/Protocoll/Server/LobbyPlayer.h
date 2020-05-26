@@ -21,10 +21,10 @@ namespace Vishala {
 
     //used by lobby to make one single client happy
     class LobbyPlayer {
-      enum class state {
-        Unintroduced, Lobby, Host, Joined
-      };
     public:
+      enum class state {
+        Unintroduced, Lobby, Host, Joined, Disconnected
+      };
       LobbyPlayer(int myport, std::string ip, int port, size_t playerNumber, std::shared_ptr<LobbyModel> model);
 
       virtual std::string getName() { return "LobbyChaperone"; }
@@ -34,6 +34,7 @@ namespace Vishala {
       void connectionFailed(std::string name);
       void disconnect(size_t clientnumber);
       void update();
+      LobbyPlayer::state getStatus() { return _state; }
 
       void gameHosted(std::shared_ptr<GameLobby> game);
 

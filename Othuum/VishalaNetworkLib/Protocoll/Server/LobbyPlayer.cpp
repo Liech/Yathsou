@@ -27,7 +27,11 @@ namespace Vishala {
       _connection->setDisconnectCallback([this](size_t client) {disconnect(client); });
       _connection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {newConnection(client, ip, port); });
       _connection->setRecievedCallback(0, [this](size_t client, std::unique_ptr<BinaryPackage> package) {messageRecived(client, 0, std::move(package)); });
-      _connection->start();
+      bool success = _connection->start();
+      if (!success) {
+        connectionFailed("");
+        return;
+      }
       _connection->connect(port, ip);
     }
 
@@ -59,18 +63,26 @@ namespace Vishala {
     void LobbyPlayer::newConnection(size_t clientnumber, std::string ip, int port)
     {
       std::cout << "Lobby Chaperone: new connection :) " << ip << ":" << port << std::endl;
-      if (ip != _ip)
-        throw std::runtime_error("Unexpected IP " + ip);
+      if (ip != _ip){
+        disconnect(clientnumber);
+        return;
+      }        
       _connected = true;
     }
 
     void LobbyPlayer::connectionFailed(std::string name)
     {
+      _state = LobbyPlayer::state::Disconnected;
+      _connected = false;
+      _connection = nullptr;
       std::cout << "Lobby Chaperone: connection failed " << name << std::endl;
     }
 
     void LobbyPlayer::disconnect(size_t clientnumber)
     {
+      _state = LobbyPlayer::state::Disconnected;
+      _connected = false;
+      _connection = nullptr;
       std::cout << "Lobby Chaperone: connection disconnect " << clientnumber << std::endl;
 
     }

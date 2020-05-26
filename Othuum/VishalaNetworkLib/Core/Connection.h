@@ -25,7 +25,7 @@ namespace Vishala {
     };
     class NetSendEvent {
     public:
-      enum class Type { disconnect, send, connect };
+      enum class Type { disconnect, send, connect,kill };
       NetSendEvent::Type               type    ;
       std::vector<unsigned char>       data    ;
       size_t                           channel ;
@@ -38,7 +38,7 @@ namespace Vishala {
      Connection();
     ~Connection();
 
-    void   start ();
+    bool   start ();
     void   stop  ();
     void   update();
     void   connect(int port, std::string ip); //returns -1 on failure
