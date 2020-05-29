@@ -42,7 +42,6 @@ void LobbyPage::hostGame() {
 
 void LobbyPage::reset() {
   _status = LobbyPageStatus::Pending;
-  _state->stop();
 }
 
 

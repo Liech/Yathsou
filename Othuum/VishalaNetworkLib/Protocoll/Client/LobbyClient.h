@@ -1,6 +1,7 @@
 #pragma once
 
 #include "VishalaNetworkLib/Core/Connection.h"
+#include "VishalaNetworkLib/Serializable/Client2LobbyMessage.h"
 
 namespace Vishala {
   class LobbyModel;
@@ -16,7 +17,7 @@ namespace Vishala {
 
       LobbyClient::Status getStatus();
 
-      void                hostGame(std::string name);
+      void                hostGame(Vishala::CreateGameRequest options);
 
       void messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package);
       void newConnection(size_t clientnumber, std::string ip, int port);
@@ -26,6 +27,8 @@ namespace Vishala {
       void update();
       void stop();
     private:
+      void sendMessage(Vishala::Client2LobbyMessage);
+
       std::unique_ptr<Connection> _connection;
       LobbyClient::Status         _status    = Status::Lobby;
     };

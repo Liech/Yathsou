@@ -14,6 +14,7 @@ class HostGamePage       ;
 class OptionsPage        ;
 class ErrorPage          ;
 class LobbyLoadingPage   ;
+class HostLoadingPage    ;
 
 class MainMenuLogic {
 public:
@@ -23,8 +24,10 @@ public:
     LoadLobby,
     Lobby,
     HostGame,
+    LoadHost,
     Options,
-    Error
+    Error,
+    GameLobbyHost
   } stat = status::MainMenu;
 
   MainMenuLogic(std::shared_ptr<ClientConfiguration> config,std::shared_ptr<ClientState> state);
@@ -41,6 +44,7 @@ private:
   std::shared_ptr<LobbyLoadingPage> _lobbyLoadingPage;
   std::shared_ptr<LobbyPage>        _lobbyPage       ;
   std::shared_ptr<HostGamePage>     _hostPage        ;
+  std::shared_ptr<HostLoadingPage>  _hostLoadingPage ;
   std::shared_ptr<OptionsPage>      _optionsPage     ;
   std::shared_ptr<ErrorPage>        _errorPage       ;
 

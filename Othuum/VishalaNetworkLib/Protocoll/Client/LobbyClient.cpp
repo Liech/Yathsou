@@ -50,21 +50,26 @@ namespace Vishala {
       _status = LobbyClient::Status::Disconnected;
     }
 
-    void LobbyClient::hostGame(std::string name) {
+    void LobbyClient::hostGame(Vishala::CreateGameRequest options) {
       if (_status != LobbyClient::Status::Lobby)
         throw std::runtime_error("Can't host when not in Lobby");
-      std::cout << "Send host request: " << name << std::endl;
+      std::cout << "Send host request: " << options.gameName << std::endl;
       Client2LobbyMessage request;
-      request.type                = Client2LobbyMessage::Type::CreateGame;     
-      request.createGame.gameName = name;
-      std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(request.toBinary());
-      _connection->send(0,0,std::move(package));
+      request.type       = Client2LobbyMessage::Type::CreateGame;     
+      request.createGame = options;
+      std::cout<<"OK" << std::endl;
+      sendMessage(request);
       _status = LobbyClient::Status::GameHostRequested;
     }
 
     void LobbyClient::stop() {
       if (_connection)
         _connection->stop();
+    }
+
+    void LobbyClient::sendMessage(Vishala::Client2LobbyMessage msg) {
+      std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(msg.toBinary());
+      _connection->send(0, 0, std::move(package));
     }
   }
 }

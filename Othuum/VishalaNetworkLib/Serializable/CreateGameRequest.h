@@ -7,7 +7,7 @@
 
 
 namespace Vishala {
-  class CreateGameRequest : public Serialization {
+  struct CreateGameRequest : public Serialization {
   public:
     std::string                        gameName;
     

@@ -1,27 +1,27 @@
 #pragma once
 
-#include "Core/Serialization.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
 
 #include "CreateGameRequest.h"
 
 namespace Vishala {
 
-  class Client2LobbyMessage : public Serialization {
+  struct Client2LobbyMessage : public Serialization {
   public:
     enum class Type : int {
       Refresh, CreateGame, JoinGame
     };
-    class Nothing{};
+    struct Nothing{};
     Client2LobbyMessage();
     Client2LobbyMessage(const Client2LobbyMessage& req);
     ~Client2LobbyMessage();
 
     Type            type   = Type::Refresh;
-    union
-    {
+    //union
+    //{
       CreateGameRequest createGame;
       Nothing           nothing   ;
-    };
+    //};
 
 
     virtual nlohmann::json             toJson()                  override;

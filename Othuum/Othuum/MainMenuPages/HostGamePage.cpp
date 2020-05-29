@@ -4,7 +4,6 @@
 
 #include "YolonaOss/Drawables/Widgets/ListLayout.h"
 #include "YolonaOss/Drawables/Widgets/Label.h"
-#include "YolonaOss/Drawables/Widgets/LineEdit.h"
 
 HostGamePage::HostGamePage(std::shared_ptr<ClientConfiguration> configuration) {
   _config = configuration;
@@ -26,9 +25,10 @@ void HostGamePage::load(YolonaOss::GL::DrawSpecification* spec) {
   subName->setHorizontal(true);
   auto nameLable = subName->addLabel("Name:");
   nameLable->getPosition().setSize({ spec->width / 4.0, 50.0 });
-  auto nameEdit = subName->addLineEdit(_config->lastGameName);
-  nameEdit->getPosition().setSize({ spec->width / 4.0, 50.0 });
+  _gameName = subName->addLineEdit(_config->lastGameName);
+  _gameName->getPosition().setSize({ spec->width / 4.0, 50.0 });
 
+  _page->layout().addButton("Host", [this]() { hostGame(); });
   _page->layout().addButton("Back", [this]() { goBack(); });
   setVisible(false);
 }
@@ -57,4 +57,9 @@ void HostGamePage::reset() {
   _status = HostPageStatus::Pending;
 }
 
+Vishala::CreateGameRequest HostGamePage::getResult() {
+  Vishala::CreateGameRequest result;
+  result.gameName = _gameName->getText();
+  return result;
+}
 

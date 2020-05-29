@@ -7,7 +7,7 @@
 #include "VishalaNetworkLib/Protocoll/Client/LobbyClient.h"
 
 enum class ClientStateStatus {
-  Nothing, LobbyConnector, Lobby
+  Nothing, LobbyConnector, Lobby, HostLoading, Host
 };
 
 class ClientState {
@@ -19,6 +19,7 @@ public:
   void update();
   void connectToLobby();
   void stop();
+  void host(Vishala::CreateGameRequest options);
 
 private:
   ClientStateStatus _status = ClientStateStatus::Nothing;

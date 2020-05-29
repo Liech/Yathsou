@@ -6,6 +6,8 @@
 
 #include "DialogPage.h"
 #include "ClientConfiguration.h"
+#include "VishalaNetworkLib/Serializable/CreateGameRequest.h"
+#include "YolonaOss/Drawables/Widgets/LineEdit.h"
 
 enum class HostPageStatus {
   Pending, Back, Host
@@ -20,13 +22,14 @@ public:
   void setVisible(bool visible);
   void reset();
 
+  Vishala::CreateGameRequest getResult();
   HostPageStatus getStatus();
 private:
   void goBack();
   void hostGame();
 
   std::unique_ptr<DialogPage> _page;
-  
-  HostPageStatus                       _status = HostPageStatus::Pending;
-  std::shared_ptr<ClientConfiguration> _config;
+  std::shared_ptr<YolonaOss::Widgets::LineEdit>   _gameName;
+  HostPageStatus                                  _status = HostPageStatus::Pending;
+  std::shared_ptr<ClientConfiguration>            _config;
 };

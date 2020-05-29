@@ -70,7 +70,7 @@ namespace YolonaOss {
     }
 
     bool LineEdit::mouseClick(glm::vec2 position, GL::Key k) {
-      std::cout << position[0] << "/" << position[1] << std::endl;
+      //std::cout << position[0] << "/" << position[1] << std::endl;
       
       for (size_t i = 1; i < _text.length()+1; i++) {
         std::string sub = _text.substr(0, i);

@@ -1,5 +1,7 @@
 #include "MainMenuLogic.h"
 
+#include <iostream>
+
 #include "ClientConfiguration.h"
 #include "ClientState.h"
 
@@ -10,6 +12,7 @@
 #include "MainMenuPages/OptionsPage.h"
 #include "MainMenuPages/ErrorPage.h"
 #include "MainMenuPages/LobbyLoadingPage.h"
+#include "MainMenuPages/HostLoadingPage.h"
 
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
@@ -26,12 +29,14 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::s
   _errorPage        = std::make_shared<ErrorPage>        (config);
   _lobbyPage        = std::make_shared<LobbyPage>        (config, state);
   _lobbyLoadingPage = std::make_shared<LobbyLoadingPage> (config, state);
+  _hostLoadingPage  = std::make_shared<HostLoadingPage>  (config, state);
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_mainMenuPage    , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_joinLobbyPage   , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyPage       , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_hostPage        , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_optionsPage     , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyLoadingPage, { "Main" });
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_hostLoadingPage , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_errorPage       , { "Main" });
 }
 
@@ -109,6 +114,28 @@ void MainMenuLogic::update() {
     stat = status::Lobby;
     _hostPage->reset();
   }
+  else if (_hostPage->getStatus() == HostPageStatus::Host && stat == status::HostGame) {
+    _hostPage->setVisible(false);
+    _hostLoadingPage->setVisible(true);
+    stat = status::LoadHost;
+    _hostLoadingPage->start(_hostPage->getResult());
+    _hostPage->reset();
+  }
+  else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Back && stat == status::LoadHost) {
+    _hostLoadingPage->setVisible(false);
+    _hostPage->setVisible(true);
+    stat = status::HostGame;
+    _hostLoadingPage->reset();
+  }
+  else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Proceed && stat == status::LoadHost) {
+    _hostLoadingPage->setVisible(true);
+    throw std::runtime_error("SUCCESS: Game Lobby Open");
+    stat = status::GameLobbyHost;
+    _hostLoadingPage->reset();
+  }
+  else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Error && stat == status::LoadHost) {
+    showError("Error while hosting game", "ERROR");
+  }
   else if (_errorPage->getStatus() == ErrorPageStatus::Back && stat == status::Error) {
     _errorPage->setVisible(false);
     _mainMenuPage->setVisible(true);
@@ -126,12 +153,14 @@ void MainMenuLogic::showError(std::string desc,std::string title) {
   _hostPage        ->setVisible(false);
   _optionsPage     ->setVisible(false);
   _lobbyLoadingPage->setVisible(false);
+  _hostLoadingPage->setVisible(false);
   _mainMenuPage    ->reset();
   _joinLobbyPage   ->reset();
   _lobbyPage       ->reset();
   _hostPage        ->reset();
   _optionsPage     ->reset();
   _lobbyLoadingPage->reset();
+  _hostLoadingPage ->reset();
   _errorPage->setMessage(desc,title);
 
 }
