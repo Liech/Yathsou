@@ -23,14 +23,10 @@ void HostLoadingPage::load(YolonaOss::GL::DrawSpecification* spec) {
 }
 
 void HostLoadingPage::update() {
-  if (_state->getStatus() == ClientStateStatus::Lobby) {
+  if (_state->getStatus() == ClientStateStatus::Lobby)
     _status = HostLoadingPageStatus::Error;
-    return;
-  }
-  else if (_state->getStatus() == ClientStateStatus::Host) {
+  else if (_state->getStatus() == ClientStateStatus::Host)
     finish();
-    return;
-  }
 }
 
 void HostLoadingPage::draw() {
@@ -42,10 +38,6 @@ void HostLoadingPage::setVisible(bool visible) {
 }
 
 HostLoadingPageStatus HostLoadingPage::getStatus() {
-  if (_state->getStatus() == ClientStateStatus::Lobby)
-    _status = HostLoadingPageStatus::Error;
-  else if (_state->getStatus() == ClientStateStatus::Host)
-    finish();
   return _status;
 }
 

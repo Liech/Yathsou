@@ -30,6 +30,11 @@ void ClientState::update() {
   }
   if (_lobbyClient) {
     _lobbyClient->update();
+
+    if (_status == ClientStateStatus::HostLoading && _lobbyClient->getStatus() == Vishala::Client::LobbyClient::Status::GameHosted) {
+      _status = ClientStateStatus::Host;
+    }
+
   }
 }
 

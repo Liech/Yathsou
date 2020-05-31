@@ -24,7 +24,7 @@ public:
     LobbyEntry,
     LoadLobby,
     Lobby,
-    HostGame,
+    AdjustHostOptions,
     LoadHost,
     Options,
     Error,

@@ -44,112 +44,129 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::s
 }
 
 void MainMenuLogic::update() {
-  if (_mainMenuPage->getStatus() == MainMenuPageStatus::Multiplayer && stat == status::MainMenu) {
-    _mainMenuPage->reset();
-    _mainMenuPage->setVisible(false);
-    _joinLobbyPage->setVisible(true);
-    stat = status::LobbyEntry;
+  if (stat == status::MainMenu) {
+    if (_mainMenuPage->getStatus() == MainMenuPageStatus::Multiplayer) {
+      _mainMenuPage->reset();
+      _mainMenuPage->setVisible(false);
+      _joinLobbyPage->setVisible(true);
+      stat = status::LobbyEntry;
+    }
+    else if (_mainMenuPage->getStatus() == MainMenuPageStatus::Options && stat == status::MainMenu) {
+      _mainMenuPage->reset();
+      _mainMenuPage->setVisible(false);
+      _optionsPage->setVisible(true);
+      stat = status::Options;
+    }
   }
-  else if (_mainMenuPage->getStatus() == MainMenuPageStatus::Options && stat == status::MainMenu) {
-    _mainMenuPage->reset();
-    _mainMenuPage->setVisible(false);
-    _optionsPage->setVisible(true);
-    stat = status::Options;
+  else if (stat == status::Options) {
+    if (_optionsPage->getStatus() == OptionsPageStatus::Back) {
+      _optionsPage->setVisible(false);
+      _mainMenuPage->setVisible(true);
+      stat = status::MainMenu;
+      if (_optionsPage->requiresRestart()) {
+        showError("Some options may require a restart", "Hint");
+      }
+      _optionsPage->reset();
+    }
   }
-  else if (_optionsPage->getStatus() == OptionsPageStatus::Back && stat == status::Options) {
-    _optionsPage->setVisible(false);
-    _mainMenuPage->setVisible(true);
-    stat = status::MainMenu;
-    if (_optionsPage->requiresRestart()) {
-      showError("Some options may require a restart","Hint");
-    }      
-    _optionsPage->reset();
+  else if (stat == status::LobbyEntry) {
+    if (_joinLobbyPage->getStatus() == JoinLobbyPageStatus::Back) {
+      _joinLobbyPage->setVisible(false);
+      _mainMenuPage->setVisible(true);
+      stat = status::MainMenu;
+      _joinLobbyPage->reset();
+    }
+    else if (_joinLobbyPage->getStatus() == JoinLobbyPageStatus::Proceed) {
+      _joinLobbyPage->setVisible(false);
+      _lobbyLoadingPage->setVisible(true);
+
+      stat = status::LoadLobby;
+      _joinLobbyPage->reset();
+      _lobbyLoadingPage->start();
+    }
   }
-  else if (_joinLobbyPage->getStatus() == JoinLobbyPageStatus::Back && stat == status::LobbyEntry) {
-    _joinLobbyPage->setVisible(false);
-    _mainMenuPage->setVisible(true);
-    stat = status::MainMenu;
-    _joinLobbyPage->reset();
-  }
-  else if (_joinLobbyPage->getStatus() == JoinLobbyPageStatus::Proceed && stat == status::LobbyEntry) {
-    _joinLobbyPage->setVisible(false);
-    _lobbyLoadingPage->setVisible(true);
-    
-    stat = status::LoadLobby;
-    _joinLobbyPage->reset();
-    _lobbyLoadingPage->start();
-  }
-  else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Proceed && stat == status::LoadLobby) {
-    _lobbyLoadingPage->setVisible(false);
-    _lobbyPage->setVisible(true);
-    stat = status::Lobby;
-    _lobbyLoadingPage->reset();
-  }
-  else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Back && stat == status::LoadLobby) {
-    _lobbyLoadingPage->setVisible(false);
-    _joinLobbyPage->setVisible(true);
-    stat = status::LobbyEntry;
-    _lobbyLoadingPage->reset();
-    _state->stop();
-  }
-  else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Error && stat == status::LoadLobby) {
-    showError("Unable to connect to Lobby", "ERROR");
-    _state->stop();
-  }
-  else if (stat == status::LoadLobby) {
+  else if (stat == status::LoadLobby){
     _lobbyLoadingPage->update();
+    if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Proceed) {
+      _lobbyLoadingPage->setVisible(false);
+      _lobbyPage->setVisible(true);
+      stat = status::Lobby;
+      _lobbyLoadingPage->reset();
+    }
+    else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Back) {
+      _lobbyLoadingPage->setVisible(false);
+      _joinLobbyPage->setVisible(true);
+      stat = status::LobbyEntry;
+      _lobbyLoadingPage->reset();
+      _state->stop();
+    }
+    else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Error) {
+      showError("Unable to connect to Lobby", "ERROR");
+      _state->stop();
+    }
   }
-  else if (_lobbyPage->getStatus() == LobbyPageStatus::Back && stat == status::Lobby) {
-    _lobbyPage->setVisible(false);
-    _mainMenuPage->setVisible(true);
-    stat = status::MainMenu;
-    _lobbyPage->reset();
+  else if (stat == status::Lobby) {
+    if (_lobbyPage->getStatus() == LobbyPageStatus::Back) {
+      _lobbyPage->setVisible(false);
+      _mainMenuPage->setVisible(true);
+      stat = status::MainMenu;
+      _lobbyPage->reset();
+    }
+    else if (_lobbyPage->getStatus() == LobbyPageStatus::Host) {
+      _lobbyPage->setVisible(false);
+      _hostPage->setVisible(true);
+      stat = status::AdjustHostOptions;
+      _lobbyPage->reset();
+    }
   }
-  else if (_lobbyPage->getStatus() == LobbyPageStatus::Host && stat == status::Lobby) {
-    _lobbyPage->setVisible(false);
-    _hostPage->setVisible(true);
-    stat = status::HostGame;
-    _lobbyPage->reset();
+  else if (stat == status::AdjustHostOptions) {
+    if (_hostPage->getStatus() == HostPageStatus::Back && stat == status::AdjustHostOptions) {
+      _hostPage->setVisible(false);
+      _lobbyPage->setVisible(true);
+      stat = status::Lobby;
+      _hostPage->reset();
+    }
+    else if (_hostPage->getStatus() == HostPageStatus::Host) {
+      _hostPage->setVisible(false);
+      _hostLoadingPage->setVisible(true);
+      stat = status::LoadHost;
+      _hostLoadingPage->start(_hostPage->getResult());
+      _hostPage->reset();
+    }
   }
-  else if (_hostPage->getStatus() == HostPageStatus::Back && stat == status::HostGame) {
-    _hostPage->setVisible(false);
-    _lobbyPage->setVisible(true);
-    stat = status::Lobby;
-    _hostPage->reset();
+  else if (stat == status::LoadHost) {
+    _hostLoadingPage->update();
+    if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Back) {
+      _hostLoadingPage->setVisible(false);
+      _hostPage->setVisible(true);
+      stat = status::AdjustHostOptions;
+      _hostLoadingPage->reset();
+    }
+    else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Proceed) {
+      _hostLoadingPage->setVisible(false);
+      _gameLobbyPage->setVisible(true);
+      stat = status::GameLobbyHost;
+      _hostLoadingPage->reset();
+    }
+    else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Error) {
+      showError("Error while hosting game", "ERROR");
+    }
   }
-  else if (_hostPage->getStatus() == HostPageStatus::Host && stat == status::HostGame) {
-    _hostPage->setVisible(false);
-    _hostLoadingPage->setVisible(true);
-    stat = status::LoadHost;
-    _hostLoadingPage->start(_hostPage->getResult());
-    _hostPage->reset();
-  }
-  else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Back && stat == status::LoadHost) {
-    _hostLoadingPage->setVisible(false);
-    _hostPage->setVisible(true);
-    stat = status::HostGame;
-    _hostLoadingPage->reset();
-  }
-  else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Proceed && stat == status::LoadHost) {
-    _hostLoadingPage->setVisible(false);
-    _gameLobbyPage->setVisible(true);
-    stat = status::GameLobbyHost;
-    _hostLoadingPage->reset();
-  }
-  else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Error && stat == status::LoadHost) {
-    showError("Error while hosting game", "ERROR");
-  }
-  else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::Back && stat == status::HostGame) {
+  else if (stat == status::GameLobbyHost) {
+    if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::Back) {
     _gameLobbyPage->setVisible(false);
     _lobbyPage->setVisible(true);
     stat = status::Lobby;
     _gameLobbyPage->reset();
+    }
   }
-  else if (_errorPage->getStatus() == ErrorPageStatus::Back && stat == status::Error) {
-    _errorPage->setVisible(false);
-    _mainMenuPage->setVisible(true);
-    stat = status::MainMenu;
-    _mainMenuPage->reset();
+  else if (stat == status::Error) {
+    if (_errorPage->getStatus() == ErrorPageStatus::Back) {
+      _errorPage->setVisible(false);
+      _mainMenuPage->setVisible(true);
+      stat = status::MainMenu;
+      _mainMenuPage->reset();
+    }
   }
 }
 

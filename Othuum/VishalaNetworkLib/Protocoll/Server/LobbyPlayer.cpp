@@ -111,8 +111,12 @@ namespace Vishala {
     void LobbyPlayer::send(Lobby2ClientMessage* message) {
       auto packet = message->toBinary();
       std::unique_ptr<BinaryPackage> p = std::make_unique<BinaryPackage>(packet);
-      _connection->send(0, 0, std::move(p));
-      std::cout << "SEND" << std::endl;
+      if (_connection) {
+        _connection->send(0, 0, std::move(p));
+        std::cout << "SEND" << std::endl;
+      }
+      else
+        std::cout << "COULD NOT SEND" << std::endl;
     }
 
   }
