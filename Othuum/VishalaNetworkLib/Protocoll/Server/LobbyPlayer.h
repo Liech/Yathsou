@@ -7,6 +7,7 @@
 #include "Core/Connection.h"
 #include "Serializable/Client2LobbyMessage.h"
 #include "Serializable/Lobby/LobbyModel.h"
+#include "Serializable/Lobby2ClientMessage.h"
 
 namespace Vishala {
   class BinaryPackage   ;
@@ -41,7 +42,7 @@ namespace Vishala {
     private:
       LobbyStateUpdate getLobbyStateUpdate();
 
-      void send(Serialization* message);
+      void send(Lobby2ClientMessage* message);
 
       bool                         _connected = false;
       std::string                  _ip;

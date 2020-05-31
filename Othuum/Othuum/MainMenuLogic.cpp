@@ -162,5 +162,5 @@ void MainMenuLogic::showError(std::string desc,std::string title) {
   _lobbyLoadingPage->reset();
   _hostLoadingPage ->reset();
   _errorPage->setMessage(desc,title);
-
+  _state->stop();
 }

@@ -8,7 +8,6 @@
 #include "Serializable/SelfBriefing.h"
 #include "Core/BinaryPackage.h"
 #include "GameLobby.h"
-#include "Serializable/Lobby2ClientMessage.h"
 
 namespace Vishala {
   namespace Server {
@@ -43,10 +42,11 @@ namespace Vishala {
         description.fromBinary(*package);
         _state = LobbyPlayer::state::Lobby;
         std::cout << "He Is Known Now" << std::endl;
-        LobbyBriefing briefing;
-        briefing.lobbyStatus = getLobbyStateUpdate();
-        briefing.playerId    = _playerNumber;
-        send(&briefing);
+        Lobby2ClientMessage msg;
+        msg.type = Lobby2ClientMessage::Type::LobbyBriefing;
+        msg.lobbyBriefing.lobbyStatus = getLobbyStateUpdate();
+        msg.lobbyBriefing.playerId    = _playerNumber;
+        send(&msg);
         return;
       }
       else if (_state == LobbyPlayer::state::Lobby) {
@@ -99,8 +99,7 @@ namespace Vishala {
       Lobby2ClientMessage msg;
       msg.type = Lobby2ClientMessage::Type::Acknowledgment;
       msg.acknowledgment.type = Acknowledgement::Type::GameHosted;
-      std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(msg.toBinary());
-      _connection->send(0, 0, std::move(package));
+      send(&msg);
     }
 
     LobbyStateUpdate LobbyPlayer::getLobbyStateUpdate() {
@@ -109,7 +108,7 @@ namespace Vishala {
       return result;
     }
 
-    void LobbyPlayer::send(Serialization* message) {
+    void LobbyPlayer::send(Lobby2ClientMessage* message) {
       auto packet = message->toBinary();
       std::unique_ptr<BinaryPackage> p = std::make_unique<BinaryPackage>(packet);
       _connection->send(0, 0, std::move(p));

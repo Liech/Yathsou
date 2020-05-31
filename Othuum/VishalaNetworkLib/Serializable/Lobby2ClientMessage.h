@@ -2,25 +2,26 @@
 
 #include "Core/Serialization.h"
 #include "Serializable/Acknowledgement.h"
+#include "Serializable/LobbyBriefing.h"
 
 namespace Vishala {
 
   class Lobby2ClientMessage : public Serialization {
   public:
     enum class Type : int {
-      Acknowledgment
+      Acknowledgment, LobbyBriefing
     };
     class Nothing {};
     Lobby2ClientMessage();
-    Lobby2ClientMessage(const Lobby2ClientMessage& req);
     ~Lobby2ClientMessage();
 
     Type            type = Type::Acknowledgment;
-    union
-    {
+    //union
+    //{
       Acknowledgement   acknowledgment;
-      Nothing           nothing;
-    };
+      LobbyBriefing     lobbyBriefing ;
+      Nothing           nothing       ;
+    //};
 
     virtual nlohmann::json             toJson()                  override;
     virtual void                       fromJson(nlohmann::json)  override;

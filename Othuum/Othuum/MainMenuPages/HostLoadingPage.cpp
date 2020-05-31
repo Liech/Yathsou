@@ -42,6 +42,10 @@ void HostLoadingPage::setVisible(bool visible) {
 }
 
 HostLoadingPageStatus HostLoadingPage::getStatus() {
+  if (_state->getStatus() == ClientStateStatus::Lobby)
+    _status = HostLoadingPageStatus::Error;
+  else if (_state->getStatus() == ClientStateStatus::Host)
+    finish();
   return _status;
 }
 

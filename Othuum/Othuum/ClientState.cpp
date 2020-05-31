@@ -28,7 +28,7 @@ void ClientState::update() {
       stop();
     }
   }
-  if (_lobbyClient && _status == ClientStateStatus::Lobby) {
+  if (_lobbyClient) {
     _lobbyClient->update();
   }
 }
