@@ -10,6 +10,7 @@ class ClientState        ;
 class MainMenuPage       ;
 class JoinLobbyPage      ;
 class LobbyPage          ;
+class GameLobbyPage      ;
 class HostGamePage       ;
 class OptionsPage        ;
 class ErrorPage          ;
@@ -47,6 +48,7 @@ private:
   std::shared_ptr<HostLoadingPage>  _hostLoadingPage ;
   std::shared_ptr<OptionsPage>      _optionsPage     ;
   std::shared_ptr<ErrorPage>        _errorPage       ;
+  std::shared_ptr<GameLobbyPage>    _gameLobbyPage   ;
 
   void showError(std::string desc, std::string title);
 };

@@ -13,6 +13,7 @@
 #include "MainMenuPages/ErrorPage.h"
 #include "MainMenuPages/LobbyLoadingPage.h"
 #include "MainMenuPages/HostLoadingPage.h"
+#include "MainMenuPages/GameLobbyPage.h"
 
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
@@ -28,6 +29,7 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::s
   _optionsPage      = std::make_shared<OptionsPage>      (config);
   _errorPage        = std::make_shared<ErrorPage>        (config);
   _lobbyPage        = std::make_shared<LobbyPage>        (config, state);
+  _gameLobbyPage    = std::make_shared<GameLobbyPage>    (config, state);
   _lobbyLoadingPage = std::make_shared<LobbyLoadingPage> (config, state);
   _hostLoadingPage  = std::make_shared<HostLoadingPage>  (config, state);
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_mainMenuPage    , { "Main" });
@@ -38,6 +40,7 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::s
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyLoadingPage, { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_hostLoadingPage , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_errorPage       , { "Main" });
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_gameLobbyPage   , { "Main" });
 }
 
 void MainMenuLogic::update() {
@@ -128,13 +131,19 @@ void MainMenuLogic::update() {
     _hostLoadingPage->reset();
   }
   else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Proceed && stat == status::LoadHost) {
-    _hostLoadingPage->setVisible(true);
-    throw std::runtime_error("SUCCESS: Game Lobby Open");
+    _hostLoadingPage->setVisible(false);
+    _gameLobbyPage->setVisible(true);
     stat = status::GameLobbyHost;
     _hostLoadingPage->reset();
   }
   else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Error && stat == status::LoadHost) {
     showError("Error while hosting game", "ERROR");
+  }
+  else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::Back && stat == status::HostGame) {
+    _gameLobbyPage->setVisible(false);
+    _lobbyPage->setVisible(true);
+    stat = status::Lobby;
+    _gameLobbyPage->reset();
   }
   else if (_errorPage->getStatus() == ErrorPageStatus::Back && stat == status::Error) {
     _errorPage->setVisible(false);
@@ -153,7 +162,8 @@ void MainMenuLogic::showError(std::string desc,std::string title) {
   _hostPage        ->setVisible(false);
   _optionsPage     ->setVisible(false);
   _lobbyLoadingPage->setVisible(false);
-  _hostLoadingPage->setVisible(false);
+  _hostLoadingPage ->setVisible(false);
+  _gameLobbyPage   ->setVisible(false);
   _mainMenuPage    ->reset();
   _joinLobbyPage   ->reset();
   _lobbyPage       ->reset();
@@ -161,6 +171,7 @@ void MainMenuLogic::showError(std::string desc,std::string title) {
   _optionsPage     ->reset();
   _lobbyLoadingPage->reset();
   _hostLoadingPage ->reset();
+  _gameLobbyPage   ->reset();
   _errorPage->setMessage(desc,title);
   _state->stop();
 }

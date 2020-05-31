@@ -157,6 +157,7 @@
     <ClCompile Include="MainMenuLogic.cpp" />
     <ClCompile Include="MainMenuPages\DialogPage.cpp" />
     <ClCompile Include="MainMenuPages\ErrorPage.cpp" />
+    <ClCompile Include="MainMenuPages\GameLobbyPage.cpp" />
     <ClCompile Include="MainMenuPages\HostGamePage.cpp" />
     <ClCompile Include="MainMenuPages\HostLoadingPage.cpp" />
     <ClCompile Include="MainMenuPages\JoinLobbyPage.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="MainMenuLogic.h" />
     <ClInclude Include="MainMenuPages\DialogPage.h" />
     <ClInclude Include="MainMenuPages\ErrorPage.h" />
+    <ClInclude Include="MainMenuPages\GameLobbyPage.h" />
     <ClInclude Include="MainMenuPages\HostGamePage.h" />
     <ClInclude Include="MainMenuPages\HostLoadingPage.h" />
     <ClInclude Include="MainMenuPages\JoinLobbyPage.h" />

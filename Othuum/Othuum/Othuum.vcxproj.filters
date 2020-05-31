@@ -75,6 +75,9 @@
     <ClCompile Include="MainMenuPages\HostLoadingPage.cpp">
       <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuPages\GameLobbyPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lib\nop\base\array.h">
@@ -351,6 +354,9 @@
       <Filter>Header Files\MainMenuPages</Filter>
     </ClInclude>
     <ClInclude Include="MainMenuPages\HostLoadingPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\GameLobbyPage.h">
       <Filter>Header Files\MainMenuPages</Filter>
     </ClInclude>
   </ItemGroup>
