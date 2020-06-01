@@ -9,11 +9,16 @@
 namespace YolonaOss {
   RectangleRenderer::RenderVars RectangleRenderer::_vars;
 
-  void RectangleRenderer::drawRectangle(Iyathuum::AABB<2> box, glm::vec3 color) {
-    drawRectangle(Util<2>::array2Vec(box.getPosition()), Util<2>::array2Vec(box.getSize()), color);
-  }
-
   void RectangleRenderer::drawRectangle(glm::vec2 pos, glm::vec2 size, glm::vec3 color) {
+    ///drawRectangle(Util<2>::array2Vec(box.getPosition()), Util<2>::array2Vec(box.getSize()), color);
+
+    Iyathuum::AABB<2> box;
+    box.setPosition(Util<2>::vec2Array<double>(pos));
+    box.setSize(Util<2>::vec2Array<double>(size));
+    drawRectangle(box, color);
+  }
+  
+  void RectangleRenderer::drawRectangle(Iyathuum::AABB<2> box, glm::vec3 color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
@@ -22,6 +27,12 @@ namespace YolonaOss {
 
     // Iterate through all characters
     std::string::const_iterator c;
+
+    if (_clipping)
+      box = _clippingBox.getUnion(box);
+
+    glm::vec2 pos  = Util<2>::array2Vec(box.getPosition());
+    glm::vec2 size = Util<2>::array2Vec(box.getSize());
 
     GLfloat xpos = pos[0];
     GLfloat ypos = pos[1];
@@ -105,4 +116,13 @@ namespace YolonaOss {
     _vars.vao = std::make_unique<GL::VAO<GL::PositionVertex>>(_vars.vbo.get());
     _vars.shader = std::make_unique<GL::ShaderProgram>(_vars.vao.get(), uniforms, vertex_shader_source, fragment_shader_source);
   }
+  void RectangleRenderer::setClippingRectangle(Iyathuum::AABB<2> box) {
+    _clipping = true;
+    _clippingBox = box;
+  }
+
+  void RectangleRenderer::disableClipping(Iyathuum::AABB<2> box) {
+    _clipping = false;
+  }
+
 }

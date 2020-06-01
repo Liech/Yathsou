@@ -33,14 +33,23 @@ namespace YolonaOss {
 
       GLfloat w = ch.Size.x * scale;
       GLfloat h = ch.Size.y * scale;
+
+      Iyathuum::AABB<2> box = Iyathuum::AABB<2>(std::array<double, 2>{xpos,ypos}, std::array<double, 2>{w,h});
+
+      if (_clipping)
+        box = _clippingBox.getUnion(box);
+
+      glm::vec2 pos  = glm::vec2(box.getPosition()[0],box.getPosition()[1]);
+      glm::vec2 size = glm::vec2(box.getSize()[0], box.getSize()[1]);
+
       // Update VBO for each character
       std::vector<GL::PositionTextureVertex> vertices = {
-        GL::PositionTextureVertex(glm::vec3(xpos,     ypos + h,0),glm::vec2(0.0, 0.0)),
-        GL::PositionTextureVertex(glm::vec3(xpos,     ypos,    0),glm::vec2(0.0, 1.0)),
-        GL::PositionTextureVertex(glm::vec3(xpos + w, ypos,    0),glm::vec2(1.0, 1.0)),
-        GL::PositionTextureVertex(glm::vec3(xpos,     ypos + h,0),glm::vec2(0.0, 0.0)),
-        GL::PositionTextureVertex(glm::vec3(xpos + w, ypos,    0),glm::vec2(1.0, 1.0)),
-        GL::PositionTextureVertex(glm::vec3(xpos + w, ypos + h,0),glm::vec2(1.0, 0.0))
+        GL::PositionTextureVertex(glm::vec3(pos[0]          , pos[1] + size[1],    0),glm::vec2(0.0, 0.0)),
+        GL::PositionTextureVertex(glm::vec3(pos[0]          , pos[1]          ,    0),glm::vec2(0.0, 1.0)),
+        GL::PositionTextureVertex(glm::vec3(pos[0] + size[0], pos[1]          ,    0),glm::vec2(1.0, 1.0)),
+        GL::PositionTextureVertex(glm::vec3(pos[0]          , pos[1] + size[1],    0),glm::vec2(0.0, 0.0)),
+        GL::PositionTextureVertex(glm::vec3(pos[0] + size[0], pos[1]          ,    0),glm::vec2(1.0, 1.0)),
+        GL::PositionTextureVertex(glm::vec3(pos[0] + size[0], pos[1] + size[1],    0),glm::vec2(1.0, 0.0))
       };
 
       // Render glyph texture over quad
@@ -195,5 +204,14 @@ namespace YolonaOss {
     _vars.vbo = std::make_unique<GL::VBO<GL::PositionTextureVertex>>(input);
     _vars.vao = std::make_unique<GL::VAO<GL::PositionTextureVertex>>(_vars.vbo.get());
     _vars.shader = std::make_unique<GL::ShaderProgram>(_vars.vao.get(), uniforms, vertex_shader_source, fragment_shader_source);
+  }
+
+  void TextRenderer::setClippingRectangle(Iyathuum::AABB<2> box) {
+    _clipping = true;
+    _clippingBox = box;
+  }
+
+  void TextRenderer::disableClipping(Iyathuum::AABB<2> box) {
+    _clipping = false;
   }
 }

@@ -71,6 +71,28 @@ namespace Iyathuum {
       return result;
     }
 
+    AABB<Dimension> getUnion(AABB<Dimension> other) {
+
+      std::array<double, Dimension> otherPosition  = other.getPosition();
+      std::array<double, Dimension> otherSize       = other.getSize();
+      std::array<double, Dimension> resultPosition = getPosition();
+      std::array<double, Dimension> resultSize     = getSize();
+
+      for (size_t i = 0; i < Dimension; i++) {
+        double otherEnd = otherSize[i] + otherPosition[i]  ;
+        double end      = resultSize[i] + resultPosition[i];
+        if (end < otherEnd)
+          resultSize[i] = otherEnd - resultPosition[i];
+        if (resultPosition[i] < otherPosition[i]) {
+          resultSize[i] -= otherPosition[i] - resultPosition[i];
+          resultPosition[i] = otherPosition[i];
+        }
+        if (resultSize[i] < 0)
+          resultSize[i] = 0;
+      }
+      return AABB<2>(resultPosition, resultSize);
+    }
+
   private:
     vec _position;
     vec _size    ;

@@ -30,6 +30,8 @@ namespace YolonaOss {
     static void end();
     static void drawRectangle(glm::vec2 pos, glm::vec2 size, glm::vec3 color);
     static void drawRectangle(Iyathuum::AABB<2> box, glm::vec3 color);
+    static void setClippingRectangle(Iyathuum::AABB<2> box);
+    static void disableClipping(Iyathuum::AABB<2> box);
 
     virtual void load(GL::DrawSpecification*) override;
 
@@ -45,9 +47,11 @@ namespace YolonaOss {
 
     void makeShader();
 
-    static inline bool       _alreadyLoaded = false;
-    static inline bool       _inRenderProcess = false;
-    static RenderVars _vars;
+    static inline bool              _alreadyLoaded   = false;
+    static inline bool              _inRenderProcess = false;
+    static inline bool              _clipping        = false;
+    static inline Iyathuum::AABB<2> _clippingBox;
+    static RenderVars               _vars;
 
   };
 }

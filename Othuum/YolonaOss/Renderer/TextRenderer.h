@@ -10,6 +10,7 @@
 #include <map>
 #include "../OpenGL/VAO.h"
 #include "../OpenGL/VBO.h"
+#include "IyathuumCoreLib/BaseTypes/AABB.h"
 #include "../OpenGL/Texture.h"
 #include "../OpenGL/ShaderProgram.h"
 #include "../OpenGL/PositionTextureVertex.h"
@@ -31,6 +32,8 @@ namespace YolonaOss {
     static void      drawText(std::string text, float x, float y, float scale, glm::vec3 color);
     static void      drawText(std::string text, glm::vec2 pos, float scale, glm::vec3 color);
     static glm::vec2 getTextSize(std::string text, float scale);
+    static void      setClippingRectangle(Iyathuum::AABB<2> box);
+    static void      disableClipping(Iyathuum::AABB<2> box);
     virtual void     load(GL::DrawSpecification*) override;
 
   private:
@@ -54,8 +57,11 @@ namespace YolonaOss {
     void makeShader();
     void makeFreetype();
 
-    static inline bool       _alreadyLoaded = false;
-    static inline bool       _inRenderProcess = false;
+    static inline bool              _alreadyLoaded   = false;
+    static inline bool              _inRenderProcess = false;
+    static inline bool              _clipping        = false;
+    static inline Iyathuum::AABB<2> _clippingBox            ;
+
     static RenderVars _vars;
     static inline int        _maxHeight = 0;
 
