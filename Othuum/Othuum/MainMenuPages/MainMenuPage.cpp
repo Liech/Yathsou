@@ -14,7 +14,9 @@ void MainMenuPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page->layout().addLabel("Main Menu Page");
   _page->layout().addButton("Multiplayer", [this]() { startLobbyJoin();           });
   _page->layout().addButton("Options"    , [this]() { startOptions();             });
+  _page->layout().addButton("ScrollDown", [this]() { _page->layout().setCurrentScroll(_page->layout().getCurrentScroll() + 1);  });
   _page->layout().addButton("Quit"       , [spec]() { spec->getWindow()->close(); });
+  _page->layout().setMaximumSize(glm::vec2(1000, 170));
 }
 
 void MainMenuPage::startLobbyJoin() {

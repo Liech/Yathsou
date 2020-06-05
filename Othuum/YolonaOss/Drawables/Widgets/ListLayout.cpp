@@ -5,6 +5,7 @@
 #include "Drawables/Widgets/Button.h"
 #include "Drawables/Widgets/Label.h"
 #include "Drawables/Widgets/LineEdit.h"
+#include "IyathuumCoreLib/Singleton/Database.h"
 
 namespace YolonaOss {
   namespace Widgets {
@@ -38,6 +39,21 @@ namespace YolonaOss {
 
       RectangleRenderer::disableClipping();
       TextRenderer::disableClipping();
+
+      float scrollMax = getMaximumScroll();
+      float current   = getCurrentScroll();
+      if (scrollMax > 0) {
+        RectangleRenderer::start();
+        Iyathuum::AABB<2> scrollBar;
+        float y = getGlobalPosition().getPosition()[1];
+        float x = getGlobalPosition().getPosition()[0] + getGlobalPosition().getSize()[0];
+        float maxY = getGlobalPosition().getSize()[1];
+        float height = 30;
+        scrollBar.setPosition({x-10,y + (maxY-height)*current/scrollMax});
+        scrollBar.setSize({ 10, height });
+        RectangleRenderer::drawRectangle(scrollBar, glm::vec3(0.7f, 0.0f, 0.7f));
+        RectangleRenderer::end();
+      }
     }
     
     void ListLayout::setHorizontal(bool horizontal) {
@@ -80,6 +96,11 @@ namespace YolonaOss {
       for (auto w : _widgets)
         w->setVisible(visible);
 
+      if (visible && !isVisible())
+        Iyathuum::Database<Widgets::Widget*>::add(this, { "MouseWheel" });
+      else if (!visible && isVisible())
+        Iyathuum::Database<Widgets::Widget*>::remove(this);
+
       Widget::setVisible(visible);
     }
 
@@ -87,26 +108,51 @@ namespace YolonaOss {
       return _widgets;
     }
 
+    std::array<double, 2> ListLayout::getPotentialSize() {
+      double maxOffset = 0;
+      if (!_horizontal)
+        for (auto w : _widgets)
+          maxOffset += w->getPosition().getSize()[1];
+      double offset = _horizontal ? 0 : maxOffset;
+      double max = 0;
+      for (auto w : _widgets) {
+        if (!_horizontal) {
+          offset -= w->getPosition().getSize()[1];
+          max = std::max(max, w->getPosition().getSize()[0]);
+        }
+        else {
+          max = std::max(max, w->getPosition().getSize()[1]);
+          offset += w->getPosition().getSize()[0];
+        }
+      }
+      std::array<double, 2> siz;
+      if (_horizontal)
+        siz = std::array<double, 2>{offset, max};
+      else
+        siz = std::array<double, 2>{max, maxOffset};
+      return siz;
+    }
+
     void ListLayout::adjustSize(){
       double maxOffset = 0;
       if (!_horizontal)
         for (auto w : _widgets)
           maxOffset += w->getPosition().getSize()[1];
-      double offset = _horizontal?0:maxOffset;
+      double offset = _horizontal ? 0 : maxOffset;
       double max = 0;
       for (auto w : _widgets) {
         w->adjustSize();
 
         if (!_horizontal) {
           offset -= w->getPosition().getSize()[1];
-          w->getPosition().setPosition(std::array<double, 2>{0,offset});
-          max = std::max(max,w->getPosition().getSize()[0]);
+          w->getPosition().setPosition(std::array<double, 2>{0, offset - _scroll});
+          max = std::max(max, w->getPosition().getSize()[0]);
         }
         else {
-          w->getPosition().setPosition(std::array<double, 2>{offset,0});
-          max = std::max(max,w->getPosition().getSize()[1]);
+          w->getPosition().setPosition(std::array<double, 2>{offset - _scroll, 0});
+          max = std::max(max, w->getPosition().getSize()[1]);
           offset += w->getPosition().getSize()[0];
-        }         
+        }
       }
       std::array<double, 2> siz;
       if (_horizontal)
@@ -120,5 +166,27 @@ namespace YolonaOss {
       getPosition().setSize(siz);
     }
 
+    float ListLayout::getMaximumScroll() {
+      float potential;
+      if (_horizontal)
+        potential = getPotentialSize()[0];
+      else
+        potential = getPotentialSize()[1];
+      float maximum = _horizontal ? _maximumSize[0] : _maximumSize[1];
+      if (maximum == 0)
+        return 0;
+      if (potential < maximum) 
+        return 0;
+      return potential - maximum;
+    }
+    
+    bool ListLayout::mouseWheel(glm::vec2 movement) {
+      float max = getMaximumScroll();
+      if (max > 0) {
+        setCurrentScroll(std::clamp(getCurrentScroll() + movement[1]*5, 0.0f, max));
+        return true;
+      }
+      return false;
+    }
   }
 }

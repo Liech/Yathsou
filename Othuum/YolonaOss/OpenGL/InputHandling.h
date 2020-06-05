@@ -25,6 +25,7 @@ namespace YolonaOss {
       void setFocus(YolonaOss::Widgets::Widget* newFocus);
       YolonaOss::Widgets::Widget* getCurrentFocus();
 
+      void mouseWheel(double x, double y);
       void keyEvent(Key key, KeyStatus status, int mode);
       void mouseEvent(Key key, KeyStatus status, int mode);
       void updateEvent();

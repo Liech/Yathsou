@@ -125,12 +125,8 @@ namespace YolonaOss {
       glfwSetScrollCallback(_window, [](GLFWwindow* window, double xoffset, double yoffset)
         {
           win->_mouseWheelMovement += (float)yoffset;
+          InputHandling::getInstance().mouseWheel(xoffset,yoffset);
         });
-      //if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-      //{
-      //  std::cout << "Failed to initialize OpenGL context" << std::endl;
-      //  return;
-      //}
       gladLoadGL();
 
 

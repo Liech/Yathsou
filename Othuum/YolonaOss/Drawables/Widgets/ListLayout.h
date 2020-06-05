@@ -25,19 +25,26 @@ namespace YolonaOss {
               void setHorizontal(bool horizontal);
       virtual void setVisible(bool visible)        override;
       virtual void adjustSize()                    override;
+      virtual bool mouseWheel(glm::vec2 movement)  override;
 
       void setMaximumSize(glm::vec2 size) { _maximumSize = size; }
+      
+      float getCurrentScroll()            { return _scroll; }
+      void  setCurrentScroll(float scroll) { _scroll = scroll; }
+      float getMaximumScroll();
 
       std::vector<std::shared_ptr<Widget>> getWidgets();
 
     private:
       const float spacing = 0;
 
-      Iyathuum::AABB<2> getElementSize();
+      Iyathuum::AABB<2>     getElementSize();     
+      std::array<double, 2> getPotentialSize();
 
       std::vector<std::shared_ptr<Widget>> _widgets;
-      bool                                 _horizontal = false;
-      glm::vec2                            _maximumSize = glm::vec2(0,0);
+      bool                                 _horizontal       = false;
+      float                                _scroll           = 0;
+      glm::vec2                            _maximumSize      = glm::vec2(0,0);
     };
   }
 }

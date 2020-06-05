@@ -115,5 +115,15 @@ namespace YolonaOss {
       _oldMousePos = mousePos;
     }
 
+    void InputHandling::mouseWheel(double x, double y) {
+      std::set<Widgets::Widget*> moveWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseWheel");
+      auto c = _yWindow->getCursorPos();
+      for (auto w : moveWidgets) {
+        if (!w->getGlobalPosition().isInside({c.first,c.second}))
+          continue;
+        bool stop = w->mouseWheel(glm::vec2(x,y));
+        if (stop) return;
+      }
+    }
   }
 }
