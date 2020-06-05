@@ -37,7 +37,7 @@ namespace YolonaOss {
       Iyathuum::AABB<2> box = Iyathuum::AABB<2>(std::array<double, 2>{xpos,ypos}, std::array<double, 2>{w,h});
 
       if (_clipping)
-        box = _clippingBox.getUnion(box);
+        box = _clippingBox.getIntersection(box);
 
       glm::vec2 pos  = glm::vec2(box.getPosition()[0],box.getPosition()[1]);
       glm::vec2 size = glm::vec2(box.getSize()[0], box.getSize()[1]);
@@ -211,7 +211,7 @@ namespace YolonaOss {
     _clippingBox = box;
   }
 
-  void TextRenderer::disableClipping(Iyathuum::AABB<2> box) {
+  void TextRenderer::disableClipping() {
     _clipping = false;
   }
 }

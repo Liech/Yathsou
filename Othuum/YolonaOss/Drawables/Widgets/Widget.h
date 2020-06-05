@@ -35,9 +35,10 @@ namespace YolonaOss {
 
       virtual void load(GL::DrawSpecification*) override{}
 
+      Widget* getParent() { return _parent; }
       Iyathuum::AABB<2>& getPosition();
-      Iyathuum::AABB<2> getGlobalPosition() const;      
-      void              setPosition(Iyathuum::AABB<2> pos);
+      Iyathuum::AABB<2>  getGlobalPosition() const;      
+      void               setPosition(Iyathuum::AABB<2> pos);
       virtual void setVisible(bool visible);
     protected:
       bool isVisible() { return _visible; }

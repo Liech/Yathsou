@@ -1,5 +1,6 @@
 #include "ListLayout.h"
 #include "../../Renderer/RectangleRenderer.h"
+#include "../../Renderer/TextRenderer.h"
 #include "IyathuumCoreLib/Util/Geometry.h"
 #include "Drawables/Widgets/Button.h"
 #include "Drawables/Widgets/Label.h"
@@ -24,6 +25,9 @@ namespace YolonaOss {
       if (!isVisible())
         return;
 
+      RectangleRenderer::setClippingRectangle(getGlobalPosition());
+      TextRenderer::setClippingRectangle(getGlobalPosition());
+
       RectangleRenderer::start();
       RectangleRenderer::drawRectangle(getGlobalPosition(), glm::vec3(0.7f, 0.7f, 0.7f));
       RectangleRenderer::end();
@@ -31,6 +35,9 @@ namespace YolonaOss {
       for (auto w : _widgets) {
         w->draw();
       }
+
+      RectangleRenderer::disableClipping();
+      TextRenderer::disableClipping();
     }
     
     void ListLayout::setHorizontal(bool horizontal) {
@@ -91,9 +98,9 @@ namespace YolonaOss {
         w->adjustSize();
 
         if (!_horizontal) {
+          offset -= w->getPosition().getSize()[1];
           w->getPosition().setPosition(std::array<double, 2>{0,offset});
           max = std::max(max,w->getPosition().getSize()[0]);
-          offset -= w->getPosition().getSize()[1];
         }
         else {
           w->getPosition().setPosition(std::array<double, 2>{offset,0});
@@ -101,10 +108,16 @@ namespace YolonaOss {
           offset += w->getPosition().getSize()[0];
         }         
       }
+      std::array<double, 2> siz;
       if (_horizontal)
-        getPosition().setSize(std::array<double, 2>{offset, max});
+        siz = std::array<double, 2>{offset, max};
       else
-        getPosition().setSize(std::array<double, 2>{max, maxOffset});
+        siz = std::array<double, 2>{max, maxOffset};
+      if (_maximumSize[0] != 0)
+        siz[0] = std::clamp(siz[0], 0.0, (double)_maximumSize[0]);
+      if (_maximumSize[1] != 0)
+        siz[1] = std::clamp(siz[1], 0.0, (double)_maximumSize[1]);
+      getPosition().setSize(siz);
     }
 
   }

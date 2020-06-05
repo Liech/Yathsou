@@ -29,7 +29,7 @@ namespace YolonaOss {
     std::string::const_iterator c;
 
     if (_clipping)
-      box = _clippingBox.getUnion(box);
+      box = _clippingBox.getIntersection(box);
 
     glm::vec2 pos  = Util<2>::array2Vec(box.getPosition());
     glm::vec2 size = Util<2>::array2Vec(box.getSize());
@@ -121,7 +121,7 @@ namespace YolonaOss {
     _clippingBox = box;
   }
 
-  void RectangleRenderer::disableClipping(Iyathuum::AABB<2> box) {
+  void RectangleRenderer::disableClipping() {
     _clipping = false;
   }
 

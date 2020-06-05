@@ -31,7 +31,7 @@ namespace YolonaOss {
     static void drawRectangle(glm::vec2 pos, glm::vec2 size, glm::vec3 color);
     static void drawRectangle(Iyathuum::AABB<2> box, glm::vec3 color);
     static void setClippingRectangle(Iyathuum::AABB<2> box);
-    static void disableClipping(Iyathuum::AABB<2> box);
+    static void disableClipping();
 
     virtual void load(GL::DrawSpecification*) override;
 

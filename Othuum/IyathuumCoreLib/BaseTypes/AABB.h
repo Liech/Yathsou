@@ -71,7 +71,7 @@ namespace Iyathuum {
       return result;
     }
 
-    AABB<Dimension> getUnion(AABB<Dimension> other) {
+    AABB<Dimension> getIntersection(AABB<Dimension> other) {
 
       std::array<double, Dimension> otherPosition  = other.getPosition();
       std::array<double, Dimension> otherSize       = other.getSize();
@@ -79,12 +79,12 @@ namespace Iyathuum {
       std::array<double, Dimension> resultSize     = getSize();
 
       for (size_t i = 0; i < Dimension; i++) {
-        double otherEnd = otherSize[i] + otherPosition[i]  ;
-        double end      = resultSize[i] + resultPosition[i];
-        if (end < otherEnd)
-          resultSize[i] = otherEnd - resultPosition[i];
-        if (resultPosition[i] < otherPosition[i]) {
-          resultSize[i] -= otherPosition[i] - resultPosition[i];
+        if (otherPosition[i] + otherSize[i] < resultPosition[i] + resultSize[i])
+          resultSize[i] = (otherPosition[i] + otherSize[i]) - resultPosition[i];
+        else
+          resultSize[i] = (resultPosition[i] + resultSize[i]) - otherPosition[i];
+        if (otherPosition[i] > resultPosition[i]) {
+          resultSize[i] = resultSize[i] - (otherPosition[i]-resultPosition[i]);
           resultPosition[i] = otherPosition[i];
         }
         if (resultSize[i] < 0)

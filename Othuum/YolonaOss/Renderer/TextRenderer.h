@@ -33,7 +33,7 @@ namespace YolonaOss {
     static void      drawText(std::string text, glm::vec2 pos, float scale, glm::vec3 color);
     static glm::vec2 getTextSize(std::string text, float scale);
     static void      setClippingRectangle(Iyathuum::AABB<2> box);
-    static void      disableClipping(Iyathuum::AABB<2> box);
+    static void      disableClipping();
     virtual void     load(GL::DrawSpecification*) override;
 
   private:

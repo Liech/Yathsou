@@ -26,6 +26,8 @@ namespace YolonaOss {
       virtual void setVisible(bool visible)        override;
       virtual void adjustSize()                    override;
 
+      void setMaximumSize(glm::vec2 size) { _maximumSize = size; }
+
       std::vector<std::shared_ptr<Widget>> getWidgets();
 
     private:
@@ -35,6 +37,7 @@ namespace YolonaOss {
 
       std::vector<std::shared_ptr<Widget>> _widgets;
       bool                                 _horizontal = false;
+      glm::vec2                            _maximumSize = glm::vec2(0,0);
     };
   }
 }

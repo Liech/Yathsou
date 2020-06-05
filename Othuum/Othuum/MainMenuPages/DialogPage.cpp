@@ -26,8 +26,10 @@ Iyathuum::AABB<2> DialogPage::getAABB() {
   if (_layout == nullptr)
     return Iyathuum::AABB<2>(std::array<double, 2>{ 0.0,0.0 }, std::array<double, 2>{ (double)_width/2,(double)_height/2 });
   Iyathuum::AABB<2> result;
+  _layout->adjustSize();
   auto size = _layout->getPosition().getSize();
   result.setPosition(std::array<double, 2>{ (_width / 2.0 - size[0] / 2.0), _height / 2.0 - size[1]/2.0});
+  result.setSize(size);
   return result;
 }
 

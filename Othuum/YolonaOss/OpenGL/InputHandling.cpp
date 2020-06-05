@@ -62,7 +62,10 @@ namespace YolonaOss {
       bool hit = false;
       std::set<Widgets::Widget*> clickableWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseClick");
       for (auto w : clickableWidgets) {
-        if (w->getGlobalPosition().isInside(Util<2>::vec2Array<double>(mousePos))) {
+        bool insideParent = true;
+        if (w->getParent() != nullptr)
+          insideParent = w->getParent()->getGlobalPosition().isInside(Util<2>::vec2Array<double>(mousePos));
+        if (w->getGlobalPosition().isInside(Util<2>::vec2Array<double>(mousePos)) && insideParent) {
           hit = true;
           if (status == KeyStatus::PRESS) {
             _pressedWidget = w;
