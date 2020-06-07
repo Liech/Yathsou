@@ -120,5 +120,24 @@ namespace Vishala {
         std::cout << "COULD NOT SEND" << std::endl;
     }
 
+    size_t LobbyPlayer::getGameNumber() {
+      if (_currentGame == nullptr)
+        throw std::runtime_error("No game open");
+      return _currentGame->getNumber();
+    } 
+
+    void LobbyPlayer::leaveGame() {
+      if (_currentGame == nullptr)
+        throw std::runtime_error("No game Open");
+      Lobby2ClientMessage msg;
+      msg.type = Lobby2ClientMessage::Type::GameClosed;
+      send(&msg);
+      _currentGame = nullptr;
+      _state = LobbyPlayer::state::Lobby;
+      std::cout << "LobbyPlayer: Game closed" << std::endl;
+    }
+
+
+
   }
 }

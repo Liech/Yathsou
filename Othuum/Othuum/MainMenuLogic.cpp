@@ -110,6 +110,7 @@ void MainMenuLogic::update() {
       _lobbyPage->setVisible(false);
       _mainMenuPage->setVisible(true);
       stat = status::MainMenu;
+      _state->stop();
       _lobbyPage->reset();
     }
     else if (_lobbyPage->getStatus() == LobbyPageStatus::Host) {

@@ -94,12 +94,16 @@ namespace Vishala {
       std::shared_ptr<GameLobby> game = std::make_shared<GameLobby>(content.gameName, _model->nextGameNumber, _model);
       _games[_model->nextGameNumber] = game;
       _players[playerNumber]->gameHosted(game);
+      game->addPlayer(_players[playerNumber]);
       _model->nextGameNumber++;
     }
 
     void Lobby::closeGame(size_t playerNumber) {
       std::cout << "Game Closed" << std::endl;
-      //_players[playerNumber]
+      size_t number = _players[playerNumber]->getGameNumber();
+      std::shared_ptr<GameLobby> game = _games[number];
+      _games.erase(number);
+      game->closeGame();
     }
 
   }

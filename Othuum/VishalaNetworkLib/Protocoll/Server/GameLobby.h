@@ -15,6 +15,9 @@ namespace Vishala {
       GameLobby(std::string name, size_t gameNumber, std::shared_ptr<LobbyModel> model);
 
       std::string getName();
+      size_t      getNumber();
+      void        addPlayer(std::shared_ptr<LobbyPlayer> player);
+      void        closeGame();
 
     private:
       std::string                                       _name         ;
