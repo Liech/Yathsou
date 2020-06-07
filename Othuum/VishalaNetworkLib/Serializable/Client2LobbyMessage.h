@@ -9,7 +9,7 @@ namespace Vishala {
   struct Client2LobbyMessage : public Serialization {
   public:
     enum class Type : int {
-      Refresh, CreateGame, JoinGame
+      Refresh, CreateGame, JoinGame, CloseGame
     };
     struct Nothing{};
     Client2LobbyMessage();

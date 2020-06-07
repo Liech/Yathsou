@@ -19,6 +19,7 @@ public:
   void update();
   void connectToLobby();
   void stop();
+  void closeGame();
   void host(Vishala::CreateGameRequest options);
 
 private:

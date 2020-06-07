@@ -3,19 +3,18 @@
 #include "Core/Serialization.h"
 #include "LobbyGame.h"
 #include "LobbyPlayerModel.h"
-#include "OpenLobbyRequest.h"
 #include "Serializable/Client2LobbyMessage.h"
 #include <vector>
 
-namespace Vishala { 
-  class LobbyModel : public Serialization {
-  public:
-    std::vector<LobbyGame>        openGames   ;
-    std::vector<LobbyPlayerModel> players     ;
-    std::vector<OpenLobbyRequest>      openRequests;
+namespace Vishala {
 
-    size_t                           nextPlayerNumber = 0;
-    size_t                           nextGameNumber   = 0;
+  class OpenLobbyRequest : public Serialization {
+  public:
+    OpenLobbyRequest();
+    OpenLobbyRequest(size_t playerNumber, Client2LobbyMessage request);
+
+    size_t              playerNumber;
+    Client2LobbyMessage request;
 
     virtual nlohmann::json           toJson()                   override;
     virtual void                     fromJson(nlohmann::json)   override;

@@ -171,6 +171,9 @@
     <ClInclude Include="Serializable\Client2LobbyMessage.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
+    <ClInclude Include="Serializable\Lobby\OpenLobbyRequest.h">
+      <Filter>Header Files\Serializable\Lobby</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Serializable\Message.cpp">
@@ -235,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="Serializable\Client2LobbyMessage.cpp">
       <Filter>Source Files\Serializable</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable\Lobby\OpenLobbyRequest.cpp">
+      <Filter>Source Files\Serializable\Lobby</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

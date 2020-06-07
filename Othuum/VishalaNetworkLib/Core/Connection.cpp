@@ -62,7 +62,10 @@ namespace Vishala {
           if (peer != NULL)
           {
             ENetEvent event;
-            if (enet_host_service(_connection, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT)
+            _currentlyConnecting = true;
+            bool connectionAttemptSuccessful = enet_host_service(_connection, &event, 5000) > 0;
+            _currentlyConnecting = false;
+            if (connectionAttemptSuccessful && event.type == ENET_EVENT_TYPE_CONNECT)
             {
               NetReciveEvent newCon;
               newCon.newConnection      = true              ;
@@ -149,6 +152,8 @@ namespace Vishala {
     _threadQueueSend.enqueue(toSend);
 
     _thread.wait_until(std::chrono::system_clock::now() + std::chrono::seconds(1));
+    while (_currentlyConnecting) 
+      std::this_thread::sleep_for(std::chrono::seconds(10));    
     for (auto p : _peers)
       enet_peer_reset(p.second);
 

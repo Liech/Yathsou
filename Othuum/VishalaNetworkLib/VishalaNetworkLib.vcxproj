@@ -260,6 +260,7 @@
     <ClInclude Include="Serializable\Lobby\LobbyGame.h" />
     <ClInclude Include="Serializable\Lobby\LobbyModel.h" />
     <ClInclude Include="Serializable\Lobby\LobbyPlayerModel.h" />
+    <ClInclude Include="Serializable\Lobby\OpenLobbyRequest.h" />
     <ClInclude Include="Serializable\LoginInstructions.h" />
     <ClInclude Include="Serializable\Message.h" />
     <ClInclude Include="Serializable\SelfBriefing.h" />
@@ -283,6 +284,7 @@
     <ClCompile Include="Serializable\Lobby\LobbyGame.cpp" />
     <ClCompile Include="Serializable\Lobby\LobbyModel.cpp" />
     <ClCompile Include="Serializable\Lobby\LobbyPlayerModel.cpp" />
+    <ClCompile Include="Serializable\Lobby\OpenLobbyRequest.cpp" />
     <ClCompile Include="Serializable\LoginInstructions.cpp" />
     <ClCompile Include="Serializable\Message.cpp" />
     <ClCompile Include="Serializable\SelfBriefing.cpp" />

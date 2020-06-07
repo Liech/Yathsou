@@ -11,6 +11,7 @@
 namespace Vishala {
   class ServerConfiguration;
   class Client2LobbyMessage;
+  class CreateGameRequest;
   class LobbyModel;
 
   namespace Server {
@@ -27,6 +28,9 @@ namespace Vishala {
       void    disconnect(size_t clientnumber);
 
       void    lobbyRequest(size_t player, Client2LobbyMessage request);
+
+      void createGame(CreateGameRequest g, size_t playerNumber);
+      void closeGame(size_t playerNumber);
 
       size_t  getNextPort();
 

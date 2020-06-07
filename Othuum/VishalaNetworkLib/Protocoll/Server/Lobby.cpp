@@ -45,8 +45,9 @@ namespace Vishala {
         }
       }
       for (auto request : _model->openRequests) {
-        if (request.type == Client2LobbyMessage::Type::CreateGame)
-          lobbyRequest(0, request);
+        if (request.request.type == Client2LobbyMessage::Type::CreateGame||
+            request.request.type == Client2LobbyMessage::Type::CloseGame)
+          lobbyRequest(request.playerNumber, request.request);
       }
       _model->openRequests.clear();
 
@@ -86,12 +87,20 @@ namespace Vishala {
 
     void Lobby::lobbyRequest(size_t player, Client2LobbyMessage request) {
       if (request.type == Client2LobbyMessage::Type::CreateGame) {        
-        CreateGameRequest content = request.createGame;
-        std::shared_ptr<GameLobby> game = std::make_shared<GameLobby>(content.gameName, _model->nextGameNumber,_model);
-        _games[_model->nextGameNumber] = game;
-        _players[player]->gameHosted(game);
-        _model->nextGameNumber++;
+        createGame(request.createGame, player);
       }
     }
+    void Lobby::createGame(CreateGameRequest content, size_t playerNumber) {
+      std::shared_ptr<GameLobby> game = std::make_shared<GameLobby>(content.gameName, _model->nextGameNumber, _model);
+      _games[_model->nextGameNumber] = game;
+      _players[playerNumber]->gameHosted(game);
+      _model->nextGameNumber++;
+    }
+
+    void Lobby::closeGame(size_t playerNumber) {
+      std::cout << "Game Closed" << std::endl;
+      //_players[playerNumber]
+    }
+
   }
 }

@@ -21,7 +21,7 @@ namespace Vishala {
     
     if (type == Type::CreateGame)
       result["Content"] = createGame.toJson();
-    else
+    else if (type != Type::CloseGame)
       throw std::runtime_error("Unkown Message Type");
     return result;
   }
@@ -31,7 +31,7 @@ namespace Vishala {
     type = (Type)number;
     if (type == Type::CreateGame)
       createGame.fromJson(from["Content"]);
-    else
+    else if (type != Type::CloseGame)
       throw std::runtime_error("Unkown Message Type");
   }
 
@@ -41,7 +41,7 @@ namespace Vishala {
     val2bin<int>(result, number);
     if (type == Type::CreateGame)
       result.add(createGame.toBinary());
-    else
+    else if (type != Type::CloseGame)
       throw std::runtime_error("Unkown Message Type");
     return result;
   }
@@ -51,7 +51,7 @@ namespace Vishala {
     type = (Type)number;
     if (type == Type::CreateGame)
       createGame.fromBinary(data);
-    else
+    else if (type != Type::CloseGame)
       throw std::runtime_error("Unkown Message Type");
   }
 }

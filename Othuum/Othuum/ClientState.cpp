@@ -48,6 +48,13 @@ void ClientState::stop() {
   _lobbyClient    = nullptr;
 }
 
+void ClientState::closeGame() {
+  if (_status != ClientStateStatus::Host)
+    throw std::runtime_error("Wrong status");
+  _status = ClientStateStatus::Lobby;
+  _lobbyClient->closeGame();
+}
+
 void ClientState::host(Vishala::CreateGameRequest options) {
   if (_status == ClientStateStatus::LobbyConnector || _status == ClientStateStatus::Nothing)
     throw std::runtime_error("Wrong status");

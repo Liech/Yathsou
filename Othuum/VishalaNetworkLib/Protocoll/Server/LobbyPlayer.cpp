@@ -53,9 +53,10 @@ namespace Vishala {
         std::cout << "Client2Lobby Request" << std::endl;
         Client2LobbyMessage request;
         request.fromBinary(*package);
-        if (request.type == Client2LobbyMessage::Type::CreateGame) {
-          std::cout << "CreateGame Request" << std::endl;
-          _model->openRequests.push_back(request);
+        std::cout << "Type: " << (int)request.type << std::endl;
+        if (request.type == Client2LobbyMessage::Type::CreateGame || request.type == Client2LobbyMessage::Type::CloseGame) {
+          std::cout << "Request" << std::endl;
+          _model->openRequests.push_back(OpenLobbyRequest(_playerNumber, request));
         }
       }
     }

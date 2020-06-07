@@ -18,6 +18,7 @@ namespace Vishala {
       LobbyClient::Status getStatus();
 
       void                hostGame(Vishala::CreateGameRequest options);
+      void                closeGame();
 
       void messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package);
       void newConnection(size_t clientnumber, std::string ip, int port);

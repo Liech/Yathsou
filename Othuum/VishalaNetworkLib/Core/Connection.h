@@ -69,6 +69,7 @@ namespace Vishala {
     int         _port                   = 6112   ;
     bool        _acceptsConnections     = true   ;
     bool        _destructorCalled       = false  ;
+    bool        _currentlyConnecting    = false  ;
 
     size_t      _clientNameCounter      = 0      ;
     

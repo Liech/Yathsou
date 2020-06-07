@@ -62,9 +62,20 @@ namespace Vishala {
       Client2LobbyMessage request;
       request.type       = Client2LobbyMessage::Type::CreateGame;     
       request.createGame = options;
+      
       std::cout<<"OK" << std::endl;
       sendMessage(request);
       _status = LobbyClient::Status::GameHostRequested;
+    }
+
+    void LobbyClient::closeGame() {
+      if (_status != LobbyClient::Status::GameHosted)
+        throw std::runtime_error("wrong status");
+      std::cout << "Close game" << std::endl;
+      Client2LobbyMessage request;
+      request.type = Client2LobbyMessage::Type::CloseGame;
+      sendMessage(request);
+      _status = LobbyClient::Status::Lobby;
     }
 
     void LobbyClient::stop() {
