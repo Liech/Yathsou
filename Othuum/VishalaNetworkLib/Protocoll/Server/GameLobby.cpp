@@ -28,5 +28,9 @@ namespace Vishala {
       }
     }
 
+    size_t GameLobby::getNumberOfPlayers() {
+      return _participators.size();
+    }
+
   }
 }

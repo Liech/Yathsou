@@ -61,3 +61,10 @@ void ClientState::host(Vishala::CreateGameRequest options) {
   _status = ClientStateStatus::HostLoading;
   _lobbyClient->hostGame(options);
 }
+
+void ClientState::requestRefresh() {
+  if (_status == ClientStateStatus::LobbyConnector || _status != ClientStateStatus::Lobby)
+    throw std::runtime_error("Wrong status");
+  _lobbyClient->requestRefresh();
+
+}

@@ -31,6 +31,7 @@ namespace Vishala {
 
       void createGame(CreateGameRequest g, size_t playerNumber);
       void closeGame(size_t playerNumber);
+      void sendLobbyUpdate(size_t player);
 
       size_t  getNextPort();
 

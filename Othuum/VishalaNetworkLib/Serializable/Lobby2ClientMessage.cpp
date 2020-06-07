@@ -17,7 +17,9 @@ namespace Vishala {
       result["Content"] = acknowledgment.toJson();
     else if (type == Type::Acknowledgment)
       result["Content"] = lobbyBriefing.toJson();
-    else
+    else if (type == Type::LobbyUpdate)
+      result["Content"] = lobbyUpdate.toJson();
+    else      
       throw std::runtime_error("Unkown Message Type");
     return result;
   }
@@ -29,6 +31,8 @@ namespace Vishala {
       acknowledgment.fromJson(from["Content"]);
     else if (type == Type::Acknowledgment)
       lobbyBriefing.fromJson(from["Content"]);
+    else if (type == Type::LobbyUpdate)
+      lobbyUpdate.fromJson(from["Content"]);
     else
       throw std::runtime_error("Unkown Message Type");
   }
@@ -41,6 +45,8 @@ namespace Vishala {
       result.add(acknowledgment.toBinary());
     else if (type == Type::LobbyBriefing)
       result.add(lobbyBriefing.toBinary());
+    else if (type == Type::LobbyUpdate)
+      result.add(lobbyUpdate.toBinary());
     else
       throw std::runtime_error("Unkown Message Type");
     return result;
@@ -53,6 +59,8 @@ namespace Vishala {
       acknowledgment.fromBinary(data);
     else if (type == Type::LobbyBriefing)
       lobbyBriefing.fromBinary(data);
+    else if (type == Type::LobbyUpdate)
+      lobbyUpdate.fromBinary(data);
     else
       throw std::runtime_error("Unkown Message Type");
   }

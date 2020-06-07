@@ -23,8 +23,9 @@ public:
 
   LobbyPageStatus getStatus();
 private:
-  void goBack();
+  void goBack  ();
   void hostGame();
+  void refresh ();
 
   std::unique_ptr<DialogPage> _page;
   

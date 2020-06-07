@@ -16,6 +16,7 @@ void LobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
 
   _page->layout().addLabel("Lobby Page");
   _page->layout().addButton("Host Game", [this]() { hostGame(); });
+  _page->layout().addButton("Refresh", [this]() { refresh(); });
   _page->layout().addButton("Back", [this]() { goBack(); });
   setVisible(false);
 }
@@ -30,6 +31,11 @@ void LobbyPage::setVisible(bool visible) {
 
 LobbyPageStatus LobbyPage::getStatus() {
   return _status;
+}
+
+void LobbyPage::refresh() {
+  std::cout << "Refresh send" << std::endl;
+  _state->requestRefresh();
 }
 
 void LobbyPage::goBack() {

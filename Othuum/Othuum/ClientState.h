@@ -21,6 +21,7 @@ public:
   void stop();
   void closeGame();
   void host(Vishala::CreateGameRequest options);
+  void requestRefresh();
 
 private:
   ClientStateStatus _status = ClientStateStatus::Nothing;

@@ -86,10 +86,25 @@ namespace Vishala {
     }
 
     void Lobby::lobbyRequest(size_t player, Client2LobbyMessage request) {
-      if (request.type == Client2LobbyMessage::Type::CreateGame) {        
-        createGame(request.createGame, player);
-      }
+      if (request.type == Client2LobbyMessage::Type::CreateGame)
+        createGame(request.createGame, player);      
+      else if (request.type == Client2LobbyMessage::Type::Refresh)
+        sendLobbyUpdate(player);
     }
+
+    void Lobby::sendLobbyUpdate(size_t player) {
+      LobbyStateUpdate msg;
+      msg.openGames.clear();
+      for (auto game : _games) {
+        LobbyGame gameDesc;
+        gameDesc.maxNumberOfPlayers = 32;
+        gameDesc.name = game.second->getName();
+        gameDesc.numberOfPlayers = game.second->getNumberOfPlayers();
+        msg.openGames.push_back(gameDesc);
+      }
+      _players[player]->sendLobbyUpdate(msg);
+    }
+
     void Lobby::createGame(CreateGameRequest content, size_t playerNumber) {
       std::shared_ptr<GameLobby> game = std::make_shared<GameLobby>(content.gameName, _model->nextGameNumber, _model);
       _games[_model->nextGameNumber] = game;

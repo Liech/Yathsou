@@ -54,7 +54,8 @@ namespace Vishala {
         Client2LobbyMessage request;
         request.fromBinary(*package);
         std::cout << "Type: " << (int)request.type << std::endl;
-        if (request.type == Client2LobbyMessage::Type::CreateGame || request.type == Client2LobbyMessage::Type::CloseGame) {
+        if (request.type == Client2LobbyMessage::Type::CreateGame || request.type == Client2LobbyMessage::Type::CloseGame
+          || request.type == Client2LobbyMessage::Type::Refresh) {
           std::cout << "Request" << std::endl;
           _model->openRequests.push_back(OpenLobbyRequest(_playerNumber, request));
         }
@@ -137,7 +138,8 @@ namespace Vishala {
       std::cout << "LobbyPlayer: Game closed" << std::endl;
     }
 
-
-
+    void LobbyPlayer::sendLobbyUpdate(LobbyStateUpdate msg) {
+      throw std::runtime_error("Lobby update not implemented");
+    }
   }
 }

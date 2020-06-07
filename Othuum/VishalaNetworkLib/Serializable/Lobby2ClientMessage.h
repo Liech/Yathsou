@@ -9,7 +9,7 @@ namespace Vishala {
   class Lobby2ClientMessage : public Serialization {
   public:
     enum class Type : int {
-      Acknowledgment, LobbyBriefing, GameClosed
+      Acknowledgment, LobbyBriefing, GameClosed, LobbyUpdate
     };
     class Nothing {};
     Lobby2ClientMessage();
@@ -20,6 +20,7 @@ namespace Vishala {
     //{
       Acknowledgement   acknowledgment;
       LobbyBriefing     lobbyBriefing ;
+      LobbyStateUpdate  lobbyUpdate   ;
       Nothing           nothing       ;
     //};
 
