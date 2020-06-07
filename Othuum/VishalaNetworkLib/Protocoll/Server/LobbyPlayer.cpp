@@ -139,7 +139,10 @@ namespace Vishala {
     }
 
     void LobbyPlayer::sendLobbyUpdate(LobbyStateUpdate msg) {
-      throw std::runtime_error("Lobby update not implemented");
+      Lobby2ClientMessage toSend;
+      toSend.type        = Lobby2ClientMessage::Type::LobbyUpdate;
+      toSend.lobbyUpdate = msg;
+      send(&toSend);
     }
   }
 }

@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "Core/Serialization.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
 
 namespace Vishala {
   class LobbyGame : public Serialization {

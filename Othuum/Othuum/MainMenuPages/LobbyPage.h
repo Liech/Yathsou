@@ -21,6 +21,8 @@ public:
   void setVisible(bool visible);
   void reset();
 
+  
+
   LobbyPageStatus getStatus();
 private:
   void goBack  ();

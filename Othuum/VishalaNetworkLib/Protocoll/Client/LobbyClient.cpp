@@ -16,6 +16,7 @@ namespace Vishala {
       _connection->setRecievedCallback(0,[this](size_t player, std::unique_ptr<BinaryPackage> package) {messageRecived(player, 0, std::move(package)); });
 
       std::cout << "Lobby Client Initialized" << std::endl;
+      _lobbyStateUpdate = nullptr;
     }
 
     void LobbyClient::update() {
@@ -39,6 +40,9 @@ namespace Vishala {
           else
             throw std::runtime_error("Unexpected Host Acknowledgement");
         }
+      }
+      else if (msg.type == Lobby2ClientMessage::Type::LobbyUpdate) {
+        _lobbyStateUpdate = std::make_unique<Vishala::LobbyStateUpdate>(msg.lobbyUpdate);
       }
     }
 
@@ -81,6 +85,7 @@ namespace Vishala {
     void LobbyClient::stop() {
       if (_connection)
         _connection->stop();
+      _lobbyStateUpdate = nullptr;
     }
 
     void LobbyClient::sendMessage(Vishala::Client2LobbyMessage msg) {
@@ -92,6 +97,15 @@ namespace Vishala {
       Vishala::Client2LobbyMessage msg;
       msg.type = Vishala::Client2LobbyMessage::Type::Refresh;
       sendMessage(msg);
+    }
+
+    std::unique_ptr<Vishala::LobbyStateUpdate> LobbyClient::getLobbyStateUpdate() {
+      if (_lobbyStateUpdate != nullptr) {
+        auto result = std::move(_lobbyStateUpdate);
+        _lobbyStateUpdate = nullptr;
+        return std::move(result);
+      }
+      return nullptr;
     }
   }
 }

@@ -66,5 +66,10 @@ void ClientState::requestRefresh() {
   if (_status == ClientStateStatus::LobbyConnector || _status != ClientStateStatus::Lobby)
     throw std::runtime_error("Wrong status");
   _lobbyClient->requestRefresh();
+}
 
+std::unique_ptr<Vishala::LobbyStateUpdate> ClientState::getLobbyStateUpdate() {
+  if (!_lobbyClient)
+    return nullptr;
+  return std::move(_lobbyClient->getLobbyStateUpdate());
 }
