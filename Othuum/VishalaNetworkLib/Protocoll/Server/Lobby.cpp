@@ -45,9 +45,7 @@ namespace Vishala {
         }
       }
       for (auto request : _model->openRequests) {
-        if (request.request.type == Client2LobbyMessage::Type::CreateGame||
-            request.request.type == Client2LobbyMessage::Type::CloseGame)
-          lobbyRequest(request.playerNumber, request.request);
+        lobbyRequest(request.playerNumber, request.request);
       }
       _model->openRequests.clear();
 
@@ -57,7 +55,7 @@ namespace Vishala {
     {
       std::cout << "Lobby::newConnection " << clientnumber << " - " << ip << ":" << incomingPort << std::endl;
       int port = getNextPort();
-
+      std::cout << "NEXT PORT: " << port << std::endl;
       LoginInstructions instructions;
       instructions.ip = "SAME";
       instructions.port = port;
@@ -79,6 +77,7 @@ namespace Vishala {
     }
 
     size_t  Lobby::getNextPort() {
+      _currentPort++;
       while (_usedPorts.count(_currentPort) != 0) {
         _currentPort = (_currentPort + 1 - _startPort) % (_endPort - _startPort) + _startPort;
       }

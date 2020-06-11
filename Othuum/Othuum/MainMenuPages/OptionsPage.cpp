@@ -35,6 +35,18 @@ void OptionsPage::load(YolonaOss::GL::DrawSpecification* spec) {
       _requiresRestart = true;
     });
 
+  auto subPort = _page->layout().addLayout();
+  subPort->setHorizontal(true);
+  auto portLable = subPort->addLabel("Port:");
+  portLable->getPosition().setSize({ spec->width / 6.0, 50.0 });
+  auto portEdit = subPort->addLineEdit(std::to_string(_config->lobbyServerMyPort));
+  portEdit->getPosition().setSize({ spec->width / 6.0, 50.0 });
+  portEdit->setValidator(YolonaOss::Widgets::LineEdit::integerValidator(0, 500065535));
+  portEdit->setEditFinishedCallback([this](std::string content)
+    {
+      _config->lobbyServerMyPort = std::atoi(content.c_str());
+    });
+
   _page->layout().addButton("OK", [this]() { goBack(); });
   setVisible(false);
 }
