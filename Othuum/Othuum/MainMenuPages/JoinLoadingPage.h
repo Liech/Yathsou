@@ -8,27 +8,30 @@
 #include "ClientConfiguration.h"
 #include "ClientState.h"
 
-enum class GameLobbyPageStatus {
-  Pending, Back
+enum class JoinLoadingPageStatus {
+  Pending, Back, Proceed, Error
 };
 
-class GameLobbyPage : public YolonaOss::GL::Drawable {
+class JoinLoadingPage : public YolonaOss::GL::Drawable {
 public:
-  GameLobbyPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state);
+  JoinLoadingPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state);
 
   virtual void draw()                                  override;
   virtual void load(YolonaOss::GL::DrawSpecification*) override;
   void setVisible(bool visible);
   void reset();
-  void start();
+  void start(size_t gameID);
+  void update();
 
-  GameLobbyPageStatus getStatus();
+
+  JoinLoadingPageStatus getStatus();
 private:
   void goBack();
+  void finish();
 
   std::unique_ptr<DialogPage> _page;
   
-  GameLobbyPageStatus                      _status = GameLobbyPageStatus::Pending;
+  JoinLoadingPageStatus                _status = JoinLoadingPageStatus::Pending;
   std::shared_ptr<ClientConfiguration> _config;
-  std::shared_ptr<ClientState        > _state;
+  std::shared_ptr<ClientState        > _state ;
 };

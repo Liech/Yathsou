@@ -44,8 +44,12 @@ void LobbyPage::updateLobbyState(std::unique_ptr<Vishala::LobbyStateUpdate> upda
     std::string msg = game.name + " " + std::to_string(game.numberOfPlayers) + "/" + std::to_string(game.maxNumberOfPlayers);
     size_t gameID = game.gameID;
     _openGamesLayout->addButton(msg, [this,gameID]() {
-        join(gameID);      
+        join(gameID);
       });
+    std::cout << msg << std::endl;
+  }
+  if (update->openGames.size() == 0) {
+    _openGamesLayout->addLabel("No Game Open");
   }
 }
 
@@ -85,6 +89,7 @@ void LobbyPage::hostGame() {
 
 void LobbyPage::reset() {
   _status = LobbyPageStatus::Pending;
+  _openGamesLayout->clear();
 }
 
 

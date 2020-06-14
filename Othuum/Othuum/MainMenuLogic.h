@@ -16,6 +16,7 @@ class OptionsPage        ;
 class ErrorPage          ;
 class LobbyLoadingPage   ;
 class HostLoadingPage    ;
+class JoinLoadingPage    ;
 
 class MainMenuLogic {
 public:
@@ -29,7 +30,8 @@ public:
     Options,
     Error,
     GameLobbyHost,
-    JoinLoading
+    GameLobbyClient,
+    LoadJoin
   } stat = status::MainMenu;
 
   MainMenuLogic(std::shared_ptr<ClientConfiguration> config,std::shared_ptr<ClientState> state);
@@ -50,6 +52,7 @@ private:
   std::shared_ptr<OptionsPage>      _optionsPage     ;
   std::shared_ptr<ErrorPage>        _errorPage       ;
   std::shared_ptr<GameLobbyPage>    _gameLobbyPage   ;
+  std::shared_ptr<JoinLoadingPage>  _joinLoadingPage ;
 
   void showError(std::string desc, std::string title);
 };

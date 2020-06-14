@@ -78,6 +78,9 @@
     <ClCompile Include="MainMenuPages\GameLobbyPage.cpp">
       <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuPages\JoinLoadingPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lib\nop\base\array.h">
@@ -357,6 +360,9 @@
       <Filter>Header Files\MainMenuPages</Filter>
     </ClInclude>
     <ClInclude Include="MainMenuPages\GameLobbyPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\JoinLoadingPage.h">
       <Filter>Header Files\MainMenuPages</Filter>
     </ClInclude>
   </ItemGroup>

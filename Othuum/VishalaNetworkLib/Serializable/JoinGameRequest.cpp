@@ -18,6 +18,6 @@ namespace Vishala {
   }
 
   void JoinGameRequest::fromBinary(BinaryPackage& data) {
-    gameID = bin2val<size_t>(data);
+    gameID = bin2val<int>(data);
   }
 }

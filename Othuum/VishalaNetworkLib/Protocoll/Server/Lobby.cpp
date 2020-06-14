@@ -30,6 +30,10 @@ namespace Vishala {
       if (!ok)
         throw std::runtime_error("Port used");
       std::cout << "Lobby awaiting connections" << std::endl;
+      
+      std::shared_ptr<GameLobby> game = std::make_shared<GameLobby>("Wohoo", _model->nextGameNumber, _model);
+      _games[_model->nextGameNumber] = game;
+      _model->nextGameNumber++;
     }
 
     void Lobby::update()

@@ -37,9 +37,19 @@ namespace Vishala {
             _status = LobbyClient::Status::GameHosted;
             std::cout << "Game Host Acknowledgement recived" << std::endl;
           }
+
           else
             throw std::runtime_error("Unexpected Host Acknowledgement");
         }
+        else if (msg.acknowledgment.type == Acknowledgement::Type::GameJoined) {
+          if (_status == LobbyClient::Status::GameJoinRequested) {
+            _status = LobbyClient::Status::GameJoined;
+            std::cout << "Game Join Acknowledgement recived" << std::endl;
+          }
+          else
+            throw std::runtime_error("Unexpected Join Acknowledgement");
+        }
+
       }
       else if (msg.type == Lobby2ClientMessage::Type::LobbyUpdate) {
         _lobbyStateUpdate = std::make_unique<Vishala::LobbyStateUpdate>(msg.lobbyUpdate);

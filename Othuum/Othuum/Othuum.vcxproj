@@ -160,6 +160,7 @@
     <ClCompile Include="MainMenuPages\GameLobbyPage.cpp" />
     <ClCompile Include="MainMenuPages\HostGamePage.cpp" />
     <ClCompile Include="MainMenuPages\HostLoadingPage.cpp" />
+    <ClCompile Include="MainMenuPages\JoinLoadingPage.cpp" />
     <ClCompile Include="MainMenuPages\JoinLobbyPage.cpp" />
     <ClCompile Include="MainMenuPages\LobbyLoadingPage.cpp" />
     <ClCompile Include="MainMenuPages\LobbyPage.cpp" />
@@ -239,6 +240,7 @@
     <ClInclude Include="MainMenuPages\GameLobbyPage.h" />
     <ClInclude Include="MainMenuPages\HostGamePage.h" />
     <ClInclude Include="MainMenuPages\HostLoadingPage.h" />
+    <ClInclude Include="MainMenuPages\JoinLoadingPage.h" />
     <ClInclude Include="MainMenuPages\JoinLobbyPage.h" />
     <ClInclude Include="MainMenuPages\LobbyLoadingPage.h" />
     <ClInclude Include="MainMenuPages\LobbyPage.h" />

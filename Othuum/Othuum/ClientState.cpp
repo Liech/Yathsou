@@ -34,6 +34,9 @@ void ClientState::update() {
     if (_status == ClientStateStatus::HostLoading && _lobbyClient->getStatus() == Vishala::Client::LobbyClient::Status::GameHosted) {
       _status = ClientStateStatus::Host;
     }
+    else if (_status == ClientStateStatus::JoinLoading && _lobbyClient->getStatus() == Vishala::Client::LobbyClient::Status::GameJoined) {
+      _status = ClientStateStatus::Joined;
+    }
 
   }
 }

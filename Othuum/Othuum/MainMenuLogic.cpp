@@ -14,6 +14,7 @@
 #include "MainMenuPages/LobbyLoadingPage.h"
 #include "MainMenuPages/HostLoadingPage.h"
 #include "MainMenuPages/GameLobbyPage.h"
+#include "MainMenuPages/JoinLoadingPage.h"
 
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
@@ -32,6 +33,7 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::s
   _gameLobbyPage    = std::make_shared<GameLobbyPage>    (config, state);
   _lobbyLoadingPage = std::make_shared<LobbyLoadingPage> (config, state);
   _hostLoadingPage  = std::make_shared<HostLoadingPage>  (config, state);
+  _joinLoadingPage  = std::make_shared<JoinLoadingPage>  (config, state);
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_mainMenuPage    , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_joinLobbyPage   , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyPage       , { "Main" });
@@ -41,6 +43,7 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::s
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_hostLoadingPage , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_errorPage       , { "Main" });
   Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_gameLobbyPage   , { "Main" });
+  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_joinLoadingPage , { "Main" });
 }
 
 void MainMenuLogic::update() {
@@ -121,10 +124,10 @@ void MainMenuLogic::update() {
     }
     else if (_lobbyPage->getStatus() == LobbyPageStatus::Join) {
       _lobbyPage->setVisible(false);
-      //_joinLoadingPage->setVisible(true);
-      //stat = status::AdjustHostOptions;
+      _joinLoadingPage->setVisible(true);
+      stat = status::LoadJoin;
+      _joinLoadingPage->start(_lobbyPage->getGameID());
       _lobbyPage->reset();
-      showError("Joining Game is not implemented yet", "ERROR");
     }
   }
   else if (stat == status::AdjustHostOptions) {
@@ -160,11 +163,30 @@ void MainMenuLogic::update() {
       showError("Error while hosting game", "ERROR");
     }
   }
-  else if (stat == status::GameLobbyHost) {
+  else if (stat == status::LoadJoin) {
+  _joinLoadingPage->update();
+  if (_joinLoadingPage->getStatus() == JoinLoadingPageStatus::Back) {
+    _joinLoadingPage->setVisible(false);
+    _lobbyPage->setVisible(true);
+    stat = status::Lobby;
+    _joinLoadingPage->reset();
+  }
+  else if (_joinLoadingPage->getStatus() == JoinLoadingPageStatus::Proceed) {
+    _joinLoadingPage->setVisible(false);
+    _gameLobbyPage->setVisible(true);
+    stat = status::GameLobbyClient;
+    _joinLoadingPage->reset();
+  }
+  else if (_joinLoadingPage->getStatus() == JoinLoadingPageStatus::Error) {
+    showError("Error while joining game", "ERROR");
+  }
+  }
+  else if (stat == status::GameLobbyHost|| stat == status::GameLobbyClient) {
     if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::Back) {
     _gameLobbyPage->setVisible(false);
     _lobbyPage->setVisible(true);
-    stat = status::Lobby;
+    stat = status::Lobby;  
+    _state->closeGame();
     _gameLobbyPage->reset();
     }
   }
@@ -189,6 +211,7 @@ void MainMenuLogic::showError(std::string desc,std::string title) {
   _lobbyLoadingPage->setVisible(false);
   _hostLoadingPage ->setVisible(false);
   _gameLobbyPage   ->setVisible(false);
+  _joinLoadingPage ->setVisible(false);
   _mainMenuPage    ->reset();
   _joinLobbyPage   ->reset();
   _lobbyPage       ->reset();
@@ -197,6 +220,7 @@ void MainMenuLogic::showError(std::string desc,std::string title) {
   _lobbyLoadingPage->reset();
   _hostLoadingPage ->reset();
   _gameLobbyPage   ->reset();
+  _joinLoadingPage ->reset();
   _errorPage->setMessage(desc,title);
   _state->stop();
 }

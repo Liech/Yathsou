@@ -9,7 +9,7 @@ namespace Vishala {
     type = req.type;
     if (type == Type::CreateGame)
       createGame = req.createGame;
-    else if (type == Type::CreateGame)
+    else if (type == Type::JoinGame)
       joinGame = req.joinGame;
   }
 
@@ -47,7 +47,7 @@ namespace Vishala {
     val2bin<int>(result, number);
     if (type == Type::CreateGame)
       result.add(createGame.toBinary());
-    else if (type == Type::CreateGame)
+    else if (type == Type::JoinGame)
       result.add(joinGame.toBinary());
     else if (type != Type::LeaveGame && type != Type::Refresh)
       throw std::runtime_error("Unkown Message Type");

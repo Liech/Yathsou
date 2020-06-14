@@ -162,7 +162,7 @@ namespace Vishala {
   }
 
   void Connection::update() {
-    assert(_connection != nullptr, "start() not called");
+    assert(_connection != nullptr, "start() not called");    
     NetReciveEvent event;
     while (_threadQueueRecive.try_dequeue(event)) {
       if (event.newConnection) {
@@ -170,6 +170,7 @@ namespace Vishala {
           _newConnection(event.player, event.targetIP, event.port);
         }
         else {
+          std::cout << "NewConFailed!" << std::endl;
           _connectionFailed(event.targetIP);
           return;
         }
@@ -190,7 +191,8 @@ namespace Vishala {
           break;
         }
         case ENetEventType::ENET_EVENT_TYPE_DISCONNECT:
-        {
+        {    
+          std::cout << "DC!" << std::endl;
           _disconnect(event.player);
           return;
         }
