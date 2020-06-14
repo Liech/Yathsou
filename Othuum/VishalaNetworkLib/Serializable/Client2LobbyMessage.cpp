@@ -9,6 +9,8 @@ namespace Vishala {
     type = req.type;
     if (type == Type::CreateGame)
       createGame = req.createGame;
+    else if (type == Type::CreateGame)
+      joinGame = req.joinGame;
   }
 
   Client2LobbyMessage::~Client2LobbyMessage() {
@@ -21,7 +23,9 @@ namespace Vishala {
     
     if (type == Type::CreateGame)
       result["Content"] = createGame.toJson();
-    else if (type != Type::CloseGame)
+    else if (type == Type::CreateGame)
+      result["Content"] = joinGame.toJson();
+    else if (type != Type::LeaveGame)
       throw std::runtime_error("Unkown Message Type");
     return result;
   }
@@ -31,7 +35,9 @@ namespace Vishala {
     type = (Type)number;
     if (type == Type::CreateGame)
       createGame.fromJson(from["Content"]);
-    else if (type != Type::CloseGame)
+    else if (type == Type::JoinGame)
+      joinGame.fromJson(from["Content"]);
+    else if (type != Type::LeaveGame)
       throw std::runtime_error("Unkown Message Type");
   }
 
@@ -41,7 +47,9 @@ namespace Vishala {
     val2bin<int>(result, number);
     if (type == Type::CreateGame)
       result.add(createGame.toBinary());
-    else if (type != Type::CloseGame && type != Type::Refresh)
+    else if (type == Type::CreateGame)
+      result.add(joinGame.toBinary());
+    else if (type != Type::LeaveGame && type != Type::Refresh)
       throw std::runtime_error("Unkown Message Type");
     return result;
   }
@@ -51,7 +59,9 @@ namespace Vishala {
     type = (Type)number;
     if (type == Type::CreateGame)
       createGame.fromBinary(data);
-    else if (type != Type::CloseGame && type != Type::Refresh)
+    else if (type == Type::JoinGame)
+      joinGame.fromBinary(data);
+    else if (type != Type::LeaveGame && type != Type::Refresh)
       throw std::runtime_error("Unkown Message Type");
   }
 }

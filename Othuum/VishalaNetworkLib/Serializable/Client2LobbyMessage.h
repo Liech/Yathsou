@@ -3,13 +3,14 @@
 #include "VishalaNetworkLib/Core/Serialization.h"
 
 #include "CreateGameRequest.h"
+#include "JoinGameRequest.h"
 
 namespace Vishala {
 
   struct Client2LobbyMessage : public Serialization {
   public:
     enum class Type : int {
-      Refresh, CreateGame, JoinGame, CloseGame
+      Refresh, CreateGame, JoinGame, LeaveGame
     };
     struct Nothing{};
     Client2LobbyMessage();
@@ -20,6 +21,7 @@ namespace Vishala {
     //union
     //{
       CreateGameRequest createGame;
+      JoinGameRequest   joinGame  ;
       Nothing           nothing   ;
     //};
 

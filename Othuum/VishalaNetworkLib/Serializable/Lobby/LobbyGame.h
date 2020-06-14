@@ -11,6 +11,7 @@ namespace Vishala {
     std::string name              ;
     int         numberOfPlayers   ;
     int         maxNumberOfPlayers;
+    int         gameID            ;
 
     virtual BinaryPackage toBinary()                override;
     virtual void fromBinary(BinaryPackage& Package) override;

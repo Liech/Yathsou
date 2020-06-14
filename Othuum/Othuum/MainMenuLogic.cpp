@@ -119,6 +119,13 @@ void MainMenuLogic::update() {
       stat = status::AdjustHostOptions;
       _lobbyPage->reset();
     }
+    else if (_lobbyPage->getStatus() == LobbyPageStatus::Join) {
+      _lobbyPage->setVisible(false);
+      //_joinLoadingPage->setVisible(true);
+      //stat = status::AdjustHostOptions;
+      _lobbyPage->reset();
+      showError("Joining Game is not implemented yet", "ERROR");
+    }
   }
   else if (stat == status::AdjustHostOptions) {
     if (_hostPage->getStatus() == HostPageStatus::Back && stat == status::AdjustHostOptions) {

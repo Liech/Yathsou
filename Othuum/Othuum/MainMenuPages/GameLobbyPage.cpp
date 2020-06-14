@@ -37,7 +37,7 @@ void GameLobbyPage::goBack() {
 }
 
 void GameLobbyPage::reset() {
-  _status = GameLobbyPageStatus::Pending;
+  _status = GameLobbyPageStatus::Pending;  
   _state->closeGame();
 }
 

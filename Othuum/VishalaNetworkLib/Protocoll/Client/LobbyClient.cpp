@@ -67,9 +67,20 @@ namespace Vishala {
       request.type       = Client2LobbyMessage::Type::CreateGame;     
       request.createGame = options;
       
-      std::cout<<"OK" << std::endl;
       sendMessage(request);
       _status = LobbyClient::Status::GameHostRequested;
+    }
+
+    void LobbyClient::joinGame(size_t gameID) {
+      if (_status != LobbyClient::Status::Lobby)
+        throw std::runtime_error("Can't join when not in Lobby");
+      std::cout << "Send join request: " << gameID << std::endl;
+      Client2LobbyMessage request;
+      request.type = Client2LobbyMessage::Type::JoinGame;
+      request.joinGame.gameID = gameID;
+
+      sendMessage(request);
+      _status = LobbyClient::Status::GameJoinRequested;
     }
 
     void LobbyClient::closeGame() {
@@ -77,7 +88,7 @@ namespace Vishala {
         throw std::runtime_error("wrong status");
       std::cout << "Close game" << std::endl;
       Client2LobbyMessage request;
-      request.type = Client2LobbyMessage::Type::CloseGame;
+      request.type = Client2LobbyMessage::Type::LeaveGame;
       sendMessage(request);
       _status = LobbyClient::Status::Lobby;
     }

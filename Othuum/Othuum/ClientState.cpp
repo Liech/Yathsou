@@ -62,6 +62,13 @@ void ClientState::host(Vishala::CreateGameRequest options) {
   _lobbyClient->hostGame(options);
 }
 
+void ClientState::join(size_t gameID) {
+  if (_status == ClientStateStatus::LobbyConnector || _status == ClientStateStatus::Nothing)
+    throw std::runtime_error("Wrong status");
+  _status = ClientStateStatus::JoinLoading;
+  _lobbyClient->joinGame(gameID);
+}
+
 void ClientState::requestRefresh() {
   if (_status == ClientStateStatus::LobbyConnector || _status != ClientStateStatus::Lobby)
     throw std::runtime_error("Wrong status");

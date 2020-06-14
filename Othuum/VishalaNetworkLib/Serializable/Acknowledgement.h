@@ -8,7 +8,7 @@ namespace Vishala {
   struct Acknowledgement : Serialization {
   public:
     enum class Type {
-      GameHosted
+      GameHosted, GameJoined
     };
 
     Acknowledgement::Type type;

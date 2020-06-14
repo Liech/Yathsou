@@ -14,6 +14,7 @@ namespace YolonaOss {
     public:
               ListLayout(Iyathuum::AABB<2> position, Widget* parent = nullptr);
 
+              void                                 clear();
               int                                  addWidget(std::shared_ptr<Widget> w);
               std::shared_ptr<Widgets::Button>     addButton(std::string name, std::function<void()> onClicked, Iyathuum::AABB<2> size = Iyathuum::AABB<2>({ 0.0, 0.0 }, { 200.0, 50.0 }));
               std::shared_ptr<Widgets::ListLayout> addLayout();

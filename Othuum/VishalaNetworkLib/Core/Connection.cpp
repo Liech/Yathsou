@@ -146,7 +146,7 @@ namespace Vishala {
 
   void Connection::stop() {
     assert(_connection != nullptr);
-
+    std::cout << "CONNECTION STOP" << std::endl;
     NetSendEvent toSend;
     toSend.type     = NetSendEvent::Type::disconnect;
     _threadQueueSend.enqueue(toSend);

@@ -13,6 +13,10 @@ namespace YolonaOss {
       setVisible(true);
     }
 
+    void ListLayout::clear() {
+      _widgets.clear();
+    }
+
     int  ListLayout::addWidget(std::shared_ptr<Widget> w) {
       _widgets.push_back(w);
       return (int)(_widgets.size() - 1);

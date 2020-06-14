@@ -86,7 +86,9 @@ namespace Vishala {
 
     void Lobby::lobbyRequest(size_t player, Client2LobbyMessage request) {
       if (request.type == Client2LobbyMessage::Type::CreateGame)
-        createGame(request.createGame, player);      
+        createGame(request.createGame, player);
+      else if (request.type == Client2LobbyMessage::Type::JoinGame)
+        joinGame(request.joinGame, player);
       else if (request.type == Client2LobbyMessage::Type::Refresh)
         sendLobbyUpdate(player);
     }
@@ -97,8 +99,9 @@ namespace Vishala {
       for (auto game : _games) {
         LobbyGame gameDesc;
         gameDesc.maxNumberOfPlayers = 32;
-        gameDesc.name = game.second->getName();
-        gameDesc.numberOfPlayers = game.second->getNumberOfPlayers();
+        gameDesc.name               = game.second->getName();
+        gameDesc.numberOfPlayers    = game.second->getNumberOfPlayers();
+        gameDesc.gameID             = game.second->getNumber();
         msg.openGames.push_back(gameDesc);
       }
       _players[player]->sendLobbyUpdate(msg);
@@ -110,6 +113,13 @@ namespace Vishala {
       _players[playerNumber]->gameHosted(game);
       game->addPlayer(_players[playerNumber]);
       _model->nextGameNumber++;
+    }
+
+    void Lobby::joinGame(JoinGameRequest g, size_t playerNumber) {
+      auto game = _games[g.gameID];
+      auto player = _players[playerNumber];
+      game->addPlayer(player);
+      player->joinGame(game);
     }
 
     void Lobby::closeGame(size_t playerNumber) {

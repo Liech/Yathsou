@@ -54,7 +54,7 @@ namespace Vishala {
         Client2LobbyMessage request;
         request.fromBinary(*package);
         std::cout << "Type: " << (int)request.type << std::endl;
-        if (request.type == Client2LobbyMessage::Type::CreateGame || request.type == Client2LobbyMessage::Type::CloseGame
+        if (request.type == Client2LobbyMessage::Type::CreateGame || request.type == Client2LobbyMessage::Type::LeaveGame
           || request.type == Client2LobbyMessage::Type::Refresh) {
           std::cout << "Request" << std::endl;
           _model->openRequests.push_back(OpenLobbyRequest(_playerNumber, request));
@@ -102,6 +102,17 @@ namespace Vishala {
       msg.type = Lobby2ClientMessage::Type::Acknowledgment;
       msg.acknowledgment.type = Acknowledgement::Type::GameHosted;
       send(&msg);
+      _state = state::Host;
+    }
+
+    void LobbyPlayer::joinGame(std::shared_ptr<GameLobby> game) {
+      std::cout << "Game Joined" << std::endl;
+      _currentGame = game;
+      Lobby2ClientMessage msg;
+      msg.type = Lobby2ClientMessage::Type::Acknowledgment;
+      msg.acknowledgment.type = Acknowledgement::Type::GameJoined;
+      send(&msg);
+      _state = state::Joined;
     }
 
     LobbyStateUpdate LobbyPlayer::getLobbyStateUpdate() {
@@ -135,7 +146,7 @@ namespace Vishala {
       send(&msg);
       _currentGame = nullptr;
       _state = LobbyPlayer::state::Lobby;
-      std::cout << "LobbyPlayer: Game closed" << std::endl;
+      std::cout << "LobbyPlayer: Game left" << std::endl;
     }
 
     void LobbyPlayer::sendLobbyUpdate(LobbyStateUpdate msg) {

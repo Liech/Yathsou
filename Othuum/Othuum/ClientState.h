@@ -8,7 +8,7 @@
 #include "VishalaNetworkLib/Serializable/LobbyStateUpdate.h"
 
 enum class ClientStateStatus {
-  Nothing, LobbyConnector, Lobby, HostLoading, Host
+  Nothing, LobbyConnector, Lobby, HostLoading, Host, JoinLoading, Joined
 };
 
 class ClientState {
@@ -22,6 +22,7 @@ public:
   void stop();
   void closeGame();
   void host(Vishala::CreateGameRequest options);
+  void join(size_t id);
   void requestRefresh();
 
   std::unique_ptr<Vishala::LobbyStateUpdate> getLobbyStateUpdate();

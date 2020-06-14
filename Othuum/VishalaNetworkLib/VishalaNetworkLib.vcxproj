@@ -254,6 +254,7 @@
     <ClInclude Include="Serializable\Acknowledgement.h" />
     <ClInclude Include="Serializable\Client2LobbyMessage.h" />
     <ClInclude Include="Serializable\CreateGameRequest.h" />
+    <ClInclude Include="Serializable\JoinGameRequest.h" />
     <ClInclude Include="Serializable\Lobby2ClientMessage.h" />
     <ClInclude Include="Serializable\LobbyBriefing.h" />
     <ClInclude Include="Serializable\LobbyStateUpdate.h" />
@@ -278,6 +279,7 @@
     <ClCompile Include="Serializable\Acknowledgement.cpp" />
     <ClCompile Include="Serializable\Client2LobbyMessage.cpp" />
     <ClCompile Include="Serializable\CreateGameRequest.cpp" />
+    <ClCompile Include="Serializable\JoinGameRequest.cpp" />
     <ClCompile Include="Serializable\Lobby2ClientMessage.cpp" />
     <ClCompile Include="Serializable\LobbyBriefing.cpp" />
     <ClCompile Include="Serializable\LobbyStateUpdate.cpp" />

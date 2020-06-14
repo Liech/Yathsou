@@ -38,6 +38,7 @@ namespace Vishala {
       LobbyPlayer::state getStatus() { return _state; }
 
       void gameHosted(std::shared_ptr<GameLobby> game);
+      void joinGame(std::shared_ptr<GameLobby> game);
       void sendLobbyUpdate(LobbyStateUpdate msg);
       size_t getGameNumber();
       size_t getID() { return _playerNumber; }

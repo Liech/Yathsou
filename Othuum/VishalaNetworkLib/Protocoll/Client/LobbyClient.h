@@ -11,7 +11,7 @@ namespace Vishala {
     class LobbyClient {
     public:
       enum class Status {
-        Disconnected, Lobby, GameHostRequested, GameHosted, GameJoined
+        Disconnected, Lobby, GameHostRequested, GameHosted, GameJoinRequested, GameJoined
       };
 
       LobbyClient(std::unique_ptr < Connection > connection);
@@ -19,6 +19,7 @@ namespace Vishala {
       LobbyClient::Status getStatus();
 
       void                hostGame(Vishala::CreateGameRequest options);
+      void                joinGame(size_t gameID);
       void                closeGame();
       void                requestRefresh();
 

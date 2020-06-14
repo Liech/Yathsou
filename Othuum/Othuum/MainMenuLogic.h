@@ -28,7 +28,8 @@ public:
     LoadHost,
     Options,
     Error,
-    GameLobbyHost
+    GameLobbyHost,
+    JoinLoading
   } stat = status::MainMenu;
 
   MainMenuLogic(std::shared_ptr<ClientConfiguration> config,std::shared_ptr<ClientState> state);
