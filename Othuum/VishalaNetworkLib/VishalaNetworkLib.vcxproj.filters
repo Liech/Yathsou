@@ -177,6 +177,12 @@
     <ClInclude Include="Serializable\JoinGameRequest.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
+    <ClInclude Include="Serializable\GameLobbyStateUpdate.h">
+      <Filter>Header Files\Serializable</Filter>
+    </ClInclude>
+    <ClInclude Include="Serializable\GameLobbyPlayer.h">
+      <Filter>Header Files\Serializable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Serializable\Message.cpp">
@@ -246,6 +252,12 @@
       <Filter>Source Files\Serializable\Lobby</Filter>
     </ClCompile>
     <ClCompile Include="Serializable\JoinGameRequest.cpp">
+      <Filter>Source Files\Serializable</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable\GameLobbyStateUpdate.cpp">
+      <Filter>Source Files\Serializable</Filter>
+    </ClCompile>
+    <ClCompile Include="Serializable\GameLobbyPlayer.cpp">
       <Filter>Source Files\Serializable</Filter>
     </ClCompile>
   </ItemGroup>
