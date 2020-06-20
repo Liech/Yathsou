@@ -93,7 +93,7 @@ namespace Vishala {
         createGame(request.createGame, player);
       else if (request.type == Client2LobbyMessage::Type::JoinGame)
         joinGame(request.joinGame, player);
-      else if (request.type == Client2LobbyMessage::Type::Refresh)
+      else if (request.type == Client2LobbyMessage::Type::LobbyRefresh)
         sendLobbyUpdate(player);
     }
 

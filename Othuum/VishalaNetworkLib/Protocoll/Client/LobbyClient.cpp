@@ -116,7 +116,7 @@ namespace Vishala {
     
     void LobbyClient::requestRefresh() {
       Vishala::Client2LobbyMessage msg;
-      msg.type = Vishala::Client2LobbyMessage::Type::Refresh;
+      msg.type = Vishala::Client2LobbyMessage::Type::LobbyRefresh;
       sendMessage(msg);
     }
 

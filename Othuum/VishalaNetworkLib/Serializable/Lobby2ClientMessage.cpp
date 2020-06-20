@@ -19,7 +19,9 @@ namespace Vishala {
       result["Content"] = lobbyBriefing.toJson();
     else if (type == Type::LobbyUpdate)
       result["Content"] = lobbyUpdate.toJson();
-    else      
+    else if (type == Type::GameLobbyUpdate)
+      result["Content"] = gameLobbyUpdate.toJson();
+    else if(type != Type::GameClosed && type != Type::StartGame)
       throw std::runtime_error("Unkown Message Type");
     return result;
   }
@@ -33,7 +35,9 @@ namespace Vishala {
       lobbyBriefing.fromJson(from["Content"]);
     else if (type == Type::LobbyUpdate)
       lobbyUpdate.fromJson(from["Content"]);
-    else
+    else if (type == Type::GameLobbyUpdate)
+      gameLobbyUpdate.fromJson(from["Content"]);
+    else if (type != Type::GameClosed && type != Type::StartGame)
       throw std::runtime_error("Unkown Message Type");
   }
 
@@ -47,7 +51,9 @@ namespace Vishala {
       result.add(lobbyBriefing.toBinary());
     else if (type == Type::LobbyUpdate)
       result.add(lobbyUpdate.toBinary());
-    else
+    else if (type == Type::GameLobbyUpdate)
+      result.add(gameLobbyUpdate.toBinary());
+    else if (type != Type::GameClosed && type != Type::StartGame)
       throw std::runtime_error("Unkown Message Type");
     return result;
   }
@@ -61,7 +67,9 @@ namespace Vishala {
       lobbyBriefing.fromBinary(data);
     else if (type == Type::LobbyUpdate)
       lobbyUpdate.fromBinary(data);
-    else
+    else if (type == Type::GameLobbyUpdate)
+      gameLobbyUpdate.fromBinary(data);
+    else if (type != Type::GameClosed && type != Type::StartGame)
       throw std::runtime_error("Unkown Message Type");
   }
 }

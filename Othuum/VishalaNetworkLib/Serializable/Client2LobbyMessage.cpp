@@ -25,7 +25,7 @@ namespace Vishala {
       result["Content"] = createGame.toJson();
     else if (type == Type::CreateGame)
       result["Content"] = joinGame.toJson();
-    else if (type != Type::LeaveGame)
+    else if (type != Type::LeaveGame && type != Type::LobbyRefresh && type != Type::StartGame)
       throw std::runtime_error("Unkown Message Type");
     return result;
   }
@@ -37,7 +37,7 @@ namespace Vishala {
       createGame.fromJson(from["Content"]);
     else if (type == Type::JoinGame)
       joinGame.fromJson(from["Content"]);
-    else if (type != Type::LeaveGame)
+    else if (type != Type::LeaveGame && type != Type::LobbyRefresh && type != Type::StartGame)
       throw std::runtime_error("Unkown Message Type");
   }
 
@@ -49,7 +49,7 @@ namespace Vishala {
       result.add(createGame.toBinary());
     else if (type == Type::JoinGame)
       result.add(joinGame.toBinary());
-    else if (type != Type::LeaveGame && type != Type::Refresh)
+    else if (type != Type::LeaveGame && type != Type::LobbyRefresh && type != Type::LobbyRefresh && type != Type::StartGame)
       throw std::runtime_error("Unkown Message Type");
     return result;
   }
@@ -61,7 +61,7 @@ namespace Vishala {
       createGame.fromBinary(data);
     else if (type == Type::JoinGame)
       joinGame.fromBinary(data);
-    else if (type != Type::LeaveGame && type != Type::Refresh)
+    else if (type != Type::LeaveGame && type != Type::LobbyRefresh && type != Type::StartGame)
       throw std::runtime_error("Unkown Message Type");
   }
 }

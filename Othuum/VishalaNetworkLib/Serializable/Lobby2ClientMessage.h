@@ -3,13 +3,14 @@
 #include "Core/Serialization.h"
 #include "Serializable/Acknowledgement.h"
 #include "Serializable/LobbyBriefing.h"
+#include "Serializable/GameLobbyStateUpdate.h"
 
 namespace Vishala {
 
   class Lobby2ClientMessage : public Serialization {
   public:
     enum class Type : int {
-      Acknowledgment, LobbyBriefing, GameClosed, LobbyUpdate
+      Acknowledgment, LobbyBriefing, GameClosed, LobbyUpdate, GameLobbyUpdate, StartGame
     };
     class Nothing {};
     Lobby2ClientMessage();
@@ -18,10 +19,11 @@ namespace Vishala {
     Type            type = Type::Acknowledgment;
     //union
     //{
-      Acknowledgement   acknowledgment;
-      LobbyBriefing     lobbyBriefing ;
-      LobbyStateUpdate  lobbyUpdate   ;
-      Nothing           nothing       ;
+      Acknowledgement      acknowledgment ;
+      LobbyBriefing        lobbyBriefing  ;
+      LobbyStateUpdate     lobbyUpdate    ;
+      GameLobbyStateUpdate gameLobbyUpdate;
+      Nothing              nothing        ;
     //};
 
     virtual nlohmann::json             toJson()                  override;

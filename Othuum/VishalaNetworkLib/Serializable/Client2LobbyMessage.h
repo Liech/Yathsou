@@ -10,14 +10,14 @@ namespace Vishala {
   struct Client2LobbyMessage : public Serialization {
   public:
     enum class Type : int {
-      Refresh, CreateGame, JoinGame, LeaveGame
+      LobbyRefresh, CreateGame, JoinGame, LeaveGame, StartGame
     };
     struct Nothing{};
     Client2LobbyMessage();
     Client2LobbyMessage(const Client2LobbyMessage& req);
     ~Client2LobbyMessage();
 
-    Type            type   = Type::Refresh;
+    Type            type   = Type::LobbyRefresh;
     //union
     //{
       CreateGameRequest createGame;
