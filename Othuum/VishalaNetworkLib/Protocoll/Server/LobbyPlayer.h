@@ -14,6 +14,7 @@ namespace Vishala {
   class Connection      ;
   class LobbyRequestCall;
   class LobbyStateUpdate;
+  class GameLobbyStateUpdate;
 }
 
 namespace Vishala {
@@ -39,7 +40,8 @@ namespace Vishala {
 
       void gameHosted(std::shared_ptr<GameLobby> game);
       void joinGame(std::shared_ptr<GameLobby> game);
-      void sendLobbyUpdate(LobbyStateUpdate msg);
+      void sendLobbyUpdate(const LobbyStateUpdate& msg);
+      void sendGameLobbyUpdate(const GameLobbyStateUpdate& update);
       size_t getGameNumber();
       size_t getID() { return _playerNumber; }
       void leaveGame();

@@ -54,6 +54,9 @@ namespace Vishala {
       else if (msg.type == Lobby2ClientMessage::Type::LobbyUpdate) {
         _lobbyStateUpdate = std::make_unique<Vishala::LobbyStateUpdate>(msg.lobbyUpdate);
       }
+      else if (msg.type == Lobby2ClientMessage::Type::GameLobbyUpdate) {
+        _gameLobbyStateUpdate = std::make_unique<Vishala::GameLobbyStateUpdate>(msg.gameLobbyUpdate);
+      }
     }
 
     void LobbyClient::newConnection(size_t clientnumber, std::string ip, int port) {
@@ -124,6 +127,15 @@ namespace Vishala {
       if (_lobbyStateUpdate != nullptr) {
         auto result = std::move(_lobbyStateUpdate);
         _lobbyStateUpdate = nullptr;
+        return std::move(result);
+      }
+      return nullptr;
+    }
+
+    std::unique_ptr<Vishala::GameLobbyStateUpdate> LobbyClient::getGameLobbyStateUpdate() {
+      if (_gameLobbyStateUpdate != nullptr) {
+        auto result = std::move(_gameLobbyStateUpdate);
+        _gameLobbyStateUpdate = nullptr;
         return std::move(result);
       }
       return nullptr;

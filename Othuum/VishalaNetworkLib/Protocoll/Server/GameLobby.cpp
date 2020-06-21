@@ -20,6 +20,7 @@ namespace Vishala {
 
     void GameLobby::addPlayer(std::shared_ptr<LobbyPlayer> player) {
       _participators[player->getID()] = player;
+      sendUpdate();
     }
 
     void GameLobby::closeGame() {
@@ -32,5 +33,19 @@ namespace Vishala {
       return _participators.size();
     }
 
+    void GameLobby::sendUpdate() {
+      GameLobbyStateUpdate update;
+      update.currentPlayers.clear();
+      for (auto p : _participators){
+        GameLobbyPlayer player;
+        player.lobbyIdentification.name = p.second->getName();
+        player.lobbyIdentification.id   = p.first;     
+        update.currentPlayers.push_back(player);
+      }
+      update.gameName = getName();
+
+      for (auto p : _participators)
+        p.second->sendGameLobbyUpdate(update);
+    }
   }
 }

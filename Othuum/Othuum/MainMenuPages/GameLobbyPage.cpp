@@ -15,13 +15,32 @@ void GameLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
 
   _page->layout().addLabel("Game Lobby Page");
-  _page->layout().addLabel("You are alone");
+  if (_state->getStatus() == ClientStateStatus::Host) {
+    _page->layout().addButton("Start Game", [this]() {
+      startGame(); 
+      });
+  }
+  _participatorsLayout = _page->layout().addLayout();
+  _participatorsLayout->addLabel("You are alone");
   _page->layout().addButton("Back", [this]() { goBack(); });
   setVisible(false);
 }
-
+ 
 void GameLobbyPage::draw() {
+  if (_state) {
+    std::unique_ptr<Vishala::GameLobbyStateUpdate> s = _state->getGameLobbyStateUpdate();
+    if (s)
+      updateGameLobbyState(std::move(s));
+  }
+
   _page->draw();
+}
+
+void GameLobbyPage::updateGameLobbyState(std::unique_ptr<Vishala::GameLobbyStateUpdate> update){
+  _participatorsLayout->clear();
+  for (auto p : update->currentPlayers) {
+    _participatorsLayout->addLabel(std::to_string(p.lobbyIdentification.id) + ": " + p.lobbyIdentification.name);
+  }
 }
 
 void GameLobbyPage::setVisible(bool visible) {
@@ -34,6 +53,10 @@ GameLobbyPageStatus GameLobbyPage::getStatus() {
 
 void GameLobbyPage::goBack() {
   _status = GameLobbyPageStatus::Back;
+}
+
+void GameLobbyPage::startGame() {
+  _status = GameLobbyPageStatus::StartGame;
 }
 
 void GameLobbyPage::reset() {

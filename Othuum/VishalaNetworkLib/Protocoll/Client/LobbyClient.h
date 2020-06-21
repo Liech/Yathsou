@@ -3,6 +3,7 @@
 #include "VishalaNetworkLib/Core/Connection.h"
 #include "VishalaNetworkLib/Serializable/Client2LobbyMessage.h"
 #include "VishalaNetworkLib/Serializable/LobbyStateUpdate.h"
+#include "VishalaNetworkLib/Serializable/GameLobbyStateUpdate.h"
 
 namespace Vishala {
   class LobbyModel;
@@ -30,13 +31,15 @@ namespace Vishala {
 
       void update();
       void stop();
-      std::unique_ptr<Vishala::LobbyStateUpdate> getLobbyStateUpdate();
+      std::unique_ptr<Vishala::LobbyStateUpdate>     getLobbyStateUpdate();
+      std::unique_ptr<Vishala::GameLobbyStateUpdate> getGameLobbyStateUpdate();
     private:
       void sendMessage(Vishala::Client2LobbyMessage);
 
-      std::unique_ptr<Connection>                _connection;
-      LobbyClient::Status                        _status    = Status::Lobby;
-      std::unique_ptr<Vishala::LobbyStateUpdate> _lobbyStateUpdate = nullptr;
+      std::unique_ptr<Connection>                    _connection;
+      LobbyClient::Status                            _status    = Status::Lobby;
+      std::unique_ptr<Vishala::LobbyStateUpdate>     _lobbyStateUpdate = nullptr;
+      std::unique_ptr<Vishala::GameLobbyStateUpdate> _gameLobbyStateUpdate = nullptr;
     };
   }
 }

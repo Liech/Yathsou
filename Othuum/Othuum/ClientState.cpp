@@ -83,3 +83,9 @@ std::unique_ptr<Vishala::LobbyStateUpdate> ClientState::getLobbyStateUpdate() {
     return nullptr;
   return std::move(_lobbyClient->getLobbyStateUpdate());
 }
+
+std::unique_ptr<Vishala::GameLobbyStateUpdate> ClientState::getGameLobbyStateUpdate() {
+  if (!_lobbyClient)
+    return nullptr;
+  return std::move(_lobbyClient->getGameLobbyStateUpdate());
+}

@@ -149,10 +149,19 @@ namespace Vishala {
       std::cout << "LobbyPlayer: Game left" << std::endl;
     }
 
-    void LobbyPlayer::sendLobbyUpdate(LobbyStateUpdate msg) {
+    void LobbyPlayer::sendLobbyUpdate(const LobbyStateUpdate& msg) {
+      assert(_state == state::Lobby);
       Lobby2ClientMessage toSend;
       toSend.type        = Lobby2ClientMessage::Type::LobbyUpdate;
       toSend.lobbyUpdate = msg;
+      send(&toSend);
+    }
+
+    void LobbyPlayer::sendGameLobbyUpdate(const GameLobbyStateUpdate& msg) {
+      assert(_state == state::Joined || _state == state::Host);
+      Lobby2ClientMessage toSend;
+      toSend.type = Lobby2ClientMessage::Type::GameLobbyUpdate;
+      toSend.gameLobbyUpdate = msg;
       send(&toSend);
     }
   }

@@ -189,6 +189,9 @@ void MainMenuLogic::update() {
     _state->closeGame();
     _gameLobbyPage->reset();
     }
+    else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::StartGame) {
+      showError("Start Game Not Implemented Yet", "ERROR");
+    }
   }
   else if (stat == status::Error) {
     if (_errorPage->getStatus() == ErrorPageStatus::Back) {

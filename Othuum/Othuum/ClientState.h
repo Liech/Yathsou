@@ -6,6 +6,7 @@
 #include "VishalaNetworkLib/Protocoll/Client/LobbyConnector.h"
 #include "VishalaNetworkLib/Protocoll/Client/LobbyClient.h"
 #include "VishalaNetworkLib/Serializable/LobbyStateUpdate.h"
+#include "VishalaNetworkLib/Serializable/GameLobbyStateUpdate.h"
 
 enum class ClientStateStatus {
   Nothing, LobbyConnector, Lobby, HostLoading, Host, JoinLoading, Joined
@@ -25,7 +26,8 @@ public:
   void join(size_t id);
   void requestRefresh();
 
-  std::unique_ptr<Vishala::LobbyStateUpdate> getLobbyStateUpdate();
+  std::unique_ptr<Vishala::LobbyStateUpdate>     getLobbyStateUpdate();
+  std::unique_ptr<Vishala::GameLobbyStateUpdate> getGameLobbyStateUpdate();
 
 private:
   ClientStateStatus _status = ClientStateStatus::Nothing;

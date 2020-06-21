@@ -21,6 +21,8 @@ namespace Vishala {
       size_t      getNumberOfPlayers();
 
     private:
+      void        sendUpdate();
+
       std::string                                       _name         ;
       size_t                                            _number       ;
       std::shared_ptr<LobbyModel>                       _model        ;

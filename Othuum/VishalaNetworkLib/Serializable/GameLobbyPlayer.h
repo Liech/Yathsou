@@ -4,13 +4,13 @@
 #include <array>
 #include <vector>
 
-#include "Lobby/LobbyPlayer.h"
+#include "Lobby/LobbyPlayerModel.h"
 #include "VishalaNetworkLib/Core/Serialization.h"
 
 namespace Vishala {
   class GameLobbyPlayer : public Serialization {
   public:
-    LobbyPlayer lobbyIdentification;
+    LobbyPlayerModel lobbyIdentification;
 
     virtual BinaryPackage toBinary()                override;
     virtual void fromBinary(BinaryPackage& Package) override;
