@@ -18,6 +18,7 @@ namespace Vishala {
       size_t      getNumber();
       void        addPlayer(std::shared_ptr<LobbyPlayer> player);
       void        closeGame();
+      void        removePlayer(size_t id);
       size_t      getNumberOfPlayers();
 
     private:

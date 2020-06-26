@@ -24,6 +24,13 @@ namespace Vishala {
       sendUpdate();
     }
 
+    void GameLobby::removePlayer(size_t playerID) {
+      auto player = _participators[playerID];
+      _participators.erase(playerID);
+      player->leaveGame();
+      sendUpdate();
+    }
+
     void GameLobby::closeGame() {
       for (auto player : _participators) {
         player.second->leaveGame();

@@ -95,6 +95,8 @@ namespace Vishala {
         joinGame(request.joinGame, player);
       else if (request.type == Client2LobbyMessage::Type::LobbyRefresh)
         sendLobbyUpdate(player);
+      else if (request.type == Client2LobbyMessage::Type::LeaveGame)
+        leaveGame(player);
     }
 
     void Lobby::sendLobbyUpdate(size_t player) {
@@ -126,12 +128,25 @@ namespace Vishala {
       game->addPlayer(player);
     }
 
-    void Lobby::closeGame(size_t playerNumber) {
-      std::cout << "Game Closed" << std::endl;
-      size_t number = _players[playerNumber]->getGameNumber();
-      std::shared_ptr<GameLobby> game = _games[number];
-      _games.erase(number);
-      game->closeGame();
+    void Lobby::leaveGame(size_t playerNumber) {
+      auto player = _players[playerNumber];
+      if (player->getStatus() == LobbyPlayer::state::Joined) {
+        std::cout << "Player " << playerNumber << " left game" << std::endl;
+        size_t number = _players[playerNumber]->getGameNumber();
+        std::shared_ptr<GameLobby> game = _games[number];
+        game->removePlayer(playerNumber);
+      }
+      else if (player->getStatus() == LobbyPlayer::state::Host) {
+        std::cout << "Game Closed" << std::endl;
+        size_t number = _players[playerNumber]->getGameNumber();
+        std::shared_ptr<GameLobby> game = _games[number];
+        _games.erase(number);
+        game->closeGame();
+      }
+      else
+        std::cout << "leaveGame request of player which cannot leave" << std::endl;
+
+
     }
 
   }

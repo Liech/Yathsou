@@ -59,16 +59,12 @@ namespace Vishala {
         send(&msg);
         return;
       }
-      else if (_state == LobbyPlayer::state::Lobby) {
+      else if (_state == LobbyPlayer::state::Lobby || _state == LobbyPlayer::state::Joined || _state == LobbyPlayer::state::Host) {
         std::cout << "Client2Lobby Request" << std::endl;
         Client2LobbyMessage request;
         request.fromBinary(*package);
         std::cout << "Type: " << (int)request.type << std::endl;
-        if (request.type == Client2LobbyMessage::Type::CreateGame || request.type == Client2LobbyMessage::Type::LeaveGame
-          || request.type == Client2LobbyMessage::Type::LobbyRefresh || request.type == Client2LobbyMessage::Type::JoinGame) {
-          std::cout << "Request" << std::endl;
-          _model->openRequests.push_back(OpenLobbyRequest(_playerNumber, request));
-        }
+        _model->openRequests.push_back(OpenLobbyRequest(_playerNumber, request));
       }
     }
 
@@ -156,7 +152,7 @@ namespace Vishala {
       send(&msg);
       _currentGame = nullptr;
       _state = LobbyPlayer::state::Lobby;
-      std::cout << "LobbyPlayer: Game left" << std::endl;
+      std::cout << "LobbyPlayer: " << getName() << " Game left" << std::endl;
     }
 
     void LobbyPlayer::sendLobbyUpdate(const LobbyStateUpdate& msg) {

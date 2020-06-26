@@ -13,6 +13,8 @@ LobbyPage::LobbyPage(std::shared_ptr<ClientConfiguration> configuration, std::sh
 
 void LobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
+  _height = spec->height;
+  _width = spec->width;
   _page->layout().setHorizontal(true);
 
   auto left = _page->layout().addLayout();
@@ -40,6 +42,7 @@ void LobbyPage::draw() {
 void LobbyPage::updateLobbyState(std::unique_ptr<Vishala::LobbyStateUpdate> update) {
   std::cout << "Lobby State update..." << std::endl;
   _openGamesLayout->clear();
+  _openGamesLayout->setPosition(Iyathuum::AABB<2>({0,0}, {_width / 4.0,_height/2.0}));
   for (auto game : update->openGames) {
     std::string msg = game.name + " " + std::to_string(game.numberOfPlayers) + "/" + std::to_string(game.maxNumberOfPlayers);
     size_t gameID = game.gameID;

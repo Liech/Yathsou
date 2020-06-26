@@ -39,4 +39,6 @@ private:
   LobbyPageStatus                      _status = LobbyPageStatus::Pending;
   std::shared_ptr<ClientConfiguration> _config;
   std::shared_ptr<ClientState        > _state;
+  int                                  _height = 100;
+  int                                  _width = 100;
 };
