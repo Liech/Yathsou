@@ -16,6 +16,7 @@ namespace YolonaOss {
 
     Label::Label(std::string name, Iyathuum::AABB<2> position, Widget* parent) : Widget(position, parent) {
       _name = name;
+      setVisible(true);
     }
 
 

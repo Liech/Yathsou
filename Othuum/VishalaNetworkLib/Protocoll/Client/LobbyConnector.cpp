@@ -7,11 +7,12 @@
 
 namespace Vishala {
   namespace Client {
-    LobbyConnector::LobbyConnector(int myPort, std::string ip, int port) {
+    LobbyConnector::LobbyConnector(int myPort, std::string ip, int port, SelfBriefing playerDescription) {
       _lobbyIP = ip;
       _lobbyPort = port;
       _myPort = myPort;
       _currentStatus = LobbyConnectorStatus::Waiting;
+      _playerDescription = playerDescription;
 
       _entryConnection = std::make_unique<Connection>();
       _entryConnection->setAcceptConnection(true);
@@ -90,10 +91,7 @@ namespace Vishala {
       if (_currentStatus != LobbyConnectorStatus::ConnectionEstablished)
         throw std::runtime_error("Wrong Status");
       std::cout << "Extract Connection" << std::endl;
-      SelfBriefing briefing;
-      briefing.color = { rand() % 256,rand() % 256,rand() % 256 };
-      briefing.name = "Horst";
-      std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(briefing.toBinary());
+      std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(_playerDescription.toBinary());
       _finalConnection->send(0, 0, std::move(package));
       _currentStatus = LobbyConnectorStatus::Extracted;
 

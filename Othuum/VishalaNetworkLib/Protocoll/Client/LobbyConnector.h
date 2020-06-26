@@ -4,11 +4,13 @@
 #include <memory>
 
 #include "VishalaNetworkLib/Core/Connection.h"
+#include "VishalaNetworkLib/Serializable/SelfBriefing.h"
 
 
 namespace Vishala {
   class Connection;
   class BinaryPackage;
+
   namespace Client {
     enum class LobbyConnectorStatus {
       ConnectionFailed,
@@ -22,7 +24,7 @@ namespace Vishala {
     //connection should already has invoked start
     class LobbyConnector {
     public:
-      LobbyConnector(int myPort, std::string ip, int port);
+      LobbyConnector(int myPort, std::string ip, int port, SelfBriefing playerDescription);
       void                        update();
       void                        stop();
       LobbyConnectorStatus        getStatus();
@@ -41,6 +43,7 @@ namespace Vishala {
       int         _lobbyPort;
       int         _myPort;
       std::string _lobbyIP;
+      SelfBriefing _playerDescription;
 
 
       std::unique_ptr<Connection> _entryConnection = nullptr;

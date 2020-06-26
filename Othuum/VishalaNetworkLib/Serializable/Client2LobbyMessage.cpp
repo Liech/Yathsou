@@ -49,7 +49,7 @@ namespace Vishala {
       result.add(createGame.toBinary());
     else if (type == Type::JoinGame)
       result.add(joinGame.toBinary());
-    else if (type != Type::LeaveGame && type != Type::LobbyRefresh && type != Type::LobbyRefresh && type != Type::StartGame)
+    else if (type != Type::LeaveGame && type != Type::LobbyRefresh && type != Type::StartGame)
       throw std::runtime_error("Unkown Message Type");
     return result;
   }

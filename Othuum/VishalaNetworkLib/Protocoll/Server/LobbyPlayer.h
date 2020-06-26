@@ -29,7 +29,8 @@ namespace Vishala {
       };
       LobbyPlayer(int myport, std::string ip, int port, size_t playerNumber, std::shared_ptr<LobbyModel> model);
 
-      virtual std::string getName() { return "LobbyChaperone"; }
+      std::string        getName();
+      std::array<int, 3> getColor();
 
       void messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package);
       void newConnection(size_t clientnumber, std::string ip, int port);
@@ -55,6 +56,8 @@ namespace Vishala {
       std::string                  _ip;
       LobbyPlayer::state           _state = state::Unintroduced;
       size_t                       _playerNumber;
+      std::string                  _name;
+      std::array<int, 3>           _color;
 
       std::unique_ptr<Connection>  _connection           ;
       std::shared_ptr<LobbyModel>  _model                ;

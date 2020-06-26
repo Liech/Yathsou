@@ -41,7 +41,6 @@ namespace YolonaOss {
       Iyathuum::AABB<2>  getGlobalPosition() const;      
       void               setPosition(Iyathuum::AABB<2> pos);
       virtual void setVisible(bool visible);
-    protected:
       bool isVisible() { return _visible; }
     private:
       Iyathuum::AABB<2> _position;

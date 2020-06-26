@@ -5,6 +5,7 @@
 class ClientConfiguration : public Vishala::Serialization {
 public:
   std::string        playerName          = "Unnamed";
+  std::array<int, 3> playerColor         = {255,255,255};
   std::array<int, 2> resolution          = std::array<int, 2> {1024,600};
   int                hostPort            = 6115; 
   std::string        lastGameName        = "Setons";

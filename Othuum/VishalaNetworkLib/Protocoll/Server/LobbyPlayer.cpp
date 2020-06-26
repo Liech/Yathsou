@@ -34,12 +34,22 @@ namespace Vishala {
       _connection->connect(port, ip);
     }
 
+    std::array<int,3> LobbyPlayer::getColor() {
+      return _color;
+    }
+
+    std::string LobbyPlayer::getName() {
+      return _name;
+    }
+
     void LobbyPlayer::messageRecived(size_t player, size_t channel, std::unique_ptr<BinaryPackage> package)
     {
       std::cout << "MSG" << std::endl;
       if (_state == LobbyPlayer::state::Unintroduced) {
         SelfBriefing description;
         description.fromBinary(*package);
+        _name = description.name;
+        _color = description.color;
         _state = LobbyPlayer::state::Lobby;
         std::cout << "He Is Known Now" << std::endl;
         Lobby2ClientMessage msg;

@@ -1,5 +1,6 @@
 #include "ClientState.h"
 
+
 ClientState::ClientState(std::shared_ptr<ClientConfiguration> config) {
   _config = config;
 }
@@ -12,7 +13,10 @@ void ClientState::connectToLobby() {
   if (_status != ClientStateStatus::Nothing)
     throw std::runtime_error("Wrong status in ClientState::connectToLobby");
   _status = ClientStateStatus::LobbyConnector;
-  _lobbyConnector = std::make_unique<Vishala::Client::LobbyConnector>(_config->lobbyServerMyPort, _config->lobbyServerAdress,_config->lobbyServerTheirPort);
+  Vishala::SelfBriefing model;
+  model.name = _config->playerName;
+  model.color = _config->playerColor;
+  _lobbyConnector = std::make_unique<Vishala::Client::LobbyConnector>(_config->lobbyServerMyPort, _config->lobbyServerAdress,_config->lobbyServerTheirPort,model);
 }
 
 void ClientState::update() {
@@ -52,7 +56,7 @@ void ClientState::stop() {
 }
 
 void ClientState::closeGame() {
-  if (_status != ClientStateStatus::Host)
+  if (_status != ClientStateStatus::Host && _status != ClientStateStatus::Joined)
     throw std::runtime_error("Wrong status");
   _status = ClientStateStatus::Lobby;
   _lobbyClient->closeGame();

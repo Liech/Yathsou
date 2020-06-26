@@ -56,6 +56,9 @@ namespace Vishala {
       }
       else if (msg.type == Lobby2ClientMessage::Type::GameLobbyUpdate) {
         _gameLobbyStateUpdate = std::make_unique<Vishala::GameLobbyStateUpdate>(msg.gameLobbyUpdate);
+        std::cout << "GameLobbyUpdate: " << msg.gameLobbyUpdate.gameName << std::endl;
+        for (auto m : msg.gameLobbyUpdate.currentPlayers)
+          std::cout << "  " << m.lobbyIdentification.name << std::endl;
       }
     }
 
@@ -97,7 +100,7 @@ namespace Vishala {
     }
 
     void LobbyClient::closeGame() {
-      if (_status != LobbyClient::Status::GameHosted)
+      if (_status != LobbyClient::Status::GameHosted && _status != LobbyClient::Status::GameJoined)
         throw std::runtime_error("wrong status");
       std::cout << "Close game" << std::endl;
       Client2LobbyMessage request;

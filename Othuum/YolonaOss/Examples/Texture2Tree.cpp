@@ -31,7 +31,7 @@ namespace YolonaOss {
     int port = 6115;
     std::string ip = "localhost";
     std::cout << "Connect to Lobby: "<< ip <<":"<< 6112 << " with Port "<< port << std::endl;
-    _connector = std::make_shared<Vishala::Client::LobbyConnector>(port, ip, 6112);
+    //_connector = std::make_shared<Vishala::Client::LobbyConnector>(port, ip, 6112);
   }
   std::future<int> thread;
   std::future<int> thread2;

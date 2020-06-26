@@ -122,8 +122,8 @@ namespace Vishala {
     void Lobby::joinGame(JoinGameRequest g, size_t playerNumber) {
       auto game = _games[g.gameID];
       auto player = _players[playerNumber];
-      game->addPlayer(player);
       player->joinGame(game);
+      game->addPlayer(player);
     }
 
     void Lobby::closeGame(size_t playerNumber) {

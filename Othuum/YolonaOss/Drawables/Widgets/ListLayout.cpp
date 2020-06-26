@@ -115,11 +115,16 @@ namespace YolonaOss {
     std::array<double, 2> ListLayout::getPotentialSize() {
       double maxOffset = 0;
       if (!_horizontal)
-        for (auto w : _widgets)
+        for (auto w : _widgets) {
+          if (!w->isVisible()) 
+            continue;
           maxOffset += w->getPosition().getSize()[1];
+        }
       double offset = _horizontal ? 0 : maxOffset;
       double max = 0;
       for (auto w : _widgets) {
+        if (!w->isVisible())
+          continue;
         if (!_horizontal) {
           offset -= w->getPosition().getSize()[1];
           max = std::max(max, w->getPosition().getSize()[0]);
@@ -140,13 +145,17 @@ namespace YolonaOss {
     void ListLayout::adjustSize(){
       double maxOffset = 0;
       if (!_horizontal)
-        for (auto w : _widgets)
+        for (auto w : _widgets) {
+          if (!w->isVisible())
+            continue;
           maxOffset += w->getPosition().getSize()[1];
+        }
       double offset = _horizontal ? 0 : maxOffset;
       double max = 0;
       for (auto w : _widgets) {
+        if (!w->isVisible())
+          continue;
         w->adjustSize();
-
         if (!_horizontal) {
           offset -= w->getPosition().getSize()[1];
           w->getPosition().setPosition(std::array<double, 2>{0, offset - _scroll});

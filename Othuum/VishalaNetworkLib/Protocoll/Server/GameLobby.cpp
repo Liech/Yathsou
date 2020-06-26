@@ -1,6 +1,7 @@
 #include "GameLobby.h"
 
 #include "LobbyPlayer.h"
+#include <iostream>
 
 namespace Vishala {
   namespace Server {
@@ -36,10 +37,13 @@ namespace Vishala {
     void GameLobby::sendUpdate() {
       GameLobbyStateUpdate update;
       update.currentPlayers.clear();
+      std::cout << "Send GameLobby update: " << getName()<<std::endl;
       for (auto p : _participators){
         GameLobbyPlayer player;
         player.lobbyIdentification.name = p.second->getName();
+        player.lobbyIdentification.color = p.second->getColor();
         player.lobbyIdentification.id   = p.first;     
+        std::cout << "  " << player.lobbyIdentification.name << std::endl;
         update.currentPlayers.push_back(player);
       }
       update.gameName = getName();
