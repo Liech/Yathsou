@@ -183,6 +183,9 @@
     <ClInclude Include="Serializable\GameLobbyPlayer.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
+    <ClInclude Include="Protocoll\Client\GameSeed.h">
+      <Filter>Header Files\Protocoll\Client</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Serializable\Message.cpp">
@@ -259,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="Serializable\GameLobbyPlayer.cpp">
       <Filter>Source Files\Serializable</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\Client\GameSeed.cpp">
+      <Filter>Source Files\Protocoll\Client</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
