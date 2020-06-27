@@ -20,6 +20,7 @@ namespace Vishala {
       void        closeGame();
       void        removePlayer(size_t id);
       size_t      getNumberOfPlayers();
+      void        startGame();
 
     private:
       void        sendUpdate();

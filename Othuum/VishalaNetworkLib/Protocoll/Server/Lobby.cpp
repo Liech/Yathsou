@@ -97,6 +97,8 @@ namespace Vishala {
         sendLobbyUpdate(player);
       else if (request.type == Client2LobbyMessage::Type::LeaveGame)
         leaveGame(player);
+      else if (request.type == Client2LobbyMessage::Type::StartGame)
+        startGame(player);
     }
 
     void Lobby::sendLobbyUpdate(size_t player) {
@@ -145,8 +147,18 @@ namespace Vishala {
       }
       else
         std::cout << "leaveGame request of player which cannot leave" << std::endl;
+    }
 
-
+    void Lobby::startGame(size_t playerNumber) {
+      auto player = _players[playerNumber];
+      if (player->getStatus() == LobbyPlayer::state::Host) {
+        size_t number = _players[playerNumber]->getGameNumber();
+        std::shared_ptr<GameLobby> game = _games[number];
+        std::cout << "Game started: " << game->getName() << std::endl;
+        game->startGame();
+      }
+      else
+        std::cout << "Non host tried to start game" << std::endl;
     }
 
   }

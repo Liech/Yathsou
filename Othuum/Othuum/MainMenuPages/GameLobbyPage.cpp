@@ -15,11 +15,10 @@ void GameLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
 
   _page->layout().addLabel("Game Lobby Page");
-  if (_state->getStatus() == ClientStateStatus::Host) {
-    _page->layout().addButton("Start Game", [this]() {
-      startGame(); 
-      });
-  }
+  _startButton = _page->layout().addButton("Start Game", [this]() {
+    startGame();
+    });
+  _startButton->setVisible(false);
   _participatorsLayout = _page->layout().addLayout();
   _participatorsLayout->addLabel("You are alone");
   _page->layout().addButton("Back", [this]() { goBack(); });
@@ -61,6 +60,10 @@ void GameLobbyPage::startGame() {
 
 void GameLobbyPage::reset() {
   _status = GameLobbyPageStatus::Pending;  
+}
+
+void GameLobbyPage::start() {
+  _startButton->setVisible(_state->getStatus() == ClientStateStatus::Host);
 }
 
 

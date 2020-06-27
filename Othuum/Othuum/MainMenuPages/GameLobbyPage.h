@@ -23,7 +23,6 @@ public:
   void reset();
   void start();
 
-
   GameLobbyPageStatus getStatus();
 private:
   void goBack();
@@ -35,5 +34,5 @@ private:
   std::shared_ptr<ClientConfiguration> _config;
   std::shared_ptr<ClientState        > _state; 
   std::shared_ptr<YolonaOss::Widgets::ListLayout> _participatorsLayout;
-
+  std::shared_ptr<YolonaOss::Widgets::Button>     _startButton;
 };

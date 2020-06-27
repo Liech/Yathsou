@@ -155,6 +155,7 @@
     <ClCompile Include="DrawCubes.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuLogic.cpp" />
+    <ClCompile Include="MainMenuLogicResult.cpp" />
     <ClCompile Include="MainMenuPages\DialogPage.cpp" />
     <ClCompile Include="MainMenuPages\ErrorPage.cpp" />
     <ClCompile Include="MainMenuPages\GameLobbyPage.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="Lib\nop\utility\stream_writer.h" />
     <ClInclude Include="Lib\nop\value.h" />
     <ClInclude Include="MainMenuLogic.h" />
+    <ClInclude Include="MainMenuLogicResult.h" />
     <ClInclude Include="MainMenuPages\DialogPage.h" />
     <ClInclude Include="MainMenuPages\ErrorPage.h" />
     <ClInclude Include="MainMenuPages\GameLobbyPage.h" />

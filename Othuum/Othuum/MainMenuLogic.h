@@ -3,7 +3,7 @@
 #include <string>
 #include <memory>
 #include "VishalaNetworkLib/Core/Connection.h"
-
+#include "MainMenuLogicResult.h"
 
 class ClientConfiguration;
 class ClientState        ;
@@ -20,8 +20,8 @@ class JoinLoadingPage    ;
 
 class MainMenuLogic {
 public:
-  enum class status { 
-    MainMenu, 
+  enum class status {
+    MainMenu,
     LobbyEntry,
     LoadLobby,
     Lobby,
@@ -31,14 +31,20 @@ public:
     Error,
     GameLobbyHost,
     GameLobbyClient,
-    LoadJoin
-  } stat = status::MainMenu;
+    LoadJoin,
+    GameStarted
+  };
+  
 
   MainMenuLogic(std::shared_ptr<ClientConfiguration> config,std::shared_ptr<ClientState> state);
 
-  void update();
+  void                  update();
+  MainMenuLogic::status getStatus() { return _stat; }
+  MainMenuLogicResult   extractResult();
 
 private:
+  status                               _stat = status::MainMenu;
+  bool                                 _extracted = false;
   std::shared_ptr<ClientConfiguration> _config     ;
   std::shared_ptr<ClientState        > _state      ;
   std::shared_ptr<Vishala::Connection> _connection = nullptr;

@@ -34,6 +34,7 @@ namespace Vishala {
       void joinGame(JoinGameRequest g, size_t playerNumber);
       void leaveGame(size_t playerNumber);
       void sendLobbyUpdate(size_t player);
+      void startGame(size_t player);
 
       size_t  getNextPort();
 

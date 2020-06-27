@@ -81,6 +81,9 @@
     <ClCompile Include="MainMenuPages\JoinLoadingPage.cpp">
       <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuLogicResult.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lib\nop\base\array.h">
@@ -364,6 +367,9 @@
     </ClInclude>
     <ClInclude Include="MainMenuPages\JoinLoadingPage.h">
       <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuLogicResult.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

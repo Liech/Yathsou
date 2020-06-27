@@ -58,5 +58,10 @@ namespace Vishala {
       for (auto p : _participators)
         p.second->sendGameLobbyUpdate(update);
     }
+
+    void GameLobby::startGame() {
+      std::cout << "GAME START" << std::endl;
+      
+    }
   }
 }

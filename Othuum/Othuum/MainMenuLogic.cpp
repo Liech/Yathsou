@@ -47,59 +47,61 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::s
 }
 
 void MainMenuLogic::update() {
-  if (stat == status::MainMenu) {
+  if (_extracted)
+    throw std::runtime_error("Main Menu Logic was already extracted");
+  if (_stat == status::MainMenu) {
     if (_mainMenuPage->getStatus() == MainMenuPageStatus::Multiplayer) {
       _mainMenuPage->reset();
       _mainMenuPage->setVisible(false);
       _joinLobbyPage->setVisible(true);
-      stat = status::LobbyEntry;
+      _stat = status::LobbyEntry;
     }
-    else if (_mainMenuPage->getStatus() == MainMenuPageStatus::Options && stat == status::MainMenu) {
+    else if (_mainMenuPage->getStatus() == MainMenuPageStatus::Options && _stat == status::MainMenu) {
       _mainMenuPage->reset();
       _mainMenuPage->setVisible(false);
       _optionsPage->setVisible(true);
-      stat = status::Options;
+      _stat = status::Options;
     }
   }
-  else if (stat == status::Options) {
+  else if (_stat == status::Options) {
     if (_optionsPage->getStatus() == OptionsPageStatus::Back) {
       _optionsPage->setVisible(false);
       _mainMenuPage->setVisible(true);
-      stat = status::MainMenu;
+      _stat = status::MainMenu;
       if (_optionsPage->requiresRestart()) {
         showError("Some options may require a restart", "Hint");
       }
       _optionsPage->reset();
     }
   }
-  else if (stat == status::LobbyEntry) {
+  else if (_stat == status::LobbyEntry) {
     if (_joinLobbyPage->getStatus() == JoinLobbyPageStatus::Back) {
       _joinLobbyPage->setVisible(false);
       _mainMenuPage->setVisible(true);
-      stat = status::MainMenu;
+      _stat = status::MainMenu;
       _joinLobbyPage->reset();
     }
     else if (_joinLobbyPage->getStatus() == JoinLobbyPageStatus::Proceed) {
       _joinLobbyPage->setVisible(false);
       _lobbyLoadingPage->setVisible(true);
 
-      stat = status::LoadLobby;
+      _stat = status::LoadLobby;
       _joinLobbyPage->reset();
       _lobbyLoadingPage->start();
     }
   }
-  else if (stat == status::LoadLobby){
+  else if (_stat == status::LoadLobby){
     _lobbyLoadingPage->update();
     if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Proceed) {
       _lobbyLoadingPage->setVisible(false);
       _lobbyPage->setVisible(true);
-      stat = status::Lobby;
+      _stat = status::Lobby;
       _lobbyLoadingPage->reset();
     }
     else if (_lobbyLoadingPage->getStatus() == LobbyLoadingPageStatus::Back) {
       _lobbyLoadingPage->setVisible(false);
       _joinLobbyPage->setVisible(true);
-      stat = status::LobbyEntry;
+      _stat = status::LobbyEntry;
       _lobbyLoadingPage->reset();
       _state->stop();
     }
@@ -108,103 +110,106 @@ void MainMenuLogic::update() {
       _state->stop();
     }
   }
-  else if (stat == status::Lobby) {
+  else if (_stat == status::Lobby) {
     if (_lobbyPage->getStatus() == LobbyPageStatus::Back) {
       _lobbyPage->setVisible(false);
       _mainMenuPage->setVisible(true);
-      stat = status::MainMenu;
+      _stat = status::MainMenu;
       _state->stop();
       _lobbyPage->reset();
     }
     else if (_lobbyPage->getStatus() == LobbyPageStatus::Host) {
       _lobbyPage->setVisible(false);
       _hostPage->setVisible(true);
-      stat = status::AdjustHostOptions;
+      _stat = status::AdjustHostOptions;
       _lobbyPage->reset();
     }
     else if (_lobbyPage->getStatus() == LobbyPageStatus::Join) {
       _lobbyPage->setVisible(false);
       _joinLoadingPage->setVisible(true);
-      stat = status::LoadJoin;
+      _stat = status::LoadJoin;
       _joinLoadingPage->start(_lobbyPage->getGameID());
       _lobbyPage->reset();
     }
   }
-  else if (stat == status::AdjustHostOptions) {
-    if (_hostPage->getStatus() == HostPageStatus::Back && stat == status::AdjustHostOptions) {
+  else if (_stat == status::AdjustHostOptions) {
+    if (_hostPage->getStatus() == HostPageStatus::Back && _stat == status::AdjustHostOptions) {
       _hostPage->setVisible(false);
       _lobbyPage->setVisible(true);
-      stat = status::Lobby;
+      _stat = status::Lobby;
       _hostPage->reset();
     }
     else if (_hostPage->getStatus() == HostPageStatus::Host) {
       _hostPage->setVisible(false);
       _hostLoadingPage->setVisible(true);
-      stat = status::LoadHost;
+      _stat = status::LoadHost;
       _hostLoadingPage->start(_hostPage->getResult());
       _hostPage->reset();
     }
   }
-  else if (stat == status::LoadHost) {
+  else if (_stat == status::LoadHost) {
     _hostLoadingPage->update();
     if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Back) {
       _hostLoadingPage->setVisible(false);
       _hostPage->setVisible(true);
-      stat = status::AdjustHostOptions;
+      _stat = status::AdjustHostOptions;
       _hostLoadingPage->reset();
     }
     else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Proceed) {
       _hostLoadingPage->setVisible(false);
       _gameLobbyPage->setVisible(true);
-      stat = status::GameLobbyHost;
+      _stat = status::GameLobbyHost;
       _hostLoadingPage->reset();
+      _gameLobbyPage->start();
     }
     else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Error) {
       showError("Error while hosting game", "ERROR");
     }
   }
-  else if (stat == status::LoadJoin) {
+  else if (_stat == status::LoadJoin) {
   _joinLoadingPage->update();
   if (_joinLoadingPage->getStatus() == JoinLoadingPageStatus::Back) {
     _joinLoadingPage->setVisible(false);
     _lobbyPage->setVisible(true);
-    stat = status::Lobby;
+    _stat = status::Lobby;
     _joinLoadingPage->reset();
   }
   else if (_joinLoadingPage->getStatus() == JoinLoadingPageStatus::Proceed) {
     _joinLoadingPage->setVisible(false);
     _gameLobbyPage->setVisible(true);
-    stat = status::GameLobbyClient;
+    _stat = status::GameLobbyClient;
     _joinLoadingPage->reset();
+    _gameLobbyPage->start();
   }
   else if (_joinLoadingPage->getStatus() == JoinLoadingPageStatus::Error) {
     showError("Error while joining game", "ERROR");
   }
   }
-  else if (stat == status::GameLobbyHost|| stat == status::GameLobbyClient) {
+  else if (_stat == status::GameLobbyHost|| _stat == status::GameLobbyClient) {
     if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::Back) {
     _gameLobbyPage->setVisible(false);
     _lobbyPage->setVisible(true);
-    stat = status::Lobby;  
+    _stat = status::Lobby;  
     _state->closeGame();
     _gameLobbyPage->reset();
     }
     else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::StartGame) {
-      showError("Start Game Not Implemented Yet", "ERROR");
+      _gameLobbyPage->setVisible(false);
+      _stat = status::GameStarted;
     }
   }
-  else if (stat == status::Error) {
+  else if (_stat == status::Error) {
     if (_errorPage->getStatus() == ErrorPageStatus::Back) {
       _errorPage->setVisible(false);
       _mainMenuPage->setVisible(true);
-      stat = status::MainMenu;
+      _stat = status::MainMenu;
       _mainMenuPage->reset();
     }
   }
 }
 
 void MainMenuLogic::showError(std::string desc,std::string title) {
-  stat = status::Error;
+  _stat = status::Error;
   _errorPage->setVisible(true);
   _mainMenuPage    ->setVisible(false);
   _joinLobbyPage   ->setVisible(false);
@@ -226,4 +231,13 @@ void MainMenuLogic::showError(std::string desc,std::string title) {
   _joinLoadingPage ->reset();
   _errorPage->setMessage(desc,title);
   _state->stop();
+}
+
+MainMenuLogicResult MainMenuLogic::extractResult(){
+  if (getStatus() != status::GameStarted)
+    throw std::runtime_error("Wrong status");
+  MainMenuLogicResult result;
+  _extracted = true;
+  throw std::runtime_error("Waahhhhh");
+  return result;
 }
