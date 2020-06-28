@@ -112,11 +112,11 @@ namespace YolonaOss {
 
     FT_Library ft;
     if (FT_Init_FreeType(&ft))
-      std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+      throw std::runtime_error("ERROR::FREETYPE: Could not init FreeType Library");
 
     FT_Face face;
     if (FT_New_Face(ft, path.c_str(), 0, &face))
-      std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+      throw std::runtime_error("ERROR::FREETYPE: Failed to load font");
 
     FT_Set_Pixel_Sizes(face, 0, 48);
 

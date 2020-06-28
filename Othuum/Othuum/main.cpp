@@ -1,4 +1,6 @@
 #include <iostream>
+#include <filesystem>
+
 #include "YolonaOss/OpenGL/Window.h"
 #include "YolonaOss/OpenGL/DrawableList.h"
 #include "YolonaOss/OpenGL/DrawSpecification.h"
@@ -26,8 +28,17 @@
 
 using namespace YolonaOss;
 
-int main() { 
+int main(int argc, char** argv) {
   {
+    std::string exe = std::string(argv[0]);
+    const size_t last_slash_idx = exe.find_last_of("\\/");
+    if (std::string::npos != last_slash_idx)
+    {
+      exe.erase(last_slash_idx + 1);
+    }
+
+
+    std::filesystem::current_path(exe);
     std::shared_ptr<ClientConfiguration> configuration = std::make_shared<ClientConfiguration>();
     std::shared_ptr<ClientState>         state         = std::make_shared<ClientState>(configuration);
     std::string configFileName = "ClientConfiguration.json";

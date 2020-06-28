@@ -1,0 +1,17 @@
+{
+    "HostPort": 6115,
+    "LastGameName": "Setons",
+    "LobbyServerAdress": "localhost",
+    "LobbyServerMyPort": 6112,
+    "LobbyServerTheirPort": 6114,
+    "PlayerColor": [
+        255,
+        255,
+        255
+    ],
+    "PlayerName": "Unnamed",
+    "Resolution": [
+        1024,
+        600
+    ]
+}

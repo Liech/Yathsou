@@ -183,8 +183,11 @@
     <ClInclude Include="Serializable\GameLobbyPlayer.h">
       <Filter>Header Files\Serializable</Filter>
     </ClInclude>
-    <ClInclude Include="Protocoll\Client\GameSeed.h">
-      <Filter>Header Files\Protocoll\Client</Filter>
+    <ClInclude Include="Core\NetworkGameSeed.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\NetworkGameSeedInput.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -263,8 +266,11 @@
     <ClCompile Include="Serializable\GameLobbyPlayer.cpp">
       <Filter>Source Files\Serializable</Filter>
     </ClCompile>
-    <ClCompile Include="Protocoll\Client\GameSeed.cpp">
-      <Filter>Source Files\Protocoll\Client</Filter>
+    <ClCompile Include="Core\NetworkGameSeed.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\NetworkGameSeedInput.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

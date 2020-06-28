@@ -1,6 +1,8 @@
 #pragma once
 
 #include <array>
+#include <stdexcept>
+#include <cmath>
 
 namespace Iyathuum {
   //Axis Aligned Bounding Box
