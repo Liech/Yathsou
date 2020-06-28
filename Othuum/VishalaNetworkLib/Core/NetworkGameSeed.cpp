@@ -31,6 +31,10 @@ namespace Vishala {
     _connection->start();
   }
 
+  void NetworkGameSeed::update() {
+    _connection->update();
+  }
+
   void NetworkGameSeed::newConnection(size_t clientnumber, std::string ip, int port) {
 
   }

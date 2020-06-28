@@ -17,14 +17,16 @@ namespace Vishala {
     public:
       NetworkGameSeed(NetworkGameSeedInput input);
 
+      void update();
+
     private:
       NetworkGameSeedInput        _input     ;
       std::unique_ptr<Connection> _connection;
 
-      void newConnection(size_t clientnumber, std::string ip, int port);
-      void connectionFailed(std::string name);
-      void disconnect(size_t clientnumber);
-      void messageRecived(size_t channel, size_t clientNumber, std::unique_ptr<BinaryPackage>);
+      void newConnection        (size_t clientnumber, std::string ip, int port);
+      void connectionFailed     (std::string name);
+      void disconnect           (size_t clientnumber);
+      void messageRecived       (size_t channel, size_t clientNumber, std::unique_ptr<BinaryPackage>);
       void controlMessageRecived(size_t clientNumber, std::unique_ptr<BinaryPackage>);
     };
 }
