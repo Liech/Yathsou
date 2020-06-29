@@ -28,7 +28,7 @@ namespace Vishala {
       size_t      id;
     };
 
-    std::set<Target>            _targets   ;
+    std::vector<Target>            _targets   ;
     NetworkGameSeedInput        _input     ;
     std::unique_ptr<Connection> _connection;
     size_t                      _targetIDCounter = 0;

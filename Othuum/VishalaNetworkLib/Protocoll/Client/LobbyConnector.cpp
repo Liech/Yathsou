@@ -19,7 +19,7 @@ namespace Vishala {
       _entryConnection->setChannelCount(1);
       _entryConnection->setMaximumConnectionCount(2);
       _entryConnection->setPort(myPort);
-      _entryConnection->setConnectionFailedCallback([this](std::string name) {connectionFailed(name); });
+      _entryConnection->setConnectionFailedCallback([this](std::string ip, int port) {connectionFailed(ip); });
       _entryConnection->setDisconnectCallback([this](size_t client) {disconnect(client); });
       _entryConnection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {newConnection(client, ip, port); });
       _entryConnection->setRecievedCallback(0, [this](size_t client, std::unique_ptr<BinaryPackage> package) {messageRecived(client, 0, std::move(package)); });
@@ -51,7 +51,7 @@ namespace Vishala {
         _currentStatus = LobbyConnectorStatus::ConnectionEstablished;
         std::cout << "LobbyConnectorStatus::ConnectionEstablished :)" << std::endl;
         });
-      _finalConnection->setConnectionFailedCallback([this](std::string ip) {
+      _finalConnection->setConnectionFailedCallback([this](std::string ip, int port) {
         std::cout << "LobbyConnectorStatus::setConnectionFailedCallback" << std::endl;
         _disposed = true;
         });

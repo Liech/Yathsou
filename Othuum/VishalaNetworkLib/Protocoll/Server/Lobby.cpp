@@ -22,7 +22,7 @@ namespace Vishala {
       _connection->setChannelCount(1);
       _connection->setMaximumConnectionCount(64);
       _connection->setPort(configurationFile.welcomePort);
-      _connection->setConnectionFailedCallback([this](std::string name) {/*Lobby don't initiate connections*/});
+      _connection->setConnectionFailedCallback([this](std::string ip, int port) {/*Lobby don't initiate connections*/});
       _connection->setDisconnectCallback([this](size_t client) {disconnect(client);     });
       _connection->setRecievedCallback(0, [this](size_t client, std::unique_ptr<BinaryPackage> package) {/*We don't care for messages in the main channel*/    });
       _connection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {newConnection(client, ip, port);  });

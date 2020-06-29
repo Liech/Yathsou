@@ -84,6 +84,7 @@ namespace Vishala {
               newCon.newConnection = true;
               newCon.connectionSuccess = false;
               newCon.targetIP = toSend.ip;
+              newCon.port     = toSend.port;
               _threadQueueRecive.enqueue(newCon);
               continue;
             }
@@ -93,6 +94,7 @@ namespace Vishala {
             newCon.newConnection     = true              ;
             newCon.connectionSuccess = false             ;
             newCon.targetIP          = toSend.ip         ;
+            newCon.port              = toSend.port       ;
             _threadQueueRecive.enqueue(newCon);
           }
         }
@@ -171,7 +173,7 @@ namespace Vishala {
         }
         else {
           std::cout << "NewConFailed!" << std::endl;
-          _connectionFailed(event.targetIP);
+          _connectionFailed(event.targetIP, event.port);
           return;
         }
       }
@@ -254,7 +256,7 @@ namespace Vishala {
     _recived[channel] = func;
   }
 
-  void Connection::setConnectionFailedCallback(std::function<void(std::string ip)> func) {
+  void Connection::setConnectionFailedCallback(std::function<void(std::string ip, int port)> func) {
     _connectionFailed = func;
   }
 }

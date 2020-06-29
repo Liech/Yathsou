@@ -15,7 +15,7 @@ namespace Vishala {
       t.port = target.port;
       t.ip   = target.IP;
       t.id   = _targetIDCounter;
-      _targets.insert(t);
+      _targets.push_back(t);
       _targetIDCounter++;
       _connection->connect(t.port, t.ip);
     }
@@ -32,8 +32,8 @@ namespace Vishala {
     _connection->setNewConnectionCallback([this](size_t clientnumber, std::string ip, int port) {
       newConnection(clientnumber, ip, port); 
       });
-    _connection->setConnectionFailedCallback([this](std::string name) {
-      connectionFailed(name); 
+    _connection->setConnectionFailedCallback([this](std::string ip, int port) {
+      connectionFailed(ip); 
       });
     _connection->setDisconnectCallback([this](size_t clientNumber) { 
       disconnect(clientNumber); 

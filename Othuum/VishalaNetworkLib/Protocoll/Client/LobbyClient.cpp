@@ -10,7 +10,7 @@ namespace Vishala {
     LobbyClient::LobbyClient(std::unique_ptr<Connection> connection) {
       //First job of the server is to send us a lobby status update in response to the self briefing of the lobby connector. We will wait for this
       _connection = std::move(connection);
-      _connection->setConnectionFailedCallback([](std::string name) {throw std::runtime_error("Connection cannot fail, but failed. New Connections are not allowed"); });
+      _connection->setConnectionFailedCallback([](std::string ip, int port) {throw std::runtime_error("Connection cannot fail, but failed. New Connections are not allowed"); });
       _connection->setDisconnectCallback([this](size_t num) {disconnect(num); });
       _connection->setNewConnectionCallback([](size_t num, std::string name, int port) {throw std::runtime_error("New Connections are not allowed"); });
       _connection->setRecievedCallback(0,[this](size_t player, std::unique_ptr<BinaryPackage> package) {messageRecived(player, 0, std::move(package)); });
