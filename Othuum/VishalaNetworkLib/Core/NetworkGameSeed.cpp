@@ -3,12 +3,31 @@
 namespace Vishala {
   NetworkGameSeed::NetworkGameSeed(NetworkGameSeedInput input) {
     _input = input;
+    initConnection();
+    initTargets();
+  }
+
+  void NetworkGameSeed::initTargets() {
+    _targets.clear();
+
+    for (auto target : _input.targets) {
+      Target t;
+      t.port = target.port;
+      t.ip   = target.IP;
+      t.id   = _targetIDCounter;
+      _targets.insert(t);
+      _targetIDCounter++;
+      _connection->connect(t.port, t.ip);
+    }
+  }
+
+  void NetworkGameSeed::initConnection(){
     _connection = std::make_unique<Connection>();
 
     _connection->setChannelCount(_input.numberOfChannels+1);
     _connection->setMaximumConnectionCount(512);
     _connection->setAcceptConnection(true);
-    _connection->setPort(input.ownPort);
+    _connection->setPort(_input.ownPort);
 
     _connection->setNewConnectionCallback([this](size_t clientnumber, std::string ip, int port) {
       newConnection(clientnumber, ip, port); 
@@ -40,6 +59,7 @@ namespace Vishala {
   }
 
   void NetworkGameSeed::connectionFailed(std::string name) {
+    
 
   }
 
