@@ -45,6 +45,15 @@ namespace Vishala {
     return true;
   }
 
+  void Connection::connectionFailed(std::string ip, int port) {
+    NetReciveEvent newCon;
+    newCon.newConnection     = true;
+    newCon.connectionSuccess = false;
+    newCon.targetIP          = ip;
+    newCon.port              = port;
+    _threadQueueRecive.enqueue(newCon);
+  }
+
   void Connection::threadRun() {
     while (!_destructorCalled) {
       NetSendEvent toSend;
@@ -52,6 +61,22 @@ namespace Vishala {
         if (toSend.type == NetSendEvent::Type::send) {
           ENetPacket* packet = enet_packet_create(toSend.data.data(), toSend.data.size(), toSend.reliable ? ENET_PACKET_FLAG_RELIABLE : 0);
           enet_peer_send(_peers[toSend.target], toSend.channel, packet);
+        }
+        else if (toSend.type == NetSendEvent::Type::connectNonblock) {
+          ENetAddress address;
+          enet_address_set_host(&address, toSend.ip.c_str());
+          address.port = toSend.port;
+          ENetPeer* peer = nullptr;
+          peer = enet_host_connect(_connection, &address, _numberOfChannels, 0);
+          if (peer == NULL)
+            connectionFailed(toSend.ip, toSend.port);
+          ToBePeer p;
+          p.peer            = peer                            ;
+          p.connectionStart = std::chrono::steady_clock::now();
+          {
+            std::lock_guard<std::mutex> guard(_toBePeersLock);
+            _toBePeers.push_back(p);
+          }
         }
         else if (toSend.type == NetSendEvent::Type::connect) {
           ENetAddress address;
@@ -90,12 +115,7 @@ namespace Vishala {
             }
           }
           else {
-            NetReciveEvent newCon;
-            newCon.newConnection     = true              ;
-            newCon.connectionSuccess = false             ;
-            newCon.targetIP          = toSend.ip         ;
-            newCon.port              = toSend.port       ;
-            _threadQueueRecive.enqueue(newCon);
+            connectionFailed(toSend.ip,toSend.port);
           }
         }
         else {
@@ -124,6 +144,16 @@ namespace Vishala {
           msg.targetIP = std::string(buffer);
           delete[] buffer;
           
+          {
+            std::lock_guard<std::mutex> guard(_toBePeersLock);
+            for (int i = 0; i < _toBePeers.size(); i++) {
+              if (_toBePeers[i].peer == event.peer) {
+                _toBePeers.erase(_toBePeers.begin() + i);
+                break;
+              }
+            }
+          }
+
           _clientNameCounter++;
           break;
         }
@@ -201,13 +231,37 @@ namespace Vishala {
         }
       }
     }
-  }
 
+    std::lock_guard<std::mutex> guard(_toBePeersLock);
+    for (int i = _toBePeers.size() - 1;i >= 0; i--) {
+      auto now = std::chrono::steady_clock::now();
+      int timePassed = std::chrono::duration_cast<std::chrono::milliseconds>(now - _toBePeers[i].connectionStart).count();
+      
+      if (timePassed > 5000) {        
+        char*       buffer = new char[256];
+        int         len = enet_address_get_host_ip(&_toBePeers[i].peer->address, buffer, 256);
+        int         port = _toBePeers[i].peer->address.port;
+        std::string ip = std::string(buffer);
+        delete[] buffer;
+        _connectionFailed(ip, port);
+        _toBePeers.erase(_toBePeers.begin() + i);
+      }
+    }
+  }
+   
   void Connection::connect(int port, std::string ip) {
     NetSendEvent toSend;
-    toSend.type     = NetSendEvent::Type::connect;
-    toSend.ip       = ip                         ;
-    toSend.port     = port                       ;
+    toSend.type = NetSendEvent::Type::connect;
+    toSend.ip = ip;
+    toSend.port = port;
+    _threadQueueSend.enqueue(toSend);
+  }
+
+  void Connection::connectNonblocking(int port, std::string ip) {
+    NetSendEvent toSend;
+    toSend.type = NetSendEvent::Type::connectNonblock;
+    toSend.ip = ip;
+    toSend.port = port;
     _threadQueueSend.enqueue(toSend);
   }
 

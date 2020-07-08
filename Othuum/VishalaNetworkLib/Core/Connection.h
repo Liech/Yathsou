@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <future>
+#include <mutex>
 
 #include "VishalaNetworkLib/lib/enet/enet.h"
 #include "VishalaNetworkLib/lib/concurrentqueue.h"
@@ -12,6 +13,10 @@
 
 namespace Vishala {
   class Connection {
+    struct ToBePeer{
+      ENetPeer*                             peer           ;
+      std::chrono::steady_clock::time_point connectionStart;
+    };
     class NetReciveEvent {
     public:
       ENetEventType              type                 ;
@@ -25,7 +30,7 @@ namespace Vishala {
     };
     class NetSendEvent {
     public:
-      enum class Type { disconnect, send, connect,kill };
+      enum class Type { disconnect, send, connect, connectNonblock,kill };
       NetSendEvent::Type               type    ;
       std::vector<unsigned char>       data    ;
       size_t                           channel ;
@@ -41,7 +46,8 @@ namespace Vishala {
     bool   start ();
     void   stop  ();
     void   update();
-    void   connect(int port, std::string ip); //returns -1 on failure
+    void   connect(int port, std::string ip);
+    void   connectNonblocking(int port, std::string ip);
     void   send(size_t target, uint8_t channel, std::unique_ptr< BinaryPackage >, bool reliable = true);
 
     size_t getChannelCount() { return _numberOfChannels; }
@@ -62,6 +68,7 @@ namespace Vishala {
 
   private:
     void threadRun();
+    void connectionFailed(std::string ip, int port);
 
     ENetHost*   _connection             = nullptr;
     int         _numberOfConnections    = 1      ;
@@ -78,6 +85,8 @@ namespace Vishala {
     std::function<void(size_t  clientNumber)>                                               _disconnect       ;
     std::vector<std::function<void(size_t  clientNumber, std::unique_ptr< BinaryPackage >)>> _recived         ;
     std::map<size_t, ENetPeer*>                                                             _peers            ;
+    std::vector<ToBePeer>                                                                   _toBePeers        ;
+    std::mutex                                                                              _toBePeersLock    ;
     std::future<void>                                                                       _thread           ;
     moodycamel::ConcurrentQueue<NetReciveEvent>                                             _threadQueueRecive;
     moodycamel::ConcurrentQueue<NetSendEvent>                                               _threadQueueSend  ;

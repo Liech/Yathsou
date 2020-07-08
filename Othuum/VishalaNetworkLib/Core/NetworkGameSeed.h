@@ -28,9 +28,9 @@ namespace Vishala {
       size_t      id;
     };
 
-    std::vector<Target>            _targets   ;
-    NetworkGameSeedInput        _input     ;
-    std::unique_ptr<Connection> _connection;
+    std::vector<Target>         _targets            ;
+    NetworkGameSeedInput        _input              ;
+    std::unique_ptr<Connection> _connection         ;
     size_t                      _targetIDCounter = 0;
 
     void initConnection();
@@ -41,8 +41,6 @@ namespace Vishala {
     void disconnect           (size_t clientnumber);
     void messageRecived       (size_t channel, size_t clientNumber, std::unique_ptr<BinaryPackage>);
     void controlMessageRecived(size_t clientNumber, std::unique_ptr<BinaryPackage>);
-
-
   };
 
 }
