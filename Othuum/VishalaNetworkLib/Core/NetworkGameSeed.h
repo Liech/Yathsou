@@ -20,27 +20,36 @@ namespace Vishala {
     NetworkGameSeed(NetworkGameSeedInput input);
 
     void update();
+    void printStatus();
+    bool isReady();
 
   private:
     struct Target {
-      std::string ip  ;
-      int         port;
-      size_t      id;
+      enum class status {
+        unconnected, connected
+      };
+      std::string ip               ;
+      int         port             ;
+      size_t      id               ;
+      size_t      clientNumber = 0 ;
+      status      status = status::unconnected;
     };
-
-    std::vector<Target>         _targets            ;
-    NetworkGameSeedInput        _input              ;
-    std::unique_ptr<Connection> _connection         ;
-    size_t                      _targetIDCounter = 0;
-
     void initConnection();
     void initTargets();
 
     void newConnection        (size_t clientnumber, std::string ip, int port);
-    void connectionFailed     (std::string name);
+    void connectionFailed     (std::string name,int port);
     void disconnect           (size_t clientnumber);
     void messageRecived       (size_t channel, size_t clientNumber, std::unique_ptr<BinaryPackage>);
     void controlMessageRecived(size_t clientNumber, std::unique_ptr<BinaryPackage>);
+
+    std::vector<Target>                            _targets;
+    std::map<std::pair<std::string, int>, Target*> _targetMap;
+    std::map<size_t, Target*>                      _targetMap2;
+    NetworkGameSeedInput                           _input;
+    std::unique_ptr<Connection>                    _connection;
+    size_t                                         _targetIDCounter = 0;
+
   };
 
 }

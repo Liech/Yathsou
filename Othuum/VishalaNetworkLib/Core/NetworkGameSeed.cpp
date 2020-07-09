@@ -1,5 +1,7 @@
 #include "NetworkGameSeed.h"
 
+#include <iostream>
+
 namespace Vishala {
   NetworkGameSeed::NetworkGameSeed(NetworkGameSeedInput input) {
     _input = input;
@@ -33,7 +35,7 @@ namespace Vishala {
       newConnection(clientnumber, ip, port); 
       });
     _connection->setConnectionFailedCallback([this](std::string ip, int port) {
-      connectionFailed(ip); 
+      connectionFailed(ip,port); 
       });
     _connection->setDisconnectCallback([this](size_t clientNumber) { 
       disconnect(clientNumber); 
@@ -48,6 +50,10 @@ namespace Vishala {
         });
 
     _connection->start();
+    for (auto s : _targets)
+      _targetMap[std::make_pair(s.ip, s.port)] = &s;
+    for (auto s : _targets)
+      _connection->connectNonblocking(s.port, s.ip);    
   }
 
   void NetworkGameSeed::update() {
@@ -55,16 +61,47 @@ namespace Vishala {
   }
 
   void NetworkGameSeed::newConnection(size_t clientnumber, std::string ip, int port) {
+    auto hash = std::make_pair(ip,port);
+    if (_targetMap.count(hash) == 0)
+      return;
+    auto target = _targetMap[hash];
+    target->status = Target::status::connected;
+    target->clientNumber = clientnumber;
 
   }
 
-  void NetworkGameSeed::connectionFailed(std::string name) {
-    
-
+  void NetworkGameSeed::connectionFailed(std::string ip, int port) {    
+    auto hash = std::make_pair(ip, port);
+    if (_targetMap.count(hash) == 0)
+      return;
+    auto target = _targetMap[hash];
+    target->status = Target::status::unconnected;
+    _connection->connectNonblocking(target->port, target->ip);
   }
 
   void NetworkGameSeed::disconnect(size_t clientnumber) {
+    if (_targetMap2.count(clientnumber) == 0)
+      return;
+    auto target = _targetMap2[clientnumber];
+    target->status = Target::status::unconnected;
+    _connection->connectNonblocking(target->port, target->ip);
+  }
 
+  void NetworkGameSeed::printStatus(){
+    for (auto t : _targets)
+      if (t.status != Target::status::connected)
+        std::cout << "X";
+      else
+        std::cout << "O";
+    std::cout << std::endl;
+  }
+
+  bool NetworkGameSeed::isReady()
+  {
+    for (auto t : _targets)
+      if (t.status != Target::status::connected)
+        return false;
+    return true;
   }
 
   void NetworkGameSeed::messageRecived(size_t channel, size_t clientNumber, std::unique_ptr<BinaryPackage> package) {
