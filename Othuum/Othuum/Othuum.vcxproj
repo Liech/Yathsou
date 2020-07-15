@@ -103,7 +103,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/AhwassaGraphicsLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ShowProgress>LinkVerbose</ShowProgress>
     </Link>
     <CustomBuildStep>
@@ -143,7 +143,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/AhwassaGraphicsLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
       <Command>call "$(ProjectDir)build.bat"</Command>
