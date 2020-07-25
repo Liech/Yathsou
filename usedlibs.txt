@@ -1,11 +1,11 @@
 license stuff needed for:      |            | 
-freetype                       |ahwassa     | Font
-glwf                           |ahwassa     | WindowManager
-libnop   -> includes changed   |vishala     | Serialization
-glm                            |ahwassa     | Math
-glad                           |ahwassa     | OpenGL
-lodepng                        |ahwassa     | Load/Save PNG
+freetype                       |yolonaoss   | Font
+glwf                           |yolonaoss   | WindowManager
+glm                            |yolonaoss   | Math
+glad                           |yolonaoss   | OpenGL
+lodepng                        |yolonaoss   | Load/Save PNG
 enet                           |vishala     | Network Library
 nlohmann/json                  |vishala     | Human Readable Config Files
 moodycamel/concurrentqueue     |vishala     | concurrent queue
 portaudio                      |ahwassa     | play sound
+nyquistaudio                   |ahwassa     | load wav/mp3

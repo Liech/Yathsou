@@ -9,7 +9,9 @@ RTS Engine fragments
   * Flocking & Flowfield Navigation is possible
   * Network communication
   * GUI System with nested layouts
+  * Main Menu + Lobby for searching and starting a game
 * Next Milestones:
-  * Lobby & Host protocolls
+  * Sound
+  * actually getting everyone connected and start the network game
   * Network Game Loop
   * Bullet/Damage Physic
