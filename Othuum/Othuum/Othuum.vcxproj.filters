@@ -28,6 +28,9 @@
     <Filter Include="Source Files\MainMenuPages">
       <UniqueIdentifier>{57d19823-4a18-4f6e-a617-525f7e4c496d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SideProject">
+      <UniqueIdentifier>{95b69834-01f8-40a0-9d6f-1d96b2f51c47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -83,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="MainMenuLogicResult.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SideProject\SideProjectMain.cpp">
+      <Filter>SideProject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -370,6 +376,9 @@
     </ClInclude>
     <ClInclude Include="MainMenuLogicResult.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SideProject\SideProjectMain.h">
+      <Filter>SideProject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

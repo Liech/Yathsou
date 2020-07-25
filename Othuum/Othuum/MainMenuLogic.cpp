@@ -16,6 +16,8 @@
 #include "MainMenuPages/GameLobbyPage.h"
 #include "MainMenuPages/JoinLoadingPage.h"
 
+#include "SideProject/SideProjectMain.h"
+
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
 
@@ -29,6 +31,7 @@ MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::s
   _hostPage         = std::make_shared<HostGamePage>     (config);
   _optionsPage      = std::make_shared<OptionsPage>      (config);
   _errorPage        = std::make_shared<ErrorPage>        (config);
+  _sideProject      = std::make_shared<SideProject::SideProjectMain> ();
   _lobbyPage        = std::make_shared<LobbyPage>        (config, state);
   _gameLobbyPage    = std::make_shared<GameLobbyPage>    (config, state);
   _lobbyLoadingPage = std::make_shared<LobbyLoadingPage> (config, state);
@@ -61,6 +64,12 @@ void MainMenuLogic::update() {
       _mainMenuPage->setVisible(false);
       _optionsPage->setVisible(true);
       _stat = status::Options;
+    }
+    else if (_mainMenuPage->getStatus() == MainMenuPageStatus::SideProject && _stat == status::MainMenu) {
+      _mainMenuPage->reset();
+      _mainMenuPage->setVisible(false);
+      _sideProject->start();
+      _stat = status::SideProject;
     }
   }
   else if (_stat == status::Options) {
