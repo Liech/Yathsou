@@ -29,6 +29,8 @@ namespace Ahwassa
 
     for (size_t i = 0; i < framesPerBuffer*s->_fileData->channelCount; i++)
     {
+      if (s->_fileData->samples.size() <= s->_position + i)
+        break;
       *out++ = s->_fileData->samples[s->_position + i] * 0.9;
     }
     s->_position += framesPerBuffer * s->_fileData->channelCount;
@@ -91,7 +93,7 @@ namespace Ahwassa
     if (err != paNoError) goto error;
 
     //printf("Play for %d seconds.\n", NUM_SECONDS);
-    Pa_Sleep(_fileData->lengthSeconds * 1000);
+    Pa_Sleep((_fileData->lengthSeconds+1) * 1000);
 
     err = Pa_StopStream(stream);
     if (err != paNoError) goto error;
