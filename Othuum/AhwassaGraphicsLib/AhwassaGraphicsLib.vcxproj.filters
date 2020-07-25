@@ -13,10 +13,58 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{304f33e4-f08f-41a5-b1eb-6a817f22d2b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\portaudio">
+      <UniqueIdentifier>{ae4af860-4ec9-4756-be74-be34de6d1f13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\libnyquist">
+      <UniqueIdentifier>{e70892e4-fa8d-4ece-946e-0da8defe2ebd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sound.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\libnyquist\Decoders.h">
+      <Filter>lib\libnyquist</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\libnyquist\Encoders.h">
+      <Filter>lib\libnyquist</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\libnyquist\Common.h">
+      <Filter>lib\libnyquist</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\portaudio\pa_win_wasapi.h">
+      <Filter>lib\portaudio</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\portaudio\pa_win_waveformat.h">
+      <Filter>lib\portaudio</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\portaudio\pa_win_wdmks.h">
+      <Filter>lib\portaudio</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\portaudio\pa_win_wmme.h">
+      <Filter>lib\portaudio</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\portaudio\portaudio.h">
+      <Filter>lib\portaudio</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\portaudio\pa_asio.h">
+      <Filter>lib\portaudio</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\portaudio\pa_jack.h">
+      <Filter>lib\portaudio</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\portaudio\pa_linux_alsa.h">
+      <Filter>lib\portaudio</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\portaudio\pa_mac_core.h">
+      <Filter>lib\portaudio</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\portaudio\pa_win_ds.h">
+      <Filter>lib\portaudio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

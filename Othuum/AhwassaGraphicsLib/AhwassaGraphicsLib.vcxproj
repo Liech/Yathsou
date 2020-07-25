@@ -101,7 +101,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist.lib;$(ProjectDir)lib\libnyquist\libopus.lib;$(ProjectDir)lib\libnyquist\libwavpack.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -132,7 +132,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -152,6 +152,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="lib\libnyquist\Common.h" />
+    <ClInclude Include="lib\libnyquist\Decoders.h" />
+    <ClInclude Include="lib\libnyquist\Encoders.h" />
+    <ClInclude Include="lib\portaudio\pa_asio.h" />
+    <ClInclude Include="lib\portaudio\pa_jack.h" />
+    <ClInclude Include="lib\portaudio\pa_linux_alsa.h" />
+    <ClInclude Include="lib\portaudio\pa_mac_core.h" />
+    <ClInclude Include="lib\portaudio\pa_win_ds.h" />
+    <ClInclude Include="lib\portaudio\pa_win_wasapi.h" />
+    <ClInclude Include="lib\portaudio\pa_win_waveformat.h" />
+    <ClInclude Include="lib\portaudio\pa_win_wdmks.h" />
+    <ClInclude Include="lib\portaudio\pa_win_wmme.h" />
+    <ClInclude Include="lib\portaudio\portaudio.h" />
     <ClInclude Include="sound.h" />
   </ItemGroup>
   <ItemGroup>
