@@ -27,6 +27,7 @@
 #include "MainMenuLogic.h"
 
 #include "AhwassaGraphicsLib/sound.h"
+#include "SuthanusPhysicsLib/PhysicTest.h"
 
 using namespace YolonaOss;
 
@@ -34,6 +35,10 @@ int main(int argc, char** argv) {
   {
     Ahwassa::sound s;
     s.play();
+
+    Suthanus::PhysicTest p;
+    p.go();
+
     std::string exe = std::string(argv[0]);
     const size_t last_slash_idx = exe.find_last_of("\\/");
     if (std::string::npos != last_slash_idx)
