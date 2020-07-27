@@ -9,3 +9,4 @@ nlohmann/json                  |vishala     | Human Readable Config Files
 moodycamel/concurrentqueue     |vishala     | concurrent queue
 portaudio                      |ahwassa     | play sound
 nyquistaudio                   |ahwassa     | load wav/mp3
+bullet (and many sublibs)      |suthanu     | physics
