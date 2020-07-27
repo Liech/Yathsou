@@ -2,6 +2,7 @@
 
 #include <map>
 #include <string>
+#include <set>
 
 #include "VishalaNetworkLib/lib/json.hpp"
 
@@ -38,6 +39,42 @@ namespace Vishala {
       val2bin<int>(data, size);
       for (size_t i = 0; i < value.size(); i++)
         val2bin<type>(data, value[i]);
+    }
+
+    template<typename type>
+    std::set<type> bin2set(BinaryPackage& data) {
+      std::set<type> result;
+      int size = bin2val<int>(data);
+      for (int i = 0; i < size; i++)
+        result.insert(bin2val<type>(data));
+      return result;
+    }
+
+    template<typename type>
+    void set2bin(BinaryPackage& data, std::set<type>& value) {
+      int size = value.size();
+      val2bin<int>(data, size);
+      for (auto v : value)
+        val2bin<type>(data, v);
+    }
+
+    template<typename type1,typename type2>
+    std::map<type1,type2> bin2map(BinaryPackage& data) {
+      std::map<type1,type2> result;
+      int size = bin2val<int>(data);
+      for (int i = 0; i < size; i++)
+        result[bin2val<type1>(data)] = bin2val<type2>(data);
+      return result;
+    }
+
+    template<typename type1, typename type2>
+    void map2bin(BinaryPackage& data, std::map<type1,type2>& value) {
+      int size = value.size();
+      val2bin<int>(data, size);
+      for (std::pair<type1,type2> v : value) {
+        val2bin<type1>(data, v.first );
+        val2bin<type2>(data, v.second);
+      }
     }
 
     template<typename type, size_t SIZE>
