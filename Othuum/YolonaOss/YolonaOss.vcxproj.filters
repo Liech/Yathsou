@@ -67,6 +67,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\GameModel">
+      <UniqueIdentifier>{adef6ca1-c9b5-4f2e-bbcc-5a8073312c57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameModel">
+      <UniqueIdentifier>{dac3e20c-38d2-4286-94cd-8f939ae259f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -237,6 +243,15 @@
     <ClInclude Include="OpenGL\InputHandling.h">
       <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="GameModel\GameState.h">
+      <Filter>Header Files\GameModel</Filter>
+    </ClInclude>
+    <ClInclude Include="GameModel\Player.h">
+      <Filter>Header Files\GameModel</Filter>
+    </ClInclude>
+    <ClInclude Include="GameModel\Unit.h">
+      <Filter>Header Files\GameModel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -379,6 +394,15 @@
     </ClCompile>
     <ClCompile Include="OpenGL\InputHandling.cpp">
       <Filter>Source Files\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="GameModel\GameState.cpp">
+      <Filter>Source Files\GameModel</Filter>
+    </ClCompile>
+    <ClCompile Include="GameModel\Player.cpp">
+      <Filter>Source Files\GameModel</Filter>
+    </ClCompile>
+    <ClCompile Include="GameModel\Unit.cpp">
+      <Filter>Source Files\GameModel</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

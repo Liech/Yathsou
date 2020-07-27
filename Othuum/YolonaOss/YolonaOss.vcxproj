@@ -214,6 +214,9 @@
     <ClInclude Include="Examples\RenderTriangle.h" />
     <ClInclude Include="Examples\RotatingCube.h" />
     <ClInclude Include="Examples\Texture2Tree.h" />
+    <ClInclude Include="GameModel\GameState.h" />
+    <ClInclude Include="GameModel\Player.h" />
+    <ClInclude Include="GameModel\Unit.h" />
     <ClInclude Include="Lib\lodepng\lodepng.h" />
     <ClInclude Include="Lib\lodepng\lodepng_util.h" />
     <ClInclude Include="OpenGL\AttributeDescription.h" />
@@ -269,6 +272,9 @@
     <ClCompile Include="Examples\RenderTriangle.cpp" />
     <ClCompile Include="Examples\RotatingCube.cpp" />
     <ClCompile Include="Examples\Texture2Tree.cpp" />
+    <ClCompile Include="GameModel\GameState.cpp" />
+    <ClCompile Include="GameModel\Player.cpp" />
+    <ClCompile Include="GameModel\Unit.cpp" />
     <ClCompile Include="Lib\glad\src\glad.c" />
     <ClCompile Include="Lib\lodepng\lodepng.cpp" />
     <ClCompile Include="Lib\lodepng\lodepng_util.cpp" />
