@@ -19,10 +19,13 @@
 #include "SideProject/SideProjectMain.h"
 
 #include "YolonaOss/OpenGL/Drawable.h"
+#include "YolonaOss/OpenGL/Window.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
 
 
-MainMenuLogic::MainMenuLogic(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state) {
+MainMenuLogic::MainMenuLogic(YolonaOss::GL::Window& window,std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state) 
+  : _window(window)
+{
   _config     = config;
   _state      = state ;
 
@@ -68,7 +71,8 @@ void MainMenuLogic::update() {
     else if (_mainMenuPage->getStatus() == MainMenuPageStatus::SideProject && _stat == status::MainMenu) {
       _mainMenuPage->reset();
       _mainMenuPage->setVisible(false);
-      _sideProject->start();
+      Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_sideProject, { "Main" });
+      _sideProject->load(_window.getSpec());
       _stat = status::SideProject;
     }
   }

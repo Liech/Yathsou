@@ -18,6 +18,7 @@ class LobbyLoadingPage   ;
 class HostLoadingPage    ;
 class JoinLoadingPage    ;
 namespace SideProject { class SideProjectMain; }
+namespace YolonaOss{namespace GL{class Window;}}
 
 class MainMenuLogic {
 public:
@@ -38,7 +39,7 @@ public:
   };
   
 
-  MainMenuLogic(std::shared_ptr<ClientConfiguration> config,std::shared_ptr<ClientState> state);
+  MainMenuLogic(YolonaOss::GL::Window& window, std::shared_ptr<ClientConfiguration> config,std::shared_ptr<ClientState> state);
 
   void                  update();
   MainMenuLogic::status getStatus() { return _stat; }
@@ -64,4 +65,5 @@ private:
   std::shared_ptr<SideProject::SideProjectMain> _sideProject     ;
 
   void showError(std::string desc, std::string title);
+  YolonaOss::GL::Window& _window;
 };

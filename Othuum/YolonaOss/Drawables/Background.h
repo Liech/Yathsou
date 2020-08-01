@@ -14,5 +14,7 @@ namespace YolonaOss {
     // Inherited via Drawable
     virtual void load(GL::DrawSpecification*) override;
     virtual void draw() override;
+
+    glm::vec3 color;
   };
 }
