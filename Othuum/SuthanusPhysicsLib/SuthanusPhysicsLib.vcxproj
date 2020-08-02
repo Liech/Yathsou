@@ -137,7 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib/bullet/lib/Bullet3Collision.lib;$(ProjectDir)lib/bullet/lib/Bullet3Common.lib;ProjectDir)lib/bullet/lib/Bullet3Dynamics.lib;ProjectDir)lib/bullet/lib/Bullet3Geometry.lib;ProjectDir)lib/bullet/lib/ConvexDecomposition.lib;ProjectDir)lib/bullet/lib/HACD.lib;ProjectDir)lib/bullet/lib/LinearMath.lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib/bullet/lib/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
