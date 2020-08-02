@@ -247,6 +247,7 @@
     <ClInclude Include="Renderer\ArrowRenderer.h" />
     <ClInclude Include="Renderer\BoxRenderer.h" />
     <ClInclude Include="Renderer\RectangleRenderer.h" />
+    <ClInclude Include="Renderer\SphereRenderer.h" />
     <ClInclude Include="Renderer\TextRenderer.h" />
     <ClInclude Include="Renderer\TextureRenderer.h" />
     <ClInclude Include="RTSComponents\Landscape.h" />
@@ -299,6 +300,7 @@
     <ClCompile Include="Renderer\ArrowRenderer.cpp" />
     <ClCompile Include="Renderer\BoxRenderer.cpp" />
     <ClCompile Include="Renderer\RectangleRenderer.cpp" />
+    <ClCompile Include="Renderer\SphereRenderer.cpp" />
     <ClCompile Include="Renderer\TextRenderer.cpp" />
     <ClCompile Include="Renderer\TextureRenderer.cpp" />
     <ClCompile Include="RTSComponents\Landscape.cpp" />

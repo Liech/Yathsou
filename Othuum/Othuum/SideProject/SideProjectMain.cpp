@@ -3,6 +3,7 @@
 #include "SuthanusPhysicsLib/PhysicTest.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
+#include "YolonaOss/Renderer/SphereRenderer.h"
 #include "YolonaOss/OpenGL/DrawableList.h"
 #include "YolonaOss/Drawables/FPS.h"
 #include "YolonaOss/Drawables/Background.h"

@@ -252,6 +252,9 @@
     <ClInclude Include="GameModel\Unit.h">
       <Filter>Header Files\GameModel</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\SphereRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -403,6 +406,9 @@
     </ClCompile>
     <ClCompile Include="GameModel\Unit.cpp">
       <Filter>Source Files\GameModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\SphereRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
