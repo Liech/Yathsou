@@ -7,7 +7,7 @@
 #include "../OpenGL/PositionNormalVertex.h"
 #include "../OpenGL/IBO.h"
 #include "../OpenGL/Uniform.h"
-#include <glm/gtc/matrix_transform.hpp>
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "Util/Geometry.h"
 
 namespace YolonaOss {

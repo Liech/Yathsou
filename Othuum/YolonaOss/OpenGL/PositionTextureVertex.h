@@ -3,7 +3,7 @@
 #include <glad/glad.h>
 #include <vector>
 #include "AttributeDescription.h"
-#include <glm/glm.hpp>
+#include <IyathuumCoreLib/lib/glm/glm.hpp>
 namespace YolonaOss {
   namespace GL {
     struct PositionTextureVertex {

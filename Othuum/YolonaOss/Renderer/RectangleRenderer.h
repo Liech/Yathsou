@@ -4,7 +4,7 @@
 #include "../OpenGL/Loadable.h"
 #include <iostream>
 #include "IyathuumCoreLib/Singleton/Factory.h"
-#include "glm/glm.hpp"
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "IyathuumCoreLib/BaseTypes/AABB.h"
 #include <memory>
 

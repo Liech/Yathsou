@@ -4,7 +4,7 @@
 #include <array>
 #include <functional>
 #include <vector>
-#include <glm/glm.hpp>
+#include <IyathuumCoreLib/lib/glm/glm.hpp>
 
 namespace YolonaOss {
   template<size_t Dimension>

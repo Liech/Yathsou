@@ -1,7 +1,7 @@
 license stuff needed for:      |            | 
 freetype                       |yolonaoss   | Font
 glwf                           |yolonaoss   | WindowManager
-glm                            |yolonaoss   | Math
+glm                            |Iyathuum    | Math
 glad                           |yolonaoss   | OpenGL
 lodepng                        |yolonaoss   | Load/Save PNG
 enet                           |vishala     | Network Library
@@ -9,4 +9,4 @@ nlohmann/json                  |vishala     | Human Readable Config Files
 moodycamel/concurrentqueue     |vishala     | concurrent queue
 portaudio                      |ahwassa     | play sound
 nyquistaudio                   |ahwassa     | load wav/mp3
-bullet (and many sublibs)      |suthanu     | physics
+bullet                         |suthanu     | physics

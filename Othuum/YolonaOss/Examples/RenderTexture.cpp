@@ -6,9 +6,9 @@
 #include "glad/glad.h"
 #include "Renderer/TextureRenderer.h"
 #include "Util/ImageIO.h"
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/ext/scalar_constants.hpp>
-#include <glm/glm.hpp>
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include <IyathuumCoreLib/lib/glm/ext/scalar_constants.hpp>
+#include <IyathuumCoreLib/lib/glm/glm.hpp>
 
 
 namespace YolonaOss {

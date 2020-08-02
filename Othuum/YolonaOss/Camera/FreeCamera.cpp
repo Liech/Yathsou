@@ -2,8 +2,8 @@
 
 #include "../OpenGL/Window.h"
 #include "../OpenGL/Camera.h"
-#include "glm/ext/matrix_transform.hpp"
-#include "glm/vec2.hpp"
+#include "IyathuumCoreLib/lib/glm/ext/matrix_transform.hpp"
+#include "IyathuumCoreLib/lib/glm/vec2.hpp"
 
 #include <iostream>
 

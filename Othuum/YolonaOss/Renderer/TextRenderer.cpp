@@ -1,7 +1,7 @@
 #include "TextRenderer.h"
 
 
-#include <glm/gtc/matrix_transform.hpp>
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "../OpenGL/DrawSpecification.h"
 #include "../OpenGL/Window.h"
 #include <ft2build.h>

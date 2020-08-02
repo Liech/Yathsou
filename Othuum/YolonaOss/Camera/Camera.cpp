@@ -1,8 +1,8 @@
 #include "Camera.h"
 #include "../OpenGL/Window.h"
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/ext/matrix_projection.hpp>
-#include <glm/gtc/matrix_access.hpp>
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include <IyathuumCoreLib/lib/glm/ext/matrix_projection.hpp>
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_access.hpp>
 #include <iostream>
 namespace YolonaOss {
   namespace Camera {

@@ -18,7 +18,7 @@
 #include "YolonaOss/Examples/RenderTexture.h"
 #include <filesystem>
 #include "YolonaOss/OpenGL/DrawSpecification.h"
-#include <glm/gtx/intersect.hpp>
+#include <IyathuumCoreLib/lib/glm/gtx/intersect.hpp>
 #include "YolonaOss/Drawables/Widgets/LineEdit.h"
 #include <iomanip>
 

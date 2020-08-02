@@ -1,6 +1,6 @@
 #include "Geometry.h"
 
-#include <glm/gtx/intersect.hpp>
+#include <IyathuumCoreLib/lib/glm/gtx/intersect.hpp>
 
 Intersection::Intersection(glm::vec3 loc, float dist, bool does) {
   location = loc;

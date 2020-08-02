@@ -11,8 +11,8 @@
 #include "SelenNavigationLib/MapGroup.h"
 #include "Util/Util.h"
 #include "Renderer/TextureRenderer.h"
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/ext/scalar_constants.hpp>
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include <IyathuumCoreLib/lib/glm/ext/scalar_constants.hpp>
 #include "../Drawables/Widgets/Slider.h"
 #include "../Drawables/Widgets/ListLayout.h"
 #include "../Drawables/Widgets/Label.h"

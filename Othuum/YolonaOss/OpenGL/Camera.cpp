@@ -1,7 +1,7 @@
 #include "Camera.h"
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include "glm/gtc/type_ptr.hpp"
+#include <IyathuumCoreLib/lib/glm/glm.hpp>
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "OpenGL/Window.h"

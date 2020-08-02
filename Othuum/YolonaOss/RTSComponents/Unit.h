@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include <glm/glm.hpp>
+#include <IyathuumCoreLib/lib/glm/glm.hpp>
 
 #include "Landscape.h"
 

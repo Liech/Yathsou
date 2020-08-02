@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../OpenGL/Loadable.h"
-#include "glm/glm.hpp"
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "../OpenGL/VBO.h"
 #include "../OpenGL/VAO.h"
 #include "IyathuumCoreLib/Singleton/Factory.h"

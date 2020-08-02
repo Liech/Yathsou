@@ -1,8 +1,8 @@
 #pragma once
 
-#include "glm/vec3.hpp"
+#include "IyathuumCoreLib/lib/glm/vec3.hpp"
 #include <array>
-#include <glm/glm.hpp>
+#include <IyathuumCoreLib/lib/glm/glm.hpp>
 
 #define _USE_MATH_DEFINES
 #include <math.h>

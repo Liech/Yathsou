@@ -6,7 +6,7 @@
 #include <set>
 #include <map>
 
-//some sort of dependencie injection stuff
+//some sort of dependency injection stuff
 //needs at least c++ magic lvl 17 to understand
 //i had lvl 5 when i wrote this
 //google is cool

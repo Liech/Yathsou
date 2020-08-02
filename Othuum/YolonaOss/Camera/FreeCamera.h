@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "glm/vec2.hpp"
+#include "IyathuumCoreLib/lib/glm/vec2.hpp"
 #include "Camera.h"
 #include "IyathuumCoreLib/Singleton/Factory.h"
 namespace YolonaOss {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <glm/glm.hpp>
+#include <IyathuumCoreLib/lib/glm/glm.hpp>
 
 #include <memory>
 

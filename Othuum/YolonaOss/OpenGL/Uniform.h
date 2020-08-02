@@ -2,7 +2,7 @@
 
 #include <cassert>
 #include <string>
-#include "glm/glm.hpp"
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 namespace YolonaOss {
   namespace GL {
     class Uniform
