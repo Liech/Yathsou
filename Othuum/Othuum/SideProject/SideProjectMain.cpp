@@ -7,6 +7,7 @@
 #include "YolonaOss/Drawables/FPS.h"
 #include "YolonaOss/Drawables/Background.h"
 #include "YolonaOss/Camera/CameraSystem.h"
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
 namespace SideProject
 {
@@ -21,16 +22,21 @@ namespace SideProject
     Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Updateable>>::add(cam, { "Main" });
     _phys = std::make_shared<Suthanus::PhysicTest>();
     _phys->go();
-    _box = _phys->newBox(glm::vec3(0, 0, 0));
+    _boxes.push_back(_phys->newBox(glm::vec3(0, 0, 0)  ,glm::vec3(2,1,1),false));
+    _boxes.push_back(_phys->newBox(glm::vec3(0, 4, 0.5),glm::vec3(1,1,1),true));
   }
 
   void SideProjectMain::draw()
   {
     _phys->update();
     _list->draw();
-    glm::vec3 pos = _box->getPosition();
     YolonaOss::BoxRenderer::start();
-    YolonaOss::BoxRenderer::drawDot(pos, glm::vec3(0.1f), glm::vec4(0, 0, 1, 1));
+    for (auto box : _boxes){
+      glm::mat4 transform = box->getTransformation();      
+      transform = glm::scale(transform, box->getSize());
+      transform = glm::translate(transform, glm::vec3(-0.5,-0.5,-0.5));
+      YolonaOss::BoxRenderer::draw(transform, glm::vec4(0, 0, 1, 1));
+    }
     YolonaOss::BoxRenderer::end();
   }
 }

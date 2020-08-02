@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "SuthanusPhysicsLib/Box.h"
 
@@ -14,8 +16,8 @@ namespace SideProject
     virtual void load(YolonaOss::GL::DrawSpecification*) override;
     virtual void draw()                                  override;
   private:
-    std::shared_ptr<YolonaOss::GL::DrawableList> _list;
-    std::shared_ptr< Suthanus::PhysicTest>       _phys;
-    std::unique_ptr < Suthanus::Box>             _box;
+    std::shared_ptr<YolonaOss::GL::DrawableList>   _list;
+    std::shared_ptr< Suthanus::PhysicTest>         _phys;
+    std::vector< std::shared_ptr< Suthanus::Box> > _boxes;
   };
 }

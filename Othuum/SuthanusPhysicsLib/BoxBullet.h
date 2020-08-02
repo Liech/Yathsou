@@ -3,17 +3,20 @@
 #include "Box.h"
 
 class btRigidBody;
+class btDiscreteDynamicsWorld;
 namespace Suthanus
 {
   class BoxBullet : public Box
   {
   public:
-    BoxBullet(btRigidBody* body);
-    virtual glm::vec3 getPosition() override;
-
+    BoxBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, glm::vec3 size, bool isDynamic = true);
+    virtual glm::vec3 getPosition()       override;
+    virtual glm::mat4 getTransformation() override;
+    virtual glm::vec3 getSize()           override;
 
   private:
-
-    btRigidBody* _body;
+    glm::vec3                _size;
+    btDiscreteDynamicsWorld* _world;
+    btRigidBody*             _body;
   };
 }

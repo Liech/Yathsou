@@ -21,7 +21,7 @@ namespace Suthanus
     void go();
     void update();
 
-    std::unique_ptr<Box> newBox(glm::vec3 pos);
+    std::shared_ptr<Box> newBox(glm::vec3 pos,glm::vec3 size, bool isDynamic);
 
     btBroadphaseInterface               * _broadphase            ;
     btDefaultCollisionConfiguration     * _collisionConfiguration;
