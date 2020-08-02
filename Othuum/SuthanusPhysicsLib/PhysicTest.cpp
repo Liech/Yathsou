@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "lib/bullet/btBulletDynamicsCommon.h"
-
+#include "BoxBullet.h"
 
 namespace Suthanus
 {
@@ -23,10 +23,8 @@ namespace Suthanus
     //New variables
 
     _world->setGravity(btVector3(0, -10, 0));
-    btAlignedObjectArray<btCollisionShape*> collisionShapes;
 
     btCollisionShape* groundShape = new btBoxShape(btVector3(btScalar(50.), btScalar(50.), btScalar(50.)));
-    collisionShapes.push_back(groundShape);
     btTransform groundTransform;
     groundTransform.setIdentity();
     groundTransform.setOrigin(btVector3(0, -2, 0));
@@ -41,31 +39,13 @@ namespace Suthanus
     {
       //create a dynamic rigidbody
 
-      //btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
-      btCollisionShape* colShape = new btSphereShape(btScalar(1.));
-      collisionShapes.push_back(colShape);
 
-      /// Create Dynamic Objects
-      btTransform startTransform;
-      startTransform.setIdentity();
 
-      btScalar mass(1.f);
 
-      //rigidbody is dynamic if and only if mass is non zero, otherwise static
-      bool isDynamic = (mass != 0.f);
-
-      btVector3 localInertia(0, 0, 0);
-      if (isDynamic)
-        colShape->calculateLocalInertia(mass, localInertia);
-
-      startTransform.setOrigin(btVector3(0, 0, 0));
 
       //using motionstate is recommended, it provides interpolation capabilities, and only synchronizes 'active' objects
-      btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-      btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
-      _body = new btRigidBody(rbInfo);
 
-      _world->addRigidBody(_body);
+
     }
   }
   void PhysicTest::update()
@@ -73,11 +53,34 @@ namespace Suthanus
     _world->stepSimulation(1.f / 1000.f, 10);
   }
 
-  std::array<float, 3> PhysicTest::getPosition()
-  {
-    auto trans = _body->getWorldTransform().getOrigin();
-    return { trans[0],trans[1],trans[2] };
+
+  std::unique_ptr<Box> PhysicTest::newBox(glm::vec3 pos)
+  {     
+    //btCollisionShape* colShape = new btBoxShape(btVector3(1,1,1));
+    btCollisionShape* colShape = new btSphereShape(btScalar(1.));
+
+    /// Create Dynamic Objects
+    btTransform startTransform;
+    startTransform.setIdentity();
+
+    btScalar mass(1.f);
+
+    //rigidbody is dynamic if and only if mass is non zero, otherwise static
+    bool isDynamic = (mass != 0.f);
+
+    btVector3 localInertia(0, 0, 0);
+    if (isDynamic)
+      colShape->calculateLocalInertia(mass, localInertia);
+
+    startTransform.setOrigin(btVector3(pos[0],pos[1],pos[2]));
+    btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
+    btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
+
+    _body = new btRigidBody(rbInfo);
+
+    _world->addRigidBody(_body);
+    BoxBullet* result = new BoxBullet(_body);
+
+    return std::move(std::unique_ptr<Box>(dynamic_cast<Box*>(result)));
   }
-
-
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "YolonaOss/OpenGL/Drawable.h"
+#include "SuthanusPhysicsLib/Box.h"
 
 namespace YolonaOss{namespace GL{class DrawableList;}}
 namespace Suthanus { class PhysicTest; }
@@ -15,5 +16,6 @@ namespace SideProject
   private:
     std::shared_ptr<YolonaOss::GL::DrawableList> _list;
     std::shared_ptr< Suthanus::PhysicTest>       _phys;
+    std::unique_ptr < Suthanus::Box>             _box;
   };
 }

@@ -1,6 +1,9 @@
 #pragma once
 
 #include <array>
+#include "IyathuumCoreLib/lib/glm/vec3.hpp"
+#include <memory>
+#include "Box.h"
 
 class btBroadphaseInterface;
 class btDefaultCollisionConfiguration;
@@ -17,7 +20,8 @@ namespace Suthanus
     PhysicTest();
     void go();
     void update();
-    std::array<float, 3> getPosition();
+
+    std::unique_ptr<Box> newBox(glm::vec3 pos);
 
     btBroadphaseInterface               * _broadphase            ;
     btDefaultCollisionConfiguration     * _collisionConfiguration;

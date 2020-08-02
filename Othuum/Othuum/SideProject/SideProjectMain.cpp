@@ -21,15 +21,16 @@ namespace SideProject
     Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Updateable>>::add(cam, { "Main" });
     _phys = std::make_shared<Suthanus::PhysicTest>();
     _phys->go();
+    _box = _phys->newBox(glm::vec3(0, 0, 0));
   }
 
   void SideProjectMain::draw()
   {
     _phys->update();
     _list->draw();
-    std::array<float,3> pos = _phys->getPosition();
+    glm::vec3 pos = _box->getPosition();
     YolonaOss::BoxRenderer::start();
-    YolonaOss::BoxRenderer::drawDot(glm::vec3(pos[0],pos[1],pos[2]), glm::vec3(0.1f), glm::vec4(0, 0, 1, 1));
+    YolonaOss::BoxRenderer::drawDot(pos, glm::vec3(0.1f), glm::vec4(0, 0, 1, 1));
     YolonaOss::BoxRenderer::end();
   }
 }
