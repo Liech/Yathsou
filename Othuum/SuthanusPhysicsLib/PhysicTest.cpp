@@ -4,6 +4,7 @@
 
 #include "lib/bullet/btBulletDynamicsCommon.h"
 #include "BoxBullet.h"
+#include "SphereBullet.h"
 
 namespace Suthanus
 {
@@ -26,10 +27,16 @@ namespace Suthanus
     _world->stepSimulation(1.f / 1000.f, 10);
   }
 
-  std::shared_ptr<Box> PhysicTest::newBox(glm::vec3 pos,glm::vec3 size, bool isDynamic)
-  {     
-    BoxBullet* result = new BoxBullet(_world,pos,size, isDynamic);
+  std::shared_ptr<Box> PhysicTest::newBox(glm::vec3 pos, glm::vec3 size, bool isDynamic)
+  {
+    BoxBullet* result = new BoxBullet(_world, pos, size, isDynamic);
 
     return std::shared_ptr<Box>(dynamic_cast<Box*>(result));
+  }
+
+  std::shared_ptr<Sphere> PhysicTest::newSphere(glm::vec3 pos, float radius, bool isDynamic)
+  {
+    SphereBullet* result = new SphereBullet(_world, pos, radius, isDynamic);
+    return std::shared_ptr<Sphere>(dynamic_cast<Sphere*>(result));
   }
 }

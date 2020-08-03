@@ -24,6 +24,12 @@
     <ClCompile Include="BoxBullet.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereBullet.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PhysicTest.h">
@@ -33,6 +39,15 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="BoxBullet.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicObject.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="SphereBullet.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

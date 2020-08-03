@@ -15,8 +15,8 @@ namespace Suthanus
     virtual glm::vec3 getSize()           override;
 
   private:
-    glm::vec3                _size;
+    glm::vec3                _size ;
     btDiscreteDynamicsWorld* _world;
-    btRigidBody*             _body;
+    btRigidBody*             _body ;
   };
 }

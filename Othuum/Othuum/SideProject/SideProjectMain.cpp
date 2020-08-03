@@ -23,8 +23,20 @@ namespace SideProject
     Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Updateable>>::add(cam, { "Main" });
     _phys = std::make_shared<Suthanus::PhysicTest>();
     _phys->go();
-    _boxes.push_back(_phys->newBox(glm::vec3(0, 0, 0)  ,glm::vec3(2,1,1),false));
-    _boxes.push_back(_phys->newBox(glm::vec3(0, 4, 0.5),glm::vec3(1,1,1),true));
+    _boxes.push_back(_phys->newBox(glm::vec3(0, -3, 0)  ,glm::vec3(10,0.2,10),false));
+    _spheres.push_back(_phys->newSphere(glm::vec3(0, 4, 0.5), 0.5, true));
+    _spheres.push_back(_phys->newSphere(glm::vec3(0, 5, 0.5), 0.5, true));
+    _spheres.push_back(_phys->newSphere(glm::vec3(0, 6, 0.5), 0.5, true));
+    _spheres.push_back(_phys->newSphere(glm::vec3(0, 7, 0.5), 0.5, true));
+    _spheres.push_back(_phys->newSphere(glm::vec3(0, 8, 0.5), 0.5, true));
+    _spheres.push_back(_phys->newSphere(glm::vec3(0, 9, 0.5), 0.5, true));
+
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 4, 0.5), glm::vec3(1,1,1), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 5, 0.5), glm::vec3(1,1,1), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 6, 0.5), glm::vec3(1,1,1), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 7, 0.5), glm::vec3(1,1,1), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 8, 0.5), glm::vec3(1,1,1), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 9, 0.5), glm::vec3(1,1,1), true));
   }
 
   void SideProjectMain::draw()
@@ -35,9 +47,17 @@ namespace SideProject
     for (auto box : _boxes){
       glm::mat4 transform = box->getTransformation();      
       transform = glm::scale(transform, box->getSize());
-      transform = glm::translate(transform, glm::vec3(-0.5,-0.5,-0.5));
+      transform = glm::translate(transform, glm::vec3(-0.5, -0.5, -0.5));
       YolonaOss::BoxRenderer::draw(transform, glm::vec4(0, 0, 1, 1));
     }
     YolonaOss::BoxRenderer::end();
+    YolonaOss::SphereRenderer::start();
+    for (auto sphere : _spheres) {
+      glm::mat4 transform = sphere->getTransformation();
+      transform = glm::scale(transform, glm::vec3(sphere->getRadius(),sphere->getRadius(),sphere->getRadius()));
+      YolonaOss::SphereRenderer::draw(transform, glm::vec4(0, 0.4, 1, 1));
+    }
+    YolonaOss::SphereRenderer::end();
+
   }
 }

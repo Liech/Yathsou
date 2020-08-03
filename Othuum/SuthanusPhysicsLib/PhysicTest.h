@@ -4,6 +4,7 @@
 #include "IyathuumCoreLib/lib/glm/vec3.hpp"
 #include <memory>
 #include "Box.h"
+#include "Sphere.h"
 
 class btBroadphaseInterface;
 class btDefaultCollisionConfiguration;
@@ -21,7 +22,8 @@ namespace Suthanus
     void go();
     void update();
 
-    std::shared_ptr<Box> newBox(glm::vec3 pos,glm::vec3 size, bool isDynamic);
+    std::shared_ptr<Box   > newBox   (glm::vec3 pos, glm::vec3 size  , bool isDynamic);
+    std::shared_ptr<Sphere> newSphere(glm::vec3 pos, float     radius, bool isDynamic);
 
     btBroadphaseInterface               * _broadphase            ;
     btDefaultCollisionConfiguration     * _collisionConfiguration;

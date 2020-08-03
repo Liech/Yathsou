@@ -156,12 +156,13 @@ namespace YolonaOss {
        // version of each vertex point; this generally won't be the case for
        // other parametric surfaces.
        // Output the first triangle of this grid square
-       result.push_back(GL::PositionNormalVertex(p0, -glm::cross(p0- p2, p1)));
-       result.push_back(GL::PositionNormalVertex(p2, -glm::cross(p0- p2, p1)));
-       result.push_back(GL::PositionNormalVertex(p1, -glm::cross(p0- p2, p1)));
-       result.push_back(GL::PositionNormalVertex(p3, glm::cross(p3- p1, p2)));
-       result.push_back(GL::PositionNormalVertex(p1, glm::cross(p3- p1, p2)));
-       result.push_back(GL::PositionNormalVertex(p2, glm::cross(p3- p1, p2)));
+       glm::vec3 offset(0,0,0);
+       result.push_back(GL::PositionNormalVertex(p0 + offset, -glm::cross(p0- p2, p1)));
+       result.push_back(GL::PositionNormalVertex(p2 + offset, -glm::cross(p0- p2, p1)));
+       result.push_back(GL::PositionNormalVertex(p1 + offset, -glm::cross(p0- p2, p1)));
+       result.push_back(GL::PositionNormalVertex(p3 + offset,  glm::cross(p3- p1, p2)));
+       result.push_back(GL::PositionNormalVertex(p1 + offset,  glm::cross(p3- p1, p2)));
+       result.push_back(GL::PositionNormalVertex(p2 + offset,  glm::cross(p3- p1, p2)));
      }
     }
     return result;

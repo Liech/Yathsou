@@ -5,9 +5,9 @@
 class btRigidBody;
 namespace Suthanus
 {
-  class Box : public PhysicObject
+  class Sphere : public PhysicObject
   {
   public:
-    virtual glm::vec3 getSize()           = 0;
+    virtual float getRadius() = 0;
   };
 }

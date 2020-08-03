@@ -4,6 +4,7 @@
 
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "SuthanusPhysicsLib/Box.h"
+#include "SuthanusPhysicsLib/Sphere.h"
 
 namespace YolonaOss{namespace GL{class DrawableList;}}
 namespace Suthanus { class PhysicTest; }
@@ -19,5 +20,6 @@ namespace SideProject
     std::shared_ptr<YolonaOss::GL::DrawableList>   _list;
     std::shared_ptr< Suthanus::PhysicTest>         _phys;
     std::vector< std::shared_ptr< Suthanus::Box> > _boxes;
+    std::vector< std::shared_ptr< Suthanus::Sphere> > _spheres;
   };
 }
