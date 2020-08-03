@@ -16,7 +16,7 @@ namespace YolonaOss {
     class UniformMat4;
   }
   class SphereRenderer : public GL::Loadable {
-    REGISTER(Loadable, SphereRenderer, "BoxRenderer", { "Main" })
+    REGISTER(Loadable, SphereRenderer, "SphereRenderer", { "Main" })
     // Geerbt über Loadable
     virtual void load(GL::DrawSpecification* spec) override;
   public:
