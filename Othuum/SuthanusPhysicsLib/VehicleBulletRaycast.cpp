@@ -1,16 +1,16 @@
-#include "SphereBullet.h"
+#include "VehicleBulletRaycast.h"
 
 #include "lib/bullet/btBulletDynamicsCommon.h"
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
+
 namespace Suthanus
 {
   namespace Bullet
   {
-    SphereBullet::SphereBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, float radius, bool isDynamic)
+    VehicleBulletRaycast::VehicleBulletRaycast(btDiscreteDynamicsWorld* world, glm::vec3 pos)
     {
       _world = world;
-      _radius = radius;
-      btCollisionShape* colShape = new btSphereShape(radius);
+      btCollisionShape* colShape = new btBoxShape(btVector3(getSize()[0], getSize()[1], getSize()[2]));
       //btCollisionShape* colShape = new btSphereShape(btScalar(1.));
 
       /// Create Dynamic Objects
@@ -18,11 +18,8 @@ namespace Suthanus
       startTransform.setIdentity();
 
       btScalar mass(1.f);
-      if (!isDynamic)
-        mass = 0;
       btVector3 localInertia(0, 0, 0);
-      if (isDynamic)
-        colShape->calculateLocalInertia(mass, localInertia);
+      colShape->calculateLocalInertia(mass, localInertia);
 
       startTransform.setOrigin(btVector3(pos[0], pos[1], pos[2]));
       btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
@@ -32,13 +29,13 @@ namespace Suthanus
       _world->addRigidBody(_body);
     }
 
-    glm::vec3 SphereBullet::getPosition()
+    glm::vec3 VehicleBulletRaycast::getPosition()
     {
       auto trans = _body->getWorldTransform().getOrigin();
       return glm::vec3(trans[0], trans[1], trans[2]);
     }
 
-    glm::mat4 SphereBullet::getTransformation()
+    glm::mat4 VehicleBulletRaycast::getTransformation()
     {
       glm::mat4 result;
       btTransform trans = _body->getWorldTransform();
@@ -47,9 +44,9 @@ namespace Suthanus
       return glm::make_mat4(mat);
     }
 
-    float SphereBullet::getRadius()
+    glm::vec3 VehicleBulletRaycast::getSize()
     {
-      return _radius;
+      return glm::vec3(0.8, 0.4, 0.4);
     }
   }
 }

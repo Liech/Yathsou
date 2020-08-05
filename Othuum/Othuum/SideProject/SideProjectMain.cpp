@@ -36,7 +36,9 @@ namespace SideProject
     _boxes.push_back(_phys->newBox(glm::vec3(-1, 6, 0.5), glm::vec3(1,1,1), true));
     _boxes.push_back(_phys->newBox(glm::vec3(-1, 7, 0.5), glm::vec3(1,1,1), true));
     _boxes.push_back(_phys->newBox(glm::vec3(-1, 8, 0.5), glm::vec3(1,1,1), true));
-    _boxes.push_back(_phys->newBox(glm::vec3(-1, 9, 0.5), glm::vec3(1,1,1), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 9, 0.5), glm::vec3(1, 1, 1), true));
+    
+    _vehicle = _phys->newVehicle(glm::vec3(1,3,1));
   }
 
   void SideProjectMain::draw()
@@ -50,7 +52,13 @@ namespace SideProject
       transform = glm::translate(transform, glm::vec3(-0.5, -0.5, -0.5));
       YolonaOss::BoxRenderer::draw(transform, glm::vec4(0, 0, 1, 1));
     }
+
+    glm::mat4 transformVehicle = _vehicle->getTransformation();
+    transformVehicle = glm::scale(transformVehicle, _vehicle->getSize());
+    transformVehicle = glm::translate(transformVehicle, glm::vec3(-0.5, -0.5, -0.5));
+    YolonaOss::BoxRenderer::draw(transformVehicle, glm::vec4(0, 0.4, 1, 1));
     YolonaOss::BoxRenderer::end();
+
     YolonaOss::SphereRenderer::start();
     for (auto sphere : _spheres) {
       glm::mat4 transform = sphere->getTransformation();

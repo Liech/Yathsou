@@ -155,6 +155,7 @@
     <ClCompile Include="PhysicTest.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereBullet.cpp" />
+    <ClCompile Include="VehicleBulletRaycast.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Box.h" />
@@ -163,6 +164,8 @@
     <ClInclude Include="PhysicTest.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="SphereBullet.h" />
+    <ClInclude Include="Vehicle.h" />
+    <ClInclude Include="VehicleBulletRaycast.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
