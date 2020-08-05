@@ -27,6 +27,10 @@ namespace Suthanus
 
       _body = new btRigidBody(rbInfo);
       _world->addRigidBody(_body);
+
+      btRaycastVehicle::btVehicleTuning tuning;
+      _raycaster = new btDefaultVehicleRaycaster(static_cast <btDynamicsWorld*> (_world));
+      _vehicle   = new btRaycastVehicle(tuning, _body, _raycaster);
     }
 
     glm::vec3 VehicleBulletRaycast::getPosition()
