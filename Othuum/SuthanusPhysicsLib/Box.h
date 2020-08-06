@@ -8,6 +8,6 @@ namespace Suthanus
   class Box : public PhysicObject
   {
   public:
-    virtual glm::vec3 getSize()           = 0;
+    virtual glm::vec3 getSize() = 0;
   };
 }

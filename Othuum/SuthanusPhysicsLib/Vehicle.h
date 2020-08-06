@@ -8,5 +8,6 @@ namespace Suthanus
   {
   public:
     virtual glm::vec3 getSize() = 0;
+    virtual void      forward() = 0;
   };
 }
