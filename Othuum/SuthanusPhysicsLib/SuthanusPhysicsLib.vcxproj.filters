@@ -33,6 +33,9 @@
     <ClCompile Include="VehicleBulletRaycast.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="BulletDebugDrawer.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PhysicTest.h">
@@ -57,6 +60,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="VehicleBulletRaycast.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletDebugDrawer.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

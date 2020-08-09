@@ -38,7 +38,7 @@ namespace SideProject
     _boxes.push_back(_phys->newBox(glm::vec3(-1, 8, 0.5), glm::vec3(1,1,1), true));
     _boxes.push_back(_phys->newBox(glm::vec3(-1, 9, 0.5), glm::vec3(1, 1, 1), true));
     
-    _vehicle = _phys->newVehicle(glm::vec3(1,3,1));
+    _vehicle = _phys->newVehicle(glm::vec3(0,3,-2));
   }
 
   void SideProjectMain::draw()
@@ -55,8 +55,8 @@ namespace SideProject
     }
 
     glm::mat4 transformVehicle = _vehicle->getTransformation();
-    transformVehicle = glm::scale(transformVehicle, _vehicle->getSize());
-    transformVehicle = glm::translate(transformVehicle, glm::vec3(-0.5, -0.5, -0.5));
+    transformVehicle = glm::scale(transformVehicle,2.0f * _vehicle->getSize());
+    transformVehicle = glm::translate(transformVehicle, glm::vec3(-0.5, 1, -0.5));
     YolonaOss::BoxRenderer::draw(transformVehicle, glm::vec4(0, 0.4, 1, 1));
     YolonaOss::BoxRenderer::end();
 

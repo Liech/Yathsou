@@ -6,6 +6,7 @@
 #include "BoxBullet.h"
 #include "SphereBullet.h"
 #include "VehicleBulletRaycast.h"
+#include "BulletDebugDrawer.h"
 
 namespace Suthanus
 {
@@ -16,7 +17,7 @@ namespace Suthanus
     , _solver                (new btSequentialImpulseConstraintSolver())
     , _world                 (new btDiscreteDynamicsWorld(_dispatcher, new btDbvtBroadphase(), _solver, _collisionConfiguration))
   {
-
+    _world->setDebugDrawer(new Bullet::BulletDebugDrawer());
   }
 
   void PhysicTest::go()

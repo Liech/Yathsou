@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="BoxBullet.cpp" />
+    <ClCompile Include="BulletDebugDrawer.cpp" />
     <ClCompile Include="PhysicTest.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereBullet.cpp" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClInclude Include="Box.h" />
     <ClInclude Include="BoxBullet.h" />
+    <ClInclude Include="BulletDebugDrawer.h" />
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="PhysicTest.h" />
     <ClInclude Include="Sphere.h" />

@@ -17,17 +17,17 @@ namespace Suthanus
     VehicleBulletRaycast::VehicleBulletRaycast(btDiscreteDynamicsWorld* world, glm::vec3 pos)
     {
       _world = world;
-
+      btVector3 spawnPos = btVector3(pos[0], pos[1], pos[2]);
       btVector3 halfExtends(1, btScalar(0.5), 2);
       btCollisionShape* chassisShape = new btBoxShape(halfExtends);
       btCompoundShape* compound = new btCompoundShape();
       btTransform localTransform;
       localTransform.setIdentity();
-      localTransform.setOrigin(btVector3(0, 1, 0));
+      localTransform.setOrigin(btVector3(0,1,0));
       compound->addChildShape(localTransform, chassisShape);
-      btRigidBody* chassisRigidBody = this->createChassisRigidBodyFromShape(compound);
-      _body = chassisRigidBody;
-      _world->addRigidBody(chassisRigidBody);
+      _chassis = this->createChassisRigidBodyFromShape(compound,spawnPos);
+      _body = _chassis;
+      _world->addRigidBody(_chassis);
 
       btCollisionShape* colShape = new btBoxShape(btVector3(getSize()[0], getSize()[1], getSize()[2]));
       //btCollisionShape* colShape = new btSphereShape(btScalar(1.));
@@ -36,10 +36,10 @@ namespace Suthanus
       btRaycastVehicle::btVehicleTuning tuning;
       
       //Creates a new instance of the raycast vehicle
-      _vehicle = new btRaycastVehicle(tuning, chassisRigidBody, vehicleRayCaster);
+      _vehicle = new btRaycastVehicle(tuning, _chassis, vehicleRayCaster);
 
       //Never deactivate the vehicle
-      chassisRigidBody->setActivationState(DISABLE_DEACTIVATION);
+      _chassis->setActivationState(DISABLE_DEACTIVATION);
 
       //Adds the vehicle to the world
       _world->addVehicle(_vehicle);
@@ -96,15 +96,15 @@ namespace Suthanus
       }
     }
 
-    btRigidBody* VehicleBulletRaycast::createChassisRigidBodyFromShape(btCollisionShape* chassisShape)
+    btRigidBody* VehicleBulletRaycast::createChassisRigidBodyFromShape(btCollisionShape* chassisShape, btVector3 pos)
     {
       btTransform chassisTransform;
       chassisTransform.setIdentity();
-      chassisTransform.setOrigin(btVector3(0, 1, 0));
+      chassisTransform.setOrigin(pos);
 
       {
         //chassis mass 
-        btScalar mass(1200);
+        btScalar mass(120);
 
         //since it is dynamic, we calculate its local inertia
         btVector3 localInertia(0, 0, 0);
@@ -135,7 +135,7 @@ namespace Suthanus
 
     glm::vec3 VehicleBulletRaycast::getSize()
     {
-      return glm::vec3(0.8, 0.4, 0.4);
+      return glm::vec3(0.4, 0.4, 1);
     }
   }
 }
