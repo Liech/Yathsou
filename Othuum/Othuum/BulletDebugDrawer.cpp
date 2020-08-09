@@ -1,11 +1,13 @@
 #include "BulletDebugDrawer.h"
 
+#include "YolonaOss/Renderer/BoxRenderer.h"
+
 namespace Suthanus
 {
   namespace Bullet
   {
     void BulletDebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color) {
-
+			YolonaOss::BoxRenderer::drawLine(glm::vec3(from[0], from[1], from[2]), glm::vec3(to[0], to[1], to[2]), 0.02f, glm::vec4(1, 1, 0,1));
     }
 
     void BulletDebugDrawer::drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color) {
@@ -25,7 +27,7 @@ namespace Suthanus
     }
 
 		int BulletDebugDrawer::getDebugMode() const{
-			return 0; 
+			return DBG_DrawWireframe;
       /*		
 			DBG_NoDebug = 0,
 		  DBG_DrawWireframe = 1,

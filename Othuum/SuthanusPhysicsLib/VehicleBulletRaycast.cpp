@@ -10,30 +10,29 @@ namespace Suthanus
     {
       _vehicle->setSteeringValue(btScalar(0), 0);
       _vehicle->setSteeringValue(btScalar(0), 1);
-      _vehicle->applyEngineForce(3000, 2);
-      _vehicle->applyEngineForce(3000, 3);
+      _vehicle->applyEngineForce(1000, 2);
+      _vehicle->applyEngineForce(1000, 3);
     }
 
     VehicleBulletRaycast::VehicleBulletRaycast(btDiscreteDynamicsWorld* world, glm::vec3 pos)
     {
       _world = world;
       btVector3 spawnPos = btVector3(pos[0], pos[1], pos[2]);
-      btVector3 halfExtends(1, btScalar(0.5), 2);
+      btVector3 halfExtends(getSize()[0]/2.0,getSize()[1]/2.0,getSize()[2]/2.0f);
       btCollisionShape* chassisShape = new btBoxShape(halfExtends);
       btCompoundShape* compound = new btCompoundShape();
       btTransform localTransform;
       localTransform.setIdentity();
-      localTransform.setOrigin(btVector3(0,1,0));
+      localTransform.setOrigin(btVector3(0, 0,0));
       compound->addChildShape(localTransform, chassisShape);
       _chassis = this->createChassisRigidBodyFromShape(compound,spawnPos);
       _body = _chassis;
       _world->addRigidBody(_chassis);
 
-      btCollisionShape* colShape = new btBoxShape(btVector3(getSize()[0], getSize()[1], getSize()[2]));
-      //btCollisionShape* colShape = new btSphereShape(btScalar(1.));
       btVehicleRaycaster* vehicleRayCaster = new btDefaultVehicleRaycaster(_world);
 
       btRaycastVehicle::btVehicleTuning tuning;
+      
       
       //Creates a new instance of the raycast vehicle
       _vehicle = new btRaycastVehicle(tuning, _chassis, vehicleRayCaster);
@@ -60,17 +59,17 @@ namespace Suthanus
       //The axis which the wheel rotates arround
       btVector3 wheelAxleCS(-1, 0, 0);
 
-      btScalar suspensionRestLength(0.7);
+      btScalar suspensionRestLength(0.2);
 
       btScalar wheelWidth(0.4);
 
-      btScalar wheelRadius(0.5);
+      btScalar wheelRadius(0.2);
 
       //The height where the wheels are connected to the chassis
-      btScalar connectionHeight(1.2);
+      btScalar connectionHeight(-halfExtents->y() *0.9);
 
       //All the wheel configuration assumes the vehicle is centered at the origin and a right handed coordinate system is used
-      btVector3 wheelConnectionPoint(halfExtents->x() - wheelRadius, connectionHeight, halfExtents->z() - wheelWidth);
+      btVector3 wheelConnectionPoint(halfExtents->x(), connectionHeight, halfExtents->z());
 
       //Adds the front wheels
       vehicle->addWheel(wheelConnectionPoint, wheelDirectionCS0, wheelAxleCS, suspensionRestLength, wheelRadius, tuning, true);
@@ -104,7 +103,7 @@ namespace Suthanus
 
       {
         //chassis mass 
-        btScalar mass(120);
+        btScalar mass(1200);
 
         //since it is dynamic, we calculate its local inertia
         btVector3 localInertia(0, 0, 0);

@@ -152,6 +152,7 @@
     </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BulletDebugDrawer.cpp" />
     <ClCompile Include="ClientConfiguration.cpp" />
     <ClCompile Include="ClientState.cpp" />
     <ClCompile Include="DrawCubes.cpp" />
@@ -174,6 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Architecture\Decisions.h" />
+    <ClInclude Include="BulletDebugDrawer.h" />
     <ClInclude Include="ClientConfiguration.h" />
     <ClInclude Include="DrawCubes.h" />
     <ClInclude Include="Lib\nop\base\array.h" />
