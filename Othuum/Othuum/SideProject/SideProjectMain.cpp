@@ -31,13 +31,13 @@ namespace SideProject
     _spheres.push_back(_phys->newSphere(glm::vec3(0, 7, 0.5), 0.5, true));
     _spheres.push_back(_phys->newSphere(glm::vec3(0, 8, 0.5), 0.5, true));
     _spheres.push_back(_phys->newSphere(glm::vec3(0, 9, 0.5), 0.5, true));
-
-    _boxes.push_back(_phys->newBox(glm::vec3(-1, 4, 0.5), glm::vec3((rand()%10)/10.0, (rand()%10)/10.0,(rand()%10)/10.0), true));
-    _boxes.push_back(_phys->newBox(glm::vec3(-1, 5, 0.5), glm::vec3((rand()%10)/10.0, (rand()%10)/10.0,(rand()%10)/10.0), true));
-    _boxes.push_back(_phys->newBox(glm::vec3(-1, 6, 0.5), glm::vec3((rand()%10)/10.0, (rand()%10)/10.0,(rand()%10)/10.0), true));
-    _boxes.push_back(_phys->newBox(glm::vec3(-1, 7, 0.5), glm::vec3((rand()%10)/10.0, (rand()%10)/10.0,(rand()%10)/10.0), true));
-    _boxes.push_back(_phys->newBox(glm::vec3(-1, 8, 0.5), glm::vec3((rand()%10)/10.0, (rand()%10)/10.0,(rand()%10)/10.0), true));
-    _boxes.push_back(_phys->newBox(glm::vec3(-1, 9, 0.5), glm::vec3((rand()%10)/10.0, (rand()%10)/10.0,(rand()%10)/10.0), true));
+    auto rnd = []() {return (5.0 + (rand() % 10)) / 15.0; };
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 4, 0.5), glm::vec3(rnd(), rnd() ,rnd()), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 5, 0.5), glm::vec3(rnd(), rnd() ,rnd()), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 6, 0.5), glm::vec3(rnd(), rnd() ,rnd()), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 7, 0.5), glm::vec3(rnd(), rnd() ,rnd()), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 8, 0.5), glm::vec3(rnd(), rnd() ,rnd()), true));
+    _boxes.push_back(_phys->newBox(glm::vec3(-1, 9, 0.5), glm::vec3(rnd(), rnd() ,rnd()), true));
     
     _vehicle = _phys->newVehicle(glm::vec3(0,3,-2));
 
