@@ -150,7 +150,12 @@
   <ItemGroup>
     <ClInclude Include="BaseTypes\AABB.h" />
     <ClInclude Include="BaseTypes\Color.h" />
+    <ClInclude Include="BaseTypes\Line.h" />
     <ClInclude Include="BaseTypes\MultiDimensionalArray.h" />
+    <ClInclude Include="BaseTypes\Polygon.h" />
+    <ClInclude Include="BaseTypes\PolygonNet.h" />
+    <ClInclude Include="Mesh\MarchingConvexPolygon.h" />
+    <ClInclude Include="Mesh\MarchingConvexPolygonNet.h" />
     <ClInclude Include="Singleton\Database.h" />
     <ClInclude Include="Singleton\Factory.h" />
     <ClInclude Include="Tree\Dijkstra.h" />

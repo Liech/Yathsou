@@ -37,6 +37,12 @@
     <Filter Include="Source Files\BaseTypes">
       <UniqueIdentifier>{ee0a04e4-3e32-4fe1-82d8-159be973a0d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Mesh">
+      <UniqueIdentifier>{45ffde32-c7b0-4954-a77d-20ab7edf71a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Mesh">
+      <UniqueIdentifier>{8d1edaf1-c823-4063-8b2e-0add12183df1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Util\ImageSubsetUtil.h">
@@ -83,6 +89,21 @@
     </ClInclude>
     <ClInclude Include="Util\Geometry.h">
       <Filter>Header Files\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTypes\Line.h">
+      <Filter>Header Files\BaseTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\MarchingConvexPolygon.h">
+      <Filter>Header Files\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh\MarchingConvexPolygonNet.h">
+      <Filter>Header Files\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTypes\Polygon.h">
+      <Filter>Header Files\BaseTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTypes\PolygonNet.h">
+      <Filter>Header Files\BaseTypes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
