@@ -6,12 +6,22 @@ namespace Suthanus
 {
   namespace Bullet
   {
-    void VehicleBulletRaycast::forward()
-    {
-      _vehicle->setSteeringValue(btScalar(0), 0);
-      _vehicle->setSteeringValue(btScalar(0), 1);
-      _vehicle->applyEngineForce(1000, 2);
-      _vehicle->applyEngineForce(1000, 3);
+    float VehicleBulletRaycast::maxAcceleration(){
+      return 1000;
+    }
+
+    float VehicleBulletRaycast::maxSteering(){
+      return 1;
+    }
+
+    void VehicleBulletRaycast::setAcceleration(float accel){
+      _vehicle->applyEngineForce(accel, 2);
+      _vehicle->applyEngineForce(accel, 3);
+    }
+
+    void VehicleBulletRaycast::setSteering(float steer) {
+      _vehicle->setSteeringValue(btScalar(steer), 0);
+      _vehicle->setSteeringValue(btScalar(steer), 1);
     }
 
     VehicleBulletRaycast::VehicleBulletRaycast(btDiscreteDynamicsWorld* world, glm::vec3 pos)
@@ -117,13 +127,13 @@ namespace Suthanus
       }
     }
 
-    glm::vec3 VehicleBulletRaycast::getPosition()
+    glm::vec3 VehicleBulletRaycast::getPosition() const
     {
       auto trans = _body->getWorldTransform().getOrigin();
       return glm::vec3(trans[0], trans[1], trans[2]);
     }
 
-    glm::mat4 VehicleBulletRaycast::getTransformation()
+    glm::mat4 VehicleBulletRaycast::getTransformation() const
     {
       glm::mat4 result;
       btTransform trans = _body->getWorldTransform();

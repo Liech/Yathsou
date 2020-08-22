@@ -156,6 +156,7 @@
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="SphereBullet.cpp" />
     <ClCompile Include="VehicleBulletRaycast.cpp" />
+    <ClCompile Include="VehicleDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Box.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="SphereBullet.h" />
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="VehicleBulletRaycast.h" />
+    <ClInclude Include="VehicleDriver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

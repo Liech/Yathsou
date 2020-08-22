@@ -46,7 +46,8 @@ namespace SideProject
 
   void SideProjectMain::draw()
   {
-    _vehicle->forward();
+    _vehicle->setAcceleration(1000);
+    _vehicle->setSteering(0);
     _phys->update();
     _list->draw();
     YolonaOss::BoxRenderer::start();

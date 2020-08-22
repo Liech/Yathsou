@@ -32,13 +32,13 @@ namespace Suthanus
       _world->addRigidBody(_body);
     }
 
-    glm::vec3 SphereBullet::getPosition()
+    glm::vec3 SphereBullet::getPosition() const
     {
       auto trans = _body->getWorldTransform().getOrigin();
       return glm::vec3(trans[0], trans[1], trans[2]);
     }
 
-    glm::mat4 SphereBullet::getTransformation()
+    glm::mat4 SphereBullet::getTransformation() const
     {
       glm::mat4 result;
       btTransform trans = _body->getWorldTransform();

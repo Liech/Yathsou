@@ -7,7 +7,7 @@ namespace Suthanus
   class PhysicObject
   {
   public:
-    virtual glm::vec3 getPosition()       = 0;
-    virtual glm::mat4 getTransformation() = 0;
+    virtual glm::vec3 getPosition()       const = 0;
+    virtual glm::mat4 getTransformation() const = 0;
   };
 }

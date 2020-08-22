@@ -12,9 +12,9 @@ namespace Suthanus
     {
     public:
       BoxBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, glm::vec3 size, bool isDynamic = true);
-      virtual glm::vec3 getPosition()       override;
-      virtual glm::mat4 getTransformation() override;
-      virtual glm::vec3 getSize()           override;
+      virtual glm::vec3 getPosition()       const override;
+      virtual glm::mat4 getTransformation() const override;
+      virtual glm::vec3 getSize()                 override;
 
     private:
       glm::vec3                _size;

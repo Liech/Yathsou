@@ -12,9 +12,9 @@ namespace Suthanus
     {
     public:
       SphereBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, float size, bool isDynamic = true);
-      virtual glm::vec3 getPosition()       override;
-      virtual glm::mat4 getTransformation() override;
-      virtual float     getRadius()         override;
+      virtual glm::vec3 getPosition()       const override;
+      virtual glm::mat4 getTransformation() const override;
+      virtual float     getRadius()               override;
 
     private:
       float                    _radius;
