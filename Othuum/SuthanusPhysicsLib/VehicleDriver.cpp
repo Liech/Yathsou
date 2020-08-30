@@ -22,4 +22,10 @@ namespace Suthanus
   {
     //const glm::vec3 rotationAxis = ;
   } 
+
+  glm::vec3 VehicleDriver::getRotationAxis()
+  {
+    //_vehicle.getTransformation()
+    return glm::vec3();
+  }
 }

@@ -15,6 +15,8 @@ namespace Suthanus
     void update();
 
   private:
+    glm::vec3       getRotationAxis();
+
     const Vehicle& _vehicle;
     glm::vec3      _target ;
     bool           _brake   = true;
