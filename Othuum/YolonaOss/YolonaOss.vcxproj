@@ -116,7 +116,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
@@ -128,11 +128,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(ProjectDir)Lib/gainput/gainput-d.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
-      <Command>(Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z) ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
-</Command>
+      <Command>((Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z))&amp;
+((Robocopy.exe "$(ProjectDir)Lib/gainput/" "$(TargetDir)/" "gainput-d.dll") ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -173,7 +173,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);$(ProjectDir)Lib/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
@@ -186,11 +186,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(ProjectDir)Lib/gainput/gainput.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
-      <Command>(Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z  /Log:LogFileName) ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
-</Command>
+      <Command>((Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z))&amp;
+((Robocopy.exe "$(ProjectDir)Lib/gainput/" "$(TargetDir)/" "gainput.dll") ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -219,6 +219,36 @@
     <ClInclude Include="GameModel\GameState.h" />
     <ClInclude Include="GameModel\Player.h" />
     <ClInclude Include="GameModel\Unit.h" />
+    <ClInclude Include="Lib\gainput\gainput.h" />
+    <ClInclude Include="Lib\gainput\GainputAllocator.h" />
+    <ClInclude Include="Lib\gainput\GainputContainers.h" />
+    <ClInclude Include="Lib\gainput\GainputDebugRenderer.h" />
+    <ClInclude Include="Lib\gainput\GainputHelpers.h" />
+    <ClInclude Include="Lib\gainput\GainputInputDeltaState.h" />
+    <ClInclude Include="Lib\gainput\GainputInputDevice.h" />
+    <ClInclude Include="Lib\gainput\GainputInputDeviceBuiltIn.h" />
+    <ClInclude Include="Lib\gainput\GainputInputDeviceKeyboard.h" />
+    <ClInclude Include="Lib\gainput\GainputInputDeviceMouse.h" />
+    <ClInclude Include="Lib\gainput\GainputInputDevicePad.h" />
+    <ClInclude Include="Lib\gainput\GainputInputDeviceTouch.h" />
+    <ClInclude Include="Lib\gainput\GainputInputListener.h" />
+    <ClInclude Include="Lib\gainput\GainputInputManager.h" />
+    <ClInclude Include="Lib\gainput\GainputInputMap.h" />
+    <ClInclude Include="Lib\gainput\GainputInputState.h" />
+    <ClInclude Include="Lib\gainput\GainputIos.h" />
+    <ClInclude Include="Lib\gainput\GainputLog.h" />
+    <ClInclude Include="Lib\gainput\GainputMapFilters.h" />
+    <ClInclude Include="Lib\gainput\gestures\GainputButtonStickGesture.h" />
+    <ClInclude Include="Lib\gainput\gestures\GainputDoubleClickGesture.h" />
+    <ClInclude Include="Lib\gainput\gestures\GainputGestures.h" />
+    <ClInclude Include="Lib\gainput\gestures\GainputHoldGesture.h" />
+    <ClInclude Include="Lib\gainput\gestures\GainputPinchGesture.h" />
+    <ClInclude Include="Lib\gainput\gestures\GainputRotateGesture.h" />
+    <ClInclude Include="Lib\gainput\gestures\GainputSimultaneouslyDownGesture.h" />
+    <ClInclude Include="Lib\gainput\gestures\GainputTapGesture.h" />
+    <ClInclude Include="Lib\gainput\recorder\GainputInputPlayer.h" />
+    <ClInclude Include="Lib\gainput\recorder\GainputInputRecorder.h" />
+    <ClInclude Include="Lib\gainput\recorder\GainputInputRecording.h" />
     <ClInclude Include="Lib\lodepng\lodepng.h" />
     <ClInclude Include="Lib\lodepng\lodepng_util.h" />
     <ClInclude Include="OpenGL\AttributeDescription.h" />

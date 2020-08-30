@@ -73,6 +73,9 @@
     <Filter Include="Source Files\GameModel">
       <UniqueIdentifier>{dac3e20c-38d2-4286-94cd-8f939ae259f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="libs\gainput">
+      <UniqueIdentifier>{91f87bc8-e6e7-4fd5-a799-60a309ad61db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -254,6 +257,96 @@
     </ClInclude>
     <ClInclude Include="Renderer\SphereRenderer.h">
       <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputDeltaState.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputDevice.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputDeviceBuiltIn.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputDeviceKeyboard.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputDeviceMouse.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputDevicePad.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputDeviceTouch.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputListener.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputManager.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputMap.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputInputState.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputIos.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputLog.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputMapFilters.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\gestures\GainputButtonStickGesture.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\gestures\GainputDoubleClickGesture.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\gestures\GainputGestures.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\gestures\GainputHoldGesture.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\gestures\GainputPinchGesture.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\gestures\GainputRotateGesture.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\gestures\GainputSimultaneouslyDownGesture.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\gestures\GainputTapGesture.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\recorder\GainputInputPlayer.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\recorder\GainputInputRecorder.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\recorder\GainputInputRecording.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\gainput.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputAllocator.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputContainers.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputDebugRenderer.h">
+      <Filter>libs\gainput</Filter>
+    </ClInclude>
+    <ClInclude Include="Lib\gainput\GainputHelpers.h">
+      <Filter>libs\gainput</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

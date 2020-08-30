@@ -10,3 +10,4 @@ moodycamel/concurrentqueue     |vishala     | concurrent queue
 portaudio                      |ahwassa     | play sound
 nyquistaudio                   |ahwassa     | load wav/mp3
 bullet                         |suthanu     | physics
+gainput                        |yolonaoss   | input
