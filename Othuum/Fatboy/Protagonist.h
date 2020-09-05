@@ -18,6 +18,9 @@ namespace Fatboy
     glm::vec3 getPosition();
 
   private:
+    void handleInput();
+
     glm::vec3 _pos = glm::vec3(0,2,0);
+    YolonaOss::GL::DrawSpecification* _spec;
   };
 }

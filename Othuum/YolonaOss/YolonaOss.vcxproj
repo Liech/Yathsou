@@ -220,6 +220,7 @@
     <ClInclude Include="GameModel\GameState.h" />
     <ClInclude Include="GameModel\Player.h" />
     <ClInclude Include="GameModel\Unit.h" />
+    <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Lib\gainput\gainput.h" />
     <ClInclude Include="Lib\gainput\GainputAllocator.h" />
     <ClInclude Include="Lib\gainput\GainputContainers.h" />
@@ -310,6 +311,7 @@
     <ClCompile Include="GameModel\GameState.cpp" />
     <ClCompile Include="GameModel\Player.cpp" />
     <ClCompile Include="GameModel\Unit.cpp" />
+    <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Lib\glad\src\glad.c" />
     <ClCompile Include="Lib\lodepng\lodepng.cpp" />
     <ClCompile Include="Lib\lodepng\lodepng_util.cpp" />

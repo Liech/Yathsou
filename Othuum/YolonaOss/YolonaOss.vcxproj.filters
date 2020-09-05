@@ -76,6 +76,12 @@
     <Filter Include="libs\gainput">
       <UniqueIdentifier>{91f87bc8-e6e7-4fd5-a799-60a309ad61db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Input">
+      <UniqueIdentifier>{5c5629d6-920e-4131-9078-909a547060e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{216a1524-aa77-454f-906b-9f05132321f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -351,6 +357,9 @@
     <ClInclude Include="Drawables\Ground.h">
       <Filter>Header Files\Drawables</Filter>
     </ClInclude>
+    <ClInclude Include="Input\Input.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -508,6 +517,9 @@
     </ClCompile>
     <ClCompile Include="Drawables\Ground.cpp">
       <Filter>Source Files\Drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\Input.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
