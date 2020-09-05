@@ -205,6 +205,7 @@
     <ClInclude Include="Camera\RTSCamera.h" />
     <ClInclude Include="Drawables\Background.h" />
     <ClInclude Include="Drawables\FPS.h" />
+    <ClInclude Include="Drawables\Ground.h" />
     <ClInclude Include="Drawables\Widgets\Button.h" />
     <ClInclude Include="Drawables\Widgets\Label.h" />
     <ClInclude Include="Drawables\Widgets\LineEdit.h" />
@@ -294,6 +295,7 @@
     <ClCompile Include="Camera\RTSCamera.cpp" />
     <ClCompile Include="Drawables\Background.cpp" />
     <ClCompile Include="Drawables\FPS.cpp" />
+    <ClCompile Include="Drawables\Ground.cpp" />
     <ClCompile Include="Drawables\Widgets\Button.cpp" />
     <ClCompile Include="Drawables\Widgets\Label.cpp" />
     <ClCompile Include="Drawables\Widgets\LineEdit.cpp" />

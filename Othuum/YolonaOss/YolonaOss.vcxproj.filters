@@ -348,6 +348,9 @@
     <ClInclude Include="Lib\gainput\GainputHelpers.h">
       <Filter>libs\gainput</Filter>
     </ClInclude>
+    <ClInclude Include="Drawables\Ground.h">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -502,6 +505,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\SphereRenderer.cpp">
       <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawables\Ground.cpp">
+      <Filter>Source Files\Drawables</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

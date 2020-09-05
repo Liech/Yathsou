@@ -1,6 +1,7 @@
 #pragma once
 #include "glad/glad.h"
 #include <vector>
+#include <stdexcept>
 namespace YolonaOss {
   namespace GL {
     template<typename Struct>
