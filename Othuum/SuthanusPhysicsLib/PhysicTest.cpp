@@ -33,8 +33,7 @@ namespace Suthanus
   }
   void PhysicTest::update()
   {
-    _world->stepSimulation(1.f / 1000.f, 10);
-
+    _world->stepSimulation(1.f / 10.f, 1);
   }
   
 

@@ -2,22 +2,32 @@
 
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "YolonaOss/OpenGL/Window.h"
+#include "SuthanusPhysicsLib/PhysicTest.h"
+#include "SuthanusPhysicsLib/Vehicle.h"
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
 namespace Fatboy
 {
-  Protagonist::Protagonist()
+  Protagonist::Protagonist(std::shared_ptr<Suthanus::PhysicTest> physic)
   {
+    _physic = physic;
   }
 
   void Protagonist::load(YolonaOss::GL::DrawSpecification* spec)
   {
     _spec = spec;
+    _physBody = _physic->newVehicle(glm::vec3(0, 2, 0));
   }
 
   void Protagonist::draw()
   {
     YolonaOss::BoxRenderer::start();
-    YolonaOss::BoxRenderer::drawDot(getPosition(), glm::vec3(1, 1, 1), glm::vec4(1,0,0,1));
+
+    glm::mat4 transformVehicle = _physBody->getTransformation();
+    transformVehicle = glm::scale(transformVehicle, _physBody->getSize());
+    transformVehicle = glm::translate(transformVehicle, glm::vec3(-0.5, -0.5, -0.5));
+    YolonaOss::BoxRenderer::draw(transformVehicle, glm::vec4(0, 0.4, 1, 1));
+
     YolonaOss::BoxRenderer::end();
   }
 
@@ -33,25 +43,34 @@ namespace Fatboy
     };
     if (isPressed(YolonaOss::GL::Key::KEY_W))
     {
-      _pos = _pos - glm::vec3(0.1, 0, 0);
+      _physBody->setAcceleration(_physBody->maxAcceleration());
     }
     else if (isPressed(YolonaOss::GL::Key::KEY_S))
     {
-      _pos = _pos + glm::vec3(0.1, 0, 0);
+      _physBody->setAcceleration(-_physBody->maxAcceleration());
     }
+    else
+      _physBody->setAcceleration(0);
     if (isPressed(YolonaOss::GL::Key::KEY_A))
     {
-      _pos = _pos + glm::vec3(0, 0, 0.1);
+      _physBody->setSteering(_physBody->maxSteering());
     }
     else if (isPressed(YolonaOss::GL::Key::KEY_D))
     {
-      _pos = _pos - glm::vec3(0, 0, 0.1);
+      _physBody->setSteering(-_physBody->maxSteering());
     }
+    else
+      _physBody->setSteering(0);
+    if (isPressed(YolonaOss::GL::Key::KEY_ENTER))
+    {
+      
+    }
+
   }
 
   glm::vec3 Protagonist::getPosition()
   {
-    return _pos;
+    return _physBody->getPosition();
   }
 
 }

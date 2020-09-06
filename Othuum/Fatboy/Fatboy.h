@@ -18,6 +18,7 @@ namespace YolonaOss
 namespace Suthanus
 {
   class PhysicTest;
+  class Box;
 }
 
 namespace Fatboy
@@ -34,9 +35,12 @@ namespace Fatboy
     virtual void update() override;
   private:
     void initPhysic();
+    void drawLandscape();
 
     std::shared_ptr<Suthanus::PhysicTest>            _physic;
-    std::shared_ptr<YolonaOss::GL::DrawableList>     _drawables;
+    std::shared_ptr<Suthanus::Box>                   _landscape;
+    std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables;
+    std::shared_ptr<YolonaOss::GL::DrawableList>     _postDrawables;
     std::shared_ptr<YolonaOss::Camera::CameraSystem> _cam;
     YolonaOss::GL::DrawSpecification*                _spec;
     std::shared_ptr<Protagonist>                     _protagonist;

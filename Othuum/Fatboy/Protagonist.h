@@ -5,12 +5,18 @@
 #include "IyathuumCoreLib/lib/glm/vec3.hpp"
 #include "YolonaOss/Util/getPosition.h"
 
+namespace Suthanus
+{
+  class PhysicTest;
+  class Vehicle;
+}
+
 namespace Fatboy
 {
   class Protagonist : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable, public YolonaOss::GetPosition
   {
   public:
-    Protagonist();
+    Protagonist(std::shared_ptr<Suthanus::PhysicTest>);
 
     virtual void load(YolonaOss::GL::DrawSpecification*) override;
     virtual void draw()                                  override;
@@ -21,7 +27,8 @@ namespace Fatboy
   private:
     void handleInput();
 
-    glm::vec3 _pos = glm::vec3(0,2,0);
     YolonaOss::GL::DrawSpecification* _spec;
+    std::shared_ptr<Suthanus::PhysicTest> _physic;
+    std::shared_ptr<Suthanus::Vehicle> _physBody;
   };
 }
