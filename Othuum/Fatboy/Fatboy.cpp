@@ -8,6 +8,7 @@
 #include "YolonaOss/Camera/CameraSystem.h"
 #include "YolonaOss/Camera/FreeCamera.h"
 #include "YolonaOss/Camera/RTSCamera.h"
+#include "YolonaOss/Camera/FollowCamera.h"
 #include "Protagonist.h"
 
 namespace Fatboy
@@ -38,6 +39,8 @@ namespace Fatboy
   void Fatboy::load(YolonaOss::GL::DrawSpecification* spec)
   {
     _cam->load(spec);
+    _cam->setCurrentCam("FollowCamera");  
+    YolonaOss::Camera::FollowCamera::setTarget({ _protagonist });
     _protagonist->load(spec);
     _drawables->load(spec);
   }

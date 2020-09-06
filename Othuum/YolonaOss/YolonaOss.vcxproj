@@ -201,6 +201,7 @@
   <ItemGroup>
     <ClInclude Include="Camera\Camera.h" />
     <ClInclude Include="Camera\CameraSystem.h" />
+    <ClInclude Include="Camera\FollowCamera.h" />
     <ClInclude Include="Camera\FreeCamera.h" />
     <ClInclude Include="Camera\RTSCamera.h" />
     <ClInclude Include="Drawables\Background.h" />
@@ -285,6 +286,7 @@
     <ClInclude Include="RTSComponents\Landscape.h" />
     <ClInclude Include="RTSComponents\Unit.h" />
     <ClInclude Include="Util\Geometry.h" />
+    <ClInclude Include="Util\getPosition.h" />
     <ClInclude Include="Util\ImageIO.h" />
     <ClInclude Include="Util\Util.h" />
     <ClInclude Include="YolonaOss.h" />
@@ -292,6 +294,7 @@
   <ItemGroup>
     <ClCompile Include="Camera\Camera.cpp" />
     <ClCompile Include="Camera\CameraSystem.cpp" />
+    <ClCompile Include="Camera\FollowCamera.cpp" />
     <ClCompile Include="Camera\FreeCamera.cpp" />
     <ClCompile Include="Camera\RTSCamera.cpp" />
     <ClCompile Include="Drawables\Background.cpp" />

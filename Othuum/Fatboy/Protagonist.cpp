@@ -33,11 +33,11 @@ namespace Fatboy
     };
     if (isPressed(YolonaOss::GL::Key::KEY_W))
     {
-      _pos = _pos + glm::vec3(0.1, 0, 0);
+      _pos = _pos - glm::vec3(0.1, 0, 0);
     }
     else if (isPressed(YolonaOss::GL::Key::KEY_S))
     {
-      _pos = _pos - glm::vec3(0.1, 0, 0);
+      _pos = _pos + glm::vec3(0.1, 0, 0);
     }
     if (isPressed(YolonaOss::GL::Key::KEY_A))
     {
