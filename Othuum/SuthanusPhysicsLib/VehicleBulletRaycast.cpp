@@ -146,5 +146,15 @@ namespace Suthanus
     {
       return glm::vec3(0.4, 0.4, 1);
     }
+
+    void VehicleBulletRaycast::setPosition(glm::vec3 pos) {
+      btTransform transform = _body->getCenterOfMassTransform();
+      transform.setOrigin(btVector3(pos[0], pos[1], pos[2]));
+      _body->setCenterOfMassTransform(transform);
+    }
+
+    void VehicleBulletRaycast::setVelocity(glm::vec3 pos) {
+      _body->setLinearVelocity(btVector3(pos[0], pos[1], pos[2]));
+    }
   }
 }

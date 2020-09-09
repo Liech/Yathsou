@@ -29,8 +29,10 @@ namespace Suthanus
       btRigidBody* createChassisRigidBodyFromShape(btCollisionShape* chassisShape, btVector3 pos);
       void         addWheels(btVector3* halfExtents, btRaycastVehicle* vehicle, btRaycastVehicle::btVehicleTuning tuning);
 
-      virtual glm::vec3 getPosition()       const override;
-      virtual glm::mat4 getTransformation() const override;
+      virtual glm::vec3 getPosition()              const override;
+      virtual glm::mat4 getTransformation()        const override;
+      virtual void      setPosition(glm::vec3 pos)       override;
+      virtual void      setVelocity(glm::vec3 pos)       override;
     };
   }
 }

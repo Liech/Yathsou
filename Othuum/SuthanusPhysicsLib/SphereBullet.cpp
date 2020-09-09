@@ -51,5 +51,15 @@ namespace Suthanus
     {
       return _radius;
     }
+
+    void SphereBullet::setPosition(glm::vec3 pos) {
+      btTransform transform = _body->getCenterOfMassTransform();
+      transform.setOrigin(btVector3(pos[0], pos[1], pos[2]));
+      _body->setCenterOfMassTransform(transform);
+    }
+
+    void SphereBullet::setVelocity(glm::vec3 pos) {
+      _body->setLinearVelocity(btVector3(pos[0], pos[1], pos[2]));
+    }
   }
 }

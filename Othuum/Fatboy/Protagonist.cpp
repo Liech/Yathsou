@@ -63,7 +63,10 @@ namespace Fatboy
       _physBody->setSteering(0);
     if (isPressed(YolonaOss::GL::Key::KEY_ENTER))
     {
-      
+      _physBody->setPosition(getStartPos());
+      _physBody->setVelocity(glm::vec3(0, 0, 0));
+      _physBody->setAngularVelocity(glm::vec3(0, 0, 0));
+      _physBody->setRotation(glm::vec3(0, 0, 0));
     }
 
   }

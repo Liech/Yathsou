@@ -31,11 +31,11 @@ namespace Suthanus
   {
     _world->setGravity(btVector3(0, -10, 0));
   }
+
   void PhysicTest::update()
   {
     _world->stepSimulation(1.f / 10.f, 1);
   }
-  
 
   std::shared_ptr<Box> PhysicTest::newBox(glm::vec3 pos, glm::vec3 size, bool isDynamic)
   {

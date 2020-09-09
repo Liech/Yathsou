@@ -51,5 +51,30 @@ namespace Suthanus
     {
       return _size;
     }
+
+    void BoxBullet::setPosition(glm::vec3 pos) {
+      btTransform transform = _body->getCenterOfMassTransform();
+      transform.setOrigin(btVector3(pos[0], pos[1], pos[2]));
+      _body->setCenterOfMassTransform(transform);
+    }
+
+    void BoxBullet::setVelocity(glm::vec3 pos) {
+      _body->setLinearVelocity(btVector3(pos[0],pos[1],pos[2]));
+    }
+
+    void BoxBullet::setAngularVelocity(glm::vec3 velocity)
+    {
+      _body->setAngularFactor(btVector3(velocity[0], velocity[1], velocity[2]));
+    }
+
+    void BoxBullet::setRotation(glm::vec3 rotation)
+    {
+      btTransform transform = _body->getCenterOfMassTransform();
+      //btQuaternion quat;
+      //quat.set
+      //transform.setRotation(btQuaternion::getIdentity());
+      
+      _body->setCenterOfMassTransform(transform);
+    }
   }
 }
