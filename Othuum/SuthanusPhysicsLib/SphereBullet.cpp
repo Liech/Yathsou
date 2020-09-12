@@ -11,7 +11,6 @@ namespace Suthanus
       _world = world;
       _radius = radius;
       btCollisionShape* colShape = new btSphereShape(radius);
-      //btCollisionShape* colShape = new btSphereShape(btScalar(1.));
 
       /// Create Dynamic Objects
       btTransform startTransform;
@@ -25,11 +24,17 @@ namespace Suthanus
         colShape->calculateLocalInertia(mass, localInertia);
 
       startTransform.setOrigin(btVector3(pos[0], pos[1], pos[2]));
-      btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-      btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
+      _motionState = new btDefaultMotionState(startTransform);
+      btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, _motionState, colShape, localInertia);
 
       _body = new btRigidBody(rbInfo);
       _world->addRigidBody(_body);
+    }
+
+    SphereBullet::~SphereBullet()
+    {
+      delete _motionState;
+      delete _body;
     }
 
     glm::vec3 SphereBullet::getPosition() const
@@ -47,7 +52,7 @@ namespace Suthanus
       return glm::make_mat4(mat);
     }
 
-    float SphereBullet::getRadius()
+    float SphereBullet::getRadius() const
     {
       return _radius;
     }
@@ -64,6 +69,13 @@ namespace Suthanus
 
     void SphereBullet::setAngularVelocity(glm::vec3 rot) {
       _body->setAngularVelocity(btVector3(rot[0], rot[1], rot[2]));
+    }
+
+    glm::quat SphereBullet::getRotation() const
+    {
+      btTransform transform = _body->getCenterOfMassTransform();
+      auto rot = transform.getRotation();
+      return glm::quat(rot.x(), rot.y(), rot.z(), rot.w());
     }
 
     void SphereBullet::setRotation(glm::quat rot) {

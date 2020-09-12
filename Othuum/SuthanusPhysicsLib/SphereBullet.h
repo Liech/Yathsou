@@ -4,6 +4,8 @@
 
 class btRigidBody;
 class btDiscreteDynamicsWorld;
+class btDefaultMotionState;
+
 namespace Suthanus
 {
   namespace Bullet
@@ -12,9 +14,11 @@ namespace Suthanus
     {
     public:
       SphereBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, float size, bool isDynamic = true);
+      ~SphereBullet();
       virtual glm::vec3 getPosition()               const override;
       virtual glm::mat4 getTransformation()         const override;
-      virtual float     getRadius()                       override;
+      virtual float     getRadius()                 const override;
+      virtual glm::quat getRotation()               const override;
       virtual void      setPosition(glm::vec3 pos)        override;
       virtual void      setVelocity(glm::vec3 pos)        override;
       virtual void      setAngularVelocity(glm::vec3 pos) override;
@@ -23,7 +27,8 @@ namespace Suthanus
     private:
       float                    _radius;
       btDiscreteDynamicsWorld* _world;
-      btRigidBody* _body;
+      btDefaultMotionState*    _motionState;
+      btRigidBody*             _body;
     };
   }
 }

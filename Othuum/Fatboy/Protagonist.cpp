@@ -1,11 +1,14 @@
 #include "Protagonist.h"
 
 #include "YolonaOss/Renderer/BoxRenderer.h"
+#include "YolonaOss/Renderer/SphereRenderer.h"
 #include "YolonaOss/OpenGL/Window.h"
 #include "SuthanusPhysicsLib/PhysicTest.h"
 #include "SuthanusPhysicsLib/Vehicle.h"
+#include "SuthanusPhysicsLib/Sphere.h"
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
+#include <IyathuumCoreLib/lib/glm/gtx/quaternion.hpp>
 
 namespace Fatboy
 {
@@ -30,6 +33,15 @@ namespace Fatboy
     YolonaOss::BoxRenderer::draw(transformVehicle, glm::vec4(0, 0.4, 1, 1));
 
     YolonaOss::BoxRenderer::end();
+
+
+    YolonaOss::SphereRenderer::start();
+    for (auto sphere : _bullets) {
+      glm::mat4 transform = sphere->getTransformation();
+      transform = glm::scale(transform, glm::vec3(sphere->getRadius(), sphere->getRadius(), sphere->getRadius()));
+      YolonaOss::SphereRenderer::draw(transform, glm::vec4(0, 0.4, 1, 1));
+    }
+    YolonaOss::SphereRenderer::end();
   }
 
   void Protagonist::update()
@@ -62,14 +74,24 @@ namespace Fatboy
     }
     else
       _physBody->setSteering(0);
+    if (isPressed(YolonaOss::GL::Key::KEY_SPACE) && !_pressed)
+    {
+      auto bullet = _physic->newSphere(_physBody->getPosition() - glm::vec3(0,-1,0), 0.1, true);
+      glm::vec3 v = glm::vec3(0, 0, 10) * _physBody->getRotation() + glm::vec3(0,4,0);
+      bullet->setVelocity(v);
+      _bullets.push_back(bullet);
+      _pressed = true;
+    }
+    else if (!isPressed(YolonaOss::GL::Key::KEY_SPACE))
+      _pressed = false;
     if (isPressed(YolonaOss::GL::Key::KEY_ENTER))
     {
       _physBody->setPosition(getStartPos());
       _physBody->setVelocity(glm::vec3(0, 0, 0));
       _physBody->setAngularVelocity(glm::vec3(0, 0, 0));
       _physBody->setRotation(glm::quat(glm::vec3(0,0,0)));
+      _bullets.clear();
     }
-
   }
 
   glm::vec3 Protagonist::getPosition()

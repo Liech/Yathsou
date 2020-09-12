@@ -67,6 +67,13 @@ namespace Suthanus
       _body->setAngularVelocity(btVector3(velocity[0], velocity[1], velocity[2]));
     }
 
+    glm::quat BoxBullet::getRotation() const
+    {
+      btTransform transform = _body->getCenterOfMassTransform();
+      auto rot = transform.getRotation();
+      return glm::quat(rot.x(), rot.y(), rot.z(), rot.w());
+    }
+
     void BoxBullet::setRotation(glm::quat rot) {
       btTransform transform = _body->getCenterOfMassTransform();
       btQuaternion q;

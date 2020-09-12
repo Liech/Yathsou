@@ -161,6 +161,13 @@ namespace Suthanus
       _body->setAngularVelocity(btVector3(rot[0], rot[1], rot[2]));
     }
 
+    glm::quat VehicleBulletRaycast::getRotation() const
+    {
+      btTransform transform = _body->getCenterOfMassTransform();
+      auto rot = transform.getRotation();
+      return glm::quat(rot.x(), rot.y(), rot.z(), rot.w());
+    }
+
     void VehicleBulletRaycast::setRotation(glm::quat rot){
       btTransform transform = _body->getCenterOfMassTransform();
       btQuaternion q;
