@@ -64,16 +64,17 @@ namespace Suthanus
 
     void BoxBullet::setAngularVelocity(glm::vec3 velocity)
     {
-      _body->setAngularFactor(btVector3(velocity[0], velocity[1], velocity[2]));
+      _body->setAngularVelocity(btVector3(velocity[0], velocity[1], velocity[2]));
     }
 
-    void BoxBullet::setRotation(glm::vec3 rotation)
-    {
+    void BoxBullet::setRotation(glm::quat rot) {
       btTransform transform = _body->getCenterOfMassTransform();
-      //btQuaternion quat;
-      //quat.set
-      //transform.setRotation(btQuaternion::getIdentity());
-      
+      btQuaternion q;
+      q.setX(rot.x);
+      q.setY(rot.y);
+      q.setZ(rot.z);
+      q.setW(rot.w);
+      transform.setRotation(btQuaternion());
       _body->setCenterOfMassTransform(transform);
     }
   }

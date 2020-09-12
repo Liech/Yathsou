@@ -5,6 +5,7 @@
 #include "SuthanusPhysicsLib/PhysicTest.h"
 #include "SuthanusPhysicsLib/Vehicle.h"
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 
 namespace Fatboy
 {
@@ -66,7 +67,7 @@ namespace Fatboy
       _physBody->setPosition(getStartPos());
       _physBody->setVelocity(glm::vec3(0, 0, 0));
       _physBody->setAngularVelocity(glm::vec3(0, 0, 0));
-      _physBody->setRotation(glm::vec3(0, 0, 0));
+      _physBody->setRotation(glm::quat(glm::vec3(0,0,0)));
     }
 
   }
