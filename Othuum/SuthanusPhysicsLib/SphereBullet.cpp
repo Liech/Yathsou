@@ -29,6 +29,7 @@ namespace Suthanus
 
       _body = new btRigidBody(rbInfo);
       _world->addRigidBody(_body);
+      _body->setCollisionFlags(_body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
     }
 
     SphereBullet::~SphereBullet()

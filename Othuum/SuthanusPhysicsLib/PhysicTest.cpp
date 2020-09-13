@@ -9,13 +9,22 @@
 
 namespace Suthanus
 {
-  PhysicTest::PhysicTest() :
-      _broadphase            (new btDbvtBroadphase               ())
-    , _collisionConfiguration(new btDefaultCollisionConfiguration())
-    , _dispatcher            (new btCollisionDispatcher          (_collisionConfiguration))
-    , _solver                (new btSequentialImpulseConstraintSolver())
-    , _world                 (new btDiscreteDynamicsWorld(_dispatcher, new btDbvtBroadphase(), _solver, _collisionConfiguration))
+  bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
   {
+    //((bulletObject*)obj1->getUserPointer())->hit = true;
+
+    //((bulletObject*)obj2->getUserPointer())->hit = true;
+    return false;
+  }
+
+  PhysicTest::PhysicTest() :
+    _broadphase(new btDbvtBroadphase())
+    , _collisionConfiguration(new btDefaultCollisionConfiguration())
+    , _dispatcher(new btCollisionDispatcher(_collisionConfiguration))
+    , _solver(new btSequentialImpulseConstraintSolver())
+    , _world(new btDiscreteDynamicsWorld(_dispatcher, new btDbvtBroadphase(), _solver, _collisionConfiguration))
+  {
+    gContactAddedCallback = callbackFunc;
   }
 
   void PhysicTest::debugDrawWorld() {

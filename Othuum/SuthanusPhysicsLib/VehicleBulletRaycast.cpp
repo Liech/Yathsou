@@ -55,6 +55,7 @@ namespace Suthanus
 
       //Adds the wheels to the vehicle
       addWheels(&halfExtends, _vehicle, tuning);
+      _body->setCollisionFlags(_body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
     }
 
 

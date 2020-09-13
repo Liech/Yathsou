@@ -77,7 +77,7 @@ namespace Fatboy
     if (isPressed(YolonaOss::GL::Key::KEY_SPACE) && !_pressed)
     {
       auto bullet = _physic->newSphere(_physBody->getPosition() - glm::vec3(0,-1,0), 0.1, true);
-      glm::vec3 v = glm::vec3(0, 0, 10) * _physBody->getRotation() + glm::vec3(0,4,0);
+      glm::vec3 v = glm::vec3(0, 0, 4) * _physBody->getRotation() + glm::vec3(0,4,0);
       bullet->setVelocity(v);
       _bullets.push_back(bullet);
       _pressed = true;
