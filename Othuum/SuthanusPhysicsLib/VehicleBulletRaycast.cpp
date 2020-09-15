@@ -37,6 +37,8 @@ namespace Suthanus
       compound->addChildShape(localTransform, chassisShape);
       _chassis = this->createChassisRigidBodyFromShape(compound,spawnPos);
       _body = _chassis;
+      _body->setUserPointer(this);
+
       _world->addRigidBody(_chassis);
 
       btVehicleRaycaster* vehicleRayCaster = new btDefaultVehicleRaycaster(_world);

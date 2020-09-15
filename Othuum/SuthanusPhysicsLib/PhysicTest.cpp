@@ -9,14 +9,6 @@
 
 namespace Suthanus
 {
-  bool callbackFunc(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
-  {
-    //((bulletObject*)obj1->getUserPointer())->hit = true;
-
-    //((bulletObject*)obj2->getUserPointer())->hit = true;
-    return false;
-  }
-
   PhysicTest::PhysicTest() :
     _broadphase(new btDbvtBroadphase())
     , _collisionConfiguration(new btDefaultCollisionConfiguration())
@@ -24,7 +16,7 @@ namespace Suthanus
     , _solver(new btSequentialImpulseConstraintSolver())
     , _world(new btDiscreteDynamicsWorld(_dispatcher, new btDbvtBroadphase(), _solver, _collisionConfiguration))
   {
-    gContactAddedCallback = callbackFunc;
+
   }
 
   void PhysicTest::debugDrawWorld() {
@@ -44,6 +36,7 @@ namespace Suthanus
   void PhysicTest::update()
   {
     _world->stepSimulation(1.f / 10.f, 1);
+    handleCollision();
   }
 
   std::shared_ptr<Box> PhysicTest::newBox(glm::vec3 pos, glm::vec3 size, bool isDynamic)
@@ -63,5 +56,31 @@ namespace Suthanus
   {
     Bullet::VehicleBulletRaycast* result = new Bullet::VehicleBulletRaycast(_world, pos);
     return std::shared_ptr<Vehicle>(dynamic_cast<Vehicle*>(result));
+  }
+
+  void PhysicTest::handleCollision()
+  {
+    btDispatcher* dp = _world->getDispatcher();
+    const int numManifolds = dp->getNumManifolds();
+    for (int m = 0; m < numManifolds; ++m)
+    {
+      btPersistentManifold* man = dp->getManifoldByIndexInternal(m);
+      const btRigidBody* obA = static_cast<const btRigidBody*>(man->getBody0());
+      const btRigidBody* obB = static_cast<const btRigidBody*>(man->getBody1());
+      PhysicObject* ptrA = (PhysicObject*)obA->getUserPointer();
+      PhysicObject* ptrB = (PhysicObject*)obB->getUserPointer();
+      // use user pointers to determine if objects are eligible for destruction.
+
+      ptrA->collisionEvent(ptrB);
+      ptrB->collisionEvent(ptrA);
+      //  const int numc = man->getNumContacts();
+    //  float totalImpact = 0.0f;
+    //  for (int c = 0; c < numc; ++c)
+    //    totalImpact += man->getContactPoint(c).m_appliedImpulse;
+    //  if (totalImpact > threshold)
+    //  {
+    //    // Here you can break one, or both shapes, if so desired.
+    //  }
+    }
   }
 }

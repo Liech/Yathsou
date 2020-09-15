@@ -29,6 +29,7 @@ namespace Suthanus
       btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
 
       _body = new btRigidBody(rbInfo);
+      _body->setUserPointer(this);
       _world->addRigidBody(_body);
       _body->setCollisionFlags(_body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
     }

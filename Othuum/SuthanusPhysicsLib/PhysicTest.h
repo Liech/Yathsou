@@ -30,6 +30,9 @@ namespace Suthanus
     std::shared_ptr<Sphere>  newSphere (glm::vec3 pos, float     radius, bool isDynamic);
     std::shared_ptr<Vehicle> newVehicle(glm::vec3 pos);
 
+  private:
+    void handleCollision();
+
     btBroadphaseInterface               * _broadphase            ;
     btDefaultCollisionConfiguration     * _collisionConfiguration;
     btCollisionDispatcher               * _dispatcher            ;
