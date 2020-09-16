@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <functional>
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
@@ -9,6 +10,7 @@ namespace Suthanus
   class PhysicObject
   {
   public:
+    virtual ~PhysicObject() = default;
     virtual glm::vec3 getPosition       ()                    const = 0;
     virtual glm::mat4 getTransformation ()                    const = 0;
     virtual glm::quat getRotation       ()                    const = 0;
@@ -17,9 +19,13 @@ namespace Suthanus
     virtual void      setAngularVelocity(glm::vec3)                 = 0;
     virtual void      setRotation       (glm::quat)                 = 0;
     
-    void setCollisionCallback(std::function<void(PhysicObject*)>);
-    void collisionEvent      (PhysicObject* other);
+    std::weak_ptr<PhysicObject> self() { return _self; }
+
+    void initialize(std::weak_ptr<PhysicObject> self);
+    void setCollisionCallback(std::function<void(std::weak_ptr<PhysicObject>)>);
+    void collisionEvent      (std::weak_ptr<PhysicObject> other);
   private:
-    std::function<void(PhysicObject*)> _collsionCallback = [](PhysicObject*) {};
+    std::function<void(std::weak_ptr<PhysicObject>)> _collsionCallback = [](std::weak_ptr<PhysicObject>) {};
+    std::weak_ptr<PhysicObject> _self;
   };
 }

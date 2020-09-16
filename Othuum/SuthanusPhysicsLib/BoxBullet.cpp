@@ -25,13 +25,20 @@ namespace Suthanus
         colShape->calculateLocalInertia(mass, localInertia);
 
       startTransform.setOrigin(btVector3(pos[0], pos[1], pos[2]));
-      btDefaultMotionState* myMotionState = new btDefaultMotionState(startTransform);
-      btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, myMotionState, colShape, localInertia);
+      _motionState = new btDefaultMotionState(startTransform);
+      btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, _motionState, colShape, localInertia);
 
       _body = new btRigidBody(rbInfo);
       _body->setUserPointer(this);
       _world->addRigidBody(_body);
       _body->setCollisionFlags(_body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+    }
+
+    BoxBullet::~BoxBullet()
+    {
+      _world->removeRigidBody(_body);
+      delete _motionState;
+      delete _body;
     }
 
     glm::vec3 BoxBullet::getPosition() const

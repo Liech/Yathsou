@@ -35,6 +35,7 @@ namespace Suthanus
 
     SphereBullet::~SphereBullet()
     {
+      _world->removeRigidBody(_body);
       delete _motionState;
       delete _body;
     }

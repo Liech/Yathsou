@@ -12,6 +12,7 @@ namespace Suthanus
     {
     public:
       VehicleBulletRaycast(btDiscreteDynamicsWorld* world, glm::vec3 pos);
+      ~VehicleBulletRaycast();
       glm::vec3 getSize();
 
       float maxSteering()          override;
@@ -24,7 +25,6 @@ namespace Suthanus
       btRigidBody*             _body     ;
       btVehicleRaycaster*      _raycaster;
       btRaycastVehicle*        _vehicle  ;
-      btRigidBody*             _chassis  ;
 
       btRigidBody* createChassisRigidBodyFromShape(btCollisionShape* chassisShape, btVector3 pos);
       void         addWheels(btVector3* halfExtents, btRaycastVehicle* vehicle, btRaycastVehicle::btVehicleTuning tuning);

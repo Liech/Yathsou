@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vector>
+#include <set>
 
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "YolonaOss/OpenGL/Updateable.h"
@@ -35,7 +36,7 @@ namespace Fatboy
     YolonaOss::GL::DrawSpecification*              _spec    ;
     std::shared_ptr<Suthanus::PhysicTest>          _physic  ;
     std::shared_ptr<Suthanus::Vehicle>             _physBody;
-    std::vector<std::shared_ptr<Suthanus::Sphere>> _bullets ;
+    std::set<std::shared_ptr<Suthanus::Sphere>> _bullets ;
 
     bool _pressed = false;
   };
