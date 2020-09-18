@@ -34,6 +34,23 @@ namespace Suthanus
     _world->setGravity(btVector3(0, -10, 0));
   }
 
+  bool PhysicEngine::raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint)
+  {
+    btVector3 bOrigin   (origin.x, origin.y, origin.z);
+    btVector3 bDirection(direction.x, direction.y, direction.z);
+    btCollisionWorld::ClosestRayResultCallback result(bOrigin,bDirection);
+    _world->rayTest(bOrigin, bDirection, result);
+    if (!result.hasHit()) {
+      hitPoint = glm::vec3(0, 0, 0);
+      return false;
+    }
+    else
+    {
+      hitPoint = origin + direction * result.m_closestHitFraction;
+      return true;
+    }
+  }
+
   void PhysicEngine::update()
   {
     _world->stepSimulation(1.f / 10.f, 1);

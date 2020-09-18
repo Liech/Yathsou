@@ -47,6 +47,18 @@ namespace Fatboy
   void Protagonist::update()
   {
     handleInput();
+    handlePicking();
+  }
+
+  void Protagonist::handlePicking()
+  {
+    std::pair<double, double> pos = _spec->getWindow()->getCursorPos();
+    glm::vec3 camPos  = _spec->getCam()->getPosition();
+    glm::vec3 pickDir = _spec->getCam()->getPickRay((float)pos.first, (float)pos.second);
+    glm::vec3 hitPoint;
+    bool hit = _physic->raycast(camPos, pickDir, hitPoint);
+    if (hit)
+      _lastPickedPosition = hitPoint;
   }
 
   void Protagonist::handleInput()

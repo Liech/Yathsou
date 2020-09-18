@@ -32,11 +32,13 @@ namespace Fatboy
   private:
     glm::vec3 getStartPos() { return glm::vec3(0, 2, 0); }
     void handleInput();
+    void handlePicking();
 
     YolonaOss::GL::DrawSpecification*              _spec    ;
     std::shared_ptr<Suthanus::PhysicEngine>          _physic  ;
     std::shared_ptr<Suthanus::Vehicle>             _physBody;
     std::set<std::shared_ptr<Suthanus::Sphere>> _bullets ;
+    glm::vec3 _lastPickedPosition;
 
     bool _pressed = false;
   };
