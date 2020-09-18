@@ -3,7 +3,7 @@
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "YolonaOss/Renderer/SphereRenderer.h"
 #include "YolonaOss/OpenGL/Window.h"
-#include "SuthanusPhysicsLib/PhysicTest.h"
+#include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/Vehicle.h"
 #include "SuthanusPhysicsLib/Sphere.h"
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
@@ -12,7 +12,7 @@
 
 namespace Fatboy
 {
-  Protagonist::Protagonist(std::shared_ptr<Suthanus::PhysicTest> physic)
+  Protagonist::Protagonist(std::shared_ptr<Suthanus::PhysicEngine> physic)
   {
     _physic = physic;
   }

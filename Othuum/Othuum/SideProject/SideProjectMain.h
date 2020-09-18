@@ -8,7 +8,7 @@
 #include "SuthanusPhysicsLib/Vehicle.h"
 
 namespace YolonaOss{namespace GL{class DrawableList;}}
-namespace Suthanus { class PhysicTest; }
+namespace Suthanus { class PhysicEngine; }
 
 namespace SideProject
 {
@@ -19,7 +19,7 @@ namespace SideProject
     virtual void draw()                                  override;
   private:
     std::shared_ptr<YolonaOss::GL::DrawableList>      _list;
-    std::shared_ptr< Suthanus::PhysicTest>            _phys;
+    std::shared_ptr< Suthanus::PhysicEngine>            _phys;
     std::vector< std::shared_ptr< Suthanus::Box> >    _boxes;
     std::vector< std::shared_ptr< Suthanus::Sphere> > _spheres;
                  std::shared_ptr< Suthanus::Vehicle > _vehicle;

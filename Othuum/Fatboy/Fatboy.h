@@ -17,7 +17,7 @@ namespace YolonaOss
 }
 namespace Suthanus
 {
-  class PhysicTest;
+  class PhysicEngine;
   class Box;
 }
 
@@ -37,7 +37,7 @@ namespace Fatboy
     void initPhysic();
     void drawLandscape();
 
-    std::shared_ptr<Suthanus::PhysicTest>            _physic;
+    std::shared_ptr<Suthanus::PhysicEngine>            _physic;
     std::shared_ptr<Suthanus::Box>                   _landscape;
     std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables;
     std::shared_ptr<YolonaOss::GL::DrawableList>     _postDrawables;

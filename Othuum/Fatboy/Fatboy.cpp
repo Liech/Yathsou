@@ -1,6 +1,6 @@
 #include "Fatboy.h"
 
-#include "SuthanusPhysicsLib/PhysicTest.h"
+#include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/Box.h"
 #include "YolonaOss/Drawables/FPS.h"
 #include "YolonaOss/Drawables/Background.h"
@@ -32,7 +32,7 @@ namespace Fatboy
 
   void Fatboy::initPhysic()
   {
-    _physic = std::make_shared<Suthanus::PhysicTest>();    
+    _physic = std::make_shared<Suthanus::PhysicEngine>();    
     _landscape = _physic->newBox(glm::vec3(0, 0, 0), glm::vec3(20, 0, 20), false);
   }
 

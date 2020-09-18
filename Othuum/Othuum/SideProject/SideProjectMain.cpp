@@ -1,6 +1,6 @@
 #include "SideProjectMain.h"
 
-#include "SuthanusPhysicsLib/PhysicTest.h"
+#include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "YolonaOss/Renderer/SphereRenderer.h"
@@ -22,7 +22,7 @@ namespace SideProject
     std::shared_ptr<YolonaOss::Camera::CameraSystem> cam = std::make_shared<YolonaOss::Camera::CameraSystem>();
     cam->load(spec);
     Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Updateable>>::add(cam, { "Main" });
-    _phys = std::make_shared<Suthanus::PhysicTest>();
+    _phys = std::make_shared<Suthanus::PhysicEngine>();
     _phys->go();
     _boxes.push_back(_phys->newBox(glm::vec3(0, -3, 0)  ,glm::vec3(10,0.2,10),false));
     _spheres.push_back(_phys->newSphere(glm::vec3(0, 4, 0.5), 0.5, true));

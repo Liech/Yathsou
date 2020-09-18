@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="PhysicTest.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
@@ -39,11 +36,11 @@
     <ClCompile Include="PhysicObject.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicEngine.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="PhysicTest.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -66,6 +63,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="VehicleDriver.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicEngine.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

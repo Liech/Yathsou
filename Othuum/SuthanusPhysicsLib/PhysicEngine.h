@@ -17,10 +17,10 @@ class btIDebugDraw;
 
 namespace Suthanus
 {
-  class PhysicTest
+  class PhysicEngine
   {
   public:
-    PhysicTest();
+    PhysicEngine();
     void go();
     void update();
     void setDebugDrawer(btIDebugDraw* drawer);

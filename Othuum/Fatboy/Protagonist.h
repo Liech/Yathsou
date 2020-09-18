@@ -10,7 +10,7 @@
 
 namespace Suthanus
 {
-  class PhysicTest;
+  class PhysicEngine;
   class Vehicle;
   class Sphere;
 }
@@ -20,7 +20,7 @@ namespace Fatboy
   class Protagonist : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable, public YolonaOss::GetPosition
   {
   public:
-    Protagonist(std::shared_ptr<Suthanus::PhysicTest>);
+    Protagonist(std::shared_ptr<Suthanus::PhysicEngine>);
 
     virtual void load(YolonaOss::GL::DrawSpecification*) override;
     virtual void draw()                                  override;
@@ -33,7 +33,7 @@ namespace Fatboy
     void handleInput();
 
     YolonaOss::GL::DrawSpecification*              _spec    ;
-    std::shared_ptr<Suthanus::PhysicTest>          _physic  ;
+    std::shared_ptr<Suthanus::PhysicEngine>          _physic  ;
     std::shared_ptr<Suthanus::Vehicle>             _physBody;
     std::vector<std::shared_ptr<Suthanus::Sphere>> _bullets ;
 
