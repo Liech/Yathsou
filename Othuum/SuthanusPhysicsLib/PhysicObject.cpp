@@ -2,13 +2,18 @@
 
 namespace Suthanus
 {
-  void PhysicObject::setCollisionCallback(std::function<void(PhysicObject*)> callback)
+  void PhysicObject::setCollisionCallback(std::function<void(std::weak_ptr<PhysicObject>)> callback)
   {
     _collsionCallback = callback;
   }
 
-  void PhysicObject::collisionEvent(PhysicObject* other)
+  void PhysicObject::collisionEvent(std::weak_ptr<PhysicObject> other)
   {
     _collsionCallback(other);
+  }
+
+  void PhysicObject::initialize(std::weak_ptr<PhysicObject> self)
+  {
+    _self = self;
   }
 }

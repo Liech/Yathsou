@@ -6,23 +6,6 @@ namespace Suthanus
 {
   namespace Bullet
   {
-    float VehicleBulletRaycast::maxAcceleration(){
-      return 1000;
-    }
-
-    float VehicleBulletRaycast::maxSteering(){
-      return 1;
-    }
-
-    void VehicleBulletRaycast::setAcceleration(float accel){
-      _vehicle->applyEngineForce(accel, 2);
-      _vehicle->applyEngineForce(accel, 3);
-    }
-
-    void VehicleBulletRaycast::setSteering(float steer) {
-      _vehicle->setSteeringValue(btScalar(steer), 0);
-      _vehicle->setSteeringValue(btScalar(steer), 1);
-    }
 
     VehicleBulletRaycast::VehicleBulletRaycast(btDiscreteDynamicsWorld* world, glm::vec3 pos)
     {
@@ -35,11 +18,10 @@ namespace Suthanus
       localTransform.setIdentity();
       localTransform.setOrigin(btVector3(0, 0,0));
       compound->addChildShape(localTransform, chassisShape);
-      _chassis = this->createChassisRigidBodyFromShape(compound,spawnPos);
-      _body = _chassis;
-      _body->setUserPointer(this);
+      _body = this->createChassisRigidBodyFromShape(compound,spawnPos);
+      _body->setUserPointer(this);      
 
-      _world->addRigidBody(_chassis);
+      _world->addRigidBody(_body);
 
       btVehicleRaycaster* vehicleRayCaster = new btDefaultVehicleRaycaster(_world);
 
@@ -47,10 +29,10 @@ namespace Suthanus
       
       
       //Creates a new instance of the raycast vehicle
-      _vehicle = new btRaycastVehicle(tuning, _chassis, vehicleRayCaster);
+      _vehicle = new btRaycastVehicle(tuning, _body, vehicleRayCaster);
 
       //Never deactivate the vehicle
-      _chassis->setActivationState(DISABLE_DEACTIVATION);
+      _body->setActivationState(DISABLE_DEACTIVATION);
 
       //Adds the vehicle to the world
       _world->addVehicle(_vehicle);
@@ -60,6 +42,31 @@ namespace Suthanus
       _body->setCollisionFlags(_body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
     }
 
+    VehicleBulletRaycast::~VehicleBulletRaycast()
+    {
+      _world->removeRigidBody(_body);
+      delete _body;
+      delete _raycaster;
+      delete _vehicle;
+    }
+
+    float VehicleBulletRaycast::maxAcceleration() {
+      return 1000;
+    }
+
+    float VehicleBulletRaycast::maxSteering() {
+      return 1;
+    }
+
+    void VehicleBulletRaycast::setAcceleration(float accel) {
+      _vehicle->applyEngineForce(accel, 2);
+      _vehicle->applyEngineForce(accel, 3);
+    }
+
+    void VehicleBulletRaycast::setSteering(float steer) {
+      _vehicle->setSteeringValue(btScalar(steer), 0);
+      _vehicle->setSteeringValue(btScalar(steer), 1);
+    }
 
     void VehicleBulletRaycast::addWheels(
       btVector3* halfExtents,
