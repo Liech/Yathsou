@@ -18,6 +18,8 @@ namespace Suthanus
 
 namespace Fatboy
 {
+  class TankTower;
+
   class Protagonist : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable, public YolonaOss::GetPosition
   {
   public:
@@ -34,10 +36,11 @@ namespace Fatboy
     void handleInput();
     void handlePicking();
 
-    YolonaOss::GL::DrawSpecification*              _spec    ;
-    std::shared_ptr<Suthanus::PhysicEngine>          _physic  ;
-    std::shared_ptr<Suthanus::Vehicle>             _physBody;
+    YolonaOss::GL::DrawSpecification*           _spec    ;
+    std::shared_ptr<Suthanus::PhysicEngine>     _physic  ;
+    std::shared_ptr<Suthanus::Vehicle>          _physBody;
     std::set<std::shared_ptr<Suthanus::Sphere>> _bullets ;
+    std::shared_ptr<TankTower>                  _tower   ;
     glm::vec3 _lastPickedPosition;
 
     bool _pressed = false;

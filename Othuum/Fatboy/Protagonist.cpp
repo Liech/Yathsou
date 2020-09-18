@@ -9,6 +9,7 @@
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include <IyathuumCoreLib/lib/glm/gtx/quaternion.hpp>
+#include "TankTower.h"
 
 namespace Fatboy
 {
@@ -21,6 +22,9 @@ namespace Fatboy
   {
     _spec = spec;
     _physBody = _physic->newVehicle(glm::vec3(0, 2, 0));
+
+    _tower = std::make_shared<TankTower>(*_physBody, glm::vec3(0, 0.3f, 0));
+    _tower->load(spec);
   }
 
   void Protagonist::draw()
@@ -42,12 +46,15 @@ namespace Fatboy
       YolonaOss::SphereRenderer::draw(transform, glm::vec4(0, 0.4, 1, 1));
     }
     YolonaOss::SphereRenderer::end();
+
+    _tower->draw();
   }
 
   void Protagonist::update()
   {
     handleInput();
     handlePicking();
+    _tower->update();
   }
 
   void Protagonist::handlePicking()
@@ -88,7 +95,7 @@ namespace Fatboy
       _physBody->setSteering(0);
     if (isPressed(YolonaOss::GL::Key::KEY_SPACE) && !_pressed)
     {
-      auto bullet = _physic->newSphere(_physBody->getPosition() - glm::vec3(0,-1,0), 0.1, true);
+      auto bullet = _physic->newSphere(_physBody->getPosition() - glm::vec3(0,-1,0), 0.1f, true);
       glm::vec3 v = glm::vec3(0, 0, 4) * _physBody->getRotation() + glm::vec3(0,4,0);
       bullet->setVelocity(v);
       _bullets.insert(bullet);
