@@ -23,8 +23,11 @@ namespace Suthanus
     PhysicEngine();
     void go();
     void update();
+    void setTicksPerSecond(int amount);
+
     void setDebugDrawer(btIDebugDraw* drawer);
     void debugDrawWorld();
+
     bool raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint);
 
     std::shared_ptr<Box   >  newBox    (glm::vec3 pos, glm::vec3 size  , bool isDynamic);
@@ -33,6 +36,8 @@ namespace Suthanus
 
   private:
     void handleCollision();
+
+    int _physicTicksPerSecond = 30;
 
     btBroadphaseInterface               * _broadphase            ;
     btDefaultCollisionConfiguration     * _collisionConfiguration;

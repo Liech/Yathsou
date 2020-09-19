@@ -168,12 +168,14 @@
     <ClInclude Include="Util\Geometry.h" />
     <ClInclude Include="Util\ImageSubsetUtil.h" />
     <ClInclude Include="Util\ImageUtil.h" />
+    <ClInclude Include="Util\UpdateTimer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseTypes\AABB.cpp" />
     <ClCompile Include="BaseTypes\Color.cpp" />
     <ClCompile Include="Util\ImageSubsetUtil.cpp" />
     <ClCompile Include="Util\ImageUtil.cpp" />
+    <ClCompile Include="Util\UpdateTimer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

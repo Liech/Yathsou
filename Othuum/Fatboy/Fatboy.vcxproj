@@ -151,12 +151,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Fatboy.cpp" />
+    <ClCompile Include="GameConfiguration.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Protagonist.cpp" />
     <ClCompile Include="TankTower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fatboy.h" />
+    <ClInclude Include="GameConfiguration.h" />
     <ClInclude Include="Protagonist.h" />
     <ClInclude Include="TankTower.h" />
   </ItemGroup>

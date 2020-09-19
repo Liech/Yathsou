@@ -14,10 +14,27 @@ namespace Fatboy
   public:
     TankTower(Suthanus::PhysicObject& attachTo, glm::vec3 offset);
 
+    float getMaxAimUp  ();
+    float getMaxAimDown();
+    float getTurnSpeed ();
+    glm::vec3 getTargetDirection();
+    glm::vec3 getCurrentGlobalDirection();
+
+    void setMaxAimUp  (float maxValue);
+    void setMaxAimDown(float maxValue);
+    void setTurnSpeed (float degreePerSecond);
+    void setGlobalTargetDirection(glm::vec3 dir);    
+
     virtual void load(YolonaOss::GL::DrawSpecification*) override;
     virtual void draw()                                  override;
     virtual void update()                                override;
   private:
+    float                   _maxAimUp  ;
+    float                   _maxAimDown;
+    float                   _turnSpeed ;
+    glm::vec3               _targetDirection;
+
+    glm::vec3               _direction ;
     glm::vec3               _offset    ;
     Suthanus::PhysicObject& _attachedTo;
   };

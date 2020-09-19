@@ -24,6 +24,11 @@ namespace Suthanus
     _world->debugDrawWorld();
   }
 
+  void PhysicEngine::setTicksPerSecond(int amount)
+  {
+    _physicTicksPerSecond = amount;
+  }
+
   void PhysicEngine::setDebugDrawer(btIDebugDraw* drawer)
   {
     _world->setDebugDrawer(drawer);
@@ -53,7 +58,7 @@ namespace Suthanus
 
   void PhysicEngine::update()
   {
-    _world->stepSimulation(1.f / 10.f, 1);
+    _world->stepSimulation(1.f / _physicTicksPerSecond, 1);
     handleCollision();
   }
 

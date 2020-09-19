@@ -36,7 +36,7 @@ namespace YolonaOss {
 
     private:
 
-        int _width = 1920;
+      int _width = 1920;
       int _height = 1080;
       GLFWwindow* _window = nullptr;
       float _mouseWheelMovement = 0;

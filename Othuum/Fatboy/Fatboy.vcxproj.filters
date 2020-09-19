@@ -27,6 +27,9 @@
     <ClCompile Include="TankTower.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameConfiguration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fatboy.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TankTower.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConfiguration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

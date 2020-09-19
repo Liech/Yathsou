@@ -105,6 +105,9 @@
     <ClInclude Include="BaseTypes\PolygonNet.h">
       <Filter>Header Files\BaseTypes</Filter>
     </ClInclude>
+    <ClInclude Include="Util\UpdateTimer.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Util\ImageSubsetUtil.cpp">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="BaseTypes\AABB.cpp">
       <Filter>Source Files\BaseTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\UpdateTimer.cpp">
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
