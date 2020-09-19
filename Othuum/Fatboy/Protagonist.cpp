@@ -23,7 +23,7 @@ namespace Fatboy
     _spec = spec;
     _physBody = _physic->newVehicle(glm::vec3(0, 2, 0));
 
-    _tower = std::make_shared<TankTower>(*_physBody, glm::vec3(0, 0.3f, 0));
+    _tower = std::make_shared<TankTower>(*_physBody, glm::vec3(0, 0.3f, 0), glm::vec3(0,0,1));
     _tower->load(spec);
   }
 
@@ -35,7 +35,7 @@ namespace Fatboy
     transformVehicle = glm::scale(transformVehicle, _physBody->getSize());
     transformVehicle = glm::translate(transformVehicle, glm::vec3(-0.5, -0.5, -0.5));
     YolonaOss::BoxRenderer::draw(transformVehicle, glm::vec4(0, 0.4, 1, 1));
-
+    YolonaOss::BoxRenderer::drawDot(_lastPickedPosition, glm::vec3(0.1f,0.1f,0.1f),glm::vec4(1,1,1,1));
     YolonaOss::BoxRenderer::end();
 
 
@@ -65,7 +65,10 @@ namespace Fatboy
     glm::vec3 hitPoint;
     bool hit = _physic->raycast(camPos, pickDir, hitPoint);
     if (hit)
+    {
       _lastPickedPosition = hitPoint;
+      _tower->setGlobalTargetDirection(hitPoint-_tower->getGlobalPosition());
+    }
   }
 
   void Protagonist::handleInput()

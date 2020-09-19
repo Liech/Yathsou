@@ -51,7 +51,8 @@ namespace Suthanus
     }
     else
     {
-      hitPoint = origin + direction * result.m_closestHitFraction;
+      //hitPoint = origin + ;
+      hitPoint = glm::vec3(result.m_hitPointWorld.x(), result.m_hitPointWorld.y(), result.m_hitPointWorld.z());
       return true;
     }
   }

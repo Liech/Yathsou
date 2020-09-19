@@ -4,8 +4,8 @@
 
 namespace Fatboy
 {
-  TankTower::TankTower(Suthanus::PhysicObject& attachTo, glm::vec3 offset)
-    : _attachedTo(attachTo), _offset(offset)
+  TankTower::TankTower(Suthanus::PhysicObject& attachTo, glm::vec3 offset, glm::vec3 startDirection)
+    : _attachedTo(attachTo), _offset(offset), _direction(startDirection),_targetDirection(startDirection)
   {
   }
 
@@ -19,12 +19,26 @@ namespace Fatboy
     //Fatboy::GameConfiguration::instance().PhysicTicksPerSecond
   }
 
+  glm::vec3 TankTower::getGlobalPosition()
+  {
+    glm::vec4 offsetTransformed = _attachedTo.getTransformation() * glm::vec4(_offset, 1);
+    glm::vec3 result = glm::vec3(offsetTransformed.x, offsetTransformed.y, offsetTransformed.z);
+    return result;
+  }
+
+  glm::vec3 TankTower::getCurrentGlobalDirection()
+  {
+    glm::vec4 dirTransformed = _attachedTo.getTransformation() * glm::vec4(_offset + _direction, 1);
+    glm::vec3 result = glm::vec3(dirTransformed.x, dirTransformed.y, dirTransformed.z);
+    return result;
+  }
+
   void TankTower::draw()
   {
     YolonaOss::BoxRenderer::start();
-    glm::vec4 offsetTransformed = _attachedTo.getTransformation()*glm::vec4(_offset, 1);
-    glm::vec3 drawPos = glm::vec3(offsetTransformed.x, offsetTransformed.y, offsetTransformed.z);
-    YolonaOss::BoxRenderer::drawDot(drawPos, glm::vec3(0.05f), glm::vec4(1, 1, 0, 1));
+    YolonaOss::BoxRenderer::drawDot(getGlobalPosition(), glm::vec3(0.05f), glm::vec4(1, 1, 0, 1));
+    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getCurrentGlobalDirection(), 0.01, glm::vec4(1, 1, 0, 1));
+    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + _targetDirection, 0.01, glm::vec4(1, 0,1, 1));
     YolonaOss::BoxRenderer::end();
   }
 
@@ -48,11 +62,6 @@ namespace Fatboy
     return _targetDirection;
   }
 
-  glm::vec3 TankTower::getCurrentGlobalDirection()
-  {
-    return _direction;
-  }
-
   void TankTower::setMaxAimUp(float maxValue)
   {
     _maxAimUp = maxValue;
@@ -70,6 +79,6 @@ namespace Fatboy
 
   void TankTower::setGlobalTargetDirection(glm::vec3 dir)
   {
-    _targetDirection = dir;
+    _targetDirection = glm::normalize(dir);
   }   
 }

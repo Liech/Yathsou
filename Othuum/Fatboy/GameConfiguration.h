@@ -8,7 +8,7 @@ namespace Fatboy
   public:
     static GameConfiguration& instance();
 
-    int TicksPerSecond = 30;
+    int TicksPerSecond = 60;
     int ScreenWidth = 800;
     int ScreenHeight = 600;
 

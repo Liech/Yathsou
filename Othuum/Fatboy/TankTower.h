@@ -12,13 +12,14 @@ namespace Fatboy
   class TankTower : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable
   {
   public:
-    TankTower(Suthanus::PhysicObject& attachTo, glm::vec3 offset);
+    TankTower(Suthanus::PhysicObject& attachTo, glm::vec3 offset, glm::vec3 startDirection);
 
     float getMaxAimUp  ();
     float getMaxAimDown();
     float getTurnSpeed ();
     glm::vec3 getTargetDirection();
     glm::vec3 getCurrentGlobalDirection();
+    glm::vec3 getGlobalPosition();
 
     void setMaxAimUp  (float maxValue);
     void setMaxAimDown(float maxValue);
