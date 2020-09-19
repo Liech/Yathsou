@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
     if (!init) {
       init = true;
       game.load(w.getSpec());
+      updater.setTicksPerSecond(Fatboy::GameConfiguration::instance().TicksPerSecond);//reset
     }
     updater.update();
     game.draw();
