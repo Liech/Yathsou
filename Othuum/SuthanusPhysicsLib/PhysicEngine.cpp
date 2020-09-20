@@ -53,9 +53,6 @@ namespace Suthanus
     }
     else
     {
-      //btVector3 p = bOrigin.lerp(bOrigin + bDirection, result.m_closestHitFraction);
-      //hitPoint = glm::vec3(p.x(), p.y(), p.z());
-      //hitPoint = origin * result.m_closestHitFraction + target * (1-result.m_closestHitFraction);
       hitPoint = glm::vec3(result.m_hitPointWorld.x(), result.m_hitPointWorld.y(), result.m_hitPointWorld.z());
       return true;
     }

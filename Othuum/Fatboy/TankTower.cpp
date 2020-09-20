@@ -1,6 +1,7 @@
 #include "TankTower.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "GameConfiguration.h"
+#include "IyathuumCoreLib/Lib/glm/gtx/vector_angle.hpp""
 
 namespace Fatboy
 {
@@ -16,7 +17,26 @@ namespace Fatboy
 
   void TankTower::update()
   {
+    rotateTowardsTarget();
+  }
+
+  void TankTower::rotateTowardsTarget()
+  {
     //Fatboy::GameConfiguration::instance().PhysicTicksPerSecond
+    //X/Y getrennt rotieren
+    //maximale gesamtgeschwindigkeit 
+    //maximal erreichbare winkel
+
+    _direction       = glm::normalize(_direction);
+    _targetDirection = glm::normalize(_targetDirection);
+    glm::vec3 direction_YLess       = glm::vec3(_direction.x      , 0, _direction.z      );
+    glm::vec3 targetDirection_YLess = glm::vec3(_targetDirection.x, 0, _targetDirection.z);
+    glm::vec3 up     = glm::vec3(0, 1, 0);
+    glm::vec3 axis   = glm::cross(_direction, _targetDirection);
+    float angle      = glm::orientedAngle(direction_YLess, targetDirection_YLess,up);
+    if (angle > glm::pi<float>())
+      angle -= glm::pi<float>() * 2;
+    _direction       = glm::rotate(_direction, angle * 0.01f, up);
   }
 
   glm::vec3 TankTower::getGlobalPosition()

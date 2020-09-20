@@ -14,6 +14,8 @@ namespace YolonaOss {
       void addDrawable(std::shared_ptr<Drawable> draw);
       virtual void load(DrawSpecification*) override;
       virtual void draw() override;
+      virtual void debugDraw() override;
+
 
     private:
       std::vector<std::shared_ptr<Drawable>> _drawables;

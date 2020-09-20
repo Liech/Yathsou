@@ -18,5 +18,11 @@ namespace YolonaOss {
       for (int i = 0; i < _drawables.size(); i++)
         _drawables[i]->draw();
     }
+
+    void DrawableList::debugDraw()
+    {
+      for (int i = 0; i < _drawables.size(); i++)
+        _drawables[i]->debugDraw();
+    }
   }
 }

@@ -12,6 +12,7 @@ namespace YolonaOss {
 
       virtual void load(DrawSpecification*) = 0;
       virtual void draw() = 0;
+      virtual void debugDraw() {};
     };
   }
 }

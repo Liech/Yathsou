@@ -30,9 +30,11 @@ namespace Fatboy
     virtual void draw()                                  override;
     virtual void update()                                override;
   private:
-    float                   _maxAimUp  ;
-    float                   _maxAimDown;
-    float                   _turnSpeed ;
+    void rotateTowardsTarget();
+
+    float                   _maxAimUp       ;
+    float                   _maxAimDown     ;
+    float                   _turnSpeed      ;
     glm::vec3               _targetDirection;
 
     glm::vec3               _direction ;
