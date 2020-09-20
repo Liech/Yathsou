@@ -38,7 +38,7 @@ namespace Fatboy
     YolonaOss::BoxRenderer::start();
     YolonaOss::BoxRenderer::drawDot(getGlobalPosition(), glm::vec3(0.05f), glm::vec4(1, 1, 0, 1));
     YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getCurrentGlobalDirection(), 0.01, glm::vec4(1, 1, 0, 1));
-    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + _targetDirection, 0.01, glm::vec4(1, 0,1, 1));
+    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + _targetDirection, 0.05, glm::vec4(1, 0,1, 1));
     YolonaOss::BoxRenderer::end();
   }
 

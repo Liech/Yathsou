@@ -36,6 +36,7 @@ namespace Fatboy
     transformVehicle = glm::translate(transformVehicle, glm::vec3(-0.5, -0.5, -0.5));
     YolonaOss::BoxRenderer::draw(transformVehicle, glm::vec4(0, 0.4, 1, 1));
     YolonaOss::BoxRenderer::drawDot(_lastPickedPosition, glm::vec3(0.1f,0.1f,0.1f),glm::vec4(1,1,1,1));
+    
     YolonaOss::BoxRenderer::end();
 
 
@@ -59,9 +60,9 @@ namespace Fatboy
 
   void Protagonist::handlePicking()
   {
-    std::pair<double, double> pos = _spec->getWindow()->getCursorPos();
+    glm::vec2 pos = _spec->getWindow()->getCursorPos();
     glm::vec3 camPos  = _spec->getCam()->getPosition();
-    glm::vec3 pickDir = _spec->getCam()->getPickRay((float)pos.first, (float)pos.second);
+    glm::vec3 pickDir = _spec->getCam()->getPickRay((float)pos.x, (float)pos.y);
     glm::vec3 hitPoint;
     bool hit = _physic->raycast(camPos, pickDir, hitPoint);
     if (hit)

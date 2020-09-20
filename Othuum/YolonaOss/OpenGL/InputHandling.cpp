@@ -48,6 +48,7 @@ namespace YolonaOss {
       for (auto i : inputWidgets) 
         i->keyboardInput(button, status);
     }
+
     void InputHandling::mouseEvent(Key key, KeyStatus status, int mode) {
       double xpos, ypos;
       glfwGetCursorPos(_window, &xpos, &ypos);
@@ -119,7 +120,7 @@ namespace YolonaOss {
       std::set<Widgets::Widget*> moveWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("MouseWheel");
       auto c = _yWindow->getCursorPos();
       for (auto w : moveWidgets) {
-        if (!w->getGlobalPosition().isInside({c.first,c.second}))
+        if (!w->getGlobalPosition().isInside({c.x,c.y}))
           continue;
         bool stop = w->mouseWheel(glm::vec2(x,y));
         if (stop) return;

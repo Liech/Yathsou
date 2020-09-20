@@ -43,15 +43,19 @@ namespace Suthanus
   {
     btVector3 bOrigin   (origin.x, origin.y, origin.z);
     btVector3 bDirection(direction.x, direction.y, direction.z);
-    btCollisionWorld::ClosestRayResultCallback result(bOrigin,bDirection);
-    _world->rayTest(bOrigin, bDirection, result);
+    btVector3 bTarget = bOrigin + bDirection * 1000;
+    glm::vec3 target(bTarget.x(), bTarget.y(), bTarget.z());
+    btCollisionWorld::ClosestRayResultCallback result(bOrigin, bTarget);
+    _world->rayTest(bOrigin, bTarget, result);
     if (!result.hasHit()) {
       hitPoint = glm::vec3(0, 0, 0);
       return false;
     }
     else
     {
-      //hitPoint = origin + ;
+      //btVector3 p = bOrigin.lerp(bOrigin + bDirection, result.m_closestHitFraction);
+      //hitPoint = glm::vec3(p.x(), p.y(), p.z());
+      //hitPoint = origin * result.m_closestHitFraction + target * (1-result.m_closestHitFraction);
       hitPoint = glm::vec3(result.m_hitPointWorld.x(), result.m_hitPointWorld.y(), result.m_hitPointWorld.z());
       return true;
     }

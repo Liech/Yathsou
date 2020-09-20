@@ -33,7 +33,7 @@ namespace YolonaOss {
 
       glm::vec3 getPickRay(float X, float Y);
       glm::vec3 viewToWorldCoordTransform(int mouse_x, int mouse_y);
-      glm::vec3 unproject(float x, float y, glm::mat4 world, glm::mat4 view, glm::mat4 proj);
+
       float getNearPlane() { return 0.1f; }
       float getFarPlane() { return 100.0f; }
 

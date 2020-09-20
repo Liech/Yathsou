@@ -207,15 +207,14 @@ namespace YolonaOss {
       glfwSetInputMode(_window, GLFW_CURSOR, (int)status);
     }
 
-    std::pair<double, double> Window::getCursorPos() {
+    glm::vec2 Window::getCursorPos() {
       double xpos, ypos;
       glfwGetCursorPos(_window, &xpos, &ypos);
-      return std::make_pair(xpos, ypos);
+      return glm::vec2(xpos, ypos);
     }
 
-
-    void Window::setCursorPos(std::pair<double, double> cursorPos) {
-      glfwSetCursorPos(_window, cursorPos.first, cursorPos.second);
+    void Window::setCursorPos(glm::vec2 cursorPos) {
+      glfwSetCursorPos(_window, cursorPos.x, cursorPos.y);
     }
 
     double Window::getTime() {

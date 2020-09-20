@@ -24,12 +24,12 @@ namespace YolonaOss {
 
       DrawSpecification* getSpec() { return _spec; }
 
-      KeyStatus                  getKeyStatus(Key key);
-      double                     getTime();
-      void                       setCursorStatus(CursorStatus);
-      std::pair<double, double>  getCursorPos();
-      void                       setCursorPos(std::pair<double, double>);
-      float                      getMouseWheelMovement();
+      KeyStatus  getKeyStatus(Key key);
+      double     getTime();
+      void       setCursorStatus(CursorStatus);
+      glm::vec2  getCursorPos();
+      void       setCursorPos(glm::vec2 pos);
+      float      getMouseWheelMovement();
 
       int getWidth() { return _width; }
       int getHeight() { return _height; }

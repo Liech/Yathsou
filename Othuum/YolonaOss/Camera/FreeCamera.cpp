@@ -13,7 +13,7 @@ namespace YolonaOss {
       _camera = camera;
       _window = window;
       _window->setCursorStatus(GL::CursorStatus::HIDDEN);
-      _lastCursorPos = glm::vec2((float)_window->getCursorPos().first, (float)_window->getCursorPos().second);
+      _lastCursorPos = glm::vec2((float)_window->getCursorPos().x, (float)_window->getCursorPos().y);
       _lastTime = _window->getTime();
     }
 
@@ -43,11 +43,11 @@ namespace YolonaOss {
         _camera->setPosition(_camera->getPosition() + offset);
         _camera->setTarget(_camera->getTarget() + offset);
       }
-      int cx = (int)_window->getCursorPos().first;
-      int cy = (int)_window->getCursorPos().second;
+      int cx = (int)_window->getCursorPos().x;
+      int cy = (int)_window->getCursorPos().y;
       glm::vec2 cursorMovement = glm::vec2(cx, cy) - glm::vec2(_lastCursorPos);
-      _window->setCursorPos(std::make_pair(_window->getWidth() / 2, _window->getHeight() / 2));
-      _lastCursorPos = glm::vec2((float)_window->getCursorPos().first, (float)_window->getCursorPos().second);
+      _window->setCursorPos(glm::vec2(_window->getWidth() / 2, _window->getHeight() / 2));
+      _lastCursorPos = glm::vec2((float)_window->getCursorPos().x, (float)_window->getCursorPos().y);
 
       glm::vec4 lookDir = glm::vec4(glm::normalize(_camera->getTarget() - _camera->getPosition()), 1);
       glm::mat4 rotationMat(1);

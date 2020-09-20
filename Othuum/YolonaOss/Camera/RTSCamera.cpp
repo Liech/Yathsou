@@ -25,7 +25,7 @@ namespace YolonaOss {
 
       glm::vec3 toTarget = glm::normalize(_camera->getTarget() - _camera->getPosition());
       glm::vec3 toSide = glm::cross(toTarget, _camera->getUp());
-      glm::vec2 mouse = glm::vec2(_window->getCursorPos().first, _window->getCursorPos().second);
+      glm::vec2 mouse = glm::vec2(_window->getCursorPos().x, _window->getCursorPos().y);
       glm::vec2 newMouse = mouse;
       glm::vec3 offset(0, 0, 0);
       if (mouse.x < 0) { newMouse.x = 0.0f;                        offset += toSide * 0.001f * mouse.x; }
@@ -42,7 +42,7 @@ namespace YolonaOss {
 
       _camera->setPosition(_camera->getPosition() + offset);
       _camera->setTarget(_camera->getTarget() + offset);
-      _window->setCursorPos(std::make_pair(newMouse.x, newMouse.y));
+      _window->setCursorPos(glm::vec2(newMouse.x, newMouse.y));
       _lastTime = _window->getTime();
 
     }

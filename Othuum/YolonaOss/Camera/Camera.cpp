@@ -38,7 +38,7 @@ namespace YolonaOss {
     glm::vec4 screenPos = glm::vec4(x, -y, -1.0f, 1.0f);
 
     // Projection/Eye Space
-    glm::mat4 ProjectView = getProjectionMatrix() * glm::lookAt(glm::vec3(0,0,0), getTarget() - getPosition(), getUp());// getViewMatrix();
+    glm::mat4 ProjectView = getProjectionMatrix() * glm::lookAt(glm::vec3(0,0,0), glm::normalize(getTarget() - getPosition()), getUp());// getViewMatrix();
     glm::mat4 viewProjectionInverse = inverse(ProjectView);
 
     glm::vec4 worldPos = viewProjectionInverse * screenPos;
