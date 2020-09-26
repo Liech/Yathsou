@@ -8,9 +8,9 @@ namespace Fatboy
   public:
     static GameConfiguration& instance();
 
-    int TicksPerSecond = 60;
-    int ScreenWidth = 800;
-    int ScreenHeight = 600;
+    float TicksPerSecond = 60;
+    int   ScreenWidth    = 800;
+    int   ScreenHeight   = 600;
 
     virtual nlohmann::json             toJson()                            override;
     virtual void                       fromJson(nlohmann::json)            override;

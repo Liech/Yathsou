@@ -21,8 +21,8 @@ namespace Fatboy
     glm::vec3 getCurrentGlobalDirection();
     glm::vec3 getGlobalPosition();
 
-    void setMaxAimUp  (float maxValue);
-    void setMaxAimDown(float maxValue);
+    void setMaxAimUp  (float maxDegree);
+    void setMaxAimDown(float maxDegree);
     void setTurnSpeed (float degreePerSecond);
     void setGlobalTargetDirection(glm::vec3 dir);    
 
@@ -30,11 +30,14 @@ namespace Fatboy
     virtual void draw()                                  override;
     virtual void update()                                override;
   private:
-    void rotateTowardsTarget();
+    void rotateTowardsTargetDir();
+    void rotateTowardsTargetHeight();
 
-    float                   _maxAimUp       ;
-    float                   _maxAimDown     ;
-    float                   _turnSpeed      ;
+    float getTurnRadianPerSecond();
+
+    float                   _maxAimUp       = 40;
+    float                   _maxAimDown     = 20;
+    float                   _turnSpeed      = 90;
     glm::vec3               _targetDirection;
 
     glm::vec3               _direction ;

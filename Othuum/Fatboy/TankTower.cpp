@@ -2,7 +2,7 @@
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "GameConfiguration.h"
 #include "IyathuumCoreLib/Lib/glm/gtx/vector_angle.hpp""
-
+#include <iostream>
 namespace Fatboy
 {
   TankTower::TankTower(Suthanus::PhysicObject& attachTo, glm::vec3 offset, glm::vec3 startDirection)
@@ -17,39 +17,37 @@ namespace Fatboy
 
   void TankTower::update()
   {
-    rotateTowardsTarget();
+    rotateTowardsTargetDir();
   }
 
-  void TankTower::rotateTowardsTarget()
-  {
-    //Fatboy::GameConfiguration::instance().PhysicTicksPerSecond
-    //X/Y getrennt rotieren
-    //maximale gesamtgeschwindigkeit 
-    //maximal erreichbare winkel
-
+  void TankTower::rotateTowardsTargetDir(){
     _direction       = glm::normalize(_direction);
     _targetDirection = glm::normalize(_targetDirection);
+    
     glm::vec3 direction_YLess       = glm::vec3(_direction.x      , 0, _direction.z      );
     glm::vec3 targetDirection_YLess = glm::vec3(_targetDirection.x, 0, _targetDirection.z);
     glm::vec3 up     = glm::vec3(0, 1, 0);
-    glm::vec3 axis   = glm::cross(_direction, _targetDirection);
     float angle      = glm::orientedAngle(direction_YLess, targetDirection_YLess,up);
     if (angle > glm::pi<float>())
       angle -= glm::pi<float>() * 2;
-    _direction       = glm::rotate(_direction, angle * 0.01f, up);
+    float angleMovement = std::clamp(angle, -getTurnRadianPerSecond(), getTurnRadianPerSecond());
+    _direction       = glm::rotate(_direction, angleMovement, up);
   }
 
-  glm::vec3 TankTower::getGlobalPosition()
+  void TankTower::rotateTowardsTargetHeight(){
+  
+  }
+
+  float TankTower::getTurnRadianPerSecond()
   {
-    glm::vec4 offsetTransformed = _attachedTo.getTransformation() * glm::vec4(_offset, 1);
-    glm::vec3 result = glm::vec3(offsetTransformed.x, offsetTransformed.y, offsetTransformed.z);
-    return result;
+    float toRad = glm::pi<float>() / 180.0f;
+    return _turnSpeed * toRad / GameConfiguration::instance().TicksPerSecond;
   }
 
   glm::vec3 TankTower::getCurrentGlobalDirection()
   {
     glm::vec4 dirTransformed = _attachedTo.getTransformation() * glm::vec4(_offset + _direction, 1);
-    glm::vec3 result = glm::vec3(dirTransformed.x, dirTransformed.y, dirTransformed.z);
+    glm::vec3 result = glm::vec3(dirTransformed.x, dirTransformed.y, dirTransformed.z)-_offset;
     return result;
   }
 
@@ -58,7 +56,7 @@ namespace Fatboy
     YolonaOss::BoxRenderer::start();
     YolonaOss::BoxRenderer::drawDot(getGlobalPosition(), glm::vec3(0.05f), glm::vec4(1, 1, 0, 1));
     YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getCurrentGlobalDirection(), 0.01, glm::vec4(1, 1, 0, 1));
-    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + _targetDirection, 0.05, glm::vec4(1, 0,1, 1));
+    //YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + _targetDirection, 0.05, glm::vec4(1, 0,1, 1));
     YolonaOss::BoxRenderer::end();
   }
 
@@ -99,6 +97,14 @@ namespace Fatboy
 
   void TankTower::setGlobalTargetDirection(glm::vec3 dir)
   {
+    dir[1] = 0;
     _targetDirection = glm::normalize(dir);
-  }   
+  }
+
+  glm::vec3 TankTower::getGlobalPosition()
+  {
+    glm::vec4 pos = _attachedTo.getTransformation() * glm::vec4(_offset, 1);
+    glm::vec3 result = glm::vec3(pos.x, pos.y, pos.z);
+    return result;
+  }
 }
