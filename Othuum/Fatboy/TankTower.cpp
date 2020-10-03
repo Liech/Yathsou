@@ -22,7 +22,7 @@ namespace Fatboy
   void TankTower::update()
   {
     rotateTowardsTargetDir();
-    rotateTowardsTargetHeight();
+    updateYRotationTarget();
   }
 
   void TankTower::rotateTowardsTargetDir(){
@@ -39,8 +39,24 @@ namespace Fatboy
 
   }
 
-  void TankTower::rotateTowardsTargetHeight(){
-  
+  void TankTower::updateYRotationTarget(){
+    glm::vec3 up = glm::vec4(0, 1, 0, 1);
+    glm::vec3 future = getTargetDirection();
+    glm::vec3 cross = glm::cross(up, future);
+    float angle = glm::abs(glm::orientedAngle(up, future, cross));
+
+    float toRad = glm::pi<float>() / 180.0f;
+    float maxAimUpRadian = _maxAimUp * toRad;
+    float maxAimDownRadian = glm::pi<float>() - _maxAimDown * toRad;
+
+
+    float rotToUp = maxAimUpRadian - angle;
+    float rotToDown = maxAimDownRadian - angle;
+
+    if (angle > maxAimDownRadian)
+      _targetDirection = glm::vec4(glm::rotate(future, rotToDown, cross), 1);
+    if (angle < maxAimUpRadian)
+      _targetDirection = glm::vec4(glm::rotate(future, rotToUp, cross), 1);
   }
 
   float TankTower::getTurnRadianPerTick()
@@ -79,6 +95,7 @@ namespace Fatboy
     float toRad = glm::pi<float>() / 180.0f;
     float maxAimUpRadian = _maxAimUp * toRad;
     float maxAimDownRadian = glm::pi<float>()-_maxAimDown * toRad;
+
 
     float rotToUp = maxAimUpRadian - angle;
     float rotToDown = maxAimDownRadian - angle;
@@ -137,6 +154,7 @@ namespace Fatboy
   {
     glm::vec3 d = glm::inverse(_attachedTo.getRotationTransformation())*glm::vec4(dir,1);
     _targetDirection = glm::normalize(d);
+    updateYRotationTarget();
   }
 
   glm::vec3 TankTower::getGlobalPosition()

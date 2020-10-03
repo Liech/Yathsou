@@ -34,13 +34,13 @@ namespace Fatboy
     virtual void update()                                override;
   private:
     void rotateTowardsTargetDir();
-    void rotateTowardsTargetHeight();
+    void updateYRotationTarget();
 
     float getTurnRadianPerTick();
 
     float                   _maxAimUp       = 40;
     float                   _maxAimDown     = 90;
-    float                   _turnSpeed      = 60;
+    float                   _turnSpeed      = 90;
     glm::vec3               _targetDirection;
 
     glm::quat               _direction ;
