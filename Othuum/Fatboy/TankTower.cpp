@@ -36,17 +36,7 @@ namespace Fatboy
       _direction = target;
     else 
       _direction = glm::slerp(_direction, target, angleMovement / angle);
-    //_direction       = glm::normalize(_direction);
-    //_targetDirection = glm::normalize(_targetDirection);
-    //
-    //glm::vec3 direction_YLess       = glm::vec3(_direction.x      , 0, _direction.z      );
-    //glm::vec3 targetDirection_YLess = glm::vec3(_targetDirection.x, 0, _targetDirection.z);
-    //glm::vec3 up     = glm::vec3(0, 1, 0);
-    //float angle      = glm::orientedAngle(direction_YLess, targetDirection_YLess,up);
-    //if (angle > glm::pi<float>())
-    //  angle -= glm::pi<float>() * 2;
-    //float angleMovement = std::clamp(angle, -getTurnRadianPerSecond(), getTurnRadianPerSecond());
-    //_direction       = glm::rotate(_direction, angleMovement, up);
+
   }
 
   void TankTower::rotateTowardsTargetHeight(){
@@ -81,7 +71,22 @@ namespace Fatboy
     YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + getCurrentGlobalDirection(), 0.01, glm::vec4(1, 1, 0, 1));
     YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + getGlobalTargetDirection(), 0.05, glm::vec4(1, 0,1, 1));
 
+    glm::vec3 up     =  glm::vec4(0,1,0,1);
+    glm::vec3 future = getTargetDirection();
+    glm::vec3 cross  = glm::cross(up, future);
+    float angle = glm::abs(glm::orientedAngle(up, future, cross));
 
+    float toRad = glm::pi<float>() / 180.0f;
+    float maxAimUpRadian = _maxAimUp * toRad;
+    float maxAimDownRadian = glm::pi<float>()-_maxAimDown * toRad;
+
+    float rotToUp = maxAimUpRadian - angle;
+    float rotToDown = maxAimDownRadian - angle;
+
+    glm::vec3 maxUp = _attachedTo.getRotationTransformation() * glm::vec4(glm::rotate(future, rotToUp, cross),1);
+    glm::vec3 maxDown = _attachedTo.getRotationTransformation() * glm::vec4(glm::rotate(future, rotToDown, cross),1);
+    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + maxUp  , 0.005, glm::vec4(0, 1, 1, 1));
+    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + maxDown, 0.005, glm::vec4(0, 1, 1, 1));
 
 
     YolonaOss::BoxRenderer::end();
