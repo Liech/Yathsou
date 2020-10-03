@@ -36,7 +36,6 @@ namespace Fatboy
       _direction = target;
     else 
       _direction = glm::slerp(_direction, target, angleMovement / angle);
-
   }
 
   void TankTower::updateYRotationTarget(){
@@ -45,10 +44,9 @@ namespace Fatboy
     glm::vec3 cross = glm::cross(up, future);
     float angle = glm::abs(glm::orientedAngle(up, future, cross));
 
-    float toRad = glm::pi<float>() / 180.0f;
+    float constexpr toRad = glm::pi<float>() / 180.0f;
     float maxAimUpRadian = _maxAimUp * toRad;
     float maxAimDownRadian = glm::pi<float>() - _maxAimDown * toRad;
-
 
     float rotToUp = maxAimUpRadian - angle;
     float rotToDown = maxAimDownRadian - angle;
@@ -92,11 +90,9 @@ namespace Fatboy
     glm::vec3 cross  = glm::cross(up, future);
     float angle = glm::abs(glm::orientedAngle(up, future, cross));
 
-    float toRad = glm::pi<float>() / 180.0f;
+    float constexpr toRad = glm::pi<float>() / 180.0f;
     float maxAimUpRadian = _maxAimUp * toRad;
     float maxAimDownRadian = glm::pi<float>()-_maxAimDown * toRad;
-
-
     float rotToUp = maxAimUpRadian - angle;
     float rotToDown = maxAimDownRadian - angle;
 
@@ -104,8 +100,6 @@ namespace Fatboy
     glm::vec3 maxDown = _attachedTo.getRotationTransformation() * glm::vec4(glm::rotate(future, rotToDown, cross),1);
     YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + maxUp  , 0.005, glm::vec4(0, 1, 1, 1));
     YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + maxDown, 0.005, glm::vec4(0, 1, 1, 1));
-
-
     YolonaOss::BoxRenderer::end();
   }
 
@@ -163,4 +157,35 @@ namespace Fatboy
     glm::vec3 result = glm::vec3(pos.x, pos.y, pos.z);
     return result;
   }
+
+  /*
+  https://www.youtube.com/watch?v=l8ZldFbZxjg
+  Chau Tran - Unity Quick Script - Projectile Motion in 2D (part 2)
+
+  float xdistance;
+  xdistance = target.position.x -throwPoint.position.x;
+
+  float ydistance;
+  ydistance = target.position.y - throwPoint.position.y;
+
+  float throwAngle; // in radian
+	/OLD
+	/throwAngle = Mathf.Atan ((ydistance + 4.905f) / xdistance);
+     	//UPDATED
+	hrowAngle = Mathf.Atan ((ydistance + 4.905f*(timeTillHit*timeTillHit)) / xdistance);
+	/OLD
+	/float totalVelo = xdistance / Mathf.Cos(throwAngle) ;
+	/UPDATED
+	loat totalVelo = xdistance / (Mathf.Cos(throwAngle) * timeTillHit);
+
+      float xVelo, yVelo;
+      xVelo = totalVelo * Mathf.Cos (throwAngle);
+	Velo = totalVelo * Mathf.Sin (throwAngle);
+
+      GameObject bulletInstance = Instantiate (ball, throwPoint.position, Quaternion.Euler (new Vector3 (0, 0, 0))) as GameObject;
+      Rigidbody2D rigid;
+      rigid = bulletInstance.GetComponent<Rigidbody2D> ();
+
+      rigid.velocity = new Vector2 (xVelo, yVelo);
+  */
 }
