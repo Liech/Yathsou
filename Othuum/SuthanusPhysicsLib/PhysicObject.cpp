@@ -16,4 +16,11 @@ namespace Suthanus
   {
     _self = self;
   }
+
+  glm::mat4 PhysicObject::getRotationTransformation() const
+  {
+    glm::mat4 trans = getTransformation();
+    trans[3] = glm::vec4(0, 0, 0, 1);
+    return trans;
+  }
 }

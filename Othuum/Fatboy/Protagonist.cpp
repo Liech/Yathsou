@@ -23,7 +23,7 @@ namespace Fatboy
     _spec = spec;
     _physBody = _physic->newVehicle(glm::vec3(0, 2, 0));
 
-    _tower = std::make_shared<TankTower>(*_physBody, glm::vec3(0, 0.3f, 0), glm::vec3(0,0,1));
+    _tower = std::make_shared<TankTower>(*_physBody, glm::vec3(0, 0.3f, 0), glm::vec3(1,0,0));
     _tower->load(spec);
   }
 

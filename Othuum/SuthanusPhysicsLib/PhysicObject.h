@@ -18,7 +18,8 @@ namespace Suthanus
     virtual void      setPosition       (glm::vec3)                 = 0;
     virtual void      setAngularVelocity(glm::vec3)                 = 0;
     virtual void      setRotation       (glm::quat)                 = 0;
-    
+
+    glm::mat4 getRotationTransformation() const;
     std::weak_ptr<PhysicObject> self() { return _self; }
 
     void initialize(std::weak_ptr<PhysicObject> self);

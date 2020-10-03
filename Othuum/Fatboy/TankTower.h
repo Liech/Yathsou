@@ -6,6 +6,7 @@
 #include "YolonaOss/OpenGL/Updateable.h"
 #include "IyathuumCoreLib/lib/glm/vec3.hpp"
 #include "SuthanusPhysicsLib/PhysicObject.h"
+#include "IyathuumCoreLib/lib/glm/gtx/quaternion.hpp"
 
 namespace Fatboy
 {
@@ -18,6 +19,8 @@ namespace Fatboy
     float getMaxAimDown();
     float getTurnSpeed ();
     glm::vec3 getTargetDirection();
+    glm::vec3 getGlobalTargetDirection();
+    glm::vec3 getCurrentDirection();
     glm::vec3 getCurrentGlobalDirection();
     glm::vec3 getGlobalPosition();
 
@@ -33,14 +36,14 @@ namespace Fatboy
     void rotateTowardsTargetDir();
     void rotateTowardsTargetHeight();
 
-    float getTurnRadianPerSecond();
+    float getTurnRadianPerTick();
 
     float                   _maxAimUp       = 40;
     float                   _maxAimDown     = 20;
-    float                   _turnSpeed      = 90;
+    float                   _turnSpeed      = 60;
     glm::vec3               _targetDirection;
 
-    glm::vec3               _direction ;
+    glm::quat               _direction ;
     glm::vec3               _offset    ;
     Suthanus::PhysicObject& _attachedTo;
   };
