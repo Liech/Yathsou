@@ -150,6 +150,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ArtilleryAim.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="BoxBullet.cpp" />
     <ClCompile Include="PhysicEngine.cpp" />
@@ -160,6 +161,7 @@
     <ClCompile Include="VehicleDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArtilleryAim.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="BoxBullet.h" />
     <ClInclude Include="PhysicEngine.h" />

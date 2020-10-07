@@ -10,6 +10,8 @@
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include <IyathuumCoreLib/lib/glm/gtx/quaternion.hpp>
 #include "TankTower.h"
+#include "SuthanusPhysicsLib/ArtilleryAim.h"
+
 
 namespace Fatboy
 {
@@ -23,7 +25,7 @@ namespace Fatboy
     _spec = spec;
     _physBody = _physic->newVehicle(glm::vec3(0, 2, 0));
 
-    _tower = std::make_shared<TankTower>(*_physBody, glm::vec3(0, 0.3f, 0), glm::vec3(1,0,0));
+    _tower = std::make_shared<TankTower>(*_physBody, glm::vec3(0, 0.5f, 0), glm::vec3(1,0,0));
     _tower->load(spec);
   }
 
@@ -68,7 +70,11 @@ namespace Fatboy
     if (hit)
     {
       _lastPickedPosition = hitPoint;
-      _tower->setGlobalTargetDirection(hitPoint-_tower->getGlobalPosition());
+      glm::vec3 diff = hitPoint - _tower->getGlobalPosition();
+      glm::vec3 aim = Suthanus::ArtilleryAim::aimSpring(diff, firePower,false);
+      aim.y = aim.y;
+      if (glm::length(aim) > 0)
+        _tower->setGlobalTargetDirection(aim);
     }
   }
 
@@ -99,8 +105,8 @@ namespace Fatboy
       _physBody->setSteering(0);
     if (isPressed(YolonaOss::GL::Key::KEY_SPACE) && !_pressed)
     {
-      auto bullet = _physic->newSphere(_physBody->getPosition() - glm::vec3(0,-1,0), 0.1f, true);
-      glm::vec3 v = glm::vec3(0, 0, 4) * _physBody->getRotation() + glm::vec3(0,4,0);
+      auto bullet = _physic->newSphere(_tower->getGlobalPosition(), 0.1f, true);
+      glm::vec3 v =  _tower->getCurrentGlobalDirection() * firePower;
       bullet->setVelocity(v);
       _bullets.insert(bullet);
       std::weak_ptr<Suthanus::Sphere> b = bullet;
@@ -108,7 +114,9 @@ namespace Fatboy
         {
           if (std::shared_ptr<Suthanus::Sphere> lock = b.lock())
           {
-            _bullets.erase(lock);
+            std::shared_ptr<Suthanus::PhysicObject> lOther = other.lock();
+            //if (!std::dynamic_pointer_cast<Suthanus::Sphere>(lOther))
+            //  _bullets.erase(lock);
           }
         });
       _pressed = true;

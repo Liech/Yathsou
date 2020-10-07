@@ -36,7 +36,7 @@ namespace Suthanus
 
   void PhysicEngine::go()
   {
-    _world->setGravity(btVector3(0, -10, 0));
+    _world->setGravity(btVector3(0, -9.81, 0));
   }
 
   bool PhysicEngine::raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint)

@@ -43,6 +43,8 @@ namespace Fatboy
     std::shared_ptr<TankTower>                  _tower   ;
     glm::vec3 _lastPickedPosition;
 
+    const float firePower = 10;
+
     bool _pressed = false;
   };
 }
