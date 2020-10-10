@@ -5,10 +5,12 @@
 #include "Fatboy.h"
 #include "GameConfiguration.h"
 #include "IyathuumCoreLib/Util/UpdateTimer.h"
+#include "HaasScriptingLib/ScriptEngine.h"
 
 int main(int argc, char** argv) {
   std::cout << "wub wub" << std::endl;
-
+  ScriptEngine s;
+  s.blubb();
   int width  = Fatboy::GameConfiguration::instance().ScreenWidth;
   int height = Fatboy::GameConfiguration::instance().ScreenHeight;
   YolonaOss::GL::Window w(width, height);
