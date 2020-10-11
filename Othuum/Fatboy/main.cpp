@@ -9,7 +9,7 @@
 
 int main(int argc, char** argv) {
   std::cout << "wub wub" << std::endl;
-  ScriptEngine s;
+  Haas::ScriptEngine s;
   s.blubb();
   int width  = Fatboy::GameConfiguration::instance().ScreenWidth;
   int height = Fatboy::GameConfiguration::instance().ScreenHeight;
