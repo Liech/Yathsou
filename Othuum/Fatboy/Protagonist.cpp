@@ -10,6 +10,7 @@
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include <IyathuumCoreLib/lib/glm/gtx/quaternion.hpp>
 #include "TankTower.h"
+#include "Tank.h"
 #include "SuthanusPhysicsLib/ArtilleryAim.h"
 
 
@@ -23,25 +24,12 @@ namespace Fatboy
   void Protagonist::load(YolonaOss::GL::DrawSpecification* spec)
   {
     _spec = spec;
-    _physBody = _physic->newVehicle(glm::vec3(0, 2, 0));
-
-    _tower = std::make_shared<TankTower>(*_physBody, glm::vec3(0, 0.5f, 0), glm::vec3(1,0,0));
-    _tower->load(spec);
+    _tank = std::make_shared<Tank>(_physic);
+    _tank->load(spec);
   }
 
   void Protagonist::draw()
   {
-    YolonaOss::BoxRenderer::start();
-
-    glm::mat4 transformVehicle = _physBody->getTransformation();
-    transformVehicle = glm::scale(transformVehicle, _physBody->getSize());
-    transformVehicle = glm::translate(transformVehicle, glm::vec3(-0.5, -0.5, -0.5));
-    YolonaOss::BoxRenderer::draw(transformVehicle, glm::vec4(0, 0.4, 1, 1));
-    YolonaOss::BoxRenderer::drawDot(_lastPickedPosition, glm::vec3(0.1f,0.1f,0.1f),glm::vec4(1,1,1,1));
-    
-    YolonaOss::BoxRenderer::end();
-
-
     YolonaOss::SphereRenderer::start();
     for (auto sphere : _bullets) {
       glm::mat4 transform = sphere->getTransformation();
@@ -50,14 +38,14 @@ namespace Fatboy
     }
     YolonaOss::SphereRenderer::end();
 
-    _tower->draw();
+    _tank->draw();
   }
 
   void Protagonist::update()
   {
     handleInput();
     handlePicking();
-    _tower->update();
+    _tank->update();
   }
 
   void Protagonist::handlePicking()
@@ -69,12 +57,7 @@ namespace Fatboy
     bool hit = _physic->raycast(camPos, pickDir, hitPoint);
     if (hit)
     {
-      _lastPickedPosition = hitPoint;
-      glm::vec3 diff = hitPoint - _tower->getGlobalPosition();
-      glm::vec3 aim = Suthanus::ArtilleryAim::aimSpring(diff, firePower,false);
-      aim.y = aim.y;
-      if (glm::length(aim) > 0)
-        _tower->setGlobalTargetDirection(aim);
+      _tank->setTarget(hitPoint);
     }
   }
 
@@ -85,57 +68,61 @@ namespace Fatboy
     };
     if (isPressed(YolonaOss::GL::Key::KEY_W))
     {
-      _physBody->setAcceleration(_physBody->maxAcceleration());
+      _tank->setAcceleration(_tank->maxAcceleration());
     }
     else if (isPressed(YolonaOss::GL::Key::KEY_S))
     {
-      _physBody->setAcceleration(-_physBody->maxAcceleration());
+      _tank->setAcceleration(-_tank->maxAcceleration());
     }
     else
-      _physBody->setAcceleration(0);
+      _tank->setAcceleration(0);
     if (isPressed(YolonaOss::GL::Key::KEY_A))
     {
-      _physBody->setSteering(_physBody->maxSteering());
+      _tank->setSteering(_tank->maxSteering());
     }
     else if (isPressed(YolonaOss::GL::Key::KEY_D))
     {
-      _physBody->setSteering(-_physBody->maxSteering());
+      _tank->setSteering(-_tank->maxSteering());
     }
     else
-      _physBody->setSteering(0);
+      _tank->setSteering(0);
     if (isPressed(YolonaOss::GL::Key::KEY_SPACE) && !_pressed)
     {
-      auto bullet = _physic->newSphere(_tower->getGlobalPosition(), 0.1f, true);
-      glm::vec3 v =  _tower->getCurrentGlobalDirection() * firePower;
-      bullet->setVelocity(v);
-      _bullets.insert(bullet);
-      std::weak_ptr<Suthanus::Sphere> b = bullet;
-      bullet->setCollisionCallback([this,b](std::weak_ptr < Suthanus::PhysicObject > other)
-        {
-          if (std::shared_ptr<Suthanus::Sphere> lock = b.lock())
-          {
-            std::shared_ptr<Suthanus::PhysicObject> lOther = other.lock();
-            //if (!std::dynamic_pointer_cast<Suthanus::Sphere>(lOther))
-            //  _bullets.erase(lock);
-          }
-        });
+      //auto bullet = _physic->newSphere(_tower->getGlobalPosition(), 0.1f, true);
+      //glm::vec3 v =  _tower->getCurrentGlobalDirection() * firePower;
+      //bullet->setVelocity(v);
+      //_bullets.insert(bullet);
+      //std::weak_ptr<Suthanus::Sphere> b = bullet;
+      //bullet->setCollisionCallback([this,b](std::weak_ptr < Suthanus::PhysicObject > other)
+      //  {
+      //    if (std::shared_ptr<Suthanus::Sphere> lock = b.lock())
+      //    {
+      //      std::shared_ptr<Suthanus::PhysicObject> lOther = other.lock();
+      //      //if (!std::dynamic_pointer_cast<Suthanus::Sphere>(lOther))
+      //      //  _bullets.erase(lock);
+      //    }
+      //  });
+      _tank->fire();
       _pressed = true;
     }
     else if (!isPressed(YolonaOss::GL::Key::KEY_SPACE))
       _pressed = false;
     if (isPressed(YolonaOss::GL::Key::KEY_ENTER))
     {
-      _physBody->setPosition(getStartPos());
-      _physBody->setVelocity(glm::vec3(0, 0, 0));
-      _physBody->setAngularVelocity(glm::vec3(0, 0, 0));
-      _physBody->setRotation(glm::quat(glm::vec3(0,0,0)));
+      //_physBody->setPosition(getStartPos());
+      //_physBody->setVelocity(glm::vec3(0, 0, 0));
+      //_physBody->setAngularVelocity(glm::vec3(0, 0, 0));
+      //_physBody->setRotation(glm::quat(glm::vec3(0,0,0)));
+
+      _tank = std::make_shared<Tank>(_physic);
+      _tank->load(_spec);
       _bullets.clear();
     }
   }
 
   glm::vec3 Protagonist::getPosition()
   {
-    return _physBody->getPosition();
+    return _tank->getPosition();
   }
 
 }

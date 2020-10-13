@@ -154,12 +154,14 @@
     <ClCompile Include="GameConfiguration.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Protagonist.cpp" />
+    <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankTower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fatboy.h" />
     <ClInclude Include="GameConfiguration.h" />
     <ClInclude Include="Protagonist.h" />
+    <ClInclude Include="Tank.h" />
     <ClInclude Include="TankTower.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

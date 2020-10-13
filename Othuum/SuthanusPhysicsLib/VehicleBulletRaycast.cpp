@@ -44,6 +44,7 @@ namespace Suthanus
 
     VehicleBulletRaycast::~VehicleBulletRaycast()
     {
+      _world->removeVehicle(_vehicle);
       _world->removeRigidBody(_body);
       delete _body;
       delete _raycaster;
