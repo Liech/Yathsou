@@ -108,6 +108,9 @@
     <ClInclude Include="Util\UpdateTimer.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
+    <ClInclude Include="Util\lambdaCapture2functionPointer.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Util\ImageSubsetUtil.cpp">

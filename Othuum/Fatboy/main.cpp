@@ -9,8 +9,12 @@
 
 int main(int argc, char** argv) {
   std::cout << "wub wub" << std::endl;
-  Haas::ScriptEngine s;
-  s.blubb();
+  //Haas::ScriptEngine s;
+  //s.blubb();
+  //s.registerAverage();
+  //int erg = s.callAdd("add", 10, 10);
+  //if (erg != 20)
+  //  throw std::runtime_error("Wahh");
   int width  = Fatboy::GameConfiguration::instance().ScreenWidth;
   int height = Fatboy::GameConfiguration::instance().ScreenHeight;
   YolonaOss::GL::Window w(width, height);

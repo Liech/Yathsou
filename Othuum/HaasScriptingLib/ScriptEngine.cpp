@@ -2,13 +2,27 @@
 
 #include <stdexcept>
 #include "lua.hpp"
+#include "lstate.h"
+#include "IyathuumCoreLib/Util/lambdaCapture2functionPointer.h"
 
 namespace Haas
 {
-  void ScriptEngine::blubb()
+  ScriptEngine::ScriptEngine()
   {
     _state = luaL_newstate();
+    _api = new ScriptEngineAPI(_state);
     luaL_openlibs(_state);
+    _state->___scriptEngine = _api;
+  }
+
+  ScriptEngine::~ScriptEngine()
+  {
+    lua_close(_state);
+    delete _api;
+  }
+
+  void ScriptEngine::blubb()
+  {
 
     // Execution of a lua string
     luaL_dostring(_state, "print \"Yo dude\"");
@@ -23,9 +37,7 @@ namespace Haas
       lua_pcall(_state, 0, LUA_MULTRET, 0);
     }
 
-    // Close lua
-    lua_close(_state);
-
+    executeFile("add.lua");
   }
 
   void ScriptEngine::executeFile(std::string filename)
@@ -35,5 +47,88 @@ namespace Haas
     }
     else
       throw std::runtime_error("File not found");
+  }
+
+  int ScriptEngine::callAdd(std::string name, int a, int b)
+  {
+    int sum;
+    lua_getglobal(_state, name.c_str());
+    _api->resetNumberOfPushes();
+    _api->pushNumber(a);
+    _api->pushNumber(b);
+    lua_call(_state, _api->numberOfPushes(), 1);
+    sum = _api->getStackElementAsInt(-1);
+    lua_pop(_state, 1);
+    _api->resetNumberOfPushes();
+    return sum;
+  }
+
+  void ScriptEngine::registerAverage()
+  {    
+    std::shared_ptr<std::function<void(ScriptEngineAPI*)>> p = std::make_shared<std::function<void(ScriptEngineAPI*)>>([](ScriptEngineAPI* api) {
+      int n = api->getStackCount();
+      double sum = 0;
+      int i;
+      for (i = 1; i <= n; i++)
+      {
+        /* total the arguments */
+        sum += api->getStackElementAsInt(i);
+      }
+      api->pushNumber(sum / n);
+      api->pushNumber(sum);
+    });
+    registerFunction("average", p);
+    luaL_dofile(_state, "average.lua");
+
+  }
+
+  void ScriptEngine::registerFunction(std::string name, std::shared_ptr<std::function<void(ScriptEngineAPI*)>> call)
+  {
+    _registry.insert(call);
+    auto fn = Iyathuum::lambdaCapture2functionPointer<int(lua_State*)>([&](lua_State* state)
+      {
+        auto api = (ScriptEngineAPI*)state->___scriptEngine;
+        api->resetNumberOfPushes();
+        (*call.get())(api);
+        api->resetNumberOfPushes();
+        return api->numberOfPushes();
+      });
+    lua_register(_state, name.c_str(), fn);
+  }
+
+  ScriptEngineAPI::ScriptEngineAPI(lua_State* state)
+  {
+    _state = state;
+  }
+
+  int ScriptEngineAPI::getStackCount()
+  {
+    return lua_gettop(_state);
+  }
+
+  int ScriptEngineAPI::getStackElementAsInt(int number)
+  {
+    return lua_tointeger(_state, number);
+  }
+
+  double ScriptEngineAPI::getStackElementAsDouble(int number)
+  {
+    return lua_tonumber(_state, number);
+  }
+
+  void ScriptEngineAPI::pushNumber(int number)
+  {
+    lua_pushnumber(_state, number);
+    _numberOfPushes++;
+  }
+
+  void ScriptEngineAPI::resetNumberOfPushes()
+  {
+    _numberOfPushes = 0;
+  }
+
+  int ScriptEngineAPI::numberOfPushes()
+  {
+    return _numberOfPushes;
   }
 }

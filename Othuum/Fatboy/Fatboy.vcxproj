@@ -150,6 +150,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletPool.cpp" />
     <ClCompile Include="Fatboy.cpp" />
     <ClCompile Include="GameConfiguration.cpp" />
     <ClCompile Include="main.cpp" />
@@ -158,6 +160,8 @@
     <ClCompile Include="TankTower.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletPool.h" />
     <ClInclude Include="Fatboy.h" />
     <ClInclude Include="GameConfiguration.h" />
     <ClInclude Include="Protagonist.h" />

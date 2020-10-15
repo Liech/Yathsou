@@ -168,6 +168,7 @@
     <ClInclude Include="Util\Geometry.h" />
     <ClInclude Include="Util\ImageSubsetUtil.h" />
     <ClInclude Include="Util\ImageUtil.h" />
+    <ClInclude Include="Util\lambdaCapture2functionPointer.h" />
     <ClInclude Include="Util\UpdateTimer.h" />
   </ItemGroup>
   <ItemGroup>
