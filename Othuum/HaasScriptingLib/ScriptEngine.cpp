@@ -79,7 +79,6 @@ namespace Haas
     });
     registerFunction("average", p);
     luaL_dofile(_state, "average.lua");
-
   }
 
   void ScriptEngine::registerFunction(std::string name, std::shared_ptr<std::function<void(ScriptEngineAPI*)>> call)
@@ -90,10 +89,48 @@ namespace Haas
         auto api = (ScriptEngineAPI*)state->___scriptEngine;
         api->resetNumberOfPushes();
         (*call.get())(api);
-        api->resetNumberOfPushes();
         return api->numberOfPushes();
       });
     lua_register(_state, name.c_str(), fn);
+  }
+
+  std::vector<any> ScriptEngine::callScript(std::string name, std::vector<any> inputArgs, std::vector<any::type> outputTypes)
+  {
+    lua_getglobal(_state, name.c_str());
+    _api->resetNumberOfPushes();
+    for (int i = 0; i < inputArgs.size(); i++)
+    {
+      switch (inputArgs[i].get_type()) {
+      case any::type::Int:
+        _api->pushNumber(inputArgs[i].get_int());
+        break;
+      case any::type::Float:
+        _api->pushNumber(inputArgs[i].get_float());
+        break;
+      case any::type::String:
+        throw std::runtime_error("not implemented");
+        break;
+      }
+    }
+    lua_call(_state, _api->numberOfPushes(), outputTypes.size());
+    std::vector<any> result;
+    for (int i = 0; i < outputTypes.size(); i++)
+    {
+      switch (outputTypes[i]) {
+      case any::type::Int:
+        result.push_back(_api->getStackElementAsInt(-((int)outputTypes.size()) + i));
+        break;
+      case any::type::Float:
+        throw std::runtime_error("not implemented");
+        break;
+      case any::type::String:
+        throw std::runtime_error("not implemented");
+        break;
+      }
+    }
+    lua_pop(_state, (int)outputTypes.size());
+    _api->resetNumberOfPushes();
+    return result;
   }
 
   ScriptEngineAPI::ScriptEngineAPI(lua_State* state)

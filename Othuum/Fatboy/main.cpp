@@ -12,8 +12,8 @@ int main(int argc, char** argv) {
   //Haas::ScriptEngine s;
   //s.blubb();
   //s.registerAverage();
-  //int erg = s.callAdd("add", 10, 10);
-  //if (erg != 20)
+  //std::vector<Haas::any> erg = s.callScript("add", {Haas::any(10),Haas::any(10)}, { Haas::any::type::Int });
+  //if (erg[0].get_int() != 20)
   //  throw std::runtime_error("Wahh");
   int width  = Fatboy::GameConfiguration::instance().ScreenWidth;
   int height = Fatboy::GameConfiguration::instance().ScreenHeight;
