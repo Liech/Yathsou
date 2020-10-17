@@ -12,6 +12,10 @@
 #include "YolonaOss/Camera/FollowCamera.h"
 #include "Protagonist.h"
 #include "GameConfiguration.h"
+#include "ScriptAPI.h"
+#include "HaasScriptingLib/ScriptEngine.h"
+#include "Context.h"
+#include "BulletPool.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "YolonaOss/Renderer/BoxRenderer.h"
@@ -26,23 +30,25 @@ namespace Fatboy
     _postDrawables->addDrawable(std::make_shared<YolonaOss::FPS>());
     _preDrawables->addDrawable(std::make_shared<YolonaOss::Ground>());
     _cam = std::make_shared<YolonaOss::Camera::CameraSystem>();
+    _context = std::make_shared<Context>();
 
     initPhysic();
-    _protagonist = std::make_shared<Protagonist>(_physic);
+    _protagonist = std::make_shared<Protagonist>(_context);
   }
 
   void Fatboy::initPhysic()
   {
-    _physic = std::make_shared<Suthanus::PhysicEngine>();    
-    _physic->setTicksPerSecond(GameConfiguration::instance().TicksPerSecond);
-    _landscape = _physic->newBox(glm::vec3(0, 0, 0), glm::vec3(20, 0, 20), false);
+    _context->physic()->setTicksPerSecond(GameConfiguration::instance().TicksPerSecond);
+    _landscape = _context->physic()->newBox(glm::vec3(0, 0, 0), glm::vec3(20, 0, 20), false);
+    _physicAPI = std::make_shared<ScriptAPI>(_context->physic().get());
+    _physicAPI->registerAPI(_context->script().get());
   }
 
   void Fatboy::update()
   {
     _cam->update();
     _protagonist->update();
-    _physic->update();
+    _context->physic()->update();
   }
 
   void Fatboy::load(YolonaOss::GL::DrawSpecification* spec)
@@ -70,6 +76,7 @@ namespace Fatboy
     _preDrawables->draw();
     drawLandscape();
     _protagonist->draw();
+    _context->bullets()->draw();
     _postDrawables->draw();
   }
 }

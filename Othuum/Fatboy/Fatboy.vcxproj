@@ -152,9 +152,11 @@
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletPool.cpp" />
+    <ClCompile Include="Context.cpp" />
     <ClCompile Include="Fatboy.cpp" />
     <ClCompile Include="GameConfiguration.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ScriptAPI.cpp" />
     <ClCompile Include="Protagonist.cpp" />
     <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankTower.cpp" />
@@ -162,8 +164,10 @@
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletPool.h" />
+    <ClInclude Include="Context.h" />
     <ClInclude Include="Fatboy.h" />
     <ClInclude Include="GameConfiguration.h" />
+    <ClInclude Include="ScriptAPI.h" />
     <ClInclude Include="Protagonist.h" />
     <ClInclude Include="Tank.h" />
     <ClInclude Include="TankTower.h" />

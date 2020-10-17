@@ -4,18 +4,21 @@
 #include "TankTower.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "SuthanusPhysicsLib/ArtilleryAim.h"
+#include "HaasScriptingLib/ScriptEngine.h"
+#include "Context.h"
+#include "BulletPool.h"
 
 namespace Fatboy
 {
-  Tank::Tank(std::shared_ptr<Suthanus::PhysicEngine> physic)
+  Tank::Tank(std::shared_ptr<Context> context)
   {
-    _physic = physic;
+    _context = context;
   }
 
   void Tank::load(YolonaOss::GL::DrawSpecification* spec)
   {
     _spec = spec;
-    _physBody = _physic->newVehicle(glm::vec3(0, 2, 0));
+    _physBody = _context->physic()->newVehicle(glm::vec3(0, 2, 0));
 
     _tower = std::make_shared<TankTower>(*_physBody, glm::vec3(0, 0.5f, 0), glm::vec3(1, 0, 0));
     _tower->load(spec);
@@ -39,7 +42,21 @@ namespace Fatboy
 
   void Tank::fire()
   {
-
+    
+    auto bullet = _context->physic()->newSphere(_tower->getGlobalPosition(), 0.1f, true);
+    glm::vec3 v =  _tower->getCurrentGlobalDirection() * _firePower;
+    bullet->setVelocity(v);
+    _context->bullets()->addBullet(bullet);
+    std::weak_ptr<Suthanus::Sphere> b = bullet;
+    bullet->setCollisionCallback([this,b](std::weak_ptr < Suthanus::PhysicObject > other)
+      {
+        if (std::shared_ptr<Suthanus::Sphere> lock = b.lock())
+        {
+          std::shared_ptr<Suthanus::PhysicObject> lOther = other.lock();
+          //if (!std::dynamic_pointer_cast<Suthanus::Sphere>(lOther))
+          //  _bullets.erase(lock);
+        }
+      });
   }
 
   void Tank::setAcceleration(float value)

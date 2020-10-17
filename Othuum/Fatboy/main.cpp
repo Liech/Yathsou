@@ -9,7 +9,8 @@
 
 int main(int argc, char** argv) {
   std::cout << "wub wub" << std::endl;
-  //Haas::ScriptEngine s;
+  Haas::ScriptEngine s;
+  
   //s.blubb();
   //s.registerAverage();
   //std::vector<Haas::any> erg = s.callScript("add", {Haas::any(10),Haas::any(10)}, { Haas::any::type::Int });

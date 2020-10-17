@@ -11,7 +11,6 @@
 
 namespace Suthanus
 {
-  class PhysicEngine;
   class Vehicle;
   class Sphere;
 }
@@ -20,11 +19,12 @@ namespace Fatboy
 {
   class TankTower;
   class Tank;
+  class Context;
 
   class Protagonist : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable, public YolonaOss::GetPosition
   {
   public:
-    Protagonist(std::shared_ptr<Suthanus::PhysicEngine>);
+    Protagonist(std::shared_ptr<Context>);
 
     virtual void load(YolonaOss::GL::DrawSpecification*) override;
     virtual void draw()                                  override;
@@ -38,12 +38,10 @@ namespace Fatboy
     void handlePicking();
 
     YolonaOss::GL::DrawSpecification*           _spec    ;
-    std::shared_ptr<Suthanus::PhysicEngine>     _physic  ;
-    std::set<std::shared_ptr<Suthanus::Sphere>> _bullets ;
+    std::shared_ptr<Context>                    _context ;
     std::shared_ptr<Tank>                       _tank    ;
     glm::vec3 _lastPickedPosition;
 
-    const float firePower = 10;
 
     bool _pressed = false;
   };

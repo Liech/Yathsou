@@ -20,10 +20,16 @@ namespace Suthanus
   class PhysicEngine;
   class Box;
 }
+namespace Haas
+{
+  class ScriptEngine;
+}
 
 namespace Fatboy
 {
   class Protagonist;
+  class ScriptAPI;
+  class Context;
 
   class Fatboy : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable
   {
@@ -37,13 +43,13 @@ namespace Fatboy
     void initPhysic();
     void drawLandscape();
 
-    std::shared_ptr<Suthanus::PhysicEngine>            _physic;
     std::shared_ptr<Suthanus::Box>                   _landscape;
     std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables;
     std::shared_ptr<YolonaOss::GL::DrawableList>     _postDrawables;
     std::shared_ptr<YolonaOss::Camera::CameraSystem> _cam;
     YolonaOss::GL::DrawSpecification*                _spec;
     std::shared_ptr<Protagonist>                     _protagonist;
-
+    std::shared_ptr<ScriptAPI>                       _physicAPI;
+    std::shared_ptr<Context>                         _context;
   };
 }
