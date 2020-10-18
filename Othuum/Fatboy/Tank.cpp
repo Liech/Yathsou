@@ -7,6 +7,7 @@
 #include "HaasScriptingLib/ScriptEngine.h"
 #include "Context.h"
 #include "BulletPool.h"
+#include "Bullet.h"
 
 namespace Fatboy
 {
@@ -41,22 +42,10 @@ namespace Fatboy
   }
 
   void Tank::fire()
-  {
-    
-    auto bullet = _context->physic()->newSphere(_tower->getGlobalPosition(), 0.1f, true);
+  {    
     glm::vec3 v =  _tower->getCurrentGlobalDirection() * _firePower;
-    bullet->setVelocity(v);
+    std::shared_ptr<Bullet> bullet = std::make_shared < Bullet>(_context, _tower->getGlobalPosition(),v);
     _context->bullets()->addBullet(bullet);
-    std::weak_ptr<Suthanus::Sphere> b = bullet;
-    bullet->setCollisionCallback([this,b](std::weak_ptr < Suthanus::PhysicObject > other)
-      {
-        if (std::shared_ptr<Suthanus::Sphere> lock = b.lock())
-        {
-          std::shared_ptr<Suthanus::PhysicObject> lOther = other.lock();
-          //if (!std::dynamic_pointer_cast<Suthanus::Sphere>(lOther))
-          //  _bullets.erase(lock);
-        }
-      });
   }
 
   void Tank::setAcceleration(float value)
