@@ -66,9 +66,21 @@
     <ClInclude Include="lib\portaudio\pa_win_ds.h">
       <Filter>lib\portaudio</Filter>
     </ClInclude>
+    <ClInclude Include="SoundEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -168,9 +168,13 @@
     <ClInclude Include="lib\portaudio\pa_win_wmme.h" />
     <ClInclude Include="lib\portaudio\portaudio.h" />
     <ClInclude Include="sound.h" />
+    <ClInclude Include="SoundEngine.h" />
+    <ClInclude Include="SoundHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound.cpp" />
+    <ClCompile Include="SoundEngine.cpp" />
+    <ClCompile Include="SoundHandler.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
