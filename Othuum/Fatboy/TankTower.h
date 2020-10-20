@@ -39,7 +39,7 @@ namespace Fatboy
     float getTurnRadianPerTick();
 
     float                   _maxAimUp       = 40;
-    float                   _maxAimDown     = 90;
+    float                   _maxAimDown     = 80;
     float                   _turnSpeed      = 90;
     glm::vec3               _targetDirection;
 

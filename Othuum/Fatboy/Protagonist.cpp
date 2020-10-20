@@ -90,13 +90,17 @@ namespace Fatboy
       Suthanus::PhysicObject* obj = _context->physic()->raycast(camPos, pickDir, hitPoint);
       std::shared_ptr<Suthanus::PhysicObject> lock;
       std::weak_ptr<Unit> cast;
+      bool changed = false;
       if (obj && (lock = obj->self().lock()))
       {
         auto unitt = _context->units()->physicBodyToUnit(lock);
-        if (unitt)
+        if (unitt) {
           _tank = unitt;
+          changed = true;
+        }
       }
-      else
+      
+      if (!changed)
       {
         _context->units()->removeUnit(_tank);
         _tank = std::make_shared<Unit>(_context);

@@ -14,6 +14,8 @@ namespace Fatboy
   void UnitPool::removeUnit(std::shared_ptr<Unit> obj)
   {
     _units.erase(obj);
+    for (auto part : obj->getPhysics())
+      _physicMap.erase(part);
   }
 
   void UnitPool::load(YolonaOss::GL::DrawSpecification* spec)
