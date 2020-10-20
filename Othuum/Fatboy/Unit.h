@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 #include <set>
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "YolonaOss/OpenGL/Updateable.h"
@@ -34,6 +35,8 @@ namespace Fatboy
 
     glm::vec3 getPosition();
     void      setStartPosition(glm::vec3);
+
+    std::vector<std::shared_ptr<Suthanus::PhysicObject>> getPhysics();
 
   private:
     std::shared_ptr<Suthanus::Vehicle> _physBody ;

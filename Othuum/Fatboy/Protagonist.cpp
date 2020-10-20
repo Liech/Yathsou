@@ -88,13 +88,15 @@ namespace Fatboy
       glm::vec3 pickDir = _spec->getCam()->getPickRay((float)pos.x, (float)pos.y);
       glm::vec3 hitPoint;
       Suthanus::PhysicObject* obj = _context->physic()->raycast(camPos, pickDir, hitPoint);
-      //std::shared_ptr<Suthanus::PhysicObject> lock;
-      //std::weak_ptr<Unit> cast;
-      //if (obj && (lock = obj->self().lock()) && (cast = lock->userPointer))
-      //{
-      //  _tank = cast;
-      //}
-      //else
+      std::shared_ptr<Suthanus::PhysicObject> lock;
+      std::weak_ptr<Unit> cast;
+      if (obj && (lock = obj->self().lock()))
+      {
+        auto unitt = _context->units()->physicBodyToUnit(lock);
+        if (unitt)
+          _tank = unitt;
+      }
+      else
       {
         _context->units()->removeUnit(_tank);
         _tank = std::make_shared<Unit>(_context);

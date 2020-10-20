@@ -7,6 +7,8 @@ namespace Fatboy
   {
     _units.insert(obj);
     obj->load(_spec);
+    for (auto part : obj->getPhysics())
+      _physicMap[part] = obj;
   }
 
   void UnitPool::removeUnit(std::shared_ptr<Unit> obj)
@@ -25,4 +27,13 @@ namespace Fatboy
       unit->draw();
     }
   }
+
+  std::shared_ptr<Unit> UnitPool::physicBodyToUnit(std::shared_ptr<Suthanus::PhysicObject> phys)
+  {
+    if (!_physicMap.count(phys))
+      return nullptr;
+    std::weak_ptr<Unit> p = _physicMap[phys];
+    return p.lock();
+  }
+
 }

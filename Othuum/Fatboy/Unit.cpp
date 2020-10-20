@@ -87,4 +87,9 @@ namespace Fatboy
   {
     return _physBody->getPosition();
   }
+
+  std::vector<std::shared_ptr<Suthanus::PhysicObject>> Unit::getPhysics()
+  {
+    return { _physBody };
+  }
 }
