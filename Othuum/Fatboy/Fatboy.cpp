@@ -16,6 +16,8 @@
 #include "HaasScriptingLib/ScriptEngine.h"
 #include "Context.h"
 #include "BulletPool.h"
+#include "UnitPool.h"
+#include "Unit.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "YolonaOss/Renderer/BoxRenderer.h"
@@ -28,12 +30,13 @@ namespace Fatboy
     _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _preDrawables->addDrawable(std::make_shared<YolonaOss::Background>());
     _postDrawables->addDrawable(std::make_shared<YolonaOss::FPS>());
-    _preDrawables->addDrawable(std::make_shared<YolonaOss::Ground>());
+    //_preDrawables->addDrawable(std::make_shared<YolonaOss::Ground>());
     _cam = std::make_shared<YolonaOss::Camera::CameraSystem>();
     _context = std::make_shared<Context>();
 
     initPhysic();
     _protagonist = std::make_shared<Protagonist>(_context);
+    initEnemys();
   }
 
   void Fatboy::initPhysic()
@@ -42,6 +45,29 @@ namespace Fatboy
     _landscape = _context->physic()->newBox(glm::vec3(0, 0, 0), glm::vec3(20, 0, 20), false);
     _physicAPI = std::make_shared<ScriptAPI>(_context->physic().get());
     _physicAPI->registerAPI(_context->script().get());
+  }
+
+  void Fatboy::initEnemys()
+  {
+    auto tank = std::make_shared<Unit>(_context);
+    tank->setStartPosition(glm::vec3(-3, 2, -3));
+    tank->load(_spec);
+    _context->units()->addUnit(tank);
+
+    tank = std::make_shared<Unit>(_context);
+    tank->setStartPosition(glm::vec3(3, 2, -3));
+    tank->load(_spec);
+    _context->units()->addUnit(tank);
+
+    tank = std::make_shared<Unit>(_context);
+    tank->setStartPosition(glm::vec3(3, 2, 3));
+    tank->load(_spec);
+    _context->units()->addUnit(tank);
+
+    tank = std::make_shared<Unit>(_context);
+    tank->setStartPosition(glm::vec3(-3, 2, 3));
+    tank->load(_spec);
+    _context->units()->addUnit(tank);
   }
 
   void Fatboy::update()
@@ -75,8 +101,8 @@ namespace Fatboy
   {
     _preDrawables->draw();
     drawLandscape();
-    _protagonist->draw();
     _context->bullets()->draw();
+    _context->units  ()->draw();
     _postDrawables->draw();
   }
 }

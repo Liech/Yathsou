@@ -12,8 +12,8 @@ namespace Ahwassa
 
   }
 
-  std::shared_ptr<SoundHandler> SoundEngine::play(std::string alias)
+  std::shared_ptr<SoundHandler> SoundEngine::createHandler(std::string alias)
   {
-
+    return nullptr;
   }
 }

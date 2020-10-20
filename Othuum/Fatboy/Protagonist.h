@@ -18,16 +18,15 @@ namespace Suthanus
 namespace Fatboy
 {
   class TankTower;
-  class Tank;
+  class Unit;
   class Context;
 
-  class Protagonist : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable, public YolonaOss::GetPosition
+  class Protagonist : public YolonaOss::GL::Updateable, public YolonaOss::GetPosition
   {
   public:
     Protagonist(std::shared_ptr<Context>);
 
     virtual void load(YolonaOss::GL::DrawSpecification*) override;
-    virtual void draw()                                  override;
     virtual void update()                                override;
 
     glm::vec3 getPosition();
@@ -39,7 +38,7 @@ namespace Fatboy
 
     YolonaOss::GL::DrawSpecification*           _spec    ;
     std::shared_ptr<Context>                    _context ;
-    std::shared_ptr<Tank>                       _tank    ;
+    std::shared_ptr<Unit>                       _tank    ;
     glm::vec3 _lastPickedPosition;
 
 

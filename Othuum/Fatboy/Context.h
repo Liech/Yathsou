@@ -14,6 +14,7 @@ namespace Suthanus
 namespace Fatboy
 {
   class BulletPool;
+  class UnitPool;
 
   //semi "Singleton", which contains stuff that exists only once per timestep
   class Context
@@ -23,9 +24,11 @@ namespace Fatboy
     std::shared_ptr<Haas::ScriptEngine    > script();
     std::shared_ptr<Suthanus::PhysicEngine> physic();
     std::shared_ptr<BulletPool>             bullets();
-  private:
+    std::shared_ptr<UnitPool>               units();
+  private:   
     std::shared_ptr<Haas::ScriptEngine    > _script;
     std::shared_ptr<Suthanus::PhysicEngine> _physic;
     std::shared_ptr<BulletPool>             _bullets;
+    std::shared_ptr<UnitPool>               _units;
   };
 }

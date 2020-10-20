@@ -8,8 +8,9 @@
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include <IyathuumCoreLib/lib/glm/gtx/quaternion.hpp>
 #include "TankTower.h"
-#include "Tank.h"
+#include "Unit.h"
 #include "Context.h"
+#include "UnitPool.h"
 #include "SuthanusPhysicsLib/ArtilleryAim.h"
 
 
@@ -23,13 +24,9 @@ namespace Fatboy
   void Protagonist::load(YolonaOss::GL::DrawSpecification* spec)
   {
     _spec = spec;
-    _tank = std::make_shared<Tank>(_context);
+    _tank = std::make_shared<Unit>(_context);
     _tank->load(spec);
-  }
-
-  void Protagonist::draw()
-  {
-    _tank->draw();
+    _context->units()->addUnit(_tank);
   }
 
   void Protagonist::update()
@@ -86,8 +83,24 @@ namespace Fatboy
       _pressed = false;
     if (isPressed(YolonaOss::GL::Key::KEY_ENTER))
     {
-      _tank = std::make_shared<Tank>(_context);
-      _tank->load(_spec);
+      glm::vec2 pos = _spec->getWindow()->getCursorPos();
+      glm::vec3 camPos = _spec->getCam()->getPosition();
+      glm::vec3 pickDir = _spec->getCam()->getPickRay((float)pos.x, (float)pos.y);
+      glm::vec3 hitPoint;
+      Suthanus::PhysicObject* obj = _context->physic()->raycast(camPos, pickDir, hitPoint);
+      //std::shared_ptr<Suthanus::PhysicObject> lock;
+      //std::weak_ptr<Unit> cast;
+      //if (obj && (lock = obj->self().lock()) && (cast = lock->userPointer))
+      //{
+      //  _tank = cast;
+      //}
+      //else
+      {
+        _context->units()->removeUnit(_tank);
+        _tank = std::make_shared<Unit>(_context);
+        _tank->load(_spec);
+        _context->units()->addUnit(_tank);
+      }
     }
   }
 

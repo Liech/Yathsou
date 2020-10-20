@@ -1,4 +1,4 @@
-#include "Tank.h"
+#include "Unit.h"
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/Vehicle.h"
 #include "TankTower.h"
@@ -11,26 +11,31 @@
 
 namespace Fatboy
 {
-  Tank::Tank(std::shared_ptr<Context> context)
+  Unit::Unit(std::shared_ptr<Context> context)
   {
     _context = context;
   }
 
-  void Tank::load(YolonaOss::GL::DrawSpecification* spec)
+  void Unit::load(YolonaOss::GL::DrawSpecification* spec)
   {
     _spec = spec;
-    _physBody = _context->physic()->newVehicle(glm::vec3(0, 2, 0));
+    _physBody = _context->physic()->newVehicle(_startPosition);
 
     _tower = std::make_shared<TankTower>(*_physBody, glm::vec3(0, 0.5f, 0), glm::vec3(1, 0, 0));
     _tower->load(spec);
   }
 
-  void Tank::update()
+  void Unit::setStartPosition(glm::vec3 startPos)
+  {
+    _startPosition = startPos;
+  }
+
+  void Unit::update()
   {
     _tower->update();
   }
 
-  void Tank::draw()
+  void Unit::draw()
   {
     YolonaOss::BoxRenderer::start();
     glm::mat4 transformVehicle = _physBody->getTransformation();
@@ -41,24 +46,24 @@ namespace Fatboy
     _tower->draw();
   }
 
-  void Tank::fire()
+  void Unit::fire()
   {    
     glm::vec3 v =  _tower->getCurrentGlobalDirection() * _firePower;
     std::shared_ptr<Bullet> bullet = std::make_shared < Bullet>(_context, _tower->getGlobalPosition(),v);
     _context->bullets()->addBullet(bullet);
   }
 
-  void Tank::setAcceleration(float value)
+  void Unit::setAcceleration(float value)
   {
     _physBody->setAcceleration(std::clamp(value, -_physBody->maxAcceleration(), _physBody->maxAcceleration()));
   }
 
-  void Tank::setSteering(float value)
+  void Unit::setSteering(float value)
   {
     _physBody->setSteering(std::clamp(value,-_physBody->maxSteering(), _physBody->maxSteering()));
   }
 
-  void Tank::setTarget(glm::vec3 target)
+  void Unit::setTarget(glm::vec3 target)
   {
     _aimTarget = target;
     glm::vec3 diff = target - _tower->getGlobalPosition();
@@ -68,17 +73,17 @@ namespace Fatboy
       _tower->setGlobalTargetDirection(aim);
   }
 
-  float Tank::maxAcceleration()
+  float Unit::maxAcceleration()
   {
     return _physBody->maxAcceleration();
   }
 
-  float Tank::maxSteering()
+  float Unit::maxSteering()
   {
     return _physBody->maxSteering();
   }
 
-  glm::vec3 Tank::getPosition()
+  glm::vec3 Unit::getPosition()
   {
     return _physBody->getPosition();
   }

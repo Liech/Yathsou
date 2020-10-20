@@ -158,8 +158,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ScriptAPI.cpp" />
     <ClCompile Include="Protagonist.cpp" />
-    <ClCompile Include="Tank.cpp" />
     <ClCompile Include="TankTower.cpp" />
+    <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitPool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
@@ -169,8 +170,9 @@
     <ClInclude Include="GameConfiguration.h" />
     <ClInclude Include="ScriptAPI.h" />
     <ClInclude Include="Protagonist.h" />
-    <ClInclude Include="Tank.h" />
     <ClInclude Include="TankTower.h" />
+    <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitPool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

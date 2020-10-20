@@ -42,6 +42,7 @@ namespace Fatboy
   private:
     void initPhysic();
     void drawLandscape();
+    void initEnemys();
 
     std::shared_ptr<Suthanus::Box>                   _landscape;
     std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables;
