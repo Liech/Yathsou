@@ -18,9 +18,11 @@
 #include "BulletPool.h"
 #include "UnitPool.h"
 #include "Unit.h"
+//#include "SuthanusPhysicsLib/SignedDistanceFunctionBullet.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "YolonaOss/Renderer/BoxRenderer.h"
+#include "BulletDebugDrawer.h"
 
 namespace Fatboy
 {
@@ -37,6 +39,7 @@ namespace Fatboy
     initPhysic();
     _protagonist = std::make_shared<Protagonist>(_context);
     initEnemys();
+    _context->physic()->setDebugDrawer(new BulletDebugDrawer());
   }
 
   void Fatboy::initPhysic()
@@ -104,5 +107,8 @@ namespace Fatboy
     _context->bullets()->draw();
     _context->units  ()->draw();
     _postDrawables->draw();
+    //YolonaOss::BoxRenderer::start();
+    //_context->physic()->debugDrawWorld();
+    //YolonaOss::BoxRenderer::end();
   }
 }

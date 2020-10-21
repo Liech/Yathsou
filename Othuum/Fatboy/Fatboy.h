@@ -19,6 +19,7 @@ namespace Suthanus
 {
   class PhysicEngine;
   class Box;
+  class PhysicObject;
 }
 namespace Haas
 {
