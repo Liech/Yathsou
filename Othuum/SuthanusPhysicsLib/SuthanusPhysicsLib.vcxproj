@@ -119,6 +119,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)lib/bullet;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +139,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir)lib/bullet/lib/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -153,6 +155,7 @@
     <ClCompile Include="ArtilleryAim.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="BoxBullet.cpp" />
+    <ClCompile Include="HeightMapBullet.cpp" />
     <ClCompile Include="PhysicEngine.cpp" />
     <ClCompile Include="PhysicObject.cpp" />
     <ClCompile Include="Sphere.cpp" />
@@ -164,6 +167,8 @@
     <ClInclude Include="ArtilleryAim.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="BoxBullet.h" />
+    <ClInclude Include="HeightMap.h" />
+    <ClInclude Include="HeightMapBullet.h" />
     <ClInclude Include="PhysicEngine.h" />
     <ClInclude Include="PhysicObject.h" />
     <ClInclude Include="Sphere.h" />

@@ -42,6 +42,9 @@
     <ClCompile Include="ArtilleryAim.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="HeightMapBullet.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Box.h">
@@ -72,6 +75,12 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ArtilleryAim.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="HeightMap.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="HeightMapBullet.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
