@@ -6,6 +6,7 @@
 #include "Box.h"
 #include "Sphere.h"
 #include "Vehicle.h"
+#include "HeightMap.h"
 
 class btBroadphaseInterface;
 class btDefaultCollisionConfiguration;
@@ -30,9 +31,10 @@ namespace Suthanus
 
     PhysicObject* raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint);
 
-    std::shared_ptr<Box   >  newBox    (glm::vec3 pos, glm::vec3 size  , bool isDynamic);
-    std::shared_ptr<Sphere>  newSphere (glm::vec3 pos, float     radius, bool isDynamic);
-    std::shared_ptr<Vehicle> newVehicle(glm::vec3 pos);
+    std::shared_ptr<Box      > newBox      (glm::vec3 pos, glm::vec3 size  , bool isDynamic);
+    std::shared_ptr<Sphere   > newSphere   (glm::vec3 pos, float     radius, bool isDynamic);
+    std::shared_ptr<Vehicle  > newVehicle  (glm::vec3 pos);
+    std::shared_ptr<HeightMap> newHeightMap(glm::vec3 pos);
 
   private:
     void handleCollision();
