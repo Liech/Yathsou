@@ -53,5 +53,8 @@ namespace Fatboy
     std::shared_ptr<Protagonist>                     _protagonist;
     std::shared_ptr<ScriptAPI>                       _physicAPI;
     std::shared_ptr<Context>                         _context;
+
+    std::shared_ptr<Suthanus::PhysicObject> _land;
+    bool _drawDebug = false;
   };
 }

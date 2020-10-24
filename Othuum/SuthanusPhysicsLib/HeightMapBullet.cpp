@@ -7,46 +7,49 @@ namespace Suthanus
 {
   namespace Bullet
   {
-    HeightMapBullet::HeightMapBullet(btDiscreteDynamicsWorld* world,glm::vec2 pos, glm::vec2 cellSize, Iyathuum::MultiDimensionalArray<float, 2> content)
-      :_cellSize(cellSize), 
-       _content (content)
+    HeightMapBullet::HeightMapBullet(btDiscreteDynamicsWorld* world,glm::vec3 pos, glm::vec2 cellSize)//, Iyathuum::MultiDimensionalArray<float, 2> content)
+      :_cellSize(cellSize)//, 
+       //_content (content)
     {
       _world = world;
 
-      int width = 128;
-      int length = 128;
-      unsigned char* heightfieldData = new unsigned char[width * length];
+      int width  = 10;
+      int length = 10;
+      float* heightfieldData = new float[width * length];
       {
         for (int i = 0; i < width * length; i++)
         {
           heightfieldData[i] = 0;
         }
       }
-
-      const char* filename = "heightfield128x128.raw";
-      FILE* heightfieldFile = fopen(filename, "r");
-      if (!heightfieldFile)
-      {
-        filename = "heightfield128x128.raw";
-        heightfieldFile = fopen(filename, "r");
-      }
-      if (heightfieldFile)
-      {
-        int numBytes = fread(heightfieldData, 1, width * length, heightfieldFile);
-        //btAssert(numBytes);
-        if (!numBytes)
-        {
-          printf("couldn't read heightfield at %s\n", filename);
-        }
-        fclose(heightfieldFile);
-      }
+      heightfieldData[3] = 0;
+      heightfieldData[4] = 0.1;
+      heightfieldData[5] = 1;
+      heightfieldData[6] = 10;
+      //const char* filename = "heightfield128x128.raw";
+      //FILE* heightfieldFile = fopen(filename, "r");
+      //if (!heightfieldFile)
+      //{
+      //  filename = "heightfield128x128.raw";
+      //  heightfieldFile = fopen(filename, "r");
+      //}
+      //if (heightfieldFile)
+      //{
+      //  int numBytes = fread(heightfieldData, 1, width * length, heightfieldFile);
+      //  //btAssert(numBytes);
+      //  if (!numBytes)
+      //  {
+      //    printf("couldn't read heightfield at %s\n", filename);
+      //  }
+      //  fclose(heightfieldFile);
+      //}
 
       bool useFloatDatam = false;
       bool flipQuadEdges = false;
       int upIndex = 1;
 
-      btScalar maxHeight = 20000.f;
-      btHeightfieldTerrainShape * heightFieldShape = new btHeightfieldTerrainShape(width, length, heightfieldData, maxHeight, upIndex, useFloatDatam, flipQuadEdges);
+      //btHeightfieldTerrainShape * heightFieldShape = new btHeightfieldTerrainShape(width, length, heightfieldData, maxHeight, upIndex, useFloatDatam, flipQuadEdges);
+      btHeightfieldTerrainShape* heightFieldShape = new btHeightfieldTerrainShape(width, length, heightfieldData, 1,0,1,upIndex,PHY_ScalarType::PHY_FLOAT, flipQuadEdges);
       btCollisionShape* colShape = heightFieldShape;
       heightFieldShape->setUseDiamondSubdivision(true);
 

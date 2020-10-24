@@ -134,6 +134,9 @@
       <Command>((Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z))&amp;
 ((Robocopy.exe "$(ProjectDir)Lib/gainput/" "$(TargetDir)/" "gainput-d.dll") ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
     </PostBuildEvent>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -192,6 +195,9 @@
       <Command>((Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z))&amp;
 ((Robocopy.exe "$(ProjectDir)Lib/gainput/" "$(TargetDir)/" "gainput.dll") ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
     </PostBuildEvent>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="OpenGL\Content.txt" />

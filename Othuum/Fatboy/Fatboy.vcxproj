@@ -91,13 +91,16 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/AhwassaGraphicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
     </Link>
     <CustomBuildStep>
       <Command>call "$(ProjectDir)build.bat"</Command>
@@ -123,11 +126,14 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/AhwassaGraphicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ShowProgress>LinkVerboseLib</ShowProgress>
     </Link>
     <CustomBuildStep>
       <Command>call "$(ProjectDir)build.bat"</Command>

@@ -14,6 +14,7 @@ namespace Suthanus
   class Vehicle;
   class Sphere;
 }
+#include "YolonaOss/Camera/CameraSystem.h"
 
 namespace Fatboy
 {
@@ -24,7 +25,7 @@ namespace Fatboy
   class Protagonist : public YolonaOss::GL::Updateable, public YolonaOss::GetPosition
   {
   public:
-    Protagonist(std::shared_ptr<Context>);
+    Protagonist(std::shared_ptr<Context>, bool*, std::shared_ptr < YolonaOss::Camera::CameraSystem> cam);
 
     virtual void load(YolonaOss::GL::DrawSpecification*) override;
     virtual void update()                                override;
@@ -40,7 +41,8 @@ namespace Fatboy
     std::shared_ptr<Context>                    _context ;
     std::shared_ptr<Unit>                       _tank    ;
     glm::vec3 _lastPickedPosition;
-
+    bool* _drawDebug;
+    std::shared_ptr<YolonaOss::Camera::CameraSystem> _cam;
 
     bool _pressed = false;
   };

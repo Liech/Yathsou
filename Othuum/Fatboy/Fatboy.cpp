@@ -37,8 +37,8 @@ namespace Fatboy
     _context = std::make_shared<Context>();
 
     initPhysic();
-    _protagonist = std::make_shared<Protagonist>(_context);
-    initEnemys();
+    _protagonist = std::make_shared<Protagonist>(_context,&_drawDebug, _cam);
+    //initEnemys();
     _context->physic()->setDebugDrawer(new BulletDebugDrawer());
   }
 
@@ -48,6 +48,7 @@ namespace Fatboy
     _landscape = _context->physic()->newBox(glm::vec3(0, 0, 0), glm::vec3(20, 0, 20), false);
     _physicAPI = std::make_shared<ScriptAPI>(_context->physic().get());
     _physicAPI->registerAPI(_context->script().get());
+    _land = _context->physic()->newHeightMap(glm::vec3(0, 2, 0));
   }
 
   void Fatboy::initEnemys()
@@ -103,12 +104,17 @@ namespace Fatboy
   void Fatboy::draw()
   {
     _preDrawables->draw();
-    drawLandscape();
+
+    if (!_drawDebug)
+      drawLandscape();
     _context->bullets()->draw();
     _context->units  ()->draw();
     _postDrawables->draw();
-    //YolonaOss::BoxRenderer::start();
-    //_context->physic()->debugDrawWorld();
-    //YolonaOss::BoxRenderer::end();
+    if (_drawDebug)
+    {
+      YolonaOss::BoxRenderer::start();
+      _context->physic()->debugDrawWorld();
+      YolonaOss::BoxRenderer::end();
+    }
   }
 }

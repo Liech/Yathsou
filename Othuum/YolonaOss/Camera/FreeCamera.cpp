@@ -25,8 +25,9 @@ namespace YolonaOss {
       bool d = _window->getKeyStatus(GL::Key::KEY_D) == GL::KeyStatus::PRESS;
       bool q = _window->getKeyStatus(GL::Key::KEY_Q) == GL::KeyStatus::PRESS;
       bool e = _window->getKeyStatus(GL::Key::KEY_E) == GL::KeyStatus::PRESS;
+      bool speedup = _window->getKeyStatus(GL::Key::KEY_LEFT_SHIFT) == GL::KeyStatus::PRESS;
 
-      float delta = (float)(time - _lastTime);
+      float delta = (float)(time - _lastTime) * speedup?10:1;
       glm::vec3 toTarget = glm::normalize(_camera->getTarget() - _camera->getPosition());
       ////toTarget /= toTarget.length();
       glm::vec3 toSide = glm::cross(toTarget, _camera->getUp());

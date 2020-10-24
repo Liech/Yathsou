@@ -7,6 +7,7 @@
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include <IyathuumCoreLib/lib/glm/gtx/quaternion.hpp>
+#include "IyathuumCoreLib/Singleton/Database.h"
 #include "TankTower.h"
 #include "Unit.h"
 #include "Context.h"
@@ -16,7 +17,9 @@
 
 namespace Fatboy
 {
-  Protagonist::Protagonist(std::shared_ptr<Context> context)
+  Protagonist::Protagonist(std::shared_ptr<Context> context, bool* drawDebug, std::shared_ptr < YolonaOss::Camera::CameraSystem> cam)
+    :_drawDebug(drawDebug),
+    _cam(cam)
   {
     _context = context;
   }
@@ -79,7 +82,20 @@ namespace Fatboy
       _tank->fire();
       _pressed = true;
     }
-    else if (!isPressed(YolonaOss::GL::Key::KEY_SPACE))
+    else if (isPressed(YolonaOss::GL::Key::KEY_F1) && !_pressed)
+    {
+      *_drawDebug = !*_drawDebug;
+      _pressed = true;
+    }
+    else if (isPressed(YolonaOss::GL::Key::KEY_F2) && !_pressed)
+    {
+      if (_cam->getCurrentCam() == "FollowCamera")
+        _cam->setCurrentCam("FreeCamera");
+      else
+        _cam->setCurrentCam("FollowCamera");
+      _pressed = true;
+    }
+    else if (!(isPressed(YolonaOss::GL::Key::KEY_SPACE) || isPressed(YolonaOss::GL::Key::KEY_F1) || isPressed(YolonaOss::GL::Key::KEY_F2)))
       _pressed = false;
     if (isPressed(YolonaOss::GL::Key::KEY_ENTER))
     {

@@ -93,8 +93,8 @@ namespace Suthanus
   std::shared_ptr<HeightMap> PhysicEngine::newHeightMap(glm::vec3 pos)
   {
     glm::vec2 cellSize(1,1);
-    Iyathuum::MultiDimensionalArray<float, 2> content({10,10});
-    Bullet::HeightMapBullet* result = new Bullet::HeightMapBullet(_world, pos,cellSize,content);
+    //Iyathuum::MultiDimensionalArray<float, 2> content({10,10});
+    Bullet::HeightMapBullet* result = new Bullet::HeightMapBullet(_world, pos, cellSize);// , content);
     auto ptr = std::shared_ptr<HeightMap>(dynamic_cast<HeightMap*>(result));
     ptr->initialize(ptr);
     return ptr;
