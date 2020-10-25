@@ -123,6 +123,9 @@
     <ClCompile Include="ScriptEngine.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="lua2json.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\lua\lcode.h">
@@ -209,8 +212,11 @@
     <ClInclude Include="lib\lua\lauxlib.h">
       <Filter>lua</Filter>
     </ClInclude>
-    <ClInclude Include="ScriptEngine.h">
+    <ClInclude Include="lua2json.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptEngine.h">
+      <Filter>lua</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

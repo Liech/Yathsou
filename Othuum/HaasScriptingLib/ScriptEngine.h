@@ -51,12 +51,19 @@ namespace Haas
 
     void executeFile(std::string filename);
     int callAdd(std::string name, int a, int b);
+    ScriptEngineAPI* api() {
+      return _api;
+    };
+    void dumpStack();
+    void dumpGlobalVariables();
 
     std::vector<any> callScript(std::string name, std::vector<any>, std::vector<any::type> outputTypes = {});
-
+    void bp2json(std::string name);
     void registerAverage();
     void registerFunction(std::string name, std::shared_ptr < std::function < void(ScriptEngineAPI*)>>);
   private:
+    std::string popStr(int pos);
+    void print_table(int indentation = 0);
     std::set<std::shared_ptr<std::function<void(ScriptEngineAPI*)>>> _registry;
     lua_State*       _state;
     ScriptEngineAPI* _api;

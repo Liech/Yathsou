@@ -50,6 +50,7 @@ namespace Suthanus
 
       //btHeightfieldTerrainShape * heightFieldShape = new btHeightfieldTerrainShape(width, length, heightfieldData, maxHeight, upIndex, useFloatDatam, flipQuadEdges);
       btHeightfieldTerrainShape* heightFieldShape = new btHeightfieldTerrainShape(width, length, heightfieldData, 1,0,1,upIndex,PHY_ScalarType::PHY_FLOAT, flipQuadEdges);
+      
       btCollisionShape* colShape = heightFieldShape;
       heightFieldShape->setUseDiamondSubdivision(true);
 

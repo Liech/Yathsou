@@ -23,11 +23,14 @@
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "BulletDebugDrawer.h"
+#include "HaasScriptingLib/lua2json.h"
 
 namespace Fatboy
 {
   Fatboy::Fatboy()
   {
+    Haas::ScriptEngine s;
+    s.bp2json("lua.bp");
     _preDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _preDrawables->addDrawable(std::make_shared<YolonaOss::Background>());

@@ -4,6 +4,7 @@
 #include "lua.hpp"
 #include "lstate.h"
 #include "IyathuumCoreLib/Util/lambdaCapture2functionPointer.h"
+#include <iostream>
 
 namespace Haas
 {
@@ -168,4 +169,89 @@ namespace Haas
   {
     return _numberOfPushes;
   }
+
+
+  void ScriptEngine::dumpStack()
+  {
+    int top = lua_gettop(_state);
+    //printf("(%s,%d) top=%d\n", func, line, top);
+    for (int i = 0; i < top; i++) {
+      int positive = top - i;
+      int negative = -(i + 1);
+      int type = lua_type(_state, positive);
+      int typeN = lua_type(_state, negative);
+      const char* typeName = lua_typename(_state, type);
+      printf("%d/%d: type=%s", positive, negative, typeName);
+      switch (type) {
+      case LUA_TNUMBER:
+        printf(" value=%f", lua_tonumber(_state, positive));
+        break;
+      case LUA_TSTRING:
+        printf(" value=%s", lua_tostring(_state, positive));
+        break;
+      case LUA_TFUNCTION:
+        if (lua_iscfunction(_state, positive)) {
+          printf(" C:%p", lua_tocfunction(_state, positive));
+        }
+        break;
+      }
+      printf("\n");
+    }
+  }
+
+  void ScriptEngine::dumpGlobalVariables()
+  {
+    lua_pushglobaltable(_state);       // Get global table
+    lua_pushnil(_state);               // put a nil key on stack
+    while (lua_next(_state, -2) != 0) { // key(-1) is replaced by the next key(-1) in table(-2)
+      std::cout<<lua_tostring(_state, -2)<<std::endl;  // Get key(-2) name
+      lua_pop(_state, 1);               // remove value(-1), now key on top at(-1)
+    }
+    lua_pop(_state, 1);                 // remove global table(-1)
+  }
+
+  std::string ScriptEngine::popStr(int pos)
+  {
+    if (lua_isnumber(_state, pos))
+      return std::to_string(lua_tonumber(_state, pos));
+    else if (lua_isstring(_state, pos))
+      return lua_tostring(_state, pos);
+     
+    throw std::runtime_error("Unkown");
+  }
+
+  void ScriptEngine::print_table(int indentation)
+  {
+    std::string indent = "";
+    for (int i = 0; i < indentation; i++)
+      indent += " ";
+
+    lua_pushnil(_state);  /* first key */
+   int amount = 0;
+   while (lua_next(_state, -2) != 0) {
+     if (lua_isstring(_state, -1)) {
+       std::cout << indent << popStr(-2) << ": " << popStr(-1) << std::endl;
+     }
+     else if (lua_isnumber(_state, -1)) {
+       std::cout << indent << popStr(-2) << ": " << lua_tonumber(_state, -1) << std::endl;
+     }
+     else if (lua_isboolean(_state, -1)) {
+       std::cout << indent << popStr(-2) << ": " << lua_toboolean(_state, -1) << std::endl;
+     }
+     else if (lua_istable(_state, -1)) {
+       print_table(indentation + 1);
+     }
+     else
+       std::cout << indent << "UNKOWN" << std::endl;
+     lua_pop(_state, 1);
+   }       
+  }
+
+  void ScriptEngine::bp2json(std::string filename)
+  {
+    //executeFile(filename);
+    //lua_getglobal(_state, "UnitBlueprint");
+    //print_table();
+  }
+
 }
