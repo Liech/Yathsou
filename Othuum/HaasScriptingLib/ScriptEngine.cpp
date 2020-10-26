@@ -244,14 +244,42 @@ namespace Haas
      else
        std::cout << indent << "UNKOWN" << std::endl;
      lua_pop(_state, 1);
-   }       
+   }
   }
 
-  void ScriptEngine::bp2json(std::string filename)
+  void ScriptEngine::toJson(nlohmann::json& result)
   {
-    //executeFile(filename);
-    //lua_getglobal(_state, "UnitBlueprint");
-    //print_table();
+    std::string indent = "";
+
+    lua_pushnil(_state);  /* first key */
+    int amount = 0;
+    while (lua_next(_state, -2) != 0) {
+      if (lua_isstring(_state, -1)) {
+        result[popStr(-2)] = popStr(-1);
+      }
+      else if (lua_isnumber(_state, -1)) {
+        result[popStr(-2)] = lua_tonumber(_state, -1);
+      }
+      else if (lua_isboolean(_state, -1)) {
+        result[popStr(-2)] = lua_toboolean(_state, -1);
+      }
+      else if (lua_istable(_state, -1)) {
+        nlohmann::json sub;
+        toJson(sub);
+        result[popStr(-2)] = sub;
+      }
+      else
+        throw std::runtime_error("Unkown Type");
+      lua_pop(_state, 1);
+    }
+  }
+
+  nlohmann::json ScriptEngine::getLuaTable(std::string name)
+  {
+    lua_getglobal(_state, name.c_str());
+    nlohmann::json result;
+    toJson(result);
+    return result;
   }
 
 }

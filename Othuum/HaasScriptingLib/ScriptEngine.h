@@ -4,6 +4,7 @@
 #include <functional>
 #include <set>
 #include <memory>
+#include "lib/json.hpp"
 struct lua_State;
 
 namespace Haas
@@ -58,10 +59,11 @@ namespace Haas
     void dumpGlobalVariables();
 
     std::vector<any> callScript(std::string name, std::vector<any>, std::vector<any::type> outputTypes = {});
-    void bp2json(std::string name);
+    nlohmann::json getLuaTable(std::string name);
     void registerAverage();
     void registerFunction(std::string name, std::shared_ptr < std::function < void(ScriptEngineAPI*)>>);
   private:
+    void toJson(nlohmann::json& json);
     std::string popStr(int pos);
     void print_table(int indentation = 0);
     std::set<std::shared_ptr<std::function<void(ScriptEngineAPI*)>>> _registry;

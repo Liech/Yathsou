@@ -25,12 +25,16 @@
 #include "BulletDebugDrawer.h"
 #include "HaasScriptingLib/lua2json.h"
 
+#include <iostream>
+
 namespace Fatboy
 {
   Fatboy::Fatboy()
   {
     Haas::ScriptEngine s;
-    s.bp2json("lua.bp");
+    s.executeFile("lua.bp");
+    auto j = s.getLuaTable("UnitBlueprint");
+    std::cout << j.dump(4);
     _preDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _preDrawables->addDrawable(std::make_shared<YolonaOss::Background>());
