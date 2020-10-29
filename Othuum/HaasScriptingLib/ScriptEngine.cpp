@@ -220,26 +220,42 @@ namespace Haas
     throw std::runtime_error("Unkown");
   }
 
-  void ScriptEngine::print_table(int indentation)
+  void ScriptEngine::printTop(int indentation)
   {
     std::string indent = "";
     for (int i = 0; i < indentation; i++)
       indent += " ";
 
+    if (!lua_istable(_state, -1))
+    {
+      if (lua_isstring(_state, -1)) {
+        std::cout << indent << popStr(-1) << std::endl;
+      }
+      else if (lua_isnumber(_state, -1)) {
+        std::cout << indent << lua_tonumber(_state, -1) << std::endl;
+      }
+      else if (lua_isboolean(_state, -1)) {
+        std::cout << indent << lua_toboolean(_state, -1) << std::endl;
+      }
+      else
+        std::cout << indent << "UNKOWN" << std::endl;
+      return;
+    }
+
     lua_pushnil(_state);  /* first key */
    int amount = 0;
    while (lua_next(_state, -2) != 0) {
-     if (lua_isstring(_state, -1)) {
+      if (lua_isstring(_state, -1)) {
        std::cout << indent << popStr(-2) << ": " << popStr(-1) << std::endl;
-     }
-     else if (lua_isnumber(_state, -1)) {
+      }
+      else if (lua_isnumber(_state, -1)) {
        std::cout << indent << popStr(-2) << ": " << lua_tonumber(_state, -1) << std::endl;
-     }
-     else if (lua_isboolean(_state, -1)) {
+      }
+      else if (lua_isboolean(_state, -1)) {
        std::cout << indent << popStr(-2) << ": " << lua_toboolean(_state, -1) << std::endl;
-     }
+      }
      else if (lua_istable(_state, -1)) {
-       print_table(indentation + 1);
+       printTop(indentation + 1);
      }
      else
        std::cout << indent << "UNKOWN" << std::endl;
@@ -250,6 +266,22 @@ namespace Haas
   void ScriptEngine::toJson(nlohmann::json& result)
   {
     std::string indent = "";
+
+    if (!lua_istable(_state, -1))
+    {
+      if (lua_isstring(_state, -1)) {
+        result = popStr(-1);
+      }
+      else if (lua_isnumber(_state, -1)) {
+        result= lua_tonumber(_state, -1);
+      }
+      else if (lua_isboolean(_state, -1)) {
+        result = lua_toboolean(_state, -1);
+      }
+      else
+        throw std::runtime_error("Unkown type");
+      return;
+    }
 
     lua_pushnil(_state);  /* first key */
     int amount = 0;
@@ -273,12 +305,73 @@ namespace Haas
       lua_pop(_state, 1);
     }
   }
+  void ScriptEngine::setVar(std::string name, nlohmann::json value) {
+    std::cout << "t1" << std::endl;
+    dumpStack();
+    std::cout << "ASD" << value.dump(4) << std::endl;
+    std::cout << "t2" << std::endl;
+    dumpStack();
 
-  nlohmann::json ScriptEngine::getLuaTable(std::string name)
+    for (auto item : value.items())
+    {
+      std::string    key   = item.key();
+      nlohmann::json value = item.value();
+      
+      if (value.type_name() == "number")
+      {
+        if (value.is_number_float())
+        {
+          float v = value;
+          lua_pushnumber(_state, v);
+        }
+        else
+        {
+          int v = value;
+          lua_pushnumber(_state, v);
+        }
+      }
+      else if (value.type_name() == "boolean")
+      {
+        bool v = value;
+        lua_pushboolean(_state, v);
+      }
+      else if (value.type_name() == "string")
+      {
+        std::string v = value;
+        lua_pushstring(_state, v.c_str());
+      }
+      else if (value.type_name() == "array")
+      {
+        throw std::runtime_error("Not implemented yet!");
+      }
+      else if (value.type_name() == "object")
+      {
+        lua_newtable(_state);
+        lua_pushstring(_state, key.c_str());
+        throw std::runtime_error("Deeper");
+        lua_settable(_state, -3);
+        throw std::runtime_error("Not implemented yet!");
+      }
+      else if (value.type_name() == "binary")
+      {
+        throw std::runtime_error("Not implemented yet!");
+      }
+      else throw std::runtime_error("Unkown type");
+      std::cout << "while" << std::endl;
+      dumpStack();
+    }
+    //print_table(0);
+    lua_setglobal(_state, name.c_str());
+  }
+
+  nlohmann::json ScriptEngine::getVar(std::string name)
   {
     lua_getglobal(_state, name.c_str());
+    printTop(0);
     nlohmann::json result;
     toJson(result);
+    dumpStack();
+    lua_pop(_state, 1);
     return result;
   }
 

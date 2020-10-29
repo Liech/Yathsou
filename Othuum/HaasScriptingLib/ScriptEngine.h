@@ -59,13 +59,14 @@ namespace Haas
     void dumpGlobalVariables();
 
     std::vector<any> callScript(std::string name, std::vector<any>, std::vector<any::type> outputTypes = {});
-    nlohmann::json getLuaTable(std::string name);
+    nlohmann::json getVar(std::string name);
+    void           setVar(std::string name, nlohmann::json value);
     void registerAverage();
     void registerFunction(std::string name, std::shared_ptr < std::function < void(ScriptEngineAPI*)>>);
   private:
     void toJson(nlohmann::json& json);
     std::string popStr(int pos);
-    void print_table(int indentation = 0);
+    void printTop(int indentation = 0);
     std::set<std::shared_ptr<std::function<void(ScriptEngineAPI*)>>> _registry;
     lua_State*       _state;
     ScriptEngineAPI* _api;
