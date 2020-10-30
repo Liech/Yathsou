@@ -31,13 +31,6 @@ namespace Fatboy
 {
   Fatboy::Fatboy()
   {
-    Haas::ScriptEngine s;
-    s.executeFile("lua.bp");
-    //auto j = s.getVar("UnitBlueprint");
-    s.setVar("Kartoffel", 0);
-    auto wub = s.getVar("Kartoffel");
-    std::cout << "ASD" << wub.dump(4) << std::endl;
-    //std::cout << j.dump(4);
     _preDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _preDrawables->addDrawable(std::make_shared<YolonaOss::Background>());

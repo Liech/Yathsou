@@ -305,62 +305,71 @@ namespace Haas
       lua_pop(_state, 1);
     }
   }
+
+  void ScriptEngine::toTable(const nlohmann::json& value)
+  {
+    if (value.type_name() == "number")
+    {
+      if (value.is_number_float())
+      {
+        float v = value;
+        lua_pushnumber(_state, v);
+      }
+      else
+      {
+        int v = value;
+        lua_pushnumber(_state, v);
+      }
+    }
+    else if (value.type_name() == "boolean")
+    {
+      bool v = value;
+      lua_pushboolean(_state, v);
+    }
+    else if (value.type_name() == "string")
+    {
+      std::string v = value;
+      lua_pushstring(_state, v.c_str());
+    }
+    else if (value.type_name() == "binary")
+    {
+      throw std::runtime_error("Not implemented yet!");
+    }
+    else if (value.type_name() == "array")
+    {
+      lua_newtable(_state);
+      int count = 0;
+      for (auto item : value.items())
+      {
+        nlohmann::json value = item.value();
+        lua_pushnumber(_state, count);
+        toTable(value);
+        lua_settable(_state, -3);
+        count++;
+      }
+    }
+    else if (value.type_name() == "object")
+    {
+      lua_newtable(_state);
+      for (auto item : value.items())
+      {
+        std::string    key = item.key();
+        nlohmann::json value = item.value();
+        lua_pushstring(_state, key.c_str());
+        toTable(value);
+        lua_settable(_state, -3);
+      }
+    }
+  }
+
   void ScriptEngine::setVar(std::string name, nlohmann::json value) {
     std::cout << "t1" << std::endl;
     dumpStack();
     std::cout << "ASD" << value.dump(4) << std::endl;
     std::cout << "t2" << std::endl;
     dumpStack();
-
-    for (auto item : value.items())
-    {
-      std::string    key   = item.key();
-      nlohmann::json value = item.value();
-      
-      if (value.type_name() == "number")
-      {
-        if (value.is_number_float())
-        {
-          float v = value;
-          lua_pushnumber(_state, v);
-        }
-        else
-        {
-          int v = value;
-          lua_pushnumber(_state, v);
-        }
-      }
-      else if (value.type_name() == "boolean")
-      {
-        bool v = value;
-        lua_pushboolean(_state, v);
-      }
-      else if (value.type_name() == "string")
-      {
-        std::string v = value;
-        lua_pushstring(_state, v.c_str());
-      }
-      else if (value.type_name() == "array")
-      {
-        throw std::runtime_error("Not implemented yet!");
-      }
-      else if (value.type_name() == "object")
-      {
-        lua_newtable(_state);
-        lua_pushstring(_state, key.c_str());
-        throw std::runtime_error("Deeper");
-        lua_settable(_state, -3);
-        throw std::runtime_error("Not implemented yet!");
-      }
-      else if (value.type_name() == "binary")
-      {
-        throw std::runtime_error("Not implemented yet!");
-      }
-      else throw std::runtime_error("Unkown type");
-      std::cout << "while" << std::endl;
-      dumpStack();
-    }
-    //print_table(0);
+    toTable(value);
+    printTop();
     lua_setglobal(_state, name.c_str());
   }
 

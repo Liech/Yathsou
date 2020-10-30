@@ -64,6 +64,7 @@ namespace Haas
     void registerAverage();
     void registerFunction(std::string name, std::shared_ptr < std::function < void(ScriptEngineAPI*)>>);
   private:
+    void toTable(const nlohmann::json& json);
     void toJson(nlohmann::json& json);
     std::string popStr(int pos);
     void printTop(int indentation = 0);
