@@ -210,7 +210,7 @@
       <Filter>lua</Filter>
     </ClInclude>
     <ClInclude Include="ScriptEngine.h">
-      <Filter>lua</Filter>
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

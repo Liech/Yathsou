@@ -4,7 +4,7 @@
 #include <functional>
 #include <set>
 #include <memory>
-#include "lib/json.hpp"
+#include "lib/json_fwd.hpp"
 struct lua_State;
 
 namespace Haas
@@ -25,11 +25,11 @@ namespace Haas
     void printTop(int indentation = 0);
     void dumpGlobalVariables();
 
-    void        toTable(const nlohmann::json& json);
-    void        toJson (nlohmann::json& json);
-    std::string popStr (int pos);
+    void        toTable(const nlohmann::json& json);//debug
+    void        toJson (nlohmann::json& json);      //debug
+    std::string popStr (int pos);                   //debug
 
     std::set<std::shared_ptr<std::function < nlohmann::json(const nlohmann::json&)>>> _registry;
-    lua_State*                                                                        _state;
+    lua_State*                                                                        _state   ;
   };
 }

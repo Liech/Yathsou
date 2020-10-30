@@ -5,6 +5,7 @@
 #include "lstate.h"
 #include "IyathuumCoreLib/Util/lambdaCapture2functionPointer.h"
 #include <iostream>
+#include "lib/json.hpp"
 
 namespace Haas
 {
