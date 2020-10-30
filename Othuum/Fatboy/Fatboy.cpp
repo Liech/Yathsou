@@ -23,7 +23,6 @@
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "BulletDebugDrawer.h"
-#include "HaasScriptingLib/lua2json.h"
 
 #include <iostream>
 
