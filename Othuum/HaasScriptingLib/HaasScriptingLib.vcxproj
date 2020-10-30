@@ -193,7 +193,6 @@
     <ClCompile Include="lib\lua\lutf8lib.c" />
     <ClCompile Include="lib\lua\lvm.c" />
     <ClCompile Include="lib\lua\lzio.c" />
-    <ClCompile Include="lua2json.cpp" />
     <ClCompile Include="ScriptEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -225,7 +224,6 @@
     <ClInclude Include="lib\lua\lundump.h" />
     <ClInclude Include="lib\lua\lvm.h" />
     <ClInclude Include="lib\lua\lzio.h" />
-    <ClInclude Include="lua2json.h" />
     <ClInclude Include="ScriptEngine.h" />
   </ItemGroup>
   <ItemGroup>
