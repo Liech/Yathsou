@@ -19,7 +19,8 @@
 class SCM
 {
 public:
-  void work();
+  struct data;
+  SCM::data load(std::string filename);
   
   struct bone {
     std::string   name;
@@ -28,6 +29,7 @@ public:
     glm::quat     rotation;
     int           parentIndex;
   };
+
   struct vertex {
     glm::vec3     position;
     glm::vec3     tangent;
@@ -45,26 +47,28 @@ public:
     short c;
   };
 
+  struct data
+  {
+    std::vector<std::string>  boneNames;
+    std::vector<bone>         bones    ;
+    std::vector<vertex>       vertecies;
+    std::vector<tri>          indices  ;
+    std::vector<std::string>  info     ;
+  };
+
 private:
   int                      pad(int size);
   std::vector<std::string> split(std::string, char seperator = '\0');
+
   std::string              readString(const std::vector<unsigned char>&, size_t& position, size_t size);
   int                      readInt   (const std::vector<unsigned char>&, size_t& position);
   float                    readFloat (const std::vector<unsigned char>&, size_t& position);
-
-  int _bonecount       = 0;//~unused
-  int _extravertoffset = 0;//~unused
-  int _indexcount      = 0;//~unused
 
   std::vector<std::string> readBoneNames(int offset);
   std::vector<bone>        readBones    (int offset,int count,std::vector<std::string> boneNames);
   std::vector<vertex>      readVertices (int offset,int count);
   std::vector<tri>         readInidices (int offset, int count);
   std::vector<std::string> readInfo     (int offset, int count);
-
-  std::string folder = "E:\\scmunpacked\\units\\UES0103";
-  std::string lod1   = "UES0103_lod1.scm";
-  std::string lod0   = "UES0103_LOD0.scm";
 
   size_t      _fileposition = 0;
   std::vector<unsigned char> _buffer;

@@ -3,36 +3,40 @@
 #include <iostream>
 #include <sstream>
 
-void SCA::work()
+//based on
+//https://github.com/Oygron/SupCom_Import_Export_Blender/blob/master/supcom-importer.py
+
+SCA::data SCA::load(std::string filename)
 {
-  std::string file = folder + "\\" + a1;
-
-  std::ifstream input(file, std::ios::binary);
+  SCA::data result;
+  std::ifstream input(filename, std::ios::binary);
   if (input.fail())
-    throw std::runtime_error("Error opening " + file);
-  _buffer = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
-
+    throw std::runtime_error("Error opening " + filename);
+  
+  _buffer       = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
+  _fileposition = 0;
 
   std::string magic  = readString(_buffer, _fileposition, 4);
-  int version        = readInt   (_buffer, _fileposition);
-  int numberOfFrames = readInt   (_buffer, _fileposition);
-  float duration     = readFloat (_buffer, _fileposition);
-  int numberOfBones  = readInt   (_buffer, _fileposition);
-  int namesOffset    = readInt   (_buffer, _fileposition);
-  int linksOffset    = readInt   (_buffer, _fileposition);
-  int animationOffset= readInt   (_buffer, _fileposition);
-  int frameSize      = readInt   (_buffer, _fileposition);
+  int version        = readInt   (_buffer, _fileposition   );
+  int numberOfFrames = readInt   (_buffer, _fileposition   );
+  result.duration    = readFloat (_buffer, _fileposition   );
+  int numberOfBones  = readInt   (_buffer, _fileposition   );
+  int namesOffset    = readInt   (_buffer, _fileposition   );
+  int linksOffset    = readInt   (_buffer, _fileposition   );
+  int animationOffset= readInt   (_buffer, _fileposition   );
+  int frameSize      = readInt   (_buffer, _fileposition   );
 
   if (magic != "ANIM")
     throw std::runtime_error("File not sca");
   if (version != 5)
     throw std::runtime_error("Unsupported version");
 
-  std::vector<std::string> boneNames = readBoneNames(namesOffset, linksOffset-namesOffset);
-  std::vector<int>         boneLinks = readLinks    (numberOfBones);
-  glm::vec3                position  = readPosition();
-  glm::quat                rotation  = readRotation();
-  std::vector<frame>       animation = readAnimation(animationOffset,numberOfFrames, boneNames);
+  result.boneNames = readBoneNames(namesOffset, linksOffset-namesOffset);
+  result.boneLinks = readLinks    (numberOfBones);
+  result.position  = readPosition ();
+  result.rotation  = readRotation ();
+  result.animation = readAnimation(animationOffset,numberOfFrames, result.boneNames);
+  return result;
 }
 
 std::vector<SCA::frame> SCA::readAnimation(int offset, int numberOfFrames, std::vector<std::string> boneNames)

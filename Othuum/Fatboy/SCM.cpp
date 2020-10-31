@@ -4,25 +4,27 @@
 #include <iostream>
 #include <sstream>
 
-void SCM::work()
+SCM::data SCM::load(std::string filename)
 {
-  std::string file = folder + "\\" + lod1;
+  SCM::data result;
 
-  std::ifstream input(file, std::ios::binary);
+  std::ifstream input(filename, std::ios::binary);
   if (input.fail())
-    throw std::runtime_error("Error opening " + file);
-  _buffer = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
-
-  std::string marker         = readString(_buffer, _fileposition,4);
+    throw std::runtime_error("Error opening " + filename);
+  
+  _buffer       = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
+  _fileposition = 0;
+  
+  std::string marker = readString(_buffer, _fileposition,4);
   int version        = readInt   (_buffer, _fileposition);
   int boneoffset     = readInt   (_buffer, _fileposition);
-  _bonecount         = readInt   (_buffer, _fileposition);
+  int bonecount      = readInt   (_buffer, _fileposition);//unused
   int vertoffset     = readInt   (_buffer, _fileposition);
-  _extravertoffset   = readInt   (_buffer, _fileposition);
+  int extravertoffset= readInt   (_buffer, _fileposition); //unused
   int vertcount      = readInt   (_buffer, _fileposition);
   int indexoffset    = readInt   (_buffer, _fileposition);
-  _indexcount        = readInt   (_buffer, _fileposition);
-  int tricount       = _indexcount /3;
+  int indexcount     = readInt   (_buffer, _fileposition);
+  int tricount       = indexcount /3;
   int infooffset     = readInt   (_buffer, _fileposition);
   int infocount      = readInt   (_buffer, _fileposition);
   int totalbonecount = readInt   (_buffer, _fileposition);
@@ -32,11 +34,13 @@ void SCM::work()
   if (version != 5)
     throw std::runtime_error("Unsupported version");
 
-  auto boneNames = readBoneNames(boneoffset);
-  auto bones     = readBones    (boneoffset, totalbonecount,boneNames);
-  auto vertecies = readVertices (vertoffset, vertcount);
-  auto indices   = readInidices (indexoffset,tricount);
-  auto info      = readInfo     (infooffset, infocount);
+  result.boneNames = readBoneNames(boneoffset);
+  result.bones     = readBones    (boneoffset, totalbonecount,result.boneNames);
+  result.vertecies = readVertices (vertoffset, vertcount);
+  result.indices   = readInidices (indexoffset,tricount);
+  result.info      = readInfo     (infooffset, infocount);
+
+  return result;
 }
 
 std::vector<std::string> SCM::readInfo(int offset, int count)

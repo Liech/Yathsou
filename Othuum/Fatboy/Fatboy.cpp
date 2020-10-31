@@ -32,8 +32,10 @@ namespace Fatboy
 {
   Fatboy::Fatboy()
   {
+    std::string folder = "E:\\scmunpacked\\units\\UES0103";
+    std::string a1 = "UES0103_A001.sca";
     SCA imp;
-    imp.work();
+    imp.load(folder + "\\" + a1);
     _preDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _preDrawables->addDrawable(std::make_shared<YolonaOss::Background>());
