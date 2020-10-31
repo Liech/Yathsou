@@ -44,13 +44,6 @@ std::vector<SCA::frame> SCA::readAnimation(int offset, int numberOfFrames, std::
     frame subresult;
     subresult.keytime     = readFloat(_buffer, _fileposition);
     subresult.keyflags    = readInt  (_buffer, _fileposition);
-    subresult.position[0] = readFloat(_buffer, _fileposition);
-    subresult.position[1] = readFloat(_buffer, _fileposition);
-    subresult.position[2] = readFloat(_buffer, _fileposition);
-    subresult.rotation[0] = readFloat(_buffer, _fileposition);
-    subresult.rotation[1] = readFloat(_buffer, _fileposition);
-    subresult.rotation[2] = readFloat(_buffer, _fileposition);
-    subresult.rotation[3] = readFloat(_buffer, _fileposition);
 
     for (int i = 0; i < boneNames.size(); i++)
     {

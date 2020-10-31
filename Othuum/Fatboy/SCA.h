@@ -24,8 +24,6 @@ public:
   {
     float             keytime ;
     int               keyflags;
-    glm::vec3         position;
-    glm::quat         rotation;
     std::vector<bone> bones   ;
   };
 
