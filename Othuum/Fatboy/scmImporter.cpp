@@ -36,40 +36,121 @@ void scmImporter::work()
   unregister
   */
   std::string marker         = readString(_buffer, _fileposition,4);
-  _version        = readInt   (_buffer, _fileposition);
-  _boneoffset     = readInt   (_buffer, _fileposition);
-  _bonecount      = readInt   (_buffer, _fileposition);
-  _vertoffset     = readInt   (_buffer, _fileposition);
-  _extravertoffset= readInt   (_buffer, _fileposition);
-  _vertcount      = readInt   (_buffer, _fileposition);
-  _indexoffset    = readInt   (_buffer, _fileposition);
-  _indexcount     = readInt   (_buffer, _fileposition);
-  _tricount       = readInt   (_buffer, _fileposition);
-  _infooffset     = readInt   (_buffer, _fileposition);
-  _infocount      = readInt   (_buffer, _fileposition);
-  _totalbonecount = readInt   (_buffer, _fileposition);
+  _version           = readInt   (_buffer, _fileposition);
+  int boneoffset     = readInt   (_buffer, _fileposition);
+  _bonecount         = readInt   (_buffer, _fileposition);
+  int vertoffset     = readInt   (_buffer, _fileposition);
+  _extravertoffset   = readInt   (_buffer, _fileposition);
+  int vertcount      = readInt   (_buffer, _fileposition);
+  _indexoffset       = readInt   (_buffer, _fileposition);
+  _indexcount        = readInt   (_buffer, _fileposition);
+  _tricount          = _indexcount /3;
+  _infooffset        = readInt   (_buffer, _fileposition);
+  _infocount         = readInt   (_buffer, _fileposition);
+  int totalbonecount = readInt   (_buffer, _fileposition);
 
   if (marker != "MODL")
     throw std::runtime_error("File not scm");
   if (_version != 5)
     throw std::runtime_error("Unsupported version");
 
-  readBoneNames();
-
+  auto boneNames = readBoneNames(boneoffset);
+  auto bones     = readBones    (boneoffset, totalbonecount,boneNames);
+  auto vertecies = readVertices (vertoffset, vertcount);
   throw std::runtime_error("Unfinished");
   //supcom importer
-  //for b in range(0, totalbonecount):
+  //# Read vertices
 
 
 }
 
-void scmImporter::readBoneNames()
+std::vector<scmImporter::vertex> scmImporter::readVertices(int vertoffset, int vertcount)
 {
+  std::vector<vertex> result;
+  _fileposition = vertoffset;
+  
+  for (int i = 0; i < vertcount; i++)
+  {
+    vertex subresult;
+    subresult.position[0]  = readFloat(_buffer, _fileposition);
+    subresult.position[1]  = readFloat(_buffer, _fileposition);
+    subresult.position[2]  = readFloat(_buffer, _fileposition);
+
+    subresult.tangent [0]  = readFloat(_buffer, _fileposition);
+    subresult.tangent [1]  = readFloat(_buffer, _fileposition);
+    subresult.tangent [2]  = readFloat(_buffer, _fileposition);
+
+    subresult.normal  [0]  = readFloat(_buffer, _fileposition);
+    subresult.normal  [1]  = readFloat(_buffer, _fileposition);
+    subresult.normal  [2]  = readFloat(_buffer, _fileposition);
+
+    subresult.binormal[0]  = readFloat(_buffer, _fileposition);
+    subresult.binormal[1]  = readFloat(_buffer, _fileposition);
+    subresult.binormal[2]  = readFloat(_buffer, _fileposition);
+
+    subresult.uv1     [0]  = readFloat(_buffer, _fileposition);
+    subresult.uv1     [1]  = readFloat(_buffer, _fileposition);
+    subresult.uv2     [0]  = readFloat(_buffer, _fileposition);
+    subresult.uv2     [1]  = readFloat(_buffer, _fileposition);
+    
+    subresult.boneIndex[0] = _buffer[_fileposition+0];
+    subresult.boneIndex[1] = _buffer[_fileposition+1];
+    subresult.boneIndex[2] = _buffer[_fileposition+2];
+    subresult.boneIndex[3] = _buffer[_fileposition+3];
+    _fileposition += 4;
+
+    result.push_back(subresult);
+  }
+
+  return result;
+}
+
+std::vector<scmImporter::bone> scmImporter::readBones(int boneoffset, int totalbonecount, std::vector<std::string> boneNames)
+{
+  std::vector<bone> result;
+  _fileposition = boneoffset;
+  for (int i = 0; i < totalbonecount; i++)
+  {
+    bone subResult;
+    subResult.name = boneNames[i];
+    float matrixInitializiation[16];
+    for(int i = 0;i < 16;i++)
+      matrixInitializiation[i] = readFloat(_buffer, _fileposition);
+    subResult.relativeInverseMatrix = glm::make_mat4(matrixInitializiation);
+    subResult.position[0] = readFloat(_buffer, _fileposition);
+    subResult.position[1] = readFloat(_buffer, _fileposition);
+    subResult.position[2] = readFloat(_buffer, _fileposition);
+    subResult.rotation[0] = readFloat(_buffer, _fileposition);
+    subResult.rotation[1] = readFloat(_buffer, _fileposition);
+    subResult.rotation[2] = readFloat(_buffer, _fileposition);
+    subResult.rotation[3] = readFloat(_buffer, _fileposition);
+    int emptyDummy1 = readInt(_buffer, _fileposition);
+    subResult.parentIndex = readInt  (_buffer, _fileposition);
+    int emptyDummy2 = readInt(_buffer, _fileposition);
+    int emptyDummy3 = readInt(_buffer, _fileposition);
+
+    result.push_back(subResult);
+  }
+  return result;
+}
+
+std::vector<std::string> scmImporter::readBoneNames(int boneoffset)
+{
+  std::vector<std::string> result;
   _fileposition += pad(_fileposition);
-  int boneDescriptionLength = (_boneoffset - 4) - _fileposition;
+  int boneDescriptionLength = (boneoffset - 4) - _fileposition;
   std::string boneNames = readString(_buffer, _fileposition, boneDescriptionLength);
-  _boneNames = split(boneNames);
-  _boneNames.erase(_boneNames.begin() + _boneNames.size() - 1);
+  result = split(boneNames);
+  result.erase(result.begin() + result.size() - 1);
+  return result;
+}
+
+float scmImporter::readFloat(const std::vector<unsigned char>& data, size_t& position)
+{
+  int  a = readInt(data, position);
+  int* b = &a;
+  float* c = (float*)b;
+  return *c;
 }
 
 int scmImporter::readInt(const std::vector<unsigned char>& data, size_t& position)
