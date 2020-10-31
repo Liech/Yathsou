@@ -13,55 +13,52 @@ void scmImporter::work()
     throw std::runtime_error("Error opening " + file);
   _buffer = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
 
-  /*
-  SimpleOperator
-  scm_bone
-  scm_vertex
-  scm_mesh
-  sca_bone
-  sca_frame
-  sca_anim
-  pad
-
-  read_scm
-  iterate_bones
-  get_mesh_bones
-  read_anim
-  check_bone
-  read_end_anim
-  IMPORT_OT_scm
-  IMPORT_OT_sca
-  menu_func
-  register
-  unregister
-  */
   std::string marker         = readString(_buffer, _fileposition,4);
-  _version           = readInt   (_buffer, _fileposition);
+  int version        = readInt   (_buffer, _fileposition);
   int boneoffset     = readInt   (_buffer, _fileposition);
   _bonecount         = readInt   (_buffer, _fileposition);
   int vertoffset     = readInt   (_buffer, _fileposition);
   _extravertoffset   = readInt   (_buffer, _fileposition);
   int vertcount      = readInt   (_buffer, _fileposition);
-  _indexoffset       = readInt   (_buffer, _fileposition);
+  int indexoffset    = readInt   (_buffer, _fileposition);
   _indexcount        = readInt   (_buffer, _fileposition);
-  _tricount          = _indexcount /3;
-  _infooffset        = readInt   (_buffer, _fileposition);
-  _infocount         = readInt   (_buffer, _fileposition);
+  int tricount       = _indexcount /3;
+  int infooffset     = readInt   (_buffer, _fileposition);
+  int infocount      = readInt   (_buffer, _fileposition);
   int totalbonecount = readInt   (_buffer, _fileposition);
 
   if (marker != "MODL")
     throw std::runtime_error("File not scm");
-  if (_version != 5)
+  if (version != 5)
     throw std::runtime_error("Unsupported version");
 
   auto boneNames = readBoneNames(boneoffset);
   auto bones     = readBones    (boneoffset, totalbonecount,boneNames);
   auto vertecies = readVertices (vertoffset, vertcount);
-  throw std::runtime_error("Unfinished");
-  //supcom importer
-  //# Read vertices
+  auto indices   = readInidices (indexoffset,tricount);
+  auto info      = readInfo     (infooffset, infocount);
+}
 
+std::vector<std::string> scmImporter::readInfo(int offset, int count)
+{
+  _fileposition = offset;
+  std::string rest = readString(_buffer, _fileposition, _buffer.size() - offset);
+  return split(rest);
+}
 
+std::vector<scmImporter::tri> scmImporter::readInidices(int offset, int count)
+{
+  std::vector<scmImporter::tri> result;
+  _fileposition = offset;
+  for (int i = 0; i < count/3; i++)
+  {
+    tri subresult;
+    subresult.a = readInt(_buffer, _fileposition);
+    subresult.b = readInt(_buffer, _fileposition);
+    subresult.c = readInt(_buffer, _fileposition);
+    result.push_back(subresult);
+  }
+  return result;
 }
 
 std::vector<scmImporter::vertex> scmImporter::readVertices(int vertoffset, int vertcount)
@@ -169,13 +166,13 @@ std::string scmImporter::readString(const std::vector<unsigned char>& data, size
   return std::string(d, size);
 }
 
-std::vector<std::string> scmImporter::split(std::string input)
+std::vector<std::string> scmImporter::split(std::string input, char seperator)
 {
   std::vector<std::string> seglist;
   std::string segment;
   std::stringstream stream(input);
 
-  while (std::getline(stream, segment, '\0'))
+  while (std::getline(stream, segment, seperator))
   {
     seglist.push_back(segment);
   }
