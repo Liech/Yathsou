@@ -163,7 +163,8 @@
     <ClCompile Include="Fatboy.cpp" />
     <ClCompile Include="GameConfiguration.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="scmImporter.cpp" />
+    <ClCompile Include="SCA.cpp" />
+    <ClCompile Include="SCM.cpp" />
     <ClCompile Include="ScriptAPI.cpp" />
     <ClCompile Include="Protagonist.cpp" />
     <ClCompile Include="TankTower.cpp" />
@@ -177,7 +178,8 @@
     <ClInclude Include="Context.h" />
     <ClInclude Include="Fatboy.h" />
     <ClInclude Include="GameConfiguration.h" />
-    <ClInclude Include="scmImporter.h" />
+    <ClInclude Include="SCA.h" />
+    <ClInclude Include="SCM.h" />
     <ClInclude Include="ScriptAPI.h" />
     <ClInclude Include="Protagonist.h" />
     <ClInclude Include="TankTower.h" />

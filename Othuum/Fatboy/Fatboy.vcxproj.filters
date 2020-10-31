@@ -51,7 +51,10 @@
     <ClCompile Include="BulletDebugDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="scmImporter.cpp">
+    <ClCompile Include="SCM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SCA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -89,7 +92,10 @@
     <ClInclude Include="BulletDebugDrawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="scmImporter.h">
+    <ClInclude Include="SCM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SCA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

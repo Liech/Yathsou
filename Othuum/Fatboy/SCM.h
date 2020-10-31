@@ -11,7 +11,12 @@
 //based on
 //https://github.com/Oygron/SupCom_Import_Export_Blender/blob/master/supcom-importer.py
 
-class scmImporter
+
+//dds:https://github.com/septag/dds-ktx
+
+
+//supreme commander model format
+class SCM
 {
 public:
   void work();

@@ -1,10 +1,10 @@
-#include "scmImporter.h"
+#include "SCM.h"
 
 #include <fstream>
 #include <iostream>
 #include <sstream>
 
-void scmImporter::work()
+void SCM::work()
 {
   std::string file = folder + "\\" + lod1;
 
@@ -39,16 +39,16 @@ void scmImporter::work()
   auto info      = readInfo     (infooffset, infocount);
 }
 
-std::vector<std::string> scmImporter::readInfo(int offset, int count)
+std::vector<std::string> SCM::readInfo(int offset, int count)
 {
   _fileposition = offset;
   std::string rest = readString(_buffer, _fileposition, _buffer.size() - offset);
   return split(rest);
 }
 
-std::vector<scmImporter::tri> scmImporter::readInidices(int offset, int count)
+std::vector<SCM::tri> SCM::readInidices(int offset, int count)
 {
-  std::vector<scmImporter::tri> result;
+  std::vector<SCM::tri> result;
   _fileposition = offset;
   for (int i = 0; i < count/3; i++)
   {
@@ -61,7 +61,7 @@ std::vector<scmImporter::tri> scmImporter::readInidices(int offset, int count)
   return result;
 }
 
-std::vector<scmImporter::vertex> scmImporter::readVertices(int vertoffset, int vertcount)
+std::vector<SCM::vertex> SCM::readVertices(int vertoffset, int vertcount)
 {
   std::vector<vertex> result;
   _fileposition = vertoffset;
@@ -102,7 +102,7 @@ std::vector<scmImporter::vertex> scmImporter::readVertices(int vertoffset, int v
   return result;
 }
 
-std::vector<scmImporter::bone> scmImporter::readBones(int boneoffset, int totalbonecount, std::vector<std::string> boneNames)
+std::vector<SCM::bone> SCM::readBones(int boneoffset, int totalbonecount, std::vector<std::string> boneNames)
 {
   std::vector<bone> result;
   _fileposition = boneoffset;
@@ -131,7 +131,7 @@ std::vector<scmImporter::bone> scmImporter::readBones(int boneoffset, int totalb
   return result;
 }
 
-std::vector<std::string> scmImporter::readBoneNames(int boneoffset)
+std::vector<std::string> SCM::readBoneNames(int boneoffset)
 {
   std::vector<std::string> result;
   _fileposition += pad(_fileposition);
@@ -142,7 +142,7 @@ std::vector<std::string> scmImporter::readBoneNames(int boneoffset)
   return result;
 }
 
-float scmImporter::readFloat(const std::vector<unsigned char>& data, size_t& position)
+float SCM::readFloat(const std::vector<unsigned char>& data, size_t& position)
 {
   int  a = readInt(data, position);
   int* b = &a;
@@ -150,7 +150,7 @@ float scmImporter::readFloat(const std::vector<unsigned char>& data, size_t& pos
   return *c;
 }
 
-int scmImporter::readInt(const std::vector<unsigned char>& data, size_t& position)
+int SCM::readInt(const std::vector<unsigned char>& data, size_t& position)
 {
   unsigned char bytes[] = { data[position],data[position + 1],data[position + 2],data[position + 3] };
   int* pInt = (int*)bytes;
@@ -159,14 +159,14 @@ int scmImporter::readInt(const std::vector<unsigned char>& data, size_t& positio
   return result;
 }
 
-std::string scmImporter::readString(const std::vector<unsigned char>& data, size_t& position, size_t size)
+std::string SCM::readString(const std::vector<unsigned char>& data, size_t& position, size_t size)
 {
   char* d = (char*)data.data() + position;
   position += size;
   return std::string(d, size);
 }
 
-std::vector<std::string> scmImporter::split(std::string input, char seperator)
+std::vector<std::string> SCM::split(std::string input, char seperator)
 {
   std::vector<std::string> seglist;
   std::string segment;
@@ -179,7 +179,7 @@ std::vector<std::string> scmImporter::split(std::string input, char seperator)
   return seglist;
 }
 
-int scmImporter::pad(int size)
+int SCM::pad(int size)
 {
   int val = 32 - (size % 32);
   if (val > 31)

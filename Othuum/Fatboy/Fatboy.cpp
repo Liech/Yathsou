@@ -19,7 +19,8 @@
 #include "UnitPool.h"
 #include "Unit.h"
 //#include "SuthanusPhysicsLib/SignedDistanceFunctionBullet.h"
-#include "scmImporter.h"
+#include "SCM.h"
+#include "SCA.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "YolonaOss/Renderer/BoxRenderer.h"
@@ -31,7 +32,7 @@ namespace Fatboy
 {
   Fatboy::Fatboy()
   {
-    scmImporter imp;
+    SCA imp;
     imp.work();
     _preDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
