@@ -67,7 +67,7 @@ namespace YolonaOss {
 
     private:
       VBO<Struct>* _vbo;
-      GLuint         _vao;
+      GLuint       _vao;
     };
   }
 }
