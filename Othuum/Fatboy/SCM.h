@@ -42,9 +42,9 @@ public:
 
   struct tri
   {
-    short a;
-    short b;
-    short c;
+    unsigned short a;
+    unsigned short b;
+    unsigned short c;
   };
 
   struct data
@@ -61,7 +61,8 @@ private:
   std::vector<std::string> split(std::string, char seperator = '\0');
 
   std::string              readString(const std::vector<unsigned char>&, size_t& position, size_t size);
-  int                      readInt   (const std::vector<unsigned char>&, size_t& position);
+  int                      readInt(const std::vector<unsigned char>&, size_t& position);
+  unsigned short           readUShort(const std::vector<unsigned char>&, size_t& position);
   float                    readFloat (const std::vector<unsigned char>&, size_t& position);
 
   std::vector<std::string> readBoneNames(int offset);

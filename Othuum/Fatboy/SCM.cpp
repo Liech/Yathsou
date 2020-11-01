@@ -24,7 +24,6 @@ SCM::data SCM::load(std::string filename)
   int vertcount      = readInt   (_buffer, _fileposition);
   int indexoffset    = readInt   (_buffer, _fileposition);
   int indexcount     = readInt   (_buffer, _fileposition);
-  int tricount       = indexcount /3;
   int infooffset     = readInt   (_buffer, _fileposition);
   int infocount      = readInt   (_buffer, _fileposition);
   int totalbonecount = readInt   (_buffer, _fileposition);
@@ -37,7 +36,7 @@ SCM::data SCM::load(std::string filename)
   result.boneNames = readBoneNames(boneoffset);
   result.bones     = readBones    (boneoffset, totalbonecount,result.boneNames);
   result.vertecies = readVertices (vertoffset, vertcount);
-  result.indices   = readInidices (indexoffset,tricount);
+  result.indices   = readInidices (indexoffset,indexcount);
   result.info      = readInfo     (infooffset, infocount);
 
   return result;
@@ -57,9 +56,9 @@ std::vector<SCM::tri> SCM::readInidices(int offset, int count)
   for (int i = 0; i < count/3; i++)
   {
     tri subresult;
-    subresult.a = readInt(_buffer, _fileposition);
-    subresult.b = readInt(_buffer, _fileposition);
-    subresult.c = readInt(_buffer, _fileposition);
+    subresult.a = readUShort(_buffer, _fileposition);
+    subresult.b = readUShort(_buffer, _fileposition);
+    subresult.c = readUShort(_buffer, _fileposition);
     result.push_back(subresult);
   }
   return result;
@@ -160,6 +159,15 @@ int SCM::readInt(const std::vector<unsigned char>& data, size_t& position)
   int* pInt = (int*)bytes;
   int result = *pInt;
   position += 4;
+  return result;
+}
+
+unsigned short SCM::readUShort(const std::vector<unsigned char>& data, size_t& position)
+{
+  unsigned char bytes[] = { data[position],data[position + 1] };
+  unsigned short* pInt = (unsigned short*)bytes;
+  unsigned short result = *pInt;
+  position += 2;
   return result;
 }
 
