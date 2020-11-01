@@ -100,7 +100,7 @@ void main() {
     _ibo = std::make_unique<GL::IBO>(indices);
     _vbo = std::make_unique<GL::VBO<GL::PositionColorNormalVertex>>(input);
     _vao = std::make_unique<GL::VAO<GL::PositionColorNormalVertex>>(_vbo.get());
-    _shader = std::make_unique<GL::ShaderProgram>(_vao.get(), uniforms, vertex_shader_source, fragment_shader_source);
+    _shader = std::make_unique<GL::ShaderProgram>(GL::PositionColorNormalVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
   void RotatingCube::draw()

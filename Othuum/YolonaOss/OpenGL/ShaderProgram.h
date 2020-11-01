@@ -9,7 +9,8 @@ namespace YolonaOss {
     class ShaderProgram
     {
     public:
-      ShaderProgram(VAO_I* vao, std::vector<Uniform*> uniforms, std::string vs, std::string fs);
+      ShaderProgram(const std::vector<AttributeDescription>&, std::vector<Uniform*> uniforms, std::string vs, std::string fs);
+      
       ~ShaderProgram();
 
 
@@ -20,7 +21,7 @@ namespace YolonaOss {
       std::string _vertexShader;
       std::string _fragmentShader;
 
-      VAO_I* _vao;
+      std::vector<AttributeDescription> _attributes;
       GLuint _program;
       std::vector<Uniform*> _uniform;
       std::vector<bool>     _uniformIsActive;
@@ -28,6 +29,7 @@ namespace YolonaOss {
       std::string toGLSL_vs();
       std::string toGLSL_fs();
       void checkUsageOfUniforms();
+      std::string AttributetoGLSL(size_t locationOffset = 0);
     };
   }
 }

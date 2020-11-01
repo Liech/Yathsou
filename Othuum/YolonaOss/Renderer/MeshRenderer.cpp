@@ -6,6 +6,8 @@
 #include "glad/glad.h"
 #include "../OpenGL/PositionNormalVertex.h"
 #include "../OpenGL/IBO.h"
+#include "../OpenGL/VBO.h"
+#include "../OpenGL/VAO.h"
 
 namespace YolonaOss
 {
@@ -23,6 +25,11 @@ namespace YolonaOss
     _p->ibo = std::make_unique<GL::IBO>(indicies);    
     _p->vbo = std::make_unique<GL::VBO<GL::PositionNormalVertex>>(vertecies);
     _p->vao = std::make_unique<GL::VAO<GL::PositionNormalVertex>>(_p->vbo.get());
+  }
+
+  void Mesh::draw() const
+  {
+    _p->ibo->bind(_p->vao.get());
   }
 
   void MeshRenderer::load(GL::DrawSpecification* spec)
@@ -69,16 +76,16 @@ namespace YolonaOss
     uniforms.push_back(_mat.get());
     _color = std::make_unique<GL::UniformVec4>("Color");
     uniforms.push_back(_color.get());
-    //_shader = std::make_unique<GL::ShaderProgram>(_vao.get(), uniforms, vertex_shader_source, fragment_shader_source);
+    _shader = std::make_unique<GL::ShaderProgram>(GL::PositionNormalVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }    
 
-  void MeshRenderer::draw(Mesh mesh, glm::mat4 transformation, glm::vec4 color)
+  void MeshRenderer::draw(const Mesh& mesh, glm::mat4 transformation, glm::vec4 color)
   {
     _mat->setValue(transformation);
     _mat->bind();
     _color->setValue(color);
     _color->bind();
-    //_ibo->bind(_vao.get());
+    mesh.draw();
   }
 
   void MeshRenderer::start()
@@ -86,7 +93,7 @@ namespace YolonaOss
     _camera->fromCamera(_spec->getCam().get());
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    //_shader->bind();
+    _shader->bind();
     _camera->bind();
   }
 

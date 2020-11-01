@@ -18,7 +18,7 @@ namespace YolonaOss {
         texture = Texture;
       }
 
-      std::vector<AttributeDescription> getBinding() {
+      static std::vector<AttributeDescription> getBinding() {
         std::vector<AttributeDescription> result;
         result.push_back(AttributeDescription("position", 3, AttributeDescription::DataType::Float));
         result.push_back(AttributeDescription("texCoord", 2, AttributeDescription::DataType::Float));

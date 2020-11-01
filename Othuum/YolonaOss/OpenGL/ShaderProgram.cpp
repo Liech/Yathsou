@@ -3,9 +3,9 @@
 #include <iostream>
 namespace YolonaOss {
   namespace GL{
-  ShaderProgram::ShaderProgram(VAO_I* vao, std::vector<Uniform*> uniforms, std::string vsmain, std::string fsmain)
+  ShaderProgram::ShaderProgram(const std::vector<AttributeDescription>& attributes, std::vector<Uniform*> uniforms, std::string vsmain, std::string fsmain)
   {
-    _vao = vao;
+    _attributes = attributes;
     _vertexShader = vsmain;
     _fragmentShader = fsmain;
     _uniform = uniforms;
@@ -123,7 +123,7 @@ namespace YolonaOss {
     std::string result = "#version 460\n";
     for (int i = 0; i < _uniform.size(); i++)
       result += _uniform[i]->toGLSL();
-    result += _vao->toGLSL();
+    result += AttributetoGLSL();
     result += _vertexShader;
     return result;
   }
@@ -133,6 +133,21 @@ namespace YolonaOss {
     for (int i = 0; i < _uniform.size(); i++)
       result += _uniform[i]->toGLSL();
     result += _fragmentShader;
+    return result;
+  }
+
+  std::string ShaderProgram::AttributetoGLSL(size_t locationOffset) {
+    std::string result = "\n";
+    size_t currentOffset = 0;
+    for (int i = 0; i < _attributes.size(); i++) {
+      result += "layout(location = ";
+      result += std::to_string(i + locationOffset);
+      result += ") in ";
+      result += _attributes[i].getTypeAsString();
+      result += " ";
+      result += _attributes[i].name;
+      result += ";\n";
+    }
     return result;
   }
 }}

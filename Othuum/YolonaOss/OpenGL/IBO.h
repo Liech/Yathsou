@@ -8,7 +8,7 @@ namespace YolonaOss {
     {
     public:
 
-      IBO(std::vector<int>& content)
+      IBO(const std::vector<int>& content)
       {
         _size = content.size();
         glGenBuffers(1, &_ibo);

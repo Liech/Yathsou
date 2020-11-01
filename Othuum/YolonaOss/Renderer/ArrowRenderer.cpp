@@ -78,7 +78,7 @@ namespace YolonaOss {
     uniforms.push_back(_color.get());
     _vbo = std::make_unique<GL::VBO<GL::PositionNormalVertex>>(input);
     _vao = std::make_unique<GL::VAO<GL::PositionNormalVertex>>(_vbo.get());
-    _shader = std::make_unique<GL::ShaderProgram>(_vao.get(), uniforms, vertex_shader_source, fragment_shader_source);
+    _shader = std::make_unique<GL::ShaderProgram>(GL::PositionNormalVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
   void ArrowRenderer::start()

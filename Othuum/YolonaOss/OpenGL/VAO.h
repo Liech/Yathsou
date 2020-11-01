@@ -6,7 +6,6 @@ namespace YolonaOss {
   namespace GL {
     class VAO_I {
     public:
-      virtual std::string toGLSL(size_t locationOffset = 0) = 0;
       virtual void bind() = 0;
       virtual GLuint getID() = 0;
     };
@@ -33,23 +32,6 @@ namespace YolonaOss {
           glVertexAttribPointer(i, bind.size, GL_FLOAT, GL_FALSE, (GLsizei)stride, (GLvoid*)currentOffset);
           currentOffset += bind.getSize();
         }
-      }
-
-      std::string toGLSL(size_t locationOffset = 0) override {
-        std::string result = "\n";
-        Struct s;
-        std::vector<AttributeDescription> bindings = s.getBinding();
-        size_t currentOffset = 0;
-        for (int i = 0; i < bindings.size(); i++) {
-          result += "layout(location = ";
-          result += std::to_string(i + locationOffset);
-          result += ") in ";
-          result += bindings[i].getTypeAsString();
-          result += " ";
-          result += bindings[i].name;
-          result += ";\n";
-        }
-        return result;
       }
 
       ~VAO() {

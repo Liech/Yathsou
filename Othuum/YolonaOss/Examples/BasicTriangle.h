@@ -22,7 +22,7 @@ namespace YolonaOss {
       z = Z;
     }
 
-    std::vector<GL::AttributeDescription> getBinding() {
+    static std::vector<GL::AttributeDescription> getBinding() {
       std::vector<GL::AttributeDescription> result;
       result.push_back(GL::AttributeDescription("position", 3, GL::AttributeDescription::DataType::Float));
       return result;

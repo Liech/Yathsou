@@ -15,12 +15,14 @@ namespace YolonaOss
     class UniformVec4;
     class UniformMat4;
     class ShaderProgram;
+    struct PositionNormalVertex;
   }
-  class MeshPimpl;
+  struct MeshPimpl;
   class Mesh
   {
   public:
     Mesh(const std::vector<GL::PositionNormalVertex>& vertecies, const std::vector<int>& indicies);
+    void draw() const;
   private:
     std::unique_ptr<MeshPimpl> _p;
   };
@@ -31,7 +33,7 @@ namespace YolonaOss
     virtual void load(GL::DrawSpecification*) override;
     static void start();
     static void end();
-    static void draw(Mesh mesh, glm::mat4 transformation, glm::vec4 color);
+    static void draw(const Mesh& mesh, glm::mat4 transformation, glm::vec4 color);
 
   private:
     static inline std::unique_ptr<GL::Camera>                               _camera;

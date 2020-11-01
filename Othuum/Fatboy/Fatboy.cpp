@@ -25,6 +25,7 @@
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "BulletDebugDrawer.h"
+#include "YolonaOss/Renderer/MeshRenderer.h"
 
 #include <iostream>
 
@@ -32,10 +33,6 @@ namespace Fatboy
 {
   Fatboy::Fatboy()
   {
-    std::string folder = "E:\\scmunpacked\\units\\UES0103";
-    std::string a1 = "UES0103_A001.sca";
-    SCA imp;
-    imp.load(folder + "\\" + a1);
     _preDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _preDrawables->addDrawable(std::make_shared<YolonaOss::Background>());
@@ -48,6 +45,7 @@ namespace Fatboy
     _protagonist = std::make_shared<Protagonist>(_context,&_drawDebug, _cam);
     //initEnemys();
     _context->physic()->setDebugDrawer(new BulletDebugDrawer());
+
   }
 
   void Fatboy::initPhysic()
@@ -97,6 +95,25 @@ namespace Fatboy
     _protagonist->load(spec);
     _preDrawables->load(spec);
     _postDrawables->load(spec);
+
+
+
+    std::string folder = "E:\\scmunpacked\\units\\UES0103";
+    std::string a1 = "UES0103_LOD0.scm";
+    SCM imp;
+    SCM::data data = imp.load(folder + "\\" + a1);
+    
+    std::vector<YolonaOss::GL::PositionNormalVertex> vertices;
+    std::vector<int>                                 indices ;
+    for (int i = 0; i < data.vertecies.size(); i++)
+      vertices.push_back(YolonaOss::GL::PositionNormalVertex(data.vertecies[i].position,data.vertecies[i].normal));
+    for (int i = 0; i < data.indices.size(); i++)
+    {
+      indices.push_back(data.indices[i].a);
+      indices.push_back(data.indices[i].b);
+      indices.push_back(data.indices[i].c);
+    }
+    _mesh = new YolonaOss::Mesh(vertices, indices);
   }
 
   void Fatboy::drawLandscape()
@@ -112,6 +129,10 @@ namespace Fatboy
   void Fatboy::draw()
   {
     _preDrawables->draw();
+
+    YolonaOss::MeshRenderer::start();
+    YolonaOss::MeshRenderer::draw(*_mesh, glm::mat4(1.0), glm::vec4(1, 0, 0, 1));
+    YolonaOss::MeshRenderer::end();
 
     if (!_drawDebug)
       drawLandscape();

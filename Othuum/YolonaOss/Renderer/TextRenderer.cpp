@@ -203,7 +203,7 @@ namespace YolonaOss {
     input.resize(6);
     _vars.vbo = std::make_unique<GL::VBO<GL::PositionTextureVertex>>(input);
     _vars.vao = std::make_unique<GL::VAO<GL::PositionTextureVertex>>(_vars.vbo.get());
-    _vars.shader = std::make_unique<GL::ShaderProgram>(_vars.vao.get(), uniforms, vertex_shader_source, fragment_shader_source);
+    _vars.shader = std::make_unique<GL::ShaderProgram>(GL::PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
   void TextRenderer::setClippingRectangle(Iyathuum::AABB<2> box) {

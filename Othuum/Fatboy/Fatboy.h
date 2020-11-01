@@ -10,6 +10,7 @@ namespace YolonaOss
     class DrawableList;
     class DrawSpecification;
   }
+  class Mesh;
   namespace Camera
   {
     class CameraSystem;
@@ -31,7 +32,7 @@ namespace Fatboy
   class Protagonist;
   class ScriptAPI;
   class Context;
-
+ 
   class Fatboy : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable
   {
   public:
@@ -56,5 +57,6 @@ namespace Fatboy
 
     std::shared_ptr<Suthanus::PhysicObject> _land;
     bool _drawDebug = false;
+    YolonaOss::Mesh* _mesh;
   };
 }

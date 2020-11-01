@@ -38,7 +38,7 @@ void main() {
 
     _vbo = std::make_unique<GL::VBO<Vector3gl>>(input);
     _vao = std::make_unique<GL::VAO<Vector3gl>>(_vbo.get());
-    _shader = std::make_unique<GL::ShaderProgram>(_vao.get(), std::vector<GL::Uniform*>(), vertex_shader_source, fragment_shader_source);
+    _shader = std::make_unique<GL::ShaderProgram>(Vector3gl::getBinding(), std::vector<GL::Uniform*>(), vertex_shader_source, fragment_shader_source);
   }
 
   void BasicTriangle::draw()

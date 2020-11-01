@@ -15,7 +15,7 @@ namespace YolonaOss {
         normal = Normal;
       }
 
-      std::vector<AttributeDescription> getBinding() {
+      static std::vector<AttributeDescription> getBinding() {
         std::vector<AttributeDescription> result;
         result.push_back(AttributeDescription("position", 3, AttributeDescription::DataType::Float));
         result.push_back(AttributeDescription("normal", 3, AttributeDescription::DataType::Float));
