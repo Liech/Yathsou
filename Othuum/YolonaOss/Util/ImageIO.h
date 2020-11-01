@@ -18,5 +18,8 @@ namespace YolonaOss {
 
     static void                                              TEST_readwrite();
     static void                                              TEST_createNew();
+  private:
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readPNG(std::string filename);
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(std::string filename);
   };
 }

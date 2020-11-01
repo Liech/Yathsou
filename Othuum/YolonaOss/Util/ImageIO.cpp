@@ -36,6 +36,16 @@ namespace YolonaOss {
   }
 
   std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readImage(std::string filename) {
+    std::string extension = ".dds";
+    std::transform(filename.begin(), filename.end(), filename.begin(),
+      [](unsigned char c) { return std::tolower(c); });
+    if (std::equal(extension.rbegin(), extension.rend(), filename.rbegin()))
+      return std::move(readDDS(filename));
+    else
+      return std::move(readPNG(filename));
+  }
+  
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readPNG(std::string filename){
     std::vector<unsigned char> image; //the raw pixels
     unsigned int width, height;
 
@@ -72,5 +82,10 @@ namespace YolonaOss {
     for (int y = 0; y < height; y++)
       m.getRef(0, y) = Iyathuum::Color(255, 255, 255);
     ImageIO::writeImage("Test/ImageIO.png", m);
+  }
+
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(std::string filename)
+  {
+    return nullptr;
   }
 }
