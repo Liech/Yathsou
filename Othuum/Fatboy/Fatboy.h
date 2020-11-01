@@ -21,6 +21,7 @@ namespace Suthanus
   class PhysicEngine;
   class Box;
   class PhysicObject;
+  class HeightMap;
 }
 namespace Haas
 {
@@ -45,6 +46,8 @@ namespace Fatboy
     void initPhysic();
     void drawLandscape();
     void initEnemys();
+    void loadSupComModel();
+    void loadLandscapeModel();
 
     std::shared_ptr<Suthanus::Box>                   _landscape;
     std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables;
@@ -55,7 +58,7 @@ namespace Fatboy
     std::shared_ptr<ScriptAPI>                       _physicAPI;
     std::shared_ptr<Context>                         _context;
 
-    std::shared_ptr<Suthanus::PhysicObject> _land;
+    std::shared_ptr<Suthanus::HeightMap> _land;
     bool _drawDebug = false;
     YolonaOss::Mesh* _mesh;
   };

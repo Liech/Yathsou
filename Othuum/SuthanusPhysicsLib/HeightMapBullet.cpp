@@ -132,5 +132,12 @@ namespace Suthanus
       transform.setRotation(btQuaternion());
       _body->setCenterOfMassTransform(transform);
     }
+
+    HeightMap::Mesh HeightMapBullet::getMesh()
+    {
+      HeightMap::Mesh result;
+
+      return result;
+    }
   }
 }

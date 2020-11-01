@@ -54,7 +54,7 @@ namespace Fatboy
     _landscape = _context->physic()->newBox(glm::vec3(0, 0, 0), glm::vec3(20, 0, 20), false);
     _physicAPI = std::make_shared<ScriptAPI>(_context->physic().get());
     _physicAPI->registerAPI(_context->script().get());
-    //_land = _context->physic()->newHeightMap(glm::vec3(0, 2, 0));
+    _land = _context->physic()->newHeightMap(glm::vec3(0, 2, 0));
   }
 
   void Fatboy::initEnemys()
@@ -96,17 +96,36 @@ namespace Fatboy
     _preDrawables->load(spec);
     _postDrawables->load(spec);
 
+    //loadSupComModel();
+    loadLandscapeModel();
+  }
 
+  void Fatboy::loadLandscapeModel()
+  {
+    auto landscapeMesh = _land->getMesh();
 
+    std::vector<YolonaOss::GL::PositionNormalVertex> vertices;
+    std::vector<int>                                 indices;
+    for (int i = 0; i < landscapeMesh.vertecies.size(); i++)
+      vertices.push_back(YolonaOss::GL::PositionNormalVertex(landscapeMesh.vertecies[i], landscapeMesh.normals[i]));
+    for (int i = 0; i < landscapeMesh.indices.size(); i++)
+    {
+      indices.push_back(landscapeMesh.indices[i]);
+    }
+    _mesh = new YolonaOss::Mesh(vertices, indices);
+  }
+
+  void Fatboy::loadSupComModel()
+  {
     std::string folder = "E:\\scmunpacked\\units\\UAL0401";
     std::string a1 = "UAL0401_lod0.scm";
     SCM imp;
     SCM::data data = imp.load(folder + "\\" + a1);
-    
+
     std::vector<YolonaOss::GL::PositionNormalVertex> vertices;
-    std::vector<int>                                 indices ;
+    std::vector<int>                                 indices;
     for (int i = 0; i < data.vertecies.size(); i++)
-      vertices.push_back(YolonaOss::GL::PositionNormalVertex(data.vertecies[i].position,data.vertecies[i].normal));
+      vertices.push_back(YolonaOss::GL::PositionNormalVertex(data.vertecies[i].position, data.vertecies[i].normal));
     for (int i = 0; i < data.indices.size(); i++)
     {
       indices.push_back(data.indices[i].a);
@@ -130,9 +149,12 @@ namespace Fatboy
   {
     _preDrawables->draw();
 
-    YolonaOss::MeshRenderer::start();
-    YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0),glm::vec3(0.1f,0.1f,0.1f)), glm::vec4(1, 0, 0, 1));
-    YolonaOss::MeshRenderer::end();
+    if (_mesh)
+    {
+      YolonaOss::MeshRenderer::start();
+      YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 0, 0, 1));
+      YolonaOss::MeshRenderer::end();
+    }
 
     if (!_drawDebug)
       drawLandscape();
