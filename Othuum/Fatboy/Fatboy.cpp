@@ -26,6 +26,7 @@
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "BulletDebugDrawer.h"
 #include "YolonaOss/Renderer/MeshRenderer.h"
+#include "YolonaOss/Util/ImageIO.h"
 
 #include <iostream>
 
@@ -54,7 +55,7 @@ namespace Fatboy
     _landscape = _context->physic()->newBox(glm::vec3(0, 0, 0), glm::vec3(20, 0, 20), false);
     _physicAPI = std::make_shared<ScriptAPI>(_context->physic().get());
     _physicAPI->registerAPI(_context->script().get());
-    _land = _context->physic()->newHeightMap(glm::vec3(0, 2, 0));
+    //_land = _context->physic()->newHeightMap(glm::vec3(0, 2, 0));
   }
 
   void Fatboy::initEnemys()
@@ -96,8 +97,8 @@ namespace Fatboy
     _preDrawables->load(spec);
     _postDrawables->load(spec);
 
-    //loadSupComModel();
-    loadLandscapeModel();
+    loadSupComModel();
+    //loadLandscapeModel();
   }
 
   void Fatboy::loadLandscapeModel()
@@ -119,8 +120,11 @@ namespace Fatboy
   {
     std::string folder = "E:\\scmunpacked\\units\\UAL0401";
     std::string a1 = "UAL0401_lod0.scm";
+    std::string texture = "UAL0401_Albedo.dds";
     SCM imp;
     SCM::data data = imp.load(folder + "\\" + a1);
+
+    auto tex = YolonaOss::ImageIO::readImage(folder + "\\" + texture);
 
     std::vector<YolonaOss::GL::PositionNormalVertex> vertices;
     std::vector<int>                                 indices;

@@ -116,7 +116,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/gli;$(SolutionDir)IyathuumCoreLib\lib\;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <TreatWarningAsError>false</TreatWarningAsError>
@@ -176,7 +176,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);$(ProjectDir)Lib/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/gli;$(SolutionDir)IyathuumCoreLib\lib\;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);$(ProjectDir)Lib/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
@@ -258,6 +258,59 @@
     <ClInclude Include="Lib\gainput\recorder\GainputInputPlayer.h" />
     <ClInclude Include="Lib\gainput\recorder\GainputInputRecorder.h" />
     <ClInclude Include="Lib\gainput\recorder\GainputInputRecording.h" />
+    <ClInclude Include="Lib\gli\clear.hpp" />
+    <ClInclude Include="Lib\gli\comparison.hpp" />
+    <ClInclude Include="Lib\gli\convert.hpp" />
+    <ClInclude Include="Lib\gli\copy.hpp" />
+    <ClInclude Include="Lib\gli\core\bc.hpp" />
+    <ClInclude Include="Lib\gli\core\clear.hpp" />
+    <ClInclude Include="Lib\gli\core\convert_func.hpp" />
+    <ClInclude Include="Lib\gli\core\coord.hpp" />
+    <ClInclude Include="Lib\gli\core\file.hpp" />
+    <ClInclude Include="Lib\gli\core\filter.hpp" />
+    <ClInclude Include="Lib\gli\core\filter_compute.hpp" />
+    <ClInclude Include="Lib\gli\core\flip.hpp" />
+    <ClInclude Include="Lib\gli\core\mipmaps_compute.hpp" />
+    <ClInclude Include="Lib\gli\core\s3tc.hpp" />
+    <ClInclude Include="Lib\gli\core\storage_linear.hpp" />
+    <ClInclude Include="Lib\gli\duplicate.hpp" />
+    <ClInclude Include="Lib\gli\dx.hpp" />
+    <ClInclude Include="Lib\gli\format.hpp" />
+    <ClInclude Include="Lib\gli\generate_mipmaps.hpp" />
+    <ClInclude Include="Lib\gli\gl.hpp" />
+    <ClInclude Include="Lib\gli\gli.hpp" />
+    <ClInclude Include="Lib\gli\image.hpp" />
+    <ClInclude Include="Lib\gli\levels.hpp" />
+    <ClInclude Include="Lib\gli\load.hpp" />
+    <ClInclude Include="Lib\gli\load_dds.hpp" />
+    <ClInclude Include="Lib\gli\load_kmg.hpp" />
+    <ClInclude Include="Lib\gli\load_ktx.hpp" />
+    <ClInclude Include="Lib\gli\make_texture.hpp" />
+    <ClInclude Include="Lib\gli\reduce.hpp" />
+    <ClInclude Include="Lib\gli\sampler.hpp" />
+    <ClInclude Include="Lib\gli\sampler1d.hpp" />
+    <ClInclude Include="Lib\gli\sampler1d_array.hpp" />
+    <ClInclude Include="Lib\gli\sampler2d.hpp" />
+    <ClInclude Include="Lib\gli\sampler2d_array.hpp" />
+    <ClInclude Include="Lib\gli\sampler3d.hpp" />
+    <ClInclude Include="Lib\gli\sampler_cube.hpp" />
+    <ClInclude Include="Lib\gli\sampler_cube_array.hpp" />
+    <ClInclude Include="Lib\gli\save.hpp" />
+    <ClInclude Include="Lib\gli\save_dds.hpp" />
+    <ClInclude Include="Lib\gli\save_kmg.hpp" />
+    <ClInclude Include="Lib\gli\save_ktx.hpp" />
+    <ClInclude Include="Lib\gli\target.hpp" />
+    <ClInclude Include="Lib\gli\texture.hpp" />
+    <ClInclude Include="Lib\gli\texture1d.hpp" />
+    <ClInclude Include="Lib\gli\texture1d_array.hpp" />
+    <ClInclude Include="Lib\gli\texture2d.hpp" />
+    <ClInclude Include="Lib\gli\texture2d_array.hpp" />
+    <ClInclude Include="Lib\gli\texture3d.hpp" />
+    <ClInclude Include="Lib\gli\texture_cube.hpp" />
+    <ClInclude Include="Lib\gli\texture_cube_array.hpp" />
+    <ClInclude Include="Lib\gli\transform.hpp" />
+    <ClInclude Include="Lib\gli\type.hpp" />
+    <ClInclude Include="Lib\gli\view.hpp" />
     <ClInclude Include="Lib\lodepng\lodepng.h" />
     <ClInclude Include="Lib\lodepng\lodepng_util.h" />
     <ClInclude Include="OpenGL\AttributeDescription.h" />
@@ -323,6 +376,7 @@
     <ClCompile Include="GameModel\Unit.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Lib\glad\src\glad.c" />
+    <ClCompile Include="Lib\gli\core\dummy.cpp" />
     <ClCompile Include="Lib\lodepng\lodepng.cpp" />
     <ClCompile Include="Lib\lodepng\lodepng_util.cpp" />
     <ClCompile Include="OpenGL\Camera.cpp" />
@@ -354,6 +408,53 @@
     <ClCompile Include="Util\ImageIO.cpp" />
     <ClCompile Include="Util\Util.cpp" />
     <ClCompile Include="YolonaOss.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Lib\gli\core\bc.inl" />
+    <None Include="Lib\gli\core\clear.inl" />
+    <None Include="Lib\gli\core\comparison.inl" />
+    <None Include="Lib\gli\core\convert.inl" />
+    <None Include="Lib\gli\core\copy.inl" />
+    <None Include="Lib\gli\core\duplicate.inl" />
+    <None Include="Lib\gli\core\dx.inl" />
+    <None Include="Lib\gli\core\file.inl" />
+    <None Include="Lib\gli\core\filter.inl" />
+    <None Include="Lib\gli\core\flip.inl" />
+    <None Include="Lib\gli\core\format.inl" />
+    <None Include="Lib\gli\core\generate_mipmaps.inl" />
+    <None Include="Lib\gli\core\gl.inl" />
+    <None Include="Lib\gli\core\image.inl" />
+    <None Include="Lib\gli\core\levels.inl" />
+    <None Include="Lib\gli\core\load.inl" />
+    <None Include="Lib\gli\core\load_dds.inl" />
+    <None Include="Lib\gli\core\load_kmg.inl" />
+    <None Include="Lib\gli\core\load_ktx.inl" />
+    <None Include="Lib\gli\core\make_texture.inl" />
+    <None Include="Lib\gli\core\reduce.inl" />
+    <None Include="Lib\gli\core\s3tc.inl" />
+    <None Include="Lib\gli\core\sampler.inl" />
+    <None Include="Lib\gli\core\sampler1d.inl" />
+    <None Include="Lib\gli\core\sampler1d_array.inl" />
+    <None Include="Lib\gli\core\sampler2d.inl" />
+    <None Include="Lib\gli\core\sampler2d_array.inl" />
+    <None Include="Lib\gli\core\sampler3d.inl" />
+    <None Include="Lib\gli\core\sampler_cube.inl" />
+    <None Include="Lib\gli\core\sampler_cube_array.inl" />
+    <None Include="Lib\gli\core\save.inl" />
+    <None Include="Lib\gli\core\save_dds.inl" />
+    <None Include="Lib\gli\core\save_kmg.inl" />
+    <None Include="Lib\gli\core\save_ktx.inl" />
+    <None Include="Lib\gli\core\storage_linear.inl" />
+    <None Include="Lib\gli\core\texture.inl" />
+    <None Include="Lib\gli\core\texture1d.inl" />
+    <None Include="Lib\gli\core\texture1d_array.inl" />
+    <None Include="Lib\gli\core\texture2d.inl" />
+    <None Include="Lib\gli\core\texture2d_array.inl" />
+    <None Include="Lib\gli\core\texture3d.inl" />
+    <None Include="Lib\gli\core\texture_cube.inl" />
+    <None Include="Lib\gli\core\texture_cube_array.inl" />
+    <None Include="Lib\gli\core\transform.inl" />
+    <None Include="Lib\gli\core\view.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -3,7 +3,7 @@ freetype                       |yolonaoss   | Font
 glwf                           |yolonaoss   | WindowManager
 glm                            |Iyathuum    | Math
 glad                           |yolonaoss   | OpenGL
-lodepng                        |yolonaoss   | Load/Save PNG
+lodepng                        |yolonaoss   | Load/Save PNG files
 enet                           |vishala     | Network Library
 nlohmann/json                  |vishala     | Human Readable Config Files
 moodycamel/concurrentqueue     |vishala     | concurrent queue
@@ -11,3 +11,4 @@ portaudio                      |ahwassa     | play sound
 nyquistaudio                   |ahwassa     | load wav/mp3
 bullet                         |suthanu     | physics
 lua                            |haas        | scripting
+gli                            |yolonaoss   | load .dds files

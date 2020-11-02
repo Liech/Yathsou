@@ -1,19 +1,11 @@
 Layer 1: Only External dependencies
   IyathuumCoreLib
-    * Without dependencies
-    * Without dimension restrictions
     * absolut base
   VishalaNetworkLib
-    * depends on libnop, boost.asio
-    * if possible without other dependencies (except network related low level libs)
-    * offers network synchronisation
-  HyalatohDatabaseLib NOT IMPLEMENTED
-    * depends on whatever the supreme commander forged alliance forever database and the game files needs
-    * offers scfa faf db access
-    * offers scfa asset access
+    * offers network
   AhwassaGraphicsLib NOT IMPLEMENTED
-    * depends on GLWF, glad, freetype, glm
-    * offers opengl
+    * offers currently audio
+    * should offer opengl
 Layer 2: External, Layer 1 dependencies
   SCUUtilityLib NOT IMPLEMENTED
     * depends on glm, lodepng, Iyathuum
@@ -22,16 +14,13 @@ Layer 2: External, Layer 1 dependencies
 
 Layer 3: External, Layer 1 and Layer 2 dependencies
   SelenNavigationLib
-    * depends on SCU, Iyathuum
     * Offers navigation and flocking
-  SuthanusArtilleryLib NOT IMPLEMENTED
-    * depends on SCU, Iyathuum
-    * Offers Bullet dynamics, Damage and aim calculations
+  SuthanusPhysicsLib
+    * Offers physic
 Layer 4:
   YolonaOssRTSLib
-    * depends on nearly everything
-      * does not depend on graphic
-    * offers basic rts components
+    * offers currently opengl which should move to ahwassa
+    * offers basic rts logic
 exe: No External dependencies, only internal
   Othuum.exe
     * depends on everything

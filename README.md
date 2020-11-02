@@ -1,7 +1,6 @@
 # Yathsou
 RTS Engine fragments
 
-* Mostly Multidimensional. 2D and 3D RTS should be possible (as soon as this is finished)
 * First "Goal" or "Milestone very far away" is to recreate supreme commander forged alliance forever with modern pathfinding
 * Milestones reached:
   * Unecessary versatile basic classes are offered (NDArray, NMTree, NDSpatialHash, ...)
@@ -12,7 +11,13 @@ RTS Engine fragments
   * Main Menu + Lobby for searching and starting a game
   * add sound lib/engine
   * add physics engine
+  * direct fire bullet motion planning
+  * loading supreme commander model files & animation files
+  * lua scripting interface
 * Next Milestones:
-  * actually getting everyone connected and start the network game
-  * Network Game Loop
-  * integrate physics
+  * loading .dds for supreme commander textures
+  * render height map
+  * render supreme commander models with texture
+  * render supreme commander models with animation
+  * import & understand .scmap files
+  

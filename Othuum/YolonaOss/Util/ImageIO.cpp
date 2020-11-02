@@ -4,6 +4,10 @@
 
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 #include "../Lib/lodepng/lodepng.h"
+#include "../Lib/gli/load_dds.hpp"
+#include "../Lib/gli/texture2d.hpp"
+
+#include <fstream>
 
 namespace YolonaOss {
   ImageIO::ImageIO()
@@ -86,6 +90,16 @@ namespace YolonaOss {
 
   std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(std::string filename)
   {
-    return nullptr;
+    gli::texture texture = gli::load_dds(filename);
+    gli::texture2d texture2d = gli::texture2d(texture);
+    gli::image image = texture2d[0];
+    Iyathuum::Color* c = image.data< Iyathuum::Color>();
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(texture.extent()[0], texture.extent()[1]);
+
+    for (size_t i = 0; i < image.size() / sizeof(Iyathuum::Color); i++)
+    {
+      result->set_linear(i, c[i]);
+    }
+    return result;
   }
 }
