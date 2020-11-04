@@ -6,8 +6,7 @@
 #include "../Lib/lodepng/lodepng.h"
 #include "../Lib/gli/load_dds.hpp"
 #include "../Lib/gli/texture2d.hpp"
-#include "../Lib/s3tc/s3tc.h"
-
+#include "../Lib/gli/sampler2d.hpp"
 #include <fstream>
 
 namespace YolonaOss {
@@ -89,32 +88,29 @@ namespace YolonaOss {
     ImageIO::writeImage("Test/ImageIO.png", m);
   }
 
-  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(std::string filename) 
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(std::string filename)
   {
     gli::texture texture = gli::load_dds(filename);
     gli::texture2d texture2d = gli::texture2d(texture);
     gli::image image = texture2d[0];
-    
-    if (image.format() != gli::format::FORMAT_RGBA_DXT1_UNORM_BLOCK8)
-      throw std::runtime_error("Unkown Format. DDS Only supports one kind of dxt1 at the moment.");
 
     unsigned long width = image.extent()[0];
     unsigned long height = image.extent()[1];
-    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(width,height);
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(width, height);
+
 
     std::vector<unsigned long> img;
-    img.resize(width* height);
-    BlockDecompressImageDXT1(width, height, image.data<unsigned char>(), img.data());
-    for (size_t i = 0; i < img.size(); i++)
-    {
-      unsigned long val = img[i];
-      unsigned char a = (val) % 256;
-      unsigned char b = (val >> 8 ) % 256;
-      unsigned char g = (val >> 16) % 256;
-      unsigned char r = (val >> 24) % 256;
+    img.resize(width * height);
 
-      result->set_linear(i, Iyathuum::Color(r,g,b,a));
-    }
+    gli::fsampler2D sampler(texture2d, gli::wrap::WRAP_REPEAT, gli::filter::FILTER_NEAREST, gli::filter::FILTER_NEAREST);
+
+    for (size_t x = 0; x < width; x++)
+      for (size_t y = 0; y < height; y++)
+      {
+        auto value = sampler.texel_fetch(glm::ivec2(x, y), 0);
+        result->getRef({ x,y }) = Iyathuum::Color(value[0] * 255, value[1] * 255, value[2] * 255, value[3] * 255);
+      }
+
     return result;
   }
 }

@@ -122,10 +122,12 @@ namespace Fatboy
     std::string folder = "E:\\scmunpacked\\units\\UAL0401";
     std::string a1 = "UAL0401_lod0.scm";
     std::string texture = "UAL0401_Albedo.dds";
+    std::string mapdds = "C:\\Users\\Niki\\Documents\\My Games\\Gas Powered Games\\Supreme Commander Forged Alliance\\Maps\\Setons 10x10\\setons 10x10.dds";
     SCM imp;
     SCM::data data = imp.load(folder + "\\" + a1);
 
     _tex = YolonaOss::ImageIO::readImage(folder + "\\" + texture);
+    //_tex = YolonaOss::ImageIO::readImage(mapdds);
 
     std::vector<YolonaOss::GL::PositionNormalVertex> vertices;
     std::vector<int>                                 indices;

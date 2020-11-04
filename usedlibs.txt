@@ -2,7 +2,6 @@ license stuff needed for:      |            |
 glm                            |Iyathuum    | Math
 nlohmann/json                  |Iyathuum    | Human Readable Config Files
 gli                            |yolonaoss   | load .dds files
-s3tc-dxt-decompression         |yolonaoss   | decompress .dds files from dxt1 to array
 lodepng                        |yolonaoss   | Load/Save PNG files
 freetype                       |yolonaoss   | Font
 glwf                           |yolonaoss   | WindowManager

@@ -313,7 +313,6 @@
     <ClInclude Include="Lib\gli\view.hpp" />
     <ClInclude Include="Lib\lodepng\lodepng.h" />
     <ClInclude Include="Lib\lodepng\lodepng_util.h" />
-    <ClInclude Include="Lib\s3tc\s3tc.h" />
     <ClInclude Include="OpenGL\AttributeDescription.h" />
     <ClInclude Include="OpenGL\Camera.h" />
     <ClInclude Include="OpenGL\Drawable.h" />
@@ -380,7 +379,6 @@
     <ClCompile Include="Lib\gli\core\dummy.cpp" />
     <ClCompile Include="Lib\lodepng\lodepng.cpp" />
     <ClCompile Include="Lib\lodepng\lodepng_util.cpp" />
-    <ClCompile Include="Lib\s3tc\s3tc.cpp" />
     <ClCompile Include="OpenGL\Camera.cpp" />
     <ClCompile Include="OpenGL\Drawable.cpp" />
     <ClCompile Include="OpenGL\DrawableList.cpp" />
