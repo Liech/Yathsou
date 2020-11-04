@@ -14,10 +14,16 @@ RTS Engine fragments
   * direct fire bullet motion planning
   * loading supreme commander model files & animation files
   * lua scripting interface
-* Next Milestones:
   * loading .dds for supreme commander textures
-  * render height map
-  * render supreme commander models with texture
-  * render supreme commander models with animation
-  * import & understand .scmap files
+* Next Milestones:
+  * render & physic height map
+  * supcom
+    * render supreme commander models with texture
+    * render supreme commander models with animation
+    * import supreme commander map files
+    * import supreme commander .bp blueprint files
+  * defered shading
+  * screen space ambient occlusion
+  * vehicle drive to direction ai
+  
   
