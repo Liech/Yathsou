@@ -168,6 +168,7 @@
     <ClCompile Include="SCMAP.cpp" />
     <ClCompile Include="ScriptAPI.cpp" />
     <ClCompile Include="Protagonist.cpp" />
+    <ClCompile Include="SupComModel.cpp" />
     <ClCompile Include="TankTower.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitPool.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="SCMAP.h" />
     <ClInclude Include="ScriptAPI.h" />
     <ClInclude Include="Protagonist.h" />
+    <ClInclude Include="SupComModel.h" />
     <ClInclude Include="TankTower.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitPool.h" />

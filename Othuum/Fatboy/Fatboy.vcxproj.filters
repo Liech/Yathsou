@@ -60,6 +60,9 @@
     <ClCompile Include="SCMAP.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SupComModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fatboy.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SCMAP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SupComModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

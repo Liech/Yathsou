@@ -28,7 +28,7 @@
 #include "YolonaOss/Renderer/MeshRenderer.h"
 #include "YolonaOss/Util/ImageIO.h"
 #include "YolonaOss/Renderer/TextureRenderer.h"
-
+#include "SupComModel.h"
 #include <iostream>
 
 namespace Fatboy
@@ -124,20 +124,17 @@ namespace Fatboy
     std::string texture = "UAL0401_Albedo.dds";
     std::string mapdds = "C:\\Users\\Niki\\Documents\\My Games\\Gas Powered Games\\Supreme Commander Forged Alliance\\Maps\\Setons 10x10\\setons 10x10.dds";
     SCM imp;
-    SCM::data data = imp.load(folder + "\\" + a1);
-
-    _tex = YolonaOss::ImageIO::readImage(folder + "\\" + texture);
-    //_tex = YolonaOss::ImageIO::readImage(mapdds);
+    _modl = std::make_shared<SupComModel>(folder);
 
     std::vector<YolonaOss::GL::PositionNormalVertex> vertices;
     std::vector<int>                                 indices;
-    for (int i = 0; i < data.vertecies.size(); i++)
-      vertices.push_back(YolonaOss::GL::PositionNormalVertex(data.vertecies[i].position, data.vertecies[i].normal));
-    for (int i = 0; i < data.indices.size(); i++)
+    for (int i = 0; i < _modl->_model->vertecies.size(); i++)
+      vertices.push_back(YolonaOss::GL::PositionNormalVertex(_modl->_model->vertecies[i].position, _modl->_model->vertecies[i].normal));
+    for (int i = 0; i < _modl->_model->indices.size(); i++)
     {
-      indices.push_back(data.indices[i].a);
-      indices.push_back(data.indices[i].b);
-      indices.push_back(data.indices[i].c);
+      indices.push_back(_modl->_model->indices[i].a);
+      indices.push_back(_modl->_model->indices[i].b);
+      indices.push_back(_modl->_model->indices[i].c);
     }
     _mesh = new YolonaOss::Mesh(vertices, indices);
   }
@@ -162,7 +159,7 @@ namespace Fatboy
       YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 0, 0, 1));
       YolonaOss::MeshRenderer::end();
       YolonaOss::TextureRenderer::start();
-      YolonaOss::TextureRenderer::drawTexture(&(*(_tex)), glm::scale(glm::mat4(1.0),glm::vec3(40, 40, 40)));
+      YolonaOss::TextureRenderer::drawTexture(&(*(_modl->_albedo)), glm::scale(glm::mat4(1.0),glm::vec3(40, 40, 40)));
       YolonaOss::TextureRenderer::end();
     }
 

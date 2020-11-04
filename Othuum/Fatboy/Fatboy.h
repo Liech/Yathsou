@@ -29,7 +29,7 @@ namespace Haas
 {
   class ScriptEngine;
 }
-
+class SupComModel;
 namespace Fatboy
 {
   class Protagonist;
@@ -63,7 +63,6 @@ namespace Fatboy
     std::shared_ptr<Suthanus::HeightMap> _land;
     bool _drawDebug = false;
     YolonaOss::Mesh* _mesh;
-    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> _tex;
-
+    std::shared_ptr< SupComModel> _modl;
   };
 }
