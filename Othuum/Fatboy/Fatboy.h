@@ -2,6 +2,8 @@
 
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "YolonaOss/OpenGL/Updateable.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 #include <memory>
 namespace YolonaOss
 {
@@ -61,5 +63,7 @@ namespace Fatboy
     std::shared_ptr<Suthanus::HeightMap> _land;
     bool _drawDebug = false;
     YolonaOss::Mesh* _mesh;
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> _tex;
+
   };
 }

@@ -6,6 +6,7 @@
 #include "../Lib/lodepng/lodepng.h"
 #include "../Lib/gli/load_dds.hpp"
 #include "../Lib/gli/texture2d.hpp"
+#include "../Lib/s3tc/s3tc.h"
 
 #include <fstream>
 
@@ -88,17 +89,31 @@ namespace YolonaOss {
     ImageIO::writeImage("Test/ImageIO.png", m);
   }
 
-  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(std::string filename)
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(std::string filename) 
   {
     gli::texture texture = gli::load_dds(filename);
     gli::texture2d texture2d = gli::texture2d(texture);
     gli::image image = texture2d[0];
-    Iyathuum::Color* c = image.data< Iyathuum::Color>();
-    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(texture.extent()[0], texture.extent()[1]);
+    
+    if (image.format() != gli::format::FORMAT_RGBA_DXT1_UNORM_BLOCK8)
+      throw std::runtime_error("Unkown Format. DDS Only supports one kind of dxt1 at the moment.");
 
-    for (size_t i = 0; i < image.size() / sizeof(Iyathuum::Color); i++)
+    unsigned long width = image.extent()[0];
+    unsigned long height = image.extent()[1];
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(width,height);
+
+    std::vector<unsigned long> img;
+    img.resize(width* height);
+    BlockDecompressImageDXT1(width, height, image.data<unsigned char>(), img.data());
+    for (size_t i = 0; i < img.size(); i++)
     {
-      result->set_linear(i, c[i]);
+      unsigned long val = img[i];
+      unsigned char a = (val) % 256;
+      unsigned char b = (val >> 8 ) % 256;
+      unsigned char g = (val >> 16) % 256;
+      unsigned char r = (val >> 24) % 256;
+
+      result->set_linear(i, Iyathuum::Color(r,g,b,a));
     }
     return result;
   }

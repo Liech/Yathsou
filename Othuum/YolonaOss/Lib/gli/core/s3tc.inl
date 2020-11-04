@@ -1,5 +1,5 @@
-#include <glm/ext/vector_packing.hpp>
-#include <glm/gtc/packing.hpp>
+#include "glm/ext/vector_packing.hpp"
+#include "glm/gtc/packing.hpp"
 
 namespace gli
 {

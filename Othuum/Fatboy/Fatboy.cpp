@@ -27,6 +27,7 @@
 #include "BulletDebugDrawer.h"
 #include "YolonaOss/Renderer/MeshRenderer.h"
 #include "YolonaOss/Util/ImageIO.h"
+#include "YolonaOss/Renderer/TextureRenderer.h"
 
 #include <iostream>
 
@@ -124,7 +125,7 @@ namespace Fatboy
     SCM imp;
     SCM::data data = imp.load(folder + "\\" + a1);
 
-    auto tex = YolonaOss::ImageIO::readImage(folder + "\\" + texture);
+    _tex = YolonaOss::ImageIO::readImage(folder + "\\" + texture);
 
     std::vector<YolonaOss::GL::PositionNormalVertex> vertices;
     std::vector<int>                                 indices;
@@ -158,6 +159,9 @@ namespace Fatboy
       YolonaOss::MeshRenderer::start();
       YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 0, 0, 1));
       YolonaOss::MeshRenderer::end();
+      YolonaOss::TextureRenderer::start();
+      YolonaOss::TextureRenderer::drawTexture(&(*(_tex)), glm::scale(glm::mat4(1.0),glm::vec3(40, 40, 40)));
+      YolonaOss::TextureRenderer::end();
     }
 
     if (!_drawDebug)

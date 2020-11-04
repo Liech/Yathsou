@@ -85,6 +85,9 @@
     <Filter Include="libs\gli">
       <UniqueIdentifier>{c4fa37b3-89ee-4213-b193-af8cd0d74259}</UniqueIdentifier>
     </Filter>
+    <Filter Include="libs\s3tc">
+      <UniqueIdentifier>{3d37ce9b-74b4-4856-baa8-7e0fbeb45ca0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -531,6 +534,9 @@
     <ClInclude Include="Lib\gli\load_dds.hpp">
       <Filter>libs\gli</Filter>
     </ClInclude>
+    <ClInclude Include="Lib\s3tc\s3tc.h">
+      <Filter>libs\s3tc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -700,6 +706,9 @@
     </ClCompile>
     <ClCompile Include="Lib\gli\core\dummy.cpp">
       <Filter>libs\gli</Filter>
+    </ClCompile>
+    <ClCompile Include="Lib\s3tc\s3tc.cpp">
+      <Filter>libs\s3tc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
