@@ -11,11 +11,19 @@ namespace YolonaOss {
 
     Texture::Texture(std::string name, GLuint tex) : Uniform(name) {
       _texture = tex;
+      release();
     }
 
     Texture::~Texture() {
-      glDeleteTextures(1, &_texture);
+      if (!_released)
+        glDeleteTextures(1, &_texture);
     }
+
+    void Texture::release()
+    {
+      _released = true;
+    }
+
     void Texture::setTextureID(GLuint tex) {
       _texture = tex;
     }

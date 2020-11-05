@@ -324,6 +324,7 @@
     <ClInclude Include="OpenGL\Loadable.h" />
     <ClInclude Include="OpenGL\PositionColorNormalVertex.h" />
     <ClInclude Include="OpenGL\PositionColorVertex.h" />
+    <ClInclude Include="OpenGL\PositionNormalTextureVertex.h" />
     <ClInclude Include="OpenGL\PositionNormalVertex.h" />
     <ClInclude Include="OpenGL\PositionTextureVertex.h" />
     <ClInclude Include="OpenGL\PositionVertex.h" />
@@ -341,6 +342,7 @@
     <ClInclude Include="Renderer\MeshRenderer.h" />
     <ClInclude Include="Renderer\RectangleRenderer.h" />
     <ClInclude Include="Renderer\SphereRenderer.h" />
+    <ClInclude Include="Renderer\SupComModelRenderer.h" />
     <ClInclude Include="Renderer\TextRenderer.h" />
     <ClInclude Include="Renderer\TextureRenderer.h" />
     <ClInclude Include="RTSComponents\Landscape.h" />
@@ -400,6 +402,7 @@
     <ClCompile Include="Renderer\MeshRenderer.cpp" />
     <ClCompile Include="Renderer\RectangleRenderer.cpp" />
     <ClCompile Include="Renderer\SphereRenderer.cpp" />
+    <ClCompile Include="Renderer\SupComModelRenderer.cpp" />
     <ClCompile Include="Renderer\TextRenderer.cpp" />
     <ClCompile Include="Renderer\TextureRenderer.cpp" />
     <ClCompile Include="RTSComponents\Landscape.cpp" />

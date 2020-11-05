@@ -28,6 +28,8 @@
 #include "YolonaOss/Renderer/MeshRenderer.h"
 #include "YolonaOss/Util/ImageIO.h"
 #include "YolonaOss/Renderer/TextureRenderer.h"
+#include "YolonaOss/Renderer/SupComModelRenderer.h"
+#include "YolonaOss/OpenGL/PositionNormalTextureVertex.h"
 #include "SupComModel.h"
 #include <iostream>
 
@@ -127,9 +129,12 @@ namespace Fatboy
     _modl = std::make_shared<SupComModel>(folder);
 
     std::vector<YolonaOss::GL::PositionNormalVertex> vertices;
+    std::vector<YolonaOss::GL::PositionNormalTextureVertex> verticesT;
     std::vector<int>                                 indices;
-    for (int i = 0; i < _modl->_model->vertecies.size(); i++)
-      vertices.push_back(YolonaOss::GL::PositionNormalVertex(_modl->_model->vertecies[i].position, _modl->_model->vertecies[i].normal));
+    for (int i = 0; i < _modl->_model->vertecies.size(); i++) {
+      vertices .push_back(YolonaOss::GL::PositionNormalVertex(_modl->_model->vertecies[i].position, _modl->_model->vertecies[i].normal));
+      verticesT.push_back(YolonaOss::GL::PositionNormalTextureVertex(_modl->_model->vertecies[i].position, _modl->_model->vertecies[i].normal, _modl->_model->vertecies[i].uv1));
+    }
     for (int i = 0; i < _modl->_model->indices.size(); i++)
     {
       indices.push_back(_modl->_model->indices[i].a);
@@ -137,6 +142,10 @@ namespace Fatboy
       indices.push_back(_modl->_model->indices[i].c);
     }
     _mesh = new YolonaOss::Mesh(vertices, indices);
+    _scMesh = new YolonaOss::SupComGLMesh(verticesT, indices);
+    _scMesh->setAlbedo(_modl->_albedo);
+    _scMesh->setTeam  (_modl->_team);
+    _scMesh->setNormal(_modl->_normal);
   }
 
   void Fatboy::drawLandscape()
@@ -155,12 +164,15 @@ namespace Fatboy
 
     if (_mesh)
     {
-      YolonaOss::MeshRenderer::start();
-      YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 0, 0, 1));
-      YolonaOss::MeshRenderer::end();
-      YolonaOss::TextureRenderer::start();
-      YolonaOss::TextureRenderer::drawTexture(&(*(_modl->_albedo)), glm::scale(glm::mat4(1.0),glm::vec3(40, 40, 40)));
-      YolonaOss::TextureRenderer::end();
+      //YolonaOss::MeshRenderer::start();
+      //YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 0, 0, 1));
+      //YolonaOss::MeshRenderer::end();
+      YolonaOss::SupComModelRenderer::start();
+      YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)));
+      YolonaOss::SupComModelRenderer::end();
+      //YolonaOss::TextureRenderer::start();
+      //YolonaOss::TextureRenderer::drawTexture(&(*(_modl->_albedo)), glm::scale(glm::mat4(1.0),glm::vec3(40, 40, 40)));
+      //YolonaOss::TextureRenderer::end();
     }
 
     if (!_drawDebug)

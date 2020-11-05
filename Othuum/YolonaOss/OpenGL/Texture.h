@@ -13,13 +13,13 @@ namespace YolonaOss {
       virtual ~Texture() override;
 
       void   setTextureID(GLuint tex);
-      GLuint getTextureID() { return _texture; }
+      GLuint getTextureID() const { return _texture; }
       void bind() override;
       virtual std::string getType() override { return "sampler2D"; }
-
+      void release();
     private:
       GLuint _texture;
-
+      bool   _released = false;
       // Inherited via Uniform
     };
   }

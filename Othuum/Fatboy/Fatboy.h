@@ -13,6 +13,7 @@ namespace YolonaOss
     class DrawSpecification;
   }
   class Mesh;
+  class SupComGLMesh;
   namespace Camera
   {
     class CameraSystem;
@@ -63,6 +64,7 @@ namespace Fatboy
     std::shared_ptr<Suthanus::HeightMap> _land;
     bool _drawDebug = false;
     YolonaOss::Mesh* _mesh;
+    YolonaOss::SupComGLMesh* _scMesh;
     std::shared_ptr< SupComModel> _modl;
   };
 }

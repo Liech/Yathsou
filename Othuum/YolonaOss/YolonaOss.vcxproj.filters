@@ -531,6 +531,12 @@
     <ClInclude Include="Lib\gli\load_dds.hpp">
       <Filter>libs\gli</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\SupComModelRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL\PositionNormalTextureVertex.h">
+      <Filter>Header Files\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -700,6 +706,9 @@
     </ClCompile>
     <ClCompile Include="Lib\gli\core\dummy.cpp">
       <Filter>libs\gli</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\SupComModelRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
