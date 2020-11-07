@@ -166,9 +166,42 @@ namespace Fatboy
     YolonaOss::BoxRenderer::end();
   }
 
+  void recurseDrawBoneGraph(const std::map<int, std::vector<int>>& graph,const std::vector<SCM::bone>& bones, glm::vec3 nodePos, int index, float scale)
+  {
+    if (index != -1)
+    {
+      YolonaOss::BoxRenderer::drawDot(nodePos, glm::vec3(1, 1, 1) * scale, glm::vec4(0, 1, 1, 1));
+    }
+    if (graph.count(index) == 0)
+      return;
+    for (const int child : graph.at(index)) {
+      if (index != -1)
+        YolonaOss::BoxRenderer::drawLine(nodePos, bones[child].position*scale + nodePos, 0.1f * scale, glm::vec4(1, 1, 0, 1)*scale);
+      recurseDrawBoneGraph(graph, bones, nodePos + bones[child].position*scale, child,0.1f);
+    }
+  }
+
   void Fatboy::draw()
   {
     _preDrawables->draw();
+
+
+    YolonaOss::BoxRenderer::start();
+
+    std::map<int, std::vector<int>> bonegraph;
+    for (int i = 0; i < _modl->_model->bones.size();i++) {
+      int me = i;
+      int parent = _modl->_model->bones[i].parentIndex;
+      if (bonegraph.count(parent) == 0)
+        bonegraph[parent] = { me };
+      else
+        bonegraph[parent].push_back(me);
+    }
+    float scale = 0.1f;
+    recurseDrawBoneGraph(bonegraph, _modl->_model->bones, glm::vec3(0, 0, 0), -1, scale);
+   
+
+    YolonaOss::BoxRenderer::end();
 
     if (_mesh)
     {
@@ -176,23 +209,23 @@ namespace Fatboy
       //YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 0, 0, 1));
       //YolonaOss::MeshRenderer::end();
       YolonaOss::SupComModelRenderer::start();
-      YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)));
+      YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::translate(glm::mat4(1.0),glm::vec3(0,0,-30) * scale), glm::vec3(scale, scale, scale)));
       YolonaOss::SupComModelRenderer::end();
       //YolonaOss::TextureRenderer::start();
       //YolonaOss::TextureRenderer::drawTexture(&(*(_modl->_albedo)), glm::scale(glm::mat4(1.0),glm::vec3(40, 40, 40)));
       //YolonaOss::TextureRenderer::end();
     }
 
-    if (!_drawDebug)
-      drawLandscape();
-    _context->bullets()->draw();
-    _context->units  ()->draw();
-    _postDrawables->draw();
-    if (_drawDebug)
-    {
-      YolonaOss::BoxRenderer::start();
-      _context->physic()->debugDrawWorld();
-      YolonaOss::BoxRenderer::end();
-    }
+    //if (!_drawDebug)
+    //  drawLandscape();
+    //_context->bullets()->draw();
+    //_context->units  ()->draw();
+    //_postDrawables->draw();
+    //if (_drawDebug)
+    //{
+    //  YolonaOss::BoxRenderer::start();
+    //  _context->physic()->debugDrawWorld();
+    //  YolonaOss::BoxRenderer::end();
+    //}
   }
 }
