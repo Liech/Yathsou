@@ -17,6 +17,9 @@ namespace YolonaOss {
       bool isActive() { return _location == -1; }
       bool isBindable() { return _bindable; }
       void setBindable(bool val) { _bindable = val; }
+      virtual bool isTexture() { return false; }
+      void setTextureLocation(int location) { assert(_texLoc == -1); assert(isTexture()); _texLoc = location; };
+      int getTextureLocation() { assert(isTexture());  return _texLoc; }
       virtual void bind() = 0;
       virtual std::string toGLSL();
       virtual std::string getType() = 0;
@@ -24,6 +27,7 @@ namespace YolonaOss {
     private:
       std::string _name;
       int         _location = -1;
+      int         _texLoc   = -1;
       bool        _bindable = true;
     };
 

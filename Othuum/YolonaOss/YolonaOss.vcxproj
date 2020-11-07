@@ -331,6 +331,7 @@
     <ClInclude Include="OpenGL\Rendertarget.h" />
     <ClInclude Include="OpenGL\ShaderProgram.h" />
     <ClInclude Include="OpenGL\SSBO.h" />
+    <ClInclude Include="OpenGL\SupComVertex.h" />
     <ClInclude Include="OpenGL\Texture.h" />
     <ClInclude Include="OpenGL\Uniform.h" />
     <ClInclude Include="OpenGL\Updateable.h" />

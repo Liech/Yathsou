@@ -537,6 +537,9 @@
     <ClInclude Include="OpenGL\PositionNormalTextureVertex.h">
       <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="OpenGL\SupComVertex.h">
+      <Filter>Header Files\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">

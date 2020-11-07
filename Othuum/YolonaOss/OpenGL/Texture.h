@@ -11,6 +11,7 @@ namespace YolonaOss {
       Texture(std::string name, Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2> * tex);
       Texture(std::string name, GLuint tex);
       virtual ~Texture() override;
+      virtual bool isTexture() override { return true; }
 
       void   setTextureID(GLuint tex);
       GLuint getTextureID() const { return _texture; }

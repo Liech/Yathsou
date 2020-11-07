@@ -30,5 +30,6 @@ namespace YolonaOss {
   private:
     int drawCall = 0;
     std::unique_ptr<GL::Texture> _texture;
+    std::unique_ptr<GL::Texture> _texture2;
   };
 }

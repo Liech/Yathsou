@@ -15,7 +15,9 @@ namespace YolonaOss {
   void RenderTexture::load(GL::DrawSpecification* d)
   {
     auto im = ImageIO::readImage("cat.png");
-    _texture = std::make_unique<GL::Texture>("TestTexture",im.get());
+    auto im2 = ImageIO::readImage("YolonaOssData\\textures\\SmallMap.png");
+    _texture = std::make_unique<GL::Texture>("TestTexture", im.get());
+    _texture2 = std::make_unique<GL::Texture>("TestTexture", im2.get());
   }
 
   void RenderTexture::draw()
@@ -26,7 +28,9 @@ namespace YolonaOss {
     world = glm::scale(world, glm::vec3(10, 10, 10));
 
     TextureRenderer::start();
-    TextureRenderer::drawTexture(_texture.get(),world);
+    TextureRenderer::drawTexture(_texture.get(), world);
+    world = glm::translate(world, glm::vec3(2, 2, 0));
+    TextureRenderer::drawTexture(_texture2.get(), world);
     TextureRenderer::end();
   }
 }

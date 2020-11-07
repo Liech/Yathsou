@@ -12,6 +12,7 @@ namespace YolonaOss {
 
     _uniformIsActive.resize(_uniform.size());
     size_t ssboLocations = 0;
+    size_t textureLocations = 0;
     size_t uniformLocations = 0;
     for (int i = 0; i < _uniform.size(); i++) {
       if (_uniform[i]->isBuffer()) {
@@ -21,6 +22,10 @@ namespace YolonaOss {
       else {
         _uniform[i]->setLocation((int)uniformLocations);
         uniformLocations++;
+      }
+      if (_uniform[i]->isTexture()){
+        _uniform[i]->setTextureLocation((int)textureLocations);
+        textureLocations++;
       }
       _uniformIsActive[i] = false;
     }

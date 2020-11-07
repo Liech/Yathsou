@@ -57,7 +57,8 @@ namespace YolonaOss {
     unsigned error = lodepng::decode(image, width, height, filename);
 
     //if there's an error, display it
-    if (error) throw std::runtime_error("decoder error " + std::to_string(error) + ": " + lodepng_error_text(error) + "\n");
+    if (error) 
+      throw std::runtime_error("decoder error " + std::to_string(error) + ": " + lodepng_error_text(error) + "\n");
 
     std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(width, height);
 

@@ -16,20 +16,20 @@ namespace YolonaOss
     class UniformMat4;
     class ShaderProgram;
     class Texture;
-    struct PositionNormalTextureVertex;
+    struct SupComVertex;
   }
   class MeshPimpl;
   class SupComGLMesh
   {
   public:
-    SupComGLMesh(const std::vector<GL::PositionNormalTextureVertex>& vertecies, const std::vector<int>& indicies);
+    SupComGLMesh(const std::vector<GL::SupComVertex>& vertecies, const std::vector<int>& indicies);
     void setAlbedo(std::shared_ptr<GL::Texture>& texture);
-    void setTeam  (std::shared_ptr<GL::Texture> texture);
+    void setInfo  (std::shared_ptr<GL::Texture> texture);
     void setNormal(std::shared_ptr<GL::Texture> texture);
     void draw() const;
 
     int getAlbedoID()const;
-    int getTeamID()  const;
+    int getInfoID()  const;
     int getNormalID()const;
   private:
     std::unique_ptr<MeshPimpl> _p;
@@ -50,7 +50,8 @@ namespace YolonaOss
     static inline std::unique_ptr<GL::UniformMat4>                          _mat   ;
     static inline std::unique_ptr<GL::ShaderProgram>                        _shader;
     static inline std::unique_ptr<GL::Texture>                              _albedo;
-    static inline std::unique_ptr<GL::Texture>                              _team  ;
+    static inline std::unique_ptr<GL::Texture>                              _info  ;
     static inline std::unique_ptr<GL::Texture>                              _normal;
+    static inline std::unique_ptr<GL::UniformVec4>                          _color;
   };
 }
