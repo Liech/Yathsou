@@ -13,6 +13,7 @@ namespace YolonaOss {
       glm::vec3 binormal;
       glm::vec2 uv1     ;
       glm::vec2 uv2     ;
+      unsigned char bones[4];
 
       SupComVertex() {
         position = glm::vec3(0.0f);
@@ -21,6 +22,8 @@ namespace YolonaOss {
         binormal = glm::vec3(0.0f);
         uv1      = glm::vec2(0.0f);
         uv2      = glm::vec2(0.0f);
+        for (int i = 0; i < 4; i++)
+          bones[i] = 0;
       };
 
       static std::vector<AttributeDescription> getBinding() {
@@ -31,6 +34,7 @@ namespace YolonaOss {
         result.push_back(AttributeDescription("binormal", 3, AttributeDescription::DataType::Float));
         result.push_back(AttributeDescription("uv1"     , 2, AttributeDescription::DataType::Float));
         result.push_back(AttributeDescription("uv2"     , 2, AttributeDescription::DataType::Float));
+        result.push_back(AttributeDescription("bones"   , 4, AttributeDescription::DataType::Char ));
         return result;
       }
     };

@@ -63,6 +63,7 @@ namespace YolonaOss
       out vec3 nrm;
       out vec2 UV1;
       out vec2 UV2;
+      out vec4 clrr;
 
       void main() {      
         mat4 view = CameraProjection *  CameraView;
@@ -70,6 +71,7 @@ namespace YolonaOss
         nrm = normal;
         UV1 = uv1;
         UV2 = uv2;
+        clrr = vec4(mod((bones * 6662177),10)/10,mod((bones * 7804957 ),10)/10,mod((bones * 9999943),10)/10,0);
       }
    )";
 
@@ -88,6 +90,7 @@ namespace YolonaOss
      in vec3 nrm;
      in vec2 UV1;
      in vec2 UV2;
+     in vec4 clrr;
      
      out vec4 frag_color;
      void main() {
@@ -102,9 +105,9 @@ namespace YolonaOss
        float reflection = info[1];
        float glow       = info[2];
        float showTeamClr= info[3];
-
+       
        //team;//albedo * diff + albedo * ambientStrength + team +
-       vec4 result = albedo + showTeamClr * (clr - albedo);
+       vec4 result = albedo + showTeamClr * (clr - albedo) + clrr;
        //result[3] = 1;
      	 frag_color = result;
      }

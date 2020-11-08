@@ -8,7 +8,8 @@ namespace YolonaOss {
 
     struct AttributeDescription {
       enum class DataType {
-        Float = GL_FLOAT
+        Float = GL_FLOAT,
+        Char  = GL_BYTE
       };
 
       AttributeDescription(std::string _name, int _size, DataType _type) {
@@ -21,6 +22,9 @@ namespace YolonaOss {
         {
         case AttributeDescription::DataType::Float:
           return sizeof(float) * size;
+          break;
+        case AttributeDescription::DataType::Char:
+          return sizeof(unsigned char) * size;
           break;
         default:
           break;
@@ -37,6 +41,8 @@ namespace YolonaOss {
           else if (size == 3) return "vec3";
           else if (size == 4) return "vec4";
           break;
+        case AttributeDescription::DataType::Char:
+          return "uint";
         default:
           break;
         }

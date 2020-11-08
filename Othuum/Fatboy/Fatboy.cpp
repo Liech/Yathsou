@@ -141,6 +141,10 @@ namespace Fatboy
       v.binormal = vPre.binormal;
       v.uv1      = vPre.uv1     ;
       v.uv2      = vPre.uv2     ;
+      v.bones[0] = vPre.boneIndex[0];
+      v.bones[1] = vPre.boneIndex[1];
+      v.bones[2] = vPre.boneIndex[2];
+      v.bones[3] = vPre.boneIndex[3];
       verticesT.push_back(v);
     }
     for (int i = 0; i < _modl->_model->indices.size(); i++)

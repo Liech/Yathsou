@@ -19,6 +19,14 @@ namespace YolonaOss
     struct SupComVertex;
   }
   class MeshPimpl;
+
+  struct Bone
+  {
+    glm::vec3          position;
+    std::vector<int>   children;
+    std::vector<Bone*> allBones;
+  };
+
   class SupComGLMesh
   {
   public:
