@@ -59,6 +59,11 @@ namespace YolonaOss
     _camera = std::make_unique<GL::Camera>("Camera", spec->getCam().get());
     _spec = spec;
 
+    
+    _anim.resize(maxBoneNumber);
+    for (int i = 0; i < maxBoneNumber; i++)
+      _anim[i] = glm::mat4(1.0);
+
     std::string vertex_shader_source = R"(
       out vec3 nrm;
       out vec2 UV1;
@@ -67,7 +72,7 @@ namespace YolonaOss
 
       void main() {      
         mat4 view = CameraProjection *  CameraView;
-        gl_Position = view * model * vec4(position , 1.0);
+        gl_Position = view * model * mat4(animation[bones]) * vec4(position , 1.0);
         nrm = normal;
         UV1 = uv1;
         UV2 = uv2;
@@ -124,6 +129,9 @@ namespace YolonaOss
     uniforms.push_back(_mat.get());
     _color = std::make_unique<GL::UniformVec4>("clr");
     uniforms.push_back(_color.get());
+    _animation = std::make_unique<GL::UniformVecMat4>("animation", maxBoneNumber);
+    _animation->setValue(_anim);
+    uniforms.push_back(_animation.get());
     _albedo = std::make_unique<GL::Texture>("Albedo", 0);
     _albedo->release();
     uniforms.push_back(_albedo.get());
@@ -136,8 +144,19 @@ namespace YolonaOss
     _shader = std::make_unique<GL::ShaderProgram>(GL::SupComVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }    
 
-  void SupComModelRenderer::draw(const SupComGLMesh& mesh, glm::mat4 transformation)
+  void SupComModelRenderer::draw(const SupComGLMesh& mesh, glm::mat4 transformation, const std::vector<glm::mat4>& animation)
   {
+    if (animation.size() == 0)
+    {
+      std::vector<glm::mat4> anim;
+      anim.resize(maxBoneNumber);
+      for (int i = 0; i < maxBoneNumber; i++)
+        anim[i] = glm::mat4(1.0);
+
+      _animation->setValue(anim);
+    }
+    else
+      _animation->setValue(animation);
     _albedo->setTextureID(mesh.getAlbedoID());
     _info  ->setTextureID(mesh.getInfoID  ());
     _normal->setTextureID(mesh.getNormalID());

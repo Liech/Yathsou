@@ -89,6 +89,8 @@ namespace Fatboy
     _cam->update();
     _protagonist->update();
     _context->physic()->update();
+
+    _boneRot = glm::rotate(_boneRot, 0.01f, glm::vec3(1, 0, 0));
   }
 
   void Fatboy::load(YolonaOss::GL::DrawSpecification* spec)
@@ -202,8 +204,7 @@ namespace Fatboy
         bonegraph[parent].push_back(me);
     }
     float scale = 0.1f;
-    recurseDrawBoneGraph(bonegraph, _modl->_model->bones, glm::vec3(0, 0, 0), -1, scale);
-   
+    recurseDrawBoneGraph(bonegraph, _modl->_model->bones, glm::vec3(0, 0, 0), -1, scale);   
 
     YolonaOss::BoxRenderer::end();
 
@@ -213,7 +214,11 @@ namespace Fatboy
       //YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 0, 0, 1));
       //YolonaOss::MeshRenderer::end();
       YolonaOss::SupComModelRenderer::start();
-      YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::translate(glm::mat4(1.0),glm::vec3(0,0,-30) * scale), glm::vec3(scale, scale, scale)));
+      std::vector<glm::mat4> animation;
+      animation.resize(32);
+      for (int i = 0; i < 32; i++)animation[i] = glm::mat4(1.0);
+      animation[1] = _boneRot;
+      YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::translate(glm::mat4(1.0),glm::vec3(0,0,-30) * scale), glm::vec3(scale, scale, scale)),animation);
       YolonaOss::SupComModelRenderer::end();
       //YolonaOss::TextureRenderer::start();
       //YolonaOss::TextureRenderer::drawTexture(&(*(_modl->_albedo)), glm::scale(glm::mat4(1.0),glm::vec3(40, 40, 40)));

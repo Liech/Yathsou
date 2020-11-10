@@ -5,7 +5,7 @@
 namespace YolonaOss {
   namespace GL {
     std::string Uniform::toGLSL() {
-      return "layout(location = " + std::to_string(getLocation()) + ") uniform " + getType() + " " + getName() + ";\n";
+      return "layout(location = " + std::to_string(getLocation()) + ") uniform " + getType() + " " + getName() + getArrayPostfix() + ";\n";
     }
 
     float UniformFloat::getValue() {
@@ -66,8 +66,22 @@ namespace YolonaOss {
     }
 
     void UniformMat4::bind() {
-
       glUniformMatrix4fv(getLocation(), 1, GL_FALSE, glm::value_ptr(_value));
+    }
+
+    const std::vector<glm::mat4>& UniformVecMat4::getValue() {
+      return _value;
+    }
+
+    void UniformVecMat4::setValue(const std::vector<glm::mat4> val) {
+      assert(val.size() == _size);
+      _value = val;
+    }
+
+    void UniformVecMat4::bind() {
+      for(int i = 0; i <_size;i++)
+        glUniformMatrix4fv(getLocation()+i, 1, GL_FALSE, glm::value_ptr(_value[i]));
+      
     }
   }
 }

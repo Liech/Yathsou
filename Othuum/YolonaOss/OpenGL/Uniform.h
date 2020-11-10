@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <string>
+#include <vector>
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 namespace YolonaOss {
   namespace GL {
@@ -20,6 +21,8 @@ namespace YolonaOss {
       virtual bool isTexture() { return false; }
       void setTextureLocation(int location) { assert(_texLoc == -1); assert(isTexture()); _texLoc = location; };
       int getTextureLocation() { assert(isTexture());  return _texLoc; }
+      virtual std::string getArrayPostfix() { return ""; }
+      virtual int getNumberOfLocationsUsed() { return 1; }
       virtual void bind() = 0;
       virtual std::string toGLSL();
       virtual std::string getType() = 0;
@@ -81,6 +84,7 @@ namespace YolonaOss {
     private:
       glm::vec4 _value = glm::vec4(0, 0, 0, 0);
     };
+
     class UniformMat4 : public Uniform {
     public:
       UniformMat4(std::string name) : Uniform(name) {};
@@ -92,6 +96,22 @@ namespace YolonaOss {
 
     private:
       glm::mat4 _value = glm::mat4(1.0);
+    };
+
+    class UniformVecMat4 : public Uniform {
+    public:
+      UniformVecMat4(std::string name, int size) : Uniform(name) { _value.resize(size); _size = size; };
+      void  setValue(const std::vector<glm::mat4> val);
+      const std::vector<glm::mat4>& getValue();
+      virtual int getNumberOfLocationsUsed() override { return _size; }
+      virtual std::string getArrayPostfix() { return "["+ std::to_string(_size)+"]"; }
+
+      void bind() override;
+      std::string getType() override { return "mat4"; }//[" + std::to_string(_size) + "]"; }
+
+    private:
+      std::vector<glm::mat4> _value;
+      int _size = 1;
     };
   }
 }

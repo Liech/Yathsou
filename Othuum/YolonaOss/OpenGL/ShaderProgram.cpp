@@ -21,7 +21,7 @@ namespace YolonaOss {
       }
       else {
         _uniform[i]->setLocation((int)uniformLocations);
-        uniformLocations++;
+        uniformLocations+=_uniform[i]->getNumberOfLocationsUsed();
       }
       if (_uniform[i]->isTexture()){
         _uniform[i]->setTextureLocation((int)textureLocations);
@@ -99,13 +99,15 @@ namespace YolonaOss {
 
     for (int i = 0; i < count; i++)
     {
-      if (_uniform[i]->isBuffer()) continue;
+      if (_uniform[i]->isBuffer()) 
+        continue;
       glGetActiveUniform(_program, (GLuint)_uniform[i]->getLocation(), bufSize, &length, &size, &type, name);
       activeNames.insert(name);
     }
     for (int i = 0; i < _uniform.size(); i++) {
-      if (_uniform[i]->isBuffer()) continue;
-      _uniformIsActive[i] = activeNames.count(_uniform[i]->getName()) != 0;
+      if (_uniform[i]->isBuffer()) 
+        continue;
+      _uniformIsActive[i] = activeNames.count(_uniform[i]->getName()) != 0 || activeNames.count(_uniform[i]->getName() + "[0]") != 0;
       if (!_uniformIsActive[i]) {
         std::cout << "Uniform is inactive: " << _uniform[i]->getName() << std::endl;
       }

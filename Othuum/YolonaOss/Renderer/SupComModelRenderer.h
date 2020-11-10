@@ -14,6 +14,7 @@ namespace YolonaOss
     class UniformVec3;
     class UniformVec4;
     class UniformMat4;
+    class UniformVecMat4;
     class ShaderProgram;
     class Texture;
     struct SupComVertex;
@@ -49,17 +50,20 @@ namespace YolonaOss
     virtual void load(GL::DrawSpecification*) override;
     static void start();
     static void end();
-    static void draw(const SupComGLMesh& mesh, glm::mat4 transformation);
+    static void draw(const SupComGLMesh& mesh, glm::mat4 transformation, const std::vector<glm::mat4>& animation = { });
 
   private:
     static inline std::unique_ptr<GL::Camera>                               _camera;
     static inline GL::DrawSpecification*                                    _spec  ;
     static inline std::unique_ptr<GL::UniformVec3>                          _light ;
     static inline std::unique_ptr<GL::UniformMat4>                          _mat   ;
+    static inline std::unique_ptr<GL::UniformVecMat4>                       _animation;
     static inline std::unique_ptr<GL::ShaderProgram>                        _shader;
     static inline std::unique_ptr<GL::Texture>                              _albedo;
     static inline std::unique_ptr<GL::Texture>                              _info  ;
     static inline std::unique_ptr<GL::Texture>                              _normal;
     static inline std::unique_ptr<GL::UniformVec4>                          _color;
+    static inline const int maxBoneNumber = 32;
+    std::vector<glm::mat4> _anim;
   };
 }
