@@ -66,5 +66,6 @@ namespace Fatboy
     YolonaOss::SupComGLMesh* _scMesh;
     std::shared_ptr< SupComModel> _modl;
     glm::mat4 _boneRot = glm::mat4(1.0);
+    float _animationTime = 0;
   };
 }

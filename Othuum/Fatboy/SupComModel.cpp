@@ -6,7 +6,7 @@
 #include "SCA.h"
 
 #include <filesystem>
-
+#include <IyathuumCoreLib/lib/glm/gtx/quaternion.hpp>
 
 SupComModel::SupComModel(std::string foldername)
 {
@@ -39,9 +39,28 @@ SupComModel::SupComModel(std::string foldername)
       size_t      animSeperator = animationPath.find_last_of('\\');
       std::string animationName = animationPath.substr(animSeperator + 1/*\\*/ + name.size() + 2/*_A*/);
       animationName = animationName.substr(0, animationName.size() - 4);
-      SCA animLoader;      
+      SCA animLoader;
       std::shared_ptr<SCA::data> anim = std::make_shared<SCA::data>(animLoader.load(animationPath));
       _animations[animationName] = anim;    
     }
+  }
+}
+
+glm::mat4 SupComModel::toAnimation(const glm::mat4& input, int bone) const
+{
+  return glm::inverse(_model->bones[bone].relativeInverseMatrix)*input/**_model->bones[bone].relativeInverseMatrix*/  ;
+}
+
+void SupComModel::animate(std::string animation, float time, std::vector<glm::mat4>& outVector)
+{
+  auto anim = _animations[animation];
+  time = std::fmod(time, anim->duration);
+  auto frame = anim->animation[(int)((time / anim->duration) * anim->animation.size())];
+  
+  for (int i = 0; i < frame.bones.size(); i++){
+    auto bone = frame.bones[i];
+    glm::mat4 boneMovement(1.0);
+    boneMovement = glm::translate(glm::toMat4(bone.rotation),bone.position);
+    outVector[i] = toAnimation(boneMovement,i);
   }
 }

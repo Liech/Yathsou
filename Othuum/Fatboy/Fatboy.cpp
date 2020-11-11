@@ -216,8 +216,12 @@ namespace Fatboy
       YolonaOss::SupComModelRenderer::start();
       std::vector<glm::mat4> animation;
       animation.resize(32);
-      for (int i = 0; i < 32; i++)animation[i] = glm::mat4(1.0);
-      animation[1] = _boneRot;
+      for (int i = 0; i < 32; i++)
+        animation[i] = glm::mat4(1.0);
+      animation[1] = _modl->toAnimation(_boneRot,1);
+
+      _modl->animate("walk", _animationTime, animation);
+      _animationTime += 0.01f;
       YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::translate(glm::mat4(1.0),glm::vec3(0,0,-30) * scale), glm::vec3(scale, scale, scale)),animation);
       YolonaOss::SupComModelRenderer::end();
       //YolonaOss::TextureRenderer::start();

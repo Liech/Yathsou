@@ -76,7 +76,7 @@ namespace YolonaOss
         nrm = normal;
         UV1 = uv1;
         UV2 = uv2;
-        boneMarker = vec4(mod((bones * 6662177),100)/100.0,mod((bones * 7804957 ),100)/100.0,mod((bones * 9999943),100)/100.0,0);
+        boneMarker = vec4(0,0,0,0);//vec4(mod((bones * 6662177),100)/100.0,mod((bones * 7804957 ),100)/100.0,mod((bones * 9999943),100)/100.0,0);
       }
    )";
 
