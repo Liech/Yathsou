@@ -7,6 +7,7 @@
 
 #include <filesystem>
 #include <IyathuumCoreLib/lib/glm/gtx/quaternion.hpp>
+#include <IyathuumCoreLib/lib/glm/gtx/euler_angles.hpp>
 
 SupComModel::SupComModel(std::string foldername)
 {
@@ -48,7 +49,18 @@ SupComModel::SupComModel(std::string foldername)
 
 glm::mat4 SupComModel::toAnimation(const glm::mat4& input, int bone) const
 {
-  return glm::inverse(_model->bones[bone].relativeInverseMatrix)*input/**_model->bones[bone].relativeInverseMatrix*/  ;
+  return input;//* glm::inverse(_model->bones[bone].relativeInverseMatrix)/**_model->bones[bone].relativeInverseMatrix*/  ;
+}
+
+glm::mat4 QuatToMat(glm::quat input)
+{
+  glm::vec3 euler = glm::eulerAngles(input) * 3.14159f / 180.f;
+
+  glm::mat4 transformX = glm::eulerAngleX(euler.x);
+  glm::mat4 transformY = glm::eulerAngleY(euler.y);
+  glm::mat4 transformZ = glm::eulerAngleZ(euler.z);
+
+  return transformX * transformY * transformZ; // or some other order
 }
 
 void SupComModel::animate(std::string animation, float time, std::vector<glm::mat4>& outVector)
@@ -58,9 +70,11 @@ void SupComModel::animate(std::string animation, float time, std::vector<glm::ma
   auto frame = anim->animation[(int)((time / anim->duration) * anim->animation.size())];
   
   for (int i = 0; i < frame.bones.size(); i++){
+  //int i = 0; {
     auto bone = frame.bones[i];
     glm::mat4 boneMovement(1.0);
-    boneMovement = glm::translate(glm::toMat4(bone.rotation),bone.position);
+    glm::mat4 rotated = QuatToMat(bone.rotation);
+    boneMovement = glm::translate(rotated,bone.position);
     outVector[i] = toAnimation(boneMovement,i);
   }
 }

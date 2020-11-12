@@ -218,7 +218,7 @@ namespace Fatboy
       animation.resize(32);
       for (int i = 0; i < 32; i++)
         animation[i] = glm::mat4(1.0);
-      animation[1] = _modl->toAnimation(_boneRot,1);
+      //animation[1] = _modl->toAnimation(_boneRot,1);
 
       _modl->animate("walk", _animationTime, animation);
       _animationTime += 0.01f;
