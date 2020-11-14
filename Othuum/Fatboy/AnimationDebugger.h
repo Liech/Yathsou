@@ -19,6 +19,7 @@ namespace YolonaOss
     class CameraSystem;
   }
 }
+class SupComModel;
 
 namespace Fatboy{
   class AnimationDebugger : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable {
@@ -30,12 +31,15 @@ namespace Fatboy{
     virtual void update() override;
 
   private:
+    void drawModel();
 
     std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables;
     std::shared_ptr<YolonaOss::GL::DrawableList>     _postDrawables;
     std::shared_ptr<YolonaOss::Camera::CameraSystem> _cam;
     YolonaOss::GL::DrawSpecification*                _spec;
 
+    std::shared_ptr< SupComModel> _modl;
+    YolonaOss::SupComGLMesh* _scMesh;
 
     bool _keyPressed = false;
   };
