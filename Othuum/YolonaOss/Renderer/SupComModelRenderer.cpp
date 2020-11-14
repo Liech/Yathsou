@@ -72,7 +72,7 @@ namespace YolonaOss
 
       void main() {      
         mat4 view = CameraProjection *  CameraView;
-        gl_Position = view * model * mat4(animation[bones]) * vec4(position , 1.0);
+        gl_Position = view * model * mat4(animation[bones+1]) * vec4(position , 1.0);
         nrm = normal;
         UV1 = uv1;
         UV2 = uv2;

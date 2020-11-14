@@ -47,11 +47,12 @@ std::vector<SCA::frame> SCA::readAnimation(int offset, int numberOfFrames, std::
   {
     frame subresult;
     subresult.keytime     = readFloat(_buffer, _fileposition);
-    subresult.keyflags    = readInt  (_buffer, _fileposition);
+    subresult.keyflags    = readUInt (_buffer, _fileposition);
 
     for (int i = 0; i < boneNames.size(); i++)
     {
       bone b;
+
       b.position[0] = readFloat(_buffer, _fileposition);
       b.position[1] = readFloat(_buffer, _fileposition);
       b.position[2] = readFloat(_buffer, _fileposition);
@@ -125,6 +126,15 @@ int SCA::readInt(const std::vector<unsigned char>& data, size_t& position)
   return result;
 }
 
+unsigned int SCA::readUInt(const std::vector<unsigned char>& data, size_t& position)
+{
+  unsigned char bytes[] = { data[position],data[position + 1],data[position + 2],data[position + 3] };
+  unsigned int* pInt = (unsigned int*)bytes;
+  unsigned int result = *pInt;
+  position += 4;
+  return result;
+}
+
 std::string SCA::readString(const std::vector<unsigned char>& data, size_t& position, size_t size)
 {
   char* d = (char*)data.data() + position;
@@ -143,4 +153,57 @@ std::vector<std::string> SCA::split(std::string input, char seperator)
     seglist.push_back(segment);
   }
   return seglist;
+}
+
+void SCA::data::fromJson(nlohmann::json input)
+{
+  duration = input["Duration"];
+  boneNames.clear();
+  for (auto name : input["BoneNames"]) boneNames.push_back(name);
+  for (auto name : input["BoneLinks"]) boneLinks.push_back(name);
+  position = glm::vec3(input["Position"][0], input["Position"][1], input["Position"][2]);
+  rotation = glm::quat(input["Rotation"][0], input["Rotation"][1], input["Rotation"][2], input["Rotation"][3]);
+  for (auto anim : input["Animation"])
+  {
+    frame sub;
+    sub.keytime = anim["Keytime"];
+    sub.keyflags = anim["Keyflags"];
+    for (auto jbone : anim["Bone"]){
+      bone b;
+      b.position = glm::vec3(jbone["Position"][0], jbone["Position"][1], jbone["Position"][2]);
+      b.rotation = glm::quat(jbone["Rotation"][0], jbone["Rotation"][1], jbone["Rotation"][2], jbone["Rotation"][3]);
+      b.name = jbone["Name"];
+      sub.bones.push_back(b);
+    }
+    animation.push_back(sub);
+  }
+}
+
+nlohmann::json SCA::data::toJson()
+{
+  nlohmann::json result;
+  result["Duration"] = duration;
+  result["BoneNames"] = boneNames;
+  result["BoneLinks"] = boneLinks;
+  result["Position"] = std::vector<float>{ position[0],position[1],position[2] };
+  result["Rotation"] = std::vector<float>{ rotation[0],rotation[1],rotation[2],rotation[3] };
+  std::vector<nlohmann::json> anim;
+  for (auto a : animation)
+  {
+    nlohmann::json subresult;
+    subresult["Keytime"] = a.keytime;
+    subresult["Keyflags"] = a.keyflags;
+    std::vector<nlohmann::json> bones;
+    for (auto bone : a.bones) {
+      nlohmann::json jbone;
+      jbone["Position"] = std::vector<float>{ bone.position[0],bone.position[1],bone.position[2] };
+      jbone["Rotation"] = std::vector<float>{ bone.rotation[0],bone.rotation[1],bone.rotation[2],bone.rotation[3] };
+      jbone["Name"] = bone.name;
+      bones.push_back(jbone);
+    }
+    subresult["Bone"] = bones;
+    anim.push_back(subresult);
+  }
+  result["Animation"] = anim;
+  return result;
 }

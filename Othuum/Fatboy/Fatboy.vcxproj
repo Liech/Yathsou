@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationDebugger.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletDebugDrawer.cpp" />
     <ClCompile Include="BulletPool.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="UnitPool.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationDebugger.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletDebugDrawer.h" />
     <ClInclude Include="BulletPool.h" />

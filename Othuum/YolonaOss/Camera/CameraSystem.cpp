@@ -3,6 +3,8 @@
 #include "../OpenGL/DrawSpecification.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include "Camera.h"
+#include "../OpenGL/Keys.h"
+#include "../OpenGL/Window.h"
 
 namespace YolonaOss {
   namespace Camera {
@@ -22,7 +24,8 @@ namespace YolonaOss {
 
     void CameraSystem::update()
     {
-      _currentCam->update();
+      if (_currentCam)
+        _currentCam->update();
     }
 
     std::vector<std::string> CameraSystem::getAvailableCams() {
@@ -37,6 +40,12 @@ namespace YolonaOss {
     }
 
     void CameraSystem::setCurrentCam(std::string name) {
+      if (name == "None") {
+        _currentCam = nullptr;
+        _currentCamName = "None";
+        _spec->getWindow()->setCursorStatus(GL::CursorStatus::NORMAL);
+        return;
+      }
       if (!_availableCams.count(name))
         throw std::runtime_error("cam not found");
       _currentCam = _availableCams[name];

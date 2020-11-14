@@ -3,6 +3,7 @@
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include "YolonaOss/OpenGL/Window.h"
 #include "Fatboy.h"
+#include "AnimationDebugger.h"
 #include "GameConfiguration.h"
 #include "IyathuumCoreLib/Util/UpdateTimer.h"
 #include "HaasScriptingLib/ScriptEngine.h"
@@ -19,7 +20,8 @@ int main(int argc, char** argv) {
   int width  = Fatboy::GameConfiguration::instance().ScreenWidth;
   int height = Fatboy::GameConfiguration::instance().ScreenHeight;
   YolonaOss::GL::Window w(width, height);
-  Fatboy::Fatboy game;
+  //Fatboy::Fatboy game;
+  Fatboy::AnimationDebugger game;
   bool init = false;
 
   Iyathuum::UpdateTimer updater([&game]() {

@@ -123,9 +123,17 @@ namespace Fatboy
 
   void Fatboy::loadSupComModel()
   {
-    std::string folder = "E:\\scmunpacked\\units\\UAL0401";
-    std::string a1 = "UAL0401_lod0.scm";
-    std::string texture = "UAL0401_Albedo.dds";
+    //gc: UAL0401 walk
+    //megalith: XRL0403 walk01
+    //monkeylord: URL0402 walk
+    //chicken: XSL0401 walk
+    //brick XRL0305  walk
+    //cyt1 URL0106 walk01
+    _animName = "walk01";
+    std::string unitName = "URL0106";
+    std::string folder = "E:\\scmunpacked\\units\\"+ unitName;
+    std::string a1 = unitName+"_lod0.scm";
+    std::string texture = unitName+"_Albedo.dds";
     std::string mapdds = "C:\\Users\\Niki\\Documents\\My Games\\Gas Powered Games\\Supreme Commander Forged Alliance\\Maps\\Setons 10x10\\setons 10x10.dds";
     SCM imp;
     _modl = std::make_shared<SupComModel>(folder);
@@ -172,18 +180,23 @@ namespace Fatboy
     YolonaOss::BoxRenderer::end();
   }
 
-  void recurseDrawBoneGraph(const std::map<int, std::vector<int>>& graph,const std::vector<SCM::bone>& bones, glm::vec3 nodePos, int index, float scale)
+  void recurseDrawBoneGraph(bool useanim, glm::mat4 parentMat, const std::map<int, std::vector<int>>& graph,const std::vector<SCM::bone>& bones, glm::vec3 nodePos, int index, float scale, std::vector<glm::mat4> animation)
   {
+    glm::vec4 red = glm::vec4(1, 0, 0, 1);
+    glm::vec4 blue = glm::vec4(0, 0, 1, 1);
     if (index != -1)
     {
-      YolonaOss::BoxRenderer::drawDot(nodePos, glm::vec3(1, 1, 1) * scale, glm::vec4(0, 1, 1, 1));
+      YolonaOss::BoxRenderer::drawDot(nodePos, glm::vec3(1, 1, 1) * scale, useanim?red:blue);
     }
     if (graph.count(index) == 0)
       return;
     for (const int child : graph.at(index)) {
+      glm::vec3 newPos = nodePos + (bones[child].position) * scale;
+      if (useanim)
+        newPos = nodePos + glm::vec3(animation[child] * glm::vec4(bones[child].position, 1)) * scale;
       if (index != -1)
-        YolonaOss::BoxRenderer::drawLine(nodePos, bones[child].position*scale + nodePos, 0.1f * scale, glm::vec4(1, 1, 0, 1)*scale);
-      recurseDrawBoneGraph(graph, bones, nodePos + bones[child].position*scale, child,0.1f);
+        YolonaOss::BoxRenderer::drawLine(nodePos, newPos, 0.1f * scale, useanim ? red : blue);
+      recurseDrawBoneGraph(useanim,parentMat,graph, bones, newPos, child,scale,animation);
     }
   }
 
@@ -191,6 +204,13 @@ namespace Fatboy
   {
     _preDrawables->draw();
 
+    std::vector<glm::mat4> animation;
+    animation.resize(32);
+    for (int i = 0; i < 32; i++)
+      animation[i] = glm::mat4(1.0);
+    //animation[1] = _modl->toAnimation(_boneRot,1);
+
+    _modl->animate(_animName, _animationTime, animation);
 
     YolonaOss::BoxRenderer::start();
 
@@ -204,36 +224,33 @@ namespace Fatboy
         bonegraph[parent].push_back(me);
     }
     float scale = 0.1f;
-    recurseDrawBoneGraph(bonegraph, _modl->_model->bones, glm::vec3(0, 0, 0), -1, scale);   
+    recurseDrawBoneGraph(false, glm::mat4(1.0), bonegraph, _modl->_model->bones, glm::vec3(0, 0, 0), -1, scale, animation);
+    recurseDrawBoneGraph(true, glm::mat4(1.0), bonegraph, _modl->_model->bones, glm::vec3(0, 0, 0), -1, scale, animation);
 
     YolonaOss::BoxRenderer::end();
 
-    if (_mesh)
-    {
-      //YolonaOss::MeshRenderer::start();
-      //YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 0, 0, 1));
-      //YolonaOss::MeshRenderer::end();
-      YolonaOss::SupComModelRenderer::start();
-      std::vector<glm::mat4> animation;
-      animation.resize(32);
-      for (int i = 0; i < 32; i++)
-        animation[i] = glm::mat4(1.0);
-      //animation[1] = _modl->toAnimation(_boneRot,1);
-
-      _modl->animate("walk", _animationTime, animation);
-      _animationTime += 0.01f;
-      YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::translate(glm::mat4(1.0),glm::vec3(0,0,-30) * scale), glm::vec3(scale, scale, scale)),animation);
-      YolonaOss::SupComModelRenderer::end();
-      //YolonaOss::TextureRenderer::start();
-      //YolonaOss::TextureRenderer::drawTexture(&(*(_modl->_albedo)), glm::scale(glm::mat4(1.0),glm::vec3(40, 40, 40)));
-      //YolonaOss::TextureRenderer::end();
-    }
+    //YolonaOss::MeshRenderer::start();
+    //YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 0, 0, 1));
+    //YolonaOss::MeshRenderer::end();
+    YolonaOss::SupComModelRenderer::start();
+    //_animationTime += 0.001f;
+    YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::translate(glm::mat4(1.0),glm::vec3(0,0,-30) * scale), glm::vec3(scale, scale, scale)),animation);
+    YolonaOss::SupComModelRenderer::end();
+    YolonaOss::BoxRenderer::start();
+    float h = std::fmod(_animationTime, _modl->_animations[_animName]->duration) / _modl->_animations[_animName]->duration;
+    YolonaOss::BoxRenderer::drawBox(glm::vec3(3, 0, 3), glm::vec3(1, 2 * h, 1), glm::vec4(0.2f, 0.2f, 0.2f, 1));
+    YolonaOss::BoxRenderer::drawBox(glm::vec3(3, 2, 3), glm::vec3(1, -2 * (1-h), 1), glm::vec4(1, 1, 1, 1));
+    YolonaOss::BoxRenderer::end();
+     
+    //YolonaOss::TextureRenderer::start();
+    //YolonaOss::TextureRenderer::drawTexture(&(*(_modl->_albedo)), glm::scale(glm::mat4(1.0),glm::vec3(40, 40, 40)));
+    //YolonaOss::TextureRenderer::end();
 
     //if (!_drawDebug)
     //  drawLandscape();
     //_context->bullets()->draw();
     //_context->units  ()->draw();
-    //_postDrawables->draw();
+    _postDrawables->draw();
     //if (_drawDebug)
     //{
     //  YolonaOss::BoxRenderer::start();
