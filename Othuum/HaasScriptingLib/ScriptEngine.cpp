@@ -158,7 +158,11 @@ namespace Haas
         result = popStr(-1);
       }
       else if (lua_isnumber(_state, -1)) {
-        result= lua_tonumber(_state, -1);
+        float number = lua_tonumber(_state, -1);
+        if (number == (int)number)
+          result = (int)number;
+        else
+          result = number;
       }
       else if (lua_isboolean(_state, -1)) {
         result = lua_toboolean(_state, -1);
@@ -168,22 +172,40 @@ namespace Haas
       return;
     }
 
+    auto assign = [this](nlohmann::json& target, nlohmann::json value) {
+      
+      if (lua_isnumber(_state, -2)) {
+        float nr = lua_tonumber(_state, -2);
+        if (nr == (int)nr)
+          target[(int)nr] = value;
+        else
+          target[nr] = value;
+      }
+      else if (lua_isstring(_state, -2)) {
+        target[lua_tostring(_state, -2)] = value;
+      }
+    };
+
     lua_pushnil(_state);  /* first key */
     int amount = 0;
     while (lua_next(_state, -2) != 0) {
-      if (lua_isstring(_state, -1)) {
-        result[popStr(-2)] = popStr(-1);
-      }
-      else if (lua_isnumber(_state, -1)) {
-        result[popStr(-2)] = lua_tonumber(_state, -1);
+      if (lua_isnumber(_state, -1)) {
+        float number = lua_tonumber(_state, -1);
+        if (number == (int)number)
+          assign(result, (int)number);
+        else
+          assign(result, number);
       }
       else if (lua_isboolean(_state, -1)) {
-        result[popStr(-2)] = lua_toboolean(_state, -1);
+        assign(result, lua_toboolean(_state, -1));
+      }
+      else if (lua_isstring(_state, -1)) {
+        assign(result, popStr(-1));
       }
       else if (lua_istable(_state, -1)) {
         nlohmann::json sub;
         toJson(sub);
-        result[popStr(-2)] = sub;
+        assign(result, sub);
       }
       else
         throw std::runtime_error("Unkown Type");

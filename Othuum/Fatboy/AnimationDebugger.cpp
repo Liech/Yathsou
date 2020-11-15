@@ -1,5 +1,7 @@
 #include "AnimationDebugger.h"
 
+#include <iostream>
+
 #include "YolonaOss/Drawables/FPS.h"
 #include "YolonaOss/Drawables/Background.h"
 #include "YolonaOss/Drawables/Ground.h"
@@ -16,6 +18,9 @@
 #include "YolonaOss/Renderer/SupComModelRenderer.h"
 #include "SupComModel.h"
 #include "YolonaOss/OpenGL/SupComVertex.h"
+#include "HaasScriptingLib/ScriptEngine.h"
+#include "YolonaOss/Drawables/Widgets/Button.h"
+#include "YolonaOss/Drawables/Widgets/ListLayout.h"
 
 namespace Fatboy{
   AnimationDebugger::AnimationDebugger() {
@@ -34,15 +39,30 @@ namespace Fatboy{
     _cam->load(spec);
     _cam->setCurrentCam("None");
 
-    std::string _animName = "walk01";
-    std::string unitName = "URL0106";
-    std::string folder = "E:\\scmunpacked\\units\\" + unitName;
-    std::string a1 = unitName + "_lod0.scm";
-    std::string texture = unitName + "_Albedo.dds";
+    loadMenu();
+    loadModel();
+    loadScript();
+  }
+
+  void AnimationDebugger::draw() {
+    _layout->adjustSize();
+    _preDrawables->draw();
+    _postDrawables->draw();
+    drawModel();
+  }
+
+  void AnimationDebugger::loadScript()  {
+    _script = std::make_shared<Haas::ScriptEngine>();
+    _script->executeFile("AnimationTest.lua");
+  }
+
+  void AnimationDebugger::loadModel() {
+    std::string folder = "E:\\scmunpacked\\units\\" + _unitName;
+    std::string a1 = _unitName + "_lod0.scm";
+    std::string texture = _unitName + "_Albedo.dds";
     std::string mapdds = "C:\\Users\\Niki\\Documents\\My Games\\Gas Powered Games\\Supreme Commander Forged Alliance\\Maps\\Setons 10x10\\setons 10x10.dds";
     SCM imp;
     _modl = std::make_shared<SupComModel>(folder);
-
 
     std::vector<YolonaOss::GL::SupComVertex> verticesT;
     std::vector<int>                                 indices;
@@ -73,10 +93,37 @@ namespace Fatboy{
     _scMesh->setNormal(_modl->_normal);
   }
 
-  void AnimationDebugger::draw() {
-    _preDrawables->draw();
-    _postDrawables->draw();
-    drawModel();
+  void AnimationDebugger::loadMenu(){
+    std::shared_ptr<YolonaOss::Widgets::Button> scout = std::make_shared<YolonaOss::Widgets::Button>("Scout", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+      _animName = "walk01";
+      _unitName = "URL0106";
+      loadModel();
+      });
+    std::shared_ptr<YolonaOss::Widgets::Button> gc = std::make_shared<YolonaOss::Widgets::Button>("GC", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+      _animName = "walk";
+      _unitName = "UAL0401";
+      loadModel();
+      });
+    std::shared_ptr<YolonaOss::Widgets::Button> spiderlord = std::make_shared<YolonaOss::Widgets::Button>("Monkeylord", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+      _animName = "walk";
+      _unitName = "URL0402";
+      loadModel();
+      });
+    std::shared_ptr<YolonaOss::Widgets::Button> brick = std::make_shared<YolonaOss::Widgets::Button>("Brick", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+      _animName = "walk";
+      _unitName = "XRL0305";
+      loadModel();
+      });
+    std::shared_ptr<YolonaOss::Widgets::Button> reload = std::make_shared<YolonaOss::Widgets::Button>("Reload", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+      loadScript();
+      });
+    _layout = std::make_shared<YolonaOss::Widgets::ListLayout>(Iyathuum::AABB<2>({ 0, 0 }, { 700, 900 }));
+    _layout->addWidget(scout);
+    _layout->addWidget(gc);
+    _layout->addWidget(spiderlord);
+    _layout->addWidget(brick);
+    _layout->addWidget(reload);
+    _postDrawables->addDrawable(_layout);
   }
 
   void AnimationDebugger::drawModel()  {
@@ -88,6 +135,25 @@ namespace Fatboy{
     for (int i = 0; i < 32; i++)
       animation[i] = glm::mat4(1.0);
 
+    nlohmann::json input = nlohmann::json::array();
+    for (glm::mat4 g : animation) {
+      nlohmann::json arr = nlohmann::json::array();
+      for (int i = 0; i < 16; i++) {
+        float ig = glm::value_ptr(g)[i];
+        arr.push_back(ig);
+      }
+      input.push_back(arr);
+    }
+    //std::cout << input.dump(4);
+    nlohmann::json out = _script->callScript("anim", input);
+    //std::cout << out.dump(4);
+    for (int i = 0; i < 32; i++) {
+      for (int j = 0; j < 16;j++)
+        glm::value_ptr(animation[i])[j] = out[i][j];
+    }
+
+    
+      
     YolonaOss::SupComModelRenderer::start();
     //_animationTime += 0.001f;
     YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, 10, 0) * scale), glm::vec3(scale, scale, scale)), animation);
