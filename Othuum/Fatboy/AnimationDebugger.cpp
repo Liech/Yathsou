@@ -54,6 +54,9 @@ namespace Fatboy{
   void AnimationDebugger::loadScript()  {
     _script = std::make_shared<Haas::ScriptEngine>();
     _script->executeFile("AnimationTest.lua");
+
+    _script->setVar("Animation", _modl->_animations[_animName]->toJson());
+    _script->setVar("Model", _modl->_model->toJson());
   }
 
   void AnimationDebugger::loadModel() {
@@ -146,7 +149,7 @@ namespace Fatboy{
     }
     //std::cout << input.dump(4);
     nlohmann::json input;
-    input["Animation"] = jAnim;
+    input["Mats"] = jAnim;
     input["Scale"] = scale;
 
     nlohmann::json out = _script->callScript("anim", input);

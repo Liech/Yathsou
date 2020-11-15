@@ -283,23 +283,15 @@ namespace Haas
   }
 
   void ScriptEngine::setVar(const std::string& name, const nlohmann::json& value) {
-    std::cout << "t1" << std::endl;
-    dumpStack();
-    std::cout << "ASD" << value.dump(4) << std::endl;
-    std::cout << "t2" << std::endl;
-    dumpStack();
     toTable(value);
-    printTop();
     lua_setglobal(_state, name.c_str());
   }
 
   nlohmann::json ScriptEngine::getVar(const std::string& name)
   {
     lua_getglobal(_state, name.c_str());
-    printTop(0);
     nlohmann::json result;
     toJson(result);
-    dumpStack();
     lua_pop(_state, 1);
     return result;
   }

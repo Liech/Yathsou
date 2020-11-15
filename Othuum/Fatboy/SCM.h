@@ -7,6 +7,7 @@
 #include "IyathuumCoreLib/lib/glm/vec3.hpp"
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
+#include "VishalaNetworkLib/lib/json.hpp"
 
 //based on
 //https://github.com/Oygron/SupCom_Import_Export_Blender/blob/master/supcom-importer.py
@@ -23,11 +24,11 @@ public:
   SCM::data load(std::string filename);
   
   struct bone {
-    std::string   name;
+    std::string   name                 ;
     glm::mat4     relativeInverseMatrix;
-    glm::vec3     position;
-    glm::quat     rotation;
-    int           parentIndex;
+    glm::vec3     position             ;
+    glm::quat     rotation             ;
+    int           parentIndex          ;
   };
 
   struct vertex {
@@ -54,6 +55,9 @@ public:
     std::vector<vertex>       vertecies;
     std::vector<tri>          indices  ;
     std::vector<std::string>  info     ;
+
+    nlohmann::json toJson();
+    void fromJson(const nlohmann::json&);
   };
 
 private:
