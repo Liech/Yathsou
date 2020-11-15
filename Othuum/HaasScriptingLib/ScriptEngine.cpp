@@ -13,20 +13,31 @@ namespace Haas
   {
     _state = luaL_newstate();
     luaL_openlibs(_state);
+
+    //https://stackoverflow.com/questions/4551101/lual-openlibs-and-sandboxing-scripts
+    //luaL_requiref(_state, "_G", luaopen_base, 1);
+    //lua_pop(_state, 1);
+
   }
 
   ScriptEngine::~ScriptEngine()
   {
     lua_close(_state);
   }
-
+  
   void ScriptEngine::executeFile(const std::string& filename)
   {
-    if (luaL_loadfile(_state, filename.c_str()) == 0) {
-      lua_pcall(_state, 0, LUA_MULTRET, 0);
+    if (luaL_loadfile(_state, filename.c_str()) == LUA_OK) {
+      int returnCode = lua_pcall(_state, 0, LUA_MULTRET, 0);
+      if (returnCode != LUA_OK) {
+        std::cout << lua_tostring(_state, -1) << std::endl;
+        throw std::runtime_error("Error in call");
+      }
     }
-    else
+    else {
+      std::cout << lua_tostring(_state, -1)<<std::endl;
       throw std::runtime_error("File not found");
+    }
   }
 
   void ScriptEngine::registerFunction(const std::string& name, std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> call)
@@ -50,7 +61,9 @@ namespace Haas
     nlohmann::json result;
     lua_getglobal(_state, name.c_str());
     toTable(input);
-    lua_call(_state, 1,1);
+    int returnCode = lua_pcall(_state, 1,1,0);
+    if (returnCode != LUA_OK)
+      std::cout << lua_tostring(_state, -1) << std::endl;
     toJson(result);
     lua_pop(_state, 1);
     return result;
@@ -177,7 +190,7 @@ namespace Haas
       if (lua_isnumber(_state, -2)) {
         float nr = lua_tonumber(_state, -2);
         if (nr == (int)nr)
-          target[(int)nr] = value;
+          target[((int)nr)-1] = value; //array assignment
         else
           target[nr] = value;
       }
@@ -245,7 +258,7 @@ namespace Haas
     else if (value.type_name() == "array")
     {
       lua_newtable(_state);
-      int count = 0;
+      int count = 1;
       for (auto item : value.items())
       {
         nlohmann::json value = item.value();

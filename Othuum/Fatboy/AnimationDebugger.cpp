@@ -135,16 +135,20 @@ namespace Fatboy{
     for (int i = 0; i < 32; i++)
       animation[i] = glm::mat4(1.0);
 
-    nlohmann::json input = nlohmann::json::array();
+    nlohmann::json jAnim = nlohmann::json::array();
     for (glm::mat4 g : animation) {
       nlohmann::json arr = nlohmann::json::array();
       for (int i = 0; i < 16; i++) {
         float ig = glm::value_ptr(g)[i];
         arr.push_back(ig);
       }
-      input.push_back(arr);
+      jAnim.push_back(arr);
     }
     //std::cout << input.dump(4);
+    nlohmann::json input;
+    input["Animation"] = jAnim;
+    input["Scale"] = scale;
+
     nlohmann::json out = _script->callScript("anim", input);
     //std::cout << out.dump(4);
     for (int i = 0; i < 32; i++) {

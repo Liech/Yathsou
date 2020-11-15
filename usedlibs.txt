@@ -12,3 +12,5 @@ portaudio                      |ahwassa     | play sound
 nyquistaudio                   |ahwassa     | load wav/mp3
 bullet                         |suthanu     | physics
 lua                            |haas        | scripting
+lua-matrix                     |haas        | matrix operations in scripting
+kikito/inspect.lua             |haas        | debug inside lua
