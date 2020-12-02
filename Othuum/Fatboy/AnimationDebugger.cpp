@@ -16,19 +16,26 @@
 #include "YolonaOss/OpenGL/Window.h"
 
 #include "YolonaOss/Renderer/SupComModelRenderer.h"
+#include "YolonaOss/Renderer/BoxRenderer.h"
+
 #include "SupComModel.h"
 #include "YolonaOss/OpenGL/SupComVertex.h"
 #include "HaasScriptingLib/ScriptEngine.h"
 #include "YolonaOss/Drawables/Widgets/Button.h"
 #include "YolonaOss/Drawables/Widgets/ListLayout.h"
+#include "IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp"
+#include <IyathuumCoreLib/lib/glm/gtx/quaternion.hpp>
+#include <IyathuumCoreLib/lib/glm/gtx/euler_angles.hpp>
 
 namespace Fatboy{
   AnimationDebugger::AnimationDebugger() {
+    _animName = "walk01";
+    _unitName = "URL0106";
     _preDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _preDrawables->addDrawable(std::make_shared<YolonaOss::Background>());
     _postDrawables->addDrawable(std::make_shared<YolonaOss::FPS>());
-    _preDrawables->addDrawable(std::make_shared<YolonaOss::Ground>());
+    //_preDrawables->addDrawable(std::make_shared<YolonaOss::Ground>());
     _cam = std::make_shared<YolonaOss::Camera::CameraSystem>();
   }
 
@@ -42,6 +49,7 @@ namespace Fatboy{
     loadMenu();
     loadModel();
     loadScript();
+
   }
 
   void AnimationDebugger::draw() {
@@ -53,13 +61,21 @@ namespace Fatboy{
 
   void AnimationDebugger::loadScript()  {
     _script = std::make_shared<Haas::ScriptEngine>();
-    _script->executeFile("AnimationTest.lua");
+    try
+    {
+      _script->executeFile("AnimationTest.lua");
 
-    _script->setVar("Animation", _modl->_animations[_animName]->toJson());
-    _script->setVar("Model", _modl->_model->toJson());
+      _script->setVar("SCAAnimation", _modl->_animations[_animName]->toJson());
+      _script->setVar("Model", _modl->_model->toJson());
+    }
+    catch (...)
+    {
+      std::cout << "ERROR WHILE FILE EXEC" << std::endl;
+    }
   }
 
   void AnimationDebugger::loadModel() {
+
     std::string folder = "E:\\scmunpacked\\units\\" + _unitName;
     std::string a1 = _unitName + "_lod0.scm";
     std::string texture = _unitName + "_Albedo.dds";
@@ -108,7 +124,7 @@ namespace Fatboy{
       loadModel();
       });
     std::shared_ptr<YolonaOss::Widgets::Button> spiderlord = std::make_shared<YolonaOss::Widgets::Button>("Monkeylord", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
-      _animName = "walk";
+      _animName = "001";
       _unitName = "URL0402";
       loadModel();
       });
@@ -117,6 +133,13 @@ namespace Fatboy{
       _unitName = "XRL0305";
       loadModel();
       });
+    std::shared_ptr<YolonaOss::Widgets::Button> mole = std::make_shared<YolonaOss::Widgets::Button>("Mole", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+      _animName = "walk";
+      _unitName = "URL0101";
+      loadModel();
+      });
+
+    
     std::shared_ptr<YolonaOss::Widgets::Button> reload = std::make_shared<YolonaOss::Widgets::Button>("Reload", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
       loadScript();
       });
@@ -125,46 +148,91 @@ namespace Fatboy{
     _layout->addWidget(gc);
     _layout->addWidget(spiderlord);
     _layout->addWidget(brick);
+    _layout->addWidget(mole);
     _layout->addWidget(reload);
     _postDrawables->addDrawable(_layout);
   }
 
   void AnimationDebugger::drawModel()  {
 
-    float scale = 0.1f;
-
-    std::vector<glm::mat4> animation;
-    animation.resize(32);
-    for (int i = 0; i < 32; i++)
-      animation[i] = glm::mat4(1.0);
-
-    nlohmann::json jAnim = nlohmann::json::array();
-    for (glm::mat4 g : animation) {
-      nlohmann::json arr = nlohmann::json::array();
-      for (int i = 0; i < 16; i++) {
-        float ig = glm::value_ptr(g)[i];
-        arr.push_back(ig);
-      }
-      jAnim.push_back(arr);
-    }
-    //std::cout << input.dump(4);
-    nlohmann::json input;
-    input["Mats"] = jAnim;
-    input["Scale"] = scale;
-
-    nlohmann::json out = _script->callScript("anim", input);
-    //std::cout << out.dump(4);
-    for (int i = 0; i < 32; i++) {
-      for (int j = 0; j < 16;j++)
-        glm::value_ptr(animation[i])[j] = out[i][j];
-    }
-
-    
-      
-    YolonaOss::SupComModelRenderer::start();
-    //_animationTime += 0.001f;
-    YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::translate(glm::mat4(1.0), glm::vec3(0, 10, 0) * scale), glm::vec3(scale, scale, scale)), animation);
-    YolonaOss::SupComModelRenderer::end();
+    //float scale = 1;
+    //
+    //std::vector<glm::mat4> animation;
+    //animation.resize(32);
+    //for (int i = 0; i < 32; i++)
+    //  animation[i] = glm::mat4(1.0);
+    //
+    //nlohmann::json jAnim = nlohmann::json::array();
+    //for (glm::mat4 g : animation) {
+    //  nlohmann::json arr = nlohmann::json::array();
+    //  for (int i = 0; i < 16; i++) {
+    //    float ig = glm::value_ptr(g)[i];
+    //    arr.push_back(ig);
+    //  }
+    //  jAnim.push_back(arr);
+    //}
+    ////std::cout << input.dump(4);
+    //nlohmann::json input;
+    //input["Mats"]      = jAnim;
+    //input["Scale"]     = scale;
+    //
+    //struct local_dot {
+    //  float     size ;
+    //  glm::vec4 color;
+    //  glm::vec3 pos  ;
+    //};
+    //struct local_line {
+    //  float     size ;
+    //  glm::vec4 color;
+    //  glm::vec3 start;
+    //  glm::vec3 end  ;
+    //};
+    //
+    //std::vector<local_dot > dots;
+    //std::vector<local_line> lines;
+    //try {
+    //  nlohmann::json out = _script->callScript("anim", input);
+    //  //std::cout << out.dump(4);
+    //  for (int i = 0; i < 32; i++) {
+    //    for (int j = 0; j < 16; j++)
+    //      glm::value_ptr(animation[i])[j] = out["anim"][i][j];
+    //  }
+    //  for (auto sub : out["Dots"]) {
+    //    local_dot d;
+    //    d.pos = glm::vec3(sub["Pos"][0], sub["Pos"][1], sub["Pos"][2]);
+    //    d.color = glm::vec4(sub["Color"][0], sub["Color"][1], sub["Color"][2], sub["Color"][3]);
+    //    d.size  = sub["Size"];
+    //    dots.push_back(d);
+    //  }
+    //  for (auto sub : out["Lines"]) {
+    //    local_line d;
+    //    d.start = glm::vec3(sub["Start"][0], sub["Start"][1], sub["Start"][2]);
+    //    d.end   = glm::vec3(sub["End"][0], sub["End"][1], sub["End"][2]);
+    //    d.color = glm::vec4(sub["Color"][0], sub["Color"][1], sub["Color"][2], sub["Color"][3]);
+    //    d.size  = sub["Size"];
+    //    lines.push_back(d);
+    //  }
+    //}
+    //catch (...)
+    //{
+    //  std::cout << "ERRROR ON PARSE OUTPUT" << std::endl;
+    //}
+    //
+    //
+    //  
+    //YolonaOss::SupComModelRenderer::start();
+    ////_animationTime += 0.001f;
+    //glm::vec3 renderCenter = glm::vec3(0, 0, 0) * scale;
+    //YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::translate(glm::mat4(1.0), renderCenter ), glm::vec3(scale, scale, scale)), animation);
+    //YolonaOss::SupComModelRenderer::end();
+    //YolonaOss::BoxRenderer::start();
+    //YolonaOss::BoxRenderer::drawDot(renderCenter, glm::vec3(0.1f,0.1f,0.1f), glm::vec4(1, 1, 1, 1));
+    //for (auto d : dots)
+    //  YolonaOss::BoxRenderer::drawDot(d.pos, glm::vec3(d.size, d.size, d.size), d.color);
+    //for (auto d : lines)
+    //  YolonaOss::BoxRenderer::drawLine(d.start,d.end, d.size, d.color);
+    //YolonaOss::BoxRenderer::end();
+    renderStuff();
   }
 
 
@@ -184,5 +252,48 @@ namespace Fatboy{
     }
     else if (!isPressed(YolonaOss::GL::Key::KEY_F2)) 
       _keyPressed = false;
+  }
+  
+  glm::mat4 QuatToMat(glm::quat input)
+  {
+    glm::vec3 euler = glm::eulerAngles(input) * 3.14159f / 180.f;
+
+    glm::mat4 transformX = glm::eulerAngleX(euler.x);
+    glm::mat4 transformY = glm::eulerAngleY(euler.y);
+    glm::mat4 transformZ = glm::eulerAngleZ(euler.z);
+
+    return transformX * transformY * transformZ; // or some other order
+  }
+
+  float animtime = 0;
+  void AnimationDebugger::renderStuff()
+  {
+    animtime += 0.001f;
+    animtime = std::fmod(animtime, _modl->_animations[_animName]->duration);
+    YolonaOss::BoxRenderer::start();
+    std::vector<glm::mat4> cummulativePos;
+    int numberOfFrames = _modl->_animations[_animName]->animation.size()-1;
+    int frameID = std::floor((animtime * numberOfFrames) / _modl->_animations[_animName]->duration)+1;
+    auto frame = _modl->_animations[_animName]->animation[frameID];
+    
+    int amountOfBones = _modl->_model->bones.size();
+    cummulativePos.resize(amountOfBones);
+    for (int i = 0; i < amountOfBones; i++){
+      SCM::bone b = _modl->_model->bones[i];
+      //cummulativePos[i] = glm::translate(glm::mat4(1.0),b.position);
+      glm::mat4 rot = QuatToMat(frame.bones[i].rotation);
+      cummulativePos[i] = glm::translate(glm::mat4(1.0), frame.bones[i].position)*rot;
+      if (b.parentIndex != -1) {
+        cummulativePos[i] = cummulativePos[b.parentIndex]*cummulativePos[i];
+        YolonaOss::BoxRenderer::drawLine(cummulativePos[i]*glm::vec4(0,0,0,1), cummulativePos[b.parentIndex] * glm::vec4(0, 0, 0, 1), 0.1f, glm::vec4(1, 0, 0, 1));
+      }
+      YolonaOss::BoxRenderer::drawDot(cummulativePos[i] * glm::vec4(0, 0, 0, 1), glm::vec3(0.1f, 0.1f, 0.1f), glm::vec4(1, 0, 0, 1));
+    }
+    YolonaOss::BoxRenderer::end();
+
+    cummulativePos.resize(32);
+    YolonaOss::SupComModelRenderer::start();
+    YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::mat4(1.0), cummulativePos);
+    YolonaOss::SupComModelRenderer::end();
   }
 }

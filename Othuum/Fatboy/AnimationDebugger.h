@@ -43,6 +43,7 @@ namespace Fatboy{
     void loadScript();
 
     void drawModel();
+    void renderStuff();
 
     std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables;
     std::shared_ptr<YolonaOss::GL::DrawableList>     _postDrawables;
@@ -55,8 +56,8 @@ namespace Fatboy{
     YolonaOss::SupComGLMesh* _scMesh;
     std::shared_ptr<Haas::ScriptEngine> _script;
     
-    std::string _animName = "walk01";
-    std::string _unitName = "URL0106";
+    std::string _animName;
+    std::string _unitName;
 
     bool _keyPressed = false;
   };

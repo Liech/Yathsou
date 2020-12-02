@@ -23,7 +23,7 @@ namespace Haas
   private:
     void dumpStack();
     void printTop(int indentation = 0);
-    void dumpGlobalVariables();
+    void dumpGlobalVariables(bool fullPrint);
 
     void        toTable(const nlohmann::json& json);//debug
     void        toJson (nlohmann::json& json);      //debug

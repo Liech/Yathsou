@@ -62,8 +62,11 @@ namespace Haas
     lua_getglobal(_state, name.c_str());
     toTable(input);
     int returnCode = lua_pcall(_state, 1,1,0);
-    if (returnCode != LUA_OK)
+    if (returnCode != LUA_OK) {
+      //dumpGlobalVariables(true);
       std::cout << lua_tostring(_state, -1) << std::endl;
+      throw std::runtime_error("script call error");
+    }
     toJson(result);
     lua_pop(_state, 1);
     return result;
@@ -97,12 +100,14 @@ namespace Haas
     }
   }
 
-  void ScriptEngine::dumpGlobalVariables()
+  void ScriptEngine::dumpGlobalVariables(bool fullPrint)
   {
     lua_pushglobaltable(_state);       // Get global table
     lua_pushnil(_state);               // put a nil key on stack
     while (lua_next(_state, -2) != 0) { // key(-1) is replaced by the next key(-1) in table(-2)
       std::cout<<lua_tostring(_state, -2)<<std::endl;  // Get key(-2) name
+      if (fullPrint)
+        printTop(1);
       lua_pop(_state, 1);               // remove value(-1), now key on top at(-1)
     }
     lua_pop(_state, 1);                 // remove global table(-1)

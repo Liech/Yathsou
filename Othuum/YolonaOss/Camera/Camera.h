@@ -35,7 +35,7 @@ namespace YolonaOss {
       glm::vec3 viewToWorldCoordTransform(int mouse_x, int mouse_y);
 
       float getNearPlane() { return 0.1f; }
-      float getFarPlane() { return 1000.0f; }
+      float getFarPlane() { return 2000.0f; }
 
       void fromCamera(YolonaOss::Camera::Camera* cam);
     private:
