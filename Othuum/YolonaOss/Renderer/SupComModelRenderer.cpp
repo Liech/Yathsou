@@ -76,7 +76,7 @@ namespace YolonaOss
         nrm = normal;
         UV1 = uv1;
         UV2 = uv2;
-        boneMarker = vec4(mod((bones * 6662177),100)/100.0,mod((bones * 7804957 ),100)/100.0,mod((bones * 9999943),100)/100.0,0);//vec4(0,0,0,0);//
+                boneMarker = vec4(mod((bones * 6662177),100)/100.0,mod((bones * 7804957 ),100)/100.0,mod((bones * 9999943),100)/100.0,0);//vec4(0,0,0,0);//
       }
    )";
 
@@ -95,8 +95,8 @@ namespace YolonaOss
      in vec3 nrm;
      in vec2 UV1;
      in vec2 UV2;
-     in vec4 boneMarker;
-     
+     in vec4 boneMarker;     
+
      out vec4 frag_color;
      void main() {
        float ambientStrength = 0.5;  
@@ -112,7 +112,9 @@ namespace YolonaOss
        float showTeamClr= info[3];
        
        //team;//albedo * diff + albedo * ambientStrength + team +
-       vec4 result = albedo + showTeamClr * (clr - albedo) + boneMarker;
+       vec4 result = albedo + showTeamClr * (clr - albedo);
+       if (debugRender > 0.5)
+         result = result + boneMarker;
        //result[3] = 1;
      	 frag_color = result;
      }
@@ -127,6 +129,8 @@ namespace YolonaOss
     uniforms.push_back(_light.get());
     _mat = std::make_unique<GL::UniformMat4>("model");
     uniforms.push_back(_mat.get());
+    _debugRender = std::make_unique<GL::UniformFloat>("debugRender");
+    uniforms.push_back(_debugRender.get());
     _color = std::make_unique<GL::UniformVec4>("clr");
     uniforms.push_back(_color.get());
     _animation = std::make_unique<GL::UniformVecMat4>("animation", maxBoneNumber);
@@ -164,6 +168,7 @@ namespace YolonaOss
     _camera->bind();
     _color->setValue(glm::vec4(0, 1, 0, 1));
     _mat->setValue(transformation);
+    _debugRender->setValue(debugRender ? 1 : 0);
     mesh.draw();
   }
 

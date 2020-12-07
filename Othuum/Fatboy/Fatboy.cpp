@@ -49,7 +49,6 @@ namespace Fatboy
     _protagonist = std::make_shared<Protagonist>(_context,&_drawDebug, _cam);
     //initEnemys();
     _context->physic()->setDebugDrawer(new BulletDebugDrawer());
-
   }
 
   void Fatboy::initPhysic()
@@ -58,7 +57,7 @@ namespace Fatboy
     _landscape = _context->physic()->newBox(glm::vec3(0, 0, 0), glm::vec3(20, 0, 20), false);
     _physicAPI = std::make_shared<ScriptAPI>(_context->physic().get());
     _physicAPI->registerAPI(_context->script().get());
-    //_land = _context->physic()->newHeightMap(glm::vec3(0, 2, 0));
+    _land = _context->physic()->newHeightMap(glm::vec3(0, 2, 0));
   }
 
   void Fatboy::initEnemys()
@@ -89,8 +88,6 @@ namespace Fatboy
     _cam->update();
     _protagonist->update();
     _context->physic()->update();
-
-    _boneRot = glm::rotate(_boneRot, 0.01f, glm::vec3(1, 0, 0));
   }
 
   void Fatboy::load(YolonaOss::GL::DrawSpecification* spec)
@@ -102,72 +99,12 @@ namespace Fatboy
     _preDrawables->load(spec);
     _postDrawables->load(spec);
 
-    loadSupComModel();
-    //loadLandscapeModel();
+    loadLandscapeModel();
   }
 
   void Fatboy::loadLandscapeModel()
   {
     auto landscapeMesh = _land->getMesh();
-
-    std::vector<YolonaOss::GL::PositionNormalVertex> vertices;
-    std::vector<int>                                 indices;
-    for (int i = 0; i < landscapeMesh.vertecies.size(); i++)
-      vertices.push_back(YolonaOss::GL::PositionNormalVertex(landscapeMesh.vertecies[i], landscapeMesh.normals[i]));
-    for (int i = 0; i < landscapeMesh.indices.size(); i++)
-    {
-      indices.push_back(landscapeMesh.indices[i]);
-    }
-    _mesh = new YolonaOss::Mesh(vertices, indices);
-  }
-
-  void Fatboy::loadSupComModel()
-  {
-    //gc: UAL0401 walk
-    //megalith: XRL0403 walk01
-    //monkeylord: URL0402 walk
-    //chicken: XSL0401 walk
-    //brick XRL0305  walk
-    //cyt1 URL0106 walk01
-    _animName = "walk01";
-    std::string unitName = "URL0106";
-    std::string folder = "E:\\scmunpacked\\units\\"+ unitName;
-    std::string a1 = unitName+"_lod0.scm";
-    std::string texture = unitName+"_Albedo.dds";
-    std::string mapdds = "C:\\Users\\Niki\\Documents\\My Games\\Gas Powered Games\\Supreme Commander Forged Alliance\\Maps\\Setons 10x10\\setons 10x10.dds";
-    SCM imp;
-    _modl = std::make_shared<SupComModel>(folder);
-
-    std::vector<YolonaOss::GL::PositionNormalVertex> vertices;
-    std::vector<YolonaOss::GL::SupComVertex> verticesT;
-    std::vector<int>                                 indices;
-    for (int i = 0; i < _modl->_model->vertecies.size(); i++) {
-      vertices .push_back(YolonaOss::GL::PositionNormalVertex(_modl->_model->vertecies[i].position, _modl->_model->vertecies[i].normal));
-      YolonaOss::GL::SupComVertex v;
-      auto vPre = _modl->_model->vertecies[i];
-      v.position = vPre.position;
-      v.tangent  = vPre.tangent ;
-      v.normal   = vPre.normal  ;
-      v.binormal = vPre.binormal;
-      v.uv1      = vPre.uv1     ;
-      v.uv2      = vPre.uv2     ;
-      v.bones[0] = vPre.boneIndex[0];
-      v.bones[1] = vPre.boneIndex[1];
-      v.bones[2] = vPre.boneIndex[2];
-      v.bones[3] = vPre.boneIndex[3];
-      verticesT.push_back(v);
-    }
-    for (int i = 0; i < _modl->_model->indices.size(); i++)
-    {
-      indices.push_back(_modl->_model->indices[i].a);
-      indices.push_back(_modl->_model->indices[i].b);
-      indices.push_back(_modl->_model->indices[i].c);
-    }
-    _mesh = new YolonaOss::Mesh(vertices, indices);
-    _scMesh = new YolonaOss::SupComGLMesh(verticesT, indices);
-    _scMesh->setAlbedo(_modl->_albedo);
-    _scMesh->setInfo  (_modl->_info);
-    _scMesh->setNormal(_modl->_normal);
   }
 
   void Fatboy::drawLandscape()
@@ -180,82 +117,20 @@ namespace Fatboy
     YolonaOss::BoxRenderer::end();
   }
 
-  void recurseDrawBoneGraph(bool useanim, glm::mat4 parentMat, const std::map<int, std::vector<int>>& graph,const std::vector<SCM::bone>& bones, glm::vec3 nodePos, int index, float scale, std::vector<glm::mat4> animation)
-  {
-    glm::vec4 red = glm::vec4(1, 0, 0, 1);
-    glm::vec4 blue = glm::vec4(0, 0, 1, 1);
-    if (index != -1)
-    {
-      YolonaOss::BoxRenderer::drawDot(nodePos, glm::vec3(1, 1, 1) * scale, useanim?red:blue);
-    }
-    if (graph.count(index) == 0)
-      return;
-    for (const int child : graph.at(index)) {
-      glm::vec3 newPos = nodePos + (bones[child].position) * scale;
-      if (useanim)
-        newPos = nodePos + glm::vec3(animation[child] * glm::vec4(bones[child].position, 1)) * scale;
-      if (index != -1)
-        YolonaOss::BoxRenderer::drawLine(nodePos, newPos, 0.1f * scale, useanim ? red : blue);
-      recurseDrawBoneGraph(useanim,parentMat,graph, bones, newPos, child,scale,animation);
-    }
-  }
-
   void Fatboy::draw()
   {
     _preDrawables->draw();
 
-    std::vector<glm::mat4> animation;
-    animation.resize(32);
-    for (int i = 0; i < 32; i++)
-      animation[i] = glm::mat4(1.0);
-    //animation[1] = _modl->toAnimation(_boneRot,1);
-
-    _modl->animate(_animName, _animationTime, animation);
-
-    YolonaOss::BoxRenderer::start();
-
-    std::map<int, std::vector<int>> bonegraph;
-    for (int i = 0; i < _modl->_model->bones.size();i++) {
-      int me = i;
-      int parent = _modl->_model->bones[i].parentIndex;
-      if (bonegraph.count(parent) == 0)
-        bonegraph[parent] = { me };
-      else
-        bonegraph[parent].push_back(me);
-    }
-    float scale = 0.1f;
-    recurseDrawBoneGraph(false, glm::mat4(1.0), bonegraph, _modl->_model->bones, glm::vec3(0, 0, 0), -1, scale, animation);
-    recurseDrawBoneGraph(true, glm::mat4(1.0), bonegraph, _modl->_model->bones, glm::vec3(0, 0, 0), -1, scale, animation);
-
-    YolonaOss::BoxRenderer::end();
-
-    //YolonaOss::MeshRenderer::start();
-    //YolonaOss::MeshRenderer::draw(*_mesh, glm::scale(glm::mat4(1.0), glm::vec3(0.1f, 0.1f, 0.1f)), glm::vec4(1, 0, 0, 1));
-    //YolonaOss::MeshRenderer::end();
-    YolonaOss::SupComModelRenderer::start();
-    //_animationTime += 0.001f;
-    YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::scale(glm::translate(glm::mat4(1.0),glm::vec3(0,0,-30) * scale), glm::vec3(scale, scale, scale)),animation);
-    YolonaOss::SupComModelRenderer::end();
-    YolonaOss::BoxRenderer::start();
-    float h = std::fmod(_animationTime, _modl->_animations[_animName]->duration) / _modl->_animations[_animName]->duration;
-    YolonaOss::BoxRenderer::drawBox(glm::vec3(3, 0, 3), glm::vec3(1, 2 * h, 1), glm::vec4(0.2f, 0.2f, 0.2f, 1));
-    YolonaOss::BoxRenderer::drawBox(glm::vec3(3, 2, 3), glm::vec3(1, -2 * (1-h), 1), glm::vec4(1, 1, 1, 1));
-    YolonaOss::BoxRenderer::end();
-     
-    //YolonaOss::TextureRenderer::start();
-    //YolonaOss::TextureRenderer::drawTexture(&(*(_modl->_albedo)), glm::scale(glm::mat4(1.0),glm::vec3(40, 40, 40)));
-    //YolonaOss::TextureRenderer::end();
-
-    //if (!_drawDebug)
-    //  drawLandscape();
-    //_context->bullets()->draw();
-    //_context->units  ()->draw();
+    if (!_drawDebug)
+      drawLandscape();
+    _context->bullets()->draw();
+    _context->units  ()->draw();
     _postDrawables->draw();
-    //if (_drawDebug)
-    //{
-    //  YolonaOss::BoxRenderer::start();
-    //  _context->physic()->debugDrawWorld();
-    //  YolonaOss::BoxRenderer::end();
-    //}
+    if (_drawDebug)
+    {
+      YolonaOss::BoxRenderer::start();
+      _context->physic()->debugDrawWorld();
+      YolonaOss::BoxRenderer::end();
+    }
   }
 }

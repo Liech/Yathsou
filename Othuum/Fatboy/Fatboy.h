@@ -49,7 +49,6 @@ namespace Fatboy
     void initPhysic();
     void drawLandscape();
     void initEnemys();
-    void loadSupComModel();
     void loadLandscapeModel();
 
     std::shared_ptr<Suthanus::Box>                   _landscape;
@@ -62,11 +61,5 @@ namespace Fatboy
     std::shared_ptr<Context>                         _context;
     std::shared_ptr<Suthanus::HeightMap> _land;
     bool _drawDebug = false;
-    YolonaOss::Mesh* _mesh;
-    YolonaOss::SupComGLMesh* _scMesh;
-    std::shared_ptr< SupComModel> _modl;
-    glm::mat4 _boneRot = glm::mat4(1.0);
-    float _animationTime = 0;
-    std::string _animName;
   };
 }

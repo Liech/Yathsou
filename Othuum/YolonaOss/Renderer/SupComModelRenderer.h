@@ -11,6 +11,7 @@ namespace YolonaOss
   namespace GL
   {
     class Camera;
+    class UniformFloat;
     class UniformVec3;
     class UniformVec4;
     class UniformMat4;
@@ -51,10 +52,11 @@ namespace YolonaOss
     static void start();
     static void end();
     static void draw(const SupComGLMesh& mesh, glm::mat4 transformation, const std::vector<glm::mat4>& animation = { });
-
+    static inline bool debugRender = true;
   private:
     static inline std::unique_ptr<GL::Camera>                               _camera;
     static inline GL::DrawSpecification*                                    _spec  ;
+    static inline std::unique_ptr<GL::UniformFloat>                         _debugRender;
     static inline std::unique_ptr<GL::UniformVec3>                          _light ;
     static inline std::unique_ptr<GL::UniformMat4>                          _mat   ;
     static inline std::unique_ptr<GL::UniformVecMat4>                       _animation;
