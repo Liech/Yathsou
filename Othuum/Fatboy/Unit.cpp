@@ -8,6 +8,7 @@
 #include "Context.h"
 #include "BulletPool.h"
 #include "Bullet.h"
+#include <execution>
 
 namespace Fatboy
 {

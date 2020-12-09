@@ -38,7 +38,7 @@ SupComModel::SupComModel(std::string foldername)
   for (const auto& entry : std::filesystem::directory_iterator(foldername))
   {
     std::string animationPath = entry.path().string();
-    if (animationPath.ends_with(".sca"))
+    if (animationPath.substr(animationPath.size()-4) == ".sca")
     {
       size_t      animSeperator = animationPath.find_last_of('\\');
       std::string animationName = animationPath.substr(animSeperator + 1/*\\*/ + name.size() + 2/*_A*/);

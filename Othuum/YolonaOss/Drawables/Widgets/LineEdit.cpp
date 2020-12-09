@@ -172,8 +172,8 @@ namespace YolonaOss {
 
     std::function<bool(YolonaOss::GL::Key, std::string full)> LineEdit::defaultValidator() {
       return [](YolonaOss::GL::Key key, std::string full) -> bool {
-        return YolonaOss::GL::CharacterSets::AlphanumericKeys.contains(key) ||
-          YolonaOss::GL::CharacterSets::InputExtraSymbols.contains(key);
+        return YolonaOss::GL::CharacterSets::AlphanumericKeys.count(key)!=0 ||
+          YolonaOss::GL::CharacterSets::InputExtraSymbols.count(key) != 0;
       };
     }
 
