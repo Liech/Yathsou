@@ -17,6 +17,7 @@
 
 #include "YolonaOss/Renderer/SupComModelRenderer.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
+#include "YolonaOss/Renderer/TextRenderer.h"
 
 #include "SupComModel.h"
 #include "YolonaOss/OpenGL/SupComVertex.h"
@@ -29,8 +30,8 @@
 
 namespace Fatboy{
   AnimationDebugger::AnimationDebugger() {
-    _animName = "walk";
-    _unitName = "UAL0401";
+    _animName = "walk01";
+    _unitName = "URL0106";
     _preDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
     _preDrawables->addDrawable(std::make_shared<YolonaOss::Background>());
@@ -76,7 +77,8 @@ namespace Fatboy{
 
   void AnimationDebugger::loadModel() {
 
-    std::string folder = "E:\\scmunpacked\\units\\" + _unitName;
+    //std::string folder = "E:\\scmunpacked\\units\\" + _unitName;
+    std::string folder = "C:\\Users\\Niki\\Desktop\\units\\" + _unitName;
     std::string a1 = _unitName + "_lod0.scm";
     std::string texture = _unitName + "_Albedo.dds";
     std::string mapdds = "C:\\Users\\Niki\\Documents\\My Games\\Gas Powered Games\\Supreme Commander Forged Alliance\\Maps\\Setons 10x10\\setons 10x10.dds";
@@ -254,15 +256,37 @@ namespace Fatboy{
       _keyPressed = false;
   }
   
-  glm::mat4 QuatToMat(glm::quat input)
+  glm::mat4 QuatToMat(glm::quat q)
   {
-    glm::vec3 euler = glm::eulerAngles(input) * 3.14159f / 180.f;
+    //https://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/index.htm
+    glm::mat4 result = glm::mat4(1.0f);
+    double sqw = q.w*q.w;
+    double sqx = q.x*q.x;
+    double sqy = q.y*q.y;
+    double sqz = q.z*q.z;
 
-    glm::mat4 transformX = glm::eulerAngleX(euler.x);
-    glm::mat4 transformY = glm::eulerAngleY(euler.y);
-    glm::mat4 transformZ = glm::eulerAngleZ(euler.z);
+    // invs (inverse square length) is only required if quaternion is not already normalised
+    double invs = 1 / (sqx + sqy + sqz + sqw);
+    result[0][0] = ( sqx - sqy - sqz + sqw)*invs ; // since sqw + sqx + sqy + sqz =1/invs*invs
+    result[1][1] = (-sqx + sqy - sqz + sqw)*invs ;
+    result[2][2] = (-sqx - sqy + sqz + sqw)*invs ;
+    
+    double tmp1 = q.x*q.y;
+    double tmp2 = q.z*q.w;
+    result[1][0] = 2.0 * (tmp1 + tmp2)*invs ;
+    result[0][1] = 2.0 * (tmp1 - tmp2)*invs ;
+    
+    tmp1 = q.x*q.z;
+    tmp2 = q.y*q.w;
+    result[2][0] = 2.0 * (tmp1 - tmp2)*invs ;
+    result[0][2] = 2.0 * (tmp1 + tmp2)*invs ;
+    tmp1 = q.y*q.z;
+    tmp2 = q.x*q.w;
+    result[2][1] = 2.0 * (tmp1 + tmp2)*invs ;
+    result[1][2] = 2.0 * (tmp1 - tmp2)*invs ; 
 
-    return transformX * transformY * transformZ; // or some other order
+
+    return result;
   }
 
   float animtime = 0;
@@ -270,91 +294,61 @@ namespace Fatboy{
   {
     animtime += 0.01f;
     animtime = std::fmod(animtime, _modl->_animations[_animName]->duration);
-    YolonaOss::BoxRenderer::start();
-    std::vector<glm::mat4> cummulativePos;
-    std::vector<glm::vec3> antiPos;
+    int frame = (animtime / _modl->_animations[_animName]->duration) * _modl->_animations[_animName]->animation.size();
     
-    int numberOfFrames = _modl->_animations[_animName]->animation.size()-1;
-    int frameID = std::floor((animtime * numberOfFrames) / _modl->_animations[_animName]->duration)+1;
-    auto frame = _modl->_animations[_animName]->animation[frameID];
-    std::cout << frameID <<std::endl;
-    int amountOfBones = frame.bones.size();
-    cummulativePos.resize(_modl->_model->bones.size());
-    antiPos.resize(amountOfBones);
-    std::map<std::string, int> boneMap;
-    for (int i = 0; i < _modl->_model->bones.size(); i++)
-      boneMap[_modl->_model->bones[i].name] = i;
-    for (int i = 0; i < cummulativePos.size(); i++)
-      cummulativePos[i] = glm::mat4(1.0);
-    for (int i = 0; i < amountOfBones; i++){
-      int index = boneMap[frame.bones[i].name];
-      SCM::bone b = _modl->_model->bones[index];
-      //cummulativePos[i] = glm::translate(glm::mat4(1.0),b.position);
-      glm::mat4 rot = QuatToMat(frame.bones[i].rotation);
-      //if (b.parentIndex != 0)
-        cummulativePos[index] = glm::translate(glm::mat4(1.0), frame.bones[i].position) * rot;
-        antiPos[i] = glm::vec3(0, 0, 0);//-_modl->_model->bones[i].position;
-      //else
-      //  cummulativePos[i] = glm::mat4(1.0);
-      if (b.parentIndex != -1) {
-        cummulativePos[index] = cummulativePos[b.parentIndex]*cummulativePos[index];
-        YolonaOss::BoxRenderer::drawLine(cummulativePos[index]*glm::vec4(0,0,0,1), cummulativePos[b.parentIndex] * glm::vec4(0, 0, 0, 1), 0.1f, glm::vec4(1, 0, 0, 1));
-        //antiPos[i] += antiPos[b.parentIndex];
-      }
-      else
-      {
-        cummulativePos[index] = glm::translate(glm::mat4(1.0), b.position);
-      }
-      YolonaOss::BoxRenderer::draw(glm::mat4(0.2f)* cummulativePos[index], glm::vec4(1, 0, 0, 1));
-    }
+    std::vector<glm::mat4> animationMatrices;
+    animationMatrices.resize(32);
+    for (int i = 0; i < 32; i++)
+      animationMatrices[i] = glm::mat4(1.0);
 
-    YolonaOss::BoxRenderer::drawDot(glm::vec3(0, 0, 0), glm::vec3(0.3f, 0.3f, 0.3f), glm::vec4(1, 1, 1, 1));
-    YolonaOss::BoxRenderer::end();
-
-    for (int i = 0; i < amountOfBones; i++){
-      //cummulativePos[i] = cummulativePos[i]*_modl->_model->bones[i].relativeInverseMatrix;
-      if (i == 9) continue;
-      cummulativePos[i] = glm::mat4(0.0);
-    }
-
-    int b = 9;
-    std::cout << "START" << std::endl;    
-    while (b != -1)
+    auto bones = _modl->_model->bones;
+    int number = 0;
+    for (auto bone : bones)
     {
-      std::cout <<b<<": " << _modl->_model->bones[b].position[0] << "/" << _modl->_model->bones[b].position[1] << "/" << _modl->_model->bones[b].position[2] << std::endl;
-      b = _modl->_model->bones[b].parentIndex;
+      YolonaOss::BoxRenderer::start();
+      animationMatrices[number] = glm::translate(glm::mat4(1.0f),bone.position);
+      
+      auto anim = _modl->_animations[_animName]->animation[frame];
+      glm::mat4 rot = QuatToMat(anim.bones[number].rotation);
+      if (bone.parentIndex != -1)
+      {
+        //auto q = _modl->_animations[_animName]->animation[frame].bones[number].rotation;
+        //std::cout << q[0] << " " << q[1] << " " << q[2] << " " << q[3] << std::endl;;
+        animationMatrices[number] = animationMatrices[number]*animationMatrices[bone.parentIndex];
+      }
+      glm::vec3 pos = animationMatrices[number] * glm::vec4(0, 0, 0, 1);
+      
+      YolonaOss::BoxRenderer::drawDot(pos,glm::vec3(1,1,1), glm::vec4(1, 0, 0, 1));
+      //YolonaOss::BoxRenderer::draw(glm::translate(rot, pos), glm::vec4(0, 1, 0, 1));
+      YolonaOss::BoxRenderer::draw(glm::translate(glm::mat4(1.0), pos)*rot, glm::vec4(0, 1, 0, 1));
+      if (bone.parentIndex != -1)
+      {
+        glm::vec3 parentPos = animationMatrices[bone.parentIndex] * glm::vec4(0, 0, 0, 1);
+        auto parent = bones[bone.parentIndex];
+        YolonaOss::BoxRenderer::drawLine(pos,parentPos, 0.5f, glm::vec4(0, 1, 0, 1));
+      }
+      YolonaOss::BoxRenderer::end();
+
+      YolonaOss::TextRenderer::start();
+      YolonaOss::TextRenderer::drawText(std::to_string(number), _spec->getCam()->worldToViewCoordTransform(pos), 0.3f, glm::vec4(0, 0, 0, 1));
+      YolonaOss::TextRenderer::end();
+
+
+      number++;
     }
 
-    glm::vec3 pos0 = glm::vec3(5.2f,-2.0f,-4.0f);
-    glm::vec3 pos1 = glm::vec3(5.2f,-2.0f,-4.0f);
-    glm::vec3 pos2 = glm::vec3(5.2f,-2.0f,-4.0f);
-    glm::vec3 pos3 = glm::vec3(5.2f,-2.0f,-4.0f);
-    
-    static int x = 0;
-    x = (x + 1) % 4;
-    
-    if (x==0) 
-      cummulativePos[9] = glm::translate(glm::mat4(1.0), pos0);
-    else if (x == 1)
-      cummulativePos[9] = glm::translate(glm::mat4(1.0), pos1);
-    else if (x == 2)
-      cummulativePos[9] = glm::translate(glm::mat4(1.0), pos2);
-    else if (x == 3)
-      cummulativePos[9] = glm::translate(glm::mat4(1.0), pos3);
 
+
+
+    YolonaOss::TextRenderer::start();
+    std::string text = std::to_string(frame);
+    glm::vec2 textPos = glm::vec2(_spec->width - YolonaOss::TextRenderer::getTextSize(text, 1)[0], 0);
+    YolonaOss::TextRenderer::drawText(text, textPos, 1, glm::vec4(0, 0, 0, 1));
+    YolonaOss::TextRenderer::end();
     YolonaOss::SupComModelRenderer::debugRender = true;
-    cummulativePos.resize(32);
+    animationMatrices.resize(32);
     YolonaOss::SupComModelRenderer::start();
-    YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::mat4(1.0), cummulativePos);
+    //YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::mat4(1.0), animationMatrices);
     YolonaOss::SupComModelRenderer::end();
-
-    std::vector<glm::mat4> cp(cummulativePos.begin(),cummulativePos.end());
-    
-    //cp[9] = glm::inverse(_modl->_model->bones[9].relativeInverseMatrix);
-    //
-    //YolonaOss::SupComModelRenderer::debugRender = false;
-    //YolonaOss::SupComModelRenderer::start();
-    //YolonaOss::SupComModelRenderer::draw(*_scMesh, glm::mat4(1.0), cp);
-    //YolonaOss::SupComModelRenderer::end();
   }
 }

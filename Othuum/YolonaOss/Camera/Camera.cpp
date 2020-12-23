@@ -28,6 +28,16 @@ namespace YolonaOss {
       return glm::lookAt(getPosition(),getTarget(),getUp());
     }
 
+    glm::vec2 Camera::worldToViewCoordTransform(glm::vec3 worldPos)
+    {
+      //https://stackoverflow.com/questions/8491247/c-opengl-convert-world-coords-to-screen2d-coords
+      glm::vec4 clipSpacePos = getProjectionMatrix() * (glm::lookAt(getPosition(), getTarget(), getUp()) * glm::vec4(worldPos, 1.0));
+      glm::vec3 ndcSpacePos = clipSpacePos / clipSpacePos.w;
+      float x = ((ndcSpacePos[0] + 1.0) / 2.0) * getResolution()[0];
+      float y = ((ndcSpacePos[1] + 1.0) / 2.0) * getResolution()[1];
+      return glm::vec2(x,y);
+    }
+
     // SCREEN SPACE: mouse_x and mouse_y are screen space
     glm::vec3 Camera::viewToWorldCoordTransform(int mouse_x, int mouse_y) {
     // NORMALISED DEVICE SPACE
@@ -46,7 +56,7 @@ namespace YolonaOss {
   }
 
     glm::vec3 Camera::getPickRay(float X, float Y) {
-      glm::vec3 worldMouse = viewToWorldCoordTransform(X, Y);//unproject(X, Y,glm::mat4(1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1),getViewMatrix(), getProjectionMatrix());
+      glm::vec3 worldMouse = viewToWorldCoordTransform(X, Y);
       return worldMouse; 
     }
   }

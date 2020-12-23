@@ -49,18 +49,18 @@ std::vector<SCA::frame> SCA::readAnimation(int offset, int numberOfFrames, std::
     subresult.keytime     = readFloat(_buffer, _fileposition);
     subresult.keyflags    = readUInt (_buffer, _fileposition);
 
-    for (int i = 0; i < boneNames.size(); i++)
+    for (int j = 0; j < boneNames.size(); j++)
     {
       bone b;
 
       b.position[0] = readFloat(_buffer, _fileposition);
       b.position[1] = readFloat(_buffer, _fileposition);
       b.position[2] = readFloat(_buffer, _fileposition);
+      b.rotation[3] = readFloat(_buffer, _fileposition);
       b.rotation[0] = readFloat(_buffer, _fileposition);
       b.rotation[1] = readFloat(_buffer, _fileposition);
       b.rotation[2] = readFloat(_buffer, _fileposition);
-      b.rotation[3] = readFloat(_buffer, _fileposition);
-      b.name = boneNames[i];
+      b.name = boneNames[j];
 
       subresult.bones.push_back(b);
     }
@@ -73,19 +73,19 @@ std::vector<SCA::frame> SCA::readAnimation(int offset, int numberOfFrames, std::
 glm::vec3 SCA::readPosition()
 {
   glm::vec3 result;
-  result[0] = readInt(_buffer, _fileposition);
-  result[1] = readInt(_buffer, _fileposition);
-  result[2] = readInt(_buffer, _fileposition);
+  result[0] = readFloat(_buffer, _fileposition);
+  result[1] = readFloat(_buffer, _fileposition);
+  result[2] = readFloat(_buffer, _fileposition);
   return result;
 }
 
 glm::quat SCA::readRotation()
 {
   glm::quat result;
-  result[0] = readInt(_buffer, _fileposition);
-  result[1] = readInt(_buffer, _fileposition);
-  result[2] = readInt(_buffer, _fileposition);
-  result[3] = readInt(_buffer, _fileposition);
+  result[0] = readFloat(_buffer, _fileposition);
+  result[1] = readFloat(_buffer, _fileposition);
+  result[2] = readFloat(_buffer, _fileposition);
+  result[3] = readFloat(_buffer, _fileposition);
   return result;
 }
 
