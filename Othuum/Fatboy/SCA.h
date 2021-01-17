@@ -19,7 +19,6 @@ public:
   {
     glm::vec3   position;
     glm::quat   rotation;
-    std::string name    ;
   };
   struct frame
   {

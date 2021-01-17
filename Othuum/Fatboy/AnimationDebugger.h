@@ -44,6 +44,7 @@ namespace Fatboy{
 
     void drawModel();
     void renderStuff();
+    void renderStuff2();
 
     std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables;
     std::shared_ptr<YolonaOss::GL::DrawableList>     _postDrawables;

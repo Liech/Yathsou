@@ -60,7 +60,6 @@ std::vector<SCA::frame> SCA::readAnimation(int offset, int numberOfFrames, std::
       b.rotation[0] = readFloat(_buffer, _fileposition);
       b.rotation[1] = readFloat(_buffer, _fileposition);
       b.rotation[2] = readFloat(_buffer, _fileposition);
-      b.name = boneNames[j];
 
       subresult.bones.push_back(b);
     }
@@ -172,7 +171,6 @@ void SCA::data::fromJson(nlohmann::json input)
       bone b;
       b.position = glm::vec3(jbone["Position"][0], jbone["Position"][1], jbone["Position"][2]);
       b.rotation = glm::quat(jbone["Rotation"][0], jbone["Rotation"][1], jbone["Rotation"][2], jbone["Rotation"][3]);
-      b.name = jbone["Name"];
       sub.bones.push_back(b);
     }
     animation.push_back(sub);
@@ -198,7 +196,6 @@ nlohmann::json SCA::data::toJson()
       nlohmann::json jbone;
       jbone["Position"] = std::vector<float>{ bone.position[0],bone.position[1],bone.position[2] };
       jbone["Rotation"] = std::vector<float>{ bone.rotation[0],bone.rotation[1],bone.rotation[2],bone.rotation[3] };
-      jbone["Name"] = bone.name;
       bones.push_back(jbone);
     }
     subresult["Bone"] = bones;

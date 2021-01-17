@@ -90,7 +90,6 @@ void SupComModel::animate(std::string animation, float time, std::vector<glm::ma
   
   for (int i = 0; i < frame.bones.size(); i++){
   //int i = 0; {
-    assert(frame.bones[i].name == _model->boneNames[i]);
     auto bone = frame.bones[i];
     glm::mat4 boneMovement(1.0);
     //glm::mat4 rotated = QuatToMat(bone.rotation);
