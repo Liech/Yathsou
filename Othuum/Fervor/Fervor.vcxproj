@@ -151,9 +151,13 @@
   <ItemGroup>
     <ClCompile Include="Fervor.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainCharacter.cpp" />
+    <ClCompile Include="MainCharacterVisualization.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fervor.h" />
+    <ClInclude Include="MainCharacter.h" />
+    <ClInclude Include="MainCharacterVisualization.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

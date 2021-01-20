@@ -227,6 +227,8 @@
     <ClInclude Include="GameModel\GameState.h" />
     <ClInclude Include="GameModel\Player.h" />
     <ClInclude Include="GameModel\Unit.h" />
+    <ClInclude Include="Input\DirectWASDController.h" />
+    <ClInclude Include="Input\WASDInputable.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Lib\gainput\gainput.h" />
     <ClInclude Include="Lib\gainput\GainputAllocator.h" />
@@ -335,6 +337,7 @@
     <ClInclude Include="OpenGL\Texture.h" />
     <ClInclude Include="OpenGL\Uniform.h" />
     <ClInclude Include="OpenGL\Updateable.h" />
+    <ClInclude Include="OpenGL\UpdateableList.h" />
     <ClInclude Include="OpenGL\VAO.h" />
     <ClInclude Include="OpenGL\VBO.h" />
     <ClInclude Include="OpenGL\Window.h" />
@@ -377,6 +380,7 @@
     <ClCompile Include="GameModel\GameState.cpp" />
     <ClCompile Include="GameModel\Player.cpp" />
     <ClCompile Include="GameModel\Unit.cpp" />
+    <ClCompile Include="Input\DirectWASDController.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Lib\glad\src\glad.c" />
     <ClCompile Include="Lib\gli\core\dummy.cpp" />
@@ -395,6 +399,7 @@
     <ClCompile Include="OpenGL\Texture.cpp" />
     <ClCompile Include="OpenGL\Uniform.cpp" />
     <ClCompile Include="OpenGL\Updateable.cpp" />
+    <ClCompile Include="OpenGL\UpdateableList.cpp" />
     <ClCompile Include="OpenGL\VAO.cpp" />
     <ClCompile Include="OpenGL\VBO.cpp" />
     <ClCompile Include="OpenGL\Window.cpp" />

@@ -57,6 +57,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HaasScriptingLib", "HaasScriptingLib\HaasScriptingLib.vcxproj", "{29F913DF-B11C-4CEE-B5F0-DDCD3972C7BE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fervor", "Fervor\Fervor.vcxproj", "{836893EA-8892-4C4E-A95A-F143748FF809}"
+	ProjectSection(ProjectDependencies) = postProject
+		{030C3B7E-3682-4A03-8188-D46921B837DA} = {030C3B7E-3682-4A03-8188-D46921B837DA}
+		{E6F78C96-EEC7-40E0-A401-F0C3CD022AC8} = {E6F78C96-EEC7-40E0-A401-F0C3CD022AC8}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

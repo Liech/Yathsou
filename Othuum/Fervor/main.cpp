@@ -19,6 +19,7 @@ int main(int argc, char** argv) {
       f.load(w.getSpec());
     }
     f.update();
+    f.draw  ();
   };
   w.run();
 
