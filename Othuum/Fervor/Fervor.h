@@ -11,8 +11,11 @@ namespace YolonaOss {
   }
 }
 
-namespace Suthanus
-{
+namespace Athanah {
+  class BulletDebugDrawer;
+}
+
+namespace Suthanus {
   class PhysicEngine;
 }
 
@@ -38,4 +41,5 @@ private:
 
   std::shared_ptr<MainCharacterVisualization     >      _mainCharVis;
   std::shared_ptr<MainCharacter                  >      _mainChar   ;
+  std::shared_ptr<Athanah::BulletDebugDrawer     >      _physicDebugDrawer;
 };
