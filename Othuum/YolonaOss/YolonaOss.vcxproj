@@ -228,6 +228,7 @@
     <ClInclude Include="GameModel\Player.h" />
     <ClInclude Include="GameModel\Unit.h" />
     <ClInclude Include="Input\DirectWASDController.h" />
+    <ClInclude Include="Input\Hotkey.h" />
     <ClInclude Include="Input\WASDInputable.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Lib\gainput\gainput.h" />
@@ -381,6 +382,7 @@
     <ClCompile Include="GameModel\Player.cpp" />
     <ClCompile Include="GameModel\Unit.cpp" />
     <ClCompile Include="Input\DirectWASDController.cpp" />
+    <ClCompile Include="Input\Hotkey.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Lib\glad\src\glad.c" />
     <ClCompile Include="Lib\gli\core\dummy.cpp" />

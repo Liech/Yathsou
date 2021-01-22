@@ -11,6 +11,11 @@ namespace YolonaOss {
   }
 }
 
+namespace Suthanus
+{
+  class PhysicEngine;
+}
+
 class MainCharacter;
 class MainCharacterVisualization;
 
@@ -23,11 +28,14 @@ public:
   virtual void draw()   override;
 
 private:
+  bool _drawPhysicDebug = false;
+
   std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables ;
   std::shared_ptr<YolonaOss::GL::DrawableList>     _postDrawables;
   std::shared_ptr<YolonaOss::GL::UpdateableList>   _updateList   ;
 
+  std::shared_ptr<Suthanus::PhysicEngine>          _physic;
+
   std::shared_ptr<MainCharacterVisualization     >      _mainCharVis;
   std::shared_ptr<MainCharacter                  >      _mainChar   ;
-
 };
