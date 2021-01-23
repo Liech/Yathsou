@@ -1,6 +1,7 @@
 #pragma once
 
 #include "YolonaOss/OpenGL/Drawable.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 
 namespace Iyathuum {
   struct Color;

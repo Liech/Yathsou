@@ -5,6 +5,9 @@
 #include "YolonaOss/OpenGL/Window.h"
 #include "Fervor.h"
 
+#include "YolonaOss/Camera/Camera2D.h"
+#include "YolonaOss/Camera/RTSCamera.h"
+
 int main(int argc, char** argv) {
   int width  =600;
   int height =600;

@@ -3,7 +3,7 @@
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
 #include "SuthanusPhysicsLib/Box.h"
-#include "IyathuumCoreLib/BaseTypes/Color.h"
+
 
 namespace Athanah {
   BoxVisualization::BoxVisualization(std::shared_ptr<Suthanus::Box> target, Iyathuum::Color color) {

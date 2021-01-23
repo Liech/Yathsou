@@ -9,6 +9,9 @@ namespace YolonaOss {
     class DrawableList;
     class UpdateableList;
   }
+  namespace Camera {
+    class CameraSystem;
+  }
 }
 
 namespace Athanah {
@@ -17,6 +20,7 @@ namespace Athanah {
 
 namespace Suthanus {
   class PhysicEngine;
+  class Box;
 }
 
 class MainCharacter;
@@ -39,7 +43,10 @@ private:
 
   std::shared_ptr<Suthanus::PhysicEngine>          _physic;
 
-  std::shared_ptr<MainCharacterVisualization     >      _mainCharVis;
-  std::shared_ptr<MainCharacter                  >      _mainChar   ;
+  std::shared_ptr<MainCharacterVisualization     >      _mainCharVis      ;
+  std::shared_ptr<MainCharacter                  >      _mainChar         ;
   std::shared_ptr<Athanah::BulletDebugDrawer     >      _physicDebugDrawer;
+  std::shared_ptr<Suthanus::Box                  >      _testBox          ;
+  std::shared_ptr<YolonaOss::Camera::CameraSystem>      _camera           ;
+
 };

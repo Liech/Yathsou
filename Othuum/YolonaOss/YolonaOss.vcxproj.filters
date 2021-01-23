@@ -552,6 +552,9 @@
     <ClInclude Include="Input\Hotkey.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
+    <ClInclude Include="Camera\Camera2D.h">
+      <Filter>Header Files\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YolonaOss.cpp">
@@ -733,6 +736,9 @@
     </ClCompile>
     <ClCompile Include="Input\Hotkey.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera\Camera2D.cpp">
+      <Filter>Source Files\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
