@@ -21,7 +21,7 @@ Fervor::Fervor()
   _mainChar          = std::make_shared< MainCharacter                >();
   _mainCharVis       = std::make_shared< MainCharacterVisualization   >(*_mainChar);
   _physic            = std::make_shared< Suthanus::PhysicEngine       >();
-  _physicDebugDrawer = std::make_shared<Athanah::BulletDebugDrawer    >();
+  _physicDebugDrawer = std::make_shared< Athanah::BulletDebugDrawer   >();
 
   _preDrawables ->addDrawable(std::make_shared<YolonaOss::Background>());
   _postDrawables->addDrawable(std::make_shared<YolonaOss::FPS>());
@@ -39,8 +39,7 @@ void Fervor::load(YolonaOss::GL::DrawSpecification* spec)
 {
   _updateList   ->load(spec);
   _preDrawables ->load(spec);
-  _postDrawables->load(spec);
-  
+  _postDrawables->load(spec);  
 }
 
 void Fervor::update()

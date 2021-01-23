@@ -18,9 +18,15 @@
     <ClCompile Include="BulletDebugDrawer.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="BoxVisualization.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BulletDebugDrawer.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxVisualization.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

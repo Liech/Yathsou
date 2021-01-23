@@ -8,6 +8,11 @@
 #include "../OpenGL/PositionNormalVertex.h"
 #include "../OpenGL/Camera.h"
 #include "../OpenGL/ShaderProgram.h"
+
+namespace Iyathuum {
+  struct Color;
+}
+
 namespace YolonaOss {
   namespace GL {
     class IBO;
@@ -26,6 +31,11 @@ namespace YolonaOss {
     static void drawDot(glm::vec3 start, glm::vec3 size, glm::vec4 color);
     static void drawBox(glm::vec3 start, glm::vec3 size, glm::vec4 color);
     static void draw(glm::mat4 mat, glm::vec4 color);
+
+    static void drawLine(glm::vec3 start, glm::vec3 end, float thickness, Iyathuum::Color color);
+    static void drawDot (glm::vec3 start, glm::vec3 size, Iyathuum::Color color);
+    static void drawBox (glm::vec3 start, glm::vec3 size, Iyathuum::Color color);
+    static void draw    (glm::mat4 mat, Iyathuum::Color color);
   private:
     static inline GL::DrawSpecification*                                    _spec; 
     static inline std::vector<int>                                          _indices;

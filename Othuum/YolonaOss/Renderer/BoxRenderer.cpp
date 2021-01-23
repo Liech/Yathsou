@@ -4,6 +4,8 @@
 #include "../OpenGL/IBO.h"
 #include "../OpenGL/Uniform.h"
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include "IyathuumCoreLib/BaseTypes/Color.h"
+
 namespace YolonaOss {
   void BoxRenderer::load(GL::DrawSpecification* spec)
   {
@@ -116,6 +118,23 @@ namespace YolonaOss {
     glDisable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);    
   }
+
+  void BoxRenderer::drawLine(glm::vec3 start, glm::vec3 end, float thickness, Iyathuum::Color color) {
+    drawLine(start, end, thickness, glm::vec4(color.r()/255.0f, color.g() / 255.0f, color.b() / 255.0f, color.a() / 255.0f));
+  }
+
+  void BoxRenderer::drawDot(glm::vec3 start, glm::vec3 size, Iyathuum::Color color) {
+    drawDot(start, size, glm::vec4(color.r() / 255.0f, color.g() / 255.0f, color.b() / 255.0f, color.a() / 255.0f));
+  }
+
+  void BoxRenderer::drawBox(glm::vec3 start, glm::vec3 size, Iyathuum::Color color) {
+    drawBox(start, size, glm::vec4(color.r() / 255.0f, color.g() / 255.0f, color.b() / 255.0f, color.a() / 255.0f));
+  }
+
+  void BoxRenderer::draw(glm::mat4 mat, Iyathuum::Color color) {
+    draw(mat, glm::vec4(color.r() / 255.0f, color.g() / 255.0f, color.b() / 255.0f, color.a() / 255.0f));
+  }
+
 
   void BoxRenderer::draw(glm::mat4 m, glm::vec4 color) {
     _mat->setValue(m);
