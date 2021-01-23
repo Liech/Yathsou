@@ -31,17 +31,16 @@ Fervor::Fervor()
   _preDrawables ->addDrawable(std::make_shared<YolonaOss::Background>());
   _postDrawables->addDrawable(std::make_shared<YolonaOss::FPS>());
 
-  _preDrawables ->addDrawable(std::dynamic_pointer_cast<YolonaOss::GL::Drawable>(_mainCharVis));
+  //_preDrawables ->addDrawable(std::dynamic_pointer_cast<YolonaOss::GL::Drawable>(_mainCharVis));
   auto controller = std::make_shared<YolonaOss::DirectWASDController>(*_mainChar);
   auto physicDebugHotkey = std::make_shared<YolonaOss::Hotkey>(YolonaOss::GL::Key::KEY_F1, [this]() {_drawPhysicDebug = !_drawPhysicDebug; });
   _updateList->addUpdateable(physicDebugHotkey);
   _updateList->addUpdateable(controller);
   _updateList->addUpdateable(_camera);
   _physic->setDebugDrawer(_physicDebugDrawer.get());
-  _testBox = _physic->newBox(glm::vec3(0, 0, 0), glm::vec3(5, 10, 1), false);
+  _testBox = _physic->newBox(glm::vec3(120, 120, 0), glm::vec3(50, 50, 1), true);
   auto boxVis = std::make_shared<Athanah::BoxVisualization>(_testBox, Iyathuum::Color(255,0,0));
   _preDrawables->addDrawable(boxVis);
-
 }
 
 void Fervor::load(YolonaOss::GL::DrawSpecification* spec)

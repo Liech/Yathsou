@@ -19,6 +19,7 @@ namespace YolonaOss {
       GL::Window* _window;
       std::shared_ptr<YolonaOss::Camera::Camera> _camera;
 
+      float _ortho = 1;
       double                  _lastTime = 0;
       glm::vec2               _lastCursorPos;
     };

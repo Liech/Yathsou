@@ -28,6 +28,9 @@ namespace YolonaOss {
       float     getFOV() { return _fov; }
       void      setFOV(float v) { _fov = v; }
 
+      bool      is2D();
+      void      set2D(bool);
+
       glm::mat4 getProjectionMatrix();
       glm::mat4 getViewMatrix();
 
@@ -44,8 +47,9 @@ namespace YolonaOss {
       glm::vec3 _position = glm::vec3(4, 3, 3);
       glm::vec3 _up = glm::vec3(0, 1, 0);
       glm::vec3 _target = glm::vec3(0, 0, 0);
-      int _width ;
-      int _height;
+      int   _width ;
+      int   _height;
+      bool  _is2D = false;
     };
     class CameraMode {
     public:
