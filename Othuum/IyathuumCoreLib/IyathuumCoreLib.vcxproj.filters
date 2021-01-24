@@ -111,6 +111,12 @@
     <ClInclude Include="Util\lambdaCapture2functionPointer.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
+    <ClInclude Include="BaseTypes\glmAABB.h">
+      <Filter>Header Files\BaseTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="View2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Util\ImageSubsetUtil.cpp">
@@ -127,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="Util\UpdateTimer.cpp">
       <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="View2D.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

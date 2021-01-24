@@ -158,6 +158,7 @@
   <ItemGroup>
     <ClInclude Include="BaseTypes\AABB.h" />
     <ClInclude Include="BaseTypes\Color.h" />
+    <ClInclude Include="BaseTypes\glmAABB.h" />
     <ClInclude Include="BaseTypes\Line.h" />
     <ClInclude Include="BaseTypes\MultiDimensionalArray.h" />
     <ClInclude Include="BaseTypes\Polygon.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Util\ImageUtil.h" />
     <ClInclude Include="Util\lambdaCapture2functionPointer.h" />
     <ClInclude Include="Util\UpdateTimer.h" />
+    <ClInclude Include="View2D.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseTypes\AABB.cpp" />
@@ -185,6 +187,7 @@
     <ClCompile Include="Util\ImageSubsetUtil.cpp" />
     <ClCompile Include="Util\ImageUtil.cpp" />
     <ClCompile Include="Util\UpdateTimer.cpp" />
+    <ClCompile Include="View2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
