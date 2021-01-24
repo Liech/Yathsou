@@ -3,6 +3,11 @@
 #include "IyathuumCoreLib/lib/glm/vec2.hpp"
 #include "Camera.h"
 #include "IyathuumCoreLib/Singleton/Factory.h"
+
+namespace Iyathuum {
+  class View2D;
+}
+
 namespace YolonaOss {
   namespace GL {
     class Window;
@@ -18,7 +23,7 @@ namespace YolonaOss {
     private:
       GL::Window* _window;
       std::shared_ptr<YolonaOss::Camera::Camera> _camera;
-
+      std::shared_ptr<Iyathuum::View2D>          _view  ;
       float _ortho = 1;
       double                  _lastTime = 0;
       glm::vec2               _lastCursorPos;

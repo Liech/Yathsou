@@ -39,10 +39,10 @@ namespace YolonaOss {
     struct RenderVars {
       std::unique_ptr<GL::VBO<GL::PositionVertex>>   vbo;
       std::unique_ptr<GL::VAO<GL::PositionVertex>>   vao;
-      std::unique_ptr<GL::ShaderProgram>              shader;
+      std::unique_ptr<GL::ShaderProgram>             shader;
       GL::DrawSpecification* spec;
-      std::unique_ptr<GL::UniformMat4>                projection;
-      std::unique_ptr<GL::UniformVec3>                color;
+      std::unique_ptr<GL::UniformMat4>               projection;
+      std::unique_ptr<GL::UniformVec3>               color;
     };
 
     void makeShader();

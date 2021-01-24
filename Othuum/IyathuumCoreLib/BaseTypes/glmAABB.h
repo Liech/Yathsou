@@ -65,7 +65,7 @@ namespace Iyathuum {
     }
 
     vec getCenter() {
-      glmAABB<Dimension> result;
+      vec result;
       for (size_t i = 0; i < Dimension; i++)
         result[i] = getPosition()[i] + getSize()[i] / 2.0;
       return result;

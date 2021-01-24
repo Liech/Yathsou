@@ -7,8 +7,13 @@
 namespace Iyathuum {
   class View2D {
   public:
+    View2D(const glmAABB<2>&);
+
     glmAABB<2> getView();
     void       setView(const glmAABB<2>&);
+
+    void       move(glm::vec2 amount);
+    glm::vec2  getCenter();
   private:
     glmAABB<2> _view;
   };

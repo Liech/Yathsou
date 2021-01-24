@@ -9,6 +9,7 @@ namespace YolonaOss {
     Camera::Camera(int width, int height) {
       _width = width;
       _height = height;
+      _view2D = Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_width,_height));
     }
 
     void Camera::fromCamera(Camera* cam) {
@@ -19,11 +20,14 @@ namespace YolonaOss {
       _width        = cam->_width       ;
       _height       = cam->_height      ;
       _is2D         = cam->_is2D        ;
+      _view2D       = cam->_view2D     ;
     }
 
     glm::mat4 Camera::getProjectionMatrix() {
-      if (_is2D)
-        return glm::ortho(0.0f, (float)_width, (float)_height, 0.0f, 0.1f, 100.0f);
+      if (_is2D) {
+        glm::vec2 p = _view2D.getPosition();
+        return glm::ortho(p[0], p[0]+ _view2D.getSize()[0], p[1]+ _view2D.getSize()[1], p[1]+ 0.0f, 0.1f, 100.0f);
+      }
         //return glm::ortho(0, 600, 0,600);
 
       return glm::perspective(glm::radians(getFOV()), getResolution()[0] / getResolution()[1], getNearPlane(), getFarPlane());
@@ -74,6 +78,14 @@ namespace YolonaOss {
    
     void  Camera::set2D(bool on) {
       _is2D = on;
+    }
+
+    void Camera::set2DView(Iyathuum::glmAABB<2> view) {
+      _view2D = view;
+    }
+
+    Iyathuum::glmAABB<2> Camera::getView() {
+      return _view2D;
     }
   }
 }

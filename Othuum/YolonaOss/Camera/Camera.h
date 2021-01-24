@@ -1,6 +1,8 @@
 #pragma once
 
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
+#include "IyathuumCoreLib/BaseTypes/glmAABB.h"
+
 #include <memory>
 namespace YolonaOss {
   namespace GL {
@@ -31,6 +33,9 @@ namespace YolonaOss {
       bool      is2D();
       void      set2D(bool);
 
+      void                 set2DView(Iyathuum::glmAABB<2> view);
+      Iyathuum::glmAABB<2> getView();
+
       glm::mat4 getProjectionMatrix();
       glm::mat4 getViewMatrix();
 
@@ -50,6 +55,7 @@ namespace YolonaOss {
       int   _width ;
       int   _height;
       bool  _is2D = false;
+      Iyathuum::glmAABB<2> _view2D;
     };
     class CameraMode {
     public:

@@ -4,6 +4,8 @@
 #include "../OpenGL/Camera.h"
 #include "IyathuumCoreLib/lib/glm/ext/matrix_transform.hpp"
 #include "IyathuumCoreLib/lib/glm/vec2.hpp"
+#include "IyathuumCoreLib/View2D.h"
+#include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 
 #include <iostream>
 
@@ -15,10 +17,12 @@ namespace YolonaOss {
       //_window->setCursorStatus(GL::CursorStatus::HIDDEN);
       _lastCursorPos = glm::vec2((float)_window->getCursorPos().x, (float)_window->getCursorPos().y);
       _lastTime = _window->getTime();
+      _view = std::make_shared<Iyathuum::View2D>(Iyathuum::glmAABB<2>(glm::vec2(0,0),glm::vec2(window->getWidth(),window->getHeight())));
     }
 
     void Camera2D::update() {
       _camera->set2D(true);
+      _camera->set2DView(_view->getView());
       double time = _window->getTime();
       bool w = _window->getKeyStatus(GL::Key::KEY_W) == GL::KeyStatus::PRESS;
       bool a = _window->getKeyStatus(GL::Key::KEY_A) == GL::KeyStatus::PRESS;
@@ -39,7 +43,17 @@ namespace YolonaOss {
 
       if (_ortho < 0)_ortho = 0;
       if (_ortho > 1) _ortho = 1;
-      //if (w || a || s || d || q || e) {
+      if (w || a || s || d || q || e) {
+        if (w)
+          _view->move(glm::vec2(0, 1));
+        if (a)
+          _view->move(glm::vec2(+1, 0));
+        if (d)
+          _view->move(glm::vec2(-1, 0));
+        if (s)
+          _view->move(glm::vec2(0,-1));
+
+      }
       //  glm::vec3 offset(0, 0, 0);
       //  if (w) offset += toTarget * delta;
       //  if (s) offset += toTarget * -delta;

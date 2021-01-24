@@ -63,6 +63,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fervor", "Fervor\Fervor.vcx
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AthanahCommonLib", "AthanahCommonLib\AthanahCommonLib.vcxproj", "{227FC423-A301-469E-BE2A-E181251540DE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{030C3B7E-3682-4A03-8188-D46921B837DA} = {030C3B7E-3682-4A03-8188-D46921B837DA}
+		{87FBFD7F-DB98-4BD5-9AC1-37645A685488} = {87FBFD7F-DB98-4BD5-9AC1-37645A685488}
+		{E6F78C96-EEC7-40E0-A401-F0C3CD022AC8} = {E6F78C96-EEC7-40E0-A401-F0C3CD022AC8}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
