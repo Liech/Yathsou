@@ -38,9 +38,12 @@ Fervor::Fervor()
   _updateList->addUpdateable(controller);
   _updateList->addUpdateable(_camera);
   _physic->setDebugDrawer(_physicDebugDrawer.get());
-  _testBox = _physic->newBox(glm::vec3(120, 120, 0), glm::vec3(50, 50, 1), true);
-  auto boxVis = std::make_shared<Athanah::BoxVisualization>(_testBox, Iyathuum::Color(255,0,0));
+  _testBox  = _physic->newBox(glm::vec3(120, 120, 0), glm::vec3(400, 50, 1), false);
+  _testBox2 = _physic->newBox(glm::vec3(320, 320, 0), glm::vec3(50, 50, 1), true);
+  auto boxVis = std::make_shared<Athanah::BoxVisualization>(_testBox, Iyathuum::Color(255, 0, 0));
   _preDrawables->addDrawable(boxVis);
+  auto boxVis2 = std::make_shared<Athanah::BoxVisualization>(_testBox2, Iyathuum::Color(255, 0, 0));
+  _preDrawables->addDrawable(boxVis2);
 }
 
 void Fervor::load(YolonaOss::GL::DrawSpecification* spec)

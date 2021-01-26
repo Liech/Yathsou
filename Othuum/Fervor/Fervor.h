@@ -47,6 +47,7 @@ private:
   std::shared_ptr<MainCharacter                  >      _mainChar         ;
   std::shared_ptr<Athanah::BulletDebugDrawer     >      _physicDebugDrawer;
   std::shared_ptr<Suthanus::Box                  >      _testBox          ;
+  std::shared_ptr<Suthanus::Box                  >      _testBox2         ;
   std::shared_ptr<YolonaOss::Camera::CameraSystem>      _camera           ;
 
 };
