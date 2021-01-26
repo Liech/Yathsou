@@ -10,7 +10,7 @@ namespace YolonaOss {
     class UpdateableList;
   }
   namespace Camera {
-    class CameraSystem;
+    class Camera2D;
   }
 }
 
@@ -43,10 +43,10 @@ private:
 
   std::shared_ptr<Suthanus::PhysicEngine>          _physic;
 
-  std::shared_ptr<MainCharacterVisualization     >      _mainCharVis      ;
-  std::shared_ptr<MainCharacter                  >      _mainChar         ;
-  std::shared_ptr<Athanah::BulletDebugDrawer     >      _physicDebugDrawer;
-  std::shared_ptr<Suthanus::Box                  >      _testBox          ;
-  std::shared_ptr<YolonaOss::Camera::CameraSystem>      _camera           ;
+  std::shared_ptr<MainCharacterVisualization >      _mainCharVis      ;
+  std::shared_ptr<MainCharacter              >      _mainChar         ;
+  std::shared_ptr<Athanah::BulletDebugDrawer >      _physicDebugDrawer;
+  std::shared_ptr<Suthanus::Box              >      _testBox          ;
+  std::shared_ptr<YolonaOss::Camera::Camera2D>      _camera           ;
 
 };
