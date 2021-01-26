@@ -10,11 +10,12 @@
 #include "YolonaOss/Input/DirectWASDController.h"
 #include "YolonaOss/Input/Hotkey.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
-#include "YolonaOss/Camera/CameraSystem.h"
+#include "YolonaOss/Camera/Camera2D.h"
 
 #include "AthanahCommonLib/BulletDebugDrawer.h"
 #include "AthanahCommonLib/BoxVisualization.h"
 
+#include "IyathuumCoreLib/View2D.h"
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 
 Fervor::Fervor()
@@ -26,8 +27,8 @@ Fervor::Fervor()
   _mainCharVis       = std::make_shared< MainCharacterVisualization     >(*_mainChar);
   _physic            = std::make_shared< Suthanus::PhysicEngine         >();
   _physicDebugDrawer = std::make_shared< Athanah::BulletDebugDrawer     >();
-  _camera            = std::make_shared< YolonaOss::Camera::CameraSystem>();
-
+  _camera            = std::make_shared< YolonaOss::Camera::Camera2D    >();
+  
   _preDrawables ->addDrawable(std::make_shared<YolonaOss::Background>());
   _postDrawables->addDrawable(std::make_shared<YolonaOss::FPS>());
 
@@ -36,11 +37,10 @@ Fervor::Fervor()
   auto physicDebugHotkey = std::make_shared<YolonaOss::Hotkey>(YolonaOss::GL::Key::KEY_F1, [this]() {_drawPhysicDebug = !_drawPhysicDebug; });
   _updateList->addUpdateable(physicDebugHotkey);
   _updateList->addUpdateable(controller);
-  _updateList->addUpdateable(_camera);
   _physic->setDebugDrawer(_physicDebugDrawer.get());
-  _testBox  = _physic->newBox(glm::vec3(120, 120, 0), glm::vec3(400, 50, 1), false);
-  _testBox2 = _physic->newBox(glm::vec3(320, 320, 0), glm::vec3(50, 50, 1), true);
-  auto boxVis = std::make_shared<Athanah::BoxVisualization>(_testBox, Iyathuum::Color(255, 0, 0));
+  _testBox = _physic->newBox(glm::vec3(120, 120, 0), glm::vec3(400, 50, 1), false);
+  _testBox =_testBox  = _physic->newBox(glm::vec3(120, 120, 0), glm::vec3(400, 50, 1), false); _physic->newBox(glm::vec3(12, 12, 0), glm::vec3(5, 5, 1), true);
+  auto boxVis = std::make_shared<Athanah::BoxVisualization>(_testBox, Iyathuum::Color(255,0,0));
   _preDrawables->addDrawable(boxVis);
   auto boxVis2 = std::make_shared<Athanah::BoxVisualization>(_testBox2, Iyathuum::Color(255, 0, 0));
   _preDrawables->addDrawable(boxVis2);
@@ -51,14 +51,15 @@ void Fervor::load(YolonaOss::GL::DrawSpecification* spec)
   _updateList   ->load(spec);
   _preDrawables ->load(spec);
   _postDrawables->load(spec);  
-
-  _camera->setCurrentCam("Camera2D");
+  _camera->load(spec->getCam(), spec->getWindow());
+  _camera->view().setView(Iyathuum::glmAABB<2>(glm::vec2(0,0),glm::vec2(60,60)));
 }
 
 void Fervor::update()
 {
   _physic    ->update();
   _updateList->update();
+  _camera    ->update();
 }
 
 void Fervor::draw()

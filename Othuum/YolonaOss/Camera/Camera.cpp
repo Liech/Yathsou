@@ -13,14 +13,14 @@ namespace YolonaOss {
     }
 
     void Camera::fromCamera(Camera* cam) {
-      _fov          = cam->_fov         ;
-      _position     = cam->_position    ;
-      _up           = cam->_up          ;
-      _target       = cam->_target      ;
-      _width        = cam->_width       ;
-      _height       = cam->_height      ;
-      _is2D         = cam->_is2D        ;
-      _view2D       = cam->_view2D     ;
+      _fov          = cam->_fov     ;
+      _position     = cam->_position;
+      _up           = cam->_up      ;
+      _target       = cam->_target  ;
+      _width        = cam->_width   ;
+      _height       = cam->_height  ;
+      _is2D         = cam->_is2D    ;
+      _view2D       = cam->_view2D  ;
     }
 
     glm::mat4 Camera::getProjectionMatrix() {
@@ -28,15 +28,12 @@ namespace YolonaOss {
         glm::vec2 p = _view2D.getPosition();
         return glm::ortho(p[0], p[0]+ _view2D.getSize()[0], p[1]+ _view2D.getSize()[1], p[1]+ 0.0f, 0.1f, 100.0f);
       }
-        //return glm::ortho(0, 600, 0,600);
-
       return glm::perspective(glm::radians(getFOV()), getResolution()[0] / getResolution()[1], getNearPlane(), getFarPlane());
     }
 
     glm::mat4 Camera::getViewMatrix() {
       if (_is2D)
         return glm::lookAt(glm::vec3(0.f, 0.f, 2.0f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.0f, 1.0f, 0.0f));
-        //return glm::mat4(1.0);
       return glm::lookAt(getPosition(),getTarget(),getUp());
     }
 

@@ -20,6 +20,10 @@ namespace YolonaOss {
       _view = std::make_shared<Iyathuum::View2D>(Iyathuum::glmAABB<2>(glm::vec2(0,0),glm::vec2(window->getWidth(),window->getHeight())));
     }
 
+    Iyathuum::View2D& Camera2D::view() {
+      return *_view;
+    }
+
     void Camera2D::update() {
       _camera->set2D(true);
       _camera->set2DView(_view->getView());
@@ -47,9 +51,9 @@ namespace YolonaOss {
         if (w)
           _view->move(glm::vec2(0, 1));
         if (a)
-          _view->move(glm::vec2(+1, 0));
-        if (d)
           _view->move(glm::vec2(-1, 0));
+        if (d)
+          _view->move(glm::vec2(+1, 0));
         if (s)
           _view->move(glm::vec2(0,-1));
 

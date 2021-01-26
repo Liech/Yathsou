@@ -20,6 +20,7 @@ namespace YolonaOss {
       virtual void load(std::shared_ptr<YolonaOss::Camera::Camera> camera, GL::Window* window) override;
       virtual void update() override;
 
+      Iyathuum::View2D& view();
     private:
       GL::Window* _window;
       std::shared_ptr<YolonaOss::Camera::Camera> _camera;
