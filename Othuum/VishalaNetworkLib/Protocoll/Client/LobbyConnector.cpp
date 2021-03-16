@@ -24,11 +24,18 @@ namespace Vishala {
       _entryConnection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {newConnection(client, ip, port); });
       _entryConnection->setRecievedCallback(0, [this](size_t client, std::unique_ptr<BinaryPackage> package) {messageRecived(client, 0, std::move(package)); });
       try {
-        _entryConnection->start();
-        _entryConnection->connect(port, ip);
+        bool success = _entryConnection->start();
+        if (!success)
+        {
+          _currentStatus = LobbyConnectorStatus::ConnectionFailed;
+          _entryConnection = nullptr;
+        }
+        else
+          _entryConnection->connect(port, ip);
       }
       catch (std::exception){
         _currentStatus = LobbyConnectorStatus::ConnectionFailed;
+        _entryConnection = nullptr;
       }
     }
 

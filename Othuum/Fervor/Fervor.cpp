@@ -38,8 +38,8 @@ Fervor::Fervor()
   _updateList->addUpdateable(physicDebugHotkey);
   _updateList->addUpdateable(controller);
   _physic->setDebugDrawer(_physicDebugDrawer.get());
-  _testBox = _physic->newBox(glm::vec3(120, 120, 0), glm::vec3(400, 50, 1), false);
-  _testBox =_testBox  = _physic->newBox(glm::vec3(120, 120, 0), glm::vec3(400, 50, 1), false); _physic->newBox(glm::vec3(12, 12, 0), glm::vec3(5, 5, 1), true);
+  _testBox = _physic->newBox(glm::vec3(12, 22, 0), glm::vec3(4, 5, 1), true);
+  _testBox2 = _physic->newBox(glm::vec3(12, 12, 0), glm::vec3(40, 5, 1), false);
   auto boxVis = std::make_shared<Athanah::BoxVisualization>(_testBox, Iyathuum::Color(255,0,0));
   _preDrawables->addDrawable(boxVis);
   auto boxVis2 = std::make_shared<Athanah::BoxVisualization>(_testBox2, Iyathuum::Color(255, 0, 0));
