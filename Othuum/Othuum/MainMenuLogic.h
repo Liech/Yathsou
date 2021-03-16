@@ -68,6 +68,7 @@ private:
   std::shared_ptr<StartGameLoadingPage>         _startGameLoadingPage ;
   std::shared_ptr<SideProject::SideProjectMain> _sideProject          ;
 
+  void setLoader();
   void showError(std::string desc, std::string title);
   YolonaOss::GL::Window& _window;
 };

@@ -8,6 +8,15 @@
 #include "ClientConfiguration.h"
 #include "ClientState.h"
 
+namespace Iyathuum {
+  class ContentLoader;
+}
+namespace YolonaOss {
+  namespace Widgets {
+    class Label;
+  }
+}
+
 enum class StartGameLoadingPageStatus {
   HostWait, Pending, Back, Proceed, Error
 };
@@ -20,7 +29,7 @@ public:
   virtual void load(YolonaOss::GL::DrawSpecification*) override;
   void setVisible(bool visible);
   void reset();
-  void setLoader();
+  void setLoader(std::shared_ptr<Iyathuum::ContentLoader> loader);
   void LoadGame();
   void HostWait();
   void update();
@@ -34,7 +43,9 @@ private:
 
   std::unique_ptr<DialogPage> _page;
   
-  StartGameLoadingPageStatus           _status = StartGameLoadingPageStatus::Pending;
-  std::shared_ptr<ClientConfiguration> _config;
-  std::shared_ptr<ClientState        > _state ;
+  StartGameLoadingPageStatus                 _status = StartGameLoadingPageStatus::Pending;
+  std::shared_ptr<ClientConfiguration>       _config;
+  std::shared_ptr<ClientState        >       _state ;
+  std::shared_ptr<Iyathuum::ContentLoader>   _loader;
+  std::shared_ptr<YolonaOss::Widgets::Label> _text;
 };

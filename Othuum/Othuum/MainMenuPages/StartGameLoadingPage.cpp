@@ -5,7 +5,7 @@
 #include "YolonaOss/Drawables/Widgets/ListLayout.h"
 #include "YolonaOss/Drawables/Widgets/Label.h"
 #include "YolonaOss/Drawables/Widgets/LineEdit.h"
-
+#include "IyathuumCoreLib/Util/ContentLoader.h"
 #include "VishalaNetworkLib/Serializable/Client2LobbyMessage.h"
 
 StartGameLoadingPage::StartGameLoadingPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state) {
@@ -16,7 +16,7 @@ StartGameLoadingPage::StartGameLoadingPage(std::shared_ptr<ClientConfiguration> 
 void StartGameLoadingPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page = std::make_unique<DialogPage>(spec->width, spec->height);
 
-  _page->layout().addLabel("Starting Game...");
+  _text = _page->layout().addLabel("Starting Game...");
   
   _page->layout().addButton("Cancel", [this]() { goBack(); });
   setVisible(false);
@@ -39,6 +39,14 @@ void StartGameLoadingPage::update() {
       }
     }
   }
+
+  if (_status == StartGameLoadingPageStatus::Pending && _loader) {
+    _loader->update();
+    _text->setText(std::to_string(_loader->getProgression() * 100));
+    if (_loader->isFinished())
+      _status = StartGameLoadingPageStatus::Proceed;
+
+  }
 }
 
 void StartGameLoadingPage::draw() {
@@ -60,10 +68,14 @@ void StartGameLoadingPage::finish() {
 
 void StartGameLoadingPage::goBack() {
   _status = StartGameLoadingPageStatus::Back;
+  if (_loader->isStarted())
+    _loader->abort();
+
 }
 
 void StartGameLoadingPage::reset() {
   _status = StartGameLoadingPageStatus::Pending;
+  _loader = nullptr;
 }
 
 void StartGameLoadingPage::LoadGame(){
@@ -77,11 +89,14 @@ void StartGameLoadingPage::HostWait() {
 
 void StartGameLoadingPage::startLoading()
 {
+  if (!_loader)
+    throw std::runtime_error("StartGame Loading Page: No Loader");
   std::cout << "Load Game" << std::endl;
-  _status = StartGameLoadingPageStatus::Proceed;
+  _status = StartGameLoadingPageStatus::Pending;
+  _loader->start();
 }
 
-void StartGameLoadingPage::setLoader()
+void StartGameLoadingPage::setLoader(std::shared_ptr<Iyathuum::ContentLoader> loader)
 {
-
+  _loader = loader;
 }

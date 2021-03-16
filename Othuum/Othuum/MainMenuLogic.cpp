@@ -23,6 +23,8 @@
 #include "YolonaOss/OpenGL/Window.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
 
+#include <thread>
+#include "IyathuumCoreLib/Util/ContentLoader.h"
 
 MainMenuLogic::MainMenuLogic(YolonaOss::GL::Window& window,std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state) 
   : _window(window)
@@ -215,13 +217,16 @@ void MainMenuLogic::update() {
       _gameLobbyPage->reset();
       _state->startGame();
       _startGameLoadingPage->setVisible(true);
+      setLoader();
       _startGameLoadingPage->HostWait();
       _stat = status::HostWaitStartGame;
     }
     else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::StartGame) {
       _gameLobbyPage->setVisible(false);
       _gameLobbyPage->reset();
+      setLoader();
       _startGameLoadingPage->setVisible(true);
+      _startGameLoadingPage->LoadGame();
       _stat = status::GameLoading;
       std::cout << "Game started" << std::endl;
     }
@@ -251,6 +256,15 @@ void MainMenuLogic::update() {
       _mainMenuPage->reset();
     }
   }
+}
+
+void MainMenuLogic::setLoader() {
+  auto l = std::make_shared<Iyathuum::ContentLoader>();
+  l->addPackage([]() {
+    using namespace std::chrono_literals;
+    std::this_thread::sleep_for(2000ms);
+  },false);
+  _startGameLoadingPage->setLoader(l);
 }
 
 void MainMenuLogic::showError(std::string desc,std::string title) {

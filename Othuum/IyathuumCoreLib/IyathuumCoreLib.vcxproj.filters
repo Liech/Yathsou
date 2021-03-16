@@ -117,6 +117,9 @@
     <ClInclude Include="View2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Util\ContentLoader.h">
+      <Filter>Header Files\Util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Util\ImageSubsetUtil.cpp">
@@ -136,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="View2D.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\ContentLoader.cpp">
+      <Filter>Source Files\Util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
