@@ -68,5 +68,10 @@ namespace YolonaOss {
       Widget::setVisible(visible);
     }
 
+    void Button::setText(std::string t)
+    {
+      _name = t;
+    }
+
   }
 }

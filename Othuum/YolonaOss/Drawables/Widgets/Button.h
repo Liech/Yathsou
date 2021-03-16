@@ -22,6 +22,9 @@ namespace YolonaOss {
       virtual bool mouseClick(glm::vec2 position, GL::Key k) override;
       virtual void setVisible(bool visible) override;
 
+      void setText(std::string t);
+
+
     private:
       std::string               _name;
       std::function<void(void)> _clickedFunction;

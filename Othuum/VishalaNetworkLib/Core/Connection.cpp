@@ -126,7 +126,7 @@ namespace Vishala {
       if (_destructorCalled)
         return;
       ENetEvent event;
-      if (enet_host_service(_connection, &event, 0) > 0) {
+      if (_connection && enet_host_service(_connection, &event, 0) > 0) {
         NetReciveEvent msg;
         msg.type = event.type;
         msg.channel = event.channelID;
