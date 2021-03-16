@@ -93,6 +93,9 @@
     <ClCompile Include="BulletDebugDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuPages\StartGameLoadingPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Lib\nop\base\array.h">
@@ -385,6 +388,9 @@
     </ClInclude>
     <ClInclude Include="BulletDebugDrawer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\StartGameLoadingPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

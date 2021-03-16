@@ -9,7 +9,7 @@
 #include "VishalaNetworkLib/Serializable/GameLobbyStateUpdate.h"
 
 enum class ClientStateStatus {
-  Nothing, LobbyConnector, Lobby, HostLoading, Host, JoinLoading, Joined
+  Nothing, LobbyConnector, Lobby, HostLoading, Host, JoinLoading, Joined, GameRunning
 };
 
 class ClientState {

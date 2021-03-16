@@ -25,13 +25,15 @@ void GameLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   setVisible(false);
 }
  
-void GameLobbyPage::draw() {
+void GameLobbyPage::update(){
   if (_state) {
     std::unique_ptr<Vishala::GameLobbyStateUpdate> s = _state->getGameLobbyStateUpdate();
     if (s)
       updateGameLobbyState(std::move(s));
   }
+}
 
+void GameLobbyPage::draw() {
   _page->draw();
 }
 
@@ -58,7 +60,6 @@ void GameLobbyPage::goBack() {
 
 void GameLobbyPage::startGame() {
   _status = GameLobbyPageStatus::WaitForStartGame;
-
 }
 
 void GameLobbyPage::reset() {

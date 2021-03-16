@@ -17,6 +17,7 @@ class GameLobbyPage : public YolonaOss::GL::Drawable {
 public:
   GameLobbyPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state);
 
+  void update();
   virtual void draw()                                  override;
   virtual void load(YolonaOss::GL::DrawSpecification*) override;
   void setVisible(bool visible);

@@ -25,6 +25,7 @@ namespace Vishala {
     private:
       void        sendUpdate();
 
+      bool                                              _gameStarted  = false;
       std::string                                       _name         ;
       size_t                                            _number       ;
       std::shared_ptr<LobbyModel>                       _model        ;

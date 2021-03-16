@@ -41,7 +41,6 @@ void ClientState::update() {
     else if (_status == ClientStateStatus::JoinLoading && _lobbyClient->getStatus() == Vishala::Client::LobbyClient::Status::GameJoined) {
       _status = ClientStateStatus::Joined;
     }
-
   }
 }
 

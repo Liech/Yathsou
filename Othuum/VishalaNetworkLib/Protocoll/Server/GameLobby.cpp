@@ -54,6 +54,7 @@ namespace Vishala {
         update.currentPlayers.push_back(player);
       }
       update.gameName = getName();
+      update.gameStart = _gameStarted;
 
       for (auto p : _participators)
         p.second->sendGameLobbyUpdate(update);
@@ -61,7 +62,8 @@ namespace Vishala {
 
     void GameLobby::startGame() {
       std::cout << "GAME START" << std::endl;
-      
+      _gameStarted = true;
+      sendUpdate();      
     }
   }
 }
