@@ -11,6 +11,7 @@ namespace Vishala {
       BinaryPackage p = currentPlayers[i].toBinary();
       result.add(p);
     }
+    val2bin(result, gameStart);
     return result;
   }
 
@@ -24,6 +25,7 @@ namespace Vishala {
       game.fromBinary(Package);
       currentPlayers.push_back(game);
     }
+    gameStart = bin2val<bool>(Package);
   }
 
   nlohmann::json GameLobbyStateUpdate::toJson() {
@@ -36,6 +38,7 @@ namespace Vishala {
     }
     result["CurrentPlayers"] = arr;
     result["GameName"]       = gameName;
+    result["GameStart"]      = gameStart;
     return result;
   }
 
@@ -46,6 +49,7 @@ namespace Vishala {
       g.fromJson(game);
       currentPlayers.push_back(g);
     }
-    gameName = data["GameName"];
+    gameName  = data["GameName"];
+    gameStart = data["GameStart"];
   }
 }

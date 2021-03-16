@@ -80,6 +80,12 @@ namespace Vishala {
     data.data.insert(data.data.end(), c, c + size);
   }
 
+  template<>
+  void Serialization::val2bin<bool>(BinaryPackage& data, bool& value) {
+    int v = value ? 1 : 0;
+    val2bin(data, v);
+  }
+
   template <>
   std::string Serialization::bin2val<std::string>(BinaryPackage& data) {
     int len = bin2val<int>(data);    
@@ -102,6 +108,12 @@ namespace Vishala {
     int* b = &a;
     float* c = (float*)b;
     return *c;
+  }
+
+  template <>
+  bool Serialization::bin2val<bool>(BinaryPackage& data) {
+    int  a = bin2val<int>(data);
+    return a!=0;
   }
 
   template<>

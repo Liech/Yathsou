@@ -34,6 +34,7 @@ public:
     GameLobbyHost,
     GameLobbyClient,
     LoadJoin,
+    LoadStartGame,
     GameStarted,
     SideProject
   };

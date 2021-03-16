@@ -27,7 +27,7 @@ void MainMenuPage::load(YolonaOss::GL::DrawSpecification* spec) {
   _page->layout().addLabel("Main Menu Page");
   _page->layout().addButton("SideProject", [this]() { startSideProject();         });
   _startServerButton =
-    _page->layout().addButton("Server", [this]() { if (!_serverStarted) startServer();         });
+  _page->layout().addButton("Server"     , [this]() { if (!_serverStarted) startServer();         });
   _page->layout().addButton("Multiplayer", [this]() { startLobbyJoin();           });
   _page->layout().addButton("Options"    , [this]() { startOptions();             });
   _page->layout().addButton("Quit"       , [spec]() { spec->getWindow()->close(); });

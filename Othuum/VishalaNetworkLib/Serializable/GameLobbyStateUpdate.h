@@ -12,6 +12,7 @@ namespace Vishala {
   public:
     std::vector<GameLobbyPlayer> currentPlayers;
     std::string                  gameName      ;
+    bool                         gameStart     = false;
 
     virtual BinaryPackage toBinary()                override;
     virtual void fromBinary(BinaryPackage& Package) override;

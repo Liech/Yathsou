@@ -82,6 +82,12 @@ void ClientState::requestRefresh() {
   _lobbyClient->requestRefresh();
 }
 
+void ClientState::startGame() {
+  if (_status != ClientStateStatus::Host)
+    throw std::runtime_error("Wrong status");
+  _lobbyClient->startGameRequest();
+}
+
 std::unique_ptr<Vishala::LobbyStateUpdate> ClientState::getLobbyStateUpdate() {
   if (!_lobbyClient)
     return nullptr;

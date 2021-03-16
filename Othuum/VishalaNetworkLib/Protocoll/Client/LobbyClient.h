@@ -23,6 +23,7 @@ namespace Vishala {
       void                joinGame(size_t gameID);
       void                closeGame();
       void                requestRefresh();
+      void                startGameRequest();
 
       void messageRecived  (size_t player, size_t channel, std::unique_ptr<BinaryPackage> package);
       void newConnection   (size_t clientnumber, std::string ip, int port);

@@ -200,15 +200,21 @@ void MainMenuLogic::update() {
   }
   else if (_stat == status::GameLobbyHost|| _stat == status::GameLobbyClient) {
     if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::Back) {
-    _gameLobbyPage->setVisible(false);
-    _lobbyPage->setVisible(true);
-    _stat = status::Lobby;  
-    _state->closeGame();
-    _gameLobbyPage->reset();
+      _gameLobbyPage->setVisible(false);
+      _lobbyPage->setVisible(true);
+      _stat = status::Lobby;  
+      _state->closeGame();
+      _gameLobbyPage->reset();
+    }
+    else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::WaitForStartGame) {
+      _gameLobbyPage->setVisible(false);
+      _state->startGame();
+      //_stat = status::LoadStartGame;
     }
     else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::StartGame) {
       _gameLobbyPage->setVisible(false);
       _stat = status::GameStarted;
+      std::cout << "Game started" << std::endl;
     }
   }
   else if (_stat == status::Error) {

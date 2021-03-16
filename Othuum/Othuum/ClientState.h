@@ -25,6 +25,7 @@ public:
   void host(Vishala::CreateGameRequest options);
   void join(size_t id);
   void requestRefresh();
+  void startGame();
 
   std::unique_ptr<Vishala::LobbyStateUpdate>     getLobbyStateUpdate();
   std::unique_ptr<Vishala::GameLobbyStateUpdate> getGameLobbyStateUpdate();

@@ -40,6 +40,8 @@ void GameLobbyPage::updateGameLobbyState(std::unique_ptr<Vishala::GameLobbyState
   for (auto p : update->currentPlayers) {
     _participatorsLayout->addLabel(std::to_string(p.lobbyIdentification.id) + ": " + p.lobbyIdentification.name);
   }
+  if (update->gameStart)
+    _status = GameLobbyPageStatus::StartGame;
 }
 
 void GameLobbyPage::setVisible(bool visible) {
@@ -55,7 +57,8 @@ void GameLobbyPage::goBack() {
 }
 
 void GameLobbyPage::startGame() {
-  _status = GameLobbyPageStatus::StartGame;
+  _status = GameLobbyPageStatus::WaitForStartGame;
+
 }
 
 void GameLobbyPage::reset() {

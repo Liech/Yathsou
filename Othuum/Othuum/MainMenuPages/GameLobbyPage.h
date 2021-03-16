@@ -10,7 +10,7 @@
 #include "VishalaNetworkLib/Serializable/GameLobbyStateUpdate.h"
 
 enum class GameLobbyPageStatus {
-  Pending, Back, StartGame
+  Pending, Back, WaitForStartGame, StartGame
 };
 
 class GameLobbyPage : public YolonaOss::GL::Drawable {

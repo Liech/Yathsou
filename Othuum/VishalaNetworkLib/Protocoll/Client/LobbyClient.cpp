@@ -119,10 +119,16 @@ namespace Vishala {
       std::unique_ptr<BinaryPackage> package = std::make_unique<BinaryPackage>(msg.toBinary());
       _connection->send(0, 0, std::move(package));
     }
-    
+
     void LobbyClient::requestRefresh() {
       Vishala::Client2LobbyMessage msg;
       msg.type = Vishala::Client2LobbyMessage::Type::LobbyRefresh;
+      sendMessage(msg);
+    }
+
+    void LobbyClient::startGameRequest() {
+      Vishala::Client2LobbyMessage msg;
+      msg.type = Vishala::Client2LobbyMessage::Type::StartGame;
       sendMessage(msg);
     }
 
