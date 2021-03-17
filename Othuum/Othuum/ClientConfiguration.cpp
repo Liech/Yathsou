@@ -2,14 +2,16 @@
 
 nlohmann::json ClientConfiguration::toJson() {
   nlohmann::json result;
-  result["PlayerName"]        = playerName;
-  result["PlayerColor"] = playerColor;
-  result["Resolution"]        = resolution;
-  result["HostPort"]          = hostPort;
-  result["LastGameName"]      = lastGameName;
-  result["LobbyServerAdress"] = lobbyServerAdress;
-  result["LobbyServerMyPort"]   = lobbyServerMyPort;
+  result["PlayerName"]             = playerName;
+  result["PlayerColor"]            = playerColor;
+  result["Resolution"]             = resolution;
+  result["HostPort"]               = hostPort;
+  result["LastGameName"]           = lastGameName;
+  result["LobbyServerAdress"]      = lobbyServerAdress;
+  result["LobbyServerMyPort"]      = lobbyServerMyPort;
   result["LobbyServerTheirPort"]   = lobbyServerTheirPort;
+  result["GameServerPort"]         = gameServerPort;
+  result["MyGameClientPort"]       = myGameClientPort;
   return result;
 }
 
@@ -22,6 +24,8 @@ void ClientConfiguration::fromJson(nlohmann::json from) {
   lobbyServerAdress    = from["LobbyServerAdress"];
   lobbyServerMyPort    = from["LobbyServerMyPort"];
   lobbyServerTheirPort = from["LobbyServerTheirPort"];
+  gameServerPort       = from["GameServerPort"];
+  myGameClientPort     = from["MyGameClientPort"];
 }
 
 Vishala::BinaryPackage ClientConfiguration::toBinary() {
@@ -34,6 +38,8 @@ Vishala::BinaryPackage ClientConfiguration::toBinary() {
   val2bin<std::string>(result, lobbyServerAdress);
   val2bin<int>        (result, lobbyServerMyPort);
   val2bin<int>        (result, lobbyServerTheirPort);
+  val2bin<int>        (result, gameServerPort);
+  val2bin<int>        (result, myGameClientPort);
   return result;
 }
 
@@ -46,4 +52,6 @@ void ClientConfiguration::fromBinary(Vishala::BinaryPackage& data) {
   lobbyServerAdress    = bin2val<std::string>(data);
   lobbyServerMyPort    = bin2val<int        >(data);
   lobbyServerTheirPort = bin2val<int        >(data);
+  gameServerPort       = bin2val<int        >(data);
+  myGameClientPort     = bin2val<int        >(data);
 }

@@ -10,9 +10,11 @@ namespace Vishala {
   namespace Server {
     class LobbyPlayer;
 
+    class GameServer{};
+
     class GameLobby {
     public:
-      GameLobby(std::string name, size_t gameNumber, std::shared_ptr<LobbyModel> model);
+      GameLobby(std::string name,int gameServerPort, std::string ip, size_t gameNumber, std::shared_ptr<LobbyModel> model);
 
       std::string getName();
       size_t      getNumber();
@@ -25,6 +27,8 @@ namespace Vishala {
     private:
       void        sendUpdate();
 
+      std::string                                       _gameServerIP = "localhost";
+      int                                               _gameServerPort = 0;
       bool                                              _gameStarted  = false;
       std::string                                       _name         ;
       size_t                                            _number       ;

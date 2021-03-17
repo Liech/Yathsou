@@ -169,6 +169,7 @@ namespace Vishala {
           msg.player = (size_t)event.peer->data;
           event.peer->data = NULL;
           _peers.erase((size_t)event.peer->data);
+          std::cout << "DC!"<<std::endl;
         }
         }
         _threadQueueRecive.enqueue(msg);

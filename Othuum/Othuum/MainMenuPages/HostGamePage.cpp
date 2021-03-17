@@ -60,6 +60,7 @@ void HostGamePage::reset() {
 Vishala::CreateGameRequest HostGamePage::getResult() {
   Vishala::CreateGameRequest result;
   result.gameName = _gameName->getText();
+  result.serverPort = _config->gameServerPort;
   return result;
 }
 

@@ -10,6 +10,7 @@ namespace Vishala {
   struct CreateGameRequest : public Serialization {
   public:
     std::string                        gameName;
+    int                                serverPort = 6333;
     
     virtual nlohmann::json             toJson()                  override;
     virtual void                       fromJson(nlohmann::json)  override;

@@ -17,12 +17,15 @@ class GameLobbyPage : public YolonaOss::GL::Drawable {
 public:
   GameLobbyPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state);
 
-  void update();
+  void         update();
   virtual void draw()                                  override;
   virtual void load(YolonaOss::GL::DrawSpecification*) override;
-  void setVisible(bool visible);
-  void reset();
-  void start();
+  void         setVisible(bool visible);
+  void         reset();
+  void         start();
+
+  std::string getGameIP();
+  int         getGamePort();
 
   GameLobbyPageStatus getStatus();
 private:
@@ -36,4 +39,7 @@ private:
   std::shared_ptr<ClientState        > _state; 
   std::shared_ptr<YolonaOss::Widgets::ListLayout> _participatorsLayout;
   std::shared_ptr<YolonaOss::Widgets::Button>     _startButton;
+
+  int         _port;
+  std::string _ip;
 };

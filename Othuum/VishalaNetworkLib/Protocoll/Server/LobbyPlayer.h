@@ -29,6 +29,7 @@ namespace Vishala {
       };
       LobbyPlayer(int myport, std::string ip, int port, size_t playerNumber, std::shared_ptr<LobbyModel> model);
 
+      std::string        getIP();
       std::string        getName();
       std::array<int, 3> getColor();
 

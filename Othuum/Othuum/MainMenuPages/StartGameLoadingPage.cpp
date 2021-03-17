@@ -45,7 +45,6 @@ void StartGameLoadingPage::update() {
     _text->setText(std::to_string(_loader->getProgression() * 100));
     if (_loader->isFinished())
       _status = StartGameLoadingPageStatus::Proceed;
-
   }
 }
 
@@ -70,7 +69,6 @@ void StartGameLoadingPage::goBack() {
   _status = StartGameLoadingPageStatus::Back;
   if (_loader->isStarted())
     _loader->abort();
-
 }
 
 void StartGameLoadingPage::reset() {

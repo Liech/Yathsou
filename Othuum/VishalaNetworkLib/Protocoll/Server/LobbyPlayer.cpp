@@ -34,6 +34,11 @@ namespace Vishala {
       _connection->connect(port, ip);
     }
 
+    std::string LobbyPlayer::getIP() {
+      return _ip;
+    }
+
+
     std::array<int,3> LobbyPlayer::getColor() {
       return _color;
     }

@@ -20,11 +20,14 @@
 #include "YolonaOss/OpenGL/DrawSpecification.h"
 #include <IyathuumCoreLib/lib/glm/gtx/intersect.hpp>
 #include "YolonaOss/Drawables/Widgets/LineEdit.h"
+#include "IyathuumCoreLib/Util/ContentLoader.h"
+#include "SideProject/SideProjectMain.h"
 #include <iomanip>
 
 #include "ClientConfiguration.h"
 #include "ClientState.h"
 #include "MainMenuLogic.h"
+#include "MainMenuLogicResult.h"
 
 #include "AhwassaGraphicsLib/sound.h"
 
@@ -45,18 +48,38 @@ int main(int argc, char** argv) {
 
     std::filesystem::current_path(exe);
     std::shared_ptr<ClientConfiguration> configuration = std::make_shared<ClientConfiguration>();
-    std::shared_ptr<ClientState>         state         = std::make_shared<ClientState>(configuration);
+    std::shared_ptr<ClientState>         state = std::make_shared<ClientState>(configuration);
     std::string configFileName = "ClientConfiguration.json";
     configuration->fromJsonFile(configFileName);
 
-    int width  = configuration->resolution[0];
+    int width = configuration->resolution[0];
     int height = configuration->resolution[1];
     GL::Window w(width, height);
-    
-    MainMenuLogic logic(w,configuration,state);
 
-    w.Update = [&logic, state]() {
-      logic.update();
+    MainMenuLogic logic(w, configuration, state);
+
+    std::unique_ptr<MainMenuLogicResult> rslt = nullptr;
+
+    auto contentCreator = [&w]() {
+      std::shared_ptr<Iyathuum::ContentLoader> loader = std::make_shared<Iyathuum::ContentLoader>();
+      loader->addPackage([&w]() {
+        auto sp = std::make_shared<SideProject::SideProjectMain>();
+        sp->load(w.getSpec());
+        Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(sp, { "Main" });
+        }, true);
+      return loader;
+    };
+  
+    logic.setContentLoaderCreater(contentCreator);
+
+
+    w.Update = [&logic, state,&rslt]() {      
+      if (logic.getStatus() != MainMenuLogic::status::GameRunning)
+        logic.update();
+      else {
+        if (!rslt)
+          rslt = std::move(logic.extractResult());
+      }
       state->update();
     };
     w.run();

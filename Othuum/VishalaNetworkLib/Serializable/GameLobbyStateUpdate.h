@@ -13,6 +13,8 @@ namespace Vishala {
     std::vector<GameLobbyPlayer> currentPlayers;
     std::string                  gameName      ;
     bool                         gameStart     = false;
+    int                          gameServerPort = 1234;
+    std::string                  gameServerIP = "localhost";
 
     virtual BinaryPackage toBinary()                override;
     virtual void fromBinary(BinaryPackage& Package) override;

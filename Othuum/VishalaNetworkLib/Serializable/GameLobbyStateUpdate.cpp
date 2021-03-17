@@ -4,7 +4,9 @@ namespace Vishala {
 
   BinaryPackage GameLobbyStateUpdate::toBinary() {
     BinaryPackage result;
-    val2bin<std::string>(result,gameName);
+    val2bin<std::string>(result, gameName);
+    val2bin<std::string>(result, gameServerIP);
+    val2bin<int>(result, gameServerPort);
     int numberOfEntries = currentPlayers.size();
     val2bin(result,numberOfEntries);
     for (int i = 0; i < numberOfEntries; i++) {
@@ -19,6 +21,8 @@ namespace Vishala {
     currentPlayers.clear();
 
     gameName = bin2val<std::string>(Package);
+    gameServerIP = bin2val<std::string>(Package);
+    gameServerPort = bin2val<int>(Package);
     int numberOfEntries = bin2val<int>(Package);
     for (size_t i = 0; i < numberOfEntries; i++) {
       GameLobbyPlayer game;
@@ -39,6 +43,8 @@ namespace Vishala {
     result["CurrentPlayers"] = arr;
     result["GameName"]       = gameName;
     result["GameStart"]      = gameStart;
+    result["GameServerPort"] = gameServerPort;
+    result["GameServerIP"]   = gameServerIP;
     return result;
   }
 
@@ -49,7 +55,9 @@ namespace Vishala {
       g.fromJson(game);
       currentPlayers.push_back(g);
     }
-    gameName  = data["GameName"];
-    gameStart = data["GameStart"];
+    gameName       = data["GameName"];
+    gameStart      = data["GameStart"];
+    gameServerPort = data["GameServerPort"];
+    gameServerIP   = data["GameServerIP"];
   }
 }

@@ -22,9 +22,10 @@
 #include "YolonaOss/OpenGL/Drawable.h"
 #include "YolonaOss/OpenGL/Window.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
-
 #include <thread>
 #include "IyathuumCoreLib/Util/ContentLoader.h"
+#include "UyanahGameServer/DedicatedServerConfiguration.h"
+#include "UyanahGameServer/ClientConfiguration.h"
 
 MainMenuLogic::MainMenuLogic(YolonaOss::GL::Window& window,std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state) 
   : _window(window)
@@ -172,6 +173,7 @@ void MainMenuLogic::update() {
       _hostPage->setVisible(true);
       _stat = status::AdjustHostOptions;
       _hostLoadingPage->reset();
+      _server = nullptr;
     }
     else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Proceed) {
       _hostLoadingPage->setVisible(false);
@@ -179,6 +181,7 @@ void MainMenuLogic::update() {
       _stat = status::GameLobbyHost;
       _hostLoadingPage->reset();
       _gameLobbyPage->start();
+      createServer();
     }
     else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Error) {
       showError("Error while hosting game", "ERROR");
@@ -211,6 +214,7 @@ void MainMenuLogic::update() {
       _stat = status::Lobby;  
       _state->closeGame();
       _gameLobbyPage->reset();
+      _server = nullptr;
     }
     else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::WaitForStartGame) {
       _gameLobbyPage->setVisible(false);
@@ -220,15 +224,23 @@ void MainMenuLogic::update() {
       setLoader();
       _startGameLoadingPage->HostWait();
       _stat = status::HostWaitStartGame;
+      _clientConfig.serverIP   = _gameLobbyPage->getGameIP();
+      _clientConfig.serverPort = _gameLobbyPage->getGamePort();
+      _clientConfig.myPort     = _config->myGameClientPort;
+      createClient();
     }
     else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::StartGame) {
       _gameLobbyPage->setVisible(false);
-      _gameLobbyPage->reset();
       setLoader();
       _startGameLoadingPage->setVisible(true);
       _startGameLoadingPage->LoadGame();
       _stat = status::GameLoading;
       std::cout << "Game started" << std::endl;
+      _clientConfig.serverIP   = _gameLobbyPage->getGameIP();
+      _clientConfig.serverPort = _gameLobbyPage->getGamePort();
+      _clientConfig.myPort = _config->myGameClientPort;
+      createClient();
+      _gameLobbyPage->reset();
     }
   }
   else if (_stat == status::HostWaitStartGame || _stat == status::GameLoading)
@@ -240,12 +252,17 @@ void MainMenuLogic::update() {
       _stat = status::Lobby;
       _state->closeGame();
       _startGameLoadingPage->reset();
+      _server = nullptr;
+      std::cout << "StartGameLoadingPageStatus::Back" << std::endl;
     }
     else if (_startGameLoadingPage->getStatus() == StartGameLoadingPageStatus::Error) {
       showError("Error while loading game", "ERROR");
     }
     else if (_startGameLoadingPage->getStatus() == StartGameLoadingPageStatus::Proceed) {
-      showError("Game Loading Finished", "ERROR");
+      _startGameLoadingPage->setVisible(false); 
+      _startGameLoadingPage->reset();
+      _stat = status::GameRunning;
+      std::cout << "StartGameLoadingPageStatus::Proceed" << std::endl;
     }
   }
   else if (_stat == status::Error) {
@@ -258,13 +275,12 @@ void MainMenuLogic::update() {
   }
 }
 
+void MainMenuLogic::setContentLoaderCreater(std::function<std::shared_ptr<Iyathuum::ContentLoader>()> c){
+  _contentCreator = c;
+}
+
 void MainMenuLogic::setLoader() {
-  auto l = std::make_shared<Iyathuum::ContentLoader>();
-  l->addPackage([]() {
-    using namespace std::chrono_literals;
-    std::this_thread::sleep_for(2000ms);
-  },false);
-  _startGameLoadingPage->setLoader(l);
+  _startGameLoadingPage->setLoader(_contentCreator());
 }
 
 void MainMenuLogic::showError(std::string desc,std::string title) {
@@ -290,15 +306,34 @@ void MainMenuLogic::showError(std::string desc,std::string title) {
   _gameLobbyPage       ->reset();
   _joinLoadingPage     ->reset();
   _startGameLoadingPage->reset();
+  _server = nullptr;
+  _client = nullptr;
   _errorPage->setMessage(desc,title);
   _state->stop();
 }
 
-MainMenuLogicResult MainMenuLogic::extractResult(){
+void MainMenuLogic::createClient() {
+  _client = std::make_unique<Uyanah::Client>();
+  _client->setConfig(_clientConfig);
+  _client->start();
+}
+
+void MainMenuLogic::createServer() {
+  _server = std::make_unique<Uyanah::DedicatedServer>();
+  Uyanah::DedicatedServerConfiguration config;
+  config.welcomePort = _config->gameServerPort;
+  _server->setConfig(config);
+  _server->start();
+}
+
+std::unique_ptr<MainMenuLogicResult> MainMenuLogic::extractResult(){
   if (getStatus() != status::GameRunning)
     throw std::runtime_error("Wrong status");
-  MainMenuLogicResult result;
+  std::unique_ptr < MainMenuLogicResult> result = std::make_unique<MainMenuLogicResult>();
+  if (_server)
+    result->_server = std::move(_server);
+  if (_client)
+    result->_client = std::move(_client);
   _extracted = true;
-  throw std::runtime_error("Waahhhhh");
-  return result;
+  return std::move(result);
 }

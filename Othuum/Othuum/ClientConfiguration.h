@@ -12,6 +12,8 @@ public:
   std::string        lobbyServerAdress   = "localhost";
   int                lobbyServerMyPort   = 6112;
   int                lobbyServerTheirPort= 6114;
+  int                gameServerPort      = 6113;
+  int                myGameClientPort    = 6110;
 
   virtual nlohmann::json             toJson()                            override;
   virtual void                       fromJson(nlohmann::json)            override;

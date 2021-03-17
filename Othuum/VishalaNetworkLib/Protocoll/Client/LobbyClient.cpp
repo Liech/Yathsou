@@ -129,7 +129,8 @@ namespace Vishala {
     void LobbyClient::startGameRequest() {
       Vishala::Client2LobbyMessage msg;
       msg.type = Vishala::Client2LobbyMessage::Type::StartGame;
-      sendMessage(msg);
+      std::cout << "startGameRequest" << std::endl;
+      sendMessage(msg);      
     }
 
     std::unique_ptr<Vishala::LobbyStateUpdate> LobbyClient::getLobbyStateUpdate() {

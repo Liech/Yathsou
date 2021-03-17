@@ -5,10 +5,12 @@
 
 namespace Vishala {
   namespace Server {
-    GameLobby::GameLobby(std::string name, size_t number, std::shared_ptr<LobbyModel> model) {
-      _name   = name  ;
-      _model  = model ;
-      _number = number;
+    GameLobby::GameLobby(std::string name,int gameServerPort, std::string ip, size_t number, std::shared_ptr<LobbyModel> model) {
+      _name           = name  ;
+      _model          = model ;
+      _number         = number;
+      _gameServerPort = gameServerPort;
+      _gameServerIP   = ip;
     }
 
     std::string GameLobby::getName() {
@@ -53,8 +55,10 @@ namespace Vishala {
         std::cout << "  " << player.lobbyIdentification.name << std::endl;
         update.currentPlayers.push_back(player);
       }
-      update.gameName = getName();
-      update.gameStart = _gameStarted;
+      update.gameName       = getName();
+      update.gameStart      = _gameStarted;
+      update.gameServerPort = _gameServerPort;
+      update.gameServerIP   = _gameServerIP;
 
       for (auto p : _participators)
         p.second->sendGameLobbyUpdate(update);

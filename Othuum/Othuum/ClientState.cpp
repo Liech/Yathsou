@@ -1,5 +1,6 @@
 #include "ClientState.h"
 
+#include <iostream>
 
 ClientState::ClientState(std::shared_ptr<ClientConfiguration> config) {
   _config = config;
@@ -58,6 +59,7 @@ void ClientState::closeGame() {
   if (_status != ClientStateStatus::Host && _status != ClientStateStatus::Joined)
     throw std::runtime_error("Wrong status");
   _status = ClientStateStatus::Lobby;
+  std::cout << "ClientState::closeGame" << std::endl;
   _lobbyClient->closeGame();
 }
 

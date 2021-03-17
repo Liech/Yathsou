@@ -44,6 +44,8 @@ void GameLobbyPage::updateGameLobbyState(std::unique_ptr<Vishala::GameLobbyState
   }
   if (update->gameStart)
     _status = GameLobbyPageStatus::StartGame;
+  _port = update->gameServerPort;
+  _ip = update->gameServerIP;
 }
 
 void GameLobbyPage::setVisible(bool visible) {
@@ -60,6 +62,7 @@ void GameLobbyPage::goBack() {
 
 void GameLobbyPage::startGame() {
   _status = GameLobbyPageStatus::WaitForStartGame;
+  std::cout << "GameLobbyPage::startGame" << std::endl;
 }
 
 void GameLobbyPage::reset() {
@@ -70,4 +73,10 @@ void GameLobbyPage::start() {
   _startButton->setVisible(_state->getStatus() == ClientStateStatus::Host);
 }
 
+std::string GameLobbyPage::getGameIP() {
+  return _ip;
+}
 
+int GameLobbyPage::getGamePort() {
+  return _port;
+}
