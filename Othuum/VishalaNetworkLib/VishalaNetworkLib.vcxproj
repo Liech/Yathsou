@@ -149,7 +149,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib/enet/enet64.lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Ws2_32.Lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib/enet/enet64.lib;$(ProjectDir)lib/xdelta3/xdelta3.lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Ws2_32.Lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -195,7 +195,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib/enet/enet64.lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Ws2_32.Lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib/enet/enet64.lib;$(ProjectDir)lib/xdelta3/xdelta3.lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Ws2_32.Lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -258,6 +258,18 @@
     <ClInclude Include="lib\json.hpp" />
     <ClInclude Include="lib\json_fwd.hpp" />
     <ClInclude Include="lib\readerwriterqueue.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-blkcache.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-cfgs.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-decode.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-djw.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-fgk.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-hash.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-internal.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-list.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-lzma.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-merge.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-second.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3.h" />
     <ClInclude Include="Protocoll\Client\LobbyClient.h" />
     <ClInclude Include="Protocoll\Client\LobbyConnector.h" />
     <ClInclude Include="Protocoll\Server\GameLobby.h" />

@@ -14,3 +14,4 @@ bullet                         |suthanu     | physics
 lua                            |haas        | scripting
 lua-matrix                     |haas        | matrix operations in scripting
 kikito/inspect.lua             |haas        | debug inside lua
+xdelta3                        |vishala     | delta compression

@@ -55,6 +55,9 @@
     <Filter Include="Source Files\Protocoll\Client">
       <UniqueIdentifier>{f82ece2e-213d-4452-aa08-d95d6112ef5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib\xdelta3">
+      <UniqueIdentifier>{a39c634d-58d4-4397-913b-a89c4dfc1391}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Serializable\Message.h">
@@ -188,6 +191,42 @@
     </ClInclude>
     <ClInclude Include="Core\NetworkGameSeedInput.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-decode.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-djw.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-fgk.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-hash.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-internal.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-list.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-lzma.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-merge.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-second.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-blkcache.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-cfgs.h">
+      <Filter>lib\xdelta3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

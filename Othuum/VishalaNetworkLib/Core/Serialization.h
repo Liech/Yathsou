@@ -19,10 +19,13 @@ namespace Vishala {
             void                       toBinFile(std::string filename);
             void                       fromBinFile(std::string filename); 
 
+    static BinaryPackage createDelta(const BinaryPackage& oldData, const BinaryPackage& newData);
+    static BinaryPackage applyDelta(const BinaryPackage& oldData, BinaryPackage& delta);
+
     template<typename type>
-    type bin2val(BinaryPackage& data);
+    static type bin2val(BinaryPackage& data);
     template<typename type>
-    void val2bin(BinaryPackage& data, type& value);
+    static void val2bin(BinaryPackage& data, type& value);
 
     template<typename type>
     std::vector<type> bin2vec(BinaryPackage& data) {

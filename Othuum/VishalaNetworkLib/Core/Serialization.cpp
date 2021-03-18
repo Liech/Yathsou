@@ -3,6 +3,9 @@
 #include <fstream>
 #include <filesystem>
 #include <bitset>
+#include <algorithm>
+
+#include "VishalaNetworkLib/lib/xdelta3/xdelta3.h"
 
 namespace Vishala {
   void Serialization::toBinFile(std::string filename) {
@@ -130,5 +133,35 @@ namespace Vishala {
     data.data.insert(data.data.end(), result.data.begin(), result.data.end());
   }
 
+  BinaryPackage Serialization::createDelta(const BinaryPackage& oldData, const BinaryPackage& newData){
+    const size_t reservedSize = newData.data.size()<1024?1024: newData.data.size();
+    BinaryPackage result;
+    result.data.resize(reservedSize);
+    usize_t usedSize = 0;
+    int errorCode = xd3_encode_memory(newData.data.data(), newData.data.size(), oldData.data.data(), oldData.data.size(), result.data.data(), &usedSize, reservedSize, 0);
+    
+    result.position = usedSize;
+    size_t len = newData.data.size();
+    val2bin<size_t>(result, len);
+    result.position = 0;
+    result.data.resize(usedSize + sizeof(size_t));
+    return result;
+  }
 
+  BinaryPackage Serialization::applyDelta(const BinaryPackage& oldData, BinaryPackage& delta) {
+    size_t oldDeltaData = oldData.position;
+    delta.position = oldData.data.size() - sizeof(size_t);
+    size_t newSize = bin2val<size_t>(delta);
+    delta.position = oldDeltaData;
+
+    BinaryPackage result;
+    result.data.resize(newSize);
+    size_t actualNewSize = 0;
+
+    xd3_decode_memory(delta.data.data(), delta.data.size(), oldData.data.data(), oldData.data.size() - sizeof(size_t), result.data.data(), &actualNewSize, newSize, 0);
+    if (actualNewSize != newSize)
+      throw std::runtime_error("Decrompress error");
+
+    return result;
+  }
 }
