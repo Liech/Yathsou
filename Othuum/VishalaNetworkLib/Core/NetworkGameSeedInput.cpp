@@ -3,27 +3,27 @@
 namespace Vishala {
   BinaryPackage NetworkGameSeedInput::toBinary() {
     BinaryPackage result;
-    val2bin<int        >(result, ownPort);
-    val2bin<int        >(result, numberOfChannels);
+    BinaryPackage::val2bin<int        >(result, ownPort);
+    BinaryPackage::val2bin<int        >(result, numberOfChannels);
 
     int numberOfEntries = targets.size();
-    val2bin<int>(result, numberOfEntries);
+    BinaryPackage::val2bin<int>(result, numberOfEntries);
     for (int i = 0; i < numberOfEntries; i++) {
-      val2bin<std::string>(result, targets[i].IP  );
-      val2bin<int        >(result, targets[i].port);
+      BinaryPackage::val2bin<std::string>(result, targets[i].IP  );
+      BinaryPackage::val2bin<int        >(result, targets[i].port);
     }    
     return result;
   }
 
   void NetworkGameSeedInput::fromBinary(BinaryPackage& Package) {
-    ownPort = bin2val<int        >(Package);
-    numberOfChannels = bin2val<int        >(Package);
+    ownPort = BinaryPackage::bin2val<int        >(Package);
+    numberOfChannels = BinaryPackage::bin2val<int        >(Package);
 
     targets.clear();
-    int numberOfEntries = bin2val<int>(Package);    
+    int numberOfEntries = BinaryPackage::bin2val<int>(Package);    
     for (int i = 0; i < numberOfEntries; i++){
-      targets[i].IP   = bin2val<std::string>(Package);
-      targets[i].port = bin2val<int        >(Package);
+      targets[i].IP   = BinaryPackage::bin2val<std::string>(Package);
+      targets[i].port = BinaryPackage::bin2val<int        >(Package);
     }
   }
 

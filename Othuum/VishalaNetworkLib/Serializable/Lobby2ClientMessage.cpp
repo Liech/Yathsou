@@ -44,7 +44,7 @@ namespace Vishala {
   BinaryPackage Lobby2ClientMessage::toBinary() {
     BinaryPackage result;
     int number = (int)type;
-    val2bin<int>(result, number);
+    BinaryPackage::val2bin<int>(result, number);
     if (type == Type::Acknowledgment)
       result.add(acknowledgment.toBinary());
     else if (type == Type::LobbyBriefing)
@@ -59,7 +59,7 @@ namespace Vishala {
   }
 
   void Lobby2ClientMessage::fromBinary(BinaryPackage& data) {
-    int number = bin2val<int>(data);
+    int number = BinaryPackage::bin2val<int>(data);
     type = (Type)number;
     if (type == Type::Acknowledgment)
       acknowledgment.fromBinary(data);

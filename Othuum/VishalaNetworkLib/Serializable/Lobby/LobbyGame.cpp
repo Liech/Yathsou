@@ -6,18 +6,18 @@ namespace Vishala {
 
   BinaryPackage LobbyGame::toBinary(){
     BinaryPackage result;
-    val2bin(result, name);
-    val2bin(result, numberOfPlayers);
-    val2bin(result, maxNumberOfPlayers);
-    val2bin(result, gameID);
+    BinaryPackage::val2bin(result, name);
+    BinaryPackage::val2bin(result, numberOfPlayers);
+    BinaryPackage::val2bin(result, maxNumberOfPlayers);
+    BinaryPackage::val2bin(result, gameID);
     return result;
   }
 
   void LobbyGame::fromBinary(BinaryPackage& Package) {
-    name               = bin2val<std::string>(Package);
-    numberOfPlayers    = bin2val<int>(Package);
-    maxNumberOfPlayers = bin2val<int>(Package);
-    gameID             = bin2val<int>(Package);
+    name               = BinaryPackage::bin2val<std::string>(Package);
+    numberOfPlayers    = BinaryPackage::bin2val<int>(Package);
+    maxNumberOfPlayers = BinaryPackage::bin2val<int>(Package);
+    gameID             = BinaryPackage::bin2val<int>(Package);
   }
 
   nlohmann::json LobbyGame::toJson(){

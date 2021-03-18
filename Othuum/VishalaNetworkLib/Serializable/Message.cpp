@@ -15,13 +15,13 @@ namespace Vishala {
 
   BinaryPackage Message::toBinary() {
     BinaryPackage result;
-    val2bin<int>(result, playerID);
-    val2bin<int>(result, message );
+    BinaryPackage::val2bin<int>(result, playerID);
+    BinaryPackage::val2bin<int>(result, message );
     return result;
   }
 
   void Message::fromBinary(BinaryPackage& data) {
-    playerID = bin2val<int>(data);
-    message  = bin2val<int>(data);
+    playerID = BinaryPackage::bin2val<int>(data);
+    message  = BinaryPackage::bin2val<int>(data);
   }
 }

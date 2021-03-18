@@ -30,28 +30,28 @@ void ClientConfiguration::fromJson(nlohmann::json from) {
 
 Vishala::BinaryPackage ClientConfiguration::toBinary() {
   Vishala::BinaryPackage result;  
-  val2bin<std::string>(result, playerName  );
-  arr2bin<int,3>      (result, playerColor );
-  arr2bin<int, 2>     (result, resolution  );
-  val2bin<int>        (result, hostPort    );
-  val2bin<std::string>(result, lastGameName);
-  val2bin<std::string>(result, lobbyServerAdress);
-  val2bin<int>        (result, lobbyServerMyPort);
-  val2bin<int>        (result, lobbyServerTheirPort);
-  val2bin<int>        (result, gameServerPort);
-  val2bin<int>        (result, myGameClientPort);
+  Vishala::BinaryPackage::val2bin<std::string>(result, playerName  );
+  Vishala::BinaryPackage::arr2bin<int,3>      (result, playerColor );
+  Vishala::BinaryPackage::arr2bin<int, 2>     (result, resolution  );
+  Vishala::BinaryPackage::val2bin<int>        (result, hostPort    );
+  Vishala::BinaryPackage::val2bin<std::string>(result, lastGameName);
+  Vishala::BinaryPackage::val2bin<std::string>(result, lobbyServerAdress);
+  Vishala::BinaryPackage::val2bin<int>        (result, lobbyServerMyPort);
+  Vishala::BinaryPackage::val2bin<int>        (result, lobbyServerTheirPort);
+  Vishala::BinaryPackage::val2bin<int>        (result, gameServerPort);
+  Vishala::BinaryPackage::val2bin<int>        (result, myGameClientPort);
   return result;
 }
 
 void ClientConfiguration::fromBinary(Vishala::BinaryPackage& data) {
-  playerName           = bin2val<std::string>(data);
-  playerColor          = bin2arr<int,3>(data);
-  resolution           = bin2arr<int, 2>(data);
-  hostPort             = bin2val<int>(data);
-  lastGameName         = bin2val<std::string>(data);
-  lobbyServerAdress    = bin2val<std::string>(data);
-  lobbyServerMyPort    = bin2val<int        >(data);
-  lobbyServerTheirPort = bin2val<int        >(data);
-  gameServerPort       = bin2val<int        >(data);
-  myGameClientPort     = bin2val<int        >(data);
+  playerName           = Vishala::BinaryPackage::bin2val<std::string>(data);
+  playerColor          = Vishala::BinaryPackage::bin2arr<int,3>(data);
+  resolution           = Vishala::BinaryPackage::bin2arr<int, 2>(data);
+  hostPort             = Vishala::BinaryPackage::bin2val<int>(data);
+  lastGameName         = Vishala::BinaryPackage::bin2val<std::string>(data);
+  lobbyServerAdress    = Vishala::BinaryPackage::bin2val<std::string>(data);
+  lobbyServerMyPort    = Vishala::BinaryPackage::bin2val<int        >(data);
+  lobbyServerTheirPort = Vishala::BinaryPackage::bin2val<int        >(data);
+  gameServerPort       = Vishala::BinaryPackage::bin2val<int        >(data);
+  myGameClientPort     = Vishala::BinaryPackage::bin2val<int        >(data);
 }

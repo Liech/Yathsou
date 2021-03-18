@@ -19,13 +19,13 @@ namespace Vishala {
 
   BinaryPackage ServerConfiguration::toBinary() {
     BinaryPackage result;
-    val2bin<int>(result, welcomePort);
-    arr2bin<int>(result, portRange);
+    BinaryPackage::val2bin<int>(result, welcomePort);
+    BinaryPackage::arr2bin<int>(result, portRange);
     return result;
   }
 
   void ServerConfiguration::fromBinary(BinaryPackage& data) {
-    welcomePort = bin2val<int>(data);
-    portRange   = bin2arr<int,2>(data);
+    welcomePort = BinaryPackage::bin2val<int>(data);
+    portRange   = BinaryPackage::bin2arr<int,2>(data);
   }
 }

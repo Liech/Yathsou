@@ -17,11 +17,11 @@ namespace Uyanah {
 
   Vishala::BinaryPackage DedicatedServerConfiguration::toBinary() {
     Vishala::BinaryPackage result;
-    val2bin<int>(result, welcomePort);
+    Vishala::BinaryPackage::val2bin<int>(result, welcomePort);
     return result;
   }
 
   void DedicatedServerConfiguration::fromBinary(Vishala::BinaryPackage& data) {
-    welcomePort = bin2val<int>(data);
+    welcomePort = Vishala::BinaryPackage::bin2val<int>(data);
   }
 }

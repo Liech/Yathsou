@@ -6,7 +6,7 @@ namespace Vishala {
   BinaryPackage LobbyBriefing::toBinary()
   {
     BinaryPackage result;
-    val2bin(result, playerId);
+    BinaryPackage::val2bin(result, playerId);
     BinaryPackage status = lobbyStatus.toBinary();
     result.add(status);
     return result;
@@ -14,7 +14,7 @@ namespace Vishala {
 
   void LobbyBriefing::fromBinary(BinaryPackage& Package)
   {
-    playerId = bin2val<int>(Package);
+    playerId = BinaryPackage::bin2val<int>(Package);
     lobbyStatus.fromBinary(Package);
   }
 

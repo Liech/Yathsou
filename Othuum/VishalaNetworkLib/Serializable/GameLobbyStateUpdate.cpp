@@ -4,32 +4,32 @@ namespace Vishala {
 
   BinaryPackage GameLobbyStateUpdate::toBinary() {
     BinaryPackage result;
-    val2bin<std::string>(result, gameName);
-    val2bin<std::string>(result, gameServerIP);
-    val2bin<int>(result, gameServerPort);
+    BinaryPackage::val2bin<std::string>(result, gameName);
+    BinaryPackage::val2bin<std::string>(result, gameServerIP);
+    BinaryPackage::val2bin<int>(result, gameServerPort);
     int numberOfEntries = currentPlayers.size();
-    val2bin(result,numberOfEntries);
+    BinaryPackage::val2bin(result,numberOfEntries);
     for (int i = 0; i < numberOfEntries; i++) {
       BinaryPackage p = currentPlayers[i].toBinary();
       result.add(p);
     }
-    val2bin(result, gameStart);
+    BinaryPackage::val2bin(result, gameStart);
     return result;
   }
 
   void GameLobbyStateUpdate::fromBinary(BinaryPackage& Package) {
     currentPlayers.clear();
 
-    gameName = bin2val<std::string>(Package);
-    gameServerIP = bin2val<std::string>(Package);
-    gameServerPort = bin2val<int>(Package);
-    int numberOfEntries = bin2val<int>(Package);
+    gameName = BinaryPackage::bin2val<std::string>(Package);
+    gameServerIP = BinaryPackage::bin2val<std::string>(Package);
+    gameServerPort = BinaryPackage::bin2val<int>(Package);
+    int numberOfEntries = BinaryPackage::bin2val<int>(Package);
     for (size_t i = 0; i < numberOfEntries; i++) {
       GameLobbyPlayer game;
       game.fromBinary(Package);
       currentPlayers.push_back(game);
     }
-    gameStart = bin2val<bool>(Package);
+    gameStart = BinaryPackage::bin2val<bool>(Package);
   }
 
   nlohmann::json GameLobbyStateUpdate::toJson() {

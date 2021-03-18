@@ -13,11 +13,11 @@ namespace Vishala {
 
   BinaryPackage JoinGameRequest::toBinary() {
     BinaryPackage result;
-    val2bin<int>(result, gameID);
+    BinaryPackage::val2bin<int>(result, gameID);
     return result;
   }
 
   void JoinGameRequest::fromBinary(BinaryPackage& data) {
-    gameID = bin2val<int>(data);
+    gameID = BinaryPackage::bin2val<int>(data);
   }
 }

@@ -16,12 +16,12 @@ namespace Vishala {
   BinaryPackage Acknowledgement::toBinary() {
     BinaryPackage result;
     int number = (int)type;
-    val2bin<int>(result, number);
+    BinaryPackage::val2bin<int>(result, number);
     return result;
   }
 
   void Acknowledgement::fromBinary(BinaryPackage& data) {    
-    int number = bin2val<int>(data);
+    int number = BinaryPackage::bin2val<int>(data);
     type = (Acknowledgement::Type)number;
   }
 }

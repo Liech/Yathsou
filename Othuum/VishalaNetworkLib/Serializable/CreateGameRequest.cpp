@@ -15,13 +15,13 @@ namespace Vishala {
 
   BinaryPackage CreateGameRequest::toBinary() {
     BinaryPackage result;
-    val2bin<std::string>(result, gameName);
-    val2bin<int>        (result, serverPort);
+    BinaryPackage::val2bin<std::string>(result, gameName);
+    BinaryPackage::val2bin<int>        (result, serverPort);
     return result;
   }
 
   void CreateGameRequest::fromBinary(BinaryPackage& data) {
-    gameName   = bin2val<std::string>(data);
-    serverPort = bin2val<int>(data);
+    gameName   = BinaryPackage::bin2val<std::string>(data);
+    serverPort = BinaryPackage::bin2val<int>(data);
   }
 }

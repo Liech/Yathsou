@@ -6,15 +6,15 @@ namespace Vishala {
   BinaryPackage LoginInstructions::toBinary()
   {
     BinaryPackage result;
-    val2bin<std::string>(result, ip  );
-    val2bin<int        >(result, port);
+    BinaryPackage::val2bin<std::string>(result, ip  );
+    BinaryPackage::val2bin<int        >(result, port);
     return result;
   }
 
   void LoginInstructions::fromBinary(BinaryPackage& Package)
   {
-    ip   = bin2val<std::string>(Package);
-    port = bin2val<int        >(Package);
+    ip   = BinaryPackage::bin2val<std::string>(Package);
+    port = BinaryPackage::bin2val<int        >(Package);
   }
 
   nlohmann::json LoginInstructions::toJson()

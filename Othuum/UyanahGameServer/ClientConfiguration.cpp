@@ -21,15 +21,15 @@ namespace Uyanah {
 
   Vishala::BinaryPackage ClientConfiguration::toBinary() {
     Vishala::BinaryPackage result;
-    val2bin<std::string>(result, serverIP);
-    val2bin<int>(result, serverPort);
-    val2bin<int>(result, myPort);
+    Vishala::BinaryPackage::val2bin<std::string>(result, serverIP);
+    Vishala::BinaryPackage::val2bin<int>(result, serverPort);
+    Vishala::BinaryPackage::val2bin<int>(result, myPort);
     return result;
   }
 
   void ClientConfiguration::fromBinary(Vishala::BinaryPackage& data) {
-    serverIP   = bin2val<std::string>(data);
-    serverPort = bin2val<int>(data);
-    myPort     = bin2val<int>(data);
+    serverIP   = Vishala::BinaryPackage::bin2val<std::string>(data);
+    serverPort = Vishala::BinaryPackage::bin2val<int>(data);
+    myPort     = Vishala::BinaryPackage::bin2val<int>(data);
   }
 }

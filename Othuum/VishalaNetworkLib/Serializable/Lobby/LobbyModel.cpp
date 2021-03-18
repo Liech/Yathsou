@@ -5,22 +5,22 @@ namespace Vishala {
   BinaryPackage LobbyModel::toBinary() {
     BinaryPackage result;
     int numberOfGames = openGames.size();
-    val2bin(result, numberOfGames);
+    BinaryPackage::val2bin(result, numberOfGames);
     for (size_t i = 0; i < numberOfGames; i++)
       result.add(openGames[i].toBinary());
 
     int numberOfPlayers = players.size();
-    val2bin(result, numberOfPlayers);
+    BinaryPackage::val2bin(result, numberOfPlayers);
     for (size_t i = 0; i < numberOfPlayers; i++)
       result.add(players[i].toBinary());
 
     int numberOfRequests = openRequests.size();
-    val2bin(result, numberOfRequests);
+    BinaryPackage::val2bin(result, numberOfRequests);
     for (size_t i = 0; i < numberOfRequests; i++)
       result.add(openRequests[i].toBinary());
 
-    val2bin(result, nextPlayerNumber);
-    val2bin(result, nextGameNumber);
+    BinaryPackage::val2bin(result, nextPlayerNumber);
+    BinaryPackage::val2bin(result, nextGameNumber);
     return result;
   }
 
@@ -29,29 +29,29 @@ namespace Vishala {
     players.clear();
     openRequests.clear();
 
-    int numberOfGames = bin2val<int>(Package);
+    int numberOfGames = BinaryPackage::bin2val<int>(Package);
     for (size_t i = 0; i < numberOfGames; i++) {
       LobbyGame game;
       game.fromBinary(Package);
       openGames.push_back(game);
     }
 
-    int numberOfPlayers = bin2val<int>(Package);
+    int numberOfPlayers = BinaryPackage::bin2val<int>(Package);
     for (size_t i = 0; i < numberOfPlayers; i++) {
       LobbyPlayerModel player;
       player.fromBinary(Package);
       players.push_back(player);
     }
 
-    int numberOfRequests = bin2val<int>(Package);
+    int numberOfRequests = BinaryPackage::bin2val<int>(Package);
     for (size_t i = 0; i < numberOfRequests; i++) {
       OpenLobbyRequest request;
       request.fromBinary(Package);
       openRequests.push_back(request);
     }
 
-    nextPlayerNumber = bin2val<size_t>(Package);
-    nextGameNumber = bin2val<size_t>(Package);
+    nextPlayerNumber = BinaryPackage::bin2val<size_t>(Package);
+    nextGameNumber = BinaryPackage::bin2val<size_t>(Package);
   }
 
   nlohmann::json LobbyModel::toJson() {

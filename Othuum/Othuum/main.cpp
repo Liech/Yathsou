@@ -31,15 +31,12 @@
 
 #include "AhwassaGraphicsLib/sound.h"
 
-#include "VishalaNetworkLib/Core/Serialization.h"
-
 using namespace YolonaOss;
 
 int main(int argc, char** argv) {
   {
     //Ahwassa::sound s;
     //s.play();
-    Vishala::Serialization::delta(Vishala::BinaryPackage(), Vishala::BinaryPackage());
    
     std::string exe = std::string(argv[0]);
     const size_t last_slash_idx = exe.find_last_of("\\/");

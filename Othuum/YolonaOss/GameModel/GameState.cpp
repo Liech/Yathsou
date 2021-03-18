@@ -39,14 +39,14 @@ namespace YolonaOss
 
     Vishala::BinaryPackage GameState::toBinary() {
       Vishala::BinaryPackage result;
-      map2bin(result, players);
-      map2bin(result, units  );
+      Vishala::BinaryPackage::map2bin(result, players);
+      Vishala::BinaryPackage::map2bin(result, units  );
       return result;
     }
 
     void GameState::fromBinary(Vishala::BinaryPackage& data) {
-      players = bin2map<int,GameModel::Player>(data);
-      units   = bin2map<int,GameModel::Unit  >(data);
+      players = Vishala::BinaryPackage::bin2map<int,GameModel::Player>(data);
+      units   = Vishala::BinaryPackage::bin2map<int,GameModel::Unit  >(data);
     }
   }
 }

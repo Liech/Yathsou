@@ -5,7 +5,7 @@ namespace Vishala {
   BinaryPackage LobbyStateUpdate::toBinary() {
     BinaryPackage result;
     int numberOfEntries = openGames.size();    
-    val2bin(result,numberOfEntries);
+    BinaryPackage::val2bin(result,numberOfEntries);
     for (int i = 0; i < numberOfEntries; i++) {
       BinaryPackage p = openGames[i].toBinary();
       result.add(p);
@@ -15,7 +15,7 @@ namespace Vishala {
 
   void LobbyStateUpdate::fromBinary(BinaryPackage& Package) {
     openGames.clear();
-    int numberOfEntries = bin2val<int>(Package);
+    int numberOfEntries = BinaryPackage::bin2val<int>(Package);
     for (size_t i = 0; i < numberOfEntries; i++) {
       LobbyGame game;
       game.fromBinary(Package);

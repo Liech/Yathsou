@@ -44,7 +44,7 @@ namespace Vishala {
   BinaryPackage Client2LobbyMessage::toBinary() {
     BinaryPackage result;
     int number = (int)type;
-    val2bin<int>(result, number);
+    BinaryPackage::val2bin<int>(result, number);
     if (type == Type::CreateGame)
       result.add(createGame.toBinary());
     else if (type == Type::JoinGame)
@@ -55,7 +55,7 @@ namespace Vishala {
   }
 
   void Client2LobbyMessage::fromBinary(BinaryPackage& data) {
-    int number = bin2val<int>(data);
+    int number = BinaryPackage::bin2val<int>(data);
     type = (Type)number;
     if (type == Type::CreateGame)
       createGame.fromBinary(data);

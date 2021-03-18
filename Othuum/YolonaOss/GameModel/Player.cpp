@@ -16,12 +16,12 @@ namespace YolonaOss
 
     Vishala::BinaryPackage Player::toBinary() {
       Vishala::BinaryPackage result;
-      val2bin(result, name);
+      Vishala::BinaryPackage::val2bin(result, name);
       return result;
     }
 
     void Player::fromBinary(Vishala::BinaryPackage& data) {
-      name = bin2val<std::string>(data);
+      name = Vishala::BinaryPackage::bin2val<std::string>(data);
     }
   }
 }

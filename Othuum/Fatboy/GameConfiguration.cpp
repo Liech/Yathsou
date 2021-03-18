@@ -29,15 +29,15 @@ namespace Fatboy
 
   Vishala::BinaryPackage GameConfiguration::toBinary() {
     Vishala::BinaryPackage result;
-    val2bin<int>(result, ScreenWidth         );
-    val2bin<int>(result, ScreenHeight        );
-    val2bin<float>(result, TicksPerSecond);
+    Vishala::BinaryPackage::val2bin<int>(result, ScreenWidth         );
+    Vishala::BinaryPackage::val2bin<int>(result, ScreenHeight        );
+    Vishala::BinaryPackage::val2bin<float>(result, TicksPerSecond);
     return result;
   }
 
   void GameConfiguration::fromBinary(Vishala::BinaryPackage& data) {
-    ScreenWidth    = bin2val<int>(data);
-    ScreenHeight   = bin2val<int>(data);
-    TicksPerSecond = bin2val<float>(data);
+    ScreenWidth    = Vishala::BinaryPackage::bin2val<int>(data);
+    ScreenHeight   = Vishala::BinaryPackage::bin2val<int>(data);
+    TicksPerSecond = Vishala::BinaryPackage::bin2val<float>(data);
   }
 }

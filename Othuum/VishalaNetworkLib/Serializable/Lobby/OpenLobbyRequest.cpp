@@ -12,13 +12,13 @@ namespace Vishala {
 
   BinaryPackage OpenLobbyRequest::toBinary() {
     BinaryPackage result;    
-    val2bin(result, playerNumber);
+    BinaryPackage::val2bin(result, playerNumber);
     result.add(request.toBinary());
     return result;
   }
 
   void OpenLobbyRequest::fromBinary(BinaryPackage& Package) {
-    playerNumber = bin2val<size_t>(Package);
+    playerNumber = BinaryPackage::bin2val<size_t>(Package);
     request.fromBinary(Package);
   }
 
