@@ -27,6 +27,12 @@
     <ClInclude Include="ClientConfiguration.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DedicatedServerConfiguration.cpp">
@@ -39,6 +45,12 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="ClientConfiguration.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

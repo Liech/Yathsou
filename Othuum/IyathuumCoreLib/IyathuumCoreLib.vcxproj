@@ -174,6 +174,7 @@
     <ClInclude Include="Tree\NMTreeNeighbourIndex.h" />
     <ClInclude Include="Tree\NMTreeSpatialHash.h" />
     <ClInclude Include="Tree\SpatialHash.h" />
+    <ClInclude Include="Util\ConstExprHash.h" />
     <ClInclude Include="Util\ContentLoader.h" />
     <ClInclude Include="Util\Geometry.h" />
     <ClInclude Include="Util\ImageSubsetUtil.h" />
@@ -185,6 +186,7 @@
   <ItemGroup>
     <ClCompile Include="BaseTypes\AABB.cpp" />
     <ClCompile Include="BaseTypes\Color.cpp" />
+    <ClCompile Include="Util\ConstExprHash.cpp" />
     <ClCompile Include="Util\ContentLoader.cpp" />
     <ClCompile Include="Util\ImageSubsetUtil.cpp" />
     <ClCompile Include="Util\ImageUtil.cpp" />
