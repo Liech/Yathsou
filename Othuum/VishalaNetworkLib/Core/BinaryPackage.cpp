@@ -4,6 +4,7 @@
 #include <fstream>
 
 #include "VishalaNetworkLib/lib/xdelta3/xdelta3.h"
+#include "VishalaNetworkLib/lib/snappy/snappy.h"
 #include "VishalaNetworkLib/Core/Serialization.h"
 
 namespace Vishala {
@@ -134,4 +135,25 @@ namespace Vishala {
 
     return result;
   }
+
+  BinaryPackage BinaryPackage::compress() {
+    std::string input(data.begin(), data.end());
+    std::string output;
+    snappy::Compress(input.data(), input.size(), &output);
+    BinaryPackage result;
+    result.data.resize(output.size());
+    std::copy(output.begin(), output.end(), result.data.data());
+    return result;
+  }
+
+  BinaryPackage BinaryPackage::decompress() {
+    std::string input(data.begin(), data.end());
+    std::string output;
+    snappy::Uncompress(input.data(), input.size(), &output);
+    BinaryPackage result;
+    result.data.resize(output.size());
+    std::copy(output.begin(), output.end(), result.data.data());
+    return result;
+  }
+
 }

@@ -58,6 +58,9 @@
     <Filter Include="lib\xdelta3">
       <UniqueIdentifier>{a39c634d-58d4-4397-913b-a89c4dfc1391}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib\snappy">
+      <UniqueIdentifier>{caf191a9-4541-45ee-8031-dfd7150138d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Serializable\Message.h">
@@ -227,6 +230,24 @@
     </ClInclude>
     <ClInclude Include="lib\xdelta3\xdelta3-cfgs.h">
       <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy-c.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy-internal.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy-sinksource.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy-stubs-internal.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy-stubs-public.h">
+      <Filter>lib\snappy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

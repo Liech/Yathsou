@@ -13,6 +13,8 @@ namespace Vishala {
 
     static BinaryPackage createDelta(const BinaryPackage& oldData, const BinaryPackage& newData);
     static BinaryPackage applyDelta(const BinaryPackage& oldData, BinaryPackage& delta);
+    BinaryPackage compress();
+    BinaryPackage decompress();
 
     void add(BinaryPackage p);
 

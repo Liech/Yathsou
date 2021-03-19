@@ -15,3 +15,4 @@ lua                            |haas        | scripting
 lua-matrix                     |haas        | matrix operations in scripting
 kikito/inspect.lua             |haas        | debug inside lua
 xdelta3                        |vishala     | delta compression
+google snappy                  |vishala     | fast compression/decompression
