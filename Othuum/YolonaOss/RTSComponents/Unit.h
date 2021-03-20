@@ -33,7 +33,7 @@ namespace YolonaOss{
     vec getOrientation() {
       if (Math::length(_navigationAgent->getVelocity())< 1e-5)
         return lastVelocity;
-      lastVelocity = glm::normalize(Util<Dimension>::array2Vec<double>(_navigationAgent->getVelocity()));
+      lastVelocity = glm::normalize(Util<Dimension>::template array2Vec<double>(_navigationAgent->getVelocity()));
       return lastVelocity;
     }
 

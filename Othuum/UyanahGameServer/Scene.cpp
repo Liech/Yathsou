@@ -11,6 +11,7 @@ namespace Uyanah {
       result.add(obj.toBinary());
     return result;
   }
+
   void Scene::fromBinary(Vishala::BinaryPackage& Package)
   {
     objects.clear();
@@ -21,6 +22,7 @@ namespace Uyanah {
       objects.push_back(e);
     }
   }
+
   nlohmann::json Scene::toJson()
   {
     nlohmann::json arr = nlohmann::json::array();
@@ -32,12 +34,13 @@ namespace Uyanah {
     result["Objects"] = arr;
     return result;
   }
+
   void Scene::fromJson(nlohmann::json input)
   {
     objects.clear();
-    for (auto comp : input["Components"]) {
+    for (auto comp : input["Objects"]) {
       Entity g;
-      g.fromJson(input);
+      g.fromJson(comp);
       objects.push_back(g);
     }
   }

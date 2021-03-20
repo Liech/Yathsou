@@ -20,8 +20,7 @@ namespace Uyanah {
   {
     components.clear();
     for (auto comp : input["Components"]) {
-      std::shared_ptr<Component> g;
-      Component::factory_fromJson(comp);
+      std::shared_ptr<Component> g = Component::factory_fromJson(comp);
       components.push_back(g);
     }
   }
@@ -33,7 +32,7 @@ namespace Uyanah {
     Vishala::BinaryPackage::val2bin(result,numberOfComponents);
     for (auto comp : components)
       result.add(Component::factory_toBinary(comp));
-    return Vishala::BinaryPackage();
+    return result;
   }
 
   void Entity::fromBinary(Vishala::BinaryPackage& input)

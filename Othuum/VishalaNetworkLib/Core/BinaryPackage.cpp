@@ -54,6 +54,30 @@ namespace Vishala {
   }
 
   template<>
+  void BinaryPackage::val2bin<char>(BinaryPackage& data, char& value) {
+    data.data.push_back((unsigned char)value);
+  }
+
+  template <>
+  char BinaryPackage::bin2val<char>(BinaryPackage& data) {
+    char result = data.data[data.position];
+    data.position += 1;
+    return result;
+  }
+
+  template<>
+  void BinaryPackage::val2bin<unsigned char>(BinaryPackage& data, unsigned char& value) {
+    data.data.push_back(value);
+  }
+
+  template <>
+  unsigned char BinaryPackage::bin2val<unsigned char>(BinaryPackage& data) {
+    unsigned char result = data.data[data.position];
+    data.position += 1;
+    return result;
+  }
+
+  template<>
   void BinaryPackage::val2bin<bool>(BinaryPackage& data, bool& value) {
     int v = value ? 1 : 0;
     val2bin(data, v);

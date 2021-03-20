@@ -9,7 +9,7 @@ namespace Uyanah {
       REGISTERCOMPONENT(Dot, "Dot");
       virtual const std::string      ComponentName() const override { return "Dot"; }
 
-      Iyathuum::Color color;
+      Iyathuum::Color color = Iyathuum::Color(255,255,0,255);
 
       virtual Vishala::BinaryPackage toBinary()                                  override;
       virtual void                   fromBinary(Vishala::BinaryPackage& Package) override;

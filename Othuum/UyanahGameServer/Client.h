@@ -5,6 +5,7 @@
 namespace Vishala { class Connection; }
 
 namespace Uyanah {
+  class Scene;
   class ClientConfiguration;
 
   class Client
@@ -17,9 +18,13 @@ namespace Uyanah {
     void start();
     void stop();
 
+    std::shared_ptr<Scene> getScene();
+
   private:
     void runThread();
+    void createTestScene();
 
+    std::shared_ptr<Scene>               _scene;
     std::future<void>                    _thread;
     std::unique_ptr<Vishala::Connection> _connection;
     std::unique_ptr<ClientConfiguration> _config;

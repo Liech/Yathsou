@@ -6,6 +6,7 @@ namespace Vishala { class Connection; }
 
 namespace Uyanah {
   class DedicatedServerConfiguration;
+  class Scene;
 
   class DedicatedServer
   {
@@ -19,7 +20,9 @@ namespace Uyanah {
 
   private:
     void runThread();
+    void createTestScene();
 
+    std::unique_ptr<Scene>                        _scene       ;
     std::future<void>                             _thread      ;
     std::unique_ptr<Vishala::Connection>          _connection  ;
     std::unique_ptr<DedicatedServerConfiguration> _config      ;

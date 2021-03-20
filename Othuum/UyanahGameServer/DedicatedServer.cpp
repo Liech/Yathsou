@@ -1,12 +1,18 @@
 #include "DedicatedServer.h"
 #include "VishalaNetworkLib/Core/Connection.h"
 #include "DedicatedServerConfiguration.h"
+#include "Scene.h"
+#include "Entity.h"
+#include "Components/Transform2D.h"
+#include "Components/Dot.h"
+#include <filesystem>
 
 #include <iostream>
 
 namespace Uyanah {
   DedicatedServer::DedicatedServer() {
     _config = std::make_unique<DedicatedServerConfiguration>();
+    createTestScene();
   }
 
   DedicatedServer::~DedicatedServer() {
@@ -46,5 +52,30 @@ namespace Uyanah {
     while (!_stop) {
       _connection->update();
     }
+  }
+
+  void DedicatedServer::createTestScene() {
+    _scene = std::make_unique<Scene>();
+    if (!std::filesystem::exists("savegame.json")) {
+      Entity a;
+      std::shared_ptr<Components::Transform2D> aTransform = std::make_shared<Components::Transform2D>();
+      aTransform->position = glm::vec2(5, 5);
+      std::shared_ptr<Components::Dot> aDot = std::make_shared<Components::Dot>();
+      a.components.push_back(aTransform);
+      a.components.push_back(aDot);
+
+      Entity b;
+      std::shared_ptr<Components::Transform2D> bTransform = std::make_shared<Components::Transform2D>();
+      bTransform->position = glm::vec2(7, 5);
+      std::shared_ptr<Components::Dot> bDot = std::make_shared<Components::Dot>();
+      b.components.push_back(bTransform);
+      b.components.push_back(bDot);
+
+      _scene->objects.push_back(a);
+      _scene->objects.push_back(b);
+      _scene->toJsonFile("savegame.json");
+    }
+    else
+      _scene->fromJsonFile("savegame.json");
   }
 }
