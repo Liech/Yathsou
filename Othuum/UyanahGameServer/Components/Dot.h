@@ -1,0 +1,20 @@
+#pragma once
+
+#include "Component.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
+
+namespace Uyanah {
+  namespace Components {
+    class Dot : public Component {
+      REGISTERCOMPONENT(Dot, "Dot");
+      virtual const std::string      ComponentName() const override { return "Dot"; }
+
+      Iyathuum::Color color;
+
+      virtual Vishala::BinaryPackage toBinary()                                  override;
+      virtual void                   fromBinary(Vishala::BinaryPackage& Package) override;
+      virtual nlohmann::json         toJson()                                    override;
+      virtual void                   fromJson(nlohmann::json)                    override;
+    };
+  }
+}
