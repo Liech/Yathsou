@@ -1,5 +1,6 @@
 #include "Client.h"
 #include "VishalaNetworkLib/Core/Connection.h"
+#include "VishalaNetworkLib/Core/ConnectionMultiplexer.h"
 #include "ClientConfiguration.h"
 
 #include <iostream>
@@ -13,12 +14,11 @@ namespace Uyanah {
 
   Client::Client() {
     _config = std::make_unique<ClientConfiguration>();
-    createTestScene();
+    _connection = std::shared_ptr< Vishala::Connection>();
   }
 
   Client::~Client() {
     _stop = true;
-    _thread.wait();
   }
 
   void Client::setConfig(ClientConfiguration config) {
@@ -26,9 +26,9 @@ namespace Uyanah {
   }
 
   void Client::start() {
-    _connection = std::make_unique<Vishala::Connection>();
+    _connection = std::make_shared<Vishala::Connection>();
     _connection->setAcceptConnection(true);
-    _connection->setChannelCount(1);
+    _connection->setChannelCount(2);
     _connection->setMaximumConnectionCount(64);
     _connection->setPort(_config->myPort);
     _connection->setConnectionFailedCallback([this](std::string ip, int port) {});
@@ -39,47 +39,25 @@ namespace Uyanah {
     if (!ok)
       throw std::runtime_error("Port used");
 
-    _thread = std::async(std::launch::async, [this]() {runThread(); });
     _connection->connectNonblocking(_config->serverPort, _config->serverIP);
 
+    _multiplexer = std::make_shared<Vishala::ConnectionMultiplexer>(1,_connection);
+    _scene = std::make_unique< Vishala::NetworkMemoryReader<Scene>>(0,_multiplexer);
   }
 
   void Client::stop() {
     _stop = true;
   }
 
-  void Client::runThread() {
-    while (!_stop) {
+  void Client::update() {
+    if (_connection)
       _connection->update();
-    }
-  }
-  void Client::createTestScene() {
-    _scene = std::make_unique<Scene>();
-    if (!std::filesystem::exists("savegame.json")) {
-      Entity a;
-      std::shared_ptr<Components::Transform2D> aTransform = std::make_shared<Components::Transform2D>();
-      aTransform->position = glm::vec2(5, 5);
-      std::shared_ptr<Components::Dot> aDot = std::make_shared<Components::Dot>();
-      a.components.push_back(aTransform);
-      a.components.push_back(aDot);
-
-      Entity b;
-      std::shared_ptr<Components::Transform2D> bTransform = std::make_shared<Components::Transform2D>();
-      bTransform->position = glm::vec2(7, 5);
-      std::shared_ptr<Components::Dot> bDot = std::make_shared<Components::Dot>();
-      b.components.push_back(bTransform);
-      b.components.push_back(bDot);
-
-      _scene->objects.push_back(a);
-      _scene->objects.push_back(b);
-      _scene->toJsonFile("savegame.json");
-    }
-    else
-      _scene->fromJsonFile("savegame.json");
   }
 
-  std::shared_ptr<Scene> Client::getScene() {
-    return _scene;
+  const Scene& Client::getScene() {
+    if (!_scene)
+      return Scene();
+    return _scene->Data();
   }
 
 }

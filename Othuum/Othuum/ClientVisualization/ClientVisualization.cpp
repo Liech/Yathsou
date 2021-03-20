@@ -18,9 +18,11 @@ void ClientVisualization::load(YolonaOss::GL::DrawSpecification*) {
 }
 
 void ClientVisualization::draw() {
+  if (_client)
+    _client->update();
   YolonaOss::RectangleRenderer::start();
-  if (_client && _client->getScene())
-  for (auto ent : _client->getScene()->objects) {
+  if (_client)
+  for (auto ent : _client->getScene().objects) {
     for (auto comp : ent.components) {
       if (comp->ComponentName() == "Transform2D") {
         std::shared_ptr<Uyanah::Components::Transform2D> t = std::dynamic_pointer_cast<Uyanah::Components::Transform2D>(comp);

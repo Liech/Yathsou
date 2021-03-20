@@ -314,4 +314,13 @@ namespace Vishala {
   void Connection::setConnectionFailedCallback(std::function<void(std::string ip, int port)> func) {
     _connectionFailed = func;
   }
+
+  std::vector<size_t> Connection::getAllConnections() {
+    std::vector<size_t> result;
+    for (auto peer : _peers) {
+      result.push_back(peer.first);
+    }
+    return result;
+  }
+
 }

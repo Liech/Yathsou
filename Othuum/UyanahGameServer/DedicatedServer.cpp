@@ -12,7 +12,6 @@
 namespace Uyanah {
   DedicatedServer::DedicatedServer() {
     _config = std::make_unique<DedicatedServerConfiguration>();
-    createTestScene();
   }
 
   DedicatedServer::~DedicatedServer() {
@@ -25,9 +24,9 @@ namespace Uyanah {
   }
 
   void DedicatedServer::start() {
-    _connection = std::make_unique<Vishala::Connection>();
+    _connection = std::make_shared<Vishala::Connection>();
     _connection->setAcceptConnection(true);
-    _connection->setChannelCount(1);
+    _connection->setChannelCount(2);
     _connection->setMaximumConnectionCount(64);
     _connection->setPort(_config->welcomePort);
     _connection->setConnectionFailedCallback([this](std::string ip, int port) {});
@@ -42,6 +41,8 @@ namespace Uyanah {
 
     _stop = false;
     _thread = std::async(std::launch::async, [this]() {runThread(); });
+    createTestScene();
+
   }
 
   void DedicatedServer::stop() {
@@ -51,11 +52,12 @@ namespace Uyanah {
   void DedicatedServer::runThread() {
     while (!_stop) {
       _connection->update();
+      _scene->update();
     }
   }
 
   void DedicatedServer::createTestScene() {
-    _scene = std::make_unique<Scene>();
+    _scene = std::make_unique<Vishala::NetworkMemoryWriter<Scene>>(1,_connection);
     if (!std::filesystem::exists("savegame.json")) {
       Entity a;
       std::shared_ptr<Components::Transform2D> aTransform = std::make_shared<Components::Transform2D>();
@@ -71,11 +73,12 @@ namespace Uyanah {
       b.components.push_back(bTransform);
       b.components.push_back(bDot);
 
-      _scene->objects.push_back(a);
-      _scene->objects.push_back(b);
-      _scene->toJsonFile("savegame.json");
+      _scene->Data.objects.push_back(a);
+      _scene->Data.objects.push_back(b);
+      _scene->Data.toJsonFile("savegame.json");
     }
     else
-      _scene->fromJsonFile("savegame.json");
+      _scene->Data.fromJsonFile("savegame.json");
+    _scene->changed();
   }
 }

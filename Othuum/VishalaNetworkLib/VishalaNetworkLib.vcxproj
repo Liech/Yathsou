@@ -157,8 +157,10 @@
   <ItemGroup>
     <ClInclude Include="Core\BinaryPackage.h" />
     <ClInclude Include="Core\Connection.h" />
+    <ClInclude Include="Core\ConnectionMultiplexer.h" />
     <ClInclude Include="Core\NetworkGameSeed.h" />
     <ClInclude Include="Core\NetworkGameSeedInput.h" />
+    <ClInclude Include="Core\NetworkMemory.h" />
     <ClInclude Include="Core\Serialization.h" />
     <ClInclude Include="lib\atomicops.h" />
     <ClInclude Include="lib\concurrentqueue.h" />
@@ -217,8 +219,10 @@
   <ItemGroup>
     <ClCompile Include="Core\BinaryPackage.cpp" />
     <ClCompile Include="Core\Connection.cpp" />
+    <ClCompile Include="Core\ConnectionMultiplexer.cpp" />
     <ClCompile Include="Core\NetworkGameSeed.cpp" />
     <ClCompile Include="Core\NetworkGameSeedInput.cpp" />
+    <ClCompile Include="Core\NetworkMemory.cpp" />
     <ClCompile Include="Core\Serialization.cpp" />
     <ClCompile Include="Protocoll\Client\LobbyClient.cpp" />
     <ClCompile Include="Protocoll\Client\LobbyConnector.cpp" />

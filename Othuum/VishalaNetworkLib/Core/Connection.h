@@ -65,6 +65,7 @@ namespace Vishala {
     void setDisconnectCallback       (                 std::function<void(size_t clientnumber                                 )> func);
     void setRecievedCallback         (uint8_t channel, std::function<void(size_t clientNumber, std::unique_ptr<BinaryPackage> )> func);
 
+    std::vector<size_t> getAllConnections();
 
   private:
     void threadRun();
