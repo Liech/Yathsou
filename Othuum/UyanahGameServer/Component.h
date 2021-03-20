@@ -1,10 +1,11 @@
 #pragma once
 
 #include "VishalaNetworkLib/Core/Serialization.h"
+#include "IyathuumCoreLib/Singleton/Factory.h"
 #include <map>
 
-#define REGISTERCOMPONENT(SpecificType,Name)\
-   static inline Component::Registrator<SpecificType> Registrator{ Name };
+#define REGISTERCOMPONENT(SpecificType,name)\
+   static inline Uyanah::Component::Registrator<SpecificType> Registrator{ name };
 
 
 namespace Uyanah {
@@ -19,15 +20,16 @@ namespace Uyanah {
             constexpr const size_t      ComponentID() const;
 
   private:
-    inline static std::map<int, std::string> id2name;
+    inline static std::map<size_t, std::string> id2name;
 
 
+  public:
     template <typename T>
     class Registrator {
     public:
       Registrator(const std::string name) {
-        //Iyathuum::Factory<Component>::Register<T>();
-        Component::id2name.insert(create()->ComponentID(), create()->ComponentName());
+        Iyathuum::template Factory<Component>::template Register<T>(name, {});
+        Component::id2name[create()->ComponentID()] = create()->ComponentName();
       }
     private:
       static std::shared_ptr<Component> create() {

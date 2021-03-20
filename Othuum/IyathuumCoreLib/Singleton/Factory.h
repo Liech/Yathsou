@@ -47,19 +47,16 @@ namespace Iyathuum {
     static inline std::map<std::string, Factory<BaseClass>::InstantiatorFun>      registry;
     static inline std::map<std::string, std::set<std::string>>                    tagMap;
 
-    template<typename T> void Register(const std::string name, const std::set<std::string> tags) {
-      Factory<BaseClass>::Registrator<T> registerMe(name, tags);
-    }
-
     static void Register(const std::string name, const std::set<std::string> tags, Factory<BaseClass>::InstantiatorFun func) {
       registry[name] = func;
       for (auto t : tags)
         tagMap[t].insert(name);
     }
 
-
-
   public:
+    template<typename T> static void Register(const std::string name, const std::set<std::string> tags) {
+      Factory<BaseClass>::Registrator<T> registerMe(name, tags);
+    }
     static std::set<std::string> getAll() {
       std::set<std::string> result;
       for (std::pair<std::string, Factory<BaseClass>::InstantiatorFun> f : Factory<BaseClass>::registry)

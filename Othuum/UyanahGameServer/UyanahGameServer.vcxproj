@@ -155,6 +155,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="ClientConfiguration.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Components\Transform2D.h" />
     <ClInclude Include="DedicatedServer.h" />
     <ClInclude Include="DedicatedServerConfiguration.h" />
     <ClInclude Include="Entity.h" />
@@ -163,6 +164,7 @@
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="ClientConfiguration.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Components\Transform2D.cpp" />
     <ClCompile Include="DedicatedServer.cpp" />
     <ClCompile Include="DedicatedServerConfiguration.cpp" />
     <ClCompile Include="Entity.cpp" />

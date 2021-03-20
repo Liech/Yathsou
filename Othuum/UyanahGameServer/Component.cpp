@@ -1,11 +1,10 @@
 #include "Component.h"
 
-#include "IyathuumCoreLib/Singleton/Factory.h"
 #include "IyathuumCoreLib/Util/ConstExprHash.h"
 
 namespace Uyanah {
   constexpr const size_t Component::ComponentID() const {
-    return Iyathuum::constexprHash::hash(ComponentName());
+    return constexprHASH(ComponentName());
   }
 
   nlohmann::json Component::factory_toJson(std::shared_ptr<Component> comp) {
