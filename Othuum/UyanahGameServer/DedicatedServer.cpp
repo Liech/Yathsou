@@ -32,7 +32,9 @@ namespace Uyanah {
     _connection->setConnectionFailedCallback([this](std::string ip, int port) {});
     _connection->setDisconnectCallback([this](size_t client) {std::cout << ":(" << std::endl;     });
     _connection->setRecievedCallback(0, [this](size_t client, std::unique_ptr<Vishala::BinaryPackage> package) {});
-    _connection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {std::cout << ":)" << std::endl;  });
+    _connection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {
+      newConnection(client);
+      });
     bool ok = _connection->start();
     if (!ok)
       throw std::runtime_error("Port used");
@@ -49,10 +51,26 @@ namespace Uyanah {
     _stop = true;
   }
 
+  void DedicatedServer::newConnection(size_t player) {
+    _scene->newTarget(player);
+  }
+
   void DedicatedServer::runThread() {
+    float time = 0;
     while (!_stop) {
       _connection->update();
       _scene->update();
+      time += 0.001f;
+      glm::vec2 pos = glm::vec2(std::sin(time) * 100 + 300,std::cos(time) * 100 + 300);
+      Scene* s = &_scene->Data;
+      if (s->objects.size() == 0)
+        continue;
+      Entity* e = &s->objects[0];
+      std::shared_ptr<Component> c = e->components[0];
+      std::shared_ptr<Components::Transform2D> t = std::dynamic_pointer_cast<Components::Transform2D>(c);
+      if (t)
+        t->position = pos;
+      _scene->changed();
     }
   }
 

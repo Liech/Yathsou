@@ -21,6 +21,8 @@ namespace Uyanah {
     void stop();
 
   private:
+    void newConnection(size_t player);
+
     void runThread();
     void createTestScene();
 

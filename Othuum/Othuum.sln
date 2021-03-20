@@ -68,8 +68,15 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AthanahCommonLib", "Athanah
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UyanahGameServer", "UyanahGameServer\UyanahGameServer.vcxproj", "{E18FE3F4-CE6A-4A2F-8948-B1AE11D7F37E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{030C3B7E-3682-4A03-8188-D46921B837DA} = {030C3B7E-3682-4A03-8188-D46921B837DA}
+		{032F72F3-8F82-4991-9238-2D385AC70A22} = {032F72F3-8F82-4991-9238-2D385AC70A22}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VishalaNetworkLib", "VishalaNetworkLib\VishalaNetworkLib.vcxproj", "{032F72F3-8F82-4991-9238-2D385AC70A22}"
+	ProjectSection(ProjectDependencies) = postProject
+		{030C3B7E-3682-4A03-8188-D46921B837DA} = {030C3B7E-3682-4A03-8188-D46921B837DA}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

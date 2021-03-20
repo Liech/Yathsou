@@ -7,6 +7,12 @@
 namespace Vishala {
   class BinaryPackage;
 
+  enum class MemoryTransmissionMode {
+    full        = 0,
+    delta       = 1, 
+    compressed  = 2
+  };
+
   template<typename T>
   class NetworkMemoryWriter {
   public:
@@ -20,15 +26,37 @@ namespace Vishala {
       _changed = true;
     }; 
 
+    void newTarget(size_t) {
+      BinaryPackage package = Data.toBinary();
+      package.position = 0;
+      BinaryPackage msg;
+      int mode = (int)MemoryTransmissionMode::compressed;
+      BinaryPackage::val2bin(msg, mode);
+      msg.add(package.compress());
+      for (auto target : _connection->getAllConnections())
+        _connection->send(target, _channel, std::make_unique<BinaryPackage>(msg), true);
+      _lastSend = package;
+      _lastSend.position = 0;
+    }
+
     void update() {
       if (_changed) {
         BinaryPackage package = Data.toBinary();
+        package.position = 0;
+        BinaryPackage delta = BinaryPackage::createDelta(_lastSend, package);
+        BinaryPackage msg;
+        int mode = (int)MemoryTransmissionMode::delta;
+        BinaryPackage::val2bin(msg, mode);
+        msg.add(delta);
         for(auto target : _connection->getAllConnections())
-          _connection->send(target, _channel, std::make_unique<BinaryPackage>(package), true);
-        //_changed = false;
+          _connection->send(target, _channel, std::make_unique<BinaryPackage>(msg), true);
+        _changed = false;
+        _lastSend = package;
+        _lastSend.position = 0;
       }
     }
   private:
+    BinaryPackage               _lastSend;
     std::shared_ptr<Connection> _connection;
     bool                        _changed = true;
     size_t                      _channel = 0;
@@ -55,12 +83,34 @@ namespace Vishala {
     
   private:
     void messageRecieved(std::unique_ptr<BinaryPackage> package) {
-      _currentData.fromBinary(*package);
+      MemoryTransmissionMode mode = (MemoryTransmissionMode)BinaryPackage::bin2val<int>(*package);
+      if (mode == MemoryTransmissionMode::full) {
+        _currentData.fromBinary(*package);
+        _lastRecieved = *package;
+        _lastRecieved.position = 4;
+        _initialized = true;
+      }
+      else if (mode == MemoryTransmissionMode::delta && _initialized)
+      {
+        BinaryPackage r = BinaryPackage::applyDelta(_lastRecieved, *package);
+        _lastRecieved = r;
+        _lastRecieved.position = 0;
+        _currentData.fromBinary(r);
+      }
+      else if (mode == MemoryTransmissionMode::compressed) {
+        _lastRecieved = package->decompress();
+        _currentData.fromBinary(_lastRecieved);
+        _lastRecieved.position = 0;
+        _initialized = true;
+      }
+
       _onChanged();
     }
 
-    T                           _currentData;
-    std::function<void()>       _onChanged = []() {};
+    bool                                   _initialized = false;
+    BinaryPackage                          _lastRecieved;
+    T                                      _currentData;
+    std::function<void()>                  _onChanged = []() {};
     std::shared_ptr<ConnectionMultiplexer> _connection;
     size_t                                 _player;
   };
