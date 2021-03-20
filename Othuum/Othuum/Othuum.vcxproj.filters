@@ -31,6 +31,12 @@
     <Filter Include="SideProject">
       <UniqueIdentifier>{95b69834-01f8-40a0-9d6f-1d96b2f51c47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ClientVisualization">
+      <UniqueIdentifier>{437ea019-3523-429e-b59c-927a4bc82f37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ClientVisualization">
+      <UniqueIdentifier>{cf71b4f8-0ca5-4a91-bd38-2d7e23500955}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -95,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="MainMenuPages\StartGameLoadingPage.cpp">
       <Filter>Source Files\MainMenuPages</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientVisualization\ClientVisualization.cpp">
+      <Filter>Source Files\ClientVisualization</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -391,6 +400,9 @@
     </ClInclude>
     <ClInclude Include="MainMenuPages\StartGameLoadingPage.h">
       <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientVisualization\ClientVisualization.h">
+      <Filter>Header Files\ClientVisualization</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

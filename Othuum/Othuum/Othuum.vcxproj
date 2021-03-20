@@ -155,6 +155,7 @@
     <ClCompile Include="BulletDebugDrawer.cpp" />
     <ClCompile Include="ClientConfiguration.cpp" />
     <ClCompile Include="ClientState.cpp" />
+    <ClCompile Include="ClientVisualization\ClientVisualization.cpp" />
     <ClCompile Include="DrawCubes.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuLogic.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Architecture\Decisions.h" />
     <ClInclude Include="BulletDebugDrawer.h" />
     <ClInclude Include="ClientConfiguration.h" />
+    <ClInclude Include="ClientVisualization\ClientVisualization.h" />
     <ClInclude Include="DrawCubes.h" />
     <ClInclude Include="Lib\nop\base\array.h" />
     <ClInclude Include="Lib\nop\base\encoding.h" />

@@ -1,12 +1,11 @@
 #pragma once
 
-#include "Component.h"
+#include "UyanahGameServer/Component.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 
 namespace Uyanah {
   namespace Components {
     class Dot : public Component {
-      REGISTERCOMPONENT(Dot, "Dot");
       virtual const std::string      ComponentName() const override { return "Dot"; }
 
       Iyathuum::Color color = Iyathuum::Color(255,255,0,255);

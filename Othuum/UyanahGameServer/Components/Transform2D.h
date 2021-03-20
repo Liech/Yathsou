@@ -1,12 +1,11 @@
 #pragma once
 
-#include "Component.h"
+#include "UyanahGameServer/Component.h"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 
 namespace Uyanah {
   namespace Components {
     class Transform2D : public Component {
-      REGISTERCOMPONENT(Transform2D, "Transform2D");
     public:
       virtual const std::string      ComponentName() const override { return "Transform2D"; }
 

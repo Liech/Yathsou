@@ -3,6 +3,7 @@
 
 namespace Uyanah {
   namespace Components {
+    REGISTERCOMPONENT(Transform2D, "Transform2D");
     Vishala::BinaryPackage Transform2D::toBinary()
     {
       Vishala::BinaryPackage result;

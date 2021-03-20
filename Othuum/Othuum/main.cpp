@@ -22,6 +22,7 @@
 #include "YolonaOss/Drawables/Widgets/LineEdit.h"
 #include "IyathuumCoreLib/Util/ContentLoader.h"
 #include "SideProject/SideProjectMain.h"
+#include "ClientVisualization/ClientVisualization.h"
 #include <iomanip>
 
 #include "ClientConfiguration.h"
@@ -60,12 +61,13 @@ int main(int argc, char** argv) {
 
     std::unique_ptr<MainMenuLogicResult> rslt = nullptr;
 
-    auto contentCreator = [&w]() {
+    std::shared_ptr<ClientVisualization> vis = nullptr;
+    auto contentCreator = [&w,&vis]() {
       std::shared_ptr<Iyathuum::ContentLoader> loader = std::make_shared<Iyathuum::ContentLoader>();
-      loader->addPackage([&w]() {
-        auto sp = std::make_shared<SideProject::SideProjectMain>();
-        sp->load(w.getSpec());
-        Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(sp, { "Main" });
+      loader->addPackage([&w,&vis]() {
+        vis = std::make_shared<ClientVisualization>();
+        vis->load(w.getSpec());
+        Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(vis, { "Main" });
         }, true);
       return loader;
     };
@@ -73,12 +75,15 @@ int main(int argc, char** argv) {
     logic.setContentLoaderCreater(contentCreator);
 
 
-    w.Update = [&logic, state,&rslt]() {      
+    w.Update = [&logic, state,&rslt,&vis]() {      
       if (logic.getStatus() != MainMenuLogic::status::GameRunning)
         logic.update();
       else {
         if (!rslt)
+        {
           rslt = std::move(logic.extractResult());
+          vis->setClient(std::move(rslt->_client));
+        }
       }
       state->update();
     };
