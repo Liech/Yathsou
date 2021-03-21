@@ -18,7 +18,8 @@
 #include "IyathuumCoreLib/Tree/NMTreeDijkstra.h"
 #include "IyathuumCoreLib/Util/ImageUtil.h"
 #include "SelenNavigationLib/Maps/InfectiousArrivalMapGroup.h"
-#include "../Util/Util.h"
+#include "YolonaOss/Util/Util.h"
+#include "YolonaOss/Util/ImageIO.h"
 
 namespace YolonaOss{
   template<size_t Dimension>
@@ -52,9 +53,9 @@ namespace YolonaOss{
         result ->addMap(discomfort  , _config[3]);
         result ->addMap(comfort     , _config[4]);
         result ->addMap(alignment   , _config[5]);
-        auto path = std::dynamic_pointer_cast<Iyathuum::DijkstraI<Dimension>>(std::make_shared< Iyathuum::NMTreeDijkstra<Dimension> >(Util<Dimension>::vec2Array<double>(target), _tree.get(), _index, [](Tree* node) {return 1; }));
+        auto path = std::dynamic_pointer_cast<Iyathuum::DijkstraI<Dimension>>(std::make_shared< Iyathuum::NMTreeDijkstra<Dimension> >(Util<Dimension>::template vec2Array<double>(target), _tree.get(), _index, [](Tree* node) {return 1; }));
         navigation->setDijkstra(path);        
-        result->setTarget(Util<Dimension>::vec2Array<double>(target));
+        result->setTarget(Util<Dimension>::template vec2Array<double>(target));
         return result;
       }
 

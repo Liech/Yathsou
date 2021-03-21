@@ -6,6 +6,7 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <algorithm>
 
 struct Intersection {
   Intersection(glm::vec3 loc, float dist, bool does);
@@ -133,7 +134,7 @@ public:
     for (size_t currentDimension = 0; currentDimension < Dimension; currentDimension++) {
       glm::mat<Dimension - 1, Dimension - 1, float> matrix;
       for (size_t row = 0; row < Dimension - 1; row++) {
-        for (size_t column = 0; column < Dimension - 1)
+        for (size_t column = 0; column < Dimension - 1;column++)
           matrix[row][column] = input[column][column + currentDimension<=column?1:0];
       }
       result[currentDimension] = glm::determinant(matrix);

@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,21 +19,21 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{E6F78C96-EEC7-40E0-A401-F0C3CD022AC8}</ProjectGuid>
+    <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{f38fffaa-7e2d-4418-bf86-81213afde6de}</ProjectGuid>
     <RootNamespace>YolonaOss</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -44,7 +44,6 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -52,7 +51,6 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -75,134 +73,156 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)Othuum/IyathuumCoreLib/lib;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)Othuum/IyathuumCoreLib/lib;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/freetype/include;$(ProjectDir)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <PostBuildEvent>
-      <Command>(Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z  /Log:LogFileName) ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
-</Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/gli;$(SolutionDir)IyathuumCoreLib\lib\;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <TreatWarningAsError>false</TreatWarningAsError>
-      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-    <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(ProjectDir)Lib/gainput/gainput-d.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <PostBuildEvent>
-      <Command>((Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z))&amp;
-((Robocopy.exe "$(ProjectDir)Lib/gainput/" "$(TargetDir)/" "gainput-d.dll") ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
-    </PostBuildEvent>
-    <ProjectReference>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/freetype/include;$(ProjectDir)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Lib/freetype/include;$(SolutionDir)IyathuumCoreLib/lib;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/GLWF/include;$(SolutionDir)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
-      <Command>(Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z  /Log:LogFileName) ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0
-</Command>
+      <Command>((Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z)) 
+IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/GLWF/include;$(ProjectDir)Lib/gli;$(SolutionDir)IyathuumCoreLib\lib\;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/freetype/include;$(SolutionDir);$(ProjectDir);$(ProjectDir)Lib/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Lib/freetype/include;$(SolutionDir)IyathuumCoreLib/lib;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/GLWF/include;$(SolutionDir)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(ProjectDir)Lib/gainput/gainput.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
-    <PostBuildEvent>
-      <Command>((Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z))&amp;
-((Robocopy.exe "$(ProjectDir)Lib/gainput/" "$(TargetDir)/" "gainput.dll") ^&amp; IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
-    </PostBuildEvent>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
+    <Lib>
+      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
+    <PostBuildEvent>
+      <Command>((Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z)) 
+IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="OpenGL\Content.txt" />
-    <Text Include="ReadMe.txt" />
-    <Text Include="Renderer\Content.txt" />
+    <ClCompile Include="Camera\Camera.cpp" />
+    <ClCompile Include="Camera\Camera2D.cpp" />
+    <ClCompile Include="Camera\CameraSystem.cpp" />
+    <ClCompile Include="Camera\FollowCamera.cpp" />
+    <ClCompile Include="Camera\FreeCamera.cpp" />
+    <ClCompile Include="Camera\RTSCamera.cpp" />
+    <ClCompile Include="Drawables\Background.cpp" />
+    <ClCompile Include="Drawables\FPS.cpp" />
+    <ClCompile Include="Drawables\Ground.cpp" />
+    <ClCompile Include="Drawables\Widgets\Button.cpp" />
+    <ClCompile Include="Drawables\Widgets\Label.cpp" />
+    <ClCompile Include="Drawables\Widgets\LineEdit.cpp" />
+    <ClCompile Include="Drawables\Widgets\ListLayout.cpp" />
+    <ClCompile Include="Drawables\Widgets\Slider.cpp" />
+    <ClCompile Include="Drawables\Widgets\Widget.cpp" />
+    <ClCompile Include="Examples\BasicTriangle.cpp" />
+    <ClCompile Include="Examples\RenderTexture.cpp" />
+    <ClCompile Include="Examples\RenderTriangle.cpp" />
+    <ClCompile Include="Examples\RotatingCube.cpp" />
+    <ClCompile Include="Examples\Texture2Tree.cpp" />
+    <ClCompile Include="GameModel\GameState.cpp" />
+    <ClCompile Include="GameModel\Player.cpp" />
+    <ClCompile Include="GameModel\Unit.cpp" />
+    <ClCompile Include="Input\DirectWASDController.cpp" />
+    <ClCompile Include="Input\Hotkey.cpp" />
+    <ClCompile Include="Lib\glad\src\glad.c" />
+    <ClCompile Include="Lib\gli\core\dummy.cpp" />
+    <ClCompile Include="OpenGL\Camera.cpp" />
+    <ClCompile Include="OpenGL\Drawable.cpp" />
+    <ClCompile Include="OpenGL\DrawableList.cpp" />
+    <ClCompile Include="OpenGL\DrawSpecification.cpp" />
+    <ClCompile Include="OpenGL\IBO.cpp" />
+    <ClCompile Include="OpenGL\InputHandling.cpp" />
+    <ClCompile Include="OpenGL\Key.cpp" />
+    <ClCompile Include="OpenGL\Rendertarget.cpp" />
+    <ClCompile Include="OpenGL\ShaderProgram.cpp" />
+    <ClCompile Include="OpenGL\SSBO.cpp" />
+    <ClCompile Include="OpenGL\Texture.cpp" />
+    <ClCompile Include="OpenGL\Uniform.cpp" />
+    <ClCompile Include="OpenGL\Updateable.cpp" />
+    <ClCompile Include="OpenGL\UpdateableList.cpp" />
+    <ClCompile Include="OpenGL\VAO.cpp" />
+    <ClCompile Include="OpenGL\VBO.cpp" />
+    <ClCompile Include="OpenGL\Window.cpp" />
+    <ClCompile Include="Renderer\ArrowRenderer.cpp" />
+    <ClCompile Include="Renderer\BoxRenderer.cpp" />
+    <ClCompile Include="Renderer\MeshRenderer.cpp" />
+    <ClCompile Include="Renderer\RectangleRenderer.cpp" />
+    <ClCompile Include="Renderer\SphereRenderer.cpp" />
+    <ClCompile Include="Renderer\SupComModelRenderer.cpp" />
+    <ClCompile Include="Renderer\TextRenderer.cpp" />
+    <ClCompile Include="Renderer\TextureRenderer.cpp" />
+    <ClCompile Include="RTSComponents\Landscape.cpp" />
+    <ClCompile Include="RTSComponents\Unit.cpp" />
+    <ClCompile Include="Util\Geometry.cpp" />
+    <ClCompile Include="Util\ImageIO.cpp" />
+    <ClCompile Include="Util\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera\Camera.h" />
@@ -231,37 +251,6 @@
     <ClInclude Include="Input\DirectWASDController.h" />
     <ClInclude Include="Input\Hotkey.h" />
     <ClInclude Include="Input\WASDInputable.h" />
-    <ClInclude Include="Input\Input.h" />
-    <ClInclude Include="Lib\gainput\gainput.h" />
-    <ClInclude Include="Lib\gainput\GainputAllocator.h" />
-    <ClInclude Include="Lib\gainput\GainputContainers.h" />
-    <ClInclude Include="Lib\gainput\GainputDebugRenderer.h" />
-    <ClInclude Include="Lib\gainput\GainputHelpers.h" />
-    <ClInclude Include="Lib\gainput\GainputInputDeltaState.h" />
-    <ClInclude Include="Lib\gainput\GainputInputDevice.h" />
-    <ClInclude Include="Lib\gainput\GainputInputDeviceBuiltIn.h" />
-    <ClInclude Include="Lib\gainput\GainputInputDeviceKeyboard.h" />
-    <ClInclude Include="Lib\gainput\GainputInputDeviceMouse.h" />
-    <ClInclude Include="Lib\gainput\GainputInputDevicePad.h" />
-    <ClInclude Include="Lib\gainput\GainputInputDeviceTouch.h" />
-    <ClInclude Include="Lib\gainput\GainputInputListener.h" />
-    <ClInclude Include="Lib\gainput\GainputInputManager.h" />
-    <ClInclude Include="Lib\gainput\GainputInputMap.h" />
-    <ClInclude Include="Lib\gainput\GainputInputState.h" />
-    <ClInclude Include="Lib\gainput\GainputIos.h" />
-    <ClInclude Include="Lib\gainput\GainputLog.h" />
-    <ClInclude Include="Lib\gainput\GainputMapFilters.h" />
-    <ClInclude Include="Lib\gainput\gestures\GainputButtonStickGesture.h" />
-    <ClInclude Include="Lib\gainput\gestures\GainputDoubleClickGesture.h" />
-    <ClInclude Include="Lib\gainput\gestures\GainputGestures.h" />
-    <ClInclude Include="Lib\gainput\gestures\GainputHoldGesture.h" />
-    <ClInclude Include="Lib\gainput\gestures\GainputPinchGesture.h" />
-    <ClInclude Include="Lib\gainput\gestures\GainputRotateGesture.h" />
-    <ClInclude Include="Lib\gainput\gestures\GainputSimultaneouslyDownGesture.h" />
-    <ClInclude Include="Lib\gainput\gestures\GainputTapGesture.h" />
-    <ClInclude Include="Lib\gainput\recorder\GainputInputPlayer.h" />
-    <ClInclude Include="Lib\gainput\recorder\GainputInputRecorder.h" />
-    <ClInclude Include="Lib\gainput\recorder\GainputInputRecording.h" />
     <ClInclude Include="Lib\gli\clear.hpp" />
     <ClInclude Include="Lib\gli\comparison.hpp" />
     <ClInclude Include="Lib\gli\convert.hpp" />
@@ -315,8 +304,6 @@
     <ClInclude Include="Lib\gli\transform.hpp" />
     <ClInclude Include="Lib\gli\type.hpp" />
     <ClInclude Include="Lib\gli\view.hpp" />
-    <ClInclude Include="Lib\lodepng\lodepng.h" />
-    <ClInclude Include="Lib\lodepng\lodepng_util.h" />
     <ClInclude Include="OpenGL\AttributeDescription.h" />
     <ClInclude Include="OpenGL\Camera.h" />
     <ClInclude Include="OpenGL\Drawable.h" />
@@ -357,70 +344,6 @@
     <ClInclude Include="Util\getPosition.h" />
     <ClInclude Include="Util\ImageIO.h" />
     <ClInclude Include="Util\Util.h" />
-    <ClInclude Include="YolonaOss.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Camera\Camera.cpp" />
-    <ClCompile Include="Camera\Camera2D.cpp" />
-    <ClCompile Include="Camera\CameraSystem.cpp" />
-    <ClCompile Include="Camera\FollowCamera.cpp" />
-    <ClCompile Include="Camera\FreeCamera.cpp" />
-    <ClCompile Include="Camera\RTSCamera.cpp" />
-    <ClCompile Include="Drawables\Background.cpp" />
-    <ClCompile Include="Drawables\FPS.cpp" />
-    <ClCompile Include="Drawables\Ground.cpp" />
-    <ClCompile Include="Drawables\Widgets\Button.cpp" />
-    <ClCompile Include="Drawables\Widgets\Label.cpp" />
-    <ClCompile Include="Drawables\Widgets\LineEdit.cpp" />
-    <ClCompile Include="Drawables\Widgets\ListLayout.cpp" />
-    <ClCompile Include="Drawables\Widgets\Slider.cpp" />
-    <ClCompile Include="Drawables\Widgets\Widget.cpp" />
-    <ClCompile Include="Examples\BasicTriangle.cpp" />
-    <ClCompile Include="Examples\RenderTexture.cpp" />
-    <ClCompile Include="Examples\RenderTriangle.cpp" />
-    <ClCompile Include="Examples\RotatingCube.cpp" />
-    <ClCompile Include="Examples\Texture2Tree.cpp" />
-    <ClCompile Include="GameModel\GameState.cpp" />
-    <ClCompile Include="GameModel\Player.cpp" />
-    <ClCompile Include="GameModel\Unit.cpp" />
-    <ClCompile Include="Input\DirectWASDController.cpp" />
-    <ClCompile Include="Input\Hotkey.cpp" />
-    <ClCompile Include="Input\Input.cpp" />
-    <ClCompile Include="Lib\glad\src\glad.c" />
-    <ClCompile Include="Lib\gli\core\dummy.cpp" />
-    <ClCompile Include="Lib\lodepng\lodepng.cpp" />
-    <ClCompile Include="Lib\lodepng\lodepng_util.cpp" />
-    <ClCompile Include="OpenGL\Camera.cpp" />
-    <ClCompile Include="OpenGL\Drawable.cpp" />
-    <ClCompile Include="OpenGL\DrawableList.cpp" />
-    <ClCompile Include="OpenGL\DrawSpecification.cpp" />
-    <ClCompile Include="OpenGL\IBO.cpp" />
-    <ClCompile Include="OpenGL\InputHandling.cpp" />
-    <ClCompile Include="OpenGL\Key.cpp" />
-    <ClCompile Include="OpenGL\Rendertarget.cpp" />
-    <ClCompile Include="OpenGL\ShaderProgram.cpp" />
-    <ClCompile Include="OpenGL\SSBO.cpp" />
-    <ClCompile Include="OpenGL\Texture.cpp" />
-    <ClCompile Include="OpenGL\Uniform.cpp" />
-    <ClCompile Include="OpenGL\Updateable.cpp" />
-    <ClCompile Include="OpenGL\UpdateableList.cpp" />
-    <ClCompile Include="OpenGL\VAO.cpp" />
-    <ClCompile Include="OpenGL\VBO.cpp" />
-    <ClCompile Include="OpenGL\Window.cpp" />
-    <ClCompile Include="Renderer\ArrowRenderer.cpp" />
-    <ClCompile Include="Renderer\BoxRenderer.cpp" />
-    <ClCompile Include="Renderer\MeshRenderer.cpp" />
-    <ClCompile Include="Renderer\RectangleRenderer.cpp" />
-    <ClCompile Include="Renderer\SphereRenderer.cpp" />
-    <ClCompile Include="Renderer\SupComModelRenderer.cpp" />
-    <ClCompile Include="Renderer\TextRenderer.cpp" />
-    <ClCompile Include="Renderer\TextureRenderer.cpp" />
-    <ClCompile Include="RTSComponents\Landscape.cpp" />
-    <ClCompile Include="RTSComponents\Unit.cpp" />
-    <ClCompile Include="Util\Geometry.cpp" />
-    <ClCompile Include="Util\ImageIO.cpp" />
-    <ClCompile Include="Util\Util.cpp" />
-    <ClCompile Include="YolonaOss.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Lib\gli\core\bc.inl" />

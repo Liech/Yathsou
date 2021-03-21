@@ -127,8 +127,13 @@ namespace YolonaOss {
           win->_mouseWheelMovement += (float)yoffset;
           InputHandling::getInstance().mouseWheel(xoffset,yoffset);
         });
-      gladLoadGL();
 
+      if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+      {
+        std::cout << "Failed to initialize GLAD" << std::endl;
+        glfwTerminate();
+        return;
+      }
 
       GLint flags; glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
       if (flags & GL_CONTEXT_FLAG_DEBUG_BIT)

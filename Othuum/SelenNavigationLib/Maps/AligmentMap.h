@@ -9,6 +9,7 @@ namespace Selen {
   class AligmentMap :public NavigationMap<Dimension> {
     using self = DiscomfortMap<Dimension>;
     using Math = Iyathuum::Geometry<Dimension>;
+    using vec = std::array<double, Dimension>;
   public:
     AligmentMap(std::shared_ptr<NavigationAgentManager<Dimension>> agents) {
       _agents = agents;

@@ -143,7 +143,7 @@ namespace Iyathuum {
         return;
       std::vector<Tree::Leaf> leaves = parent->getLeafs();
       content_ptr all = std::make_shared<std::set<std::shared_ptr<Content>>>();
-      for (Tree::Leaf leaf : leaves) {        
+      for (auto leaf : leaves) {        
         if (leaf.link->getContent() == nullptr)
           continue;
         for (auto f : *leaf.link->getContent()) {

@@ -3,10 +3,10 @@
 #include <stdexcept>
 
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "../Lib/lodepng/lodepng.h"
-#include "../Lib/gli/load_dds.hpp"
-#include "../Lib/gli/texture2d.hpp"
-#include "../Lib/gli/sampler2d.hpp"
+#include "Lib/lodepng/lodepng.h"
+#include "Lib/gli/load_dds.hpp"
+#include "Lib/gli/texture2d.hpp"
+#include "Lib/gli/sampler2d.hpp"
 #include <fstream>
 
 namespace YolonaOss {
@@ -27,7 +27,7 @@ namespace YolonaOss {
     image.resize(width * height * 4);
     for (unsigned y = 0; y < height; y++)
       for (unsigned x = 0; x < width; x++) {
-        Iyathuum::Color& c = img.getVal(x, y);
+        Iyathuum::Color c = img.getVal(x, y);
         image[4 * width * y + 4 * x + 0] = (unsigned char)c.r();
         image[4 * width * y + 4 * x + 1] = (unsigned char)c.g();
         image[4 * width * y + 4 * x + 2] = (unsigned char)c.b();

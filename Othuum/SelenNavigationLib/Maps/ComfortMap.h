@@ -9,6 +9,7 @@ namespace Selen {
   class ComfortMap :public NavigationMap<Dimension> {
     using self = ComfortMap<Dimension>;
     using Math = Iyathuum::Geometry<Dimension>;
+    using vec = std::array<double, Dimension>;
   public:
     ComfortMap(std::shared_ptr<NavigationAgentManager<Dimension>> agents) {
       _agents = agents;

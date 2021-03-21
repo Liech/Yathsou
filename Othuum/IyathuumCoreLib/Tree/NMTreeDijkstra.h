@@ -3,6 +3,7 @@
 #include "Dijkstra.h"
 #include "NMTree.h"
 #include "NMTreeNeighbourIndex.h"
+#include "YolonaOss/Util/Util.h"
 
 namespace Iyathuum {
 
@@ -50,7 +51,7 @@ namespace Iyathuum {
     }
 
     std::vector<Tree*> getPath(vec currentPosition) {
-      Tree* current = _root->getLeaf(Util<Dimension>::vec2Array(currentPosition));
+      Tree* current = _root->getLeaf(YolonaOss::Util<Dimension>::vec2Array(currentPosition));
       std::vector<Tree*> result;
       while (current) {
         result.push_back(current);
@@ -65,8 +66,8 @@ namespace Iyathuum {
 
   private:
     double getDijkstraDistance(Tree* A, Tree* B) {
-      vec a = Geometry<Dimension>::convert<double,size_t>(A->getPosition());
-      vec b = Geometry<Dimension>::convert<double,size_t>(B->getPosition());
+      vec a = Geometry<Dimension>::template convert<double,size_t>(A->getPosition());
+      vec b = Geometry<Dimension>::template convert<double,size_t>(B->getPosition());
       for (int i = 0; i < Dimension; i++)
         a[i] += (float)A->getSize() / 2.0;
       for (int i = 0; i < Dimension; i++)

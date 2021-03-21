@@ -11,6 +11,7 @@ namespace Selen {
   template <size_t Dimension>
   class InfectiousArrivalMapGroup : public MapGroup<Dimension> {
     using Math = Iyathuum::Geometry<Dimension>;
+    using vec = std::array<double, Dimension>;
   public:
     InfectiousArrivalMapGroup(std::shared_ptr<NavigationAgentManager<Dimension>> agents) : MapGroup<Dimension>(){
       _agents = agents;
@@ -24,9 +25,9 @@ namespace Selen {
 
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       if (_arrivedUnits.count(obj)) {
-        return Math::invert( obj->getVelocity());
+        return Math::invert(obj->getVelocity());
       }
-      else if (Math::length(Math::subtract(_target , obj->getPosition())) < 0.5f) {
+      else if (Math::length(Math::subtract(MapGroup<Dimension>::_target, obj->getPosition())) < 0.5f) {
         _arrivedUnits.insert(obj);
         return Math::invert(obj->getVelocity());
       }

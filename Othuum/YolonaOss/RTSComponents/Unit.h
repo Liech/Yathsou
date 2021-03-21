@@ -14,12 +14,12 @@ namespace YolonaOss{
     using Math = Iyathuum::Geometry<Dimension>;
   public:
     Unit(vec position, vec orientation) {
-      _navigationAgent = std::make_shared<Selen::NavigationAgent<2>>(Util<Dimension>::vec2Array<double>(position), Util<Dimension>::vec2Array<double>(orientation));
+      _navigationAgent = std::make_shared<Selen::NavigationAgent<2>>(Util<Dimension>::template vec2Array<double>(position), Util<Dimension>::template vec2Array<double>(orientation));
     }
 
     void setTarget(vec target, std::shared_ptr<Selen::NavigationMap<Dimension>> map) {
       _navigationAgent->setMap(map);
-      _navigationAgent->setTarget(Util<Dimension>::vec2Array<double>(target));
+      _navigationAgent->setTarget(Util<Dimension>::template vec2Array<double>(target));
     }
 
     void setSpeed(float speed) {
@@ -27,7 +27,7 @@ namespace YolonaOss{
     }
 
     vec getPosition() {
-      return Util<Dimension>::array2Vec<double>(_navigationAgent->getPosition());
+      return Util<Dimension>::template array2Vec<double>(_navigationAgent->getPosition());
     }
 
     vec getOrientation() {

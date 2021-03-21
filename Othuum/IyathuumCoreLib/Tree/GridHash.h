@@ -3,6 +3,7 @@
 #include "SpatialHash.h"
 #include <map>
 #include "IyathuumCoreLib/BaseTypes/AABB.h"
+#include "YolonaOss/Util/Util.h"
 
 
 namespace Iyathuum {
@@ -39,7 +40,7 @@ namespace Iyathuum {
 
       std::set<std::array<size_t, Dimension>> indexes;
       std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> result;
-      Util<Dimension>::apply(start, size, [object, &indexes,this](std::array<size_t, Dimension> index) {
+      YolonaOss::Util<Dimension>::apply(start, size, [object, &indexes,this](std::array<size_t, Dimension> index) {
         #pragma omp critical
         {     
           indexes.insert(index);
@@ -80,7 +81,7 @@ namespace Iyathuum {
         size[i] = std::ceil((bounds.getPosition()[i] + bounds.getSize()[i] - _area.getPosition()[i]) / (float)_gridSize) - start[i];
       }
       std::set<std::shared_ptr<ObjectWithAABB<Dimension>>> result;
-      Util<Dimension>::apply(start, size, [result,this, position](std::array<size_t, Dimension> index) {
+      YolonaOss::Util<Dimension>::apply(start, size, [result,this, position](std::array<size_t, Dimension> index) {
         auto candidates = _data->getRef(index);
         std::set < std::shared_ptr<ObjectWithAABB<Dimension>>> result;
         for (auto candidate : candidates) {
