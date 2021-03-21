@@ -18,6 +18,14 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BoxVisualization.h" />
+    <ClInclude Include="BulletDebugDrawer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BoxVisualization.cpp" />
+    <ClCompile Include="BulletDebugDrawer.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -154,14 +162,6 @@
       <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\AthanahCommonLib_\BoxVisualization.h" />
-    <ClInclude Include="..\AthanahCommonLib_\BulletDebugDrawer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\AthanahCommonLib_\BoxVisualization.cpp" />
-    <ClCompile Include="..\AthanahCommonLib_\BulletDebugDrawer.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

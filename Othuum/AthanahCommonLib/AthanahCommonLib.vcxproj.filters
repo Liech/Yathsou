@@ -15,18 +15,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\AthanahCommonLib_\BoxVisualization.h">
+    <ClInclude Include="BoxVisualization.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\AthanahCommonLib_\BulletDebugDrawer.h">
+    <ClInclude Include="BulletDebugDrawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\AthanahCommonLib_\BoxVisualization.cpp">
+    <ClCompile Include="BulletDebugDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\AthanahCommonLib_\BulletDebugDrawer.cpp">
+    <ClCompile Include="BoxVisualization.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
