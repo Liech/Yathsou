@@ -130,7 +130,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>((Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z)) 
@@ -158,7 +158,7 @@ IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SelenNavigationLib.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)Lib/GLWF/lib/glfw3.lib;$(ProjectDir)Lib/freetype/lib/freetype.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <PostBuildEvent>
       <Command>((Robocopy.exe "$(ProjectDir)Data" "$(TargetDir)/YolonaOssData" /S /Z)) 
