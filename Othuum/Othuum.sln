@@ -32,13 +32,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fatboy", "Fatboy\Fatboy.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fervor", "Fervor\Fervor.vcxproj", "{836893EA-8892-4C4E-A95A-F143748FF809}"
 	ProjectSection(ProjectDependencies) = postProject
-		{227FC423-A301-469E-BE2A-E181251540DE} = {227FC423-A301-469E-BE2A-E181251540DE}
 		{5704436B-4D3B-4267-B906-21EF16E34A1B} = {5704436B-4D3B-4267-B906-21EF16E34A1B}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AthanahCommonLib", "AthanahCommonLib\AthanahCommonLib.vcxproj", "{227FC423-A301-469E-BE2A-E181251540DE}"
-	ProjectSection(ProjectDependencies) = postProject
-		{F38FFFAA-7E2D-4418-BF86-81213AFDE6DE} = {F38FFFAA-7E2D-4418-BF86-81213AFDE6DE}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UyanahGameServer", "UyanahGameServer\UyanahGameServer.vcxproj", "{E18FE3F4-CE6A-4A2F-8948-B1AE11D7F37E}"
@@ -55,6 +49,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SelenNavigationLib", "SelenNavigationLib\SelenNavigationLib.vcxproj", "{B9848E9F-0DD5-43B3-9255-CA2B3BE05210}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HaasScriptingLib", "HaasScriptingLib\HaasScriptingLib.vcxproj", "{BC4B7397-276E-4FD1-B8E7-CA367CF5AC4D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AthanahCommonLib", "AthanahCommonLib\AthanahCommonLib.vcxproj", "{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -164,22 +160,6 @@ Global
 		{836893EA-8892-4C4E-A95A-F143748FF809}.Release|x64.Build.0 = Release|x64
 		{836893EA-8892-4C4E-A95A-F143748FF809}.Release|x86.ActiveCfg = Release|Win32
 		{836893EA-8892-4C4E-A95A-F143748FF809}.Release|x86.Build.0 = Release|Win32
-		{227FC423-A301-469E-BE2A-E181251540DE}.Debug|x64.ActiveCfg = Debug|x64
-		{227FC423-A301-469E-BE2A-E181251540DE}.Debug|x64.Build.0 = Debug|x64
-		{227FC423-A301-469E-BE2A-E181251540DE}.Debug|x86.ActiveCfg = Debug|Win32
-		{227FC423-A301-469E-BE2A-E181251540DE}.Debug|x86.Build.0 = Debug|Win32
-		{227FC423-A301-469E-BE2A-E181251540DE}.LinuxDebug|x64.ActiveCfg = Debug|x64
-		{227FC423-A301-469E-BE2A-E181251540DE}.LinuxDebug|x64.Build.0 = Debug|x64
-		{227FC423-A301-469E-BE2A-E181251540DE}.LinuxDebug|x86.ActiveCfg = Debug|Win32
-		{227FC423-A301-469E-BE2A-E181251540DE}.LinuxDebug|x86.Build.0 = Debug|Win32
-		{227FC423-A301-469E-BE2A-E181251540DE}.LinuxRelease|x64.ActiveCfg = Release|x64
-		{227FC423-A301-469E-BE2A-E181251540DE}.LinuxRelease|x64.Build.0 = Release|x64
-		{227FC423-A301-469E-BE2A-E181251540DE}.LinuxRelease|x86.ActiveCfg = Release|Win32
-		{227FC423-A301-469E-BE2A-E181251540DE}.LinuxRelease|x86.Build.0 = Release|Win32
-		{227FC423-A301-469E-BE2A-E181251540DE}.Release|x64.ActiveCfg = Release|x64
-		{227FC423-A301-469E-BE2A-E181251540DE}.Release|x64.Build.0 = Release|x64
-		{227FC423-A301-469E-BE2A-E181251540DE}.Release|x86.ActiveCfg = Release|Win32
-		{227FC423-A301-469E-BE2A-E181251540DE}.Release|x86.Build.0 = Release|Win32
 		{E18FE3F4-CE6A-4A2F-8948-B1AE11D7F37E}.Debug|x64.ActiveCfg = Debug|x64
 		{E18FE3F4-CE6A-4A2F-8948-B1AE11D7F37E}.Debug|x64.Build.0 = Debug|x64
 		{E18FE3F4-CE6A-4A2F-8948-B1AE11D7F37E}.Debug|x86.ActiveCfg = Debug|Win32
@@ -276,6 +256,22 @@ Global
 		{BC4B7397-276E-4FD1-B8E7-CA367CF5AC4D}.Release|x64.Build.0 = Release|x64
 		{BC4B7397-276E-4FD1-B8E7-CA367CF5AC4D}.Release|x86.ActiveCfg = Release|Win32
 		{BC4B7397-276E-4FD1-B8E7-CA367CF5AC4D}.Release|x86.Build.0 = Release|Win32
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.Debug|x64.ActiveCfg = Debug|x64
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.Debug|x64.Build.0 = Debug|x64
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.Debug|x86.ActiveCfg = Debug|Win32
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.Debug|x86.Build.0 = Debug|Win32
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.LinuxDebug|x64.ActiveCfg = Debug|x64
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.LinuxDebug|x64.Build.0 = Debug|x64
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.LinuxDebug|x86.ActiveCfg = Debug|Win32
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.LinuxDebug|x86.Build.0 = Debug|Win32
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.LinuxRelease|x64.ActiveCfg = Release|x64
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.LinuxRelease|x64.Build.0 = Release|x64
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.LinuxRelease|x86.ActiveCfg = Release|Win32
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.LinuxRelease|x86.Build.0 = Release|Win32
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.Release|x64.ActiveCfg = Release|x64
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.Release|x64.Build.0 = Release|x64
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.Release|x86.ActiveCfg = Release|Win32
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
