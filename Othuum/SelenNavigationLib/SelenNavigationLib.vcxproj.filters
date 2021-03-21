@@ -3,7 +3,7 @@
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
@@ -14,24 +14,30 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Header Files\Maps">
-      <UniqueIdentifier>{55199e0e-e578-4f41-b599-304642a98b2d}</UniqueIdentifier>
+      <UniqueIdentifier>{e915b037-3332-490b-ab74-f24fccb6297a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Maps">
-      <UniqueIdentifier>{0856144d-a89e-4876-bff7-1644553450d9}</UniqueIdentifier>
+      <UniqueIdentifier>{a2cb23c0-ff4b-4b8a-81ae-d5c7c2c0fafa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MapGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NavigationAgent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="NavigationAgentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NavigationMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MapGroup.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Maps\DirectDistanceMap.h">
+      <Filter>Header Files\Maps</Filter>
     </ClInclude>
-    <ClInclude Include="NavigationAgent.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Maps\DiscomfortMap.h">
+      <Filter>Header Files\Maps</Filter>
     </ClInclude>
     <ClInclude Include="Maps\GradientGridMap.h">
       <Filter>Header Files\Maps</Filter>
@@ -48,21 +54,12 @@
     <ClInclude Include="Maps\DijkstraMap.h">
       <Filter>Header Files\Maps</Filter>
     </ClInclude>
-    <ClInclude Include="Maps\DirectDistanceMap.h">
-      <Filter>Header Files\Maps</Filter>
-    </ClInclude>
-    <ClInclude Include="Maps\DiscomfortMap.h">
-      <Filter>Header Files\Maps</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MapGroup.cpp">
+    <ClCompile Include="NavigationMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="NavigationAgent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NavigationMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Maps\DirectDistanceMap.cpp">

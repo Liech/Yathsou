@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{29f913df-b11c-4cee-b5f0-ddcd3972c7be}</ProjectGuid>
+    <ProjectGuid>{bc4b7397-276e-4fd1-b8e7-ca367cf5ac4d}</ProjectGuid>
     <RootNamespace>HaasScriptingLib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -78,6 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -116,18 +117,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/lua;$(SolutionDir)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir)lib\lua</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
@@ -141,9 +137,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)Lib/lua;$(SolutionDir)</AdditionalIncludeDirectories>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir)lib\lua</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,13 +145,43 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Lib>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="lib\json.hpp" />
+    <ClInclude Include="lib\json_fwd.hpp" />
+    <ClInclude Include="lib\lua\lapi.h" />
+    <ClInclude Include="lib\lua\lauxlib.h" />
+    <ClInclude Include="lib\lua\lcode.h" />
+    <ClInclude Include="lib\lua\lctype.h" />
+    <ClInclude Include="lib\lua\ldebug.h" />
+    <ClInclude Include="lib\lua\ldo.h" />
+    <ClInclude Include="lib\lua\lfunc.h" />
+    <ClInclude Include="lib\lua\lgc.h" />
+    <ClInclude Include="lib\lua\ljumptab.h" />
+    <ClInclude Include="lib\lua\llex.h" />
+    <ClInclude Include="lib\lua\llimits.h" />
+    <ClInclude Include="lib\lua\lmem.h" />
+    <ClInclude Include="lib\lua\lobject.h" />
+    <ClInclude Include="lib\lua\lopcodes.h" />
+    <ClInclude Include="lib\lua\lopnames.h" />
+    <ClInclude Include="lib\lua\lparser.h" />
+    <ClInclude Include="lib\lua\lprefix.h" />
+    <ClInclude Include="lib\lua\lstate.h" />
+    <ClInclude Include="lib\lua\lstring.h" />
+    <ClInclude Include="lib\lua\ltable.h" />
+    <ClInclude Include="lib\lua\ltm.h" />
+    <ClInclude Include="lib\lua\lua.h" />
+    <ClInclude Include="lib\lua\lua.hpp" />
+    <ClInclude Include="lib\lua\luaconf.h" />
+    <ClInclude Include="lib\lua\lualib.h" />
+    <ClInclude Include="lib\lua\lundump.h" />
+    <ClInclude Include="lib\lua\lvm.h" />
+    <ClInclude Include="lib\lua\lzio.h" />
+    <ClInclude Include="ScriptEngine.h" />
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="lib\lua\lapi.c" />
     <ClCompile Include="lib\lua\lauxlib.c" />
@@ -194,57 +218,6 @@
     <ClCompile Include="lib\lua\lvm.c" />
     <ClCompile Include="lib\lua\lzio.c" />
     <ClCompile Include="ScriptEngine.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="lib\lua\lapi.h" />
-    <ClInclude Include="lib\lua\lauxlib.h" />
-    <ClInclude Include="lib\lua\lcode.h" />
-    <ClInclude Include="lib\lua\lctype.h" />
-    <ClInclude Include="lib\lua\ldebug.h" />
-    <ClInclude Include="lib\lua\ldo.h" />
-    <ClInclude Include="lib\lua\lfunc.h" />
-    <ClInclude Include="lib\lua\lgc.h" />
-    <ClInclude Include="lib\lua\ljumptab.h" />
-    <ClInclude Include="lib\lua\llex.h" />
-    <ClInclude Include="lib\lua\llimits.h" />
-    <ClInclude Include="lib\lua\lmem.h" />
-    <ClInclude Include="lib\lua\lobject.h" />
-    <ClInclude Include="lib\lua\lopcodes.h" />
-    <ClInclude Include="lib\lua\lopnames.h" />
-    <ClInclude Include="lib\lua\lparser.h" />
-    <ClInclude Include="lib\lua\lprefix.h" />
-    <ClInclude Include="lib\lua\lstate.h" />
-    <ClInclude Include="lib\lua\lstring.h" />
-    <ClInclude Include="lib\lua\ltable.h" />
-    <ClInclude Include="lib\lua\ltm.h" />
-    <ClInclude Include="lib\lua\lua.h" />
-    <ClInclude Include="lib\lua\lua.hpp" />
-    <ClInclude Include="lib\lua\luaconf.h" />
-    <ClInclude Include="lib\lua\lualib.h" />
-    <ClInclude Include="lib\lua\lundump.h" />
-    <ClInclude Include="lib\lua\lvm.h" />
-    <ClInclude Include="lib\lua\lzio.h" />
-    <ClInclude Include="ScriptEngine.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="lib\lua\Makefile" />
-    <CopyFileToFolders Include="lualib\complex.lua">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</DeploymentContent>
-      <FileType>Document</FileType>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)lua</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)lua</DestinationFolders>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="lualib\matrix.lua">
-      <FileType>Document</FileType>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)lua</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)lua</DestinationFolders>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="lualib\inspect.lua">
-      <FileType>Document</FileType>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)lua</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)lua</DestinationFolders>
-    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
