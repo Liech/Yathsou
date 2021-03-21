@@ -118,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Lib/freetype/include;$(SolutionDir)IyathuumCoreLib/lib;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/GLWF/include;$(SolutionDir)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
@@ -147,6 +147,7 @@ IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Lib/freetype/include;$(SolutionDir)IyathuumCoreLib/lib;$(ProjectDir)Lib/glm/include;$(ProjectDir)Lib/glad/include;$(ProjectDir)Lib/GLWF/include;$(SolutionDir)</AdditionalIncludeDirectories>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
