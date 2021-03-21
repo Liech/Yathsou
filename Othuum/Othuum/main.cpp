@@ -61,13 +61,20 @@ int main(int argc, char** argv) {
 
     std::unique_ptr<MainMenuLogicResult> rslt = nullptr;
 
+
     std::shared_ptr<ClientVisualization> vis = nullptr;
     auto contentCreator = [&w,&vis]() {
       std::shared_ptr<Iyathuum::ContentLoader> loader = std::make_shared<Iyathuum::ContentLoader>();
       loader->addPackage([&w,&vis]() {
         vis = std::make_shared<ClientVisualization>();
-        vis->load(w.getSpec());
-        Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(vis, { "Main" });
+        std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
+        list->addDrawable(std::make_shared<Background>());
+        list->addDrawable(std::make_shared<FPS>());
+        list->addDrawable(vis);
+        list->load(w.getSpec());
+        Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
+
+        //Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(vis, { "Main" });
         }, true);
       return loader;
     };
