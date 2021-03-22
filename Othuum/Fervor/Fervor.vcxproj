@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{836893ea-8892-4c4e-a95a-f143748ff809}</ProjectGuid>
+    <ProjectGuid>{1a0f9355-8480-4496-a81c-d498ca53bd01}</ProjectGuid>
     <RootNamespace>Fervor</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -49,9 +49,8 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>PGInstrument</WholeProgramOptimization>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -117,16 +116,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)YolonaOss/Lib/glad/include;$(ProjectDir);$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <OpenMPSupport>true</OpenMPSupport>
-      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)YolonaOss/Lib/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/AthanahCommonLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;
+$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;
+$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;
+$(SolutionDir)x64/$(ConfigurationName)/AthanahCommonLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,18 +136,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)YolonaOss/Lib/glad/include;$(ProjectDir);$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <OpenMPSupport>true</OpenMPSupport>
-      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)YolonaOss/Lib/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/AthanahCommonLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;
+$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;
+$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;
+$(SolutionDir)x64/$(ConfigurationName)/AthanahCommonLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
