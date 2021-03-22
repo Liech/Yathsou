@@ -101,60 +101,6 @@
     <ClInclude Include="lib\enet\time.h">
       <Filter>lib\enet</Filter>
     </ClInclude>
-    <ClInclude Include="lib\snappy\snappy-sinksource.h">
-      <Filter>lib\snappy</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\snappy\snappy-stubs-internal.h">
-      <Filter>lib\snappy</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\snappy\snappy-stubs-public.h">
-      <Filter>lib\snappy</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\snappy\snappy.h">
-      <Filter>lib\snappy</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\snappy\snappy-c.h">
-      <Filter>lib\snappy</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\snappy\snappy-internal.h">
-      <Filter>lib\snappy</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-hash.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-internal.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-list.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-lzma.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-merge.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-second.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-blkcache.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-cfgs.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-decode.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-djw.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\xdelta3\xdelta3-fgk.h">
-      <Filter>lib\xdelta3</Filter>
-    </ClInclude>
     <ClInclude Include="Core\NetworkGameSeed.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -241,6 +187,63 @@
     </ClInclude>
     <ClInclude Include="Core\ConnectionMultiplexer.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy-sinksource.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy-stubs-internal.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy-stubs-public.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy-c.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\snappy\snappy-internal.h">
+      <Filter>lib\snappy</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-internal.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-list.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-lzma.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-main.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-merge.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-second.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-blkcache.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-cfgs.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-decode.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-djw.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-fgk.h">
+      <Filter>lib\xdelta3</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\xdelta3\xdelta3-hash.h">
+      <Filter>lib\xdelta3</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -330,6 +333,27 @@
     </ClCompile>
     <ClCompile Include="Core\ConnectionMultiplexer.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\snappy\snappy-sinksource.cc">
+      <Filter>lib\snappy</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\snappy\snappy-stubs-internal.cc">
+      <Filter>lib\snappy</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\snappy\snappy.cc">
+      <Filter>lib\snappy</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\snappy\snappy_compress_fuzzer.cc">
+      <Filter>lib\snappy</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\snappy\snappy_uncompress_fuzzer.cc">
+      <Filter>lib\snappy</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\snappy\snappy-c.cc">
+      <Filter>lib\snappy</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\xdelta3\xdelta3.c">
+      <Filter>lib\xdelta3</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

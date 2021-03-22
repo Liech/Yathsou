@@ -19,6 +19,9 @@
  * interfaces -- xd3_encode_input and xd3_decode_input -- plus a dozen
  * or so related calls.  This interface is styled after Zlib. */
 
+#define SIZEOF_UNSIGNED_LONG_LONG 8
+#define SIZEOF_SIZE_T 8
+
 #ifndef _XDELTA3_H_
 #define _XDELTA3_H_
 
@@ -166,9 +169,6 @@ typedef ULONGLONG      uint64_t;
 #ifndef _FILE_OFFSET_BITS
 #define _FILE_OFFSET_BITS 64
 #endif
-
-#define SIZEOF_SIZE_T 8
-#define SIZEOF_UNSIGNED_LONG_LONG sizeof(unsigned long long)
 
 static_assert(SIZEOF_SIZE_T == sizeof(size_t), "SIZEOF_SIZE_T not correctly set");
 static_assert(SIZEOF_UNSIGNED_LONG_LONG == sizeof(unsigned long long), "SIZEOF_UNSIGNED_LONG_LONG not correctly set");

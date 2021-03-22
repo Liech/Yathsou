@@ -126,7 +126,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib/enet/enet64.lib;$(ProjectDir)lib/xdelta3/xdelta3.lib;$(ProjectDir)lib/snappy/snappyd.lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Ws2_32.Lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib/enet/enet64.lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Ws2_32.Lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -153,7 +153,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib/enet/enet64.lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Ws2_32.Lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Winmm.lib;$(ProjectDir)lib/snappy/snappyd.lib;$(ProjectDir)lib/xdelta3/xdelta3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib/enet/enet64.lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Ws2_32.Lib;$(WindowsSdkDir)Lib\10.0.18362.0\um\x64\Winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -195,6 +195,7 @@
     <ClInclude Include="lib\xdelta3\xdelta3-internal.h" />
     <ClInclude Include="lib\xdelta3\xdelta3-list.h" />
     <ClInclude Include="lib\xdelta3\xdelta3-lzma.h" />
+    <ClInclude Include="lib\xdelta3\xdelta3-main.h" />
     <ClInclude Include="lib\xdelta3\xdelta3-merge.h" />
     <ClInclude Include="lib\xdelta3\xdelta3-second.h" />
     <ClInclude Include="lib\xdelta3\xdelta3.h" />
@@ -229,6 +230,13 @@
     <ClCompile Include="Core\NetworkGameSeedInput.cpp" />
     <ClCompile Include="Core\NetworkMemory.cpp" />
     <ClCompile Include="Core\Serialization.cpp" />
+    <ClCompile Include="lib\snappy\snappy-c.cc" />
+    <ClCompile Include="lib\snappy\snappy-sinksource.cc" />
+    <ClCompile Include="lib\snappy\snappy-stubs-internal.cc" />
+    <ClCompile Include="lib\snappy\snappy.cc" />
+    <ClCompile Include="lib\snappy\snappy_compress_fuzzer.cc" />
+    <ClCompile Include="lib\snappy\snappy_uncompress_fuzzer.cc" />
+    <ClCompile Include="lib\xdelta3\xdelta3.c" />
     <ClCompile Include="Protocoll\Client\LobbyClient.cpp" />
     <ClCompile Include="Protocoll\Client\LobbyConnector.cpp" />
     <ClCompile Include="Protocoll\Server\GameLobby.cpp" />
