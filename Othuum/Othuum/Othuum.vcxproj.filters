@@ -3,56 +3,181 @@
   <ItemGroup>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="libnop">
-      <UniqueIdentifier>{48e6329e-56bf-44b5-af41-46fbbbde0079}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Serial">
-      <UniqueIdentifier>{2130c330-b440-4045-a097-425220871a7e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Architecture">
-      <UniqueIdentifier>{2d48d53c-682d-4d07-a5ab-67969328448f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\MainMenuPages">
-      <UniqueIdentifier>{85d258a4-fe2b-4e36-9434-01d278991c1c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\MainMenuPages">
-      <UniqueIdentifier>{57d19823-4a18-4f6e-a617-525f7e4c496d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SideProject">
-      <UniqueIdentifier>{95b69834-01f8-40a0-9d6f-1d96b2f51c47}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\ClientVisualization">
-      <UniqueIdentifier>{437ea019-3523-429e-b59c-927a4bc82f37}</UniqueIdentifier>
+      <UniqueIdentifier>{b979f8c2-cc53-45c5-98d2-e0fc59e6614e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\ClientVisualization">
-      <UniqueIdentifier>{cf71b4f8-0ca5-4a91-bd38-2d7e23500955}</UniqueIdentifier>
+      <UniqueIdentifier>{69768f9f-99fb-4760-b790-1a6632b1b8a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MainMenuPages">
+      <UniqueIdentifier>{fb08ebcf-ad17-49ed-97f7-61fa5f0cec80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainMenuPages">
+      <UniqueIdentifier>{3c15331a-dd20-4625-8e72-9eb520f6d439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Serial">
+      <UniqueIdentifier>{ccfedf79-2587-4dcc-b48b-45d14ae1bb7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Serial">
+      <UniqueIdentifier>{15cdce5c-6427-44e4-bbbc-105585175392}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SideProject">
+      <UniqueIdentifier>{cf3216a2-dab5-4110-b541-a3ac2321b91d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SideProject">
+      <UniqueIdentifier>{a07d3715-c7f3-4297-a2e5-efe3487ee5fe}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ClientState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawCubes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuLogicResult.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicalModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletDebugDrawer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientConfiguration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientVisualization\ClientVisualization.h">
+      <Filter>Header Files\ClientVisualization</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\DialogPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\ErrorPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\GameLobbyPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\HostGamePage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\HostLoadingPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\JoinLoadingPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\JoinLobbyPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\LobbyLoadingPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\LobbyPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\MainMenuPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\OptionsPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenuPages\StartGameLoadingPage.h">
+      <Filter>Header Files\MainMenuPages</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\MoveableEntity.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\MovementCommand.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Owned.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Player.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Projectile.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Quaternion.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Ressource.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Unit.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Vector3.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Building.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\ConstructionSite.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Destructible.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Entity.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\ExtractionPoint.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Gamestate.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="Serial\Landscape.h">
+      <Filter>Header Files\Serial</Filter>
+    </ClInclude>
+    <ClInclude Include="SideProject\SideProjectMain.h">
+      <Filter>Header Files\SideProject</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DrawCubes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuLogic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuLogicResult.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PhysicalModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DrawCubes.cpp">
+    <ClCompile Include="BulletDebugDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ClientConfiguration.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenuLogic.cpp">
+    <ClCompile Include="ClientState.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientVisualization\ClientVisualization.cpp">
+      <Filter>Source Files\ClientVisualization</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuPages\DialogPage.cpp">
       <Filter>Source Files\MainMenuPages</Filter>
@@ -60,7 +185,16 @@
     <ClCompile Include="MainMenuPages\ErrorPage.cpp">
       <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuPages\GameLobbyPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
+    </ClCompile>
     <ClCompile Include="MainMenuPages\HostGamePage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuPages\HostLoadingPage.cpp">
+      <Filter>Source Files\MainMenuPages</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenuPages\JoinLoadingPage.cpp">
       <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
     <ClCompile Include="MainMenuPages\JoinLobbyPage.cpp">
@@ -78,336 +212,11 @@
     <ClCompile Include="MainMenuPages\OptionsPage.cpp">
       <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
-    <ClCompile Include="ClientState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenuPages\HostLoadingPage.cpp">
-      <Filter>Source Files\MainMenuPages</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenuPages\GameLobbyPage.cpp">
-      <Filter>Source Files\MainMenuPages</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenuPages\JoinLoadingPage.cpp">
-      <Filter>Source Files\MainMenuPages</Filter>
-    </ClCompile>
-    <ClCompile Include="MainMenuLogicResult.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SideProject\SideProjectMain.cpp">
-      <Filter>SideProject</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletDebugDrawer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MainMenuPages\StartGameLoadingPage.cpp">
       <Filter>Source Files\MainMenuPages</Filter>
     </ClCompile>
-    <ClCompile Include="ClientVisualization\ClientVisualization.cpp">
-      <Filter>Source Files\ClientVisualization</Filter>
+    <ClCompile Include="SideProject\SideProjectMain.cpp">
+      <Filter>Source Files\SideProject</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Lib\nop\base\array.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\encoding.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\encoding_byte.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\enum.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\handle.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\logical_buffer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\macros.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\map.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\members.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\optional.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\pair.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\reference_wrapper.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\result.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\serializer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\string.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\table.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\tuple.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\utility.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\value.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\variant.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\base\vector.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\protocol.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\rpc\interface.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\rpc\simple_method_receiver.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\rpc\simple_method_sender.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\serializer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\status.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\structure.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\table.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\traits\function_traits.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\traits\is_comparable.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\traits\is_detected.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\traits\is_fungible.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\traits\is_template_base_of.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\traits\void.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\types\detail\logical_buffer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\types\detail\member_pointer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\types\detail\variant.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\types\enum_flags.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\types\file_handle.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\types\handle.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\types\optional.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\types\result.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\types\thread_local.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\types\variant.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\backtrace.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\bounded_reader.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\bounded_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\buffer_reader.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\buffer_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\compiler.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\constexpr_buffer_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\die.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\endian.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\fd_reader.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\fd_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\pedantic_buffer_reader.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\pedantic_buffer_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\sip_hash.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\stream_reader.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\utility\stream_writer.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Lib\nop\value.h">
-      <Filter>libnop</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Unit.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Vector3.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Ressource.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Building.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\ConstructionSite.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\MovementCommand.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Player.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Projectile.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\ExtractionPoint.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Architecture\Decisions.h">
-      <Filter>Architecture</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Quaternion.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Entity.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\MoveableEntity.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Owned.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Destructible.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Gamestate.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Landscape.h">
-      <Filter>Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicalModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DrawCubes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientConfiguration.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuLogic.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\ErrorPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\HostGamePage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\JoinLobbyPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\LobbyLoadingPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\LobbyPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\MainMenuPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\DialogPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\OptionsPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\HostLoadingPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\GameLobbyPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\JoinLoadingPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuLogicResult.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SideProject\SideProjectMain.h">
-      <Filter>SideProject</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletDebugDrawer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainMenuPages\StartGameLoadingPage.h">
-      <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="ClientVisualization\ClientVisualization.h">
-      <Filter>Header Files\ClientVisualization</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Architecture\SerialDesign.txt">
-      <Filter>Architecture</Filter>
-    </Text>
   </ItemGroup>
 </Project>

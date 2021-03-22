@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,8 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{CD140090-7BA2-46E0-918F-3E0E0756DA62}</ProjectGuid>
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{29546bf3-e106-4f2a-9dab-ac637745d56b}</ProjectGuid>
     <RootNamespace>Othuum</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -29,29 +30,27 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>PGInstrument</WholeProgramOptimization>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -71,178 +70,86 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
-    <SourcePath>$(ProjectDir);$(SourcePath)</SourcePath>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Debug\YolonaOss.lib;$(LibraryPath)</LibraryPath>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/glm/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
-      <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(ProjectDir);$(SolutionDir)YolonaOss/Lib/glm/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <TreatWarningAsError>false</TreatWarningAsError>
-      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/AhwassaGraphicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/UyanahGameServer.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <ShowProgress>LinkVerbose</ShowProgress>
-    </Link>
-    <CustomBuildStep>
-      <Command>call "$(ProjectDir)build.bat"</Command>
-    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/glm/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)YolonaOss/Lib/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/UyanahGameServer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/glm/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)YolonaOss/Lib/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/AhwassaGraphicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/UyanahGameServer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(SolutionDir)x64/$(ConfigurationName)/UyanahGameServer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <CustomBuildStep>
-      <Command>call "$(ProjectDir)build.bat"</Command>
-    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BulletDebugDrawer.cpp" />
-    <ClCompile Include="ClientConfiguration.cpp" />
-    <ClCompile Include="ClientState.cpp" />
-    <ClCompile Include="ClientVisualization\ClientVisualization.cpp" />
-    <ClCompile Include="DrawCubes.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainMenuLogic.cpp" />
-    <ClCompile Include="MainMenuLogicResult.cpp" />
-    <ClCompile Include="MainMenuPages\DialogPage.cpp" />
-    <ClCompile Include="MainMenuPages\ErrorPage.cpp" />
-    <ClCompile Include="MainMenuPages\GameLobbyPage.cpp" />
-    <ClCompile Include="MainMenuPages\HostGamePage.cpp" />
-    <ClCompile Include="MainMenuPages\HostLoadingPage.cpp" />
-    <ClCompile Include="MainMenuPages\JoinLoadingPage.cpp" />
-    <ClCompile Include="MainMenuPages\JoinLobbyPage.cpp" />
-    <ClCompile Include="MainMenuPages\LobbyLoadingPage.cpp" />
-    <ClCompile Include="MainMenuPages\LobbyPage.cpp" />
-    <ClCompile Include="MainMenuPages\MainMenuPage.cpp" />
-    <ClCompile Include="MainMenuPages\OptionsPage.cpp" />
-    <ClCompile Include="MainMenuPages\StartGameLoadingPage.cpp" />
-    <ClCompile Include="PhysicalModel.cpp" />
-    <ClCompile Include="SideProject\SideProjectMain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Architecture\Decisions.h" />
     <ClInclude Include="BulletDebugDrawer.h" />
     <ClInclude Include="ClientConfiguration.h" />
+    <ClInclude Include="ClientState.h" />
     <ClInclude Include="ClientVisualization\ClientVisualization.h" />
     <ClInclude Include="DrawCubes.h" />
-    <ClInclude Include="Lib\nop\base\array.h" />
-    <ClInclude Include="Lib\nop\base\encoding.h" />
-    <ClInclude Include="Lib\nop\base\encoding_byte.h" />
-    <ClInclude Include="Lib\nop\base\enum.h" />
-    <ClInclude Include="Lib\nop\base\handle.h" />
-    <ClInclude Include="Lib\nop\base\logical_buffer.h" />
-    <ClInclude Include="Lib\nop\base\macros.h" />
-    <ClInclude Include="Lib\nop\base\map.h" />
-    <ClInclude Include="Lib\nop\base\members.h" />
-    <ClInclude Include="Lib\nop\base\optional.h" />
-    <ClInclude Include="Lib\nop\base\pair.h" />
-    <ClInclude Include="Lib\nop\base\reference_wrapper.h" />
-    <ClInclude Include="Lib\nop\base\result.h" />
-    <ClInclude Include="Lib\nop\base\serializer.h" />
-    <ClInclude Include="Lib\nop\base\string.h" />
-    <ClInclude Include="Lib\nop\base\table.h" />
-    <ClInclude Include="Lib\nop\base\tuple.h" />
-    <ClInclude Include="Lib\nop\base\utility.h" />
-    <ClInclude Include="Lib\nop\base\value.h" />
-    <ClInclude Include="Lib\nop\base\variant.h" />
-    <ClInclude Include="Lib\nop\base\vector.h" />
-    <ClInclude Include="Lib\nop\protocol.h" />
-    <ClInclude Include="Lib\nop\rpc\interface.h" />
-    <ClInclude Include="Lib\nop\rpc\simple_method_receiver.h" />
-    <ClInclude Include="Lib\nop\rpc\simple_method_sender.h" />
-    <ClInclude Include="Lib\nop\serializer.h" />
-    <ClInclude Include="Lib\nop\status.h" />
-    <ClInclude Include="Lib\nop\structure.h" />
-    <ClInclude Include="Lib\nop\table.h" />
-    <ClInclude Include="Lib\nop\traits\function_traits.h" />
-    <ClInclude Include="Lib\nop\traits\is_comparable.h" />
-    <ClInclude Include="Lib\nop\traits\is_detected.h" />
-    <ClInclude Include="Lib\nop\traits\is_fungible.h" />
-    <ClInclude Include="Lib\nop\traits\is_template_base_of.h" />
-    <ClInclude Include="Lib\nop\traits\void.h" />
-    <ClInclude Include="Lib\nop\types\detail\logical_buffer.h" />
-    <ClInclude Include="Lib\nop\types\detail\member_pointer.h" />
-    <ClInclude Include="Lib\nop\types\detail\variant.h" />
-    <ClInclude Include="Lib\nop\types\enum_flags.h" />
-    <ClInclude Include="Lib\nop\types\file_handle.h" />
-    <ClInclude Include="Lib\nop\types\handle.h" />
-    <ClInclude Include="Lib\nop\types\optional.h" />
-    <ClInclude Include="Lib\nop\types\result.h" />
-    <ClInclude Include="Lib\nop\types\thread_local.h" />
-    <ClInclude Include="Lib\nop\types\variant.h" />
-    <ClInclude Include="Lib\nop\utility\backtrace.h" />
-    <ClInclude Include="Lib\nop\utility\bounded_reader.h" />
-    <ClInclude Include="Lib\nop\utility\bounded_writer.h" />
-    <ClInclude Include="Lib\nop\utility\buffer_reader.h" />
-    <ClInclude Include="Lib\nop\utility\buffer_writer.h" />
-    <ClInclude Include="Lib\nop\utility\compiler.h" />
-    <ClInclude Include="Lib\nop\utility\constexpr_buffer_writer.h" />
-    <ClInclude Include="Lib\nop\utility\die.h" />
-    <ClInclude Include="Lib\nop\utility\endian.h" />
-    <ClInclude Include="Lib\nop\utility\fd_reader.h" />
-    <ClInclude Include="Lib\nop\utility\fd_writer.h" />
-    <ClInclude Include="Lib\nop\utility\pedantic_buffer_reader.h" />
-    <ClInclude Include="Lib\nop\utility\pedantic_buffer_writer.h" />
-    <ClInclude Include="Lib\nop\utility\sip_hash.h" />
-    <ClInclude Include="Lib\nop\utility\stream_reader.h" />
-    <ClInclude Include="Lib\nop\utility\stream_writer.h" />
-    <ClInclude Include="Lib\nop\value.h" />
     <ClInclude Include="MainMenuLogic.h" />
     <ClInclude Include="MainMenuLogicResult.h" />
     <ClInclude Include="MainMenuPages\DialogPage.h" />
@@ -277,7 +184,28 @@
     <ClInclude Include="SideProject\SideProjectMain.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Architecture\SerialDesign.txt" />
+    <ClCompile Include="BulletDebugDrawer.cpp" />
+    <ClCompile Include="ClientConfiguration.cpp" />
+    <ClCompile Include="ClientState.cpp" />
+    <ClCompile Include="ClientVisualization\ClientVisualization.cpp" />
+    <ClCompile Include="DrawCubes.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenuLogic.cpp" />
+    <ClCompile Include="MainMenuLogicResult.cpp" />
+    <ClCompile Include="MainMenuPages\DialogPage.cpp" />
+    <ClCompile Include="MainMenuPages\ErrorPage.cpp" />
+    <ClCompile Include="MainMenuPages\GameLobbyPage.cpp" />
+    <ClCompile Include="MainMenuPages\HostGamePage.cpp" />
+    <ClCompile Include="MainMenuPages\HostLoadingPage.cpp" />
+    <ClCompile Include="MainMenuPages\JoinLoadingPage.cpp" />
+    <ClCompile Include="MainMenuPages\JoinLobbyPage.cpp" />
+    <ClCompile Include="MainMenuPages\LobbyLoadingPage.cpp" />
+    <ClCompile Include="MainMenuPages\LobbyPage.cpp" />
+    <ClCompile Include="MainMenuPages\MainMenuPage.cpp" />
+    <ClCompile Include="MainMenuPages\OptionsPage.cpp" />
+    <ClCompile Include="MainMenuPages\StartGameLoadingPage.cpp" />
+    <ClCompile Include="PhysicalModel.cpp" />
+    <ClCompile Include="SideProject\SideProjectMain.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
