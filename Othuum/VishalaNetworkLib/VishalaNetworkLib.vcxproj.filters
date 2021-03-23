@@ -101,12 +101,6 @@
     <ClInclude Include="lib\enet\time.h">
       <Filter>lib\enet</Filter>
     </ClInclude>
-    <ClInclude Include="Core\NetworkGameSeed.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\NetworkGameSeedInput.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Serialization.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -254,12 +248,6 @@
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Connection.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\NetworkGameSeed.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\NetworkGameSeedInput.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Serialization.cpp">

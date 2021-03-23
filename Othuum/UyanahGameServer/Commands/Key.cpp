@@ -1,13 +1,22 @@
 #include "Key.h"
 
 #include "Scene.h"
+#include "Components/Transform2D.h"
 
 namespace Uyanah {
   namespace Commands {
     REGISTERGROUP(Command, Commands::Key, "Key");
 
     void Key::apply(Scene& s) {
-      
+      auto transform = s.objects[0].getComponent<Components::Transform2D>("Transform2D");
+      if (key == Iyathuum::Key::KEY_W)
+        transform->position += glm::vec2(0, 1);
+      if (key == Iyathuum::Key::KEY_S)
+        transform->position += glm::vec2(0, -1);
+      if (key == Iyathuum::Key::KEY_A)
+        transform->position += glm::vec2(-1,0);
+      if (key == Iyathuum::Key::KEY_D)
+        transform->position += glm::vec2(1,0);
     }
 
     Vishala::BinaryPackage Key::toBinary()

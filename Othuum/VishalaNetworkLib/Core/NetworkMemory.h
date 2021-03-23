@@ -4,6 +4,13 @@
 #include "VishalaNetworkLib/Core/Connection.h"
 #include "VishalaNetworkLib/Core/ConnectionMultiplexer.h"
 
+//very very simple network class
+//keeps serializable intelligently one way synchronized (delta compression & compression)
+//limited to small sizes of synchronized stuff.
+//i assume bottleneck is creating the delta, but this bug prevents currently performance profiling
+//https://developercommunity.visualstudio.com/t/profiling-cpu-still-states-no-user-code-was-runnin/607535
+//therefor i will write more complex approaches...
+
 namespace Vishala {
   class BinaryPackage;
 
