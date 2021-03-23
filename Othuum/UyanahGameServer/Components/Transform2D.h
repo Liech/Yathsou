@@ -7,7 +7,7 @@ namespace Uyanah {
   namespace Components {
     class Transform2D : public Component {
     public:
-      virtual const std::string      ComponentName() const override { return "Transform2D"; }
+      virtual const std::string Name() const override { return "Transform2D"; }
 
       glm::vec2 position = glm::vec2(0,0);
       float     rotation = 0;

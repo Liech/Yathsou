@@ -25,7 +25,7 @@ void ClientVisualization::draw() {
   if (_client)
   for (auto ent : _client->getScene().objects) {
     for (auto comp : ent.components) {
-      if (comp->ComponentName() == "Transform2D") {
+      if (comp->Name() == "Transform2D") {
         std::shared_ptr<Uyanah::Components::Transform2D> t = std::dynamic_pointer_cast<Uyanah::Components::Transform2D>(comp);
         YolonaOss::RectangleRenderer::drawRectangle(t->position-glm::vec2(5,5),glm::vec2(10,10),glm::vec3(1,0,0));
         end = true;

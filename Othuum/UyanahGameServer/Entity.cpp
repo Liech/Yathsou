@@ -8,7 +8,7 @@ namespace Uyanah {
   {
     nlohmann::json arr = nlohmann::json::array();
     for (auto comp : components) {
-      nlohmann::json d = Component::factory_toJson(comp);
+      nlohmann::json d = Component::_toJson(comp);
       arr.push_back(d);
     }
     nlohmann::json result;
@@ -20,7 +20,7 @@ namespace Uyanah {
   {
     components.clear();
     for (auto comp : input["Components"]) {
-      std::shared_ptr<Component> g = Component::factory_fromJson(comp);
+      std::shared_ptr<Component> g = Component::_fromJson(comp);
       components.push_back(g);
     }
   }
@@ -31,7 +31,7 @@ namespace Uyanah {
     int numberOfComponents = components.size();
     Vishala::BinaryPackage::val2bin(result,numberOfComponents);
     for (auto comp : components)
-      result.add(Component::factory_toBinary(comp));
+      result.add(Component::_toBinary(comp));
     return result;
   }
 
@@ -40,6 +40,6 @@ namespace Uyanah {
     components.clear();
     int numberOfPackages = Vishala::BinaryPackage::bin2val<int>(input);
     for (int i = 0; i < numberOfPackages; i++)
-      components.push_back(Component::factory_fromBinary(input));
+      components.push_back(Component::_fromBinary(input));
   }
 }

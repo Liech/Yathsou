@@ -2,7 +2,7 @@
 
 namespace Uyanah {
   namespace Components {
-    REGISTERCOMPONENT(Dot, "Dot");
+    REGISTERGROUP(Component,Dot, "Dot");
 
     Vishala::BinaryPackage Dot::toBinary()
     {
