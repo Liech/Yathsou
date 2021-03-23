@@ -11,7 +11,12 @@ namespace Uyanah {
     virtual void                    fromJson(nlohmann::json)            override;
     virtual Vishala::BinaryPackage  toBinary()                          override;
     virtual void                    fromBinary(Vishala::BinaryPackage&) override;
+    
+    void                                    addComponent(std::shared_ptr<Component>);
+    std::shared_ptr<Component>              getComponent(std::string name);
+    std::vector<std::shared_ptr<Component>> getComponents();
 
-    std::vector<std::shared_ptr<Component>> components;
+  private:
+    std::map<std::string,std::shared_ptr<Component>> components;
   };
 }

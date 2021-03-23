@@ -66,9 +66,9 @@ namespace Uyanah {
       if (s->objects.size() == 0)
         return;
       Entity* e = &s->objects[0];
-      if (e->components.size() == 0)
+      if (e->getComponents().size() == 0)
         return;
-      std::shared_ptr<Component> c = e->components[0];
+      std::shared_ptr<Component> c = e->getComponent("Transform2D");
       std::shared_ptr<Components::Transform2D> t = std::dynamic_pointer_cast<Components::Transform2D>(c);
       if (t)
         t->position = pos;
@@ -89,16 +89,16 @@ namespace Uyanah {
       std::shared_ptr<Components::Transform2D> aTransform = std::make_shared<Components::Transform2D>();
       aTransform->position = glm::vec2(5, 5);
       std::shared_ptr<Components::Dot> aDot = std::make_shared<Components::Dot>();
-      a.components.push_back(aTransform);
-      a.components.push_back(aDot);
+      a.addComponent(aTransform);
+      a.addComponent(aDot);
 
       for (int i = 0; i < 600; i++) {
         Entity b;
         std::shared_ptr<Components::Transform2D> bTransform = std::make_shared<Components::Transform2D>();
         bTransform->position = glm::vec2(rand() %300,  rand() % 300);
         std::shared_ptr<Components::Dot> bDot = std::make_shared<Components::Dot>();
-        b.components.push_back(bTransform);
-        b.components.push_back(bDot);
+        b.addComponent(bTransform);
+        b.addComponent(bDot);
         _scene->Data.objects.push_back(b);
       }
       _scene->Data.objects.push_back(a);
