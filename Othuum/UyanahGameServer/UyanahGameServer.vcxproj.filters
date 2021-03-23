@@ -19,6 +19,12 @@
     <Filter Include="Quelldateien\Components">
       <UniqueIdentifier>{77ae3bd0-f4b7-496d-b342-b411ffe0eb80}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Commands">
+      <UniqueIdentifier>{4035eed0-f222-4e42-8a2f-721b3dce1178}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Commands">
+      <UniqueIdentifier>{c6ef5c29-08c7-4985-97fa-f3d2493fda01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DedicatedServerConfiguration.h">
@@ -48,6 +54,12 @@
     <ClInclude Include="Scene.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Commands\Command.h">
+      <Filter>Headerdateien\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\Key.h">
+      <Filter>Headerdateien\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DedicatedServerConfiguration.cpp">
@@ -76,6 +88,12 @@
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\Command.cpp">
+      <Filter>Quelldateien\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\Key.cpp">
+      <Filter>Quelldateien\Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

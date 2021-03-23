@@ -192,9 +192,6 @@
     <ClCompile Include="OpenGL\InputHandling.cpp">
       <Filter>Source Files\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL\Key.cpp">
-      <Filter>Source Files\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="OpenGL\Rendertarget.cpp">
       <Filter>Source Files\OpenGL</Filter>
     </ClCompile>
@@ -357,9 +354,6 @@
       <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="OpenGL\InputHandling.h">
-      <Filter>Header Files\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGL\Keys.h">
       <Filter>Header Files\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="OpenGL\Loadable.h">

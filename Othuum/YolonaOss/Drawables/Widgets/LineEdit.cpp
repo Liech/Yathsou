@@ -69,7 +69,7 @@ namespace YolonaOss {
       return _text;
     }
 
-    bool LineEdit::mouseClick(glm::vec2 position, GL::Key k) {
+    bool LineEdit::mouseClick(glm::vec2 position, Iyathuum::Key k) {
       //std::cout << position[0] << "/" << position[1] << std::endl;
       
       for (size_t i = 1; i < _text.length()+1; i++) {
@@ -87,13 +87,13 @@ namespace YolonaOss {
       return true;
     };
 
-    void LineEdit::focusedKeyboardInput(YolonaOss::GL::Key key, YolonaOss::GL::KeyStatus status) {
-      auto left   = YolonaOss::GL::Key::KEY_LEFT;
-      auto right  = YolonaOss::GL::Key::KEY_RIGHT;
-      auto del    = YolonaOss::GL::Key::KEY_DELETE;
-      auto remove = YolonaOss::GL::Key::KEY_BACKSPACE;
+    void LineEdit::focusedKeyboardInput(Iyathuum::Key key, Iyathuum::KeyStatus status) {
+      auto left   = Iyathuum::Key::KEY_LEFT;
+      auto right  = Iyathuum::Key::KEY_RIGHT;
+      auto del    = Iyathuum::Key::KEY_DELETE;
+      auto remove = Iyathuum::Key::KEY_BACKSPACE;
 
-      if (status == YolonaOss::GL::KeyStatus::RELEASE)
+      if (status == Iyathuum::KeyStatus::RELEASE)
         return;
 
       if (key == del) {
@@ -166,20 +166,20 @@ namespace YolonaOss {
       _finishedEditingCallback = callback;
     }
 
-    void LineEdit::setValidator(std::function<bool(YolonaOss::GL::Key,std::string)> validator) {
+    void LineEdit::setValidator(std::function<bool(Iyathuum::Key,std::string)> validator) {
       _validator = validator;
     }
 
-    std::function<bool(YolonaOss::GL::Key, std::string full)> LineEdit::defaultValidator() {
-      return [](YolonaOss::GL::Key key, std::string full) -> bool {
-        return YolonaOss::GL::CharacterSets::AlphanumericKeys.count(key)!=0 ||
-          YolonaOss::GL::CharacterSets::InputExtraSymbols.count(key) != 0;
+    std::function<bool(Iyathuum::Key, std::string full)> LineEdit::defaultValidator() {
+      return [](Iyathuum::Key key, std::string full) -> bool {
+        return Iyathuum::CharacterSets::AlphanumericKeys.count(key)!=0 ||
+          Iyathuum::CharacterSets::InputExtraSymbols.count(key) != 0;
       };
     }
 
-    std::function<bool(YolonaOss::GL::Key, std::string full)> LineEdit::integerValidator(int min, int max) {
-      return [min,max](YolonaOss::GL::Key character, std::string newText) -> bool{
-        bool numeric = YolonaOss::GL::CharacterSets::Numeric.count(character) != 0;
+    std::function<bool(Iyathuum::Key, std::string full)> LineEdit::integerValidator(int min, int max) {
+      return [min,max](Iyathuum::Key character, std::string newText) -> bool{
+        bool numeric = Iyathuum::CharacterSets::Numeric.count(character) != 0;
         int  number = std::atoi(newText.c_str());
         return numeric && number > min && number < max;
       };

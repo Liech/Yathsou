@@ -55,7 +55,7 @@ namespace YolonaOss {
       _hovered = false;
     };
 
-    bool Button::mouseClick(glm::vec2 position, GL::Key k) {
+    bool Button::mouseClick(glm::vec2 position, Iyathuum::Key k) {
       _clickedFunction();
       return true;
     };

@@ -3,7 +3,7 @@
 #include "../OpenGL/DrawSpecification.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include "Camera.h"
-#include "../OpenGL/Keys.h"
+#include "IyathuumCoreLib/BaseTypes/Keys.h"
 #include "../OpenGL/Window.h"
 
 namespace YolonaOss {
@@ -43,7 +43,7 @@ namespace YolonaOss {
       if (name == "None") {
         _currentCam = nullptr;
         _currentCamName = "None";
-        _spec->getWindow()->setCursorStatus(GL::CursorStatus::NORMAL);
+        _spec->getWindow()->setCursorStatus(Iyathuum::CursorStatus::NORMAL);
         return;
       }
       if (!_availableCams.count(name))

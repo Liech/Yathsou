@@ -20,7 +20,7 @@ namespace YolonaOss {
       virtual void mouseEnter() override;
       virtual void mouseLeave() override;
       virtual void mouseMove(glm::vec2 position) override;
-      virtual bool mouseStatusChanged(glm::vec2 position, GL::Key k, GL::KeyStatus status) override;
+      virtual bool mouseStatusChanged(glm::vec2 position, Iyathuum::Key k, Iyathuum::KeyStatus status) override;
 
       double getValue() { return _currentValue; }
       void   setValue(double value, bool emit = true);

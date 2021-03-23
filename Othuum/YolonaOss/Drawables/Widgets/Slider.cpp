@@ -94,9 +94,9 @@ namespace YolonaOss {
       }
     }
 
-    bool Slider::mouseStatusChanged(glm::vec2 position, GL::Key k, GL::KeyStatus status) {
-      if (k == GL::Key::MOUSE_BUTTON_1) {
-        if (status == GL::KeyStatus::PRESS && !_pressed) {
+    bool Slider::mouseStatusChanged(glm::vec2 position, Iyathuum::Key k, Iyathuum::KeyStatus status) {
+      if (k == Iyathuum::Key::MOUSE_BUTTON_1) {
+        if (status == Iyathuum::KeyStatus::PRESS && !_pressed) {
           Iyathuum::AABB<2> b = getSliderLocation();
           b.setPosition( Iyathuum::Geometry<2>::subtract(b.getPosition() , getPosition().getPosition()));
           if (b.isInside({ position[0],position[1] })) {
@@ -105,7 +105,7 @@ namespace YolonaOss {
           }
 
         }
-        if (status == GL::KeyStatus::RELEASE && _pressed) {
+        if (status == Iyathuum::KeyStatus::RELEASE && _pressed) {
           _pressed = false;
           return true;
         }

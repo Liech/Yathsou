@@ -54,40 +54,40 @@ namespace Fatboy
 
   void Protagonist::handleInput()
   {
-    auto isPressed = [this](YolonaOss::GL::Key key) {
-      return _spec->getWindow()->getKeyStatus(key) == YolonaOss::GL::KeyStatus::PRESS;
+    auto isPressed = [this](Iyathuum::Key key) {
+      return _spec->getWindow()->getKeyStatus(key) == Iyathuum::KeyStatus::PRESS;
     };
-    if (isPressed(YolonaOss::GL::Key::KEY_W))
+    if (isPressed(Iyathuum::Key::KEY_W))
     {
       _tank->setAcceleration(_tank->maxAcceleration());
     }
-    else if (isPressed(YolonaOss::GL::Key::KEY_S))
+    else if (isPressed(Iyathuum::Key::KEY_S))
     {
       _tank->setAcceleration(-_tank->maxAcceleration());
     }
     else
       _tank->setAcceleration(0);
-    if (isPressed(YolonaOss::GL::Key::KEY_A))
+    if (isPressed(Iyathuum::Key::KEY_A))
     {
       _tank->setSteering(_tank->maxSteering());
     }
-    else if (isPressed(YolonaOss::GL::Key::KEY_D))
+    else if (isPressed(Iyathuum::Key::KEY_D))
     {
       _tank->setSteering(-_tank->maxSteering());
     }
     else
       _tank->setSteering(0);
-    if (isPressed(YolonaOss::GL::Key::KEY_SPACE) && !_pressed)
+    if (isPressed(Iyathuum::Key::KEY_SPACE) && !_pressed)
     {
       _tank->fire();
       _pressed = true;
     }
-    else if (isPressed(YolonaOss::GL::Key::KEY_F1) && !_pressed)
+    else if (isPressed(Iyathuum::Key::KEY_F1) && !_pressed)
     {
       *_drawDebug = !*_drawDebug;
       _pressed = true;
     }
-    else if (isPressed(YolonaOss::GL::Key::KEY_F2) && !_pressed)
+    else if (isPressed(Iyathuum::Key::KEY_F2) && !_pressed)
     {
       if (_cam->getCurrentCam() == "FollowCamera")
         _cam->setCurrentCam("FreeCamera");
@@ -95,9 +95,9 @@ namespace Fatboy
         _cam->setCurrentCam("FollowCamera");
       _pressed = true;
     }
-    else if (!(isPressed(YolonaOss::GL::Key::KEY_SPACE) || isPressed(YolonaOss::GL::Key::KEY_F1) || isPressed(YolonaOss::GL::Key::KEY_F2)))
+    else if (!(isPressed(Iyathuum::Key::KEY_SPACE) || isPressed(Iyathuum::Key::KEY_F1) || isPressed(Iyathuum::Key::KEY_F2)))
       _pressed = false;
-    if (isPressed(YolonaOss::GL::Key::KEY_ENTER))
+    if (isPressed(Iyathuum::Key::KEY_ENTER))
     {
       glm::vec2 pos = _spec->getWindow()->getCursorPos();
       glm::vec3 camPos = _spec->getCam()->getPosition();

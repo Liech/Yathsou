@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <functional>
-#include "Keys.h"
+#include "IyathuumCoreLib/BaseTypes/Keys.h"
 struct GLFWwindow; 
 
 #include "../Renderer/TextRenderer.h"
@@ -24,9 +24,9 @@ namespace YolonaOss {
 
       DrawSpecification* getSpec() { return _spec; }
 
-      KeyStatus  getKeyStatus(Key key);
+      Iyathuum::KeyStatus  getKeyStatus(Iyathuum::Key key);
       double     getTime();
-      void       setCursorStatus(CursorStatus);
+      void       setCursorStatus(Iyathuum::CursorStatus);
       glm::vec2  getCursorPos();
       void       setCursorPos(glm::vec2 pos);
       float      getMouseWheelMovement();

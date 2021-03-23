@@ -34,7 +34,7 @@ Fervor::Fervor()
 
   //_preDrawables ->addDrawable(std::dynamic_pointer_cast<YolonaOss::GL::Drawable>(_mainCharVis));
   auto controller = std::make_shared<YolonaOss::DirectWASDController>(*_mainChar);
-  auto physicDebugHotkey = std::make_shared<YolonaOss::Hotkey>(YolonaOss::GL::Key::KEY_F1, [this]() {_drawPhysicDebug = !_drawPhysicDebug; });
+  auto physicDebugHotkey = std::make_shared<YolonaOss::Hotkey>(Iyathuum::Key::KEY_F1, [this]() {_drawPhysicDebug = !_drawPhysicDebug; });
   _updateList->addUpdateable(physicDebugHotkey);
   _updateList->addUpdateable(controller);
   _physic->setDebugDrawer(_physicDebugDrawer.get());

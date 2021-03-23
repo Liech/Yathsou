@@ -14,7 +14,7 @@ namespace YolonaOss {
     void Camera2D::load(std::shared_ptr<YolonaOss::Camera::Camera> camera, GL::Window* window) {
       _camera = camera;
       _window = window;
-      //_window->setCursorStatus(GL::CursorStatus::HIDDEN);
+      //_window->setCursorStatus(Iyathuum::CursorStatus::HIDDEN);
       _lastCursorPos = glm::vec2((float)_window->getCursorPos().x, (float)_window->getCursorPos().y);
       _lastTime = _window->getTime();
       _view = std::make_shared<Iyathuum::View2D>(Iyathuum::glmAABB<2>(glm::vec2(0,0),glm::vec2(window->getWidth(),window->getHeight())));
@@ -28,13 +28,13 @@ namespace YolonaOss {
       _camera->set2D(true);
       _camera->set2DView(_view->getView());
       double time = _window->getTime();
-      bool w = _window->getKeyStatus(GL::Key::KEY_W) == GL::KeyStatus::PRESS;
-      bool a = _window->getKeyStatus(GL::Key::KEY_A) == GL::KeyStatus::PRESS;
-      bool s = _window->getKeyStatus(GL::Key::KEY_S) == GL::KeyStatus::PRESS;
-      bool d = _window->getKeyStatus(GL::Key::KEY_D) == GL::KeyStatus::PRESS;
-      bool q = _window->getKeyStatus(GL::Key::KEY_Q) == GL::KeyStatus::PRESS;
-      bool e = _window->getKeyStatus(GL::Key::KEY_E) == GL::KeyStatus::PRESS;
-      bool speedup = _window->getKeyStatus(GL::Key::KEY_LEFT_SHIFT) == GL::KeyStatus::PRESS;
+      bool w = _window->getKeyStatus(Iyathuum::Key::KEY_W) == Iyathuum::KeyStatus::PRESS;
+      bool a = _window->getKeyStatus(Iyathuum::Key::KEY_A) == Iyathuum::KeyStatus::PRESS;
+      bool s = _window->getKeyStatus(Iyathuum::Key::KEY_S) == Iyathuum::KeyStatus::PRESS;
+      bool d = _window->getKeyStatus(Iyathuum::Key::KEY_D) == Iyathuum::KeyStatus::PRESS;
+      bool q = _window->getKeyStatus(Iyathuum::Key::KEY_Q) == Iyathuum::KeyStatus::PRESS;
+      bool e = _window->getKeyStatus(Iyathuum::Key::KEY_E) == Iyathuum::KeyStatus::PRESS;
+      bool speedup = _window->getKeyStatus(Iyathuum::Key::KEY_LEFT_SHIFT) == Iyathuum::KeyStatus::PRESS;
 
       float delta = (float)(time - _lastTime) * speedup ? 10 : 1;
       glm::vec3 toTarget = glm::normalize(_camera->getTarget() - _camera->getPosition());

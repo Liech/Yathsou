@@ -223,6 +223,7 @@
     <ClInclude Include="BaseTypes\AABB.h" />
     <ClInclude Include="BaseTypes\Color.h" />
     <ClInclude Include="BaseTypes\glmAABB.h" />
+    <ClInclude Include="BaseTypes\Keys.h" />
     <ClInclude Include="BaseTypes\Line.h" />
     <ClInclude Include="BaseTypes\MultiDimensionalArray.h" />
     <ClInclude Include="BaseTypes\Polygon.h" />
@@ -492,6 +493,7 @@
   <ItemGroup>
     <ClCompile Include="BaseTypes\AABB.cpp" />
     <ClCompile Include="BaseTypes\Color.cpp" />
+    <ClCompile Include="BaseTypes\Key.cpp" />
     <ClCompile Include="lib\glm\detail\glm.cpp" />
     <ClCompile Include="Util\ConstExprHash.cpp" />
     <ClCompile Include="Util\ContentLoader.cpp" />

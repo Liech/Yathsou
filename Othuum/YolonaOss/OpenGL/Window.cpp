@@ -191,24 +191,24 @@ namespace YolonaOss {
     Widgets::Widget* pressed = nullptr;
     void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
     {
-      InputHandling::getInstance().mouseEvent((Key)button, (KeyStatus)action, mods);
+      InputHandling::getInstance().mouseEvent((Iyathuum::Key)button, (Iyathuum::KeyStatus)action, mods);
     }
 
     void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
     {
-      InputHandling::getInstance().keyEvent((YolonaOss::GL::Key)key, (YolonaOss::GL::KeyStatus)action, mode);
+      InputHandling::getInstance().keyEvent((Iyathuum::Key)key, (Iyathuum::KeyStatus)action, mode);
       if ((int)key == GLFW_KEY_ESCAPE && (int)action == GLFW_PRESS)
         glfwSetWindowShouldClose(window, GL_TRUE);
     }
 
-    KeyStatus Window::getKeyStatus(Key key) {
+    Iyathuum::KeyStatus Window::getKeyStatus(Iyathuum::Key key) {
       if ((int)key <= 7)
-        return (KeyStatus)((int)glfwGetMouseButton(_window, (int)key));
+        return (Iyathuum::KeyStatus)((int)glfwGetMouseButton(_window, (int)key));
       else
-        return (KeyStatus)((int)glfwGetKey(_window, (int)key));
+        return (Iyathuum::KeyStatus)((int)glfwGetKey(_window, (int)key));
     }
 
-    void Window::setCursorStatus(CursorStatus status) {
+    void Window::setCursorStatus(Iyathuum::CursorStatus status) {
       glfwSetInputMode(_window, GLFW_CURSOR, (int)status);
     }
 

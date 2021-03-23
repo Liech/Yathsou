@@ -19,7 +19,7 @@ namespace YolonaOss {
 
       virtual void mouseEnter() override;
       virtual void mouseLeave() override;
-      virtual bool mouseClick(glm::vec2 position, GL::Key k) override;
+      virtual bool mouseClick(glm::vec2 position, Iyathuum::Key k) override;
       virtual void setVisible(bool visible) override;
 
       void setText(std::string t);

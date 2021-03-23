@@ -286,7 +286,6 @@ IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
     <ClCompile Include="OpenGL\DrawSpecification.cpp" />
     <ClCompile Include="OpenGL\IBO.cpp" />
     <ClCompile Include="OpenGL\InputHandling.cpp" />
-    <ClCompile Include="OpenGL\Key.cpp" />
     <ClCompile Include="OpenGL\Rendertarget.cpp" />
     <ClCompile Include="OpenGL\ShaderProgram.cpp" />
     <ClCompile Include="OpenGL\SSBO.cpp" />
@@ -398,7 +397,6 @@ IF %ERRORLEVEL% LEQ 1 exit 0)</Command>
     <ClInclude Include="OpenGL\DrawSpecification.h" />
     <ClInclude Include="OpenGL\IBO.h" />
     <ClInclude Include="OpenGL\InputHandling.h" />
-    <ClInclude Include="OpenGL\Keys.h" />
     <ClInclude Include="OpenGL\Loadable.h" />
     <ClInclude Include="OpenGL\PositionColorNormalVertex.h" />
     <ClInclude Include="OpenGL\PositionColorVertex.h" />

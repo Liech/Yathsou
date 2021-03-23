@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../OpenGL/Drawable.h"
-#include "../../OpenGL/Keys.h"
+#include "IyathuumCoreLib/BaseTypes/Keys.h"
 #include "IyathuumCoreLib/BaseTypes/AABB.h"
 #include "../../OpenGL/InputHandling.h"
 
@@ -23,12 +23,12 @@ namespace YolonaOss {
 
       virtual void mouseEnter() {};
       virtual void mouseLeave() {};
-      virtual bool mouseClick          (glm::vec2 position, GL::Key k) { return false; };
+      virtual bool mouseClick          (glm::vec2 position, Iyathuum::Key k) { return false; };
       virtual void mouseMove           (glm::vec2 position) {};
-      virtual bool mouseStatusChanged  (glm::vec2 position, GL::Key key, GL::KeyStatus status) { return false; };
+      virtual bool mouseStatusChanged  (glm::vec2 position, Iyathuum::Key key, Iyathuum::KeyStatus status) { return false; };
       virtual bool mouseWheel          (glm::vec2 movement){ return false;};
-      virtual bool keyboardInput       (GL::Key key, GL::KeyStatus status){ return false;};
-      virtual void focusedKeyboardInput(YolonaOss::GL::Key key, YolonaOss::GL::KeyStatus status) {};
+      virtual bool keyboardInput       (Iyathuum::Key key, Iyathuum::KeyStatus status){ return false;};
+      virtual void focusedKeyboardInput(Iyathuum::Key key, Iyathuum::KeyStatus status) {};
       virtual void focusStart() {};
       virtual void focusEnd  () {};
       virtual void adjustSize() {};

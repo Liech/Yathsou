@@ -2,7 +2,7 @@
 
 #include "Drawables/Widgets/Widget.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
-#include "Keys.h"
+#include "IyathuumCoreLib/BaseTypes/Keys.h"
 
 #include "YolonaOss/Util/Util.h"
 #include "Window.h"
@@ -41,7 +41,7 @@ namespace YolonaOss {
       _yWindow = yWindow;
     }
 
-    void InputHandling::keyEvent(Key button, KeyStatus status, int mode) {
+    void InputHandling::keyEvent(Iyathuum::Key button, Iyathuum::KeyStatus status, int mode) {
       std::set<Widgets::Widget*> inputWidgets = Iyathuum::Database<Widgets::Widget*>::getByTag("KeyboardInput");
       if (_focusedWidget != nullptr)
         _focusedWidget->focusedKeyboardInput(button, status);
@@ -49,7 +49,7 @@ namespace YolonaOss {
         i->keyboardInput(button, status);
     }
 
-    void InputHandling::mouseEvent(Key key, KeyStatus status, int mode) {
+    void InputHandling::mouseEvent(Iyathuum::Key key, Iyathuum::KeyStatus status, int mode) {
       double xpos, ypos;
       glfwGetCursorPos(_window, &xpos, &ypos);
       glm::vec2 mousePos((float)xpos, (float)(_yWindow->getHeight() - ypos));
@@ -68,12 +68,12 @@ namespace YolonaOss {
           insideParent = w->getParent()->getGlobalPosition().isInside(Util<2>::vec2Array<double>(mousePos));
         if (w->getGlobalPosition().isInside(Util<2>::vec2Array<double>(mousePos)) && insideParent) {
           hit = true;
-          if (status == KeyStatus::PRESS) {
+          if (status == Iyathuum::KeyStatus::PRESS) {
             _pressedWidget = w;
             setFocus(w);
           }
           else
-            if (status == KeyStatus::RELEASE && _pressedWidget == w) {
+            if (status == Iyathuum::KeyStatus::RELEASE && _pressedWidget == w) {
               bool stop = w->mouseClick(mousePos - Util<2>::array2Vec(w->getGlobalPosition().getPosition()), key);
               if (stop)
                 return;
@@ -83,7 +83,7 @@ namespace YolonaOss {
       if (!hit)
         _focusedWidget = nullptr;
       std::set<std::function<bool(double, double)>*> functions = Iyathuum::Database<std::function<bool(double, double)>*>::getByTag("MouseClick");
-      if (status == KeyStatus::PRESS) {
+      if (status == Iyathuum::KeyStatus::PRESS) {
         for (auto f : functions) {
           bool stop = (*f)(xpos, ypos);
           if (stop)
@@ -96,7 +96,7 @@ namespace YolonaOss {
             return;
         }
       }
-      if (status == KeyStatus::RELEASE)
+      if (status == Iyathuum::KeyStatus::RELEASE)
         _pressedWidget = nullptr;
     }
 

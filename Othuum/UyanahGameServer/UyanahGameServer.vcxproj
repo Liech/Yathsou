@@ -234,6 +234,8 @@
   <ItemGroup>
     <ClInclude Include="Client.h" />
     <ClInclude Include="ClientConfiguration.h" />
+    <ClInclude Include="Commands\Command.h" />
+    <ClInclude Include="Commands\Key.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components\Dot.h" />
     <ClInclude Include="Components\Transform2D.h" />
@@ -245,6 +247,8 @@
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="ClientConfiguration.cpp" />
+    <ClCompile Include="Commands\Command.cpp" />
+    <ClCompile Include="Commands\Key.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Components\Dot.cpp" />
     <ClCompile Include="Components\Transform2D.cpp" />

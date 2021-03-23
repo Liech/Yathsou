@@ -18,10 +18,10 @@ namespace YolonaOss {
     void RTSCamera::update() {
       double time = _window->getTime();
       float delta = (float)(time - _lastTime);
-      bool w = _window->getKeyStatus(GL::Key::KEY_W) == GL::KeyStatus::PRESS;
-      bool a = _window->getKeyStatus(GL::Key::KEY_A) == GL::KeyStatus::PRESS;
-      bool s = _window->getKeyStatus(GL::Key::KEY_S) == GL::KeyStatus::PRESS;
-      bool d = _window->getKeyStatus(GL::Key::KEY_D) == GL::KeyStatus::PRESS;
+      bool w = _window->getKeyStatus(Iyathuum::Key::KEY_W) == Iyathuum::KeyStatus::PRESS;
+      bool a = _window->getKeyStatus(Iyathuum::Key::KEY_A) == Iyathuum::KeyStatus::PRESS;
+      bool s = _window->getKeyStatus(Iyathuum::Key::KEY_S) == Iyathuum::KeyStatus::PRESS;
+      bool d = _window->getKeyStatus(Iyathuum::Key::KEY_D) == Iyathuum::KeyStatus::PRESS;
 
       glm::vec3 toTarget = glm::normalize(_camera->getTarget() - _camera->getPosition());
       glm::vec3 toSide = glm::cross(toTarget, _camera->getUp());

@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "Keys.h"
+#include "IyathuumCoreLib/BaseTypes/Keys.h"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "glad/glad.h"
 //#include <GLFW/glfw3.h>
@@ -26,8 +26,8 @@ namespace YolonaOss {
       YolonaOss::Widgets::Widget* getCurrentFocus();
 
       void mouseWheel(double x, double y);
-      void keyEvent(Key key, KeyStatus status, int mode);
-      void mouseEvent(Key key, KeyStatus status, int mode);
+      void keyEvent  (Iyathuum::Key key, Iyathuum::KeyStatus status, int mode);
+      void mouseEvent(Iyathuum::Key key, Iyathuum::KeyStatus status, int mode);
       void updateEvent();
       
     private:

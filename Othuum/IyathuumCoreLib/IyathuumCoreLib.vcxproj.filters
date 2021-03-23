@@ -855,6 +855,9 @@
     <ClInclude Include="View2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BaseTypes\Keys.h">
+      <Filter>Header Files\BaseTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseTypes\AABB.cpp">
@@ -883,6 +886,9 @@
     </ClCompile>
     <ClCompile Include="View2D.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseTypes\Key.cpp">
+      <Filter>Source Files\BaseTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
