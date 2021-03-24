@@ -43,13 +43,11 @@ namespace Uyanah {
     _connection->connectNonblocking(_config->serverPort, _config->serverIP);
 
     _multiplexer = std::make_shared<Vishala::ConnectionMultiplexer>(1,_connection);
-    _scene = std::make_unique< Vishala::NetworkMemoryReader<Scene>>(0,_multiplexer);
+    _scene = std::make_unique<Scene>();
 
     _connection->setRecievedCallback(2, [this](size_t client, std::unique_ptr<Vishala::BinaryPackage> package) {
       auto cmd = Vishala::Serialization::deserializeCast<Uyanah::Commands::Command>(*package);
-      //cmd->apply(_scene);
-      //Scene s;
-      //cmd->apply(s);
+      cmd->apply(*_scene);
     });
   }
 
@@ -65,7 +63,7 @@ namespace Uyanah {
   const Scene& Client::getScene() {
     if (!_scene)
       return Scene();
-    return _scene->Data();
+    return *_scene;
   }
 
   void Client::send(size_t channel, const Vishala::BinaryPackage& p) {

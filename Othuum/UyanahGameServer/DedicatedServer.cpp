@@ -7,6 +7,7 @@
 #include "Components/Dot.h"
 #include <filesystem>
 #include "IyathuumCoreLib/Util/UpdateTimer.h"
+#include "Commands/Initialize.h"
 
 #include <iostream>
 
@@ -59,59 +60,39 @@ namespace Uyanah {
   }
 
   void DedicatedServer::newConnection(size_t player) {
-    _scene->newTarget(player);
+    Uyanah::Commands::Initialize cmd;
+    cmd.scene = *_scene;
+    _connection->send(player, 2, std::make_unique<Vishala::BinaryPackage>(cmd.serialize()));
   }
 
   void DedicatedServer::runThread() {
     float time = 0;
     int ticksPerSecond = 60;
-    Iyathuum::UpdateTimer timer([this,&time, ticksPerSecond]() {
-      time += 1 / (float)ticksPerSecond;
-      glm::vec2 pos = glm::vec2(std::sin(time) * 100 + 300, std::cos(time) * 100 + 300);
-      Scene* s = &_scene->Data;
-      if (s->objects.size() == 0)
-        return;
-      Entity* e = &s->objects[0];
-      if (e->getComponents().size() == 0)
-        return;
-      std::shared_ptr<Component> c = e->getComponent("Transform2D");
-      std::shared_ptr<Components::Transform2D> t = std::dynamic_pointer_cast<Components::Transform2D>(c);
-      if (t)
-        t->position = pos;
-      _scene->changed();
-    }, ticksPerSecond);
-    timer.setStallCall([](int x) {std::cout << "Stall " << x <<std::endl; });
     while (!_stop) {
       _connection->update();
-      _scene->update();
-      timer.update();
     }
   }
 
   void DedicatedServer::createTestScene() {
-    _scene = std::make_unique<Vishala::NetworkMemoryWriter<Scene>>(1,_connection);
+    _scene = std::make_unique<Scene>();
     //if (!std::filesystem::exists("savegame.json")) {
-      Entity a;
-      std::shared_ptr<Components::Transform2D> aTransform = std::make_shared<Components::Transform2D>();
-      aTransform->position = glm::vec2(5, 5);
-      std::shared_ptr<Components::Dot> aDot = std::make_shared<Components::Dot>();
-      a.addComponent(aTransform);
-      a.addComponent(aDot);
+    Entity a;
+    std::shared_ptr<Components::Transform2D> aTransform = std::make_shared<Components::Transform2D>();
+    aTransform->position = glm::vec2(5, 5);
+    std::shared_ptr<Components::Dot> aDot = std::make_shared<Components::Dot>();
+    a.addComponent(aTransform);
+    a.addComponent(aDot);
 
-      for (int i = 0; i < 600; i++) {
-        Entity b;
-        std::shared_ptr<Components::Transform2D> bTransform = std::make_shared<Components::Transform2D>();
-        bTransform->position = glm::vec2(rand() %300,  rand() % 300);
-        std::shared_ptr<Components::Dot> bDot = std::make_shared<Components::Dot>();
-        b.addComponent(bTransform);
-        b.addComponent(bDot);
-        _scene->Data.objects.push_back(b);
-      }
-      _scene->Data.objects.push_back(a);
-      _scene->Data.toJsonFile("savegame.json");
-    //}
-    //else
-    //  _scene->Data.fromJsonFile("savegame.json");
-    _scene->changed();
+    for (int i = 0; i < 600; i++) {
+      Entity b;
+      std::shared_ptr<Components::Transform2D> bTransform = std::make_shared<Components::Transform2D>();
+      bTransform->position = glm::vec2(rand() %300,  rand() % 300);
+      std::shared_ptr<Components::Dot> bDot = std::make_shared<Components::Dot>();
+      b.addComponent(bTransform);
+      b.addComponent(bDot);
+      _scene->objects.push_back(b);
+    }
+    _scene->objects.push_back(a);
+    _scene->toJsonFile("savegame.json");
   }
 }

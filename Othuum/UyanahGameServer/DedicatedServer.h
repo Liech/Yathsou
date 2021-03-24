@@ -27,11 +27,11 @@ namespace Uyanah {
     void createTestScene();
 
     
-    std::unique_ptr<Vishala::NetworkMemoryWriter<Scene>> _scene       ;
-    std::future<void>                                    _thread      ;
-    std::shared_ptr<Vishala::Connection>                 _connection  ;
-    std::unique_ptr<DedicatedServerConfiguration>        _config      ;
-    bool                                                 _stop = false;
+    std::unique_ptr<Scene>                        _scene       ;
+    std::future<void>                             _thread      ;
+    std::shared_ptr<Vishala::Connection>          _connection  ;
+    std::unique_ptr<DedicatedServerConfiguration> _config      ;
+    bool                                          _stop = false;
   };
 }
 

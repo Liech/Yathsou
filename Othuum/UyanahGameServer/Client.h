@@ -27,7 +27,7 @@ namespace Uyanah {
 
   private:
 
-    std::unique_ptr<Vishala::NetworkMemoryReader<Scene>>  _scene = nullptr;
+    std::unique_ptr<Scene>                                _scene = nullptr;
     std::shared_ptr<Vishala::Connection>                  _connection;
     std::shared_ptr<Vishala::ConnectionMultiplexer>       _multiplexer;
     std::unique_ptr<ClientConfiguration>                  _config;

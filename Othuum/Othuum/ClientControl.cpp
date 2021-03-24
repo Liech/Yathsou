@@ -15,34 +15,39 @@ void ClientControl::update() {
   bool s = _window->getKeyStatus(Iyathuum::Key::KEY_S) == Iyathuum::KeyStatus::PRESS;
   bool d = _window->getKeyStatus(Iyathuum::Key::KEY_D) == Iyathuum::KeyStatus::PRESS;
 
-  if (w)
+  if (w != _w && w)
   {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
     wCmd->key = Iyathuum::Key::KEY_W;
     std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
-  if (a)
+  if (a != _a && a)
   {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
     wCmd->key = Iyathuum::Key::KEY_A;
     std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
-  if (s)
+  if (s != _s && s)
   {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
     wCmd->key = Iyathuum::Key::KEY_S;
     std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
-  if (d)
+  if (d!=_d && d)
   {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
     wCmd->key = Iyathuum::Key::KEY_D;
     std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
+
+  _w = w; 
+  _a = a; 
+  _s = s; 
+  _d = d; 
 }
 
 void ClientControl::load(YolonaOss::GL::DrawSpecification* spec)

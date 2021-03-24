@@ -25,6 +25,7 @@
 #include "ClientVisualization/ClientVisualization.h"
 #include "ClientControl.h"
 #include <iomanip>
+#include "IyathuumCoreLib/Util/UpdateTimer.h"
 
 #include "ClientConfiguration.h"
 #include "ClientState.h"
@@ -67,11 +68,14 @@ int main(int argc, char** argv) {
 
     std::unique_ptr<MainMenuLogicResult> rslt = nullptr;
 
-
+    std::shared_ptr<ClientControl> control = nullptr;
+    Iyathuum::UpdateTimer timer([&control]() {
+      control->update();
+    }, 30);
     std::shared_ptr<ClientVisualization> vis = nullptr;
-    auto contentCreator = [&w,&vis,&rslt]() {
+    auto contentCreator = [&w,&vis,&rslt,&control,&timer]() {
       std::shared_ptr<Iyathuum::ContentLoader> loader = std::make_shared<Iyathuum::ContentLoader>();
-      loader->addPackage([&w,&vis,&rslt]() {
+      loader->addPackage([&w,&vis,&rslt,&control,&timer]() {
         vis = std::make_shared<ClientVisualization>();
         std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
         list->addDrawable(std::make_shared<Background>());
@@ -80,9 +84,10 @@ int main(int argc, char** argv) {
         list->load(w.getSpec());
         Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
         auto s = std::make_shared<const Uyanah::Scene>();
-        std::shared_ptr<ClientControl> control = std::make_shared<ClientControl>(
+        timer.setTicksPerSecond(30);
+        control = std::make_shared<ClientControl>(
           [&rslt](std::shared_ptr<Uyanah::Commands::Command> cmd) {
-            rslt->_client->send(2,cmd->serialize());
+          rslt->_client->send(2,cmd->serialize());
           },
           s
           );
@@ -90,15 +95,14 @@ int main(int argc, char** argv) {
           //rslt->_client->send(2, cmd->serialize());
         //}, std::make_shared<ClientControl>());
         control->load(w.getSpec());
-        Iyathuum::Database<std::shared_ptr<GL::Updateable>>::add(control, { "Main" });
+        //Iyathuum::Database<std::shared_ptr<GL::Updateable>>::add(control, { "Main" });
         }, true);
       return loader;
     };
   
     logic.setContentLoaderCreater(contentCreator);
 
-
-    w.Update = [&logic, state,&rslt,&vis]() {      
+    w.Update = [&logic, state,&rslt,&vis,&timer,&control]() {
       if (logic.getStatus() != MainMenuLogic::status::GameRunning)
         logic.update();
       else {
@@ -109,6 +113,9 @@ int main(int argc, char** argv) {
         }
       }
       state->update();
+
+      if (control)
+        timer.update();
     };
     w.run();
 
