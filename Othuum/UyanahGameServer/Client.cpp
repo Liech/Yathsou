@@ -48,6 +48,8 @@ namespace Uyanah {
     _connection->setRecievedCallback(2, [this](size_t client, std::unique_ptr<Vishala::BinaryPackage> package) {
       auto cmd = Vishala::Serialization::deserializeCast<Uyanah::Commands::Command>(*package);
       //cmd->apply(_scene);
+      //Scene s;
+      //cmd->apply(s);
     });
   }
 

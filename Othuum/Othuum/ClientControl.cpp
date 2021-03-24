@@ -18,28 +18,28 @@ void ClientControl::update() {
   if (w)
   {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
-    //wCmd->key = Iyathuum::Key::KEY_W;
+    wCmd->key = Iyathuum::Key::KEY_W;
     std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
   if (a)
   {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
-    //wCmd->key = Iyathuum::Key::KEY_A;
+    wCmd->key = Iyathuum::Key::KEY_A;
     std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
   if (s)
   {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
-    //wCmd->key = Iyathuum::Key::KEY_S;
+    wCmd->key = Iyathuum::Key::KEY_S;
     std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
   if (d)
   {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
-    //wCmd->key = Iyathuum::Key::KEY_D;
+    wCmd->key = Iyathuum::Key::KEY_D;
     std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
