@@ -21,8 +21,8 @@ namespace Uyanah {
   {
     components.clear();
     for (auto comp : input["Components"]) {
-      //std::shared_ptr<Component> g = Component::deserializeJsonCast<Component>(comp);
-      //components[input["___ID___"]] = g;
+      std::shared_ptr<Component> g = Component::deserializeJsonCast<Component>(comp);
+      components[input["___ID___"]] = g;
     }
   }
 
