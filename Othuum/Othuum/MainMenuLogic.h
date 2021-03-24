@@ -51,7 +51,6 @@ public:
   MainMenuLogic::status getStatus() { return _stat; }
   std::unique_ptr<MainMenuLogicResult>   extractResult();
   void setContentLoaderCreater(std::function<std::shared_ptr<Iyathuum::ContentLoader>()>);
-
 private:
   void createServer();
   void createClient();
@@ -81,7 +80,7 @@ private:
 
   std::unique_ptr<Uyanah::DedicatedServer> _server = nullptr;
   Uyanah::ClientConfiguration              _clientConfig;
-  std::unique_ptr<Uyanah::Client         > _client = nullptr;
+  std::shared_ptr<Uyanah::Client         > _client = nullptr;
 
   YolonaOss::GL::Window& _window;
 };

@@ -9,7 +9,7 @@
 #include "UyanahGameServer/Components/Transform2D.h"
 #include "YolonaOss/Renderer/RectangleRenderer.h"
 
-void ClientVisualization::setClient(std::unique_ptr<Uyanah::Client> client) {
+void ClientVisualization::setClient(std::shared_ptr<Uyanah::Client> client) {
   _client = std::move(client);
 }
 

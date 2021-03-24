@@ -27,7 +27,7 @@ namespace Uyanah {
   void DedicatedServer::start() {
     _connection = std::make_shared<Vishala::Connection>();
     _connection->setAcceptConnection(true);
-    _connection->setChannelCount(2);
+    _connection->setChannelCount(3);
     _connection->setMaximumConnectionCount(64);
     _connection->setPort(_config->welcomePort);
     _connection->setConnectionFailedCallback([this](std::string ip, int port) {});
@@ -46,6 +46,12 @@ namespace Uyanah {
     _thread = std::async(std::launch::async, [this]() {runThread(); });
     createTestScene();
 
+    _connection->setRecievedCallback(2, [this](size_t client, std::unique_ptr<Vishala::BinaryPackage> package) {
+      for (auto con : _connection->getAllConnections()) {
+        std::unique_ptr<Vishala::BinaryPackage> p = std::make_unique<Vishala::BinaryPackage>(*package);
+        _connection->send(con, 2, std::move(p));
+      }
+    });
   }
 
   void DedicatedServer::stop() {

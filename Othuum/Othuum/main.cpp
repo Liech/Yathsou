@@ -23,6 +23,7 @@
 #include "IyathuumCoreLib/Util/ContentLoader.h"
 #include "SideProject/SideProjectMain.h"
 #include "ClientVisualization/ClientVisualization.h"
+#include "ClientControl.h"
 #include <iomanip>
 
 #include "ClientConfiguration.h"
@@ -31,6 +32,7 @@
 #include "MainMenuLogicResult.h"
 #include "UyanahGameServer/Commands/Command.h"
 #include "UyanahGameServer/Commands/Key.h"
+#include "UyanahGameServer/Scene.h"
 
 #include "AhwassaGraphicsLib/sound.h"
 
@@ -57,7 +59,7 @@ int main(int argc, char** argv) {
     std::string configFileName = "ClientConfiguration.json";
     configuration->fromJsonFile(configFileName);
 
-    int width = configuration->resolution[0];
+    int width  = configuration->resolution[0];
     int height = configuration->resolution[1];
     GL::Window w(width, height);
 
@@ -67,9 +69,9 @@ int main(int argc, char** argv) {
 
 
     std::shared_ptr<ClientVisualization> vis = nullptr;
-    auto contentCreator = [&w,&vis]() {
+    auto contentCreator = [&w,&vis,&rslt]() {
       std::shared_ptr<Iyathuum::ContentLoader> loader = std::make_shared<Iyathuum::ContentLoader>();
-      loader->addPackage([&w,&vis]() {
+      loader->addPackage([&w,&vis,&rslt]() {
         vis = std::make_shared<ClientVisualization>();
         std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
         list->addDrawable(std::make_shared<Background>());
@@ -77,8 +79,18 @@ int main(int argc, char** argv) {
         list->addDrawable(vis);
         list->load(w.getSpec());
         Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
-
-        //Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(vis, { "Main" });
+        auto s = std::make_shared<const Uyanah::Scene>();
+        std::shared_ptr<ClientControl> control = std::make_shared<ClientControl>(
+          [&rslt](std::shared_ptr<Uyanah::Commands::Command> cmd) {
+            rslt->_client->send(2,cmd->serialize());
+          },
+          s
+          );
+          //std::make_shared<ClientControl>([&rslt](std::shared_ptr<Uyanah::Commands::Command> cmd) {
+          //rslt->_client->send(2, cmd->serialize());
+        //}, std::make_shared<ClientControl>());
+        control->load(w.getSpec());
+        Iyathuum::Database<std::shared_ptr<GL::Updateable>>::add(control, { "Main" });
         }, true);
       return loader;
     };
@@ -93,7 +105,7 @@ int main(int argc, char** argv) {
         if (!rslt)
         {
           rslt = std::move(logic.extractResult());
-          vis->setClient(std::move(rslt->_client));
+          vis->setClient(rslt->_client);
         }
       }
       state->update();

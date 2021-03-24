@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Entity.h"
 #include "Components/Transform2D.h"
+#include "Commands/Command.h"
 #include "Components/Dot.h"
 #include <filesystem>
 
@@ -28,7 +29,7 @@ namespace Uyanah {
   void Client::start() {
     _connection = std::make_shared<Vishala::Connection>();
     _connection->setAcceptConnection(true);
-    _connection->setChannelCount(2);
+    _connection->setChannelCount(3);
     _connection->setMaximumConnectionCount(64);
     _connection->setPort(_config->myPort);
     _connection->setConnectionFailedCallback([this](std::string ip, int port) {});
@@ -43,6 +44,11 @@ namespace Uyanah {
 
     _multiplexer = std::make_shared<Vishala::ConnectionMultiplexer>(1,_connection);
     _scene = std::make_unique< Vishala::NetworkMemoryReader<Scene>>(0,_multiplexer);
+
+    _connection->setRecievedCallback(2, [this](size_t client, std::unique_ptr<Vishala::BinaryPackage> package) {
+      auto cmd = Vishala::Serialization::deserializeCast<Uyanah::Commands::Command>(*package);
+      //cmd->apply(_scene);
+    });
   }
 
   void Client::stop() {
@@ -60,4 +66,9 @@ namespace Uyanah {
     return _scene->Data();
   }
 
+  void Client::send(size_t channel, const Vishala::BinaryPackage& p) {
+    for (auto c : _connection->getAllConnections()) {
+      _connection->send(c, channel, std::make_unique<Vishala::BinaryPackage>(p));
+    }
+  }
 }

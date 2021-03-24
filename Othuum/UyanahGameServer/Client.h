@@ -23,6 +23,8 @@ namespace Uyanah {
 
     const Scene& getScene();
 
+    void send(size_t channel, const Vishala::BinaryPackage&);
+
   private:
 
     std::unique_ptr<Vishala::NetworkMemoryReader<Scene>>  _scene = nullptr;

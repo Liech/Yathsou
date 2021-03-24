@@ -15,7 +15,7 @@ public:
   };
 
   std::unique_ptr<Uyanah::DedicatedServer> _server;
-  std::unique_ptr<Uyanah::Client         > _client;
+  std::shared_ptr<Uyanah::Client         > _client;
   std::vector<MainMenuLogicResult::Player> _otherPlayers;
   MainMenuLogicResult::Player              _self        ; //connection = nullptr
 

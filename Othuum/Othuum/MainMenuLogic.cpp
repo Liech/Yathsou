@@ -27,6 +27,8 @@
 #include "UyanahGameServer/DedicatedServerConfiguration.h"
 #include "UyanahGameServer/ClientConfiguration.h"
 
+#include "VishalaNetworkLib/Core/Connection.h"
+
 MainMenuLogic::MainMenuLogic(YolonaOss::GL::Window& window,std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state) 
   : _window(window)
 {
@@ -313,7 +315,7 @@ void MainMenuLogic::showError(std::string desc,std::string title) {
 }
 
 void MainMenuLogic::createClient() {
-  _client = std::make_unique<Uyanah::Client>();
+  _client = std::make_shared<Uyanah::Client>();
   _client->setConfig(_clientConfig);
   _client->start();
 }
@@ -333,7 +335,7 @@ std::unique_ptr<MainMenuLogicResult> MainMenuLogic::extractResult(){
   if (_server)
     result->_server = std::move(_server);
   if (_client)
-    result->_client = std::move(_client);
+    result->_client = _client;
   _extracted = true;
   return std::move(result);
-}
+}  

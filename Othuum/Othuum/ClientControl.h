@@ -14,6 +14,7 @@ namespace Uyanah {
 
 class ClientControl : public YolonaOss::GL::Updateable {
 public:
+  ClientControl() = default;
   ClientControl(std::function<void(std::shared_ptr<Uyanah::Commands::Command>)> sendCommand,
                 std::shared_ptr<const Uyanah::Scene> scene);
   void update();
