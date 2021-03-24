@@ -7,7 +7,7 @@ namespace Uyanah {
   namespace Commands {
     class Command : public Vishala::SerializationGroup<Command> {
     public:
-      virtual void apply(Scene&) = 0;
+      //virtual void apply(Scene&) = 0;
     };
   }
 }

@@ -150,6 +150,9 @@
     <ClInclude Include="SideProject\SideProjectMain.h">
       <Filter>Header Files\SideProject</Filter>
     </ClInclude>
+    <ClInclude Include="ClientControl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DrawCubes.cpp">
@@ -217,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="SideProject\SideProjectMain.cpp">
       <Filter>Source Files\SideProject</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientControl.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

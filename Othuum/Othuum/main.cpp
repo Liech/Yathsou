@@ -29,6 +29,8 @@
 #include "ClientState.h"
 #include "MainMenuLogic.h"
 #include "MainMenuLogicResult.h"
+#include "UyanahGameServer/Commands/Command.h"
+#include "UyanahGameServer/Commands/Key.h"
 
 #include "AhwassaGraphicsLib/sound.h"
 
@@ -39,6 +41,8 @@ int main(int argc, char** argv) {
     //Ahwassa::sound s;
     //s.play();
    
+
+
     std::string exe = std::string(argv[0]);
     const size_t last_slash_idx = exe.find_last_of("\\/");
     if (std::string::npos != last_slash_idx)

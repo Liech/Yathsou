@@ -5,8 +5,6 @@
 #include "IyathuumCoreLib/Util/ConstExprHash.h"
 #include <map>
 
-#define REGISTERGROUP(Group,SpecificType,name)\
-   static inline Vishala::SerializationGroup<Group>::Registrator<SpecificType> Registrator{ name };
 
 
 namespace Vishala {
@@ -54,7 +52,7 @@ namespace Vishala {
     public:
       Registrator(const std::string name) {
         Iyathuum::template Factory<SerializationGroup<T>>::template Register<X>(name, {});
-        SerializationGroup::id2name[create()->ID()] = create()->Name();
+        SerializationGroup<T>::id2name[create()->ID()] = create()->Name();
       }
     private:
       static std::shared_ptr<SerializationGroup<T>> create() {
@@ -63,3 +61,6 @@ namespace Vishala {
     };
   };
 }
+
+#define REGISTERGROUP(Group,SpecificType,name)\
+   static inline Vishala::SerializationGroup<Group>::Registrator<SpecificType> Registrator{ name };

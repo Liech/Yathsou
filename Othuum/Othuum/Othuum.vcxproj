@@ -216,6 +216,7 @@
   <ItemGroup>
     <ClInclude Include="BulletDebugDrawer.h" />
     <ClInclude Include="ClientConfiguration.h" />
+    <ClInclude Include="ClientControl.h" />
     <ClInclude Include="ClientState.h" />
     <ClInclude Include="ClientVisualization\ClientVisualization.h" />
     <ClInclude Include="DrawCubes.h" />
@@ -255,6 +256,7 @@
   <ItemGroup>
     <ClCompile Include="BulletDebugDrawer.cpp" />
     <ClCompile Include="ClientConfiguration.cpp" />
+    <ClCompile Include="ClientControl.cpp" />
     <ClCompile Include="ClientState.cpp" />
     <ClCompile Include="ClientVisualization\ClientVisualization.cpp" />
     <ClCompile Include="DrawCubes.cpp" />

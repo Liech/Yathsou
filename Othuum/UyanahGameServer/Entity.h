@@ -18,7 +18,7 @@ namespace Uyanah {
 
     template<typename T>
     std::shared_ptr<T> getComponent(std::string name) {
-      return std::static_pointer_cast<T>(getComponent(name))
+      return std::static_pointer_cast<T>(getComponent(name));
     }
 
   private:

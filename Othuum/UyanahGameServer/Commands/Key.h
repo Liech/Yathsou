@@ -1,17 +1,17 @@
 #pragma once
 
 #include "Command.h"
-#include "IyathuumCoreLib/BaseTypes/Keys.h"
+//#include "IyathuumCoreLib/BaseTypes/Keys.h"
 
 namespace Uyanah {
   namespace Commands {
-    class Key : public Command {
+    class KeyCmd : public Command {
     public:
-      virtual void apply(Scene&) override;
+      //virtual void apply(Scene&) override;
       virtual const std::string Name() const override { return "Key"; }
 
-      Iyathuum::Key       key      = Iyathuum::Key::KEY_SPACE;
-      Iyathuum::KeyStatus status   = Iyathuum::KeyStatus::PRESS;
+      //Iyathuum::Key       key      = Iyathuum::Key::KEY_SPACE;
+      //Iyathuum::KeyStatus status   = Iyathuum::KeyStatus::PRESS;
       size_t              targetID = 0;
 
       virtual Vishala::BinaryPackage toBinary()                                  override;
