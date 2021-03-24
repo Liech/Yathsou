@@ -243,7 +243,6 @@
     <ClInclude Include="Core\ConnectionMultiplexer.h" />
     <ClInclude Include="Core\NetworkMemory.h" />
     <ClInclude Include="Core\Serialization.h" />
-    <ClInclude Include="Core\SerializationGroup.h" />
     <ClInclude Include="lib\atomicops.h" />
     <ClInclude Include="lib\concurrentqueue.h" />
     <ClInclude Include="lib\enet\callbacks.h" />
@@ -305,7 +304,6 @@
     <ClCompile Include="Core\ConnectionMultiplexer.cpp" />
     <ClCompile Include="Core\NetworkMemory.cpp" />
     <ClCompile Include="Core\Serialization.cpp" />
-    <ClCompile Include="Core\SerializationGroup.cpp" />
     <ClCompile Include="lib\snappy\snappy-c.cc" />
     <ClCompile Include="lib\snappy\snappy-sinksource.cc" />
     <ClCompile Include="lib\snappy\snappy-stubs-internal.cc" />

@@ -10,6 +10,8 @@ namespace Vishala {
 
   class OpenLobbyRequest : public Serialization {
   public:
+    const std::string Name() const override { return "OpenLobbyRequest"; }
+
     OpenLobbyRequest();
     OpenLobbyRequest(size_t playerNumber, Client2LobbyMessage request);
 

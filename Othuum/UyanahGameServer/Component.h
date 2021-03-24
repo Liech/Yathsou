@@ -1,8 +1,8 @@
 #pragma once
 
-#include "VishalaNetworkLib/Core/SerializationGroup.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
 
 namespace Uyanah {
-  class Component : public Vishala::SerializationGroup<Component> {
+  class Component : public Vishala::Serialization {
   };
 }

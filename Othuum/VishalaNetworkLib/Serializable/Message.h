@@ -6,6 +6,7 @@
 
 namespace Vishala {
   struct Message : Serialization{
+    const std::string Name() const override { return "Message"; }
     int playerID;
     int message ;
     

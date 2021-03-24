@@ -5,6 +5,8 @@
 
 namespace Uyanah {
   struct ClientConfiguration : public Vishala::Serialization {
+    const std::string Name() const override { return "ClientConfiguration"; }
+
     int serverPort = 6212;
     int myPort     = 6213;
     std::string serverIP = "localhost";

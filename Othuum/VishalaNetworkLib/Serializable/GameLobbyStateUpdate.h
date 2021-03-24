@@ -10,6 +10,7 @@
 namespace Vishala {
   class GameLobbyStateUpdate : public Serialization {
   public:
+    const std::string Name() const override { return "GameLobbyStateUpdate"; }
     std::vector<GameLobbyPlayer> currentPlayers;
     std::string                  gameName      ;
     bool                         gameStart     = false;

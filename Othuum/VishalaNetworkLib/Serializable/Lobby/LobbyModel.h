@@ -10,6 +10,7 @@
 namespace Vishala { 
   class LobbyModel : public Serialization {
   public:
+    const std::string Name() const override { return "LobbyModel"; }
     std::vector<LobbyGame>        openGames   ;
     std::vector<LobbyPlayerModel> players     ;
     std::vector<OpenLobbyRequest>      openRequests;

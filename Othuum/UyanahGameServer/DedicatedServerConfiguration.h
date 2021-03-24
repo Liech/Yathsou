@@ -5,6 +5,7 @@
 
 namespace Uyanah {
   struct DedicatedServerConfiguration : public Vishala::Serialization {
+    const std::string Name() const override { return "DedicatedServerConfiguration"; }
     int welcomePort = 6212;
     
     virtual nlohmann::json          toJson()                            override;

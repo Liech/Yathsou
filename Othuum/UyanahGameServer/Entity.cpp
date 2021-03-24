@@ -8,7 +8,7 @@ namespace Uyanah {
   {
     nlohmann::json arr = nlohmann::json::array();
     for (auto comp : components) {
-      nlohmann::json d = Component::_toJson(comp.second);
+      nlohmann::json d = comp.second->serializeJson();
       d["___ID___"] = comp.second->Name();
       arr.push_back(d);
     }
@@ -21,8 +21,8 @@ namespace Uyanah {
   {
     components.clear();
     for (auto comp : input["Components"]) {
-      std::shared_ptr<Component> g = Component::_fromJson(comp);
-      components[input["___ID___"]] = g;
+      //std::shared_ptr<Component> g = Component::deserializeJsonCast<Component>(comp);
+      //components[input["___ID___"]] = g;
     }
   }
 
@@ -32,7 +32,7 @@ namespace Uyanah {
     int numberOfComponents = components.size();
     Vishala::BinaryPackage::val2bin(result,numberOfComponents);
     for (auto comp : components)
-      result.add(Component::_toBinary(comp.second));
+      result.add(comp.second->serialize());
     return result;
   }
 
@@ -41,13 +41,13 @@ namespace Uyanah {
     components.clear();
     int numberOfPackages = Vishala::BinaryPackage::bin2val<int>(input);
     for (int i = 0; i < numberOfPackages; i++) {
-      auto c = Component::_fromBinary(input);
+      auto c = Component::deserializeCast<Component>(input);
       components[c->Name()] = c;
     }
   }
 
   void Entity::addComponent(std::shared_ptr<Component> c) {
-    if (components.count(c->Name()) == 0)
+    if (components.count(c->Name()) != 0)
       throw std::runtime_error("Component already there");
     components[c->Name()] = c;
   }

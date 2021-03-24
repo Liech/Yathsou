@@ -9,6 +9,7 @@ namespace Vishala {
 
   struct Client2LobbyMessage : public Serialization {
   public:
+    const std::string Name() const override { return "Client2LobbyMessage"; }
     enum class Type : int {
       LobbyRefresh, CreateGame, JoinGame, LeaveGame, StartGame
     };

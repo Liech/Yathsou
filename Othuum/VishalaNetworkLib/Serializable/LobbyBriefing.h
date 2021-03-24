@@ -10,6 +10,7 @@
 namespace Vishala {
   class LobbyBriefing : public Serialization{
   public:
+    const std::string Name() const override { return "LobbyBriefing"; }
     int               playerId    = 0;
     LobbyStateUpdate  lobbyStatus   ;
 

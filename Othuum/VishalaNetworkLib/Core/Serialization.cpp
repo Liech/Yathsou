@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <bitset>
 #include <algorithm>
+#include "IyathuumCoreLib/Util/ConstExprHash.h"
 
 namespace Vishala {
   void Serialization::toBinFile(std::string filename) {
@@ -44,5 +45,37 @@ namespace Vishala {
     std::string content((std::istreambuf_iterator<char>(inputStream)), std::istreambuf_iterator<char>());
     inputStream.close();
     fromJson(nlohmann::json::parse(content));
+  }
+
+  BinaryPackage Serialization::serialize() {    
+    Vishala::BinaryPackage result;
+    size_t id = ID();
+    Vishala::BinaryPackage::val2bin(result, id);
+    result.add(toBinary());
+    return result;
+  }
+
+  std::shared_ptr<Serialization> Serialization::deserialize(BinaryPackage& Package) {
+    size_t id = Vishala::BinaryPackage::bin2val<size_t>(Package);
+    auto result = Iyathuum::Factory<Serialization>::make(id2name[id]);
+    result->fromBinary(Package);
+    return result;
+  }
+
+  nlohmann::json Serialization::serializeJson() {
+    nlohmann::json result = toJson();    
+    result["___ID___"] = Name();
+    return result;
+  }
+
+  std::shared_ptr<Serialization> Serialization::deserializeJson(nlohmann::json j) {
+    auto result = Iyathuum::Factory<Serialization>::make(j["___ID___"]);
+    result->fromJson(j);
+    return result;
+  }
+
+  constexpr const size_t Serialization::ID() const
+  {
+    return constexprHASH(Name());
   }
 }

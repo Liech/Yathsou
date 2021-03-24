@@ -6,6 +6,8 @@
 namespace Uyanah {
   class Scene : public Vishala::Serialization {
   public:
+    const std::string Name() const override { return "Scene"; }
+
     std::vector<Entity> objects;
 
     virtual Vishala::BinaryPackage toBinary()                                  override;

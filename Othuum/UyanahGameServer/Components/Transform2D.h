@@ -6,6 +6,7 @@
 namespace Uyanah {
   namespace Components {
     class Transform2D : public Component {
+      SERIALIZATION(Transform2D, "Transform2D")
     public:
       virtual const std::string Name() const override { return "Transform2D"; }
 

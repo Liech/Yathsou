@@ -7,6 +7,8 @@ namespace Uyanah {
 
   class Entity : public Vishala::Serialization {
   public:
+    const std::string Name() const override { return "Entity"; }
+
     virtual nlohmann::json          toJson()                            override;
     virtual void                    fromJson(nlohmann::json)            override;
     virtual Vishala::BinaryPackage  toBinary()                          override;

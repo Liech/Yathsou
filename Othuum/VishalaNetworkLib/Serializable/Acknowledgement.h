@@ -7,6 +7,7 @@
 namespace Vishala {
   struct Acknowledgement : Serialization {
   public:
+    const std::string Name() const override { return "Acknowledgement"; }
     enum class Type {
       GameHosted, GameJoined
     };

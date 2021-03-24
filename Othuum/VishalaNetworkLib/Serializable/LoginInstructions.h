@@ -5,6 +5,7 @@
 namespace Vishala {
   class LoginInstructions : public Serialization {
   public:
+    const std::string Name() const override { return "LoginInstructions"; }
     std::string ip  ;
     int         port = 0;
 

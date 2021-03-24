@@ -9,6 +9,8 @@ namespace Vishala {
 
   class LobbyPlayerModel : public Serialization {
   public:
+    const std::string Name() const override { return "LobbyPlayerModel"; }
+
     std::string        name ;
     std::array<int, 3> color;
     size_t             id   ;

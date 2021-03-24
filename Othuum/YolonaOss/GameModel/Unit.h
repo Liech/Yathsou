@@ -9,6 +9,8 @@ namespace YolonaOss
     class Unit : public Vishala::Serialization
     {
     public:
+      const std::string Name() const override { return "Unit"; }
+
       std::array<float, 3> position = { 0,0,0 };
       int                  owner    = 0        ; 
 

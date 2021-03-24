@@ -6,6 +6,7 @@
 namespace Uyanah {
   namespace Components {
     class Dot : public Component {
+      SERIALIZATION(Dot, "Dot")
       virtual const std::string Name() const override { return "Dot"; }
 
       Iyathuum::Color color = Iyathuum::Color(255,255,0,255);

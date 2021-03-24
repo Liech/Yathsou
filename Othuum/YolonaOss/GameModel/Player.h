@@ -9,6 +9,7 @@ namespace YolonaOss
     class Player : public Vishala::Serialization
     {
     public:
+      const std::string Name() const override { return "Player"; }
       std::string name;
 
 

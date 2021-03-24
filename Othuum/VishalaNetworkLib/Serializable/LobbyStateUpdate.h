@@ -10,6 +10,7 @@
 namespace Vishala {
   class LobbyStateUpdate : public Serialization {
   public:
+    const std::string Name() const override { return "LobbyStateUpdate"; }
     std::vector<LobbyGame> openGames;
 
     virtual BinaryPackage toBinary()                override;

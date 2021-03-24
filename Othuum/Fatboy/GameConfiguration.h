@@ -6,6 +6,7 @@ namespace Fatboy
 {
   class GameConfiguration : public Vishala::Serialization {
   public:
+    const std::string Name() const override { return "GameConfiguration"; }
     static GameConfiguration& instance();
 
     float TicksPerSecond = 60;

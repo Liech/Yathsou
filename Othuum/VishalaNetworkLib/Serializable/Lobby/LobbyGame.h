@@ -8,6 +8,8 @@
 namespace Vishala {
   class LobbyGame : public Serialization {
   public:
+    const std::string Name() const override { return "LobbyGame"; }
+
     std::string name              ;
     int         numberOfPlayers   ;
     int         maxNumberOfPlayers;

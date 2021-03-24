@@ -239,9 +239,6 @@
     <ClInclude Include="lib\xdelta3\xdelta3-hash.h">
       <Filter>lib\xdelta3</Filter>
     </ClInclude>
-    <ClInclude Include="Core\SerializationGroup.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\BinaryPackage.cpp">
@@ -345,9 +342,6 @@
     </ClCompile>
     <ClCompile Include="lib\xdelta3\xdelta3.c">
       <Filter>lib\xdelta3</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\SerializationGroup.cpp">
-      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,6 +5,8 @@
 
 namespace Vishala {
   struct ServerConfiguration : public Serialization {
+    const std::string Name() const override { return "ServerConfiguration"; }
+    
     int                welcomePort = 6112;
     std::array<int, 2> portRange   = { 6113,7000 };
 

@@ -9,6 +9,7 @@
 namespace Vishala {
   struct JoinGameRequest : public Serialization {
   public:
+    const std::string Name() const override { return "JoinGameRequest"; }
     int gameID;
     
     virtual nlohmann::json             toJson()                  override;
