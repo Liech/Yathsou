@@ -8,6 +8,8 @@ namespace Uyanah {
   public:
     const std::string Name() const override { return "Scene"; }
 
+    void update();
+
     std::vector<Entity> objects;
 
     virtual Vishala::BinaryPackage toBinary()                                  override;

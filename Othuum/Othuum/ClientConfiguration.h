@@ -12,8 +12,8 @@ public:
   int                hostPort            = 6115; 
   std::string        lastGameName        = "Setons";
   std::string        lobbyServerAdress   = "localhost";
-  int                lobbyServerMyPort   = 6114;
-  int                lobbyServerTheirPort= 6112;
+  int                lobbyServerMyPort   = 6112;
+  int                lobbyServerTheirPort= 6114;
   int                gameServerPort      = 6113;
   int                myGameClientPort    = 6110;
 

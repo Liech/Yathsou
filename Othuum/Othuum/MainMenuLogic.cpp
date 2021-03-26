@@ -323,6 +323,7 @@ void MainMenuLogic::createClient() {
 void MainMenuLogic::createServer() {
   _server = std::make_unique<Uyanah::DedicatedServer>();
   Uyanah::DedicatedServerConfiguration config;
+  config.fromJsonFile("DedicatedConfiguration.json");
   config.welcomePort = _config->gameServerPort;
   _server->setConfig(config);
   _server->start();

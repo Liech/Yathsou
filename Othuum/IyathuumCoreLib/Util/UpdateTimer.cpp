@@ -27,10 +27,10 @@ namespace Iyathuum
     long long ticksShouldBe = ticksDiff.count() * _ticksPerSecond;
     long long ticksMissing = ticksShouldBe - _ticksSinceStart;
     if (ticksMissing > 0) {
-      for (int i = 0; i < ticksMissing; i++) {
+      //for (int i = 0; i < ticksMissing; i++) {
         _ticksSinceStart++;
         _updateCall();
-      }
+      //}
     }
     if (ticksMissing > _ticksPerSecond / 10.0f) {
       _stallCall(ticksMissing);

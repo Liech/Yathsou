@@ -14,6 +14,7 @@
 #include "YolonaOss/Drawables/Widgets/Button.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include "YolonaOss/Renderer/BoxRenderer.h"
+#include "YolonaOss/Renderer/RectangleRenderer.h"
 #include "YolonaOss/Examples/Texture2Tree.h"
 #include "YolonaOss/Examples/RenderTexture.h"
 #include <filesystem>
@@ -69,8 +70,14 @@ int main(int argc, char** argv) {
     std::unique_ptr<MainMenuLogicResult> rslt = nullptr;
 
     std::shared_ptr<ClientControl> control = nullptr;
-    Iyathuum::UpdateTimer timer([&control]() {
+    glm::vec2 v;
+    int tick = 0;
+    Iyathuum::UpdateTimer timer([&control, &tick,&v,&rslt]() {
       control->update();
+      if (rslt)
+        rslt->_client->update();
+      v = glm::vec2(200, 200) + glm::vec2(std::cos(tick / 10.0f) * 50, std::sin(tick / 10.0f) * 50);
+      tick++;
     }, 30);
     std::shared_ptr<ClientVisualization> vis = nullptr;
     auto contentCreator = [&w,&vis,&rslt,&control,&timer]() {
@@ -83,7 +90,7 @@ int main(int argc, char** argv) {
         list->addDrawable(vis);
         list->load(w.getSpec());
         Iyathuum::Database<std::shared_ptr<GL::Drawable>>::add(list, { "Main" });
-        auto s = std::make_shared<const Uyanah::Scene>();
+        auto s = std::make_shared<Uyanah::Scene>();
         timer.setTicksPerSecond(30);
         control = std::make_shared<ClientControl>(
           [&rslt](std::shared_ptr<Uyanah::Commands::Command> cmd) {
@@ -102,7 +109,11 @@ int main(int argc, char** argv) {
   
     logic.setContentLoaderCreater(contentCreator);
 
-    w.Update = [&logic, state,&rslt,&vis,&timer,&control]() {
+    w.Update = [&logic, state,&rslt,&vis,&timer,&control,&v]() {
+      YolonaOss::RectangleRenderer::start();
+      YolonaOss::RectangleRenderer::drawRectangle(v,glm::vec2(10,10),glm::vec3(1,1,0));
+      YolonaOss::RectangleRenderer::end();
+
       if (logic.getStatus() != MainMenuLogic::status::GameRunning)
         logic.update();
       else {

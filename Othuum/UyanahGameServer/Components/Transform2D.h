@@ -9,8 +9,9 @@ namespace Uyanah {
       SERIALIZATION(Transform2D, "Transform2D")
     public:
       virtual const std::string Name() const override { return "Transform2D"; }
-
-      glm::vec2 position = glm::vec2(0,0);
+      void update() { position += velocity; }
+      glm::vec2 position = glm::vec2(0, 0);
+      glm::vec2 velocity = glm::vec2(0, 0);
       float     rotation = 0;
 
       virtual Vishala::BinaryPackage toBinary()                                  override;

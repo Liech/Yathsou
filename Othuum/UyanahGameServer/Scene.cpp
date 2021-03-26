@@ -44,4 +44,9 @@ namespace Uyanah {
       objects.push_back(g);
     }
   }
+
+  void Scene::update() {
+    for (auto& c : objects)
+      c.update();
+  }
 }

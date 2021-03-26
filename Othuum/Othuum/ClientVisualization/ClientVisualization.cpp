@@ -18,8 +18,6 @@ void ClientVisualization::load(YolonaOss::GL::DrawSpecification*) {
 }
 
 void ClientVisualization::draw() {
-  if (_client)
-    _client->update();
   YolonaOss::RectangleRenderer::start();
   bool end = false;
   if (_client)

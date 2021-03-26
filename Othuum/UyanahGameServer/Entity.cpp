@@ -66,4 +66,8 @@ namespace Uyanah {
     return result;
   }
 
+  void Entity::update() {
+    for (auto& c : components)
+      c.second->update();
+  }
 }

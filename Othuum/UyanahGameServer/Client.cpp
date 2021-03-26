@@ -58,6 +58,7 @@ namespace Uyanah {
   void Client::update() {
     if (_connection)
       _connection->update();
+    _scene->update();
   }
 
   const Scene& Client::getScene() {
