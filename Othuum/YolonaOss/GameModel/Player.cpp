@@ -4,7 +4,7 @@ namespace YolonaOss
 {
   namespace GameModel
   {
-    nlohmann::json Player::toJson() {
+    nlohmann::json Player::toJson() const {
       nlohmann::json result;
       result["Name"] = name;
       return result;
@@ -14,7 +14,7 @@ namespace YolonaOss
       name = from["Name"];
     }
 
-    Vishala::BinaryPackage Player::toBinary() {
+    Vishala::BinaryPackage Player::toBinary() const {
       Vishala::BinaryPackage result;
       Vishala::BinaryPackage::val2bin(result, name);
       return result;

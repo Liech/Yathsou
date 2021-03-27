@@ -4,7 +4,7 @@ namespace Uyanah {
   namespace Components {
     //REGISTERGROUP(Component,Dot, "Dot");
 
-    Vishala::BinaryPackage Dot::toBinary()
+    Vishala::BinaryPackage Dot::toBinary()const
     {
       Vishala::BinaryPackage result;
       Vishala::BinaryPackage::val2bin(result, color[0]);
@@ -22,7 +22,7 @@ namespace Uyanah {
       color[3] = Vishala::BinaryPackage::bin2val<char>(Package);
     }
 
-    nlohmann::json Dot::toJson()
+    nlohmann::json Dot::toJson()const
     {
       nlohmann::json result;
       result["Color"] = { color[0],color[1],color[2],color[3] };

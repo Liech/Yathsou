@@ -10,9 +10,9 @@ namespace Vishala {
     int                welcomePort = 6112;
     std::array<int, 2> portRange   = { 6113,7000 };
 
-    virtual nlohmann::json          toJson()                            override;
+    virtual nlohmann::json          toJson()              const              override;
     virtual void                    fromJson(nlohmann::json)            override;
-    virtual Vishala::BinaryPackage  toBinary()                          override;
+    virtual Vishala::BinaryPackage  toBinary()           const               override;
     virtual void                    fromBinary(BinaryPackage&) override;
   };
 }

@@ -1,6 +1,6 @@
 #include "ClientConfiguration.h"
 
-nlohmann::json ClientConfiguration::toJson() {
+nlohmann::json ClientConfiguration::toJson() const {
   nlohmann::json result;
   result["PlayerName"]             = playerName;
   result["PlayerColor"]            = playerColor;
@@ -28,7 +28,7 @@ void ClientConfiguration::fromJson(nlohmann::json from) {
   myGameClientPort     = from["MyGameClientPort"];
 }
 
-Vishala::BinaryPackage ClientConfiguration::toBinary() {
+Vishala::BinaryPackage ClientConfiguration::toBinary()const {
   Vishala::BinaryPackage result;  
   Vishala::BinaryPackage::val2bin<std::string>(result, playerName  );
   Vishala::BinaryPackage::arr2bin<int,3>      (result, playerColor );

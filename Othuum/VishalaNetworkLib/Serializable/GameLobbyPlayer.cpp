@@ -2,7 +2,7 @@
 
 namespace Vishala {
 
-  BinaryPackage GameLobbyPlayer::toBinary() {
+  BinaryPackage GameLobbyPlayer::toBinary() const{
     BinaryPackage result;
     result.add(lobbyIdentification.toBinary());
     return result;
@@ -12,7 +12,7 @@ namespace Vishala {
     lobbyIdentification.fromBinary(Package);
   }
 
-  nlohmann::json GameLobbyPlayer::toJson() {
+  nlohmann::json GameLobbyPlayer::toJson() const{
     nlohmann::json result;
     result["LobbyPlayer"] = lobbyIdentification.toJson();
     return result;

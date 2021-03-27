@@ -11,9 +11,9 @@ namespace Uyanah {
 
       Iyathuum::Color color = Iyathuum::Color(255,255,0,255);
 
-      virtual Vishala::BinaryPackage toBinary()                                  override;
+      virtual Vishala::BinaryPackage toBinary()        const                          override;
       virtual void                   fromBinary(Vishala::BinaryPackage& Package) override;
-      virtual nlohmann::json         toJson()                                    override;
+      virtual nlohmann::json         toJson()          const                          override;
       virtual void                   fromJson(nlohmann::json)                    override;
     };
   }

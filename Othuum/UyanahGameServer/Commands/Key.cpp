@@ -19,7 +19,7 @@ namespace Uyanah {
         transform->velocity += glm::vec2(status == Iyathuum::KeyStatus::PRESS ? 1 : -1,0)*10.0f;
     }
 
-    Vishala::BinaryPackage KeyCmd::toBinary()
+    Vishala::BinaryPackage KeyCmd::toBinary()const
     {
       Vishala::BinaryPackage result;
       int k = (int)key;
@@ -35,7 +35,7 @@ namespace Uyanah {
       status = (Iyathuum::KeyStatus)Vishala::BinaryPackage::bin2val<int>(Package);
     }
 
-    nlohmann::json KeyCmd::toJson()
+    nlohmann::json KeyCmd::toJson()const
     {
       nlohmann::json result;
       result["Key"]    = (int)key   ;

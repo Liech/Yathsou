@@ -1,7 +1,7 @@
 #include "CreateGameRequest.h"
 
 namespace Vishala {
-  nlohmann::json CreateGameRequest::toJson() {
+  nlohmann::json CreateGameRequest::toJson() const {
     nlohmann::json result;
     result["GameName"]   = gameName;
     result["ServerPort"] = serverPort;
@@ -13,7 +13,7 @@ namespace Vishala {
     serverPort = from["ServerPort"];
   }
 
-  BinaryPackage CreateGameRequest::toBinary() {
+  BinaryPackage CreateGameRequest::toBinary() const {
     BinaryPackage result;
     BinaryPackage::val2bin<std::string>(result, gameName);
     BinaryPackage::val2bin<int>        (result, serverPort);

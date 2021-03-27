@@ -12,9 +12,9 @@ namespace Vishala {
     const std::string Name() const override { return "JoinGameRequest"; }
     int gameID;
     
-    virtual nlohmann::json             toJson()                  override;
-    virtual void                       fromJson(nlohmann::json)  override;
-    virtual BinaryPackage              toBinary()                override;
+    virtual nlohmann::json             toJson()            const       override;
+    virtual void                       fromJson(nlohmann::json)   override;
+    virtual BinaryPackage              toBinary()         const        override;
     virtual void                       fromBinary(BinaryPackage&) override;
   };
 }

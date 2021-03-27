@@ -11,7 +11,7 @@ namespace Uyanah {
       s = scene;
     }
 
-    Vishala::BinaryPackage Initialize::toBinary()
+    Vishala::BinaryPackage Initialize::toBinary()const
     {
       return scene.toBinary();
     }
@@ -21,7 +21,7 @@ namespace Uyanah {
       scene.fromBinary(Package);
     }
 
-    nlohmann::json Initialize::toJson()
+    nlohmann::json Initialize::toJson()const
     {
       return scene.toJson();
     }

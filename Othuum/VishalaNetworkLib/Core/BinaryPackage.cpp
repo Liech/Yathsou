@@ -26,7 +26,7 @@ namespace Vishala {
   }
 
   template<>
-  void BinaryPackage::val2bin<size_t>(BinaryPackage& data, size_t& value) {    
+  void BinaryPackage::val2bin<size_t>(BinaryPackage& data, const size_t& value) {    
     if (data.data.size() < data.position + 8)
       data.data.resize(data.position + 8);
     data.data[data.position + 0] = ((value >> 56) & 0xFFFF);
@@ -41,7 +41,7 @@ namespace Vishala {
   }
 
   template<>
-  void BinaryPackage::val2bin<int>(BinaryPackage& data, int& value) {
+  void BinaryPackage::val2bin<int>(BinaryPackage& data, const int& value) {
     if (data.data.size() < data.position + 4)
       data.data.resize(data.position + 4);
     data.data[data.position + 0] = ((value >> 24) & 0xFF);
@@ -61,7 +61,7 @@ namespace Vishala {
   }
 
   template<>
-  void BinaryPackage::val2bin<char>(BinaryPackage& data, char& value) {
+  void BinaryPackage::val2bin<char>(BinaryPackage& data, const char& value) {
     if (data.position == data.data.size())
       data.data.push_back((unsigned char)value);
     else
@@ -77,7 +77,7 @@ namespace Vishala {
   }
 
   template<>
-  void BinaryPackage::val2bin<unsigned char>(BinaryPackage& data, unsigned char& value) {
+  void BinaryPackage::val2bin<unsigned char>(BinaryPackage& data, const unsigned char& value) {
     if (data.position == data.data.size())
       data.data.push_back(value);
     else
@@ -93,7 +93,7 @@ namespace Vishala {
   }
 
   template<>
-  void BinaryPackage::val2bin<bool>(BinaryPackage& data, bool& value) {
+  void BinaryPackage::val2bin<bool>(BinaryPackage& data,const bool& value) {
     int v = value ? 1 : 0;
     val2bin(data, v);
   }
@@ -108,7 +108,7 @@ namespace Vishala {
   }
 
   template<>
-  void BinaryPackage::val2bin<std::string>(BinaryPackage& data, std::string& value) {
+  void BinaryPackage::val2bin<std::string>(BinaryPackage& data,const std::string& value) {
     int len = value.length();
     val2bin<int>(data, len);
     data.data.insert(data.data.end(), value.data(), value.data() + len);
@@ -130,17 +130,11 @@ namespace Vishala {
   }
 
   template<>
-  void BinaryPackage::val2bin<float>(BinaryPackage& data, float& value) {
-    float* a = &value;
-    int* b = (int*)a;
+  void BinaryPackage::val2bin<float>(BinaryPackage& data,const float& value) {
+    const float* a = &value;
+    const int* b = (const int*)a;
     int    c = *b;
     val2bin<int>(data, c);
-  }
-
-  template<>
-  void BinaryPackage::val2bin<Serialization*>(BinaryPackage& data, Serialization*& value) {
-    auto result = value->toBinary();
-    data.data.insert(data.data.end(), result.data.begin(), result.data.end());
   }
 
   BinaryPackage BinaryPackage::createDelta(const BinaryPackage& oldData, const BinaryPackage& newData) {

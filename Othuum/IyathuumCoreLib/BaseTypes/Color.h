@@ -36,6 +36,7 @@ namespace Iyathuum {
     }
 
     unsigned char& operator [](int i);
+    unsigned char operator [](int i) const;
   private:
     std::array<unsigned char, 4> _color;
   };

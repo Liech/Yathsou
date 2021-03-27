@@ -10,7 +10,7 @@ namespace Vishala {
   }
 
 
-  BinaryPackage OpenLobbyRequest::toBinary() {
+  BinaryPackage OpenLobbyRequest::toBinary()const {
     BinaryPackage result;    
     BinaryPackage::val2bin(result, playerNumber);
     result.add(request.toBinary());
@@ -22,7 +22,7 @@ namespace Vishala {
     request.fromBinary(Package);
   }
 
-  nlohmann::json OpenLobbyRequest::toJson() {
+  nlohmann::json OpenLobbyRequest::toJson() const {
     nlohmann::json result;
     result["PlayerNumber"] = playerNumber;
     result["Request"] = request.toJson();   

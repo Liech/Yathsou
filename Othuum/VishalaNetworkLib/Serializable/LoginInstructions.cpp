@@ -3,7 +3,7 @@
 #include "Core/BinaryPackage.h"
 
 namespace Vishala {
-  BinaryPackage LoginInstructions::toBinary()
+  BinaryPackage LoginInstructions::toBinary()const
   {
     BinaryPackage result;
     BinaryPackage::val2bin<std::string>(result, ip  );
@@ -17,7 +17,7 @@ namespace Vishala {
     port = BinaryPackage::bin2val<int        >(Package);
   }
 
-  nlohmann::json LoginInstructions::toJson()
+  nlohmann::json LoginInstructions::toJson()const
   {
     nlohmann::json result;
     result["Port"] = port;

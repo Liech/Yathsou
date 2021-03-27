@@ -9,9 +9,9 @@ namespace Uyanah {
   public:
     const std::string Name() const override { return "Entity"; }
 
-    virtual nlohmann::json          toJson()                            override;
+    virtual nlohmann::json          toJson()               const             override;
     virtual void                    fromJson(nlohmann::json)            override;
-    virtual Vishala::BinaryPackage  toBinary()                          override;
+    virtual Vishala::BinaryPackage  toBinary()             const             override;
     virtual void                    fromBinary(Vishala::BinaryPackage&) override;
     
     void                                    addComponent(std::shared_ptr<Component>);

@@ -5,7 +5,7 @@
 
 namespace Uyanah {
 
-  nlohmann::json DedicatedServerConfiguration::toJson() {
+  nlohmann::json DedicatedServerConfiguration::toJson()const {
     nlohmann::json result;
     result["WelcomePort"] = welcomePort;
     return result;
@@ -15,7 +15,7 @@ namespace Uyanah {
     welcomePort = from["WelcomePort"];
   }
 
-  Vishala::BinaryPackage DedicatedServerConfiguration::toBinary() {
+  Vishala::BinaryPackage DedicatedServerConfiguration::toBinary()const {
     Vishala::BinaryPackage result;
     Vishala::BinaryPackage::val2bin<int>(result, welcomePort);
     return result;

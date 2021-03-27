@@ -2,7 +2,7 @@
 
 namespace Vishala {
 
-  BinaryPackage LobbyModel::toBinary() {
+  BinaryPackage LobbyModel::toBinary() const {
     BinaryPackage result;
     int numberOfGames = openGames.size();
     BinaryPackage::val2bin(result, numberOfGames);
@@ -54,7 +54,7 @@ namespace Vishala {
     nextGameNumber = BinaryPackage::bin2val<size_t>(Package);
   }
 
-  nlohmann::json LobbyModel::toJson() {
+  nlohmann::json LobbyModel::toJson() const {
     nlohmann::json result;
 
     nlohmann::json games = nlohmann::json::array();

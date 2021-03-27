@@ -13,9 +13,9 @@ namespace Fatboy
     int   ScreenWidth    = 800;
     int   ScreenHeight   = 600;
 
-    virtual nlohmann::json             toJson()                            override;
+    virtual nlohmann::json             toJson()            const                override;
     virtual void                       fromJson(nlohmann::json)            override;
-    virtual Vishala::BinaryPackage     toBinary()                          override;
+    virtual Vishala::BinaryPackage     toBinary()          const                override;
     virtual void                       fromBinary(Vishala::BinaryPackage&) override;
   };
 }

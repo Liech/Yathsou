@@ -4,7 +4,7 @@
 
 namespace Vishala {
 
-  BinaryPackage LobbyGame::toBinary(){
+  BinaryPackage LobbyGame::toBinary()const {
     BinaryPackage result;
     BinaryPackage::val2bin(result, name);
     BinaryPackage::val2bin(result, numberOfPlayers);
@@ -20,7 +20,7 @@ namespace Vishala {
     gameID             = BinaryPackage::bin2val<int>(Package);
   }
 
-  nlohmann::json LobbyGame::toJson(){
+  nlohmann::json LobbyGame::toJson()const {
     nlohmann::json result;
     result["Name"]               = name              ;
     result["NumberOfPlayers"]    = numberOfPlayers   ;

@@ -7,7 +7,7 @@ namespace YolonaOss
 {
   namespace GameModel
   {
-    nlohmann::json GameState::toJson() {
+    nlohmann::json GameState::toJson()const {
       nlohmann::json result;
       nlohmann::json arr = nlohmann::json::array();
       for(auto p : players)
@@ -37,7 +37,7 @@ namespace YolonaOss
       }
     }
 
-    Vishala::BinaryPackage GameState::toBinary() {
+    Vishala::BinaryPackage GameState::toBinary() const {
       Vishala::BinaryPackage result;
       Vishala::BinaryPackage::map2bin(result, players);
       Vishala::BinaryPackage::map2bin(result, units  );

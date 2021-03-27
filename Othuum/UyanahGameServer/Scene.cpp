@@ -2,7 +2,7 @@
 #include "VishalaNetworkLib/Core/BinaryPackage.h"
 
 namespace Uyanah {
-  Vishala::BinaryPackage Scene::toBinary()
+  Vishala::BinaryPackage Scene::toBinary()const
   {
     Vishala::BinaryPackage result;
     int numberOfObjects = objects.size();
@@ -23,7 +23,7 @@ namespace Uyanah {
     }
   }
 
-  nlohmann::json Scene::toJson()
+  nlohmann::json Scene::toJson()const
   {
     nlohmann::json arr = nlohmann::json::array();
     for (auto obj : objects) {

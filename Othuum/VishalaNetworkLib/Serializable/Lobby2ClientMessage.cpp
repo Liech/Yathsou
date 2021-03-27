@@ -9,7 +9,7 @@ namespace Vishala {
 
   }
 
-  nlohmann::json Lobby2ClientMessage::toJson() {
+  nlohmann::json Lobby2ClientMessage::toJson() const {
     nlohmann::json result;
     result["Type"] = (int)type;
 
@@ -41,7 +41,7 @@ namespace Vishala {
       throw std::runtime_error("Unkown Message Type");
   }
 
-  BinaryPackage Lobby2ClientMessage::toBinary() {
+  BinaryPackage Lobby2ClientMessage::toBinary()const {
     BinaryPackage result;
     int number = (int)type;
     BinaryPackage::val2bin<int>(result, number);

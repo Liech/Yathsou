@@ -13,9 +13,9 @@ namespace Vishala {
     std::string                        gameName;
     int                                serverPort = 6333;
     
-    virtual nlohmann::json             toJson()                  override;
+    virtual nlohmann::json             toJson()      const       override;
     virtual void                       fromJson(nlohmann::json)  override;
-    virtual BinaryPackage              toBinary()                override;
+    virtual BinaryPackage              toBinary()    const       override;
     virtual void                       fromBinary(BinaryPackage&) override;
   };
 }

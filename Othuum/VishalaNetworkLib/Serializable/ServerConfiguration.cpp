@@ -5,7 +5,7 @@
 
 namespace Vishala {
 
-  nlohmann::json ServerConfiguration::toJson() {
+  nlohmann::json ServerConfiguration::toJson()const {
     nlohmann::json result;
     result["WelcomePort"] = welcomePort;
     result["PortRange"]   = portRange;
@@ -17,7 +17,7 @@ namespace Vishala {
     portRange   = from["PortRange"];
   }
 
-  BinaryPackage ServerConfiguration::toBinary() {
+  BinaryPackage ServerConfiguration::toBinary()const {
     BinaryPackage result;
     BinaryPackage::val2bin<int>(result, welcomePort);
     BinaryPackage::arr2bin<int>(result, portRange);

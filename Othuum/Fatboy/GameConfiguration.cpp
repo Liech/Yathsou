@@ -13,7 +13,7 @@ namespace Fatboy
     return *g;
   }
 
-  nlohmann::json GameConfiguration::toJson() {
+  nlohmann::json GameConfiguration::toJson() const {
     nlohmann::json result;
     result["ScreenWidth"]          = ScreenWidth         ;
     result["ScreenHeight"]         = ScreenHeight        ;
@@ -27,7 +27,7 @@ namespace Fatboy
     TicksPerSecond = from["TicksPerSecond"];
   }
 
-  Vishala::BinaryPackage GameConfiguration::toBinary() {
+  Vishala::BinaryPackage GameConfiguration::toBinary() const {
     Vishala::BinaryPackage result;
     Vishala::BinaryPackage::val2bin<int>(result, ScreenWidth         );
     Vishala::BinaryPackage::val2bin<int>(result, ScreenHeight        );

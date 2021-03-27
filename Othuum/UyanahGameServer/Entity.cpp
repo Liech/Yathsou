@@ -4,7 +4,7 @@
 #include "Component.h"
 
 namespace Uyanah {
-  nlohmann::json Entity::toJson()
+  nlohmann::json Entity::toJson()const
   {
     nlohmann::json arr = nlohmann::json::array();
     for (auto comp : components) {
@@ -26,7 +26,7 @@ namespace Uyanah {
     }
   }
 
-  Vishala::BinaryPackage Entity::toBinary()
+  Vishala::BinaryPackage Entity::toBinary()const
   {
     Vishala::BinaryPackage result;
     int numberOfComponents = components.size();

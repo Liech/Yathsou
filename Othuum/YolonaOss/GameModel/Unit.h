@@ -14,9 +14,9 @@ namespace YolonaOss
       std::array<float, 3> position = { 0,0,0 };
       int                  owner    = 0        ; 
 
-      virtual nlohmann::json             toJson()                   override;
+      virtual nlohmann::json             toJson()        const           override;
       virtual void                       fromJson(nlohmann::json)   override;
-      virtual Vishala::BinaryPackage     toBinary()                 override;
+      virtual Vishala::BinaryPackage     toBinary()     const            override;
       virtual void                       fromBinary(Vishala::BinaryPackage&) override;
     };
   }

@@ -239,6 +239,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Core\BinaryPackage.h" />
+    <ClInclude Include="Core\Command.h" />
     <ClInclude Include="Core\Connection.h" />
     <ClInclude Include="Core\ConnectionMultiplexer.h" />
     <ClInclude Include="Core\NetworkMemory.h" />
@@ -275,8 +276,10 @@
     <ClInclude Include="lib\xdelta3\xdelta3-merge.h" />
     <ClInclude Include="lib\xdelta3\xdelta3-second.h" />
     <ClInclude Include="lib\xdelta3\xdelta3.h" />
+    <ClInclude Include="Protocoll\AuthoritarianGameServer.h" />
     <ClInclude Include="Protocoll\Client\LobbyClient.h" />
     <ClInclude Include="Protocoll\Client\LobbyConnector.h" />
+    <ClInclude Include="Protocoll\GameClient.h" />
     <ClInclude Include="Protocoll\Server\GameLobby.h" />
     <ClInclude Include="Protocoll\Server\Lobby.h" />
     <ClInclude Include="Protocoll\Server\LobbyPlayer.h" />
@@ -311,8 +314,10 @@
     <ClCompile Include="lib\snappy\snappy_compress_fuzzer.cc" />
     <ClCompile Include="lib\snappy\snappy_uncompress_fuzzer.cc" />
     <ClCompile Include="lib\xdelta3\xdelta3.c" />
+    <ClCompile Include="Protocoll\AuthoritarianGameServer.cpp" />
     <ClCompile Include="Protocoll\Client\LobbyClient.cpp" />
     <ClCompile Include="Protocoll\Client\LobbyConnector.cpp" />
+    <ClCompile Include="Protocoll\GameClient.cpp" />
     <ClCompile Include="Protocoll\Server\GameLobby.cpp" />
     <ClCompile Include="Protocoll\Server\Lobby.cpp" />
     <ClCompile Include="Protocoll\Server\LobbyPlayer.cpp" />

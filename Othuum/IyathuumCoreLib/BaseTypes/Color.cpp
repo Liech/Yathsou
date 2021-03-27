@@ -26,6 +26,12 @@ namespace Iyathuum {
     return _color[i];
   }
 
+  unsigned char Color::operator [](int i) const{
+    assert(i >= 0);
+    assert(i < 4);
+    return _color[i];
+  }
+
   Color Color::random() {
     return Color(rand() % 255, rand() % 255, rand() % 255);
   }

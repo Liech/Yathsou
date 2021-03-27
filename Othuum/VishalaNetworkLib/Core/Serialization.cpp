@@ -47,7 +47,7 @@ namespace Vishala {
     fromJson(nlohmann::json::parse(content));
   }
 
-  BinaryPackage Serialization::serialize() {    
+  BinaryPackage Serialization::serialize() const{    
     Vishala::BinaryPackage result;
     size_t id = ID();
     Vishala::BinaryPackage::val2bin(result, id);
@@ -62,7 +62,7 @@ namespace Vishala {
     return result;
   }
 
-  nlohmann::json Serialization::serializeJson() {
+  nlohmann::json Serialization::serializeJson() const{
     nlohmann::json result = toJson();    
     result["___ID___"] = Name();
     return result;

@@ -2,7 +2,7 @@
 
 namespace Vishala {
 
-  BinaryPackage GameLobbyStateUpdate::toBinary() {
+  BinaryPackage GameLobbyStateUpdate::toBinary() const {
     BinaryPackage result;
     BinaryPackage::val2bin<std::string>(result, gameName);
     BinaryPackage::val2bin<std::string>(result, gameServerIP);
@@ -32,7 +32,7 @@ namespace Vishala {
     gameStart = BinaryPackage::bin2val<bool>(Package);
   }
 
-  nlohmann::json GameLobbyStateUpdate::toJson() {
+  nlohmann::json GameLobbyStateUpdate::toJson() const {
     nlohmann::json result;
     nlohmann::json arr = nlohmann::json::array();
 

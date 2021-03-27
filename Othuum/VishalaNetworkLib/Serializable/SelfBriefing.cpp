@@ -1,7 +1,7 @@
 #include "SelfBriefing.h"
 
 namespace Vishala {
-  BinaryPackage  SelfBriefing::toBinary(){
+  BinaryPackage  SelfBriefing::toBinary()const {
     BinaryPackage result;
     BinaryPackage::val2bin(result, name );
     BinaryPackage::arr2bin<int,3>(result, color); 
@@ -13,7 +13,7 @@ namespace Vishala {
     color = BinaryPackage::bin2arr<int, 3>(Package);
   }
 
-  nlohmann::json SelfBriefing::toJson(){
+  nlohmann::json SelfBriefing::toJson()const {
     nlohmann::json result;
     result["Name"] = name;
     result["Color"] = color;

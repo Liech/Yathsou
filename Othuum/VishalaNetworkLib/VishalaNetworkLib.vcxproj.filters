@@ -239,6 +239,15 @@
     <ClInclude Include="lib\xdelta3\xdelta3-hash.h">
       <Filter>lib\xdelta3</Filter>
     </ClInclude>
+    <ClInclude Include="Protocoll\GameClient.h">
+      <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Command.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\AuthoritarianGameServer.h">
+      <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\BinaryPackage.cpp">
@@ -342,6 +351,12 @@
     </ClCompile>
     <ClCompile Include="lib\xdelta3\xdelta3.c">
       <Filter>lib\xdelta3</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\GameClient.cpp">
+      <Filter>Source Files\Protocoll</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\AuthoritarianGameServer.cpp">
+      <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

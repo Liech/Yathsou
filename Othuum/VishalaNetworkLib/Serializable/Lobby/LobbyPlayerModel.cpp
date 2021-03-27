@@ -2,7 +2,7 @@
 
 namespace Vishala {
 
-  BinaryPackage LobbyPlayerModel::toBinary() {
+  BinaryPackage LobbyPlayerModel::toBinary()const {
     BinaryPackage result;
     int id_ = id;
     BinaryPackage::val2bin<int>        (result, id_  );
@@ -17,7 +17,7 @@ namespace Vishala {
     color = BinaryPackage::bin2arr<int,3>(Package);
   }
 
-  nlohmann::json LobbyPlayerModel::toJson() {
+  nlohmann::json LobbyPlayerModel::toJson() const {
     nlohmann::json result;
     result["ID"]    = id;
     result["Color"] = color;

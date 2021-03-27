@@ -5,7 +5,7 @@
 
 namespace Uyanah {
 
-  nlohmann::json ClientConfiguration::toJson() {
+  nlohmann::json ClientConfiguration::toJson()const {
     nlohmann::json result;
     result["ServerIP"] = serverIP;
     result["ServerPort"] = serverPort;
@@ -19,7 +19,7 @@ namespace Uyanah {
     myPort     = from["MyPort"];
   }
 
-  Vishala::BinaryPackage ClientConfiguration::toBinary() {
+  Vishala::BinaryPackage ClientConfiguration::toBinary() const {
     Vishala::BinaryPackage result;
     Vishala::BinaryPackage::val2bin<std::string>(result, serverIP);
     Vishala::BinaryPackage::val2bin<int>(result, serverPort);

@@ -2,7 +2,7 @@
 
 namespace Vishala {
 
-  BinaryPackage LobbyStateUpdate::toBinary() {
+  BinaryPackage LobbyStateUpdate::toBinary() const {
     BinaryPackage result;
     int numberOfEntries = openGames.size();    
     BinaryPackage::val2bin(result,numberOfEntries);
@@ -23,7 +23,7 @@ namespace Vishala {
     }
   }
 
-  nlohmann::json LobbyStateUpdate::toJson() {
+  nlohmann::json LobbyStateUpdate::toJson() const {
     nlohmann::json result;
     nlohmann::json arr = nlohmann::json::array();
 

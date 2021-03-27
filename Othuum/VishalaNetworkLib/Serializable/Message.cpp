@@ -1,7 +1,7 @@
 #include "Message.h"
 
 namespace Vishala {
-  nlohmann::json Message::toJson() {
+  nlohmann::json Message::toJson() const {
     nlohmann::json result;
     result["playerID"] = playerID;
     result["message"]  = message ;
@@ -13,7 +13,7 @@ namespace Vishala {
     message  = from["message"] ;
   }
 
-  BinaryPackage Message::toBinary() {
+  BinaryPackage Message::toBinary() const {
     BinaryPackage result;
     BinaryPackage::val2bin<int>(result, playerID);
     BinaryPackage::val2bin<int>(result, message );

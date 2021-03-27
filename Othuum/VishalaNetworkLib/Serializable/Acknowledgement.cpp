@@ -1,7 +1,7 @@
 #include "Acknowledgement.h"
 
 namespace Vishala {
-  nlohmann::json Acknowledgement::toJson() {
+  nlohmann::json Acknowledgement::toJson() const {
     nlohmann::json result;
     int number = (int)type;
     result["Type"] = number;
@@ -13,7 +13,7 @@ namespace Vishala {
     type = (Acknowledgement::Type)number;
   }
 
-  BinaryPackage Acknowledgement::toBinary() {
+  BinaryPackage Acknowledgement::toBinary() const{
     BinaryPackage result;
     int number = (int)type;
     BinaryPackage::val2bin<int>(result, number);

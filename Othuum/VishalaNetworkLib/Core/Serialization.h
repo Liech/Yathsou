@@ -17,18 +17,18 @@ namespace Vishala {
     virtual   const std::string Name() const = 0;    
     constexpr const size_t      ID()   const;
 
-    virtual BinaryPackage  toBinary() = 0;
+    virtual BinaryPackage  toBinary() const = 0;
     virtual void           fromBinary(BinaryPackage& Package) = 0;
-    virtual nlohmann::json toJson() = 0;
+    virtual nlohmann::json toJson() const = 0;
     virtual void           fromJson    (nlohmann::json) = 0;
             void           toJsonFile  (std::string filename);
             void           fromJsonFile(std::string filename);
             void           toBinFile   (std::string filename);
             void           fromBinFile (std::string filename); 
 
-    BinaryPackage                         serialize();
+    BinaryPackage                         serialize() const;
     static std::shared_ptr<Serialization> deserialize(BinaryPackage& Package);
-    nlohmann::json                        serializeJson();
+    nlohmann::json                        serializeJson() const;
     static std::shared_ptr<Serialization> deserializeJson(nlohmann::json);
 
     template<typename T>

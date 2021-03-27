@@ -13,9 +13,9 @@ namespace Vishala {
     std::string        name ;
     std::array<int, 3> color = { 0,0,0 };
 
-    virtual BinaryPackage  toBinary()                         override;
+    virtual BinaryPackage  toBinary()              const           override;
     virtual void           fromBinary(BinaryPackage& Package) override;
-    virtual nlohmann::json toJson()                           override;
+    virtual nlohmann::json toJson()               const            override;
     virtual void           fromJson(nlohmann::json)           override;
   };
 }

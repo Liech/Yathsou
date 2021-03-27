@@ -11,9 +11,9 @@ namespace Uyanah {
     int myPort     = 6213;
     std::string serverIP = "localhost";
 
-    virtual nlohmann::json          toJson()                            override;
+    virtual nlohmann::json          toJson()                 const           override;
     virtual void                    fromJson(nlohmann::json)            override;
-    virtual Vishala::BinaryPackage  toBinary()                          override;
+    virtual Vishala::BinaryPackage  toBinary()         const                 override;
     virtual void                    fromBinary(Vishala::BinaryPackage&) override;
   };
 }

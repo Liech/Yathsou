@@ -3,13 +3,11 @@
 #include <functional>
 #include "VishalaNetworkLib/Core/Connection.h"
 #include "VishalaNetworkLib/Core/ConnectionMultiplexer.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
 
 //very very simple network class
 //keeps serializable intelligently one way synchronized (delta compression & compression)
 //limited to small sizes of synchronized stuff.
-//i assume bottleneck is creating the delta, but this bug prevents currently performance profiling
-//https://developercommunity.visualstudio.com/t/profiling-cpu-still-states-no-user-code-was-runnin/607535
-//therefor i will write more complex approaches...
 
 namespace Vishala {
   class BinaryPackage;
@@ -20,51 +18,53 @@ namespace Vishala {
     compressed  = 2
   };
 
-  template<typename T>
   class NetworkMemoryWriter {
   public:
-    NetworkMemoryWriter(size_t channel, std::shared_ptr<Connection> connection) {
-      _connection = connection;
+    NetworkMemoryWriter(const Serialization& data, size_t channel, Connection& connection) :
+      _data(data) , 
+      _connection(connection)
+    {
       _channel    = channel   ;
     }
-    T Data;
 
     void changed() {//please call when data changes
       _changed = true;
     }; 
 
     void newTarget(size_t) {
-      BinaryPackage package = Data.toBinary();
+      BinaryPackage package = _data.serialize();
       package.position = 0;
       BinaryPackage msg;
       int mode = (int)MemoryTransmissionMode::compressed;
       BinaryPackage::val2bin(msg, mode);
       msg.add(package.compress());
-      for (auto target : _connection->getAllConnections())
-        _connection->send(target, _channel, std::make_unique<BinaryPackage>(msg), true);
+      for (auto target : _connection.getAllConnections())
+        _connection.send(target, _channel, std::make_unique<BinaryPackage>(msg), true);
       _lastSend = package;
       _lastSend.position = 0;
     }
 
     void update() {
       if (_changed) {
-        BinaryPackage package = Data.toBinary();
+        BinaryPackage package = _data.serialize();
         package.position = 0;
         BinaryPackage delta = BinaryPackage::createDelta(_lastSend, package);
         BinaryPackage msg;
         int mode = (int)MemoryTransmissionMode::delta;
         BinaryPackage::val2bin(msg, mode);
         msg.add(delta);
-        for(auto target : _connection->getAllConnections())
-          _connection->send(target, _channel, std::make_unique<BinaryPackage>(msg), true);
+        for(auto target : _connection.getAllConnections())
+          _connection.send(target, _channel, std::make_unique<BinaryPackage>(msg), true);
         _changed = false;
         _lastSend = package;
         _lastSend.position = 0;
       }
     }
   private:
+    const Serialization&              _data;
+
     BinaryPackage               _lastSend;
-    std::shared_ptr<Connection> _connection;
+    Connection&                 _connection;
     bool                        _changed = true;
     size_t                      _channel = 0;
   };

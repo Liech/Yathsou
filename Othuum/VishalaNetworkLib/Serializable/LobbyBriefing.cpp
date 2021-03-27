@@ -3,7 +3,7 @@
 #include "Core/BinaryPackage.h"
 
 namespace Vishala {
-  BinaryPackage LobbyBriefing::toBinary()
+  BinaryPackage LobbyBriefing::toBinary()const
   {
     BinaryPackage result;
     BinaryPackage::val2bin(result, playerId);
@@ -18,7 +18,7 @@ namespace Vishala {
     lobbyStatus.fromBinary(Package);
   }
 
-  nlohmann::json LobbyBriefing::toJson()
+  nlohmann::json LobbyBriefing::toJson()const
   {
     nlohmann::json result;
     result["PlayerID"] = playerId;

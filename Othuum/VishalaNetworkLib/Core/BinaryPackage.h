@@ -21,7 +21,7 @@ namespace Vishala {
     template<typename type>
     static type bin2val(BinaryPackage& data);
     template<typename type>
-    static void val2bin(BinaryPackage& data, type& value);
+    static void val2bin(BinaryPackage& data,const type& value);
 
     template<typename type>
     static std::vector<type> bin2vec(BinaryPackage& data) {
@@ -33,7 +33,7 @@ namespace Vishala {
     }
 
     template<typename type>
-    static void vec2bin(BinaryPackage& data, std::vector<type>& value) {
+    static void vec2bin(BinaryPackage& data, const std::vector<type>& value) {
       int size = value.size();
       val2bin<int>(data, size);
       for (size_t i = 0; i < value.size(); i++)
@@ -50,7 +50,7 @@ namespace Vishala {
     }
 
     template<typename type>
-    static void set2bin(BinaryPackage& data, std::set<type>& value) {
+    static void set2bin(BinaryPackage& data,const std::set<type>& value) {
       int size = value.size();
       val2bin<int>(data, size);
       for (auto v : value)
@@ -67,7 +67,7 @@ namespace Vishala {
     }
 
     template<typename type1, typename type2>
-    static void map2bin(BinaryPackage& data, std::map<type1, type2>& value) {
+    static void map2bin(BinaryPackage& data,const std::map<type1, type2>& value) {
       int size = value.size();
       val2bin<int>(data, size);
       for (std::pair<type1, type2> v : value) {
@@ -85,7 +85,7 @@ namespace Vishala {
     }
 
     template<typename type, size_t SIZE>
-    static void arr2bin(BinaryPackage& data, std::array<type, SIZE>& value) {
+    static void arr2bin(BinaryPackage& data,const std::array<type, SIZE>& value) {
       for (size_t i = 0; i < SIZE; i++)
         val2bin<type>(data, value[i]);
     }

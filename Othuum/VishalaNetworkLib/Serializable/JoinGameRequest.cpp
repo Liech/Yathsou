@@ -1,7 +1,7 @@
 #include "JoinGameRequest.h"
 
 namespace Vishala {
-  nlohmann::json JoinGameRequest::toJson() {
+  nlohmann::json JoinGameRequest::toJson()const {
     nlohmann::json result;
     result["GameID"] = gameID;
     return result;
@@ -11,7 +11,7 @@ namespace Vishala {
     gameID = from["GameID"];
   }
 
-  BinaryPackage JoinGameRequest::toBinary() {
+  BinaryPackage JoinGameRequest::toBinary()const {
     BinaryPackage result;
     BinaryPackage::val2bin<int>(result, gameID);
     return result;
