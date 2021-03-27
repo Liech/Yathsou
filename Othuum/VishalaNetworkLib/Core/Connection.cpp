@@ -55,7 +55,11 @@ namespace Vishala {
   }
 
   void Connection::threadRun() {
+    auto start = std::chrono::steady_clock::now();
     while (!_destructorCalled) {
+      auto now = std::chrono::steady_clock::now();
+      auto diff = now - start;
+      auto end = now + std::chrono::milliseconds(16);
       NetSendEvent toSend;
       if (_threadQueueSend.try_dequeue(toSend)) {
         if (toSend.type == NetSendEvent::Type::send) {
@@ -174,6 +178,7 @@ namespace Vishala {
         }
         _threadQueueRecive.enqueue(msg);
       }
+      std::this_thread::sleep_until(end);
     }
   }
 

@@ -1,6 +1,7 @@
 #include "MainMenuPage.h"
 
 #include <iostream>
+#include <chrono>
 
 #include "YolonaOss/OpenGL/Window.h"
 #include "YolonaOss/Drawables/Widgets/ListLayout.h"
@@ -73,7 +74,13 @@ void MainMenuPage::startServer()
 
   _serverThread = std::async(std::launch::async, [&config,this]() {
     auto s = std::make_unique<Vishala::Server::Lobby>(config);
-    while (_serverStarted)
+    auto start = std::chrono::steady_clock::now();
+    while (_serverStarted) {
+      auto now = std::chrono::steady_clock::now();
+      auto diff = now - start;
+      auto end = now + std::chrono::milliseconds(16);
       s->update();
+      std::this_thread::sleep_until(end);
+    }
     });
 }

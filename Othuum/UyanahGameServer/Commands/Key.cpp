@@ -10,13 +10,13 @@ namespace Uyanah {
     void KeyCmd::apply(Scene& s) {
       auto transform = s.objects[0].getComponent<Components::Transform2D>("Transform2D");
       if (key == Iyathuum::Key::KEY_W)
-        transform->velocity += glm::vec2(0, 1);
+        transform->velocity += glm::vec2(0, status==Iyathuum::KeyStatus::PRESS?1:-1)*10.0f;
       if (key == Iyathuum::Key::KEY_S)
-        transform->velocity += glm::vec2(0, -1);
+        transform->velocity += glm::vec2(0, status == Iyathuum::KeyStatus::PRESS ? -1 : 1)*10.0f;
       if (key == Iyathuum::Key::KEY_A)
-        transform->velocity += glm::vec2(-1,0);
+        transform->velocity += glm::vec2(status == Iyathuum::KeyStatus::PRESS ? -1 : 1,0)*10.0f;
       if (key == Iyathuum::Key::KEY_D)
-        transform->velocity += glm::vec2(1,0);
+        transform->velocity += glm::vec2(status == Iyathuum::KeyStatus::PRESS ? 1 : -1,0)*10.0f;
     }
 
     Vishala::BinaryPackage KeyCmd::toBinary()

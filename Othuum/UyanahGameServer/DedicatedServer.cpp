@@ -67,9 +67,15 @@ namespace Uyanah {
 
   void DedicatedServer::runThread() {
     float time = 0;
+    auto start = std::chrono::steady_clock::now();
+
     int ticksPerSecond = 60;
     while (!_stop) {
+      auto now = std::chrono::steady_clock::now();
+      auto diff = now - start;
+      auto end = now + std::chrono::milliseconds(16);
       _connection->update();
+      std::this_thread::sleep_until(end);
     }
   }
 

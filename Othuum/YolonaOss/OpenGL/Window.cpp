@@ -165,10 +165,14 @@ namespace YolonaOss {
       }
       for (auto renderStep : loadList)
         renderStep->load(&spec);      
+      auto start = std::chrono::steady_clock::now();
 
       // Game loop
       while (!glfwWindowShouldClose(_window))
       {
+        auto now = std::chrono::steady_clock::now();
+        auto diff = now - start;
+        auto end = now + std::chrono::milliseconds(8);
         _mouseWheelMovement = 0;
         // Check if any events have been activated (key pressed, mouse moved etc.) and call corresponding response functions
         glfwPollEvents();
@@ -180,6 +184,7 @@ namespace YolonaOss {
         for (auto draw : Iyathuum::Database<std::shared_ptr<GL::Drawable>>::getByTag("Main"))
           draw->draw();
         Update();
+        std::this_thread::sleep_until(end);
 
         glfwSwapBuffers(_window);
       }
