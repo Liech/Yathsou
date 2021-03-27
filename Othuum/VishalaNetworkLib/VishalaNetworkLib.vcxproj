@@ -279,7 +279,7 @@
     <ClInclude Include="Protocoll\AuthoritarianGameServer.h" />
     <ClInclude Include="Protocoll\Client\LobbyClient.h" />
     <ClInclude Include="Protocoll\Client\LobbyConnector.h" />
-    <ClInclude Include="Protocoll\GameClient.h" />
+    <ClInclude Include="Protocoll\AuthoritarianGameClient.h" />
     <ClInclude Include="Protocoll\Server\GameLobby.h" />
     <ClInclude Include="Protocoll\Server\Lobby.h" />
     <ClInclude Include="Protocoll\Server\LobbyPlayer.h" />
@@ -317,7 +317,7 @@
     <ClCompile Include="Protocoll\AuthoritarianGameServer.cpp" />
     <ClCompile Include="Protocoll\Client\LobbyClient.cpp" />
     <ClCompile Include="Protocoll\Client\LobbyConnector.cpp" />
-    <ClCompile Include="Protocoll\GameClient.cpp" />
+    <ClCompile Include="Protocoll\AuthoritarianGameClient.cpp" />
     <ClCompile Include="Protocoll\Server\GameLobby.cpp" />
     <ClCompile Include="Protocoll\Server\Lobby.cpp" />
     <ClCompile Include="Protocoll\Server\LobbyPlayer.cpp" />

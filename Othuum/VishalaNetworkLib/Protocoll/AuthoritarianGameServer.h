@@ -28,7 +28,6 @@ namespace Vishala {
 
     std::unique_ptr<Serialization> _data;
     size_t                         _tick;
-    bool                           _serverSideSimulation;
 
     std::unique_ptr<Iyathuum::UpdateTimer> _timer     ;
     std::unique_ptr<NetworkMemoryWriter>   _writer    ;

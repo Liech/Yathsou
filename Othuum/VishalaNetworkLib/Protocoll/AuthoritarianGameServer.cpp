@@ -45,7 +45,7 @@ namespace Vishala {
   void AuthoritarianGameServer::initConnection(int port) {
     _connection = std::make_unique<Vishala::Connection>();
     _connection->setAcceptConnection(true);
-    _connection->setChannelCount(3);
+    _connection->setChannelCount(1);
     _connection->setMaximumConnectionCount(64);
     _connection->setPort(port);
     _connection->setConnectionFailedCallback([this](std::string ip, int port) {});

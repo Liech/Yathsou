@@ -69,19 +69,15 @@ namespace Vishala {
     size_t                      _channel = 0;
   };
 
-  template<typename T>
   class NetworkMemoryReader {
   public:
-    NetworkMemoryReader(size_t player, std::shared_ptr<ConnectionMultiplexer> connection) {
+    NetworkMemoryReader(std::shared_ptr<Serialization>& d,size_t player, std::shared_ptr<ConnectionMultiplexer> connection) 
+    : _data (d){
       _connection = connection;
       _player     = player    ;
       _connection->setOnRecievedCall(_player, [this](std::unique_ptr<BinaryPackage> inp) {
         messageRecieved(std::move(inp));
         });        
-    }
-
-    const T& Data() { 
-      return _currentData;
     }
 
     void setOnChangedCallback(std::function<void()> onChanged) {
@@ -92,7 +88,7 @@ namespace Vishala {
     void messageRecieved(std::unique_ptr<BinaryPackage> package) {
       MemoryTransmissionMode mode = (MemoryTransmissionMode)BinaryPackage::bin2val<int>(*package);
       if (mode == MemoryTransmissionMode::full) {
-        _currentData.fromBinary(*package);
+        _data = Serialization::deserialize(*package);
         _lastRecieved = *package;
         _lastRecieved.position = 4;
         _initialized = true;
@@ -102,11 +98,11 @@ namespace Vishala {
         BinaryPackage r = BinaryPackage::applyDelta(_lastRecieved, *package);
         _lastRecieved = r;
         _lastRecieved.position = 0;
-        _currentData.fromBinary(r);
+        _data = Serialization::deserialize(r);
       }
       else if (mode == MemoryTransmissionMode::compressed) {
         _lastRecieved = package->decompress();
-        _currentData.fromBinary(_lastRecieved);
+        _data = Serialization::deserialize(_lastRecieved);
         _lastRecieved.position = 0;
         _initialized = true;
       }
@@ -116,7 +112,7 @@ namespace Vishala {
 
     bool                                   _initialized = false;
     BinaryPackage                          _lastRecieved;
-    T                                      _currentData;
+    std::shared_ptr<Serialization>&                         _data;
     std::function<void()>                  _onChanged = []() {};
     std::shared_ptr<ConnectionMultiplexer> _connection;
     size_t                                 _player;
