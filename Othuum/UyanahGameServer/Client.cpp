@@ -31,14 +31,22 @@ namespace Uyanah {
     _connection->setAcceptConnection(true);
     _connection->setChannelCount(3);
     _connection->setMaximumConnectionCount(64);
-    _connection->setPort(_config->myPort);
+    int port = _config->myPort;
+    _connection->setPort(port);
     _connection->setConnectionFailedCallback([this](std::string ip, int port) {});
     _connection->setDisconnectCallback([this](size_t client) {std::cout << ":(" << std::endl;     });
     _connection->setRecievedCallback(0, [this](size_t client, std::unique_ptr<Vishala::BinaryPackage> package) {});
     _connection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {std::cout << ":)" << std::endl;  });
     bool ok = _connection->start();
+    int tests = 50;
+    while (!ok && tests > 0) {
+      port++;
+      tests--;
+      _connection->setPort(port);
+      ok = _connection->start();
+    }
     if (!ok)
-      throw std::runtime_error("Port used");
+      throw std::runtime_error("Could not find free port");
 
     _connection->connectNonblocking(_config->serverPort, _config->serverIP);
 
