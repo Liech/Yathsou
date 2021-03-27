@@ -487,6 +487,7 @@
     <ClInclude Include="Util\ImageSubsetUtil.h" />
     <ClInclude Include="Util\ImageUtil.h" />
     <ClInclude Include="Util\lambdaCapture2functionPointer.h" />
+    <ClInclude Include="Util\Scheduler.h" />
     <ClInclude Include="Util\UpdateTimer.h" />
     <ClInclude Include="View2D.h" />
   </ItemGroup>
@@ -499,6 +500,7 @@
     <ClCompile Include="Util\ContentLoader.cpp" />
     <ClCompile Include="Util\ImageSubsetUtil.cpp" />
     <ClCompile Include="Util\ImageUtil.cpp" />
+    <ClCompile Include="Util\Scheduler.cpp" />
     <ClCompile Include="Util\UpdateTimer.cpp" />
     <ClCompile Include="View2D.cpp" />
   </ItemGroup>
