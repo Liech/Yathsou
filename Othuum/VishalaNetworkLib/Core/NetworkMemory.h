@@ -71,11 +71,12 @@ namespace Vishala {
 
   class NetworkMemoryReader {
   public:
-    NetworkMemoryReader(std::shared_ptr<Serialization>& d,size_t player, std::shared_ptr<ConnectionMultiplexer> connection) 
-    : _data (d){
-      _connection = connection;
-      _player     = player    ;
-      _connection->setOnRecievedCall(_player, [this](std::unique_ptr<BinaryPackage> inp) {
+    NetworkMemoryReader(std::shared_ptr<Serialization>& d,size_t channel, Connection& connection) 
+    : _data (d),
+      _connection(connection)
+    {
+      _channel     = channel;
+      _connection.setRecievedCallback(channel,[this](size_t,std::unique_ptr<BinaryPackage> inp) {
         messageRecieved(std::move(inp));
         });        
     }
@@ -110,11 +111,11 @@ namespace Vishala {
       _onChanged();
     }
 
-    bool                                   _initialized = false;
-    BinaryPackage                          _lastRecieved;
-    std::shared_ptr<Serialization>&                         _data;
-    std::function<void()>                  _onChanged = []() {};
-    std::shared_ptr<ConnectionMultiplexer> _connection;
-    size_t                                 _player;
+    bool                            _initialized = false;
+    BinaryPackage                   _lastRecieved;
+    std::shared_ptr<Serialization>& _data;
+    std::function<void()>           _onChanged = []() {};
+    Connection&                     _connection;
+    size_t                          _channel;
   };
 }

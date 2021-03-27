@@ -98,11 +98,7 @@ int main(int argc, char** argv) {
           },
           s
           );
-          //std::make_shared<ClientControl>([&rslt](std::shared_ptr<Uyanah::Commands::Command> cmd) {
-          //rslt->_client->send(2, cmd->serialize());
-        //}, std::make_shared<ClientControl>());
         control->load(w.getSpec());
-        //Iyathuum::Database<std::shared_ptr<GL::Updateable>>::add(control, { "Main" });
         }, true);
       return loader;
     };
@@ -110,10 +106,6 @@ int main(int argc, char** argv) {
     logic.setContentLoaderCreater(contentCreator);
 
     w.Update = [&logic, state,&rslt,&vis,&timer,&control,&v]() {
-      YolonaOss::RectangleRenderer::start();
-      YolonaOss::RectangleRenderer::drawRectangle(v,glm::vec2(10,10),glm::vec3(1,1,0));
-      YolonaOss::RectangleRenderer::end();
-
       if (logic.getStatus() != MainMenuLogic::status::GameRunning)
         logic.update();
       else {

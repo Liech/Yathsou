@@ -17,16 +17,16 @@ namespace Vishala {
 
   class AuthoritarianGameClient {
   public:
-    AuthoritarianGameClient(Serialization& data,int ticksPerSecond, int port, int serverPort, std::string serverIP);
+    AuthoritarianGameClient(std::shared_ptr<Serialization>& data,int ticksPerSecond, int port, int serverPort, std::string serverIP);
     void update();
+    void sendCmd(const ICommand& cmd);
 
   private:
     void nextTick();
     void initConnection();
-    void recived(size_t player, std::unique_ptr<BinaryPackage> package);
 
   private:
-    Serialization& _data;
+    std::shared_ptr<Serialization>& _data;
     int            _port;
     int            _serverPort;
     std::string    _ip  ;
