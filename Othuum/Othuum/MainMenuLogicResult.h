@@ -8,15 +8,8 @@
 
 class MainMenuLogicResult{
 public:
-  struct Player {
-    std::unique_ptr<Vishala::Connection> _connection;
-    size_t                               _id        ;
-    Vishala::GameLobbyPlayer             _info      ;
-  };
-
-  std::unique_ptr<Uyanah::DedicatedServer> _server;
-  std::shared_ptr<Uyanah::Client         > _client;
-  std::vector<MainMenuLogicResult::Player> _otherPlayers;
-  MainMenuLogicResult::Player              _self        ; //connection = nullptr
-
+  bool hostServer      = false;
+  int  serverPort      = 6112;
+  std::string serverIP = "localhost";
+  int  myPort          = 6114;
 };

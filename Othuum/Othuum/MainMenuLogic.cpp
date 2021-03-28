@@ -24,8 +24,6 @@
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include <thread>
 #include "IyathuumCoreLib/Util/ContentLoader.h"
-#include "UyanahGameServer/DedicatedServerConfiguration.h"
-#include "UyanahGameServer/ClientConfiguration.h"
 
 #include "VishalaNetworkLib/Core/Connection.h"
 
@@ -175,7 +173,6 @@ void MainMenuLogic::update() {
       _hostPage->setVisible(true);
       _stat = status::AdjustHostOptions;
       _hostLoadingPage->reset();
-      _server = nullptr;
     }
     else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Proceed) {
       _hostLoadingPage->setVisible(false);
@@ -183,7 +180,6 @@ void MainMenuLogic::update() {
       _stat = status::GameLobbyHost;
       _hostLoadingPage->reset();
       _gameLobbyPage->start();
-      createServer();
     }
     else if (_hostLoadingPage->getStatus() == HostLoadingPageStatus::Error) {
       showError("Error while hosting game", "ERROR");
@@ -216,7 +212,6 @@ void MainMenuLogic::update() {
       _stat = status::Lobby;  
       _state->closeGame();
       _gameLobbyPage->reset();
-      _server = nullptr;
     }
     else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::WaitForStartGame) {
       _gameLobbyPage->setVisible(false);
@@ -226,10 +221,10 @@ void MainMenuLogic::update() {
       setLoader();
       _startGameLoadingPage->HostWait();
       _stat = status::HostWaitStartGame;
-      _clientConfig.serverIP   = _gameLobbyPage->getGameIP();
-      _clientConfig.serverPort = _gameLobbyPage->getGamePort();
-      _clientConfig.myPort     = _config->myGameClientPort;
-      createClient();
+      _result.serverIP   = _gameLobbyPage->getGameIP()  ;
+      _result.serverPort = _gameLobbyPage->getGamePort();
+      _result.myPort     = _config->myGameClientPort    ;
+      _result.hostServer = false                        ;
     }
     else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::StartGame) {
       _gameLobbyPage->setVisible(false);
@@ -238,10 +233,10 @@ void MainMenuLogic::update() {
       _startGameLoadingPage->LoadGame();
       _stat = status::GameLoading;
       std::cout << "Game started" << std::endl;
-      _clientConfig.serverIP   = _gameLobbyPage->getGameIP();
-      _clientConfig.serverPort = _gameLobbyPage->getGamePort();
-      _clientConfig.myPort = _config->myGameClientPort;
-      createClient();
+      _result.serverIP   = _gameLobbyPage->getGameIP()  ;
+      _result.serverPort = _gameLobbyPage->getGamePort();
+      _result.myPort     = _config->myGameClientPort    ;
+      _result.hostServer = true                         ;
       _gameLobbyPage->reset();
     }
   }
@@ -254,7 +249,6 @@ void MainMenuLogic::update() {
       _stat = status::Lobby;
       _state->closeGame();
       _startGameLoadingPage->reset();
-      _server = nullptr;
       std::cout << "StartGameLoadingPageStatus::Back" << std::endl;
     }
     else if (_startGameLoadingPage->getStatus() == StartGameLoadingPageStatus::Error) {
@@ -308,35 +302,14 @@ void MainMenuLogic::showError(std::string desc,std::string title) {
   _gameLobbyPage       ->reset();
   _joinLoadingPage     ->reset();
   _startGameLoadingPage->reset();
-  _server = nullptr;
-  _client = nullptr;
   _errorPage->setMessage(desc,title);
   _state->stop();
-}
-
-void MainMenuLogic::createClient() {
-  _client = std::make_shared<Uyanah::Client>();
-  _client->setConfig(_clientConfig);
-  _client->start();
-}
-
-void MainMenuLogic::createServer() {
-  _server = std::make_unique<Uyanah::DedicatedServer>();
-  Uyanah::DedicatedServerConfiguration config;
-  config.fromJsonFile("DedicatedConfiguration.json");
-  config.welcomePort = _config->gameServerPort;
-  _server->setConfig(config);
-  _server->start();
 }
 
 std::unique_ptr<MainMenuLogicResult> MainMenuLogic::extractResult(){
   if (getStatus() != status::GameRunning)
     throw std::runtime_error("Wrong status");
-  std::unique_ptr < MainMenuLogicResult> result = std::make_unique<MainMenuLogicResult>();
-  if (_server)
-    result->_server = std::move(_server);
-  if (_client)
-    result->_client = _client;
+  std::unique_ptr < MainMenuLogicResult> result = std::make_unique<MainMenuLogicResult>(_result);
   _extracted = true;
   return std::move(result);
 }  

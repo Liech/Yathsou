@@ -74,8 +74,8 @@ int main(int argc, char** argv) {
     int tick = 0;
     Iyathuum::UpdateTimer timer([&control, &tick,&v,&rslt]() {
       control->update();
-      if (rslt)
-        rslt->_client->update();
+      //if (rslt)
+      //  rslt->_client->update();
       v = glm::vec2(200, 200) + glm::vec2(std::cos(tick / 10.0f) * 50, std::sin(tick / 10.0f) * 50);
       tick++;
     }, 30);
@@ -94,7 +94,7 @@ int main(int argc, char** argv) {
         timer.setTicksPerSecond(30);
         control = std::make_shared<ClientControl>(
           [&rslt](std::shared_ptr<Uyanah::Commands::Command> cmd) {
-          rslt->_client->send(2,cmd->serialize());
+          //rslt->_client->send(2,cmd->serialize());
           },
           s
           );
@@ -112,7 +112,7 @@ int main(int argc, char** argv) {
         if (!rslt)
         {
           rslt = std::move(logic.extractResult());
-          vis->setClient(rslt->_client);
+          //vis->setClient(rslt->_client);
         }
       }
       state->update();

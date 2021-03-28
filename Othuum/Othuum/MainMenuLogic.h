@@ -4,7 +4,6 @@
 #include <memory>
 #include "VishalaNetworkLib/Core/Connection.h"
 #include "MainMenuLogicResult.h"
-#include "UyanahGameServer/ClientConfiguration.h"
 
 class ClientConfiguration ;
 class ClientState         ;
@@ -52,9 +51,6 @@ public:
   std::unique_ptr<MainMenuLogicResult>   extractResult();
   void setContentLoaderCreater(std::function<std::shared_ptr<Iyathuum::ContentLoader>()>);
 private:
-  void createServer();
-  void createClient();
-
   status                               _stat = status::MainMenu;
   bool                                 _extracted = false;
   std::shared_ptr<ClientConfiguration> _config     ;
@@ -78,9 +74,6 @@ private:
   void setLoader();
   void showError(std::string desc, std::string title);
 
-  std::unique_ptr<Uyanah::DedicatedServer> _server = nullptr;
-  Uyanah::ClientConfiguration              _clientConfig;
-  std::shared_ptr<Uyanah::Client         > _client = nullptr;
-
+  MainMenuLogicResult    _result;
   YolonaOss::GL::Window& _window;
 };
