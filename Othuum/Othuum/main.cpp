@@ -35,6 +35,8 @@
 #include "UyanahGameServer/Commands/Command.h"
 #include "UyanahGameServer/Commands/Key.h"
 #include "UyanahGameServer/Scene.h"
+#include "VishalaNetworkLib/Protocoll/AuthoritarianGameServer.h"
+#include "VishalaNetworkLib/Protocoll/AuthoritarianGameClient.h"
 
 #include "AhwassaGraphicsLib/sound.h"
 
@@ -44,7 +46,8 @@ int main(int argc, char** argv) {
   {
     //Ahwassa::sound s;
     //s.play();
-   
+    std::unique_ptr<Vishala::AuthoritarianGameClient> client = nullptr;
+
 
 
     std::string exe = std::string(argv[0]);
@@ -72,17 +75,17 @@ int main(int argc, char** argv) {
     std::shared_ptr<ClientControl> control = nullptr;
     glm::vec2 v;
     int tick = 0;
-    Iyathuum::UpdateTimer timer([&control, &tick,&v,&rslt]() {
+    Iyathuum::UpdateTimer timer([&control, &tick,&v,&rslt,&client]() {
       control->update();
-      //if (rslt)
-      //  rslt->_client->update();
+      if (client)
+        client->update();
       v = glm::vec2(200, 200) + glm::vec2(std::cos(tick / 10.0f) * 50, std::sin(tick / 10.0f) * 50);
       tick++;
     }, 30);
     std::shared_ptr<ClientVisualization> vis = nullptr;
-    auto contentCreator = [&w,&vis,&rslt,&control,&timer]() {
+    auto contentCreator = [&w,&vis,&rslt,&control,&timer,&client]() {
       std::shared_ptr<Iyathuum::ContentLoader> loader = std::make_shared<Iyathuum::ContentLoader>();
-      loader->addPackage([&w,&vis,&rslt,&control,&timer]() {
+      loader->addPackage([&w,&vis,&rslt,&control,&timer,&client]() {
         vis = std::make_shared<ClientVisualization>();
         std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
         list->addDrawable(std::make_shared<Background>());
@@ -93,8 +96,8 @@ int main(int argc, char** argv) {
         auto s = std::make_shared<Uyanah::Scene>();
         timer.setTicksPerSecond(30);
         control = std::make_shared<ClientControl>(
-          [&rslt](std::shared_ptr<Uyanah::Commands::Command> cmd) {
-          //rslt->_client->send(2,cmd->serialize());
+          [&rslt,&client](std::shared_ptr<Vishala::ICommand> cmd) {
+          client->sendCmd(*cmd);
           },
           s
           );
@@ -103,16 +106,21 @@ int main(int argc, char** argv) {
       return loader;
     };
   
+    std::unique_ptr<Vishala::AuthoritarianGameServer> server;
     logic.setContentLoaderCreater(contentCreator);
-
-    w.Update = [&logic, state,&rslt,&vis,&timer,&control,&v]() {
+    logic.setServerCreator([&server](int port) {
+      std::unique_ptr<Uyanah::Scene> scene = std::make_unique<Uyanah::Scene>();
+      server = std::make_unique<Vishala::AuthoritarianGameServer>(std::move(scene),port,30);
+    });
+    std::shared_ptr<Uyanah::Scene> s = std::make_shared<Uyanah::Scene>();
+    w.Update = [&logic, state,&rslt,&vis,&timer,&control,&v,&s,&client]() {
       if (logic.getStatus() != MainMenuLogic::status::GameRunning)
         logic.update();
       else {
         if (!rslt)
         {
           rslt = std::move(logic.extractResult());
-          //vis->setClient(rslt->_client);
+          client = std::make_unique<Vishala::AuthoritarianGameClient>(s,30,rslt->serverPort,rslt->serverIP);
         }
       }
       state->update();

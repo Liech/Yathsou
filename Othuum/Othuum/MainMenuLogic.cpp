@@ -225,6 +225,7 @@ void MainMenuLogic::update() {
       _result.serverPort = _gameLobbyPage->getGamePort();
       _result.myPort     = _config->myGameClientPort    ;
       _result.hostServer = false                        ;
+      _openServer(_result.serverPort);
     }
     else if (_gameLobbyPage->getStatus() == GameLobbyPageStatus::StartGame) {
       _gameLobbyPage->setVisible(false);
@@ -312,4 +313,8 @@ std::unique_ptr<MainMenuLogicResult> MainMenuLogic::extractResult(){
   std::unique_ptr < MainMenuLogicResult> result = std::make_unique<MainMenuLogicResult>(_result);
   _extracted = true;
   return std::move(result);
-}  
+} 
+
+void MainMenuLogic::setServerCreator(std::function<void(int)> p) {
+  _openServer = p;
+}

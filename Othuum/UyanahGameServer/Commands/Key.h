@@ -1,14 +1,14 @@
 #pragma once
 
-#include "Command.h"
+#include "VishalaNetworkLib/Core/Command.h"
 #include "IyathuumCoreLib/BaseTypes/Keys.h"
 
 namespace Uyanah {
   namespace Commands {
-    class KeyCmd : public Command {
+    class KeyCmd : public Vishala::Command<Scene> {
       SERIALIZATION(KeyCmd, "Key")
     public:
-      virtual void apply(Scene&) override;
+      virtual void _apply(Scene&) override;
       virtual const std::string Name() const override { return "Key"; }
 
       Iyathuum::Key       key      = Iyathuum::Key::KEY_SPACE;

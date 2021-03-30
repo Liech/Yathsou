@@ -49,6 +49,7 @@ public:
   void                  update();
   MainMenuLogic::status getStatus() { return _stat; }
   std::unique_ptr<MainMenuLogicResult>   extractResult();
+  void setServerCreator(std::function<void(int port)>);
   void setContentLoaderCreater(std::function<std::shared_ptr<Iyathuum::ContentLoader>()>);
 private:
   status                               _stat = status::MainMenu;
@@ -57,7 +58,7 @@ private:
   std::shared_ptr<ClientState        > _state      ;
   std::shared_ptr<Vishala::Connection> _connection = nullptr;
   std::function<std::shared_ptr<Iyathuum::ContentLoader>()> _contentCreator;
-
+  std::function<void(int)>                                  _openServer;
   std::shared_ptr<MainMenuPage >                _mainMenuPage         ;
   std::shared_ptr<JoinLobbyPage>                _joinLobbyPage        ;
   std::shared_ptr<LobbyLoadingPage>             _lobbyLoadingPage     ;
@@ -73,6 +74,8 @@ private:
 
   void setLoader();
   void showError(std::string desc, std::string title);
+
+
 
   MainMenuLogicResult    _result;
   YolonaOss::GL::Window& _window;

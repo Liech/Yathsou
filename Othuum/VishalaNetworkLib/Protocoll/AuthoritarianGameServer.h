@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <functional>
+#include "VishalaNetworkLib/Core/Command.h"
 
 namespace Iyathuum {
   class UpdateTimer;
@@ -12,7 +13,6 @@ namespace Vishala {
   class Connection;
   class BinaryPackage;
   class NetworkMemoryWriter;
-  class ICommand;
 
   class AuthoritarianGameServer {
   public:

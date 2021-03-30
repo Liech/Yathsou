@@ -3,7 +3,7 @@
 #include <functional>
 #include <memory>
 #include "YolonaOss/OpenGL/Updateable.h"
-#include "UyanahGameServer/Commands/Command.h"
+#include "VishalaNetworkLib/Core/Command.h"
 
 namespace Uyanah {
   class Scene;
@@ -15,7 +15,7 @@ namespace Uyanah {
 class ClientControl : public YolonaOss::GL::Updateable {
 public:
   ClientControl() = default;
-  ClientControl(std::function<void(std::shared_ptr<Uyanah::Commands::Command>)> sendCommand,
+  ClientControl(std::function<void(std::shared_ptr<Vishala::ICommand>)> sendCommand,
                 std::shared_ptr<const Uyanah::Scene> scene);
   void update();
   virtual void load(YolonaOss::GL::DrawSpecification*) override;
@@ -27,6 +27,6 @@ private:
 
   YolonaOss::GL::Window*                                _window     ;
   std::shared_ptr<const Uyanah::Scene>                  _scene      ;
-  std::function<void(std::shared_ptr<Uyanah::Commands::Command>)> _sendCommand;
+  std::function<void(std::shared_ptr<Vishala::ICommand>)> _sendCommand;
 
 };

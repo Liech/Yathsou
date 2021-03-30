@@ -7,7 +7,7 @@
 namespace Uyanah {
   namespace Commands {
 
-    void KeyCmd::apply(Scene& s) {
+    void KeyCmd::_apply(Scene& s) {
       auto transform = s.objects[0].getComponent<Components::Transform2D>("Transform2D");
       if (key == Iyathuum::Key::KEY_W)
         transform->velocity += glm::vec2(0, status==Iyathuum::KeyStatus::PRESS?1:-1)*10.0f;

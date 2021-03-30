@@ -3,7 +3,7 @@
 #include "YolonaOss/OpenGL/Window.h"
 #include "UyanahGameServer/Commands/Key.h"
 
-ClientControl::ClientControl(std::function<void(std::shared_ptr<Uyanah::Commands::Command>)> sendCommand,
+ClientControl::ClientControl(std::function<void(std::shared_ptr<Vishala::ICommand>)> sendCommand,
   std::shared_ptr<const Uyanah::Scene> scene) {
   _scene = scene;
   _sendCommand = sendCommand;
@@ -20,7 +20,7 @@ void ClientControl::update() {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
     wCmd->key = Iyathuum::Key::KEY_W;
     wCmd->status = w ? Iyathuum::KeyStatus::PRESS : Iyathuum::KeyStatus::RELEASE;
-    std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
+    std::shared_ptr<Vishala::ICommand> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
   if (a != _a)
@@ -28,7 +28,7 @@ void ClientControl::update() {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
     wCmd->key = Iyathuum::Key::KEY_A;
     wCmd->status = a ? Iyathuum::KeyStatus::PRESS : Iyathuum::KeyStatus::RELEASE;
-    std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
+    std::shared_ptr<Vishala::ICommand> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
   if (s != _s)
@@ -36,7 +36,7 @@ void ClientControl::update() {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
     wCmd->key = Iyathuum::Key::KEY_S;
     wCmd->status = s ? Iyathuum::KeyStatus::PRESS : Iyathuum::KeyStatus::RELEASE;
-    std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
+    std::shared_ptr<Vishala::ICommand> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
   if (d!=_d)
@@ -44,7 +44,7 @@ void ClientControl::update() {
     auto wCmd = std::make_shared<Uyanah::Commands::KeyCmd>();
     wCmd->key = Iyathuum::Key::KEY_D;
     wCmd->status = d ? Iyathuum::KeyStatus::PRESS : Iyathuum::KeyStatus::RELEASE;
-    std::shared_ptr<Uyanah::Commands::Command> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
+    std::shared_ptr<Vishala::ICommand> cast = std::static_pointer_cast<Uyanah::Commands::KeyCmd>(wCmd);
     _sendCommand(cast);
   }
 

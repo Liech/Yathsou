@@ -5,7 +5,6 @@
 #include "IyathuumCoreLib/Util/UpdateTimer.h"
 #include "VishalaNetworkLib/Core/Connection.h"
 #include "VishalaNetworkLib/Core/NetworkMemory.h"
-#include "VishalaNetworkLib/Core/Command.h"
 
 namespace Vishala {
   AuthoritarianGameServer::AuthoritarianGameServer(std::unique_ptr<Serialization> data, int port, int ticksPerSecond) {
