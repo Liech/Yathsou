@@ -6,6 +6,7 @@ namespace Uyanah {
   class Component;
 
   class Entity : public Vishala::Serialization {
+    SERIALIZATION(Entity, "Entity")
   public:
     const std::string Name() const override { return "Entity"; }
 

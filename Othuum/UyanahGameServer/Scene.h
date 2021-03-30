@@ -5,6 +5,7 @@
 
 namespace Uyanah {
   class Scene : public Vishala::Serialization {
+    SERIALIZATION(Scene, "Scene")
   public:
     const std::string Name() const override { return "Scene"; }
 

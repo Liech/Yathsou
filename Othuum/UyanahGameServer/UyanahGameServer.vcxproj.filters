@@ -63,6 +63,9 @@
     <ClInclude Include="Commands\Initialize.h">
       <Filter>Headerdateien\Commands</Filter>
     </ClInclude>
+    <ClInclude Include="Commands\UpdateScene.h">
+      <Filter>Headerdateien\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DedicatedServerConfiguration.cpp">
@@ -99,6 +102,9 @@
       <Filter>Quelldateien\Commands</Filter>
     </ClCompile>
     <ClCompile Include="Commands\Initialize.cpp">
+      <Filter>Quelldateien\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\UpdateScene.cpp">
       <Filter>Quelldateien\Commands</Filter>
     </ClCompile>
   </ItemGroup>

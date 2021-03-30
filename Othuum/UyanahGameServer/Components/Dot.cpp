@@ -7,6 +7,7 @@ namespace Uyanah {
     Vishala::BinaryPackage Dot::toBinary()const
     {
       Vishala::BinaryPackage result;
+      result.data.resize(4);
       Vishala::BinaryPackage::val2bin(result, color[0]);
       Vishala::BinaryPackage::val2bin(result, color[1]);
       Vishala::BinaryPackage::val2bin(result, color[2]);

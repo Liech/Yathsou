@@ -237,6 +237,7 @@
     <ClInclude Include="Commands\Command.h" />
     <ClInclude Include="Commands\Initialize.h" />
     <ClInclude Include="Commands\Key.h" />
+    <ClInclude Include="Commands\UpdateScene.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Components\Dot.h" />
     <ClInclude Include="Components\Transform2D.h" />
@@ -251,6 +252,7 @@
     <ClCompile Include="Commands\Command.cpp" />
     <ClCompile Include="Commands\Initialize.cpp" />
     <ClCompile Include="Commands\Key.cpp" />
+    <ClCompile Include="Commands\UpdateScene.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Components\Dot.cpp" />
     <ClCompile Include="Components\Transform2D.cpp" />

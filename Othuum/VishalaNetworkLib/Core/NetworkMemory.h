@@ -69,16 +69,17 @@ namespace Vishala {
     size_t                      _channel = 0;
   };
 
+  template<typename T>
   class NetworkMemoryReader {
   public:
-    NetworkMemoryReader(std::shared_ptr<Serialization>& d,size_t channel, Connection& connection) 
+    NetworkMemoryReader(std::shared_ptr<T>& d,size_t channel, Connection& connection) 
     : _data (d),
       _connection(connection)
     {
       _channel     = channel;
       _connection.setRecievedCallback(channel,[this](size_t,std::unique_ptr<BinaryPackage> inp) {
         messageRecieved(std::move(inp));
-        });        
+        });
     }
 
     void setOnChangedCallback(std::function<void()> onChanged) {
@@ -89,7 +90,7 @@ namespace Vishala {
     void messageRecieved(std::unique_ptr<BinaryPackage> package) {
       MemoryTransmissionMode mode = (MemoryTransmissionMode)BinaryPackage::bin2val<int>(*package);
       if (mode == MemoryTransmissionMode::full) {
-        _data = Serialization::deserialize(*package);
+        _data = std::static_pointer_cast<T>(Serialization::deserialize(*package));
         _lastRecieved = *package;
         _lastRecieved.position = 4;
         _initialized = true;
@@ -99,11 +100,11 @@ namespace Vishala {
         BinaryPackage r = BinaryPackage::applyDelta(_lastRecieved, *package);
         _lastRecieved = r;
         _lastRecieved.position = 0;
-        _data = Serialization::deserialize(r);
+        _data = std::static_pointer_cast<T>(Serialization::deserialize(r));
       }
       else if (mode == MemoryTransmissionMode::compressed) {
         _lastRecieved = package->decompress();
-        _data = Serialization::deserialize(_lastRecieved);
+        _data = std::static_pointer_cast<T>(Serialization::deserialize(_lastRecieved));
         _lastRecieved.position = 0;
         _initialized = true;
       }
@@ -113,7 +114,7 @@ namespace Vishala {
 
     bool                            _initialized = false;
     BinaryPackage                   _lastRecieved;
-    std::shared_ptr<Serialization>& _data;
+    std::shared_ptr<T>&             _data;
     std::function<void()>           _onChanged = []() {};
     Connection&                     _connection;
     size_t                          _channel;

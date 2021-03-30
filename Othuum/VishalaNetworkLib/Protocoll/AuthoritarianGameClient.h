@@ -2,37 +2,82 @@
 
 #include <memory>
 #include <functional>
-#include "VishalaNetworkLib/Core/Serialization.h"
+#include <iostream>
 
-namespace Iyathuum {
-  class UpdateTimer;
-  class Scheduler;
-}
+#include "VishalaNetworkLib/Core/Serialization.h"
+#include "VishalaNetworkLib/Core/NetworkMemory.h"
+
+#include "VishalaNetworkLib/Core/Command.h"
+#include "VishalaNetworkLib/Core/Connection.h"
+#include "VishalaNetworkLib/Core/NetworkMemory.h"
+#include "IyathuumCoreLib/Util/UpdateTimer.h"
 
 namespace Vishala {
-  class ICommand;  
-  class Connection;
-  class BinaryPackage;
-  class NetworkMemoryReader;
-
+  template<typename T>
   class AuthoritarianGameClient {
   public:
-    AuthoritarianGameClient(std::shared_ptr<Serialization>& data,int ticksPerSecond, int port, int serverPort, std::string serverIP);
-    void update();
-    void sendCmd(const ICommand& cmd);
+    AuthoritarianGameClient(std::shared_ptr<T>& data,int ticksPerSecond, int port, int serverPort, std::string serverIP)
+    : _data(data) {
+      _ip = serverIP;
+      _port = port;
+      _serverPort = serverPort;
+
+      _timer = std::make_unique<Iyathuum::UpdateTimer>([this]() {nextTick(); }, ticksPerSecond);
+      _timer->setStallCall([](int) {std::cout << "GameServer stall" << std::endl; });
+
+      initConnection();
+    }
+
+
+    void update() {
+      _timer->update();
+    }
+    void sendCmd(const ICommand& cmd) {
+      std::unique_ptr<BinaryPackage> toSend = std::make_unique<BinaryPackage>(cmd.serialize());
+      _connection->send(0, 0, std::move(toSend));
+    }
+    
 
   private:
-    void nextTick();
-    void initConnection();
+    void nextTick() {
+      _connection->update();
+    }
+    void initConnection() {
+      std::cout << "AuthoritarianGameClient::initConnection" << std::endl;
+      int port = _port;
+      _connection = std::make_unique<Vishala::Connection>();
+      _connection->setAcceptConnection(false);
+      _connection->setChannelCount(3);
+      _connection->setMaximumConnectionCount(1);
+      _connection->setPort(port);
+      _connection->setConnectionFailedCallback([this](std::string ip, int port) {initConnection(); });
+      _connection->setDisconnectCallback([this](size_t client) { initConnection(); });
+      _connection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {
+      });
+
+      bool ok = _connection->start();
+      int tests = 50;
+      while (!ok && tests > 0) {
+        port++;
+        tests--;
+        _connection->setPort(port);
+        ok = _connection->start();
+      }
+      if (!ok)
+        throw std::runtime_error("Could not find free port");
+      _reader = std::make_unique<NetworkMemoryReader<T>>(_data, 0, *_connection);
+
+      _connection->connectNonblocking(_serverPort, _ip);
+    }
 
   private:
-    std::shared_ptr<Serialization>& _data;
+    std::shared_ptr<T>& _data;
     int            _port;
     int            _serverPort;
     std::string    _ip  ;
 
-    std::unique_ptr<Iyathuum::UpdateTimer> _timer     ;
-    std::unique_ptr<NetworkMemoryReader>   _reader    ;
-    std::unique_ptr<Connection>            _connection;
+    std::unique_ptr<Iyathuum::UpdateTimer>  _timer     ;
+    std::unique_ptr<NetworkMemoryReader<T>> _reader    ;
+    std::unique_ptr<Connection>             _connection;
   };
 }

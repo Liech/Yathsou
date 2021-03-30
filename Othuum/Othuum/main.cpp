@@ -34,9 +34,13 @@
 #include "MainMenuLogicResult.h"
 #include "UyanahGameServer/Commands/Command.h"
 #include "UyanahGameServer/Commands/Key.h"
+#include "UyanahGameServer/Commands/UpdateScene.h"
 #include "UyanahGameServer/Scene.h"
 #include "VishalaNetworkLib/Protocoll/AuthoritarianGameServer.h"
 #include "VishalaNetworkLib/Protocoll/AuthoritarianGameClient.h"
+
+#include "UyanahGameServer/Components/Dot.h"
+#include "UyanahGameServer/Components/Transform2D.h"
 
 #include "AhwassaGraphicsLib/sound.h"
 
@@ -46,7 +50,8 @@ int main(int argc, char** argv) {
   {
     //Ahwassa::sound s;
     //s.play();
-    std::unique_ptr<Vishala::AuthoritarianGameClient> client = nullptr;
+    std::unique_ptr<Vishala::AuthoritarianGameClient<Uyanah::Scene>> client = nullptr;
+    std::shared_ptr<Uyanah::Scene> s = std::make_shared<Uyanah::Scene>();
 
 
 
@@ -75,7 +80,7 @@ int main(int argc, char** argv) {
     std::shared_ptr<ClientControl> control = nullptr;
     glm::vec2 v;
     int tick = 0;
-    Iyathuum::UpdateTimer timer([&control, &tick,&v,&rslt,&client]() {
+    Iyathuum::UpdateTimer timer([&control, &tick,&v,&rslt,&client,&s]() {
       control->update();
       if (client)
         client->update();
@@ -83,10 +88,10 @@ int main(int argc, char** argv) {
       tick++;
     }, 30);
     std::shared_ptr<ClientVisualization> vis = nullptr;
-    auto contentCreator = [&w,&vis,&rslt,&control,&timer,&client]() {
+    auto contentCreator = [&w,&vis,&rslt,&control,&timer,&client,&s]() {
       std::shared_ptr<Iyathuum::ContentLoader> loader = std::make_shared<Iyathuum::ContentLoader>();
-      loader->addPackage([&w,&vis,&rslt,&control,&timer,&client]() {
-        vis = std::make_shared<ClientVisualization>();
+      loader->addPackage([&w,&vis,&rslt,&control,&timer,&client,&s]() {
+        vis = std::make_shared<ClientVisualization>(s);
         std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
         list->addDrawable(std::make_shared<Background>());
         list->addDrawable(std::make_shared<FPS>());
@@ -110,17 +115,39 @@ int main(int argc, char** argv) {
     logic.setContentLoaderCreater(contentCreator);
     logic.setServerCreator([&server](int port) {
       std::unique_ptr<Uyanah::Scene> scene = std::make_unique<Uyanah::Scene>();
+
+      Uyanah::Entity a;
+      std::shared_ptr<Uyanah::Components::Transform2D> aTransform = std::make_shared<Uyanah::Components::Transform2D>();
+      aTransform->position = glm::vec2(5, 5);
+      std::shared_ptr<Uyanah::Components::Dot> aDot = std::make_shared<Uyanah::Components::Dot>();
+      a.addComponent(aTransform);
+      a.addComponent(aDot);
+
+      for (int i = 0; i < 600; i++) {
+        Uyanah::Entity b;
+        std::shared_ptr<Uyanah::Components::Transform2D> bTransform = std::make_shared<Uyanah::Components::Transform2D>();
+        bTransform->position = glm::vec2(rand() % 300, rand() % 300);
+        std::shared_ptr<Uyanah::Components::Dot> bDot = std::make_shared<Uyanah::Components::Dot>();
+        b.addComponent(bTransform);
+        b.addComponent(bDot);
+        scene->objects.push_back(b);
+      }
+      scene->objects.push_back(a);
+
       server = std::make_unique<Vishala::AuthoritarianGameServer>(std::move(scene),port,30);
+      server->addOnUpdate(std::make_unique<Uyanah::Commands::UpdateScene>());
     });
-    std::shared_ptr<Uyanah::Scene> s = std::make_shared<Uyanah::Scene>();
-    w.Update = [&logic, state,&rslt,&vis,&timer,&control,&v,&s,&client]() {
+    w.Update = [&logic, state,&rslt,&vis,&timer,&control,&v,&s,&client,&server]() {
+      if (server)
+        server->update();
       if (logic.getStatus() != MainMenuLogic::status::GameRunning)
         logic.update();
       else {
         if (!rslt)
         {
           rslt = std::move(logic.extractResult());
-          client = std::make_unique<Vishala::AuthoritarianGameClient>(s,30,rslt->serverPort,rslt->serverIP);
+          
+          client = std::make_unique<Vishala::AuthoritarianGameClient<Uyanah::Scene>>(s,30,rslt->myPort,rslt->serverPort,rslt->serverIP);
         }
       }
       state->update();

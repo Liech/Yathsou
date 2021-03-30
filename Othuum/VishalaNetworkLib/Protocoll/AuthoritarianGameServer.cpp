@@ -11,8 +11,8 @@ namespace Vishala {
     _data = std::move(data);
     _timer = std::make_unique<Iyathuum::UpdateTimer>([this]() {nextTick(); }, ticksPerSecond);
     _timer->setStallCall([](int) {std::cout << "GameServer stall" << std::endl; });
-    _writer = std::make_unique<NetworkMemoryWriter>(*_data,1,*_connection);
     initConnection(port);
+    _writer = std::make_unique<NetworkMemoryWriter>(*_data,0,*_connection);
   }
 
   void AuthoritarianGameServer::addOnUpdate(std::unique_ptr<ICommand> cmd) {
@@ -34,6 +34,7 @@ namespace Vishala {
     _tick++;
     for (auto& t : _onUpdate)
       t->apply(*_data);
+    _writer->changed();
     _writer->update();
   }
 
