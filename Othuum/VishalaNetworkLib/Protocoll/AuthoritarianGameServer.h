@@ -14,6 +14,8 @@ namespace Vishala {
   class BinaryPackage;
   class NetworkMemoryWriter;
 
+  //streams exact state to clients. recives and executes cmds from clients. 
+  //cpu bound, bad for big synchronization objects, simple, can't desync
   class AuthoritarianGameServer {
   public:
     AuthoritarianGameServer(std::unique_ptr<Serialization> data,int port, int ticksPerSecond);

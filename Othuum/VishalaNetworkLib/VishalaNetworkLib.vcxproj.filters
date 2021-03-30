@@ -248,6 +248,12 @@
     <ClInclude Include="Protocoll\AuthoritarianGameServer.h">
       <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
+    <ClInclude Include="Protocoll\LiberalGameClient.h">
+      <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocoll\LiberalGameServer.h">
+      <Filter>Header Files\Protocoll</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\BinaryPackage.cpp">
@@ -357,6 +363,12 @@
     </ClCompile>
     <ClCompile Include="Protocoll\AuthoritarianGameServer.cpp">
       <Filter>Source Files\Protocoll</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\LiberalGameClient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocoll\LiberalGameServer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -25,7 +25,7 @@ namespace YolonaOss {
 
 class OthuumGame {
 public:
-  OthuumGame();
+  OthuumGame(bool authoritarian = true);
 
   void load(YolonaOss::GL::DrawSpecification* spec);
   
@@ -37,11 +37,14 @@ public:
   void createClient(int myPort, int serverPort, std::string ip);
 
 private:
-  std::unique_ptr<Vishala::AuthoritarianGameClient<Uyanah::Scene>> _client   ;
+  bool _authoritarian = false;
+
+  std::unique_ptr<Vishala::AuthoritarianGameClient<Uyanah::Scene>> _authoClient;
+  std::unique_ptr<Vishala::AuthoritarianGameServer>                _authoServer;
+
   std::shared_ptr<Uyanah::Scene>                                   _scene    ;
   std::shared_ptr<ClientControl>                                   _control  ;
   std::unique_ptr<Iyathuum::UpdateTimer>                           _timer    ;
   std::shared_ptr<YolonaOss::GL::DrawableList>                     _drawables;
   std::shared_ptr<ClientVisualization>                             _vis      ;
-  std::unique_ptr<Vishala::AuthoritarianGameServer>                _server   ;
 };

@@ -13,10 +13,10 @@
 #include "UyanahGameServer/Components/Transform2D.h"
 #include "UyanahGameServer/Commands/UpdateScene.h"
 
+OthuumGame::OthuumGame(bool authoritarian) {
+  _authoritarian = authoritarian;
 
-
-OthuumGame::OthuumGame() {
-  _client = nullptr;
+  _authoClient = nullptr;
   _scene  = std::make_shared<Uyanah::Scene>();
   _timer = std::make_unique<Iyathuum::UpdateTimer>([this]() {tick(); }, 30);
   _drawables = std::make_shared<YolonaOss::GL::DrawableList>();
@@ -27,13 +27,12 @@ void OthuumGame::load(YolonaOss::GL::DrawSpecification* spec) {
   _drawables->addDrawable(std::make_shared<YolonaOss::Background>());
   _drawables->addDrawable(std::make_shared<YolonaOss::FPS>());
   _drawables->addDrawable(_vis);
-  
 
   auto s = std::make_shared<Uyanah::Scene>();
   _timer->setTicksPerSecond(30);
   _control = std::make_shared<ClientControl>(
     [this](std::shared_ptr<Vishala::ICommand> cmd) {
-      _client->sendCmd(*cmd);
+      _authoClient->sendCmd(*cmd);
     },s);
 
   _drawables->load(spec);
@@ -41,18 +40,19 @@ void OthuumGame::load(YolonaOss::GL::DrawSpecification* spec) {
 }
 
 void OthuumGame::createClient(int myPort, int serverPort, std::string ip) {
-  _client = std::make_unique<Vishala::AuthoritarianGameClient<Uyanah::Scene>>(_scene, 30, myPort,serverPort,ip);
+  if (_authoritarian)
+    _authoClient = std::make_unique<Vishala::AuthoritarianGameClient<Uyanah::Scene>>(_scene, 30, myPort,serverPort,ip);
 }
 
 void OthuumGame::tick() {
   _control->update();
-  if (_client)
-    _client->update();
+  if (_authoClient)
+    _authoClient->update();
 }
 
 void OthuumGame::update() {
-  if (_server)
-    _server->update();
+  if (_authoServer)
+    _authoServer->update();
   if (_control)
     _timer->update();
 }
@@ -82,7 +82,9 @@ void OthuumGame::createServer(int port) {
   }
   scene->objects.push_back(a);
 
-  _server = std::make_unique<Vishala::AuthoritarianGameServer>(std::move(scene), port, 30);
-  _server->addOnUpdate(std::make_unique<Uyanah::Commands::UpdateScene>());
+  if (_authoritarian) {
+    _authoServer = std::make_unique<Vishala::AuthoritarianGameServer>(std::move(scene), port, 30);
+    _authoServer->addOnUpdate(std::make_unique<Uyanah::Commands::UpdateScene>());
+  }
 }
 

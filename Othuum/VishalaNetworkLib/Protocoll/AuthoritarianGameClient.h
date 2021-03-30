@@ -13,6 +13,8 @@
 #include "IyathuumCoreLib/Util/UpdateTimer.h"
 
 namespace Vishala {
+  //gets exact server state from server. Sends cmds to server and recives newly streamed state
+  //cpu bound, bad for big synchronization objects, simple, can't desync
   template<typename T>
   class AuthoritarianGameClient {
   public:
