@@ -42,6 +42,8 @@
 #include "UyanahGameServer/Components/Dot.h"
 #include "UyanahGameServer/Components/Transform2D.h"
 
+#include "OthuumGame.h"
+
 #include "AhwassaGraphicsLib/sound.h"
 
 using namespace YolonaOss;
@@ -50,9 +52,7 @@ int main(int argc, char** argv) {
   {
     //Ahwassa::sound s;
     //s.play();
-    std::unique_ptr<Vishala::AuthoritarianGameClient<Uyanah::Scene>> client = nullptr;
-    std::shared_ptr<Uyanah::Scene> s = std::make_shared<Uyanah::Scene>();
-
+    OthuumGame game;
 
 
     std::string exe = std::string(argv[0]);
@@ -80,18 +80,18 @@ int main(int argc, char** argv) {
     std::shared_ptr<ClientControl> control = nullptr;
     glm::vec2 v;
     int tick = 0;
-    Iyathuum::UpdateTimer timer([&control, &tick,&v,&rslt,&client,&s]() {
+    Iyathuum::UpdateTimer timer([&control, &tick,&v,&rslt,&game]() {
       control->update();
-      if (client)
-        client->update();
+      if (game._client)
+        game._client->update();
       v = glm::vec2(200, 200) + glm::vec2(std::cos(tick / 10.0f) * 50, std::sin(tick / 10.0f) * 50);
       tick++;
     }, 30);
     std::shared_ptr<ClientVisualization> vis = nullptr;
-    auto contentCreator = [&w,&vis,&rslt,&control,&timer,&client,&s]() {
+    auto contentCreator = [&w,&vis,&rslt,&control,&timer,&game]() {
       std::shared_ptr<Iyathuum::ContentLoader> loader = std::make_shared<Iyathuum::ContentLoader>();
-      loader->addPackage([&w,&vis,&rslt,&control,&timer,&client,&s]() {
-        vis = std::make_shared<ClientVisualization>(s);
+      loader->addPackage([&w,&vis,&rslt,&control,&timer,&game]() {
+        vis = std::make_shared<ClientVisualization>(game._scene);
         std::shared_ptr<GL::DrawableList> list = std::make_shared<GL::DrawableList>();
         list->addDrawable(std::make_shared<Background>());
         list->addDrawable(std::make_shared<FPS>());
@@ -101,8 +101,8 @@ int main(int argc, char** argv) {
         auto s = std::make_shared<Uyanah::Scene>();
         timer.setTicksPerSecond(30);
         control = std::make_shared<ClientControl>(
-          [&rslt,&client](std::shared_ptr<Vishala::ICommand> cmd) {
-          client->sendCmd(*cmd);
+          [&rslt,&game](std::shared_ptr<Vishala::ICommand> cmd) {
+          game._client->sendCmd(*cmd);
           },
           s
           );
@@ -123,7 +123,7 @@ int main(int argc, char** argv) {
       a.addComponent(aTransform);
       a.addComponent(aDot);
 
-      for (int i = 0; i < 600; i++) {
+      for (int i = 0; i < 6; i++) {
         Uyanah::Entity b;
         std::shared_ptr<Uyanah::Components::Transform2D> bTransform = std::make_shared<Uyanah::Components::Transform2D>();
         bTransform->position = glm::vec2(rand() % 300, rand() % 300);
@@ -137,7 +137,7 @@ int main(int argc, char** argv) {
       server = std::make_unique<Vishala::AuthoritarianGameServer>(std::move(scene),port,30);
       server->addOnUpdate(std::make_unique<Uyanah::Commands::UpdateScene>());
     });
-    w.Update = [&logic, state,&rslt,&vis,&timer,&control,&v,&s,&client,&server]() {
+    w.Update = [&logic, state,&rslt,&vis,&timer,&control,&v,&game,&server]() {
       if (server)
         server->update();
       if (logic.getStatus() != MainMenuLogic::status::GameRunning)
@@ -147,7 +147,7 @@ int main(int argc, char** argv) {
         {
           rslt = std::move(logic.extractResult());
           
-          client = std::make_unique<Vishala::AuthoritarianGameClient<Uyanah::Scene>>(s,30,rslt->myPort,rslt->serverPort,rslt->serverIP);
+          game._client = std::make_unique<Vishala::AuthoritarianGameClient<Uyanah::Scene>>(game._scene,30,rslt->myPort,rslt->serverPort,rslt->serverIP);
         }
       }
       state->update();

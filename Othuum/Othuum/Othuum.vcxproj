@@ -234,6 +234,7 @@
     <ClInclude Include="MainMenuPages\MainMenuPage.h" />
     <ClInclude Include="MainMenuPages\OptionsPage.h" />
     <ClInclude Include="MainMenuPages\StartGameLoadingPage.h" />
+    <ClInclude Include="OthuumGame.h" />
     <ClInclude Include="PhysicalModel.h" />
     <ClInclude Include="Serial\Building.h" />
     <ClInclude Include="Serial\ConstructionSite.h" />
@@ -275,6 +276,7 @@
     <ClCompile Include="MainMenuPages\MainMenuPage.cpp" />
     <ClCompile Include="MainMenuPages\OptionsPage.cpp" />
     <ClCompile Include="MainMenuPages\StartGameLoadingPage.cpp" />
+    <ClCompile Include="OthuumGame.cpp" />
     <ClCompile Include="PhysicalModel.cpp" />
     <ClCompile Include="SideProject\SideProjectMain.cpp" />
   </ItemGroup>
