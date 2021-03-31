@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <functional>
+#include <iostream>
 
 #include "IyathuumCoreLib/Util/UpdateTimer.h"
 #include "IyathuumCoreLib/Util/Scheduler.h"
@@ -11,6 +12,9 @@
 #include "VishalaNetworkLib/Protocoll/LiberalMessage.h"
 
 namespace Vishala {
+
+  //Client that assumes send commands are deterministic
+  //every client has its own state, the server is only a relay
   template<typename T>
   class LiberalGameClient {
     LiberalGameClient(std::shared_ptr<T>& data, int ticksPerSecond, int port, int serverPort, std::string serverIP) {
@@ -95,14 +99,13 @@ namespace Vishala {
     }
 
     void recievePackage(const LiberalMessage& message) {
-      LiberalMessageType type = (LiberalMessageType)BinaryPackage::bin2val<char>(*package);
-      if (type == LiberalMessageType::Command)
+      if (message.type == LiberalMessage::Type::Command)
         scheduleCommand(message.tick, message.command);
-      if (type == LiberalMessageType::Initialization)
+      if (message.type == LiberalMessage::Type::Initialization)
         initialization(message.tick,*message.command);
-      else if (type == LiberalMessageType::Start)
+      else if (message.type == LiberalMessage::Type::Start)
         unpause();
-      else if (type == LiberalMessageType::Pause)
+      else if (message.type == LiberalMessage::Type::Pause)
         pause();
     }
 
