@@ -280,6 +280,7 @@
     <ClInclude Include="Protocoll\Client\LobbyClient.h" />
     <ClInclude Include="Protocoll\Client\LobbyConnector.h" />
     <ClInclude Include="Protocoll\AuthoritarianGameClient.h" />
+    <ClInclude Include="Protocoll\InitializeCmd.h" />
     <ClInclude Include="Protocoll\LiberalGameClient.h" />
     <ClInclude Include="Protocoll\LiberalGameServer.h" />
     <ClInclude Include="Protocoll\LiberalMessage.h" />
@@ -321,6 +322,7 @@
     <ClCompile Include="Protocoll\Client\LobbyClient.cpp" />
     <ClCompile Include="Protocoll\Client\LobbyConnector.cpp" />
     <ClCompile Include="Protocoll\AuthoritarianGameClient.cpp" />
+    <ClCompile Include="Protocoll\InitializeCmd.cpp" />
     <ClCompile Include="Protocoll\LiberalGameClient.cpp" />
     <ClCompile Include="Protocoll\LiberalGameServer.cpp" />
     <ClCompile Include="Protocoll\LiberalMessage.cpp" />

@@ -7,6 +7,7 @@ namespace Vishala {
 
   struct LiberalMessage : Serialization {
   public:
+    SERIALIZATION(LiberalMessage, "LiberalMessage")
     const int clientReportIntervall = 120;
 
     const std::string Name() const override { return "LiberalMessage"; }
