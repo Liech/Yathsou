@@ -1,29 +1,37 @@
 # Yathsou
 RTS Engine fragments
 
-* First "Goal" or "Milestone very far away" is to recreate supreme commander forged alliance forever with modern pathfinding
-* Milestones reached:
-  * Unecessary versatile basic classes are offered (NDArray, NMTree, NDSpatialHash, ...)
-  * Basic OpenGL Renderer are available
-  * Flocking & Flowfield Navigation is possible
-  * Network communication
-  * GUI System with nested layouts
-  * Main Menu + Lobby for searching and starting a game
-  * add sound lib/engine
-  * add physics engine
-  * direct fire bullet motion planning
-  * loading supreme commander model files & animation files
-  * lua scripting interface
-  * loading .dds for supreme commander textures
-* Next Milestones:
-  * render & physic height map
-  * supcom
-    * render supreme commander models with texture
-    * render supreme commander models with animation
-    * import supreme commander map files
-    * import supreme commander .bp blueprint files
-  * defered shading
-  * screen space ambient occlusion
-  * vehicle drive to direction ai
-  
-  
+Could also become an RPG one day
+
+# Goal
+In an recreational project the goals may change at any given time. Currently the longterm goal is to create an engine, which is suited for RPG and RTS games. The initial dream, which is still tracked but also still very far away is to recreate supreme commander 1 with the original assets.
+
+# Capabilities
+
+* slow, but simple OpenGL interface
+* unoptimized flow path finding
+* serialization & network layer
+* lobby to search and start games
+* basic gui system
+* can play sounds (prototype)
+* bullet3d physics
+* lua scripting interface
+* loading supreme commander file formats (.scm, .sca, .dds)
+* fancy unoptimized multidimensional core data structures written with arcance template magic
+* some nice util classes
+
+# Current Work
+
+Currently the Network layer is beeing improved. 
+
+The next step after that is to create a graphic system that is not slow.
+
+# Dependencies
+
+This project uses a lot of libraries.
+
+If i didn't made a mistake they are all non-infectious/non-gpl.
+
+A full list of used libraries can be obtained in the usedlibs.txt.
+
+This should all be plattform independent, but a way to compile it under linux is not given.
