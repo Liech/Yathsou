@@ -49,7 +49,7 @@ namespace Vishala {
       int port = _port;
       _connection = std::make_unique<Vishala::Connection>();
       _connection->setAcceptConnection(false);
-      _connection->setChannelCount(3);
+      _connection->setChannelCount(1);
       _connection->setMaximumConnectionCount(1);
       _connection->setPort(port);
       _connection->setConnectionFailedCallback([this](std::string ip, int port) {initConnection(); });
