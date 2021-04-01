@@ -220,6 +220,7 @@
     <ClInclude Include="ClientState.h" />
     <ClInclude Include="ClientVisualization\ClientVisualization.h" />
     <ClInclude Include="DrawCubes.h" />
+    <ClInclude Include="InitializeCmd.h" />
     <ClInclude Include="MainMenuLogic.h" />
     <ClInclude Include="MainMenuLogicResult.h" />
     <ClInclude Include="MainMenuPages\DialogPage.h" />
@@ -261,6 +262,7 @@
     <ClCompile Include="ClientState.cpp" />
     <ClCompile Include="ClientVisualization\ClientVisualization.cpp" />
     <ClCompile Include="DrawCubes.cpp" />
+    <ClCompile Include="InitializeCmd.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuLogic.cpp" />
     <ClCompile Include="MainMenuLogicResult.cpp" />

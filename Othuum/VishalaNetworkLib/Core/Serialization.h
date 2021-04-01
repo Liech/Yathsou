@@ -10,7 +10,7 @@
 #include "BinaryPackage.h"
 
 #define SERIALIZATION(TYPE, NAME)\
-   static inline Vishala::Serialization::Registrator<TYPE> Registrator{ NAME };
+   static inline Vishala::Serialization::Registrator<TYPE> __Serialization___Registrator__{ NAME };
 
 namespace Vishala {
   struct Serialization {

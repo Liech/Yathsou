@@ -43,7 +43,7 @@ using namespace YolonaOss;
 
 int main(int argc, char** argv) {
   {
-    std::unique_ptr<OthuumGame> game = std::make_unique<OthuumGame>();
+    std::unique_ptr<OthuumGame> game = std::make_unique<OthuumGame>(false);
     
     std::string exe = std::string(argv[0]);
     const size_t last_slash_idx = exe.find_last_of("\\/");

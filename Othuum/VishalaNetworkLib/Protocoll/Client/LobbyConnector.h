@@ -9,7 +9,7 @@
 
 namespace Vishala {
   class Connection;
-  class BinaryPackage;
+  struct BinaryPackage;
 
   namespace Client {
     enum class LobbyConnectorStatus {

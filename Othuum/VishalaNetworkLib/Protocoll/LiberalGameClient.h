@@ -17,7 +17,9 @@ namespace Vishala {
   //every client has its own state, the server is only a relay
   template<typename T>
   class LiberalGameClient {
-    LiberalGameClient(std::shared_ptr<T>& data, int ticksPerSecond, int port, int serverPort, std::string serverIP) {
+  public:
+    LiberalGameClient(std::shared_ptr<T>& data, int ticksPerSecond, int port, int serverPort, std::string serverIP) :
+    _data(data){
       _timer      = std::make_unique<Iyathuum::UpdateTimer>([this]() {tick(); }, ticksPerSecond);
       _scheduler  = std::make_unique<Iyathuum::Scheduler>();
       _port       = port;
@@ -32,10 +34,10 @@ namespace Vishala {
       _timer     ->update();
     }
 
-    void sendCmd(const ICommand& cmd) {
+    void sendCmd(std::shared_ptr<ICommand> cmd) {
       LiberalMessage msg;
       msg.type    = LiberalMessage::Type::Command;
-      msg.command = std::make_shared<ICommand>(cmd);
+      msg.command = cmd;
       msg.tick    = _tick;
       std::unique_ptr<BinaryPackage> toSend = std::make_unique<BinaryPackage>(msg.toBinary());
       _connection->send(0, 0, std::move(toSend));
@@ -57,13 +59,20 @@ namespace Vishala {
       _connection->send(0, 0, std::move(toSend));
     }
 
+    void addOnUpdate(std::unique_ptr<ICommand> cmd){
+      _onUpdate.push_back(std::move(cmd));
+    }
+
   private:
     void tick() {
       if (!_paused) {
+        for (auto& t : _onUpdate)
+          t->apply(*_data);
         _scheduler->update(_tick);
         _tick++;
-        if (_tick % LiberalMessage::clientReportIntervall == 0)
-          sendClientReport();
+
+        //if (tick % LiberalMessage::clientReportIntervall == 0)
+        //  sendClientReport();
       }
     }
 
@@ -77,7 +86,7 @@ namespace Vishala {
 
     void scheduleCommand(size_t tick, std::shared_ptr<ICommand> cmd) {
       _scheduler->addToSchedule(tick, [this, cmd]() {
-        cmd->apply(_data); 
+        cmd->apply((Serialization&)(*_data)); 
       });
     }
 
@@ -91,7 +100,8 @@ namespace Vishala {
 
     void initialization(size_t tick, ICommand& cmd) {
       _tick = tick;
-      cmd.apply(_data);
+      Serialization* s = (Serialization*)_data.get();
+      cmd.apply(*s);
       LiberalMessage msg;
       msg.type = LiberalMessage::Type::Ready;
       std::unique_ptr<BinaryPackage> toSend = std::make_unique<BinaryPackage>(msg.toBinary());
@@ -120,6 +130,7 @@ namespace Vishala {
       _connection->setConnectionFailedCallback([this](std::string ip, int port) {initConnection(); });
       _connection->setDisconnectCallback([this](size_t client) { initConnection(); });
       _connection->setNewConnectionCallback([this](size_t client, std::string ip, int port) {
+        std::cout << "client connected" << std::endl;
       });
       _connection->setRecievedCallback(0, [this](size_t, std::unique_ptr<BinaryPackage> package) {
         LiberalMessage msg;
@@ -152,6 +163,7 @@ namespace Vishala {
     std::unique_ptr<Iyathuum::UpdateTimer> _timer     ;
     std::unique_ptr<Iyathuum::Scheduler  > _scheduler ;
     std::unique_ptr<Connection>            _connection;
+    std::vector<std::unique_ptr<ICommand>> _onUpdate  ;
 
   };
 }

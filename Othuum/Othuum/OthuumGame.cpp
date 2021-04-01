@@ -1,8 +1,9 @@
 #include "OthuumGame.h"
 
 #include "ClientControl.h"
-#include "VishalaNetworkLib/Protocoll/AuthoritarianGameServer.h"
+#include "VishalaNetworkLib/Protocoll/LiberalGameServer.h"
 #include "ClientVisualization/ClientVisualization.h"
+#include "InitializeCmd.h"
 
 #include "YolonaOss/OpenGL/DrawableList.h"
 #include "YolonaOss/Drawables/FPS.h"
@@ -17,8 +18,9 @@ OthuumGame::OthuumGame(bool authoritarian) {
   _authoritarian = authoritarian;
 
   _authoClient = nullptr;
+  _libClient   = nullptr;
   _scene  = std::make_shared<Uyanah::Scene>();
-  _timer = std::make_unique<Iyathuum::UpdateTimer>([this]() {tick(); }, 30);
+  _timer = std::make_unique<Iyathuum::UpdateTimer>([this]() {tick(); }, _fps);
   _drawables = std::make_shared<YolonaOss::GL::DrawableList>();
 }
 
@@ -29,10 +31,13 @@ void OthuumGame::load(YolonaOss::GL::DrawSpecification* spec) {
   _drawables->addDrawable(_vis);
 
   auto s = std::make_shared<Uyanah::Scene>();
-  _timer->setTicksPerSecond(30);
+  _timer->setTicksPerSecond(_fps);
   _control = std::make_shared<ClientControl>(
     [this](std::shared_ptr<Vishala::ICommand> cmd) {
+    if (_authoritarian)
       _authoClient->sendCmd(*cmd);
+    else
+      _libClient->sendCmd(cmd);
     },s);
 
   _drawables->load(spec);
@@ -41,18 +46,26 @@ void OthuumGame::load(YolonaOss::GL::DrawSpecification* spec) {
 
 void OthuumGame::createClient(int myPort, int serverPort, std::string ip) {
   if (_authoritarian)
-    _authoClient = std::make_unique<Vishala::AuthoritarianGameClient<Uyanah::Scene>>(_scene, 30, myPort,serverPort,ip);
+    _authoClient = std::make_unique<Vishala::AuthoritarianGameClient<Uyanah::Scene>>(_scene, _fps, myPort,serverPort,ip);
+  else {
+    _libClient = std::make_unique<Vishala::LiberalGameClient<Uyanah::Scene>>(_scene, _fps, myPort, serverPort, ip);
+    _libClient->addOnUpdate(std::make_unique<Uyanah::Commands::UpdateScene>());
+  }
 }
 
 void OthuumGame::tick() {
   _control->update();
-  if (_authoClient)
-    _authoClient->update();
 }
 
 void OthuumGame::update() {
+  if (_authoClient)
+    _authoClient->update();
+  if (_libClient)
+    _libClient->update();
   if (_authoServer)
     _authoServer->update();
+  if (_libServer)
+    _libServer->update();
   if (_control)
     _timer->update();
 }
@@ -83,8 +96,17 @@ void OthuumGame::createServer(int port) {
   scene->objects.push_back(a);
 
   if (_authoritarian) {
-    _authoServer = std::make_unique<Vishala::AuthoritarianGameServer>(std::move(scene), port, 30);
+    _authoServer = std::make_unique<Vishala::AuthoritarianGameServer>(std::move(scene), port, _fps);
     _authoServer->addOnUpdate(std::make_unique<Uyanah::Commands::UpdateScene>());
+  }
+  else {
+    _libServer = std::make_unique<Vishala::LiberalGameServer>(std::move(scene), port, _fps);
+    _libServer->addOnUpdate(std::make_unique<Uyanah::Commands::UpdateScene>());
+    _libServer->setInitializationCommandCreator([this]() -> std::shared_ptr<Vishala::ICommand> {
+      auto cmd = std::make_shared<InitializeCmd>();
+      cmd->data = (Uyanah::Scene&)_libServer->data();
+      return std::dynamic_pointer_cast<Vishala::ICommand>(cmd);
+    });
   }
 }
 

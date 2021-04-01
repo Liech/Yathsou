@@ -34,6 +34,7 @@ namespace Vishala {
     void update() {
       _timer->update();
     }
+
     void sendCmd(const ICommand& cmd) {
       std::unique_ptr<BinaryPackage> toSend = std::make_unique<BinaryPackage>(cmd.serialize());
       _connection->send(0, 0, std::move(toSend));

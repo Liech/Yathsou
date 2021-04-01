@@ -1,10 +1,9 @@
 #pragma once
 
 #include "VishalaNetworkLib/Core/Serialization.h"
+#include "VishalaNetworkLib/Core/Command.h"
 
 namespace Vishala {
-  class ICommand;
-
   struct LiberalMessage : Serialization {
   public:
     SERIALIZATION(LiberalMessage, "LiberalMessage")

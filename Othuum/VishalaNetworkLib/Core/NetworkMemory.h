@@ -10,7 +10,7 @@
 //limited to small sizes of synchronized stuff.
 
 namespace Vishala {
-  class BinaryPackage;
+  struct BinaryPackage;
 
   enum class MemoryTransmissionMode {
     full        = 0,

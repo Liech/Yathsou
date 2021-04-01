@@ -9,9 +9,9 @@ namespace Iyathuum {
 }
 
 namespace Vishala {
-  class Serialization;
+  struct Serialization;
   class Connection;
-  class BinaryPackage;
+  struct BinaryPackage;
   class NetworkMemoryWriter;
 
   //streams exact state to clients. recives and executes cmds from clients. 

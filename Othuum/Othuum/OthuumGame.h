@@ -3,7 +3,10 @@
 #include <memory>
 #include <functional>
 
+#include "VishalaNetworkLib/Protocoll/AuthoritarianGameServer.h"
 #include "VishalaNetworkLib/Protocoll/AuthoritarianGameClient.h"
+#include "VishalaNetworkLib/Protocoll/LiberalGameClient.h"
+#include "VishalaNetworkLib/Protocoll/LiberalGameServer.h"
 
 class ClientControl;
 class ClientVisualization;
@@ -12,6 +15,7 @@ namespace Uyanah {
 }
 namespace Vishala {
   class AuthoritarianGameServer;
+  class LiberalGameServer;
 }
 namespace Iyathuum {
   class UpdateTimer;
@@ -38,9 +42,12 @@ public:
 
 private:
   bool _authoritarian = false;
+  int  _fps = 60;
 
   std::unique_ptr<Vishala::AuthoritarianGameClient<Uyanah::Scene>> _authoClient;
   std::unique_ptr<Vishala::AuthoritarianGameServer>                _authoServer;
+  std::unique_ptr<Vishala::LiberalGameClient      <Uyanah::Scene>> _libClient  ;
+  std::unique_ptr<Vishala::LiberalGameServer      >                _libServer  ;
 
   std::shared_ptr<Uyanah::Scene>                                   _scene    ;
   std::shared_ptr<ClientControl>                                   _control  ;

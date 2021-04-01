@@ -7,7 +7,7 @@
 
 namespace Vishala {
   class Connection;
-  class BinaryPackage;
+  struct BinaryPackage;
 
   class ConnectionMultiplexer {
   public:

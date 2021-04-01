@@ -6,7 +6,6 @@
 #include "VishalaNetworkLib/Core/Connection.h"
 #include "VishalaNetworkLib/Protocoll/LiberalMessage.h"
 #include "VishalaNetworkLib/Protocoll/LiberalMessage.h"
-#include "VishalaNetworkLib/Protocoll/InitializeCmd.h"
 
 namespace Vishala {
   LiberalGameServer::LiberalGameServer(std::unique_ptr<Serialization> data, int port, int ticksPerSecond) {
@@ -21,7 +20,12 @@ namespace Vishala {
   }
   
   void LiberalGameServer::update() {
-    _timer->update();
+    _connection->update();
+    _timer     ->update();
+  }
+
+  void LiberalGameServer::setInitializationCommandCreator(std::function<std::shared_ptr<ICommand>()> cmd) {
+    _createInitCmd = cmd;
   }
 
   void LiberalGameServer::initConnection(int port) {
@@ -44,7 +48,9 @@ namespace Vishala {
   }
 
   void LiberalGameServer::nextTick() {
-
+    if (_paused)
+      return;
+    _tick++;
   }
 
   void LiberalGameServer::newConnection(size_t player) {
@@ -53,15 +59,26 @@ namespace Vishala {
     _reportedTicks[player] = 0;
     LiberalMessage msg;
     msg.type = LiberalMessage::Type::Initialization;
-    std::shared_ptr<InitializeCmd> cmd = std::make_shared<InitializeCmd>();
-    cmd->data = std::make_shared<InitializeCmd>(*_data);
-    msg.command = cmd;
+    msg.command = _createInitCmd();
     msg.tick = 0;
     _connection->send(player, 0, std::make_unique<BinaryPackage>(msg.toBinary()));
   }
 
-  void LiberalGameServer::commandRecived(const LiberalMessage&) {
+  void LiberalGameServer::commandRecived(LiberalMessage& msg) {
+    msg.tick = _tick + _RTTinTicks;
+    for(auto player : _connection->getAllConnections())
+      _connection->send(player, 0, std::make_unique<BinaryPackage>(msg.toBinary()));
+  }
 
+  void LiberalGameServer::unpause() {
+    _paused = false;
+    LiberalMessage msg;
+    msg.type = LiberalMessage::Type::Start;
+    msg.tick = _tick;
+    auto bin = msg.toBinary();
+
+    for (auto player : _connection->getAllConnections())
+      _connection->send(0, 0, std::make_unique<BinaryPackage>(bin));
   }
 
   void LiberalGameServer::recived(size_t player, std::unique_ptr<BinaryPackage> package) {
@@ -71,15 +88,17 @@ namespace Vishala {
       commandRecived(msg);
     else if (msg.type == LiberalMessage::Type::ClientReport)
       std::cout << "Wub" << std::endl;
+    else if (msg.type == LiberalMessage::Type::Ready)
+    {
+      unpause();
+    }
     else if (msg.type == LiberalMessage::Type::Pause)
       std::cout << "Pause" << std::endl;
     else if (msg.type == LiberalMessage::Type::Start)
       std::cout << "Start" << std::endl;
-      //msg.tick = _tick + _RTTinTicks;
-    //msg.type = LiberalMessage::Type::Command;
-    //for (auto target : _connection->getAllConnections()) {
-    //
-    //  _connection->send(target, 0, std::move(msg));
-    //}
+  }
+
+  const Serialization& LiberalGameServer::data() {
+    return *_data;
   }
 }

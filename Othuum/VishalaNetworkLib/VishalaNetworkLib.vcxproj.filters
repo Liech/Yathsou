@@ -257,9 +257,6 @@
     <ClInclude Include="Protocoll\LiberalMessage.h">
       <Filter>Header Files\Protocoll</Filter>
     </ClInclude>
-    <ClInclude Include="Protocoll\InitializeCmd.h">
-      <Filter>Header Files\Protocoll</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\BinaryPackage.cpp">
@@ -377,9 +374,6 @@
       <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
     <ClCompile Include="Protocoll\LiberalMessage.cpp">
-      <Filter>Source Files\Protocoll</Filter>
-    </ClCompile>
-    <ClCompile Include="Protocoll\InitializeCmd.cpp">
       <Filter>Source Files\Protocoll</Filter>
     </ClCompile>
   </ItemGroup>
