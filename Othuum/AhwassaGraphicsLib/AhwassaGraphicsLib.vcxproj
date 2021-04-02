@@ -241,6 +241,8 @@
     <ClInclude Include="BufferObjects\VAO.h" />
     <ClInclude Include="BufferObjects\VBO.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Uniforms\SSBOint.h" />
+    <ClInclude Include="Uniforms\SSBOvec4.h" />
     <ClInclude Include="Uniforms\Uniform.h" />
     <ClInclude Include="Uniforms\UniformFloat.h" />
     <ClInclude Include="Uniforms\UniformMat4.h" />
@@ -266,6 +268,12 @@
     <ClInclude Include="sound\sound.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundHandler.h" />
+    <ClInclude Include="Vertex\PositionColorNormalVertex.h" />
+    <ClInclude Include="Vertex\PositionColorVertex.h" />
+    <ClInclude Include="Vertex\PositionNormalTextureVertex.h" />
+    <ClInclude Include="Vertex\PositionNormalVertex.h" />
+    <ClInclude Include="Vertex\PositionTextureVertex.h" />
+    <ClInclude Include="Vertex\PositionVertex.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +285,8 @@
     <ClCompile Include="BufferObjects\VAO.cpp" />
     <ClCompile Include="BufferObjects\VBO.cpp" />
     <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="Uniforms\SSBOint.cpp" />
+    <ClCompile Include="Uniforms\SSBOvec4.cpp" />
     <ClCompile Include="Uniforms\Uniform.cpp" />
     <ClCompile Include="Uniforms\UniformFloat.cpp" />
     <ClCompile Include="Uniforms\UniformMat4.cpp" />
@@ -289,6 +299,12 @@
     <ClCompile Include="sound\sound.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
     <ClCompile Include="sound\SoundHandler.cpp" />
+    <ClCompile Include="Vertex\PositionColorNormalVertex.cpp" />
+    <ClCompile Include="Vertex\PositionColorVertex.cpp" />
+    <ClCompile Include="Vertex\PositionNormalTextureVertex.cpp" />
+    <ClCompile Include="Vertex\PositionNormalVertex.cpp" />
+    <ClCompile Include="Vertex\PositionTextureVertex.cpp" />
+    <ClCompile Include="Vertex\PositionVertex.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

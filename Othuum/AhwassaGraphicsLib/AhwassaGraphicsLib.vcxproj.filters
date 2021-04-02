@@ -43,6 +43,12 @@
     <Filter Include="Source Files\BufferObjects">
       <UniqueIdentifier>{525cff11-ad42-4df3-805c-38b3eeb72340}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Vertex">
+      <UniqueIdentifier>{e00b0387-ddf0-483a-bcd9-a15452cb3603}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Vertex">
+      <UniqueIdentifier>{53d5c9c3-2e34-4db5-87e8-c16e9f61bd91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -144,6 +150,30 @@
     <ClInclude Include="BufferObjects\AttributeDescription.h">
       <Filter>Header Files\BufferObjects</Filter>
     </ClInclude>
+    <ClInclude Include="Uniforms\SSBOint.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\SSBOvec4.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\PositionNormalTextureVertex.h">
+      <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\PositionNormalVertex.h">
+      <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\PositionTextureVertex.h">
+      <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\PositionVertex.h">
+      <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\PositionColorNormalVertex.h">
+      <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\PositionColorVertex.h">
+      <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -208,6 +238,30 @@
     </ClCompile>
     <ClCompile Include="BufferObjects\AttributeDescription.cpp">
       <Filter>Source Files\BufferObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\SSBOint.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\SSBOvec4.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\PositionNormalTextureVertex.cpp">
+      <Filter>Source Files\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\PositionNormalVertex.cpp">
+      <Filter>Source Files\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\PositionTextureVertex.cpp">
+      <Filter>Source Files\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\PositionVertex.cpp">
+      <Filter>Source Files\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\PositionColorNormalVertex.cpp">
+      <Filter>Source Files\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\PositionColorVertex.cpp">
+      <Filter>Source Files\Vertex</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
