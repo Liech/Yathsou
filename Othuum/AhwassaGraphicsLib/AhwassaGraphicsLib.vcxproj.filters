@@ -31,6 +31,18 @@
     <Filter Include="lib\glad">
       <UniqueIdentifier>{64384098-c4ed-4418-892c-bfcf85406c67}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Uniform">
+      <UniqueIdentifier>{0829cfd1-5eeb-42ed-b80a-8b10f80cb340}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Uniform">
+      <UniqueIdentifier>{71bdb16c-2281-4d1f-9684-2cf8d43bd609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BufferObjects">
+      <UniqueIdentifier>{1c685db7-14ca-4806-a5b2-7234001eb0e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BufferObjects">
+      <UniqueIdentifier>{525cff11-ad42-4df3-805c-38b3eeb72340}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -93,14 +105,44 @@
     <ClInclude Include="Input.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VBO.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Uniforms\Uniform.h">
+      <Filter>Header Files\Uniform</Filter>
     </ClInclude>
-    <ClInclude Include="VAO.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Uniforms\UniformFloat.h">
+      <Filter>Header Files\Uniform</Filter>
     </ClInclude>
-    <ClInclude Include="AttributeDescription.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Uniforms\UniformMat4.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\UniformVec2.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\UniformVec3.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\UniformVec4.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\UniformVecMat4.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferObjects\IBO.h">
+      <Filter>Header Files\BufferObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferObjects\VAO.h">
+      <Filter>Header Files\BufferObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferObjects\VBO.h">
+      <Filter>Header Files\BufferObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferObjects\IVBO.h">
+      <Filter>Header Files\BufferObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferObjects\IVAO.h">
+      <Filter>Header Files\BufferObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferObjects\AttributeDescription.h">
+      <Filter>Header Files\BufferObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,14 +170,44 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VBO.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Uniforms\Uniform.cpp">
+      <Filter>Source Files\Uniform</Filter>
     </ClCompile>
-    <ClCompile Include="VAO.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Uniforms\UniformFloat.cpp">
+      <Filter>Source Files\Uniform</Filter>
     </ClCompile>
-    <ClCompile Include="AttributeDescription.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Uniforms\UniformMat4.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\UniformVec2.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\UniformVec3.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\UniformVec4.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\UniformVecMat4.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferObjects\IBO.cpp">
+      <Filter>Source Files\BufferObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferObjects\VAO.cpp">
+      <Filter>Source Files\BufferObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferObjects\VBO.cpp">
+      <Filter>Source Files\BufferObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferObjects\IVBO.cpp">
+      <Filter>Source Files\BufferObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferObjects\IVAO.cpp">
+      <Filter>Source Files\BufferObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferObjects\AttributeDescription.cpp">
+      <Filter>Source Files\BufferObjects</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

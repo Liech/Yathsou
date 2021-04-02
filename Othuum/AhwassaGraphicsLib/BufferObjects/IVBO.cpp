@@ -1,8 +1,9 @@
-#include "VBO.h"
+#include "IVBO.h"
 
+#include "glad/glad.h"
 
 namespace Ahwassa {
-  IVBO::IVBO(size_t size,size_t structsize,const void* pos) {
+  IVBO::IVBO(size_t size, size_t structsize, const void* pos) {
     _size = size;
     _structsize = structsize;
     glGenBuffers(1, &_id);
@@ -10,7 +11,7 @@ namespace Ahwassa {
     glBufferData(GL_ARRAY_BUFFER, size * structsize, pos, GL_STATIC_DRAW);
   }
 
-  IVBO::~IVBO(){
+  IVBO::~IVBO() {
     glDeleteBuffers(1, &_id);
   }
 
@@ -27,5 +28,4 @@ namespace Ahwassa {
     glBufferSubData(GL_ARRAY_BUFFER, 0, size * _structsize, pos);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
   }
-
 }

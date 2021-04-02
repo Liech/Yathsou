@@ -234,8 +234,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AttributeDescription.h" />
+    <ClInclude Include="BufferObjects\AttributeDescription.h" />
+    <ClInclude Include="BufferObjects\IBO.h" />
+    <ClInclude Include="BufferObjects\IVAO.h" />
+    <ClInclude Include="BufferObjects\IVBO.h" />
+    <ClInclude Include="BufferObjects\VAO.h" />
+    <ClInclude Include="BufferObjects\VBO.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Uniforms\Uniform.h" />
+    <ClInclude Include="Uniforms\UniformFloat.h" />
+    <ClInclude Include="Uniforms\UniformMat4.h" />
+    <ClInclude Include="Uniforms\UniformVec2.h" />
+    <ClInclude Include="Uniforms\UniformVec3.h" />
+    <ClInclude Include="Uniforms\UniformVec4.h" />
+    <ClInclude Include="Uniforms\UniformVecMat4.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="lib\libnyquist\Common.h" />
@@ -254,21 +266,29 @@
     <ClInclude Include="sound\sound.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundHandler.h" />
-    <ClInclude Include="VAO.h" />
-    <ClInclude Include="VBO.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
-    <ClCompile Include="AttributeDescription.cpp" />
+    <ClCompile Include="BufferObjects\AttributeDescription.cpp" />
+    <ClCompile Include="BufferObjects\IBO.cpp" />
+    <ClCompile Include="BufferObjects\IVAO.cpp" />
+    <ClCompile Include="BufferObjects\IVBO.cpp" />
+    <ClCompile Include="BufferObjects\VAO.cpp" />
+    <ClCompile Include="BufferObjects\VBO.cpp" />
     <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="Uniforms\Uniform.cpp" />
+    <ClCompile Include="Uniforms\UniformFloat.cpp" />
+    <ClCompile Include="Uniforms\UniformMat4.cpp" />
+    <ClCompile Include="Uniforms\UniformVec2.cpp" />
+    <ClCompile Include="Uniforms\UniformVec3.cpp" />
+    <ClCompile Include="Uniforms\UniformVec4.cpp" />
+    <ClCompile Include="Uniforms\UniformVecMat4.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="sound\sound.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
     <ClCompile Include="sound\SoundHandler.cpp" />
-    <ClCompile Include="VAO.cpp" />
-    <ClCompile Include="VBO.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
