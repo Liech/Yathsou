@@ -13,21 +13,23 @@ namespace Iyathuum {
       _position = vec();
       _size = vec();
     }
+
     glmAABB(vec start, vec size) {
       _position = start;
       _size = size;
     }
+
     glmAABB(vec start, double size) {
       _position = start;
       for (size_t i = 0; i < Dimension; i++)
         _size[i] = size;
     }
 
-    vec getPosition() {
+    vec getPosition() const {
       return _position;
     }
 
-    vec getSize() {
+    vec getSize() const {
       return _size;
     }
 
@@ -39,7 +41,7 @@ namespace Iyathuum {
       _position = pos;
     }
 
-    bool isInside(vec pos) {
+    bool isInside(vec pos) const {
       for (size_t i = 0; i < Dimension; i++) {
         if (pos[i] < getPosition()[i] || pos[i] >= getPosition()[i] + getSize()[i])
           return false;
@@ -47,12 +49,12 @@ namespace Iyathuum {
       return true;
     }
 
-    bool intersects(glmAABB<Dimension> d) {
+    bool intersects(glmAABB<Dimension> d) const{
       throw std::runtime_error("Not yet implemented");
       return true;
     }
 
-    bool intersectsCircle(vec pos, double radius) {
+    bool intersectsCircle(vec pos, double radius) const{
       vec newPos;
       for (size_t i = 0; i < Dimension; i++) {
         newPos[i] = std::clamp(pos[i], _position[i], _position[i] + _size[i]);
@@ -64,14 +66,14 @@ namespace Iyathuum {
       return dist < radius;
     }
 
-    vec getCenter() {
+    vec getCenter() const{
       vec result;
       for (size_t i = 0; i < Dimension; i++)
         result[i] = getPosition()[i] + getSize()[i] / 2.0;
       return result;
     }
 
-    glmAABB<Dimension> getIntersection(glmAABB<Dimension> other) {
+    glmAABB<Dimension> getIntersection(glmAABB<Dimension> other) const {
 
       vec otherPosition  = other.getPosition();
       vec otherSize      = other.getSize();

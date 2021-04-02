@@ -6,7 +6,7 @@
 #include <chrono>
 #include <thread>
 
-#include "Input.h"
+#include "Input/Input.h"
 
 #include "YolonaOss/Lib/glad/include/glad/glad.h"
 #include "YolonaOss/Lib/GLWF/include/GLFW/glfw3.h"
@@ -111,7 +111,7 @@ namespace Ahwassa {
       return;
     }
 
-    _input = std::make_unique<Input>(_window);
+    _input = std::make_unique<Input>(_window,this);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -147,6 +147,7 @@ namespace Ahwassa {
       //update
 
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      input().update();
       Update();
       std::this_thread::sleep_until(end);
 
