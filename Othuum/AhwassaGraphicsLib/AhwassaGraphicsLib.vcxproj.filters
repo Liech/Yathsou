@@ -22,11 +22,17 @@
     <Filter Include="lib\libnyquist">
       <UniqueIdentifier>{e70892e4-fa8d-4ece-946e-0da8defe2ebd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\sound">
+      <UniqueIdentifier>{36ca7865-3a1b-40b2-8759-63bd2c5fb017}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sound">
+      <UniqueIdentifier>{8f2b95eb-2874-4c65-b00c-3b38e07b8f9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\glad">
+      <UniqueIdentifier>{64384098-c4ed-4418-892c-bfcf85406c67}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sound.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="lib\libnyquist\Decoders.h">
       <Filter>lib\libnyquist</Filter>
     </ClInclude>
@@ -66,22 +72,40 @@
     <ClInclude Include="lib\portaudio\pa_win_ds.h">
       <Filter>lib\portaudio</Filter>
     </ClInclude>
-    <ClInclude Include="SoundEngine.h">
+    <ClInclude Include="sound\SoundHandler.h">
+      <Filter>Header Files\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="sound\sound.h">
+      <Filter>Header Files\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="sound\SoundEngine.h">
+      <Filter>Header Files\sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SoundHandler.h">
+    <ClInclude Include="DrawSpecification.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sound.cpp">
+    <ClCompile Include="sound\sound.cpp">
+      <Filter>Source Files\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\SoundEngine.cpp">
+      <Filter>Source Files\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="sound\SoundHandler.cpp">
+      <Filter>Source Files\sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SoundEngine.cpp">
+    <ClCompile Include="DrawSpecification.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SoundHandler.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c">
+      <Filter>lib\glad</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

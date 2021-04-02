@@ -172,10 +172,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;
-$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;
-$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;
-$(SolutionDir)x64/$(ConfigurationName)/AthanahCommonLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(TargetDir)AhwassaGraphicsLib.lib;$(TargetDir)VishalaNetworkLib.lib;$(TargetDir)IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -194,10 +191,7 @@ $(SolutionDir)x64/$(ConfigurationName)/AthanahCommonLib.lib;%(AdditionalDependen
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;
-$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;
-$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;
-$(SolutionDir)x64/$(ConfigurationName)/AthanahCommonLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(TargetDir)AhwassaGraphicsLib.lib;$(TargetDir)VishalaNetworkLib.lib;$(TargetDir)IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">
@@ -216,22 +210,15 @@ $(SolutionDir)x64/$(ConfigurationName)/AthanahCommonLib.lib;%(AdditionalDependen
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/YolonaOss.lib;$(SolutionDir)x64/$(ConfigurationName)/VishalaNetworkLib.lib;$(SolutionDir)x64/$(ConfigurationName)/SuthanusPhysicsLib.lib;
-$(SolutionDir)x64/$(ConfigurationName)/HaasScriptingLib.lib;
-$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;
-$(SolutionDir)x64/$(ConfigurationName)/AthanahCommonLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(TargetDir)AhwassaGraphicsLib.lib;$(TargetDir)VishalaNetworkLib.lib;$(TargetDir)IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Fervor.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MainCharacter.cpp" />
-    <ClCompile Include="MainCharacterVisualization.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fervor.h" />
-    <ClInclude Include="MainCharacter.h" />
-    <ClInclude Include="MainCharacterVisualization.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
