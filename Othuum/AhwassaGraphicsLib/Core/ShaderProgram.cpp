@@ -5,7 +5,7 @@
 
 #include <glad/glad.h>
 #include "Uniforms/Uniform.h"
-#include "AttributeDescription.h"
+#include "Core/AttributeDescription.h"
 
 namespace Ahwassa {
   ShaderProgram::ShaderProgram(const std::vector<AttributeDescription>& attributes, std::vector<Uniform*> uniforms, std::string vsmain, std::string fsmain)

@@ -1,7 +1,7 @@
 #include "IVAO.h"
 
 #include "glad/glad.h"
-#include "AttributeDescription.h"
+#include "Core/AttributeDescription.h"
 
 namespace Ahwassa {
   IVAO::IVAO(IVBO* vbo) {

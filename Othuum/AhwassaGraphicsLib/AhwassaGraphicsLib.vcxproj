@@ -234,17 +234,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AttributeDescription.h" />
     <ClInclude Include="BufferObjects\IBO.h" />
     <ClInclude Include="BufferObjects\IVAO.h" />
     <ClInclude Include="BufferObjects\IVBO.h" />
     <ClInclude Include="BufferObjects\VAO.h" />
     <ClInclude Include="BufferObjects\VBO.h" />
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Core\AttributeDescription.h" />
+    <ClInclude Include="Core\Camera.h" />
+    <ClInclude Include="Core\Drawable.h" />
+    <ClInclude Include="Core\ShaderProgram.h" />
+    <ClInclude Include="Core\Window.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />
-    <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="Uniforms\Rendertarget.h" />
     <ClInclude Include="Uniforms\SSBOint.h" />
     <ClInclude Include="Uniforms\SSBOvec4.h" />
@@ -280,21 +281,21 @@
     <ClInclude Include="Vertex\PositionTextureVertex.h" />
     <ClInclude Include="Vertex\PositionVertex.h" />
     <ClInclude Include="Vertex\SupComVertex.h" />
-    <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
-    <ClCompile Include="AttributeDescription.cpp" />
     <ClCompile Include="BufferObjects\IBO.cpp" />
     <ClCompile Include="BufferObjects\IVAO.cpp" />
     <ClCompile Include="BufferObjects\IVBO.cpp" />
     <ClCompile Include="BufferObjects\VAO.cpp" />
     <ClCompile Include="BufferObjects\VBO.cpp" />
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="Core\AttributeDescription.cpp" />
+    <ClCompile Include="Core\Camera.cpp" />
+    <ClCompile Include="Core\Drawable.cpp" />
+    <ClCompile Include="Core\ShaderProgram.cpp" />
+    <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
-    <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />
     <ClCompile Include="Uniforms\SSBOint.cpp" />
     <ClCompile Include="Uniforms\SSBOvec4.cpp" />
@@ -317,7 +318,6 @@
     <ClCompile Include="Vertex\PositionTextureVertex.cpp" />
     <ClCompile Include="Vertex\PositionVertex.cpp" />
     <ClCompile Include="Vertex\SupComVertex.cpp" />
-    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

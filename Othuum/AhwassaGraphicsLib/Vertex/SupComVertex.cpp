@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
-#include "AttributeDescription.h"
+#include "Core/AttributeDescription.h"
 
 namespace Ahwassa {
   SupComVertex::SupComVertex() {

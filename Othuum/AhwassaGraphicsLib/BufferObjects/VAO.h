@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IVAO.h"
-#include "AttributeDescription.h"
+#include "Core/AttributeDescription.h"
 
 namespace Ahwassa {
   template<typename Struct>

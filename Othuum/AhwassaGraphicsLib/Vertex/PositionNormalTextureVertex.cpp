@@ -3,7 +3,7 @@
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include <glad/glad.h>
 #include <vector>
-#include "AttributeDescription.h"
+#include "Core/AttributeDescription.h"
 
 namespace Ahwassa {
   PositionNormalTextureVertex::PositionNormalTextureVertex() : position(0), normal(0), texture(0) {
