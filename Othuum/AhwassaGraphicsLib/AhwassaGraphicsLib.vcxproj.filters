@@ -147,9 +147,6 @@
     <ClInclude Include="BufferObjects\IVAO.h">
       <Filter>Header Files\BufferObjects</Filter>
     </ClInclude>
-    <ClInclude Include="BufferObjects\AttributeDescription.h">
-      <Filter>Header Files\BufferObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Uniforms\SSBOint.h">
       <Filter>Header Files\Uniform</Filter>
     </ClInclude>
@@ -173,6 +170,24 @@
     </ClInclude>
     <ClInclude Include="Vertex\PositionColorVertex.h">
       <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\Rendertarget.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex\SupComVertex.h">
+      <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\Texture.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AttributeDescription.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -236,9 +251,6 @@
     <ClCompile Include="BufferObjects\IVAO.cpp">
       <Filter>Source Files\BufferObjects</Filter>
     </ClCompile>
-    <ClCompile Include="BufferObjects\AttributeDescription.cpp">
-      <Filter>Source Files\BufferObjects</Filter>
-    </ClCompile>
     <ClCompile Include="Uniforms\SSBOint.cpp">
       <Filter>Source Files\Uniform</Filter>
     </ClCompile>
@@ -262,6 +274,24 @@
     </ClCompile>
     <ClCompile Include="Vertex\PositionColorVertex.cpp">
       <Filter>Source Files\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\Rendertarget.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex\SupComVertex.cpp">
+      <Filter>Source Files\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\Texture.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AttributeDescription.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

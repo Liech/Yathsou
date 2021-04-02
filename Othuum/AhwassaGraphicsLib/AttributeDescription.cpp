@@ -8,6 +8,10 @@ namespace Ahwassa {
     type = _type;
   }
 
+  std::string AttributeDescription::getName() const {
+    return name;
+  }
+
   size_t AttributeDescription::getSize() const {
     switch (type)
     {

@@ -234,15 +234,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BufferObjects\AttributeDescription.h" />
+    <ClInclude Include="AttributeDescription.h" />
     <ClInclude Include="BufferObjects\IBO.h" />
     <ClInclude Include="BufferObjects\IVAO.h" />
     <ClInclude Include="BufferObjects\IVBO.h" />
     <ClInclude Include="BufferObjects\VAO.h" />
     <ClInclude Include="BufferObjects\VBO.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="Uniforms\Rendertarget.h" />
     <ClInclude Include="Uniforms\SSBOint.h" />
     <ClInclude Include="Uniforms\SSBOvec4.h" />
+    <ClInclude Include="Uniforms\Texture.h" />
     <ClInclude Include="Uniforms\Uniform.h" />
     <ClInclude Include="Uniforms\UniformFloat.h" />
     <ClInclude Include="Uniforms\UniformMat4.h" />
@@ -274,19 +278,24 @@
     <ClInclude Include="Vertex\PositionNormalVertex.h" />
     <ClInclude Include="Vertex\PositionTextureVertex.h" />
     <ClInclude Include="Vertex\PositionVertex.h" />
+    <ClInclude Include="Vertex\SupComVertex.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
-    <ClCompile Include="BufferObjects\AttributeDescription.cpp" />
+    <ClCompile Include="AttributeDescription.cpp" />
     <ClCompile Include="BufferObjects\IBO.cpp" />
     <ClCompile Include="BufferObjects\IVAO.cpp" />
     <ClCompile Include="BufferObjects\IVBO.cpp" />
     <ClCompile Include="BufferObjects\VAO.cpp" />
     <ClCompile Include="BufferObjects\VBO.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="Uniforms\Rendertarget.cpp" />
     <ClCompile Include="Uniforms\SSBOint.cpp" />
     <ClCompile Include="Uniforms\SSBOvec4.cpp" />
+    <ClCompile Include="Uniforms\Texture.cpp" />
     <ClCompile Include="Uniforms\Uniform.cpp" />
     <ClCompile Include="Uniforms\UniformFloat.cpp" />
     <ClCompile Include="Uniforms\UniformMat4.cpp" />
@@ -305,6 +314,7 @@
     <ClCompile Include="Vertex\PositionNormalVertex.cpp" />
     <ClCompile Include="Vertex\PositionTextureVertex.cpp" />
     <ClCompile Include="Vertex\PositionVertex.cpp" />
+    <ClCompile Include="Vertex\SupComVertex.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

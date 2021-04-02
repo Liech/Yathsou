@@ -33,7 +33,7 @@ namespace Ahwassa {
       AttributeDescription bind = bindings[i];
       glEnableVertexAttribArray(i);
       glBindBuffer(GL_ARRAY_BUFFER, _vbo->getID());
-      glVertexAttribPointer(i, bind.getSize(), GL_FLOAT, GL_FALSE, (GLsizei)stride, (GLvoid*)currentOffset);
+      glVertexAttribPointer(i, (GLint)bind.getSize(), GL_FLOAT, GL_FALSE, (GLsizei)stride, (GLvoid*)currentOffset);
       currentOffset += bind.getSize();
     }
 

@@ -3,7 +3,7 @@
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include <glad/glad.h>
 #include <vector>
-#include "BufferObjects/AttributeDescription.h"
+#include "AttributeDescription.h"
 
 namespace Ahwassa {
   PositionColorVertex::PositionColorVertex() : position(0), color(0) {

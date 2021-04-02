@@ -15,6 +15,7 @@ namespace Ahwassa {
 
     size_t      getSize()         const;
     std::string getTypeAsString() const;
+    std::string getName()         const;
 
   private:
     std::string name;
