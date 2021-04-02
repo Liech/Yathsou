@@ -234,6 +234,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AttributeDescription.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="Input.h" />
@@ -253,16 +254,21 @@
     <ClInclude Include="sound\sound.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundHandler.h" />
+    <ClInclude Include="VAO.h" />
+    <ClInclude Include="VBO.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
+    <ClCompile Include="AttributeDescription.cpp" />
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="sound\sound.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
     <ClCompile Include="sound\SoundHandler.cpp" />
+    <ClCompile Include="VAO.cpp" />
+    <ClCompile Include="VBO.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

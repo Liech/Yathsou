@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <functional>
-#include "IyathuumCoreLib/Singleton/Factory.h"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 
 struct GLFWwindow;
