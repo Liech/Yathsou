@@ -234,7 +234,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="DrawSpecification.h" />
+    <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Util.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="lib\libnyquist\Common.h" />
     <ClInclude Include="lib\libnyquist\Decoders.h" />
     <ClInclude Include="lib\libnyquist\Encoders.h" />
@@ -255,7 +257,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
-    <ClCompile Include="DrawSpecification.cpp" />
+    <ClCompile Include="Drawable.cpp" />
+    <ClCompile Include="Util.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="sound\sound.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
     <ClCompile Include="sound\SoundHandler.cpp" />
