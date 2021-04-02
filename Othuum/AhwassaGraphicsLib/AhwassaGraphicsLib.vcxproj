@@ -241,9 +241,10 @@
     <ClInclude Include="BufferObjects\VBO.h" />
     <ClInclude Include="Core\AttributeDescription.h" />
     <ClInclude Include="Core\Camera.h" />
-    <ClInclude Include="Core\Drawable.h" />
     <ClInclude Include="Core\ShaderProgram.h" />
     <ClInclude Include="Core\Window.h" />
+    <ClInclude Include="Drawables\Background.h" />
+    <ClInclude Include="Drawables\Drawable.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />
     <ClInclude Include="Uniforms\Rendertarget.h" />
@@ -291,9 +292,10 @@
     <ClCompile Include="BufferObjects\VBO.cpp" />
     <ClCompile Include="Core\AttributeDescription.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
-    <ClCompile Include="Core\Drawable.cpp" />
     <ClCompile Include="Core\ShaderProgram.cpp" />
     <ClCompile Include="Core\Window.cpp" />
+    <ClCompile Include="Drawables\Background.cpp" />
+    <ClCompile Include="Drawables\Drawable.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />

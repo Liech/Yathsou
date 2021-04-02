@@ -61,6 +61,12 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{1f356b1f-aaa6-4e31-b115-8746f37c8eef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Drawables">
+      <UniqueIdentifier>{d9bc9169-6050-4b44-8485-c4a179986b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Drawables">
+      <UniqueIdentifier>{dd417644-d6cb-4d83-a196-8643d2bf11fc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -192,9 +198,6 @@
     <ClInclude Include="Core\Camera.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Drawable.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Core\ShaderProgram.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -203,6 +206,12 @@
     </ClInclude>
     <ClInclude Include="Core\AttributeDescription.h">
       <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawables\Background.h">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawables\Drawable.h">
+      <Filter>Header Files\Drawables</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -299,9 +308,6 @@
     <ClCompile Include="Core\Camera.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Drawable.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Core\ShaderProgram.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -310,6 +316,12 @@
     </ClCompile>
     <ClCompile Include="Core\AttributeDescription.cpp">
       <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawables\Background.cpp">
+      <Filter>Source Files\Drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawables\Drawable.cpp">
+      <Filter>Source Files\Drawables</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
