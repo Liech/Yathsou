@@ -38,6 +38,8 @@ This should all be plattform independent, but a way to compile it under linux is
 
 # Libraries
 
+All Names are from Supreme Commander Units. Mainly Seraphim faction. See https://unitdb.faforever.com/
+
 ## IyathuumCoreLib
 Depends on    | Purpose
 ------------- | -------------
