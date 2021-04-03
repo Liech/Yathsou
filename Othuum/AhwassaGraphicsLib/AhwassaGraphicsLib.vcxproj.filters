@@ -85,6 +85,9 @@
     <Filter Include="Data\Fonts">
       <UniqueIdentifier>{a2861661-2641-4898-8e4e-6467c9195e44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data\Textures">
+      <UniqueIdentifier>{15ca3bec-09bd-487f-ad39-c7b9edd13326}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -246,6 +249,9 @@
     <ClInclude Include="BasicRenderer\BasicTextRenderer.h">
       <Filter>Header Files\BasicRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
+      <Filter>Header Files\BasicRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -371,10 +377,16 @@
     <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp">
       <Filter>Source Files\BasicRenderer</Filter>
     </ClCompile>
+    <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp">
+      <Filter>Source Files\BasicRenderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Data\Fonts\arial.ttf">
       <Filter>Data\Fonts</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Data\Textures\Map.png">
+      <Filter>Data\Textures</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

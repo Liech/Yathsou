@@ -236,6 +236,7 @@
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicRectangleRenderer.h" />
     <ClInclude Include="BasicRenderer\BasicTextRenderer.h" />
+    <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h" />
     <ClInclude Include="BufferObjects\IBO.h" />
     <ClInclude Include="BufferObjects\IVAO.h" />
     <ClInclude Include="BufferObjects\IVBO.h" />
@@ -292,6 +293,7 @@
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
     <ClCompile Include="BasicRenderer\BasicRectangleRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp" />
+    <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp" />
     <ClCompile Include="BufferObjects\IBO.cpp" />
     <ClCompile Include="BufferObjects\IVAO.cpp" />
     <ClCompile Include="BufferObjects\IVBO.cpp" />
@@ -337,9 +339,16 @@
       <FileType>Document</FileType>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">true</DeploymentContent>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)/Data/Fonts;%(DestinationFolders)</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)/Data/Fonts;%(DestinationFolders)</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">$(TargetDir)/Data/Fonts;%(DestinationFolders)</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)/Data/Fonts</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)/Data/Fonts</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">$(TargetDir)/Data/Fonts</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Data\Textures\Map.png">
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)/Data/Textures</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)/Data/Textures</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">$(TargetDir)/Data/Textures</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
