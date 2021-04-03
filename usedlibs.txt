@@ -1,18 +1,18 @@
-license stuff needed for:      |            | 
-glm                            |Iyathuum    | Math
-nlohmann/json                  |Iyathuum    | Human Readable Config Files
-gli                            |yolonaoss   | load .dds files
-lodepng                        |yolonaoss   | Load/Save PNG files
-freetype                       |yolonaoss   | Font
-glwf                           |yolonaoss   | WindowManager
-glad                           |yolonaoss   | OpenGL
-enet                           |vishala     | Network Library
-moodycamel/concurrentqueue     |vishala     | concurrent queue
-portaudio                      |ahwassa     | play sound
-nyquistaudio                   |ahwassa     | load wav/mp3
-bullet                         |suthanu     | physics
-lua                            |haas        | scripting
-lua-matrix                     |haas        | matrix operations in scripting
-kikito/inspect.lua             |haas        | debug inside lua
-xdelta3                        |vishala     | delta compression
-google snappy                  |vishala     | fast compression/decompression
+license stuff needed for:      |             | 
+glm                            |Iyathuum     | Math
+gli                            |aezesel      | load .dds files
+lodepng                        |aezesel      | Load/Save PNG files
+freetype                       |ahwassa      | Font
+glwf                           |ahwassa      | WindowManager
+glad                           |ahwassa      | OpenGL
+portaudio                      |ahwassa      | play sound
+nyquistaudio                   |ahwassa      | load wav/mp3
+bullet                         |suthanus     | physics
+lua                            |haas         | scripting
+lua-matrix                     |haas         | matrix operations in scripting
+kikito/inspect.lua             |haas         | debug inside lua
+enet                           |vishala      | Network Library
+moodycamel/concurrentqueue     |vishala      | concurrent queue
+xdelta3                        |vishala      | delta compression
+google snappy                  |vishala      | fast compression/decompression
+nlohmann/json                  |vishala, haas| Human Readable Config Files
