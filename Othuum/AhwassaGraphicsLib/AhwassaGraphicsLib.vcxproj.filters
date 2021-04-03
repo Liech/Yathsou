@@ -88,6 +88,9 @@
     <Filter Include="Data\Textures">
       <UniqueIdentifier>{15ca3bec-09bd-487f-ad39-c7b9edd13326}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib\openvr">
+      <UniqueIdentifier>{9f6242f1-ec7c-48b3-9a95-9f2a94c810d5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -252,6 +255,18 @@
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
       <Filter>Header Files\BasicRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="lib\openvr\openvr.h">
+      <Filter>lib\openvr</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openvr\openvr_capi.h">
+      <Filter>lib\openvr</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openvr\openvr_driver.h">
+      <Filter>lib\openvr</Filter>
+    </ClInclude>
+    <ClInclude Include="VR.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -380,6 +395,9 @@
     <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp">
       <Filter>Source Files\BasicRenderer</Filter>
     </ClCompile>
+    <ClCompile Include="VR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Data\Fonts\arial.ttf">
@@ -387,6 +405,9 @@
     </CopyFileToFolders>
     <CopyFileToFolders Include="Data\Textures\Map.png">
       <Filter>Data\Textures</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="lib\openvr\openvr_api.dll">
+      <Filter>lib\openvr</Filter>
     </CopyFileToFolders>
   </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AezeselFileIOLib/ImageIO.h"
 
+#include "AhwassaGraphicsLib/VR.h"
 
 int main(int argc, char** argv) {
   int width  = 800;
@@ -17,6 +18,8 @@ int main(int argc, char** argv) {
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
   
+  Ahwassa::VR vr;
+
   auto img = Aezesel::ImageIO::readImage("Data/Textures/Map.png");
 
   std::unique_ptr<Ahwassa::Texture> texture;
@@ -37,7 +40,7 @@ int main(int argc, char** argv) {
 
   w.Update = [&]() {
     b.draw();
-
+    vr.update();
     //for (int i = 0; i < 10000; i++) {
     //  auto rec = Iyathuum::glmAABB<2>(glm::vec2(rand() % width, rand() % height), glm::vec2(rand() % 10 + 10, rand() % 10 + 10));
     //  auto clr = Iyathuum::Color(rand() % 255, rand() % 255, rand() % 255);

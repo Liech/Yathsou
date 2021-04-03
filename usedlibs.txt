@@ -7,6 +7,7 @@ glwf                           |ahwassa      | WindowManager
 glad                           |ahwassa      | OpenGL
 portaudio                      |ahwassa      | play sound
 nyquistaudio                   |ahwassa      | load wav/mp3
+openvr                         |ahwassa      | virtual reality
 bullet                         |suthanus     | physics
 lua                            |haas         | scripting
 lua-matrix                     |haas         | matrix operations in scripting
