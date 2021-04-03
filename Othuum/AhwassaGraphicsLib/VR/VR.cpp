@@ -18,6 +18,7 @@ namespace Ahwassa {
   }
 
   void VR::update() {
+    //vr_pointer->TriggerHapticPulse(3, 0, 3000);
     vr::VREvent_t event;
     if (vr_pointer->PollNextEvent(&event, sizeof(event)))
     {
@@ -28,9 +29,14 @@ namespace Ahwassa {
         break;
 
       default:
-        std::cout << "EVENT--(OpenVR) Event: " << event.eventType << std::endl;
+        std::cout << "EVENT--(OpenVR) Event: " << event.trackedDeviceIndex <<" " << event.eventType << std::endl;
+        vrEvent(event);
       }
     }
+  }
+
+  void VR::vrEvent(const vr::VREvent_t& e) {
+    
   }
 
   VR::~VR() {

@@ -291,7 +291,8 @@
     <ClInclude Include="Vertex\PositionTextureVertex.h" />
     <ClInclude Include="Vertex\PositionVertex.h" />
     <ClInclude Include="Vertex\SupComVertex.h" />
-    <ClInclude Include="VR.h" />
+    <ClInclude Include="VR\VRController.h" />
+    <ClInclude Include="VR\VR.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
@@ -336,7 +337,8 @@
     <ClCompile Include="Vertex\PositionTextureVertex.cpp" />
     <ClCompile Include="Vertex\PositionVertex.cpp" />
     <ClCompile Include="Vertex\SupComVertex.cpp" />
-    <ClCompile Include="VR.cpp" />
+    <ClCompile Include="VR\VRController.cpp" />
+    <ClCompile Include="VR\VR.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Data\Fonts\arial.ttf">

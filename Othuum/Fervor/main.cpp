@@ -10,7 +10,7 @@
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AezeselFileIOLib/ImageIO.h"
 
-#include "AhwassaGraphicsLib/VR.h"
+#include "AhwassaGraphicsLib/VR/VR.h"
 
 int main(int argc, char** argv) {
   int width  = 800;

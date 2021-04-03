@@ -91,6 +91,12 @@
     <Filter Include="lib\openvr">
       <UniqueIdentifier>{9f6242f1-ec7c-48b3-9a95-9f2a94c810d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\VR">
+      <UniqueIdentifier>{7b5ffadf-0cd2-4e94-b826-e9809aa7b8c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\VR">
+      <UniqueIdentifier>{e5857944-3c17-4037-8f8f-5f59d9c82521}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -264,8 +270,11 @@
     <ClInclude Include="lib\openvr\openvr_driver.h">
       <Filter>lib\openvr</Filter>
     </ClInclude>
-    <ClInclude Include="VR.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="VR\VR.h">
+      <Filter>Header Files\VR</Filter>
+    </ClInclude>
+    <ClInclude Include="VR\VRController.h">
+      <Filter>Header Files\VR</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -395,8 +404,11 @@
     <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp">
       <Filter>Source Files\BasicRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="VR.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="VR\VR.cpp">
+      <Filter>Source Files\VR</Filter>
+    </ClCompile>
+    <ClCompile Include="VR\VRController.cpp">
+      <Filter>Source Files\VR</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
