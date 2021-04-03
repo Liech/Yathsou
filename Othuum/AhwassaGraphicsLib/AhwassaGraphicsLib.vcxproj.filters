@@ -79,6 +79,12 @@
     <Filter Include="Source Files\InstancedRenderer">
       <UniqueIdentifier>{1be1911c-8dd2-445c-b29c-f32c5ba26bc2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{eb9bf757-b1e0-453b-a1fe-7eaa55e287d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Fonts">
+      <UniqueIdentifier>{a2861661-2641-4898-8e4e-6467c9195e44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -237,6 +243,9 @@
     <ClInclude Include="InstancedRenderer\Rectangle.h">
       <Filter>Header Files\InstancedRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="BasicRenderer\BasicTextRenderer.h">
+      <Filter>Header Files\BasicRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -359,5 +368,13 @@
     <ClCompile Include="InstancedRenderer\Rectangle.cpp">
       <Filter>Source Files\InstancedRenderer</Filter>
     </ClCompile>
+    <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp">
+      <Filter>Source Files\BasicRenderer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Data\Fonts\arial.ttf">
+      <Filter>Data\Fonts</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

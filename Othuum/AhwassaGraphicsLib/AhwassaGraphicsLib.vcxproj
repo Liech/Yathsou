@@ -128,7 +128,7 @@
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/GLWF/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/GLWF/include;$(SolutionDir)YolonaOss/Lib/freetype/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +141,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(SolutionDir)YolonaOss/Lib/GLWF/lib/glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(SolutionDir)YolonaOss/Lib/GLWF/lib/glfw3.lib;$(SolutionDir)YolonaOss/Lib/freetype/lib/freetype.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -178,7 +178,7 @@
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/GLWF/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/GLWF/include;$(SolutionDir)YolonaOss/Lib/freetype/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -189,7 +189,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(SolutionDir)YolonaOss/Lib/GLWF/lib/glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(SolutionDir)YolonaOss/Lib/GLWF/lib/glfw3.lib;$(SolutionDir)YolonaOss/Lib/freetype/lib/freetype.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">
@@ -203,7 +203,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/GLWF/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/GLWF/include;$(SolutionDir)YolonaOss/Lib/freetype/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -214,7 +214,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(SolutionDir)YolonaOss/Lib/GLWF/lib/glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(SolutionDir)YolonaOss/Lib/GLWF/lib/glfw3.lib;$(SolutionDir)YolonaOss/Lib/freetype/lib/freetype.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -235,6 +235,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicRectangleRenderer.h" />
+    <ClInclude Include="BasicRenderer\BasicTextRenderer.h" />
     <ClInclude Include="BufferObjects\IBO.h" />
     <ClInclude Include="BufferObjects\IVAO.h" />
     <ClInclude Include="BufferObjects\IVBO.h" />
@@ -290,6 +291,7 @@
   <ItemGroup>
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
     <ClCompile Include="BasicRenderer\BasicRectangleRenderer.cpp" />
+    <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp" />
     <ClCompile Include="BufferObjects\IBO.cpp" />
     <ClCompile Include="BufferObjects\IVAO.cpp" />
     <ClCompile Include="BufferObjects\IVBO.cpp" />
@@ -328,6 +330,17 @@
     <ClCompile Include="Vertex\PositionTextureVertex.cpp" />
     <ClCompile Include="Vertex\PositionVertex.cpp" />
     <ClCompile Include="Vertex\SupComVertex.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Data\Fonts\arial.ttf">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+      <FileType>Document</FileType>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">true</DeploymentContent>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)/Data/Fonts;%(DestinationFolders)</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)/Data/Fonts;%(DestinationFolders)</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">$(TargetDir)/Data/Fonts;%(DestinationFolders)</DestinationFolders>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
