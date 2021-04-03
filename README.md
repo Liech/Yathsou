@@ -57,6 +57,7 @@ glfw          | Window Manager
 freetype      | Font
 libnyquist    | load wav/mp3
 portaudio     | play sound
+openrvr       | virtual reality
 
 Graphics and Media Library
 
