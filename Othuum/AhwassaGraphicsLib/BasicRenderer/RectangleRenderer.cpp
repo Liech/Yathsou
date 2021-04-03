@@ -66,7 +66,7 @@ namespace Ahwassa {
     };
     _vars->color->bind();
     _vars->vbo->setData(vertices);
-    _vars->vao->bind();
+    _vars->vao->draw();
   }
 
   void RectangleRenderer::start() {

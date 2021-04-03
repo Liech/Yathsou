@@ -18,11 +18,13 @@ namespace Ahwassa {
 
     void draw();
   private:
-    void shaderCall(std::shared_ptr<Rectangle>);
+    void shaderCall(const std::vector<glm::mat4>&, const std::vector<glm::vec3>&, size_t amount);
     void makeShader();
+    void makeModelArray(size_t bufferSize);
 
     struct RenderVars;
     std::shared_ptr<RenderVars> _vars;
+    size_t _bufferSize = 1000;
 
     std::vector<std::weak_ptr<Rectangle>> _rectangles;
   };

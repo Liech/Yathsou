@@ -6,6 +6,7 @@
 
 #include "AhwassaGraphicsLib/BasicRenderer/RectangleRenderer.h"
 #include "AhwassaGraphicsLib/Graphics/Rectangles.h"
+#include "AhwassaGraphicsLib/Graphics/Rectangle.h"
 
 
 int main(int argc, char** argv) {
@@ -14,25 +15,29 @@ int main(int argc, char** argv) {
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
 
-  auto rec = Iyathuum::glmAABB<2>(glm::vec2(50, 50), glm::vec2(100, 100));
-  auto clr = Iyathuum::Color(128, 20, 69);
-  std::shared_ptr<Ahwassa::Rectangle> handle;
+  std::vector<std::shared_ptr<Ahwassa::Rectangle>> handle;
 
-  std::unique_ptr<Ahwassa::RectangleRenderer> rect;
   std::unique_ptr<Ahwassa::Rectangles> g;
   w.Startup = [&]() {
-    rect = std::make_unique<Ahwassa::RectangleRenderer>(&w);
     g = std::make_unique<Ahwassa::Rectangles>(&w);
 
-    handle = g->newRectangle(rec, clr);
+    for (int i = 0; i < 10000; i++) {
+      auto rec = Iyathuum::glmAABB<2>(glm::vec2(rand() % width, rand() % height), glm::vec2(rand()%10+10, rand()%10+10));
+      auto clr = Iyathuum::Color(rand()%255, rand() % 255, rand() % 255);
+      handle.push_back(g->newRectangle(rec, clr));
+    }
   };
 
   w.Update = [&]() {
+
+    for (int i = 0; i < 10000; i++) {
+      auto rec = Iyathuum::glmAABB<2>(glm::vec2(rand() % width, rand() % height), glm::vec2(rand() % 10 + 10, rand() % 10 + 10));
+      auto clr = Iyathuum::Color(rand() % 255, rand() % 255, rand() % 255);
+      handle[i]->location = rec;
+    }
+
     b.draw();
     g->draw();
-    //rect->start();
-    //rect->drawRectangle(rec, clr);
-    //rect->end();
   };
   w.run();
 

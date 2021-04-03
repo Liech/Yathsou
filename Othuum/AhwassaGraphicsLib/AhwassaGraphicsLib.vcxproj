@@ -261,6 +261,7 @@
     <ClInclude Include="Uniforms\UniformVec3.h" />
     <ClInclude Include="Uniforms\UniformVec4.h" />
     <ClInclude Include="Uniforms\UniformVecMat4.h" />
+    <ClInclude Include="Uniforms\UniformVecVec3.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="lib\libnyquist\Common.h" />
     <ClInclude Include="lib\libnyquist\Decoders.h" />
@@ -315,6 +316,7 @@
     <ClCompile Include="Uniforms\UniformVec3.cpp" />
     <ClCompile Include="Uniforms\UniformVec4.cpp" />
     <ClCompile Include="Uniforms\UniformVecMat4.cpp" />
+    <ClCompile Include="Uniforms\UniformVecVec3.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="sound\sound.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />

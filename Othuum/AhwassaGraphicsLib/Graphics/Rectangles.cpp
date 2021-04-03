@@ -8,21 +8,22 @@
 #include "Rectangle.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/ShaderProgram.h"
-#include "AhwassaGraphicsLib/Uniforms/UniformVec3.h"
+#include "AhwassaGraphicsLib/Uniforms/UniformVecVec3.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformMat4.h"
+#include "AhwassaGraphicsLib/Uniforms/UniformVecMat4.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
 #include "AhwassaGraphicsLib/BufferObjects/VBO.h"
 #include "AhwassaGraphicsLib/Vertex/PositionVertex.h"
 
 namespace Ahwassa {
   struct Rectangles::RenderVars {
-    std::unique_ptr<VBO<PositionVertex>>   vbo;
-    std::unique_ptr<VAO<PositionVertex>>   vao;
-    std::unique_ptr<ShaderProgram>         shader;
-    Window* window;
-    std::unique_ptr<UniformMat4>           projection;
-    std::unique_ptr<UniformMat4>           model;
-    std::unique_ptr<UniformVec3>           color;
+    std::unique_ptr<VBO<PositionVertex>> vbo;
+    std::unique_ptr<VAO<PositionVertex>> vao;
+    std::unique_ptr<ShaderProgram>       shader;
+    Window* window;                      
+    std::unique_ptr<UniformMat4>         projection;
+    std::unique_ptr<UniformVecMat4>      models;
+    std::unique_ptr<UniformVecVec3>      colors;
 
     virtual ~RenderVars() {}
   };
@@ -30,22 +31,37 @@ namespace Ahwassa {
   Rectangles::Rectangles(Window* w) : Drawable(w) {
     _vars = std::make_shared<Rectangles::RenderVars>();
     _vars->window = w;
+    _bufferSize = 1000;
+    makeModelArray(_bufferSize);
     makeShader();
   }
 
   void Rectangles::draw() {
+
     glEnable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     _vars->shader->bind();
 
+    std::vector<glm::mat4> matrices;
+    std::vector<glm::vec3> colors  ;
+    matrices.resize(_bufferSize);
+    colors  .resize(_bufferSize);
+
     std::vector<size_t> destroyed;
     destroyed.resize(40);
     size_t destroyedIndex = 0;
+    size_t current = 0;
     for (size_t i = 0; i < _rectangles.size(); i++) {
       auto rec = _rectangles[i].lock();
       if (rec) {
-        shaderCall(rec);
+        if (current == _bufferSize) {
+          shaderCall(matrices, colors, current);
+          current = 0;
+        }
+        matrices[current] = rec->matrix  ();
+        colors  [current] = rec->colorVec();
+        current++;
       }
       else {
         if (destroyedIndex >= destroyed.size())
@@ -57,39 +73,47 @@ namespace Ahwassa {
     for (size_t i = destroyedIndex; i > 0; i--)
       _rectangles.erase(_rectangles.begin() + i);
 
+
+    shaderCall(matrices,colors,current);
+
     glDisable(GL_BLEND);
     glEnable(GL_DEPTH_TEST);
+  }
+
+  void Rectangles::makeModelArray(size_t bufferSize) {
+    _vars->models = std::make_unique<UniformVecMat4>("models", bufferSize);
+    _vars->colors = std::make_unique<UniformVecVec3>("colors", bufferSize);
   }
 
   void Rectangles::makeShader() {
     std::cout << "Load Shader" << std::endl;
 
     std::string vertex_shader_source = R"(
-
+    
+    out vec3 clr;
     void main()
     {
-        gl_Position = projection * model * vec4(position.xy, 0.0, 1.0);
+        gl_Position = projection * models[gl_InstanceID] * vec4(position.xy, 0.0, 1.0);
+        clr = colors[gl_InstanceID];
     }  
    )";
 
     std::string fragment_shader_source = R"(
     out vec4 color;
-
+    in vec3 clr;
     void main()
     {    
-        color = vec4(textColor, 1.0);
+        color = vec4(clr, 1.0);
     }  
    )";
 
     std::vector<Uniform*> uniforms;
     _vars->projection = std::make_unique<UniformMat4>("projection");
     _vars->projection->setValue(glm::ortho(0.0f, (float)_vars->window->getWidth(), 0.0f, (float)_vars->window->getHeight()));
-    _vars->model      = std::make_unique<UniformMat4>("model");
 
-    _vars->color = std::make_unique<UniformVec3>("textColor");
     uniforms.push_back(_vars->projection.get());
-    uniforms.push_back(_vars->model.get());
-    uniforms.push_back(_vars->color.get());
+    uniforms.push_back(_vars->models.get());
+    uniforms.push_back(_vars->colors.get());
 
     std::vector<PositionVertex> input;
     input.resize(6);
@@ -108,15 +132,12 @@ namespace Ahwassa {
     _vars->vbo->setData(vertices);
   }
 
-  void Rectangles::shaderCall(std::shared_ptr<Rectangle> r) {
-    auto mat = glm::mat4(1.0);
-    mat = glm::translate(mat, glm::vec3(r->location.getPosition()[0], r->location.getPosition()[1], 1));
-    mat = glm::scale    (mat, glm::vec3(r->location.getSize()[0]    , r->location.getSize()[1]    , 1));
-    _vars->model->setValue(mat);
-
-    _vars->color->setValue(r->color.to3());
-    _vars->color->bind();
-    _vars->vao->bind();
+  void Rectangles::shaderCall(const std::vector<glm::mat4>& mats, const std::vector<glm::vec3>&clr, size_t amount) {
+    _vars->models->setValue(mats);
+    _vars->colors->setValue(clr);
+    _vars->models->bind();
+    _vars->colors->bind();
+    _vars->vao->drawInstanced(amount);
   }
 
   std::shared_ptr<Rectangle> Rectangles::newRectangle(Iyathuum::glmAABB<2> location, Iyathuum::Color color) {

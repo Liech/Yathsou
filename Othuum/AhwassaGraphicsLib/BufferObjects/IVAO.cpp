@@ -19,9 +19,15 @@ namespace Ahwassa {
   }
 
 
-  void IVAO::bind(){
+  void IVAO::draw(){
     glBindVertexArray(_id);
     glDrawArrays(GL_TRIANGLES, 0, (GLsizei)_vbo->getSize());
+  }
+
+  void IVAO::drawInstanced(size_t amount) {
+    glBindVertexArray(_id);
+    //glDrawElementsInstanced(GL_TRIANGLES, (GLsizei)_vbo->getSize(), GL_UNSIGNED_INT, 0, amount);
+    glDrawArraysInstanced(GL_TRIANGLES, 0, (GLsizei)_vbo->getSize(), amount);
   }
 
   void IVAO::init(const std::vector<AttributeDescription>& bindings){

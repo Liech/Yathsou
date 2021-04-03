@@ -107,7 +107,7 @@ namespace Ahwassa {
     {
       if (_uniform[i]->isBuffer())
         continue;
-      glGetActiveUniform(_program, (GLuint)_uniform[i]->getLocation(), bufSize, &length, &size, &type, name);
+      glGetActiveUniform(_program, i, bufSize, &length, &size, &type, name);
       activeNames.insert(name);
     }
     for (int i = 0; i < _uniform.size(); i++) {

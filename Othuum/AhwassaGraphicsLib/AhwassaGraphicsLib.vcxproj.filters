@@ -234,6 +234,9 @@
     <ClInclude Include="Graphics\Rectangle.h">
       <Filter>Header Files\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Uniforms\UniformVecVec3.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -352,6 +355,9 @@
     </ClCompile>
     <ClCompile Include="Graphics\Rectangles.cpp">
       <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\UniformVecVec3.cpp">
+      <Filter>Source Files\Uniform</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

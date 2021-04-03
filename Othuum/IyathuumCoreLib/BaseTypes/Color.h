@@ -36,11 +36,11 @@ namespace Iyathuum {
         (_color[2] + other._color[2]) / 2);
     }
 
-    glm::vec3 to3() {
+    glm::vec3 to3() const {
       return glm::vec3(_color[0] / 255.0f, _color[1] / 255.0f, _color[2] / 255.0f);
     }
 
-    glm::vec4 to4() {
+    glm::vec4 to4() const {
       return glm::vec4(_color[0] / 255.0f, _color[1] / 255.0f, _color[2] / 255.0f, _color[3] / 255.0f);
     }
 
