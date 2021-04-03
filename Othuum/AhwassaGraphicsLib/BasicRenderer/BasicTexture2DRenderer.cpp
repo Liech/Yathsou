@@ -101,7 +101,7 @@ namespace Ahwassa {
     void main()
     {
       gl_Position = projection * vec4(position.xy, 0.0, 1.0);
-      TexCoords = texCoord;
+      TexCoords = texture;
     }  
    )";
 
@@ -112,7 +112,7 @@ namespace Ahwassa {
     void main()
     {    
       vec4 sampled = texture(shownTexture, TexCoords);
-      color = vec4(textureColor.r * sampled.r,textureColor.g * sampled.g,textureColor.b * sampled.b, textureColor.a *  sampled.a);
+      color = vec4(sampled.r,sampled.g,sampled.b,sampled.a);
     }  
    )";
 

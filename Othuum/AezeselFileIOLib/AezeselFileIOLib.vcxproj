@@ -5,14 +5,6 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseWithDbg|Win32">
-      <Configuration>ReleaseWithDbg</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseWithDbg|x64">
-      <Configuration>ReleaseWithDbg</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
@@ -29,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1a0f9355-8480-4496-a81c-d498ca53bd01}</ProjectGuid>
-    <RootNamespace>Fervor</RootNamespace>
+    <ProjectGuid>{1690e851-1424-484a-ae4a-cb998160bf18}</ProjectGuid>
+    <RootNamespace>AezeselFileIOLib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -47,28 +39,14 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -85,16 +63,10 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -104,16 +76,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -144,36 +110,25 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)YolonaOss/Lib/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(TargetDir)AhwassaGraphicsLib.lib;$(TargetDir)VishalaNetworkLib.lib;$(TargetDir)IyathuumCoreLib.lib;$(TargetDir)AezeselFileIOLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <Lib>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -183,42 +138,142 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)YolonaOss/Lib/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(TargetDir)AhwassaGraphicsLib.lib;$(TargetDir)VishalaNetworkLib.lib;$(TargetDir)IyathuumCoreLib.lib;$(TargetDir)AezeselFileIOLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)YolonaOss/Lib/glad/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(TargetDir)AhwassaGraphicsLib.lib;$(TargetDir)VishalaNetworkLib.lib;$(TargetDir)IyathuumCoreLib.lib;$(TargetDir)AezeselFileIOLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+    <Lib>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Fervor.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClInclude Include="ImageIO.h" />
+    <ClInclude Include="lib\gli\clear.hpp" />
+    <ClInclude Include="lib\gli\comparison.hpp" />
+    <ClInclude Include="lib\gli\convert.hpp" />
+    <ClInclude Include="lib\gli\copy.hpp" />
+    <ClInclude Include="lib\gli\core\bc.hpp" />
+    <ClInclude Include="lib\gli\core\clear.hpp" />
+    <ClInclude Include="lib\gli\core\convert_func.hpp" />
+    <ClInclude Include="lib\gli\core\coord.hpp" />
+    <ClInclude Include="lib\gli\core\file.hpp" />
+    <ClInclude Include="lib\gli\core\filter.hpp" />
+    <ClInclude Include="lib\gli\core\filter_compute.hpp" />
+    <ClInclude Include="lib\gli\core\flip.hpp" />
+    <ClInclude Include="lib\gli\core\mipmaps_compute.hpp" />
+    <ClInclude Include="lib\gli\core\s3tc.hpp" />
+    <ClInclude Include="lib\gli\core\storage_linear.hpp" />
+    <ClInclude Include="lib\gli\duplicate.hpp" />
+    <ClInclude Include="lib\gli\dx.hpp" />
+    <ClInclude Include="lib\gli\format.hpp" />
+    <ClInclude Include="lib\gli\generate_mipmaps.hpp" />
+    <ClInclude Include="lib\gli\gl.hpp" />
+    <ClInclude Include="lib\gli\gli.hpp" />
+    <ClInclude Include="lib\gli\image.hpp" />
+    <ClInclude Include="lib\gli\levels.hpp" />
+    <ClInclude Include="lib\gli\load.hpp" />
+    <ClInclude Include="lib\gli\load_dds.hpp" />
+    <ClInclude Include="lib\gli\load_kmg.hpp" />
+    <ClInclude Include="lib\gli\load_ktx.hpp" />
+    <ClInclude Include="lib\gli\make_texture.hpp" />
+    <ClInclude Include="lib\gli\reduce.hpp" />
+    <ClInclude Include="lib\gli\sampler.hpp" />
+    <ClInclude Include="lib\gli\sampler1d.hpp" />
+    <ClInclude Include="lib\gli\sampler1d_array.hpp" />
+    <ClInclude Include="lib\gli\sampler2d.hpp" />
+    <ClInclude Include="lib\gli\sampler2d_array.hpp" />
+    <ClInclude Include="lib\gli\sampler3d.hpp" />
+    <ClInclude Include="lib\gli\sampler_cube.hpp" />
+    <ClInclude Include="lib\gli\sampler_cube_array.hpp" />
+    <ClInclude Include="lib\gli\save.hpp" />
+    <ClInclude Include="lib\gli\save_dds.hpp" />
+    <ClInclude Include="lib\gli\save_kmg.hpp" />
+    <ClInclude Include="lib\gli\save_ktx.hpp" />
+    <ClInclude Include="lib\gli\target.hpp" />
+    <ClInclude Include="lib\gli\texture.hpp" />
+    <ClInclude Include="lib\gli\texture1d.hpp" />
+    <ClInclude Include="lib\gli\texture1d_array.hpp" />
+    <ClInclude Include="lib\gli\texture2d.hpp" />
+    <ClInclude Include="lib\gli\texture2d_array.hpp" />
+    <ClInclude Include="lib\gli\texture3d.hpp" />
+    <ClInclude Include="lib\gli\texture_cube.hpp" />
+    <ClInclude Include="lib\gli\texture_cube_array.hpp" />
+    <ClInclude Include="lib\gli\transform.hpp" />
+    <ClInclude Include="lib\gli\type.hpp" />
+    <ClInclude Include="lib\gli\view.hpp" />
+    <ClInclude Include="lib\lodepng\include\lodepng\lodepng.h" />
+    <ClInclude Include="lib\lodepng\include\lodepng\lodepng_util.h" />
+    <ClInclude Include="lib\lodepng\lodepng.h" />
+    <ClInclude Include="lib\lodepng\lodepng_util.h" />
+    <ClInclude Include="SCA.h" />
+    <ClInclude Include="SCM.h" />
+    <ClInclude Include="SCMAP.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Fervor.h" />
+    <ClCompile Include="ImageIO.cpp" />
+    <ClCompile Include="lib\gli\core\dummy.cpp" />
+    <ClCompile Include="lib\lodepng\include\lodepng\lodepng.cpp" />
+    <ClCompile Include="lib\lodepng\include\lodepng\lodepng_util.cpp" />
+    <ClCompile Include="lib\lodepng\lodepng.cpp" />
+    <ClCompile Include="lib\lodepng\lodepng_util.cpp" />
+    <ClCompile Include="SCA.cpp" />
+    <ClCompile Include="SCM.cpp" />
+    <ClCompile Include="SCMAP.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lib\gli\core\bc.inl" />
+    <None Include="lib\gli\core\clear.inl" />
+    <None Include="lib\gli\core\comparison.inl" />
+    <None Include="lib\gli\core\convert.inl" />
+    <None Include="lib\gli\core\copy.inl" />
+    <None Include="lib\gli\core\duplicate.inl" />
+    <None Include="lib\gli\core\dx.inl" />
+    <None Include="lib\gli\core\file.inl" />
+    <None Include="lib\gli\core\filter.inl" />
+    <None Include="lib\gli\core\flip.inl" />
+    <None Include="lib\gli\core\format.inl" />
+    <None Include="lib\gli\core\generate_mipmaps.inl" />
+    <None Include="lib\gli\core\gl.inl" />
+    <None Include="lib\gli\core\image.inl" />
+    <None Include="lib\gli\core\levels.inl" />
+    <None Include="lib\gli\core\load.inl" />
+    <None Include="lib\gli\core\load_dds.inl" />
+    <None Include="lib\gli\core\load_kmg.inl" />
+    <None Include="lib\gli\core\load_ktx.inl" />
+    <None Include="lib\gli\core\make_texture.inl" />
+    <None Include="lib\gli\core\reduce.inl" />
+    <None Include="lib\gli\core\s3tc.inl" />
+    <None Include="lib\gli\core\sampler.inl" />
+    <None Include="lib\gli\core\sampler1d.inl" />
+    <None Include="lib\gli\core\sampler1d_array.inl" />
+    <None Include="lib\gli\core\sampler2d.inl" />
+    <None Include="lib\gli\core\sampler2d_array.inl" />
+    <None Include="lib\gli\core\sampler3d.inl" />
+    <None Include="lib\gli\core\sampler_cube.inl" />
+    <None Include="lib\gli\core\sampler_cube_array.inl" />
+    <None Include="lib\gli\core\save.inl" />
+    <None Include="lib\gli\core\save_dds.inl" />
+    <None Include="lib\gli\core\save_kmg.inl" />
+    <None Include="lib\gli\core\save_ktx.inl" />
+    <None Include="lib\gli\core\storage_linear.inl" />
+    <None Include="lib\gli\core\texture.inl" />
+    <None Include="lib\gli\core\texture1d.inl" />
+    <None Include="lib\gli\core\texture1d_array.inl" />
+    <None Include="lib\gli\core\texture2d.inl" />
+    <None Include="lib\gli\core\texture2d_array.inl" />
+    <None Include="lib\gli\core\texture3d.inl" />
+    <None Include="lib\gli\core\texture_cube.inl" />
+    <None Include="lib\gli\core\texture_cube_array.inl" />
+    <None Include="lib\gli\core\transform.inl" />
+    <None Include="lib\gli\core\view.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="lib">
+      <UniqueIdentifier>{ef05e3c3-d036-43d7-a90a-fd8785a6f40f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\gli">
+      <UniqueIdentifier>{1b04ef8d-ede9-4cef-8b3e-6c64fcc73ef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\lodepng">
+      <UniqueIdentifier>{ca2d24df-30b7-4755-a43c-67ef57c304b9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ImageIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\lodepng\include\lodepng\lodepng.h">
+      <Filter>lib\lodepng</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\lodepng\include\lodepng\lodepng_util.h">
+      <Filter>lib\lodepng</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\lodepng\lodepng.h">
+      <Filter>lib\lodepng</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\lodepng\lodepng_util.h">
+      <Filter>lib\lodepng</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\clear.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\comparison.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\convert.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\copy.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\bc.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\clear.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\convert_func.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\coord.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\file.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\filter.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\filter_compute.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\flip.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\mipmaps_compute.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\s3tc.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\core\storage_linear.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\duplicate.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\dx.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\format.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\generate_mipmaps.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\gl.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\gli.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\image.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\levels.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\load.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\load_dds.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\load_kmg.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\load_ktx.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\make_texture.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\reduce.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\sampler.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\sampler1d.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\sampler1d_array.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\sampler2d.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\sampler2d_array.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\sampler3d.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\sampler_cube.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\sampler_cube_array.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\save.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\save_dds.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\save_kmg.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\save_ktx.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\target.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\texture.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\texture1d.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\texture1d_array.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\texture2d.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\texture2d_array.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\texture3d.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\texture_cube.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\texture_cube_array.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\transform.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\type.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\gli\view.hpp">
+      <Filter>lib\gli</Filter>
+    </ClInclude>
+    <ClInclude Include="SCM.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SCMAP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SCA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ImageIO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\lodepng\include\lodepng\lodepng.cpp">
+      <Filter>lib\lodepng</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\lodepng\include\lodepng\lodepng_util.cpp">
+      <Filter>lib\lodepng</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\lodepng\lodepng.cpp">
+      <Filter>lib\lodepng</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\lodepng\lodepng_util.cpp">
+      <Filter>lib\lodepng</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\gli\core\dummy.cpp">
+      <Filter>lib\gli</Filter>
+    </ClCompile>
+    <ClCompile Include="SCA.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SCM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SCMAP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="lib\gli\core\bc.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\clear.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\comparison.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\convert.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\copy.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\duplicate.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\dx.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\file.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\filter.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\flip.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\format.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\generate_mipmaps.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\gl.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\image.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\levels.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\load.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\load_dds.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\load_kmg.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\load_ktx.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\make_texture.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\reduce.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\s3tc.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\sampler.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\sampler1d.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\sampler1d_array.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\sampler2d.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\sampler2d_array.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\sampler3d.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\sampler_cube.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\sampler_cube_array.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\save.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\save_dds.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\save_kmg.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\save_ktx.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\storage_linear.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\texture.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\texture1d.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\texture1d_array.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\texture2d.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\texture2d_array.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\texture3d.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\texture_cube.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\texture_cube_array.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\transform.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+    <None Include="lib\gli\core\view.inl">
+      <Filter>lib\gli</Filter>
+    </None>
+  </ItemGroup>
+</Project>
