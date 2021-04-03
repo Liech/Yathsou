@@ -4,9 +4,8 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Drawables/Background.h"
 
-#include "AhwassaGraphicsLib/BasicRenderer/RectangleRenderer.h"
-#include "AhwassaGraphicsLib/Graphics/Rectangles.h"
-#include "AhwassaGraphicsLib/Graphics/Rectangle.h"
+#include "AhwassaGraphicsLib/InstancedRenderer/InstancedRectangleRenderer.h"
+#include "AhwassaGraphicsLib/InstancedRenderer/Rectangle.h"
 
 
 int main(int argc, char** argv) {
@@ -17,9 +16,9 @@ int main(int argc, char** argv) {
 
   std::vector<std::shared_ptr<Ahwassa::Rectangle>> handle;
 
-  std::unique_ptr<Ahwassa::Rectangles> g;
+  std::unique_ptr<Ahwassa::InstancedRectangleRenderer> g;
   w.Startup = [&]() {
-    g = std::make_unique<Ahwassa::Rectangles>(&w);
+    g = std::make_unique<Ahwassa::InstancedRectangleRenderer>(&w);
 
     for (int i = 0; i < 10000; i++) {
       auto rec = Iyathuum::glmAABB<2>(glm::vec2(rand() % width, rand() % height), glm::vec2(rand()%10+10, rand()%10+10));

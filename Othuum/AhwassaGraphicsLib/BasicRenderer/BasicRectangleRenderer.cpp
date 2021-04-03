@@ -1,4 +1,4 @@
-#include "RectangleRenderer.h"
+#include "BasicRectangleRenderer.h"
 
 #include "glad/glad.h"
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
@@ -14,7 +14,7 @@
 #include "AhwassaGraphicsLib/Vertex/PositionVertex.h"
 
 namespace Ahwassa {
-  struct RectangleRenderer::RenderVars {
+  struct BasicRectangleRenderer::RenderVars {
     std::unique_ptr<VBO<PositionVertex>>   vbo;
     std::unique_ptr<VAO<PositionVertex>>   vao;
     std::unique_ptr<ShaderProgram>         shader;
@@ -25,20 +25,20 @@ namespace Ahwassa {
     virtual ~RenderVars() {}
   };
 
-  RectangleRenderer::RectangleRenderer(Window* w) {
-    _vars = std::make_shared<RectangleRenderer::RenderVars>();
+  BasicRectangleRenderer::BasicRectangleRenderer(Window* w) {
+    _vars = std::make_shared<BasicRectangleRenderer::RenderVars>();
     _vars->window = w;
     makeShader();
   }
 
-  void RectangleRenderer::drawRectangle(glm::vec2 pos, glm::vec2 size, Iyathuum::Color color) {
+  void BasicRectangleRenderer::drawRectangle(glm::vec2 pos, glm::vec2 size, Iyathuum::Color color) {
     Iyathuum::glmAABB<2> box;
     box.setPosition(pos);
     box.setSize(size);
     drawRectangle(box, color);
   }
   
-  void RectangleRenderer::drawRectangle(Iyathuum::glmAABB<2> box, Iyathuum::Color color) {
+  void BasicRectangleRenderer::drawRectangle(Iyathuum::glmAABB<2> box, Iyathuum::Color color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
@@ -69,7 +69,7 @@ namespace Ahwassa {
     _vars->vao->draw();
   }
 
-  void RectangleRenderer::start() {
+  void BasicRectangleRenderer::start() {
     if (_inRenderProcess == true)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
     _inRenderProcess = true;
@@ -79,7 +79,7 @@ namespace Ahwassa {
     _vars->shader->bind();
   }
 
-  void RectangleRenderer::end() {
+  void BasicRectangleRenderer::end() {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in endTextRender");
     _inRenderProcess = false;
@@ -87,7 +87,7 @@ namespace Ahwassa {
     glEnable(GL_DEPTH_TEST);
   }
 
-  void RectangleRenderer::makeShader() {
+  void BasicRectangleRenderer::makeShader() {
     std::cout << "Load Shader" << std::endl;
 
     std::string vertex_shader_source = R"(
@@ -120,12 +120,12 @@ namespace Ahwassa {
     _vars->vao = std::make_unique<VAO<PositionVertex>>(_vars->vbo.get());
     _vars->shader = std::make_unique<ShaderProgram>(PositionVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
-  void RectangleRenderer::setClippingRectangle(Iyathuum::glmAABB<2> box) {
+  void BasicRectangleRenderer::setClippingRectangle(Iyathuum::glmAABB<2> box) {
     _clipping = true;
     _clippingBox = box;
   }
 
-  void RectangleRenderer::disableClipping() {
+  void BasicRectangleRenderer::disableClipping() {
     _clipping = false;
   }
 }

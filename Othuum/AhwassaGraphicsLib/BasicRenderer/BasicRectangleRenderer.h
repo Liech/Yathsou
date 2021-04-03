@@ -12,10 +12,10 @@
 namespace Ahwassa {
   class Window;
 
-  class RectangleRenderer {
+  class BasicRectangleRenderer {
   public:
-    RectangleRenderer(Window*);
-    virtual ~RectangleRenderer() {}
+    BasicRectangleRenderer(Window*);
+    virtual ~BasicRectangleRenderer() {}
     void start();
     void end();
     void drawRectangle(glm::vec2 pos, glm::vec2 size, Iyathuum::Color color);

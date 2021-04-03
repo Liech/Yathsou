@@ -234,7 +234,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BasicRenderer\RectangleRenderer.h" />
+    <ClInclude Include="BasicRenderer\BasicRectangleRenderer.h" />
     <ClInclude Include="BufferObjects\IBO.h" />
     <ClInclude Include="BufferObjects\IVAO.h" />
     <ClInclude Include="BufferObjects\IVBO.h" />
@@ -246,10 +246,10 @@
     <ClInclude Include="Core\Window.h" />
     <ClInclude Include="Drawables\Background.h" />
     <ClInclude Include="Drawables\Drawable.h" />
-    <ClInclude Include="Graphics\Rectangles.h" />
-    <ClInclude Include="Graphics\Rectangle.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />
+    <ClInclude Include="InstancedRenderer\InstancedRectangleRenderer.h" />
+    <ClInclude Include="InstancedRenderer\Rectangle.h" />
     <ClInclude Include="Uniforms\Rendertarget.h" />
     <ClInclude Include="Uniforms\SSBOint.h" />
     <ClInclude Include="Uniforms\SSBOvec4.h" />
@@ -289,7 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
-    <ClCompile Include="BasicRenderer\RectangleRenderer.cpp" />
+    <ClCompile Include="BasicRenderer\BasicRectangleRenderer.cpp" />
     <ClCompile Include="BufferObjects\IBO.cpp" />
     <ClCompile Include="BufferObjects\IVAO.cpp" />
     <ClCompile Include="BufferObjects\IVBO.cpp" />
@@ -301,10 +301,10 @@
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Drawables\Background.cpp" />
     <ClCompile Include="Drawables\Drawable.cpp" />
-    <ClCompile Include="Graphics\Rectangles.cpp" />
-    <ClCompile Include="Graphics\Rectangle.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
+    <ClCompile Include="InstancedRenderer\InstancedRectangleRenderer.cpp" />
+    <ClCompile Include="InstancedRenderer\Rectangle.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />
     <ClCompile Include="Uniforms\SSBOint.cpp" />
     <ClCompile Include="Uniforms\SSBOvec4.cpp" />

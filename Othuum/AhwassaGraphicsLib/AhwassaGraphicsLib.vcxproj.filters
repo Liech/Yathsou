@@ -73,10 +73,10 @@
     <Filter Include="Source Files\BasicRenderer">
       <UniqueIdentifier>{a03cf5ca-440d-4aed-a706-bba3bff81229}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Graphics">
+    <Filter Include="Header Files\InstancedRenderer">
       <UniqueIdentifier>{9619a74d-4e64-49ad-98a4-9048ef661def}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Graphics">
+    <Filter Include="Source Files\InstancedRenderer">
       <UniqueIdentifier>{1be1911c-8dd2-445c-b29c-f32c5ba26bc2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -225,17 +225,17 @@
     <ClInclude Include="Drawables\Drawable.h">
       <Filter>Header Files\Drawables</Filter>
     </ClInclude>
-    <ClInclude Include="BasicRenderer\RectangleRenderer.h">
+    <ClInclude Include="BasicRenderer\BasicRectangleRenderer.h">
       <Filter>Header Files\BasicRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Rectangles.h">
-      <Filter>Header Files\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Graphics\Rectangle.h">
-      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Uniforms\UniformVecVec3.h">
       <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedRenderer\InstancedRectangleRenderer.h">
+      <Filter>Header Files\InstancedRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedRenderer\Rectangle.h">
+      <Filter>Header Files\InstancedRenderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -347,17 +347,17 @@
     <ClCompile Include="Drawables\Drawable.cpp">
       <Filter>Source Files\Drawables</Filter>
     </ClCompile>
-    <ClCompile Include="BasicRenderer\RectangleRenderer.cpp">
+    <ClCompile Include="BasicRenderer\BasicRectangleRenderer.cpp">
       <Filter>Source Files\BasicRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Rectangle.cpp">
-      <Filter>Source Files\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics\Rectangles.cpp">
-      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Uniforms\UniformVecVec3.cpp">
       <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedRenderer\InstancedRectangleRenderer.cpp">
+      <Filter>Source Files\InstancedRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedRenderer\Rectangle.cpp">
+      <Filter>Source Files\InstancedRenderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

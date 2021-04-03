@@ -10,9 +10,9 @@
 namespace Ahwassa {
   class Rectangle;
 
-  class Rectangles : Drawable{
+  class InstancedRectangleRenderer : Drawable{
   public:
-    Rectangles(Window*);
+    InstancedRectangleRenderer(Window*);
 
     std::shared_ptr<Rectangle> newRectangle(Iyathuum::glmAABB<2> = Iyathuum::glmAABB<2>(glm::vec2(0,0),glm::vec2(100,100)), Iyathuum::Color = Iyathuum::Color(255,255,255));
 
@@ -26,6 +26,6 @@ namespace Ahwassa {
     std::shared_ptr<RenderVars> _vars;
     size_t _bufferSize = 1000;
 
-    std::vector<std::weak_ptr<Rectangle>> _rectangles;
+    std::vector<std::weak_ptr<Rectangle>> _InstancedRectangleRenderer;
   };
 }
