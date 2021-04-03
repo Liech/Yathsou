@@ -1,6 +1,5 @@
 #pragma once
 
-#include <glad/glad.h>
 #include <string>
 #include <stdexcept>
 
@@ -13,9 +12,11 @@ namespace Ahwassa {
 
     AttributeDescription(const std::string& _name, const int& _size, const DataType& _type);
 
-    size_t      getSize()         const;
-    std::string getTypeAsString() const;
-    std::string getName()         const;
+    size_t                         getSize()         const;
+    size_t                         getSizeOf()       const;
+    std::string                    getTypeAsString() const;
+    std::string                    getName()         const;
+    AttributeDescription::DataType getType()         const;
 
   private:
     std::string name;

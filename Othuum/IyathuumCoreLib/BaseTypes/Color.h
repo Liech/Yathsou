@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 
 namespace Iyathuum {
   //RGBA color
@@ -33,6 +34,14 @@ namespace Iyathuum {
         (_color[0] + other._color[0]) / 2,
         (_color[1] + other._color[1]) / 2,
         (_color[2] + other._color[2]) / 2);
+    }
+
+    glm::vec3 to3() {
+      return glm::vec3(_color[0] / 255.0f, _color[1] / 255.0f, _color[2] / 255.0f);
+    }
+
+    glm::vec4 to4() {
+      return glm::vec4(_color[0] / 255.0f, _color[1] / 255.0f, _color[2] / 255.0f, _color[3] / 255.0f);
     }
 
     unsigned char& operator [](int i);

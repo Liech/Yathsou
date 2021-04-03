@@ -9,9 +9,9 @@ namespace Ahwassa {
     unsigned int getID();
     size_t       getSize();
   protected:
-    void setData(const void* pos, size_t size);
+    void setRawData(const void* pos, size_t size);
   private:
-    unsigned int _id;
+    unsigned int _id = 0;
     size_t _size;
     size_t _structsize;
   };

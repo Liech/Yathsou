@@ -12,6 +12,10 @@ namespace Ahwassa {
     return name;
   }
 
+  AttributeDescription::DataType AttributeDescription::getType() const {
+    return type;
+  }
+
   size_t AttributeDescription::getSize() const {
     switch (type)
     {
@@ -25,6 +29,10 @@ namespace Ahwassa {
       break;
     }
     throw std::runtime_error("Unkown DataType");
+  }
+
+  size_t AttributeDescription::getSizeOf() const {
+    return size;
   }
 
   std::string AttributeDescription::getTypeAsString() const{

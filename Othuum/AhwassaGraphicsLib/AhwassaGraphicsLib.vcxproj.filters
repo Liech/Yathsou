@@ -67,6 +67,12 @@
     <Filter Include="Source Files\Drawables">
       <UniqueIdentifier>{dd417644-d6cb-4d83-a196-8643d2bf11fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\BasicRenderer">
+      <UniqueIdentifier>{07f74b21-e5a1-4e2f-9ea6-d657da73816c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BasicRenderer">
+      <UniqueIdentifier>{a03cf5ca-440d-4aed-a706-bba3bff81229}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -213,6 +219,9 @@
     <ClInclude Include="Drawables\Drawable.h">
       <Filter>Header Files\Drawables</Filter>
     </ClInclude>
+    <ClInclude Include="BasicRenderer\RectangleRenderer.h">
+      <Filter>Header Files\BasicRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -322,6 +331,9 @@
     </ClCompile>
     <ClCompile Include="Drawables\Drawable.cpp">
       <Filter>Source Files\Drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicRenderer\RectangleRenderer.cpp">
+      <Filter>Source Files\BasicRenderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

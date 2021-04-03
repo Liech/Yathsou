@@ -5,8 +5,8 @@
 
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
-#include "Uniforms/UniformMat4.h"
-#include "Uniforms/UniformVec3.h"
+#include "AhwassaGraphicsLib/Uniforms/UniformMat4.h"
+#include "AhwassaGraphicsLib/Uniforms/UniformVec3.h"
 
 namespace Ahwassa {
   class Camera {

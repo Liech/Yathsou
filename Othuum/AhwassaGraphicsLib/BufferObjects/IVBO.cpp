@@ -23,7 +23,7 @@ namespace Ahwassa {
   size_t IVBO::getSize() {
     return _size;
   }
-  void IVBO::setData(const void* pos, size_t size) {
+  void IVBO::setRawData(const void* pos, size_t size) {
     glBindBuffer(GL_ARRAY_BUFFER, _id);
     glBufferSubData(GL_ARRAY_BUFFER, 0, size * _structsize, pos);
     glBindBuffer(GL_ARRAY_BUFFER, 0);

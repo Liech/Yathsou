@@ -30,10 +30,10 @@ namespace Ahwassa {
       stride += bindings[i].getSize();
     size_t currentOffset = 0;
     for (int i = 0; i < bindings.size(); i++) {
-      AttributeDescription bind = bindings[i];
+      const AttributeDescription& bind = bindings[i];
       glEnableVertexAttribArray(i);
       glBindBuffer(GL_ARRAY_BUFFER, _vbo->getID());
-      glVertexAttribPointer(i, (GLint)bind.getSize(), GL_FLOAT, GL_FALSE, (GLsizei)stride, (GLvoid*)currentOffset);
+      glVertexAttribPointer(i, (GLint)bind.getSizeOf(), (GLenum)bind.getType(), GL_FALSE, (GLsizei)stride, (GLvoid*)currentOffset);
       currentOffset += bind.getSize();
     }
 

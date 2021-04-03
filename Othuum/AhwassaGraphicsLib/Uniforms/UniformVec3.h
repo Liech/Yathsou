@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Uniform.h"
+#include "AhwassaGraphicsLib/Uniforms/Uniform.h"
 
 namespace Ahwassa {
 

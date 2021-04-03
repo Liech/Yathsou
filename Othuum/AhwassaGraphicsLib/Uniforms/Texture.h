@@ -2,7 +2,7 @@
 
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "Uniform.h"
+#include "AhwassaGraphicsLib/Uniforms/Uniform.h"
 
 namespace Ahwassa {
   class Texture : public Uniform {

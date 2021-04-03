@@ -3,11 +3,11 @@
 #include <vector>
 #include <stdexcept>
 
-#include "IVBO.h"
+#include "AhwassaGraphicsLib/BufferObjects/IVBO.h"
 
 namespace Ahwassa{
   template<typename Struct>
-  class VBO : IVBO
+  class VBO : public IVBO
   {
   public:
     VBO(std::vector<Struct> content) : IVBO(content.size(), sizeof(Struct),content.data())
@@ -21,7 +21,7 @@ namespace Ahwassa{
     void setData(std::vector<Struct> content) {
       if (getSize() != content.size())
         throw std::runtime_error("Size different");
-      setData(content.data(), content.size());
+      setRawData(content.data(), content.size());
     }
   };
 }

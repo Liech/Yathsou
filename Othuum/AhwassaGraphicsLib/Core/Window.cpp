@@ -8,7 +8,7 @@
 
 #include "Input/Input.h"
 
-#include "YolonaOss/Lib/glad/include/glad/glad.h"
+#include "glad/glad.h"
 #include "YolonaOss/Lib/GLWF/include/GLFW/glfw3.h"
 
 namespace Ahwassa {
