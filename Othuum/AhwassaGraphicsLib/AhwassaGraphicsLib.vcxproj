@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -246,6 +246,8 @@
     <ClInclude Include="Core\Window.h" />
     <ClInclude Include="Drawables\Background.h" />
     <ClInclude Include="Drawables\Drawable.h" />
+    <ClInclude Include="Graphics\Rectangles.h" />
+    <ClInclude Include="Graphics\Rectangle.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />
     <ClInclude Include="Uniforms\Rendertarget.h" />
@@ -298,6 +300,8 @@
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Drawables\Background.cpp" />
     <ClCompile Include="Drawables\Drawable.cpp" />
+    <ClCompile Include="Graphics\Rectangles.cpp" />
+    <ClCompile Include="Graphics\Rectangle.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />

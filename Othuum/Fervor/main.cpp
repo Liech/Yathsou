@@ -5,6 +5,7 @@
 #include "AhwassaGraphicsLib/Drawables/Background.h"
 
 #include "AhwassaGraphicsLib/BasicRenderer/RectangleRenderer.h"
+#include "AhwassaGraphicsLib/Graphics/Rectangles.h"
 
 
 int main(int argc, char** argv) {
@@ -13,16 +14,25 @@ int main(int argc, char** argv) {
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
 
+  auto rec = Iyathuum::glmAABB<2>(glm::vec2(50, 50), glm::vec2(100, 100));
+  auto clr = Iyathuum::Color(128, 20, 69);
+  std::shared_ptr<Ahwassa::Rectangle> handle;
+
   std::unique_ptr<Ahwassa::RectangleRenderer> rect;
-  w.Startup = [&w,&rect]() {
+  std::unique_ptr<Ahwassa::Rectangles> g;
+  w.Startup = [&]() {
     rect = std::make_unique<Ahwassa::RectangleRenderer>(&w);
+    g = std::make_unique<Ahwassa::Rectangles>(&w);
+
+    handle = g->newRectangle(rec, clr);
   };
 
-  w.Update = [&w,&b,&rect]() {
+  w.Update = [&]() {
     b.draw();
-    rect->start();
-    rect->drawRectangle(Iyathuum::glmAABB<2>(glm::vec2(50, 50), glm::vec2(100, 100)), Iyathuum::Color(128,20,69));
-    rect->end();
+    g->draw();
+    //rect->start();
+    //rect->drawRectangle(rec, clr);
+    //rect->end();
   };
   w.run();
 

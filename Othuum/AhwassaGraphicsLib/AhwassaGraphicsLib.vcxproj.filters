@@ -73,6 +73,12 @@
     <Filter Include="Source Files\BasicRenderer">
       <UniqueIdentifier>{a03cf5ca-440d-4aed-a706-bba3bff81229}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{9619a74d-4e64-49ad-98a4-9048ef661def}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Graphics">
+      <UniqueIdentifier>{1be1911c-8dd2-445c-b29c-f32c5ba26bc2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -222,6 +228,12 @@
     <ClInclude Include="BasicRenderer\RectangleRenderer.h">
       <Filter>Header Files\BasicRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="Graphics\Rectangles.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Rectangle.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -334,6 +346,12 @@
     </ClCompile>
     <ClCompile Include="BasicRenderer\RectangleRenderer.cpp">
       <Filter>Source Files\BasicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Rectangle.cpp">
+      <Filter>Source Files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics\Rectangles.cpp">
+      <Filter>Source Files\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
