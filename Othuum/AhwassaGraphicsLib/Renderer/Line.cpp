@@ -1,10 +1,10 @@
-#include "InstancedLine.h"
+#include "Line.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 
 namespace Ahwassa {
-  InstancedLine::InstancedLine(const glm::vec3& start, const glm::vec3& end, const float& size, const Iyathuum::Color& clr) {
+  Line::Line(const glm::vec3& start, const glm::vec3& end, const float& size, const Iyathuum::Color& clr) {
     _start = start;
     _end   = end  ;
     _size  = size ;
@@ -12,46 +12,46 @@ namespace Ahwassa {
     recalculate();
   }
 
-  void InstancedLine::setStart(const glm::vec3& pos) {
+  void Line::setStart(const glm::vec3& pos) {
     _start = pos;
     recalculate();
   }
 
-  glm::vec3 InstancedLine::getStart() const {
+  glm::vec3 Line::getStart() const {
     return _start;
   }
 
-  void InstancedLine::setEnd(const glm::vec3& pos) {
+  void Line::setEnd(const glm::vec3& pos) {
     _end = pos;
     recalculate();
   }
 
-  glm::vec3 InstancedLine::getEnd() const {
+  glm::vec3 Line::getEnd() const {
     return _end;
   }
 
-  void InstancedLine::setThickness(const float& size) {
+  void Line::setThickness(const float& size) {
     _size = size;
     recalculate();
   }
 
-  float InstancedLine::getThickness() const {
+  float Line::getThickness() const {
     return _size;
   }
 
-  void InstancedLine::setColor(const Iyathuum::Color& clr) {
+  void Line::setColor(const Iyathuum::Color& clr) {
     _clr = clr;
   }
 
-  Iyathuum::Color InstancedLine::getColor() const {
+  Iyathuum::Color Line::getColor() const {
     return _clr;
   }
 
-  glm::mat4 InstancedLine::matrix() const {
+  glm::mat4 Line::matrix() const {
     return _matrix;
   }
 
-  void InstancedLine::recalculate() {
+  void Line::recalculate() {
     const float l = glm::length(_end - _start);
     const float s = _size;
 

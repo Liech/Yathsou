@@ -9,6 +9,8 @@ struct GLFWwindow;
 namespace Ahwassa {
   class Drawable;
   class Input;
+  class Renderer;
+  class Camera;
 
   class Window
   {
@@ -16,21 +18,25 @@ namespace Ahwassa {
     Window(int width, int height);
     ~Window();
 
-    Input& input();
+    Input&                  input   ();
+    Renderer&               renderer();
+    std::shared_ptr<Camera> camera  ();
 
     void run  ();
     void close();
 
     std::function<void()> Startup = []() {};
-    std::function<void()> Update = []() {};
+    std::function<void()> Update  = []() {};
 
     int getWidth () { return _width; }
     int getHeight() { return _height; }
 
   private:
-    int _width = 1920;
+    int _width  = 1920;
     int _height = 1080;
     GLFWwindow* _window = nullptr;
-    std::unique_ptr<Input> _input;
+    std::unique_ptr<Input>    _input;
+    std::unique_ptr<Renderer> _renderer;
+    std::shared_ptr<Camera>   _camera;
   };
 }

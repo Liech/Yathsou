@@ -5,27 +5,32 @@
 
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
 namespace Ahwassa {
-  class InstancedRectangle;
+  class Sphere;
+  class Camera;
 
-  class InstancedRectangleRenderer : Drawable{
+  class SphereRenderer {
   public:
-    InstancedRectangleRenderer(Window*);
+    SphereRenderer(std::shared_ptr<Camera> camera);
 
-    std::shared_ptr<InstancedRectangle> newRectangle(Iyathuum::glmAABB<2> = Iyathuum::glmAABB<2>(glm::vec2(0,0),glm::vec2(100,100)), Iyathuum::Color = Iyathuum::Color(255,255,255));
+    std::shared_ptr<Sphere> newSphere (const glm::vec3& pos, float size, Iyathuum::Color = Iyathuum::Color(255, 255, 255));
+
+    glm::vec3 getLightDir()const;
+    void setLightDir(const glm::vec3&);
 
     void draw();
   private:
     void shaderCall(const std::vector<glm::mat4>&, const std::vector<glm::vec3>&, size_t amount);
     void makeShader();
     void makeModelArray(size_t bufferSize);
+    void genSphere();
 
     struct RenderVars;
     std::shared_ptr<RenderVars> _vars;
     size_t _bufferSize = 1000;
+    glm::vec3 _lightDir;
 
-    std::vector<std::weak_ptr<InstancedRectangle>> _InstancedRectangleRenderer;
+    std::vector<std::weak_ptr<Sphere>> _instances;
   };
 }

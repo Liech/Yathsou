@@ -1,10 +1,10 @@
-#include "InstancedRectangle.h"
+#include "Rectangle.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 
 namespace Ahwassa {
-  glm::mat4 InstancedRectangle::matrix() const {
+  glm::mat4 Rectangle::matrix() const {
     const float x  = location.getPosition()[0];
     const float y  = location.getPosition()[1];
     const float xs = location.getSize    ()[0];
@@ -18,7 +18,7 @@ namespace Ahwassa {
     return glm::make_mat4(transAndScale);
   }
 
-  glm::vec3 InstancedRectangle::colorVec() const {
+  glm::vec3 Rectangle::colorVec() const {
     return color.to3();
   }
 }

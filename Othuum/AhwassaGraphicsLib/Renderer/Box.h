@@ -2,12 +2,12 @@
 
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "AhwassaGraphicsLib/InstancedRenderer/IInstancedBox.h"
+#include "AhwassaGraphicsLib/Renderer/IBox.h"
 
 namespace Ahwassa {
-  class InstancedBox : public IInstancedBox {
+  class Box : public IBox {
   public:
-    InstancedBox(const glm::mat4&, const Iyathuum::Color&);
+    Box(const glm::mat4&, const Iyathuum::Color&);
 
     void setMatrix(const glm::mat4&);
     glm::mat4 getMatrix() const;

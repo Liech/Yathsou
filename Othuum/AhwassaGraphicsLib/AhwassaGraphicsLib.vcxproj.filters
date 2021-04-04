@@ -73,12 +73,6 @@
     <Filter Include="Source Files\BasicRenderer">
       <UniqueIdentifier>{a03cf5ca-440d-4aed-a706-bba3bff81229}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\InstancedRenderer">
-      <UniqueIdentifier>{9619a74d-4e64-49ad-98a4-9048ef661def}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\InstancedRenderer">
-      <UniqueIdentifier>{1be1911c-8dd2-445c-b29c-f32c5ba26bc2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Data">
       <UniqueIdentifier>{eb9bf757-b1e0-453b-a1fe-7eaa55e287d3}</UniqueIdentifier>
     </Filter>
@@ -96,6 +90,18 @@
     </Filter>
     <Filter Include="Source Files\VR">
       <UniqueIdentifier>{e5857944-3c17-4037-8f8f-5f59d9c82521}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Widgets">
+      <UniqueIdentifier>{54ca64ad-805a-4b5f-8108-843089911491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Widgets">
+      <UniqueIdentifier>{9a524247-cc8c-4f2c-93b0-d378f906b783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{9619a74d-4e64-49ad-98a4-9048ef661def}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{1be1911c-8dd2-445c-b29c-f32c5ba26bc2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -249,12 +255,6 @@
     <ClInclude Include="Uniforms\UniformVecVec3.h">
       <Filter>Header Files\Uniform</Filter>
     </ClInclude>
-    <ClInclude Include="InstancedRenderer\InstancedRectangleRenderer.h">
-      <Filter>Header Files\InstancedRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="InstancedRenderer\InstancedRectangle.h">
-      <Filter>Header Files\InstancedRenderer</Filter>
-    </ClInclude>
     <ClInclude Include="BasicRenderer\BasicTextRenderer.h">
       <Filter>Header Files\BasicRenderer</Filter>
     </ClInclude>
@@ -285,32 +285,62 @@
     <ClInclude Include="BasicRenderer\BasicBoxRenderer.h">
       <Filter>Header Files\BasicRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="InstancedRenderer\InstancedBox.h">
-      <Filter>Header Files\InstancedRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="InstancedRenderer\InstancedBoxRenderer.h">
-      <Filter>Header Files\InstancedRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="InstancedRenderer\InstancedDot.h">
-      <Filter>Header Files\InstancedRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="InstancedRenderer\InstancedLine.h">
-      <Filter>Header Files\InstancedRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="InstancedRenderer\IInstancedBox.h">
-      <Filter>Header Files\InstancedRenderer</Filter>
-    </ClInclude>
     <ClInclude Include="Input\FreeCamera.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
-    <ClInclude Include="InstancedRenderer\InstancedSphereRenderer.h">
-      <Filter>Header Files\InstancedRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="InstancedRenderer\InstancedSphere.h">
-      <Filter>Header Files\InstancedRenderer</Filter>
-    </ClInclude>
     <ClInclude Include="Drawables\FPS.h">
       <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\Slider.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\Button.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\Label.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\LineEdit.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\ListLayout.h">
+      <Filter>Header Files\Widgets</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Renderer.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\IBox.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Line.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Rectangle.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RectangleRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Sphere.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\SphereRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Text.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\TextRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Box.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\BoxRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Dot.h">
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -428,12 +458,6 @@
     <ClCompile Include="Uniforms\UniformVecVec3.cpp">
       <Filter>Source Files\Uniform</Filter>
     </ClCompile>
-    <ClCompile Include="InstancedRenderer\InstancedRectangleRenderer.cpp">
-      <Filter>Source Files\InstancedRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="InstancedRenderer\InstancedRectangle.cpp">
-      <Filter>Source Files\InstancedRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp">
       <Filter>Source Files\BasicRenderer</Filter>
     </ClCompile>
@@ -455,29 +479,59 @@
     <ClCompile Include="BasicRenderer\BasicBoxRenderer.cpp">
       <Filter>Source Files\BasicRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="InstancedRenderer\InstancedBox.cpp">
-      <Filter>Source Files\InstancedRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="InstancedRenderer\InstancedBoxRenderer.cpp">
-      <Filter>Source Files\InstancedRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="InstancedRenderer\InstancedDot.cpp">
-      <Filter>Source Files\InstancedRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="InstancedRenderer\InstancedLine.cpp">
-      <Filter>Source Files\InstancedRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="Input\FreeCamera.cpp">
       <Filter>Source Files\Input</Filter>
     </ClCompile>
-    <ClCompile Include="InstancedRenderer\InstancedSphere.cpp">
-      <Filter>Source Files\InstancedRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="InstancedRenderer\InstancedSphereRenderer.cpp">
-      <Filter>Source Files\InstancedRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="Drawables\FPS.cpp">
       <Filter>Source Files\Drawables</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\Button.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\Label.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\LineEdit.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\ListLayout.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Widgets\Slider.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Renderer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Line.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Rectangle.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\RectangleRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Sphere.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\SphereRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Text.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\TextRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Box.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\BoxRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Dot.cpp">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

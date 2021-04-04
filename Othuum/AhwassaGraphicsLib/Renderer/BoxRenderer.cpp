@@ -1,7 +1,5 @@
-#include "InstancedRenderer/InstancedSphereRenderer.h"
+#include "Renderer/BoxRenderer.h"
 
-#define _USE_MATH_DEFINES
-#include <math.h>
 #include <iostream>
 #include "glad/glad.h"
 
@@ -18,12 +16,14 @@
 #include "AhwassaGraphicsLib/BufferObjects/IBO.h"
 #include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
 
-#include "InstancedSphere.h"
+#include "Dot.h"
+#include "Line.h"
+#include "Box.h"
 #include "Util.h"
 
 
 namespace Ahwassa {
-  struct InstancedSphereRenderer::RenderVars {
+  struct BoxRenderer::RenderVars {
     std::unique_ptr<VBO<PositionNormalVertex>> vbo;
     std::unique_ptr<VAO<PositionNormalVertex>> vao;
     std::unique_ptr<IBO>                       ibo;
@@ -36,8 +36,8 @@ namespace Ahwassa {
     virtual ~RenderVars() {}
   };
 
-  InstancedSphereRenderer::InstancedSphereRenderer(std::shared_ptr<Camera> camera) {
-    _vars = std::make_shared<InstancedSphereRenderer::RenderVars>();
+  BoxRenderer::BoxRenderer(std::shared_ptr<Camera> camera) {
+    _vars = std::make_shared<BoxRenderer::RenderVars>();
     _vars->camera = camera;
     _lightDir = glm::normalize(glm::vec3(25, 31, -21));
     _bufferSize = (Util::maxUniformAmount()-10) / 2;
@@ -45,15 +45,15 @@ namespace Ahwassa {
     makeShader();
   }
 
-  glm::vec3 InstancedSphereRenderer::getLightDir()const {
+  glm::vec3 BoxRenderer::getLightDir()const {
     return _lightDir;
   }
 
-  void InstancedSphereRenderer::setLightDir(const glm::vec3& pos) {
+  void BoxRenderer::setLightDir(const glm::vec3& pos) {
     _lightDir = pos;
   }
 
-  void InstancedSphereRenderer::draw() {
+  void BoxRenderer::draw() {
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -97,14 +97,14 @@ namespace Ahwassa {
     glDepthFunc(GL_LESS);
   }
 
-  void InstancedSphereRenderer::makeModelArray(size_t bufferSize) {
+  void BoxRenderer::makeModelArray(size_t bufferSize) {
     _vars->models = std::make_unique<UniformVecMat4>("models", bufferSize);
     _vars->colors = std::make_unique<UniformVecVec3>("colors", bufferSize);
   }
 
-  void InstancedSphereRenderer::makeShader() {
+  void BoxRenderer::makeShader() {
     std::cout << "Load Shader" << std::endl;
-    genSphere();
+    makeGeometry();
 
     std::string vertex_shader_source = R"(
       out vec3 clr;
@@ -145,7 +145,7 @@ namespace Ahwassa {
     _vars->shader = std::make_unique<ShaderProgram>(PositionNormalVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
-  void InstancedSphereRenderer::shaderCall(const std::vector<glm::mat4>& mats, const std::vector<glm::vec3>&clr, size_t amount) {
+  void BoxRenderer::shaderCall(const std::vector<glm::mat4>& mats, const std::vector<glm::vec3>&clr, size_t amount) {
     _vars->light->setValue(_lightDir);
     _vars->models->setValue(mats);
     _vars->colors->setValue(clr);
@@ -154,59 +154,76 @@ namespace Ahwassa {
     _vars->ibo->drawInstanced(_vars->vao.get(),amount);
   }
 
-  std::shared_ptr<InstancedSphere> InstancedSphereRenderer::newSphere(const glm::vec3& pos, float size, Iyathuum::Color clr) {
-    std::shared_ptr<InstancedSphere> result = std::make_shared<InstancedSphere>(pos,size,clr);
+  std::shared_ptr<Dot> BoxRenderer::newDot(const glm::vec3& pos, float size, Iyathuum::Color clr) {
+    std::shared_ptr<Dot> result = std::make_shared<Dot>(pos,size,clr);
     _instances.push_back(result);
     return result;
   }
 
-  //https://stackoverflow.com/questions/7687148/drawing-sphere-in-opengl-without-using-glusphere
-  void InstancedSphereRenderer::genSphere()
-  {
-    std::vector<PositionNormalVertex> result;
-    int uResolution = 15;
-    int vResolution = 15;
-    float r = 1;
-    auto F = [](float u, float v, float r) {return glm::vec3(cos(u) * sin(v) * r, cos(v) * r, sin(u) * sin(v) * r); };
-    auto triangle = [](glm::vec3 a, glm::vec3 b, glm::vec3 c) {};
-    float startU = 0;
-    float startV = 0;
-    float endU = M_PI * 2;
-    float endV = M_PI;
-    float stepU = (endU - startU) / uResolution; // step size between U-points on the grid
-    float stepV = (endV - startV) / vResolution; // step size between V-points on the grid
-    for (int i = 0; i < uResolution; i++) { // U-points
-      for (int j = 0; j < vResolution; j++) { // V-points
-        float u = i * stepU + startU;
-        float v = j * stepV + startV;
-        float un = (i + 1 == uResolution) ? endU : (i + 1) * stepU + startU;
-        float vn = (j + 1 == vResolution) ? endV : (j + 1) * stepV + startV;
-        // Find the four points of the grid
-        // square by evaluating the parametric
-        // surface function
-        glm::vec3 p0 = F(u, v, r);
-        glm::vec3 p1 = F(u, vn, r);
-        glm::vec3 p2 = F(un, v, r);
-        glm::vec3 p3 = F(un, vn, r);
-        // NOTE: For spheres, the normal is just the normalized
-        // version of each vertex point; this generally won't be the case for
-        // other parametric surfaces.
-        // Output the first triangle of this grid square
-        glm::vec3 offset(0, 0, 0);
-        result.push_back(PositionNormalVertex(p0 + offset, -glm::cross(p0 - p2, p1)));
-        result.push_back(PositionNormalVertex(p2 + offset, -glm::cross(p0 - p2, p1)));
-        result.push_back(PositionNormalVertex(p1 + offset, -glm::cross(p0 - p2, p1)));
-        result.push_back(PositionNormalVertex(p3 + offset, glm::cross(p3 - p1, p2)));
-        result.push_back(PositionNormalVertex(p1 + offset, glm::cross(p3 - p1, p2)));
-        result.push_back(PositionNormalVertex(p2 + offset, glm::cross(p3 - p1, p2)));
-      }
-    }
-    std::vector<int> indices;
-    indices.resize(result.size());
-    for (size_t i = 0; i < result.size(); i++)
-      indices[i] = i;
+  std::shared_ptr<Line> BoxRenderer::newLine(const glm::vec3& start, const glm::vec3& end, float size, Iyathuum::Color clr) {
+    std::shared_ptr<Line> result = std::make_shared<Line>(start, end, size, clr);
+    _instances.push_back(result);
+    return result;
+  }
+
+  std::shared_ptr<Box> BoxRenderer::newBox(const glm::mat4& mat, Iyathuum::Color clr) {
+    std::shared_ptr<Box> result = std::make_shared<Box>(mat,clr);
+    _instances.push_back(result);
+    return result;
+  }
+
+  void BoxRenderer::makeGeometry() {
+    std::vector<PositionNormalVertex> input;
+    float start = 0;
+    float end = 1;
+    //front
+    input.push_back(PositionNormalVertex(glm::vec3(start, start, end), glm::vec3(0, 0, 1)));
+    input.push_back(PositionNormalVertex(glm::vec3(end  , start, end), glm::vec3(0, 0, 1)));
+    input.push_back(PositionNormalVertex(glm::vec3(end  , end  , end), glm::vec3(0, 0, 1)));
+    input.push_back(PositionNormalVertex(glm::vec3(start, end  , end), glm::vec3(0, 0, 1)));
+
+    //right
+    input.push_back(PositionNormalVertex(glm::vec3(end, end, end    ), glm::vec3(1, 0, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(end, end, start  ), glm::vec3(1, 0, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(end, start, start), glm::vec3(1, 0, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(end, start, end  ), glm::vec3(1, 0, 0)));
+
+    //back
+    input.push_back(PositionNormalVertex(glm::vec3(start, start, start), glm::vec3(0, 0, -1)));
+    input.push_back(PositionNormalVertex(glm::vec3(end  , start, start), glm::vec3(0, 0, -1)));
+    input.push_back(PositionNormalVertex(glm::vec3(end  , end  , start), glm::vec3(0, 0, -1)));
+    input.push_back(PositionNormalVertex(glm::vec3(start, end  , start), glm::vec3(0, 0, -1)));
+
+    //left
+    input.push_back(PositionNormalVertex(glm::vec3(start, start, start), glm::vec3(-1, 0, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(start, start, end  ), glm::vec3(-1, 0, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(start, end  , end  ), glm::vec3(-1, 0, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(start, end  , start), glm::vec3(-1, 0, 0)));
+
+    //upper
+    input.push_back(PositionNormalVertex(glm::vec3(end  , end, end  )  , glm::vec3(0, 1, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(start, end, end  )  , glm::vec3(0, 1, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(start, end, start)  , glm::vec3(0, 1, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(end  , end, start)  , glm::vec3(0, 1, 0)));
+
+    //bottom
+    input.push_back(PositionNormalVertex(glm::vec3(start, start, start) , glm::vec3(0, -1, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(end  , start, start) , glm::vec3(0, -1, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(end  , start, end  ) , glm::vec3(0, -1, 0)));
+    input.push_back(PositionNormalVertex(glm::vec3(start, start, end  ) , glm::vec3(0, -1, 0)));
+
+    //note every face of the cube is on a single line
+    auto indices = std::vector<int>{
+      0,  1,  2,  0,  2,  3,   //front
+      4,  5,  6,  4,  6,  7,   //right
+      8,  9,  10, 8,  10, 11,  //back
+      12, 13, 14, 12, 14, 15,  //left
+      16, 17, 18, 16, 18, 19,  //upper
+      20, 21, 22, 20, 22, 23 }; //bottom
+
     _vars->ibo = std::make_unique<IBO>(indices);
-    _vars->vbo = std::make_unique<VBO<PositionNormalVertex>>(result);
+    _vars->vbo = std::make_unique<VBO<PositionNormalVertex>>(input);
     _vars->vao = std::make_unique<VAO<PositionNormalVertex>>(_vars->vbo.get());
   }
+
 }

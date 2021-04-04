@@ -245,6 +245,7 @@
     <ClInclude Include="BufferObjects\VBO.h" />
     <ClInclude Include="Core\AttributeDescription.h" />
     <ClInclude Include="Core\Camera.h" />
+    <ClInclude Include="Core\Renderer.h" />
     <ClInclude Include="Core\ShaderProgram.h" />
     <ClInclude Include="Core\Window.h" />
     <ClInclude Include="Drawables\Background.h" />
@@ -253,18 +254,20 @@
     <ClInclude Include="Input\FreeCamera.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />
-    <ClInclude Include="InstancedRenderer\IInstancedBox.h" />
-    <ClInclude Include="InstancedRenderer\InstancedBox.h" />
-    <ClInclude Include="InstancedRenderer\InstancedBoxRenderer.h" />
-    <ClInclude Include="InstancedRenderer\InstancedDot.h" />
-    <ClInclude Include="InstancedRenderer\InstancedLine.h" />
-    <ClInclude Include="InstancedRenderer\InstancedRectangleRenderer.h" />
-    <ClInclude Include="InstancedRenderer\InstancedRectangle.h" />
-    <ClInclude Include="InstancedRenderer\InstancedSphere.h" />
-    <ClInclude Include="InstancedRenderer\InstancedSphereRenderer.h" />
     <ClInclude Include="lib\openvr\openvr.h" />
     <ClInclude Include="lib\openvr\openvr_capi.h" />
     <ClInclude Include="lib\openvr\openvr_driver.h" />
+    <ClInclude Include="Renderer\Box.h" />
+    <ClInclude Include="Renderer\BoxRenderer.h" />
+    <ClInclude Include="Renderer\Dot.h" />
+    <ClInclude Include="Renderer\IBox.h" />
+    <ClInclude Include="Renderer\Line.h" />
+    <ClInclude Include="Renderer\Rectangle.h" />
+    <ClInclude Include="Renderer\RectangleRenderer.h" />
+    <ClInclude Include="Renderer\Sphere.h" />
+    <ClInclude Include="Renderer\SphereRenderer.h" />
+    <ClInclude Include="Renderer\Text.h" />
+    <ClInclude Include="Renderer\TextRenderer.h" />
     <ClInclude Include="Uniforms\Rendertarget.h" />
     <ClInclude Include="Uniforms\SSBOint.h" />
     <ClInclude Include="Uniforms\SSBOvec4.h" />
@@ -305,6 +308,11 @@
     <ClInclude Include="Vertex\SupComVertex.h" />
     <ClInclude Include="VR\VRController.h" />
     <ClInclude Include="VR\VR.h" />
+    <ClInclude Include="Widgets\Button.h" />
+    <ClInclude Include="Widgets\Label.h" />
+    <ClInclude Include="Widgets\LineEdit.h" />
+    <ClInclude Include="Widgets\ListLayout.h" />
+    <ClInclude Include="Widgets\Slider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
@@ -319,6 +327,7 @@
     <ClCompile Include="BufferObjects\VBO.cpp" />
     <ClCompile Include="Core\AttributeDescription.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
+    <ClCompile Include="Core\Renderer.cpp" />
     <ClCompile Include="Core\ShaderProgram.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Drawables\Background.cpp" />
@@ -327,14 +336,16 @@
     <ClCompile Include="Input\FreeCamera.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
-    <ClCompile Include="InstancedRenderer\InstancedBox.cpp" />
-    <ClCompile Include="InstancedRenderer\InstancedBoxRenderer.cpp" />
-    <ClCompile Include="InstancedRenderer\InstancedDot.cpp" />
-    <ClCompile Include="InstancedRenderer\InstancedLine.cpp" />
-    <ClCompile Include="InstancedRenderer\InstancedRectangleRenderer.cpp" />
-    <ClCompile Include="InstancedRenderer\InstancedRectangle.cpp" />
-    <ClCompile Include="InstancedRenderer\InstancedSphere.cpp" />
-    <ClCompile Include="InstancedRenderer\InstancedSphereRenderer.cpp" />
+    <ClCompile Include="Renderer\Box.cpp" />
+    <ClCompile Include="Renderer\BoxRenderer.cpp" />
+    <ClCompile Include="Renderer\Dot.cpp" />
+    <ClCompile Include="Renderer\Line.cpp" />
+    <ClCompile Include="Renderer\Rectangle.cpp" />
+    <ClCompile Include="Renderer\RectangleRenderer.cpp" />
+    <ClCompile Include="Renderer\Sphere.cpp" />
+    <ClCompile Include="Renderer\SphereRenderer.cpp" />
+    <ClCompile Include="Renderer\Text.cpp" />
+    <ClCompile Include="Renderer\TextRenderer.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />
     <ClCompile Include="Uniforms\SSBOint.cpp" />
     <ClCompile Include="Uniforms\SSBOvec4.cpp" />
@@ -362,6 +373,11 @@
     <ClCompile Include="Vertex\SupComVertex.cpp" />
     <ClCompile Include="VR\VRController.cpp" />
     <ClCompile Include="VR\VR.cpp" />
+    <ClCompile Include="Widgets\Button.cpp" />
+    <ClCompile Include="Widgets\Label.cpp" />
+    <ClCompile Include="Widgets\LineEdit.cpp" />
+    <ClCompile Include="Widgets\ListLayout.cpp" />
+    <ClCompile Include="Widgets\Slider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Data\Fonts\arial.ttf">

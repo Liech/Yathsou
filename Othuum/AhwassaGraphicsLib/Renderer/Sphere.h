@@ -2,12 +2,12 @@
 
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "AhwassaGraphicsLib/InstancedRenderer/IInstancedBox.h"
+#include "AhwassaGraphicsLib/Renderer/IBox.h"
 
 namespace Ahwassa {
-  class InstancedSphere : public IInstancedBox {
+  class Sphere : public IBox {
   public:
-    InstancedSphere(const glm::vec3& pos, const float& size, const Iyathuum::Color& clr);
+    Sphere(const glm::vec3& pos, const float& size, const Iyathuum::Color& clr);
 
     void setPosition(const glm::vec3& pos);
     glm::vec3 getPosition() const;

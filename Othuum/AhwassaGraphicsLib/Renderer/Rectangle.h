@@ -4,7 +4,7 @@
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 
 namespace Ahwassa {
-  class InstancedRectangle{
+  class Rectangle{
   public:
     Iyathuum::glmAABB<2> location;
     Iyathuum::Color      color   ;

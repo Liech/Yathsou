@@ -8,8 +8,8 @@
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
 
-#include "AhwassaGraphicsLib/InstancedRenderer/InstancedSphereRenderer.h"
-#include "AhwassaGraphicsLib/InstancedRenderer/InstancedSphere.h"
+#include "AhwassaGraphicsLib/Renderer/SphereRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/Sphere.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AezeselFileIOLib/ImageIO.h"
 
@@ -29,11 +29,11 @@ int main(int argc, char** argv) {
 
   auto img = Aezesel::ImageIO::readImage("Data/Textures/Map.png");
 
-  std::vector < std::shared_ptr<Ahwassa::InstancedSphere>> handle;
-  std::shared_ptr < Ahwassa::InstancedSphereRenderer> box;
+  std::vector < std::shared_ptr<Ahwassa::Sphere>> handle;
+  std::shared_ptr < Ahwassa::SphereRenderer> box;
 
   w.Startup = [&]() {
-    box = std::make_unique<Ahwassa::InstancedSphereRenderer>(cam);
+    box = std::make_unique<Ahwassa::SphereRenderer>(cam);
     for (int i = 0; i < 100; i++) {
       handle.push_back(box->newSphere(glm::vec3(0,0,0), 0.1f));
     }

@@ -7,6 +7,8 @@
 #include <thread>
 
 #include "Input/Input.h"
+#include "Core/Renderer.h"
+#include "Core/Camera.h"
 
 #include "glad/glad.h"
 #include "YolonaOss/Lib/GLWF/include/GLFW/glfw3.h"
@@ -131,6 +133,8 @@ namespace Ahwassa {
       glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
     }
 
+    _camera   = std::make_shared<Camera>("Camera",_width,_height);
+    _renderer = std::make_unique<Renderer>(this,_camera);
     Startup();
     // Define the viewport dimensions
     glViewport(0, 0, _width, _height);
@@ -166,5 +170,13 @@ namespace Ahwassa {
 
   Input& Window::input() {
     return *_input;
+  }
+
+  Renderer& Window::renderer() {
+    return *_renderer;
+  }
+
+  std::shared_ptr<Camera> Window::camera() {
+    return _camera;
   }
 }

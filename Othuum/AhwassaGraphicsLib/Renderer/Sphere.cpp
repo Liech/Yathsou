@@ -1,47 +1,47 @@
-#include "InstancedDot.h"
+#include "Sphere.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 
 namespace Ahwassa {
-  InstancedDot::InstancedDot(const glm::vec3& pos, const float& size, const Iyathuum::Color& clr) {
+  Sphere::Sphere(const glm::vec3& pos, const float& size, const Iyathuum::Color& clr) {
     _position = pos ;
     _size     = size;
     _color    = clr ;
     recalculate();
   }
 
-  void InstancedDot::setPosition(const glm::vec3& pos) {
+  void Sphere::setPosition(const glm::vec3& pos) {
     _position = pos;
     recalculate();
   }
 
-  glm::vec3 InstancedDot::getPosition() const {
+  glm::vec3 Sphere::getPosition() const {
     return _position;
   }
 
-  void InstancedDot::setSize(const float& size) {
+  void Sphere::setSize(const float& size) {
     _size = size;
     recalculate();
   }
 
-  float InstancedDot::getSize() const {
+  float Sphere::getSize() const {
     return _size;
   }
 
-  void InstancedDot::setColor(const Iyathuum::Color& clr) {
+  void Sphere::setColor(const Iyathuum::Color& clr) {
     _color = clr;
   }
 
-  Iyathuum::Color InstancedDot::getColor() const {
+  Iyathuum::Color Sphere::getColor() const {
     return _color;
   }
 
-  glm::mat4 InstancedDot::matrix() const {
+  glm::mat4 Sphere::matrix() const {
     return _matrix;
   }
 
-  void InstancedDot::recalculate() {
+  void Sphere::recalculate() {
     const float x  = _position[0] - _size/2.0f;
     const float y  = _position[1] - _size/2.0f;
     const float z  = _position[2] - _size/2.0f;

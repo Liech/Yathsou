@@ -1,11 +1,11 @@
-#include "InstancedRenderer/InstancedRectangleRenderer.h"
+#include "Renderer/RectangleRenderer.h"
 
 #include <iostream>
 #include "glad/glad.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
-#include "InstancedRectangle.h"
+#include "Rectangle.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/ShaderProgram.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformVecVec3.h"
@@ -17,7 +17,7 @@
 #include "Util.h"
 
 namespace Ahwassa {
-  struct InstancedRectangleRenderer::RenderVars {
+  struct RectangleRenderer::RenderVars {
     std::unique_ptr<VBO<PositionVertex>> vbo;
     std::unique_ptr<VAO<PositionVertex>> vao;
     std::unique_ptr<ShaderProgram>       shader;
@@ -29,15 +29,15 @@ namespace Ahwassa {
     virtual ~RenderVars() {}
   };
 
-  InstancedRectangleRenderer::InstancedRectangleRenderer(Window* w) : Drawable(w) {
-    _vars = std::make_shared<InstancedRectangleRenderer::RenderVars>();
+  RectangleRenderer::RectangleRenderer(Window* w) : Drawable(w) {
+    _vars = std::make_shared<RectangleRenderer::RenderVars>();
     _vars->window = w;
     _bufferSize = (Util::maxUniformAmount() - 10) / 2;
     makeModelArray(_bufferSize);
     makeShader();
   }
 
-  void InstancedRectangleRenderer::draw() {
+  void RectangleRenderer::draw() {
 
     glEnable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
@@ -53,8 +53,8 @@ namespace Ahwassa {
     destroyed.resize(40);
     size_t destroyedIndex = 0;
     size_t current = 0;
-    for (size_t i = 0; i < _InstancedRectangleRenderer.size(); i++) {
-      auto rec = _InstancedRectangleRenderer[i].lock();
+    for (size_t i = 0; i < _RectangleRenderer.size(); i++) {
+      auto rec = _RectangleRenderer[i].lock();
       if (rec) {
         if (current == _bufferSize) {
           shaderCall(matrices, colors, current);
@@ -72,7 +72,7 @@ namespace Ahwassa {
       }
     }
     for (size_t i = destroyedIndex; i > 0; i--)
-      _InstancedRectangleRenderer.erase(_InstancedRectangleRenderer.begin() + i);
+      _RectangleRenderer.erase(_RectangleRenderer.begin() + i);
 
 
     shaderCall(matrices,colors,current);
@@ -81,12 +81,12 @@ namespace Ahwassa {
     glEnable(GL_DEPTH_TEST);
   }
 
-  void InstancedRectangleRenderer::makeModelArray(size_t bufferSize) {
+  void RectangleRenderer::makeModelArray(size_t bufferSize) {
     _vars->models = std::make_unique<UniformVecMat4>("models", bufferSize);
     _vars->colors = std::make_unique<UniformVecVec3>("colors", bufferSize);
   }
 
-  void InstancedRectangleRenderer::makeShader() {
+  void RectangleRenderer::makeShader() {
     std::cout << "Load Shader" << std::endl;
 
     std::string vertex_shader_source = R"(
@@ -133,7 +133,7 @@ namespace Ahwassa {
     _vars->vbo->setData(vertices);
   }
 
-  void InstancedRectangleRenderer::shaderCall(const std::vector<glm::mat4>& mats, const std::vector<glm::vec3>&clr, size_t amount) {
+  void RectangleRenderer::shaderCall(const std::vector<glm::mat4>& mats, const std::vector<glm::vec3>&clr, size_t amount) {
     _vars->models->setValue(mats);
     _vars->colors->setValue(clr);
     _vars->models->bind();
@@ -141,11 +141,11 @@ namespace Ahwassa {
     _vars->vao->drawInstanced(amount);
   }
 
-  std::shared_ptr<InstancedRectangle> InstancedRectangleRenderer::newRectangle(Iyathuum::glmAABB<2> location, Iyathuum::Color color) {
-    std::shared_ptr<InstancedRectangle> result = std::make_shared<InstancedRectangle>();
+  std::shared_ptr<Rectangle> RectangleRenderer::newRectangle(Iyathuum::glmAABB<2> location, Iyathuum::Color color) {
+    std::shared_ptr<Rectangle> result = std::make_shared<Rectangle>();
     result->location = location;
     result->color    = color   ;
-    _InstancedRectangleRenderer.push_back(result);
+    _RectangleRenderer.push_back(result);
     return result;
   }
 }

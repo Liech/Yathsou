@@ -2,12 +2,12 @@
 
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "AhwassaGraphicsLib/InstancedRenderer/IInstancedBox.h"
+#include "AhwassaGraphicsLib/Renderer/IBox.h"
 
 namespace Ahwassa {
-  class InstancedLine : public IInstancedBox {
+  class Line : public IBox {
   public:
-    InstancedLine(const glm::vec3& start, const glm::vec3& end, const float& size, const Iyathuum::Color&);
+    Line(const glm::vec3& start, const glm::vec3& end, const float& size, const Iyathuum::Color&);
 
     void setStart(const glm::vec3& pos);
     glm::vec3 getStart() const;

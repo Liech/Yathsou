@@ -16,7 +16,6 @@ namespace Ahwassa {
   }
 
   void Uniform::setLocation(int location) {
-    assert(_location == -1); 
     _location = location; 
   }
 
