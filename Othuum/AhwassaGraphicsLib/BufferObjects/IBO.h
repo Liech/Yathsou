@@ -13,7 +13,8 @@ namespace Ahwassa {
 
     unsigned int getID();
     size_t       getSize();
-    void         bind(IVAO* vertexBuffer);
+    void         draw(IVAO* vertexBuffer);
+    void         drawInstanced(IVAO* vertexBuffer,size_t amount);
 
   private:
     unsigned int _ibo ;

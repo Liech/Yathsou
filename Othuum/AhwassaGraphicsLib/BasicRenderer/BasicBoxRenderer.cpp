@@ -18,7 +18,6 @@
 
 namespace Ahwassa {
   struct BasicBoxRenderer::RenderVars {
-    std::shared_ptr<RenderVars>                _vars;
     std::vector<int>                           _indices;
     std::unique_ptr<UniformMat4>               _mat;
     std::unique_ptr<UniformVec4>               _color;
@@ -87,7 +86,7 @@ namespace Ahwassa {
       void main() {
       
         mat4 view = )"+_vars->_camera->getName()+R"(Projection *  )" + _vars->_camera->getName() + R"(View;
-        gl_Position = view * model *vec4(position , 1.0);
+        gl_Position = view * model * vec4(position , 1.0);
         clr = Color;
         nrm = normal;
       }
@@ -145,7 +144,7 @@ namespace Ahwassa {
     _vars->_mat->bind();
     _vars->_color->setValue(color.to4());
     _vars->_color->bind();
-    _vars->_ibo->bind(_vars->_vao.get());
+    _vars->_ibo->draw(_vars->_vao.get());
   }
 
   void BasicBoxRenderer::drawDot(glm::vec3 start, glm::vec3 size, Iyathuum::Color color) {

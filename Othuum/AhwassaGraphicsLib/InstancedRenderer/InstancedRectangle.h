@@ -2,7 +2,6 @@
 
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
 namespace Ahwassa {
   class InstancedRectangle{

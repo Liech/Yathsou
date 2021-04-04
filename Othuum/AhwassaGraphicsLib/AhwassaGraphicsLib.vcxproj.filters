@@ -285,6 +285,21 @@
     <ClInclude Include="BasicRenderer\BasicBoxRenderer.h">
       <Filter>Header Files\BasicRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="InstancedRenderer\InstancedBox.h">
+      <Filter>Header Files\InstancedRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedRenderer\InstancedBoxRenderer.h">
+      <Filter>Header Files\InstancedRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedRenderer\InstancedDot.h">
+      <Filter>Header Files\InstancedRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedRenderer\InstancedLine.h">
+      <Filter>Header Files\InstancedRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedRenderer\IInstancedBox.h">
+      <Filter>Header Files\InstancedRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -427,6 +442,18 @@
     </ClCompile>
     <ClCompile Include="BasicRenderer\BasicBoxRenderer.cpp">
       <Filter>Source Files\BasicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedRenderer\InstancedBox.cpp">
+      <Filter>Source Files\InstancedRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedRenderer\InstancedBoxRenderer.cpp">
+      <Filter>Source Files\InstancedRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedRenderer\InstancedDot.cpp">
+      <Filter>Source Files\InstancedRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedRenderer\InstancedLine.cpp">
+      <Filter>Source Files\InstancedRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

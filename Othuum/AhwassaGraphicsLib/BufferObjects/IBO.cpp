@@ -25,7 +25,14 @@ namespace Ahwassa {
     return _size;
   }
 
-  void IBO::bind(IVAO* vertexBuffer) {
+  void IBO::drawInstanced(IVAO* vertexBuffer,size_t amount) {
+    glBindVertexArray(vertexBuffer->getID());
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
+    
+    glDrawElementsInstanced(GL_TRIANGLES, (GLsizei)_size, GL_UNSIGNED_INT, 0, amount);    
+  }
+
+  void IBO::draw(IVAO* vertexBuffer) {
     glBindVertexArray(vertexBuffer->getID());
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
 

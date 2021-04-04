@@ -251,6 +251,11 @@
     <ClInclude Include="Drawables\Drawable.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />
+    <ClInclude Include="InstancedRenderer\IInstancedBox.h" />
+    <ClInclude Include="InstancedRenderer\InstancedBox.h" />
+    <ClInclude Include="InstancedRenderer\InstancedBoxRenderer.h" />
+    <ClInclude Include="InstancedRenderer\InstancedDot.h" />
+    <ClInclude Include="InstancedRenderer\InstancedLine.h" />
     <ClInclude Include="InstancedRenderer\InstancedRectangleRenderer.h" />
     <ClInclude Include="InstancedRenderer\InstancedRectangle.h" />
     <ClInclude Include="lib\openvr\openvr.h" />
@@ -316,6 +321,10 @@
     <ClCompile Include="Drawables\Drawable.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
+    <ClCompile Include="InstancedRenderer\InstancedBox.cpp" />
+    <ClCompile Include="InstancedRenderer\InstancedBoxRenderer.cpp" />
+    <ClCompile Include="InstancedRenderer\InstancedDot.cpp" />
+    <ClCompile Include="InstancedRenderer\InstancedLine.cpp" />
     <ClCompile Include="InstancedRenderer\InstancedRectangleRenderer.cpp" />
     <ClCompile Include="InstancedRenderer\InstancedRectangle.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />
