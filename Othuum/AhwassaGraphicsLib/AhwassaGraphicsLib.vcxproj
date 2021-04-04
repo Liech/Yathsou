@@ -259,6 +259,8 @@
     <ClInclude Include="InstancedRenderer\InstancedLine.h" />
     <ClInclude Include="InstancedRenderer\InstancedRectangleRenderer.h" />
     <ClInclude Include="InstancedRenderer\InstancedRectangle.h" />
+    <ClInclude Include="InstancedRenderer\InstancedSphere.h" />
+    <ClInclude Include="InstancedRenderer\InstancedSphereRenderer.h" />
     <ClInclude Include="lib\openvr\openvr.h" />
     <ClInclude Include="lib\openvr\openvr_capi.h" />
     <ClInclude Include="lib\openvr\openvr_driver.h" />
@@ -329,6 +331,8 @@
     <ClCompile Include="InstancedRenderer\InstancedLine.cpp" />
     <ClCompile Include="InstancedRenderer\InstancedRectangleRenderer.cpp" />
     <ClCompile Include="InstancedRenderer\InstancedRectangle.cpp" />
+    <ClCompile Include="InstancedRenderer\InstancedSphere.cpp" />
+    <ClCompile Include="InstancedRenderer\InstancedSphereRenderer.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />
     <ClCompile Include="Uniforms\SSBOint.cpp" />
     <ClCompile Include="Uniforms\SSBOvec4.cpp" />

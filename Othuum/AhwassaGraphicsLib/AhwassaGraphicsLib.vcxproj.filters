@@ -303,6 +303,12 @@
     <ClInclude Include="Input\FreeCamera.h">
       <Filter>Header Files\Input</Filter>
     </ClInclude>
+    <ClInclude Include="InstancedRenderer\InstancedSphereRenderer.h">
+      <Filter>Header Files\InstancedRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="InstancedRenderer\InstancedSphere.h">
+      <Filter>Header Files\InstancedRenderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -460,6 +466,12 @@
     </ClCompile>
     <ClCompile Include="Input\FreeCamera.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedRenderer\InstancedSphere.cpp">
+      <Filter>Source Files\InstancedRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="InstancedRenderer\InstancedSphereRenderer.cpp">
+      <Filter>Source Files\InstancedRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

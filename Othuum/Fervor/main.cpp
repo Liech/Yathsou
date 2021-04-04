@@ -7,10 +7,8 @@
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
 
-#include "AhwassaGraphicsLib/InstancedRenderer/InstancedBoxRenderer.h"
-#include "AhwassaGraphicsLib/InstancedRenderer/IInstancedBox.h"
-#include "AhwassaGraphicsLib/InstancedRenderer/InstancedDot.h"
-#include "AhwassaGraphicsLib/InstancedRenderer/InstancedBox.h"
+#include "AhwassaGraphicsLib/InstancedRenderer/InstancedSphereRenderer.h"
+#include "AhwassaGraphicsLib/InstancedRenderer/InstancedSphere.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AezeselFileIOLib/ImageIO.h"
 
@@ -29,13 +27,13 @@ int main(int argc, char** argv) {
 
   auto img = Aezesel::ImageIO::readImage("Data/Textures/Map.png");
 
-  std::vector < std::shared_ptr<Ahwassa::InstancedDot>> handle;
-  std::shared_ptr < Ahwassa::InstancedBoxRenderer> box;
+  std::vector < std::shared_ptr<Ahwassa::InstancedSphere>> handle;
+  std::shared_ptr < Ahwassa::InstancedSphereRenderer> box;
 
   w.Startup = [&]() {
-    box = std::make_unique<Ahwassa::InstancedBoxRenderer>(cam);
+    box = std::make_unique<Ahwassa::InstancedSphereRenderer>(cam);
     for (int i = 0; i < 10000; i++) {
-      handle.push_back(box->newDot(glm::vec3(0,0,0), 0.1f));
+      handle.push_back(box->newSphere(glm::vec3(0,0,0), 0.1f));
     }
     freeCam = std::make_shared<Ahwassa::FreeCamera>(cam, w.input());
     w.input().addUIElement(freeCam);
