@@ -8,4 +8,9 @@ namespace Ahwassa {
     return glfwGetTime();
   }
 
+  size_t Util::maxUniformAmount() {
+    int result = 0;
+    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS,&result);
+    return result;
+  }
 }

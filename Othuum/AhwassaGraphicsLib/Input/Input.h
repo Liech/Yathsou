@@ -23,6 +23,7 @@ namespace Ahwassa {
     void                 setCursorStatus(Iyathuum::CursorStatus);
     glm::vec2            getCursorPos() const;
     void                 setCursorPos(glm::vec2 pos);
+    void                 resetCursorMovement(glm::vec2 v);
 
     void setFocus(std::shared_ptr<UIElement> newFocus);
     std::shared_ptr<UIElement> getCurrentFocus();
@@ -49,6 +50,7 @@ namespace Ahwassa {
 
     std::weak_ptr<UIElement> _pressedWidget;
     std::weak_ptr<UIElement> _currentFocus ;
-    glm::vec2                _oldMousePos  ;
+    glm::vec2                _oldMousePos;
+    glm::vec2                _cursorpos;
   };
 }

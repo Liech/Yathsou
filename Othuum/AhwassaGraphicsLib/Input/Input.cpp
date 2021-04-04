@@ -50,6 +50,7 @@ namespace Ahwassa {
 
   void Input::setCursorPos(glm::vec2 cursorPos) {
     glfwSetCursorPos(_windowGL, cursorPos.x, cursorPos.y);
+    _cursorpos = cursorPos;
   }
 
 
@@ -139,17 +140,25 @@ namespace Ahwassa {
   }
 
   void Input::update() {
-    glm::vec2 mousePos = getCursorPos();
+    _cursorpos = getCursorPos();
 
-    if (mousePos != _oldMousePos) {
-      auto inputWidgets = getUIElements();
+    auto inputWidgets = getUIElements();
+    if (_cursorpos != _oldMousePos) {
       for (auto w : inputWidgets) {
-        if (w->getGlobalPosition().isInside(mousePos)) {
-          w->mouseMoveEvent(mousePos - w->getGlobalPosition().getPosition());
+        if (w->getGlobalPosition().isInside(_cursorpos)) {
+          if (w->mouseMoveEvent(_cursorpos - w->getGlobalPosition().getPosition(), _cursorpos - _oldMousePos))
+            break;
         }
       }
     }
-    _oldMousePos = mousePos;
+    for (auto w : inputWidgets)
+      w->update();
+
+    _oldMousePos = _cursorpos;
+  }
+
+  void Input::resetCursorMovement(glm::vec2 v) {
+    _oldMousePos = v;
   }
 
   void Input::addUIElement(std::shared_ptr<UIElement> elem) {

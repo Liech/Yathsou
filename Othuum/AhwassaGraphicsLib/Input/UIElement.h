@@ -18,7 +18,7 @@ namespace Ahwassa {
     virtual bool mouseEvent(     glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) { return false; };
     virtual bool mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button                            ) { return false; };
     virtual bool mouseWheelEvent(glm::vec2 movement                                                       ) { return false; };
-    virtual bool mouseMoveEvent( glm::vec2 movement                                                       ) { return false; };
+    virtual bool mouseMoveEvent( glm::vec2 current, glm::vec2 movement                                    ) { return false; };
 
     //Position
     const Iyathuum::glmAABB<2>& getLocalPosition()  const;

@@ -14,6 +14,7 @@
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
 #include "AhwassaGraphicsLib/BufferObjects/VBO.h"
 #include "AhwassaGraphicsLib/Vertex/PositionVertex.h"
+#include "Util.h"
 
 namespace Ahwassa {
   struct InstancedRectangleRenderer::RenderVars {
@@ -31,7 +32,7 @@ namespace Ahwassa {
   InstancedRectangleRenderer::InstancedRectangleRenderer(Window* w) : Drawable(w) {
     _vars = std::make_shared<InstancedRectangleRenderer::RenderVars>();
     _vars->window = w;
-    _bufferSize = 1000;
+    _bufferSize = (Util::maxUniformAmount() - 10) / 2;
     makeModelArray(_bufferSize);
     makeShader();
   }

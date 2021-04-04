@@ -19,6 +19,7 @@
 #include "InstancedDot.h"
 #include "InstancedLine.h"
 #include "InstancedBox.h"
+#include "Util.h"
 
 
 namespace Ahwassa {
@@ -29,7 +30,7 @@ namespace Ahwassa {
     std::unique_ptr<UniformVec3>         light ;
     std::unique_ptr<ShaderProgram>       shader;
     std::unique_ptr<UniformVecMat4>      models;
-    std::unique_ptr<UniformVecVec3>      colors;
+    std::unique_ptr<UniformVecVec3>      colors; 
     std::shared_ptr<Camera>              camera;
 
     virtual ~RenderVars() {}
@@ -39,7 +40,7 @@ namespace Ahwassa {
     _vars = std::make_shared<InstancedBoxRenderer::RenderVars>();
     _vars->camera = camera;
     _lightDir = glm::normalize(glm::vec3(25, 31, -21));
-    _bufferSize = 1000;
+    _bufferSize = (Util::maxUniformAmount()-10) / 2;
     makeModelArray(_bufferSize);
     makeShader();
   }
