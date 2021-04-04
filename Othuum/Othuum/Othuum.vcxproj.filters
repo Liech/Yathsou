@@ -25,12 +25,6 @@
     <Filter Include="Source Files\MainMenuPages">
       <UniqueIdentifier>{3c15331a-dd20-4625-8e72-9eb520f6d439}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Serial">
-      <UniqueIdentifier>{ccfedf79-2587-4dcc-b48b-45d14ae1bb7a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Serial">
-      <UniqueIdentifier>{15cdce5c-6427-44e4-bbbc-105585175392}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\SideProject">
       <UniqueIdentifier>{cf3216a2-dab5-4110-b541-a3ac2321b91d}</UniqueIdentifier>
     </Filter>
@@ -98,54 +92,6 @@
     </ClInclude>
     <ClInclude Include="MainMenuPages\StartGameLoadingPage.h">
       <Filter>Header Files\MainMenuPages</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\MoveableEntity.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\MovementCommand.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Owned.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Player.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Projectile.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Quaternion.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Ressource.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Unit.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Vector3.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Building.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\ConstructionSite.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Destructible.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Entity.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\ExtractionPoint.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Gamestate.h">
-      <Filter>Header Files\Serial</Filter>
-    </ClInclude>
-    <ClInclude Include="Serial\Landscape.h">
-      <Filter>Header Files\Serial</Filter>
     </ClInclude>
     <ClInclude Include="SideProject\SideProjectMain.h">
       <Filter>Header Files\SideProject</Filter>

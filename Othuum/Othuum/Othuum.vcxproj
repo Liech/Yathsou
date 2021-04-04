@@ -237,22 +237,6 @@
     <ClInclude Include="MainMenuPages\StartGameLoadingPage.h" />
     <ClInclude Include="OthuumGame.h" />
     <ClInclude Include="PhysicalModel.h" />
-    <ClInclude Include="Serial\Building.h" />
-    <ClInclude Include="Serial\ConstructionSite.h" />
-    <ClInclude Include="Serial\Destructible.h" />
-    <ClInclude Include="Serial\Entity.h" />
-    <ClInclude Include="Serial\ExtractionPoint.h" />
-    <ClInclude Include="Serial\Gamestate.h" />
-    <ClInclude Include="Serial\Landscape.h" />
-    <ClInclude Include="Serial\MoveableEntity.h" />
-    <ClInclude Include="Serial\MovementCommand.h" />
-    <ClInclude Include="Serial\Owned.h" />
-    <ClInclude Include="Serial\Player.h" />
-    <ClInclude Include="Serial\Projectile.h" />
-    <ClInclude Include="Serial\Quaternion.h" />
-    <ClInclude Include="Serial\Ressource.h" />
-    <ClInclude Include="Serial\Unit.h" />
-    <ClInclude Include="Serial\Vector3.h" />
     <ClInclude Include="SideProject\SideProjectMain.h" />
   </ItemGroup>
   <ItemGroup>

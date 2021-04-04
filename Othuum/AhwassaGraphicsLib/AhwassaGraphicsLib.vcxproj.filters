@@ -309,6 +309,9 @@
     <ClInclude Include="InstancedRenderer\InstancedSphere.h">
       <Filter>Header Files\InstancedRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="Drawables\FPS.h">
+      <Filter>Header Files\Drawables</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -472,6 +475,9 @@
     </ClCompile>
     <ClCompile Include="InstancedRenderer\InstancedSphereRenderer.cpp">
       <Filter>Source Files\InstancedRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawables\FPS.cpp">
+      <Filter>Source Files\Drawables</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

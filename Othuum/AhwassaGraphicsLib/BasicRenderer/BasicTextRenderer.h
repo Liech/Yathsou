@@ -23,8 +23,8 @@ namespace Ahwassa {
     virtual   ~BasicTextRenderer() {}
     void      start();
     void      end();
-    void      drawText(std::string text, float x, float y, float scale, Iyathuum::Color color);
-    void      drawText(std::string text, glm::vec2 pos, float scale, Iyathuum::Color color);
+    void      drawText(std::string text, float x, float y, float scale, Iyathuum::Color color = Iyathuum::Color(0,0,0));
+    void      drawText(std::string text, glm::vec2 pos, float scale   , Iyathuum::Color color = Iyathuum::Color(0,0,0));
     glm::vec2 getTextSize(std::string text, float scale);
     void      setClippingRectangle(Iyathuum::glmAABB<2> box);
     void      disableClipping();

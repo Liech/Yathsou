@@ -4,25 +4,44 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AhwassaGraphicsLib", "AhwassaGraphicsLib\AhwassaGraphicsLib.vcxproj", "{62844E10-BEDE-4454-88CC-1F614B008B75}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B27750C7-A35E-4C5B-8E9F-229A4443A6E6} = {B27750C7-A35E-4C5B-8E9F-229A4443A6E6}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "exe", "exe", "{B445D9C6-8AB1-4097-AA0A-18D555102E17}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SuthanusPhysicsLib", "SuthanusPhysicsLib\SuthanusPhysicsLib.vcxproj", "{5704436B-4D3B-4267-B906-21EF16E34A1B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B27750C7-A35E-4C5B-8E9F-229A4443A6E6} = {B27750C7-A35E-4C5B-8E9F-229A4443A6E6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UyanahGameServer", "UyanahGameServer\UyanahGameServer.vcxproj", "{E18FE3F4-CE6A-4A2F-8948-B1AE11D7F37E}"
 	ProjectSection(ProjectDependencies) = postProject
+		{B27750C7-A35E-4C5B-8E9F-229A4443A6E6} = {B27750C7-A35E-4C5B-8E9F-229A4443A6E6}
 		{032F72F3-8F82-4991-9238-2D385AC70A22} = {032F72F3-8F82-4991-9238-2D385AC70A22}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VishalaNetworkLib", "VishalaNetworkLib\VishalaNetworkLib.vcxproj", "{032F72F3-8F82-4991-9238-2D385AC70A22}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B27750C7-A35E-4C5B-8E9F-229A4443A6E6} = {B27750C7-A35E-4C5B-8E9F-229A4443A6E6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YolonaOss", "YolonaOss\YolonaOss.vcxproj", "{F38FFFAA-7E2D-4418-BF86-81213AFDE6DE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B27750C7-A35E-4C5B-8E9F-229A4443A6E6} = {B27750C7-A35E-4C5B-8E9F-229A4443A6E6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IyathuumCoreLib", "IyathuumCoreLib\IyathuumCoreLib.vcxproj", "{B27750C7-A35E-4C5B-8E9F-229A4443A6E6}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SelenNavigationLib", "SelenNavigationLib\SelenNavigationLib.vcxproj", "{B9848E9F-0DD5-43B3-9255-CA2B3BE05210}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B27750C7-A35E-4C5B-8E9F-229A4443A6E6} = {B27750C7-A35E-4C5B-8E9F-229A4443A6E6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HaasScriptingLib", "HaasScriptingLib\HaasScriptingLib.vcxproj", "{BC4B7397-276E-4FD1-B8E7-CA367CF5AC4D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B27750C7-A35E-4C5B-8E9F-229A4443A6E6} = {B27750C7-A35E-4C5B-8E9F-229A4443A6E6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AthanahCommonLib", "AthanahCommonLib\AthanahCommonLib.vcxproj", "{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -32,6 +51,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AthanahCommonLib", "Athanah
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IavishLobbyServer", "IavishLobbyServer\IavishLobbyServer.vcxproj", "{A801C2D3-1595-40CE-BBD3-E91DDFC94AEF}"
 	ProjectSection(ProjectDependencies) = postProject
+		{B27750C7-A35E-4C5B-8E9F-229A4443A6E6} = {B27750C7-A35E-4C5B-8E9F-229A4443A6E6}
 		{032F72F3-8F82-4991-9238-2D385AC70A22} = {032F72F3-8F82-4991-9238-2D385AC70A22}
 		{E18FE3F4-CE6A-4A2F-8948-B1AE11D7F37E} = {E18FE3F4-CE6A-4A2F-8948-B1AE11D7F37E}
 	EndProjectSection
@@ -44,6 +64,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fervor", "Fervor\Fervor.vcx
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Fatboy", "Fatboy\Fatboy.vcxproj", "{FD063652-C4F8-47FC-B696-CE6BB6DBB949}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5704436B-4D3B-4267-B906-21EF16E34A1B} = {5704436B-4D3B-4267-B906-21EF16E34A1B}
+		{D30CBE90-DD09-420E-A4AC-01FC2FFE19E0} = {D30CBE90-DD09-420E-A4AC-01FC2FFE19E0}
+		{F38FFFAA-7E2D-4418-BF86-81213AFDE6DE} = {F38FFFAA-7E2D-4418-BF86-81213AFDE6DE}
+		{B27750C7-A35E-4C5B-8E9F-229A4443A6E6} = {B27750C7-A35E-4C5B-8E9F-229A4443A6E6}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Othuum", "Othuum\Othuum.vcxproj", "{29546BF3-E106-4F2A-9DAB-AC637745D56B}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -57,6 +83,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Othuum", "Othuum\Othuum.vcx
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AezeselFileIOLib", "AezeselFileIOLib\AezeselFileIOLib.vcxproj", "{1690E851-1424-484A-AE4A-CB998160BF18}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B27750C7-A35E-4C5B-8E9F-229A4443A6E6} = {B27750C7-A35E-4C5B-8E9F-229A4443A6E6}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
