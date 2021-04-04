@@ -5,7 +5,7 @@
 #include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
 namespace Ahwassa {
-  class Rectangle{
+  class InstancedRectangle{
   public:
     Iyathuum::glmAABB<2> location;
     Iyathuum::Color      color   ;

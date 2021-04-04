@@ -83,8 +83,10 @@ namespace Ahwassa {
 	
 	if (msgSeverity == "MEDIUM")
       printf("glDebugMessage:\n%s \n type = %s source = %s severity = %s\n", message, msgType.c_str(), msgSource.c_str(), msgSeverity.c_str());
-    if (msgSeverity == "HIGH")
-      throw std::runtime_error("OPENGL ERROR:" + std::string(message));
+  if (msgSeverity == "HIGH") {
+    std::cout << message << std::endl;
+    throw std::runtime_error("OPENGL ERROR:" + std::string(message));
+  }
   }
 
 

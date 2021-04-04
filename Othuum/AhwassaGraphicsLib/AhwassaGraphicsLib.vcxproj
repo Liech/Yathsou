@@ -234,6 +234,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BasicRenderer\BasicBoxRenderer.h" />
     <ClInclude Include="BasicRenderer\BasicRectangleRenderer.h" />
     <ClInclude Include="BasicRenderer\BasicTextRenderer.h" />
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h" />
@@ -251,7 +252,7 @@
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />
     <ClInclude Include="InstancedRenderer\InstancedRectangleRenderer.h" />
-    <ClInclude Include="InstancedRenderer\Rectangle.h" />
+    <ClInclude Include="InstancedRenderer\InstancedRectangle.h" />
     <ClInclude Include="lib\openvr\openvr.h" />
     <ClInclude Include="lib\openvr\openvr_capi.h" />
     <ClInclude Include="lib\openvr\openvr_driver.h" />
@@ -266,6 +267,8 @@
     <ClInclude Include="Uniforms\UniformVec3.h" />
     <ClInclude Include="Uniforms\UniformVec4.h" />
     <ClInclude Include="Uniforms\UniformVecMat4.h" />
+    <ClInclude Include="Uniforms\UniformVecTexture.h" />
+    <ClInclude Include="Uniforms\UniformVecVec2.h" />
     <ClInclude Include="Uniforms\UniformVecVec3.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="lib\libnyquist\Common.h" />
@@ -296,6 +299,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
+    <ClCompile Include="BasicRenderer\BasicBoxRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicRectangleRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp" />
@@ -313,7 +317,7 @@
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
     <ClCompile Include="InstancedRenderer\InstancedRectangleRenderer.cpp" />
-    <ClCompile Include="InstancedRenderer\Rectangle.cpp" />
+    <ClCompile Include="InstancedRenderer\InstancedRectangle.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />
     <ClCompile Include="Uniforms\SSBOint.cpp" />
     <ClCompile Include="Uniforms\SSBOvec4.cpp" />
@@ -325,6 +329,8 @@
     <ClCompile Include="Uniforms\UniformVec3.cpp" />
     <ClCompile Include="Uniforms\UniformVec4.cpp" />
     <ClCompile Include="Uniforms\UniformVecMat4.cpp" />
+    <ClCompile Include="Uniforms\UniformVecTexture.cpp" />
+    <ClCompile Include="Uniforms\UniformVecVec2.cpp" />
     <ClCompile Include="Uniforms\UniformVecVec3.cpp" />
     <ClCompile Include="Util.cpp" />
     <ClCompile Include="sound\sound.cpp" />

@@ -6,6 +6,20 @@
 #include "GLFW/glfw3.h"
 
 namespace Ahwassa {
+  Camera::Camera(std::string name, int width, int height):
+    _view(name + "View"),
+    _projection(name + "Projection"),
+    _cameraPos(name + "Position"),
+    _invViewProj(name + "inv") 
+  {
+    _name   = name;
+    _width  = width ;
+    _height = height;
+  }
+
+  std::string Camera::getName() {
+    return _name;
+  }
 
   void Camera::bind()
   {

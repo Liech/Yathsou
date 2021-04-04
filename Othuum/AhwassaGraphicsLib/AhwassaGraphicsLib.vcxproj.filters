@@ -252,7 +252,7 @@
     <ClInclude Include="InstancedRenderer\InstancedRectangleRenderer.h">
       <Filter>Header Files\InstancedRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="InstancedRenderer\Rectangle.h">
+    <ClInclude Include="InstancedRenderer\InstancedRectangle.h">
       <Filter>Header Files\InstancedRenderer</Filter>
     </ClInclude>
     <ClInclude Include="BasicRenderer\BasicTextRenderer.h">
@@ -275,6 +275,15 @@
     </ClInclude>
     <ClInclude Include="VR\VRController.h">
       <Filter>Header Files\VR</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\UniformVecVec2.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\UniformVecTexture.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicRenderer\BasicBoxRenderer.h">
+      <Filter>Header Files\BasicRenderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -395,7 +404,7 @@
     <ClCompile Include="InstancedRenderer\InstancedRectangleRenderer.cpp">
       <Filter>Source Files\InstancedRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="InstancedRenderer\Rectangle.cpp">
+    <ClCompile Include="InstancedRenderer\InstancedRectangle.cpp">
       <Filter>Source Files\InstancedRenderer</Filter>
     </ClCompile>
     <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp">
@@ -409,6 +418,15 @@
     </ClCompile>
     <ClCompile Include="VR\VRController.cpp">
       <Filter>Source Files\VR</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\UniformVecVec2.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\UniformVecTexture.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicRenderer\BasicBoxRenderer.cpp">
+      <Filter>Source Files\BasicRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

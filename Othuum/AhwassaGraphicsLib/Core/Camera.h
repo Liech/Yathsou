@@ -15,7 +15,7 @@ namespace Ahwassa {
   
     void bind();
     std::vector<Uniform*> getUniforms();
-  
+    std::string getName();
 
     glm::mat4 getProjectionMatrix();
     glm::mat4 getViewMatrix();
@@ -55,5 +55,6 @@ namespace Ahwassa {
     int                  _height    ;
     bool                 _is2D     = false;
     Iyathuum::glmAABB<2> _view2D    ;
+    std::string          _name;
   };
 }

@@ -5,7 +5,7 @@
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
-#include "Rectangle.h"
+#include "InstancedRectangle.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/ShaderProgram.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformVecVec3.h"
@@ -140,8 +140,8 @@ namespace Ahwassa {
     _vars->vao->drawInstanced(amount);
   }
 
-  std::shared_ptr<Rectangle> InstancedRectangleRenderer::newRectangle(Iyathuum::glmAABB<2> location, Iyathuum::Color color) {
-    std::shared_ptr<Rectangle> result = std::make_shared<Rectangle>();
+  std::shared_ptr<InstancedRectangle> InstancedRectangleRenderer::newRectangle(Iyathuum::glmAABB<2> location, Iyathuum::Color color) {
+    std::shared_ptr<InstancedRectangle> result = std::make_shared<InstancedRectangle>();
     result->location = location;
     result->color    = color   ;
     _InstancedRectangleRenderer.push_back(result);
