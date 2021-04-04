@@ -31,6 +31,8 @@ namespace Ahwassa {
     void      setUp        (glm::vec3 v);
     glm::vec3 getTarget    ();
     void      setTarget    (glm::vec3 v);
+    glm::vec3 getDir       ();
+    void      setDir       (glm::vec3 v);
     float     getFOV       ();
     void      setFOV       (float v);
     bool      is2D         ();

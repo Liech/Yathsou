@@ -300,6 +300,9 @@
     <ClInclude Include="InstancedRenderer\IInstancedBox.h">
       <Filter>Header Files\InstancedRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="Input\FreeCamera.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -454,6 +457,9 @@
     </ClCompile>
     <ClCompile Include="InstancedRenderer\InstancedLine.cpp">
       <Filter>Source Files\InstancedRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\FreeCamera.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

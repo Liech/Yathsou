@@ -4,6 +4,8 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
 #include "AhwassaGraphicsLib/Drawables/Background.h"
+#include "AhwassaGraphicsLib/Input/Input.h"
+#include "AhwassaGraphicsLib/Input/FreeCamera.h"
 
 #include "AhwassaGraphicsLib/InstancedRenderer/InstancedBoxRenderer.h"
 #include "AhwassaGraphicsLib/InstancedRenderer/IInstancedBox.h"
@@ -22,6 +24,7 @@ int main(int argc, char** argv) {
   Ahwassa::Background b(&w);
 
   std::shared_ptr<Ahwassa::Camera> cam = std::make_shared<Ahwassa::Camera>("camera",width,height);
+  std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   //Ahwassa::VR vr;
 
   auto img = Aezesel::ImageIO::readImage("Data/Textures/Map.png");
@@ -30,17 +33,18 @@ int main(int argc, char** argv) {
   std::shared_ptr < Ahwassa::InstancedBoxRenderer> box;
 
   w.Startup = [&]() {
-    //g = std::make_unique<Ahwassa::InstancedTextRenderer>(&w);
     box = std::make_unique<Ahwassa::InstancedBoxRenderer>(cam);
-    for (int i = 0; i < 50000; i++) {
+    for (int i = 0; i < 10000; i++) {
       handle.push_back(box->newDot(glm::vec3(0,0,0), 0.1f));
     }
+    freeCam = std::make_shared<Ahwassa::FreeCamera>(cam, w.input());
+    w.input().addUIElement(freeCam);
   };
 
   w.Update = [&]() {
     b.draw();
     //vr.update();
-    for (int i = 0; i < 50000; i++) {
+    for (int i = 0; i < 10000; i++) {
       float x = (rand() % 1000) / 1000.00f;
       float y = (rand() % 1000) / 1000.00f;
       float z = (rand() % 1000) / 1000.00f;

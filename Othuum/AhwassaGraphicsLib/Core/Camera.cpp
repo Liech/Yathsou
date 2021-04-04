@@ -146,4 +146,13 @@ namespace Ahwassa {
   void Camera::setFOV(float v) {
     _fov = v; 
   }
+
+  glm::vec3 Camera::getDir() {
+    return glm::normalize(_target - _position);
+  }
+
+  void Camera::setDir(glm::vec3 v) {
+    setTarget(_position + v);
+  }
+
 }

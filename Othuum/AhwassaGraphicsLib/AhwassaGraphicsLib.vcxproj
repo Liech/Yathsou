@@ -249,6 +249,7 @@
     <ClInclude Include="Core\Window.h" />
     <ClInclude Include="Drawables\Background.h" />
     <ClInclude Include="Drawables\Drawable.h" />
+    <ClInclude Include="Input\FreeCamera.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />
     <ClInclude Include="InstancedRenderer\IInstancedBox.h" />
@@ -319,6 +320,7 @@
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Drawables\Background.cpp" />
     <ClCompile Include="Drawables\Drawable.cpp" />
+    <ClCompile Include="Input\FreeCamera.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
     <ClCompile Include="InstancedRenderer\InstancedBox.cpp" />

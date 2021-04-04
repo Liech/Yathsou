@@ -8,8 +8,9 @@
 namespace Ahwassa {
   class UIElement {
   public:
-
+    
     //Events
+    virtual void update() {};
     virtual void startFocusEvent() {};
     virtual void endFocusEvent  () {};
     virtual bool focusKeyEvent(                           Iyathuum::Key button, Iyathuum::KeyStatus status) { return false; };

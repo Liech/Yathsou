@@ -11,7 +11,11 @@ namespace Ahwassa {
   }
 
   bool UIElement::isVisible() const {
-    return _visible; 
+    return _visible;
+  }
+
+  void  UIElement::setVisible(bool vis) {
+    _visible = vis;
   }
 
   const Iyathuum::glmAABB<2>& UIElement::getLocalPosition() const{
