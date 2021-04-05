@@ -10,6 +10,7 @@ namespace Ahwassa {
   public:
     
     //Events
+    virtual void draw() {};
     virtual void update() {};
     virtual void startFocusEvent() {};
     virtual void endFocusEvent  () {};
