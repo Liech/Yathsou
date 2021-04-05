@@ -9,14 +9,18 @@
 #include "Renderer/Line.h"
 #include "Renderer/Rectangle.h"
 #include "Renderer/Sphere.h"
+#include "BasicRenderer/BasicTextRenderer.h"
+#include "BasicRenderer/BasicRectangleRenderer.h"
 
 namespace Ahwassa {
   Renderer::Renderer(Window* window, std::shared_ptr<Camera> cam) {
     _window = window;
     
-    _box       = std::make_shared<BoxRenderer      >(cam   );
-    _rectangle = std::make_shared<RectangleRenderer>(window);
-    _sphere    = std::make_shared<SphereRenderer   >(cam   );
+    _box       = std::make_shared<BoxRenderer           >(cam   );
+    _rectangle = std::make_shared<RectangleRenderer     >(window);
+    _sphere    = std::make_shared<SphereRenderer        >(cam   );
+    _bRectangle= std::make_shared<BasicRectangleRenderer>(window);
+    _bText     = std::make_shared<BasicTextRenderer     >(window);
   }
 
   std::shared_ptr<Dot> Renderer::newDot(const glm::vec3& pos, float size, Iyathuum::Color clr) {
@@ -48,5 +52,13 @@ namespace Ahwassa {
     _sphere->draw();
     _box   ->draw();
     _sphere->draw();
+  }
+
+  BasicRectangleRenderer& Renderer::rectangle() {
+    return *_bRectangle;
+  }
+
+  BasicTextRenderer& Renderer::text() {
+    return *_bText;
   }
 }

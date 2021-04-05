@@ -13,6 +13,8 @@ namespace Ahwassa {
     virtual void update() {};
     virtual void startFocusEvent() {};
     virtual void endFocusEvent  () {};
+    virtual void mouseEnterEvent() {};
+    virtual void mouseLeaveEvent() {};
     virtual bool focusKeyEvent(                           Iyathuum::Key button, Iyathuum::KeyStatus status) { return false; };
     virtual bool      keyEvent(                           Iyathuum::Key button, Iyathuum::KeyStatus status) { return false; };
     virtual bool mouseEvent(     glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) { return false; };

@@ -1,25 +1,22 @@
-//#pragma once
-//
-//#include "Widget.h"
-//#include <string>
-//
-//namespace YolonaOss {
-//  namespace Widgets {
-//    class Label : public Widget
-//    {
-//    public:
-//      Label();
-//      Label(std::string name, Iyathuum::AABB<2> position, Widget* parent = nullptr);
-//      ~Label();
-//
-//      // Inherited via Drawable
-//      virtual void load(GL::DrawSpecification*) override;
-//      virtual void draw() override;
-//
-//      void setText(std::string text) { _name = text; }
-//
-//    private:
-//      std::string               _name;
-//    };
-//  }
-//}
+#pragma once
+
+#include <string>
+
+#include "AhwassaGraphicsLib/Input/UIElement.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
+
+namespace Ahwassa {
+  class Label : public UIElement, public Drawable
+  {
+  public:
+    Label(Window* w);
+    Label(std::string name, Iyathuum::glmAABB<2> position, Window* w, std::shared_ptr<UIElement> parent = nullptr);
+    ~Label();
+
+    virtual void draw() override;
+
+    void setText(std::string text) { _name = text; }
+  private:
+    std::string               _name;
+  };
+}

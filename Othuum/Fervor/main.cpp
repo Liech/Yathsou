@@ -12,6 +12,7 @@
 #include "AhwassaGraphicsLib/Renderer/Sphere.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AezeselFileIOLib/ImageIO.h"
+#include "AhwassaGraphicsLib/Widgets/Button.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "AhwassaGraphicsLib/VR/VR.h"
@@ -31,6 +32,7 @@ int main(int argc, char** argv) {
 
   std::vector < std::shared_ptr<Ahwassa::Sphere>> handle;
   std::shared_ptr < Ahwassa::SphereRenderer> box;
+  std::shared_ptr<Ahwassa::Button> button;
 
   w.Startup = [&]() {
     box = std::make_unique<Ahwassa::SphereRenderer>(cam);
@@ -40,6 +42,8 @@ int main(int argc, char** argv) {
     freeCam = std::make_shared<Ahwassa::FreeCamera>(cam, w.input());
     w.input().addUIElement(freeCam);
     fps = std::make_unique<Ahwassa::FPS>(&w);
+    button = std::make_shared<Ahwassa::Button>("Hallo", Iyathuum::glmAABB<2>(glm::vec2(50, 50), glm::vec2(200, 50)), []() {std::cout << "huhu" << std::endl; }, &w);
+    w.input().addUIElement(button);
   };
 
   w.Update = [&]() {
@@ -59,6 +63,7 @@ int main(int argc, char** argv) {
 
     box->draw();
     fps->draw();
+    button->draw();
   };
   w.run();
 

@@ -50,6 +50,7 @@ namespace Ahwassa {
 
     std::weak_ptr<UIElement> _pressedWidget;
     std::weak_ptr<UIElement> _currentFocus ;
+    std::weak_ptr<UIElement> _currentHover ;
     glm::vec2                _oldMousePos;
     glm::vec2                _cursorpos;
   };

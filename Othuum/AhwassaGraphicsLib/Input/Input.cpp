@@ -110,6 +110,7 @@ namespace Ahwassa {
         if (status == Iyathuum::KeyStatus::PRESS) {
           _pressedWidget = w;
           setFocus(w);
+          break;
         }
         else {
           auto pressedWidget = _pressedWidget.lock();
@@ -143,6 +144,26 @@ namespace Ahwassa {
     _cursorpos = getCursorPos();
 
     auto inputWidgets = getUIElements();
+
+    auto currentHover = _currentHover.lock();
+    if (currentHover && !currentHover->getGlobalPosition().isInside(_cursorpos)) {
+      currentHover->mouseLeaveEvent();
+      _currentHover = std::weak_ptr<UIElement>();
+      currentHover = nullptr;
+    }
+
+    for (auto w : inputWidgets) {
+      if (w->getGlobalPosition().isInside(_cursorpos)) {
+        if (currentHover == w)
+          break;
+        if (currentHover != nullptr)
+          currentHover->mouseLeaveEvent();
+        _currentHover = w;
+        w->mouseEnterEvent();
+        break;
+      }
+    }
+
     if (_cursorpos != _oldMousePos) {
       for (auto w : inputWidgets) {
         if (w->getGlobalPosition().isInside(_cursorpos)) {
@@ -174,7 +195,7 @@ namespace Ahwassa {
     struct compare {
       bool operator()(std::pair<std::shared_ptr<UIElement>, size_t> const& left,
         std::pair<std::shared_ptr<UIElement>, size_t> const& right) const {
-        return left.first > right.first; //reverse!
+        return left.first < right.first; //reverse!
       }
     };
 
