@@ -330,9 +330,6 @@
     <ClInclude Include="Renderer\Text.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Renderer\TextRenderer.h">
-      <Filter>Header Files\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\Box.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
@@ -519,9 +516,6 @@
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Text.cpp">
-      <Filter>Source Files\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\TextRenderer.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Box.cpp">

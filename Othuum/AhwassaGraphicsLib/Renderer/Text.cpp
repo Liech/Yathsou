@@ -1,24 +1,38 @@
-#include "Rectangle.h"
+#include "Text.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 
 namespace Ahwassa {
-  glm::mat4 Rectangle::matrix() const {
-    const float x  = location.getPosition()[0];
-    const float y  = location.getPosition()[1];
-    const float xs = location.getSize    ()[0];
-    const float ys = location.getSize    ()[1];
-    float transAndScale[16] = {
-      xs, 0 , 0, 0,
-      0 , ys, 0, 0,
-      0 , 0 , 1, 0,
-      x , y , 0, 1
-    };
-    return glm::make_mat4(transAndScale);
+  void Text::setText(const std::string& text) {
+    _text = text;
   }
 
-  glm::vec3 Rectangle::colorVec() const {
-    return color.to3();
+  std::string Text::getText() const {
+    return _text;
+  }
+
+  void Text::setPosition(const glm::vec2& position) {
+    _position = position;
+  }
+
+  glm::vec2 Text::getPosition() const {
+    return _position;
+  }
+
+  void Text::setColor(const Iyathuum::Color& clr) {
+    _color = clr;
+  }
+
+  Iyathuum::Color Text::getColor() const {
+    return _color;
+  }
+
+  void Text::setSize(const float& size) {
+    _size = size;
+  }
+
+  float Text::getSize() const {
+    return _size;
   }
 }
