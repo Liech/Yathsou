@@ -10,7 +10,7 @@
 #include "../OpenGL/ShaderProgram.h"
 
 namespace Iyathuum {
-  struct Color;
+  class Color;
 }
 
 namespace YolonaOss {

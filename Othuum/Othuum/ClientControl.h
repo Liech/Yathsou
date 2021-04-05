@@ -2,7 +2,7 @@
 
 #include <functional>
 #include <memory>
-#include "YolonaOss/OpenGL/Updateable.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 #include "VishalaNetworkLib/Core/Command.h"
 
 namespace Uyanah {
@@ -12,21 +12,20 @@ namespace Uyanah {
   } 
 }
 
-class ClientControl : public YolonaOss::GL::Updateable {
+class ClientControl {
 public:
-  ClientControl() = default;
+  ClientControl(Ahwassa::Window*);
   ClientControl(std::function<void(std::shared_ptr<Vishala::ICommand>)> sendCommand,
-                std::shared_ptr<const Uyanah::Scene> scene);
+                std::shared_ptr<const Uyanah::Scene> scene, Ahwassa::Window*);
   void update();
-  virtual void load(YolonaOss::GL::DrawSpecification*) override;
 private:
   bool _w = false;
   bool _a = false;
   bool _s = false;
   bool _d = false;
 
-  YolonaOss::GL::Window*                                _window     ;
-  std::shared_ptr<const Uyanah::Scene>                  _scene      ;
+  Ahwassa::Window*                                        _window     ;
+  std::shared_ptr<const Uyanah::Scene>                    _scene      ;
   std::function<void(std::shared_ptr<Vishala::ICommand>)> _sendCommand;
 
 };

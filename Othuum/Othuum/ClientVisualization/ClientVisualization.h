@@ -1,16 +1,15 @@
 #pragma once
 
-#include "YolonaOss/OpenGL/Drawable.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 #include "UyanahGameServer/Scene.h"
 
 namespace Uyanah {
   class Client;
 }
 
-class ClientVisualization : public YolonaOss::GL::Drawable {
+class ClientVisualization : public Ahwassa::Drawable {
 public:
-  ClientVisualization(std::shared_ptr<Uyanah::Scene>& scene);
-  virtual void load(YolonaOss::GL::DrawSpecification*) override;
+  ClientVisualization(std::shared_ptr<Uyanah::Scene>& scene, Ahwassa::Window*);
   virtual void draw()                                  override;
 
 private:

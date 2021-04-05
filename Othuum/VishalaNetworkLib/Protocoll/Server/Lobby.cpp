@@ -76,7 +76,7 @@ namespace Vishala {
         _players.erase(clientnumber);
     }
 
-    size_t  Lobby::getNextPort() {
+    int Lobby::getNextPort() {
       _currentPort++;
       while (_usedPorts.count(_currentPort) != 0) {
         _currentPort = (_currentPort + 1 - _startPort) % (_endPort - _startPort) + _startPort;

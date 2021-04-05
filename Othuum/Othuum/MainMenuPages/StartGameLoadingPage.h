@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "YolonaOss/OpenGL/Drawable.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
 #include "DialogPage.h"
 #include "ClientConfiguration.h"
@@ -11,22 +11,19 @@
 namespace Iyathuum {
   class ContentLoader;
 }
-namespace YolonaOss {
-  namespace Widgets {
-    class Label;
-  }
+namespace Ahwassa {
+  class Label;
 }
 
 enum class StartGameLoadingPageStatus {
   HostWait, Pending, Back, Proceed, Error
 };
 
-class StartGameLoadingPage : public YolonaOss::GL::Drawable {
+class StartGameLoadingPage : public Ahwassa::Drawable {
 public:
-  StartGameLoadingPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state);
+  StartGameLoadingPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state, Ahwassa::Window*);
 
-  virtual void draw()                                  override;
-  virtual void load(YolonaOss::GL::DrawSpecification*) override;
+  virtual void draw() override;
   void setVisible(bool visible);
   void reset();
   void setLoader(std::shared_ptr<Iyathuum::ContentLoader> loader);
@@ -47,5 +44,5 @@ private:
   std::shared_ptr<ClientConfiguration>       _config;
   std::shared_ptr<ClientState        >       _state ;
   std::shared_ptr<Iyathuum::ContentLoader>   _loader;
-  std::shared_ptr<YolonaOss::Widgets::Label> _text;
+  std::shared_ptr<Ahwassa::Label> _text;
 };

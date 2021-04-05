@@ -10,7 +10,7 @@ namespace Ahwassa {
   {
   public:
     Label(Window* w);
-    Label(std::string name, Iyathuum::glmAABB<2> position, Window* w, std::shared_ptr<UIElement> parent = nullptr);
+    Label(std::string name, Iyathuum::glmAABB<2> position, Window* w, UIElement* parent = nullptr);
     ~Label();
 
     virtual void draw() override;

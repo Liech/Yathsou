@@ -1,16 +1,10 @@
 #include "DialogPage.h"
 
-#include "YolonaOss/Drawables/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 
-DialogPage::DialogPage(int width, int height) {
-  _width  = width ;
-  _height = height;
-  _layout = std::make_unique<YolonaOss::Widgets::ListLayout>(getAABB());
-}
-
-void DialogPage::load(YolonaOss::GL::DrawSpecification* spec)
-{
-  _layout->load(spec);
+DialogPage::DialogPage(Ahwassa::Window* w) : Ahwassa::Drawable(w) {
+  _layout = std::make_unique<Ahwassa::ListLayout>(getAABB(),w);
 }
 
 void DialogPage::draw()
@@ -18,17 +12,17 @@ void DialogPage::draw()
   if (!_visible)
     return;
   _layout->adjustSize();
-  _layout->setPosition(getAABB());
+  _layout->setLocalPosition(getAABB());
   _layout->draw();
 }
 
-Iyathuum::AABB<2> DialogPage::getAABB() {
+Iyathuum::glmAABB<2> DialogPage::getAABB() {
   if (_layout == nullptr)
-    return Iyathuum::AABB<2>(std::array<double, 2>{ 0.0,0.0 }, std::array<double, 2>{ (double)_width/2,(double)_height/2 });
-  Iyathuum::AABB<2> result;
+    return Iyathuum::glmAABB<2>({ 0.0,0.0 }, { getWindow()->getHeight()/2,getWindow()->getHeight()/2 });
+  Iyathuum::glmAABB<2> result;
   _layout->adjustSize();
-  auto size = _layout->getPosition().getSize();
-  result.setPosition(std::array<double, 2>{ (_width / 2.0 - size[0] / 2.0), _height / 2.0 - size[1]/2.0});
+  auto size = _layout->getLocalPosition().getSize();
+  result.setPosition({ (getWindow()->getHeight() / 2.0 - size[0] / 2.0), getWindow()->getHeight() / 2.0 - size[1]/2.0});
   result.setSize(size);
   return result;
 }
@@ -38,6 +32,6 @@ void DialogPage::setVisible(bool visible) {
   _visible = visible; 
 }
 
-YolonaOss::Widgets::ListLayout& DialogPage::layout() {
+Ahwassa::ListLayout& DialogPage::layout() {
   return *_layout;
 }

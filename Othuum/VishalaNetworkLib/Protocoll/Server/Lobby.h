@@ -36,7 +36,7 @@ namespace Vishala {
       void sendLobbyUpdate(size_t player);
       void startGame(size_t player);
 
-      size_t  getNextPort();
+      int  getNextPort();
 
       std::unique_ptr<Connection>                       _connection;
       std::shared_ptr<LobbyModel>                       _model     ;

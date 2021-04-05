@@ -71,7 +71,7 @@ namespace Uyanah {
 
   const Scene& Client::getScene() {
     if (!_scene)
-      return Scene();
+      throw std::runtime_error("Wahh");
     return *_scene;
   }
 

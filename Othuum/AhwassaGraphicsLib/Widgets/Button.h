@@ -11,7 +11,7 @@ namespace Ahwassa {
   {
   public:
     Button(Window* w);
-    Button(std::string name, Iyathuum::glmAABB<2> position, std::function<void(void)> clickedFunction, Window* w, std::shared_ptr<UIElement> parent = nullptr);
+    Button(std::string name, Iyathuum::glmAABB<2> position, std::function<void(void)> clickedFunction, Window* w, UIElement* parent = nullptr);
     ~Button();
     
     virtual void draw() override;

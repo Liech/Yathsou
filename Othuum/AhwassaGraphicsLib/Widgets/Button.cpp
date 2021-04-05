@@ -12,7 +12,7 @@ namespace Ahwassa {
     _name = "Def";
   }
 
-  Button::Button(std::string name, Iyathuum::glmAABB<2> position, std::function<void(void)> clickedFunction, Window* w, std::shared_ptr<UIElement> parent) : Drawable(w)
+  Button::Button(std::string name, Iyathuum::glmAABB<2> position, std::function<void(void)> clickedFunction, Window* w, UIElement* parent) : Drawable(w)
   {
     _clickedFunction = clickedFunction;
     _name = name;

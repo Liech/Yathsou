@@ -1,29 +1,18 @@
 #include <iostream>
 #include <filesystem>
+#include <iomanip>
 
-#include "YolonaOss/OpenGL/Window.h"
-#include "YolonaOss/OpenGL/DrawableList.h"
-#include "YolonaOss/OpenGL/DrawSpecification.h"
-#include "DrawCubes.h"
-#include "YolonaOss/Camera/Camera.h"
-#include "YolonaOss/Camera/FreeCamera.h"
-#include "YolonaOss/Camera/RTSCamera.h"
-#include "YolonaOss/Camera/CameraSystem.h"
-#include "YolonaOss/Drawables/Widgets/Button.h"
 #include "IyathuumCoreLib/Singleton/Database.h"
-#include "YolonaOss/Renderer/BoxRenderer.h"
-#include "YolonaOss/Renderer/RectangleRenderer.h"
-#include "YolonaOss/Examples/Texture2Tree.h"
-#include "YolonaOss/Examples/RenderTexture.h"
-#include <filesystem>
-#include "YolonaOss/OpenGL/DrawSpecification.h"
 #include <IyathuumCoreLib/lib/glm/gtx/intersect.hpp>
-#include "YolonaOss/Drawables/Widgets/LineEdit.h"
+#include "IyathuumCoreLib/Util/UpdateTimer.h"
+
+#include "AhwassaGraphicsLib/Core/Window.h"
+#include "AhwassaGraphicsLib/Widgets/Button.h"
+#include "AhwassaGraphicsLib/Widgets/LineEdit.h"
 #include "IyathuumCoreLib/Util/ContentLoader.h"
 #include "SideProject/SideProjectMain.h"
 #include "ClientControl.h"
-#include <iomanip>
-#include "IyathuumCoreLib/Util/UpdateTimer.h"
+#include "DrawCubes.h"
 
 #include "ClientConfiguration.h"
 #include "ClientState.h"
@@ -38,11 +27,8 @@
 #include "OthuumGame.h"
 
 
-using namespace YolonaOss;
-
 int main(int argc, char** argv) {
   {
-    std::unique_ptr<OthuumGame> game = std::make_unique<OthuumGame>(false);
     
     std::string exe = std::string(argv[0]);
     const size_t last_slash_idx = exe.find_last_of("\\/");
@@ -58,16 +44,18 @@ int main(int argc, char** argv) {
 
     int width  = configuration->resolution[0];
     int height = configuration->resolution[1];
-    GL::Window w(width, height);
+    Ahwassa::Window w(width, height);
+    std::unique_ptr<OthuumGame> game = std::make_unique<OthuumGame>(&w,false);
 
-    MainMenuLogic logic(w, configuration, state);
+    MainMenuLogic logic(&w, configuration, state);
     std::unique_ptr<MainMenuLogicResult> rslt = nullptr;
 
     int tick = 0;
     auto contentCreator = [&w,&game]() {
       std::shared_ptr<Iyathuum::ContentLoader> loader = std::make_shared<Iyathuum::ContentLoader>();
       loader->addPackage([&w,&game]() {
-        game->load(w.getSpec());
+//        game->load(w.getSpec());
+        throw std::runtime_error("Not yet implemented");
         }, true);
       return loader;
     };

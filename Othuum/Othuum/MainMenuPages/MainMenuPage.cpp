@@ -3,15 +3,23 @@
 #include <iostream>
 #include <chrono>
 
-#include "YolonaOss/OpenGL/Window.h"
-#include "YolonaOss/Drawables/Widgets/ListLayout.h"
-#include "YolonaOss/Drawables/Widgets/Button.h"
+#include "AhwassaGraphicsLib/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Widgets/Button.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 
 #include "VishalaNetworkLib/Serializable/ServerConfiguration.h"
 #include "VishalaNetworkLib/Protocoll/Server/Lobby.h"
 
-MainMenuPage::MainMenuPage(){
-
+MainMenuPage::MainMenuPage(Ahwassa::Window* w) : Ahwassa::Drawable(w) {
+  _page = std::make_unique<DialogPage>(w);
+  
+  _page->layout().addLabel("Main Menu Page");
+  _page->layout().addButton("SideProject", [this]() { startSideProject();         });
+  _startServerButton =
+  _page->layout().addButton("Server"     , [this]() { if (!_serverStarted) startServer();         });
+  _page->layout().addButton("Multiplayer", [this]() { startLobbyJoin();           });
+  _page->layout().addButton("Options"    , [this]() { startOptions();             });
+  _page->layout().addButton("Quit"       , [w]() { w->close(); });
 }
 
 MainMenuPage::~MainMenuPage(){
@@ -22,17 +30,6 @@ MainMenuPage::~MainMenuPage(){
   }
 }
 
-void MainMenuPage::load(YolonaOss::GL::DrawSpecification* spec) {
-  _page = std::make_unique<DialogPage>(spec->width, spec->height);
-  
-  _page->layout().addLabel("Main Menu Page");
-  _page->layout().addButton("SideProject", [this]() { startSideProject();         });
-  _startServerButton =
-  _page->layout().addButton("Server"     , [this]() { if (!_serverStarted) startServer();         });
-  _page->layout().addButton("Multiplayer", [this]() { startLobbyJoin();           });
-  _page->layout().addButton("Options"    , [this]() { startOptions();             });
-  _page->layout().addButton("Quit"       , [spec]() { spec->getWindow()->close(); });
-}
 
 void MainMenuPage::startLobbyJoin() {
   _status = MainMenuPageStatus::Multiplayer;

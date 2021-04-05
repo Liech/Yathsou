@@ -19,7 +19,7 @@ class HostLoadingPage     ;
 class JoinLoadingPage     ;
 class StartGameLoadingPage;
 namespace SideProject { class SideProjectMain; }
-namespace YolonaOss{namespace GL{class Window;}}
+namespace Ahwassa{class Window;}
 namespace Iyathuum { class ContentLoader; }
 
 
@@ -44,7 +44,7 @@ public:
   };
   
 
-  MainMenuLogic(YolonaOss::GL::Window& window, std::shared_ptr<ClientConfiguration> config,std::shared_ptr<ClientState> state);
+  MainMenuLogic(Ahwassa::Window* window, std::shared_ptr<ClientConfiguration> config,std::shared_ptr<ClientState> state);
 
   void                  update();
   MainMenuLogic::status getStatus() { return _stat; }
@@ -78,5 +78,5 @@ private:
 
 
   MainMenuLogicResult    _result;
-  YolonaOss::GL::Window& _window;
+  Ahwassa::Window* _window;
 };

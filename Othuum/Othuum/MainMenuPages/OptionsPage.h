@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "YolonaOss/OpenGL/Drawable.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
 #include "DialogPage.h"
 #include "ClientConfiguration.h"
@@ -11,12 +11,11 @@ enum class OptionsPageStatus {
   Pending, Back
 };
 
-class OptionsPage : public YolonaOss::GL::Drawable {
+class OptionsPage : public Ahwassa::Drawable {
 public:
-  OptionsPage(std::shared_ptr<ClientConfiguration> config);
+  OptionsPage(std::shared_ptr<ClientConfiguration> config, Ahwassa::Window*);
 
   virtual void draw()                                  override;
-  virtual void load(YolonaOss::GL::DrawSpecification*) override;
   void setVisible(bool visible);
   void reset();
   bool requiresRestart();

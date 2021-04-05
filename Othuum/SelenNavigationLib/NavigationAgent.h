@@ -65,11 +65,11 @@ namespace Selen {
       _maxForce = speed;
     }
 
-    float getMaxSpeed() {
+    double getMaxSpeed() {
       return _maxSpeed;
     }
 
-    float getMaxForce() {
+    double getMaxForce() {
       return _maxForce;
     }
 

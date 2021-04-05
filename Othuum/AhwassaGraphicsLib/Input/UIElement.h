@@ -27,16 +27,17 @@ namespace Ahwassa {
     const Iyathuum::glmAABB<2>& getLocalPosition()  const;
     const Iyathuum::glmAABB<2>  getGlobalPosition() const;
     void                        setLocalPosition(Iyathuum::glmAABB<2>);
+    void                        setSize(const glm::vec2&);
 
-    void                        setParent(std::shared_ptr<UIElement> parent);
-    std::shared_ptr<UIElement>  getParent() const;
+    void        setParent(UIElement* parent);
+    UIElement*  getParent() const;
 
     virtual void setVisible(bool visible);
     bool         isVisible() const;
 
   private:
-    Iyathuum::glmAABB<2>     _localPosition;
-    std::weak_ptr<UIElement> _parent;
-    bool                     _visible = true;
+    Iyathuum::glmAABB<2> _localPosition;
+    UIElement*           _parent;
+    bool                 _visible = true;
   };
 }

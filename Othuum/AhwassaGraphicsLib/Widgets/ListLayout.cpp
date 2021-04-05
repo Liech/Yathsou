@@ -6,10 +6,14 @@
 #include "Core/Window.h"
 #include "Core/Renderer.h"
 
+#include "Button.h"
+#include "Slider.h"
+#include "Label.h"
+#include "LineEdit.h"
 
 
 namespace Ahwassa {
-  ListLayout::ListLayout(Iyathuum::glmAABB<2> position, Window* w, std::shared_ptr<UIElement> parent) : Drawable(w) {
+  ListLayout::ListLayout(Iyathuum::glmAABB<2> position, Window* w, UIElement* parent) : Drawable(w) {
     setLocalPosition(position);
     setParent(parent);
   }
@@ -19,12 +23,38 @@ namespace Ahwassa {
   }
 
   int  ListLayout::addElement(std::shared_ptr<UIElement> w) {
+    w->setParent(this);
     _widgets.push_back(w);
     return (int)(_widgets.size() - 1);
   }
 
   void ListLayout::removeWidget(int w) {
     _widgets.erase(_widgets.begin() + w);
+  }
+
+  std::shared_ptr<Button> ListLayout::addButton(std::string name, std::function<void()> onClicked, Iyathuum::glmAABB<2> size) {
+    std::shared_ptr<Button> b = std::make_shared<Button>(name, getElementSize(), [onClicked]() { onClicked(); },getWindow(),this);
+    addElement(b);
+    return b;
+  }
+
+  std::shared_ptr<ListLayout> ListLayout::addLayout() {
+    std::shared_ptr<ListLayout> l = std::make_shared<ListLayout>(getElementSize(),getWindow(),this);
+    addElement(l);
+    return l;
+  }
+
+  std::shared_ptr<Label> ListLayout::addLabel(std::string text){
+    std::shared_ptr<Label> l = std::make_shared<Label>(text, getElementSize(),getWindow(),this);
+    addElement(l);
+    return l;
+  }
+
+  std::shared_ptr<LineEdit> ListLayout::addLineEdit(std::string text) {
+    std::shared_ptr<LineEdit> l = std::make_shared<LineEdit>(text, getElementSize(),getWindow(), this);
+    addElement(l);
+    return l;
+
   }
 
   void ListLayout::draw() {

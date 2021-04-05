@@ -2,23 +2,22 @@
 
 #include <memory>
 
-#include "YolonaOss/OpenGL/Drawable.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
 #include "DialogPage.h"
 #include "ClientConfiguration.h"
 #include "VishalaNetworkLib/Serializable/CreateGameRequest.h"
-#include "YolonaOss/Drawables/Widgets/LineEdit.h"
+#include "AhwassaGraphicsLib/Widgets/LineEdit.h"
 
 enum class HostPageStatus {
   Pending, Back, Host
 };
 
-class HostGamePage : public YolonaOss::GL::Drawable {
+class HostGamePage : public Ahwassa::Drawable {
 public:
-  HostGamePage(std::shared_ptr<ClientConfiguration> config);
+  HostGamePage(std::shared_ptr<ClientConfiguration> config, Ahwassa::Window*);
 
   virtual void draw()                                  override;
-  virtual void load(YolonaOss::GL::DrawSpecification*) override;
   void setVisible(bool visible);
   void reset();
 
@@ -29,7 +28,7 @@ private:
   void hostGame();
 
   std::unique_ptr<DialogPage> _page;
-  std::shared_ptr<YolonaOss::Widgets::LineEdit>   _gameName;
+  std::shared_ptr<Ahwassa::LineEdit>   _gameName;
   HostPageStatus                                  _status = HostPageStatus::Pending;
   std::shared_ptr<ClientConfiguration>            _config;
 };

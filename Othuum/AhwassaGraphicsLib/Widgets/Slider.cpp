@@ -14,7 +14,7 @@ namespace Ahwassa {
   {
   }
 
-  Slider::Slider(Iyathuum::glmAABB<2> position, double min, double max, double startValue, std::function<void(double)> valueChangedCall, Window* w, std::shared_ptr<UIElement> parent) : Drawable(w) {
+  Slider::Slider(Iyathuum::glmAABB<2> position, double min, double max, double startValue, std::function<void(double)> valueChangedCall, Window* w, UIElement* parent) : Drawable(w) {
     _valueChangedCall = valueChangedCall;
     _currentValue = startValue;
     _min = min;

@@ -11,7 +11,7 @@ namespace Ahwassa {
   {
   public:
     Slider(Window*);
-    Slider(Iyathuum::glmAABB<2> position, double min, double max, double startValue, std::function<void(double)> valueChangedCall, Window* w, std::shared_ptr<UIElement> parent = nullptr);
+    Slider(Iyathuum::glmAABB<2> position, double min, double max, double startValue, std::function<void(double)> valueChangedCall, Window* w, UIElement* parent = nullptr);
     ~Slider();
 
     virtual void draw() override;
@@ -38,9 +38,9 @@ namespace Ahwassa {
 
 
     std::function<void(double)> _valueChangedCall;
-    double                      _min;
-    double                      _max;
-    double                      _currentValue;
+    double                      _min          = 0;
+    double                      _max          = 1;
+    double                      _currentValue = 0;
 
     bool _pressed = false;
 

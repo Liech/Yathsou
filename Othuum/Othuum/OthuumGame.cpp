@@ -5,30 +5,28 @@
 #include "ClientVisualization/ClientVisualization.h"
 #include "InitializeCmd.h"
 
-#include "YolonaOss/OpenGL/DrawableList.h"
-#include "YolonaOss/Drawables/FPS.h"
-#include "YolonaOss/Drawables/Background.h"
+#include "AhwassaGraphicsLib/Drawables/FPS.h"
+#include "AhwassaGraphicsLib/Drawables/Background.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 
 #include "UyanahGameServer/Scene.h"
 #include "UyanahGameServer/Components/Dot.h"
 #include "UyanahGameServer/Components/Transform2D.h"
 #include "UyanahGameServer/Commands/UpdateScene.h"
 
-OthuumGame::OthuumGame(bool authoritarian) {
+OthuumGame::OthuumGame(Ahwassa::Window* w, bool authoritarian) {
   _authoritarian = authoritarian;
+  _window = w;
 
   _authoClient = nullptr;
   _libClient   = nullptr;
   _scene  = std::make_shared<Uyanah::Scene>();
   _timer = std::make_unique<Iyathuum::UpdateTimer>([this]() {tick(); }, _fps);
-  _drawables = std::make_shared<YolonaOss::GL::DrawableList>();
-}
 
-void OthuumGame::load(YolonaOss::GL::DrawSpecification* spec) {
-  _vis = std::make_shared<ClientVisualization>(_scene);
-  _drawables->addDrawable(std::make_shared<YolonaOss::Background>());
-  _drawables->addDrawable(std::make_shared<YolonaOss::FPS>());
-  _drawables->addDrawable(_vis);
+  _vis = std::make_shared<ClientVisualization>(_scene,w);
+  _list.push_back(std::make_shared<Ahwassa::Background>(w));
+  _list.push_back(std::make_shared<Ahwassa::FPS>(w));
+  _list.push_back(_vis);
 
   auto s = std::make_shared<Uyanah::Scene>();
   _timer->setTicksPerSecond(_fps);
@@ -38,10 +36,7 @@ void OthuumGame::load(YolonaOss::GL::DrawSpecification* spec) {
       _authoClient->sendCmd(*cmd);
     else
       _libClient->sendCmd(cmd);
-    },s);
-
-  _drawables->load(spec);
-  _control->load(spec);
+    },s,w);
 }
 
 void OthuumGame::createClient(int myPort, int serverPort, std::string ip) {
@@ -71,7 +66,8 @@ void OthuumGame::update() {
 }
 
 void OthuumGame::draw() {
-  _drawables->draw();
+  for (auto f : _list)
+    f->draw();
 }
 
 void OthuumGame::createServer(int port) {

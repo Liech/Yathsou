@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "YolonaOss/OpenGL/Drawable.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
 #include "DialogPage.h"
 #include "ClientConfiguration.h"
@@ -12,12 +12,11 @@ enum class JoinLoadingPageStatus {
   Pending, Back, Proceed, Error
 };
 
-class JoinLoadingPage : public YolonaOss::GL::Drawable {
+class JoinLoadingPage : public Ahwassa::Drawable {
 public:
-  JoinLoadingPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state);
+  JoinLoadingPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state, Ahwassa::Window*);
 
-  virtual void draw()                                  override;
-  virtual void load(YolonaOss::GL::DrawSpecification*) override;
+  virtual void draw() override;
   void setVisible(bool visible);
   void reset();
   void start(size_t gameID);

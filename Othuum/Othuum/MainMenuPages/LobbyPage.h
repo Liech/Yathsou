@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "YolonaOss/OpenGL/Drawable.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
 #include "DialogPage.h"
 #include "ClientConfiguration.h"
@@ -12,12 +12,11 @@ enum class LobbyPageStatus {
   Pending, Back, Host, Join
 };
 
-class LobbyPage : public YolonaOss::GL::Drawable {
+class LobbyPage : public Ahwassa::Drawable {
 public:
-  LobbyPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state);
+  LobbyPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state, Ahwassa::Window*);
 
-  virtual void draw()                                  override;
-  virtual void load(YolonaOss::GL::DrawSpecification*) override;
+  virtual void draw() override;
   void setVisible(bool visible);
   void reset();
 
@@ -32,7 +31,7 @@ private:
   void updateLobbyState(std::unique_ptr<Vishala::LobbyStateUpdate>);
 
   std::unique_ptr<DialogPage>                     _page;
-  std::shared_ptr<YolonaOss::Widgets::ListLayout> _openGamesLayout;
+  std::shared_ptr<Ahwassa::ListLayout> _openGamesLayout;
   
   size_t _gameIDToJoin = 0;
 

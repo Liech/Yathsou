@@ -1,19 +1,25 @@
 #include "ClientControl.h"
 
-#include "YolonaOss/OpenGL/Window.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
+#include "AhwassaGraphicsLib/Input/Input.h"
 #include "UyanahGameServer/Commands/Key.h"
 
 ClientControl::ClientControl(std::function<void(std::shared_ptr<Vishala::ICommand>)> sendCommand,
-  std::shared_ptr<const Uyanah::Scene> scene) {
+  std::shared_ptr<const Uyanah::Scene> scene, Ahwassa::Window* w) {
   _scene = scene;
   _sendCommand = sendCommand;
+  _window = w;
+}  
+ClientControl::ClientControl(Ahwassa::Window*w)  {
+  _window = w;
 }
 
+
 void ClientControl::update() {
-  bool w = _window->getKeyStatus(Iyathuum::Key::KEY_W) == Iyathuum::KeyStatus::PRESS;
-  bool a = _window->getKeyStatus(Iyathuum::Key::KEY_A) == Iyathuum::KeyStatus::PRESS;
-  bool s = _window->getKeyStatus(Iyathuum::Key::KEY_S) == Iyathuum::KeyStatus::PRESS;
-  bool d = _window->getKeyStatus(Iyathuum::Key::KEY_D) == Iyathuum::KeyStatus::PRESS;
+  bool w = _window->input().getKeyStatus(Iyathuum::Key::KEY_W) == Iyathuum::KeyStatus::PRESS;
+  bool a = _window->input().getKeyStatus(Iyathuum::Key::KEY_A) == Iyathuum::KeyStatus::PRESS;
+  bool s = _window->input().getKeyStatus(Iyathuum::Key::KEY_S) == Iyathuum::KeyStatus::PRESS;
+  bool d = _window->input().getKeyStatus(Iyathuum::Key::KEY_D) == Iyathuum::KeyStatus::PRESS;
 
   if (w != _w)
   {
@@ -52,9 +58,4 @@ void ClientControl::update() {
   _a = a; 
   _s = s; 
   _d = d; 
-}
-
-void ClientControl::load(YolonaOss::GL::DrawSpecification* spec)
-{
-  _window = spec->getWindow();
 }

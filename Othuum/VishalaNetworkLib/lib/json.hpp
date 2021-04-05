@@ -14892,7 +14892,7 @@ class serializer
                     {
                         dump_integer(*i);
                         o->write_character(',');
-                        int index = i - val.m_value.binary->cbegin();
+                        int index = (int)(i - val.m_value.binary->cbegin());
                         if (index % 16 == 0)
                         {
                             o->write_character('\n');

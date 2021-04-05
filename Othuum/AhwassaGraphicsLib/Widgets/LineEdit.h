@@ -2,7 +2,9 @@
 
 #include <string>
 #include <functional>
+#include <limits>
 
+#include "IyathuumCoreLib/BaseTypes/Keys.h"
 #include "AhwassaGraphicsLib/Input/UIElement.h"
 #include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
@@ -11,7 +13,7 @@ namespace Ahwassa {
   {
   public:
     LineEdit(Window* w);
-    LineEdit(std::string name, Iyathuum::glmAABB<2> position, Window* w, std::shared_ptr<UIElement> parent = nullptr);
+    LineEdit(std::string name, Iyathuum::glmAABB<2> position, Window* w, UIElement* parent = nullptr);
     ~LineEdit();
 
     void        setText(std::string text);
@@ -26,16 +28,16 @@ namespace Ahwassa {
     virtual void startFocusEvent();
     virtual void endFocusEvent();
 
-    static std::function<bool(Iyathuum::Key, std::string)> integerValidator(int min = std::numeric_limits<int>::min(), int max = std::numeric_limits<int>::max());
+    static std::function<bool(Iyathuum::Key, std::string)> integerValidator(int min = INT_MIN, int max = INT_MAX);
     static std::function<bool(Iyathuum::Key, std::string)> defaultValidator();
 
   private:
-    std::string _text = "";
-    int         _cursorPosition = 3;
-    bool        _hasFocus = false;
-    bool        _changed = false;
-    std::function<void(std::string)>        _textChangedCallback = [](std::string s) {};
-    std::function<void(std::string)>        _finishedEditingCallback = [](std::string s) {};
-    std::function<bool(Iyathuum::Key, std::string)> _validator = defaultValidator();
+    std::string _text           ;
+    int         _cursorPosition ;
+    bool        _hasFocus       ;
+    bool        _changed        ;
+    std::function<void(std::string)>                _textChangedCallback     ;
+    std::function<void(std::string)>                _finishedEditingCallback ;
+    std::function<bool(Iyathuum::Key, std::string)> _validator               ;
   };
 }

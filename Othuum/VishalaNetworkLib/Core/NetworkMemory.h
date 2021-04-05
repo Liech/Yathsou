@@ -39,7 +39,7 @@ namespace Vishala {
       BinaryPackage::val2bin(msg, mode);
       msg.add(package.compress());
       for (auto target : _connection.getAllConnections())
-        _connection.send(target, _channel, std::make_unique<BinaryPackage>(msg), true);
+        _connection.send(target, (uint8_t)_channel, std::make_unique<BinaryPackage>(msg), true);
       _lastSend = package;
       _lastSend.position = 0;
     }

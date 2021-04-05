@@ -2,22 +2,25 @@
 
 #include <iostream>
 
-#include "YolonaOss/Drawables/Widgets/ListLayout.h"
-#include "YolonaOss/Drawables/Widgets/Label.h"
-#include "YolonaOss/Drawables/Widgets/LineEdit.h"
+#include "AhwassaGraphicsLib/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Widgets/Label.h"
+#include "AhwassaGraphicsLib/Widgets/Button.h"
+#include "AhwassaGraphicsLib/Widgets/LineEdit.h"
 
-GameLobbyPage::GameLobbyPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state) {
+GameLobbyPage::GameLobbyPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state, Ahwassa::Window* w) : Ahwassa::Drawable(w) {
   _config = configuration;
-  _state  = state;
-}
+  _state  = state;  
+  _page = std::make_unique<DialogPage>(w);
 
-void GameLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
-  _page = std::make_unique<DialogPage>(spec->width, spec->height);
+  std::shared_ptr<Ahwassa::Label> title = std::make_shared<Ahwassa::Label>("Game Lobby Page", Iyathuum::glmAABB<2>{ {0,0},{100,50} },w);
 
-  _page->layout().addLabel("Game Lobby Page");
-  _startButton = _page->layout().addButton("Start Game", [this]() {
+  _page->layout().addElement(title);
+
+  std::shared_ptr<Ahwassa::Button> start = std::make_shared<Ahwassa::Button>("Start Game", Iyathuum::glmAABB<2>{ {0, 0}, { 100,50 } }, [this]() {
     startGame();
-    });
+  }, w);
+  _page->layout().addElement(start);
+
   _startButton->setVisible(false);
   _participatorsLayout = _page->layout().addLayout();
   _participatorsLayout->addLabel("You are alone");

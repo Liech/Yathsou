@@ -2,19 +2,18 @@
 
 #include <iostream>
 
-#include "YolonaOss/Drawables/Widgets/ListLayout.h"
-#include "YolonaOss/Drawables/Widgets/LineEdit.h"
+#include "AhwassaGraphicsLib/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Widgets/LineEdit.h"
 
-ErrorPage::ErrorPage(std::shared_ptr<ClientConfiguration> configuration) {
+ErrorPage::ErrorPage(std::shared_ptr<ClientConfiguration> configuration, Ahwassa::Window* w) : Ahwassa::Drawable(w) {
   _config = configuration;
-}
+  _page = std::make_unique<DialogPage>(w);
 
-void ErrorPage::load(YolonaOss::GL::DrawSpecification* spec) {
-  _page = std::make_unique<DialogPage>(spec->width, spec->height);
-
-  _title= _page->layout().addLabel("ERROR");
-  _desc = _page->layout().addLabel("Description");
-  _page->layout().addButton("OK", [this]() { goBack(); });
+  _title = std::make_shared<Ahwassa::Label>("ERROR", Iyathuum::glmAABB<2>{ {0, 0}, { 100,50 } }, w);
+  _page->layout().addElement(_title);
+  _desc = std::make_shared<Ahwassa::Label>("Description", Iyathuum::glmAABB<2>{ {0, 0}, { 100,50 } }, w);
+  _page->layout().addElement(_desc);
+  _page->layout().addButton("OK", [this]() { goBack(); }, Iyathuum::glmAABB<2>({ 0, 0 }, { 100,50 }));
   setVisible(false);
 }
 

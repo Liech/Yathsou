@@ -1,20 +1,18 @@
 #include "SideProjectMain.h"
 
-#include "YolonaOss/Drawables/FPS.h"
-#include "YolonaOss/Drawables/Background.h"
+#include "AhwassaGraphicsLib/Drawables/FPS.h"
+#include "AhwassaGraphicsLib/Drawables/Background.h"
 
 namespace SideProject
 {
-  void SideProjectMain::load(YolonaOss::GL::DrawSpecification* spec)
-  {
-    _list = std::make_shared<YolonaOss::GL::DrawableList>();
-    _list->addDrawable(std::make_shared<YolonaOss::Background>());
-    _list->addDrawable(std::make_shared<YolonaOss::FPS>());
-    _list->load(spec);    
+  SideProjectMain::SideProjectMain(Ahwassa::Window* w) : Ahwassa::Drawable(w){
+   _list.push_back(std::make_shared<Ahwassa::Background>(w));
+   _list.push_back(std::make_shared<Ahwassa::FPS>(w));
   }
 
   void SideProjectMain::draw()
   {
-    _list->draw();
+    for (auto x : _list)
+      x->draw();
   }
 }

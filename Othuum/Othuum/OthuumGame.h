@@ -20,19 +20,16 @@ namespace Vishala {
 namespace Iyathuum {
   class UpdateTimer;
 }
-namespace YolonaOss {
-  namespace GL {
-    class DrawableList;
-    class DrawSpecification;
-  }
+namespace Ahwassa {
+  class Window;
+  class Drawable;
 }
 
 class OthuumGame {
 public:
-  OthuumGame(bool authoritarian = true);
+  OthuumGame(Ahwassa::Window*,bool authoritarian = true);
 
-  void load(YolonaOss::GL::DrawSpecification* spec);
-  
+ 
   void tick();
   void update();
   void draw();
@@ -52,6 +49,7 @@ private:
   std::shared_ptr<Uyanah::Scene>                                   _scene    ;
   std::shared_ptr<ClientControl>                                   _control  ;
   std::unique_ptr<Iyathuum::UpdateTimer>                           _timer    ;
-  std::shared_ptr<YolonaOss::GL::DrawableList>                     _drawables;
   std::shared_ptr<ClientVisualization>                             _vis      ;
+  Ahwassa::Window* _window;
+  std::vector<std::shared_ptr<Ahwassa::Drawable>> _list;
 };

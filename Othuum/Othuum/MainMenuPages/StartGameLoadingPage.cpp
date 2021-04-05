@@ -2,19 +2,18 @@
 
 #include <iostream>
 
-#include "YolonaOss/Drawables/Widgets/ListLayout.h"
-#include "YolonaOss/Drawables/Widgets/Label.h"
-#include "YolonaOss/Drawables/Widgets/LineEdit.h"
+#include "AhwassaGraphicsLib/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Widgets/Label.h"
+#include "AhwassaGraphicsLib/Widgets/LineEdit.h"
 #include "IyathuumCoreLib/Util/ContentLoader.h"
 #include "VishalaNetworkLib/Serializable/Client2LobbyMessage.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 
-StartGameLoadingPage::StartGameLoadingPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state) {
+StartGameLoadingPage::StartGameLoadingPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state, Ahwassa::Window* w) : Ahwassa::Drawable(w) {
   _config = configuration;
   _state  = state;
-}
 
-void StartGameLoadingPage::load(YolonaOss::GL::DrawSpecification* spec) {
-  _page = std::make_unique<DialogPage>(spec->width, spec->height);
+  _page = std::make_unique<DialogPage>(w);
 
   _text = _page->layout().addLabel("Starting Game...");
   

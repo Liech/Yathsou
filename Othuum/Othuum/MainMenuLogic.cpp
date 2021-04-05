@@ -19,43 +19,31 @@
 
 #include "SideProject/SideProjectMain.h"
 
-#include "YolonaOss/OpenGL/Drawable.h"
-#include "YolonaOss/OpenGL/Window.h"
-#include "IyathuumCoreLib/Singleton/Database.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 #include <thread>
 #include "IyathuumCoreLib/Util/ContentLoader.h"
 
 #include "VishalaNetworkLib/Core/Connection.h"
 
-MainMenuLogic::MainMenuLogic(YolonaOss::GL::Window& window,std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state) 
+MainMenuLogic::MainMenuLogic(Ahwassa::Window* window,std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state) 
   : _window(window)
 {
   _config     = config;
   _state      = state ;
 
-  _mainMenuPage         = std::make_shared<MainMenuPage >();
-  _joinLobbyPage        = std::make_shared<JoinLobbyPage>       (config);
-  _hostPage             = std::make_shared<HostGamePage>        (config);
-  _optionsPage          = std::make_shared<OptionsPage>         (config);
-  _errorPage            = std::make_shared<ErrorPage>           (config);
-  _sideProject          = std::make_shared<SideProject::SideProjectMain> ();
-  _lobbyPage            = std::make_shared<LobbyPage>           (config, state);
-  _gameLobbyPage        = std::make_shared<GameLobbyPage>       (config, state);
-  _lobbyLoadingPage     = std::make_shared<LobbyLoadingPage>    (config, state);
-  _hostLoadingPage      = std::make_shared<HostLoadingPage>     (config, state);
-  _joinLoadingPage      = std::make_shared<JoinLoadingPage>     (config, state);
-  _startGameLoadingPage = std::make_shared<StartGameLoadingPage>(config, state);
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_mainMenuPage         , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_joinLobbyPage        , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyPage            , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_hostPage             , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_optionsPage          , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_lobbyLoadingPage     , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_hostLoadingPage      , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_errorPage            , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_gameLobbyPage        , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_joinLoadingPage      , { "Main" });
-  Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_startGameLoadingPage , { "Main" });
+  _mainMenuPage         = std::make_shared<MainMenuPage >(window);
+  _joinLobbyPage        = std::make_shared<JoinLobbyPage>       (config,window);
+  _hostPage             = std::make_shared<HostGamePage>        (config,window);
+  _optionsPage          = std::make_shared<OptionsPage>         (config,window);
+  _errorPage            = std::make_shared<ErrorPage>           (config,window);
+  _sideProject          = std::make_shared<SideProject::SideProjectMain> (window);
+  _lobbyPage            = std::make_shared<LobbyPage>           (config, state,window);
+  _gameLobbyPage        = std::make_shared<GameLobbyPage>       (config, state,window);
+  _lobbyLoadingPage     = std::make_shared<LobbyLoadingPage>    (config, state,window);
+  _hostLoadingPage      = std::make_shared<HostLoadingPage>     (config, state,window);
+  _joinLoadingPage      = std::make_shared<JoinLoadingPage>     (config, state,window);
+  _startGameLoadingPage = std::make_shared<StartGameLoadingPage>(config, state,window);
 }
 
 void MainMenuLogic::update() {
@@ -77,8 +65,9 @@ void MainMenuLogic::update() {
     else if (_mainMenuPage->getStatus() == MainMenuPageStatus::SideProject && _stat == status::MainMenu) {
       _mainMenuPage->reset();
       _mainMenuPage->setVisible(false);
-      Iyathuum::Database<std::shared_ptr<YolonaOss::GL::Drawable>>::add(_sideProject, { "Main" });
-      _sideProject->load(_window.getSpec());
+      //_sideProject->load(_window.getSpec());
+      throw std::runtime_error("Not yet implemented");
+
       _stat = status::SideProject;
     }
   }

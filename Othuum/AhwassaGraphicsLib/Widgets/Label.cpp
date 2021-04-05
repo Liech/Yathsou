@@ -12,7 +12,7 @@ namespace Ahwassa {
     _name = "Def";
   }
 
-  Label::Label(std::string name, Iyathuum::glmAABB<2> position, Window* w, std::shared_ptr<UIElement> parent) : Drawable(w) {
+  Label::Label(std::string name, Iyathuum::glmAABB<2> position, Window* w, UIElement* parent) : Drawable(w) {
     _name = name;
     setParent(parent);
     setLocalPosition(position);

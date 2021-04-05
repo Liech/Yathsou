@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "YolonaOss/OpenGL/Drawable.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
 #include "DialogPage.h"
 #include "ClientConfiguration.h"
@@ -12,12 +12,11 @@ enum class LobbyLoadingPageStatus {
   Pending, Back, Proceed, Error
 };
 
-class LobbyLoadingPage : public YolonaOss::GL::Drawable {
+class LobbyLoadingPage : public Ahwassa::Drawable {
 public:
-  LobbyLoadingPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state);
+  LobbyLoadingPage(std::shared_ptr<ClientConfiguration> config, std::shared_ptr<ClientState> state, Ahwassa::Window*);
 
-  virtual void draw()                                  override;
-  virtual void load(YolonaOss::GL::DrawSpecification*) override;
+  virtual void draw() override;
   void setVisible(bool visible);
   void reset();
   void start();

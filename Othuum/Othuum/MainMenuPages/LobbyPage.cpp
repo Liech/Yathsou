@@ -2,19 +2,16 @@
 
 #include <iostream>
 
-#include "YolonaOss/Drawables/Widgets/ListLayout.h"
-#include "YolonaOss/Drawables/Widgets/Label.h"
-#include "YolonaOss/Drawables/Widgets/LineEdit.h"
+#include "AhwassaGraphicsLib/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Widgets/Label.h"
+#include "AhwassaGraphicsLib/Widgets/LineEdit.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 
-LobbyPage::LobbyPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state) {
+LobbyPage::LobbyPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state, Ahwassa::Window* w) : Ahwassa::Drawable(w) {
   _config = configuration;
   _state  = state;
-}
 
-void LobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
-  _page = std::make_unique<DialogPage>(spec->width, spec->height);
-  _height = spec->height;
-  _width = spec->width;
+  _page = std::make_unique<DialogPage>(w);
   _page->layout().setHorizontal(true);
 
   auto left = _page->layout().addLayout();
@@ -25,7 +22,7 @@ void LobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
 
   _openGamesLayout = _page->layout().addLayout();
   _openGamesLayout->addButton("No Games Yet", []() {});
-  _openGamesLayout->setMaximumSize(glm::vec2(0, spec->height / 2));
+  _openGamesLayout->setMaximumSize(glm::vec2(0, w->getHeight() / 2));
 
   setVisible(false);
 }
@@ -42,7 +39,7 @@ void LobbyPage::draw() {
 void LobbyPage::updateLobbyState(std::unique_ptr<Vishala::LobbyStateUpdate> update) {
   std::cout << "Lobby State update..." << std::endl;
   _openGamesLayout->clear();
-  _openGamesLayout->setPosition(Iyathuum::AABB<2>({0,0}, {_width / 4.0,_height/2.0}));
+  _openGamesLayout->setLocalPosition(Iyathuum::glmAABB<2>({ 0,0 }, { getWindow()->getWidth() / 4.0,getWindow()->getHeight() / 2.0 }));
   for (auto game : update->openGames) {
     std::string msg = game.name + " " + std::to_string(game.numberOfPlayers) + "/" + std::to_string(game.maxNumberOfPlayers);
     size_t gameID = game.gameID;

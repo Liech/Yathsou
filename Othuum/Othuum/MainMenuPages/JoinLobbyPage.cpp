@@ -2,16 +2,15 @@
 
 #include <iostream>
 
-#include "YolonaOss/Drawables/Widgets/ListLayout.h"
-#include "YolonaOss/Drawables/Widgets/Label.h"
-#include "YolonaOss/Drawables/Widgets/LineEdit.h"
+#include "AhwassaGraphicsLib/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Widgets/Label.h"
+#include "AhwassaGraphicsLib/Widgets/LineEdit.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 
-JoinLobbyPage::JoinLobbyPage(std::shared_ptr<ClientConfiguration> configuration) {
+JoinLobbyPage::JoinLobbyPage(std::shared_ptr<ClientConfiguration> configuration, Ahwassa::Window* w) : Ahwassa::Drawable(w) {
   _config = configuration;
-}
 
-void JoinLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
-  _page = std::make_unique<DialogPage>(spec->width, spec->height);
+  _page = std::make_unique<DialogPage>(w);
 
   _page->layout().addLabel("Join Lobby Page");
 
@@ -19,9 +18,9 @@ void JoinLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   auto sub = _page->layout().addLayout();  
   sub->setHorizontal(true);
   auto but = sub->addLabel("Nickname:");
-  but->getPosition().setSize(std::array<double,2>{ spec->width / 4.0,50.0 });
+  but->setSize({ w->getWidth()  / 4.0,50.0 });
   auto but2 = sub->addLineEdit(_config->playerName);
-  but2->getPosition().setSize(std::array<double, 2>{ spec->width / 4.0,50.0 });
+  but2->setSize({ w->getWidth() / 4.0,50.0 });
   but2->setEditFinishedCallback([this](std::string s) {
     _config->playerName = s;
     saveConfig();
@@ -30,9 +29,9 @@ void JoinLobbyPage::load(YolonaOss::GL::DrawSpecification* spec) {
   auto subAdress = _page->layout().addLayout();
   subAdress->setHorizontal(true);
   auto adressLabel = subAdress->addLabel("Server:");
-  adressLabel->getPosition().setSize(std::array<double, 2>{ spec->width / 4.0, 50.0 });
+  adressLabel->setSize({ w->getWidth() / 4.0, 50.0 });
   auto adressLine = subAdress->addLineEdit(_config->lobbyServerAdress);
-  adressLine->getPosition().setSize(std::array<double, 2>{ spec->width / 4.0, 50.0 });
+  adressLine->setSize({ w->getWidth() / 4.0, 50.0 });
   adressLine->setEditFinishedCallback([this](std::string s) {
     _config->lobbyServerAdress = s;
     saveConfig();

@@ -200,7 +200,7 @@ namespace Vishala {
   }
 
   void Connection::update() {
-    assert(_connection != nullptr, "start() not called");    
+    assert(_connection != nullptr);    //"start() not called"
     NetReciveEvent event;
     while (_threadQueueRecive.try_dequeue(event)) {
       if (event.newConnection) {

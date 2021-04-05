@@ -2,31 +2,30 @@
 
 #include <iostream>
 
-#include "YolonaOss/Drawables/Widgets/ListLayout.h"
-#include "YolonaOss/Drawables/Widgets/Label.h"
+#include "AhwassaGraphicsLib/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Widgets/Label.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 
-HostGamePage::HostGamePage(std::shared_ptr<ClientConfiguration> configuration) {
+HostGamePage::HostGamePage(std::shared_ptr<ClientConfiguration> configuration, Ahwassa::Window* w) : Ahwassa::Drawable(w) {
   _config = configuration;
-}
 
-void HostGamePage::load(YolonaOss::GL::DrawSpecification* spec) {
-  _page = std::make_unique<DialogPage>(spec->width, spec->height);
+  _page = std::make_unique<DialogPage>(w);
 
   _page->layout().addLabel("Host Game Page");
   auto subPort = _page->layout().addLayout();
   subPort->setHorizontal(true);
   auto portLable = subPort->addLabel("Port:");
-  portLable->getPosition().setSize({spec->width / 4.0, 50.0});
+  portLable->setLocalPosition(Iyathuum::glmAABB<2>({ 0.0f,0.0f },{ w->getWidth() / 4.0, 50.0 }));
   auto portEdit = subPort->addLineEdit(std::to_string(_config->hostPort));
-  portEdit->getPosition().setSize({ spec->width / 4.0, 50.0 });
-  portEdit->setValidator(YolonaOss::Widgets::LineEdit::integerValidator(0, 65535));
+  portEdit->setLocalPosition(Iyathuum::glmAABB<2>({ 0.0f,0.0f }, { w->getWidth() / 4.0, 50.0 }));
+  portEdit->setValidator(Ahwassa::LineEdit::integerValidator(0, 65535));
 
   auto subName = _page->layout().addLayout();
   subName->setHorizontal(true);
   auto nameLable = subName->addLabel("Name:");
-  nameLable->getPosition().setSize({ spec->width / 4.0, 50.0 });
+  nameLable->setSize({ w->getWidth() / 4.0, 50.0 });
   _gameName = subName->addLineEdit(_config->lastGameName);
-  _gameName->getPosition().setSize({ spec->width / 4.0, 50.0 });
+  _gameName->setSize({ w->getWidth() / 4.0, 50.0 });
 
   _page->layout().addButton("Host", [this]() { hostGame(); });
   _page->layout().addButton("Back", [this]() { goBack(); });

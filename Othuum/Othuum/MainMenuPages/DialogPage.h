@@ -3,39 +3,33 @@
 #include <memory>
 #include <functional>
 
-#include "YolonaOss/OpenGL/Drawable.h"
-#include "IyathuumCoreLib/BaseTypes/AABB.h"
-#include "YolonaOss/Drawables/Widgets/Button.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
+#include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 
-namespace YolonaOss {
-  namespace Widgets {
-    class ListLayout;
-  }
+namespace Ahwassa {
+  class ListLayout;
 }
 
 enum class DialogPageStatus {
   InProgress,Finished
 };
 
-class DialogPage : public YolonaOss::GL::Drawable {
+class DialogPage : public Ahwassa::Drawable {
 public:
-  DialogPage(int width, int height);
+  DialogPage(Ahwassa::Window*);
 
-  virtual void load(YolonaOss::GL::DrawSpecification*)  override;
-  virtual void draw()                                   override;
+  virtual void draw() override;
   
   void setVisible(bool visible);
 
-  YolonaOss::Widgets::ListLayout& layout();
+  Ahwassa::ListLayout& layout();
 
 private:
-  Iyathuum::AABB<2> getAABB();
+  Iyathuum::glmAABB<2> getAABB();
   const int buttonWidth = 500;
   const int buttonHeight = 100;  
 
-  std::unique_ptr<YolonaOss::Widgets::ListLayout> _layout        ;
-  int                                             _width   = 0   ;
-  int                                             _height  = 0   ;
-  bool                                            _visible = true;
+  std::unique_ptr<Ahwassa::ListLayout> _layout        ;
+  bool                                 _visible = true;
 
 };

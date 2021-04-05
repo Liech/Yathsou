@@ -12,7 +12,16 @@ namespace Ahwassa {
     _text = "Def";
   }
 
-  LineEdit::LineEdit(std::string text, Iyathuum::glmAABB<2> position, Window* w, std::shared_ptr<UIElement> parent) : Drawable(w) {
+  LineEdit::LineEdit(std::string text, Iyathuum::glmAABB<2> position, Window* w, UIElement* parent) : Drawable(w),  
+    _text          { ""   },
+   _cursorPosition { 3    },
+   _hasFocus       { false},
+   _changed        { false},
+    
+   _textChangedCallback      {[](std::string s) {}},
+   _finishedEditingCallback  {[](std::string s) {}},
+   _validator                {defaultValidator()  }
+  {
     _text = text;
     setParent(parent);
     setLocalPosition(position);
@@ -68,11 +77,11 @@ namespace Ahwassa {
       rect.setPosition(glm::vec2(0, 0));
       rect.setSize(glm::vec2(textSize[0], getLocalPosition().getSize()[1]));
       if (rect.isInside(glm::vec2(position[0], position[1]))) {
-        _cursorPosition = i - 1;
+        _cursorPosition = (int)i - 1;
         return true;
       }
     }
-    _cursorPosition = _text.length();
+    _cursorPosition = (int)_text.length();
     return true;
   };
 

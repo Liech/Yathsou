@@ -2,17 +2,16 @@
 
 #include <iostream>
 
-#include "YolonaOss/Drawables/Widgets/ListLayout.h"
-#include "YolonaOss/Drawables/Widgets/Label.h"
-#include "YolonaOss/Drawables/Widgets/LineEdit.h"
+#include "AhwassaGraphicsLib/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Widgets/Label.h"
+#include "AhwassaGraphicsLib/Widgets/LineEdit.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 
-LobbyLoadingPage::LobbyLoadingPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state) {
+LobbyLoadingPage::LobbyLoadingPage(std::shared_ptr<ClientConfiguration> configuration, std::shared_ptr<ClientState> state, Ahwassa::Window* w) : Ahwassa::Drawable(w) {
   _config = configuration;
   _state  = state;
-}
 
-void LobbyLoadingPage::load(YolonaOss::GL::DrawSpecification* spec) {
-  _page = std::make_unique<DialogPage>(spec->width, spec->height);
+  _page = std::make_unique<DialogPage>(w);
 
   _page->layout().addLabel("Lobby Loading Page");
   

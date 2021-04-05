@@ -2,12 +2,12 @@
 
 namespace Ahwassa {
 
-  void UIElement::setParent(std::shared_ptr<UIElement> parent) {
+  void UIElement::setParent(UIElement* parent) {
     _parent = parent;
   }
 
-  std::shared_ptr<UIElement> UIElement::getParent() const {
-    return _parent.lock();
+  UIElement* UIElement::getParent() const {
+    return _parent;
   }
 
   bool UIElement::isVisible() const {
@@ -24,7 +24,7 @@ namespace Ahwassa {
 
   const Iyathuum::glmAABB<2> UIElement::getGlobalPosition() const {
     Iyathuum::glmAABB<2> result = _localPosition;
-    auto parent = _parent.lock();
+    auto parent = _parent;
     if (parent)
       result.setPosition(glm::vec2(
         result.getPosition()[0] + parent->getGlobalPosition().getPosition()[0],
@@ -35,4 +35,9 @@ namespace Ahwassa {
   void UIElement::setLocalPosition(Iyathuum::glmAABB<2> pos) {
     _localPosition = pos;
   }
+
+  void UIElement::setSize(const glm::vec2& v) {
+    _localPosition.setSize(v);
+  }
+
 }

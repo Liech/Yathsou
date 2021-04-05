@@ -1,13 +1,18 @@
 #include "BulletDebugDrawer.h"
 
-#include "YolonaOss/Renderer/BoxRenderer.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
+#include "AhwassaGraphicsLib/Core/Renderer.h"
 
 namespace Suthanus
 {
   namespace Bullet
   {
+		BulletDebugDrawer::BulletDebugDrawer(Ahwassa::Window* w) {
+			_window = w;
+		}
+
     void BulletDebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color) {
-			YolonaOss::BoxRenderer::drawLine(glm::vec3(from[0], from[1], from[2]), glm::vec3(to[0], to[1], to[2]), 0.02f, glm::vec4(1, 1, 0,1));
+			//YolonaOss::BoxRenderer::drawLine(glm::vec3(from[0], from[1], from[2]), glm::vec3(to[0], to[1], to[2]), 0.02f, glm::vec4(1, 1, 0,1));			
     }
 
     void BulletDebugDrawer::drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color) {
