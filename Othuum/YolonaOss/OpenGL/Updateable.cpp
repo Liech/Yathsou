@@ -1,2 +1,0 @@
-#include "../OpenGL/Updateable.h"
-
