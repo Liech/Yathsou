@@ -25,12 +25,12 @@ namespace Ahwassa {
     void                 setCursorPos(glm::vec2 pos);
     void                 resetCursorMovement(glm::vec2 v);
 
-    void setFocus(std::shared_ptr<UIElement> newFocus);
-    std::shared_ptr<UIElement> getCurrentFocus();
+    void setFocus(UIElement* newFocus);
+    UIElement* getCurrentFocus();
 
-    void addUIElement(std::shared_ptr<UIElement>);
-    void removeUIElement(std::shared_ptr<UIElement>);
-    std::vector<std::shared_ptr<UIElement>> getUIElements();
+    void addUIElement(UIElement*);
+    void removeUIElement(UIElement*);
+    std::vector<UIElement*> getUIElements();
 
   //pseudo private:
     void update();
@@ -42,16 +42,16 @@ namespace Ahwassa {
 
     static Input* _instance;
 
-    std::map<std::shared_ptr<UIElement>, size_t> _uiElements;
-    size_t                                       _orderpos = 0;
+    std::map<UIElement*, size_t> _uiElements;
+    size_t                       _orderpos = 0;
 
     GLFWwindow* _windowGL;
     Window*     _windowAhwassa;
 
-    std::weak_ptr<UIElement> _pressedWidget;
-    std::weak_ptr<UIElement> _currentFocus ;
-    std::weak_ptr<UIElement> _currentHover ;
-    glm::vec2                _oldMousePos;
-    glm::vec2                _cursorpos;
+    UIElement* _pressedWidget;
+    UIElement* _currentFocus ;
+    UIElement* _currentHover ;
+    glm::vec2  _oldMousePos;
+    glm::vec2  _cursorpos;
   };
 }

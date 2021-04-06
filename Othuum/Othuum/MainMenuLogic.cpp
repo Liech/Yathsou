@@ -44,6 +44,23 @@ MainMenuLogic::MainMenuLogic(Ahwassa::Window* window,std::shared_ptr<ClientConfi
   _hostLoadingPage      = std::make_shared<HostLoadingPage>     (config, state,window);
   _joinLoadingPage      = std::make_shared<JoinLoadingPage>     (config, state,window);
   _startGameLoadingPage = std::make_shared<StartGameLoadingPage>(config, state,window);
+
+  _list.push_back(_mainMenuPage        );
+  _list.push_back(_joinLobbyPage       );
+  _list.push_back(_hostPage            );
+  _list.push_back(_optionsPage         );
+  _list.push_back(_errorPage           );
+  _list.push_back(_lobbyPage           );
+  _list.push_back(_gameLobbyPage       );
+  _list.push_back(_lobbyLoadingPage    );
+  _list.push_back(_hostLoadingPage     );
+  _list.push_back(_joinLoadingPage     );
+  _list.push_back(_startGameLoadingPage);
+}
+
+void MainMenuLogic::draw() {
+  for (auto x : _list)
+    x->draw();
 }
 
 void MainMenuLogic::update() {

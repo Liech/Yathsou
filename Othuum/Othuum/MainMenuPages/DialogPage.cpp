@@ -18,11 +18,11 @@ void DialogPage::draw()
 
 Iyathuum::glmAABB<2> DialogPage::getAABB() {
   if (_layout == nullptr)
-    return Iyathuum::glmAABB<2>({ 0.0,0.0 }, { getWindow()->getHeight()/2,getWindow()->getHeight()/2 });
+    return Iyathuum::glmAABB<2>({ 0.0,0.0 }, { getWindow()->getWidth()/2,getWindow()->getHeight()/2 });
   Iyathuum::glmAABB<2> result;
   _layout->adjustSize();
   auto size = _layout->getLocalPosition().getSize();
-  result.setPosition({ (getWindow()->getHeight() / 2.0 - size[0] / 2.0), getWindow()->getHeight() / 2.0 - size[1]/2.0});
+  result.setPosition({ (getWindow()->getWidth() / 2.0 - size[0] / 2.0), getWindow()->getHeight() / 2.0 - size[1]/2.0});
   result.setSize(size);
   return result;
 }

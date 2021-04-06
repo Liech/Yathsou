@@ -26,7 +26,7 @@ namespace Ahwassa {
 
 
     void setHorizontal(bool horizontal);
-    //virtual void setVisible(bool visible)        override;
+    virtual void setVisible(bool visible)        override;
     void adjustSize();
     virtual bool mouseWheelEvent(glm::vec2 movement) override;
 

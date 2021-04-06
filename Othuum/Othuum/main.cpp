@@ -45,9 +45,9 @@ int main(int argc, char** argv) {
     int width  = configuration->resolution[0];
     int height = configuration->resolution[1];
     Ahwassa::Window w(width, height);
-    std::unique_ptr<OthuumGame> game = std::make_unique<OthuumGame>(&w,false);
+    std::unique_ptr<OthuumGame> game;
 
-    MainMenuLogic logic(&w, configuration, state);
+    std::shared_ptr<MainMenuLogic> logic;
     std::unique_ptr<MainMenuLogicResult> rslt = nullptr;
 
     int tick = 0;
@@ -60,17 +60,23 @@ int main(int argc, char** argv) {
       return loader;
     };
   
-    logic.setContentLoaderCreater(contentCreator);
-    logic.setServerCreator([&game](int port) { game->createServer(port); });
+    w.Startup = [&]() {
+      game = std::make_unique<OthuumGame>(&w, false);
+      logic = std::make_shared<MainMenuLogic>(&w, configuration, state);
+      logic->setContentLoaderCreater(contentCreator);
+      logic->setServerCreator([&game](int port) { game->createServer(port); });
+    };
     w.Update = [&logic, state,&rslt,&game]() {
       game->update();
-      game->draw();
-      if (logic.getStatus() != MainMenuLogic::status::GameRunning)
-        logic.update();
+      //game->draw();
+      if (logic->getStatus() != MainMenuLogic::status::GameRunning) {
+        logic->draw();
+        logic->update();
+      }
       else {
         if (!rslt)
         {
-          rslt = std::move(logic.extractResult());
+          rslt = std::move(logic->extractResult());
           game->createClient(rslt->myPort, rslt->serverPort, rslt->serverIP);
         }
       }

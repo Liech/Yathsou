@@ -30,7 +30,6 @@ MainMenuPage::~MainMenuPage(){
   }
 }
 
-
 void MainMenuPage::startLobbyJoin() {
   _status = MainMenuPageStatus::Multiplayer;
 }

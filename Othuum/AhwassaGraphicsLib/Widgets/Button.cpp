@@ -5,6 +5,7 @@
 #include "BasicRenderer/BasicTextRenderer.h"
 #include "Core/Window.h"
 #include "Core/Renderer.h"
+#include "Input/Input.h"
 
 namespace Ahwassa {
   Button::Button(Window* w) : Drawable(w)
@@ -16,12 +17,14 @@ namespace Ahwassa {
   {
     _clickedFunction = clickedFunction;
     _name = name;
+    w->input().addUIElement(this);
     setLocalPosition(position);
     setParent(parent);
   }
 
   Button::~Button()
   {
+    getWindow()->input().removeUIElement(this);
     setVisible(false);
   }
 
@@ -29,9 +32,9 @@ namespace Ahwassa {
   {
     if (!isVisible())
       return;
-
+    auto glob = getGlobalPosition();
     getWindow()->renderer().rectangle().start();
-    getWindow()->renderer().rectangle().drawRectangle(getGlobalPosition(), _hovered ? Iyathuum::Color(0.8f*255, 0.8f * 255, 0.8f * 255) : Iyathuum::Color(0.4f * 255, 0.4f * 255, 0.4f * 255));
+    getWindow()->renderer().rectangle().drawRectangle(glob, _hovered ? Iyathuum::Color(0.8f*255, 0.8f * 255, 0.8f * 255) : Iyathuum::Color(0.4f * 255, 0.4f * 255, 0.4f * 255));
     getWindow()->renderer().rectangle().end();
     glm::vec2 textSize = getWindow()->renderer().text().getTextSize(_name, 1);
     glm::vec2 spacing = (glm::vec2(getGlobalPosition().getSize()[0], getGlobalPosition().getSize()[1]) - textSize) / 2.0f;

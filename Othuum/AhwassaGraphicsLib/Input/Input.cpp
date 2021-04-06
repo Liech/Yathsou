@@ -66,25 +66,23 @@ namespace Ahwassa {
       glfwSetWindowShouldClose(window, GL_TRUE);
   }
 
-  void Input::setFocus(std::shared_ptr<UIElement> newFocus) {
-    auto current = _currentFocus.lock();
-    if (newFocus == current)
+  void Input::setFocus(UIElement* newFocus) {
+    if (newFocus == _currentFocus)
       return;
-    if (current)
-      current->endFocusEvent();
+    if (_currentFocus)
+      _currentFocus->endFocusEvent();
     _currentFocus = newFocus;
     if (newFocus)
       newFocus->startFocusEvent();
   }
 
-  std::shared_ptr<UIElement> Input::getCurrentFocus() {
-    return _currentFocus.lock();
+  UIElement* Input::getCurrentFocus() {
+    return _currentFocus;;
   }
 
   void Input::keyEvent(Iyathuum::Key button, Iyathuum::KeyStatus status, int mode) {
-    auto focus = _currentFocus.lock();
-    if (focus)
-      if (focus->focusKeyEvent(button, status))
+    if (_currentFocus)
+      if (_currentFocus->focusKeyEvent(button, status))
         return;
     auto inputWidgets = getUIElements();
     for (auto i : inputWidgets)
@@ -113,8 +111,7 @@ namespace Ahwassa {
           break;
         }
         else {
-          auto pressedWidget = _pressedWidget.lock();
-          if (status == Iyathuum::KeyStatus::RELEASE && pressedWidget == w) {
+          if (status == Iyathuum::KeyStatus::RELEASE && _pressedWidget == w) {
             bool stop = w->mouseClickEvent(mousePos - w->getGlobalPosition().getPosition(), key);
             if (stop)
               return;
@@ -122,10 +119,11 @@ namespace Ahwassa {
         }
       }
     }
-    if (!hit)
-      _currentFocus = std::weak_ptr<UIElement>();
+    if (!hit) {
+      _currentFocus = nullptr;
+    }
     if (status == Iyathuum::KeyStatus::RELEASE)
-      _pressedWidget = std::weak_ptr<UIElement>();
+      _pressedWidget = nullptr;
   }
 
   void Input::mouseWheel(double x, double y) {
@@ -145,19 +143,17 @@ namespace Ahwassa {
 
     auto inputWidgets = getUIElements();
 
-    auto currentHover = _currentHover.lock();
-    if (currentHover && !currentHover->getGlobalPosition().isInside(_cursorpos)) {
-      currentHover->mouseLeaveEvent();
-      _currentHover = std::weak_ptr<UIElement>();
-      currentHover = nullptr;
+    if (_currentHover && !_currentHover->getGlobalPosition().isInside(_cursorpos)) {
+      _currentHover->mouseLeaveEvent();
+      _currentHover = nullptr;
     }
 
     for (auto w : inputWidgets) {
       if (w->getGlobalPosition().isInside(_cursorpos)) {
-        if (currentHover == w)
+        if (_currentFocus == w)
           break;
-        if (currentHover != nullptr)
-          currentHover->mouseLeaveEvent();
+        if (_currentFocus != nullptr)
+          _currentFocus->mouseLeaveEvent();
         _currentHover = w;
         w->mouseEnterEvent();
         break;
@@ -182,29 +178,35 @@ namespace Ahwassa {
     _oldMousePos = v;
   }
 
-  void Input::addUIElement(std::shared_ptr<UIElement> elem) {
+  void Input::addUIElement(UIElement* elem) {
     _uiElements[elem] = _orderpos;
     _orderpos++;
   }
 
-  void Input::removeUIElement(std::shared_ptr<UIElement> elem) {
+  void Input::removeUIElement(UIElement* elem) {
     _uiElements.erase(elem);
   }
 
-  std::vector<std::shared_ptr<UIElement>> Input::getUIElements() {
+  std::vector<UIElement*> Input::getUIElements() {
     struct compare {
-      bool operator()(std::pair<std::shared_ptr<UIElement>, size_t> const& left,
-        std::pair<std::shared_ptr<UIElement>, size_t> const& right) const {
+      bool operator()(std::pair<UIElement*, size_t> const& left,
+        std::pair<UIElement*, size_t> const& right) const {
         return left.first < right.first; //reverse!
       }
     };
 
-    std::vector<std::pair<std::shared_ptr<UIElement>, size_t> > sortList(_uiElements.begin(), _uiElements.end());
+    std::vector<std::pair<UIElement*, size_t> > sortList(_uiElements.begin(), _uiElements.end());
     std::sort(sortList.begin(), sortList.end(), compare());
-    std::vector<std::shared_ptr<UIElement>> result;
+    std::vector<UIElement*> result;
     result.resize(sortList.size());
-    for (size_t i = 0; i < sortList.size(); i++)
-      result[i] = sortList[i].first;
+    size_t used = 0;
+    for (size_t i = 0; i < sortList.size(); i++) {
+      if (!sortList[i].first->isVisible())
+        continue;
+      result[used] = sortList[i].first;
+      used++;
+    }
+    result.resize(used);
     return result;
   }
 }

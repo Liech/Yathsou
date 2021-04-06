@@ -19,9 +19,11 @@ class HostLoadingPage     ;
 class JoinLoadingPage     ;
 class StartGameLoadingPage;
 namespace SideProject { class SideProjectMain; }
-namespace Ahwassa{class Window;}
+namespace Ahwassa{
+  class Window;
+  class Drawable;
+}
 namespace Iyathuum { class ContentLoader; }
-
 
 class MainMenuLogic {
 public:
@@ -46,7 +48,8 @@ public:
 
   MainMenuLogic(Ahwassa::Window* window, std::shared_ptr<ClientConfiguration> config,std::shared_ptr<ClientState> state);
 
-  void                  update();
+  void update();
+  void draw();
   MainMenuLogic::status getStatus() { return _stat; }
   std::unique_ptr<MainMenuLogicResult>   extractResult();
   void setServerCreator(std::function<void(int port)>);
@@ -76,7 +79,7 @@ private:
   void showError(std::string desc, std::string title);
 
 
-
+  std::vector<std::shared_ptr<Ahwassa::Drawable>> _list;
   MainMenuLogicResult    _result;
   Ahwassa::Window* _window;
 };

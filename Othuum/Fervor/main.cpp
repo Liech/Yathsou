@@ -40,10 +40,10 @@ int main(int argc, char** argv) {
       handle.push_back(box->newSphere(glm::vec3(0,0,0), 0.1f));
     }
     freeCam = std::make_shared<Ahwassa::FreeCamera>(cam, w.input());
-    w.input().addUIElement(freeCam);
+    w.input().addUIElement(freeCam.get());
     fps = std::make_unique<Ahwassa::FPS>(&w);
     button = std::make_shared<Ahwassa::Button>("Hallo", Iyathuum::glmAABB<2>(glm::vec2(50, 50), glm::vec2(200, 50)), []() {std::cout << "huhu" << std::endl; }, &w);
-    w.input().addUIElement(button);
+    w.input().addUIElement(button.get());
   };
 
   w.Update = [&]() {

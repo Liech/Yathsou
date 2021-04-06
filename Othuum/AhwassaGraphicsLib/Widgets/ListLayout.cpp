@@ -5,6 +5,7 @@
 #include "BasicRenderer/BasicTextRenderer.h"
 #include "Core/Window.h"
 #include "Core/Renderer.h"
+#include "Input/Input.h"
 
 #include "Button.h"
 #include "Slider.h"
@@ -150,9 +151,13 @@ namespace Ahwassa {
       if (!w->isVisible())
         continue;
 
+      auto cast = std::dynamic_pointer_cast<ListLayout>(w);
+      if (cast)
+        cast->adjustSize();
+
       if (!_horizontal) {
         offset -= w->getLocalPosition().getSize()[1];
-        w->setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2{ offset - _scroll, 0 }, w->getLocalPosition().getSize()));
+        w->setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2{0 ,  offset - _scroll}, w->getLocalPosition().getSize()));
         max = std::max(max, w->getLocalPosition().getSize()[0]);
       }
       else {
@@ -194,5 +199,12 @@ namespace Ahwassa {
       return true;
     }
     return false;
+  }
+
+  void ListLayout::setVisible(bool visible) {
+    for (auto w : _widgets)
+      w->setVisible(visible);
+
+    UIElement::setVisible(visible);
   }
 }
