@@ -128,7 +128,7 @@
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/GLWF/include;$(SolutionDir)YolonaOss/Lib/freetype/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(ProjectDir)lib/glad/include;$(ProjectDir)lib/GLWF/include;$(ProjectDir)lib/freetype/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +141,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(SolutionDir)YolonaOss/Lib/GLWF/lib/glfw3.lib;$(SolutionDir)YolonaOss/Lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -178,7 +178,7 @@
       <OpenMPSupport>true</OpenMPSupport>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/GLWF/include;$(SolutionDir)YolonaOss/Lib/freetype/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(ProjectDir)lib/glad/include;$(ProjectDir)lib/GLWF/include;$(ProjectDir)lib/freetype/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -189,7 +189,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(SolutionDir)YolonaOss/Lib/GLWF/lib/glfw3.lib;$(SolutionDir)YolonaOss/Lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">
@@ -203,7 +203,7 @@
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(SolutionDir)YolonaOss/Lib/glad/include;$(SolutionDir)YolonaOss/Lib/GLWF/include;$(SolutionDir)YolonaOss/Lib/freetype/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(ProjectDir)lib/glad/include;$(ProjectDir)lib/GLWF/include;$(ProjectDir)lib/freetype/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -214,7 +214,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(SolutionDir)YolonaOss/Lib/GLWF/lib/glfw3.lib;$(SolutionDir)YolonaOss/Lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -254,6 +254,11 @@
     <ClInclude Include="Input\FreeCamera.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />
+    <ClInclude Include="lib\freetype\include\ft2build.h" />
+    <ClInclude Include="lib\glad\include\glad\glad.h" />
+    <ClInclude Include="lib\glad\include\KHR\khrplatform.h" />
+    <ClInclude Include="lib\GLWF\include\GLFW\glfw3.h" />
+    <ClInclude Include="lib\GLWF\include\GLFW\glfw3native.h" />
     <ClInclude Include="lib\openvr\openvr.h" />
     <ClInclude Include="lib\openvr\openvr_capi.h" />
     <ClInclude Include="lib\openvr\openvr_driver.h" />
@@ -314,7 +319,6 @@
     <ClInclude Include="Widgets\Slider.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c" />
     <ClCompile Include="BasicRenderer\BasicBoxRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicRectangleRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp" />
@@ -335,6 +339,7 @@
     <ClCompile Include="Input\FreeCamera.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
+    <ClCompile Include="lib\glad\src\glad.c" />
     <ClCompile Include="Renderer\Box.cpp" />
     <ClCompile Include="Renderer\BoxRenderer.cpp" />
     <ClCompile Include="Renderer\Dot.cpp" />

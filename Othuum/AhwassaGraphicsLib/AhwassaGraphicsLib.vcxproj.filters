@@ -103,6 +103,12 @@
     <Filter Include="Source Files\Renderer">
       <UniqueIdentifier>{1be1911c-8dd2-445c-b29c-f32c5ba26bc2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib\glwf">
+      <UniqueIdentifier>{a9e77be5-b8c4-4546-9246-84c2c6a984f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="lib\freetype">
+      <UniqueIdentifier>{379d509d-622e-4617-a2d9-ec36df22fda5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -339,6 +345,21 @@
     <ClInclude Include="Renderer\Dot.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="lib\GLWF\include\GLFW\glfw3.h">
+      <Filter>lib\glwf</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\GLWF\include\GLFW\glfw3native.h">
+      <Filter>lib\glwf</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\freetype\include\ft2build.h">
+      <Filter>lib\freetype</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\glad\include\glad\glad.h">
+      <Filter>lib\glad</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\glad\include\KHR\khrplatform.h">
+      <Filter>lib\glad</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -349,9 +370,6 @@
     </ClCompile>
     <ClCompile Include="sound\SoundHandler.cpp">
       <Filter>Source Files\sound</Filter>
-    </ClCompile>
-    <ClCompile Include="..\YolonaOss\Lib\glad\src\glad.c">
-      <Filter>lib\glad</Filter>
     </ClCompile>
     <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
@@ -526,6 +544,9 @@
     </ClCompile>
     <ClCompile Include="Renderer\Dot.cpp">
       <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\glad\src\glad.c">
+      <Filter>lib\glad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

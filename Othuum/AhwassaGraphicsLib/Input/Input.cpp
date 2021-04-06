@@ -1,7 +1,7 @@
 #include "Input.h"
 
-#include "YolonaOss/Lib/glad/include/glad/glad.h"
-#include "YolonaOss/Lib/GLWF/include/GLFW/glfw3.h"
+#include "AhwassaGraphicsLib/lib/glad/include/glad/glad.h"
+#include "AhwassaGraphicsLib/lib/GLWF/include/GLFW/glfw3.h"
 
 #include "UIElement.h"
 #include "Core/Window.h"

@@ -11,7 +11,7 @@
 #include "Core/Camera.h"
 
 #include "glad/glad.h"
-#include "YolonaOss/Lib/GLWF/include/GLFW/glfw3.h"
+#include "AhwassaGraphicsLib/lib/GLWF/include/GLFW/glfw3.h"
 
 namespace Ahwassa {
   Window* win;
