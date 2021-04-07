@@ -1,28 +1,25 @@
 #include "BoxVisualization.h"
 
-#include "YolonaOss/OpenGL/DrawSpecification.h"
-#include "YolonaOss/Renderer/BoxRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
+#include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "SuthanusPhysicsLib/Box.h"
 
 
 namespace Athanah {
-  BoxVisualization::BoxVisualization(std::shared_ptr<Suthanus::Box> target, Iyathuum::Color color) {
+  BoxVisualization::BoxVisualization(std::shared_ptr<Suthanus::Box> target, Iyathuum::Color color, Ahwassa::Window* w) : Ahwassa::Drawable(w) {
     _target = target;
     _color  = color ;
-  }
-
-  void BoxVisualization::load(YolonaOss::GL::DrawSpecification*)
-  {
-
+    _box = std::make_shared<Ahwassa::BasicBoxRenderer>(w->camera());
   }
 
   void BoxVisualization::draw()
-  {
-    YolonaOss::BoxRenderer::start();
+  {    
+    _box->start();
     glm::mat4 transform = _target->getTransformation();
     transform = glm::scale      (transform, _target->getSize());
     transform = glm::translate  (transform, glm::vec3(-0.5, -0.5, -0.5));
-    YolonaOss::BoxRenderer::draw(transform, _color);
-    YolonaOss::BoxRenderer::end();
+    _box->draw(transform, _color);
+    _box->end();
   }
 }

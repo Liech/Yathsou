@@ -1,24 +1,29 @@
 #pragma once
 
-#include "YolonaOss/OpenGL/Drawable.h"
+#include <memory>
+
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 
 namespace Iyathuum {
   struct Color;
 }
-
+namespace Ahwassa {
+  class BasicBoxRenderer;
+  class Window;
+}
 namespace Suthanus {
   class Box;
 }
 
 namespace Athanah {
-  class BoxVisualization : public YolonaOss::GL::Drawable {
+  class BoxVisualization : public Ahwassa::Drawable {
   public:
-    BoxVisualization(std::shared_ptr<Suthanus::Box> target, Iyathuum::Color);
-    virtual void load(YolonaOss::GL::DrawSpecification*) override;
+    BoxVisualization(std::shared_ptr<Suthanus::Box> target, Iyathuum::Color, Ahwassa::Window*);
     virtual void draw() override;
 
   private:
+    std::shared_ptr<Ahwassa::BasicBoxRenderer> _box;
     std::shared_ptr<Suthanus::Box> _target;
     Iyathuum::Color                _color ;
   };
