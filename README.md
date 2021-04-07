@@ -4,21 +4,12 @@ RTS Engine fragments
 Could also become an RPG one day
 
 # Goal
-In an recreational project the goals may change at any given time. Currently the longterm goal is to create an engine, which is suited for RPG and RTS games. The initial dream, which is still tracked but also still very far away is to recreate supreme commander 1 with the original assets.
+
+In an recreational project the goals may change at any given time. Currently the longterm goal is to create an engine, which is suited for RPG and RTS games. The initial dream, which is still tracked but also still very far away, is to recreate a Supreme Commander total conversion mod.
 
 # Current Work
 
-Currently the Graphics Library is improved. Was very simple and slow. Adding Instancing and Later Deffered Shading.
-
-# Dependencies
-
-This project uses a lot of libraries.
-
-If i didn't made a mistake they are all non-infectious/non-gpl.
-
-A full list of used libraries can be obtained in the usedlibs.txt.
-
-This should all be plattform independent, but a way to compile it under linux is not given.
+Currently the Graphics Library is improved. It was very simple and slow. Adding Instancing and Later Deffered Shading.
 
 # Libraries
 
@@ -62,11 +53,12 @@ openrvr       | virtual reality
 Graphics and Media Library
 
 Offers:
- * c++ wrapper to opengl
- * easy to use renderer
+ * wrapper to opengl
+ * renderer
  * play sound (prototype)
  * GUI System
  * YolonaOss is beeing migrated to this
+ * interact with vr (prototype)
 
 ## AezeselFileIOLib
 Depends on    | Purpose
@@ -83,6 +75,41 @@ Offers:
  * SCM Load (Supreme Commander Model File)
  * SCA Load (Supreme Commander Animation File)
 
+## SuthanusPhysicsLibrary
+
+Depends on    | Purpose
+------------- | -------------
+Iyathuum      | Core
+Bullet        | Physics Engine 
+
+Offers:
+ * Physic Engine access
+ * Artillery calculations
+
+## HaasScriptingLibrary
+
+Depends on    | Purpose
+------------- | -------------
+Iyathuum      | Core
+lua           | scripting
+nlohmann json | lua table access
+
+Offers:
+ * script engine access
+ * lua table <-> nlohmann::json
+
 ## Other Libs
 
 Not all Libs are listed yet.
+
+Some are not worth any mentioning yet.
+
+# Build and Rund
+
+Start Project should be Othuum.
+
+Working Directory should be changed to $(TargetDir).
+
+Use Visual Studio 2019 and Windows.
+
+Linux should be possible, but is not done yet.
