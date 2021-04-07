@@ -1,7 +1,8 @@
 # Yathsou
-RTS Engine fragments
 
-Could also become an RPG one day
+RTS Engine fragments.
+
+Could also become a RPG one day.
 
 # Goal
 
