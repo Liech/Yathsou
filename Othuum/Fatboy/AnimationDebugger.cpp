@@ -2,62 +2,49 @@
 
 #include <iostream>
 
-#include "YolonaOss/Drawables/FPS.h"
-#include "YolonaOss/Drawables/Background.h"
-#include "YolonaOss/Drawables/Ground.h"
+#include "AhwassaGraphicsLib/Drawables/FPS.h"
+#include "AhwassaGraphicsLib/Drawables/Background.h"
 
-#include "YolonaOss/OpenGL/DrawableList.h"
-#include "YolonaOss/Camera/CameraSystem.h"
-#include "YolonaOss/Camera/FreeCamera.h"
-#include "YolonaOss/OpenGL/Camera.h"
+#include "AhwassaGraphicsLib/Core/Camera.h"
 
 #include "IyathuumCoreLib/BaseTypes/Keys.h"
-#include "YolonaOss/OpenGL/DrawSpecification.h"
-#include "YolonaOss/OpenGL/Window.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
+#include "AhwassaGraphicsLib/Input/Input.h"
 
 #include "YolonaOss/Renderer/SupComModelRenderer.h"
-#include "YolonaOss/Renderer/BoxRenderer.h"
-#include "YolonaOss/Renderer/TextRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicTextRenderer.h"
 
 #include "SupComModel.h"
 #include "YolonaOss/OpenGL/SupComVertex.h"
 #include "HaasScriptingLib/ScriptEngine.h"
-#include "YolonaOss/Drawables/Widgets/Button.h"
-#include "YolonaOss/Drawables/Widgets/ListLayout.h"
+#include "AhwassaGraphicsLib/Widgets/Button.h"
+#include "AhwassaGraphicsLib/Widgets/ListLayout.h"
 #include "IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp"
 #include <IyathuumCoreLib/lib/glm/gtx/quaternion.hpp>
 #include <IyathuumCoreLib/lib/glm/gtx/euler_angles.hpp>
 #include <fstream>
 
 namespace Fatboy{
-  AnimationDebugger::AnimationDebugger() {
+  AnimationDebugger::AnimationDebugger(Ahwassa::Window* w) : Ahwassa::Drawable(w) {
     _animName = "walk01";
     _unitName = "URL0106";
-    _preDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
-    _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
-    _preDrawables->addDrawable(std::make_shared<YolonaOss::Background>());
-    _postDrawables->addDrawable(std::make_shared<YolonaOss::FPS>());
-    //_preDrawables->addDrawable(std::make_shared<YolonaOss::Ground>());
-    _cam = std::make_shared<YolonaOss::Camera::CameraSystem>();
-  }
-
-  void AnimationDebugger::load(YolonaOss::GL::DrawSpecification* spec){
-    _spec = spec;
-    _preDrawables->load(spec);
-    _postDrawables->load(spec);
-    _cam->load(spec);
-    _cam->setCurrentCam("None");
+    _preDrawables .push_back(std::make_shared<Ahwassa::Background>(w));
+    _postDrawables.push_back(std::make_shared<Ahwassa::FPS>(w));
 
     loadMenu();
     loadModel();
     loadScript();
 
+    _box = std::make_shared<Ahwassa::BasicBoxRenderer>(w->camera());
   }
 
   void AnimationDebugger::draw() {
     _layout->adjustSize();
-    _preDrawables->draw();
-    _postDrawables->draw();
+    for(auto x : _preDrawables) 
+      x->draw();
+    for(auto x : _postDrawables) 
+      x->draw();
     drawModel();
   }
 
@@ -86,10 +73,10 @@ namespace Fatboy{
     SCM imp;
     _modl = std::make_shared<SupComModel>(folder);
 
-    std::vector<YolonaOss::GL::SupComVertex> verticesT;
+    std::vector<Ahwassa::SupComVertex> verticesT;
     std::vector<int>                                 indices;
     for (int i = 0; i < _modl->_model->vertecies.size(); i++) {
-      YolonaOss::GL::SupComVertex v;
+      Ahwassa::SupComVertex v;
       auto vPre = _modl->_model->vertecies[i];
       v.position = vPre.position;
       v.tangent = vPre.tangent;
@@ -132,46 +119,44 @@ namespace Fatboy{
   }
 
   void AnimationDebugger::loadMenu(){
-    std::shared_ptr<YolonaOss::Widgets::Button> scout = std::make_shared<YolonaOss::Widgets::Button>("Scout", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+    std::shared_ptr<Ahwassa::Button> scout = std::make_shared<Ahwassa::Button>("Scout", Iyathuum::glmAABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
       _animName = "walk01";
       _unitName = "URL0106";
       loadModel();
       });
-    std::shared_ptr<YolonaOss::Widgets::Button> gc = std::make_shared<YolonaOss::Widgets::Button>("GC", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+    std::shared_ptr<Ahwassa::Button> gc = std::make_shared<Ahwassa::Button>("GC", Iyathuum::glmAABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
       _animName = "walk";
       _unitName = "UAL0401";
       loadModel();
       });
-    std::shared_ptr<YolonaOss::Widgets::Button> spiderlord = std::make_shared<YolonaOss::Widgets::Button>("Monkeylord", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+    std::shared_ptr<Ahwassa::Button> spiderlord = std::make_shared<Ahwassa::Button>("Monkeylord", Iyathuum::glmAABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
       _animName = "001";
       _unitName = "URL0402";
       loadModel();
       });
-    std::shared_ptr<YolonaOss::Widgets::Button> brick = std::make_shared<YolonaOss::Widgets::Button>("Brick", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+    std::shared_ptr<Ahwassa::Button> brick = std::make_shared<Ahwassa::Button>("Brick", Iyathuum::glmAABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
       _animName = "walk";
       _unitName = "XRL0305";
       loadModel();
       });
-    std::shared_ptr<YolonaOss::Widgets::Button> mole = std::make_shared<YolonaOss::Widgets::Button>("Mole", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+    std::shared_ptr<Ahwassa::Button> mole = std::make_shared<Ahwassa::Button>("Mole", Iyathuum::glmAABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
       _animName = "walk";
       _unitName = "URL0101";
       loadModel();
       });
 
     
-    std::shared_ptr<YolonaOss::Widgets::Button> reload = std::make_shared<YolonaOss::Widgets::Button>("Reload", Iyathuum::AABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
+    std::shared_ptr<Ahwassa::Button> reload = std::make_shared<Ahwassa::Button>("Reload", Iyathuum::glmAABB<2>({ 0, 0 }, { 300, 50 }), [this]() {
       loadScript();
       });
-    _layout = std::make_shared<YolonaOss::Widgets::ListLayout>(Iyathuum::AABB<2>({ 0, 0 }, { 700, 900 }));
-    _layout->addWidget(scout);
-    _layout->addWidget(gc);
-    _layout->addWidget(spiderlord);
-    _layout->addWidget(brick);
-    _layout->addWidget(mole);
-    _layout->addWidget(reload);
-    _postDrawables->addDrawable(_layout);
-
-
+    _layout = std::make_shared<Ahwassa::ListLayout>(Iyathuum::glmAABB<2>({ 0, 0 }, { 700, 900 }));
+    _layout->addElement(scout);
+    _layout->addElement(gc);
+    _layout->addElement(spiderlord);
+    _layout->addElement(brick);
+    _layout->addElement(mole);
+    _layout->addElement(reload);
+    _postDrawables.push_back(_layout);
   }
 
   void AnimationDebugger::drawModel()  {
@@ -258,17 +243,11 @@ namespace Fatboy{
 
 
   void AnimationDebugger::update(){
-    _cam->update();
-
     auto isPressed = [this](Iyathuum::Key key) {
-      return _spec->getWindow()->getKeyStatus(key) == Iyathuum::KeyStatus::PRESS;
+      return getWindow()->input().getKeyStatus(key) == Iyathuum::KeyStatus::PRESS;
     };
     if (isPressed(Iyathuum::Key::KEY_F2) && !_keyPressed)
     {
-      if (_cam->getCurrentCam() == "None")
-        _cam->setCurrentCam("FreeCamera");
-      else
-        _cam->setCurrentCam("None");
       _keyPressed = true;
     }
     else if (!isPressed(Iyathuum::Key::KEY_F2)) 
@@ -332,7 +311,7 @@ namespace Fatboy{
     for (int i = 0; i < 32; i++)
       animationMatrices2[i] = glm::mat4(1.0);
 
-    YolonaOss::BoxRenderer::start();
+    _box->start();
     for(int i = 1;i < anim.bones.size();i++)
     {
       int imin = i - 1;
@@ -347,20 +326,20 @@ namespace Fatboy{
       }
 
       glm::vec3 absPos = animationMatrices[imin] * glm::vec4(0, 0, 0, 1);
-      YolonaOss::BoxRenderer::drawDot(absPos, glm::vec3(1, 1, 1), glm::vec4(1, 0, 0, 1));
+      _box->drawDot(absPos, glm::vec3(1, 1, 1), Iyathuum::Color(255, 0, 0));
       //YolonaOss::BoxRenderer::draw   (animationMatrices[imin]*rot,glm::vec4(0, 1, 0, 1));
 
       if (parentIndex != -1)
       {
         glm::vec3 parPos = animationMatrices[parentIndex] * glm::vec4(0, 0, 0, 1);
-        YolonaOss::BoxRenderer::drawLine(parPos, absPos, 0.5f, glm::vec4(0, 1, 0, 1));
+        _box->drawLine(parPos, absPos, 0.5f, Iyathuum::Color(0, 255, 0));
       }
     }
 
     //YolonaOss::BoxRenderer::drawDot(glm::vec3(animtime,0,0), glm::vec3(1, 1, 1), glm::vec4(1, 0, 0, 1));
-    YolonaOss::BoxRenderer::end();
+    _box->end();
 
-    YolonaOss::TextRenderer::start();
+    _text->start();
 
     //for (int i = 0; i < anim.bones.size(); i++)
     //{
@@ -370,9 +349,9 @@ namespace Fatboy{
     //}
 
     std::string text = std::to_string(frame);
-    glm::vec2 textPos = glm::vec2(_spec->width - YolonaOss::TextRenderer::getTextSize(text, 1)[0], 0);
-    YolonaOss::TextRenderer::drawText(text, textPos, 1, glm::vec4(0, 0, 0, 1));
-    YolonaOss::TextRenderer::end();
+    glm::vec2 textPos = glm::vec2(getWindow()->getWidth() - _text->getTextSize(text, 1)[0], 0);
+    _text->drawText(text, textPos, 1, Iyathuum::Color(0, 0, 0, 1));
+    _text->end();
 
     auto r = QuatToMat(anim.bones[2].rotation);
     auto r2 = r;
@@ -427,7 +406,7 @@ namespace Fatboy{
       std::string msg = "";
       auto bone = bones[number];
 
-      YolonaOss::BoxRenderer::start();
+      _box->start();
       if (frame % 2 == 0)
       {  // Animation
         glm::vec3 trans = anim.bones[number].position;
@@ -457,30 +436,30 @@ namespace Fatboy{
       }
       glm::vec3 pos = animationMatrices[number] * glm::vec4(0, 0, 0, 1);
       
-      YolonaOss::BoxRenderer::drawDot(pos,glm::vec3(1,1,1), glm::vec4(1, 0, 0, 1));
+      _box->drawDot(pos,glm::vec3(1,1,1), Iyathuum::Color(255, 0, 0));
       //YolonaOss::BoxRenderer::draw(glm::translate(rot, pos), glm::vec4(0, 1, 0, 1));
-      YolonaOss::BoxRenderer::draw(glm::translate(glm::mat4(1.0), pos)*rot, glm::vec4(0, 1, 0, 1));
+      _box->draw(glm::translate(glm::mat4(1.0), pos)*rot, Iyathuum::Color(0, 1, 0, 1));
       if (bone.parentIndex != -1)
       {
         glm::vec3 parentPos = animationMatrices[bone.parentIndex] * glm::vec4(0, 0, 0, 1);
         auto parent = bones[bone.parentIndex];
-        YolonaOss::BoxRenderer::drawLine(pos,parentPos, 0.5f, glm::vec4(0, 1, 0, 1));
+        _box->drawLine(pos,parentPos, 0.5f, Iyathuum::Color(0, 255, 0));
       }
-      YolonaOss::BoxRenderer::end();
+      _box->end();
 
-      YolonaOss::TextRenderer::start();
-      YolonaOss::TextRenderer::drawText(std::to_string(number) + " " + msg, _spec->getCam()->worldToViewCoordTransform(pos), 0.3f, glm::vec4(0, 0, 0, 1));
-      YolonaOss::TextRenderer::end();
+      _text->start();
+      _text->drawText(std::to_string(number) + " " + msg, getWindow()->camera().worldToViewCoordTransform(pos), 0.3f, Iyathuum::Color(0, 0, 0));
+      _text->end();
     }
 
 
 
 
-    YolonaOss::TextRenderer::start();
+    _text->start();
     std::string text = std::to_string(frame);
-    glm::vec2 textPos = glm::vec2(_spec->width - YolonaOss::TextRenderer::getTextSize(text, 1)[0], 0);
-    YolonaOss::TextRenderer::drawText(text, textPos, 1, glm::vec4(0, 0, 0, 1));
-    YolonaOss::TextRenderer::end();
+    glm::vec2 textPos = glm::vec2(getWindow()->getWidth() - _text->getTextSize(text, 1)[0], 0);
+    _text->drawText(text, textPos, 1, Iyathuum::Color(0, 0, 0));
+    _text->end();
     YolonaOss::SupComModelRenderer::debugRender = true;
     animationMatrices.resize(32);
     YolonaOss::SupComModelRenderer::start();

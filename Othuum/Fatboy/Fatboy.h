@@ -1,23 +1,13 @@
 #pragma once
 
-#include "YolonaOss/OpenGL/Drawable.h"
-#include "YolonaOss/OpenGL/Updateable.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 #include <memory>
-namespace YolonaOss
+namespace Ahwassa
 {
-  namespace GL
-  {
-    class DrawableList;
-    class DrawSpecification;
-  }
   class Mesh;
   class SupComGLMesh;
-  namespace Camera
-  {
-    class CameraSystem;
-  }
 }
 namespace Suthanus
 {
@@ -37,14 +27,13 @@ namespace Fatboy
   class ScriptAPI;
   class Context;
  
-  class Fatboy : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable
+  class Fatboy : public Ahwassa::Drawable
   {
   public:
-    Fatboy();
+    Fatboy(Ahwassa::Window*);
 
-    virtual void load(YolonaOss::GL::DrawSpecification*) override;
     virtual void draw() override;
-    virtual void update() override;
+    void update();
   private:
     void initPhysic();
     void drawLandscape();
@@ -52,10 +41,8 @@ namespace Fatboy
     void loadLandscapeModel();
 
     std::shared_ptr<Suthanus::Box>                   _landscape;
-    std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables;
-    std::shared_ptr<YolonaOss::GL::DrawableList>     _postDrawables;
-    std::shared_ptr<YolonaOss::Camera::CameraSystem> _cam;
-    YolonaOss::GL::DrawSpecification*                _spec;
+    std::vector<std::shared_ptr<Ahwassa::Drawable>>  _preDrawables;
+    std::vector<std::shared_ptr<Ahwassa::Drawable>>  _postDrawables;
     std::shared_ptr<Protagonist>                     _protagonist;
     std::shared_ptr<ScriptAPI>                       _physicAPI;
     std::shared_ptr<Context>                         _context;

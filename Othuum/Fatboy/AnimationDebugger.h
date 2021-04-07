@@ -2,40 +2,33 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
-#include "YolonaOss/OpenGL/Drawable.h"
-#include "YolonaOss/OpenGL/Updateable.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 
-namespace YolonaOss
+namespace Ahwassa
 {
-  namespace Widgets {
-    class ListLayout;
-  }
-  namespace GL
-  {
-    class DrawableList;
-    class DrawSpecification;
-  }
+  class Window;
+  class ListLayout;
   class Mesh;
   class SupComGLMesh;
-  namespace Camera
-  {
-    class CameraSystem;
-  }
+  class BasicBoxRenderer;
+  class BasicTextRenderer;
 }
+
 class SupComModel;
 namespace Haas
 {
   class ScriptEngine;
 }
-namespace Fatboy{
-  class AnimationDebugger : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable {
-  public:
-    AnimationDebugger();
 
-    virtual void load(YolonaOss::GL::DrawSpecification*) override;
+namespace Fatboy{
+  class AnimationDebugger : public Ahwassa::Drawable {
+  public:
+    AnimationDebugger(Ahwassa::Window*);
+
     virtual void draw() override;
-    virtual void update() override;
+    void update();
 
   private:
     void loadMenu();
@@ -46,17 +39,16 @@ namespace Fatboy{
     void renderStuff();
     void renderStuff2();
 
-    std::shared_ptr<YolonaOss::GL::DrawableList>     _preDrawables;
-    std::shared_ptr<YolonaOss::GL::DrawableList>     _postDrawables;
-    std::shared_ptr<YolonaOss::Camera::CameraSystem> _cam;
-    YolonaOss::GL::DrawSpecification*                _spec;
+    std::vector<std::shared_ptr<Ahwassa::Drawable>>     _preDrawables;
+    std::vector<std::shared_ptr<Ahwassa::Drawable>>     _postDrawables;
     
-    std::shared_ptr<YolonaOss::Widgets::ListLayout>  _layout;
+    std::shared_ptr<Ahwassa::ListLayout>  _layout;
 
     std::shared_ptr< SupComModel> _modl;
-    YolonaOss::SupComGLMesh* _scMesh;
+    Ahwassa::SupComGLMesh* _scMesh;
     std::shared_ptr<Haas::ScriptEngine> _script;
-    
+    std::shared_ptr<Ahwassa::BasicBoxRenderer> _box;
+    std::shared_ptr<Ahwassa::BasicTextRenderer> _text;
     std::string _animName;
     std::string _unitName;
 

@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "IyathuumCoreLib/Singleton/Database.h"
-#include "YolonaOss/OpenGL/Window.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 #include "Fatboy.h"
 #include "AnimationDebugger.h"
 #include "GameConfiguration.h"
@@ -19,24 +19,24 @@ int main(int argc, char** argv) {
   //  throw std::runtime_error("Wahh");
   int width  = Fatboy::GameConfiguration::instance().ScreenWidth;
   int height = Fatboy::GameConfiguration::instance().ScreenHeight;
-  YolonaOss::GL::Window w(width, height);
+  Ahwassa::Window w(width, height);
   //Fatboy::Fatboy game;
-  Fatboy::AnimationDebugger game;
+  std::unique_ptr<Fatboy::AnimationDebugger> game;
   bool init = false;
 
   Iyathuum::UpdateTimer updater([&game]() {
-      game.update();    
+      game->update();    
     }
   , Fatboy::GameConfiguration::instance().TicksPerSecond);
 
   w.Update = [&game,&init,&w, &updater]() {
     if (!init) {
       init = true;
-      game.load(w.getSpec());
+      game = std::make_unique<Fatboy::AnimationDebugger>(w);
       updater.setTicksPerSecond(Fatboy::GameConfiguration::instance().TicksPerSecond);//reset
     }
     updater.update();
-    game.draw();
+    game->draw();
   };
   w.run();
 

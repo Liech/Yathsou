@@ -5,22 +5,19 @@
 #include <map>
 #include "SCM.h"
 #include "SCA.h"
-namespace YolonaOss
+namespace Ahwassa
 {
-  namespace GL
-  {
-    class Texture;
-  }
+  class Texture;
 }
 
 struct SupComModel
 {
   SupComModel(std::string foldername);
 
-  std::string                                      _foldername;
-  std::shared_ptr<YolonaOss::GL::Texture>          _albedo    ;
-  std::shared_ptr<YolonaOss::GL::Texture>          _info      ;
-  std::shared_ptr<YolonaOss::GL::Texture>          _normal    ;
+  std::string                                _foldername;
+  std::shared_ptr<Ahwassa::Texture>          _albedo    ;
+  std::shared_ptr<Ahwassa::Texture>          _info      ;
+  std::shared_ptr<Ahwassa::Texture>          _normal    ;
   //std::shared_ptr<YolonaOss::GL::Texture>        _albedoLOD1;
   //std::shared_ptr<YolonaOss::GL::Texture>        _teamLOD1  ;
   //std::shared_ptr<YolonaOss::GL::Texture>        _normalLOD1;

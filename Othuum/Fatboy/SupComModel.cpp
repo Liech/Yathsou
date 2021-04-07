@@ -1,7 +1,7 @@
 #include "SupComModel.h"
 
-#include "YolonaOss/OpenGL/Texture.h"
-#include "YolonaOss/Util/ImageIO.h"
+#include "AhwassaGraphicsLib/Uniforms/Texture.h"
+#include "AezeselFileIOLib/ImageIO.h"
 #include "SCM.h"
 #include "SCA.h"
 
@@ -26,9 +26,9 @@ SupComModel::SupComModel(std::string foldername)
   //auto albedoArrayLOD1 = YolonaOss::ImageIO::readImage(foldername + "\\" + name + "_lod1_Albedo.dds");
   //auto teamArrayLOD1   = YolonaOss::ImageIO::readImage(foldername + "\\" + name + "_lod1_normalsTS.dds");
   //auto normalArrayLOD1 = YolonaOss::ImageIO::readImage(foldername + "\\" + name + "_lod1_SpecTeam.dds");
-  _albedo = std::make_shared<YolonaOss::GL::Texture>("Albedo"  , 0);//////albedoArray.get());
-  _info   = std::make_shared<YolonaOss::GL::Texture>("TeamSpec", 0);//////infoArray  .get());
-  _normal = std::make_shared<YolonaOss::GL::Texture>("Normal"  , 0);//////normalArray.get());  
+  _albedo = std::make_shared<Ahwassa::Texture>("Albedo"  , 0);//////albedoArray.get());
+  _info   = std::make_shared<Ahwassa::Texture>("TeamSpec", 0);//////infoArray  .get());
+  _normal = std::make_shared<Ahwassa::Texture>("Normal"  , 0);//////normalArray.get());  
   //_albedoLOD1 = std::make_shared<YolonaOss::GL::Texture>("Albedo"  , albedoArray.get());
   //_teamLOD1   = std::make_shared<YolonaOss::GL::Texture>("TeamSpec", teamArray  .get());
   //_normalLOD1 = std::make_shared<YolonaOss::GL::Texture>("Normal"  , normalArray.get());

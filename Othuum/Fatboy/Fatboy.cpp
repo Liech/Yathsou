@@ -2,14 +2,9 @@
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/Box.h"
-#include "YolonaOss/Drawables/FPS.h"
-#include "YolonaOss/Drawables/Background.h"
-#include "YolonaOss/Drawables/Ground.h"
-#include "YolonaOss/OpenGL/DrawableList.h"
-#include "YolonaOss/Camera/CameraSystem.h"
-#include "YolonaOss/Camera/FreeCamera.h"
-#include "YolonaOss/Camera/RTSCamera.h"
-#include "YolonaOss/Camera/FollowCamera.h"
+#include "AhwassaGraphicsLib/Drawables/FPS.h"
+#include "AhwassaGraphicsLib/Drawables/Background.h"
+#include "AhwassaGraphicsLib/Core/Camera.h"
 #include "Protagonist.h"
 #include "GameConfiguration.h"
 #include "ScriptAPI.h"
@@ -23,10 +18,10 @@
 #include "SCA.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
-#include "YolonaOss/Renderer/BoxRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
 #include "BulletDebugDrawer.h"
 #include "YolonaOss/Renderer/MeshRenderer.h"
-#include "YolonaOss/Util/ImageIO.h"
+#include "AezeselFileIOLib/ImageIO.h"
 #include "YolonaOss/Renderer/TextureRenderer.h"
 #include "YolonaOss/Renderer/SupComModelRenderer.h"
 #include "YolonaOss/OpenGL/SupComVertex.h"
@@ -35,20 +30,19 @@
 
 namespace Fatboy
 {
-  Fatboy::Fatboy()
+  Fatboy::Fatboy(Ahwassa::Window* w)
   {
-    _preDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
-    _postDrawables = std::make_shared< YolonaOss::GL::DrawableList>();
-    _preDrawables->addDrawable(std::make_shared<YolonaOss::Background>());
-    _postDrawables->addDrawable(std::make_shared<YolonaOss::FPS>());
+    _preDrawables.push_back(std::make_shared<Ahwassa::Background>());
+    _postDrawables.push_back(std::make_shared<Ahwassa::FPS>());
     //_preDrawables->addDrawable(std::make_shared<YolonaOss::Ground>());
-    _cam = std::make_shared<YolonaOss::Camera::CameraSystem>();
     _context = std::make_shared<Context>();
 
     initPhysic();
-    _protagonist = std::make_shared<Protagonist>(_context,&_drawDebug, _cam);
+    _protagonist = std::make_shared<Protagonist>(_context,&_drawDebug, w);
     //initEnemys();
     _context->physic()->setDebugDrawer(new BulletDebugDrawer());
+
+    loadLandscapeModel();
   }
 
   void Fatboy::initPhysic()
@@ -62,44 +56,27 @@ namespace Fatboy
 
   void Fatboy::initEnemys()
   {
-    auto tank = std::make_shared<Unit>(_context);
+    auto tank = std::make_shared<Unit>(_context,getWindow());
     tank->setStartPosition(glm::vec3(-3, 2, -3));
-    tank->load(_spec);
     _context->units()->addUnit(tank);
 
-    tank = std::make_shared<Unit>(_context);
+    tank = std::make_shared<Unit>(_context,getWindow());
     tank->setStartPosition(glm::vec3(3, 2, -3));
-    tank->load(_spec);
     _context->units()->addUnit(tank);
 
-    tank = std::make_shared<Unit>(_context);
+    tank = std::make_shared<Unit>(_context, getWindow());
     tank->setStartPosition(glm::vec3(3, 2, 3));
-    tank->load(_spec);
     _context->units()->addUnit(tank);
 
-    tank = std::make_shared<Unit>(_context);
+    tank = std::make_shared<Unit>(_context,getWindow());
     tank->setStartPosition(glm::vec3(-3, 2, 3));
-    tank->load(_spec);
     _context->units()->addUnit(tank);
   }
 
   void Fatboy::update()
   {
-    _cam->update();
     _protagonist->update();
     _context->physic()->update();
-  }
-
-  void Fatboy::load(YolonaOss::GL::DrawSpecification* spec)
-  {
-    _cam->load(spec);
-    _cam->setCurrentCam("FollowCamera");  
-    YolonaOss::Camera::FollowCamera::setTarget({ _protagonist });
-    _protagonist->load(spec);
-    _preDrawables->load(spec);
-    _postDrawables->load(spec);
-
-    loadLandscapeModel();
   }
 
   void Fatboy::loadLandscapeModel()

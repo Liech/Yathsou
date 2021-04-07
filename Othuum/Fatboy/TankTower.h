@@ -2,18 +2,21 @@
 
 #include <memory>
 
-#include "YolonaOss/OpenGL/Drawable.h"
-#include "YolonaOss/OpenGL/Updateable.h"
+#include "AhwassaGraphicsLib/Drawables/Drawable.h"
 #include "IyathuumCoreLib/lib/glm/vec3.hpp"
 #include "SuthanusPhysicsLib/PhysicObject.h"
 #include "IyathuumCoreLib/lib/glm/gtx/quaternion.hpp"
 
+namespace Ahwassa {
+  class BasicBoxRenderer;
+}
+
 namespace Fatboy
 {
-  class TankTower : public YolonaOss::GL::Drawable, public YolonaOss::GL::Updateable
+  class TankTower : public Ahwassa::Drawable
   {
   public:
-    TankTower(Suthanus::PhysicObject& attachTo, glm::vec3 offset, glm::vec3 startDirection);
+    TankTower(Suthanus::PhysicObject& attachTo, glm::vec3 offset, glm::vec3 startDirection, Ahwassa::Window* w);
 
     float getMaxAimUp  ();
     float getMaxAimDown();
@@ -29,9 +32,8 @@ namespace Fatboy
     void setTurnSpeed (float degreePerSecond);
     void setGlobalTargetDirection(glm::vec3 dir);    
 
-    virtual void load(YolonaOss::GL::DrawSpecification*) override;
     virtual void draw()                                  override;
-    virtual void update()                                override;
+    void update();
   private:
     void rotateTowardsTargetDir();
     void updateYRotationTarget();
@@ -46,5 +48,7 @@ namespace Fatboy
     glm::quat               _direction ;
     glm::vec3               _offset    ;
     Suthanus::PhysicObject& _attachedTo;
+
+    std::shared_ptr<Ahwassa::BasicBoxRenderer> _box;
   };
 }

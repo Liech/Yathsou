@@ -1,22 +1,19 @@
 #include "TankTower.h"
-#include "YolonaOss/Renderer/BoxRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
+#include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "GameConfiguration.h"
 #include "IyathuumCoreLib/Lib/glm/gtx/vector_angle.hpp""
 #include <iostream>
 
 namespace Fatboy
 {
-  TankTower::TankTower(Suthanus::PhysicObject& attachTo, glm::vec3 offset, glm::vec3 startDirection)
-    : _attachedTo(attachTo), _offset(offset),_targetDirection(startDirection)
+  TankTower::TankTower(Suthanus::PhysicObject& attachTo, glm::vec3 offset, glm::vec3 startDirection, Ahwassa::Window* w)
+    : _attachedTo(attachTo), _offset(offset),_targetDirection(startDirection), Ahwassa::Drawable(w)
   {
     setGlobalTargetDirection(startDirection);
     _direction = glm::lookAt(glm::vec3(0,0,0), glm::vec3(0, 0, 0) + _targetDirection, glm::vec3(0, 1, 0));
-
-  }
-
-  void TankTower::load(YolonaOss::GL::DrawSpecification*)
-  {
-
+    _box = std::make_shared<Ahwassa::BasicBoxRenderer>(w->camera());
   }
 
   void TankTower::update()
@@ -80,10 +77,10 @@ namespace Fatboy
 
   void TankTower::draw()
   {
-    YolonaOss::BoxRenderer::start();
-    YolonaOss::BoxRenderer::drawDot(getGlobalPosition(), glm::vec3(0.05f), glm::vec4(1, 1, 0, 1));
-    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + getCurrentGlobalDirection(), 0.01, glm::vec4(1, 1, 0, 1));
-    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + getGlobalTargetDirection(), 0.05, glm::vec4(1, 0,1, 1));
+    _box->start();
+    _box->drawDot(getGlobalPosition(), glm::vec3(0.05f), Iyathuum::Color(255, 255, 0));
+    _box->drawLine(getGlobalPosition(), getGlobalPosition() + getCurrentGlobalDirection(), 0.01, Iyathuum::Color(255, 255, 0));
+    _box->drawLine(getGlobalPosition(), getGlobalPosition() + getGlobalTargetDirection(), 0.05 , Iyathuum::Color(255, 0,255 ));
 
     glm::vec3 up     =  glm::vec4(0,1,0,1);
     glm::vec3 future = getTargetDirection();
@@ -98,9 +95,9 @@ namespace Fatboy
 
     glm::vec3 maxUp = _attachedTo.getRotationTransformation() * glm::vec4(glm::rotate(future, rotToUp, cross),1);
     glm::vec3 maxDown = _attachedTo.getRotationTransformation() * glm::vec4(glm::rotate(future, rotToDown, cross),1);
-    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + maxUp  , 0.005, glm::vec4(0, 1, 1, 1));
-    YolonaOss::BoxRenderer::drawLine(getGlobalPosition(), getGlobalPosition() + maxDown, 0.005, glm::vec4(0, 1, 1, 1));
-    YolonaOss::BoxRenderer::end();
+    _box->drawLine(getGlobalPosition(), getGlobalPosition() + maxUp  , 0.005, Iyathuum::Color(0, 255, 255));
+    _box->drawLine(getGlobalPosition(), getGlobalPosition() + maxDown, 0.005, Iyathuum::Color(0, 255, 255));
+    _box->end();
   }
 
   float TankTower::getMaxAimUp()
