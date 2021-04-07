@@ -1,0 +1,2 @@
+https://www.freetype.org/index.html
+https://gitlab.freedesktop.org/freetype/freetype/-/tree/master

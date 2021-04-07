@@ -10,8 +10,8 @@ nyquistaudio                   |ahwassa      | load wav/mp3
 openvr                         |ahwassa      | virtual reality
 bullet                         |suthanus     | physics
 lua                            |haas         | scripting
-lua-matrix                     |haas         | matrix operations in scripting
-kikito/inspect.lua             |haas         | debug inside lua
+lua-matrix                     |haas         | matrix operations lua script
+kikito/inspect.lua             |haas         | debug inside lua script
 enet                           |vishala      | Network Library
 moodycamel/concurrentqueue     |vishala      | concurrent queue
 xdelta3                        |vishala      | delta compression
