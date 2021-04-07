@@ -104,9 +104,9 @@ Not all Libs are listed yet.
 
 Some are not worth any mentioning yet.
 
-# Build and Rund
+# Build and Run
 
-Start Project should be Othuum.
+Start Project is Othuum.
 
 Working Directory should be changed to $(TargetDir).
 
