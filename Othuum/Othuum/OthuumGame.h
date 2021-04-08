@@ -33,6 +33,7 @@ public:
   void tick();
   void update();
   void draw();
+  void load();
 
   void createServer(int port);
   void createClient(int myPort, int serverPort, std::string ip);

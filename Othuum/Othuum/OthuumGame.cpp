@@ -22,10 +22,12 @@ OthuumGame::OthuumGame(Ahwassa::Window* w, bool authoritarian) {
   _libClient   = nullptr;
   _scene  = std::make_shared<Uyanah::Scene>();
   _timer = std::make_unique<Iyathuum::UpdateTimer>([this]() {tick(); }, _fps);
+}
 
-  _vis = std::make_shared<ClientVisualization>(_scene,w);
-  _list.push_back(std::make_shared<Ahwassa::Background>(w));
-  _list.push_back(std::make_shared<Ahwassa::FPS>(w));
+void OthuumGame::load() {
+  _vis = std::make_shared<ClientVisualization>(_scene, _window);
+  _list.push_back(std::make_shared<Ahwassa::Background>(_window));
+  _list.push_back(std::make_shared<Ahwassa::FPS>(_window));
   _list.push_back(_vis);
 
   auto s = std::make_shared<Uyanah::Scene>();
@@ -36,7 +38,7 @@ OthuumGame::OthuumGame(Ahwassa::Window* w, bool authoritarian) {
       _authoClient->sendCmd(*cmd);
     else
       _libClient->sendCmd(cmd);
-    },s,w);
+  }, s, _window);
 }
 
 void OthuumGame::createClient(int myPort, int serverPort, std::string ip) {

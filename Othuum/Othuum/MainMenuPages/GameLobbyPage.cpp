@@ -15,12 +15,9 @@ GameLobbyPage::GameLobbyPage(std::shared_ptr<ClientConfiguration> configuration,
   std::shared_ptr<Ahwassa::Label> title = std::make_shared<Ahwassa::Label>("Game Lobby Page", Iyathuum::glmAABB<2>{ {0,0},{100,50} },w);
 
   _page->layout().addElement(title);
-
-  _startButton = std::make_shared<Ahwassa::Button>("Start Game", Iyathuum::glmAABB<2>{ {0, 0}, { 100,50 } }, [this]() {
+  _startButton = _page->layout().addButton("Start Game", [this]() {
     startGame();
-  }, w);
-  _page->layout().addElement(_startButton);
-
+  });
   _startButton->setVisible(false);
   _participatorsLayout = _page->layout().addLayout();
   _participatorsLayout->addLabel("You are alone");

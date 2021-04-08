@@ -54,8 +54,7 @@ int main(int argc, char** argv) {
     auto contentCreator = [&w,&game]() {
       std::shared_ptr<Iyathuum::ContentLoader> loader = std::make_shared<Iyathuum::ContentLoader>();
       loader->addPackage([&w,&game]() {
-//        game->load(w.getSpec());
-        throw std::runtime_error("Not yet implemented");
+        game->load();
         }, true);
       return loader;
     };
@@ -67,8 +66,10 @@ int main(int argc, char** argv) {
       logic->setServerCreator([&game](int port) { game->createServer(port); });
     };
     w.Update = [&logic, state,&rslt,&game]() {
-      game->update();
-      //game->draw();
+      if (game) {
+        game->update();
+        game->draw();
+      }
       if (logic->getStatus() != MainMenuLogic::status::GameRunning) {
         logic->draw();
         logic->update();
