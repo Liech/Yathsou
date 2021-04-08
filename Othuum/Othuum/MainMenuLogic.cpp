@@ -82,8 +82,7 @@ void MainMenuLogic::update() {
     else if (_mainMenuPage->getStatus() == MainMenuPageStatus::SideProject && _stat == status::MainMenu) {
       _mainMenuPage->reset();
       _mainMenuPage->setVisible(false);
-      //_sideProject->load(_window.getSpec());
-      throw std::runtime_error("Not yet implemented");
+      _sideProject->load();
 
       _stat = status::SideProject;
     }

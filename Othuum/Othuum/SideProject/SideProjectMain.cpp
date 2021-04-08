@@ -15,4 +15,8 @@ namespace SideProject
     for (auto x : _list)
       x->draw();
   }
+
+  void SideProjectMain::load() {
+
+  }
 }

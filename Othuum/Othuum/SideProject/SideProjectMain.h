@@ -14,6 +14,7 @@ namespace SideProject
   public:
     SideProjectMain(Ahwassa::Window*);
     virtual void draw()                                  override;
+    void load();
   private:
     std::vector<std::shared_ptr<Ahwassa::Drawable>> _list;
   };
