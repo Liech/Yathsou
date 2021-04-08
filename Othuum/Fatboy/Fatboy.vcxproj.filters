@@ -13,20 +13,20 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Tank">
+      <UniqueIdentifier>{282f52e2-5d2f-4b70-88c9-07d3c2b2c39f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Animation">
+      <UniqueIdentifier>{ec5859f3-d664-4261-801d-d9292d27577e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animation">
+      <UniqueIdentifier>{14879eac-c007-4318-aeb1-d77347710971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tank">
+      <UniqueIdentifier>{012e09a0-ed7a-4542-b9ae-c6061542cad3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletDebugDrawer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletPool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Fatboy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -36,44 +36,44 @@
     <ClInclude Include="Protagonist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SCA.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Animation\SupComVertex.h">
+      <Filter>Header Files\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="SCM.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Animation\AnimationDebugger.h">
+      <Filter>Header Files\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="SCMAP.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Animation\SupComModel.h">
+      <Filter>Header Files\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="ScriptAPI.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Animation\SupComModelRenderer.h">
+      <Filter>Header Files\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="SupComModel.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tank\Bullet.h">
+      <Filter>Header Files\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="TankTower.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tank\BulletDebugDrawer.h">
+      <Filter>Header Files\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tank\BulletPool.h">
+      <Filter>Header Files\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="UnitPool.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tank\Context.h">
+      <Filter>Header Files\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationDebugger.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Tank\ScriptAPI.h">
+      <Filter>Header Files\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank\TankTower.h">
+      <Filter>Header Files\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank\Unit.h">
+      <Filter>Header Files\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="Tank\UnitPool.h">
+      <Filter>Header Files\Tank</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BulletDebugDrawer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletPool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Context.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Fatboy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -86,35 +86,38 @@
     <ClCompile Include="Protagonist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SCA.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Animation\AnimationDebugger.cpp">
+      <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="SCM.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Animation\SupComModel.cpp">
+      <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="SCMAP.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Animation\SupComModelRenderer.cpp">
+      <Filter>Source Files\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="ScriptAPI.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Tank\Bullet.cpp">
+      <Filter>Source Files\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="SupComModel.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Tank\BulletDebugDrawer.cpp">
+      <Filter>Source Files\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="TankTower.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Tank\BulletPool.cpp">
+      <Filter>Source Files\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="Unit.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Tank\Context.cpp">
+      <Filter>Source Files\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="UnitPool.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Tank\ScriptAPI.cpp">
+      <Filter>Source Files\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationDebugger.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Tank\TankTower.cpp">
+      <Filter>Source Files\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Tank\Unit.cpp">
+      <Filter>Source Files\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="Tank\UnitPool.cpp">
+      <Filter>Source Files\Tank</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

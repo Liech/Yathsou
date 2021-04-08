@@ -235,12 +235,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicBoxRenderer.h" />
+    <ClInclude Include="BasicRenderer\BasicMeshRenderer.h" />
     <ClInclude Include="BasicRenderer\BasicRectangleRenderer.h" />
     <ClInclude Include="BasicRenderer\BasicTextRenderer.h" />
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h" />
     <ClInclude Include="BufferObjects\IBO.h" />
     <ClInclude Include="BufferObjects\IVAO.h" />
     <ClInclude Include="BufferObjects\IVBO.h" />
+    <ClInclude Include="BufferObjects\Mesh.h" />
     <ClInclude Include="BufferObjects\VAO.h" />
     <ClInclude Include="BufferObjects\VBO.h" />
     <ClInclude Include="Core\AttributeDescription.h" />
@@ -320,12 +322,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicRenderer\BasicBoxRenderer.cpp" />
+    <ClCompile Include="BasicRenderer\BasicMeshRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicRectangleRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp" />
     <ClCompile Include="BufferObjects\IBO.cpp" />
     <ClCompile Include="BufferObjects\IVAO.cpp" />
     <ClCompile Include="BufferObjects\IVBO.cpp" />
+    <ClCompile Include="BufferObjects\Mesh.cpp" />
     <ClCompile Include="BufferObjects\VAO.cpp" />
     <ClCompile Include="BufferObjects\VBO.cpp" />
     <ClCompile Include="Core\AttributeDescription.cpp" />

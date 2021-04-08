@@ -27,41 +27,38 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimationDebugger.h" />
-    <ClInclude Include="Bullet.h" />
-    <ClInclude Include="BulletDebugDrawer.h" />
-    <ClInclude Include="BulletPool.h" />
-    <ClInclude Include="Context.h" />
+    <ClInclude Include="Animation\AnimationDebugger.h" />
+    <ClInclude Include="Animation\SupComModel.h" />
+    <ClInclude Include="Animation\SupComModelRenderer.h" />
+    <ClInclude Include="Animation\SupComVertex.h" />
     <ClInclude Include="Fatboy.h" />
     <ClInclude Include="GameConfiguration.h" />
     <ClInclude Include="Protagonist.h" />
-    <ClInclude Include="SCA.h" />
-    <ClInclude Include="SCM.h" />
-    <ClInclude Include="SCMAP.h" />
-    <ClInclude Include="ScriptAPI.h" />
-    <ClInclude Include="SupComModel.h" />
-    <ClInclude Include="TankTower.h" />
-    <ClInclude Include="Unit.h" />
-    <ClInclude Include="UnitPool.h" />
+    <ClInclude Include="Tank\Bullet.h" />
+    <ClInclude Include="Tank\BulletDebugDrawer.h" />
+    <ClInclude Include="Tank\BulletPool.h" />
+    <ClInclude Include="Tank\Context.h" />
+    <ClInclude Include="Tank\ScriptAPI.h" />
+    <ClInclude Include="Tank\TankTower.h" />
+    <ClInclude Include="Tank\Unit.h" />
+    <ClInclude Include="Tank\UnitPool.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AnimationDebugger.cpp" />
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="BulletDebugDrawer.cpp" />
-    <ClCompile Include="BulletPool.cpp" />
-    <ClCompile Include="Context.cpp" />
+    <ClCompile Include="Animation\AnimationDebugger.cpp" />
+    <ClCompile Include="Animation\SupComModel.cpp" />
+    <ClCompile Include="Animation\SupComModelRenderer.cpp" />
     <ClCompile Include="Fatboy.cpp" />
     <ClCompile Include="GameConfiguration.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Protagonist.cpp" />
-    <ClCompile Include="SCA.cpp" />
-    <ClCompile Include="SCM.cpp" />
-    <ClCompile Include="SCMAP.cpp" />
-    <ClCompile Include="ScriptAPI.cpp" />
-    <ClCompile Include="SupComModel.cpp" />
-    <ClCompile Include="TankTower.cpp" />
-    <ClCompile Include="Unit.cpp" />
-    <ClCompile Include="UnitPool.cpp" />
+    <ClCompile Include="Tank\Bullet.cpp" />
+    <ClCompile Include="Tank\BulletDebugDrawer.cpp" />
+    <ClCompile Include="Tank\BulletPool.cpp" />
+    <ClCompile Include="Tank\Context.cpp" />
+    <ClCompile Include="Tank\ScriptAPI.cpp" />
+    <ClCompile Include="Tank\TankTower.cpp" />
+    <ClCompile Include="Tank\Unit.cpp" />
+    <ClCompile Include="Tank\UnitPool.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -360,6 +360,12 @@
     <ClInclude Include="lib\glad\include\KHR\khrplatform.h">
       <Filter>lib\glad</Filter>
     </ClInclude>
+    <ClInclude Include="BasicRenderer\BasicMeshRenderer.h">
+      <Filter>Header Files\BasicRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferObjects\Mesh.h">
+      <Filter>Header Files\BufferObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -547,6 +553,12 @@
     </ClCompile>
     <ClCompile Include="lib\glad\src\glad.c">
       <Filter>lib\glad</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicRenderer\BasicMeshRenderer.cpp">
+      <Filter>Source Files\BasicRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferObjects\Mesh.cpp">
+      <Filter>Source Files\BufferObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
