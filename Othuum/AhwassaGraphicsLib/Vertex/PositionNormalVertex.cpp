@@ -21,4 +21,8 @@ namespace Ahwassa {
     result.push_back(AttributeDescription("normal"  , 3, AttributeDescription::DataType::Float));
     return result;
   }
+
+  std::vector<AttributeDescription> PositionNormalVertex::binding() {
+    return PositionNormalVertex::getBinding();
+  }
 }

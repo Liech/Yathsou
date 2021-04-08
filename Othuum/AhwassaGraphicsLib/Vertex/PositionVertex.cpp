@@ -19,4 +19,8 @@ namespace Ahwassa {
     result.push_back(AttributeDescription("position", 3, AttributeDescription::DataType::Float));
     return result;
   }
+
+  std::vector<AttributeDescription> PositionVertex::binding() {
+    return PositionVertex::getBinding();
+  }
 }

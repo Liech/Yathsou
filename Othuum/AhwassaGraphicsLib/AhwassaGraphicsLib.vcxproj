@@ -240,6 +240,7 @@
     <ClInclude Include="BasicRenderer\BasicTextRenderer.h" />
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h" />
     <ClInclude Include="BufferObjects\IBO.h" />
+    <ClInclude Include="BufferObjects\IMesh.h" />
     <ClInclude Include="BufferObjects\IVAO.h" />
     <ClInclude Include="BufferObjects\IVBO.h" />
     <ClInclude Include="BufferObjects\Mesh.h" />
@@ -305,13 +306,13 @@
     <ClInclude Include="sound\sound.h" />
     <ClInclude Include="sound\SoundEngine.h" />
     <ClInclude Include="sound\SoundHandler.h" />
+    <ClInclude Include="Vertex\IVertex.h" />
     <ClInclude Include="Vertex\PositionColorNormalVertex.h" />
     <ClInclude Include="Vertex\PositionColorVertex.h" />
     <ClInclude Include="Vertex\PositionNormalTextureVertex.h" />
     <ClInclude Include="Vertex\PositionNormalVertex.h" />
     <ClInclude Include="Vertex\PositionTextureVertex.h" />
     <ClInclude Include="Vertex\PositionVertex.h" />
-    <ClInclude Include="Vertex\SupComVertex.h" />
     <ClInclude Include="VR\VRController.h" />
     <ClInclude Include="VR\VR.h" />
     <ClInclude Include="Widgets\Button.h" />
@@ -371,13 +372,13 @@
     <ClCompile Include="sound\sound.cpp" />
     <ClCompile Include="sound\SoundEngine.cpp" />
     <ClCompile Include="sound\SoundHandler.cpp" />
+    <ClCompile Include="Vertex\IVertex.cpp" />
     <ClCompile Include="Vertex\PositionColorNormalVertex.cpp" />
     <ClCompile Include="Vertex\PositionColorVertex.cpp" />
     <ClCompile Include="Vertex\PositionNormalTextureVertex.cpp" />
     <ClCompile Include="Vertex\PositionNormalVertex.cpp" />
     <ClCompile Include="Vertex\PositionTextureVertex.cpp" />
     <ClCompile Include="Vertex\PositionVertex.cpp" />
-    <ClCompile Include="Vertex\SupComVertex.cpp" />
     <ClCompile Include="VR\VRController.cpp" />
     <ClCompile Include="VR\VR.cpp" />
     <ClCompile Include="Widgets\Button.cpp" />

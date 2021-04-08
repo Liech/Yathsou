@@ -23,4 +23,8 @@ namespace Ahwassa {
     result.push_back(AttributeDescription("texture" , 2, AttributeDescription::DataType::Float));
     return result;
   }
+
+  std::vector<AttributeDescription> PositionNormalTextureVertex::binding() {
+    return PositionNormalTextureVertex::getBinding();
+  }
 }

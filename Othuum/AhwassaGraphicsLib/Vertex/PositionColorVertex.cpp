@@ -21,4 +21,8 @@ namespace Ahwassa {
     result.push_back(AttributeDescription("color", 4, AttributeDescription::DataType::Float));
     return result;
   }
+
+  std::vector<AttributeDescription> PositionColorVertex::binding() {
+    return PositionColorVertex::getBinding();
+  }
 }

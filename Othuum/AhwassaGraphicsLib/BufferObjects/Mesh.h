@@ -1,16 +1,43 @@
 #pragma once
 
-namespace BasicMesh {
-  class Mesh
-  {
-  //  std::unique_ptr<GL::VBO<GL::PositionNormalVertex>>        vbo;
-  //  std::unique_ptr<GL::VAO<GL::PositionNormalVertex>>        vao;
-  //  std::unique_ptr<GL::IBO>                                  ibo;
+#include <memory>
+#include "IMesh.h"
+#include "VBO.h"
+#include "VAO.h"
+#include "IBO.h"
 
-  //public:
-  //  Mesh(const std::vector<GL::PositionNormalVertex>& vertecies, const std::vector<int>& indicies);
-  //  void draw() const;
-  //private:
-  //  std::unique_ptr<MeshPimpl> _p;
+namespace Ahwassa {
+  template <typename Vertex>
+  class Mesh : public IMesh
+  {
+  public:
+    Mesh(const std::vector<Vertex>& vertecies, const std::vector<int>& indicies) {
+      _ibo = std::make_unique<IBO>(indices);
+      _vbo = std::make_unique<VBO<Vertex>>(vertecies);
+      _vao = std::make_unique<VAO<Vertex>>(vbo.get());
+    }
+
+    Mesh(const std::vector<Vertex>& trianglestrip) {
+      std::vector<int> indices;
+      indices.resize(trianglestrip.size());
+      for (int i = 0; i < trianglestrip.size(); i++)
+        indices[i] = i;
+      _ibo = std::make_unique<IBO>(indices);
+      _vbo = std::make_unique<VBO<Vertex>>(vertecies);
+      _vao = std::make_unique<VAO<Vertex>>(vbo.get());
+    }
+
+    virtual void draw() override {
+      _ibo->draw(_vao.get());
+    }
+
+    virtual void drawInstanced(size_t amount) override {
+      _ibo->drawInstanced(_vao.get(),amount);
+    }
+
+  private:
+    std::unique_ptr<VBO<Vertex>>> _vbo;
+    std::unique_ptr<VAO<Vertex>>> _vao;
+    std::unique_ptr<IBO>        > _ibo;
   };
 }
