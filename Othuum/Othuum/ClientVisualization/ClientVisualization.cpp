@@ -1,6 +1,5 @@
 #include "ClientVisualization.h"
 
-#include "glad/glad.h"
 #include "UyanahGameServer/Client.h"
 #include "UyanahGameServer/Component.h"
 #include "UyanahGameServer/Entity.h"

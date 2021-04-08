@@ -4,6 +4,7 @@
 #include "BasicRenderer/BasicRectangleRenderer.h"
 #include "BasicRenderer/BasicTextRenderer.h"
 #include "Core/Window.h"
+#include "Input/Input.h"
 #include "Core/Renderer.h"
 
 namespace Ahwassa {
@@ -24,13 +25,16 @@ namespace Ahwassa {
   {
     _text = text;
     setParent(parent);
-    setLocalPosition(position);
+    setLocalPosition(position);    
+    getWindow()->input().addUIElement(this);
   }
 
 
   LineEdit::~LineEdit()
   {
-    setVisible(false);
+    setVisible(false);  
+    getWindow()->input().removeUIElement(this);
+
   }
 
   void LineEdit::draw()
@@ -70,6 +74,7 @@ namespace Ahwassa {
   }
 
   bool LineEdit::mouseClickEvent(glm::vec2 position, Iyathuum::Key button) {
+    getWindow()->input().setFocus(this);
     for (size_t i = 1; i < _text.length() + 1; i++) {
       std::string sub = _text.substr(0, i);
       glm::vec2 textSize =  getWindow()->renderer().text().getTextSize(sub, 1);

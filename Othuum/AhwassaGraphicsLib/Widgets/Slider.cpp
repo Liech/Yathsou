@@ -8,6 +8,7 @@
 #include "BasicRenderer/BasicTextRenderer.h"
 #include "Core/Window.h"
 #include "Core/Renderer.h"
+#include "Input/Input.h"
 
 namespace Ahwassa {
   Slider::Slider(Window* w) : Drawable(w)
@@ -21,10 +22,12 @@ namespace Ahwassa {
     _max = max;
     setParent(parent);
     setLocalPosition(position);
+    w->input().addUIElement(this);
   }
 
   Slider::~Slider()
   {
+    getWindow()->input().removeUIElement(this);
     setVisible(false);
   }
 
