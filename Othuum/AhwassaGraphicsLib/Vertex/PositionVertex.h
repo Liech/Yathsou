@@ -7,13 +7,13 @@
 namespace Ahwassa {
   struct AttributeDescription;
 
-  struct PositionVertex : public IVertex {
+  struct PositionVertex {//: public IVertex {
     glm::vec3 position;
 
     PositionVertex();
     PositionVertex(glm::vec3 Position);
 
     static std::vector<AttributeDescription> getBinding();
-    virtual std::vector<AttributeDescription> binding() override;
+    std::vector<AttributeDescription> binding();
   };
 }

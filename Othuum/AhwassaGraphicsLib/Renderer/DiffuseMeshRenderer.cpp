@@ -88,11 +88,10 @@ namespace Ahwassa {
     for (auto& meshVector : _meshes) {
       std::vector<glm::mat4> models;
       std::vector<glm::vec3> colors;
-      models.resize(_meshes.size());
-      colors.resize(_meshes.size());
+      models.resize(_bufferSize);
+      colors.resize(_bufferSize);
 
       std::vector<size_t> toDelete;
-      toDelete.reserve(10);
 
       size_t currentPosition = 0;
       for (size_t i = 0; i < meshVector.second.size(); i++) {
@@ -114,7 +113,7 @@ namespace Ahwassa {
       _colors->bind();
       meshVector.first->drawInstanced(currentPosition);
 
-      for (int i = toDelete.size(); i >= 0; i--)
+      for (int i = toDelete.size()-1; i >= 0; i--)
         meshVector.second.erase(meshVector.second.begin() + i);
       if (meshVector.second.size() == 0)
         toDeleteMeshes.push_back(meshVector.first);

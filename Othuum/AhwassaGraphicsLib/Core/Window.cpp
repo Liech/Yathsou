@@ -81,11 +81,14 @@ namespace Ahwassa {
       break;
     }
 
-	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
 	
-	if (msgSeverity == "MEDIUM")
+	
+    if (msgSeverity == "MEDIUM") {
       printf("glDebugMessage:\n%s \n type = %s source = %s severity = %s\n", message, msgType.c_str(), msgSource.c_str(), msgSeverity.c_str());
+      printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
+    }
   if (msgSeverity == "HIGH") {
+    printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
     std::cout << message << std::endl;
     throw std::runtime_error("OPENGL ERROR:" + std::string(message));
   }
