@@ -3,8 +3,8 @@
 #include <string>
 #include <memory>
 #include <map>
-#include "SCM.h"
-#include "SCA.h"
+#include "AezeselFileIOLib/SCM.h"
+#include "AezeselFileIOLib/SCA.h"
 namespace Ahwassa
 {
   class Texture;
@@ -18,11 +18,11 @@ struct SupComModel
   std::shared_ptr<Ahwassa::Texture>          _albedo    ;
   std::shared_ptr<Ahwassa::Texture>          _info      ;
   std::shared_ptr<Ahwassa::Texture>          _normal    ;
-  //std::shared_ptr<YolonaOss::GL::Texture>        _albedoLOD1;
-  //std::shared_ptr<YolonaOss::GL::Texture>        _teamLOD1  ;
-  //std::shared_ptr<YolonaOss::GL::Texture>        _normalLOD1;
-  std::shared_ptr<SCM::data>                       _model     ;
-  std::map<std::string,std::shared_ptr<SCA::data>> _animations;
+  //std::shared_ptr<Ahwassa::Texture>        _albedoLOD1;
+  //std::shared_ptr<Ahwassa::Texture>        _teamLOD1  ;
+  //std::shared_ptr<Ahwassa::Texture>        _normalLOD1;
+  std::shared_ptr<Aezesel::SCM::data>                       _model     ;
+  std::map<std::string,std::shared_ptr<Aezesel::SCA::data>> _animations;
 
 
   glm::mat4 toAnimation(const glm::mat4&,int bone) const;

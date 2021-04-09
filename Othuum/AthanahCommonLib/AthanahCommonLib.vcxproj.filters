@@ -21,12 +21,18 @@
     <ClInclude Include="BulletDebugDrawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SupComMeshLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletDebugDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BoxVisualization.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SupComMeshLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,7 +3,7 @@
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "Fatboy.h"
-#include "AnimationDebugger.h"
+#include "Animation/AnimationDebugger.h"
 #include "GameConfiguration.h"
 #include "IyathuumCoreLib/Util/UpdateTimer.h"
 #include "HaasScriptingLib/ScriptEngine.h"

@@ -7,25 +7,11 @@
 #include "AhwassaGraphicsLib/Core/Camera.h"
 #include "Protagonist.h"
 #include "GameConfiguration.h"
-#include "ScriptAPI.h"
 #include "HaasScriptingLib/ScriptEngine.h"
-#include "Context.h"
-#include "BulletPool.h"
-#include "UnitPool.h"
-#include "Unit.h"
-//#include "SuthanusPhysicsLib/SignedDistanceFunctionBullet.h"
-#include "SCM.h"
-#include "SCA.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
-#include "BulletDebugDrawer.h"
-#include "YolonaOss/Renderer/MeshRenderer.h"
 #include "AezeselFileIOLib/ImageIO.h"
-#include "YolonaOss/Renderer/TextureRenderer.h"
-#include "YolonaOss/Renderer/SupComModelRenderer.h"
-#include "YolonaOss/OpenGL/SupComVertex.h"
-#include "SupComModel.h"
 #include <iostream>
 
 namespace Fatboy

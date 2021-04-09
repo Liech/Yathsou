@@ -29,10 +29,12 @@
   <ItemGroup>
     <ClInclude Include="BoxVisualization.h" />
     <ClInclude Include="BulletDebugDrawer.h" />
+    <ClInclude Include="SupComMeshLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BoxVisualization.cpp" />
     <ClCompile Include="BulletDebugDrawer.cpp" />
+    <ClCompile Include="SupComMeshLoader.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

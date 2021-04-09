@@ -2,8 +2,6 @@
 
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AezeselFileIOLib/ImageIO.h"
-#include "SCM.h"
-#include "SCA.h"
 
 #include "HaasScriptingLib/lib/json.hpp"
 #include <filesystem>
@@ -32,8 +30,8 @@ SupComModel::SupComModel(std::string foldername)
   //_albedoLOD1 = std::make_shared<YolonaOss::GL::Texture>("Albedo"  , albedoArray.get());
   //_teamLOD1   = std::make_shared<YolonaOss::GL::Texture>("TeamSpec", teamArray  .get());
   //_normalLOD1 = std::make_shared<YolonaOss::GL::Texture>("Normal"  , normalArray.get());
-  SCM loader;
-  _model = std::make_shared<SCM::data>(loader.load(foldername + "\\" + name + "_lod0.scm"));
+  Aezesel::SCM loader;
+  _model = std::make_shared<Aezesel::SCM::data>(loader.load(foldername + "\\" + name + "_lod0.scm"));
 
   for (const auto& entry : std::filesystem::directory_iterator(foldername))
   {
@@ -43,8 +41,8 @@ SupComModel::SupComModel(std::string foldername)
       size_t      animSeperator = animationPath.find_last_of('\\');
       std::string animationName = animationPath.substr(animSeperator + 1/*\\*/ + name.size() + 2/*_A*/);
       animationName = animationName.substr(0, animationName.size() - 4);
-      SCA animLoader;
-      std::shared_ptr<SCA::data> anim = std::make_shared<SCA::data>(animLoader.load(animationPath));
+      Aezesel::SCA animLoader;
+      std::shared_ptr<Aezesel::SCA::data> anim = std::make_shared<Aezesel::SCA::data>(animLoader.load(animationPath));
       _animations[animationName] = anim;    
     }
   }

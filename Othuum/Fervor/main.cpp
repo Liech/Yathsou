@@ -12,6 +12,9 @@
 
 #include "AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
 #include "AhwassaGraphicsLib/Util.h"
+#include "AthanahCommonLib/SupComMeshLoader.h"
+
+
 
 int main(int argc, char** argv) {
   int width  = 800;
@@ -25,7 +28,8 @@ int main(int argc, char** argv) {
   std::shared_ptr<Ahwassa::DiffuseMeshRendererMesh> mesh  = std::make_shared< Ahwassa::DiffuseMeshRendererMesh>();
   w.Startup = [&]() {
     renderer = std::make_shared<Ahwassa::DiffuseMeshRenderer>(w.camera());
-    mesh->mesh = Ahwassa::Util::getCube();
+    std::string unit = "UEL0208";
+    mesh->mesh = Athanah::SupComMeshLoader::loadBasic("C:\\Users\\nicol\\Desktop\\units\\" + unit + "\\" + unit + "_lod0.scm");
     mesh->color = Iyathuum::Color(255, 0, 0);
     mesh->transformation = glm::mat4(1);
 
