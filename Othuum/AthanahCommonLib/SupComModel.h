@@ -19,6 +19,10 @@ namespace Athanah {
 
 
     Ahwassa::Mesh<SupComVertex>& mesh();
+    Ahwassa::Texture& albedo();
+    Ahwassa::Texture& info  ();
+    Ahwassa::Texture& normal();
+
   private:
     void loadImages(std::string unitDir, std::string unitName);
     void loadMesh  (std::string unitDir, std::string unitName);

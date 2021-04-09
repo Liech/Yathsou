@@ -9,6 +9,7 @@
 #include "AhwassaGraphicsLib/Uniforms/UniformVec3.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformVecMat4.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformVecVec3.h"
+#include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
 #include "SupComModel.h"
 
@@ -41,26 +42,39 @@ namespace Athanah {
     std::string vertex_shader_source = R"(
       out vec3 clr;
       out vec3 nrm;
+      out vec2 UV1;
+
       void main() {
       
         mat4 view = )" + _camera->getName() + R"(Projection *  )" + _camera->getName() + R"(View;
         gl_Position = view *  models[gl_InstanceID] *vec4(position , 1.0);
         clr = colors[gl_InstanceID];
         nrm = normal;
+        UV1 = uv1;
       }
    )";
 
     std::string fragment_shader_source = R"(
      in vec3 clr;
      in vec3 nrm;
+     in vec2 UV1;
      
      out vec4 frag_color;
      void main() {
+
+       vec4 albedo = texture(Albedo, UV1);
+       vec4 info   = texture(Info  , UV1);
+       float specular   = info[0];
+       float reflection = info[1];
+       float glow       = info[2];
+       float showTeamClr= info[3];
        float ambientStrength = 0.5;  
        float diffuseStrength = 0.5;
        float diff = max(dot(nrm, Light), 0.0) * diffuseStrength;
-     
-       vec4 result = vec4(clr,1) *  diff + vec4(clr,1) * ambientStrength;
+
+       vec4 unlightColor = albedo + showTeamClr * (vec4(clr,1) - albedo);
+
+       vec4 result = unlightColor *  diff + unlightColor * ambientStrength;
        result[3] = 1;
      	frag_color = result;
      }
@@ -76,6 +90,14 @@ namespace Athanah {
     uniforms.push_back(_light .get());
     uniforms.push_back(_models.get());
     uniforms.push_back(_colors.get());
+
+    _albedo = std::make_unique<Ahwassa::Texture>("Albedo", 0);
+    _albedo->release();
+    uniforms.push_back(_albedo.get());
+    _info = std::make_unique<Ahwassa::Texture>("Info", 0);
+    _info->release();
+    uniforms.push_back(_info.get());
+
     _shader = std::make_unique<Ahwassa::ShaderProgram>(SupComVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
@@ -104,10 +126,12 @@ namespace Athanah {
           continue;
         }
         models[currentPosition] = m->transformation;
-        colors[currentPosition] = m->color.to3();
+        colors[currentPosition] = m->teamColor.to3();
         currentPosition++;
       }
 
+      _albedo->setTextureID(meshVector.first->albedo().getTextureID());
+      _info->setTextureID(meshVector.first->info().getTextureID());
       _light ->setValue(getLightDirection());
       _models->setValue(models);
       _colors->setValue(colors);

@@ -6,12 +6,24 @@
 
 namespace Athanah {
   SupComModel::SupComModel(std::string unitDir, std::string unitName) {
-    //loadImages(unitDir,unitName);
+    loadImages(unitDir,unitName);
     loadMesh(unitDir, unitName);
   }
 
   Ahwassa::Mesh<SupComVertex>& SupComModel::mesh() {
     return *_mesh;
+  }
+
+  Ahwassa::Texture& SupComModel::albedo() {
+    return *_albedo;
+  }
+
+  Ahwassa::Texture& SupComModel::info() {
+    return *_info;
+  }
+
+  Ahwassa::Texture& SupComModel::normal() {
+    return *_normal;
   }
 
   void SupComModel::loadMesh(std::string unitDir, std::string unitName) {

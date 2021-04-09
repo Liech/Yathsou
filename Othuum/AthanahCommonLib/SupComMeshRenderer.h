@@ -23,7 +23,7 @@ namespace Athanah {
 
   struct SupComMesh {
     glm::mat4                    transformation;
-    Iyathuum::Color              color;
+    Iyathuum::Color              teamColor;
     std::shared_ptr<SupComModel> model;
   };
 

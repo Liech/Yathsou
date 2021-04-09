@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
     model = std::make_shared<Athanah::SupComModel>("C:\\Users\\nicol\\Desktop\\units\\",unit);
 
     mesh = std::make_shared<Athanah::SupComMesh>();
-    mesh->color = Iyathuum::Color(255, 0, 0);
+    mesh->teamColor = Iyathuum::Color(0 , 255, 255);
     mesh->transformation = glm::mat4(1.0);
     mesh->model = model;
 
