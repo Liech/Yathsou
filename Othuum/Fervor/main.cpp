@@ -13,7 +13,8 @@
 #include "AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AthanahCommonLib/SupComMeshLoader.h"
-
+#include "AthanahCommonLib/SupComMeshRenderer.h"
+#include "AthanahCommonLib/SupComModel.h"
 
 
 int main(int argc, char** argv) {
@@ -24,15 +25,18 @@ int main(int argc, char** argv) {
   std::unique_ptr<Ahwassa::FPS> fps;
 
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
-  std::shared_ptr<Ahwassa::DiffuseMeshRenderer> renderer;
-  std::shared_ptr<Ahwassa::DiffuseMeshRendererMesh> mesh  = std::make_shared< Ahwassa::DiffuseMeshRendererMesh>();
+  std::shared_ptr<Athanah::SupComMeshRenderer> renderer;
+  std::shared_ptr<Athanah::SupComModel> model = std::shared_ptr<Athanah::SupComModel>();
+  std::shared_ptr<Athanah::SupComMesh> mesh = std::shared_ptr<Athanah::SupComMesh>();
   w.Startup = [&]() {
-    renderer = std::make_shared<Ahwassa::DiffuseMeshRenderer>(w.camera());
+    renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
     std::string unit = "UEL0208";
-    mesh->mesh = Athanah::SupComMeshLoader::loadBasic("C:\\Users\\nicol\\Desktop\\units\\" + unit + "\\" + unit + "_lod0.scm");
-    mesh->color = Iyathuum::Color(255, 0, 0);
-    mesh->transformation = glm::mat4(1);
+    model = std::make_shared<Athanah::SupComModel>("C:\\Users\\nicol\\Desktop\\units\\",unit);
 
+    mesh = std::make_shared<Athanah::SupComMesh>();
+    mesh->color = Iyathuum::Color(255, 0, 0);
+    mesh->transformation = glm::mat4(1.0);
+    mesh->model = model;
 
     renderer->addMesh(mesh); 
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
