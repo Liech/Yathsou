@@ -16,7 +16,7 @@ namespace Ahwassa {
   {
   public:
     Window(int width, int height);
-    ~Window();
+    virtual ~Window();
 
     Input&                  input   ();
     Renderer&               renderer();

@@ -38,8 +38,8 @@ namespace Ahwassa {
 
   BoxRenderer::BoxRenderer(std::shared_ptr<Camera> camera) {
     _vars = std::make_shared<BoxRenderer::RenderVars>();
-    _vars->camera = camera;
     _lightDir = glm::normalize(glm::vec3(25, 31, -21));
+    _vars->camera = camera;
     _bufferSize = (Util::maxUniformAmount()-10) / 2;
     makeModelArray(_bufferSize);
     makeShader();

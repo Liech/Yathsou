@@ -37,7 +37,7 @@ namespace Ahwassa {
 
   private:
     Iyathuum::glmAABB<2> _localPosition;
-    UIElement*           _parent;
+    UIElement*           _parent  = nullptr;
     bool                 _visible = true;
   };
 }

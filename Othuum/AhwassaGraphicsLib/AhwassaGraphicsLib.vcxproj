@@ -267,6 +267,7 @@
     <ClInclude Include="lib\openvr\openvr_driver.h" />
     <ClInclude Include="Renderer\Box.h" />
     <ClInclude Include="Renderer\BoxRenderer.h" />
+    <ClInclude Include="Renderer\DiffuseMeshRenderer.h" />
     <ClInclude Include="Renderer\Dot.h" />
     <ClInclude Include="Renderer\IBox.h" />
     <ClInclude Include="Renderer\Line.h" />
@@ -347,6 +348,7 @@
     <ClCompile Include="lib\glad\src\glad.c" />
     <ClCompile Include="Renderer\Box.cpp" />
     <ClCompile Include="Renderer\BoxRenderer.cpp" />
+    <ClCompile Include="Renderer\DiffuseMeshRenderer.cpp" />
     <ClCompile Include="Renderer\Dot.cpp" />
     <ClCompile Include="Renderer\Line.cpp" />
     <ClCompile Include="Renderer\Rectangle.cpp" />

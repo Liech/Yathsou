@@ -11,7 +11,7 @@ namespace Ahwassa {
   {
   public:
     ShaderProgram(const std::vector<AttributeDescription>&, std::vector<Uniform*> uniforms, std::string vs, std::string fs);
-    ~ShaderProgram();
+    virtual ~ShaderProgram();
 
     void bind();
     unsigned int getID();

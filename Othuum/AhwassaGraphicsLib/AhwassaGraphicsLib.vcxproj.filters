@@ -109,12 +109,6 @@
     <Filter Include="lib\freetype">
       <UniqueIdentifier>{379d509d-622e-4617-a2d9-ec36df22fda5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Shader">
-      <UniqueIdentifier>{8b72a677-b49c-48c7-bbd1-7121205cad2a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Shader">
-      <UniqueIdentifier>{7b6149e2-786e-4a4b-899b-2a9d3a345613}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\libnyquist\Decoders.h">
@@ -375,6 +369,9 @@
     <ClInclude Include="Vertex\IVertex.h">
       <Filter>Header Files\Vertex</Filter>
     </ClInclude>
+    <ClInclude Include="Renderer\DiffuseMeshRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -568,6 +565,9 @@
     </ClCompile>
     <ClCompile Include="Vertex\IVertex.cpp">
       <Filter>Source Files\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\DiffuseMeshRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
