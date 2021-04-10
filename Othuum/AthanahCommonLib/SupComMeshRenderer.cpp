@@ -16,7 +16,7 @@
 namespace Athanah {
   SupComMeshRenderer::SupComMeshRenderer(std::shared_ptr<Ahwassa::Camera> camera) {
     _camera = camera;
-    _bufferSize = (Ahwassa::Util::maxUniformAmount() - 10) / 2;
+    _bufferSize = (Ahwassa::Util::maxUniformAmount() - 10) / (2+ _maxBoneSize);
     _lightDirection = glm::normalize(glm::vec3(25, 31, -21));
     makeShader();
   }
@@ -45,9 +45,9 @@ namespace Athanah {
       out vec2 UV1;
 
       void main() {
-      
+        uint boneSize =)" + std::to_string(_maxBoneSize) + R"( ;
         mat4 view = )" + _camera->getName() + R"(Projection *  )" + _camera->getName() + R"(View;
-        gl_Position = view *  models[gl_InstanceID] *vec4(position , 1.0);
+        gl_Position = view *  models[gl_InstanceID] * animation[gl_InstanceID*boneSize + bones] * vec4(position , 1.0);
         clr = colors[gl_InstanceID];
         nrm = normal;
         UV1 = uv1;
@@ -90,10 +90,14 @@ namespace Athanah {
     uniforms.push_back(_light .get());
     uniforms.push_back(_models.get());
     uniforms.push_back(_colors.get());
+    
+    _animations = std::make_unique<Ahwassa::UniformVecMat4>("animation", _maxBoneSize* _bufferSize);
+    uniforms.push_back(_animations.get());
 
     _albedo = std::make_unique<Ahwassa::Texture>("Albedo", 0);
     _albedo->release();
     uniforms.push_back(_albedo.get());
+    
     _info = std::make_unique<Ahwassa::Texture>("Info", 0);
     _info->release();
     uniforms.push_back(_info.get());
@@ -112,8 +116,10 @@ namespace Athanah {
     for (auto& meshVector : _meshes) {
       std::vector<glm::mat4> models;
       std::vector<glm::vec3> colors;
+      std::vector<glm::mat4> anim  ;
       models.resize(_bufferSize);
       colors.resize(_bufferSize);
+      anim  .resize(_bufferSize* _maxBoneSize);
 
       std::vector<size_t> toDelete;
 
@@ -127,6 +133,12 @@ namespace Athanah {
         }
         models[currentPosition] = m->transformation;
         colors[currentPosition] = m->teamColor.to3();
+        if (m->animation.size() > _maxBoneSize)
+          throw std::runtime_error("Too many bones");
+        for (size_t a = 0; a < m->animation.size(); a++)
+          anim[i * _maxBoneSize + a] = m->animation[a];
+        for (size_t a = m->animation.size() - 1; a < _maxBoneSize; a++)
+          anim[i * _maxBoneSize + a] = glm::mat4(1.0);
         currentPosition++;
       }
 
@@ -134,9 +146,11 @@ namespace Athanah {
       _info->setTextureID(meshVector.first->info().getTextureID());
       _light ->setValue(getLightDirection());
       _models->setValue(models);
-      _colors->setValue(colors);
+      _colors->setValue(colors);    
+      _animations->setValue(anim);
       _models->bind();
       _colors->bind();
+      _animations->bind();
       meshVector.first->mesh().drawInstanced(currentPosition);
 
       for (int i = toDelete.size()-1; i >= 0; i--)

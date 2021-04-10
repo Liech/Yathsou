@@ -68,19 +68,41 @@ namespace Ahwassa {
 
     const char* vs_src = vssrc.c_str();
     const char* fs_src = fssrc.c_str();
+    GLint compile_ok = GL_FALSE, link_ok = GL_FALSE;
 
     GLuint vs = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vs, 1, &vs_src, nullptr);
     glCompileShader(vs);
+    glGetShaderiv(vs, GL_COMPILE_STATUS, &compile_ok);
+    char logBuf[1024];
+    int len;
+    if (0 == compile_ok)
+    {
+      glGetShaderInfoLog(vs, sizeof(logBuf), &len, logBuf);
+      throw std::runtime_error(logBuf);
+    }
 
     GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fs, 1, &fs_src, nullptr);
     glCompileShader(fs);
+    glGetShaderiv(fs, GL_COMPILE_STATUS, &compile_ok);
+    if (0 == compile_ok)
+    {
+      glGetShaderInfoLog(fs, sizeof(logBuf), &len, logBuf);
+      throw std::runtime_error(logBuf);
+    }
+
 
     _program = glCreateProgram();
     glAttachShader(_program, vs);
     glAttachShader(_program, fs);
     glLinkProgram(_program);
+    glGetProgramiv(_program, GL_LINK_STATUS, &link_ok);
+    if (!link_ok)
+    {
+      glGetShaderInfoLog(vs, sizeof(logBuf), &len, logBuf);
+      //throw std::runtime_error(logBuf);
+    }
     glDeleteShader(vs);
     glDeleteShader(fs);
 

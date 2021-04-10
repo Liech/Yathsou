@@ -83,7 +83,7 @@ namespace Ahwassa {
 
 	
 	
-    if (msgSeverity == "MEDIUM") {
+    if (msgSeverity == "MEDIUM" || msgSeverity == "LOW") {
       printf("glDebugMessage:\n%s \n type = %s source = %s severity = %s\n", message, msgType.c_str(), msgSource.c_str(), msgSeverity.c_str());
       printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
     }

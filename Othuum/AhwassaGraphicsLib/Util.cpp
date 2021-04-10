@@ -10,8 +10,9 @@ namespace Ahwassa {
   }
 
   size_t Util::maxUniformAmount() {
-    int result = 0;
-    glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &result);
+    int result = 1000;
+    //glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &result);
+    glGetIntegerv(GL_MAX_UNIFORM_LOCATIONS, &result);
     return result;
   }
 

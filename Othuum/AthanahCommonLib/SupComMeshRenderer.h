@@ -25,6 +25,7 @@ namespace Athanah {
     glm::mat4                    transformation;
     Iyathuum::Color              teamColor;
     std::shared_ptr<SupComModel> model;
+    std::vector<glm::mat4>       animation;
   };
 
   class SupComMeshRenderer {
@@ -46,15 +47,17 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::Camera>           _camera        ;
     glm::vec3                                  _lightDirection;
     
-    std::shared_ptr<Ahwassa::UniformVec3   >   _light ;
-    std::shared_ptr<Ahwassa::Texture       >   _albedo;
-    std::shared_ptr<Ahwassa::Texture       >   _info  ;
-    std::shared_ptr<Ahwassa::Texture       >   _normal;
+    std::shared_ptr<Ahwassa::UniformVec3   >   _light    ;
+    std::shared_ptr<Ahwassa::Texture       >   _albedo   ;
+    std::shared_ptr<Ahwassa::Texture       >   _info     ;
+    std::shared_ptr<Ahwassa::Texture       >   _normal   ;
 
-    std::unique_ptr<Ahwassa::UniformVecMat4>   _models;
-    std::unique_ptr<Ahwassa::UniformVecVec3>   _colors;
+    std::unique_ptr<Ahwassa::UniformVecMat4>   _animations;
+    std::unique_ptr<Ahwassa::UniformVecMat4>   _models    ;
+    std::unique_ptr<Ahwassa::UniformVecVec3>   _colors    ;
 
     size_t _bufferSize = 1000;
+    size_t _maxBoneSize = 16;
     std::map<std::shared_ptr<SupComModel>, std::vector<std::weak_ptr<SupComMesh>>> _meshes;
   };
 }

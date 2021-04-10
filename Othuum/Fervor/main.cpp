@@ -10,7 +10,7 @@
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
-#include "AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
+//#include "AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AthanahCommonLib/SupComMeshLoader.h"
 #include "AthanahCommonLib/SupComMeshRenderer.h"
