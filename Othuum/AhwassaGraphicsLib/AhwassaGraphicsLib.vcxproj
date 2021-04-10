@@ -276,6 +276,8 @@
     <ClInclude Include="Renderer\Sphere.h" />
     <ClInclude Include="Renderer\SphereRenderer.h" />
     <ClInclude Include="Renderer\Text.h" />
+    <ClInclude Include="Uniforms\InstancedVecMat4.h" />
+    <ClInclude Include="Uniforms\InstancedVecVec3.h" />
     <ClInclude Include="Uniforms\Rendertarget.h" />
     <ClInclude Include="Uniforms\SSBOint.h" />
     <ClInclude Include="Uniforms\SSBOvec4.h" />
@@ -356,6 +358,8 @@
     <ClCompile Include="Renderer\Sphere.cpp" />
     <ClCompile Include="Renderer\SphereRenderer.cpp" />
     <ClCompile Include="Renderer\Text.cpp" />
+    <ClCompile Include="Uniforms\InstancedVecMat4.cpp" />
+    <ClCompile Include="Uniforms\InstancedVecVec3.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />
     <ClCompile Include="Uniforms\SSBOint.cpp" />
     <ClCompile Include="Uniforms\SSBOvec4.cpp" />

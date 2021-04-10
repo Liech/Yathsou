@@ -7,8 +7,8 @@
 #include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformVec3.h"
-#include "AhwassaGraphicsLib/Uniforms/UniformVecMat4.h"
-#include "AhwassaGraphicsLib/Uniforms/UniformVecVec3.h"
+#include "AhwassaGraphicsLib/Uniforms/InstancedVecMat4.h"
+#include "AhwassaGraphicsLib/Uniforms/InstancedVecVec3.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
 #include "SupComModel.h"
@@ -16,7 +16,7 @@
 namespace Athanah {
   SupComMeshRenderer::SupComMeshRenderer(std::shared_ptr<Ahwassa::Camera> camera) {
     _camera = camera;
-    _bufferSize = (Ahwassa::Util::maxUniformAmount() - 10) / (2+ _maxBoneSize);
+    _bufferSize = 500;
     _lightDirection = glm::normalize(glm::vec3(25, 31, -21));
     makeShader();
   }
@@ -47,8 +47,8 @@ namespace Athanah {
       void main() {
         uint boneSize =)" + std::to_string(_maxBoneSize) + R"( ;
         mat4 view = )" + _camera->getName() + R"(Projection *  )" + _camera->getName() + R"(View;
-        gl_Position = view *  models[gl_InstanceID] * animation[gl_InstanceID*boneSize + bones] * vec4(position , 1.0);
-        clr = colors[gl_InstanceID];
+        gl_Position = view *  models * vec4(position , 1.0);
+        clr = colors;
         nrm = normal;
         UV1 = uv1;
       }
@@ -84,15 +84,15 @@ namespace Athanah {
     std::vector<Ahwassa::Uniform*> cameraUniforms = _camera->getUniforms();
     uniforms.insert(uniforms.end(), cameraUniforms.begin(), cameraUniforms.end());
     _light = std::make_unique<Ahwassa::UniformVec3>("Light");
-    _models = std::make_unique<Ahwassa::UniformVecMat4>("models", _bufferSize);
-    _colors = std::make_unique<Ahwassa::UniformVecVec3>("colors", _bufferSize);
+    _models = std::make_unique<Ahwassa::InstancedVecMat4>("models", _bufferSize);
+    _colors = std::make_unique<Ahwassa::InstancedVecVec3>("colors", _bufferSize);
     _light->setValue(glm::normalize(glm::vec3(0)));
     uniforms.push_back(_light .get());
     uniforms.push_back(_models.get());
     uniforms.push_back(_colors.get());
     
-    _animations = std::make_unique<Ahwassa::UniformVecMat4>("animation", _maxBoneSize* _bufferSize);
-    uniforms.push_back(_animations.get());
+    //_animations = std::make_unique<Ahwassa::InstancedVecMat4>("animation", _maxBoneSize* _bufferSize);
+    //uniforms.push_back(_animations.get());
 
     _albedo = std::make_unique<Ahwassa::Texture>("Albedo", 0);
     _albedo->release();
@@ -143,14 +143,14 @@ namespace Athanah {
       }
 
       _albedo->setTextureID(meshVector.first->albedo().getTextureID());
-      _info->setTextureID(meshVector.first->info().getTextureID());
+      _info  ->setTextureID(meshVector.first->info().getTextureID());
       _light ->setValue(getLightDirection());
       _models->setValue(models);
       _colors->setValue(colors);    
-      _animations->setValue(anim);
+      //_animations->setValue(anim);
       _models->bind();
       _colors->bind();
-      _animations->bind();
+      //_animations->bind();
       meshVector.first->mesh().drawInstanced(currentPosition);
 
       for (int i = toDelete.size()-1; i >= 0; i--)

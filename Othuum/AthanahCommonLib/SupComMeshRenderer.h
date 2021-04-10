@@ -13,8 +13,8 @@ namespace Ahwassa {
   class Camera;
   class IMesh;
   class UniformVec3;
-  class UniformVecMat4;
-  class UniformVecVec3;
+  class InstancedVecMat4;
+  class InstancedVecVec3;
   class Texture;
 }
 
@@ -52,9 +52,9 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::Texture       >   _info     ;
     std::shared_ptr<Ahwassa::Texture       >   _normal   ;
 
-    std::unique_ptr<Ahwassa::UniformVecMat4>   _animations;
-    std::unique_ptr<Ahwassa::UniformVecMat4>   _models    ;
-    std::unique_ptr<Ahwassa::UniformVecVec3>   _colors    ;
+    std::unique_ptr<Ahwassa::InstancedVecMat4> _animations;
+    std::unique_ptr<Ahwassa::InstancedVecMat4> _models    ;
+    std::unique_ptr<Ahwassa::InstancedVecVec3> _colors    ;
 
     size_t _bufferSize = 1000;
     size_t _maxBoneSize = 16;

@@ -101,7 +101,7 @@ namespace Ahwassa {
     if (!link_ok)
     {
       glGetShaderInfoLog(vs, sizeof(logBuf), &len, logBuf);
-      //throw std::runtime_error(logBuf);
+      throw std::runtime_error(logBuf);
     }
     glDeleteShader(vs);
     glDeleteShader(fs);

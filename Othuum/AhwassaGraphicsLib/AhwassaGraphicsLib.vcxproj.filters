@@ -372,6 +372,12 @@
     <ClInclude Include="Renderer\DiffuseMeshRenderer.h">
       <Filter>Header Files\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="Uniforms\InstancedVecMat4.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\InstancedVecVec3.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -568,6 +574,12 @@
     </ClCompile>
     <ClCompile Include="Renderer\DiffuseMeshRenderer.cpp">
       <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\InstancedVecMat4.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\InstancedVecVec3.cpp">
+      <Filter>Source Files\Uniform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
