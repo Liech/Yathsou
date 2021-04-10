@@ -13,10 +13,24 @@ namespace Ahwassa {
     _attributes = attributes;
     _uniform = uniforms;
 
+    size_t attributeUniformLocations = 0;
+
+    for (int i = 0; i < _uniform.size(); i++) {
+      if (_uniform[i]->isAttribute()) {
+        _attributeUniforms.push_back(_uniform[i]);
+        _uniform[i]->setLocation((int)(attributes.size() + attributeUniformLocations));
+
+        attributeUniformLocations+= _uniform[i]->getNumberOfLocationsUsed();
+        _uniform.erase(_uniform.begin() + i);
+        i--;
+      }
+    }
+
     _uniformIsActive.resize(_uniform.size());
     size_t ssboLocations = 0;
     size_t textureLocations = 0;
     size_t uniformLocations = 0;
+
     for (int i = 0; i < _uniform.size(); i++) {
       if (_uniform[i]->isBuffer()) {
         _uniform[i]->setLocation((int)ssboLocations);
@@ -173,7 +187,6 @@ namespace Ahwassa {
 
   std::string ShaderProgram::AttributetoGLSL(size_t locationOffset) {
     std::string result = "\n";
-    size_t currentOffset = 0;
     for (int i = 0; i < _attributes.size(); i++) {
       result += "layout(location = ";
       result += std::to_string(i + locationOffset);
@@ -183,6 +196,17 @@ namespace Ahwassa {
       result += _attributes[i].getName();
       result += ";\n";
     }
+
+    for (int i = 0; i < _attributeUniforms.size(); i++) {
+      result += "layout(location = ";
+      result += std::to_string(_attributeUniforms[i]->getLocation());
+      result += ") in ";
+      result += _attributeUniforms[i]->getType();
+      result += " ";
+      result += _attributeUniforms[i]->getName();
+      result += ";\n";
+    }
+
     return result;
   }
 }

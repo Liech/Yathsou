@@ -15,6 +15,7 @@ namespace Ahwassa {
 
     void bind() override;
     std::string getType() override { return "vec3"; }
+    virtual bool isAttribute() override { return true; };
 
   private:
     std::vector<glm::vec3> _value;

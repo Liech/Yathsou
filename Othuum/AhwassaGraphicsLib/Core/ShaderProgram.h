@@ -20,6 +20,7 @@ namespace Ahwassa {
     std::vector<AttributeDescription> _attributes     ;
     unsigned int                      _program        ;
     std::vector<Uniform*>             _uniform        ;
+    std::vector<Uniform*>             _attributeUniforms; //<- not really a uniform anymore
     std::vector<bool>                 _uniformIsActive;
 
     std::string toGLSL_vs(std::string shader);

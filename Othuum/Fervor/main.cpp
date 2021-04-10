@@ -18,11 +18,11 @@
 
 
 int main(int argc, char** argv) {
-  int width  = 800;
-  int height = 600;
+  //int width  = 800;
+  //int height = 600;
+  int width = 1920;
+  int height = 1080;
 
-  int x = 0;
-  std::cin>>x;
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
   std::unique_ptr<Ahwassa::FPS> fps;

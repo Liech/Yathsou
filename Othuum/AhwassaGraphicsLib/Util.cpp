@@ -23,8 +23,19 @@ namespace Ahwassa {
       glDisable(GL_DEPTH_TEST);
   }
 
+  void Util::depthMask(bool enabled) {
+    if (enabled)
+      glDepthMask(GL_TRUE);
+    else
+      glDepthMask(GL_FALSE);
+  }
+
   void Util::setDepthFuncLess() {
     glDepthFunc(GL_LESS);
+  }
+
+  void Util::setDepthFuncMore() {
+    glDepthFunc(GL_GREATER);
   }
 
   std::shared_ptr<Mesh<PositionNormalVertex>> Util::getCube() {
@@ -78,4 +89,18 @@ namespace Ahwassa {
 
     return std::make_shared< Mesh<PositionNormalVertex>>(input, indices);
   }
+
+  void Util::setCulling(bool front) {
+    if (front)
+      glCullFace(GL_FRONT);
+    else
+      glCullFace(GL_BACK);
+  }
+  void Util::enableCulling(bool enabled) {
+    if (enabled)
+      glEnable(GL_CULL_FACE);
+    else
+      glDisable(GL_CULL_FACE);
+  }
+
 }

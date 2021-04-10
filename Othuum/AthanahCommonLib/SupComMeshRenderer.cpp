@@ -16,7 +16,7 @@
 namespace Athanah {
   SupComMeshRenderer::SupComMeshRenderer(std::shared_ptr<Ahwassa::Camera> camera) {
     _camera = camera;
-    _bufferSize = 500;
+    _bufferSize = 10;
     _lightDirection = glm::normalize(glm::vec3(25, 31, -21));
     makeShader();
   }
@@ -87,17 +87,17 @@ namespace Athanah {
     _models = std::make_unique<Ahwassa::InstancedVecMat4>("models", _bufferSize);
     _colors = std::make_unique<Ahwassa::InstancedVecVec3>("colors", _bufferSize);
     _light->setValue(glm::normalize(glm::vec3(0)));
-    uniforms.push_back(_light .get());
+    uniforms.push_back(_light.get());
     uniforms.push_back(_models.get());
     uniforms.push_back(_colors.get());
-    
+
     //_animations = std::make_unique<Ahwassa::InstancedVecMat4>("animation", _maxBoneSize* _bufferSize);
     //uniforms.push_back(_animations.get());
 
     _albedo = std::make_unique<Ahwassa::Texture>("Albedo", 0);
     _albedo->release();
     uniforms.push_back(_albedo.get());
-    
+
     _info = std::make_unique<Ahwassa::Texture>("Info", 0);
     _info->release();
     uniforms.push_back(_info.get());
@@ -108,18 +108,23 @@ namespace Athanah {
   void SupComMeshRenderer::draw() {
     std::vector< std::shared_ptr<SupComModel>> toDeleteMeshes;
 
-    Ahwassa::Util::setDepthTest(true); 
+    Ahwassa::Util::setDepthTest(true);
     Ahwassa::Util::setDepthFuncLess();
+    Ahwassa::Util::depthMask(true);
     _shader->bind();
     _camera->bind();
 
     for (auto& meshVector : _meshes) {
       std::vector<glm::mat4> models;
       std::vector<glm::vec3> colors;
-      std::vector<glm::mat4> anim  ;
+      std::vector<glm::mat4> anim;
       models.resize(_bufferSize);
+
+      for (size_t i = 0; i < models.size(); i++)
+        models[i] = glm::mat4(1.0);
+
       colors.resize(_bufferSize);
-      anim  .resize(_bufferSize* _maxBoneSize);
+      anim.resize(_bufferSize * _maxBoneSize);
 
       std::vector<size_t> toDelete;
 
@@ -143,17 +148,17 @@ namespace Athanah {
       }
 
       _albedo->setTextureID(meshVector.first->albedo().getTextureID());
-      _info  ->setTextureID(meshVector.first->info().getTextureID());
-      _light ->setValue(getLightDirection());
+      _info->setTextureID(meshVector.first->info().getTextureID());
+      _light->setValue(getLightDirection());
       _models->setValue(models);
-      _colors->setValue(colors);    
+      _colors->setValue(colors);
       //_animations->setValue(anim);
       _models->bind();
       _colors->bind();
       //_animations->bind();
       meshVector.first->mesh().drawInstanced(currentPosition);
 
-      for (int i = toDelete.size()-1; i >= 0; i--)
+      for (int i = toDelete.size() - 1; i >= 0; i--)
         meshVector.second.erase(meshVector.second.begin() + i);
       if (meshVector.second.size() == 0)
         toDeleteMeshes.push_back(meshVector.first);
@@ -165,5 +170,4 @@ namespace Athanah {
       _meshes.erase(x);
     }
   }
-
 }

@@ -7,8 +7,14 @@ namespace Ahwassa {
   InstancedVecMat4::InstancedVecMat4(std::string name, int size) : Uniform(name) { 
     _value.resize(size); 
     _size = size; 
+    for (size_t i = 0; i < _value.size(); i++) {
+      _value[i] = glm::mat4(1.0);
+    }
 
     glGenBuffers(1, &instanceVBO);
+    glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * _value.size(), _value.data(), GL_STATIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
   }
 
   InstancedVecMat4::~InstancedVecMat4() {
@@ -37,9 +43,6 @@ namespace Ahwassa {
   }
 
   void InstancedVecMat4::bind() {
-    glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * _value.size(), _value.data(), GL_STATIC_DRAW);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glEnableVertexAttribArray(getLocation()+0);
     glEnableVertexAttribArray(getLocation()+1);

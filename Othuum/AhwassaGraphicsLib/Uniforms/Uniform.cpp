@@ -61,4 +61,9 @@ namespace Ahwassa {
   bool Uniform::isBuffer() {
     return false;
   }
+  
+  bool Uniform::isAttribute() {
+    return false;
+  }
+
 }

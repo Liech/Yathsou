@@ -5,6 +5,9 @@
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 
 namespace Ahwassa {
+
+  //not what an opengl uniform is. Well it was the same in the beginning.
+  //e.g. instanced arrays are also uniforms here for simplicity
   class Uniform
   {
   public:
@@ -27,6 +30,7 @@ namespace Ahwassa {
     virtual std::string toGLSL();
     virtual std::string getType() = 0;
     virtual bool        isBuffer();
+    virtual bool        isAttribute();
   private:
     std::string _name;
     int         _location = -1;

@@ -15,6 +15,7 @@ namespace Ahwassa {
 
     void bind() override;
     std::string getType() override;
+    virtual bool isAttribute() override { return true; };
 
   private:
     std::vector<glm::mat4> _value;

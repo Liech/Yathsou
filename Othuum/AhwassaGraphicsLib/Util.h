@@ -11,6 +11,10 @@ namespace Ahwassa {
     static size_t maxUniformAmount();
     static void setDepthTest(bool enabled);
     static void setDepthFuncLess();
+    static void setDepthFuncMore();
+    static void setCulling(bool front);
+    static void enableCulling(bool enabled);
+    static void depthMask(bool enabled);
 
     static std::shared_ptr<Mesh<PositionNormalVertex>> getCube();
   };
