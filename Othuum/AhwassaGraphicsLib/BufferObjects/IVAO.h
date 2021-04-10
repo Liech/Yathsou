@@ -7,16 +7,17 @@ namespace Ahwassa {
 
   class IVAO {
   public:
-    IVAO(IVBO* vbo);
+    IVAO(std::vector<IVBO*> vbo);
     virtual ~IVAO();
     unsigned int getID();
     void draw();
     void drawInstanced(size_t amount);
 
   protected:
-    void init(const std::vector<AttributeDescription>&);
+    void init(const std::vector<std::vector<AttributeDescription>>&);
   private:
     unsigned int _id;
-    IVBO*        _vbo;
+    unsigned int _size = 0;
+    std::vector<IVBO*> _vbo;
   };
 }

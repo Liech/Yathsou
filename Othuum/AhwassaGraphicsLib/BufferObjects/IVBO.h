@@ -1,6 +1,10 @@
 #pragma once
 
+#include <vector>
+
 namespace Ahwassa {
+  struct AttributeDescription;
+
   class IVBO {
   public:
     IVBO(size_t size, size_t structsize, const void* pos);
@@ -8,6 +12,7 @@ namespace Ahwassa {
 
     unsigned int getID();
     size_t       getSize();
+    virtual std::vector<AttributeDescription> getBinding() = 0;
   protected:
     void setRawData(const void* pos, size_t size);
   private:

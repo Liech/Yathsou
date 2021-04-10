@@ -2,10 +2,11 @@
 
 #include <stdexcept>
 namespace Ahwassa {
-  AttributeDescription::AttributeDescription(const std::string& _name, const int& _size, const DataType& _type) {
-    name = _name;
-    size = _size;
-    type = _type;
+  AttributeDescription::AttributeDescription(const std::string& _name, const int& _size, const DataType& _type, bool _instancing) {
+    name       = _name;
+    size       = _size;
+    type       = _type;
+    instancing = _instancing;
   }
 
   std::string AttributeDescription::getName() const {
@@ -33,6 +34,10 @@ namespace Ahwassa {
 
   size_t AttributeDescription::getSizeOf() const {
     return size;
+  }
+
+  bool AttributeDescription::isInstancing() const {
+    return instancing;
   }
 
   std::string AttributeDescription::getTypeAsString() const{

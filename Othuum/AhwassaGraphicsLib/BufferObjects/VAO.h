@@ -6,13 +6,9 @@
 namespace Ahwassa {
   template<typename Struct>
   class VAO : public IVAO
-  {
+  {//todo: remove class
   public:
-    VAO(VBO<Struct>* vbo) : IVAO(vbo) {
-      Struct s;
-      init(s.getBinding());
+    VAO(IVBO* vbo) : IVAO({ vbo }) {
     }
-  private:
-    VBO<Struct>* _vbo;
   };
 }

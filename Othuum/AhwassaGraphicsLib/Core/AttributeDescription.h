@@ -10,17 +10,19 @@ namespace Ahwassa {
       Char  = 0x1400 , //glad.h->GL_BYTE 0x1400
     };
 
-    AttributeDescription(const std::string& _name, const int& _size, const DataType& _type);
+    AttributeDescription(const std::string& _name, const int& _size, const DataType& _type, bool instancing = false);
 
     size_t                         getSize()         const;
     size_t                         getSizeOf()       const;
     std::string                    getTypeAsString() const;
     std::string                    getName()         const;
     AttributeDescription::DataType getType()         const;
+    bool                           isInstancing()    const;
 
   private:
     std::string name;
     int         size;
     DataType    type;
+    bool        instancing = false;
   };
 }

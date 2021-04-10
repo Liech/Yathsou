@@ -4,6 +4,7 @@
 #include <stdexcept>
 
 #include "AhwassaGraphicsLib/BufferObjects/IVBO.h"
+#include "AhwassaGraphicsLib/Core/AttributeDescription.h"
 
 namespace Ahwassa{
   template<typename Struct>
@@ -16,6 +17,11 @@ namespace Ahwassa{
 
     ~VBO()
     {
+    }
+
+    virtual std::vector<AttributeDescription> getBinding() override{
+      Struct s;
+      return s.getBinding();
     }
 
     void setData(std::vector<Struct> content) {

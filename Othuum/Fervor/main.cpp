@@ -18,10 +18,10 @@
 
 
 int main(int argc, char** argv) {
-  //int width  = 800;
-  //int height = 600;
-  int width = 1920;
-  int height = 1080;
+  int width = 800;
+  int height = 600;
+  //int width = 1920;
+  //int height = 1080;
 
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
@@ -32,16 +32,19 @@ int main(int argc, char** argv) {
   std::shared_ptr<Athanah::SupComModel> model = std::shared_ptr<Athanah::SupComModel>();
   std::shared_ptr<Athanah::SupComMesh> mesh = std::shared_ptr<Athanah::SupComMesh>();
   w.Startup = [&]() {
-    renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
+    //renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
     std::string unit = "UEL0208";
-    model = std::make_shared<Athanah::SupComModel>("C:\\Users\\nicol\\Desktop\\units\\",unit);
+    std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
+    std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
+
+    model = std::make_shared<Athanah::SupComModel>(lpt, unit);
 
     mesh = std::make_shared<Athanah::SupComMesh>();
-    mesh->teamColor = Iyathuum::Color(0 , 255, 255);
+    mesh->teamColor = Iyathuum::Color(0, 255, 255);
     mesh->transformation = glm::mat4(1.0);
     mesh->model = model;
 
-    renderer->addMesh(mesh); 
+    //renderer->addMesh(mesh); 
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
     w.input().addUIElement(freeCam.get());
     fps = std::make_unique<Ahwassa::FPS>(&w);
@@ -49,7 +52,7 @@ int main(int argc, char** argv) {
 
   w.Update = [&]() {
     b.draw();
-    renderer->draw();
+    //renderer->draw();
     fps->draw();
   };
   w.run();
