@@ -3,7 +3,7 @@
 #include <vector>
 
 namespace Ahwassa {
-  class IVAO;
+  class VAO;
 
   class IBO
   {
@@ -13,8 +13,8 @@ namespace Ahwassa {
 
     unsigned int getID();
     size_t       getSize();
-    void         draw(IVAO* vertexBuffer);
-    void         drawInstanced(IVAO* vertexBuffer,size_t amount);
+    void         draw(VAO* vertexBuffer);
+    void         drawInstanced(VAO* vertexBuffer,size_t amount);
 
   private:
     unsigned int _ibo ;

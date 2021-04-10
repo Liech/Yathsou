@@ -22,7 +22,7 @@ namespace Ahwassa {
     std::unique_ptr<UniformMat4>               _mat;
     std::unique_ptr<UniformVec4>               _color;
     std::unique_ptr<VBO<PositionNormalVertex>> _vbo;
-    std::unique_ptr<VAO<PositionNormalVertex>> _vao;
+    std::unique_ptr<VAO>                       _vao;
     std::unique_ptr<IBO>                       _ibo;
     std::unique_ptr<ShaderProgram>             _shader;
     std::unique_ptr<UniformVec3>               _light;
@@ -121,7 +121,7 @@ namespace Ahwassa {
     _vars->_color = std::make_unique<UniformVec4>("Color");
     uniforms.push_back(_vars->_color.get());
     _vars->_vbo = std::make_unique<VBO<PositionNormalVertex>>(input);
-    _vars->_vao = std::make_unique<VAO<PositionNormalVertex>>(_vars->_vbo.get());
+    _vars->_vao = std::make_unique<VAO>(_vars->_vbo.get());
     _vars->_shader = std::make_unique<ShaderProgram>(PositionNormalVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 

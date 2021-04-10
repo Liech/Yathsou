@@ -19,7 +19,7 @@
 namespace Ahwassa {
   struct BasicTextRenderer::RenderVars {
     std::unique_ptr<VBO<PositionTextureVertex>> vbo;
-    std::unique_ptr<VAO<PositionTextureVertex>> vao;
+    std::unique_ptr<VAO>                        vao;
     std::unique_ptr<ShaderProgram>              shader;
     Window*                                     window;
     std::map<char, BasicTextRenderer_Character> characters;
@@ -212,7 +212,7 @@ namespace Ahwassa {
     std::vector< PositionTextureVertex> input;
     input.resize(6);
     _vars->vbo = std::make_unique<VBO<PositionTextureVertex>>(input);
-    _vars->vao = std::make_unique<VAO<PositionTextureVertex>>(_vars->vbo.get());
+    _vars->vao = std::make_unique<VAO>(_vars->vbo.get());
     _vars->shader = std::make_unique<ShaderProgram>(PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 

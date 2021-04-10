@@ -186,16 +186,13 @@
     <ClInclude Include="BufferObjects\IBO.h">
       <Filter>Header Files\BufferObjects</Filter>
     </ClInclude>
-    <ClInclude Include="BufferObjects\VAO.h">
-      <Filter>Header Files\BufferObjects</Filter>
-    </ClInclude>
     <ClInclude Include="BufferObjects\VBO.h">
       <Filter>Header Files\BufferObjects</Filter>
     </ClInclude>
     <ClInclude Include="BufferObjects\IVBO.h">
       <Filter>Header Files\BufferObjects</Filter>
     </ClInclude>
-    <ClInclude Include="BufferObjects\IVAO.h">
+    <ClInclude Include="BufferObjects\VAO.h">
       <Filter>Header Files\BufferObjects</Filter>
     </ClInclude>
     <ClInclude Include="Uniforms\SSBOint.h">
@@ -416,16 +413,13 @@
     <ClCompile Include="BufferObjects\IBO.cpp">
       <Filter>Source Files\BufferObjects</Filter>
     </ClCompile>
-    <ClCompile Include="BufferObjects\VAO.cpp">
-      <Filter>Source Files\BufferObjects</Filter>
-    </ClCompile>
     <ClCompile Include="BufferObjects\VBO.cpp">
       <Filter>Source Files\BufferObjects</Filter>
     </ClCompile>
     <ClCompile Include="BufferObjects\IVBO.cpp">
       <Filter>Source Files\BufferObjects</Filter>
     </ClCompile>
-    <ClCompile Include="BufferObjects\IVAO.cpp">
+    <ClCompile Include="BufferObjects\VAO.cpp">
       <Filter>Source Files\BufferObjects</Filter>
     </ClCompile>
     <ClCompile Include="Uniforms\SSBOint.cpp">

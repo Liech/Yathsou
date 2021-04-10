@@ -16,7 +16,7 @@
 namespace Ahwassa {
   struct BasicRectangleRenderer::RenderVars {
     std::unique_ptr<VBO<PositionVertex>>   vbo;
-    std::unique_ptr<VAO<PositionVertex>>   vao;
+    std::unique_ptr<VAO>                   vao;
     std::unique_ptr<ShaderProgram>         shader;
     Window* window;
     std::unique_ptr<UniformMat4>           projection;
@@ -117,7 +117,7 @@ namespace Ahwassa {
     std::vector<PositionVertex> input;
     input.resize(6);
     _vars->vbo = std::make_unique<VBO<PositionVertex>>(input);
-    _vars->vao = std::make_unique<VAO<PositionVertex>>(_vars->vbo.get());
+    _vars->vao = std::make_unique<VAO>(_vars->vbo.get());
     _vars->shader = std::make_unique<ShaderProgram>(PositionVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
   void BasicRectangleRenderer::setClippingRectangle(Iyathuum::glmAABB<2> box) {

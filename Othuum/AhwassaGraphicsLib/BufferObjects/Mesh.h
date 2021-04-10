@@ -14,7 +14,7 @@ namespace Ahwassa {
     Mesh(const std::vector<Vertex>& vertecies, const std::vector<int>& indices) {
       _ibo = std::make_unique<IBO>(indices);
       _vbo = std::make_unique<VBO<Vertex>>(vertecies);
-      _vao = std::make_unique<VAO<Vertex>>(_vbo.get());
+      _vao = std::make_unique<VAO>(_vbo.get());
     }
 
     Mesh(const std::vector<Vertex>& trianglestrip) {
@@ -37,7 +37,7 @@ namespace Ahwassa {
 
   private:
     std::unique_ptr<VBO<Vertex>> _vbo;
-    std::unique_ptr<VAO<Vertex>> _vao;
+    std::unique_ptr<VAO>         _vao;
     std::unique_ptr<IBO        > _ibo;
   };
 }

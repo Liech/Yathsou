@@ -25,7 +25,7 @@
 namespace Ahwassa {
   struct SphereRenderer::RenderVars {
     std::unique_ptr<VBO<PositionNormalVertex>> vbo;
-    std::unique_ptr<VAO<PositionNormalVertex>> vao;
+    std::unique_ptr<VAO> vao;
     std::unique_ptr<IBO>                       ibo;
     std::unique_ptr<UniformVec3>         light ;
     std::unique_ptr<ShaderProgram>       shader;
@@ -207,6 +207,6 @@ namespace Ahwassa {
       indices[i] = i;
     _vars->ibo = std::make_unique<IBO>(indices);
     _vars->vbo = std::make_unique<VBO<PositionNormalVertex>>(result);
-    _vars->vao = std::make_unique<VAO<PositionNormalVertex>>(_vars->vbo.get());
+    _vars->vao = std::make_unique<VAO>(_vars->vbo.get());
   }
 }

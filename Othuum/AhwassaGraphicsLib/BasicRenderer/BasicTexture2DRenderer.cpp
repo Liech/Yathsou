@@ -16,10 +16,10 @@
 
 namespace Ahwassa {
   struct BasicTexture2DRenderer::RenderVars {
-    std::unique_ptr<VBO<PositionTextureVertex>>   vbo;
-    std::unique_ptr<VAO<PositionTextureVertex>>   vao;
-    std::vector<PositionTextureVertex>            vertices;
-    std::unique_ptr<Texture>                      shownTexture;
+    std::unique_ptr<VBO<PositionTextureVertex>> vbo;
+    std::unique_ptr<VAO>                        vao;
+    std::vector<PositionTextureVertex>          vertices;
+    std::unique_ptr<Texture>                    shownTexture;
     
     std::unique_ptr<ShaderProgram>         shader;
     Window* window;
@@ -129,7 +129,7 @@ namespace Ahwassa {
     std::vector<PositionTextureVertex> input;
     input.resize(6);
     _vars->vbo = std::make_unique<VBO<PositionTextureVertex>>(input);
-    _vars->vao = std::make_unique<VAO<PositionTextureVertex>>(_vars->vbo.get());
+    _vars->vao = std::make_unique<VAO>(_vars->vbo.get());
     _vars->shader = std::make_unique<ShaderProgram>(PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
   void BasicTexture2DRenderer::setClippingRectangle(Iyathuum::glmAABB<2> box) {

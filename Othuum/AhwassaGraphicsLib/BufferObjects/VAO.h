@@ -1,14 +1,24 @@
 #pragma once
 
-#include "AhwassaGraphicsLib/BufferObjects/IVAO.h"
-#include "AhwassaGraphicsLib/Core/AttributeDescription.h"
+#include "VBO.h"
 
 namespace Ahwassa {
-  template<typename Struct>
-  class VAO : public IVAO
-  {//todo: remove class
+  struct AttributeDescription;
+
+  class VAO {
   public:
-    VAO(IVBO* vbo) : IVAO({ vbo }) {
-    }
+    VAO(IVBO* vbo);
+    VAO(std::vector<IVBO*> vbo);
+    virtual ~VAO();
+    unsigned int getID();
+    void draw();
+    void drawInstanced(size_t amount);
+
+  protected:
+    void init(const std::vector<std::vector<AttributeDescription>>&);
+  private:
+    unsigned int _id;
+    unsigned int _size = 0;
+    std::vector<IVBO*> _vbo;
   };
 }
