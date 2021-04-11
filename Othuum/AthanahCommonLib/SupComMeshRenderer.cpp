@@ -46,9 +46,9 @@ namespace Athanah {
       out vec2 UV1;
 
       void main() {
-        uint boneSize =)" + std::to_string(_maxBoneSize) + R"( ;
+        int boneSize =)" + std::to_string(_maxBoneSize) + R"( ;
         mat4 view = )" + _camera->getName() + R"(Projection *  )" + _camera->getName() + R"(View;
-        gl_Position = view *  models[gl_InstanceID] * animations[gl_InstanceID*boneSize+bones] * vec4(position , 1.0);
+        gl_Position = view *  models[gl_InstanceID] * animations[gl_InstanceID*boneSize+int(bone)] * vec4(position , 1.0);
         clr = colors[gl_InstanceID];
         nrm = normal;
         UV1 = uv1;

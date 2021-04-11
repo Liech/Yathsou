@@ -68,10 +68,7 @@ namespace Athanah {
       p.binormal= v.binormal;
       p.uv1     = v.uv1     ;
       p.uv2     = v.uv2     ;
-      v.boneIndex[0] = p.bones[0];
-      v.boneIndex[1] = p.bones[1];
-      v.boneIndex[2] = p.bones[2];
-      v.boneIndex[3] = p.bones[3];
+      p.bone = v.boneIndex[0];
       vertices.push_back(p);
     }
 
@@ -105,9 +102,9 @@ namespace Athanah {
     result.resize(anim->boneNames.size());
     
 
-
     for (int i = 0; i < result.size(); i++) {
-      result[i] = glm::mat4(1);
+      result[i] = glm::scale(glm::mat4(1.0f),glm::vec3(5,5,5));
+      //result[i] = glm::transpose(_model->bones[i].relativeInverseMatrix);
 
     }
 

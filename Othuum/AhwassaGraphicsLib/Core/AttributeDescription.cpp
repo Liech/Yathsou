@@ -26,6 +26,9 @@ namespace Ahwassa {
     case AttributeDescription::DataType::Char:
       return sizeof(unsigned char) * size;
       break;
+    case AttributeDescription::DataType::UInt:
+      return sizeof(unsigned int) * size;
+      break;
     default:
       break;
     }
@@ -50,6 +53,8 @@ namespace Ahwassa {
       else if (size == 4) return "vec4";
       break;
     case AttributeDescription::DataType::Char:
+      return "uint";
+    case AttributeDescription::DataType::UInt:
       return "uint";
     default:
       break;

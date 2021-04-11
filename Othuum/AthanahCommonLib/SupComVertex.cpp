@@ -8,8 +8,7 @@ namespace Athanah {
     binormal = glm::vec3(0.0f);
     uv1 = glm::vec2(0.0f);
     uv2 = glm::vec2(0.0f);
-    for (int i = 0; i < 4; i++)
-      bones[i] = 0;
+    bone = 0;
   };
 
   std::vector<Ahwassa::AttributeDescription> SupComVertex::getBinding() {
@@ -20,7 +19,7 @@ namespace Athanah {
     result.push_back(Ahwassa::AttributeDescription("binormal", 3, Ahwassa::AttributeDescription::DataType::Float));
     result.push_back(Ahwassa::AttributeDescription("uv1", 2, Ahwassa::AttributeDescription::DataType::Float));
     result.push_back(Ahwassa::AttributeDescription("uv2", 2, Ahwassa::AttributeDescription::DataType::Float));
-    result.push_back(Ahwassa::AttributeDescription("bones", 4, Ahwassa::AttributeDescription::DataType::Char));
+    result.push_back(Ahwassa::AttributeDescription("bone", 1, Ahwassa::AttributeDescription::DataType::Float));
     return result;
   }
 }

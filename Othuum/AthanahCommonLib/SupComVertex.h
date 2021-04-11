@@ -12,7 +12,7 @@ namespace Athanah {
     glm::vec3 binormal;
     glm::vec2 uv1     ;
     glm::vec2 uv2     ;
-    unsigned char bones[4];
+    float     bone ;
 
     SupComVertex();
 
