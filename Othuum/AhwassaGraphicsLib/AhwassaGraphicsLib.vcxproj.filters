@@ -375,6 +375,12 @@
     <ClInclude Include="Uniforms\InstancedVecVec3.h">
       <Filter>Header Files\Uniform</Filter>
     </ClInclude>
+    <ClInclude Include="Uniforms\SSBOmat4.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
+    <ClInclude Include="Uniforms\SSBOvec3.h">
+      <Filter>Header Files\Uniform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sound\sound.cpp">
@@ -573,6 +579,12 @@
       <Filter>Source Files\Uniform</Filter>
     </ClCompile>
     <ClCompile Include="Uniforms\InstancedVecVec3.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\SSBOmat4.cpp">
+      <Filter>Source Files\Uniform</Filter>
+    </ClCompile>
+    <ClCompile Include="Uniforms\SSBOvec3.cpp">
       <Filter>Source Files\Uniform</Filter>
     </ClCompile>
   </ItemGroup>

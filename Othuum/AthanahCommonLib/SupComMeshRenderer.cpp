@@ -7,8 +7,9 @@
 #include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformVec3.h"
-#include "AhwassaGraphicsLib/Uniforms/InstancedVecMat4.h"
-#include "AhwassaGraphicsLib/Uniforms/InstancedVecVec3.h"
+#include "AhwassaGraphicsLib/Uniforms/SSBOmat4.h"
+#include "AhwassaGraphicsLib/Uniforms/SSBOvec3.h"
+#include "AhwassaGraphicsLib/Uniforms/UniformVecVec3.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
 #include "SupComModel.h"
@@ -47,8 +48,8 @@ namespace Athanah {
       void main() {
         uint boneSize =)" + std::to_string(_maxBoneSize) + R"( ;
         mat4 view = )" + _camera->getName() + R"(Projection *  )" + _camera->getName() + R"(View;
-        gl_Position = view *  models * vec4(position , 1.0);
-        clr = colors;
+        gl_Position = view *  models[gl_InstanceID] * vec4(position , 1.0);
+        clr = colors[gl_InstanceID];
         nrm = normal;
         UV1 = uv1;
       }
@@ -84,8 +85,19 @@ namespace Athanah {
     std::vector<Ahwassa::Uniform*> cameraUniforms = _camera->getUniforms();
     uniforms.insert(uniforms.end(), cameraUniforms.begin(), cameraUniforms.end());
     _light = std::make_unique<Ahwassa::UniformVec3>("Light");
-    _models = std::make_unique<Ahwassa::InstancedVecMat4>("models", _bufferSize);
-    _colors = std::make_unique<Ahwassa::InstancedVecVec3>("colors", _bufferSize);
+
+    std::vector<glm::mat4> modelContent;
+    modelContent.resize(_bufferSize);
+    for (size_t i = 0; i < _bufferSize; i++)
+      modelContent[i] = glm::mat4(1);
+
+    std::vector<glm::vec3> colorContent;
+    colorContent.resize(_bufferSize);
+    for (size_t i = 0; i < _bufferSize; i++)
+      colorContent[i] = glm::vec3(0,1,0);
+
+    _models = std::make_shared<Ahwassa::SSBOmat4>("models", modelContent);
+    _colors = std::make_shared<Ahwassa::SSBOvec3>("colors", colorContent);
     _light->setValue(glm::normalize(glm::vec3(0)));
     uniforms.push_back(_light.get());
     uniforms.push_back(_models.get());
@@ -150,8 +162,8 @@ namespace Athanah {
       _albedo->setTextureID(meshVector.first->albedo().getTextureID());
       _info->setTextureID(meshVector.first->info().getTextureID());
       _light->setValue(getLightDirection());
-      _models->setValue(models);
-      _colors->setValue(colors);
+      //_models->setValue(models);
+      //_colors->setValue(colors);
       //_animations->setValue(anim);
       _models->bind();
       _colors->bind();

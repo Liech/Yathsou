@@ -22,6 +22,12 @@
     <Filter Include="lib\lodepng">
       <UniqueIdentifier>{ca2d24df-30b7-4755-a43c-67ef57c304b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\MagickaVox">
+      <UniqueIdentifier>{4857814f-eb33-4bf9-8073-da04aad2ebcd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MagickaVox">
+      <UniqueIdentifier>{baa9811b-84ac-4c02-9590-5e8b1c202063}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageIO.h">
@@ -207,6 +213,60 @@
     <ClInclude Include="SCA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MagicaVox\Import.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\Reader.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\typeDICT.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\typeROTATION.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\VoxFile.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\Chunk.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunkFactory.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunkLAYR.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunkMAIN.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunkMATL.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunknGRP.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunknSHP.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunknTRN.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunkPACK.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunkRGBA.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunkrOBJ.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunkSIZE.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicaVox\ChunkXYZI.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageIO.cpp">
@@ -235,6 +295,60 @@
     </ClCompile>
     <ClCompile Include="SCMAP.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\Chunk.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunkFactory.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunkLAYR.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunkMAIN.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunkMATL.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunknGRP.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunknSHP.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunknTRN.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunkPACK.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunkRGBA.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunkrOBJ.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunkSIZE.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\ChunkXYZI.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\Import.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\Reader.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\typeDICT.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\typeROTATION.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicaVox\VoxFile.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
