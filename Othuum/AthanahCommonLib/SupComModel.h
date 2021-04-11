@@ -24,6 +24,10 @@ namespace Athanah {
     Ahwassa::Texture& info  ();
     Ahwassa::Texture& normal();
 
+    std::vector<std::string> availableAnimations() const;
+    float                    getAnimationLength(const std::string& name);
+    std::vector<glm::mat4>   getAnimation(const std::string& name, float time);
+
   private:
     void loadImages    (std::string unitDir, std::string unitName);
     void loadMesh      (std::string unitDir, std::string unitName);

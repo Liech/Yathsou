@@ -1,5 +1,7 @@
 #include "SupComModel.h"
 
+#include <filesystem>
+
 #include "AezeselFileIOLib/SCM.h"
 #include "AezeselFileIOLib/ImageIO.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
@@ -28,7 +30,20 @@ namespace Athanah {
   }
 
   void SupComModel::loadAnimation(std::string unitDir, std::string unitName) {
-
+    std::string fullPath = unitDir + "\\" + unitName + "\\";
+    for (const auto& entry : std::filesystem::directory_iterator(fullPath))
+    {
+      std::string animationPath = entry.path().string();
+      if (animationPath.substr(animationPath.size() - 4) == ".sca")
+      {
+        size_t      animSeperator = animationPath.find_last_of('\\');
+        std::string animationName = animationPath.substr(animSeperator + 1/*\\*/ + unitName.size() + 2/*_A*/);
+        animationName = animationName.substr(0, animationName.size() - 4);
+        Aezesel::SCA animLoader;
+        std::shared_ptr<Aezesel::SCA::data> anim = std::make_shared<Aezesel::SCA::data>(animLoader.load(animationPath));
+        _animations[animationName] = anim;
+      }
+    }
   }
 
   void SupComModel::loadMesh(std::string unitDir, std::string unitName) {
@@ -72,4 +87,31 @@ namespace Athanah {
     _info   = std::make_shared<Ahwassa::Texture>("TeamSpec", infoArray.get());
     _normal = std::make_shared<Ahwassa::Texture>("Normal", normalArray.get());
   }
+
+  std::vector<std::string> SupComModel::availableAnimations() const {
+    std::vector<std::string> result;
+    for (auto anim : _animations)
+      result.push_back(anim.first);
+    return result;
+  }
+
+  float SupComModel::getAnimationLength(const std::string& name) {
+    return _animations[name]->duration;
+  }
+
+  std::vector<glm::mat4> SupComModel::getAnimation(const std::string& name, float time) {
+    std::vector<glm::mat4> result;
+    auto& anim = _animations[name];
+    result.resize(anim->boneNames.size());
+    
+
+
+    for (int i = 0; i < result.size(); i++) {
+      result[i] = glm::mat4(1);
+
+    }
+
+    return result;
+  }
+
 }
