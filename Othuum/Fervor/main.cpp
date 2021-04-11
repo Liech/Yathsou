@@ -19,10 +19,10 @@
 #include "AthanahCommonLib/SupComModel.h"
 
 int main(int argc, char** argv) {
-  int width = 800;
-  int height = 600;
-  //int width = 1920;
-  //int height = 1080;
+  //int width = 800;
+  //int height = 600;
+  int width = 1920;
+  int height = 1080;
 
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
@@ -38,7 +38,8 @@ int main(int argc, char** argv) {
   w.Startup = [&]() {
     renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
     boxr = std::make_shared<Ahwassa::BoxRenderer>(w.camera());
-    std::string unit = "UEL0208";
+    std::string unit = "UAL0401";//"UEL0208";
+    int animationNumber = 4;
     std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
     std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
 
@@ -46,14 +47,14 @@ int main(int argc, char** argv) {
       boxes.push_back(boxr->newBox(glm::mat4()));      
     }
 
-    model = std::make_shared<Athanah::SupComModel>(lpt, unit);
-    animName = model->availableAnimations()[0];
-    for (int x = 0; x < 50; x++) {
+    model = std::make_shared<Athanah::SupComModel>(pc, unit);
+    animName = model->availableAnimations()[animationNumber];
+    for (int x = 0; x < 2; x++) {
       int y = 0;
       //for (int y = 0; y < 50; y++) {
         std::shared_ptr<Athanah::SupComMesh> mesh = std::make_shared<Athanah::SupComMesh>();
         mesh->teamColor = Iyathuum::Color(rand()%255, rand()%255, rand()%255);
-        mesh->transformation = glm::translate(glm::mat4(1.0),glm::vec3(x*10,y*10,0));
+        mesh->transformation = glm::translate(glm::mat4(1.0),glm::vec3(x*100,y*100,0));
         mesh->model = model;
         
         mesh->animation = model->getAnimation(animName, model->getAnimationLength(animName)* x / 50.0f);
