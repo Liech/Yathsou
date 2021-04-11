@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <fstream>
 #include <filesystem>
+#include <set>
 
 #include "AezeselFileIOLib/SCM.h"
 #include "AezeselFileIOLib/ImageIO.h"
@@ -44,22 +45,31 @@ namespace Athanah {
         Aezesel::SCA animLoader;
         std::shared_ptr<Aezesel::SCA::data> anim = std::make_shared<Aezesel::SCA::data>(animLoader.load(animationPath));
         _animations[animationName] = anim;
+
+        std::cout << animationName << std::endl;
+        std::set<std::string> keyflags;
+        for (int i = 0; i < anim->animation.size(); i++)
+          keyflags.insert(anim->animation[i].flag2str());
+        for (auto x : keyflags)
+          std::cout << "    Keyflag: " << x << std::endl;
+
+
+        std::ofstream stream2;
+        stream2.open(unitName + "_" + animationName + "_anim.json");
+        nlohmann::json jd = anim->toJson();
+        stream2 << jd.dump(4);
+        stream2.close();
       }
     }
 
 
-
     std::ofstream stream;
-    stream.open("model.json");
+    stream.open(unitName + "_model.json");
     nlohmann::json j = _model->toJson();
     stream << j.dump(4);
     stream.close();
 
-    std::ofstream stream2;
-    stream2.open("anim.json");
-    j = _animations[availableAnimations()[0]]->toJson();
-    stream2 << j.dump(4);
-    stream2.close();
+
   }
 
   void SupComModel::loadMesh(std::string unitDir, std::string unitName) {
@@ -133,28 +143,30 @@ namespace Athanah {
     for (int i = 0; i < anim->boneNames.size(); i++) {
       std::vector<int> chain;
       chain.push_back(i);
-      while (anim->boneLinks[chain.back()] != -1)
-        chain.push_back(anim->boneLinks[chain.back()]);
+      
+      while (_model->bones[chain.back()].parentIndex != -1)
+        chain.push_back(_model->bones[chain.back()].parentIndex);
       boneChain.push_back(chain);
     }
 
-    std::vector<glm::mat4> cummulativeInverse;
-    for (int i = 0; i < boneChain.size(); i++) {
-      glm::mat4 current = glm::mat4(1.0);
-      for (auto x : boneChain[i])
-        current = current * inverse[x];
-      cummulativeInverse.push_back(current);
-    }
     int frameno = (int)((time / anim->duration) * (anim->animation.size()-1)) + 1;
     Aezesel::SCA::frame frame = anim->animation[frameno];
 
     std::vector<glm::mat4> rotation;
     for (int i = 0; i < frame.bones.size(); i++)
     {
-      glm::mat4 sub = glm::mat4(1.0);
-      //sub = glm::translate(sub, frame.bones[i].position);
-      sub = Aezesel::SCA::QuatToMat(frame.bones[i].rotation);
+      glm::quat iden = glm::identity<glm::quat>();
+      glm::quat rot = glm::normalize(frame.bones[i].rotation);
+      glm::mat4 sub = Aezesel::SCA::QuatToMat(rot);
       rotation.push_back(sub);
+    }
+
+    std::vector<glm::mat4> translation;
+    for (int i = 0; i < frame.bones.size(); i++)
+    {
+      glm::mat4 sub = glm::mat4(1.0);
+      sub = glm::translate(sub, frame.bones[i].position);
+      translation.push_back(sub);
     }
 
     std::vector<glm::mat4> localForward;
@@ -164,7 +176,7 @@ namespace Athanah {
       if (parentIndex != -1)
         local = inverse[parentIndex] * forward[i];
       else
-        local = glm::mat4(1.0f);
+        local = forward[i];
 
       localForward.push_back(local);
     }
@@ -174,15 +186,26 @@ namespace Athanah {
     auto names = anim->boneNames;
     //anim->animation[0].bones[0].position;
 
-
-    for (int i = 0; i < result.size(); i++) {
+    result[0] = glm::mat4(1.0);
+    for (int i = 1; i < result.size()-1; i++) {
       //result[i] = glm::scale(glm::mat4(1.0f),glm::vec3(5,5,5));
       glm::mat4 fwd = glm::mat4(1.0);
-      for (auto x : boneChain[i]) {
-        fwd = localForward[x] * rotation[x] * fwd;
+      for(int chainIndex = 0; chainIndex < ((int)boneChain[i].size()); chainIndex++){
+        int x = boneChain[i][chainIndex];
+        int p = boneChain[i][chainIndex];
+        //if (p >= 0)
+        fwd = localForward[p] * rotation[p+1] * fwd;
+        //fwd = localForward[x] * fwd;
       }
+
       result[i] = fwd*inverse[i];
+      //result[i] = rotation[i];
     }
+
+    //result[4] = result[5];
+    //result[5] = result[6];
+    //result[6] = result[7];
+    //result[7] = result[8];
 
     return result;
   }

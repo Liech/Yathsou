@@ -29,6 +29,7 @@ namespace Aezesel {
       float             keytime;//ignored at least by blender import/export
       unsigned int      keyflags;//ignored at least by blender import/export
       std::vector<bone> bones;//same throughout all frames
+      std::string flag2str();
     };
     struct data
     {

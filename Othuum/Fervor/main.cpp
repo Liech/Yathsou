@@ -14,8 +14,9 @@
 #include "AhwassaGraphicsLib/Util.h"
 #include "AthanahCommonLib/SupComMeshLoader.h"
 #include "AthanahCommonLib/SupComMeshRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BoxRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/Box.h"
 #include "AthanahCommonLib/SupComModel.h"
-
 
 int main(int argc, char** argv) {
   int width = 800;
@@ -29,14 +30,21 @@ int main(int argc, char** argv) {
 
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   std::shared_ptr<Athanah::SupComMeshRenderer> renderer;
+  std::shared_ptr<Ahwassa::BoxRenderer> boxr;
+  std::vector<std::shared_ptr<Ahwassa::Box>> boxes;
   std::shared_ptr<Athanah::SupComModel> model = std::shared_ptr<Athanah::SupComModel>();
   std::vector<std::shared_ptr<Athanah::SupComMesh>> meshes;
   std::string animName;
   w.Startup = [&]() {
     renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
+    boxr = std::make_shared<Ahwassa::BoxRenderer>(w.camera());
     std::string unit = "UEL0208";
     std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
     std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
+
+    for (int i = 0; i < 10; i++) {
+      boxes.push_back(boxr->newBox(glm::mat4()));      
+    }
 
     model = std::make_shared<Athanah::SupComModel>(lpt, unit);
     animName = model->availableAnimations()[0];
@@ -63,11 +71,20 @@ int main(int argc, char** argv) {
   float t = 0;
   w.Update = [&]() {
     t += 0.01f;
-    meshes[0]->animation = model->getAnimation(animName, model->getAnimationLength(animName) * std::fmod(t,1));
+    meshes[0]->animation = model->getAnimation(animName, model->getAnimationLength(animName) * std::fmod(t, 1));
+    meshes[1]->animation = {};
 
+
+    for (int i = 0; i < 10; i++) {
+      glm::mat4 argh = glm::mat4(1);
+      argh = glm::translate(argh, glm::vec3(5 * i, 5, 5));
+      argh = glm::scale(argh, glm::vec3(1,2,1));
+      boxes[i]->setMatrix(argh*meshes[0]->animation[i]);
+    }
 
     b.draw();
     renderer->draw();
+    boxr->draw();
     fps->draw();
   };
   w.run();
