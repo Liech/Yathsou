@@ -11,10 +11,19 @@ namespace Ahwassa {
       glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
     }
 
+    SSBOmat4::SSBOmat4(std::string name, size_t amount) : Uniform(name) {
+      glGenBuffers(1, &_ssbo);
+      std::vector<glm::mat4> content;
+      content.resize(amount);
+      glBindBuffer(GL_SHADER_STORAGE_BUFFER, _ssbo);
+      glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(glm::mat4) * content.size(), content.data(), GL_DYNAMIC_COPY);
+      glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+    }
+
     void SSBOmat4::setData(std::vector<glm::mat4> content) {
       glBindBuffer(GL_SHADER_STORAGE_BUFFER, _ssbo);
       GLvoid* p = glMapBuffer(GL_SHADER_STORAGE_BUFFER, GL_WRITE_ONLY);
-      memcpy(p, content.data(), sizeof(glm::mat4));
+      memcpy(p, content.data(), sizeof(glm::mat4)*content.size());
       glUnmapBuffer(GL_SHADER_STORAGE_BUFFER);
     }
 

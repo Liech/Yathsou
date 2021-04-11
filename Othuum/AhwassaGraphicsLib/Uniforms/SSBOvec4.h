@@ -10,6 +10,7 @@ namespace Ahwassa {
   class SSBOvec4 : public Uniform {
   public:
     SSBOvec4(std::string name, std::vector<glm::vec4> content);
+    SSBOvec4(std::string name, size_t amount);
     virtual ~SSBOvec4();
 
     virtual std::string toGLSL() override;

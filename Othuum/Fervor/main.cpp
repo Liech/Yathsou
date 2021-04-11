@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   std::shared_ptr<Athanah::SupComMeshRenderer> renderer;
   std::shared_ptr<Athanah::SupComModel> model = std::shared_ptr<Athanah::SupComModel>();
-  std::shared_ptr<Athanah::SupComMesh> mesh = std::shared_ptr<Athanah::SupComMesh>();
+  std::vector<std::shared_ptr<Athanah::SupComMesh>> meshes;
   w.Startup = [&]() {
     renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
     std::string unit = "UEL0208";
@@ -39,12 +39,18 @@ int main(int argc, char** argv) {
 
     model = std::make_shared<Athanah::SupComModel>(lpt, unit);
 
-    mesh = std::make_shared<Athanah::SupComMesh>();
-    mesh->teamColor = Iyathuum::Color(0, 255, 255);
-    mesh->transformation = glm::mat4(1.0);
-    mesh->model = model;
+    for (int x = 0; x < 50; x++) {
+      for (int y = 0; y < 50; y++) {
+        std::shared_ptr<Athanah::SupComMesh> mesh = std::make_shared<Athanah::SupComMesh>();
+        mesh->teamColor = Iyathuum::Color(rand()%255, rand()%255, rand()%255);
+        mesh->transformation = glm::translate(glm::mat4(1.0),glm::vec3(x*10,y*10,0));
+        mesh->model = model;
+        mesh->animation.push_back(glm::rotate(glm::mat4(1.0), glm::pi<float>() * x / 50.0f, glm::vec3(0, 1, 0)));
+        renderer->addMesh(mesh);
+        meshes.push_back(mesh);
+      }
+    }
 
-    renderer->addMesh(mesh); 
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
     w.input().addUIElement(freeCam.get());
     fps = std::make_unique<Ahwassa::FPS>(&w);

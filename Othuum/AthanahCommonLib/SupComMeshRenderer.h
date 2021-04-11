@@ -53,7 +53,7 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::Texture       >   _info     ;
     std::shared_ptr<Ahwassa::Texture       >   _normal   ;
 
-    //std::unique_ptr<Ahwassa::UniformVecMat4> _animations;
+    std::shared_ptr<Ahwassa::SSBOmat4> _animations;
     std::shared_ptr<Ahwassa::SSBOmat4> _models    ;
     std::shared_ptr<Ahwassa::SSBOvec3> _colors    ;
 

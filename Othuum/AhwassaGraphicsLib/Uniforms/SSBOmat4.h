@@ -10,6 +10,7 @@ namespace Ahwassa {
   class SSBOmat4 : public Uniform {
   public:
     SSBOmat4(std::string name, std::vector<glm::mat4> content);
+    SSBOmat4(std::string name, size_t amount);
     virtual ~SSBOmat4();
 
     virtual std::string toGLSL() override;
