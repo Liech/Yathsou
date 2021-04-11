@@ -9,6 +9,8 @@
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "VishalaNetworkLib/lib/json.hpp"
 
+#include "VishalaNetworkLib/lib/json.hpp"
+
 //based on
 //https://github.com/Oygron/SupCom_Import_Export_Blender/blob/master/supcom-importer.py
 
@@ -57,8 +59,8 @@ namespace Aezesel {
       std::vector<tri>          indices;
       std::vector<std::string>  info;
 
-      //nlohmann::json toJson();
-      //void fromJson(const nlohmann::json&);
+      nlohmann::json toJson();
+      void fromJson(const nlohmann::json&);
     };
 
   private:

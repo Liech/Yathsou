@@ -202,49 +202,49 @@ namespace Aezesel {
     return val;
   }
 
-  //nlohmann::json SCM::data::toJson() {
-  //  nlohmann::json result;
-  //  result["BoneNames"] = boneNames;
-  //
-  //  nlohmann::json bon;
-  //  for (auto b : bones) {
-  //    nlohmann::json sub;
-  //    sub["Name"] = b.name;
-  //    std::vector<float> mat;
-  //    for (int i = 0; i < 16; i++) {
-  //      mat.push_back(glm::value_ptr(b.relativeInverseMatrix)[i]);
-  //    }
-  //    sub["RelativeInverseMatrix"] = mat;
-  //    sub["Position"] = std::vector<float>{ b.rotation[0] , b.rotation[1] , b.rotation[2] };
-  //    sub["Rotation"] = std::vector<float>{ b.rotation[0] , b.rotation[1] , b.rotation[2] , b.rotation[3] };
-  //    sub["ParentIndex"] = b.parentIndex;
-  //    bon.push_back(sub);
-  //  }
-  //  result["Bones"] = bon;
-  //
-  //  nlohmann::json vert;
-  //  for (auto v : vertecies) {
-  //    nlohmann::json sub;
-  //    sub["Binormal"] = std::vector<float>{ v.binormal[0], v.binormal[1], v.binormal[2] };
-  //    sub["UV1"] = std::vector<float>{ v.uv1[0], v.uv1[1] };
-  //    sub["UV2"] = std::vector<float>{ v.uv2[0], v.uv2[1] };
-  //    sub["Normal"] = std::vector<float>{ v.normal[0], v.normal[1], v.normal[2] };
-  //    sub["Tangent"] = std::vector<float>{ v.tangent[0], v.tangent[1], v.tangent[2] };
-  //    sub["Position"] = std::vector<float>{ v.position[0], v.position[1], v.position[2] };
-  //    sub["BoneIndex"] = v.boneIndex[0];
-  //    vert.push_back(sub);
-  //  }
-  //  result["Vertecies"] = vert;
-  //
-  //  nlohmann::json indi;
-  //  for (auto i : indices)
-  //    indi.push_back(std::vector<int>{i.a, i.b, i.c});
-  //  result["Indices"] = indi;
-  //  result["Info"] = info;
-  //  return result;
-  //}
-  //
-  //void SCM::data::fromJson(const nlohmann::json&) {
-  //
-  //}
+  nlohmann::json SCM::data::toJson() {
+    nlohmann::json result;
+    result["BoneNames"] = boneNames;
+  
+    nlohmann::json bon;
+    for (auto b : bones) {
+      nlohmann::json sub;
+      sub["Name"] = b.name;
+      std::vector<float> mat;
+      for (int i = 0; i < 16; i++) {
+        mat.push_back(glm::value_ptr(b.relativeInverseMatrix)[i]);
+      }
+      sub["RelativeInverseMatrix"] = mat;
+      sub["Position"] = std::vector<float>{ b.rotation[0] , b.rotation[1] , b.rotation[2] };
+      sub["Rotation"] = std::vector<float>{ b.rotation[0] , b.rotation[1] , b.rotation[2] , b.rotation[3] };
+      sub["ParentIndex"] = b.parentIndex;
+      bon.push_back(sub);
+    }
+    result["Bones"] = bon;
+  
+    nlohmann::json vert;
+    for (auto v : vertecies) {
+      nlohmann::json sub;
+      sub["Binormal"] = std::vector<float>{ v.binormal[0], v.binormal[1], v.binormal[2] };
+      sub["UV1"] = std::vector<float>{ v.uv1[0], v.uv1[1] };
+      sub["UV2"] = std::vector<float>{ v.uv2[0], v.uv2[1] };
+      sub["Normal"] = std::vector<float>{ v.normal[0], v.normal[1], v.normal[2] };
+      sub["Tangent"] = std::vector<float>{ v.tangent[0], v.tangent[1], v.tangent[2] };
+      sub["Position"] = std::vector<float>{ v.position[0], v.position[1], v.position[2] };
+      sub["BoneIndex"] = v.boneIndex[0];
+      vert.push_back(sub);
+    }
+    result["Vertecies"] = vert;
+  
+    nlohmann::json indi;
+    for (auto i : indices)
+      indi.push_back(std::vector<int>{i.a, i.b, i.c});
+    result["Indices"] = indi;
+    result["Info"] = info;
+    return result;
+  }
+  
+  void SCM::data::fromJson(const nlohmann::json&) {
+  
+  }
 }

@@ -3,6 +3,9 @@
 #include <iostream>
 #include <sstream>
 
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
+
 //based on
 //https://github.com/Oygron/SupCom_Import_Export_Blender/blob/master/supcom-importer.py
 
@@ -155,54 +158,119 @@ namespace Aezesel {
     return seglist;
   }
 
-  //void SCA::data::fromJson(nlohmann::json input)
-  //{
-  //  duration = input["Duration"];
-  //  boneNames.clear();
-  //  for (auto name : input["BoneNames"]) boneNames.push_back(name);
-  //  for (auto name : input["BoneLinks"]) boneLinks.push_back(name);
-  //  position = glm::vec3(input["Position"][0], input["Position"][1], input["Position"][2]);
-  //  rotation = glm::quat(input["Rotation"][0], input["Rotation"][1], input["Rotation"][2], input["Rotation"][3]);
-  //  for (auto anim : input["Animation"])
-  //  {
-  //    frame sub;
-  //    sub.keytime = anim["Keytime"];
-  //    sub.keyflags = anim["Keyflags"];
-  //    for (auto jbone : anim["Bone"]) {
-  //      bone b;
-  //      b.position = glm::vec3(jbone["Position"][0], jbone["Position"][1], jbone["Position"][2]);
-  //      b.rotation = glm::quat(jbone["Rotation"][0], jbone["Rotation"][1], jbone["Rotation"][2], jbone["Rotation"][3]);
-  //      sub.bones.push_back(b);
-  //    }
-  //    animation.push_back(sub);
-  //  }
-  //}
-  //
-  //nlohmann::json SCA::data::toJson()
-  //{
-  //  nlohmann::json result;
-  //  result["Duration"] = duration;
-  //  result["BoneNames"] = boneNames;
-  //  result["BoneLinks"] = boneLinks;
-  //  result["Position"] = std::vector<float>{ position[0],position[1],position[2] };
-  //  result["Rotation"] = std::vector<float>{ rotation[0],rotation[1],rotation[2],rotation[3] };
-  //  std::vector<nlohmann::json> anim;
-  //  for (auto a : animation)
-  //  {
-  //    nlohmann::json subresult;
-  //    subresult["Keytime"] = a.keytime;
-  //    subresult["Keyflags"] = a.keyflags;
-  //    std::vector<nlohmann::json> bones;
-  //    for (auto bone : a.bones) {
-  //      nlohmann::json jbone;
-  //      jbone["Position"] = std::vector<float>{ bone.position[0],bone.position[1],bone.position[2] };
-  //      jbone["Rotation"] = std::vector<float>{ bone.rotation[0],bone.rotation[1],bone.rotation[2],bone.rotation[3] };
-  //      bones.push_back(jbone);
-  //    }
-  //    subresult["Bone"] = bones;
-  //    anim.push_back(subresult);
-  //  }
-  //  result["Animation"] = anim;
-  //  return result;
-  //}
+  void SCA::data::fromJson(nlohmann::json input)
+  {
+    duration = input["Duration"];
+    boneNames.clear();
+    for (auto name : input["BoneNames"]) boneNames.push_back(name);
+    for (auto name : input["BoneLinks"]) boneLinks.push_back(name);
+    position = glm::vec3(input["Position"][0], input["Position"][1], input["Position"][2]);
+    rotation = glm::quat(input["Rotation"][0], input["Rotation"][1], input["Rotation"][2], input["Rotation"][3]);
+    for (auto anim : input["Animation"])
+    {
+      frame sub;
+      sub.keytime = anim["Keytime"];
+      sub.keyflags = anim["Keyflags"];
+      for (auto jbone : anim["Bone"]) {
+        bone b;
+        b.position = glm::vec3(jbone["Position"][0], jbone["Position"][1], jbone["Position"][2]);
+        b.rotation = glm::quat(jbone["Rotation"][0], jbone["Rotation"][1], jbone["Rotation"][2], jbone["Rotation"][3]);
+        sub.bones.push_back(b);
+      }
+      animation.push_back(sub);
+    }
+  }
+  
+  nlohmann::json SCA::data::toJson()
+  {
+    nlohmann::json result;
+    result["Duration"] = duration;
+    result["BoneNames"] = boneNames;
+    result["BoneLinks"] = boneLinks;
+    result["Position"] = std::vector<float>{ position[0],position[1],position[2] };
+    result["Rotation"] = std::vector<float>{ rotation[0],rotation[1],rotation[2],rotation[3] };
+    std::vector<nlohmann::json> anim;
+    for (auto a : animation)
+    {
+      nlohmann::json subresult;
+      subresult["Keytime"] = a.keytime;
+      subresult["Keyflags"] = a.keyflags;
+      std::vector<nlohmann::json> bones;
+      for (auto bone : a.bones) {
+        nlohmann::json jbone;
+        jbone["Position"] = std::vector<float>{ bone.position[0],bone.position[1],bone.position[2] };
+        jbone["Rotation"] = std::vector<float>{ bone.rotation[0],bone.rotation[1],bone.rotation[2],bone.rotation[3] };
+        bones.push_back(jbone);
+      }
+      subresult["Bone"] = bones;
+      anim.push_back(subresult);
+    }
+    result["Animation"] = anim;
+    return result;
+  }
+
+
+  glm::mat4 SCA::QuatToMat(glm::quat q)
+  {
+    //https://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/index.htm
+    glm::mat4 result = glm::mat4(1.0f);
+    double sqw = q.w * q.w;
+    double sqx = q.x * q.x;
+    double sqy = q.y * q.y;
+    double sqz = q.z * q.z;
+    
+    if (sqw == 0 && sqx == 0 && sqy == 0 && sqz == 0)
+      return glm::mat4(1.0f);
+    
+    // invs (inverse square length) is only required if quaternion is not already normalised
+    double invs = 1 / (sqx + sqy + sqz + sqw);
+    result[0][0] = (sqx - sqy - sqz + sqw) * invs; // since sqw + sqx + sqy + sqz =1/invs*invs
+    result[1][1] = (-sqx + sqy - sqz + sqw) * invs;
+    result[2][2] = (-sqx - sqy + sqz + sqw) * invs;
+    
+    double tmp1 = q.x * q.y;
+    double tmp2 = q.z * q.w;
+    result[1][0] = 2.0 * (tmp1 + tmp2) * invs;
+    result[0][1] = 2.0 * (tmp1 - tmp2) * invs;
+    
+    tmp1 = q.x * q.z;
+    tmp2 = q.y * q.w;
+    result[2][0] = 2.0 * (tmp1 - tmp2) * invs;
+    result[0][2] = 2.0 * (tmp1 + tmp2) * invs;
+    tmp1 = q.y * q.z;
+    tmp2 = q.x * q.w;
+    result[2][1] = 2.0 * (tmp1 + tmp2) * invs;
+    result[1][2] = 2.0 * (tmp1 - tmp2) * invs;
+    return result;
+    //https://automaticaddison.com/how-to-convert-a-quaternion-to-a-rotation-matrix/
+    //float q0 = q[0];
+    //float q1 = q[1];
+    //float q2 = q[2];
+    //float q3 = q[3];
+    //
+    //float r00 = 2 * (q0 * q0 + q1 * q1) - 1;
+    //float r01 = 2 * (q1 * q2 - q0 * q3)    ;
+    //float r02 = 2 * (q1 * q3 + q0 * q2)    ;
+    //
+    //float r10 = 2 * (q1 * q2 + q0 * q3)    ;
+    //float r11 = 2 * (q0 * q0 + q2 * q2) - 1;
+    //float r12 = 2 * (q2 * q3 - q0 * q1)    ;
+    //
+    //float r20 = 2 * (q1 * q3 - q0 * q2)    ;
+    //float r21 = 2 * (q2 * q3 + q0 * q1)    ;
+    //float r22 = 2 * (q0 * q0 + q3 * q3) - 1;
+    //
+    //std::vector<float> v = {
+    //};
+    //float transAndScale[16] = {
+    //    r00, r01, r02,0,
+    //    r10, r11, r12,0,
+    //    r20, r21, r22,0,
+    //    0  ,   0,   0,1
+    //};
+    //
+    //if (q0 == 0 && q1 == 0 && q2 == 0 && q3 == 0)
+    //  return glm::mat4(1.0);
+    //return glm::make_mat4(transAndScale);
+  }
 }

@@ -15,6 +15,7 @@ namespace Ahwassa {
     static void setCulling(bool front);
     static void enableCulling(bool enabled);
     static void depthMask(bool enabled);
+    static void setWireframe(bool enabled);
 
     static std::shared_ptr<Mesh<PositionNormalVertex>> getCube();
   };

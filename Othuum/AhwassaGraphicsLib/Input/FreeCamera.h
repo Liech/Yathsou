@@ -18,7 +18,7 @@ namespace Ahwassa {
     bool _focus = false;
     std::shared_ptr<Camera> _camera;
     Input& _input;
-
+    bool _wireframe = false;
     float _moveX = 0;
     float _moveY = 0;
   };

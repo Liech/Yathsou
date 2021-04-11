@@ -3,6 +3,7 @@
 #include "Core/Camera.h"
 #include "Input/Input.h"
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include "Util.h"
 
 namespace Ahwassa {
   FreeCamera::FreeCamera(std::shared_ptr<Camera> cam, Input& inp) : _input(inp) {
@@ -72,6 +73,12 @@ namespace Ahwassa {
       if (status == Iyathuum::KeyStatus::RELEASE)
         _moveY = std::min(_moveY, 0.0f);
     }
+    if (button == Iyathuum::Key::KEY_F1) {
+      if (status == Iyathuum::KeyStatus::RELEASE)
+        _wireframe = !_wireframe;
+      Util::setWireframe(_wireframe);
+    }
+
     return true;
   }
 

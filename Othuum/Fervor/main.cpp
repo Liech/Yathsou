@@ -31,6 +31,7 @@ int main(int argc, char** argv) {
   std::shared_ptr<Athanah::SupComMeshRenderer> renderer;
   std::shared_ptr<Athanah::SupComModel> model = std::shared_ptr<Athanah::SupComModel>();
   std::vector<std::shared_ptr<Athanah::SupComMesh>> meshes;
+  std::string animName;
   w.Startup = [&]() {
     renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
     std::string unit = "UEL0208";
@@ -38,7 +39,7 @@ int main(int argc, char** argv) {
     std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
 
     model = std::make_shared<Athanah::SupComModel>(lpt, unit);
-    std::string animName = model->availableAnimations()[0];
+    animName = model->availableAnimations()[0];
     for (int x = 0; x < 50; x++) {
       int y = 0;
       //for (int y = 0; y < 50; y++) {
@@ -59,7 +60,12 @@ int main(int argc, char** argv) {
     fps = std::make_unique<Ahwassa::FPS>(&w);
   };
 
+  float t = 0;
   w.Update = [&]() {
+    t += 0.01f;
+    meshes[0]->animation = model->getAnimation(animName, model->getAnimationLength(animName) * std::fmod(t,1));
+
+
     b.draw();
     renderer->draw();
     fps->draw();

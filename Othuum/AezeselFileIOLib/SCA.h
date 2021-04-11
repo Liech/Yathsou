@@ -8,6 +8,8 @@
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "HaasScriptingLib/lib/json.hpp"
 
+#include "VishalaNetworkLib/lib/json.hpp"
+
 //supreme commander animation format
 namespace Aezesel {
   class SCA
@@ -15,6 +17,7 @@ namespace Aezesel {
   public:
     struct data;
     SCA::data load(std::string filename);
+    static glm::mat4 QuatToMat(glm::quat q);
 
     struct bone
     {
@@ -36,8 +39,8 @@ namespace Aezesel {
       glm::quat                rotation; //can contain weird values. ignored by blender
       std::vector<frame>       animation;
 
-      //nlohmann::json toJson();
-      //void           fromJson(nlohmann::json);
+      nlohmann::json toJson();
+      void           fromJson(nlohmann::json);
     };
 
   private:
