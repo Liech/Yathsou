@@ -10,7 +10,7 @@ In an recreational project the goals may change at any given time. Currently the
 
 # Current Work
 
-It is possible to render Supreme Commander Unit animations. The next step is to offer with EyeOfRhianne an actual ~product for investigating Supreme Commnader Units.
+It is possible to render Supreme Commander Unit animations. The next step is to offer with EyeOfRhianne an actual ~product for investigating Supreme Commander Units.
 
 # Libraries
 
@@ -58,7 +58,6 @@ Offers:
  * renderer
  * play sound (prototype)
  * GUI System
- * YolonaOss is beeing migrated to this
  * interact with vr (prototype)
 
 ## AezeselFileIOLib
@@ -114,13 +113,13 @@ Offers:
 
 Not all Libs are listed yet.
 
-Some are not worth any mentioning yet.
+Most are not worth any mentioning yet.
 
 # Build and Run
 
 Start Project is Othuum.
 
-Working Directory should be changed to $(TargetDir).
+Fervor is my personal playground.
 
 Use Visual Studio 2019 and Windows.
 
