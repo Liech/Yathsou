@@ -34,10 +34,11 @@ namespace Athanah {
     void loadMesh      (std::string unitDir, std::string unitName);
     void loadAnimation (std::string unitDir, std::string unitName);
 
+    glm::vec3 getTranslationVector(glm::mat4);
 
-    std::shared_ptr<Ahwassa::Texture> _albedo;
-    std::shared_ptr<Ahwassa::Texture> _info  ;
-    std::shared_ptr<Ahwassa::Texture> _normal;
+    std::shared_ptr<Ahwassa::Texture> _albedo = nullptr;
+    std::shared_ptr<Ahwassa::Texture> _info   = nullptr;
+    std::shared_ptr<Ahwassa::Texture> _normal = nullptr;
 
     std::shared_ptr<Aezesel::SCM::data>                       _model;
     std::map<std::string,std::shared_ptr<Aezesel::SCA::data>> _animations;

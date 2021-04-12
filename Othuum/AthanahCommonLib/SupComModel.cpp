@@ -103,12 +103,16 @@ namespace Athanah {
 
   void SupComModel::loadImages(std::string unitDir, std::string unitName) {
     std::string fullPath = unitDir + "\\" + unitName + "\\";
-    auto albedoArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_Albedo.dds");
-    auto infoArray   = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_SpecTeam.dds");
-    auto normalArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_normalsTS.dds");
-    _albedo = std::make_shared<Ahwassa::Texture>("Albedo", albedoArray.get());
-    _info   = std::make_shared<Ahwassa::Texture>("TeamSpec", infoArray.get());
-    _normal = std::make_shared<Ahwassa::Texture>("Normal", normalArray.get());
+    //auto albedoArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_Albedo.dds");
+    //auto infoArray   = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_SpecTeam.dds");
+    //auto normalArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_normalsTS.dds");
+    //_albedo = std::make_shared<Ahwassa::Texture>("Albedo", albedoArray.get());
+    //_info = std::make_shared<Ahwassa::Texture>("TeamSpec", infoArray.get());
+    //_normal = std::make_shared<Ahwassa::Texture>("Normal", normalArray.get());
+    
+    _albedo = std::make_shared<Ahwassa::Texture>("Albedo", 0);
+    _info = std::make_shared<Ahwassa::Texture>("TeamSpec", 0);
+    _normal = std::make_shared<Ahwassa::Texture>("Normal", 0);
   }
 
   std::vector<std::string> SupComModel::availableAnimations() const {
@@ -122,6 +126,9 @@ namespace Athanah {
     return _animations[name]->duration;
   }
 
+  glm::vec3 SupComModel::getTranslationVector(glm::mat4 mat) {
+    return glm::vec3(mat[3].x,mat[3].y,mat[3].z);
+  }
 
   std::vector<glm::mat4> SupComModel::wargh(const std::string& name, float time) {
     std::vector<glm::mat4> inverse;
@@ -159,6 +166,7 @@ namespace Athanah {
     auto& anim = _animations[name];
     int frameno = (int)((time / anim->duration) * (anim->animation.size() - 1)) + 1;
     Aezesel::SCA::frame frame = anim->animation[frameno];
+    
     std::vector<glm::mat4> rotation;
     for (int i = 0; i < frame.bones.size(); i++)
     {
@@ -167,6 +175,17 @@ namespace Athanah {
       glm::mat4 sub = Aezesel::SCA::QuatToMat(rot);
       rotation.push_back(sub);
     }
+
+    std::vector<glm::mat4> translation;
+    for (int i = 0; i < frame.bones.size(); i++)
+    {
+      glm::mat4 sub = glm::mat4(1.0);
+      //glm::vec3 forwardTrans = getTranslationVector(localForward[i]);
+
+      sub = glm::translate(sub, frame.bones[i].position);
+      translation.push_back(sub);
+    }
+
     std::map<std::string, int> preMap;
     std::map<int, int> animMap;
     for (int i = 0; i < anim->boneNames.size(); i++)
@@ -184,7 +203,7 @@ namespace Athanah {
         return glm::mat4(1);
       if (animMap[x] >= rotation.size())
         return glm::mat4(1);
-      return rotation[animMap[x]]; 
+      return translation[animMap[x]] * rotation[animMap[x]];
     };
 
     std::vector<glm::mat4> result;
@@ -194,7 +213,7 @@ namespace Athanah {
       glm::mat4 fwd = inverse[i];
       for (int chainIndex = 0; chainIndex < parentChain[i].size(); chainIndex++) {
         int p = parentChain[i][chainIndex];
-        fwd = localForward[p] * r(p) * fwd;
+        fwd =  r(p) * fwd;//localForward[p] *
       }
       result[i] = fwd;
     }
