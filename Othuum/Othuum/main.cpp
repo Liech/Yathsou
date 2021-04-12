@@ -27,16 +27,19 @@
 #include "OthuumGame.h"
 
 
+void enforceWorkingDir(std::string exeDir) {
+  const size_t last_slash_idx = exeDir.find_last_of("\\/");
+  if (std::string::npos != last_slash_idx)
+  {
+    exeDir.erase(last_slash_idx + 1);
+  }
+  std::filesystem::current_path(exeDir);
+}
+
 int main(int argc, char** argv) {
   {
-    
-    std::string exe = std::string(argv[0]);
-    const size_t last_slash_idx = exe.find_last_of("\\/");
-    if (std::string::npos != last_slash_idx)
-    {
-      exe.erase(last_slash_idx + 1);
-    }
-    std::filesystem::current_path(exe);
+    enforceWorkingDir(std::string(argv[0]));
+
     std::shared_ptr<ClientConfiguration> configuration = std::make_shared<ClientConfiguration>();
     std::shared_ptr<ClientState>         state = std::make_shared<ClientState>(configuration);
     std::string configFileName = "ClientConfiguration.json";
