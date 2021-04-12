@@ -10,7 +10,7 @@ In an recreational project the goals may change at any given time. Currently the
 
 # Current Work
 
-Currently the Graphics Library is improved. It was very simple and slow. Adding Instancing and Later Deffered Shading.
+It is possible to render Supreme Commander Unit animations. The next step is to offer with EyeOfRhianne an actual ~product for investigating Supreme Commnader Units.
 
 # Libraries
 
@@ -75,6 +75,17 @@ Offers:
  * PNG Load Save
  * SCM Load (Supreme Commander Model File)
  * SCA Load (Supreme Commander Animation File)
+ * MagicaVox loading
+
+## AthanahCommonLib
+
+Depends on soon ~every Project of the Solution.
+
+Collection of reusable cross library code (=everything). Will get too big and needs to be split up.
+
+Offers:
+ * Rendering of Supreme Commander Units & Animation
+ * Physics Debug Drawer
 
 ## SuthanusPhysicsLibrary
 
