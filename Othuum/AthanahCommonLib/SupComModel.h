@@ -27,12 +27,12 @@ namespace Athanah {
     std::vector<std::string> availableAnimations() const;
     float                    getAnimationLength(const std::string& name);
     std::vector<glm::mat4>   getAnimation(const std::string& name, float time);
-    std::vector<glm::mat4>   wargh(const std::string& name, float time);
 
   private:
     void loadImages    (std::string unitDir, std::string unitName);
     void loadMesh      (std::string unitDir, std::string unitName);
     void loadAnimation (std::string unitDir, std::string unitName);
+    void prepareAnimationHelper(std::string animationName);
 
     glm::vec3 getTranslationVector(glm::mat4);
 
@@ -40,8 +40,20 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::Texture> _info   = nullptr;
     std::shared_ptr<Ahwassa::Texture> _normal = nullptr;
 
-    std::shared_ptr<Aezesel::SCM::data>                       _model;
-    std::map<std::string,std::shared_ptr<Aezesel::SCA::data>> _animations;
-    std::shared_ptr<Ahwassa::Mesh<SupComVertex>>              _mesh;
+    std::shared_ptr<Aezesel::SCM::data>                        _model;
+    std::map<std::string, std::shared_ptr<Aezesel::SCA::data>> _animations;
+    std::shared_ptr<Ahwassa::Mesh<SupComVertex>>               _mesh;
+
+
+
+
+    //animation
+    struct animationHelper {
+      std::vector<std::vector<int>> parentChain;
+      std::map<int, int> animMap;
+      std::vector<glm::mat4> inverse;
+      std::vector<glm::mat4> forward;
+    };
+    std::map<std::string, animationHelper> _animationHelper;
   };
 }

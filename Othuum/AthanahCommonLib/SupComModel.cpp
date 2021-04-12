@@ -53,23 +53,9 @@ namespace Athanah {
         for (auto x : keyflags)
           std::cout << "    Keyflag: " << x << std::endl;
 
-
-        std::ofstream stream2;
-        stream2.open(unitName + "_" + animationName + "_anim.json");
-        nlohmann::json jd = anim->toJson();
-        stream2 << jd.dump(4);
-        stream2.close();
+        prepareAnimationHelper(animationName);
       }
     }
-
-
-    std::ofstream stream;
-    stream.open(unitName + "_model.json");
-    nlohmann::json j = _model->toJson();
-    stream << j.dump(4);
-    stream.close();
-
-
   }
 
   void SupComModel::loadMesh(std::string unitDir, std::string unitName) {
@@ -103,16 +89,16 @@ namespace Athanah {
 
   void SupComModel::loadImages(std::string unitDir, std::string unitName) {
     std::string fullPath = unitDir + "\\" + unitName + "\\";
-    //auto albedoArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_Albedo.dds");
-    //auto infoArray   = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_SpecTeam.dds");
-    //auto normalArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_normalsTS.dds");
-    //_albedo = std::make_shared<Ahwassa::Texture>("Albedo", albedoArray.get());
-    //_info = std::make_shared<Ahwassa::Texture>("TeamSpec", infoArray.get());
-    //_normal = std::make_shared<Ahwassa::Texture>("Normal", normalArray.get());
+    auto albedoArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_Albedo.dds");
+    auto infoArray   = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_SpecTeam.dds");
+    auto normalArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_normalsTS.dds");
+    _albedo = std::make_shared<Ahwassa::Texture>("Albedo", albedoArray.get());
+    _info = std::make_shared<Ahwassa::Texture>("TeamSpec", infoArray.get());
+    _normal = std::make_shared<Ahwassa::Texture>("Normal", normalArray.get());
     
-    _albedo = std::make_shared<Ahwassa::Texture>("Albedo", 0);
-    _info = std::make_shared<Ahwassa::Texture>("TeamSpec", 0);
-    _normal = std::make_shared<Ahwassa::Texture>("Normal", 0);
+    //_albedo = std::make_shared<Ahwassa::Texture>("Albedo", 0);
+    //_info = std::make_shared<Ahwassa::Texture>("TeamSpec", 0);
+    //_normal = std::make_shared<Ahwassa::Texture>("Normal", 0);
   }
 
   std::vector<std::string> SupComModel::availableAnimations() const {
@@ -130,29 +116,16 @@ namespace Athanah {
     return glm::vec3(mat[3].x,mat[3].y,mat[3].z);
   }
 
-  std::vector<glm::mat4> SupComModel::wargh(const std::string& name, float time) {
-    std::vector<glm::mat4> inverse;
-    std::vector<glm::mat4> forward;
-    inverse.resize(_model->bones.size());
-    forward.resize(_model->bones.size());
-    for (int i = 0; i < inverse.size(); i++) {
-      inverse[i] = _model->bones[i].relativeInverseMatrix;
-      forward[i] = glm::inverse(_model->bones[i].relativeInverseMatrix);
+  void SupComModel::prepareAnimationHelper(std::string animationName) {
+    _animationHelper[animationName] = animationHelper();
+    animationHelper& result = _animationHelper[animationName];
+     
+    result.inverse.resize(_model->bones.size());
+    result.forward.resize(_model->bones.size());
+    for (int i = 0; i < result.inverse.size(); i++) {
+      result.inverse[i] = _model->bones[i].relativeInverseMatrix;
+      result.forward[i] = glm::inverse(_model->bones[i].relativeInverseMatrix);
     }
-
-    std::vector<glm::mat4> localForward;
-    for (int i = 0; i < _model->bones.size(); i++) {
-      glm::mat4 local;
-      int parentIndex = _model->bones[i].parentIndex;
-      if (parentIndex != -1)
-        local = forward[i] * inverse[parentIndex];
-      else
-        local = forward[i];
-
-      localForward.push_back(local);
-    }
-
-    std::vector<std::vector<int>> parentChain;
 
     for (int i = 0; i < _model->bones.size(); i++) {
       std::vector<int> chain;
@@ -160,45 +133,56 @@ namespace Athanah {
 
       while (_model->bones[chain.back()].parentIndex != -1)
         chain.push_back(_model->bones[chain.back()].parentIndex);
-      parentChain.push_back(chain);
+      result.parentChain.push_back(chain);
     }
 
+    auto& anim = _animations[animationName];
+    std::map<std::string, int> preMap;
+    for (int i = 0; i < anim->boneNames.size(); i++)
+      preMap[anim->boneNames[i]] = i;
+    for (int i = 0; i < _model->boneNames.size(); i++)
+    {
+      if (preMap.count(_model->bones[i].name) != 0)
+        result.animMap[i] = preMap[_model->bones[i].name] + 1;
+      else
+        result.animMap[i] = 0;
+    }
+  }
+
+  std::vector<glm::mat4> SupComModel::getAnimation(const std::string& name, float time) {
+    //this function is not really fast. But somewhat correct.
+    //faster things could be developed based on this.
+
+    animationHelper&               helper     = _animationHelper[name];
+    std::map<int, int>&            animMap    = helper.animMap;
+    std::vector<glm::mat4>&        inverse    = helper.inverse;
+    std::vector<glm::mat4>&        forward    = helper.forward;
+    std::vector<std::vector<int>>& parentChain= helper.parentChain;
+    
     auto& anim = _animations[name];
     int frameno = (int)((time / anim->duration) * (anim->animation.size() - 1)) + 1;
-    Aezesel::SCA::frame frame = anim->animation[frameno];
-    
+    Aezesel::SCA::frame& frame = anim->animation[frameno];
+
     std::vector<glm::mat4> rotation;
+    rotation.resize(frame.bones.size());
     for (int i = 0; i < frame.bones.size(); i++)
     {
       glm::quat iden = glm::identity<glm::quat>();
       glm::quat rot = glm::normalize(frame.bones[i].rotation);
       glm::mat4 sub = Aezesel::SCA::QuatToMat(rot);
-      rotation.push_back(sub);
+      rotation[i] = sub;
     }
 
     std::vector<glm::mat4> translation;
+    translation.resize(frame.bones.size());
     for (int i = 0; i < frame.bones.size(); i++)
     {
       glm::mat4 sub = glm::mat4(1.0);
-      //glm::vec3 forwardTrans = getTranslationVector(localForward[i]);
-
       sub = glm::translate(sub, frame.bones[i].position);
-      translation.push_back(sub);
+      translation[i] = sub;
     }
 
-    std::map<std::string, int> preMap;
-    std::map<int, int> animMap;
-    for (int i = 0; i < anim->boneNames.size(); i++)
-      preMap[anim->boneNames[i]] = i;
-    for(int i =0;i < _model->boneNames.size();i++)
-    {
-      if (preMap.count(_model->bones[i].name) != 0)
-        animMap[i] = preMap[_model->bones[i].name]+1;
-      else
-        animMap[i] = 0;
-    }
-
-    auto r = [&](int x) { 
+    auto r = [&](int x) {
       if (rotation.size() <= x)
         return glm::mat4(1);
       if (animMap[x] >= rotation.size())
@@ -213,141 +197,10 @@ namespace Athanah {
       glm::mat4 fwd = inverse[i];
       for (int chainIndex = 0; chainIndex < parentChain[i].size(); chainIndex++) {
         int p = parentChain[i][chainIndex];
-        fwd =  r(p) * fwd;//localForward[p] *
+        fwd = r(p) * fwd;
       }
       result[i] = fwd;
     }
-
-    //result[0]  =  localForward[0 ] *r(0)* inverse[0];
-    //result[1]  =  localForward[0 ] *r(0)*  localForward[1 ] *r(1) * inverse[1];
-    //result[2]  =  localForward[0 ] *r(0)*  localForward[2 ] *r(2) * inverse[2];
-    //result[3]  =  localForward[0 ] *r(0)*  localForward[3 ] *r(3) * inverse[3];
-    //result[4]  =  localForward[0 ] *r(0)*  localForward[2 ] *r(2) * localForward[4] *r(4)* inverse[4];
-    //result[5]  =  localForward[0 ] *r(0)*  localForward[2 ] *r(2) * localForward[4] *r(4)* localForward[5] *r(5)* inverse[5];
-    //result[6]  =  localForward[0 ] *r(0)*  localForward[2 ] *r(2) * localForward[4] *r(4)* localForward[5] *r(5)* localForward[6] * r(6)* inverse[6];
-    //result[7]  =  localForward[0 ] *r(0)*  localForward[7 ] *r(7) * inverse[7];
-    //result[8]  =  localForward[0 ] *r(0)*  localForward[8 ] *r(8) * inverse[8];
-    //result[9]  =  localForward[0 ] *r(0)*  localForward[9 ] *r(9) * inverse[9];
-    //result[10] =  localForward[0 ] *r(0)*  localForward[10] *r(10)* inverse[10];
-    //result[11] =  localForward[0 ] *r(0)*  localForward[11] *r(11)* inverse[11];
-    //result[12] =  localForward[0 ] *r(0)*  localForward[12] *r(12)* inverse[12];
-    return result;
-  }
-
-  std::vector<glm::mat4> SupComModel::getAnimation(const std::string& name, float time) {
-
-    std::vector<glm::mat4> result;
-    auto& anim = _animations[name];
-    result.resize(_model->bones.size());
-    for (int i = 0; i < result.size(); i++)
-      result[i] = glm::mat4(1.0f);
-
-    std::vector<std::string> modelBonesp;
-    std::map<std::string, int> modelBones;
-    for (int i = 0; i < _model->bones.size(); i++) {
-      modelBones[_model->bones[i].name] = i;
-      modelBonesp.push_back(std::to_string(i)+ "__" + _model->bones[i].name + "__" + std::to_string(_model->bones[i].parentIndex));
-    }
-    std::map<std::string, int> animBones;
-    for (int i = 0; i < anim->boneNames.size(); i++)
-      animBones[anim->boneNames[i]] = i;
-
-    auto anim2model = [&](int animationBone) {
-      if (animationBone == -1)
-        return -1;
-      auto animBoneName = anim->boneNames[animationBone];
-      if (modelBones.count(animBoneName) == 0)
-        return 0;
-      else
-        return modelBones[animBoneName];
-    };
-
-    auto model2anim = [&](int modelBone) {
-      if (modelBone == -1)
-        return -1;
-      auto modelBoneName = _model->boneNames[modelBone];      
-      if (animBones.count(modelBoneName) == 0)
-        return 0;
-      else
-        return animBones[modelBoneName];
-    };
-
-    std::vector<glm::mat4> inverse;
-    std::vector<glm::mat4> forward;
-    inverse.resize(anim->boneNames.size());
-    forward.resize(anim->boneNames.size());
-    for (int i = 0; i < inverse.size(); i++) {
-      inverse[i] = _model->bones[anim2model(i)].relativeInverseMatrix;
-      forward[i] = glm::inverse(_model->bones[anim2model(i)].relativeInverseMatrix);
-    }
-
-    std::vector<std::vector<int>> boneChain;
-
-    for (int i = 0; i < anim->boneNames.size(); i++) {
-      std::vector<int> chain;
-      chain.push_back(i);
-      
-      while (_model->bones[anim2model(chain.back())].parentIndex != -1)
-        chain.push_back(model2anim(_model->bones[anim2model(chain.back())].parentIndex));
-      boneChain.push_back(chain);
-    }
-
-    int frameno = (int)((time / anim->duration) * (anim->animation.size()-1)) + 1;
-    Aezesel::SCA::frame frame = anim->animation[frameno];
-
-    std::vector<glm::mat4> rotation;
-    for (int i = 0; i < frame.bones.size(); i++)
-    {
-      glm::quat iden = glm::identity<glm::quat>();
-      glm::quat rot = glm::normalize(frame.bones[i].rotation);
-      glm::mat4 sub = Aezesel::SCA::QuatToMat(rot);
-      rotation.push_back(sub);
-    }
-    rotation.push_back(glm::mat4(1));
-
-    std::vector<glm::mat4> translation;
-    for (int i = 0; i < frame.bones.size(); i++)
-    {
-      glm::mat4 sub = glm::mat4(1.0);
-      sub = glm::translate(sub, frame.bones[i].position);
-      translation.push_back(sub);
-    }
-
-    std::vector<glm::mat4> localForward;
-    for (int i = 0; i < frame.bones.size(); i++) {
-      glm::mat4 local;
-      int parentIndex = model2anim(_model->bones[anim2model(i)].parentIndex);
-      if (parentIndex != -1)
-        local = forward[i] * inverse[parentIndex];
-      else
-        local = forward[i];
-
-      localForward.push_back(local);
-    }
-
-
-    for (int i = 0; i < inverse.size(); i++) {
-      glm::mat4 fwd = glm::mat4(1.0);
-      for(int chainIndex = 0; chainIndex < boneChain[i].size(); chainIndex++){
-        int p = boneChain[i][chainIndex];
-        fwd = localForward[p]* rotation[p + 1] * fwd;        
-      }
-      result[anim2model(i)] = fwd*inverse[i];
-    }
-
-    std::map<std::string, glm::mat4> rrresssuuult;
-    for (int i = 0; i < result.size(); i++) {
-      rrresssuuult[_model->boneNames[i]] = result[i];
-    }
-
-
-    std::map<int, int> model2animmap;
-    for (int i = 0; i < _model->boneNames.size(); i++)
-      model2animmap[i] = model2anim(i);
-
-
-    return wargh(name,time);
-
 
     return result;
   }
