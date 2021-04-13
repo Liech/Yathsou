@@ -1,17 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseWithDbg|Win32">
-      <Configuration>ReleaseWithDbg</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="ReleaseWithDbg|x64">
-      <Configuration>ReleaseWithDbg</Configuration>
-      <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
@@ -28,18 +20,13 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{62844E10-BEDE-4454-88CC-1F614B008B75}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{5cf2749e-0398-4d21-89c8-c6e0b8e8b407}</ProjectGuid>
     <RootNamespace>AhwassaGraphicsLib</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
@@ -57,22 +44,13 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>PGInstrument</WholeProgramOptimization>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -82,89 +60,53 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <OpenMPSupport>true</OpenMPSupport>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(ProjectDir)lib/glad/include;$(ProjectDir)lib/GLWF/include;$(ProjectDir)lib/freetype/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-    </ProjectReference>
-    <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
-    </Lib>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -174,50 +116,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <OpenMPSupport>true</OpenMPSupport>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(ProjectDir)lib/glad/include;$(ProjectDir)lib/GLWF/include;$(ProjectDir)lib/freetype/include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-    </ProjectReference>
     <Lib>
       <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <OpenMPSupport>true</OpenMPSupport>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(ProjectDir)lib/glad/include;$(ProjectDir)lib/GLWF/include;$(ProjectDir)lib/freetype/include</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;%(AdditionalDependencies)</AdditionalDependencies>
-    </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-    </ProjectReference>
-    <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
-    </Lib>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -225,6 +135,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(ProjectDir)lib/glad/include;$(ProjectDir)lib/GLWF/include;$(ProjectDir)lib/freetype/include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -232,99 +144,10 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <Lib>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
+    </Lib>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="BasicRenderer\BasicBoxRenderer.h" />
-    <ClInclude Include="BasicRenderer\BasicMeshRenderer.h" />
-    <ClInclude Include="BasicRenderer\BasicRectangleRenderer.h" />
-    <ClInclude Include="BasicRenderer\BasicTextRenderer.h" />
-    <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h" />
-    <ClInclude Include="BufferObjects\IBO.h" />
-    <ClInclude Include="BufferObjects\IMesh.h" />
-    <ClInclude Include="BufferObjects\VAO.h" />
-    <ClInclude Include="BufferObjects\IVBO.h" />
-    <ClInclude Include="BufferObjects\Mesh.h" />
-    <ClInclude Include="BufferObjects\VBO.h" />
-    <ClInclude Include="Core\AttributeDescription.h" />
-    <ClInclude Include="Core\Camera.h" />
-    <ClInclude Include="Core\Renderer.h" />
-    <ClInclude Include="Core\ShaderProgram.h" />
-    <ClInclude Include="Core\Window.h" />
-    <ClInclude Include="Drawables\Background.h" />
-    <ClInclude Include="Drawables\Drawable.h" />
-    <ClInclude Include="Drawables\FPS.h" />
-    <ClInclude Include="Input\FreeCamera.h" />
-    <ClInclude Include="Input\Input.h" />
-    <ClInclude Include="Input\UIElement.h" />
-    <ClInclude Include="lib\freetype\include\ft2build.h" />
-    <ClInclude Include="lib\glad\include\glad\glad.h" />
-    <ClInclude Include="lib\glad\include\KHR\khrplatform.h" />
-    <ClInclude Include="lib\GLWF\include\GLFW\glfw3.h" />
-    <ClInclude Include="lib\GLWF\include\GLFW\glfw3native.h" />
-    <ClInclude Include="lib\openvr\openvr.h" />
-    <ClInclude Include="lib\openvr\openvr_capi.h" />
-    <ClInclude Include="lib\openvr\openvr_driver.h" />
-    <ClInclude Include="Renderer\Box.h" />
-    <ClInclude Include="Renderer\BoxRenderer.h" />
-    <ClInclude Include="Renderer\DiffuseMeshRenderer.h" />
-    <ClInclude Include="Renderer\Dot.h" />
-    <ClInclude Include="Renderer\IBox.h" />
-    <ClInclude Include="Renderer\Line.h" />
-    <ClInclude Include="Renderer\Rectangle.h" />
-    <ClInclude Include="Renderer\RectangleRenderer.h" />
-    <ClInclude Include="Renderer\Sphere.h" />
-    <ClInclude Include="Renderer\SphereRenderer.h" />
-    <ClInclude Include="Renderer\Text.h" />
-    <ClInclude Include="Uniforms\InstancedVecMat4.h" />
-    <ClInclude Include="Uniforms\InstancedVecVec3.h" />
-    <ClInclude Include="Uniforms\Rendertarget.h" />
-    <ClInclude Include="Uniforms\SSBOint.h" />
-    <ClInclude Include="Uniforms\SSBOmat4.h" />
-    <ClInclude Include="Uniforms\SSBOvec3.h" />
-    <ClInclude Include="Uniforms\SSBOvec4.h" />
-    <ClInclude Include="Uniforms\Texture.h" />
-    <ClInclude Include="Uniforms\Uniform.h" />
-    <ClInclude Include="Uniforms\UniformFloat.h" />
-    <ClInclude Include="Uniforms\UniformMat4.h" />
-    <ClInclude Include="Uniforms\UniformVec2.h" />
-    <ClInclude Include="Uniforms\UniformVec3.h" />
-    <ClInclude Include="Uniforms\UniformVec4.h" />
-    <ClInclude Include="Uniforms\UniformVecMat4.h" />
-    <ClInclude Include="Uniforms\UniformVecTexture.h" />
-    <ClInclude Include="Uniforms\UniformVecVec2.h" />
-    <ClInclude Include="Uniforms\UniformVecVec3.h" />
-    <ClInclude Include="Util.h" />
-    <ClInclude Include="lib\libnyquist\Common.h" />
-    <ClInclude Include="lib\libnyquist\Decoders.h" />
-    <ClInclude Include="lib\libnyquist\Encoders.h" />
-    <ClInclude Include="lib\portaudio\pa_asio.h" />
-    <ClInclude Include="lib\portaudio\pa_jack.h" />
-    <ClInclude Include="lib\portaudio\pa_linux_alsa.h" />
-    <ClInclude Include="lib\portaudio\pa_mac_core.h" />
-    <ClInclude Include="lib\portaudio\pa_win_ds.h" />
-    <ClInclude Include="lib\portaudio\pa_win_wasapi.h" />
-    <ClInclude Include="lib\portaudio\pa_win_waveformat.h" />
-    <ClInclude Include="lib\portaudio\pa_win_wdmks.h" />
-    <ClInclude Include="lib\portaudio\pa_win_wmme.h" />
-    <ClInclude Include="lib\portaudio\portaudio.h" />
-    <ClInclude Include="sound\sound.h" />
-    <ClInclude Include="sound\SoundEngine.h" />
-    <ClInclude Include="sound\SoundHandler.h" />
-    <ClInclude Include="Vertex\IVertex.h" />
-    <ClInclude Include="Vertex\PositionColorNormalVertex.h" />
-    <ClInclude Include="Vertex\PositionColorVertex.h" />
-    <ClInclude Include="Vertex\PositionNormalTextureVertex.h" />
-    <ClInclude Include="Vertex\PositionNormalVertex.h" />
-    <ClInclude Include="Vertex\PositionTextureVertex.h" />
-    <ClInclude Include="Vertex\PositionVertex.h" />
-    <ClInclude Include="VR\VRController.h" />
-    <ClInclude Include="VR\VR.h" />
-    <ClInclude Include="Widgets\Button.h" />
-    <ClInclude Include="Widgets\Label.h" />
-    <ClInclude Include="Widgets\LineEdit.h" />
-    <ClInclude Include="Widgets\ListLayout.h" />
-    <ClInclude Include="Widgets\Slider.h" />
-  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicRenderer\BasicBoxRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicMeshRenderer.cpp" />
@@ -332,9 +155,9 @@
     <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp" />
     <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp" />
     <ClCompile Include="BufferObjects\IBO.cpp" />
-    <ClCompile Include="BufferObjects\VAO.cpp" />
     <ClCompile Include="BufferObjects\IVBO.cpp" />
     <ClCompile Include="BufferObjects\Mesh.cpp" />
+    <ClCompile Include="BufferObjects\VAO.cpp" />
     <ClCompile Include="BufferObjects\VBO.cpp" />
     <ClCompile Include="Core\AttributeDescription.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
@@ -358,6 +181,9 @@
     <ClCompile Include="Renderer\Sphere.cpp" />
     <ClCompile Include="Renderer\SphereRenderer.cpp" />
     <ClCompile Include="Renderer\Text.cpp" />
+    <ClCompile Include="Sound\sound.cpp" />
+    <ClCompile Include="Sound\SoundEngine.cpp" />
+    <ClCompile Include="Sound\SoundHandler.cpp" />
     <ClCompile Include="Uniforms\InstancedVecMat4.cpp" />
     <ClCompile Include="Uniforms\InstancedVecVec3.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />
@@ -377,9 +203,6 @@
     <ClCompile Include="Uniforms\UniformVecVec2.cpp" />
     <ClCompile Include="Uniforms\UniformVecVec3.cpp" />
     <ClCompile Include="Util.cpp" />
-    <ClCompile Include="sound\sound.cpp" />
-    <ClCompile Include="sound\SoundEngine.cpp" />
-    <ClCompile Include="sound\SoundHandler.cpp" />
     <ClCompile Include="Vertex\IVertex.cpp" />
     <ClCompile Include="Vertex\PositionColorNormalVertex.cpp" />
     <ClCompile Include="Vertex\PositionColorVertex.cpp" />
@@ -387,8 +210,9 @@
     <ClCompile Include="Vertex\PositionNormalVertex.cpp" />
     <ClCompile Include="Vertex\PositionTextureVertex.cpp" />
     <ClCompile Include="Vertex\PositionVertex.cpp" />
-    <ClCompile Include="VR\VRController.cpp" />
+    <ClCompile Include="Vertex\SupComVertex.cpp" />
     <ClCompile Include="VR\VR.cpp" />
+    <ClCompile Include="VR\VRController.cpp" />
     <ClCompile Include="Widgets\Button.cpp" />
     <ClCompile Include="Widgets\Label.cpp" />
     <ClCompile Include="Widgets\LineEdit.cpp" />
@@ -396,27 +220,195 @@
     <ClCompile Include="Widgets\Slider.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="Data\Fonts\arial.ttf">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-      <FileType>Document</FileType>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">true</DeploymentContent>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)/Data/Fonts</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)/Data/Fonts</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">$(TargetDir)/Data/Fonts</DestinationFolders>
-    </CopyFileToFolders>
+    <ClInclude Include="BasicRenderer\BasicBoxRenderer.h" />
+    <ClInclude Include="BasicRenderer\BasicMeshRenderer.h" />
+    <ClInclude Include="BasicRenderer\BasicRectangleRenderer.h" />
+    <ClInclude Include="BasicRenderer\BasicTextRenderer.h" />
+    <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h" />
+    <ClInclude Include="BufferObjects\IBO.h" />
+    <ClInclude Include="BufferObjects\IMesh.h" />
+    <ClInclude Include="BufferObjects\IVBO.h" />
+    <ClInclude Include="BufferObjects\Mesh.h" />
+    <ClInclude Include="BufferObjects\VAO.h" />
+    <ClInclude Include="BufferObjects\VBO.h" />
+    <ClInclude Include="Core\AttributeDescription.h" />
+    <ClInclude Include="Core\Camera.h" />
+    <ClInclude Include="Core\Renderer.h" />
+    <ClInclude Include="Core\ShaderProgram.h" />
+    <ClInclude Include="Core\Window.h" />
+    <ClInclude Include="Drawables\Background.h" />
+    <ClInclude Include="Drawables\Drawable.h" />
+    <ClInclude Include="Drawables\FPS.h" />
+    <ClInclude Include="Input\FreeCamera.h" />
+    <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Input\UIElement.h" />
+    <ClInclude Include="lib\freetype\include\freetype\config\ftconfig.h" />
+    <ClInclude Include="lib\freetype\include\freetype\config\ftheader.h" />
+    <ClInclude Include="lib\freetype\include\freetype\config\ftmodule.h" />
+    <ClInclude Include="lib\freetype\include\freetype\config\ftoption.h" />
+    <ClInclude Include="lib\freetype\include\freetype\config\ftstdlib.h" />
+    <ClInclude Include="lib\freetype\include\freetype\freetype.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftadvanc.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftbbox.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftbdf.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftbitmap.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftbzip2.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftcache.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftchapters.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftcid.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftcolor.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftdriver.h" />
+    <ClInclude Include="lib\freetype\include\freetype\fterrdef.h" />
+    <ClInclude Include="lib\freetype\include\freetype\fterrors.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftfntfmt.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftgasp.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftglyph.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftgxval.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftgzip.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftimage.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftincrem.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftlcdfil.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftlist.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftlzw.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftmac.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftmm.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftmodapi.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftmoderr.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftotval.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftoutln.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftparams.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftpfr.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftrender.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftsizes.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftsnames.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftstroke.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftsynth.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftsystem.h" />
+    <ClInclude Include="lib\freetype\include\freetype\fttrigon.h" />
+    <ClInclude Include="lib\freetype\include\freetype\fttypes.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ftwinfnt.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\autohint.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\cffotypes.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\cfftypes.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftcalc.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftdebug.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftdrv.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftgloadr.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\fthash.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftmemory.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftobjs.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftpsprop.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftrfork.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftserv.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftstream.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\fttrace.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\ftvalid.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\internal.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\psaux.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\pshints.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svbdf.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svcfftl.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svcid.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svfntfmt.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svgldict.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svgxval.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svkern.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svmetric.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svmm.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svotval.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svpfr.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svpostnm.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svprop.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svpscmap.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svpsinfo.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svsfnt.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svttcmap.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svtteng.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svttglyf.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\services\svwinfnt.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\sfnt.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\t1types.h" />
+    <ClInclude Include="lib\freetype\include\freetype\internal\tttypes.h" />
+    <ClInclude Include="lib\freetype\include\freetype\t1tables.h" />
+    <ClInclude Include="lib\freetype\include\freetype\ttnameid.h" />
+    <ClInclude Include="lib\freetype\include\freetype\tttables.h" />
+    <ClInclude Include="lib\freetype\include\freetype\tttags.h" />
+    <ClInclude Include="lib\freetype\include\ft2build.h" />
+    <ClInclude Include="lib\glad\include\glad\glad.h" />
+    <ClInclude Include="lib\glad\include\KHR\khrplatform.h" />
+    <ClInclude Include="lib\GLWF\include\GLFW\glfw3.h" />
+    <ClInclude Include="lib\GLWF\include\GLFW\glfw3native.h" />
+    <ClInclude Include="lib\libnyquist\Common.h" />
+    <ClInclude Include="lib\libnyquist\Decoders.h" />
+    <ClInclude Include="lib\libnyquist\Encoders.h" />
+    <ClInclude Include="lib\openvr\openvr.h" />
+    <ClInclude Include="lib\openvr\openvr_driver.h" />
+    <ClInclude Include="lib\portaudio\pa_asio.h" />
+    <ClInclude Include="lib\portaudio\pa_jack.h" />
+    <ClInclude Include="lib\portaudio\pa_linux_alsa.h" />
+    <ClInclude Include="lib\portaudio\pa_mac_core.h" />
+    <ClInclude Include="lib\portaudio\pa_win_ds.h" />
+    <ClInclude Include="lib\portaudio\pa_win_wasapi.h" />
+    <ClInclude Include="lib\portaudio\pa_win_waveformat.h" />
+    <ClInclude Include="lib\portaudio\pa_win_wdmks.h" />
+    <ClInclude Include="lib\portaudio\pa_win_wmme.h" />
+    <ClInclude Include="lib\portaudio\portaudio.h" />
+    <ClInclude Include="Renderer\BoxRenderer.h" />
+    <ClInclude Include="Renderer\DiffuseMeshRenderer.h" />
+    <ClInclude Include="Renderer\Dot.h" />
+    <ClInclude Include="Renderer\IBox.h" />
+    <ClInclude Include="Renderer\Line.h" />
+    <ClInclude Include="Renderer\Rectangle.h" />
+    <ClInclude Include="Renderer\RectangleRenderer.h" />
+    <ClInclude Include="Renderer\Sphere.h" />
+    <ClInclude Include="Renderer\SphereRenderer.h" />
+    <ClInclude Include="Sound\sound.h" />
+    <ClInclude Include="Sound\SoundEngine.h" />
+    <ClInclude Include="Sound\SoundHandler.h" />
+    <ClInclude Include="Uniforms\InstancedVecMat4.h" />
+    <ClInclude Include="Uniforms\InstancedVecVec3.h" />
+    <ClInclude Include="Uniforms\Rendertarget.h" />
+    <ClInclude Include="Uniforms\SSBOint.h" />
+    <ClInclude Include="Uniforms\SSBOmat4.h" />
+    <ClInclude Include="Uniforms\SSBOvec3.h" />
+    <ClInclude Include="Uniforms\SSBOvec4.h" />
+    <ClInclude Include="Uniforms\Texture.h" />
+    <ClInclude Include="Uniforms\Uniform.h" />
+    <ClInclude Include="Uniforms\UniformFloat.h" />
+    <ClInclude Include="Uniforms\UniformMat4.h" />
+    <ClInclude Include="Uniforms\UniformVec2.h" />
+    <ClInclude Include="Uniforms\UniformVec3.h" />
+    <ClInclude Include="Uniforms\UniformVec4.h" />
+    <ClInclude Include="Uniforms\UniformVecMat4.h" />
+    <ClInclude Include="Uniforms\UniformVecTexture.h" />
+    <ClInclude Include="Uniforms\UniformVecVec2.h" />
+    <ClInclude Include="Uniforms\UniformVecVec3.h" />
+    <ClInclude Include="Util.h" />
+    <ClInclude Include="Vertex\IVertex.h" />
+    <ClInclude Include="Vertex\PositionColorNormalVertex.h" />
+    <ClInclude Include="Vertex\PositionColorVertex.h" />
+    <ClInclude Include="Vertex\PositionNormalTextureVertex.h" />
+    <ClInclude Include="Vertex\PositionNormalVertex.h" />
+    <ClInclude Include="Vertex\PositionTextureVertex.h" />
+    <ClInclude Include="Vertex\PositionVertex.h" />
+    <ClInclude Include="Vertex\SupComVertex.h" />
+    <ClInclude Include="VR\VR.h" />
+    <ClInclude Include="VR\VRController.h" />
+    <ClInclude Include="Widgets\Button.h" />
+    <ClInclude Include="Widgets\Label.h" />
+    <ClInclude Include="Widgets\LineEdit.h" />
+    <ClInclude Include="Widgets\ListLayout.h" />
+    <ClInclude Include="Widgets\Slider.h" />
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="Data\Textures\Map.png">
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)/Data/Textures</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)/Data/Textures</DestinationFolders>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">$(TargetDir)/Data/Textures</DestinationFolders>
+    <CopyFileToFolders Include="Data\Fonts\arial.ttf">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)Data/Fonts</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="lib\openvr\openvr_api.dll">
       <FileType>Document</FileType>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
