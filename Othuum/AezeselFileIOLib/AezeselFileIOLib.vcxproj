@@ -209,6 +209,8 @@
     <ClInclude Include="lib\gli\transform.hpp" />
     <ClInclude Include="lib\gli\type.hpp" />
     <ClInclude Include="lib\gli\view.hpp" />
+    <ClInclude Include="lib\json.hpp" />
+    <ClInclude Include="lib\json_fwd.hpp" />
     <ClInclude Include="lib\lodepng\include\lodepng\lodepng.h" />
     <ClInclude Include="lib\lodepng\include\lodepng\lodepng_util.h" />
     <ClInclude Include="lib\lodepng\lodepng.h" />
@@ -234,6 +236,7 @@
     <ClInclude Include="SCA.h" />
     <ClInclude Include="SCM.h" />
     <ClInclude Include="SCMAP.h" />
+    <ClInclude Include="SupremeCommanderAnimator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageIO.cpp" />
@@ -263,6 +266,7 @@
     <ClCompile Include="SCA.cpp" />
     <ClCompile Include="SCM.cpp" />
     <ClCompile Include="SCMAP.cpp" />
+    <ClCompile Include="SupremeCommanderAnimator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="lib\gli\core\bc.inl" />

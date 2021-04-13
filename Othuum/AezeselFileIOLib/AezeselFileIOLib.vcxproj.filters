@@ -267,6 +267,15 @@
     <ClInclude Include="MagicaVox\ChunkXYZI.h">
       <Filter>Header Files\MagickaVox</Filter>
     </ClInclude>
+    <ClInclude Include="lib\json.hpp">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\json_fwd.hpp">
+      <Filter>lib</Filter>
+    </ClInclude>
+    <ClInclude Include="SupremeCommanderAnimator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageIO.cpp">
@@ -349,6 +358,9 @@
     </ClCompile>
     <ClCompile Include="MagicaVox\VoxFile.cpp">
       <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="SupremeCommanderAnimator.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

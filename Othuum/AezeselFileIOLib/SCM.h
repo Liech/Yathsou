@@ -7,9 +7,7 @@
 #include "IyathuumCoreLib/lib/glm/vec3.hpp"
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
-#include "VishalaNetworkLib/lib/json.hpp"
-
-#include "VishalaNetworkLib/lib/json.hpp"
+#include "AezeselFileIOLib/lib/json.hpp"
 
 //based on
 //https://github.com/Oygron/SupCom_Import_Export_Blender/blob/master/supcom-importer.py

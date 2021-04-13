@@ -28,10 +28,10 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  //int width = 800;
-  //int height = 600;
-  int width = 1920;
-  int height = 1080;
+  int width = 800;
+  int height = 600;
+  //int width = 1920;
+  //int height = 1080;
 
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
     std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
     std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
 
-    model = std::make_shared<Athanah::SupComModel>(pc, unit);
+    model = std::make_shared<Athanah::SupComModel>(lpt, unit);
     animName = model->availableAnimations()[animationNumber];
     for (int x = 0; x < 2; x++) {
       std::shared_ptr<Athanah::SupComMesh> mesh = std::make_shared<Athanah::SupComMesh>();

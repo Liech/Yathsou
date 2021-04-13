@@ -6,9 +6,7 @@
 #include "IyathuumCoreLib/lib/glm/vec3.hpp"
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
-#include "HaasScriptingLib/lib/json.hpp"
-
-#include "VishalaNetworkLib/lib/json.hpp"
+#include "AezeselFileIOLib/lib/json.hpp"
 
 //supreme commander animation format
 namespace Aezesel {

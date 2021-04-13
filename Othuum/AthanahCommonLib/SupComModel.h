@@ -11,6 +11,9 @@
 namespace Ahwassa {
   class Texture;
 }
+namespace Aezesel {
+  class SupremeCommanderAnimator;
+}
 
 namespace Athanah {
   
@@ -32,7 +35,6 @@ namespace Athanah {
     void loadImages    (std::string unitDir, std::string unitName);
     void loadMesh      (std::string unitDir, std::string unitName);
     void loadAnimation (std::string unitDir, std::string unitName);
-    void prepareAnimationHelper(std::string animationName);
 
     glm::vec3 getTranslationVector(glm::mat4);
 
@@ -40,20 +42,9 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::Texture> _info   = nullptr;
     std::shared_ptr<Ahwassa::Texture> _normal = nullptr;
 
-    std::shared_ptr<Aezesel::SCM::data>                        _model;
-    std::map<std::string, std::shared_ptr<Aezesel::SCA::data>> _animations;
-    std::shared_ptr<Ahwassa::Mesh<SupComVertex>>               _mesh;
-
-
-
-
-    //animation
-    struct animationHelper {
-      std::vector<std::vector<int>> parentChain;
-      std::map<int, int> animMap;
-      std::vector<glm::mat4> inverse;
-      std::vector<glm::mat4> forward;
-    };
-    std::map<std::string, animationHelper> _animationHelper;
+    std::shared_ptr<Aezesel::SCM::data>                                       _model;
+    std::map<std::string, std::shared_ptr<Aezesel::SCA::data>>                _animations;
+    std::map<std::string, std::shared_ptr<Aezesel::SupremeCommanderAnimator>> _animator;
+    std::shared_ptr<Ahwassa::Mesh<SupComVertex>>                              _mesh;
   };
 }
