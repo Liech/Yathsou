@@ -37,10 +37,10 @@ namespace Aezesel {
       throw std::runtime_error("Unsupported version");
 
     result.boneNames = readBoneNames(boneoffset);
-    result.bones = readBones(boneoffset, totalbonecount, result.boneNames);
+    result.bones     = readBones(boneoffset, totalbonecount, result.boneNames);
     result.vertecies = readVertices(vertoffset, vertcount);
-    result.indices = readInidices(indexoffset, indexcount);
-    result.info = readInfo(infooffset, infocount);
+    result.indices   = readInidices(indexoffset, indexcount);
+    result.info      = readInfo(infooffset, infocount);
 
     return result;
   }
@@ -246,5 +246,151 @@ namespace Aezesel {
   
   void SCM::data::fromJson(const nlohmann::json&) {
   
+  }
+
+  void SCM::save(std::string filename, const SCM::data& data) {
+    std::ofstream outfile(filename, std::ofstream::binary);
+
+    writeString(outfile, "MODL");
+    writeInt(outfile, 5);
+
+    size_t boneOffsetPos = outfile.tellp();
+    writeInt(outfile, 0); //boneoffset
+    writeInt(outfile, data.bones.size());
+    size_t vertexOffsetPos = outfile.tellp();
+    writeInt(outfile, 0); //vertex offset
+
+    //int extravertoffset = readInt(_buffer, _fileposition); //unused
+    //int vertcount = readInt(_buffer, _fileposition);
+    //int indexoffset = readInt(_buffer, _fileposition);
+    //int indexcount = readInt(_buffer, _fileposition);
+    //int infooffset = readInt(_buffer, _fileposition);
+    //int infocount = readInt(_buffer, _fileposition);
+    //int totalbonecount = readInt(_buffer, _fileposition);
+    //
+    //if (marker != "MODL")
+    //  throw std::runtime_error("File not scm");
+    //if (version != 5)
+    //  throw std::runtime_error("Unsupported version");
+    //
+    //result.boneNames = readBoneNames(boneoffset);
+    //result.bones = readBones(boneoffset, totalbonecount, result.boneNames);
+    //result.vertecies = readVertices(vertoffset, vertcount);
+    //result.indices = readInidices(indexoffset, indexcount);
+    //result.info = readInfo(infooffset, infocount);
+  }
+
+  void SCM::writeBoneNames(std::ofstream& stream, const SCM::data& data) {
+    char seperator = '\0';
+    for (int i = 0; i < data.boneNames.size(); i++) {
+      stream.write(data.boneNames[i].c_str(), data.boneNames[i].size());
+      if (data.boneNames.size() - 1 != i)
+        stream.write(&seperator, 1);
+    }
+  }
+
+  void SCM::writeBones(std::ofstream& stream, const SCM::data& data) {
+   for (int i = 0; i < data.bones.size(); i++)
+    {
+      const bone& sub = data.bones[i];
+      const float* relInverse = (const float*)glm::value_ptr(sub.relativeInverseMatrix);
+      for (int i = 0; i < 16; i++)
+        writeFloat(stream, relInverse[i]);
+      writeFloat(stream, sub.position[0]);
+      writeFloat(stream, sub.position[1]);
+      writeFloat(stream, sub.position[2]);
+      writeFloat(stream, sub.rotation[0]);
+      writeFloat(stream, sub.rotation[1]);
+      writeFloat(stream, sub.rotation[2]);
+      writeFloat(stream, sub.rotation[3]);
+      int dummy = 0;
+      writeInt(stream, dummy);
+      writeInt(stream, sub.parentIndex);
+      writeInt(stream, dummy);
+      writeInt(stream, dummy);
+    }
+  }
+
+  void SCM::writeVertices(std::ofstream& stream, const SCM::data& data) {
+    for (int i = 0; i < data.vertecies.size(); i++)
+    {
+      const vertex& sub = data.vertecies[i];
+
+      writeFloat(stream, sub.position[0]);
+      writeFloat(stream, sub.position[1]);
+      writeFloat(stream, sub.position[2]);
+
+      writeFloat(stream, sub.tangent[0]);
+      writeFloat(stream, sub.tangent[1]);
+      writeFloat(stream, sub.tangent[2]);
+
+      writeFloat(stream, sub.normal[0]);
+      writeFloat(stream, sub.normal[1]);
+      writeFloat(stream, sub.normal[2]);
+
+      writeFloat(stream, sub.binormal[0]);
+      writeFloat(stream, sub.binormal[1]);
+      writeFloat(stream, sub.binormal[2]);
+
+      writeFloat(stream, sub.uv1[0]);
+      writeFloat(stream, sub.uv1[1]);
+      writeFloat(stream, sub.uv2[0]);
+      writeFloat(stream, sub.uv2[1]);
+
+      stream.write((const char*)(&sub.boneIndex), 4);
+    }
+  }
+
+  void SCM::writeInidices(std::ofstream& stream, const SCM::data& data) {
+    for (int i = 0; i < data.indices.size(); i++)
+    {
+      const tri& sub = data.indices[i];
+      writeUShort(stream,sub.a);
+      writeUShort(stream,sub.b);
+      writeUShort(stream,sub.c);
+    }
+  }
+
+  void SCM::writeInfo(std::ofstream& stream, const SCM::data& data) {
+    char seperator = '\0';
+    for (int i = 0; i < data.info.size(); i++) {
+      stream.write(data.info[i].c_str(), data.info[i].size());
+      if (data.info.size() - 1 != i)
+        stream.write(&seperator, 1);
+    }
+  }
+
+  void SCM::writeString(std::ofstream& stream, const std::string& data) {
+    stream.write(data.c_str(), data.length());
+  }
+
+  void SCM::writeInt(std::ofstream& stream, const int& value) {
+    unsigned char bytes[4];
+    bytes[0] = ((value >> 24) & 0xFF);
+    bytes[1] = ((value >> 16) & 0xFF);
+    bytes[2] = ((value >> 8) & 0xFF);
+    bytes[3] = (value & 0xFF);
+    stream.write((const char*)(bytes), 4);
+  }
+
+  void SCM::writeUInt(std::ofstream& stream, const unsigned int& value) {
+    unsigned char bytes[4];
+    bytes[0] = ((value >> 24) & 0xFF);
+    bytes[1] = ((value >> 16) & 0xFF);
+    bytes[2] = ((value >> 8) & 0xFF);
+    bytes[3] = (value & 0xFF);
+    stream.write((const char*)(bytes), 4);
+  }
+
+  void SCM::writeFloat(std::ofstream& stream, const float& data) {
+    const float* a = &data;
+    const int* b = (const int*)a;
+    int    c = *b;
+    writeInt(stream, data);
+  }
+  
+  void SCM::writeUShort(std::ofstream& stream, const unsigned short& data) {
+    unsigned short* p = (unsigned short*)data;
+    stream.write((const char*)p, sizeof(unsigned short));
   }
 }

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
 #include <map>
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "IyathuumCoreLib/lib/glm/vec3.hpp"
@@ -12,10 +13,6 @@
 //based on
 //https://github.com/Oygron/SupCom_Import_Export_Blender/blob/master/supcom-importer.py
 
-
-//dds:https://github.com/septag/dds-ktx
-
-
 namespace Aezesel {
   //supreme commander model format
   class SCM
@@ -23,6 +20,7 @@ namespace Aezesel {
   public:
     struct data;
     SCM::data load(std::string filename);
+    static void save(std::string filename, const SCM::data&);
 
     struct bone {
       std::string   name;
@@ -75,6 +73,18 @@ namespace Aezesel {
     std::vector<vertex>      readVertices(int offset, int count);
     std::vector<tri>         readInidices(int offset, int count);
     std::vector<std::string> readInfo(int offset, int count);
+
+    static void writeString(std::ofstream&, const std::string&);
+    static void writeInt(std::ofstream&, const int&);
+    static void writeUInt(std::ofstream&, const unsigned int&);
+    static void writeUShort(std::ofstream&, const unsigned short&);
+    static void writeFloat(std::ofstream&, const float&);
+
+    static void writeBoneNames(std::ofstream&,const SCM::data&);
+    static void writeBones    (std::ofstream&,const SCM::data&);
+    static void writeVertices (std::ofstream&,const SCM::data&);
+    static void writeInidices (std::ofstream&,const SCM::data&);
+    static void writeInfo     (std::ofstream&,const SCM::data&);
 
     size_t      _fileposition = 0;
     std::vector<unsigned char> _buffer;
