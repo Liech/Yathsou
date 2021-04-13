@@ -43,9 +43,9 @@ namespace Aezesel {
       nlohmann::json toJson();
       void           fromJson(nlohmann::json);
     };
+    static glm::mat4 QuatToMat(glm::quat q);
 
   private:
-    static glm::mat4 QuatToMat(glm::quat q);
     std::vector<std::string> split(std::string, char seperator = '\0');
 
     std::string  readString(const std::vector<unsigned char>&, size_t& position, size_t size);
