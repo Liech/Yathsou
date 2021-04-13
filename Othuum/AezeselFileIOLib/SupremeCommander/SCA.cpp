@@ -1,5 +1,4 @@
 #include "SCA.h"
-#include <fstream>
 #include <iostream>
 #include <sstream>
 
@@ -221,4 +220,122 @@ namespace Aezesel {
       result += ((keyflags >> i) % 2) ? "1" : "0";
     return result;
   }
+
+
+  void SCA::save(std::string filename, const SCA::data& data) {
+    std::ofstream outfile(filename, std::ofstream::binary);
+
+    writeString(outfile, "ANIM");
+    writeInt   (outfile, 5);
+    writeInt   (outfile, data.animation.size());
+    writeFloat (outfile, data.duration);
+    writeInt   (outfile, data.boneNames.size());
+    
+    size_t offsetPosition = outfile.tellp();
+
+    //come back later to this
+    writeInt(outfile, 0); //names offset
+    writeInt(outfile, 0); //links offset
+    writeInt(outfile, 0); //animation offset
+    writeInt(outfile, 0); //framesize
+
+    size_t namesOffset = outfile.tellp();
+    writeBoneNames(outfile, data);
+    size_t linksOffset = outfile.tellp();
+    writeLinks(outfile, data);
+    writePosition(outfile,data);
+    writeRotation(outfile,data);
+    size_t animationOffset = outfile.tellp();
+    int frameSize = writeAnimation(outfile, data);
+
+    //now everything is known to go back
+    outfile.seekp(offsetPosition);
+    writeInt(outfile, namesOffset);
+    writeInt(outfile, linksOffset);
+    writeInt(outfile, animationOffset);
+    writeInt(outfile, frameSize);
+  }
+
+  void SCA::writeLinks(std::ofstream& stream, const SCA::data& data) {
+    for (int i = 0; i < data.boneLinks.size(); i++)
+      writeInt(stream, data.boneLinks[i]);
+  }
+
+  void SCA::writeBoneNames(std::ofstream& stream, const SCA::data& data) {
+    char seperator = '\0';
+    for (int i = 0; i < data.boneNames.size(); i++) {
+      stream.write(data.boneNames[i].c_str(), data.boneNames[i].size());
+      if (data.boneNames.size() - 1 != i)
+        stream.write(&seperator, 1);
+    }
+  }
+
+  void SCA::writePosition(std::ofstream& stream, const SCA::data& data) {
+    writeFloat(stream, data.position[0]);
+    writeFloat(stream, data.position[1]);
+    writeFloat(stream, data.position[2]);
+  }
+
+  void SCA::writeRotation(std::ofstream& stream, const SCA::data& data) {
+    writeFloat(stream, data.rotation[0]);
+    writeFloat(stream, data.rotation[1]);
+    writeFloat(stream, data.rotation[2]);
+    writeFloat(stream, data.rotation[3]);
+  }
+
+  int SCA::writeAnimation(std::ofstream& stream, const SCA::data& data) {
+    int framesize = 0;
+    for (int i = 0; i < data.animation.size(); i++)
+    {
+      int start = stream.tellp();
+      const frame& sub = data.animation[i];
+      writeFloat(stream, sub.keytime);
+      writeUInt(stream, sub.keyflags);
+
+      for (int j = 0; j < sub.bones.size(); j++)
+      {
+        const bone& b  = sub.bones[i];
+
+        writeFloat(stream,b.position[0]);
+        writeFloat(stream,b.position[1]);
+        writeFloat(stream,b.position[2]);
+        writeFloat(stream,b.rotation[3]);
+        writeFloat(stream,b.rotation[0]);
+        writeFloat(stream,b.rotation[1]);
+        writeFloat(stream,b.rotation[2]);
+      }
+      framesize = (int)stream.tellp() - start;
+    }
+    return framesize;
+  }
+
+  void SCA::writeString(std::ofstream& stream, const std::string& data) {
+    stream.write(data.c_str(),data.length());
+  }
+
+  void SCA::writeInt(std::ofstream& stream, const int& value) {
+    unsigned char bytes[4];
+    bytes[0] = ((value >> 24) & 0xFF);
+    bytes[1] = ((value >> 16) & 0xFF);
+    bytes[2] = ((value >> 8) & 0xFF);
+    bytes[3] = (value & 0xFF);
+    stream.write((const char*)(bytes), 4);
+  }
+
+  void SCA::writeUInt(std::ofstream& stream, const unsigned int& value) {
+    unsigned char bytes[4];
+    bytes[0] = ((value >> 24) & 0xFF);
+    bytes[1] = ((value >> 16) & 0xFF);
+    bytes[2] = ((value >> 8) & 0xFF);
+    bytes[3] = (value & 0xFF);
+    stream.write((const char*)(bytes), 4);
+  }
+
+  void SCA::writeFloat(std::ofstream& stream, const float&data) {
+    const float* a = &data;
+    const int* b = (const int*)a;
+    int    c = *b;
+    writeInt(stream, data);
+  }
+
 }

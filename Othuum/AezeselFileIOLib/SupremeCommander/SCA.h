@@ -1,5 +1,6 @@
 #pragma once
 
+#include <fstream>
 #include <string>
 #include <vector>
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
@@ -15,7 +16,8 @@ namespace Aezesel {
   public:
     struct data;
     SCA::data load(std::string filename);
-    static glm::mat4 QuatToMat(glm::quat q);
+    static void save(std::string filename, const SCA::data&); //not many validations. be careful!
+
 
     struct bone
     {
@@ -43,6 +45,7 @@ namespace Aezesel {
     };
 
   private:
+    static glm::mat4 QuatToMat(glm::quat q);
     std::vector<std::string> split(std::string, char seperator = '\0');
 
     std::string  readString(const std::vector<unsigned char>&, size_t& position, size_t size);
@@ -55,6 +58,17 @@ namespace Aezesel {
     glm::vec3                readPosition();
     glm::quat                readRotation();
     std::vector<frame>       readAnimation(int offset, int numberOfFrames, std::vector<std::string> boneNames);
+
+    static void         writeString(std::ofstream&, const std::string&);
+    static void         writeInt(std::ofstream&, const int&);
+    static void         writeUInt(std::ofstream&, const unsigned int&);
+    static void         writeFloat(std::ofstream&, const float&);
+
+    static void         writeLinks(std::ofstream&, const SCA::data&);
+    static void         writeBoneNames(std::ofstream&, const SCA::data&);
+    static void         writePosition(std::ofstream&, const SCA::data&);
+    static void         writeRotation(std::ofstream&, const SCA::data&);
+    static int          writeAnimation(std::ofstream&, const SCA::data&);
 
     size_t                     _fileposition;
     std::vector<unsigned char> _buffer;
