@@ -3,8 +3,8 @@
 #include <string>
 #include <memory>
 
-#include "AezeselFileIOLib/SCM.h"
-#include "AezeselFileIOLib/SCA.h"
+#include "AezeselFileIOLib/SupremeCommander/SCM.h"
+#include "AezeselFileIOLib/SupremeCommander/SCA.h"
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
 #include "SupComVertex.h"
 

@@ -28,6 +28,12 @@
     <Filter Include="Source Files\MagickaVox">
       <UniqueIdentifier>{baa9811b-84ac-4c02-9590-5e8b1c202063}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SupremeCommander">
+      <UniqueIdentifier>{ad08238e-2633-414c-8d82-9250d9aab28e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SupremeCommander">
+      <UniqueIdentifier>{e7600ba7-507e-4039-a770-86ea96ec0b82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageIO.h">
@@ -204,15 +210,6 @@
     <ClInclude Include="lib\gli\view.hpp">
       <Filter>lib\gli</Filter>
     </ClInclude>
-    <ClInclude Include="SCM.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SCMAP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SCA.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MagicaVox\Import.h">
       <Filter>Header Files\MagickaVox</Filter>
     </ClInclude>
@@ -273,8 +270,17 @@
     <ClInclude Include="lib\json_fwd.hpp">
       <Filter>lib</Filter>
     </ClInclude>
-    <ClInclude Include="SupremeCommanderAnimator.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="SupremeCommander\SCMAP.h">
+      <Filter>Header Files\SupremeCommander</Filter>
+    </ClInclude>
+    <ClInclude Include="SupremeCommander\SupremeCommanderAnimator.h">
+      <Filter>Header Files\SupremeCommander</Filter>
+    </ClInclude>
+    <ClInclude Include="SupremeCommander\SCA.h">
+      <Filter>Header Files\SupremeCommander</Filter>
+    </ClInclude>
+    <ClInclude Include="SupremeCommander\SCM.h">
+      <Filter>Header Files\SupremeCommander</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -295,15 +301,6 @@
     </ClCompile>
     <ClCompile Include="lib\gli\core\dummy.cpp">
       <Filter>lib\gli</Filter>
-    </ClCompile>
-    <ClCompile Include="SCA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SCM.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SCMAP.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MagicaVox\Chunk.cpp">
       <Filter>Source Files\MagickaVox</Filter>
@@ -359,8 +356,17 @@
     <ClCompile Include="MagicaVox\VoxFile.cpp">
       <Filter>Source Files\MagickaVox</Filter>
     </ClCompile>
-    <ClCompile Include="SupremeCommanderAnimator.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SupremeCommander\SCA.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
+    </ClCompile>
+    <ClCompile Include="SupremeCommander\SCM.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
+    </ClCompile>
+    <ClCompile Include="SupremeCommander\SCMAP.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
+    </ClCompile>
+    <ClCompile Include="SupremeCommander\SupremeCommanderAnimator.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

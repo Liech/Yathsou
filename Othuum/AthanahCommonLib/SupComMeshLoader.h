@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AezeselFileIOLib/SCM.h"
+#include "AezeselFileIOLib/SupremeCommander/SCM.h"
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
 #include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
 

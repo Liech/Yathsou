@@ -5,9 +5,9 @@
 #include <filesystem>
 #include <set>
 
-#include "AezeselFileIOLib/SCM.h"
+#include "AezeselFileIOLib/SupremeCommander/SCM.h"
 #include "AezeselFileIOLib/ImageIO.h"
-#include "AezeselFileIOLib/SupremeCommanderAnimator.h"
+#include "AezeselFileIOLib/SupremeCommander/SupremeCommanderAnimator.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
 namespace Athanah {
