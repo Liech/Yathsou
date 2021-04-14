@@ -15,7 +15,7 @@
 #include "AthanahCommonLib/SupComMeshLoader.h"
 #include "AthanahCommonLib/SupComMeshRenderer.h"
 #include "AthanahCommonLib/SupComModel.h"
-
+#include "AezeselFileIOLib/ZIP.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
   int height = 600;
   //int width = 1920;
   //int height = 1080;
-
+  Aezesel::ZIP z;
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
   std::unique_ptr<Ahwassa::FPS> fps;
@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
     std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
     std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
 
-    model = std::make_shared<Athanah::SupComModel>(lpt, unit);
+    model = std::make_shared<Athanah::SupComModel>(pc, unit);
     animName = model->availableAnimations()[animationNumber];
     for (int x = 0; x < 2; x++) {
       std::shared_ptr<Athanah::SupComMesh> mesh = std::make_shared<Athanah::SupComMesh>();

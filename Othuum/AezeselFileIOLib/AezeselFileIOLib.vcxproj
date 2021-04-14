@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(ProjectDir)lib\minizip;$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -127,7 +127,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-staticd.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,7 +138,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(ProjectDir)lib\minizip;$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -151,7 +151,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-static.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -215,6 +215,11 @@
     <ClInclude Include="lib\lodepng\include\lodepng\lodepng_util.h" />
     <ClInclude Include="lib\lodepng\lodepng.h" />
     <ClInclude Include="lib\lodepng\lodepng_util.h" />
+    <ClInclude Include="lib\zipper\CDirEntry.h" />
+    <ClInclude Include="lib\zipper\defs.h" />
+    <ClInclude Include="lib\zipper\tools.h" />
+    <ClInclude Include="lib\zipper\unzipper.h" />
+    <ClInclude Include="lib\zipper\zipper.h" />
     <ClInclude Include="MagicaVox\Chunk.h" />
     <ClInclude Include="MagicaVox\ChunkFactory.h" />
     <ClInclude Include="MagicaVox\ChunkLAYR.h" />
@@ -237,6 +242,7 @@
     <ClInclude Include="SupremeCommander\SCM.h" />
     <ClInclude Include="SupremeCommander\SCMAP.h" />
     <ClInclude Include="SupremeCommander\SupremeCommanderAnimator.h" />
+    <ClInclude Include="ZIP.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageIO.cpp" />
@@ -267,6 +273,7 @@
     <ClCompile Include="SupremeCommander\SCM.cpp" />
     <ClCompile Include="SupremeCommander\SCMAP.cpp" />
     <ClCompile Include="SupremeCommander\SupremeCommanderAnimator.cpp" />
+    <ClCompile Include="ZIP.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="lib\gli\core\bc.inl" />

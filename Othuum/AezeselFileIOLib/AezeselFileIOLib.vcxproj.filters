@@ -34,6 +34,9 @@
     <Filter Include="Source Files\SupremeCommander">
       <UniqueIdentifier>{e7600ba7-507e-4039-a770-86ea96ec0b82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib\zipper">
+      <UniqueIdentifier>{7cb3eeb3-0aeb-47db-aefe-20062e844a10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageIO.h">
@@ -282,6 +285,24 @@
     <ClInclude Include="SupremeCommander\SCM.h">
       <Filter>Header Files\SupremeCommander</Filter>
     </ClInclude>
+    <ClInclude Include="ZIP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\zipper\defs.h">
+      <Filter>lib\zipper</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\zipper\tools.h">
+      <Filter>lib\zipper</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\zipper\unzipper.h">
+      <Filter>lib\zipper</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\zipper\zipper.h">
+      <Filter>lib\zipper</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\zipper\CDirEntry.h">
+      <Filter>lib\zipper</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageIO.cpp">
@@ -367,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="SupremeCommander\SupremeCommanderAnimator.cpp">
       <Filter>Source Files\SupremeCommander</Filter>
+    </ClCompile>
+    <ClCompile Include="ZIP.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
