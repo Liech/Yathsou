@@ -259,20 +259,18 @@ namespace Aezesel {
     writeInt(outfile, data.bones.size());
     size_t vertexOffsetPos = outfile.tellp();
     writeInt(outfile, 0); //vertex offset
+    writeInt(outfile, 0); //extravertoffset unused
+    writeInt(outfile, data.vertecies.size());
+    size_t indexOffsetPos = outfile.tellp();
+    writeInt(outfile, 0); //indexoffset
+    writeInt(outfile, data.indices.size() * 3);
+    writeInt(outfile, 0); //infooffset
+    writeInt(outfile, 0); //infocount ??
+    writeInt(outfile, data.bones.size());
 
-    //int extravertoffset = readInt(_buffer, _fileposition); //unused
-    //int vertcount = readInt(_buffer, _fileposition);
-    //int indexoffset = readInt(_buffer, _fileposition);
-    //int indexcount = readInt(_buffer, _fileposition);
-    //int infooffset = readInt(_buffer, _fileposition);
-    //int infocount = readInt(_buffer, _fileposition);
-    //int totalbonecount = readInt(_buffer, _fileposition);
-    //
-    //if (marker != "MODL")
-    //  throw std::runtime_error("File not scm");
-    //if (version != 5)
-    //  throw std::runtime_error("Unsupported version");
-    //
+    int boneOffset = outfile.tellp();
+    //writeBoneNames(outfile, data);
+    
     //result.boneNames = readBoneNames(boneoffset);
     //result.bones = readBones(boneoffset, totalbonecount, result.boneNames);
     //result.vertecies = readVertices(vertoffset, vertcount);
