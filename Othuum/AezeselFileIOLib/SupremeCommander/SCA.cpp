@@ -11,12 +11,20 @@
 namespace Aezesel {
   SCA::data SCA::load(std::string filename)
   {
-    SCA::data result;
     std::ifstream input(filename, std::ios::binary);
     if (input.fail())
       throw std::runtime_error("Error opening " + filename);
-
     _buffer = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
+    return internalLoad();
+  }
+
+  SCA::data SCA::load(const std::vector<unsigned char>& buffer) {
+    _buffer = buffer;
+    return internalLoad();
+  }
+
+  SCA::data SCA::internalLoad() {
+    SCA::data result;
     _fileposition = 0;
 
     std::string magic = readString(_buffer, _fileposition, 4);

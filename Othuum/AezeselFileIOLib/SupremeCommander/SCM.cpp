@@ -9,13 +9,22 @@
 namespace Aezesel {
   SCM::data SCM::load(std::string filename)
   {
-    SCM::data result;
 
     std::ifstream input(filename, std::ios::binary);
     if (input.fail())
       throw std::runtime_error("Error opening " + filename);
-
     _buffer = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
+    return loadInternal();
+  }
+
+
+  SCM::data SCM::load(const std::vector<unsigned char>& buffer) {
+    _buffer = buffer;
+    return loadInternal();
+  }
+
+  SCM::data SCM::loadInternal(){
+    SCM::data result;
     _fileposition = 0;
 
     std::string marker = readString(_buffer, _fileposition, 4);

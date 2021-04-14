@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
   int height = 600;
   //int width = 1920;
   //int height = 1080;
-
+  
   Ahwassa::Window w(width, height);
   std::unique_ptr<Ahwassa::Background> background;
   std::unique_ptr<Ahwassa::FPS       > fps;

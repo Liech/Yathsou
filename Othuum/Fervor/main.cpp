@@ -32,7 +32,9 @@ int main(int argc, char** argv) {
   int height = 600;
   //int width = 1920;
   //int height = 1080;
-  Aezesel::ZIP z;
+
+  std::string supcompath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Supreme Commander\\gamedata\\units.scd";
+  std::shared_ptr<Aezesel::ZIP> z = std::make_shared<Aezesel::ZIP>(supcompath);
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
   std::unique_ptr<Ahwassa::FPS> fps;
@@ -49,7 +51,8 @@ int main(int argc, char** argv) {
     std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
     std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
 
-    model = std::make_shared<Athanah::SupComModel>(pc, unit);
+    //model = std::make_shared<Athanah::SupComModel>(pc, unit);
+    model = std::make_shared<Athanah::SupComModel>(unit,z);
     animName = model->availableAnimations()[animationNumber];
     for (int x = 0; x < 2; x++) {
       std::shared_ptr<Athanah::SupComMesh> mesh = std::make_shared<Athanah::SupComMesh>();

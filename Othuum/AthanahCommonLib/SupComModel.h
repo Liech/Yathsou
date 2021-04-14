@@ -13,6 +13,7 @@ namespace Ahwassa {
 }
 namespace Aezesel {
   class SupremeCommanderAnimator;
+  class ZIP;
 }
 
 namespace Athanah {
@@ -20,6 +21,7 @@ namespace Athanah {
   class SupComModel {
   public:
     SupComModel(std::string unitDir, std::string unitName);
+    SupComModel(std::string unitName, std::shared_ptr<Aezesel::ZIP> zip);
 
 
     Ahwassa::Mesh<SupComVertex>& mesh();
@@ -33,7 +35,7 @@ namespace Athanah {
 
   private:
     void loadImages    (std::string unitDir, std::string unitName);
-    void loadMesh      (std::string unitDir, std::string unitName);
+    void loadMesh      ();
     void loadAnimation (std::string unitDir, std::string unitName);
 
     glm::vec3 getTranslationVector(glm::mat4);

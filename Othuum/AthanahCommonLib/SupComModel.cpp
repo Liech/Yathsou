@@ -8,14 +8,61 @@
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
 #include "AezeselFileIOLib/ImageIO.h"
 #include "AezeselFileIOLib/SupremeCommander/SupremeCommanderAnimator.h"
+#include "AezeselFileIOLib/ZIP.h"
+
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
 namespace Athanah {
   SupComModel::SupComModel(std::string unitDir, std::string unitName) {
     std::cout << "---Loading: " << unitName <<"---"<< std::endl;
     loadImages(unitDir,unitName);
-    loadMesh(unitDir, unitName);
+
+    std::string fullPath = unitDir + "\\" + unitName + "\\";
+    std::string scmPath = fullPath + unitName + "_lod0.scm";
+    Aezesel::SCM scm;
+    _model = std::make_shared<Aezesel::SCM::data>(scm.load(scmPath));
+
+    loadMesh();
     loadAnimation(unitDir, unitName);
+  }
+
+  SupComModel::SupComModel(std::string unitName, std::shared_ptr<Aezesel::ZIP> zip){
+
+    std::cout << "---Loading: " << unitName << "---" << std::endl;
+
+    auto entries = zip->getEntries();
+    _albedo = std::make_shared<Ahwassa::Texture>("Albedo", 0);
+    _info = std::make_shared<Ahwassa::Texture>("TeamSpec", 0);
+    _normal = std::make_shared<Ahwassa::Texture>("Normal", 0);    
+    
+    std::string scmPath = "units/" + unitName + "/" + unitName + "_lod0.scm";
+    Aezesel::SCM scm;
+
+    for (auto x : entries) {
+      if (x.starts_with("units/" + unitName) && x.ends_with("0.scm")) {
+        _model = std::make_shared<Aezesel::SCM::data>(scm.load(zip->getFile(x)));
+        break;
+      }
+    }
+    loadMesh();
+
+    for (auto entry : entries) {
+      if (!(entry.starts_with("units/"+unitName) && entry.ends_with(".sca")))
+        continue;
+      size_t      animSeperator = entry.find_last_of('/');
+      std::string animationName = entry.substr(animSeperator + 1/*\\*/ + unitName.size() + 2/*_A*/);
+      std::cout << "Loading Animation: " << animationName << std::endl;
+      animationName = animationName.substr(0, animationName.size() - 4);
+      Aezesel::SCA animLoader;
+      std::shared_ptr<Aezesel::SCA::data> anim = std::make_shared<Aezesel::SCA::data>(animLoader.load(zip->getFile(entry)));
+      _animations[animationName] = anim;
+
+      std::cout << animationName << std::endl;
+      std::set<std::string> keyflags;
+      for (int i = 0; i < anim->animation.size(); i++)
+        keyflags.insert(anim->animation[i].flag2str());
+      _animator[animationName] = std::make_shared<Aezesel::SupremeCommanderAnimator>(*anim, *_model);
+    }
   }
 
   Ahwassa::Mesh<SupComVertex>& SupComModel::mesh() {
@@ -58,13 +105,8 @@ namespace Athanah {
     }
   }
 
-  void SupComModel::loadMesh(std::string unitDir, std::string unitName) {
+  void SupComModel::loadMesh() {
     std::cout << "Loading: " << "Mesh" << std::endl;
-    std::string fullPath = unitDir + "\\" + unitName + "\\";
-    std::string scmPath = fullPath + unitName + "_lod0.scm";
-    Aezesel::SCM scm;
-    _model = std::make_shared<Aezesel::SCM::data>(scm.load(scmPath));
-
     std::vector<int> indices;
     for (auto i : _model->indices) {
       indices.push_back(i.a);

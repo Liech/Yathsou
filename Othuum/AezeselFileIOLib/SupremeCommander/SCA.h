@@ -16,6 +16,7 @@ namespace Aezesel {
   public:
     struct data;
     SCA::data load(std::string filename);
+    SCA::data load(const std::vector<unsigned char>&);
     static void save(std::string filename, const SCA::data&); //not many validations. be careful!
 
 
@@ -46,6 +47,8 @@ namespace Aezesel {
     static glm::mat4 QuatToMat(glm::quat q);
 
   private:
+    SCA::data internalLoad();
+
     std::vector<std::string> split(std::string, char seperator = '\0');
 
     std::string  readString(const std::vector<unsigned char>&, size_t& position, size_t size);

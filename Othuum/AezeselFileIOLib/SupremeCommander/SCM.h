@@ -20,6 +20,7 @@ namespace Aezesel {
   public:
     struct data;
     SCM::data load(std::string filename);
+    SCM::data load(const std::vector<unsigned char>& buffer);
     static void save(std::string filename, const SCM::data&);
 
     struct bone {
@@ -60,6 +61,7 @@ namespace Aezesel {
     };
 
   private:
+    SCM::data                loadInternal();
     int                      pad(int size);
     std::vector<std::string> split(std::string, char seperator = '\0');
 
