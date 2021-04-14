@@ -47,12 +47,13 @@ int main(int argc, char** argv) {
   w.Startup = [&]() {
     renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
     std::string unit = "URL0402";//"UEL0208";
+    auto folder = z->getFolder("units/" + unit);
     int animationNumber = 0;
     std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
     std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
 
     //model = std::make_shared<Athanah::SupComModel>(pc, unit);
-    model = std::make_shared<Athanah::SupComModel>(unit,z);
+    model = std::make_shared<Athanah::SupComModel>(unit,folder);
     animName = model->availableAnimations()[animationNumber];
     for (int x = 0; x < 2; x++) {
       std::shared_ptr<Athanah::SupComMesh> mesh = std::make_shared<Athanah::SupComMesh>();

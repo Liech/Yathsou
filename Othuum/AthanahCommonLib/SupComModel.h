@@ -2,6 +2,8 @@
 
 #include <string>
 #include <memory>
+#include <map>
+#include <vector>
 
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
 #include "AezeselFileIOLib/SupremeCommander/SCA.h"
@@ -13,28 +15,27 @@ namespace Ahwassa {
 }
 namespace Aezesel {
   class SupremeCommanderAnimator;
-  class ZIP;
 }
 
 namespace Athanah {
-  
   class SupComModel {
   public:
-    SupComModel(std::string unitDir, std::string unitName);
-    SupComModel(std::string unitName, std::shared_ptr<Aezesel::ZIP> zip);
+    SupComModel(const std::string& unitDir, const std::string& unitName);
+    SupComModel(const std::string& unitName, const std::map<std::string, std::vector<unsigned char>>& folder);
 
 
     Ahwassa::Mesh<SupComVertex>& mesh();
-    Ahwassa::Texture& albedo();
-    Ahwassa::Texture& info  ();
-    Ahwassa::Texture& normal();
+    Ahwassa::Texture&            albedo();
+    Ahwassa::Texture&            info  ();
+    Ahwassa::Texture&            normal();
 
     std::vector<std::string> availableAnimations() const;
     float                    getAnimationLength(const std::string& name);
     std::vector<glm::mat4>   getAnimation(const std::string& name, float time);
 
   private:
-    void loadImages    (std::string unitDir, std::string unitName);
+    void loadImages    (const std::string& unitName, const std::map<std::string, std::vector<unsigned char>>& folder);
+    void loadImages    (const std::string& unitDir, const std::string& unitName);
     void loadMesh      ();
     void loadAnimation (std::string unitDir, std::string unitName);
 

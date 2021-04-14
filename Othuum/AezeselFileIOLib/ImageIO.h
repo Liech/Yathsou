@@ -9,16 +9,21 @@ namespace Aezesel {
   class ImageIO
   {
   public:
+    enum class Format {
+      PNG, DDS
+    };
+      
     ImageIO();
     ~ImageIO();
 
     static void                                              writeImage(std::string filename, const Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2> & img);
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readImage(std::string filename);
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readImage(ImageIO::Format,const std::vector<unsigned char>&);
 
 
-    static void                                              TEST_readwrite();
-    static void                                              TEST_createNew();
   private:
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readPNG(const std::vector<unsigned char>&);
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(const std::vector<unsigned char>&);
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readPNG(std::string filename);
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(std::string filename);
   };

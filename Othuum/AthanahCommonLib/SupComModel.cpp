@@ -8,12 +8,11 @@
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
 #include "AezeselFileIOLib/ImageIO.h"
 #include "AezeselFileIOLib/SupremeCommander/SupremeCommanderAnimator.h"
-#include "AezeselFileIOLib/ZIP.h"
 
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
 namespace Athanah {
-  SupComModel::SupComModel(std::string unitDir, std::string unitName) {
+  SupComModel::SupComModel(const std::string& unitDir, const std::string& unitName) {
     std::cout << "---Loading: " << unitName <<"---"<< std::endl;
     loadImages(unitDir,unitName);
 
@@ -26,35 +25,30 @@ namespace Athanah {
     loadAnimation(unitDir, unitName);
   }
 
-  SupComModel::SupComModel(std::string unitName, std::shared_ptr<Aezesel::ZIP> zip){
+  SupComModel::SupComModel(const std::string& unitName, const std::map<std::string, std::vector<unsigned char>>& folder){
 
     std::cout << "---Loading: " << unitName << "---" << std::endl;
-
-    auto entries = zip->getEntries();
-    _albedo = std::make_shared<Ahwassa::Texture>("Albedo", 0);
-    _info = std::make_shared<Ahwassa::Texture>("TeamSpec", 0);
-    _normal = std::make_shared<Ahwassa::Texture>("Normal", 0);    
     
     std::string scmPath = "units/" + unitName + "/" + unitName + "_lod0.scm";
     Aezesel::SCM scm;
 
-    for (auto x : entries) {
-      if (x.starts_with("units/" + unitName) && x.ends_with("0.scm")) {
-        _model = std::make_shared<Aezesel::SCM::data>(scm.load(zip->getFile(x)));
+    for (auto x : folder) {
+      if (x.first.starts_with(unitName) && x.first.ends_with("0.scm")) {
+        _model = std::make_shared<Aezesel::SCM::data>(scm.load(x.second));
         break;
       }
     }
     loadMesh();
+    loadImages(unitName, folder);
 
-    for (auto entry : entries) {
-      if (!(entry.starts_with("units/"+unitName) && entry.ends_with(".sca")))
+    for (auto entry : folder) {
+      if (!(entry.first.ends_with(".sca")))
         continue;
-      size_t      animSeperator = entry.find_last_of('/');
-      std::string animationName = entry.substr(animSeperator + 1/*\\*/ + unitName.size() + 2/*_A*/);
+      std::string animationName = entry.first.substr(unitName.size() + 2/*_A*/);
       std::cout << "Loading Animation: " << animationName << std::endl;
       animationName = animationName.substr(0, animationName.size() - 4);
       Aezesel::SCA animLoader;
-      std::shared_ptr<Aezesel::SCA::data> anim = std::make_shared<Aezesel::SCA::data>(animLoader.load(zip->getFile(entry)));
+      std::shared_ptr<Aezesel::SCA::data> anim = std::make_shared<Aezesel::SCA::data>(animLoader.load(entry.second));
       _animations[animationName] = anim;
 
       std::cout << animationName << std::endl;
@@ -130,22 +124,54 @@ namespace Athanah {
     _mesh = std::make_shared<Ahwassa::Mesh<SupComVertex>>(vertices,indices);
   }
 
-  void SupComModel::loadImages(std::string unitDir, std::string unitName) {
+  void SupComModel::loadImages(const std::string& unitName, const std::map<std::string, std::vector<unsigned char>>& folder) {
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> albedoArray;
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> infoArray  ;
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> normalArray;
+
+    std::string lowerUnitName = unitName;
+    std::transform(lowerUnitName.begin(), lowerUnitName.end(), lowerUnitName.begin(),
+      [](unsigned char c) { return std::tolower(c); });
+
+    for (auto& entry : folder) {
+      if (!entry.first.ends_with(".dds"))
+        continue;
+      std::string lower = entry.first;
+      std::transform(lower.begin(), lower.end(), lower.begin(),
+        [](unsigned char c) { return std::tolower(c); });
+
+      if (lower == lowerUnitName + "_albedo.dds")
+        albedoArray = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS,entry.second);
+      else if (lower == lowerUnitName + "_specteam.dds")
+        infoArray = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, entry.second);
+      else if (lower == lowerUnitName + "_normalts.dds")
+        normalArray = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, entry.second);
+    }
+
+    if (albedoArray)
+      _albedo = std::make_shared<Ahwassa::Texture>("Albedo", albedoArray.get());
+    else
+      _albedo = std::make_shared<Ahwassa::Texture>("Albedo", 0);
+
+    if (infoArray)
+      _info = std::make_shared<Ahwassa::Texture>("TeamSpec", infoArray.get());
+    else
+      _info = std::make_shared<Ahwassa::Texture>("TeamSpec", 0);
+
+    if (normalArray)
+      _normal = std::make_shared<Ahwassa::Texture>("Normal", normalArray.get());
+    else
+      _normal = std::make_shared<Ahwassa::Texture>("Normal", 0);
+  }
+
+  void SupComModel::loadImages(const std::string& unitDir, const std::string& unitName) {
     std::string fullPath = unitDir + "\\" + unitName + "\\";
-    std::cout << "Loading Texture: " << "Albedo" << std::endl;
     auto albedoArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_Albedo.dds");
-    std::cout << "Loading Texture: " << "Info" << std::endl;
-    auto infoArray   = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_SpecTeam.dds");
-    std::cout << "Loading Texture: " << "Normal" << std::endl;
+    auto infoArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_SpecTeam.dds");
     auto normalArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_normalsTS.dds");
-    std::cout << "Formatting Textures" << std::endl;
     _albedo = std::make_shared<Ahwassa::Texture>("Albedo", albedoArray.get());
     _info = std::make_shared<Ahwassa::Texture>("TeamSpec", infoArray.get());
     _normal = std::make_shared<Ahwassa::Texture>("Normal", normalArray.get());
-    
-    //_albedo = std::make_shared<Ahwassa::Texture>("Albedo", 0);
-    //_info = std::make_shared<Ahwassa::Texture>("TeamSpec", 0);
-    //_normal = std::make_shared<Ahwassa::Texture>("Normal", 0);
   }
 
   std::vector<std::string> SupComModel::availableAnimations() const {

@@ -9,6 +9,10 @@ namespace Aezesel {
   ZIP::ZIP(const std::string& filename) {
     _filename = filename;
     _unzipper = std::make_unique<zipper::Unzipper>(filename);
+    
+    auto entries =  _unzipper->entries();
+    for (auto x : entries)
+      _entries.push_back(x.name);
   }
 
   ZIP::~ZIP() {
@@ -16,11 +20,7 @@ namespace Aezesel {
   }
 
   std::vector<std::string> ZIP::getEntries() {
-    std::vector<zipper::ZipEntry> entries = _unzipper->entries();
-    std::vector<std::string> result;
-    for (auto x : entries)
-      result.push_back(x.name);
-    return result;
+    return _entries;
   }
 
   std::vector<unsigned char> ZIP::getFile(std::string name) {
@@ -31,4 +31,16 @@ namespace Aezesel {
     return unzipped_entry;
   }
 
+  std::map<std::string, std::vector<unsigned char>> ZIP::getFolder(std::string name) {
+    std::map<std::string, std::vector<unsigned char>> result;
+    int len = (name + "/").length();
+    for (auto entry : _entries) {
+      if (!entry.starts_with(name + "/"))
+        continue;
+      if (entry.length() == len)
+        continue;
+      result[entry.substr(len)] = getFile(entry);
+    }
+    return result;
+  }
 }

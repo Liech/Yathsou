@@ -49,7 +49,14 @@ namespace Aezesel {
       return std::move(readPNG(filename));
   }
   
-  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readPNG(std::string filename){
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  ImageIO::readImage(ImageIO::Format format,const std::vector<unsigned char>& data) {
+    if (format == Format::DDS)
+      return std::move(readDDS(data));
+    else
+      return std::move(readPNG(data));
+  }
+
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readPNG(std::string filename) {
     std::vector<unsigned char> image; //the raw pixels
     unsigned int width, height;
 
@@ -57,7 +64,7 @@ namespace Aezesel {
     unsigned error = lodepng::decode(image, width, height, filename);
 
     //if there's an error, display it
-    if (error) 
+    if (error)
       throw std::runtime_error("decoder error " + std::to_string(error) + ": " + lodepng_error_text(error) + "\n");
 
     std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(width, height);
@@ -73,20 +80,28 @@ namespace Aezesel {
     return result;
   }
 
-  void ImageIO::TEST_readwrite() {
-    auto s = ImageIO::readImage("Test/ImageIO.png");
-    ImageIO::writeImage("Test/ImageIO2.png", *s);
-  }
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readPNG(const std::vector<unsigned char>& data) {
+    std::vector<unsigned char> image; //the raw pixels
+    unsigned int width, height;
 
-  void ImageIO::TEST_createNew() {
-    size_t width = 512;
-    size_t height = 512;
-    Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2> m(width, height);
-    for (int x = 0; x < width; x++)
-      m.getRef(x, 0) = Iyathuum::Color(0, 0, 255);
-    for (int y = 0; y < height; y++)
-      m.getRef(0, y) = Iyathuum::Color(255, 255, 255);
-    ImageIO::writeImage("Test/ImageIO.png", m);
+    //decode
+    unsigned error = lodepng::decode(image, width, height, data);
+
+    //if there's an error, display it
+    if (error)
+      throw std::runtime_error("decoder error " + std::to_string(error) + ": " + lodepng_error_text(error) + "\n");
+
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(width, height);
+
+    for (unsigned y = 0; y < height; y++)
+      for (unsigned x = 0; x < width; x++) {
+        Iyathuum::Color& c = result->getRef(x, y);
+        c.r() = image[4 * width * y + 4 * x + 0];
+        c.g() = image[4 * width * y + 4 * x + 1];
+        c.b() = image[4 * width * y + 4 * x + 2];
+        c.a() = image[4 * width * y + 4 * x + 3];
+      }
+    return result;
   }
 
   std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(std::string filename)
@@ -114,4 +129,31 @@ namespace Aezesel {
 
     return result;
   }
+
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(const std::vector<unsigned char>& data)
+  {
+    gli::texture texture = gli::load_dds((char const*)(data.data()),data.size());
+    gli::texture2d texture2d = gli::texture2d(texture);
+    gli::image image = texture2d[0];
+
+    unsigned long width = image.extent()[0];
+    unsigned long height = image.extent()[1];
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(width, height);
+
+
+    std::vector<unsigned long> img;
+    img.resize(width * height);
+
+    gli::fsampler2D sampler(texture2d, gli::wrap::WRAP_REPEAT, gli::filter::FILTER_NEAREST, gli::filter::FILTER_NEAREST);
+
+    for (size_t x = 0; x < width; x++)
+      for (size_t y = 0; y < height; y++)
+      {
+        auto value = sampler.texel_fetch(glm::ivec2(x, y), 0);
+        result->getRef({ x,y }) = Iyathuum::Color(value[0] * 255, value[1] * 255, value[2] * 255, value[3] * 255);
+      }
+
+    return result;
+  }
+
 }
