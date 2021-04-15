@@ -32,6 +32,7 @@
     <ClInclude Include="SupComMeshLoader.h" />
     <ClInclude Include="SupComMeshRenderer.h" />
     <ClInclude Include="SupComModel.h" />
+    <ClInclude Include="SupComModelFactory.h" />
     <ClInclude Include="SupComVertex.h" />
   </ItemGroup>
   <ItemGroup>
@@ -40,6 +41,7 @@
     <ClCompile Include="SupComMeshLoader.cpp" />
     <ClCompile Include="SupComMeshRenderer.cpp" />
     <ClCompile Include="SupComModel.cpp" />
+    <ClCompile Include="SupComModelFactory.cpp" />
     <ClCompile Include="SupComVertex.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
