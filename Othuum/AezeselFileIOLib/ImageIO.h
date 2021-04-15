@@ -2,9 +2,13 @@
 
 #include <array>
 #include <memory>
+#include <vector>
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 
+namespace gli {
+  class texture;
+}
 namespace Aezesel {
   class ImageIO
   {
@@ -23,8 +27,12 @@ namespace Aezesel {
 
   private:
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readPNG(const std::vector<unsigned char>&);
-    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(const std::vector<unsigned char>&);
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readPNG(std::string filename);
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readPNG(int,int,std::vector<unsigned char>&);
+
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(const std::vector<unsigned char>&);
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(std::string filename);
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(gli::texture& tex);
+
   };
 }

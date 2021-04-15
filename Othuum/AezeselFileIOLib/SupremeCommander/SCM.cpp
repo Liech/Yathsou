@@ -273,18 +273,33 @@ namespace Aezesel {
     size_t indexOffsetPos = outfile.tellp();
     writeInt(outfile, 0); //indexoffset
     writeInt(outfile, data.indices.size() * 3);
+    size_t infoOffsetPos = outfile.tellp();
     writeInt(outfile, 0); //infooffset
     writeInt(outfile, 0); //infocount ??
     writeInt(outfile, data.bones.size());
 
+    writeBones(outfile, data);
     int boneOffset = outfile.tellp();
-    //writeBoneNames(outfile, data);
+    writeBoneNames(outfile, data);
     
-    //result.boneNames = readBoneNames(boneoffset);
-    //result.bones = readBones(boneoffset, totalbonecount, result.boneNames);
-    //result.vertecies = readVertices(vertoffset, vertcount);
-    //result.indices = readInidices(indexoffset, indexcount);
-    //result.info = readInfo(infooffset, infocount);
+    int vertOffset = outfile.tellp();
+    writeVertices(outfile, data);
+    int indexOffset = outfile.tellp();
+    writeInidices(outfile, data);
+    int infoOffset = outfile.tellp();
+    writeInfo(outfile, data);
+
+    outfile.seekp(boneOffsetPos);
+    writeInt(outfile, boneOffset);
+
+    outfile.seekp(vertexOffsetPos);
+    writeInt(outfile, vertOffset);
+    
+    outfile.seekp(indexOffsetPos);
+    writeInt(outfile, indexOffset);
+    
+    outfile.seekp(infoOffsetPos);
+    writeInt(outfile, infoOffset);
   }
 
   void SCM::writeBoneNames(std::ofstream& stream, const SCM::data& data) {
