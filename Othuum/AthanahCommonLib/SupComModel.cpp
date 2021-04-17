@@ -166,12 +166,25 @@ namespace Athanah {
 
   void SupComModel::loadImages(const std::string& unitDir, const std::string& unitName) {
     std::string fullPath = unitDir + "\\" + unitName + "\\";
-    auto albedoArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_Albedo.dds");
-    auto infoArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_SpecTeam.dds");
-    auto normalArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_normalsTS.dds");
-    _albedo = std::make_shared<Ahwassa::Texture>("Albedo", albedoArray.get());
-    _info = std::make_shared<Ahwassa::Texture>("TeamSpec", infoArray.get());
-    _normal = std::make_shared<Ahwassa::Texture>("Normal", normalArray.get());
+
+    if (std::filesystem::exists(fullPath + "\\" + unitName + "_Albedo.dds")) {
+      auto albedoArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_Albedo.dds");
+      _albedo = std::make_shared<Ahwassa::Texture>("Albedo", albedoArray.get());   
+    }
+    else
+      _albedo = std::make_shared<Ahwassa::Texture>("Albedo", 0);
+    if (std::filesystem::exists(fullPath + "\\" + unitName + "_SpecTeam.dds")) {
+      auto infoArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_SpecTeam.dds");
+      _info = std::make_shared<Ahwassa::Texture>("TeamSpec", infoArray.get());
+    }
+    else
+      _info = std::make_shared<Ahwassa::Texture>("TeamSpec", 0);
+    if (std::filesystem::exists(fullPath + "\\" + unitName + "_normalsTS.dds")) {
+      auto normalArray = Aezesel::ImageIO::readImage(fullPath + "\\" + unitName + "_normalsTS.dds");
+      _normal = std::make_shared<Ahwassa::Texture>("Normal", normalArray.get());
+    }
+    else
+      _normal = std::make_shared<Ahwassa::Texture>("Normal", 0);
   }
 
   std::vector<std::string> SupComModel::availableAnimations() const {

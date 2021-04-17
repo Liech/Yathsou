@@ -15,7 +15,7 @@ namespace Ahwassa {
   {
   }
 
-  Slider::Slider(Iyathuum::glmAABB<2> position, double min, double max, double startValue, std::function<void(double)> valueChangedCall, Window* w, UIElement* parent) : Drawable(w) {
+  Slider::Slider(Iyathuum::glmAABB<2> position, float min, float max, float startValue, std::function<void(float)> valueChangedCall, Window* w, UIElement* parent) : Drawable(w) {
     _valueChangedCall = valueChangedCall;
     _currentValue = startValue;
     _min = min;
@@ -117,7 +117,7 @@ namespace Ahwassa {
     return c.isInside({ localPosition[0] ,localPosition[1] });
   }
 
-  void Slider::setValue(double value, bool emit) {
+  void Slider::setValue(float value, bool emit) {
     _currentValue = value;
     if (emit)
       _valueChangedCall(value);

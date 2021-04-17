@@ -11,7 +11,7 @@ namespace Ahwassa {
   {
   public:
     Slider(Window*);
-    Slider(Iyathuum::glmAABB<2> position, double min, double max, double startValue, std::function<void(double)> valueChangedCall, Window* w, UIElement* parent = nullptr);
+    Slider(Iyathuum::glmAABB<2> position, float min, float max, float startValue, std::function<void(float)> valueChangedCall, Window* w, UIElement* parent = nullptr);
     ~Slider();
 
     virtual void draw() override;
@@ -21,15 +21,14 @@ namespace Ahwassa {
     virtual bool mouseMoveEvent(glm::vec2 current, glm::vec2 movement) override;
     virtual bool mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) override;
 
-    double getValue() { return _currentValue; }
-    void   setValue(double value, bool emit = true);
-    virtual void setVisible(bool visible) override;
+    float getValue() { return _currentValue; }
+    void   setValue(float value, bool emit = true);
 
   private:
     Iyathuum::glmAABB<2> getSliderLocation();
     Iyathuum::glmAABB<2> getBarLocation();
 
-    const float leftPad = 0.4f;
+    const float leftPad = 0.05f;
     const float rightPad = 0.05f;
     const float barHeight = 0.3f;
     const float sliderHeight = 0.6f;
@@ -37,10 +36,10 @@ namespace Ahwassa {
     const float minSliderWidth = 15;
 
 
-    std::function<void(double)> _valueChangedCall;
-    double                      _min          = 0;
-    double                      _max          = 1;
-    double                      _currentValue = 0;
+    std::function<void(float)> _valueChangedCall;
+    float                      _min          = 0;
+    float                      _max          = 1;
+    float                      _currentValue = 0;
 
     bool _pressed = false;
 

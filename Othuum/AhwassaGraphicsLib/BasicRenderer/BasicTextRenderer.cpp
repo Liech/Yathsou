@@ -92,7 +92,7 @@ namespace Ahwassa {
       BasicTextRenderer_Character ch = _vars->characters[*c];
       result[0] += (ch.Advance >> 6) * scale;
     }
-    result[1] = (float)_maxHeight;
+    result[1] = (float)_maxHeight * scale;
 
     return result;
   }

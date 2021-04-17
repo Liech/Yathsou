@@ -58,7 +58,7 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::SSBOvec3> _colors    ;
 
     size_t _bufferSize = 1000;
-    size_t _maxBoneSize = 60;
+    size_t _maxBoneSize = 150;
     std::map<std::shared_ptr<SupComModel>, std::vector<std::weak_ptr<SupComMesh>>> _meshes;
   };
 }

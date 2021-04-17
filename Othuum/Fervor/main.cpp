@@ -15,7 +15,7 @@
 #include "AthanahCommonLib/SupComMeshLoader.h"
 #include "AthanahCommonLib/SupComMeshRenderer.h"
 #include "AthanahCommonLib/SupComModel.h"
-#include "AezeselFileIOLib/ZIP.h"
+#include "AthanahCommonLib/SupComModelFactory.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -33,8 +33,6 @@ int main(int argc, char** argv) {
   //int width = 1920;
   //int height = 1080;
 
-  std::string supcompath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Supreme Commander\\gamedata\\units.scd";
-  std::shared_ptr<Aezesel::ZIP> z = std::make_shared<Aezesel::ZIP>(supcompath);
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
   std::unique_ptr<Ahwassa::FPS> fps;
@@ -44,16 +42,18 @@ int main(int argc, char** argv) {
   std::shared_ptr<Athanah::SupComModel> model = std::shared_ptr<Athanah::SupComModel>();
   std::vector<std::shared_ptr<Athanah::SupComMesh>> meshes;
   std::string animName;
+
+  std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
+  std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
+  Athanah::SupComModelFactory factory(lpt);
+
   w.Startup = [&]() {
     renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
-    std::string unit = "URL0402";//"UEL0208";
-    auto folder = z->getFolder("units/" + unit);
+    std::string unit = "UAL0401";//"UEL0208";
     int animationNumber = 0;
-    std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
-    std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
 
     //model = std::make_shared<Athanah::SupComModel>(pc, unit);
-    model = std::make_shared<Athanah::SupComModel>(unit,folder);
+    model = factory.loadModel(unit);
     animName = model->availableAnimations()[animationNumber];
     for (int x = 0; x < 2; x++) {
       std::shared_ptr<Athanah::SupComMesh> mesh = std::make_shared<Athanah::SupComMesh>();

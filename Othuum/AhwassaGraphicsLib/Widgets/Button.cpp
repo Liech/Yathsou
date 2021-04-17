@@ -36,11 +36,11 @@ namespace Ahwassa {
     getWindow()->renderer().rectangle().start();
     getWindow()->renderer().rectangle().drawRectangle(glob, _hovered ? Iyathuum::Color(0.8f*255, 0.8f * 255, 0.8f * 255) : Iyathuum::Color(0.4f * 255, 0.4f * 255, 0.4f * 255));
     getWindow()->renderer().rectangle().end();
-    glm::vec2 textSize = getWindow()->renderer().text().getTextSize(_name, 1);
+    glm::vec2 textSize = getWindow()->renderer().text().getTextSize(_name, _textSize);
     glm::vec2 spacing = (glm::vec2(getGlobalPosition().getSize()[0], getGlobalPosition().getSize()[1]) - textSize) / 2.0f;
     getWindow()->renderer().text().start();
     glm::vec2 pos = getGlobalPosition().getPosition() + spacing;
-    getWindow()->renderer().text().drawText(_name, pos, 1, Iyathuum::Color(0, 0, 0));
+    getWindow()->renderer().text().drawText(_name, pos, _textSize, Iyathuum::Color(0, 0, 0));
     getWindow()->renderer().text().end();
   }
 
@@ -61,4 +61,9 @@ namespace Ahwassa {
   void Button::mouseLeaveEvent() {
     _hovered = false;
   };
+
+  void Button::setTextSize(float size) {
+    _textSize = size;
+  }
+
 }

@@ -22,10 +22,12 @@ namespace Ahwassa {
     virtual void mouseLeaveEvent() override;
 
     void setText(std::string t);
+    void setTextSize(float size);
   private:
     std::string               _name;
     std::function<void(void)> _clickedFunction;
 
+    float _textSize = 1;
     bool _hovered = false;
   };
 }

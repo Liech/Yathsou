@@ -4,7 +4,9 @@
 
 #include "lib/zipper/unzipper.h"
 
-
+//does not work for supreme commander units.sca...
+//eg UAL0401_Aactivate.sca is not found...
+//useless :(
 namespace Aezesel {
   ZIP::ZIP(const std::string& filename) {
     _filename = filename;
@@ -19,8 +21,12 @@ namespace Aezesel {
     _unzipper->close();
   }
 
+  void ZIP::unzip(std::string targetFolder) {
+    _unzipper->extract(targetFolder);
+  }
+
   std::vector<std::string> ZIP::getEntries() {
-    return _entries;
+    return _entries; 
   }
 
   std::vector<unsigned char> ZIP::getFile(std::string name) {

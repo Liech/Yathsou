@@ -191,7 +191,7 @@ namespace Ahwassa {
     struct compare {
       bool operator()(std::pair<UIElement*, size_t> const& left,
         std::pair<UIElement*, size_t> const& right) const {
-        return left.first < right.first; //reverse!
+        return left.second > right.second; //reverse!
       }
     };
 

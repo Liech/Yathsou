@@ -14,6 +14,7 @@ namespace Ahwassa {
   class ListLayout : public UIElement, public Drawable {
   public:
     ListLayout(Iyathuum::glmAABB<2> position, Window* w, UIElement* parent = nullptr);
+    ~ListLayout();
 
     void                        clear();
     int  addElement(std::shared_ptr<UIElement> w);

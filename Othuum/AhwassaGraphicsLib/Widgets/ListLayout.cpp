@@ -17,6 +17,11 @@ namespace Ahwassa {
   ListLayout::ListLayout(Iyathuum::glmAABB<2> position, Window* w, UIElement* parent) : Drawable(w) {
     setLocalPosition(position);
     setParent(parent);
+    w->input().addUIElement(this);
+  }
+
+  ListLayout::~ListLayout() {
+    getWindow()->input().removeUIElement(this);
   }
 
   void ListLayout::clear() {
@@ -70,7 +75,8 @@ namespace Ahwassa {
     getWindow()->renderer().rectangle().end();
 
     for (auto w : _widgets) {
-      w->draw();
+      if (w->getGlobalPosition().intersects(getGlobalPosition()))
+        w->draw();
     }
 
     getWindow()->renderer().rectangle().disableClipping();
@@ -195,7 +201,8 @@ namespace Ahwassa {
   bool ListLayout::mouseWheelEvent(glm::vec2 movement) {
     float max = getMaximumScroll();
     if (max > 0) {
-      setCurrentScroll(std::clamp(getCurrentScroll() + movement[1] * 5, 0.0f, max));
+      bool shift = getWindow()->input().getKeyStatus(Iyathuum::Key::KEY_LEFT_SHIFT) == Iyathuum::KeyStatus::PRESS;
+      setCurrentScroll(std::clamp(getCurrentScroll() + movement[1] * 5 * (shift?40:1), 0.0f, max));
       return true;
     }
     return false;

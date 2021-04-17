@@ -50,7 +50,10 @@ namespace Iyathuum {
     }
 
     bool intersects(glmAABB<Dimension> d) const{
-      throw std::runtime_error("Not yet implemented");
+      if (d.getPosition()[0] + d.getSize()[0] < getPosition()[0]) return false;
+      if (d.getPosition()[1] + d.getSize()[1] < getPosition()[1]) return false;
+      if (d.getPosition()[0] > getPosition()[0] + getSize()[0]) return false;
+      if (d.getPosition()[1] > getPosition()[1] + getSize()[1]) return false;
       return true;
     }
 

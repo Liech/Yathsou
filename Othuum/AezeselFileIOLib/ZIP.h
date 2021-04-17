@@ -15,6 +15,7 @@ namespace Aezesel {
     ZIP(const std::string& filename);
     ~ZIP();
 
+    void unzip(std::string targetFolder);
     std::vector<std::string>                          getEntries();
     std::vector<unsigned char>                        getFile(std::string name);
     std::map<std::string, std::vector<unsigned char>> getFolder(std::string name);
