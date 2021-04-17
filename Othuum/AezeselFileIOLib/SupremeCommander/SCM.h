@@ -21,7 +21,7 @@ namespace Aezesel {
     struct data;
     SCM::data load(std::string filename);
     SCM::data load(const std::vector<unsigned char>& buffer);
-    static void save(std::string filename, const SCM::data&);
+    static void save(std::string filename, const SCM::data&);//not tested
 
     struct bone {
       std::string   name;

@@ -17,7 +17,7 @@ namespace Aezesel {
     struct data;
     SCA::data load(std::string filename);
     SCA::data load(const std::vector<unsigned char>&);
-    static void save(std::string filename, const SCA::data&); //not many validations. be careful!
+    static void save(std::string filename, const SCA::data&); // not tested
 
 
     struct bone

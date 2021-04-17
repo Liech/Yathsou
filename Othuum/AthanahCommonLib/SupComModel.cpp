@@ -75,6 +75,11 @@ namespace Athanah {
     return *_normal;
   }
 
+  Aezesel::SCM::data& SupComModel::scm() {
+    return *_model;
+  }
+
+
   void SupComModel::loadAnimation(std::string unitDir, std::string unitName) {
     std::string fullPath = unitDir + "\\" + unitName + "\\";
     for (const auto& entry : std::filesystem::directory_iterator(fullPath))

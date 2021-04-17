@@ -28,6 +28,7 @@ namespace Athanah {
     Ahwassa::Texture&            albedo();
     Ahwassa::Texture&            info  ();
     Ahwassa::Texture&            normal();
+    Aezesel::SCM::data&          scm();
 
     std::vector<std::string> availableAnimations() const;
     float                    getAnimationLength(const std::string& name);

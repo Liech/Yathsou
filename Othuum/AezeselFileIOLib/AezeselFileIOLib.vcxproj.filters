@@ -303,6 +303,9 @@
     <ClInclude Include="lib\zipper\CDirEntry.h">
       <Filter>lib\zipper</Filter>
     </ClInclude>
+    <ClInclude Include="STLWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageIO.cpp">
@@ -390,6 +393,9 @@
       <Filter>Source Files\SupremeCommander</Filter>
     </ClCompile>
     <ClCompile Include="ZIP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="STLWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
