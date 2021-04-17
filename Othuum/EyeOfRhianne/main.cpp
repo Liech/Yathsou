@@ -19,6 +19,8 @@
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
 
 #include "ListSelection.h"
+#include "AthanahCommonLib/BlueprintFactory.h"
+#include "AthanahCommonLib/Blueprint.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -54,6 +56,8 @@ int main(int argc, char** argv) {
   
   std::string currentAnimation = "None";
 
+  Athanah::BlueprintFactory blueprints("Data\\units\\");
+
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   Iyathuum::glmAABB<2> animListArea;
   Iyathuum::glmAABB<2> pauseArea;
@@ -67,7 +71,15 @@ int main(int argc, char** argv) {
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
     w.camera()->setPosition(glm::vec3(20, 20, 20));
     w.input().addUIElement(freeCam.get());
-    UnitSelection = std::make_unique<ListSelection>(factory.getAvailableModels(), unitListArea, &w, [&](std::string u) {
+
+    std::vector<std::string> names;
+    
+    for (auto x : factory.getAvailableModels()) {
+      auto bp = blueprints.loadModel(x);
+      names.push_back(bp->getName());
+    }
+
+    UnitSelection = std::make_unique<ListSelection>(factory.getAvailableModels(),names, unitListArea, &w, [&](std::string u) {
       mesh = std::make_shared<Athanah::SupComMesh>();
       mesh->model = factory.loadModel(u);
       mesh->teamColor = Iyathuum::Color(rand() % 255, rand() % 255, rand() % 255);
@@ -104,7 +116,7 @@ int main(int argc, char** argv) {
       anims.push_back("None");
       anims.insert(anims.begin(), available.begin(), available.end());
       if (anims.size() > 1) {
-        AnimationSelection = std::make_unique<ListSelection>(anims, animListArea, &w, [&](std::string u) {
+        AnimationSelection = std::make_unique<ListSelection>(anims, anims, animListArea, &w, [&](std::string u) {
           currentAnimation = u;
           time = 0;
         });

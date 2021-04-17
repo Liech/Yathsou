@@ -36,6 +36,12 @@
     <ClInclude Include="SupComModelFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BlueprintFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Blueprint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletDebugDrawer.cpp">
@@ -57,6 +63,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SupComModelFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Blueprint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BlueprintFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

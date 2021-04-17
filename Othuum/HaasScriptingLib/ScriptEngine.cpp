@@ -42,18 +42,29 @@ namespace Haas
 
   void ScriptEngine::registerFunction(const std::string& name, std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> call)
   {
-    _registry.insert(call);
-    auto fn = Iyathuum::lambdaCapture2functionPointer<int(lua_State*)>([&](lua_State* state)
-      {
-        
-        nlohmann::json input ;        
-        nlohmann::json output;
-        toJson(input);
-        output = (*call.get())(input);
-        toTable(output);
-        return 1;
-      });
-    lua_register(_state, name.c_str(), fn);
+    //https://stackoverflow.com/questions/61071267/how-to-reference-this-in-a-lambda-used-with-a-lua-script
+    _registry.push_back(call);
+    int regpos = _registry.size() - 1;
+   
+    auto callFunction = [](lua_State* L) -> int
+    {
+      ScriptEngine* This = (ScriptEngine*)lua_topointer(L, lua_upvalueindex(1));
+      int pos = (int)lua_topointer(L, lua_upvalueindex(2));
+      
+      nlohmann::json input;
+      nlohmann::json output;
+      This->toJson(input);
+      output = (*This->_registry[pos].get())(input);
+      This->toTable(output);
+
+      return 0;
+    };
+    
+    lua_pushlightuserdata(_state, this);
+    lua_pushlightuserdata(_state, (void*)regpos);
+    lua_pushcclosure(_state, callFunction, 2);
+    lua_setglobal(_state,name.c_str() );
+
   }
 
   nlohmann::json ScriptEngine::callScript(const std::string& name, const nlohmann::json& input)

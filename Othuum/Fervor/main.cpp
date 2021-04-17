@@ -17,6 +17,9 @@
 #include "AthanahCommonLib/SupComModel.h"
 #include "AthanahCommonLib/SupComModelFactory.h"
 
+#include "AthanahCommonLib/BlueprintFactory.h"
+#include "AthanahCommonLib/Blueprint.h"
+
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
   if (std::string::npos != last_slash_idx)
@@ -28,10 +31,10 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  int width = 800;
-  int height = 600;
-  //int width = 1920;
-  //int height = 1080;
+  //int width = 800;
+  //int height = 600;
+  int width = 1920;
+  int height = 1080;
 
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
@@ -45,12 +48,15 @@ int main(int argc, char** argv) {
 
   std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
   std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
-  Athanah::SupComModelFactory factory(lpt);
+  std::string unit = "UAL0001";//"UEL0208";
+  Athanah::SupComModelFactory factory(pc);
+  Athanah::BlueprintFactory blueprints(pc);
+  auto blueprint = blueprints.loadModel(unit);
+  std::cout<< blueprint->getName()<<std::endl;
 
   w.Startup = [&]() {
     renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
-    std::string unit = "UAL0401";//"UEL0208";
-    int animationNumber = 0;
+    int animationNumber = 2;
 
     //model = std::make_shared<Athanah::SupComModel>(pc, unit);
     model = factory.loadModel(unit);

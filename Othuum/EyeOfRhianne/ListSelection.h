@@ -15,12 +15,14 @@ namespace Ahwassa {
 
 class ListSelection {
 public:
-  ListSelection(const std::vector<std::string>& options,Iyathuum::glmAABB<2> loc,Ahwassa::Window*, std::function<void(std::string)> onClick);
+  ListSelection(const std::vector<std::string>& options, const std::vector<std::string>& names, Iyathuum::glmAABB<2> loc,Ahwassa::Window*, std::function<void(std::string)> onClick);
+
   void draw();
 
 private:
   std::function<void(std::string)>     _onClick;
   std::vector<std::string>             _options;
+  std::vector<std::string>             _names;
   Ahwassa::Window*                     _window;
   std::shared_ptr<Ahwassa::ListLayout> _layout;
 };

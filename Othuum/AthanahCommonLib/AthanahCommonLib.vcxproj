@@ -27,6 +27,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Blueprint.h" />
+    <ClInclude Include="BlueprintFactory.h" />
     <ClInclude Include="BoxVisualization.h" />
     <ClInclude Include="BulletDebugDrawer.h" />
     <ClInclude Include="SupComMeshLoader.h" />
@@ -36,6 +38,8 @@
     <ClInclude Include="SupComVertex.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Blueprint.cpp" />
+    <ClCompile Include="BlueprintFactory.cpp" />
     <ClCompile Include="BoxVisualization.cpp" />
     <ClCompile Include="BulletDebugDrawer.cpp" />
     <ClCompile Include="SupComMeshLoader.cpp" />

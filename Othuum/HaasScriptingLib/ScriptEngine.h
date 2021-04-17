@@ -29,7 +29,7 @@ namespace Haas
     void        toJson (nlohmann::json& json);      //debug
     std::string popStr (int pos);                   //debug
 
-    std::set<std::shared_ptr<std::function < nlohmann::json(const nlohmann::json&)>>> _registry;
+    std::vector<std::shared_ptr<std::function < nlohmann::json(const nlohmann::json&)>>> _registry;
     lua_State*                                                                        _state   ;
   };
 }
