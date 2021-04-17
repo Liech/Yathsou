@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
   std::unique_ptr<ListSelection      > AnimationSelection = nullptr;
   std::unique_ptr<Ahwassa::Button    > PauseButton;
   std::unique_ptr<Ahwassa::Button    > SaveButton = nullptr;
-  Athanah::SupComModelFactory factory("./Data/units");
+  Athanah::SupComModelFactory factory("Data\\units\\");
   std::shared_ptr<Athanah::SupComMesh> mesh;
   std::unique_ptr<Athanah::SupComMeshRenderer> renderer;
   bool play = true;
