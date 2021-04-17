@@ -36,8 +36,8 @@ int main(int argc, char** argv) {
   //int width = 1920;
   //int height = 1080;
 
-  std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
-  std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
+  //std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
+  //std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
   
   Ahwassa::Window w(width, height);
   std::unique_ptr<Ahwassa::Background> background;
@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
   std::unique_ptr<ListSelection      > AnimationSelection = nullptr;
   std::unique_ptr<Ahwassa::Button    > PauseButton;
   std::unique_ptr<Ahwassa::Button    > SaveButton = nullptr;
-  Athanah::SupComModelFactory factory(lpt);
+  Athanah::SupComModelFactory factory("./Data/units");
   std::shared_ptr<Athanah::SupComMesh> mesh;
   std::unique_ptr<Athanah::SupComMeshRenderer> renderer;
   bool play = true;
