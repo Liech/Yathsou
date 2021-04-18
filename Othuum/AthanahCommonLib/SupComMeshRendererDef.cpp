@@ -44,7 +44,7 @@ namespace Athanah {
         mat4 world = models[gl_InstanceID] * animations[gl_InstanceID*boneSize+int(bone)];
         gl_Position = view * world * vec4(position , 1.0);
         
-        world[3] = glm::vec4(0, 0, 0, 1); //cancel translation
+        world[3] = vec4(0, 0, 0, 1); //cancel translation
         clr       = colors[gl_InstanceID];
         Normal    = (world * vec4(normal, 1.0)).xyz;
         TexCoords = uv1;
