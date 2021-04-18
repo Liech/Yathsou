@@ -6,7 +6,6 @@
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
 #include "BufferObjects/FBO.h"
-#include "BufferObjects/VBO.h"
 #include "BufferObjects/VAO.h"
 #include "Uniforms/Rendertarget.h"
 #include "Uniforms/Texture.h"
@@ -15,10 +14,11 @@
 #include "Core/ShaderProgram.h"
 
 namespace Ahwassa {
-  DeferredComposer::DeferredComposer(Window* window, int width, int height) {
+  DeferredComposer::DeferredComposer(Window* window, int width, int height) :r(window) {
     _fbo = std::make_shared<Ahwassa::FBO>(width,height, std::vector<std::string> {"gPosition", "gNormal", "gAlbedoSpec"});
     _resultCanvas = std::make_shared<Ahwassa::Rendertarget>("Result", width, height);
-    
+    _width = width;
+    _height = height;
 
     std::string vertex_shader_source = R"(
     out vec2 TexCoords;
@@ -37,8 +37,7 @@ namespace Ahwassa {
     void main()
     {    
       vec4 sampled = texture(gPosition, TexCoords);
-      //color = vec4(sampled.r,sampled.g,sampled.b,sampled.a);
-      color = vec4(1,1,0,1);
+      color = vec4(sampled.r,sampled.g,sampled.b,sampled.a);
     }  
    )";
 
@@ -72,18 +71,39 @@ namespace Ahwassa {
   void DeferredComposer::end() {
     _fbo->end();
     _resultCanvas->start();
+   
+
     glEnable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        
     _shader->bind();
+
+    GLfloat x = 0;
+    GLfloat y = 0;
+
+    GLfloat w = _width;
+    GLfloat h = _height;
+
+    _vertices = {
+       PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 0.0)),
+       PositionTextureVertex(glm::vec3(x + 0, y + 0, 0),glm::vec2(0.0, 1.0)),
+       PositionTextureVertex(glm::vec3(x + w, y + 0, 0),glm::vec2(1.0, 1.0)),
+       PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 0.0)),
+       PositionTextureVertex(glm::vec3(x + w, y + 0, 0),glm::vec2(1.0, 1.0)),
+       PositionTextureVertex(glm::vec3(x + w, y + h, 0),glm::vec2(1.0, 0.0))
+    };
 
     for (auto x : getRawTextures())
       x->bind();
+
+    _vbo->setData(_vertices);
     _vao->draw();
 
-    glDisable(GL_BLEND);
-    glEnable(GL_DEPTH_TEST);
+
+    //r.start();
+    //r.draw(*getRawTextures()[0], Iyathuum::glmAABB<2>(glm::vec2(0,0), glm::vec2(_width,_height)));
+    //r.end();
+
     _resultCanvas->end();
   }
 
