@@ -42,6 +42,9 @@
     <ClInclude Include="Blueprint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BlueprintGeneral.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletDebugDrawer.cpp">
@@ -69,6 +72,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BlueprintFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BlueprintGeneral.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

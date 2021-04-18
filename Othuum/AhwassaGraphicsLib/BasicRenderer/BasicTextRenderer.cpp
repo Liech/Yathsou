@@ -38,9 +38,12 @@ namespace Ahwassa {
   void BasicTextRenderer::drawText(std::string text, glm::vec2 pos, float scale, Iyathuum::Color color) {
     drawText(text, pos[0], pos[1], scale, color);
   }
-  void BasicTextRenderer::drawText(std::string text, float x, float y, float scale, Iyathuum::Color color) {
+  void BasicTextRenderer::drawText(std::string text, const float startX, const float startY, float scale, Iyathuum::Color color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
+
+    float x = startX;
+    float y = startY;
 
     // Activate corresponding render state	
     _vars->textColor->setValue(color.to3());
@@ -50,6 +53,12 @@ namespace Ahwassa {
     for (c = text.begin(); c != text.end(); c++)
     {
       BasicTextRenderer_Character ch = _vars->characters[*c];
+
+      if (*c == '\n') {
+        x = startX;
+        y = y + (float)_maxHeight * scale;
+        continue;
+      }
 
       GLfloat xpos = x + ch.Bearing.x * scale;
       GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
@@ -86,14 +95,20 @@ namespace Ahwassa {
   }
 
   glm::vec2 BasicTextRenderer::getTextSize(std::string text, float scale) {
+    float maxWidth = 0;
     glm::vec2 result(0, 0);
     std::string::const_iterator c;
-    for (c = text.begin(); c != text.end(); c++) {
+    for (c = text.begin(); c != text.end(); c++) {      
       BasicTextRenderer_Character ch = _vars->characters[*c];
+      if (*c == '\n') {
+        result[1] += (float)_maxHeight * scale;
+        maxWidth = std::max(maxWidth, result[0]);
+        result[0] = 0;
+      }
       result[0] += (ch.Advance >> 6) * scale;
     }
-    result[1] = (float)_maxHeight * scale;
-
+    result[1] += (float)_maxHeight * scale;
+    result[0] = std::max(maxWidth, result[0]);
     return result;
   }
 

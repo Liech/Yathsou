@@ -10,6 +10,7 @@
 #include "AhwassaGraphicsLib/Widgets/Button.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicTextRenderer.h"
 
 #include "AthanahCommonLib/SupComModelFactory.h"
 #include "AthanahCommonLib/SupComModel.h"
@@ -21,6 +22,7 @@
 #include "ListSelection.h"
 #include "AthanahCommonLib/BlueprintFactory.h"
 #include "AthanahCommonLib/Blueprint.h"
+#include "AthanahCommonLib/BlueprintGeneral.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -41,6 +43,7 @@ int main(int argc, char** argv) {
   //std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
   //std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
   
+
   Ahwassa::Window w(width, height);
   std::unique_ptr<Ahwassa::Background> background;
   std::unique_ptr<Ahwassa::FPS       > fps;
@@ -51,13 +54,14 @@ int main(int argc, char** argv) {
   Athanah::SupComModelFactory factory("Data\\units\\");
   std::shared_ptr<Athanah::SupComMesh> mesh;
   std::unique_ptr<Athanah::SupComMeshRenderer> renderer;
+  std::unique_ptr< Ahwassa::BasicTextRenderer> textRenderer;
   bool play = true;
   float time = 0;
   
   std::string currentAnimation = "None";
 
   Athanah::BlueprintFactory blueprints("Data\\units\\");
-
+  std::string currentID = "";
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   Iyathuum::glmAABB<2> animListArea;
   Iyathuum::glmAABB<2> pauseArea;
@@ -76,8 +80,10 @@ int main(int argc, char** argv) {
     
     for (auto x : factory.getAvailableModels()) {
       auto bp = blueprints.loadModel(x);
-      names.push_back(bp->getName());
+      names.push_back(bp->getName() + "\n" + bp->general().unitName());
     }
+
+    textRenderer = std::make_unique<Ahwassa::BasicTextRenderer>(&w);
 
     UnitSelection = std::make_unique<ListSelection>(factory.getAvailableModels(),names, unitListArea, &w, [&](std::string u) {
       mesh = std::make_shared<Athanah::SupComMesh>();
@@ -85,6 +91,7 @@ int main(int argc, char** argv) {
       mesh->teamColor = Iyathuum::Color(rand() % 255, rand() % 255, rand() % 255);
       mesh->transformation = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0));
       renderer->addMesh(mesh);
+      currentID = u;
 
       SaveButton = std::make_unique<Ahwassa::Button>("Save", saveArea, [&]() { 
         std::vector<glm::vec3> data;
@@ -160,6 +167,15 @@ int main(int argc, char** argv) {
     if (AnimationSelection) {
       AnimationSelection->draw();
       PauseButton->draw();
+    }
+
+    if (currentID.size() > 0) {
+      auto bp = blueprints.loadModel(currentID);
+      textRenderer->start();
+      std::string text = bp->general().faction() + "\n" + bp->general().techLevelString();
+      glm::vec2 textSize = textRenderer->getTextSize(text, 1);
+      textRenderer->drawText(text, glm::vec2(w.getWidth()-textSize[0],textSize[1]),1);
+      textRenderer->end();
     }
     fps->draw();
   };
