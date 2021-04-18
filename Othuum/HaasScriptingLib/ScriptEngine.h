@@ -15,7 +15,10 @@ namespace Haas
     ScriptEngine();
     ~ScriptEngine();
 
+    static std::string cleanComments(const std::string& code, char symbol = '#'); //supreme commander bp files uses this unauthorized comment
+
     void           executeFile     (const std::string& filename                         );
+    void           executeString   (const std::string& str                              );
     nlohmann::json callScript      (const std::string& name, const nlohmann::json& input);
     nlohmann::json getVar          (const std::string& name                             );
     void           setVar          (const std::string& name, const nlohmann::json& value);

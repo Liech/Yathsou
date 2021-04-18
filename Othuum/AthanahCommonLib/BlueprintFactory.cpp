@@ -2,6 +2,7 @@
 #include "Blueprint.h"
 
 #include <iostream>
+#include <fstream>
 #include <filesystem>
 
 #include "HaasScriptingLib/ScriptEngine.h"
@@ -30,10 +31,12 @@ namespace Athanah {
     if (_loadedUnits.count(name))
       return _loadedUnits[name];
 
+    bool called = false;
     std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> UnitBlueprint = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
       [&](const nlohmann::json& input) -> nlohmann::json
     {
-      _loadedUnits[name] = std::make_shared<const Blueprint>(input);
+      called = true;
+      _loadedUnits[name] = std::make_shared<const Blueprint>(name,input);
       return 1;
     }
     );
@@ -42,14 +45,13 @@ namespace Athanah {
     script.registerFunction("Sound", soundCall);
     
     std::string path = _unitsPath + name + "\\" + name + "_unit.bp";
-    try {
-      script.executeFile(path);
-    }
-    catch(...) {
-      std::cout << "ERROR in executing file. Maybe it does not exist or the # comments are not yet preprocessed" << std::endl;
-      nlohmann::json input;
-      input["Description"] = "<>" + name;
-      _loadedUnits[name] = std::make_shared<const Blueprint>(input);
+    std::ifstream t(path);
+    std::string str((std::istreambuf_iterator<char>(t)),
+      std::istreambuf_iterator<char>());
+    str = Haas::ScriptEngine::cleanComments(str);
+    script.executeString(str);
+    if (!called) {
+      _loadedUnits[name] = std::make_shared<const Blueprint>(name);
     }
     return _loadedUnits[name];
   }

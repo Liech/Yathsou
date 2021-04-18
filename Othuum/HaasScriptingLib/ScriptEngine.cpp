@@ -1,6 +1,7 @@
 #include "ScriptEngine.h"
 
 #include <stdexcept>
+#include <sstream>
 #include "lua.hpp"
 #include "lstate.h"
 #include "IyathuumCoreLib/Util/lambdaCapture2functionPointer.h"
@@ -37,6 +38,24 @@ namespace Haas
     else {
       std::cout << lua_tostring(_state, -1)<<std::endl;
       throw std::runtime_error("File not found");
+    }
+  }
+
+  void ScriptEngine::executeString(const std::string& str) {
+    int returnCode = luaL_dostring(_state, str.c_str());    
+    if (returnCode != LUA_OK) {
+      std::string lined = "";
+      std::string current = "";
+      std::istringstream f(str);
+      size_t lineNo = 0;
+      while (std::getline(f, current, '\n')) {
+        lined += std::to_string(lineNo) + " " + current + "\n";
+        lineNo++;
+      }
+      
+      std::cout << lined << std::endl;
+      std::cout << lua_tostring(_state, -1) << std::endl;
+      throw std::runtime_error("Error in call");
     }
   }
 
@@ -309,6 +328,27 @@ namespace Haas
     nlohmann::json result;
     toJson(result);
     lua_pop(_state, 1);
+    return result;
+  }
+
+  std::string ScriptEngine::cleanComments(const std::string& code, char symbol){
+    std::string result = "";
+    std::string current = "";
+    std::istringstream f(code);
+    size_t lineNo = 0;
+    bool stringOpen = false;
+    while (std::getline(f, current, '\n')) {
+      int i = 0;
+      for (; i < current.size(); i++) {
+        if (current[i] == '"') {
+          stringOpen = !stringOpen;
+        }
+        if (!stringOpen && current[i] == symbol) {
+          break;
+        }
+      }
+      result = result + current.substr(0,i) + "\n";
+    }
     return result;
   }
 
