@@ -60,6 +60,7 @@ namespace Ahwassa {
     glGetIntegeri_v(GL_VIEWPORT, 0, _oldViewPort.data());
     glViewport(0, 0, (GLsizei)_width, (GLsizei)_height);
     glBindFramebuffer(GL_FRAMEBUFFER, _id);
+    glClearColor(0,0,0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
   }

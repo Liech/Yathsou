@@ -16,6 +16,10 @@ namespace Ahwassa {
   class VAO;
   class PositionTextureVertex;
   class UniformMat4;
+  class UniformVecVec3;
+  class UniformVec3;
+  class UniformFloat;
+  class Window;
 
   class DeferredComposer {
   public:
@@ -24,7 +28,9 @@ namespace Ahwassa {
     void end();
     std::vector<std::shared_ptr<Texture>> getRawTextures();
     std::shared_ptr<Texture> getResult();
+    void draw();
   private:
+    const int MAXLIGHT = 32;
     std::shared_ptr<Rendertarget>           _resultCanvas;
     std::shared_ptr<FBO>                    _fbo;
     BasicTexture2DRenderer r;
@@ -34,7 +40,14 @@ namespace Ahwassa {
     std::vector<PositionTextureVertex> _vertices;
     std::shared_ptr<ShaderProgram>     _shader;
     std::unique_ptr<UniformMat4>       _projection;
+    std::shared_ptr<UniformVecVec3>    _lightPositions;
+    std::shared_ptr<UniformVecVec3>    _lightColors;
+    std::shared_ptr<UniformVec3>       _camPos;
+    std::shared_ptr<UniformFloat>      _numberOfLights;
+    std::vector<glm::vec3> lights;
+    std::vector<glm::vec3> clrs;
     int _width;
     int _height;
+    Window* _window;
   };
 }

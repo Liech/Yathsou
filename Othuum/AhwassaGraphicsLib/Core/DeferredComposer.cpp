@@ -10,8 +10,12 @@
 #include "Uniforms/Rendertarget.h"
 #include "Uniforms/Texture.h"
 #include "Uniforms/UniformMat4.h"
+#include "Uniforms/UniformVecVec3.h"
+#include "Uniforms/UniformVec3.h"
+#include "Uniforms/UniformFloat.h"
 #include "Core/Window.h"
 #include "Core/ShaderProgram.h"
+#include "Core/Camera.h"
 
 namespace Ahwassa {
   DeferredComposer::DeferredComposer(Window* window, int width, int height) :r(window) {
@@ -19,6 +23,7 @@ namespace Ahwassa {
     _resultCanvas = std::make_shared<Ahwassa::Rendertarget>("Result", width, height);
     _width = width;
     _height = height;
+    _window = window;
 
     std::string vertex_shader_source = R"(
     out vec2 TexCoords;
@@ -36,8 +41,25 @@ namespace Ahwassa {
 
     void main()
     {    
-      vec4 sampled = texture(gPosition, TexCoords);
-      color = vec4(sampled.r,sampled.g,sampled.b,sampled.a);
+      vec3 FragPos   = texture(gPosition  , TexCoords).rgb;
+      vec3 Normal    = texture(gNormal    , TexCoords).rgb;
+      vec3 Albedo    = texture(gAlbedoSpec, TexCoords).rgb;
+      float Specular = texture(gAlbedoSpec, TexCoords).a;
+      
+      vec3 lighting = Albedo * 0.5;
+      vec3 viewDir = normalize(CamPos - FragPos);
+      for(int i = 0; i < NumberOfLights; ++i)
+      {
+          // diffuse
+          vec3 lightDir = normalize(LightPositions[i] - FragPos);
+          vec3 diffuse = max(dot(Normal, lightDir), 0.0) * Albedo * LightColors[i];
+          lighting += diffuse;
+      }
+      
+      if (FragPos[0] == 0 && FragPos[1] == 0&& FragPos[2] == 0)
+        discard;
+
+      color = vec4(lighting, 1.0);
     }  
    )";
 
@@ -54,6 +76,16 @@ namespace Ahwassa {
     uniforms.push_back(_projection.get());
     _projection->setValue(glm::ortho(0.0f, (float)width, 0.0f, (float)height));
 
+    _lightPositions = std::make_shared<UniformVecVec3>("LightPositions", MAXLIGHT);
+    _lightColors    = std::make_shared<UniformVecVec3>("LightColors"   , MAXLIGHT);
+    _numberOfLights = std::make_shared<UniformFloat  >("NumberOfLights");
+    uniforms.push_back(_lightPositions.get());
+    uniforms.push_back(_lightColors   .get());
+    uniforms.push_back(_numberOfLights.get());
+
+    _camPos = std::make_shared<UniformVec3  >("CamPos");
+    uniforms.push_back(_camPos.get());
+
     for (auto x : getRawTextures()) {
       uniforms.push_back(x.get());
       x->setBindable(false);
@@ -62,20 +94,45 @@ namespace Ahwassa {
     _vbo = std::make_unique<VBO<PositionTextureVertex>>(_vertices);
     _vao = std::make_unique<VAO>(_vbo.get());
     _shader = std::make_shared<ShaderProgram>(PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
+
+
+    lights.resize(MAXLIGHT);
+    //for (int i = 0; i < lights.size(); i++) {
+    //  lights[i] = glm::vec3(rand() % 100 - 50, rand() % 100 - 50, rand() % 100 - 50);
+    //}
+    lights[0] = glm::vec3(40, 40, 40);
+    clrs.resize(MAXLIGHT);
+    //for (int i = 0; i < clrs.size(); i++) {
+    //  clrs[i] = glm::vec3((rand() % 100) / 100.0f, (rand() % 100) / 100.0f, (rand() % 100)/100.0f);
+    //}
+    clrs[0] = glm::vec3(1, 1, 1);
   }
 
   void DeferredComposer::start() {
     _fbo->start();
+    glClearColor(1,1,1, 1);
   }
 
   void DeferredComposer::end() {
     _fbo->end();
     _resultCanvas->start();
    
-
     glEnable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    _camPos->setValue(_window->camera()->getPosition());
+    std::vector<glm::vec3> lightPos;
+    std::vector<glm::vec3> lightClr;
+    lightPos.resize(MAXLIGHT);
+    lightClr.resize(MAXLIGHT);
+
+    lightPos[0] = glm::vec3(30, 30, 30);
+    lightClr[0] = Iyathuum::Color(255, 255, 255).to3();
+
+    _lightColors   ->setValue(clrs);
+    _lightPositions->setValue(lights);
+    _numberOfLights->setValue(1);
+
     _shader->bind();
 
     GLfloat x = 0;
@@ -99,11 +156,6 @@ namespace Ahwassa {
     _vbo->setData(_vertices);
     _vao->draw();
 
-
-    //r.start();
-    //r.draw(*getRawTextures()[0], Iyathuum::glmAABB<2>(glm::vec2(0,0), glm::vec2(_width,_height)));
-    //r.end();
-
     _resultCanvas->end();
   }
 
@@ -115,5 +167,11 @@ namespace Ahwassa {
     std::shared_ptr<Ahwassa::Texture> result = std::make_shared<Ahwassa::Texture>("Result", _resultCanvas->getTextureID());
     result->release();
     return result;
+  }
+
+  void DeferredComposer::draw() {
+    r.start();
+    r.draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0,0), glm::vec2(_width,_height)));
+    r.end();
   }
 }

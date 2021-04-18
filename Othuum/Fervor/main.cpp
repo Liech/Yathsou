@@ -104,7 +104,7 @@ int main(int argc, char** argv) {
     textureRenderer->draw(*composer->getRawTextures()[0], loc ,true);
     textureRenderer->draw(*composer->getRawTextures()[1], loc2,true);
     textureRenderer->draw(*composer->getRawTextures()[2], loc3, true);
-    textureRenderer->draw(*composer->getResult(), loc4, true);
+    textureRenderer->draw(*composer->getResult(), loc4, false);
     textureRenderer->end();
     
 

@@ -5,6 +5,7 @@
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
+#include "AhwassaGraphicsLib/Core/DeferredComposer.h"
 #include "AhwassaGraphicsLib/Drawables/Background.h"
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
 #include "AhwassaGraphicsLib/Widgets/Button.h"
@@ -35,10 +36,10 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  int width = 1200;
-  int height = 900;
-  //int width = 1920;
-  //int height = 1080;
+  //int width = 1200;
+  //int height = 900;
+  int width = 1920;
+  int height = 1080;
 
   //std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
   //std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
@@ -55,6 +56,7 @@ int main(int argc, char** argv) {
   std::shared_ptr<Athanah::SupComMesh> mesh;
   std::unique_ptr<Athanah::SupComMeshRenderer> renderer;
   std::unique_ptr< Ahwassa::BasicTextRenderer> textRenderer;
+  std::shared_ptr<Ahwassa::DeferredComposer> composer;
   bool play = true;
   float time = 0;
   
@@ -75,6 +77,8 @@ int main(int argc, char** argv) {
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
     w.camera()->setPosition(glm::vec3(20, 20, 20));
     w.input().addUIElement(freeCam.get());
+
+    composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
 
     std::vector<std::string> names;
     
@@ -158,11 +162,15 @@ int main(int argc, char** argv) {
       else
         mesh->animation = std::vector<glm::mat4>();
     }
-
+    composer->start();
+    renderer->draw();
+    composer->end();
     background->draw();
+
+    composer->draw();
+
     if (SaveButton)
       SaveButton->draw();
-    renderer->draw();
     UnitSelection->draw();
     if (AnimationSelection) {
       AnimationSelection->draw();
