@@ -11,11 +11,11 @@ namespace Athanah {
     Blueprint(const std::string id);
 
 
-    std::string       getName() const;
+    std::string       description() const;
     BlueprintGeneral& general() const;
 
   private:
-    std::string _name;
+    std::string _description;
     std::string _id;
 
     std::shared_ptr<BlueprintGeneral> _general;

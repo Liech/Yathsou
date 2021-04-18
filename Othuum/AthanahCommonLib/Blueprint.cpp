@@ -4,11 +4,11 @@
 namespace Athanah {
   Blueprint::Blueprint(const std::string id, const nlohmann::json& input) {
     if (input.find("Description") != input.end()) {
-      _name = input["Description"];
-      _name = _name.substr(_name.find_first_of('>')+1);
+      _description = input["Description"];
+      _description = _description.substr(_description.find_first_of('>')+1);
     }
     else if (input.find("Description") != input.end())
-      _name = id;
+      _description = id;
 
     _general = std::make_shared<BlueprintGeneral>(input["General"]);
 
@@ -16,13 +16,13 @@ namespace Athanah {
   }
 
   Blueprint::Blueprint(const std::string id) {
-    _name = id;
+    _description = id;
     _id = id;
     _general = std::make_shared<BlueprintGeneral>();
   }
 
-  std::string Blueprint::getName() const {
-    return _name;
+  std::string Blueprint::description() const {
+    return _description;
   }
 
   BlueprintGeneral& Blueprint::general() const {

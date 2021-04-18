@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
   Athanah::SupComModelFactory factory(pc);
   Athanah::BlueprintFactory blueprints(pc);
   auto blueprint = blueprints.loadModel(unit);
-  std::cout<< blueprint->getName()<<std::endl;
+  std::cout<< blueprint->description()<<std::endl;
 
   w.Startup = [&]() {
     renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());

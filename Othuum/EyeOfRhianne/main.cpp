@@ -80,7 +80,7 @@ int main(int argc, char** argv) {
     
     for (auto x : factory.getAvailableModels()) {
       auto bp = blueprints.loadModel(x);
-      names.push_back(bp->getName() + "\n" + bp->general().unitName());
+      names.push_back(bp->description() + "\n" + bp->general().unitName());
     }
 
     textRenderer = std::make_unique<Ahwassa::BasicTextRenderer>(&w);
