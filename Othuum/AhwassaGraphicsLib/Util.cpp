@@ -23,6 +23,13 @@ namespace Ahwassa {
       glDisable(GL_DEPTH_TEST);
   }
 
+  void Util::setBlend(bool enabled) {
+    if (enabled)
+      glEnable(GL_BLEND);
+    else
+      glDisable(GL_BLEND);
+  }
+
   void Util::depthMask(bool enabled) {
     if (enabled)
       glDepthMask(GL_TRUE);
@@ -37,6 +44,11 @@ namespace Ahwassa {
   void Util::setDepthFuncMore() {
     glDepthFunc(GL_GREATER);
   }
+
+  void Util::setTextureBlend() {
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  }
+
 
   std::shared_ptr<Mesh<PositionNormalVertex>> Util::getCube() {
     std::vector<PositionNormalVertex> input;
