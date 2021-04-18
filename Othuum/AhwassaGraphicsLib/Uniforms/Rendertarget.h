@@ -12,6 +12,7 @@ namespace Ahwassa {
     void end();
     void bind() override;
     virtual std::string getType() override;
+    unsigned int getTextureID() { return _texture; }
 
   private:
     unsigned int _texture      = 0;

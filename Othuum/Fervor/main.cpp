@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
 
   w.Startup = [&]() {
     renderer = std::make_shared<Athanah::SupComMeshRendererDef>(w.camera());
-    composer = std::make_shared<Ahwassa::DeferredComposer>(width, height);
+    composer = std::make_shared<Ahwassa::DeferredComposer>(&w,width, height);
     textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
     int animationNumber = 2;
 
@@ -100,9 +100,11 @@ int main(int argc, char** argv) {
     auto loc = Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
     auto loc2 = Iyathuum::glmAABB<2>(glm::vec2(w.getWidth() / 2, 0), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
     auto loc3 = Iyathuum::glmAABB<2>(glm::vec2(0, w.getHeight() / 2), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
+    auto loc4 = Iyathuum::glmAABB<2>(glm::vec2(w.getWidth() / 2, w.getHeight() / 2), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
     textureRenderer->draw(*composer->getRawTextures()[0], loc ,true);
     textureRenderer->draw(*composer->getRawTextures()[1], loc2,true);
-    textureRenderer->draw(*composer->getRawTextures()[2], loc3,true);
+    textureRenderer->draw(*composer->getRawTextures()[2], loc3, true);
+    textureRenderer->draw(*composer->getResult(), loc4, true);
     textureRenderer->end();
     
 

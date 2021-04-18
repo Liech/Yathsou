@@ -133,6 +133,7 @@ namespace Ahwassa {
     _vars->vao = std::make_unique<VAO>(_vars->vbo.get());
     _vars->shader = std::make_unique<ShaderProgram>(PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
+
   void BasicTexture2DRenderer::setClippingRectangle(Iyathuum::glmAABB<2> box) {
     _clipping = true;
     _clippingBox = box;
