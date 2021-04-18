@@ -4,16 +4,19 @@
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
+#include "AhwassaGraphicsLib/Core/DeferredComposer.h"
 #include "AhwassaGraphicsLib/Drawables/Background.h"
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/BufferObjects/FBO.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
 #include "AhwassaGraphicsLib/Util.h"
 #include "AthanahCommonLib/SupComMeshLoader.h"
-#include "AthanahCommonLib/SupComMeshRenderer.h"
+#include "AthanahCommonLib/SupComMeshRendererDef.h"
 #include "AthanahCommonLib/SupComModel.h"
 #include "AthanahCommonLib/SupComModelFactory.h"
 
@@ -41,7 +44,9 @@ int main(int argc, char** argv) {
   std::unique_ptr<Ahwassa::FPS> fps;
 
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
-  std::shared_ptr<Athanah::SupComMeshRenderer> renderer;
+  std::shared_ptr<Athanah::SupComMeshRendererDef> renderer;
+  std::shared_ptr<Ahwassa::DeferredComposer> composer;
+  std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
   std::shared_ptr<Athanah::SupComModel> model = std::shared_ptr<Athanah::SupComModel>();
   std::vector<std::shared_ptr<Athanah::SupComMesh>> meshes;
   std::string animName;
@@ -55,7 +60,9 @@ int main(int argc, char** argv) {
   std::cout<< blueprint->description()<<std::endl;
 
   w.Startup = [&]() {
-    renderer = std::make_shared<Athanah::SupComMeshRenderer>(w.camera());
+    renderer = std::make_shared<Athanah::SupComMeshRendererDef>(w.camera());
+    composer = std::make_shared<Ahwassa::DeferredComposer>(width, height);
+    textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
     int animationNumber = 2;
 
     //model = std::make_shared<Athanah::SupComModel>(pc, unit);
@@ -82,9 +89,23 @@ int main(int argc, char** argv) {
     t += 0.01f;
     meshes[0]->animation = model->getAnimation(animName, model->getAnimationLength(animName) * std::fmod(t, 1));
     meshes[1]->animation = {};
+    
+    composer->start();
+    renderer->draw();
+    composer->end();
 
     b.draw();
-    renderer->draw();
+
+    textureRenderer->start();
+    auto loc = Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
+    auto loc2 = Iyathuum::glmAABB<2>(glm::vec2(w.getWidth() / 2, 0), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
+    auto loc3 = Iyathuum::glmAABB<2>(glm::vec2(0, w.getHeight() / 2), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
+    textureRenderer->draw(*composer->getRawTextures()[0], loc ,true);
+    textureRenderer->draw(*composer->getRawTextures()[1], loc2,true);
+    textureRenderer->draw(*composer->getRawTextures()[2], loc3,true);
+    textureRenderer->end();
+    
+
     fps->draw();
   };
   w.run();

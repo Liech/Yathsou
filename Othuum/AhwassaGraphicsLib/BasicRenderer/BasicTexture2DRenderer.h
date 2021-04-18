@@ -20,7 +20,7 @@ namespace Ahwassa {
     void start();
     void end();
     void draw(const Texture& texture, glm::vec2 pos, glm::vec2 size);
-    void draw(const Texture& texture, Iyathuum::glmAABB<2> box);
+    void draw(const Texture& texture, Iyathuum::glmAABB<2> box, bool yswap = false);
     void setClippingRectangle(Iyathuum::glmAABB<2> box);
     void disableClipping();
 

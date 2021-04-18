@@ -315,6 +315,12 @@
     <ClCompile Include="Renderer\RectangleRenderer.cpp">
       <Filter>Source Files\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="BufferObjects\FBO.cpp">
+      <Filter>Source Files\BufferObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\DeferredComposer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
@@ -853,6 +859,12 @@
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferObjects\FBO.h">
+      <Filter>Header Files\BufferObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\DeferredComposer.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

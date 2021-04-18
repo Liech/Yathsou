@@ -35,6 +35,7 @@
     <ClInclude Include="BulletDebugDrawer.h" />
     <ClInclude Include="SupComMeshLoader.h" />
     <ClInclude Include="SupComMeshRenderer.h" />
+    <ClInclude Include="SupComMeshRendererDef.h" />
     <ClInclude Include="SupComModel.h" />
     <ClInclude Include="SupComModelFactory.h" />
     <ClInclude Include="SupComVertex.h" />
@@ -48,6 +49,7 @@
     <ClCompile Include="BulletDebugDrawer.cpp" />
     <ClCompile Include="SupComMeshLoader.cpp" />
     <ClCompile Include="SupComMeshRenderer.cpp" />
+    <ClCompile Include="SupComMeshRendererDef.cpp" />
     <ClCompile Include="SupComModel.cpp" />
     <ClCompile Include="SupComModelFactory.cpp" />
     <ClCompile Include="SupComVertex.cpp" />

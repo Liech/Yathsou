@@ -11,6 +11,12 @@ namespace Ahwassa {
     glGenerateMipmap(GL_TEXTURE_2D);
   }
 
+  Texture::Texture(std::string name, int width, int height) : Uniform(name) {
+    glGenTextures(1, &_texture);
+    glBindTexture(GL_TEXTURE_2D, _texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
+  }
+
   Texture::Texture(std::string name, unsigned int tex) : Uniform(name) {
     _texture = tex;
     release();

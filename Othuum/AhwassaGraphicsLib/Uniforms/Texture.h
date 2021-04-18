@@ -7,7 +7,8 @@
 namespace Ahwassa {
   class Texture : public Uniform {
   public:
-    Texture(std::string name, Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2> * tex);
+    Texture(std::string name, Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>* tex);
+    Texture(std::string name, int width, int height);
     Texture(std::string name, unsigned int tex);
     virtual ~Texture() override;
 

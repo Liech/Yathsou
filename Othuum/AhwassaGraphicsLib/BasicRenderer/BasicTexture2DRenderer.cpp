@@ -43,7 +43,7 @@ namespace Ahwassa {
     draw(texture, box);
   }
   
-  void BasicTexture2DRenderer::draw(const Texture& texture,Iyathuum::glmAABB<2> box) {
+  void BasicTexture2DRenderer::draw(const Texture& texture,Iyathuum::glmAABB<2> box,bool yswap) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
@@ -59,13 +59,14 @@ namespace Ahwassa {
     GLfloat w = size[0];
     GLfloat h = size[1];
 
+
     _vars->vertices = {
-  PositionTextureVertex(glm::vec3(x+0, y+h, 0),glm::vec2(0.0, 0.0)),
-  PositionTextureVertex(glm::vec3(x+0, y+0, 0),glm::vec2(0.0, 1.0)),
-  PositionTextureVertex(glm::vec3(x+w, y+0, 0),glm::vec2(1.0, 1.0)),
-  PositionTextureVertex(glm::vec3(x+0, y+h, 0),glm::vec2(0.0, 0.0)),
-  PositionTextureVertex(glm::vec3(x+w, y+0, 0),glm::vec2(1.0, 1.0)),
-  PositionTextureVertex(glm::vec3(x+w, y+h, 0),glm::vec2(1.0, 0.0))
+  PositionTextureVertex(glm::vec3(x+0, y+h, 0),glm::vec2(0.0, yswap?1:0.0)),
+  PositionTextureVertex(glm::vec3(x+0, y+0, 0),glm::vec2(0.0, yswap?0:1.0)),
+  PositionTextureVertex(glm::vec3(x+w, y+0, 0),glm::vec2(1.0, yswap?0:1.0)),
+  PositionTextureVertex(glm::vec3(x+0, y+h, 0),glm::vec2(0.0, yswap?1:0.0)),
+  PositionTextureVertex(glm::vec3(x+w, y+0, 0),glm::vec2(1.0, yswap?0:1.0)),
+  PositionTextureVertex(glm::vec3(x+w, y+h, 0),glm::vec2(1.0, yswap?1:0.0))
     };
 
     _vars->shownTexture->setTextureID(texture.getTextureID());
