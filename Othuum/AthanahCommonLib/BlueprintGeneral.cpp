@@ -18,9 +18,9 @@ namespace Athanah {
       _unitName = "Undefined";
 
     if (input.find("Icon") != input.end())
-      _unitName = input["Icon"];
+      _icon = input["Icon"];
     else
-      _unitName = "Undefined";
+      _icon = "Undefined";
 
     if (input.find("UnitWeight") != input.end())
       _weight = input["UnitWeight"];
