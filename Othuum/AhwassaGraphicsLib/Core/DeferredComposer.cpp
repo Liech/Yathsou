@@ -52,8 +52,11 @@ namespace Ahwassa {
       {
           // diffuse
           vec3 lightDir = normalize(LightPositions[i] - FragPos);
+          vec3 reflectDir = reflect(-lightDir, Normal);  
           vec3 diffuse = max(dot(Normal, lightDir), 0.0) * Albedo * LightColors[i];
-          lighting += diffuse;
+          float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+          vec3 specular = Specular * spec * LightColors[i];  
+          lighting += diffuse + specular;
       }
       
       if (FragPos[0] == 0 && FragPos[1] == 0&& FragPos[2] == 0)
@@ -97,14 +100,14 @@ namespace Ahwassa {
 
 
     lights.resize(MAXLIGHT);
-    //for (int i = 0; i < lights.size(); i++) {
-    //  lights[i] = glm::vec3(rand() % 100 - 50, rand() % 100 - 50, rand() % 100 - 50);
-    //}
-    lights[0] = glm::vec3(40, 40, 40);
+    for (int i = 0; i < lights.size(); i++) {
+      lights[i] = glm::vec3(rand() % 100 - 50, rand() % 100 - 50, rand() % 100 - 50);
+    }
+    lights[0] = glm::vec3(3, 3, 3);
     clrs.resize(MAXLIGHT);
-    //for (int i = 0; i < clrs.size(); i++) {
-    //  clrs[i] = glm::vec3((rand() % 100) / 100.0f, (rand() % 100) / 100.0f, (rand() % 100)/100.0f);
-    //}
+    for (int i = 0; i < clrs.size(); i++) {
+      clrs[i] = glm::vec3(1,1,1);
+    }
     clrs[0] = glm::vec3(1, 1, 1);
   }
 
@@ -121,13 +124,6 @@ namespace Ahwassa {
     glDisable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     _camPos->setValue(_window->camera()->getPosition());
-    std::vector<glm::vec3> lightPos;
-    std::vector<glm::vec3> lightClr;
-    lightPos.resize(MAXLIGHT);
-    lightClr.resize(MAXLIGHT);
-
-    lightPos[0] = glm::vec3(30, 30, 30);
-    lightClr[0] = Iyathuum::Color(255, 255, 255).to3();
 
     _lightColors   ->setValue(clrs);
     _lightPositions->setValue(lights);

@@ -68,11 +68,11 @@ namespace Athanah {
        float specular   = info[0];
        float reflection = info[1];
        float glow       = info[2];
-       float showTeamClr= info[3];
+       float showTeamClr= info[3]; 
 
        gAlbedoSpec.rgb = (albedo + showTeamClr * (vec4(clr,1) - albedo)).rgb;
-       gAlbedoSpec.a = reflection;
-       gNormal.rgb = (normalize(Normal) + vec3(0.5,0.5,0.5))/2.0;
+       gAlbedoSpec.a = specular;
+       gNormal.rgb = normalize(Normal);
        gNormal.a = 1;
        gPosition.rgb = FragPos.rgb; 	
        gPosition.a = 1;

@@ -15,7 +15,7 @@
 
 #include "AthanahCommonLib/SupComModelFactory.h"
 #include "AthanahCommonLib/SupComModel.h"
-#include "AthanahCommonLib/SupComMeshRenderer.h"
+#include "AthanahCommonLib/SupComMeshRendererDef.h"
 
 #include "AezeselFileIOLib/STLWriter.h"
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
@@ -54,7 +54,7 @@ int main(int argc, char** argv) {
   std::unique_ptr<Ahwassa::Button    > SaveButton = nullptr;
   Athanah::SupComModelFactory factory("Data\\units\\");
   std::shared_ptr<Athanah::SupComMesh> mesh;
-  std::unique_ptr<Athanah::SupComMeshRenderer> renderer;
+  std::unique_ptr<Athanah::SupComMeshRendererDef> renderer;
   std::unique_ptr< Ahwassa::BasicTextRenderer> textRenderer;
   std::shared_ptr<Ahwassa::DeferredComposer> composer;
   bool play = true;
@@ -149,7 +149,7 @@ int main(int argc, char** argv) {
     fps = std::make_unique<Ahwassa::FPS>(&w);
     background = std::make_unique<Ahwassa::Background>(&w);
 
-    renderer = std::make_unique<Athanah::SupComMeshRenderer>(w.camera());
+    renderer = std::make_unique<Athanah::SupComMeshRendererDef>(w.camera());
   };
 
   w.Update = [&]() {
