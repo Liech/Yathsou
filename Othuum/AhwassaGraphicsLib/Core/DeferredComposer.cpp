@@ -19,7 +19,7 @@
 
 namespace Ahwassa {
   DeferredComposer::DeferredComposer(Window* window, int width, int height) :r(window) {
-    _fbo = std::make_shared<Ahwassa::FBO>(width,height, std::vector<std::string> {"gPosition", "gNormal", "gAlbedoSpec"});
+    _fbo = std::make_shared<Ahwassa::FBO>(width,height, std::vector<std::string> {"gPosition", "gNormal", "gAlbedoSpec", "gSpecial"});
     _resultCanvas = std::make_shared<Ahwassa::Rendertarget>("Result", width, height);
     _width = width;
     _height = height;
@@ -44,7 +44,8 @@ namespace Ahwassa {
       vec3 FragPos   = texture(gPosition  , TexCoords).rgb;
       vec3 Normal    = texture(gNormal    , TexCoords).rgb;
       vec3 Albedo    = texture(gAlbedoSpec, TexCoords).rgb;
-      float Specular = texture(gAlbedoSpec, TexCoords).a;
+      vec3 Special   = texture(gSpecial   , TexCoords).rgb;
+      float Specular = Special.b;
       
       vec3 lighting = Albedo * 0.5;
       vec3 viewDir = normalize(CamPos - FragPos);

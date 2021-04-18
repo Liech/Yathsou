@@ -32,7 +32,7 @@ namespace Ahwassa {
     for (int i = 0; i < _textures.size(); i++)
       forFrameBufferGL_COLOR_ATTACHMENT[i] = getGL_COLOR_ATTACHMENT(i);
 
-    glDrawBuffers(3, forFrameBufferGL_COLOR_ATTACHMENT.data());
+    glDrawBuffers(_textures.size(), forFrameBufferGL_COLOR_ATTACHMENT.data());
 
     // create and attach depth buffer (renderbuffer)
     glGenRenderbuffers(1, &_depth);

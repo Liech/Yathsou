@@ -61,6 +61,7 @@ namespace Athanah {
      layout (location = 0) out vec4 gPosition;
      layout (location = 1) out vec4 gNormal;
      layout (location = 2) out vec4 gAlbedoSpec;
+     layout (location = 3) out vec4 gSpecial;
 
      in vec2 TexCoords;
      in vec3 FragPos;
@@ -81,11 +82,15 @@ namespace Athanah {
        vec4 normalWithNormalMap = vec4(Bitangent * normMap.z + Tangent * normMap.y + Normal,1);
 
        gAlbedoSpec.rgb = (albedo + showTeamClr * (vec4(clr,1) - albedo)).rgb;
-       gAlbedoSpec.a = specular;
+       gAlbedoSpec.a = 1;
        gNormal.rgb = normalize(normalWithNormalMap).rgb;
        gNormal.a = 1;
        gPosition.rgb = FragPos.rgb; 	
        gPosition.a = 1;
+       gSpecial.r = reflection;
+       gSpecial.g = glow;
+       gSpecial.b = specular;
+       gSpecial.a = 1;
      }
    )";
     std::vector<Ahwassa::Uniform*> uniforms;

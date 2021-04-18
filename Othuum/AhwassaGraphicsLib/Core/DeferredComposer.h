@@ -10,7 +10,7 @@ namespace Ahwassa {
   class FBO;
   class Texture;
   class ShaderProgram;
-  class Window;
+  class Window; 
   class Texture;
   class Rendertarget;
   class VAO;
