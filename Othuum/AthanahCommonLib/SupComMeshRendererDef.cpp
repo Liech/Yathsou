@@ -37,6 +37,8 @@ namespace Athanah {
       out vec3 FragPos;
       out vec3 Normal;
       out vec3 clr;
+      out vec3 Tangent;
+      out vec3 Bitangent;
 
       void main() {
         int boneSize =)" + std::to_string(_maxBoneSize) + R"( ;
@@ -49,6 +51,9 @@ namespace Athanah {
         Normal    = (world * vec4(normal, 1.0)).xyz;
         TexCoords = uv1;
         FragPos   = (world * vec4(position , 1.0)).xyz;
+        
+        Tangent   = vec3(world*vec4(tangent ,1));
+        Bitangent = vec3(world*vec4(binormal,1));
       }
    )";
 
@@ -61,18 +66,23 @@ namespace Athanah {
      in vec3 FragPos;
      in vec3 Normal;
      in vec3 clr;
+     in vec3 Tangent;
+     in vec3 Bitangent;
      
      void main() {
-       vec4  albedo = texture(Albedo, TexCoords);
-       vec4  info   = texture(Info  , TexCoords);
+       vec4  albedo = texture(Albedo   , TexCoords);
+       vec4  info   = texture(Info     , TexCoords);
+       vec4  normMap= texture(NormalMap, TexCoords) * 2 - 1;
        float specular   = info[0];
        float reflection = info[1];
        float glow       = info[2];
        float showTeamClr= info[3]; 
 
+       vec4 normalWithNormalMap = vec4(Bitangent * normMap.z + Tangent * normMap.y + Normal,1);
+
        gAlbedoSpec.rgb = (albedo + showTeamClr * (vec4(clr,1) - albedo)).rgb;
        gAlbedoSpec.a = specular;
-       gNormal.rgb = normalize(Normal);
+       gNormal.rgb = normalize(normalWithNormalMap).rgb;
        gNormal.a = 1;
        gPosition.rgb = FragPos.rgb; 	
        gPosition.a = 1;
@@ -93,6 +103,10 @@ namespace Athanah {
     _albedo = std::make_unique<Ahwassa::Texture>("Albedo", 0);
     _albedo->release();
     uniforms.push_back(_albedo.get());
+
+    _normal = std::make_unique<Ahwassa::Texture>("NormalMap", 0);
+    _normal->release();
+    uniforms.push_back(_normal.get());
 
     _info = std::make_unique<Ahwassa::Texture>("Info", 0);
     _info->release();
@@ -140,6 +154,7 @@ namespace Athanah {
       }
 
       _albedo->setTextureID(meshVector.first->albedo().getTextureID());
+      _normal->setTextureID(meshVector.first->normal().getTextureID());
       _info->setTextureID(meshVector.first->info().getTextureID());
       _models->setData(models);
       _colors->setData(colors);

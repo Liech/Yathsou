@@ -103,7 +103,7 @@ namespace Ahwassa {
     for (int i = 0; i < lights.size(); i++) {
       lights[i] = glm::vec3(rand() % 100 - 50, rand() % 100 - 50, rand() % 100 - 50);
     }
-    lights[0] = glm::vec3(3, 3, 3);
+    lights[0] = glm::vec3(100, 100, 0);
     clrs.resize(MAXLIGHT);
     for (int i = 0; i < clrs.size(); i++) {
       clrs[i] = glm::vec3(1,1,1);

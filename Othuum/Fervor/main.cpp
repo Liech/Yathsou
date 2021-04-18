@@ -54,8 +54,8 @@ int main(int argc, char** argv) {
   std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
   std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
   std::string unit = "UAL0001";//"UEL0208";
-  Athanah::SupComModelFactory factory(pc);
-  Athanah::BlueprintFactory blueprints(pc);
+  Athanah::SupComModelFactory factory (lpt);
+  Athanah::BlueprintFactory blueprints(lpt);
   auto blueprint = blueprints.loadModel(unit);
   std::cout<< blueprint->description()<<std::endl;
 
