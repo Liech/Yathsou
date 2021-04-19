@@ -9,7 +9,10 @@
 #include "AhwassaGraphicsLib/Uniforms/UniformMat4.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/ShaderProgram.h"
+#include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Util.h"
+#include "AhwassaGraphicsLib/BufferObjects/VAO.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
 namespace Athanah {
   Bloom::Bloom(Ahwassa::Window* window, int width, int height) {
@@ -34,11 +37,11 @@ namespace Athanah {
 
     void main()
     {    
-      float bloom = texture(BloomMap, TexCoords)[BloomChannel];
-      vec4  input = texture(Input   , TexCoords);
+      float bloom = texture(BloomMap, TexCoords)[int(BloomChannel)];
+      vec4  inp = texture(Input   , TexCoords);
 
 
-      color = vec4(lighting, 1.0);
+      color = inp;
     }  
    )";
 
@@ -64,7 +67,8 @@ namespace Athanah {
     uniforms.push_back(_bloomMap    .get());
     uniforms.push_back(_input       .get());
     uniforms.push_back(_bloomChannel.get());
-
+    _vbo = std::make_unique<Ahwassa::VBO<Ahwassa::PositionTextureVertex>>(_vertices);
+    _vao = std::make_unique<Ahwassa::VAO>(_vbo.get());
     _shader = std::make_shared<Ahwassa::ShaderProgram>(Ahwassa::PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
 
   }
@@ -94,8 +98,8 @@ namespace Athanah {
   }
 
   void Bloom::drawResult() {
-    r.start();
-    r.draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_width, _height)));
-    r.end();
+    _window->renderer().texture().start();
+    _window->renderer().texture().draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_width, _height)));
+    _window->renderer().texture().end();
   }
 }

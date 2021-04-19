@@ -52,9 +52,10 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::Texture       >   _info     ;
     std::shared_ptr<Ahwassa::Texture       >   _normal   ;
 
-    std::shared_ptr<Ahwassa::SSBOmat4> _animations;
-    std::shared_ptr<Ahwassa::SSBOmat4> _models    ;
-    std::shared_ptr<Ahwassa::SSBOvec3> _colors    ;
+    std::shared_ptr<Ahwassa::SSBOmat4> _animations ;
+    std::shared_ptr<Ahwassa::SSBOmat4> _models     ;
+    std::shared_ptr<Ahwassa::SSBOmat4> _modelsRot  ;
+    std::shared_ptr<Ahwassa::SSBOvec3> _colors     ;
 
     size_t _bufferSize = 1000;
     size_t _maxBoneSize = 150;

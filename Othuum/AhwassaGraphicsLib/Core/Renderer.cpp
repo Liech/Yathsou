@@ -1,16 +1,17 @@
 #include "Renderer.h"
 
-#include "Renderer/RectangleRenderer.h"
-#include "Renderer/BoxRenderer.h"
-#include "Renderer/SphereRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/RectangleRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BoxRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/SphereRenderer.h"
 
-#include "Renderer/Box.h"
-#include "Renderer/Dot.h"
-#include "Renderer/Line.h"
-#include "Renderer/Rectangle.h"
-#include "Renderer/Sphere.h"
-#include "BasicRenderer/BasicTextRenderer.h"
-#include "BasicRenderer/BasicRectangleRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/Box.h"
+#include "AhwassaGraphicsLib/Renderer/Dot.h"
+#include "AhwassaGraphicsLib/Renderer/Line.h"
+#include "AhwassaGraphicsLib/Renderer/Rectangle.h"
+#include "AhwassaGraphicsLib/Renderer/Sphere.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicTextRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
   Renderer::Renderer(Window* window, std::shared_ptr<Camera> cam) {
@@ -21,6 +22,7 @@ namespace Ahwassa {
     _sphere    = std::make_shared<SphereRenderer        >(cam   );
     _bRectangle= std::make_shared<BasicRectangleRenderer>(window);
     _bText     = std::make_shared<BasicTextRenderer     >(window);
+    _bTexture  = std::make_shared<BasicTexture2DRenderer>(window);
   }
 
   std::shared_ptr<Dot> Renderer::newDot(const glm::vec3& pos, float size, Iyathuum::Color clr) {
@@ -60,5 +62,9 @@ namespace Ahwassa {
 
   BasicTextRenderer& Renderer::text() {
     return *_bText;
+  }
+
+  BasicTexture2DRenderer& Renderer::texture() {
+    return *_bTexture;
   }
 }

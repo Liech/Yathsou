@@ -16,6 +16,7 @@
 #include "AthanahCommonLib/SupComModelFactory.h"
 #include "AthanahCommonLib/SupComModel.h"
 #include "AthanahCommonLib/SupComMeshRendererDef.h"
+#include "AthanahCommonLib/Bloom.h"
 
 #include "AezeselFileIOLib/STLWriter.h"
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
@@ -36,15 +37,15 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  int width = 1200;
-  int height = 900;
-  //int width = 1920;
-  //int height = 1080;
+  //int width = 1200;
+  //int height = 900;
+  int width = 1920;
+  int height = 1080;
 
   //std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
   //std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
   
-
+   
   Ahwassa::Window w(width, height);
   std::unique_ptr<Ahwassa::Background> background;
   std::unique_ptr<Ahwassa::FPS       > fps;
@@ -57,6 +58,7 @@ int main(int argc, char** argv) {
   std::unique_ptr<Athanah::SupComMeshRendererDef> renderer;
   std::unique_ptr< Ahwassa::BasicTextRenderer> textRenderer;
   std::shared_ptr<Ahwassa::DeferredComposer> composer;
+  std::shared_ptr<Athanah::Bloom> bloom;
   bool play = true;
   float time = 0;
   
@@ -73,6 +75,7 @@ int main(int argc, char** argv) {
     animListArea = Iyathuum::glmAABB<2>(glm::vec2(300, 0), glm::vec2(300, w.getHeight() / 4));
     saveArea    = Iyathuum::glmAABB<2>(glm::vec2(300, w.getHeight() -50), glm::vec2(150, 50));
     pauseArea    = Iyathuum::glmAABB<2>(glm::vec2(450, w.getHeight() -50), glm::vec2(150, 50));
+    bloom = std::make_shared<Athanah::Bloom>(&w, width, height);
 
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
     w.camera()->setPosition(glm::vec3(20, 20, 20));

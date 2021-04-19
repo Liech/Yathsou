@@ -11,6 +11,7 @@
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/FBO.h"
+#include "AthanahCommonLib/Bloom.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
@@ -36,8 +37,8 @@ int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
   //int width = 800;
   //int height = 600;
-  int width = 1920;
-  int height = 1080;
+  int width = 2500;
+  int height = 1500;
 
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
@@ -49,13 +50,14 @@ int main(int argc, char** argv) {
   std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
   std::shared_ptr<Athanah::SupComModel> model = std::shared_ptr<Athanah::SupComModel>();
   std::vector<std::shared_ptr<Athanah::SupComMesh>> meshes;
+  std::shared_ptr<Athanah::Bloom> bloom;
   std::string animName;
 
   std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
   std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
-  std::string unit = "UAL0001";//"UEL0208";
-  Athanah::SupComModelFactory factory (lpt);
-  Athanah::BlueprintFactory blueprints(lpt);
+  std::string unit ="UEL0208";
+  Athanah::SupComModelFactory factory (pc);
+  Athanah::BlueprintFactory blueprints(pc);
   auto blueprint = blueprints.loadModel(unit);
   std::cout<< blueprint->description()<<std::endl;
 
@@ -63,7 +65,8 @@ int main(int argc, char** argv) {
     renderer = std::make_shared<Athanah::SupComMeshRendererDef>(w.camera());
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w,width, height);
     textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
-    int animationNumber = 2;
+    int animationNumber = 0;
+    bloom = std::make_shared<Athanah::Bloom>(&w, width, height);
 
     //model = std::make_shared<Athanah::SupComModel>(pc, unit);
     model = factory.loadModel(unit);
@@ -89,22 +92,27 @@ int main(int argc, char** argv) {
     t += 0.01f;
     meshes[0]->animation = model->getAnimation(animName, model->getAnimationLength(animName) * std::fmod(t, 1));
     meshes[1]->animation = {};
+    meshes[1]->transformation = glm::rotate(glm::translate(glm::mat4(1.0), glm::vec3(100, 0, 0)), t, glm::vec3(0, 1, 0)) ;
     
     composer->start();
     renderer->draw();
     composer->end();
-
+    bloom->draw(composer->getResult(), composer->getRawTextures()[3], 3);
     b.draw();
 
     textureRenderer->start();
-    auto loc = Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
-    auto loc2 = Iyathuum::glmAABB<2>(glm::vec2(w.getWidth() / 2, 0), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
-    auto loc3 = Iyathuum::glmAABB<2>(glm::vec2(0, w.getHeight() / 2), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
-    auto loc4 = Iyathuum::glmAABB<2>(glm::vec2(w.getWidth() / 2, w.getHeight() / 2), glm::vec2(w.getWidth() / 2, w.getHeight() / 2));
+    auto loc  = Iyathuum::glmAABB<2>(glm::vec2(  0               , 0                ), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
+    auto loc2 = Iyathuum::glmAABB<2>(glm::vec2(  w.getWidth() / 3, 0                ), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
+    auto loc3 = Iyathuum::glmAABB<2>(glm::vec2(  0               , w.getHeight() / 3), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
+    auto loc4 = Iyathuum::glmAABB<2>(glm::vec2(  w.getWidth() / 3, w.getHeight() / 3), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
+    auto loc5 = Iyathuum::glmAABB<2>(glm::vec2(2 * w.getWidth() / 3, w.getHeight() / 3), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
+    auto loc6 = Iyathuum::glmAABB<2>(glm::vec2(2 * w.getWidth() / 3, 0), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
     textureRenderer->draw(*composer->getRawTextures()[0], loc , true);
     textureRenderer->draw(*composer->getRawTextures()[1], loc2, true);
     textureRenderer->draw(*composer->getRawTextures()[2], loc3, true);
     textureRenderer->draw(*composer->getRawTextures()[3], loc4, true);
+    textureRenderer->draw(*composer->getResult(), loc5, false);
+    textureRenderer->draw(*bloom->getResult()   , loc6, false);
     textureRenderer->end();
     
 

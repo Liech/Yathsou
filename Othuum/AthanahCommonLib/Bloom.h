@@ -3,7 +3,6 @@
 #include <memory>
 #include "AhwassaGraphicsLib/BufferObjects/VBO.h"
 #include "AhwassaGraphicsLib/Vertex/PositionTextureVertex.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
   class FBO;
@@ -16,7 +15,6 @@ namespace Ahwassa {
   class UniformMat4;
   class UniformFloat;
   class Window;
-  class BasicTexture2DRenderer;
 }
 
 namespace Athanah {
@@ -37,8 +35,6 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::Texture>                             _bloomMap;
     std::shared_ptr<Ahwassa::Texture>                             _input;
     std::shared_ptr<Ahwassa::UniformFloat>                        _bloomChannel;
-
-    Ahwassa::BasicTexture2DRenderer r;
 
     int                                                           _width;
     int                                                           _height;

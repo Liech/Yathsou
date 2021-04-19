@@ -42,7 +42,7 @@ namespace Ahwassa {
     void main()
     {    
       vec3 FragPos   = texture(gPosition  , TexCoords).rgb;
-      vec3 Normal    = texture(gNormal    , TexCoords).rgb;
+      vec3 Normal    = (texture(gNormal    , TexCoords).rgb - vec3(0.5,0.5,0.5))*2;
       vec3 Albedo    = texture(gAlbedoSpec, TexCoords).rgb;
       vec3 Special   = texture(gSpecial   , TexCoords).rgb;
       float Specular = Special.b;

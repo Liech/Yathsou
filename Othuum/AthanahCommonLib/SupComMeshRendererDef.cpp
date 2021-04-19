@@ -48,12 +48,12 @@ namespace Athanah {
         
         world[3] = vec4(0, 0, 0, 1); //cancel translation
         clr       = colors[gl_InstanceID];
-        Normal    = (world * vec4(normal, 1.0)).xyz;
+        Normal    = (modelsRot[gl_InstanceID] * vec4(normal, 1.0)).xyz;
         TexCoords = uv1;
         FragPos   = (world * vec4(position , 1.0)).xyz;
         
-        Tangent   = vec3(world*vec4(tangent ,1));
-        Bitangent = vec3(world*vec4(binormal,1));
+        Tangent   = vec3(modelsRot[gl_InstanceID]*vec4(tangent ,1));
+        Bitangent = vec3(modelsRot[gl_InstanceID]*vec4(binormal,1));
       }
    )";
 
@@ -83,7 +83,7 @@ namespace Athanah {
 
        gAlbedoSpec.rgb = (albedo + showTeamClr * (vec4(clr,1) - albedo)).rgb;
        gAlbedoSpec.a = 1;
-       gNormal.rgb = normalize(normalWithNormalMap).rgb;
+       gNormal.rgb = (normalize(Normal).rgb /2.0 + vec3(0.5,0.5,0.5)); 
        gNormal.a = 1;
        gPosition.rgb = FragPos.rgb; 	
        gPosition.a = 1;
@@ -97,11 +97,13 @@ namespace Athanah {
 
     std::vector<Ahwassa::Uniform*> cameraUniforms = _camera->getUniforms();
     uniforms.insert(uniforms.end(), cameraUniforms.begin(), cameraUniforms.end());
-
+    
     _models     = std::make_shared<Ahwassa::SSBOmat4>("models", _bufferSize);
+    _modelsRot  = std::make_shared<Ahwassa::SSBOmat4>("modelsRot", _bufferSize);
     _colors     = std::make_shared<Ahwassa::SSBOvec3>("colors", _bufferSize);
     _animations = std::make_shared<Ahwassa::SSBOmat4>("animations", _bufferSize* _maxBoneSize);
     uniforms.push_back(_models.get());
+    uniforms.push_back(_modelsRot.get());
     uniforms.push_back(_colors.get());
     uniforms.push_back(_animations.get());
 
@@ -120,6 +122,16 @@ namespace Athanah {
     _shader = std::make_unique<Ahwassa::ShaderProgram>(SupComVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
+  glm::mat4 removeTranslation(const glm::mat4& input) {
+    double dArray[16] = { 0.0 };
+
+    const float* pSource = (const float*)glm::value_ptr(input);
+    for (int i = 0; i < 12; ++i)
+      dArray[i] = pSource[i];
+    dArray[15] = 1;
+    return glm::make_mat4(dArray);
+  }
+
   void SupComMeshRendererDef::draw() {
     std::vector< std::shared_ptr<SupComModel>> toDeleteMeshes;
 
@@ -131,11 +143,13 @@ namespace Athanah {
 
     for (auto& meshVector : _meshes) {
       std::vector<glm::mat4> models;
+      std::vector<glm::mat4> modelsRot;
       std::vector<glm::vec3> colors;
       std::vector<glm::mat4> anim;
-      models.resize(_bufferSize);
-      colors.resize(_bufferSize);
-      anim.resize(_bufferSize * _maxBoneSize);
+      models   .resize(_bufferSize);
+      modelsRot.resize(_bufferSize);
+      colors   .resize(_bufferSize);
+      anim     .resize(_bufferSize * _maxBoneSize);
 
       std::vector<size_t> toDelete;
 
@@ -147,7 +161,8 @@ namespace Athanah {
           toDelete.push_back(i);
           continue;
         }
-        models[currentPosition] = m->transformation;
+        models   [currentPosition] = m->transformation;
+        modelsRot[currentPosition] = removeTranslation(m->transformation);
         colors[currentPosition] = m->teamColor.to3();
         if (m->animation.size() > _maxBoneSize)
           throw std::runtime_error("Too many bones");
@@ -162,9 +177,11 @@ namespace Athanah {
       _normal->setTextureID(meshVector.first->normal().getTextureID());
       _info->setTextureID(meshVector.first->info().getTextureID());
       _models->setData(models);
+      _modelsRot->setData(modelsRot);
       _colors->setData(colors);
       _animations->setData(anim);
       _models->bind();
+      _modelsRot->bind();
       _colors->bind();
       _animations->bind();
       meshVector.first->mesh().drawInstanced(currentPosition);
