@@ -34,7 +34,7 @@ namespace Ahwassa {
       TexCoords = texture;
     }  
    )";
-
+     
     std::string fragment_shader_source = R"(
      in vec2 TexCoords;    
      out vec4 color;
@@ -139,12 +139,12 @@ namespace Ahwassa {
     GLfloat h = _height;
 
     _vertices = {
-       PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 0.0)),
-       PositionTextureVertex(glm::vec3(x + 0, y + 0, 0),glm::vec2(0.0, 1.0)),
-       PositionTextureVertex(glm::vec3(x + w, y + 0, 0),glm::vec2(1.0, 1.0)),
-       PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 0.0)),
-       PositionTextureVertex(glm::vec3(x + w, y + 0, 0),glm::vec2(1.0, 1.0)),
-       PositionTextureVertex(glm::vec3(x + w, y + h, 0),glm::vec2(1.0, 0.0))
+       PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 1.0)),
+       PositionTextureVertex(glm::vec3(x + 0, y + 0, 0),glm::vec2(0.0, 0.0)),
+       PositionTextureVertex(glm::vec3(x + w, y + 0, 0),glm::vec2(1.0, 0.0)),
+       PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 1.0)),
+       PositionTextureVertex(glm::vec3(x + w, y + 0, 0),glm::vec2(1.0, 0.0)),
+       PositionTextureVertex(glm::vec3(x + w, y + h, 0),glm::vec2(1.0, 1.0))
     };
 
     for (auto x : getRawTextures())

@@ -30,28 +30,39 @@ namespace Athanah {
       TexCoords = texture;
     }  
    )";
-
+    //https://learnopengl.com/Advanced-Lighting/Bloom
     std::string fragment_shader_source = R"(
      in vec2 TexCoords;    
      out vec4 color;
 
+    
     void main()
     {    
-      float bloom = texture(BloomMap, TexCoords)[int(BloomChannel)];
-      vec4  inp = texture(Input   , TexCoords);
+      float weight[5] = float[] (0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216);
 
+      vec4  inp = texture(Input, TexCoords);
 
-      color = inp;
+      vec2 tex_offset = 1.0 / textureSize(Input, 0); // gets size of single texel
+      vec3 result = texture(Input, TexCoords).rgb; // current fragment's contribution
+      
+      for(int i = 1; i < 5; ++i)
+      {
+        float bloomP = texture(BloomMap, TexCoords + vec2(tex_offset.x * i, 0.0))[int(BloomChannel)];
+        float bloomM = texture(BloomMap, TexCoords - vec2(tex_offset.x * i, 0.0))[int(BloomChannel)];
+        result += vec3(bloomP+bloomM,bloomP+bloomM,bloomP+bloomM)* weight[i];
+      }
+
+      color = vec4(result, 1.0);
     }  
    )";
 
     _vertices = {
-      Ahwassa::PositionTextureVertex(glm::vec3(0,1, 0),glm::vec2(0.0, 0.0)),
-      Ahwassa::PositionTextureVertex(glm::vec3(0,0, 0),glm::vec2(0.0, 1.0)),
-      Ahwassa::PositionTextureVertex(glm::vec3(1,0, 0),glm::vec2(1.0, 1.0)),
-      Ahwassa::PositionTextureVertex(glm::vec3(0,1, 0),glm::vec2(0.0, 0.0)),
-      Ahwassa::PositionTextureVertex(glm::vec3(1,0, 0),glm::vec2(1.0, 1.0)),
-      Ahwassa::PositionTextureVertex(glm::vec3(1,1, 0),glm::vec2(1.0, 0.0))
+      Ahwassa::PositionTextureVertex(glm::vec3(0,1, 0),glm::vec2(0.0, 1.0)),
+      Ahwassa::PositionTextureVertex(glm::vec3(0,0, 0),glm::vec2(0.0, 0.0)),
+      Ahwassa::PositionTextureVertex(glm::vec3(1,0, 0),glm::vec2(1.0, 0.0)),
+      Ahwassa::PositionTextureVertex(glm::vec3(0,1, 0),glm::vec2(0.0, 1.0)),
+      Ahwassa::PositionTextureVertex(glm::vec3(1,0, 0),glm::vec2(1.0, 0.0)),
+      Ahwassa::PositionTextureVertex(glm::vec3(1,1, 0),glm::vec2(1.0, 1.0))
     };
 
     std::vector<Ahwassa::Uniform*> uniforms;
@@ -84,6 +95,21 @@ namespace Athanah {
     Ahwassa::Util::setTextureBlend();
 
     _shader->bind();
+
+
+    float x = 0;
+    float y = 0;
+    float w = _width;
+    float h = _height;
+
+    _vertices = {
+       Ahwassa::PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 1.0)),
+       Ahwassa::PositionTextureVertex(glm::vec3(x + 0, y + 0, 0),glm::vec2(0.0, 0.0)),
+       Ahwassa::PositionTextureVertex(glm::vec3(x + w, y + 0, 0),glm::vec2(1.0, 0.0)),
+       Ahwassa::PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 1.0)),
+       Ahwassa::PositionTextureVertex(glm::vec3(x + w, y + 0, 0),glm::vec2(1.0, 0.0)),
+       Ahwassa::PositionTextureVertex(glm::vec3(x + w, y + h, 0),glm::vec2(1.0, 1.0))
+    };
 
     _vbo->setData(_vertices);
     _vao->draw();

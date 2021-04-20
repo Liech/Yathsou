@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
     composer->start();
     renderer->draw();
     composer->end();
-    bloom->draw(composer->getResult(), composer->getRawTextures()[3], 3);
+    bloom->draw(composer->getResult(), composer->getRawTextures()[3], 1);
     b.draw();
 
     textureRenderer->start();
@@ -111,8 +111,8 @@ int main(int argc, char** argv) {
     textureRenderer->draw(*composer->getRawTextures()[1], loc2, true);
     textureRenderer->draw(*composer->getRawTextures()[2], loc3, true);
     textureRenderer->draw(*composer->getRawTextures()[3], loc4, true);
-    textureRenderer->draw(*composer->getResult(), loc5, false);
-    textureRenderer->draw(*bloom->getResult()   , loc6, false);
+    textureRenderer->draw(*composer->getResult(), loc5, true);
+    textureRenderer->draw(*bloom->getResult()   , loc6, true);
     textureRenderer->end();
     
 
