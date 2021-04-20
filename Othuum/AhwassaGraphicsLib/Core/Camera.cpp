@@ -104,7 +104,7 @@ namespace Ahwassa {
   }
 
   float Camera::getNearPlane() {
-    return 0.1f; 
+    return 3; 
   }
 
   float Camera::getFarPlane() {

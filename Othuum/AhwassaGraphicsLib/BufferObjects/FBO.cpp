@@ -35,14 +35,27 @@ namespace Ahwassa {
     glDrawBuffers(_textures.size(), forFrameBufferGL_COLOR_ATTACHMENT.data());
 
     // create and attach depth buffer (renderbuffer)
-    glGenRenderbuffers(1, &_depth);
-    glBindRenderbuffer(GL_RENDERBUFFER, _depth);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, _width, _height);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, _depth);
+    unsigned int d;
+    //glGenRenderbuffers(1, &d);
+    //glBindRenderbuffer(GL_RENDERBUFFER, d);
+    //glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, _width, _height);
+    //glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, d);
+    //
+    //_depth = std::make_shared<Texture>("DepthBuffer", d,false);
+    glGenTextures(1, &d);
+    glBindTexture(GL_TEXTURE_2D, d);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D,d, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    _depth = std::make_shared<Texture>("DepthBuffer", d,ReleaseBehavior::DeleteOnDeconstructor);
 
-
+    auto status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     // finally check if framebuffer is complete
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+    if (status != GL_FRAMEBUFFER_COMPLETE)
       throw std::runtime_error("Framebuffer not complete!");
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
@@ -72,5 +85,9 @@ namespace Ahwassa {
 
   std::vector<std::shared_ptr<Texture>> FBO::getUniforms() {
     return _textures;
+  }
+
+  std::shared_ptr<Texture> FBO::getDepth() {
+    return _depth;
   }
 }

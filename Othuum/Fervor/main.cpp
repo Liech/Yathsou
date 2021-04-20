@@ -109,11 +109,13 @@ int main(int argc, char** argv) {
     auto loc4 = Iyathuum::glmAABB<2>(glm::vec2(  w.getWidth() / 3, w.getHeight() / 3), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
     auto loc5 = Iyathuum::glmAABB<2>(glm::vec2(2 * w.getWidth() / 3, w.getHeight() / 3), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
     auto loc6 = Iyathuum::glmAABB<2>(glm::vec2(2 * w.getWidth() / 3, 0), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
+    auto loc7 = Iyathuum::glmAABB<2>(glm::vec2(0, 2*w.getHeight() / 3), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
     textureRenderer->draw(*composer->getRawTextures()[0], loc , true);
     textureRenderer->draw(*composer->getRawTextures()[1], loc2, true);
     textureRenderer->draw(*composer->getRawTextures()[2], loc3, true);
     textureRenderer->draw(*composer->getRawTextures()[3], loc4, true);
     textureRenderer->draw(*composer->getResult(), loc5, true);
+    textureRenderer->draw(*composer->getDepth(), loc7, true);
     textureRenderer->draw(*bloom->getResult()   , loc6, true);
     textureRenderer->end();
     

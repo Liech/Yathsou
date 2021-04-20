@@ -28,6 +28,7 @@ namespace Ahwassa {
     void end();
     std::vector<std::shared_ptr<Texture>> getRawTextures();
     std::shared_ptr<Texture> getResult();
+    std::shared_ptr<Texture> getDepth();
     void draw();
   private:
     const int MAXLIGHT = 32;

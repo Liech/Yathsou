@@ -14,6 +14,7 @@ namespace Ahwassa {
     void end();  //unset as rendertargets
     
     std::vector<std::shared_ptr<Texture>> getUniforms();
+    std::shared_ptr<Texture> getDepth();
 
   private:
     unsigned int getGL_COLOR_ATTACHMENT(int number);
@@ -23,8 +24,8 @@ namespace Ahwassa {
     unsigned int _height;
     unsigned int _id;
 
-    unsigned int              _depth;
+    std::shared_ptr<Texture>              _depth;
     std::vector<std::shared_ptr<Texture>> _textures;
-    std::vector<int> _oldViewPort;
+    std::vector<int>                      _oldViewPort;
   };
 }

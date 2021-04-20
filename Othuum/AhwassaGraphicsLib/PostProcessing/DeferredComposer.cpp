@@ -160,6 +160,10 @@ namespace Ahwassa {
     return _fbo->getUniforms();
   }
 
+  std::shared_ptr<Texture> DeferredComposer::getDepth() {
+    return _fbo->getDepth();
+  }
+  
   std::shared_ptr<Texture> DeferredComposer::getResult() {
     std::shared_ptr<Ahwassa::Texture> result = std::make_shared<Ahwassa::Texture>("Result", _resultCanvas->getTextureID());
     result->release();

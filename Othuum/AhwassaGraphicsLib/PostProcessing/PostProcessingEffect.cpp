@@ -93,6 +93,4 @@ namespace Ahwassa {
     result.push_back(_projection.get());
     return result;
   }
-
-
 }

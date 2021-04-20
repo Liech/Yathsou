@@ -17,9 +17,10 @@ namespace Ahwassa {
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
   }
 
-  Texture::Texture(std::string name, unsigned int tex) : Uniform(name) {
+  Texture::Texture(std::string name, unsigned int tex, ReleaseBehavior released) : Uniform(name) {
     _texture = tex;
-    release();
+    if (ReleaseBehavior::KeepTextureOnDeconstructor == released)
+      release();
   }
 
   Texture::~Texture() {
