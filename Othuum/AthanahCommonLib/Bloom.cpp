@@ -30,6 +30,7 @@ namespace Athanah {
       TexCoords = texture;
     }  
    )";
+
     //https://learnopengl.com/Advanced-Lighting/Bloom
     std::string fragment_shader_source = R"(
      in vec2 TexCoords;    
@@ -38,18 +39,22 @@ namespace Athanah {
     
     void main()
     {    
-      float weight[5] = float[] (0.227027, 0.1945946, 0.1216216, 0.054054, 0.016216);
-
       vec4  inp = texture(Input, TexCoords);
 
       vec2 tex_offset = 1.0 / textureSize(Input, 0); // gets size of single texel
       vec3 result = texture(Input, TexCoords).rgb; // current fragment's contribution
       
-      for(int i = 1; i < 5; ++i)
+      int width = 100;
+      for(int i = 1; i < width; ++i)
       {
-        float bloomP = texture(BloomMap, TexCoords + vec2(tex_offset.x * i, 0.0))[int(BloomChannel)];
-        float bloomM = texture(BloomMap, TexCoords - vec2(tex_offset.x * i, 0.0))[int(BloomChannel)];
-        result += vec3(bloomP+bloomM,bloomP+bloomM,bloomP+bloomM)* weight[i];
+        float w = float(width-i) / float(width);
+        w = w*w;
+        float bloomPx = texture(BloomMap, TexCoords + vec2(tex_offset.x * i, 0.0))[int(BloomChannel)];
+        float bloomMx = texture(BloomMap, TexCoords - vec2(tex_offset.x * i, 0.0))[int(BloomChannel)];
+        float bloomPy = texture(BloomMap, TexCoords + vec2(0.0 ,tex_offset.y * i))[int(BloomChannel)];
+        float bloomMy = texture(BloomMap, TexCoords - vec2(0.0 ,tex_offset.y * i))[int(BloomChannel)];
+        float bl = bloomPx+bloomMx+bloomPy+bloomMy;
+        result += vec3(bl,bl,bl)* w;
       }
 
       color = vec4(result, 1.0);

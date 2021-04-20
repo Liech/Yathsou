@@ -55,7 +55,9 @@ int main(int argc, char** argv) {
 
   std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
   std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
-  std::string unit ="UEL0208";
+  std::string unit = "UAL0401";
+  //scout "UAL0101";
+  //engi"UEL0208";
   Athanah::SupComModelFactory factory (pc);
   Athanah::BlueprintFactory blueprints(pc);
   auto blueprint = blueprints.loadModel(unit);

@@ -168,7 +168,7 @@ namespace Ahwassa {
 
   void DeferredComposer::draw() {
     r.start();
-    r.draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0,0), glm::vec2(_width,_height)));
+    r.draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0,0), glm::vec2(_width,_height)),true);
     r.end();
   }
 }
