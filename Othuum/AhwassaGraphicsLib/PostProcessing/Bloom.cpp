@@ -15,11 +15,7 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
-  Bloom::Bloom(Ahwassa::Window* window, int width, int height) {
-    _result = std::make_shared<Ahwassa::Rendertarget>("Result", width, height);
-    _width = width;
-    _height = height;
-    _window = window;
+  Bloom::Bloom(Ahwassa::Window* window, int width, int height) : PostProcessingEffect(window,width,height) {
 
     std::string vertex_shader_source = R"(
     out vec2 TexCoords;
@@ -64,32 +60,16 @@ namespace Ahwassa {
     }  
    )";
 
-    _vertices = {
-      Ahwassa::PositionTextureVertex(glm::vec3(0,1, 0),glm::vec2(0.0, 1.0)),
-      Ahwassa::PositionTextureVertex(glm::vec3(0,0, 0),glm::vec2(0.0, 0.0)),
-      Ahwassa::PositionTextureVertex(glm::vec3(1,0, 0),glm::vec2(1.0, 0.0)),
-      Ahwassa::PositionTextureVertex(glm::vec3(0,1, 0),glm::vec2(0.0, 1.0)),
-      Ahwassa::PositionTextureVertex(glm::vec3(1,0, 0),glm::vec2(1.0, 0.0)),
-      Ahwassa::PositionTextureVertex(glm::vec3(1,1, 0),glm::vec2(1.0, 1.0))
-    };
-
-    std::vector<Ahwassa::Uniform*> uniforms;
-
-    _projection = std::make_unique<Ahwassa::UniformMat4>("projection");
-    _projection->setValue(glm::ortho(0.0f, (float)width, 0.0f, (float)height));
+    std::vector<Ahwassa::Uniform*> uniforms = getUniforms();    
 
     _bloomMap = std::make_shared<Ahwassa::Texture>("BloomMap", 0);
     _input    = std::make_shared<Ahwassa::Texture>("Input"   , 0);
     _bloomChannel = std::make_shared<Ahwassa::UniformFloat>("BloomChannel");
 
-    uniforms.push_back(_projection  .get());
     uniforms.push_back(_bloomMap    .get());
     uniforms.push_back(_input       .get());
     uniforms.push_back(_bloomChannel.get());
-    _vbo = std::make_unique<Ahwassa::VBO<Ahwassa::PositionTextureVertex>>(_vertices);
-    _vao = std::make_unique<Ahwassa::VAO>(_vbo.get());
     _shader = std::make_shared<Ahwassa::ShaderProgram>(Ahwassa::PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
-
   }
 
   void Bloom::draw(std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> bloomMap, int channel) {
@@ -97,43 +77,10 @@ namespace Ahwassa {
     _bloomMap    ->setTextureID(bloomMap->getTextureID());
     _input       ->setTextureID(input->getTextureID());
 
-    _result->start();
-    Ahwassa::Util::setBlend(true);
-    Ahwassa::Util::setDepthTest(false);
-    Ahwassa::Util::setTextureBlend();
+    start();
 
     _shader->bind();
 
-
-    float x = 0;
-    float y = 0;
-    float w = _width;
-    float h = _height;
-
-    _vertices = {
-       Ahwassa::PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 1.0)),
-       Ahwassa::PositionTextureVertex(glm::vec3(x + 0, y + 0, 0),glm::vec2(0.0, 0.0)),
-       Ahwassa::PositionTextureVertex(glm::vec3(x + w, y + 0, 0),glm::vec2(1.0, 0.0)),
-       Ahwassa::PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 1.0)),
-       Ahwassa::PositionTextureVertex(glm::vec3(x + w, y + 0, 0),glm::vec2(1.0, 0.0)),
-       Ahwassa::PositionTextureVertex(glm::vec3(x + w, y + h, 0),glm::vec2(1.0, 1.0))
-    };
-
-    _vbo->setData(_vertices);
-    _vao->draw();
-
-    _result->end();
-  }
-
-  std::shared_ptr<Ahwassa::Texture> Bloom::getResult() {
-    std::shared_ptr<Ahwassa::Texture> result = std::make_shared<Ahwassa::Texture>("Result", _result->getTextureID());
-    result->release();
-    return result;
-  }
-
-  void Bloom::drawResult() {
-    _window->renderer().texture().start();
-    _window->renderer().texture().draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_width, _height)),true);
-    _window->renderer().texture().end();
+    end();
   }
 }

@@ -1,11 +1,8 @@
 #pragma once
 
-#include <memory>
-#include "AhwassaGraphicsLib/BufferObjects/VBO.h"
-#include "AhwassaGraphicsLib/Vertex/PositionTextureVertex.h"
+#include "PostProcessingEffect.h"
 
 namespace Ahwassa {
-  class FBO;
   class Texture;
   class ShaderProgram;
   class Window;
@@ -16,26 +13,15 @@ namespace Ahwassa {
   class UniformFloat;
   class Window;
 
-  class Bloom {
+  class Bloom : public PostProcessingEffect {
   public:
     Bloom(Ahwassa::Window* w, int width, int height);
     void draw(std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> bloom, int channel);
-    std::shared_ptr<Ahwassa::Texture> getResult();
-    void drawResult();
   private:  
-    std::unique_ptr<Ahwassa::VBO<Ahwassa::PositionTextureVertex>> _vbo;
-    std::unique_ptr<Ahwassa::VAO>                                 _vao;
-    std::shared_ptr<Ahwassa::Rendertarget>                        _result;
     std::shared_ptr<Ahwassa::ShaderProgram>                       _shader;
-    std::unique_ptr<Ahwassa::UniformMat4>                         _projection;
-    std::vector<Ahwassa::PositionTextureVertex>                   _vertices;
 
     std::shared_ptr<Ahwassa::Texture>                             _bloomMap;
     std::shared_ptr<Ahwassa::Texture>                             _input;
     std::shared_ptr<Ahwassa::UniformFloat>                        _bloomChannel;
-
-    int                                                           _width;
-    int                                                           _height;
-    Ahwassa::Window*                                              _window;
   };
 }

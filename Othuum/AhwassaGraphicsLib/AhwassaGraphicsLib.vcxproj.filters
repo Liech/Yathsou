@@ -330,6 +330,9 @@
     <ClCompile Include="PostProcessing\Bloom.cpp">
       <Filter>Source Files\Advanced</Filter>
     </ClCompile>
+    <ClCompile Include="PostProcessing\PostProcessingEffect.cpp">
+      <Filter>Source Files\Advanced</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
@@ -876,6 +879,9 @@
       <Filter>Header Files\Advanced</Filter>
     </ClInclude>
     <ClInclude Include="PostProcessing\Bloom.h">
+      <Filter>Header Files\Advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing\PostProcessingEffect.h">
       <Filter>Header Files\Advanced</Filter>
     </ClInclude>
   </ItemGroup>
