@@ -88,13 +88,13 @@ namespace Aezesel {
       subresult.position[1] = readFloat(_buffer, _fileposition);
       subresult.position[2] = readFloat(_buffer, _fileposition);
 
-      subresult.tangent[0] = readFloat(_buffer, _fileposition);
-      subresult.tangent[1] = readFloat(_buffer, _fileposition);
-      subresult.tangent[2] = readFloat(_buffer, _fileposition);
-
       subresult.normal[0] = readFloat(_buffer, _fileposition);
       subresult.normal[1] = readFloat(_buffer, _fileposition);
       subresult.normal[2] = readFloat(_buffer, _fileposition);
+
+      subresult.tangent[0] = readFloat(_buffer, _fileposition);
+      subresult.tangent[1] = readFloat(_buffer, _fileposition);
+      subresult.tangent[2] = readFloat(_buffer, _fileposition);
 
       subresult.binormal[0] = readFloat(_buffer, _fileposition);
       subresult.binormal[1] = readFloat(_buffer, _fileposition);
