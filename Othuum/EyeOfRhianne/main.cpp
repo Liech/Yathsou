@@ -5,7 +5,7 @@
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
-#include "AhwassaGraphicsLib/Core/DeferredComposer.h"
+#include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 #include "AhwassaGraphicsLib/Drawables/Background.h"
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
 #include "AhwassaGraphicsLib/Widgets/Button.h"
@@ -16,7 +16,7 @@
 #include "AthanahCommonLib/SupComModelFactory.h"
 #include "AthanahCommonLib/SupComModel.h"
 #include "AthanahCommonLib/SupComMeshRendererDef.h"
-#include "AthanahCommonLib/Bloom.h"
+#include "AhwassaGraphicsLib/PostProcessing/Bloom.h"
 
 #include "AezeselFileIOLib/STLWriter.h"
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
   std::unique_ptr<Athanah::SupComMeshRendererDef> renderer;
   std::unique_ptr< Ahwassa::BasicTextRenderer> textRenderer;
   std::shared_ptr<Ahwassa::DeferredComposer> composer;
-  std::shared_ptr<Athanah::Bloom> bloom;
+  std::shared_ptr<Ahwassa::Bloom> bloom;
   bool play = true;
   float time = 0;
   
@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
     animListArea = Iyathuum::glmAABB<2>(glm::vec2(300, 0), glm::vec2(300, w.getHeight() / 4));
     saveArea    = Iyathuum::glmAABB<2>(glm::vec2(300, w.getHeight() -50), glm::vec2(150, 50));
     pauseArea    = Iyathuum::glmAABB<2>(glm::vec2(450, w.getHeight() -50), glm::vec2(150, 50));
-    bloom = std::make_shared<Athanah::Bloom>(&w, width, height);
+    bloom = std::make_shared<Ahwassa::Bloom>(&w, width, height);
 
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
     w.camera()->setPosition(glm::vec3(20, 20, 20));

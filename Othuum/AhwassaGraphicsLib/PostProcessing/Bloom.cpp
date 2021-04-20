@@ -14,7 +14,7 @@
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
-namespace Athanah {
+namespace Ahwassa {
   Bloom::Bloom(Ahwassa::Window* window, int width, int height) {
     _result = std::make_shared<Ahwassa::Rendertarget>("Result", width, height);
     _width = width;
@@ -48,14 +48,16 @@ namespace Athanah {
       float Quality = 3.0;
       float Size = 8.0;
       vec2 Radius = Size/textureSize(Input, 0);
+      float intensity = 5;
       for( float d=0.0; d<Pi; d+=Pi/Directions)
       {
 		    for(float i=1.0/Quality; i<=1.0; i+=1.0/Quality)
         {
-          float bloomValue = texture( BloomMap, TexCoords+vec2(cos(d),sin(d))*Radius*i)[int(BloomChannel)];
-		  	  result += vec3(bloomValue,bloomValue,bloomValue)*5;		
+          vec2  sampleLocation = TexCoords+vec2(cos(d),sin(d))*Radius*i;
+          float bloomValue = texture( BloomMap, sampleLocation)[int(BloomChannel)];
+		  	  result += texture(Input, sampleLocation).rgb*bloomValue*intensity;		
         }
-      }
+      }  
       result /= Quality * Directions - 15.0;
       result+= texture(Input, TexCoords).rgb;
       color = vec4(result, 1.0);

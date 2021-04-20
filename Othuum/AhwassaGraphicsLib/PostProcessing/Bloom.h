@@ -15,9 +15,7 @@ namespace Ahwassa {
   class UniformMat4;
   class UniformFloat;
   class Window;
-}
 
-namespace Athanah {
   class Bloom {
   public:
     Bloom(Ahwassa::Window* w, int width, int height);

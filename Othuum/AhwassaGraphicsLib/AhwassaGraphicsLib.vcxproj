@@ -162,7 +162,6 @@
     <ClCompile Include="BufferObjects\VBO.cpp" />
     <ClCompile Include="Core\AttributeDescription.cpp" />
     <ClCompile Include="Core\Camera.cpp" />
-    <ClCompile Include="Core\DeferredComposer.cpp" />
     <ClCompile Include="Core\Renderer.cpp" />
     <ClCompile Include="Core\ShaderProgram.cpp" />
     <ClCompile Include="Core\Window.cpp" />
@@ -173,6 +172,8 @@
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
     <ClCompile Include="lib\glad\src\glad.c" />
+    <ClCompile Include="PostProcessing\Bloom.cpp" />
+    <ClCompile Include="PostProcessing\DeferredComposer.cpp" />
     <ClCompile Include="Renderer\Box.cpp" />
     <ClCompile Include="Renderer\BoxRenderer.cpp" />
     <ClCompile Include="Renderer\DiffuseMeshRenderer.cpp" />
@@ -236,7 +237,6 @@
     <ClInclude Include="BufferObjects\VBO.h" />
     <ClInclude Include="Core\AttributeDescription.h" />
     <ClInclude Include="Core\Camera.h" />
-    <ClInclude Include="Core\DeferredComposer.h" />
     <ClInclude Include="Core\Renderer.h" />
     <ClInclude Include="Core\ShaderProgram.h" />
     <ClInclude Include="Core\Window.h" />
@@ -357,6 +357,8 @@
     <ClInclude Include="lib\portaudio\pa_win_wdmks.h" />
     <ClInclude Include="lib\portaudio\pa_win_wmme.h" />
     <ClInclude Include="lib\portaudio\portaudio.h" />
+    <ClInclude Include="PostProcessing\Bloom.h" />
+    <ClInclude Include="PostProcessing\DeferredComposer.h" />
     <ClInclude Include="Renderer\BoxRenderer.h" />
     <ClInclude Include="Renderer\DiffuseMeshRenderer.h" />
     <ClInclude Include="Renderer\Dot.h" />

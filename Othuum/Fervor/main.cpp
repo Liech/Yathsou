@@ -4,14 +4,14 @@
 #include "IyathuumCoreLib/Singleton/Database.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
-#include "AhwassaGraphicsLib/Core/DeferredComposer.h"
+#include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 #include "AhwassaGraphicsLib/Drawables/Background.h"
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/FBO.h"
-#include "AthanahCommonLib/Bloom.h"
+#include "AhwassaGraphicsLib/PostProcessing/Bloom.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
   std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
   std::shared_ptr<Athanah::SupComModel> model = std::shared_ptr<Athanah::SupComModel>();
   std::vector<std::shared_ptr<Athanah::SupComMesh>> meshes;
-  std::shared_ptr<Athanah::Bloom> bloom;
+  std::shared_ptr<Ahwassa::Bloom> bloom;
   std::string animName;
 
   std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
@@ -68,7 +68,7 @@ int main(int argc, char** argv) {
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w,width, height);
     textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
     int animationNumber = 4;
-    bloom = std::make_shared<Athanah::Bloom>(&w, width, height);
+    bloom = std::make_shared<Ahwassa::Bloom>(&w, width, height);
 
     //model = std::make_shared<Athanah::SupComModel>(pc, unit);
     model = factory.loadModel(unit);

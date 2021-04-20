@@ -106,6 +106,12 @@
     <Filter Include="lib\portaudio">
       <UniqueIdentifier>{de35abd8-d1c5-4123-9623-f381fea3b11d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Advanced">
+      <UniqueIdentifier>{ac3425b6-47ea-4307-860c-f98c658ed051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Advanced">
+      <UniqueIdentifier>{ca0109f1-bf34-4e4b-8aab-e1f028a0820a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp">
@@ -318,8 +324,11 @@
     <ClCompile Include="BufferObjects\FBO.cpp">
       <Filter>Source Files\BufferObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Core\DeferredComposer.cpp">
-      <Filter>Source Files\Core</Filter>
+    <ClCompile Include="PostProcessing\DeferredComposer.cpp">
+      <Filter>Source Files\Advanced</Filter>
+    </ClCompile>
+    <ClCompile Include="PostProcessing\Bloom.cpp">
+      <Filter>Source Files\Advanced</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -863,8 +872,11 @@
     <ClInclude Include="BufferObjects\FBO.h">
       <Filter>Header Files\BufferObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Core\DeferredComposer.h">
-      <Filter>Header Files\Core</Filter>
+    <ClInclude Include="PostProcessing\DeferredComposer.h">
+      <Filter>Header Files\Advanced</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing\Bloom.h">
+      <Filter>Header Files\Advanced</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

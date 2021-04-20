@@ -27,7 +27,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bloom.h" />
     <ClInclude Include="Blueprint.h" />
     <ClInclude Include="BlueprintCommandCaps.h" />
     <ClInclude Include="BlueprintFactory.h" />
@@ -42,7 +41,6 @@
     <ClInclude Include="SupComVertex.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Bloom.cpp" />
     <ClCompile Include="Blueprint.cpp" />
     <ClCompile Include="BlueprintCommandCaps.cpp" />
     <ClCompile Include="BlueprintFactory.cpp" />
