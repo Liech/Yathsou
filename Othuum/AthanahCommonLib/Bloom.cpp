@@ -31,7 +31,6 @@ namespace Athanah {
     }  
    )";
 
-    //https://learnopengl.com/Advanced-Lighting/Bloom
     std::string fragment_shader_source = R"(
      in vec2 TexCoords;    
      out vec4 color;
@@ -42,21 +41,23 @@ namespace Athanah {
       vec4  inp = texture(Input, TexCoords);
 
       vec2 tex_offset = 1.0 / textureSize(Input, 0); // gets size of single texel
-      vec3 result = texture(Input, TexCoords).rgb; // current fragment's contribution
-      
-      int width = 100;
-      for(int i = 1; i < width; ++i)
+      float Pi = 3.1415926;
+      vec3 result = vec3(0,0,0); // current fragment's contribution
+      //https://www.shadertoy.com/view/Xltfzj
+      float Directions = 16.0;
+      float Quality = 3.0;
+      float Size = 8.0;
+      vec2 Radius = Size/textureSize(Input, 0);
+      for( float d=0.0; d<Pi; d+=Pi/Directions)
       {
-        float w = float(width-i) / float(width);
-        w = w*w;
-        float bloomPx = texture(BloomMap, TexCoords + vec2(tex_offset.x * i, 0.0))[int(BloomChannel)];
-        float bloomMx = texture(BloomMap, TexCoords - vec2(tex_offset.x * i, 0.0))[int(BloomChannel)];
-        float bloomPy = texture(BloomMap, TexCoords + vec2(0.0 ,tex_offset.y * i))[int(BloomChannel)];
-        float bloomMy = texture(BloomMap, TexCoords - vec2(0.0 ,tex_offset.y * i))[int(BloomChannel)];
-        float bl = bloomPx+bloomMx+bloomPy+bloomMy;
-        result += vec3(bl,bl,bl)* w;
+		    for(float i=1.0/Quality; i<=1.0; i+=1.0/Quality)
+        {
+          float bloomValue = texture( BloomMap, TexCoords+vec2(cos(d),sin(d))*Radius*i)[int(BloomChannel)];
+		  	  result += vec3(bloomValue,bloomValue,bloomValue)*5;		
+        }
       }
-
+      result /= Quality * Directions - 15.0;
+      result+= texture(Input, TexCoords).rgb;
       color = vec4(result, 1.0);
     }  
    )";
@@ -130,7 +131,7 @@ namespace Athanah {
 
   void Bloom::drawResult() {
     _window->renderer().texture().start();
-    _window->renderer().texture().draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_width, _height)));
+    _window->renderer().texture().draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_width, _height)),true);
     _window->renderer().texture().end();
   }
 }

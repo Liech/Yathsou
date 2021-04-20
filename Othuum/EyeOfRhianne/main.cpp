@@ -37,10 +37,10 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  //int width = 1200;
-  //int height = 900;
-  int width = 1920;
-  int height = 1080;
+  int width = 1200;
+  int height = 900;
+  //int width = 1920;
+  //int height = 1080;
 
   //std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
   //std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
@@ -168,9 +168,11 @@ int main(int argc, char** argv) {
     composer->start();
     renderer->draw();
     composer->end();
-    background->draw();
+    bloom->draw(composer->getResult(), composer->getRawTextures()[3], 1);
 
-    composer->draw();
+    background->draw();
+   
+    bloom->drawResult();
 
     if (SaveButton)
       SaveButton->draw();

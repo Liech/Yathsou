@@ -35,10 +35,10 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  //int width = 800;
-  //int height = 600;
-  int width = 2500;
-  int height = 1500;
+  int width = 800;
+  int height = 600;
+  //int height = 1500;
+  //int width = 2500;
 
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
@@ -58,8 +58,8 @@ int main(int argc, char** argv) {
   std::string unit = "UAL0401";
   //scout "UAL0101";
   //engi"UEL0208";
-  Athanah::SupComModelFactory factory (pc);
-  Athanah::BlueprintFactory blueprints(pc);
+  Athanah::SupComModelFactory factory (lpt);
+  Athanah::BlueprintFactory blueprints(lpt);
   auto blueprint = blueprints.loadModel(unit);
   std::cout<< blueprint->description()<<std::endl;
 
@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
     renderer = std::make_shared<Athanah::SupComMeshRendererDef>(w.camera());
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w,width, height);
     textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
-    int animationNumber = 0;
+    int animationNumber = 4;
     bloom = std::make_shared<Athanah::Bloom>(&w, width, height);
 
     //model = std::make_shared<Athanah::SupComModel>(pc, unit);
