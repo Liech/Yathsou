@@ -40,6 +40,6 @@ private:
   std::unique_ptr< Ahwassa::Button>             _showHide  ;
   std::unique_ptr< Athanah::SupComModelFactory> _factory   ;
   std::unique_ptr< Athanah::BlueprintFactory  > _blueprints;
-  std::unique_ptr<AnimationSelection >          _animations;
+  std::shared_ptr<AnimationSelection >          _animations;
   std::function<void(std::string)>              _onUnitChanged;
 };

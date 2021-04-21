@@ -22,11 +22,14 @@
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
 
 #include "ListSelection.h"
-#include "UnitModelSelection.h"
-#include "AnimationSelection.h"
 #include "AthanahCommonLib/BlueprintFactory.h"
 #include "AthanahCommonLib/Blueprint.h"
 #include "AthanahCommonLib/BlueprintGeneral.h"
+
+
+#include "UnitModelSelection.h"
+#include "GraphicOptions.h"
+#include "EyeOfRhianneConfiguration.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -39,16 +42,19 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  //int width = 1200;
-  //int height = 900;
-  int width = 1920;
-  int height = 1080;
+
+  EyeOfRhianneConfiguration config;
+  config.fromJsonFile("Configuration.json");
+
+  int width  = config.ScreenWidth;
+  int height = config.ScreenHeight;
 
   Ahwassa::Window w(width, height);
   std::unique_ptr<Ahwassa::Background> background;
   std::unique_ptr<Ahwassa::FPS       > fps;
 
-  std::unique_ptr<UnitModelSelection > UnitUI;
+  std::unique_ptr<UnitModelSelection > unitUI   ;
+  std::unique_ptr<GraphicOptions     > graphicUI;
 
   std::unique_ptr<Athanah::SupComMeshRendererDef> renderer;
   std::shared_ptr<Ahwassa::DeferredComposer>      composer;
@@ -63,14 +69,16 @@ int main(int argc, char** argv) {
     w.camera()->setPosition(glm::vec3(20, 20, 20));
     w.input().addUIElement(freeCam.get());
 
-    UnitUI = std::make_unique<UnitModelSelection>("Data\\units\\",
+    unitUI = std::make_unique<UnitModelSelection>(config.UnitPath,
       [&](std::string u) {
       mesh = std::make_shared<Athanah::SupComMesh>();
-      mesh->model = UnitUI->getCurrentModel();
+      mesh->model = unitUI->getCurrentModel();
       mesh->teamColor = Iyathuum::Color(rand() % 255, rand() % 255, rand() % 255);
       mesh->transformation = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0));
       renderer->addMesh(mesh);
     },&w);
+
+    graphicUI = std::make_unique<GraphicOptions>(&w);
 
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
 
@@ -81,9 +89,9 @@ int main(int argc, char** argv) {
   };
 
   w.Update = [&]() {
-    UnitUI->update();
+    unitUI->update();
     if (mesh)
-      mesh->animation = UnitUI->getAnimation();
+      mesh->animation = unitUI->getAnimation();
 
     composer->start();
     renderer->draw();
@@ -94,9 +102,11 @@ int main(int argc, char** argv) {
    
     bloom->drawResult();
 
-    UnitUI->draw();
+    unitUI->draw();
+    graphicUI->draw();
 
-    fps->draw();
+    if (config.ShowFPS) 
+     fps->draw();
   };
   w.run();
 

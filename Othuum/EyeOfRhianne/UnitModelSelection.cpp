@@ -24,7 +24,7 @@ UnitModelSelection::UnitModelSelection(const std::string path, std::function<voi
   _factory    = std::make_unique<Athanah::SupComModelFactory>(path);
   _blueprints = std::make_unique<Athanah::BlueprintFactory  >(path);
   
-  _animations = std::make_unique<AnimationSelection>(w);
+  _animations = std::make_shared<AnimationSelection>(w);
 
   Iyathuum::glmAABB<2> saveArea(glm::vec2(300, _window->getHeight() - 50), glm::vec2(150, 50));
   Iyathuum::glmAABB<2> unitListArea(glm::vec2(0, 50), glm::vec2(300, w->getHeight() - 100));

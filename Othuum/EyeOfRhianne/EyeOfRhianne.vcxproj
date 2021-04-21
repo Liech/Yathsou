@@ -146,12 +146,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimationSelection.cpp" />
+    <ClCompile Include="EyeOfRhianneConfiguration.cpp" />
+    <ClCompile Include="GraphicOptions.cpp" />
     <ClCompile Include="ListSelection.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="UnitModelSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationSelection.h" />
+    <ClInclude Include="EyeOfRhianneConfiguration.h" />
+    <ClInclude Include="GraphicOptions.h" />
     <ClInclude Include="UnitModelSelection.h" />
     <ClInclude Include="UnitSelection.h" />
   </ItemGroup>
