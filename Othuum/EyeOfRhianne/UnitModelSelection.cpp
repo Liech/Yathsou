@@ -19,7 +19,7 @@ UnitModelSelection::UnitModelSelection(const std::string path, std::function<voi
   _window = w;
   _onUnitChanged = onUnitChanged;
   _showHide = std::make_unique<Ahwassa::Button>("Units", Iyathuum::glmAABB<2>(glm::vec2(0, w->getHeight() - 50), glm::vec2(300, 50)), [&]() {
-    _list->setVisible(!_list->isVisible());
+    setVisible(!isVisible());
   }, w);
   _factory    = std::make_unique<Athanah::SupComModelFactory>(path);
   _blueprints = std::make_unique<Athanah::BlueprintFactory  >(path);
@@ -27,7 +27,7 @@ UnitModelSelection::UnitModelSelection(const std::string path, std::function<voi
   _animations = std::make_unique<AnimationSelection>(w);
 
   Iyathuum::glmAABB<2> saveArea(glm::vec2(300, _window->getHeight() - 50), glm::vec2(150, 50));
-  Iyathuum::glmAABB<2> unitListArea(glm::vec2(0, 0), glm::vec2(300, w->getHeight() - 50));
+  Iyathuum::glmAABB<2> unitListArea(glm::vec2(0, 50), glm::vec2(300, w->getHeight() - 100));
   _list = std::make_unique<ListSelection>(_factory->getAvailableModels(), getNames(), unitListArea, w, [this](std::string newModel) {
     _currentID = newModel;
     _animations->setModel(getCurrentModel());
@@ -41,6 +41,7 @@ std::shared_ptr<Athanah::SupComModel> UnitModelSelection::getCurrentModel() {
 
 void UnitModelSelection::setVisible(bool value) {
   _list->setVisible(value);
+  _animations->setVisible(value);
 }
 
 bool UnitModelSelection::isVisible() {

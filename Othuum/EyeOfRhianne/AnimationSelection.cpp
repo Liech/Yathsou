@@ -11,10 +11,19 @@
 AnimationSelection::AnimationSelection(Ahwassa::Window* w) {
   _window = w;
   _save = std::make_unique<Ahwassa::Button>("Save",
-    Iyathuum::glmAABB<2>(glm::vec2(300, w->getHeight() - 50), glm::vec2(150, 50)) , [&]() {
+    Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(300, 50)) , [&]() {
     save();
   }, w);
   _save->setVisible(false);
+}
+
+void AnimationSelection::setVisible(bool value) {
+  if (_model)
+    _save->setVisible(value);
+  if (_list) {
+    _list->setVisible(value);
+    _pause->setVisible(value);
+  }
 }
 
 void AnimationSelection::setModel(std::shared_ptr<Athanah::SupComModel> newModel) {
@@ -27,11 +36,11 @@ void AnimationSelection::setModel(std::shared_ptr<Athanah::SupComModel> newModel
   anims.push_back("None");
   anims.insert(anims.begin(), available.begin(), available.end());
   if (anims.size() > 1) {
-    _list = std::make_unique<ListSelection>(anims, anims, Iyathuum::glmAABB<2>(glm::vec2(300, 0), glm::vec2(300, _window->getHeight() / 4)), _window, [&](std::string u) {
+    _list = std::make_unique<ListSelection>(anims, anims, Iyathuum::glmAABB<2>(glm::vec2(300, 50), glm::vec2(300, _window->getHeight() / 4)), _window, [&](std::string u) {
       _currentAnimation = u;
       _time = 0;
     });
-    _pause = std::make_unique<Ahwassa::Button>("Pause", Iyathuum::glmAABB<2>(glm::vec2(450, _window->getHeight() - 50), glm::vec2(150, 50)), [&]() {
+    _pause = std::make_unique<Ahwassa::Button>("Pause", Iyathuum::glmAABB<2>(glm::vec2(300, 0), glm::vec2(300, 50)), [&]() {
       _play = !_play;
       if (_play)
         _pause->setText("Pause");
@@ -71,9 +80,9 @@ void AnimationSelection::save() {
   data.resize(_model->scm().indices.size() * 3);
   auto anim = getAnimation();
   for (size_t i = 0; i < _model->scm().indices.size(); i++) {
-    auto v1 = _model->scm().vertecies[_model->scm().indices[i].a];
-    auto v2 = _model->scm().vertecies[_model->scm().indices[i].b];
-    auto v3 = _model->scm().vertecies[_model->scm().indices[i].c];
+    const auto& v1 = _model->scm().vertecies[_model->scm().indices[i].a];
+    const auto& v2 = _model->scm().vertecies[_model->scm().indices[i].b];
+    const auto& v3 = _model->scm().vertecies[_model->scm().indices[i].c];
     auto mat1 = glm::mat4(1.0);
     auto mat2 = glm::mat4(1.0);
     auto mat3 = glm::mat4(1.0);

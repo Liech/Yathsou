@@ -48,13 +48,12 @@ int main(int argc, char** argv) {
   std::unique_ptr<Ahwassa::Background> background;
   std::unique_ptr<Ahwassa::FPS       > fps;
 
-  std::unique_ptr<UnitModelSelection > unitModels;
+  std::unique_ptr<UnitModelSelection > UnitUI;
 
   std::unique_ptr<Athanah::SupComMeshRendererDef> renderer;
-  std::shared_ptr<Ahwassa::DeferredComposer> composer;
-  std::shared_ptr<Ahwassa::Bloom> bloom;
-
-  std::shared_ptr<Athanah::SupComMesh> mesh;
+  std::shared_ptr<Ahwassa::DeferredComposer>      composer;
+  std::shared_ptr<Ahwassa::Bloom>                 bloom;
+  std::shared_ptr<Athanah::SupComMesh>            mesh;
 
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   w.Startup = [&]() {
@@ -64,15 +63,14 @@ int main(int argc, char** argv) {
     w.camera()->setPosition(glm::vec3(20, 20, 20));
     w.input().addUIElement(freeCam.get());
 
-    unitModels = std::make_unique<UnitModelSelection>("Data\\units\\",
+    UnitUI = std::make_unique<UnitModelSelection>("Data\\units\\",
       [&](std::string u) {
       mesh = std::make_shared<Athanah::SupComMesh>();
-      mesh->model = unitModels->getCurrentModel();
+      mesh->model = UnitUI->getCurrentModel();
       mesh->teamColor = Iyathuum::Color(rand() % 255, rand() % 255, rand() % 255);
       mesh->transformation = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0));
       renderer->addMesh(mesh);
     },&w);
-
 
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
 
@@ -83,9 +81,9 @@ int main(int argc, char** argv) {
   };
 
   w.Update = [&]() {
-    unitModels->update();
+    UnitUI->update();
     if (mesh)
-      mesh->animation = unitModels->getAnimation();
+      mesh->animation = UnitUI->getAnimation();
 
     composer->start();
     renderer->draw();
@@ -96,7 +94,7 @@ int main(int argc, char** argv) {
    
     bloom->drawResult();
 
-    unitModels->draw();
+    UnitUI->draw();
 
     fps->draw();
   };

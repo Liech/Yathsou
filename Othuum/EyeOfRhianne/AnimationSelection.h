@@ -24,6 +24,8 @@ public:
   void setModel(std::shared_ptr<Athanah::SupComModel>);
   std::vector<glm::mat4> getAnimation();
 
+  void setVisible(bool value);
+
 private:
   void save();
 
