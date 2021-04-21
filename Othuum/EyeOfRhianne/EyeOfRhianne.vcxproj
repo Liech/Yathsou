@@ -145,10 +145,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationSelection.cpp" />
     <ClCompile Include="ListSelection.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="UnitModelSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationSelection.h" />
+    <ClInclude Include="UnitModelSelection.h" />
     <ClInclude Include="UnitSelection.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
