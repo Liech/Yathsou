@@ -37,14 +37,15 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  int width = 1200;
-  int height = 900;
-  //int width = 1920;
-  //int height = 1080;
+  //int width = 1200;
+  //int height = 900;
+  int width = 1920;
+  int height = 1080;
 
   //std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
   //std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
-  
+
+  std::unique_ptr<Ahwassa::Button    > UnitsButton;
    
   Ahwassa::Window w(width, height);
   std::unique_ptr<Ahwassa::Background> background;
@@ -71,9 +72,9 @@ int main(int argc, char** argv) {
   Iyathuum::glmAABB<2> pauseArea;
   Iyathuum::glmAABB<2> saveArea;
   w.Startup = [&]() {
-    Iyathuum::glmAABB<2> unitListArea(glm::vec2(0, 0), glm::vec2(300, w.getHeight()));
+    Iyathuum::glmAABB<2> unitListArea(glm::vec2(0, 0), glm::vec2(300, w.getHeight()-50));
     animListArea = Iyathuum::glmAABB<2>(glm::vec2(300, 0), glm::vec2(300, w.getHeight() / 4));
-    saveArea    = Iyathuum::glmAABB<2>(glm::vec2(300, w.getHeight() -50), glm::vec2(150, 50));
+    saveArea     = Iyathuum::glmAABB<2>(glm::vec2(300, w.getHeight() -50), glm::vec2(150, 50));
     pauseArea    = Iyathuum::glmAABB<2>(glm::vec2(450, w.getHeight() -50), glm::vec2(150, 50));
     bloom = std::make_shared<Ahwassa::Bloom>(&w, width, height);
 
@@ -82,6 +83,10 @@ int main(int argc, char** argv) {
     w.input().addUIElement(freeCam.get());
 
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
+
+    UnitsButton = std::make_unique<Ahwassa::Button>("Units", Iyathuum::glmAABB<2>(glm::vec2(0, w.getHeight() - 50), glm::vec2(300,50)), [&]() {
+      UnitSelection->setVisible(!UnitSelection->isVisible());
+    },&w);
 
     std::vector<std::string> names;
     
@@ -174,6 +179,7 @@ int main(int argc, char** argv) {
    
     bloom->drawResult();
 
+    UnitsButton->draw();
     if (SaveButton)
       SaveButton->draw();
     UnitSelection->draw();

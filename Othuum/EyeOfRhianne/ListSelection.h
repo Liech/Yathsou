@@ -18,6 +18,8 @@ public:
   ListSelection(const std::vector<std::string>& options, const std::vector<std::string>& names, Iyathuum::glmAABB<2> loc,Ahwassa::Window*, std::function<void(std::string)> onClick);
 
   void draw();
+  void setVisible(bool visible);
+  bool isVisible();
 
 private:
   std::function<void(std::string)>     _onClick;

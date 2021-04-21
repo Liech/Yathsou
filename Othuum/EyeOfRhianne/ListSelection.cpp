@@ -24,3 +24,11 @@ void ListSelection::draw() {
   _layout->adjustSize();
   _layout->draw();
 }
+
+void ListSelection::setVisible(bool visible) {
+  _layout->setVisible(visible);
+}
+
+bool ListSelection::isVisible() {
+  return _layout->isVisible();
+}

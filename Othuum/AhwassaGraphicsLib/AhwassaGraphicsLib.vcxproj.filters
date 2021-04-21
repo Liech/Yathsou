@@ -106,10 +106,10 @@
     <Filter Include="lib\portaudio">
       <UniqueIdentifier>{de35abd8-d1c5-4123-9623-f381fea3b11d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Advanced">
+    <Filter Include="Header Files\PostProcessing">
       <UniqueIdentifier>{ac3425b6-47ea-4307-860c-f98c658ed051}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Advanced">
+    <Filter Include="Source Files\Post Processing">
       <UniqueIdentifier>{ca0109f1-bf34-4e4b-8aab-e1f028a0820a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -325,13 +325,13 @@
       <Filter>Source Files\BufferObjects</Filter>
     </ClCompile>
     <ClCompile Include="PostProcessing\DeferredComposer.cpp">
-      <Filter>Source Files\Advanced</Filter>
+      <Filter>Source Files\Post Processing</Filter>
     </ClCompile>
     <ClCompile Include="PostProcessing\Bloom.cpp">
-      <Filter>Source Files\Advanced</Filter>
+      <Filter>Source Files\Post Processing</Filter>
     </ClCompile>
     <ClCompile Include="PostProcessing\PostProcessingEffect.cpp">
-      <Filter>Source Files\Advanced</Filter>
+      <Filter>Source Files\Post Processing</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -876,13 +876,13 @@
       <Filter>Header Files\BufferObjects</Filter>
     </ClInclude>
     <ClInclude Include="PostProcessing\DeferredComposer.h">
-      <Filter>Header Files\Advanced</Filter>
+      <Filter>Header Files\PostProcessing</Filter>
     </ClInclude>
     <ClInclude Include="PostProcessing\Bloom.h">
-      <Filter>Header Files\Advanced</Filter>
+      <Filter>Header Files\PostProcessing</Filter>
     </ClInclude>
     <ClInclude Include="PostProcessing\PostProcessingEffect.h">
-      <Filter>Header Files\Advanced</Filter>
+      <Filter>Header Files\PostProcessing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

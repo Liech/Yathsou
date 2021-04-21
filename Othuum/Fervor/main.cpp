@@ -35,10 +35,10 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  int width = 800;
-  int height = 600;
-  //int height = 1500;
-  //int width = 2500;
+  //int width = 800;
+  //int height = 600;
+  int height = 1500;
+  int width = 2500;
 
   Ahwassa::Window w(width, height);
   Ahwassa::Background b(&w);
@@ -58,8 +58,8 @@ int main(int argc, char** argv) {
   std::string unit = "UAL0401";
   //scout "UAL0101";
   //engi"UEL0208";
-  Athanah::SupComModelFactory factory (lpt);
-  Athanah::BlueprintFactory blueprints(lpt);
+  Athanah::SupComModelFactory factory (pc);
+  Athanah::BlueprintFactory blueprints(pc);
   auto blueprint = blueprints.loadModel(unit);
   std::cout<< blueprint->description()<<std::endl;
 
