@@ -14,8 +14,8 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
-  PostProcessingEffect::PostProcessingEffect(Ahwassa::Window* window, int width, int height) {
-    _result = std::make_shared<Ahwassa::Rendertarget>("Result", width, height);
+  PostProcessingEffect::PostProcessingEffect(std::string name, Ahwassa::Window* window, int width, int height) {
+    _result = std::make_shared<Ahwassa::Rendertarget>(name, width, height);
     _width = width;
     _height = height;
     _window = window;

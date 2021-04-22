@@ -16,7 +16,7 @@ namespace Ahwassa {
 
   class PostProcessingEffect {
     public:
-      PostProcessingEffect(Ahwassa::Window* w, int width, int height);
+      PostProcessingEffect(std::string name, Ahwassa::Window* w, int width, int height);
 
       std::shared_ptr<Ahwassa::Texture> getResult();
       void drawResult();

@@ -1,16 +1,19 @@
 #include <iostream>
 #include <filesystem>
+#include <functional>
 
 #include "IyathuumCoreLib/Singleton/Database.h"
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
+#include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 #include "AhwassaGraphicsLib/Drawables/Background.h"
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
 #include "AhwassaGraphicsLib/Widgets/Button.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
 #include "AthanahCommonLib/SupComModelFactory.h"
 #include "AthanahCommonLib/SupComModel.h"
@@ -69,7 +72,12 @@ int main(int argc, char** argv) {
     w.camera()->setPosition(glm::vec3(20, 20, 20));
     w.input().addUIElement(freeCam.get());
 
-    unitUI = std::make_unique<UnitModelSelection>(config.UnitPath,
+    std::function<void()> disableAll = [&]() { 
+      unitUI->setVisible(false);
+      graphicUI->setVisible(false);
+    };
+
+    unitUI = std::make_unique<UnitModelSelection>(config.UnitPath, disableAll,
       [&](std::string u) {
       mesh = std::make_shared<Athanah::SupComMesh>();
       mesh->model = unitUI->getCurrentModel();
@@ -78,9 +86,17 @@ int main(int argc, char** argv) {
       renderer->addMesh(mesh);
     },&w);
 
-    graphicUI = std::make_unique<GraphicOptions>(&w);
-
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
+
+    std::vector<std::shared_ptr<Ahwassa::Texture>> textures;
+    textures.push_back(bloom->getResult());
+    textures.push_back(composer->getResult());
+    for (auto x : composer->getRawTextures())
+      textures.push_back(x);
+    textures.push_back(composer->getDepth());
+
+    graphicUI = std::make_unique<GraphicOptions>(textures,disableAll,&w);
+
 
     fps = std::make_unique<Ahwassa::FPS>(&w);
     background = std::make_unique<Ahwassa::Background>(&w);
@@ -99,11 +115,13 @@ int main(int argc, char** argv) {
     bloom->draw(composer->getResult(), composer->getRawTextures()[3], 1);
 
     background->draw();
-   
-    bloom->drawResult();
+       
+    w.renderer().texture().start();
+    w.renderer().texture().draw(*graphicUI->getCurrentTexture(), Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(w.getWidth(), w.getHeight())),true);
+    w.renderer().texture().end();
 
     unitUI->draw();
-    graphicUI->draw();
+    graphicUI->drawUI();
 
     if (config.ShowFPS) 
      fps->draw();

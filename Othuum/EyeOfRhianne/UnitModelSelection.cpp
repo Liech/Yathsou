@@ -15,10 +15,13 @@
 #include "AthanahCommonLib/Blueprint.h"
 #include "AthanahCommonLib/BlueprintGeneral.h"
 
-UnitModelSelection::UnitModelSelection(const std::string path, std::function<void(std::string)> onUnitChanged, Ahwassa::Window* w) {
+UnitModelSelection::UnitModelSelection(const std::string path, std::function<void()> disableAllCall, std::function<void(std::string)> onUnitChanged, Ahwassa::Window* w) {
   _window = w;
   _onUnitChanged = onUnitChanged;
+  _disableAllCall = disableAllCall;
+
   _showHide = std::make_unique<Ahwassa::Button>("Units", Iyathuum::glmAABB<2>(glm::vec2(0, w->getHeight() - 50), glm::vec2(300, 50)), [&]() {
+    _disableAllCall();
     setVisible(!isVisible());
   }, w);
   _factory    = std::make_unique<Athanah::SupComModelFactory>(path);

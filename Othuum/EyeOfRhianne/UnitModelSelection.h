@@ -21,7 +21,7 @@ namespace Athanah {
 
 class UnitModelSelection {
 public:
-  UnitModelSelection(const std::string path,std::function<void(std::string)>, Ahwassa::Window* w);
+  UnitModelSelection(const std::string path, std::function<void()> disableAllCall, std::function<void(std::string)>, Ahwassa::Window* w);
 
   void setVisible(bool value);
   bool isVisible();
@@ -41,5 +41,7 @@ private:
   std::unique_ptr< Athanah::SupComModelFactory> _factory   ;
   std::unique_ptr< Athanah::BlueprintFactory  > _blueprints;
   std::shared_ptr<AnimationSelection >          _animations;
-  std::function<void(std::string)>              _onUnitChanged;
+  std::function<void(std::string)>              _onUnitChanged;  
+  std::function<void()>                         _disableAllCall;
+
 };
