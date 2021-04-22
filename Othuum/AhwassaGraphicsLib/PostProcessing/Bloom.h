@@ -20,13 +20,23 @@ namespace Ahwassa {
 
     void setIntensity(float);
     float intensity();
-  private:  
-    std::shared_ptr<Ahwassa::ShaderProgram>                       _shader;
+    void  setSize(float);
+    float size();
+    void  setQuality(float);
+    float quality();
+    void  setDirections(float);
+    float directions();
+  private:
+    std::shared_ptr<Ahwassa::ShaderProgram> _shader;
 
-    std::shared_ptr<Ahwassa::Texture>                             _bloomMap;
-    std::shared_ptr<Ahwassa::Texture>                             _input;
-    std::shared_ptr<Ahwassa::UniformFloat>                        _bloomChannel;
-    std::shared_ptr<Ahwassa::UniformFloat>                        _intensityUniform   ;
-    float                                                         _intensity = 8;
+    std::shared_ptr<Ahwassa::Texture>       _bloomMap    ;
+    std::shared_ptr<Ahwassa::Texture>       _input       ;
+    std::shared_ptr<Ahwassa::UniformFloat>  _bloomChannel;
+    std::shared_ptr<Ahwassa::UniformFloat>  _intensity   ;
+    std::shared_ptr<Ahwassa::UniformFloat>  _size        ;
+    std::shared_ptr<Ahwassa::UniformFloat>  _quality     ;
+    std::shared_ptr<Ahwassa::UniformFloat>  _directions  ;
+
+    bool _enabled = true;
   };
 }

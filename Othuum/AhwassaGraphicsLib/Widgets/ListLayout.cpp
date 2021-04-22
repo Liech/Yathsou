@@ -11,7 +11,7 @@
 #include "Slider.h"
 #include "Label.h"
 #include "LineEdit.h"
-
+#include "Checkbox.h"
 
 namespace Ahwassa {
   ListLayout::ListLayout(Iyathuum::glmAABB<2> position, Window* w, UIElement* parent) : Drawable(w) {
@@ -38,7 +38,7 @@ namespace Ahwassa {
     _widgets.erase(_widgets.begin() + w);
   }
 
-  std::shared_ptr<Button> ListLayout::addButton(std::string name, std::function<void()> onClicked, Iyathuum::glmAABB<2> size) {
+  std::shared_ptr<Button> ListLayout::addButton(std::string name, std::function<void()> onClicked) {
     std::shared_ptr<Button> b = std::make_shared<Button>(name, getElementSize(), [onClicked]() { onClicked(); },getWindow(),this);
     addElement(b);
     return b;
@@ -60,7 +60,20 @@ namespace Ahwassa {
     std::shared_ptr<LineEdit> l = std::make_shared<LineEdit>(text, getElementSize(),getWindow(), this);
     addElement(l);
     return l;
+  }
 
+  std::shared_ptr<Slider> ListLayout::addSlider(float start, float min, float max, std::function<void(float)> changedCall) {
+    std::shared_ptr<Slider> l = std::make_shared<Slider>(getElementSize(),min,max,start, changedCall, getWindow(), this);
+    addElement(l);
+    return l;
+  }
+
+  std::shared_ptr<Checkbox> ListLayout::addCheckbox(std::string text, bool checked, std::function<void(bool)> changedCall) {
+    std::shared_ptr<Checkbox> l = std::make_shared<Checkbox>(text, getElementSize(), [changedCall](bool value) {
+      changedCall(value);
+    }, getWindow(), this);
+    addElement(l);
+    return l;
   }
 
   void ListLayout::draw() {
@@ -214,4 +227,5 @@ namespace Ahwassa {
 
     UIElement::setVisible(visible);
   }
+
 }

@@ -10,6 +10,8 @@ namespace Ahwassa {
   class Button;
   class Label;
   class LineEdit;
+  class Slider;
+  class Checkbox;
 
   class ListLayout : public UIElement, public Drawable {
   public:
@@ -20,10 +22,12 @@ namespace Ahwassa {
     int  addElement(std::shared_ptr<UIElement> w);
     void removeWidget(int w);
     virtual void draw() override;
-    std::shared_ptr<Button>     addButton(std::string name, std::function<void()> onClicked, Iyathuum::glmAABB<2> size = Iyathuum::glmAABB<2>({ 0.0, 0.0 }, { 200.0, 50.0 }));
+    std::shared_ptr<Button>     addButton(std::string name, std::function<void()> onClicked);
     std::shared_ptr<ListLayout> addLayout();
     std::shared_ptr<Label>      addLabel(std::string text);
     std::shared_ptr<LineEdit>   addLineEdit(std::string text);
+    std::shared_ptr<Checkbox>   addCheckbox(std::string text, bool checked, std::function<void(bool)> changedCall = [](bool) {});
+    std::shared_ptr<Slider>     addSlider(float start, float min, float max, std::function<void(float)> changedCall = [](float) {});
 
 
     void setHorizontal(bool horizontal);

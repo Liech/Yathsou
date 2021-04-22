@@ -218,6 +218,7 @@
     <ClCompile Include="VR\VR.cpp" />
     <ClCompile Include="VR\VRController.cpp" />
     <ClCompile Include="Widgets\Button.cpp" />
+    <ClCompile Include="Widgets\Checkbox.cpp" />
     <ClCompile Include="Widgets\Label.cpp" />
     <ClCompile Include="Widgets\LineEdit.cpp" />
     <ClCompile Include="Widgets\ListLayout.cpp" />
@@ -403,6 +404,7 @@
     <ClInclude Include="VR\VR.h" />
     <ClInclude Include="VR\VRController.h" />
     <ClInclude Include="Widgets\Button.h" />
+    <ClInclude Include="Widgets\Checkbox.h" />
     <ClInclude Include="Widgets\Label.h" />
     <ClInclude Include="Widgets\LineEdit.h" />
     <ClInclude Include="Widgets\ListLayout.h" />

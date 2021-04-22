@@ -29,6 +29,10 @@ namespace Ahwassa {
       int getHeight();
       Ahwassa::Window* getWindow();
       std::vector<Ahwassa::Uniform*> getUniforms();
+
+
+      bool  enabled();
+      void  setEnabled(bool);
     private:
       std::unique_ptr<Ahwassa::VBO<Ahwassa::PositionTextureVertex>> _vbo       ;
       std::unique_ptr<Ahwassa::VAO>                                 _vao       ;
@@ -41,5 +45,6 @@ namespace Ahwassa {
       int                                                           _width ;
       int                                                           _height;
       Ahwassa::Window*                                              _window;
+      bool                                                          _enabled = true;
   };
 }

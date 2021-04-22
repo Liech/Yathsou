@@ -42,7 +42,6 @@ namespace Ahwassa {
     float                      _currentValue = 0;
 
     bool _pressed = false;
-
     bool _hovered = false;
   };
 }

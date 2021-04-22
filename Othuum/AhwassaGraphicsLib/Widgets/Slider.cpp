@@ -99,7 +99,7 @@ namespace Ahwassa {
     if (button == Iyathuum::Key::MOUSE_BUTTON_1) {
       if (status == Iyathuum::KeyStatus::PRESS && !_pressed) {
         Iyathuum::glmAABB<2> b = getSliderLocation();
-        b.setPosition(b.getPosition() - getLocalPosition().getPosition());
+        b.setPosition(b.getPosition() - getGlobalPosition().getPosition());
         if (b.isInside({ localPosition[0],localPosition[1] })) {
           _pressed = true;
           return true;

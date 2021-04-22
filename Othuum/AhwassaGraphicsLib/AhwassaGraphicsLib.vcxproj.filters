@@ -333,6 +333,9 @@
     <ClCompile Include="PostProcessing\PostProcessingEffect.cpp">
       <Filter>Source Files\Post Processing</Filter>
     </ClCompile>
+    <ClCompile Include="Widgets\Checkbox.cpp">
+      <Filter>Source Files\Widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
@@ -883,6 +886,9 @@
     </ClInclude>
     <ClInclude Include="PostProcessing\PostProcessingEffect.h">
       <Filter>Header Files\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Widgets\Checkbox.h">
+      <Filter>Header Files\Widgets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

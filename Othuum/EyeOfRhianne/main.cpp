@@ -95,7 +95,7 @@ int main(int argc, char** argv) {
       textures.push_back(x);
     textures.push_back(composer->getDepth());
 
-    graphicUI = std::make_unique<GraphicOptions>(textures,disableAll,&w);
+    graphicUI = std::make_unique<GraphicOptions>(textures,bloom,disableAll,&w);
 
 
     fps = std::make_unique<Ahwassa::FPS>(&w);

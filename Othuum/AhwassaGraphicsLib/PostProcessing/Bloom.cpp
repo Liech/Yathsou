@@ -40,18 +40,14 @@ namespace Ahwassa {
       float Pi = 3.1415926;
       vec3 result = vec3(0,0,0); // current fragment's contribution
       //https://www.shadertoy.com/view/Xltfzj
-      float Directions = 16.0;
-      float Quality = 3.0;
-      float Size = 8.0;
       vec2 Radius = Size/textureSize(Input, 0);
-      float intensity = Intensity;
-      for( float d=0.0; d<Pi; d+=Pi/Directions)
+      for( float d=0.0; d<Pi*2; d+=Pi/Directions)
       {
 		    for(float i=1.0/Quality; i<=1.0; i+=1.0/Quality)
         {
           vec2  sampleLocation = TexCoords+vec2(cos(d),sin(d))*Radius*i;
           float bloomValue = texture( BloomMap, sampleLocation)[int(BloomChannel)];
-		  	  result += texture(Input, sampleLocation).rgb*bloomValue*intensity;		
+		  	  result += texture(Input, sampleLocation).rgb*bloomValue*Intensity;		
         }
       }  
       result /= Quality * Directions - 15.0;
@@ -65,17 +61,28 @@ namespace Ahwassa {
     _bloomMap         = std::make_shared<Ahwassa::Texture     >("BloomMap", 0);
     _input            = std::make_shared<Ahwassa::Texture     >("Input"   , 0);
     _bloomChannel     = std::make_shared<Ahwassa::UniformFloat>("BloomChannel");
-    _intensityUniform = std::make_shared<Ahwassa::UniformFloat>("Intensity");
+    _intensity = std::make_shared<Ahwassa::UniformFloat>("Intensity");
+    _size      = std::make_shared<Ahwassa::UniformFloat>("Size");
+    _quality = std::make_shared<Ahwassa::UniformFloat>("Quality");
+    _directions = std::make_shared<Ahwassa::UniformFloat>("Directions");
+    _intensity->setValue(8);
+    _size     ->setValue(8);
+    _quality->setValue(3);
+    _directions->setValue(16);
 
     uniforms.push_back(_bloomMap        .get());
     uniforms.push_back(_input           .get());
     uniforms.push_back(_bloomChannel    .get());
-    uniforms.push_back(_intensityUniform.get());
+    uniforms.push_back(_intensity.get());
+    uniforms.push_back(_size.get());
+    uniforms.push_back(_quality.get());
+    uniforms.push_back(_directions.get());
     _shader = std::make_shared<Ahwassa::ShaderProgram>(Ahwassa::PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
   void Bloom::draw(std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> bloomMap, int channel) {
-    _intensityUniform->setValue(_intensity);
+    if (!enabled())
+      return;
     _bloomChannel    ->setValue(channel);
     _bloomMap        ->setTextureID(bloomMap->getTextureID());
     _input           ->setTextureID(input->getTextureID());
@@ -88,11 +95,34 @@ namespace Ahwassa {
   }
 
   void Bloom::setIntensity(float value) {
-    _intensity = value;
+    _intensity->setValue(value);
   }
 
   float Bloom::intensity() {
-    return _intensity;
+    return _intensity->getValue();
   }
 
+  void  Bloom::setSize(float value) {
+    _size->setValue(value);
+  }
+
+  float Bloom::size() {
+    return _size->getValue();
+  }
+
+  void  Bloom::setQuality(float value) {
+    _quality->setValue(value);
+  }
+
+  float Bloom::quality() {
+    return _quality->getValue();
+  }
+
+  void  Bloom::setDirections(float value) {
+    _directions->setValue(value);
+  }
+
+  float Bloom::directions() {
+    return _directions->getValue();
+  }
 }

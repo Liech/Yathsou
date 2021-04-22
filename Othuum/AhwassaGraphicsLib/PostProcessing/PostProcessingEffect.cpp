@@ -94,4 +94,13 @@ namespace Ahwassa {
     result.push_back(_projection.get());
     return result;
   }
+
+
+  bool  PostProcessingEffect::enabled() {
+    return _enabled;
+  }
+
+  void  PostProcessingEffect::setEnabled(bool value) {
+    _enabled = value;
+  }
 }
