@@ -44,7 +44,7 @@ namespace Ahwassa {
       float Quality = 3.0;
       float Size = 8.0;
       vec2 Radius = Size/textureSize(Input, 0);
-      float intensity = 5;
+      float intensity = Intensity;
       for( float d=0.0; d<Pi; d+=Pi/Directions)
       {
 		    for(float i=1.0/Quality; i<=1.0; i+=1.0/Quality)
@@ -62,20 +62,23 @@ namespace Ahwassa {
 
     std::vector<Ahwassa::Uniform*> uniforms = getUniforms();    
 
-    _bloomMap = std::make_shared<Ahwassa::Texture>("BloomMap", 0);
-    _input    = std::make_shared<Ahwassa::Texture>("Input"   , 0);
-    _bloomChannel = std::make_shared<Ahwassa::UniformFloat>("BloomChannel");
+    _bloomMap         = std::make_shared<Ahwassa::Texture     >("BloomMap", 0);
+    _input            = std::make_shared<Ahwassa::Texture     >("Input"   , 0);
+    _bloomChannel     = std::make_shared<Ahwassa::UniformFloat>("BloomChannel");
+    _intensityUniform = std::make_shared<Ahwassa::UniformFloat>("Intensity");
 
-    uniforms.push_back(_bloomMap    .get());
-    uniforms.push_back(_input       .get());
-    uniforms.push_back(_bloomChannel.get());
+    uniforms.push_back(_bloomMap        .get());
+    uniforms.push_back(_input           .get());
+    uniforms.push_back(_bloomChannel    .get());
+    uniforms.push_back(_intensityUniform.get());
     _shader = std::make_shared<Ahwassa::ShaderProgram>(Ahwassa::PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
   void Bloom::draw(std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> bloomMap, int channel) {
-    _bloomChannel->setValue(channel);
-    _bloomMap    ->setTextureID(bloomMap->getTextureID());
-    _input       ->setTextureID(input->getTextureID());
+    _intensityUniform->setValue(_intensity);
+    _bloomChannel    ->setValue(channel);
+    _bloomMap        ->setTextureID(bloomMap->getTextureID());
+    _input           ->setTextureID(input->getTextureID());
 
     start();
 
@@ -83,4 +86,13 @@ namespace Ahwassa {
 
     end();
   }
+
+  void Bloom::setIntensity(float value) {
+    _intensity = value;
+  }
+
+  float Bloom::intensity() {
+    return _intensity;
+  }
+
 }

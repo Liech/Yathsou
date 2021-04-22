@@ -5,6 +5,8 @@
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "ListSelection.h"
+#include "AhwassaGraphicsLib/Widgets/Slider.h"
+#include "AhwassaGraphicsLib/Widgets/Label.h"
 
 GraphicOptions::GraphicOptions(std::vector<std::shared_ptr<Ahwassa::Texture>> textures,std::function<void()> disableAllCall, Ahwassa::Window* w) {
   _window = w;
@@ -25,12 +27,19 @@ GraphicOptions::GraphicOptions(std::vector<std::shared_ptr<Ahwassa::Texture>> te
   _list = std::make_unique<ListSelection>(textureNames,textureNames, Iyathuum::glmAABB<2>(glm::vec2(0,0),glm::vec2(300,w->getHeight() / 2)), w, [this](std::string newTexture) {
     _currentTexture = _textures[newTexture];
   });
-  _list->setVisible(false);
+  
+  _bloomLabel = std::make_shared<Ahwassa::Label>("Bloom Intensity", Iyathuum::glmAABB<2>(glm::vec2(0, w->getHeight() / 2 + 50), glm::vec2(300, 50)), w);
+  _bloomSlider = std::make_shared<Ahwassa::Slider>(Iyathuum::glmAABB<2>(glm::vec2(0, w->getHeight() / 2), glm::vec2(300, 50)), 0, 20, 8, [this](float) {
+    
+  },w);
+  setVisible(false);
 }
 
 void GraphicOptions::drawUI() {
   _showHide->draw();
   _list->draw();
+  _bloomLabel ->draw();
+  _bloomSlider->draw();
 }
 
 
@@ -41,6 +50,8 @@ void GraphicOptions::update() {
 void GraphicOptions::setVisible(bool visible) {
   _visible = visible;
   _list->setVisible(visible);
+  _bloomLabel ->setVisible(visible);
+  _bloomSlider->setVisible(visible);
 }
 
 bool GraphicOptions::isVisible() {

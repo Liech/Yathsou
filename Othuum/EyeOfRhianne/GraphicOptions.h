@@ -8,6 +8,8 @@ namespace Ahwassa {
   class Window;
   class Button;
   class Texture;
+  class Slider;
+  class Label;
 }
 
 class ListSelection;
@@ -32,4 +34,6 @@ private:
   std::map<std::string,std::shared_ptr<Ahwassa::Texture>> _textures;
   std::shared_ptr<Ahwassa::Texture>              _currentTexture;
   std::shared_ptr<ListSelection>                 _list;
+  std::shared_ptr<Ahwassa::Label >               _bloomLabel;
+  std::shared_ptr<Ahwassa::Slider>               _bloomSlider;
 };

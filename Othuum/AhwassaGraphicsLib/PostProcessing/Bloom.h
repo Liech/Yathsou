@@ -17,11 +17,16 @@ namespace Ahwassa {
   public:
     Bloom(Ahwassa::Window* w, int width, int height);
     void draw(std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> bloom, int channel);
+
+    void setIntensity(float);
+    float intensity();
   private:  
     std::shared_ptr<Ahwassa::ShaderProgram>                       _shader;
 
     std::shared_ptr<Ahwassa::Texture>                             _bloomMap;
     std::shared_ptr<Ahwassa::Texture>                             _input;
     std::shared_ptr<Ahwassa::UniformFloat>                        _bloomChannel;
+    std::shared_ptr<Ahwassa::UniformFloat>                        _intensityUniform   ;
+    float                                                         _intensity = 8;
   };
 }

@@ -37,6 +37,7 @@ namespace Ahwassa {
       std::unique_ptr<Ahwassa::UniformMat4>                         _projection;
       std::vector<Ahwassa::PositionTextureVertex>                   _vertices  ;
 
+      std::string                                                   _name;
       int                                                           _width ;
       int                                                           _height;
       Ahwassa::Window*                                              _window;

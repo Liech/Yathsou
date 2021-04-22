@@ -16,9 +16,10 @@
 namespace Ahwassa {
   PostProcessingEffect::PostProcessingEffect(std::string name, Ahwassa::Window* window, int width, int height) {
     _result = std::make_shared<Ahwassa::Rendertarget>(name, width, height);
-    _width = width;
+    _width  = width;
     _height = height;
     _window = window;
+    _name   = name;
 
 
     _vertices = {
@@ -65,7 +66,7 @@ namespace Ahwassa {
   }
 
   std::shared_ptr<Ahwassa::Texture> PostProcessingEffect::getResult() {
-    std::shared_ptr<Ahwassa::Texture> result = std::make_shared<Ahwassa::Texture>("Result", _result->getTextureID());
+    std::shared_ptr<Ahwassa::Texture> result = std::make_shared<Ahwassa::Texture>(_name, _result->getTextureID());
     result->release();
     return result;
   }
