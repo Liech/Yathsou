@@ -73,10 +73,10 @@ namespace Ahwassa {
     uniforms.push_back(_bloomMap        .get());
     uniforms.push_back(_input           .get());
     uniforms.push_back(_bloomChannel    .get());
-    uniforms.push_back(_intensity.get());
-    uniforms.push_back(_size.get());
-    uniforms.push_back(_quality.get());
-    uniforms.push_back(_directions.get());
+    uniforms.push_back(_intensity       .get());
+    uniforms.push_back(_size            .get());
+    uniforms.push_back(_quality         .get());
+    uniforms.push_back(_directions      .get());
     _shader = std::make_shared<Ahwassa::ShaderProgram>(Ahwassa::PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 

@@ -13,6 +13,7 @@
 #include "AhwassaGraphicsLib/Widgets/Button.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
+#include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
 #include "AthanahCommonLib/SupComModelFactory.h"
@@ -23,12 +24,14 @@
 
 #include "AezeselFileIOLib/STLWriter.h"
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
+#include "AezeselFileIOLib/ImageIO.h"
 
 #include "ListSelection.h"
 #include "AthanahCommonLib/BlueprintFactory.h"
 #include "AthanahCommonLib/Blueprint.h"
 #include "AthanahCommonLib/BlueprintGeneral.h"
 
+#include "AthanahCommonLib/SkyBox.h"
 
 #include "UnitModelSelection.h"
 #include "GraphicOptions.h"
@@ -63,6 +66,12 @@ int main(int argc, char** argv) {
   std::shared_ptr<Ahwassa::DeferredComposer>      composer;
   std::shared_ptr<Ahwassa::Bloom>                 bloom;
   std::shared_ptr<Athanah::SupComMesh>            mesh;
+  std::shared_ptr<Athanah::SkyBox>                skyBox;
+  std::shared_ptr<Ahwassa::Texture>               skyTexture;
+
+  std::string skyFolder = "Data\\textures\\environment";
+  std::string skyFile = "DefaultEnvCube.dds";
+
 
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   w.Startup = [&]() {
@@ -102,6 +111,10 @@ int main(int argc, char** argv) {
     background = std::make_unique<Ahwassa::Background>(&w);
 
     renderer = std::make_unique<Athanah::SupComMeshRendererDef>(w.camera());
+
+    //auto img = Aezesel::ImageIO::readImage(skyFolder + "\\" + skyFile);
+    skyTexture = std::make_shared <Ahwassa::Texture>("Sky", 0);//img.get());
+    skyBox = std::make_shared<Athanah::SkyBox>(skyTexture, w.camera());
   };
 
   w.Update = [&]() {
@@ -110,12 +123,13 @@ int main(int argc, char** argv) {
       mesh->animation = unitUI->getAnimation();
 
     composer->start();
+    skyBox->draw();
     renderer->draw();
     composer->end();
     bloom->draw(composer->getResult(), composer->getRawTextures()[3], 1);
 
     background->draw();
-       
+
     w.renderer().texture().start();
     w.renderer().texture().draw(*graphicUI->getCurrentTexture(), Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(w.getWidth(), w.getHeight())),true);
     w.renderer().texture().end();

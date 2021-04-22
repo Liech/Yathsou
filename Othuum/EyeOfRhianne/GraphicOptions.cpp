@@ -51,14 +51,12 @@ void GraphicOptions::makeBloomOptions() {
   _bloomOptions->setCurrentScroll(_bloomOptions->getMaximumScroll());
 }
 
-
 void GraphicOptions::drawUI() {
   _showHide->draw();
   _list->draw();
   _bloomOptions->adjustSize();
   _bloomOptions->draw();
 }
-
 
 void GraphicOptions::update() {
 
@@ -67,7 +65,7 @@ void GraphicOptions::update() {
 void GraphicOptions::setVisible(bool visible) {
   _visible = visible;
   _list->setVisible(visible);
-  _bloomOptions->setVisible(visible);
+  _bloomOptions->setVisible(isVisible() && _currentTexture->getName() == "Bloom");  
 }
 
 bool GraphicOptions::isVisible() {

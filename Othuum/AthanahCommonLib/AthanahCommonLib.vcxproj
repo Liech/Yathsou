@@ -33,6 +33,7 @@
     <ClInclude Include="BlueprintGeneral.h" />
     <ClInclude Include="BoxVisualization.h" />
     <ClInclude Include="BulletDebugDrawer.h" />
+    <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SupComMeshLoader.h" />
     <ClInclude Include="SupComMeshRenderer.h" />
     <ClInclude Include="SupComMeshRendererDef.h" />
@@ -47,6 +48,7 @@
     <ClCompile Include="BlueprintGeneral.cpp" />
     <ClCompile Include="BoxVisualization.cpp" />
     <ClCompile Include="BulletDebugDrawer.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SupComMeshLoader.cpp" />
     <ClCompile Include="SupComMeshRenderer.cpp" />
     <ClCompile Include="SupComMeshRendererDef.cpp" />
