@@ -113,9 +113,7 @@ int main(int argc, char** argv) {
     renderer = std::make_unique<Athanah::SupComMeshRendererDef>(w.camera());
 
     if (std::filesystem::exists(skyFolder + "\\" + skyFile)) {
-      auto img = Aezesel::ImageIO::readImage(skyFolder + "\\" + skyFile);
-      skyTexture = std::make_shared <Ahwassa::Texture>("Sky", img.get());
-      skyBox = std::make_shared<Athanah::SkyBox>(skyTexture, w.camera());
+      skyBox = std::make_shared<Athanah::SkyBox>(skyFolder + "\\" + skyFile, w.camera());
     }
   };
 

@@ -6,6 +6,7 @@
 #include "lib/lodepng/lodepng.h"
 #include "lib/gli/load_dds.hpp"
 #include "lib/gli/texture2d.hpp"
+#include "lib/gli/texture_cube.hpp"
 #include "lib/gli/sampler2d.hpp"
 #include <fstream>
 
@@ -96,17 +97,42 @@ namespace Aezesel {
   std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(std::string filename)
   {
     gli::texture texture = gli::load_dds(filename);
-    return std::move(readDDS(texture));
+    gli::texture2d texture2d = gli::texture2d(texture);
+    return std::move(readDDS(texture2d));
   }
 
   std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(const std::vector<unsigned char>& data)
   {
     gli::texture texture = gli::load_dds((char const*)(data.data()), data.size());
-    return std::move(readDDS(texture));
+    gli::texture2d texture2d = gli::texture2d(texture2d);
+    return std::move(readDDS(texture2d));
   }
 
-  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(gli::texture& texture){
-    gli::texture2d texture2d = gli::texture2d(texture);
+  std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> ImageIO::readDDSCube(std::string filename) {
+    gli::texture texture = gli::load_dds(filename);
+    std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> result;
+    gli::texture_cube cube = gli::texture_cube(texture);
+    result.resize(texture.faces());
+    for (int i = 0; i < texture.faces(); i++) {      
+      const gli::texture2d tex = cube[i];
+      result[i] = std::move(readDDS(tex));
+    }
+    return result;
+  }
+
+  std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> ImageIO::readDDSCube(ImageIO::Format, const std::vector<unsigned char> data) {
+    gli::texture texture = gli::load_dds((char const*)(data.data()), data.size());
+    std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> result;
+    gli::texture_cube cube = gli::texture_cube(texture);
+    result.resize(texture.faces());
+    for (int i = 0; i < texture.faces(); i++) {
+      gli::texture2d tex = cube[i];
+      result[i] = std::move(readDDS(tex));
+    }
+    return result;
+  }
+
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(const gli::texture2d& texture2d){
     gli::image image = texture2d[0];
 
     unsigned long width = image.extent()[0];

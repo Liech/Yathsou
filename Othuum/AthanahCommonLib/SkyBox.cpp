@@ -10,10 +10,20 @@
 #include "AhwassaGraphicsLib/Vertex/PositionTextureVertex.h"
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
 
+#include "AezeselFileIOLib/ImageIO.h"
+
 namespace Athanah {
-  SkyBox::SkyBox(std::shared_ptr<Ahwassa::Texture> texture, std::shared_ptr<Ahwassa::Camera> camera) {
-    _texture = std::make_shared<Ahwassa::Texture>("Sky",texture->getTextureID());
-    _camera  = camera;
+  SkyBox::SkyBox(std::string filename, std::shared_ptr<Ahwassa::Camera> camera) {
+    auto img = Aezesel::ImageIO::readDDSCube(filename);
+ 
+    _front  = std::make_shared <Ahwassa::Texture>("front" , img[0].get());
+    _right  = std::make_shared <Ahwassa::Texture>("right" , img[1].get());
+    _back   = std::make_shared <Ahwassa::Texture>("back"  , img[2].get());
+    _left   = std::make_shared <Ahwassa::Texture>("left"  , img[3].get());
+    _top    = std::make_shared <Ahwassa::Texture>("top"   , img[4].get());
+    _bottom = std::make_shared <Ahwassa::Texture>("bottom", img[5].get());
+    
+    _camera = camera;
     _mesh = makeCube();
     makeShader();
   }   
@@ -53,7 +63,7 @@ namespace Athanah {
      in vec2 TexCoords;
 
      void main() {
-       vec4  sky = texture(Sky, TexCoords);
+       vec4  sky = texture(front, TexCoords);
        
        gAlbedoSpec.rgb = sky.rgb;
        gAlbedoSpec.a = 1;
@@ -68,7 +78,12 @@ namespace Athanah {
     std::vector<Ahwassa::Uniform*> uniforms;
     std::vector<Ahwassa::Uniform*> cameraUniforms = _camera->getUniforms();
     uniforms.insert(uniforms.end(), cameraUniforms.begin(), cameraUniforms.end());
-    uniforms.push_back(_texture.get());
+    uniforms.push_back(_front .get());
+    uniforms.push_back(_right .get());
+    uniforms.push_back(_back  .get());
+    uniforms.push_back(_left  .get());
+    uniforms.push_back(_top   .get());
+    uniforms.push_back(_bottom.get());
     _mat = std::make_shared<Ahwassa::UniformMat4>("Scale");
     uniforms.push_back(_mat.get());
     _mat->setValue(glm::scale(glm::mat4(1), glm::vec3(50, 50, 50)));

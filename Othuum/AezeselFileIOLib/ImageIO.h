@@ -7,7 +7,7 @@
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 
 namespace gli {
-  class texture;
+  class texture2d;
 }
 namespace Aezesel {
   class ImageIO
@@ -21,9 +21,10 @@ namespace Aezesel {
     ~ImageIO();
 
     static void                                              writeImage(std::string filename, const Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2> & img);
-    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readImage(std::string filename);
-    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readImage(ImageIO::Format,const std::vector<unsigned char>&);
-
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>               readImage(std::string filename);
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>               readImage(ImageIO::Format,const std::vector<unsigned char>&);
+    static std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>  readDDSCube(std::string filename);
+    static std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>  readDDSCube(ImageIO::Format, const std::vector<unsigned char>);
 
   private:
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readPNG(const std::vector<unsigned char>&);
@@ -32,7 +33,7 @@ namespace Aezesel {
 
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(const std::vector<unsigned char>&);
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(std::string filename);
-    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(gli::texture& tex);
+    static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readDDS(const gli::texture2d& tex);
 
   };
 }
