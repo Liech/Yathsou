@@ -49,6 +49,7 @@ namespace Ahwassa {
     _texture = tex;
   }
 
+
   void Texture::bind() {
     int loc = getTextureLocation();
     glActiveTexture(GL_TEXTURE0 + loc);

@@ -1,22 +1,32 @@
 #pragma once
 
+#include <memory>
+#include <vector>
 #include "AhwassaGraphicsLib/Uniforms/Uniform.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 
 namespace Ahwassa {
+  class Texture;
 
   class UniformVecTexture : public Uniform {
   public:
-    UniformVecTexture(std::string name, int size) : Uniform(name) { _value.resize(size); _size = size; };
-    void  setValue(const std::vector<int>& val);
-    const std::vector<int>& getValue();
-    virtual int getNumberOfLocationsUsed() override { return _size; }
-    virtual std::string getArrayPostfix() { return "[" + std::to_string(_size) + "]"; }
+    UniformVecTexture(std::string name, std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>&);
+    ~UniformVecTexture();
+
+    void  setValue(const std::vector<std::shared_ptr<Ahwassa::Texture>>& val);
+    const std::vector<std::shared_ptr<Ahwassa::Texture>>& getValue();
+    virtual int getNumberOfLocationsUsed() override { return 1; }
+    virtual std::string getArrayPostfix();
 
     void bind() override;
-    std::string getType() override { return "sampler2D"; }
+    std::string getType() override { return "sampler2DArray"; }
+    virtual bool isTexture() override { return true; }
 
   private:
-    std::vector<int> _value;
-    int _size = 1;
+    unsigned int _id;
+    int _width;
+    int _height;
+    int _size;
   };
 }

@@ -2,8 +2,10 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 namespace Ahwassa {
+  class UniformVecTexture;
   class Texture;
   class IMesh;
   class Camera;
@@ -21,15 +23,11 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::IMesh> makeCube();
     void                            makeShader();
 
-    std::shared_ptr<Ahwassa::ShaderProgram> _shader ;
-    std::shared_ptr<Ahwassa::Camera>        _camera ;
-    std::shared_ptr<Ahwassa::IMesh>         _mesh   ;
-    std::shared_ptr<Ahwassa::Texture>       _front ;
-    std::shared_ptr<Ahwassa::Texture>       _right ;
-    std::shared_ptr<Ahwassa::Texture>       _back  ;
-    std::shared_ptr<Ahwassa::Texture>       _left  ;
-    std::shared_ptr<Ahwassa::Texture>       _top   ;
-    std::shared_ptr<Ahwassa::Texture>       _bottom;
-    std::shared_ptr<Ahwassa::UniformMat4>   _mat;
+    std::shared_ptr<Ahwassa::ShaderProgram>          _shader ;
+    std::shared_ptr<Ahwassa::Camera>                 _camera ;
+    std::shared_ptr<Ahwassa::IMesh>                  _mesh   ;
+    std::vector < std::shared_ptr<Ahwassa::Texture>> _textureArray;
+    std::shared_ptr<Ahwassa::UniformVecTexture>      _textures;
+    std::shared_ptr<Ahwassa::UniformMat4>            _mat;
   };                                        
 }

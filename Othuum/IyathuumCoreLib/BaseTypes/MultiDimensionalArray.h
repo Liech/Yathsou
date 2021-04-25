@@ -296,6 +296,7 @@ namespace Iyathuum {
     }
 
     Type* data() { return _data.data(); }
+    std::vector<Type>& vector() { return _data; }
 
   private:
     std::vector<Type> _data;

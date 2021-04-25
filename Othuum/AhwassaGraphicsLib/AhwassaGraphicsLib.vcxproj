@@ -213,6 +213,7 @@
     <ClCompile Include="Vertex\PositionNormalTextureVertex.cpp" />
     <ClCompile Include="Vertex\PositionNormalVertex.cpp" />
     <ClCompile Include="Vertex\PositionTextureVertex.cpp" />
+    <ClCompile Include="Vertex\PositionTextureVertexIndex.cpp" />
     <ClCompile Include="Vertex\PositionVertex.cpp" />
     <ClCompile Include="Vertex\SupComVertex.cpp" />
     <ClCompile Include="VR\VR.cpp" />
@@ -399,6 +400,7 @@
     <ClInclude Include="Vertex\PositionNormalTextureVertex.h" />
     <ClInclude Include="Vertex\PositionNormalVertex.h" />
     <ClInclude Include="Vertex\PositionTextureVertex.h" />
+    <ClInclude Include="Vertex\PositionTextureVertexIndex.h" />
     <ClInclude Include="Vertex\PositionVertex.h" />
     <ClInclude Include="Vertex\SupComVertex.h" />
     <ClInclude Include="VR\VR.h" />
