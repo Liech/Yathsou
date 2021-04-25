@@ -47,7 +47,7 @@ namespace Athanah {
         TexCoords = texture;
         Index = index;
       } 
-   )";//)" + _camera->getName() + R"(Projection *
+   )";
 
     std::string fragment_shader_source = R"(
      layout (location = 0) out vec4 gPosition;
@@ -59,7 +59,7 @@ namespace Athanah {
      flat in float Index;
 
      void main() {
-       vec4  sky = texture(textures, vec3(TexCoords,0));
+       vec4  sky = texture(textures, vec3(TexCoords,Index));
        
        gAlbedoSpec.rgb = sky.rgb;
        gAlbedoSpec.a = 1;
@@ -93,34 +93,34 @@ namespace Athanah {
       input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end  , end), glm::vec2(1, 0),0));
 
       //right
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end, end  , end  ), glm::vec2(1, 0),1));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end, end  , start), glm::vec2(0, 0),1));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end, start, start), glm::vec2(0, 1),1));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end, start, end  ), glm::vec2(1, 1),1));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end, end  , end  ), glm::vec2(1, 0),4));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end, end  , start), glm::vec2(0, 0),4));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end, start, start), glm::vec2(0, 1),4));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end, start, end  ), glm::vec2(1, 1),4));
 
       //back
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, start), glm::vec2(1, 1),2));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , start, start), glm::vec2(0, 1),2));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , end  , start), glm::vec2(0, 0),2));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end  , start), glm::vec2(1, 0),2));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, start), glm::vec2(0, 1),1));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , start, start), glm::vec2(1, 1),1));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , end  , start), glm::vec2(1, 0),1));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end  , start), glm::vec2(0, 0),1));
                                                                                                          
       //left
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, start), glm::vec2(0, 1),3));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, end  ), glm::vec2(1, 1),3));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end  , end  ), glm::vec2(1, 0),3));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end  , start), glm::vec2(0, 0),3));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, start), glm::vec2(1, 1),5));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, end  ), glm::vec2(0, 1),5));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end  , end  ), glm::vec2(0, 0),5));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end  , start), glm::vec2(1, 0),5));
 
       //upper
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , end, end  ), glm::vec2(0, 0),4));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end, end  ), glm::vec2(1, 0),4));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end, start), glm::vec2(1, 1),4));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , end, start), glm::vec2(0, 1),4));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , end, end  ), glm::vec2(1, 1),2));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end, end  ), glm::vec2(1, 0),2));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, end, start), glm::vec2(0, 0),2));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , end, start), glm::vec2(0, 1),2));
 
       //bottom
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, start), glm::vec2(1, 1),5));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , start, start), glm::vec2(0, 1),5));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , start, end  ), glm::vec2(0, 0),5));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, end  ), glm::vec2(1, 0),5));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, start), glm::vec2(1, 1),3));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , start, start), glm::vec2(0, 1),3));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , start, end  ), glm::vec2(0, 0),3));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, end  ), glm::vec2(1, 0),3));
 
       //note every face of the cube is on a single line
       auto indices = std::vector<int>{

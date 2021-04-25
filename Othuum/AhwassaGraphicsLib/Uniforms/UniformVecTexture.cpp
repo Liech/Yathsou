@@ -13,14 +13,14 @@ namespace Ahwassa {
 
     glGenTextures(1, &_id);
     glBindTexture(GL_TEXTURE_2D_ARRAY, _id);
-    glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, GL_RGBA8, _width, _height, value.size());
+    glTexStorage3D(GL_TEXTURE_2D_ARRAY,1, GL_RGBA8, _width, _height, value.size());
 
     std::vector<Iyathuum::Color> allData(value[0]->vector().begin(),value[0]->vector().end());
 
     for(int i = 1;i < value.size();i++)
       allData.insert(allData.end(), value[i]->vector().begin(), value[i]->vector().end());
 
-    glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 0, _width, _height, 0, GL_RGBA, GL_UNSIGNED_BYTE, allData.data());
+    glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 0, _width, _height, value.size(), GL_RGBA, GL_UNSIGNED_BYTE, allData.data());
 
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
