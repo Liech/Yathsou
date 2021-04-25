@@ -46,7 +46,7 @@ namespace Ahwassa {
       vec3 Albedo    = texture(gAlbedoSpec, TexCoords).rgb;
       vec3 Special   = texture(gSpecial   , TexCoords).rgb;
       float Specular = Special.b;
-      
+
       vec3 lighting = Albedo * 0.5;
       vec3 viewDir = normalize(CamPos - FragPos);
       for(int i = 0; i < NumberOfLights; ++i)
@@ -59,10 +59,7 @@ namespace Ahwassa {
           vec3 specular = Specular * spec * LightColors[i];  
           lighting += diffuse + specular;
       }
-      
-      if (FragPos[0] == 0 && FragPos[1] == 0&& FragPos[2] == 0)
-        discard;
-
+        
       color = vec4(lighting, 1.0);
     }  
    )";

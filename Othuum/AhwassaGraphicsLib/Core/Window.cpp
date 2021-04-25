@@ -155,11 +155,11 @@ namespace Ahwassa {
       glfwPollEvents();
       //update
 
+      std::this_thread::sleep_until(end);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
       input().update();
       Update();
-      std::this_thread::sleep_until(end);
-
       glfwSwapBuffers(_window);
     }
 

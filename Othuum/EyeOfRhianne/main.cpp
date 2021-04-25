@@ -112,9 +112,11 @@ int main(int argc, char** argv) {
 
     renderer = std::make_unique<Athanah::SupComMeshRendererDef>(w.camera());
 
-    //auto img = Aezesel::ImageIO::readImage(skyFolder + "\\" + skyFile);
-    skyTexture = std::make_shared <Ahwassa::Texture>("Sky", 0);//img.get());
-    skyBox = std::make_shared<Athanah::SkyBox>(skyTexture, w.camera());
+    if (std::filesystem::exists(skyFolder + "\\" + skyFile)) {
+      auto img = Aezesel::ImageIO::readImage(skyFolder + "\\" + skyFile);
+      skyTexture = std::make_shared <Ahwassa::Texture>("Sky", img.get());
+      skyBox = std::make_shared<Athanah::SkyBox>(skyTexture, w.camera());
+    }
   };
 
   w.Update = [&]() {
@@ -123,7 +125,8 @@ int main(int argc, char** argv) {
       mesh->animation = unitUI->getAnimation();
 
     composer->start();
-    skyBox->draw();
+    if(skyBox) 
+      skyBox->draw();
     renderer->draw();
     composer->end();
     bloom->draw(composer->getResult(), composer->getRawTextures()[3], 1);
