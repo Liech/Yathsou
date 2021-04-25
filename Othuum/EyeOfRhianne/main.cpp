@@ -6,21 +6,15 @@
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
-#include "AhwassaGraphicsLib/Core/Renderer.h"
-#include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
-#include "AhwassaGraphicsLib/Drawables/Background.h"
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
 #include "AhwassaGraphicsLib/Widgets/Button.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
 #include "AthanahCommonLib/SupComModelFactory.h"
 #include "AthanahCommonLib/SupComModel.h"
-#include "AthanahCommonLib/SupComMeshRendererDef.h"
 #include "AhwassaGraphicsLib/PostProcessing/Bloom.h"
-#include "AthanahCommonLib/SupComMeshRendererDef.h"
 
 #include "AezeselFileIOLib/STLWriter.h"
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
@@ -33,8 +27,9 @@
 
 #include "AthanahCommonLib/SkyBox.h"
 
-#include "UnitModelSelection.h"
+#include "AssetSelection.h"
 #include "GraphicOptions.h"
+#include "Graphic.h"
 #include "EyeOfRhianneConfiguration.h"
 
 void enforceWorkingDir(std::string exeDir) {
@@ -56,17 +51,13 @@ int main(int argc, char** argv) {
   int height = config.ScreenHeight;
 
   Ahwassa::Window w(width, height);
-  std::unique_ptr<Ahwassa::Background> background;
   std::unique_ptr<Ahwassa::FPS       > fps;
+  
+  std::unique_ptr<AssetSelection> assets   ;
+  std::unique_ptr<Ahwassa::Button> assetButton;
+  std::unique_ptr<GraphicOptions> graphicUI;
+  std::unique_ptr<Graphic> graphic;
 
-  std::unique_ptr<UnitModelSelection > unitUI   ;
-  std::unique_ptr<GraphicOptions     > graphicUI;
-
-  std::unique_ptr<Athanah::SupComMeshRendererDef> renderer;
-  std::shared_ptr<Ahwassa::DeferredComposer>      composer;
-  std::shared_ptr<Ahwassa::Bloom>                 bloom;
-  std::shared_ptr<Athanah::SupComMesh>            mesh;
-  std::shared_ptr<Athanah::SkyBox>                skyBox;
   std::shared_ptr<Ahwassa::Texture>               skyTexture;
 
   std::string skyFolder = "Data\\textures\\environment";
@@ -75,67 +66,43 @@ int main(int argc, char** argv) {
 
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   w.Startup = [&]() {
-    bloom = std::make_shared<Ahwassa::Bloom>(&w, width, height);
     
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
     w.camera()->setPosition(glm::vec3(20, 20, 20));
     w.input().addUIElement(freeCam.get());
 
     std::function<void()> disableAll = [&]() { 
-      unitUI->setVisible(false);
+      assets->setVisible(false);
       graphicUI->setVisible(false);
     };
 
-    unitUI = std::make_unique<UnitModelSelection>(config.UnitPath, disableAll,
-      [&](std::string u) {
-      mesh = std::make_shared<Athanah::SupComMesh>();
-      mesh->model = unitUI->getCurrentModel();
-      mesh->teamColor = Iyathuum::Color(rand() % 255, rand() % 255, rand() % 255);
-      mesh->transformation = glm::translate(glm::mat4(1.0), glm::vec3(0, 0, 0));
-      renderer->addMesh(mesh);
-    },&w);
+    graphic = std::make_unique<Graphic>(&w);
 
-    composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
+    Iyathuum::glmAABB<2> assetArea      (glm::vec2(0, 0 ), glm::vec2(300, w.getHeight() - 50));
+    Iyathuum::glmAABB<2> assetButtonArea(glm::vec2(0, w.getHeight() - 50), glm::vec2(300, 50));
+    assets = std::make_unique<AssetSelection>(config.AssetPath,assetArea, *graphic);
+    assetButton = std::make_unique<Ahwassa::Button>("Assets", assetButtonArea, [disableAll,&assets]() {
+      bool vis = assets->isVisible();
+      disableAll();
+      assets->setVisible(!vis); 
+    }, &w);
 
-    std::vector<std::shared_ptr<Ahwassa::Texture>> textures;
-    textures.push_back(bloom->getResult());
-    textures.push_back(composer->getResult());
-    for (auto x : composer->getRawTextures())
-      textures.push_back(x);
-    textures.push_back(composer->getDepth());
-
-    graphicUI = std::make_unique<GraphicOptions>(textures,bloom,disableAll,&w);
-
+    graphicUI = std::make_unique<GraphicOptions>(disableAll,*graphic);
 
     fps = std::make_unique<Ahwassa::FPS>(&w);
-    background = std::make_unique<Ahwassa::Background>(&w);
-
-    renderer = std::make_unique<Athanah::SupComMeshRendererDef>(w.camera());
 
     if (std::filesystem::exists(skyFolder + "\\" + skyFile)) {
-      skyBox = std::make_shared<Athanah::SkyBox>(skyFolder + "\\" + skyFile, w.camera());
+      graphic->_skyBox = std::make_shared<Athanah::SkyBox>(skyFolder + "\\" + skyFile, w.camera());
     }
   };
 
   w.Update = [&]() {
-    unitUI->update();
-    if (mesh)
-      mesh->animation = unitUI->getAnimation();
+    assets->update();
 
-    composer->start();
-    if(skyBox) 
-      skyBox->draw();
-    renderer->draw();
-    composer->end();
-    bloom->draw(composer->getResult(), composer->getRawTextures()[3], 1);
+    graphic->draw();
 
-    background->draw();
-
-    w.renderer().texture().start();
-    w.renderer().texture().draw(*graphicUI->getCurrentTexture(), Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(w.getWidth(), w.getHeight())),true);
-    w.renderer().texture().end();
-
-    unitUI->draw();
+    assetButton->draw();
+    assets->draw();
     graphicUI->drawUI();
 
     if (config.ShowFPS) 

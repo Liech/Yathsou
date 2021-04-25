@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 #include <functional>
+#include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 
 class ListSelection;
 class AnimationSelection;
@@ -19,9 +20,11 @@ namespace Athanah {
   class SupComModel;
 }
 
+class Graphic;
+
 class UnitModelSelection {
 public:
-  UnitModelSelection(const std::string path, std::function<void()> disableAllCall, std::function<void(std::string)>, Ahwassa::Window* w);
+  UnitModelSelection(const std::string path, Iyathuum::glmAABB<2> area,std::function<void()> disableAllCall, Graphic&);
 
   void setVisible(bool value);
   bool isVisible();
@@ -31,17 +34,13 @@ public:
   std::shared_ptr<Athanah::SupComModel> getCurrentModel();
 
   std::vector<std::string> getNames();
-  std::vector<glm::mat4> getAnimation();
 
 private:
+  Graphic&                                      _graphic;
   std::unique_ptr<ListSelection>                _list;
   std::string                                   _currentID = "";
-  Ahwassa::Window*                              _window    ;
-  std::unique_ptr< Ahwassa::Button>             _showHide  ;
-  std::unique_ptr< Athanah::SupComModelFactory> _factory   ;
-  std::unique_ptr< Athanah::BlueprintFactory  > _blueprints;
-  std::shared_ptr<AnimationSelection >          _animations;
-  std::function<void(std::string)>              _onUnitChanged;  
+  std::shared_ptr< Athanah::SupComModelFactory> _factory   ;
+  std::shared_ptr< Athanah::BlueprintFactory  > _blueprints;
   std::function<void()>                         _disableAllCall;
 
 };

@@ -146,7 +146,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AnimationSelection.cpp" />
+    <ClCompile Include="AssetSelection.cpp" />
     <ClCompile Include="EyeOfRhianneConfiguration.cpp" />
+    <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="GraphicOptions.cpp" />
     <ClCompile Include="ListSelection.cpp" />
     <ClCompile Include="main.cpp" />
@@ -154,10 +156,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimationSelection.h" />
+    <ClInclude Include="AssetSelection.h" />
     <ClInclude Include="EyeOfRhianneConfiguration.h" />
+    <ClInclude Include="Graphic.h" />
     <ClInclude Include="GraphicOptions.h" />
     <ClInclude Include="UnitModelSelection.h" />
-    <ClInclude Include="UnitSelection.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,6 +5,7 @@
 #include "AhwassaGraphicsLib/Vertex/PositionTextureVertex.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/VBO.h"
+#include "AhwassaGraphicsLib/Uniforms/UniformMat4.h"
 
 namespace Ahwassa {
   class FBO;
@@ -15,7 +16,6 @@ namespace Ahwassa {
   class Rendertarget;
   class VAO;
   class PositionTextureVertex;
-  class UniformMat4;
   class UniformVecVec3;
   class UniformVec3;
   class UniformFloat;

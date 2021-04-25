@@ -6,18 +6,19 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Widgets/Button.h"
 #include "ListSelection.h"
+#include "Graphic.h"
 
-
-AnimationSelection::AnimationSelection(Ahwassa::Window* w) {
-  _window = w;
-  _save = std::make_unique<Ahwassa::Button>("Save",
-    Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(300, 50)) , [&]() {
+AnimationSelection::AnimationSelection(Iyathuum::glmAABB<2> area,Graphic& graphic):_graphic(graphic){
+  _area = area;
+  _save = std::make_shared<Ahwassa::Button>("Save",
+    Iyathuum::glmAABB<2>(area.getPosition(), glm::vec2(300, 50)) , [&]() {
     save();
-  }, w);
+  }, graphic.getWindow());
   _save->setVisible(false);
 }
 
 void AnimationSelection::setVisible(bool value) {
+  _visible = value;
   if (_model)
     _save->setVisible(value);
   if (_list) {
@@ -26,38 +27,46 @@ void AnimationSelection::setVisible(bool value) {
   }
 }
 
-void AnimationSelection::setModel(std::shared_ptr<Athanah::SupComModel> newModel) {
-  _model = newModel;
-  _time = 0;
-  _currentAnimation = "None";  
-
-  std::vector<std::string> available = _model->availableAnimations();
-  std::vector<std::string> anims;
-  anims.push_back("None");
-  anims.insert(anims.begin(), available.begin(), available.end());
-  if (anims.size() > 1) {
-    _list = std::make_unique<ListSelection>(anims, anims, Iyathuum::glmAABB<2>(glm::vec2(300, 50), glm::vec2(300, _window->getHeight() / 4)), _window, [&](std::string u) {
-      _currentAnimation = u;
-      _time = 0;
-    });
-    _pause = std::make_unique<Ahwassa::Button>("Pause", Iyathuum::glmAABB<2>(glm::vec2(300, 0), glm::vec2(300, 50)), [&]() {
-      _play = !_play;
-      if (_play)
-        _pause->setText("Pause");
-      else
-        _pause->setText("Play");
-    }, _window);
-  }
-  else {
-    _list = nullptr;
-    _pause = nullptr;
-  }
-  _save->setVisible(true);
+bool AnimationSelection::isVisible() {
+  return _visible;
 }
 
 void AnimationSelection::update() {
   if (_play)
     _time = std::fmod(_time + 0.01f, 1);
+
+  if (_graphic._model != _model) {
+    _time = 0;
+    _model = _graphic._model;
+    _currentAnimation = "None";
+    std::vector<std::string> available =  _graphic._model->availableAnimations();
+
+    std::vector<std::string> anims;
+    anims.push_back("None");
+    anims.insert(anims.begin(), available.begin(), available.end());
+    if (anims.size() > 1) {
+      _list = std::make_unique<ListSelection>(anims, anims, Iyathuum::glmAABB<2>(_area.getPosition() + glm::vec2(0,100), _area.getSize() - glm::vec2(0,100)), _graphic.getWindow(), [&](std::string u) {
+        _currentAnimation = u;
+        _time = 0;
+      });
+      _pause = std::make_shared<Ahwassa::Button>("Pause", Iyathuum::glmAABB<2>(_area.getPosition() + glm::vec2(0, 50), glm::vec2(300, 50)), [&]() {
+        _play = !_play;
+        if (_play)
+          _pause->setText("Pause");
+        else
+          _pause->setText("Play");
+      }, _graphic.getWindow());
+    }
+    else {
+      _list = nullptr;
+      _pause = nullptr;
+    }
+    if(_list) _list->setVisible(_visible);
+    if (_pause) _pause->setVisible(_visible);
+  }
+
+  if (_graphic._mesh)
+    _graphic._mesh->animation = getAnimation();
 }
 
 void AnimationSelection::draw() {
