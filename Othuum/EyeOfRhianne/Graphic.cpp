@@ -31,7 +31,8 @@ void Graphic::draw() {
     _skyBox->draw();
   _renderer->draw();
   _composer->end();
-  _bloom->draw(_composer->getResult(), _composer->getRawTextures()[3], 1);
+  if (_bloomEnabled)
+    _bloom->draw(_composer->getResult(), _composer->getRawTextures()[3], 1);
 
   _window->renderer().texture().start();
   _window->renderer().texture().draw(*_textures[_renderedTexture], Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_window->getWidth(), _window->getHeight())), true);

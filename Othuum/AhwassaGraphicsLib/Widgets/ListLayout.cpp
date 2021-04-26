@@ -69,9 +69,9 @@ namespace Ahwassa {
   }
 
   std::shared_ptr<Checkbox> ListLayout::addCheckbox(std::string text, bool checked, std::function<void(bool)> changedCall) {
-    std::shared_ptr<Checkbox> l = std::make_shared<Checkbox>(text, getElementSize(), [changedCall](bool value) {
+    std::shared_ptr<Checkbox> l = std::make_shared<Checkbox>(text,checked, getElementSize(), [changedCall](bool value) {
       changedCall(value);
-    }, getWindow(), this);
+    }, getWindow(), this);    
     addElement(l);
     return l;
   }

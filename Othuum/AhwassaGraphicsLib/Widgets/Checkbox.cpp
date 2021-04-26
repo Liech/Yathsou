@@ -13,8 +13,9 @@ namespace Ahwassa {
     _name = "Def";
   }
 
-  Checkbox::Checkbox(std::string name, Iyathuum::glmAABB<2> position, std::function<void(bool)> clickedFunction, Window* w, UIElement* parent) : Drawable(w)
+  Checkbox::Checkbox(std::string name,bool value, Iyathuum::glmAABB<2> position, std::function<void(bool)> clickedFunction, Window* w, UIElement* parent) : Drawable(w)
   {
+    _checked = value;
     _clickedFunction = clickedFunction;
     _name = name;
     w->input().addUIElement(this);

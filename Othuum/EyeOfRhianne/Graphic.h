@@ -28,6 +28,7 @@ public:
   std::vector<std::shared_ptr<Ahwassa::Texture>> _textures;
   std::shared_ptr<Athanah::SupComMeshRendererDef> _renderer;
   std::shared_ptr<Ahwassa::Bloom>                 _bloom   ;
+  bool                                            _bloomEnabled = true;
   std::shared_ptr<Athanah::SkyBox>                _skyBox;
 
   Ahwassa::Window* getWindow();

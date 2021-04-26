@@ -11,7 +11,7 @@ namespace Ahwassa {
   {
   public:
     Checkbox(Window* w);
-    Checkbox(std::string name, Iyathuum::glmAABB<2> position, std::function<void(bool)> clickedFunction, Window* w, UIElement* parent = nullptr);
+    Checkbox(std::string name,bool value, Iyathuum::glmAABB<2> position, std::function<void(bool)> clickedFunction, Window* w, UIElement* parent = nullptr);
     ~Checkbox();
     
     virtual void draw() override;

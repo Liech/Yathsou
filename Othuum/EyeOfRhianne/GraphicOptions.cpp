@@ -16,7 +16,6 @@ GraphicOptions::GraphicOptions(std::function<void()> disableAllCall, Graphic& gr
   _showHide = std::make_shared<Ahwassa::Button>("Graphic", Iyathuum::glmAABB<2>(glm::vec2(300, _graphic.getWindow()->getHeight() - 50), glm::vec2(300, 50)), [this]() {
     _disableAllCall();
     setVisible(!isVisible());
-    _bloomOptions->setVisible(isVisible() && _currentTexture->getName() == "Bloom");
   }, _graphic.getWindow());
 
   std::vector<std::string> textureNames;
@@ -28,7 +27,6 @@ GraphicOptions::GraphicOptions(std::function<void()> disableAllCall, Graphic& gr
 
   _list = std::make_unique<ListSelection>(textureNames,textureNames, Iyathuum::glmAABB<2>(glm::vec2(0,0),glm::vec2(300, _graphic.getWindow()->getHeight() / 2)), _graphic.getWindow(), [this](std::string newTexture) {
     _graphic._renderedTexture = _textures[newTexture];
-    _bloomOptions->setVisible(isVisible() && _currentTexture->getName() == "Bloom");
   });
   makeBloomOptions();
   setVisible(false);
@@ -36,6 +34,16 @@ GraphicOptions::GraphicOptions(std::function<void()> disableAllCall, Graphic& gr
 
 void GraphicOptions::makeBloomOptions() {
   _bloomOptions = std::make_shared<Ahwassa::ListLayout>(Iyathuum::glmAABB<2>(glm::vec2(0, _graphic.getWindow()->getHeight() / 2), glm::vec2(300, _graphic.getWindow()->getHeight() / 2 - 50)), _graphic.getWindow());
+  _bloomOptions->addCheckbox("Enabled", true, [this](bool checked) {
+    _graphic._bloomEnabled = checked; 
+    if (!checked && _currentTexture->getName() == "Bloom") {
+      _graphic._renderedTexture = _textures["Result"];
+    }
+    else if (checked && _currentTexture->getName() != "Bloom") {
+      _graphic._renderedTexture = _textures["Bloom"];
+    }
+    _currentTexture = _graphic._textures[_graphic._renderedTexture];
+  });
   _bloomOptions->addLabel("Intensity");
   _bloomOptions->addSlider(8, 0, 50, [this](float value) {_graphic._bloom->setIntensity(value); });
   _bloomOptions->addLabel("Size");
@@ -63,7 +71,7 @@ void GraphicOptions::update() {
 void GraphicOptions::setVisible(bool visible) {
   _visible = visible;
   _list->setVisible(visible);
-  _bloomOptions->setVisible(isVisible() && _currentTexture->getName() == "Bloom");  
+  _bloomOptions->setVisible(isVisible());  
 }
 
 bool GraphicOptions::isVisible() {
