@@ -339,6 +339,9 @@
     <ClCompile Include="Vertex\PositionTextureVertexIndex.cpp">
       <Filter>Source Files\Vertex</Filter>
     </ClCompile>
+    <ClCompile Include="PostProcessing\SSR.cpp">
+      <Filter>Source Files\Post Processing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
@@ -895,6 +898,9 @@
     </ClInclude>
     <ClInclude Include="Vertex\PositionTextureVertexIndex.h">
       <Filter>Header Files\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing\SSR.h">
+      <Filter>Header Files\PostProcessing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

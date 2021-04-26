@@ -175,6 +175,7 @@
     <ClCompile Include="PostProcessing\Bloom.cpp" />
     <ClCompile Include="PostProcessing\DeferredComposer.cpp" />
     <ClCompile Include="PostProcessing\PostProcessingEffect.cpp" />
+    <ClCompile Include="PostProcessing\SSR.cpp" />
     <ClCompile Include="Renderer\Box.cpp" />
     <ClCompile Include="Renderer\BoxRenderer.cpp" />
     <ClCompile Include="Renderer\DiffuseMeshRenderer.cpp" />
@@ -363,6 +364,7 @@
     <ClInclude Include="PostProcessing\Bloom.h" />
     <ClInclude Include="PostProcessing\DeferredComposer.h" />
     <ClInclude Include="PostProcessing\PostProcessingEffect.h" />
+    <ClInclude Include="PostProcessing\SSR.h" />
     <ClInclude Include="Renderer\BoxRenderer.h" />
     <ClInclude Include="Renderer\DiffuseMeshRenderer.h" />
     <ClInclude Include="Renderer\Dot.h" />

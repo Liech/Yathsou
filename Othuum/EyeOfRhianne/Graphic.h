@@ -8,6 +8,7 @@ namespace Ahwassa {
   class Window;
   class DeferredComposer;
   class Bloom;
+  class SSR;
   class Texture;
 }
 namespace Athanah {
@@ -28,6 +29,7 @@ public:
   std::vector<std::shared_ptr<Ahwassa::Texture>> _textures;
   std::shared_ptr<Athanah::SupComMeshRendererDef> _renderer;
   std::shared_ptr<Ahwassa::Bloom>                 _bloom   ;
+  std::shared_ptr<Ahwassa::SSR  >                 _ssr     ;
   bool                                            _bloomEnabled = true;
   std::shared_ptr<Athanah::SkyBox>                _skyBox;
 
