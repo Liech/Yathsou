@@ -10,7 +10,9 @@ In an recreational project the goals may change at any given time. Currently the
 
 # Current Work
 
-It is possible to render Supreme Commander Unit animations. The next step is to offer with EyeOfRhianne an actual ~product for investigating Supreme Commander Units.
+With EyeOfRhianne an program to investigate supremecommander assets is created. It got extended with deffered Rendering & Post Processing and SkyBox rendering.
+Currently theres still work regarding better looking units.
+After maybe map loading will be a topic.
 
 # Libraries
 
@@ -55,7 +57,9 @@ Graphics and Media Library
 
 Offers:
  * wrapper to opengl
- * renderer
+ * forward renderer & deferred renderer
+ * post processing system
+  * Bloom 
  * play sound (prototype)
  * GUI System
  * interact with vr (prototype)
@@ -108,6 +112,7 @@ nlohmann json | lua table access
 Offers:
  * script engine access
  * lua table <-> nlohmann::json
+ * can read supreme commander .bp files with minimal effort
 
 ## Other Libs
 
@@ -117,9 +122,11 @@ Most are not worth any mentioning yet.
 
 # Build and Run
 
-Start Project is Othuum.
+UI and Network demonstration (and maybe later the actual game) are found in Othuum.
 
 Fervor is my personal playground.
+
+EyeOfRhianne is the asset debugging and exploration tool.
 
 Use Visual Studio 2019 and Windows.
 
