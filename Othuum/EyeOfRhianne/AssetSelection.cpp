@@ -2,6 +2,7 @@
 
 #include "UnitModelSelection.h"
 #include "AnimationSelection.h"
+#include "SkyBoxSelection.h"
 #include "ListSelection.h"
 #include "Graphic.h"
 
@@ -33,6 +34,7 @@ void AssetSelection::addSelections() {
   _units = std::make_shared<UnitModelSelection>(unitPath,area,[this]() {unitVisibility(false); }, _graphic);
 
   _animation = std::make_shared<AnimationSelection>(area, _graphic);
+  _skyBox    = std::make_shared<SkyBoxSelection>(_path + "\\textures\\environment",area, _graphic);
 }
 
 void AssetSelection::unitVisibility(std::string newMenu) {
@@ -43,22 +45,27 @@ void AssetSelection::unitVisibility(std::string newMenu) {
     _units->setVisible(!_units->isVisible());
   if (_current == "Animation")
     _animation->setVisible(!_animation->isVisible());
+  if (_current == "SkyBox")
+    _skyBox->setVisible(!_skyBox->isVisible());
 }
 
 void AssetSelection::hideAll() {
   _units->setVisible(false);
   _animation->setVisible(false);
+  _skyBox->setVisible(false);
 }
 
 void AssetSelection::draw() {
   _units->draw();
   _animation->draw();
+  _skyBox->draw();
   _list->draw();
 }
 
 void AssetSelection::update() {
   _units->update();
   _animation->update();
+  _skyBox->update();
 }
 
 void AssetSelection::setVisible(bool visible) {

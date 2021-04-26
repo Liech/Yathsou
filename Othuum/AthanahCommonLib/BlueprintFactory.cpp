@@ -14,8 +14,8 @@ namespace Athanah {
 
     for (const auto& entry : std::filesystem::directory_iterator(_unitsPath)) {
       std::string path = entry.path().string();
-      path = path.substr(_unitsPath.size());
-      if (std::filesystem::exists(entry.path().string() + "/" + path + "_unit.bp"))
+      path = path.substr(_unitsPath.size()+1);
+      if (std::filesystem::exists(entry.path().string() + "\\" + path + "_unit.bp"))
         _availableUnits.push_back(path);
     }
 
@@ -44,7 +44,7 @@ namespace Athanah {
     script.registerFunction("UnitBlueprint", UnitBlueprint);
     script.registerFunction("Sound", soundCall);
     
-    std::string path = _unitsPath + name + "\\" + name + "_unit.bp";
+    std::string path = _unitsPath + "\\" + name + "\\" + name + "_unit.bp";
     std::ifstream t(path);
     std::string str((std::istreambuf_iterator<char>(t)),
       std::istreambuf_iterator<char>());

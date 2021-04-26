@@ -25,8 +25,6 @@
 #include "AthanahCommonLib/Blueprint.h"
 #include "AthanahCommonLib/BlueprintGeneral.h"
 
-#include "AthanahCommonLib/SkyBox.h"
-
 #include "AssetSelection.h"
 #include "GraphicOptions.h"
 #include "Graphic.h"
@@ -58,12 +56,6 @@ int main(int argc, char** argv) {
   std::unique_ptr<GraphicOptions> graphicUI;
   std::unique_ptr<Graphic> graphic;
 
-  std::shared_ptr<Ahwassa::Texture>               skyTexture;
-
-  std::string skyFolder = "Data\\textures\\environment";
-  std::string skyFile = "DefaultEnvCube.dds";
-
-
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   w.Startup = [&]() {
     
@@ -91,9 +83,6 @@ int main(int argc, char** argv) {
 
     fps = std::make_unique<Ahwassa::FPS>(&w);
 
-    if (std::filesystem::exists(skyFolder + "\\" + skyFile)) {
-      graphic->_skyBox = std::make_shared<Athanah::SkyBox>(skyFolder + "\\" + skyFile, w.camera());
-    }
   };
 
   w.Update = [&]() {

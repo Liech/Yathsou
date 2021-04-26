@@ -108,6 +108,11 @@ namespace Aezesel {
     return std::move(readDDS(texture2d));
   }
 
+  bool ImageIO::isDDSCube(std::string filename) {
+    gli::texture texture = gli::load_dds(filename);
+    return texture.faces() > 1;
+  }
+
   std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> ImageIO::readDDSCube(std::string filename) {
     gli::texture texture = gli::load_dds(filename);
     std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> result;

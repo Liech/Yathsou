@@ -11,6 +11,7 @@ namespace Ahwassa {
 
 class UnitModelSelection;
 class AnimationSelection;
+class SkyBoxSelection;
 class ListSelection;
 class Graphic;
 
@@ -33,7 +34,10 @@ private:
   std::unique_ptr<ListSelection>      _list;
   std::string                         _path;
   Graphic&                            _graphic;
+  Iyathuum::glmAABB<2>                _area;
+
   std::shared_ptr<UnitModelSelection> _units;
   std::shared_ptr<AnimationSelection> _animation;
-  Iyathuum::glmAABB<2>                _area;
+  std::shared_ptr<SkyBoxSelection   > _skyBox;
+
 };

@@ -117,10 +117,10 @@ namespace Athanah {
       input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , end, start), glm::vec2(0, 1),2));
 
       //bottom
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, start), glm::vec2(1, 1),3));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , start, start), glm::vec2(0, 1),3));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , start, end  ), glm::vec2(0, 0),3));
-      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, end  ), glm::vec2(1, 0),3));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, start), glm::vec2(0, 1),3));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , start, start), glm::vec2(0, 0),3));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(end  , start, end  ), glm::vec2(1, 0),3));
+      input.push_back(Ahwassa::PositionTextureVertexIndex(glm::vec3(start, start, end  ), glm::vec2(1, 1),3));
 
       //note every face of the cube is on a single line
       auto indices = std::vector<int>{

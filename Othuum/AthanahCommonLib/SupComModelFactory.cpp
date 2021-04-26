@@ -5,7 +5,7 @@
 
 namespace Athanah {
   SupComModelFactory::SupComModelFactory(const std::string& unitsFolder) {
-    _unitsPath = unitsFolder;
+    _unitsPath = unitsFolder + "\\";
 
     for (const auto& entry : std::filesystem::directory_iterator(_unitsPath)) {
       std::string path = entry.path().string();

@@ -8,7 +8,7 @@ public:
 
   int         ScreenWidth  = 800;
   int         ScreenHeight = 600;
-  std::string AssetPath    = "Data\\";
+  std::string AssetPath    = "Data";
   bool        ShowFPS      = true;
 
   virtual nlohmann::json         toJson()         const              override;

@@ -152,6 +152,7 @@
     <ClCompile Include="GraphicOptions.cpp" />
     <ClCompile Include="ListSelection.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SkyBoxSelection.cpp" />
     <ClCompile Include="UnitModelSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +161,7 @@
     <ClInclude Include="EyeOfRhianneConfiguration.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="GraphicOptions.h" />
+    <ClInclude Include="SkyBoxSelection.h" />
     <ClInclude Include="UnitModelSelection.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
