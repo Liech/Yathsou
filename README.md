@@ -10,9 +10,19 @@ In an recreational project the goals may change at any given time. Currently the
 
 # Current Work
 
-With EyeOfRhianne an program to investigate supremecommander assets is created. It got extended with deffered Rendering & Post Processing and SkyBox rendering.
-Currently theres still work regarding better looking units.
-After maybe map loading will be a topic.
+With EyeOfRhianne an program to investigate supremecommander assets is created. 
+
+Since the last "Release" it got extended with:
+ * Deferred Rendering
+ * Post Processing
+  * Bloom
+ * Can load and display all SupCom SkyBoxes
+ * .BP blueprint file loading and utilization
+  * Showing unit names
+
+Currently there is still work regarding better looking units. Reflection or SSR would look great.
+
+After that map loading will be the topic.
 
 # Libraries
 
