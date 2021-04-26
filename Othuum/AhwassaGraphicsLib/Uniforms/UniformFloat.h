@@ -5,7 +5,7 @@
 namespace Ahwassa {
   class UniformFloat : public Uniform {
   public:
-    UniformFloat(std::string name) : Uniform(name) {};
+    UniformFloat(const std::string& name) : Uniform(name) {};
     void  setValue(float val);
     float getValue();
 

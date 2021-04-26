@@ -56,6 +56,7 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::SSBOmat4> _animations;
     std::shared_ptr<Ahwassa::SSBOmat4> _models    ;
     std::shared_ptr<Ahwassa::SSBOvec3> _colors    ;
+    std::vector<glm::mat4> _animMatrices;
 
     size_t _bufferSize = 1000;
     size_t _maxBoneSize = 150;

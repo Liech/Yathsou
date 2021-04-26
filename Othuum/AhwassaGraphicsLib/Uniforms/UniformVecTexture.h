@@ -11,7 +11,7 @@ namespace Ahwassa {
 
   class UniformVecTexture : public Uniform {
   public:
-    UniformVecTexture(std::string name, std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>&);
+    UniformVecTexture(const std::string& name, std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>&);
     ~UniformVecTexture();
 
     void  setValue(const std::vector<std::shared_ptr<Ahwassa::Texture>>& val);

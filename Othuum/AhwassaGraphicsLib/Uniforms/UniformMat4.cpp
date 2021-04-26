@@ -8,7 +8,7 @@ namespace Ahwassa {
     return _value;
   }
 
-  void UniformMat4::setValue(glm::mat4 val) {
+  void UniformMat4::setValue(const glm::mat4& val) {
     _value = val;
   }
 

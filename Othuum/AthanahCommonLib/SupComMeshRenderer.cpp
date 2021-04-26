@@ -17,9 +17,10 @@
 namespace Athanah {
   SupComMeshRenderer::SupComMeshRenderer(std::shared_ptr<Ahwassa::Camera> camera) {
     _camera = camera;
-    _bufferSize = 5000;
+    _bufferSize = 100;
     _lightDirection = glm::normalize(glm::vec3(25, 31, -21));
     makeShader();
+    _animMatrices.resize(_bufferSize * _maxBoneSize);
   }
 
   SupComMeshRenderer::~SupComMeshRenderer() {
@@ -121,10 +122,8 @@ namespace Athanah {
     for (auto& meshVector : _meshes) {
       std::vector<glm::mat4> models;
       std::vector<glm::vec3> colors;
-      std::vector<glm::mat4> anim;
       models.resize(_bufferSize);
       colors.resize(_bufferSize);
-      anim.resize(_bufferSize * _maxBoneSize);
 
       std::vector<size_t> toDelete;
 
@@ -141,9 +140,9 @@ namespace Athanah {
         if (m->animation.size() > _maxBoneSize)
           throw std::runtime_error("Too many bones");
         for (size_t a = 0; a < m->animation.size(); a++)
-          anim[i * _maxBoneSize + a] = m->animation[a];
+          _animMatrices[i * _maxBoneSize + a] = m->animation[a];
         for (size_t a = m->animation.size(); a < _maxBoneSize; a++)
-          anim[i * _maxBoneSize + a] = glm::mat4(1.0);
+          _animMatrices[i * _maxBoneSize + a] = glm::mat4(1.0);
         currentPosition++;
       }
 
@@ -152,7 +151,7 @@ namespace Athanah {
       _light->setValue(getLightDirection());
       _models->setData(models);
       _colors->setData(colors);
-      _animations->setData(anim);
+      _animations->setData(_animMatrices);
       _models->bind();
       _colors->bind();
       _animations->bind();

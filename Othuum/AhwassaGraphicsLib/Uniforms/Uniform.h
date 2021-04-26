@@ -11,7 +11,7 @@ namespace Ahwassa {
   class Uniform
   {
   public:
-    Uniform(std::string name);
+    Uniform(const std::string& name);
     virtual ~Uniform() = default;
 
     virtual void bind() = 0;

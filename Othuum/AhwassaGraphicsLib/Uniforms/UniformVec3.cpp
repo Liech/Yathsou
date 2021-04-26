@@ -8,7 +8,7 @@ namespace Ahwassa {
     return _value;
   }
 
-  void UniformVec3::setValue(glm::vec3 val) {
+  void UniformVec3::setValue(const glm::vec3& val) {
     _value = val;
   }
 

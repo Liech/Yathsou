@@ -6,7 +6,7 @@ namespace Ahwassa {
 
   class InstancedVecVec3 : public Uniform {
   public:
-    InstancedVecVec3(std::string name, int size);
+    InstancedVecVec3(const std::string& name, int size);
     ~InstancedVecVec3();
     void  setValue(const std::vector<glm::vec3>& val);
     const std::vector<glm::vec3>& getValue();

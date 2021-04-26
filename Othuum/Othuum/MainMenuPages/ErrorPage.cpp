@@ -13,7 +13,7 @@ ErrorPage::ErrorPage(std::shared_ptr<ClientConfiguration> configuration, Ahwassa
   _page->layout().addElement(_title);
   _desc = std::make_shared<Ahwassa::Label>("Description", Iyathuum::glmAABB<2>{ {0, 0}, { 100,50 } }, w);
   _page->layout().addElement(_desc);
-  _page->layout().addButton("OK", [this]() { goBack(); }, Iyathuum::glmAABB<2>({ 0, 0 }, { 100,50 }));
+  _page->layout().addButton("OK", [this]() { goBack(); });
   setVisible(false);
 }
 

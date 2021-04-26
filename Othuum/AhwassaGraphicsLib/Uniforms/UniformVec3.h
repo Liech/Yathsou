@@ -6,8 +6,8 @@ namespace Ahwassa {
 
   class UniformVec3 : public Uniform {
   public:
-    UniformVec3(std::string name) : Uniform(name) {};
-    void  setValue(glm::vec3 val);
+    UniformVec3(const std::string& name) : Uniform(name) {};
+    void  setValue(const glm::vec3& val);
     glm::vec3 getValue();
 
     void bind() override;

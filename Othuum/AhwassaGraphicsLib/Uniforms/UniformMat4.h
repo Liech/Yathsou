@@ -6,8 +6,8 @@ namespace Ahwassa {
 
   class UniformMat4 : public Uniform {
   public:
-    UniformMat4(std::string name) : Uniform(name) {};
-    void  setValue(glm::mat4 val);
+    UniformMat4(const std::string& name) : Uniform(name) {};
+    void  setValue(const glm::mat4& val);
     glm::mat4 getValue();
 
     void bind() override;

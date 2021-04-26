@@ -6,7 +6,7 @@ namespace Ahwassa {
 
   class UniformVecMat4 : public Uniform {
   public:
-    UniformVecMat4(std::string name, int size) : Uniform(name) { _value.resize(size); _size = size; };
+    UniformVecMat4(const std::string& name, int size) : Uniform(name) { _value.resize(size); _size = size; };
     void  setValue(const std::vector<glm::mat4>& val);
     const std::vector<glm::mat4>& getValue();
     virtual int getNumberOfLocationsUsed() override { return _size; }

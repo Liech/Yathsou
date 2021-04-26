@@ -3,7 +3,7 @@
 #include <cassert>
 
 namespace Ahwassa {
-  Uniform::Uniform(std::string name) { 
+  Uniform::Uniform(const std::string& name) { 
     _name = name; 
   }
 

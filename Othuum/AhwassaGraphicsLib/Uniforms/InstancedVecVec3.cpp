@@ -5,7 +5,7 @@
 
 namespace Ahwassa {
 
-  InstancedVecVec3::InstancedVecVec3(std::string name, int size) : Uniform(name) {
+  InstancedVecVec3::InstancedVecVec3(const std::string& name, int size) : Uniform(name) {
     _value.resize(size);
     _size = size;
     glGenBuffers(1, &instanceVBO);

@@ -6,7 +6,7 @@ namespace Ahwassa {
 
   class UniformVec2 : public Uniform {
   public:
-    UniformVec2(std::string name) : Uniform(name) {};
+    UniformVec2(const std::string& name) : Uniform(name) {};
     void  setValue(glm::vec2 val);
     glm::vec2 getValue();
 

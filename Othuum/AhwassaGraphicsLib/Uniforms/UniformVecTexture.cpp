@@ -6,7 +6,7 @@
 
 namespace Ahwassa {
 
-  UniformVecTexture::UniformVecTexture(std::string name, std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>& value) : Uniform(name) {
+  UniformVecTexture::UniformVecTexture(const std::string& name, std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>& value) : Uniform(name) {
     _width = value[0]->getDimension(0);
     _height = value[0]->getDimension(1);
     _size = value.size();
