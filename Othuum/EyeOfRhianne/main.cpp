@@ -21,9 +21,9 @@
 #include "AezeselFileIOLib/ImageIO.h"
 
 #include "ListSelection.h"
-#include "AthanahCommonLib/BlueprintFactory.h"
-#include "AthanahCommonLib/Blueprint.h"
-#include "AthanahCommonLib/BlueprintGeneral.h"
+#include "AthanahCommonLib/Blueprint/BlueprintFactory.h"
+#include "AthanahCommonLib/Blueprint/Blueprint.h"
+#include "AthanahCommonLib/Blueprint/BlueprintGeneral.h"
 
 #include "AssetSelection.h"
 #include "GraphicOptions.h"

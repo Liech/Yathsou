@@ -27,10 +27,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Blueprint.h" />
-    <ClInclude Include="BlueprintCommandCaps.h" />
-    <ClInclude Include="BlueprintFactory.h" />
-    <ClInclude Include="BlueprintGeneral.h" />
+    <ClInclude Include="Blueprint\Blueprint.h" />
+    <ClInclude Include="Blueprint\BlueprintCommandCaps.h" />
+    <ClInclude Include="Blueprint\BlueprintFactory.h" />
+    <ClInclude Include="Blueprint\BlueprintGeneral.h" />
     <ClInclude Include="BoxVisualization.h" />
     <ClInclude Include="BulletDebugDrawer.h" />
     <ClInclude Include="SkyBox.h" />
@@ -44,10 +44,10 @@
     <ClInclude Include="UiTextureFactory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Blueprint.cpp" />
-    <ClCompile Include="BlueprintCommandCaps.cpp" />
-    <ClCompile Include="BlueprintFactory.cpp" />
-    <ClCompile Include="BlueprintGeneral.cpp" />
+    <ClCompile Include="Blueprint\Blueprint.cpp" />
+    <ClCompile Include="Blueprint\BlueprintCommandCaps.cpp" />
+    <ClCompile Include="Blueprint\BlueprintFactory.cpp" />
+    <ClCompile Include="Blueprint\BlueprintGeneral.cpp" />
     <ClCompile Include="BoxVisualization.cpp" />
     <ClCompile Include="BulletDebugDrawer.cpp" />
     <ClCompile Include="SkyBox.cpp" />
@@ -202,7 +202,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>

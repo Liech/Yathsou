@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Blueprint">
+      <UniqueIdentifier>{e04d6939-fa46-429a-8f7b-49700ee2fb69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Blueprint">
+      <UniqueIdentifier>{220bdfa2-ffca-49b1-99c7-8cdfe0d9976b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxVisualization.h">
@@ -36,18 +42,6 @@
     <ClInclude Include="SupComModelFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlueprintFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Blueprint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BlueprintGeneral.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BlueprintCommandCaps.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SupComMeshRendererDef.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -59,6 +53,18 @@
     </ClInclude>
     <ClInclude Include="SupComEnums.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Blueprint\Blueprint.h">
+      <Filter>Header Files\Blueprint</Filter>
+    </ClInclude>
+    <ClInclude Include="Blueprint\BlueprintCommandCaps.h">
+      <Filter>Header Files\Blueprint</Filter>
+    </ClInclude>
+    <ClInclude Include="Blueprint\BlueprintFactory.h">
+      <Filter>Header Files\Blueprint</Filter>
+    </ClInclude>
+    <ClInclude Include="Blueprint\BlueprintGeneral.h">
+      <Filter>Header Files\Blueprint</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,18 +89,6 @@
     <ClCompile Include="SupComModelFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Blueprint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BlueprintFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BlueprintGeneral.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BlueprintCommandCaps.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SupComMeshRendererDef.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -103,6 +97,18 @@
     </ClCompile>
     <ClCompile Include="UITextureFactory.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Blueprint\Blueprint.cpp">
+      <Filter>Source Files\Blueprint</Filter>
+    </ClCompile>
+    <ClCompile Include="Blueprint\BlueprintCommandCaps.cpp">
+      <Filter>Source Files\Blueprint</Filter>
+    </ClCompile>
+    <ClCompile Include="Blueprint\BlueprintFactory.cpp">
+      <Filter>Source Files\Blueprint</Filter>
+    </ClCompile>
+    <ClCompile Include="Blueprint\BlueprintGeneral.cpp">
+      <Filter>Source Files\Blueprint</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

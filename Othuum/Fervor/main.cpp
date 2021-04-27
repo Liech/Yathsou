@@ -21,8 +21,8 @@
 #include "AthanahCommonLib/SupComModel.h"
 #include "AthanahCommonLib/SupComModelFactory.h"
 
-#include "AthanahCommonLib/BlueprintFactory.h"
-#include "AthanahCommonLib/Blueprint.h"
+#include "AthanahCommonLib/Blueprint/BlueprintFactory.h"
+#include "AthanahCommonLib/Blueprint/Blueprint.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");

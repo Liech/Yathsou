@@ -13,9 +13,9 @@
 
 #include "AthanahCommonLib/SupComModelFactory.h"
 #include "AthanahCommonLib/UiTextureFactory.h"
-#include "AthanahCommonLib/BlueprintFactory.h"
-#include "AthanahCommonLib/Blueprint.h"
-#include "AthanahCommonLib/BlueprintGeneral.h"
+#include "AthanahCommonLib/Blueprint/BlueprintFactory.h"
+#include "AthanahCommonLib/Blueprint/Blueprint.h"
+#include "AthanahCommonLib/Blueprint/BlueprintGeneral.h"
 
 UnitModelSelection::UnitModelSelection(const std::string path, Iyathuum::glmAABB<2> area, std::function<void()> disableAllCall, Graphic& graphic) : _graphic(graphic)
  {

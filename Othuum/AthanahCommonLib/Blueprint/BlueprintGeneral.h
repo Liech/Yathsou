@@ -2,7 +2,7 @@
 
 #include "AezeselFileIOLib/lib/json.hpp"
 #include <memory>
-#include "SupComEnums.h"
+#include "AthanahCommonLib/SupComEnums.h"
 
 namespace Athanah {
   class BlueprintCommandCaps;
