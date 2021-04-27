@@ -2,13 +2,11 @@
 
 #include "AezeselFileIOLib/lib/json.hpp"
 #include <memory>
+#include "SupComEnums.h"
 
 namespace Athanah {
   class BlueprintCommandCaps;
 
-  enum class TechLevel {
-    T0,T1,T2,T3,T4
-  };
 
   class BlueprintGeneral {
   public:
@@ -16,7 +14,7 @@ namespace Athanah {
     BlueprintGeneral();
     ~BlueprintGeneral() = default;
 
-    const std::string faction();
+    const Faction     faction();
     const std::string icon();
     const std::string unitName();
     const TechLevel   techLevel();
@@ -31,7 +29,7 @@ namespace Athanah {
   private:
     std::shared_ptr< BlueprintCommandCaps> _commands;
 
-    std::string _faction;
+    Faction     _faction;
     std::string _unitName;
     TechLevel   _techLevel;
     std::string _icon;

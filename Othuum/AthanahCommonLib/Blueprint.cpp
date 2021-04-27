@@ -9,6 +9,12 @@ namespace Athanah {
     }
     else if (input.find("Description") != input.end())
       _description = id;
+    
+    if (input.find("StrategicIconName") != input.end()) {
+      _strategicIcon = input["StrategicIconName"];
+    }
+    else if (input.find("StrategicIconName") != input.end())
+      _strategicIcon = "";
 
     _general = std::make_shared<BlueprintGeneral>(input["General"]);
 
@@ -19,6 +25,10 @@ namespace Athanah {
     _description = id;
     _id = id;
     _general = std::make_shared<BlueprintGeneral>();
+  }
+
+  std::string Blueprint::strategicIcon() const {
+    return _strategicIcon;
   }
 
   std::string Blueprint::description() const {

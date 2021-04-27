@@ -21,6 +21,8 @@ namespace Ahwassa {
     virtual void mouseEnterEvent() override;
     virtual void mouseLeaveEvent() override;
 
+    void setDrawOverride(std::function<void(Iyathuum::glmAABB<2>, bool hovered)> overrideCall);
+
     void setText(std::string t);
     void setTextSize(float size);
   private:
@@ -29,5 +31,8 @@ namespace Ahwassa {
 
     float _textSize = 1;
     bool _hovered = false;
+    bool _drawOverrideEnabled = false;
+    std::function<void(Iyathuum::glmAABB<2>, bool hovered)> _drawOverride;
+
   };
 }

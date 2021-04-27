@@ -34,12 +34,14 @@
     <ClInclude Include="BoxVisualization.h" />
     <ClInclude Include="BulletDebugDrawer.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="SupComEnums.h" />
     <ClInclude Include="SupComMeshLoader.h" />
     <ClInclude Include="SupComMeshRenderer.h" />
     <ClInclude Include="SupComMeshRendererDef.h" />
     <ClInclude Include="SupComModel.h" />
     <ClInclude Include="SupComModelFactory.h" />
     <ClInclude Include="SupComVertex.h" />
+    <ClInclude Include="UiTextureFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Blueprint.cpp" />
@@ -55,6 +57,7 @@
     <ClCompile Include="SupComModel.cpp" />
     <ClCompile Include="SupComModelFactory.cpp" />
     <ClCompile Include="SupComVertex.cpp" />
+    <ClCompile Include="UITextureFactory.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

@@ -3,7 +3,18 @@
 
 namespace Athanah {
   BlueprintGeneral::BlueprintGeneral(const nlohmann::json& input) {
-    _faction = input["FactionName"];
+
+    std::string fact = input["FactionName"];
+    if (fact == "Aeon")
+      _faction = Faction::Aeon;
+    else if (fact == "UEF")
+      _faction = Faction::Uef;
+    else if (fact == "Aeraphim")
+      _faction = Faction::Seraphim;
+    else if (fact == "Cybran")
+      _faction = Faction::Cybran;
+    else
+      _faction = Faction::Undefined;
 
     if (input.find("CommandCaps") != input.end())
       _commands = std::make_shared<BlueprintCommandCaps>(input["CommandCaps"]);
@@ -62,7 +73,7 @@ namespace Athanah {
   }
 
   BlueprintGeneral::BlueprintGeneral() {
-    _faction           = "None";
+    _faction           = Faction::Undefined;
     _unitName          = "Undefined";
     _icon              = "Undefined";
     _techLevel         = TechLevel::T0;
@@ -73,7 +84,7 @@ namespace Athanah {
     _commands = std::make_shared<BlueprintCommandCaps>();
   }
 
-  const std::string BlueprintGeneral::faction() {
+  const Faction BlueprintGeneral::faction() {
     return _faction;
   }
 

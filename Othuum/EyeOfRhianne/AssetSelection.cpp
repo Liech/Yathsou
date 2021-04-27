@@ -28,10 +28,9 @@ AssetSelection::AssetSelection(const std::string& path, Iyathuum::glmAABB<2> are
 }  
 
 void AssetSelection::addSelections() {
-  std::string unitPath = _path + "\\units";
   Iyathuum::glmAABB<2> area(_area.getPosition() +glm::vec2(300,0),_area.getSize());
 
-  _units = std::make_shared<UnitModelSelection>(unitPath,area,[this]() {unitVisibility(false); }, _graphic);
+  _units = std::make_shared<UnitModelSelection>(_path,area,[this]() {unitVisibility(false); }, _graphic);
 
   _animation = std::make_shared<AnimationSelection>(area, _graphic);
   _skyBox    = std::make_shared<SkyBoxSelection>(_path + "\\textures\\environment",area, _graphic);

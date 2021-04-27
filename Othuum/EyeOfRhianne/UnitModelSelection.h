@@ -17,6 +17,7 @@ namespace Ahwassa {
 namespace Athanah {
   class SupComModelFactory;
   class BlueprintFactory;
+  class UiTextureFactory;
   class SupComModel;
 }
 
@@ -36,11 +37,15 @@ public:
   std::vector<std::string> getNames();
 
 private:
+  void drawIcons(Iyathuum::glmAABB<2>,std::string name, bool hovered);
+
   Graphic&                                      _graphic;
   std::unique_ptr<ListSelection>                _list;
   std::string                                   _currentID = "";
   std::shared_ptr< Athanah::SupComModelFactory> _factory   ;
   std::shared_ptr< Athanah::BlueprintFactory  > _blueprints;
+  std::shared_ptr< Athanah::UiTextureFactory  > _icons;
   std::function<void()>                         _disableAllCall;
+  std::vector<std::string> _names;
 
 };
