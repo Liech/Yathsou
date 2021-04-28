@@ -189,6 +189,7 @@
     <ClCompile Include="Sound\sound.cpp" />
     <ClCompile Include="Sound\SoundEngine.cpp" />
     <ClCompile Include="Sound\SoundHandler.cpp" />
+    <ClCompile Include="Uniforms\CubeTexture.cpp" />
     <ClCompile Include="Uniforms\InstancedVecMat4.cpp" />
     <ClCompile Include="Uniforms\InstancedVecVec3.cpp" />
     <ClCompile Include="Uniforms\Rendertarget.cpp" />
@@ -377,6 +378,7 @@
     <ClInclude Include="Sound\sound.h" />
     <ClInclude Include="Sound\SoundEngine.h" />
     <ClInclude Include="Sound\SoundHandler.h" />
+    <ClInclude Include="Uniforms\CubeTexture.h" />
     <ClInclude Include="Uniforms\InstancedVecMat4.h" />
     <ClInclude Include="Uniforms\InstancedVecVec3.h" />
     <ClInclude Include="Uniforms\Rendertarget.h" />

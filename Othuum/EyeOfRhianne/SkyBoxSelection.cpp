@@ -5,6 +5,7 @@
 #include "ListSelection.h"
 
 #include "AhwassaGraphicsLib/Core/Window.h"
+#include "AhwassaGraphicsLib/Uniforms/CubeTexture.h"
 #include "AthanahCommonLib/SkyBox.h"
 #include "AezeselFileIOLib/ImageIO.h"
 
@@ -30,6 +31,8 @@ SkyBoxSelection::SkyBoxSelection(const std::string& path,Iyathuum::glmAABB<2> ar
 
   _list = std::make_unique<ListSelection>(skies,niceNames, area, _graphic.getWindow(), [this](std::string newSky) {
     _graphic._skyBox = std::make_shared<Athanah::SkyBox>(_path + "\\" + newSky, _graphic.getWindow()->camera());
+    auto img = Aezesel::ImageIO::readDDSCube(_path + "\\" + newSky);
+    _graphic._reflectionTexture = std::make_shared<Ahwassa::CubeTexture>("Reflection", img);
   });
   _list->setVisible(false);
 }

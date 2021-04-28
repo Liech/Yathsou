@@ -4,11 +4,13 @@
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
 #include "AhwassaGraphicsLib/Core/Window.h"
+#include "AhwassaGraphicsLib/Core/Renderer.h"
+#include "AhwassaGraphicsLib/Core/Camera.h"
+#include "AhwassaGraphicsLib/Uniforms/CubeTexture.h"
 #include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 #include "AhwassaGraphicsLib/PostProcessing/Bloom.h"
 #include "AhwassaGraphicsLib/PostProcessing/CubeReflection.h"
 
-#include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AthanahCommonLib/SupComMeshRendererDef.h"
 #include "AthanahCommonLib/SkyBox.h"
@@ -19,7 +21,7 @@ Graphic::Graphic(Ahwassa::Window* window) {
   _bloom          = std::make_shared<Ahwassa::Bloom>(_window, _window->getWidth(), _window->getHeight());
   _cubeReflection = std::make_shared<Ahwassa::CubeReflection  >(_window, _window->getWidth(), _window->getHeight());
   _renderer       = std::make_shared<Athanah::SupComMeshRendererDef>(_window->camera());
-
+  _reflectionTexture = std::make_shared<Ahwassa::CubeTexture>("Reflection", 0);
   _textures.push_back(_bloom->getResult());
   _textures.push_back(_cubeReflection  ->getResult());
   _textures.push_back(_composer->getResult());
@@ -36,7 +38,8 @@ void Graphic::draw() {
   _composer->end();
   if (_bloomEnabled)
     _bloom->draw(_composer->getResult(), _composer->getRawTextures()[3], 1);
-  _cubeReflection->draw(_composer->getResult(), _composer->getRawTextures()[3], 0);
+  _cubeReflection->setTexture(_reflectionTexture);
+  _cubeReflection->draw(_window->camera()->getPosition(),_composer->getResult(), _composer->getRawTextures()[3],_composer->getRawTextures()[1], _composer->getRawTextures()[0], 0);
 
   _window->renderer().texture().start();
   _window->renderer().texture().draw(*_textures[_renderedTexture], Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_window->getWidth(), _window->getHeight())), true);

@@ -9,6 +9,7 @@ namespace Ahwassa {
   class DeferredComposer;
   class Bloom;
   class CubeReflection;
+  class CubeTexture;
   class Texture;
 }
 namespace Athanah {
@@ -32,6 +33,7 @@ public:
   std::shared_ptr<Ahwassa::CubeReflection  >                 _cubeReflection     ;
   bool                                            _bloomEnabled = true;
   std::shared_ptr<Athanah::SkyBox>                _skyBox;
+  std::shared_ptr<Ahwassa::CubeTexture>           _reflectionTexture;
 
   Ahwassa::Window* getWindow();
 private:
