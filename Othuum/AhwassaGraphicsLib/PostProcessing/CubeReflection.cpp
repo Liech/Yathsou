@@ -1,4 +1,4 @@
-#include "SSR.h"
+#include "CubeReflection.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
@@ -15,7 +15,7 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
-  SSR::SSR(Ahwassa::Window* window, int width, int height) : PostProcessingEffect("SSR", window, width, height) {
+  CubeReflection::CubeReflection(Ahwassa::Window* window, int width, int height) : PostProcessingEffect("CubeReflection", window, width, height) {
 
     std::string vertex_shader_source = R"(
     out vec2 TexCoords;
@@ -34,10 +34,11 @@ namespace Ahwassa {
     
     void main()
     {    
-      vec4  inp = texture(Input, TexCoords);
+      vec4  inp        = texture(Input, TexCoords);
+      float reflection = texture(ReflectionMap, TexCoords)[int(ReflectionChannel)];
 
 
-      color = vec4(1,1,0, 1.0);
+      color = vec4(inp.rgb*(1-reflection) + vec3(1,1,0)*reflection, 1.0);
     }  
    )";
 
@@ -45,17 +46,19 @@ namespace Ahwassa {
 
     _input = std::make_shared<Ahwassa::Texture>("Input", 0);
 
-
+    _reflectionChannel = std::make_shared<Ahwassa::UniformFloat>("ReflectionChannel");
     _reflectionMap = std::make_shared<Ahwassa::Texture>("ReflectionMap", 0);
     uniforms.push_back(_reflectionMap.get());
+    uniforms.push_back(_reflectionChannel.get());
     uniforms.push_back(_input.get());
     _shader = std::make_shared<Ahwassa::ShaderProgram>(Ahwassa::PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
-  void SSR::draw(std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> SSRMap, int channel) {
+  void CubeReflection::draw(std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> SSRMap, int channel) {
     if (!enabled())
       return;
     _reflectionMap->setTextureID(SSRMap->getTextureID());
+    _reflectionChannel->setValue(channel);
     _input->setTextureID(input->getTextureID());
 
     start();

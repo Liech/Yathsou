@@ -13,13 +13,14 @@ namespace Ahwassa {
   class UniformFloat;
   class Window;
 
-  class SSR : public PostProcessingEffect {
+  class CubeReflection : public PostProcessingEffect {
   public:
-    SSR(Ahwassa::Window* w, int width, int height);
+    CubeReflection(Ahwassa::Window* w, int width, int height);
     void draw(std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> reflections, int channel);
   private:
     std::shared_ptr<Ahwassa::ShaderProgram> _shader;
-
+    
+    std::shared_ptr<Ahwassa::UniformFloat>  _reflectionChannel;
     std::shared_ptr<Ahwassa::Texture>       _reflectionMap;
     std::shared_ptr<Ahwassa::Texture>       _input;
 

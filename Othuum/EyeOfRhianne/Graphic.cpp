@@ -6,7 +6,7 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 #include "AhwassaGraphicsLib/PostProcessing/Bloom.h"
-#include "AhwassaGraphicsLib/PostProcessing/SSR.h"
+#include "AhwassaGraphicsLib/PostProcessing/CubeReflection.h"
 
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
@@ -14,14 +14,14 @@
 #include "AthanahCommonLib/SkyBox.h"
 
 Graphic::Graphic(Ahwassa::Window* window) {
-  _window   = window;
-  _composer = std::make_shared<Ahwassa::DeferredComposer>(_window, _window->getWidth(), _window->getHeight());
-  _bloom    = std::make_shared<Ahwassa::Bloom>(_window, _window->getWidth(), _window->getHeight());
-  _ssr      = std::make_shared<Ahwassa::SSR  >(_window, _window->getWidth(), _window->getHeight());
-  _renderer = std::make_shared<Athanah::SupComMeshRendererDef>(_window->camera());
+  _window         = window;
+  _composer       = std::make_shared<Ahwassa::DeferredComposer>(_window, _window->getWidth(), _window->getHeight());
+  _bloom          = std::make_shared<Ahwassa::Bloom>(_window, _window->getWidth(), _window->getHeight());
+  _cubeReflection = std::make_shared<Ahwassa::CubeReflection  >(_window, _window->getWidth(), _window->getHeight());
+  _renderer       = std::make_shared<Athanah::SupComMeshRendererDef>(_window->camera());
 
   _textures.push_back(_bloom->getResult());
-  _textures.push_back(_ssr  ->getResult());
+  _textures.push_back(_cubeReflection  ->getResult());
   _textures.push_back(_composer->getResult());
   for (auto x : _composer->getRawTextures())
     _textures.push_back(x);
@@ -36,7 +36,7 @@ void Graphic::draw() {
   _composer->end();
   if (_bloomEnabled)
     _bloom->draw(_composer->getResult(), _composer->getRawTextures()[3], 1);
-  _ssr->draw(_composer->getResult(), _composer->getRawTextures()[3], 0);
+  _cubeReflection->draw(_composer->getResult(), _composer->getRawTextures()[3], 0);
 
   _window->renderer().texture().start();
   _window->renderer().texture().draw(*_textures[_renderedTexture], Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_window->getWidth(), _window->getHeight())), true);

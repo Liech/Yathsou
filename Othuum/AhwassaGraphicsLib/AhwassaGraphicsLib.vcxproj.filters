@@ -339,7 +339,7 @@
     <ClCompile Include="Vertex\PositionTextureVertexIndex.cpp">
       <Filter>Source Files\Vertex</Filter>
     </ClCompile>
-    <ClCompile Include="PostProcessing\SSR.cpp">
+    <ClCompile Include="PostProcessing\CubeReflection.cpp">
       <Filter>Source Files\Post Processing</Filter>
     </ClCompile>
   </ItemGroup>
@@ -899,7 +899,7 @@
     <ClInclude Include="Vertex\PositionTextureVertexIndex.h">
       <Filter>Header Files\Vertex</Filter>
     </ClInclude>
-    <ClInclude Include="PostProcessing\SSR.h">
+    <ClInclude Include="PostProcessing\CubeReflection.h">
       <Filter>Header Files\PostProcessing</Filter>
     </ClInclude>
   </ItemGroup>
