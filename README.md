@@ -16,9 +16,11 @@ Since the last "Release" it got extended with:
  * Deferred Rendering
  * Post Processing
   * Bloom
+  * Cubemap Reflection
  * Can load and display all SupCom SkyBoxes
  * .BP blueprint file loading and utilization
   * Showing unit names
+  * Showing Unit Icon/Faction/Strategic Icon
 
 Currently there is still work regarding better looking units. Reflection or SSR would look great.
 
