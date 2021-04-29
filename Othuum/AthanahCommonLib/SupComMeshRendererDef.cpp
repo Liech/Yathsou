@@ -83,7 +83,7 @@ namespace Athanah {
 
        gAlbedoSpec.rgb = (albedo + showTeamClr * (vec4(clr,1) - albedo)).rgb;
        gAlbedoSpec.a = 1;
-       gNormal.rgb = (normalize(Normal).rgb /2.0 + vec3(0.5,0.5,0.5)); 
+       gNormal.rgb = (normalize(normalWithNormalMap).rgb /2.0 + vec3(0.5,0.5,0.5)); 
        gNormal.a = 1;
        gPosition.rgb = FragPos.rgb; 	
        gPosition.a = 1;

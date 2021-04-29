@@ -172,6 +172,7 @@
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
     <ClCompile Include="lib\glad\src\glad.c" />
+    <ClCompile Include="PostProcessing\AdditiveComposer.cpp" />
     <ClCompile Include="PostProcessing\Bloom.cpp" />
     <ClCompile Include="PostProcessing\DeferredComposer.cpp" />
     <ClCompile Include="PostProcessing\PostProcessingEffect.cpp" />
@@ -362,6 +363,7 @@
     <ClInclude Include="lib\portaudio\pa_win_wdmks.h" />
     <ClInclude Include="lib\portaudio\pa_win_wmme.h" />
     <ClInclude Include="lib\portaudio\portaudio.h" />
+    <ClInclude Include="PostProcessing\AdditiveComposer.h" />
     <ClInclude Include="PostProcessing\Bloom.h" />
     <ClInclude Include="PostProcessing\DeferredComposer.h" />
     <ClInclude Include="PostProcessing\PostProcessingEffect.h" />

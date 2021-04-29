@@ -11,6 +11,7 @@ namespace Ahwassa {
   class CubeReflection;
   class CubeTexture;
   class Texture;
+  class AdditiveComposer;
 }
 namespace Athanah {
   class SkyBox;
@@ -29,8 +30,8 @@ public:
 
   std::vector<std::shared_ptr<Ahwassa::Texture>> _textures;
   std::shared_ptr<Athanah::SupComMeshRendererDef> _renderer;
-  std::shared_ptr<Ahwassa::Bloom>                 _bloom   ;
-  std::shared_ptr<Ahwassa::CubeReflection  >                 _cubeReflection     ;
+  std::shared_ptr<Ahwassa::Bloom>                 _bloom;
+  std::shared_ptr<Ahwassa::CubeReflection  >      _cubeReflection     ;
   bool                                            _bloomEnabled = true;
   std::shared_ptr<Athanah::SkyBox>                _skyBox;
   std::shared_ptr<Ahwassa::CubeTexture>           _reflectionTexture;

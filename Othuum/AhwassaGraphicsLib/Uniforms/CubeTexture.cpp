@@ -7,12 +7,12 @@ namespace Ahwassa {
   CubeTexture::CubeTexture(const std::string& name, std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>& input) : Uniform(name) {
     glGenTextures(1, &_texture);
     glBindTexture(GL_TEXTURE_CUBE_MAP, _texture);
-    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGBA, (GLsizei)input[0]->getDimension(0), (GLsizei)input[0]->getDimension(1), 0, GL_RGBA, GL_UNSIGNED_BYTE, input[0]->data());
-    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGBA, (GLsizei)input[1]->getDimension(0), (GLsizei)input[1]->getDimension(1), 0, GL_RGBA, GL_UNSIGNED_BYTE, input[1]->data());
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGBA, (GLsizei)input[0]->getDimension(0), (GLsizei)input[0]->getDimension(1), 0, GL_RGBA, GL_UNSIGNED_BYTE, input[0]->data());
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X, 0, GL_RGBA, (GLsizei)input[4]->getDimension(0), (GLsizei)input[4]->getDimension(1), 0, GL_RGBA, GL_UNSIGNED_BYTE, input[4]->data());
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGBA, (GLsizei)input[1]->getDimension(0), (GLsizei)input[1]->getDimension(1), 0, GL_RGBA, GL_UNSIGNED_BYTE, input[1]->data());
+    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, 0, GL_RGBA, (GLsizei)input[5]->getDimension(0), (GLsizei)input[5]->getDimension(1), 0, GL_RGBA, GL_UNSIGNED_BYTE, input[5]->data());
     glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, 0, GL_RGBA, (GLsizei)input[2]->getDimension(0), (GLsizei)input[2]->getDimension(1), 0, GL_RGBA, GL_UNSIGNED_BYTE, input[2]->data());
     glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, 0, GL_RGBA, (GLsizei)input[3]->getDimension(0), (GLsizei)input[3]->getDimension(1), 0, GL_RGBA, GL_UNSIGNED_BYTE, input[3]->data());
-    glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_Z, 0, GL_RGBA, (GLsizei)input[4]->getDimension(0), (GLsizei)input[4]->getDimension(1), 0, GL_RGBA, GL_UNSIGNED_BYTE, input[4]->data());
-    glTexImage2D(GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, 0, GL_RGBA, (GLsizei)input[5]->getDimension(0), (GLsizei)input[5]->getDimension(1), 0, GL_RGBA, GL_UNSIGNED_BYTE, input[5]->data());
 
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

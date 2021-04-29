@@ -162,7 +162,7 @@ namespace Ahwassa {
   }
   
   std::shared_ptr<Texture> DeferredComposer::getResult() {
-    std::shared_ptr<Ahwassa::Texture> result = std::make_shared<Ahwassa::Texture>("Result", _resultCanvas->getTextureID());
+    std::shared_ptr<Ahwassa::Texture> result = std::make_shared<Ahwassa::Texture>("Deferred", _resultCanvas->getTextureID());
     result->release();
     return result;
   }

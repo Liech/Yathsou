@@ -345,6 +345,9 @@
     <ClCompile Include="Uniforms\CubeTexture.cpp">
       <Filter>Source Files\Uniforms</Filter>
     </ClCompile>
+    <ClCompile Include="PostProcessing\AdditiveComposer.cpp">
+      <Filter>Source Files\Post Processing</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
@@ -907,6 +910,9 @@
     </ClInclude>
     <ClInclude Include="Uniforms\CubeTexture.h">
       <Filter>Header Files\Uniforms</Filter>
+    </ClInclude>
+    <ClInclude Include="PostProcessing\AdditiveComposer.h">
+      <Filter>Header Files\PostProcessing</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
