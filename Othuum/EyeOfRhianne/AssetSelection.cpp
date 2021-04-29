@@ -3,6 +3,7 @@
 #include "UnitModelSelection.h"
 #include "AnimationSelection.h"
 #include "SkyBoxSelection.h"
+#include "RendererSelection.h"
 #include "ListSelection.h"
 #include "Graphic.h"
 
@@ -19,6 +20,7 @@ AssetSelection::AssetSelection(const std::string& path, Iyathuum::glmAABB<2> are
   options.push_back("Units");
   options.push_back("Animation");
   options.push_back("SkyBox");
+  options.push_back("Renderer");
 
   _list = std::make_unique<ListSelection>(options, options, area, _graphic.getWindow(), [this](std::string newSelection) {    
     unitVisibility(newSelection);
@@ -34,6 +36,7 @@ void AssetSelection::addSelections() {
 
   _animation = std::make_shared<AnimationSelection>(area, _graphic);
   _skyBox    = std::make_shared<SkyBoxSelection>(_path + "\\textures\\environment",area, _graphic);
+  _renderer  = std::make_shared<RendererSelection>(area,_graphic);
 }
 
 void AssetSelection::unitVisibility(std::string newMenu) {
@@ -46,18 +49,22 @@ void AssetSelection::unitVisibility(std::string newMenu) {
     _animation->setVisible(!_animation->isVisible());
   if (_current == "SkyBox")
     _skyBox->setVisible(!_skyBox->isVisible());
+  if (_current == "Renderer")
+    _renderer->setVisible(!_renderer->isVisible());
 }
 
 void AssetSelection::hideAll() {
   _units->setVisible(false);
   _animation->setVisible(false);
   _skyBox->setVisible(false);
+  _renderer->setVisible(false);
 }
 
 void AssetSelection::draw() {
   _units->draw();
   _animation->draw();
   _skyBox->draw();
+  _renderer->draw();
   _list->draw();
 }
 
@@ -65,6 +72,7 @@ void AssetSelection::update() {
   _units->update();
   _animation->update();
   _skyBox->update();
+  _renderer->update();
 }
 
 void AssetSelection::setVisible(bool visible) {

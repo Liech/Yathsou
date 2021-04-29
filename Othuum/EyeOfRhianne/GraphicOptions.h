@@ -37,7 +37,6 @@ private:
   std::function<void()>                          _disableAllCall;
   std::map<std::string,int> _textures;
   std::shared_ptr<Ahwassa::Texture>              _currentTexture;
-  std::shared_ptr<ListSelection>                 _list;
   std::shared_ptr<Ahwassa::ListLayout>           _bloomOptions;
   Graphic& _graphic;
 };

@@ -25,15 +25,12 @@ GraphicOptions::GraphicOptions(std::function<void()> disableAllCall, Graphic& gr
   }
   _currentTexture = _graphic._textures[0];
 
-  _list = std::make_unique<ListSelection>(textureNames,textureNames, Iyathuum::glmAABB<2>(glm::vec2(0,0),glm::vec2(300, _graphic.getWindow()->getHeight() / 2)), _graphic.getWindow(), [this](std::string newTexture) {
-    _graphic._renderedTexture = _textures[newTexture];
-  });
   makeBloomOptions();
   setVisible(false);
 }
 
 void GraphicOptions::makeBloomOptions() {
-  _bloomOptions = std::make_shared<Ahwassa::ListLayout>(Iyathuum::glmAABB<2>(glm::vec2(0, _graphic.getWindow()->getHeight() / 2), glm::vec2(300, _graphic.getWindow()->getHeight() / 2 - 50)), _graphic.getWindow());
+  _bloomOptions = std::make_shared<Ahwassa::ListLayout>(Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(300, _graphic.getWindow()->getHeight() - 50)), _graphic.getWindow());
   _bloomOptions->addCheckbox("Enabled", true, [this](bool checked) {
     _graphic._bloomEnabled = checked; 
     if (!checked && _currentTexture->getName() == "Bloom") {
@@ -59,7 +56,6 @@ void GraphicOptions::makeBloomOptions() {
 
 void GraphicOptions::drawUI() {
   _showHide->draw();
-  _list->draw();
   _bloomOptions->adjustSize();
   _bloomOptions->draw();
 }
@@ -70,7 +66,6 @@ void GraphicOptions::update() {
 
 void GraphicOptions::setVisible(bool visible) {
   _visible = visible;
-  _list->setVisible(visible);
   _bloomOptions->setVisible(isVisible());  
 }
 

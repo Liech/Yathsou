@@ -13,6 +13,7 @@ class UnitModelSelection;
 class AnimationSelection;
 class SkyBoxSelection;
 class ListSelection;
+class RendererSelection;
 class Graphic;
 
 class AssetSelection {
@@ -39,5 +40,6 @@ private:
   std::shared_ptr<UnitModelSelection> _units;
   std::shared_ptr<AnimationSelection> _animation;
   std::shared_ptr<SkyBoxSelection   > _skyBox;
+  std::shared_ptr<RendererSelection > _renderer;
 
 };
