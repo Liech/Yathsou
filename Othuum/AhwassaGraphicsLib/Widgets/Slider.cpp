@@ -96,7 +96,7 @@ namespace Ahwassa {
   }
 
   bool Slider::mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) {
-    if (button == Iyathuum::Key::MOUSE_BUTTON_1) {
+    if (button == Iyathuum::Key::MOUSE_BUTTON_1 && isInside(getGlobalPosition().getPosition() + localPosition)) {
       if (status == Iyathuum::KeyStatus::PRESS && !_pressed) {
         Iyathuum::glmAABB<2> b = getSliderLocation();
         b.setPosition(b.getPosition() - getGlobalPosition().getPosition());
@@ -114,7 +114,7 @@ namespace Ahwassa {
 
     Iyathuum::glmAABB<2> c = getLocalPosition();
     c.setPosition(c.getPosition() - getLocalPosition().getPosition());
-    return c.isInside({ localPosition[0] ,localPosition[1] });
+    return isInside({ localPosition[0] ,localPosition[1] });
   }
 
   void Slider::setValue(float value, bool emit) {

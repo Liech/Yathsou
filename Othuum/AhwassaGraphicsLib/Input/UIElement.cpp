@@ -40,4 +40,13 @@ namespace Ahwassa {
     _localPosition.setSize(v);
   }
 
+  bool UIElement::isInside(glm::vec2 position) {
+    UIElement* current = this;
+    while (current != nullptr) {
+      if (!current->getGlobalPosition().isInside(position))
+        return false;
+      current = current->getParent();
+    }
+    return true;
+  }
 }

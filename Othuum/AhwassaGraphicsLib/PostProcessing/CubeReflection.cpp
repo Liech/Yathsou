@@ -35,9 +35,9 @@ namespace Ahwassa {
     
     void main()
     {    
-      vec3 FragPos   = texture(gPosition  , TexCoords).rgb;
+      vec3 FragPos     = texture(gPosition  , TexCoords).rgb;
       vec4  inp        = texture(Input, TexCoords);
-      vec3 Normal    = (texture(gNormal    , TexCoords).rgb - vec3(0.5,0.5,0.5))*2;
+      vec3 Normal      = (texture(gNormal    , TexCoords).rgb - vec3(0.5,0.5,0.5))*2;
       float reflection = texture(ReflectionMap, TexCoords)[int(ReflectionChannel)];
       vec3 reflectionColor = Normal;
       vec3 viewDir = normalize(FragPos-ViewPosition);
