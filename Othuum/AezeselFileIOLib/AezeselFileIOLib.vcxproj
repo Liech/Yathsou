@@ -239,6 +239,7 @@
     <ClInclude Include="MagicaVox\typeROTATION.h" />
     <ClInclude Include="MagicaVox\VoxFile.h" />
     <ClInclude Include="STLWriter.h" />
+    <ClInclude Include="SupremeCommander\IO.h" />
     <ClInclude Include="SupremeCommander\SCA.h" />
     <ClInclude Include="SupremeCommander\SCM.h" />
     <ClInclude Include="SupremeCommander\SCMAP.h" />
@@ -271,6 +272,7 @@
     <ClCompile Include="MagicaVox\typeROTATION.cpp" />
     <ClCompile Include="MagicaVox\VoxFile.cpp" />
     <ClCompile Include="STLWriter.cpp" />
+    <ClCompile Include="SupremeCommander\IO.cpp" />
     <ClCompile Include="SupremeCommander\SCA.cpp" />
     <ClCompile Include="SupremeCommander\SCM.cpp" />
     <ClCompile Include="SupremeCommander\SCMAP.cpp" />

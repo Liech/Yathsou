@@ -60,24 +60,20 @@ namespace Athanah {
       _height = 0;
     }
 
-
     if (info.find("map") != info.end())
       _map = info["map"];
     else
       _map = "";
-
 
     if (info.find("script") != info.end())
       _script = info["script"];
     else
       _script = "";
 
-
     if (info.find("save") != info.end())
       _save = info["save"];
     else
       _save = "";
-
 
     if (info.find("preview") != info.end())
       _preview = info["preview"];

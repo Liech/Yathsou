@@ -306,6 +306,9 @@
     <ClInclude Include="STLWriter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SupremeCommander\IO.h">
+      <Filter>Header Files\SupremeCommander</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageIO.cpp">
@@ -397,6 +400,9 @@
     </ClCompile>
     <ClCompile Include="STLWriter.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SupremeCommander\IO.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,13 +9,14 @@
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "AezeselFileIOLib/lib/json.hpp"
+#include "IO.h"
 
 //based on
 //https://github.com/Oygron/SupCom_Import_Export_Blender/blob/master/supcom-importer.py
 
 namespace Aezesel {
   //supreme commander model format
-  class SCM
+  class SCM: public IO
   {
   public:
     struct data;
@@ -65,22 +66,12 @@ namespace Aezesel {
     int                      pad(int size);
     std::vector<std::string> split(std::string, char seperator = '\0');
 
-    std::string              readString(const std::vector<unsigned char>&, size_t& position, size_t size);
-    int                      readInt(const std::vector<unsigned char>&, size_t& position);
-    unsigned short           readUShort(const std::vector<unsigned char>&, size_t& position);
-    float                    readFloat(const std::vector<unsigned char>&, size_t& position);
-
     std::vector<std::string> readBoneNames(int offset);
     std::vector<bone>        readBones(int offset, int count, std::vector<std::string> boneNames);
     std::vector<vertex>      readVertices(int offset, int count);
     std::vector<tri>         readInidices(int offset, int count);
     std::vector<std::string> readInfo(int offset, int count);
 
-    static void writeString(std::ofstream&, const std::string&);
-    static void writeInt(std::ofstream&, const int&);
-    static void writeUInt(std::ofstream&, const unsigned int&);
-    static void writeUShort(std::ofstream&, const unsigned short&);
-    static void writeFloat(std::ofstream&, const float&);
 
     static void writeBoneNames(std::ofstream&,const SCM::data&);
     static void writeBones    (std::ofstream&,const SCM::data&);

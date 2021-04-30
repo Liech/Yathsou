@@ -39,6 +39,7 @@ UnitModelSelection::UnitModelSelection(const std::string path, Iyathuum::glmAABB
     }, [this](Iyathuum::glmAABB<2> loc, std::string name, bool hovered) {
       drawIcons(loc, name, hovered);
     });
+    x->setVisible(false);
     _lists.push_back(std::move(x));
   }
 
