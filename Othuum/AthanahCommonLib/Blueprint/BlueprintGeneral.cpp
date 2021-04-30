@@ -9,7 +9,7 @@ namespace Athanah {
       _faction = Faction::Aeon;
     else if (fact == "UEF")
       _faction = Faction::Uef;
-    else if (fact == "Aeraphim")
+    else if (fact == "Seraphim")
       _faction = Faction::Seraphim;
     else if (fact == "Cybran")
       _faction = Faction::Cybran;

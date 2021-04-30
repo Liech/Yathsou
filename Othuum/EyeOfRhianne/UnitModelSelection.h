@@ -6,6 +6,7 @@
 #include <vector>
 #include <functional>
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
+#include "AthanahCommonLib/SupComEnums.h"
 
 class ListSelection;
 class AnimationSelection;
@@ -13,6 +14,7 @@ class AnimationSelection;
 namespace Ahwassa {
   class Window;
   class Button;
+  class Texture;
 }
 namespace Athanah {
   class SupComModelFactory;
@@ -34,13 +36,18 @@ public:
 
   std::shared_ptr<Athanah::SupComModel> getCurrentModel();
 
-  std::vector<std::string> getNames();
+  std::pair<std::vector<std::string>,std::vector<std::string>> getNames(std::string category);
 
 private:
   void drawIcons(Iyathuum::glmAABB<2>,std::string name, bool hovered);
+  std::shared_ptr<Ahwassa::Texture> getFaction(std::string);
+  int                               getNumber(std::string);
 
+  std::unique_ptr<ListSelection>                _categories;
+  std::vector<std::unique_ptr<ListSelection>>   _lists;
+
+  int                                           _currentList = 0;
   Graphic&                                      _graphic;
-  std::unique_ptr<ListSelection>                _list;
   std::string                                   _currentID = "";
   std::shared_ptr< Athanah::SupComModelFactory> _factory   ;
   std::shared_ptr< Athanah::BlueprintFactory  > _blueprints;

@@ -24,15 +24,66 @@ UnitModelSelection::UnitModelSelection(const std::string path, Iyathuum::glmAABB
   _factory    = std::make_shared<Athanah::SupComModelFactory>(path + "\\units");
   _blueprints = std::make_shared<Athanah::BlueprintFactory  >(path + "\\units");
   _icons      = std::make_shared<Athanah::UiTextureFactory  >(path);
-  
-  _list = std::make_unique<ListSelection>(_factory->getAvailableModels(), getNames(), area, _graphic.getWindow() , [this](std::string newModel) {
-    _currentID = newModel;
 
-    _graphic.setModel(getCurrentModel());
+  Iyathuum::glmAABB<2> categoriesArea(area.getPosition()                  , glm::vec2(50                  , area.getSize()[1]));
+  Iyathuum::glmAABB<2> modelArea     (area.getPosition() + glm::vec2(50,0), glm::vec2(area.getSize()[0]-50, area.getSize()[1]));
+
+
+  std::vector<std::string> categories = {"UEF","Cybran","Aeon","Seraphim","Other","NonUnit"};
+
+  for (int i = 0; i < categories.size(); i++) {
+    auto names = getNames(categories[i]);
+    std::unique_ptr<ListSelection> x = std::make_unique<ListSelection>(names.first, names.second, modelArea, _graphic.getWindow(), [this](std::string newModel) {
+      _currentID = newModel;
+      _graphic.setModel(getCurrentModel());
+    }, [this](Iyathuum::glmAABB<2> loc, std::string name, bool hovered) {
+      drawIcons(loc, name, hovered);
+    });
+    _lists.push_back(std::move(x));
+  }
+
+  _categories = std::make_unique<ListSelection>(categories, categories, categoriesArea, _graphic.getWindow(), [this](std::string newModel) {
+    for (int i = 0; i < _lists.size(); i++)
+      _lists[i]->setVisible(false);
+    int nr = getNumber(newModel);
+    _lists[nr]->setVisible(true);
+    _currentList = nr;
 
   }, [this](Iyathuum::glmAABB<2> loc, std::string name, bool hovered) {
-    drawIcons(loc, name, hovered);
+    _graphic.getWindow()->renderer().rectangle().start();
+    _graphic.getWindow()->renderer().rectangle().drawRectangle(loc, hovered ? Iyathuum::Color(0.8f * 255, 0.8f * 255, 0.8f * 255) : Iyathuum::Color(0.4f * 255, 0.4f * 255, 0.4f * 255));
+    _graphic.getWindow()->renderer().rectangle().end();
+    _graphic.getWindow()->renderer().texture().start();
+    _graphic.getWindow()->renderer().texture().draw(*getFaction(name),loc);
+    _graphic.getWindow()->renderer().texture().end();
   });
+}
+
+int UnitModelSelection::getNumber(std::string s) {
+  if (s == "UEF")
+    return 0;
+  else if (s == "Cybran")
+    return 1;
+  else if (s == "Aeon")
+    return 2;
+  else if (s == "Seraphim")
+    return 3;
+  else if (s == "Other")
+    return 4;
+  return 5;
+}
+std::shared_ptr<Ahwassa::Texture> UnitModelSelection::getFaction(std::string s) {
+  if (s == "UEF")
+    return _icons->getFactionIcon(Athanah::Faction::Uef, Athanah::FactionIconType::Normal);
+  else if (s == "Cybran")
+    return _icons->getFactionIcon(Athanah::Faction::Cybran, Athanah::FactionIconType::Normal);
+  else if (s == "Aeon")
+    return _icons->getFactionIcon(Athanah::Faction::Aeon, Athanah::FactionIconType::Normal);
+  else if (s == "Seraphim")
+    return _icons->getFactionIcon(Athanah::Faction::Seraphim, Athanah::FactionIconType::Normal);
+  else if (s == "Other")
+    return _icons->getFactionIcon(Athanah::Faction::Undefined, Athanah::FactionIconType::Normal);
+  return _icons->getTierIcons(Athanah::Faction::Uef,Athanah::TechLevel::T4);
 }
 
 void UnitModelSelection::drawIcons(Iyathuum::glmAABB<2> location, std::string name, bool hovered) {
@@ -59,10 +110,7 @@ void UnitModelSelection::drawIcons(Iyathuum::glmAABB<2> location, std::string na
   std::string text = bp->description() + "\n" + bp->general().unitName();
 
   _graphic.getWindow()->renderer().text().drawText(text,location.getPosition() + glm::vec2(location.getSize()[0] + 20,0),0.3f);
-
   _graphic.getWindow()->renderer().text().end();
-
-
 }
 
 std::shared_ptr<Athanah::SupComModel> UnitModelSelection::getCurrentModel() {
@@ -70,26 +118,40 @@ std::shared_ptr<Athanah::SupComModel> UnitModelSelection::getCurrentModel() {
 }
 
 void UnitModelSelection::setVisible(bool value) {
-  _list->setVisible(value);
+  _categories->setVisible(value);
+  _lists[_currentList]->setVisible(value);
 }
 
 bool UnitModelSelection::isVisible() {
-  return _list->isVisible();
+  return _categories->isVisible();
 }
 
 void UnitModelSelection::update() {
 }
 
 void UnitModelSelection::draw() {
-  _list->draw();
+  _lists[_currentList]->draw();
+  _categories->draw();
 }
 
-std::vector<std::string> UnitModelSelection::getNames() {
-  std::vector<std::string> names;
+std::pair<std::vector<std::string>, std::vector<std::string>> UnitModelSelection::getNames(std::string category) {
+  std::vector<std::string> names    ;
+  std::vector<std::string> niceNames;
 
   for (auto x : _factory->getAvailableModels()) {
-    auto bp = _blueprints->loadModel(x);
-    names.push_back(bp->description() + "\n" + bp->general().unitName());
+    auto bp = _blueprints->loadModel(x);   
+    auto faction = bp->general().faction();
+    bool ok = 
+      (category == "UEF"     && faction == Athanah::Faction::Uef      ) ||
+      (category == "Cybran"  && faction == Athanah::Faction::Cybran   ) ||
+      (category == "Aeon"    && faction == Athanah::Faction::Aeon     ) ||
+      (category == "Seraphim"&& faction == Athanah::Faction::Seraphim ) ||
+      (category == "Other"   && faction == Athanah::Faction::Undefined)
+      ;
+    if (ok) {
+      names    .push_back(x);
+      niceNames.push_back(bp->description() + "\n" + bp->general().unitName());
+    }
   }
-  return names;
+  return std::make_pair(names,niceNames);
 }
