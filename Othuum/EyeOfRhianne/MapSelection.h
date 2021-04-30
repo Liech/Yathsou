@@ -3,6 +3,7 @@
 #include <IyathuumCoreLib/lib/glm/glm.hpp>
 #include <string>
 #include <memory>
+#include <map>
 #include <vector>
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "Graphic.h"
@@ -16,6 +17,7 @@ namespace Ahwassa {
 
 namespace Athanah {
   class SupComModel;
+  class Scenario;
 }
 
 class MapSelection {
@@ -29,8 +31,9 @@ public:
   bool isVisible();
 
 private:
-
-  Graphic&                              _graphic;
-  std::unique_ptr<ListSelection  >      _list = nullptr;
-  Iyathuum::glmAABB<2>                  _area;
+                                                            
+  Graphic&                                                  _graphic;
+  std::unique_ptr<ListSelection  >                          _list = nullptr;
+  Iyathuum::glmAABB<2>                                      _area;
+  std::map<std::string, std::shared_ptr<Athanah::Scenario>> _scenarios;
 };
