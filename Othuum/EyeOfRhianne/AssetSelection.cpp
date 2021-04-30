@@ -5,6 +5,7 @@
 #include "SkyBoxSelection.h"
 #include "RendererSelection.h"
 #include "ListSelection.h"
+#include "MapSelection.h"
 #include "Graphic.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
@@ -13,14 +14,14 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Widgets/ListLayout.h"
 
-AssetSelection::AssetSelection(const std::string& path, Iyathuum::glmAABB<2> area, Graphic& graphic) : _graphic(graphic){
-  _path = path;
+AssetSelection::AssetSelection(EyeOfRhianneConfiguration& config, Iyathuum::glmAABB<2> area, Graphic& graphic) : _graphic(graphic), _config(config){
   _area = area;
   std::vector<std::string> options;
   options.push_back("Units");
   options.push_back("Animation");
   options.push_back("SkyBox");
   options.push_back("Renderer");
+  options.push_back("Maps");
 
   _list = std::make_unique<ListSelection>(options, options, area, _graphic.getWindow(), [this](std::string newSelection) {    
     unitVisibility(newSelection);
@@ -32,11 +33,12 @@ AssetSelection::AssetSelection(const std::string& path, Iyathuum::glmAABB<2> are
 void AssetSelection::addSelections() {
   Iyathuum::glmAABB<2> area(_area.getPosition() +glm::vec2(300,0),_area.getSize());
 
-  _units = std::make_shared<UnitModelSelection>(_path,area,[this]() {unitVisibility(false); }, _graphic);
+  _units = std::make_shared<UnitModelSelection>(_config.AssetPath,area,[this]() {unitVisibility(false); }, _graphic);
 
   _animation = std::make_shared<AnimationSelection>(area, _graphic);
-  _skyBox    = std::make_shared<SkyBoxSelection>(_path + "\\textures\\environment",area, _graphic);
+  _skyBox    = std::make_shared<SkyBoxSelection>(_config.AssetPath + "\\textures\\environment",area, _graphic);
   _renderer  = std::make_shared<RendererSelection>(area,_graphic);
+  _maps      = std::make_shared<MapSelection>(_config.MapPath,area,_graphic);
 }
 
 void AssetSelection::unitVisibility(std::string newMenu) {
@@ -51,21 +53,25 @@ void AssetSelection::unitVisibility(std::string newMenu) {
     _skyBox->setVisible(!_skyBox->isVisible());
   if (_current == "Renderer")
     _renderer->setVisible(!_renderer->isVisible());
+  if (_current == "Maps")
+    _maps->setVisible(!_maps->isVisible());
 }
 
 void AssetSelection::hideAll() {
-  _units->setVisible(false);
+  _units    ->setVisible(false);
   _animation->setVisible(false);
-  _skyBox->setVisible(false);
-  _renderer->setVisible(false);
+  _skyBox   ->setVisible(false);
+  _renderer ->setVisible(false);
+  _maps     ->setVisible(false);
 }
 
 void AssetSelection::draw() {
-  _units->draw();
+  _units    ->draw();
   _animation->draw();
-  _skyBox->draw();
-  _renderer->draw();
-  _list->draw();
+  _skyBox   ->draw();
+  _renderer ->draw();
+  _maps     ->draw();
+  _list     ->draw();
 }
 
 void AssetSelection::update() {
@@ -73,6 +79,7 @@ void AssetSelection::update() {
   _animation->update();
   _skyBox->update();
   _renderer->update();
+  _maps->update();
 }
 
 void AssetSelection::setVisible(bool visible) {

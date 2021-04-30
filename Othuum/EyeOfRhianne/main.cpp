@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
 
     Iyathuum::glmAABB<2> assetArea      (glm::vec2(0, 0 ), glm::vec2(300, w.getHeight() - 50));
     Iyathuum::glmAABB<2> assetButtonArea(glm::vec2(0, w.getHeight() - 50), glm::vec2(300, 50));
-    assets = std::make_unique<AssetSelection>(config.AssetPath,assetArea, *graphic);
+    assets = std::make_unique<AssetSelection>(config,assetArea, *graphic);
     assetButton = std::make_unique<Ahwassa::Button>("Assets", assetButtonArea, [disableAll,&assets]() {
       bool vis = assets->isVisible();
       disableAll();
