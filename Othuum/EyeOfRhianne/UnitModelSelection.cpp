@@ -3,6 +3,7 @@
 #include "ListSelection.h"
 #include "Graphic.h"
 
+#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
@@ -16,6 +17,7 @@
 #include "AthanahCommonLib/Blueprint/BlueprintFactory.h"
 #include "AthanahCommonLib/Blueprint/Blueprint.h"
 #include "AthanahCommonLib/Blueprint/BlueprintGeneral.h"
+#include "AthanahCommonLib/Blueprint/BlueprintDisplay.h"
 
 UnitModelSelection::UnitModelSelection(const std::string path, Iyathuum::glmAABB<2> area, std::function<void()> disableAllCall, Graphic& graphic) : _graphic(graphic)
  {
@@ -36,6 +38,8 @@ UnitModelSelection::UnitModelSelection(const std::string path, Iyathuum::glmAABB
     std::unique_ptr<ListSelection> x = std::make_unique<ListSelection>(names.first, names.second, modelArea, _graphic.getWindow(), [this](std::string newModel) {
       _currentID = newModel;
       _graphic.setModel(getCurrentModel());
+      float scale = _blueprints->loadModel(_currentID)->display().scale()*30;
+      _graphic._mesh->transformation = glm::scale(glm::mat4(1), glm::vec3(scale,scale,scale));
     }, [this](Iyathuum::glmAABB<2> loc, std::string name, bool hovered) {
       drawIcons(loc, name, hovered);
     });

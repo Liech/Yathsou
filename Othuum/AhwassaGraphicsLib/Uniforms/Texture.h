@@ -8,11 +8,14 @@ namespace Ahwassa {
   enum class ReleaseBehavior {
     DeleteOnDeconstructor, KeepTextureOnDeconstructor
   };
+  enum class TextureFormat {
+    RGBA, RGBA32
+  };
 
   class Texture : public Uniform {
   public:
-    Texture(const std::string& name, Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>* tex);
-    Texture(const std::string& name, int width, int height);
+    Texture(const std::string& name, Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>* tex, TextureFormat format = TextureFormat::RGBA);
+    Texture(const std::string& name, int width, int height, TextureFormat format = TextureFormat::RGBA);
     Texture(const std::string& name, unsigned int tex, ReleaseBehavior released = ReleaseBehavior::KeepTextureOnDeconstructor);
     virtual ~Texture() override;
 

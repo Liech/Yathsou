@@ -4,12 +4,11 @@
 
 #include "glad/glad.h"
 
-#include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
 //https://learnopengl.com/Advanced-Lighting/Deferred-Shading
 
 namespace Ahwassa {
-  FBO::FBO(unsigned int width,unsigned int height, const std::vector<std::string>& textureNames){
+  FBO::FBO(unsigned int width,unsigned int height, const std::vector<std::string>& textureNames, const std::vector<TextureFormat>& formats){
     _width = width;
     _height = height;
     
@@ -19,7 +18,7 @@ namespace Ahwassa {
 
     _textures.resize(textureNames.size());
     for (int i = 0; i < textureNames.size(); i++) {
-      std::shared_ptr<Texture> texture = std::make_shared<Texture>(textureNames[i],_width,_height);
+      std::shared_ptr<Texture> texture = std::make_shared<Texture>(textureNames[i],_width,_height, formats[i]);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
       glFramebufferTexture2D(GL_FRAMEBUFFER, getGL_COLOR_ATTACHMENT(i), GL_TEXTURE_2D, texture->getTextureID(), 0);

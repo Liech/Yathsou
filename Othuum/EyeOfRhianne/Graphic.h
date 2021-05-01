@@ -35,6 +35,7 @@ public:
   bool                                            _bloomEnabled = true;
   std::shared_ptr<Athanah::SkyBox>                _skyBox;
   std::shared_ptr<Ahwassa::CubeTexture>           _reflectionTexture;
+  
 
   Ahwassa::Window* getWindow();
 private:

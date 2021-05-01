@@ -4,6 +4,7 @@
 
 namespace Athanah {
   class BlueprintGeneral;
+  class BlueprintDisplay;
 
   class Blueprint {
   public:
@@ -11,8 +12,9 @@ namespace Athanah {
     Blueprint(const std::string id);
 
     std::string       strategicIcon() const;
-    std::string       description() const;
-    BlueprintGeneral& general() const;
+    std::string       description()   const;
+    BlueprintGeneral& general()       const;
+    BlueprintDisplay& display()       const;
 
   private:
     std::string _description;
@@ -20,5 +22,6 @@ namespace Athanah {
     std::string _strategicIcon;
 
     std::shared_ptr<BlueprintGeneral> _general;
+    std::shared_ptr<BlueprintDisplay> _display;
   };
 }

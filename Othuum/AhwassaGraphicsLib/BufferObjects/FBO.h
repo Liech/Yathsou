@@ -3,13 +3,12 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
 namespace Ahwassa {
-  class Texture;
-
   class FBO {
   public:
-    FBO(unsigned int width, unsigned int height, const std::vector<std::string>& textureNames);
+    FBO(unsigned int width, unsigned int height, const std::vector<std::string>& textureNames, const std::vector<TextureFormat>& formats);
     void start();//set as rendertargets
     void end();  //unset as rendertargets
     

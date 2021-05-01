@@ -29,6 +29,7 @@
   <ItemGroup>
     <ClInclude Include="Blueprint\Blueprint.h" />
     <ClInclude Include="Blueprint\BlueprintCommandCaps.h" />
+    <ClInclude Include="Blueprint\BlueprintDisplay.h" />
     <ClInclude Include="Blueprint\BlueprintFactory.h" />
     <ClInclude Include="Blueprint\BlueprintGeneral.h" />
     <ClInclude Include="BoxVisualization.h" />
@@ -47,6 +48,7 @@
   <ItemGroup>
     <ClCompile Include="Blueprint\Blueprint.cpp" />
     <ClCompile Include="Blueprint\BlueprintCommandCaps.cpp" />
+    <ClCompile Include="Blueprint\BlueprintDisplay.cpp" />
     <ClCompile Include="Blueprint\BlueprintFactory.cpp" />
     <ClCompile Include="Blueprint\BlueprintGeneral.cpp" />
     <ClCompile Include="BoxVisualization.cpp" />

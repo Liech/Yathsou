@@ -1,5 +1,6 @@
 #include "Blueprint.h"
 #include "BlueprintGeneral.h"
+#include "BlueprintDisplay.h"
 
 namespace Athanah {
   Blueprint::Blueprint(const std::string id, const nlohmann::json& input) {
@@ -17,6 +18,7 @@ namespace Athanah {
       _strategicIcon = "";
 
     _general = std::make_shared<BlueprintGeneral>(input["General"]);
+    _display = std::make_shared<BlueprintDisplay>(input["Display"]);
 
     _id = id;
   }
@@ -25,6 +27,7 @@ namespace Athanah {
     _description = id;
     _id = id;
     _general = std::make_shared<BlueprintGeneral>();
+    _display = std::make_shared<BlueprintDisplay>();
   }
 
   std::string Blueprint::strategicIcon() const {
@@ -37,5 +40,9 @@ namespace Athanah {
 
   BlueprintGeneral& Blueprint::general() const {
     return *_general;
+  }
+
+  BlueprintDisplay& Blueprint::display() const {
+    return *_display;
   }
 }

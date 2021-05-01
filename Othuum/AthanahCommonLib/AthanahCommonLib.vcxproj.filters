@@ -69,6 +69,9 @@
     <ClInclude Include="Scenario.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Blueprint\BlueprintDisplay.h">
+      <Filter>Header Files\Blueprint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletDebugDrawer.cpp">
@@ -115,6 +118,9 @@
     </ClCompile>
     <ClCompile Include="Scenario.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Blueprint\BlueprintDisplay.cpp">
+      <Filter>Source Files\Blueprint</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

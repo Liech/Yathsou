@@ -19,7 +19,7 @@
 
 namespace Ahwassa {
   DeferredComposer::DeferredComposer(Window* window, int width, int height) :r(window) {
-    _fbo = std::make_shared<Ahwassa::FBO>(width,height, std::vector<std::string> {"gPosition", "gNormal", "gAlbedoSpec", "gSpecial"});
+    _fbo = std::make_shared<Ahwassa::FBO>(width, height, std::vector<std::string> {"gPosition", "gNormal", "gAlbedoSpec", "gSpecial"}, std::vector<TextureFormat>{TextureFormat::RGBA32,TextureFormat::RGBA,TextureFormat::RGBA,TextureFormat::RGBA});
     _resultCanvas = std::make_shared<Ahwassa::Rendertarget>("Result", width, height);
     _width = width;
     _height = height;
