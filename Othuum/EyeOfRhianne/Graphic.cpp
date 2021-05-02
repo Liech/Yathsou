@@ -33,8 +33,8 @@ Graphic::Graphic(Ahwassa::Window* window) {
 }
 
 void Graphic::draw() {
-  if (_mesh)
-    _mesh->transformation = glm::rotate(_mesh->transformation, 0.001f, glm::vec3(0, 1, 0));
+  //if (_mesh)
+  //  _mesh->transformation = glm::rotate(_mesh->transformation, 0.001f, glm::vec3(0, 1, 0));
   _composer->start();
   if (_skyBox)
     _skyBox->draw();

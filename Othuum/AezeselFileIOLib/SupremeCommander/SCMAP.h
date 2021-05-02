@@ -105,7 +105,7 @@ namespace Aezesel {
 
     SCMAP(const std::string& map);
   private:
-
+    Map                   readMap                  (const std::vector<unsigned char>&, size_t&);
     Prop                  readProp                 (const std::vector<unsigned char>&, size_t&);
     DecalGroup            readDecalGroup           (const std::vector<unsigned char>&, size_t&);
     Decal                 readDecal                (const std::vector<unsigned char>&, size_t&);

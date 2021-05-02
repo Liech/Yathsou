@@ -31,27 +31,16 @@ GraphicOptions::GraphicOptions(std::function<void()> disableAllCall, Graphic& gr
 
 void GraphicOptions::makeBloomOptions() {
   _bloomOptions = std::make_shared<Ahwassa::ListLayout>(Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(300, _graphic.getWindow()->getHeight() - 50)), _graphic.getWindow());
-  _bloomOptions->addCheckbox("Enabled", true, [this](bool checked) {
-    _graphic._bloomEnabled = checked; 
-    if (!checked && _currentTexture->getName() == "Bloom") {
-      _graphic._renderedTexture = _textures["Result"];
-    }
-    else if (checked && _currentTexture->getName() != "Bloom") {
-      _graphic._renderedTexture = _textures["Bloom"];
-    }
-    _currentTexture = _graphic._textures[_graphic._renderedTexture];
-  });
-  _bloomOptions->addLabel("Intensity");
-  _bloomOptions->addSlider(8, 0, 50, [this](float value) {_graphic._bloom->setIntensity(value); });
+  _bloomOptions->addLabel("Bloom Options:");
   _bloomOptions->addLabel("Size");
   _bloomOptions->addSlider(8, 0, 50, [this](float value) {_graphic._bloom->setSize(value); });
-  _bloomOptions->addLabel("Quality");
-  _bloomOptions->addSlider(3, 0, 20, [this](float value) {_graphic._bloom->setQuality(value); });
   _bloomOptions->addLabel("Directions");
   _bloomOptions->addSlider(16, 0, 100, [this](float value) {_graphic._bloom->setDirections(value); });
-  _bloomOptions->setMaximumSize(_bloomOptions->getLocalPosition().getSize());
+  _bloomOptions->addLabel("Intensity");
+  _bloomOptions->addSlider(8, 0, 50, [this](float value) {_graphic._bloom->setIntensity(value); });
+  _bloomOptions->addLabel("Quality");
+  _bloomOptions->addSlider(3, 0, 20, [this](float value) {_graphic._bloom->setQuality(value); });
   _bloomOptions->adjustSize();
-  _bloomOptions->setCurrentScroll(_bloomOptions->getMaximumScroll());
 }
 
 void GraphicOptions::drawUI() {

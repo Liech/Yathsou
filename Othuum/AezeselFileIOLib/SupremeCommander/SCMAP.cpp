@@ -3,7 +3,26 @@
 
 namespace Aezesel {
   SCMAP::SCMAP(const std::string& map) {
+  }
 
+  SCMAP::Map SCMAP::readMap(const std::vector<unsigned char>&data, size_t&position) {
+    std::string magic = readString(data, position, 3);
+    if (magic != "map")
+      throw std::runtime_error("Wrong map");
+    SCMAP::Map result;
+    result.versionMajor = readInt(data, position);
+    readInt(data, position);
+    readInt(data, position);
+    result.width  = readFloat(data, position);
+    result.height = readFloat(data, position);
+    readInt(data, position);
+    readUShort(data, position);
+
+    int lengthOfPreviewImage = readInt(data, position);
+    for(int i =0 ;i < lengthOfPreviewImage;i++)
+      result.mapData.push_back(readUShort(data, position));
+
+    return result;
   }
 
   SCMAP::Prop SCMAP::readProp(const std::vector<unsigned char>&data, size_t&position) {
@@ -118,6 +137,7 @@ namespace Aezesel {
     result.WaterRamp        = readString(data, position);
     for (int i = 0; i < 3; i++)
       result.waves[i] = readWaveTexture(data, position);
+    return result;
   }
 
   SCMAP::WaveTexture SCMAP::readWaveTexture(const std::vector<unsigned char>& data, size_t& position) {
