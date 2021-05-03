@@ -25,8 +25,70 @@ namespace Aezesel {
     readUShort(data, position);
 
     int lengthOfPreviewImage = readInt(data, position);
-    std::vector<unsigned char> rawPreview = read(data, position, lengthOfPreviewImage);
-    result->previewImage = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, rawPreview);
+    {
+      std::vector<unsigned char> rawPreview = read(data, position, lengthOfPreviewImage);
+      result->previewImage = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, rawPreview);
+    }
+
+    result->versionMinor     = readInt(data, position);
+    result->resolutionWidth  = readInt(data, position);
+    result->resolutionHeight = readInt(data, position);
+    result->heightScale      = readFloat(data, position); //usually 1/128
+    {
+      int pixelAmount = ((result->resolutionHeight + 1) * (result->resolutionWidth + 1));
+      std::vector<unsigned char> rawMap = read(data, position,pixelAmount*2+1);
+      //HeightmapData = ReadArray(of Int16))
+    }
+    result->terrainShader =  readString(data, position); //setons: 2363572
+    result->background    =  readString(data, position);
+    result->skyCubemap    =  readString(data, position);
+    int amountOfEnvMaps = readInt(data, position);
+    for (int i = 0; i < amountOfEnvMaps; i++) {
+      std::string faction = readString(data, position);
+      std::string map = readString(data, position);
+      result->envCubemaps[faction.substr(1,faction.length()-2)] = map;
+    }
+
+    result->lightingMultiplier = readFloat(data, position);
+    result->sunDirection[0] = readFloat(data, position);
+    result->sunDirection[1] = readFloat(data, position);
+    result->sunDirection[2] = readFloat(data, position);
+
+    result->sunAmbience[0] = readFloat(data, position);
+    result->sunAmbience[1] = readFloat(data, position);
+    result->sunAmbience[2] = readFloat(data, position);
+
+    result->sunColor[0] = readFloat(data, position);
+    result->sunColor[1] = readFloat(data, position);
+    result->sunColor[2] = readFloat(data, position);
+
+    result->shadowFillColor[0] = readFloat(data, position);
+    result->shadowFillColor[1] = readFloat(data, position);
+    result->shadowFillColor[2] = readFloat(data, position);
+
+    result->specularColor[0] = readFloat(data, position);
+    result->specularColor[1] = readFloat(data, position);
+    result->specularColor[2] = readFloat(data, position);
+
+    result->bloom       = readFloat(data, position);
+
+    result->fogColor[0] = readFloat(data, position);
+    result->fogColor[1] = readFloat(data, position);
+    result->fogColor[2] = readFloat(data, position);
+    result->fogStart    = readFloat(data, position);
+    result->fogEnd      = readFloat(data, position);
+
+    result->hasWater = data[position] != 0;
+    position += 1;
+    result->waterElevation = readFloat(data, position);
+    result->elevationDeep  = readFloat(data, position);
+    result->elevationAbyss = readFloat(data, position);
+
+    result->waterShaderProperties = readWaterShaderProperties(data, position);
+
+    int numberOfWaveGenerators = readInt(data, position);
+    for (int i = 0; i < numberOfWaveGenerators; i++)
+      result->waveGenerators.push_back(readWaveGenerator(data, position));
 
     return std::move(result);
   }
@@ -137,11 +199,32 @@ namespace Aezesel {
 
   SCMAP::WaterShaderProperties SCMAP::readWaterShaderProperties(const std::vector<unsigned char>& data, size_t& position) {
     SCMAP::WaterShaderProperties result;
-    for (int i = 0; i < 20; i++)
-      readFloat(data, position); //unkown
-    result.WaterCubemapPath = readString(data, position);
-    result.WaterRamp        = readString(data, position);
-    for (int i = 0; i < 3; i++)
+
+    result.surfaceColor[0]  = readFloat(data,position);
+    result.surfaceColor[1]  = readFloat(data,position);
+    result.surfaceColor[2]  = readFloat(data,position);
+    result.colorLerp   [0]  = readFloat(data,position);
+    result.colorLerp   [1]  = readFloat(data,position);
+    result.refractionScale  = readFloat(data,position);
+    result.fresnelBias      = readFloat(data,position);
+    result.fresnelPower     = readFloat(data,position);
+    result.unitReflection   = readFloat(data,position);
+    result.skyReflection    = readFloat(data,position);
+    result.sunShininess     = readFloat(data,position);
+    result.sunStrength      = readFloat(data,position);
+    result.sunDirection[0]  = readFloat(data,position);
+    result.sunDirection[1]  = readFloat(data,position);
+    result.sunDirection[2]  = readFloat(data,position);
+    result.sunColor    [0]  = readFloat(data,position);
+    result.sunColor    [1]  = readFloat(data,position);
+    result.sunColor    [2]  = readFloat(data,position);
+    result.sunReflection    = readFloat(data,position);
+    result.sunGlow          = readFloat(data,position);
+    result.waterCubemapPath = readString(data, position);
+    result.waterRamp        = readString(data, position);
+    for (int i = 0; i < 4; i++)
+      result.waves[i].normalRepeat = readFloat(data, position);
+    for (int i = 0; i < 4; i++)
       result.waves[i] = readWaveTexture(data, position);
     return result;
   }

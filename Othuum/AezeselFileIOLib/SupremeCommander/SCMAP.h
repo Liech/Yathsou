@@ -3,6 +3,7 @@
 #include <string>
 #include <array>
 #include <memory>
+#include <map>
 
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "IO.h"
@@ -11,7 +12,8 @@
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 
 //map format according to:
-//https://www.gamereplays.org/community/index.php?showtopic=176526
+//https://www.gamereplays.org/community/index.php?showtopic=176526 -> is for vanilla, not fa
+//https://github.com/FAForever/Neroxis-Map-Generator/blob/develop/src/main/java/com/faforever/neroxis/map/exporter/SCMapExporter.java
 
 namespace Aezesel {
   class SCMAP : public IO {
@@ -20,10 +22,24 @@ namespace Aezesel {
       float       scaleX     ;
       float       scaleY     ;
       std::string texturePath;
+      float       normalRepeat;
     };
     struct WaterShaderProperties {
-      std::string                WaterCubemapPath;
-      std::string                WaterRamp       ;
+      glm::vec3                  surfaceColor    ;
+      glm::vec2                  colorLerp       ;
+      float                      refractionScale ;
+      float                      fresnelBias     ;
+      float                      fresnelPower    ;
+      float                      unitReflection  ;
+      float                      skyReflection   ;
+      float                      sunShininess    ;
+      float                      sunStrength     ;
+      glm::vec3                  sunDirection    ;
+      glm::vec3                  sunColor        ;
+      float                      sunReflection   ;
+      float                      sunGlow         ;
+      std::string                waterCubemapPath;
+      std::string                waterRamp       ;
       std::array<WaveTexture, 3> waves           ;
     };
     struct WaveGenerator {
@@ -84,28 +100,30 @@ namespace Aezesel {
 
       std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> previewImage;
       
-      std::string                terrainShader;
-      std::string                background;
-      std::string                skyCubemap;
-      std::string                envCubemap;
+      std::string                       terrainShader;
+      std::string                       background;
+      std::string                       skyCubemap;
+      std::map<std::string,std::string> envCubemaps; //faction->map (default->map)
       
       float                      lightingMultiplier;
-      glm::vec3                  sunDirection;
-      glm::vec3                  sunAmbience;
-      glm::vec3                  sunColor;
-      glm::vec3                  specularColor;
-      float                      bloom;
+      glm::vec3                  sunDirection      ;
+      glm::vec3                  sunAmbience       ;
+      glm::vec3                  sunColor          ;
+      glm::vec3                  shadowFillColor   ;
+      glm::vec3                  specularColor     ;
+      float                      bloom             ;
 
       glm::vec3                  fogColor;
       float                      fogStart;
-      float                      fogEnd;
+      float                      fogEnd  ;
       
-      bool                       hasWater;
+      bool                       hasWater      ;
       float                      waterElevation;
-      float                      elevationDeep;
+      float                      elevationDeep ;
       float                      elevationAbyss;
 
       WaterShaderProperties      waterShaderProperties;
+      std::vector<WaveGenerator> waveGenerators;
     };
 
     std::unique_ptr<SCMAP::Map> load(const std::string& filename);

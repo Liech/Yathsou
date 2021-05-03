@@ -37,9 +37,17 @@ namespace Aezesel {
 
   std::string IO::readString(const std::vector<unsigned char>& data, size_t& position)
   {
-    char* d = (char*)data.data() + position;
-    std::string result(d);
-    position += result.size();
+    char* start = (char*)data.data() + position;
+    auto debug = std::vector<unsigned char>(data.begin() + position - 20, data.begin() + position + 40);
+    int i = 0;
+    while (i < 10000) {
+      unsigned char c = *(start + i);
+      if (c == '\0')
+        break;
+      i++;
+    }
+    std::string result(start,i);
+    position += result.size()+1;
     return result;
   }
 
