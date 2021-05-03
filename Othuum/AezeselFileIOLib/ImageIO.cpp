@@ -104,7 +104,7 @@ namespace Aezesel {
   std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> ImageIO::readDDS(const std::vector<unsigned char>& data)
   {
     gli::texture texture = gli::load_dds((char const*)(data.data()), data.size());
-    gli::texture2d texture2d = gli::texture2d(texture2d);
+    gli::texture2d texture2d = gli::texture2d(texture);
     return std::move(readDDS(texture2d));
   }
 

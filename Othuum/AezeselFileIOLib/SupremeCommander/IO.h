@@ -11,7 +11,8 @@ namespace Aezesel {
     static void    writeUInt  (std::ofstream&, const unsigned int&);
     static void    writeFloat (std::ofstream&, const float&);
     static void    writeUShort(std::ofstream&, const unsigned short&);
-                   
+            
+    std::vector<unsigned char> read(const std::vector<unsigned char>&, size_t& position, size_t size);
     std::string    readString(const std::vector<unsigned char>&, size_t& position, size_t size);
     std::string    readString(const std::vector<unsigned char>&, size_t& position);
     int            readInt   (const std::vector<unsigned char>&, size_t& position);

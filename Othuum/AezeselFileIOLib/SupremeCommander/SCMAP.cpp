@@ -1,28 +1,34 @@
 #include "SCMAP.h"
 
+#include "ImageIO.h"
 
 namespace Aezesel {
-  SCMAP::SCMAP(const std::string& map) {
+  std::unique_ptr<SCMAP::Map> SCMAP::load(const std::string& filename) {
+    std::ifstream input(filename, std::ios::binary);
+    if (input.fail())
+      throw std::runtime_error("Error opening " + filename);
+    _buffer = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
+    return readMap(_buffer, _fileposition);
   }
 
-  SCMAP::Map SCMAP::readMap(const std::vector<unsigned char>&data, size_t&position) {
-    std::string magic = readString(data, position, 3);
-    if (magic != "map")
-      throw std::runtime_error("Wrong map");
-    SCMAP::Map result;
-    result.versionMajor = readInt(data, position);
+  std::unique_ptr<SCMAP::Map> SCMAP::readMap(const std::vector<unsigned char>&data, size_t&position) {
+    std::string magic = readString(data, position, 4);
+    if (!magic.starts_with("Map"))
+      throw std::runtime_error("Wrong Format");
+    auto result = std::make_unique<SCMAP::Map>();
+    result->versionMajor = readInt(data, position);
     readInt(data, position);
     readInt(data, position);
-    result.width  = readFloat(data, position);
-    result.height = readFloat(data, position);
+    result->width  = readFloat(data, position);
+    result->height = readFloat(data, position);
     readInt(data, position);
     readUShort(data, position);
 
     int lengthOfPreviewImage = readInt(data, position);
-    for(int i =0 ;i < lengthOfPreviewImage;i++)
-      result.mapData.push_back(readUShort(data, position));
+    std::vector<unsigned char> rawPreview = read(data, position, lengthOfPreviewImage);
+    result->previewImage = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, rawPreview);
 
-    return result;
+    return std::move(result);
   }
 
   SCMAP::Prop SCMAP::readProp(const std::vector<unsigned char>&data, size_t&position) {

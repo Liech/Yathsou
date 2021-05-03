@@ -2,9 +2,13 @@
 
 #include <string>
 #include <array>
+#include <memory>
 
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "IO.h"
+
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 
 //map format according to:
 //https://www.gamereplays.org/community/index.php?showtopic=176526
@@ -77,7 +81,8 @@ namespace Aezesel {
       int                        resolutionWidth;
       int                        resolutionHeight;
       float                      heightScale;
-      std::vector<unsigned short>mapData;//((Height + 1) * (Width + 1))
+
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> previewImage;
       
       std::string                terrainShader;
       std::string                background;
@@ -103,9 +108,9 @@ namespace Aezesel {
       WaterShaderProperties      waterShaderProperties;
     };
 
-    SCMAP(const std::string& map);
+    std::unique_ptr<SCMAP::Map> load(const std::string& filename);
   private:
-    Map                   readMap                  (const std::vector<unsigned char>&, size_t&);
+    std::unique_ptr<SCMAP::Map> readMap            (const std::vector<unsigned char>&, size_t&);
     Prop                  readProp                 (const std::vector<unsigned char>&, size_t&);
     DecalGroup            readDecalGroup           (const std::vector<unsigned char>&, size_t&);
     Decal                 readDecal                (const std::vector<unsigned char>&, size_t&);
@@ -113,5 +118,9 @@ namespace Aezesel {
     WaveGenerator         readWaveGenerator        (const std::vector<unsigned char>&, size_t&);
     WaterShaderProperties readWaterShaderProperties(const std::vector<unsigned char>&, size_t&);
     WaveTexture           readWaveTexture          (const std::vector<unsigned char>&, size_t&);
+
+    size_t                     _fileposition = 0;
+    std::vector<unsigned char> _buffer;
+
   };
 }

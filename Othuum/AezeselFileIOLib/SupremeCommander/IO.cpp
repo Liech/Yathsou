@@ -85,4 +85,10 @@ namespace Aezesel {
     unsigned short* p = (unsigned short*)data;
     stream.write((const char*)p, sizeof(unsigned short));
   }
+
+  std::vector<unsigned char> IO::read(const std::vector<unsigned char>& data, size_t& position, size_t size) {
+    std::vector<unsigned char> result(data.begin() + position, data.begin() + position + size);    
+    position += size;
+    return result;
+  }
 }

@@ -30,6 +30,8 @@
 #include "Graphic.h"
 #include "EyeOfRhianneConfiguration.h"
 
+#include "AezeselFileIOLib/SupremeCommander/SCMAP.h"
+
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
   if (std::string::npos != last_slash_idx)

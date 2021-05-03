@@ -44,7 +44,10 @@ MapSelection::MapSelection(std::string mapPath, Iyathuum::glmAABB<2> area, Graph
 
   _list = std::make_unique<ListSelection>(maps, niceNamesMaps, area, _graphic.getWindow(), [mapPath,this](std::string newMap) {
     Athanah::Scenario s(mapPath + "/" + newMap + "/" + newMap + "_scenario.lua");
-    auto map = std::make_shared<Aezesel::SCMAP>(mapPath + "/" + newMap + "/" + newMap + ".scmap");
+    std::string scmapPath = mapPath + "/" + newMap + "/" + newMap + ".scmap";
+    Aezesel::SCMAP reader;
+    auto map = reader.load(scmapPath);
+    _previewImage = std::make_shared<Ahwassa::Texture>("Preview", map->previewImage.get());
   }, [this](Iyathuum::glmAABB<2> loc, std::string name, bool hovered) {
     _graphic.getWindow()->renderer().rectangle().start();
     _graphic.getWindow()->renderer().rectangle().drawRectangle(loc, hovered ? Iyathuum::Color(0.8f * 255, 0.8f * 255, 0.8f * 255) : Iyathuum::Color(0.4f * 255, 0.4f * 255, 0.4f * 255));
@@ -75,4 +78,10 @@ void MapSelection::update() {
 
 void MapSelection::draw() {
   _list->draw();
+  if (_previewImage) {
+    Iyathuum::glmAABB<2> textureLoc(glm::vec2(_graphic.getWindow()->getWidth()-400, 0), glm::vec2(400, 400));
+    _graphic.getWindow()->renderer().texture().start();
+    _graphic.getWindow()->renderer().texture().draw(*_previewImage, textureLoc);
+    _graphic.getWindow()->renderer().texture().end();
+  }
 }

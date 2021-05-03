@@ -41,7 +41,8 @@ public:
   bool isVisible();
 
 private:
-                                                            
+                                                      
+  std::shared_ptr<Ahwassa::Texture> _previewImage{ nullptr };
   Graphic&                                                  _graphic;
   std::unique_ptr<ListSelection  >                          _list = nullptr;
   Iyathuum::glmAABB<2>                                      _area;
