@@ -23,4 +23,10 @@ namespace Athanah {
     }
     return _preview;
   }
+
+  void Map::loadFull() {
+    Aezesel::SCMAP loader;
+    auto load = loader.load(_directory + "\\" + _name + "\\" + _name + ".scmap");
+  }
+
 }

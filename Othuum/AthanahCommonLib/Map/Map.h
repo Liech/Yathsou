@@ -16,6 +16,7 @@ namespace Athanah {
 
     std::shared_ptr<Ahwassa::Texture> getPreview();
     Scenario&                         getScenario();
+    void                              loadFull();
   private:
     std::string                       _directory;
     std::string                       _name     ;

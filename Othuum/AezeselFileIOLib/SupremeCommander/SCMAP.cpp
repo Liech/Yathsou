@@ -100,7 +100,42 @@ namespace Aezesel {
     for (int i = 0; i < numberOfWaveGenerators; i++)
       result->waveGenerators.push_back(readWaveGenerator(data, position));
 
+    if (result->versionMinor > 56)
+      readFloat(data, position);
+
+    result->cartographicContourInterval   = readInt(data,position);
+    result->cartographicDeepWaterColor    = readInt(data,position);
+    result->cartographicMapContourColor   = readInt(data,position);
+    result->cartographicMapShoreColor     = readInt(data,position);
+    result->cartographicMapLandStartColor = readInt(data,position);
+    result->cartographicMapLandEndColor   = readInt(data,position);
+
+    for (int i = 0; i < 10; i++) {
+      ScaledTexture sub;
+      sub.path = readString(data, position);
+      sub.scale = readFloat(data, position);
+      result->terrainTexturePaths.push_back(sub);
+    }
+    for (int i = 0; i < 9; i++) {
+      ScaledTexture sub;
+      sub.path = readString(data, position);
+      sub.scale = readFloat(data, position);
+      result->terrainNormalPaths.push_back(sub);
+    }
+
+    readInt(data, position);
+    readInt(data, position);
+
+    int decalCount = readInt(data, position);
+    result->decals.resize(decalCount);
+    for (int i = 0; i < decalCount; i++)
+      result->decals[i] = readDecal(data,position);
+
     return std::move(result);
+  }
+
+  SCMAP::Decal SCMAP::readDecal(const std::vector<unsigned char>& data, size_t& position) {
+
   }
 
   SCMAP::MapHeader SCMAP::readMapHeader(const std::vector<unsigned char>& data, size_t&position) {
@@ -115,82 +150,6 @@ namespace Aezesel {
     result.height = readFloat(data, position);
     readInt(data, position);
     readUShort(data, position);
-    return result;
-  }
-
-  SCMAP::Prop SCMAP::readProp(const std::vector<unsigned char>&data, size_t&position) {
-    SCMAP::Prop result;
-    result.blueprintPath = readString(data, position);
-    result.position[0] = readFloat(data, position);
-    result.position[1] = readFloat(data, position);
-    result.position[2] = readFloat(data, position);
-
-    glm::vec3 m1;
-    glm::vec3 m2;
-    glm::vec3 m3;
-
-    m1[0] = readFloat(data, position);
-    m1[1] = readFloat(data, position);
-    m1[2] = readFloat(data, position);
-
-    m2[0] = readFloat(data, position);
-    m2[1] = readFloat(data, position);
-    m2[2] = readFloat(data, position);
-
-    m3[0] = readFloat(data, position);
-    m3[1] = readFloat(data, position);
-    m3[2] = readFloat(data, position);
-
-    result.rotation = glm::mat3(m1, m2, m3);
-
-    return result;
-  }
-
-  SCMAP::DecalGroup SCMAP::readDecalGroup(const std::vector<unsigned char>&data, size_t&position) {
-    SCMAP::DecalGroup result;
-    result.id   = readInt   (data, position);
-    result.name = readString(data, position);
-    int len = readInt(data, position);
-    for (int i = 0; i < len; i++)
-      result.data.push_back(readInt(data, position));
-    return result;
-  }
-
-  SCMAP::Decal SCMAP::readDecal(const std::vector<unsigned char>&data, size_t&position) {
-    SCMAP::Decal result;
-    result.id   = readInt(data, position);
-    result.type = readInt(data, position);
-    int textureCount = readInt(data, position);
-    for (int i = 0; i < textureCount; i++) {
-      int stringLen = readInt(data, position);
-      result.TexturePaths.push_back(readString(data, position, stringLen));
-    }
-
-    result.scale[0]      = readFloat(data, position);
-    result.scale[1]      = readFloat(data, position);
-    result.scale[2]      = readFloat(data, position);
-                         
-    result.position[0]   = readFloat(data, position);
-    result.position[1]   = readFloat(data, position);
-    result.position[2]   = readFloat(data, position);
-                         
-    result.rotation[0]   = readFloat(data, position);
-    result.rotation[1]   = readFloat(data, position);
-    result.rotation[2]   = readFloat(data, position);
-
-    result.cutOffLOD     = readFloat(data, position);
-    result.nearCutOffLOD = readFloat(data, position);
-    result.ownerArmy     = readFloat(data, position);
-
-    return result;
-  }
-
-  SCMAP::Layer SCMAP::readLayer(const std::vector<unsigned char>&data, size_t&position) {
-    SCMAP::Layer result;
-    result.pathTexture    = readString(data, position);
-    result.pathNormalmap  = readString(data, position);
-    result.scaleTexture   = readFloat (data, position);
-    result.scaleNormalMap = readFloat (data, position);    
     return result;
   }
 

@@ -61,33 +61,14 @@ namespace Aezesel {
       float       frameRateSecond;
       float       stripCount     ;
     };
-    struct Layer {
-      std::string pathTexture   ;
-      std::string pathNormalmap ;
-      float       scaleTexture  ;
-      float       scaleNormalMap;
+    struct ScaledTexture {
+      std::string path ;
+      float       scale;
     };
     struct Decal {
-      int                      id           ;
-      int                      type         ;
-      std::vector<std::string> TexturePaths ;
-      glm::vec3                scale        ;
-      glm::vec3                position     ;
-      glm::vec3                rotation     ;
-      float                    cutOffLOD    ;
-      float                    nearCutOffLOD;
-      float                    ownerArmy    ;
+
     };
-    struct DecalGroup {
-      int id;
-      std::string name;
-      std::vector<int> data;
-    };
-    struct Prop {
-      std::string blueprintPath;
-      glm::vec3   position     ; 
-      glm::mat3   rotation     ;
-    };
+
     struct MapHeader {
       int                        versionMajor;
       float                      width;
@@ -128,17 +109,25 @@ namespace Aezesel {
 
       WaterShaderProperties      waterShaderProperties;
       std::vector<WaveGenerator> waveGenerators;
+
+      int cartographicContourInterval  ;
+      int cartographicDeepWaterColor   ;
+      int cartographicMapContourColor  ;
+      int cartographicMapShoreColor    ;
+      int cartographicMapLandStartColor;
+      int cartographicMapLandEndColor  ;
+
+      std::vector<ScaledTexture> terrainTexturePaths;
+      std::vector<ScaledTexture> terrainNormalPaths;
+      std::vector<Decal>         decals;
     };
 
     std::unique_ptr<SCMAP::Map> load(const std::string& filename);
     std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> loadPreview(const std::string& filename);
   private:
     std::unique_ptr<SCMAP::Map> readMap            (const std::vector<unsigned char>&, size_t&);
-    MapHeader             readMapHeader            (const std::vector<unsigned char>&, size_t&);
-    Prop                  readProp                 (const std::vector<unsigned char>&, size_t&);
-    DecalGroup            readDecalGroup           (const std::vector<unsigned char>&, size_t&);
     Decal                 readDecal                (const std::vector<unsigned char>&, size_t&);
-    Layer                 readLayer                (const std::vector<unsigned char>&, size_t&);
+    MapHeader             readMapHeader            (const std::vector<unsigned char>&, size_t&);
     WaveGenerator         readWaveGenerator        (const std::vector<unsigned char>&, size_t&);
     WaterShaderProperties readWaterShaderProperties(const std::vector<unsigned char>&, size_t&);
     WaveTexture           readWaveTexture          (const std::vector<unsigned char>&, size_t&);

@@ -33,7 +33,7 @@ MapSelection::MapSelection(std::string mapPath, Iyathuum::glmAABB<2> area, Graph
   }
 
   _list = std::make_unique<ListSelection>(maps, niceNamesMaps, area, _graphic.getWindow(), [mapPath,this](std::string newMap) {
-
+    _factory->loadMap(newMap)->loadFull();
 
   }, [this](Iyathuum::glmAABB<2> loc, std::string name, bool hovered) {
     _graphic.getWindow()->renderer().rectangle().start();
