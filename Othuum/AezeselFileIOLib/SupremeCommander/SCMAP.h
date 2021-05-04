@@ -88,18 +88,22 @@ namespace Aezesel {
       glm::vec3   position     ; 
       glm::mat3   rotation     ;
     };
-    struct Map {
+    struct MapHeader {
       int                        versionMajor;
-      float                      width ;
+      float                      width;
       float                      height;
       std::vector<unsigned char> previewImageData;
+    };
+    struct Map {
+      MapHeader header;
+
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> previewImage;
+
       int                        versionMinor;
       int                        resolutionWidth;
       int                        resolutionHeight;
       float                      heightScale;
 
-      std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> previewImage;
-      
       std::string                       terrainShader;
       std::string                       background;
       std::string                       skyCubemap;
@@ -127,8 +131,10 @@ namespace Aezesel {
     };
 
     std::unique_ptr<SCMAP::Map> load(const std::string& filename);
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> loadPreview(const std::string& filename);
   private:
     std::unique_ptr<SCMAP::Map> readMap            (const std::vector<unsigned char>&, size_t&);
+    MapHeader             readMapHeader            (const std::vector<unsigned char>&, size_t&);
     Prop                  readProp                 (const std::vector<unsigned char>&, size_t&);
     DecalGroup            readDecalGroup           (const std::vector<unsigned char>&, size_t&);
     Decal                 readDecal                (const std::vector<unsigned char>&, size_t&);

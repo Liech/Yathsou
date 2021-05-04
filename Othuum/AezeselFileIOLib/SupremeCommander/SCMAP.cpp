@@ -11,18 +11,28 @@ namespace Aezesel {
     return readMap(_buffer, _fileposition);
   }
 
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> SCMAP::loadPreview(const std::string& filename) {
+    std::ifstream input(filename, std::ios::binary);
+    if (input.fail())
+      throw std::runtime_error("Error opening " + filename);
+    std::vector<unsigned char> data;
+    data.resize(34);
+    input.read((char*)data.data(), 34);
+    size_t position = 0;
+
+    auto header = readMapHeader(data, position);
+
+    int lengthOfPreviewImage = readInt(data, position);
+    data.resize(34 + lengthOfPreviewImage);
+    input.read((char*)(data.data()+34), lengthOfPreviewImage);
+
+    std::vector<unsigned char> rawPreview = read(data, position, lengthOfPreviewImage);
+    return Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, rawPreview);
+  }
+
   std::unique_ptr<SCMAP::Map> SCMAP::readMap(const std::vector<unsigned char>&data, size_t&position) {
-    std::string magic = readString(data, position, 4);
-    if (!magic.starts_with("Map"))
-      throw std::runtime_error("Wrong Format");
     auto result = std::make_unique<SCMAP::Map>();
-    result->versionMajor = readInt(data, position);
-    readInt(data, position);
-    readInt(data, position);
-    result->width  = readFloat(data, position);
-    result->height = readFloat(data, position);
-    readInt(data, position);
-    readUShort(data, position);
+    result->header = readMapHeader(data, position);
 
     int lengthOfPreviewImage = readInt(data, position);
     {
@@ -91,6 +101,21 @@ namespace Aezesel {
       result->waveGenerators.push_back(readWaveGenerator(data, position));
 
     return std::move(result);
+  }
+
+  SCMAP::MapHeader SCMAP::readMapHeader(const std::vector<unsigned char>& data, size_t&position) {
+    std::string magic = readString(data, position, 4);
+    if (!magic.starts_with("Map"))
+      throw std::runtime_error("Wrong Format");
+    SCMAP::MapHeader result;
+    result.versionMajor = readInt(data, position);
+    readInt(data, position);
+    readInt(data, position);
+    result.width = readFloat(data, position);
+    result.height = readFloat(data, position);
+    readInt(data, position);
+    readUShort(data, position);
+    return result;
   }
 
   SCMAP::Prop SCMAP::readProp(const std::vector<unsigned char>&data, size_t&position) {

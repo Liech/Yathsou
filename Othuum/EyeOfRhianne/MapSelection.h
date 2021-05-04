@@ -21,14 +21,8 @@ namespace Aezesel {
 namespace Athanah {
   class SupComModel;
   class Scenario;
+  class MapFactory;
 }
-
-struct map {
-  std::shared_ptr<Athanah::Scenario> scenario;
-  std::shared_ptr<Ahwassa::Texture>  preview ;
-  std::shared_ptr<Aezesel::SCMAP>    map;
-  std::string name;
-};
 
 class MapSelection {
 public:
@@ -41,10 +35,9 @@ public:
   bool isVisible();
 
 private:
-                                                      
-  std::shared_ptr<Ahwassa::Texture> _previewImage{ nullptr };
-  Graphic&                                                  _graphic;
-  std::unique_ptr<ListSelection  >                          _list = nullptr;
-  Iyathuum::glmAABB<2>                                      _area;
-  std::map<std::string, map> _scenarios;
+                                      
+  std::shared_ptr<Athanah::MapFactory> _factory;
+  Graphic&                             _graphic;
+  std::unique_ptr<ListSelection  >     _list   = nullptr;
+  Iyathuum::glmAABB<2>                 _area   ;
 };

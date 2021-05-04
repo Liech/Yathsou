@@ -19,6 +19,12 @@
     <Filter Include="Source Files\Blueprint">
       <UniqueIdentifier>{220bdfa2-ffca-49b1-99c7-8cdfe0d9976b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Map">
+      <UniqueIdentifier>{bd0af324-5cb0-48db-a14d-cddc9b5781ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Map">
+      <UniqueIdentifier>{dbb3dfd8-e54c-45a9-955b-261b11123610}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxVisualization.h">
@@ -66,11 +72,17 @@
     <ClInclude Include="Blueprint\BlueprintGeneral.h">
       <Filter>Header Files\Blueprint</Filter>
     </ClInclude>
-    <ClInclude Include="Scenario.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Blueprint\BlueprintDisplay.h">
       <Filter>Header Files\Blueprint</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\MapFactory.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Scenario.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Map.h">
+      <Filter>Header Files\Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,11 +128,17 @@
     <ClCompile Include="Blueprint\BlueprintGeneral.cpp">
       <Filter>Source Files\Blueprint</Filter>
     </ClCompile>
-    <ClCompile Include="Scenario.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Blueprint\BlueprintDisplay.cpp">
       <Filter>Source Files\Blueprint</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MapFactory.cpp">
+      <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Scenario.cpp">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
