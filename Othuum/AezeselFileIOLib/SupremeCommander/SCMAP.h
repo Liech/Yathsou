@@ -65,9 +65,29 @@ namespace Aezesel {
       std::string path ;
       float       scale;
     };
+    enum class DecalType {
+      Albedo = 1,
+      Normals = 2,
+      WaterMask = 3,
+      WaterAlbedo = 4,
+      WaterNormals = 5,
+      Glow = 6,
+      AlphaNormals = 7,
+      GlowMask = 8
+    };
     struct Decal {
-      int id;
-
+      int         id       ;
+      DecalType   type     ;
+      std::string path     ;
+      glm::vec3   scale    ;
+      glm::vec3   position ;
+      glm::vec3   rotation ;
+      float       cutOffLOD;      
+    };
+    struct DecalGroup {
+      int              id    ;
+      std::string      name  ;
+      std::vector<int> member;
     };
 
     struct MapHeader {
@@ -121,12 +141,14 @@ namespace Aezesel {
       std::vector<ScaledTexture> terrainTexturePaths;
       std::vector<ScaledTexture> terrainNormalPaths;
       std::vector<Decal>         decals;
+      std::vector<DecalGroup>    decalGroups;
     };
 
     std::unique_ptr<SCMAP::Map> load(const std::string& filename);
     std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> loadPreview(const std::string& filename);
   private:
     std::unique_ptr<SCMAP::Map> readMap            (const std::vector<unsigned char>&, size_t&);
+    DecalGroup            readDecalGroup           (const std::vector<unsigned char>&, size_t&);
     Decal                 readDecal                (const std::vector<unsigned char>&, size_t&);
     MapHeader             readMapHeader            (const std::vector<unsigned char>&, size_t&);
     WaveGenerator         readWaveGenerator        (const std::vector<unsigned char>&, size_t&);

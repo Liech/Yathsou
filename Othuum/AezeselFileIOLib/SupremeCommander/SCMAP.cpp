@@ -131,12 +131,49 @@ namespace Aezesel {
     for (int i = 0; i < decalCount; i++)
       result->decals[i] = readDecal(data,position);
 
+    int decalGroupCount = readInt(data, position);
+    result->decalGroups.resize(decalGroupCount);
+    for (int i = 0; i < decalCount; i++)
+      result->decalGroups[i] = readDecalGroup(data, position);
+
     return std::move(result);
+  }
+
+  SCMAP::DecalGroup SCMAP::readDecalGroup(const std::vector<unsigned char>&data, size_t&position) {
+    SCMAP::DecalGroup result;
+    result.id   = readInt   (data, position);
+    result.name = readString(data, position);
+    int numberOfMembers = readInt(data, position);
+    result.member.resize(numberOfMembers);
+    for (int i = 0; i < numberOfMembers; i++)
+      result.member[i] = readInt(data, position);
+    return result;
   }
 
   SCMAP::Decal SCMAP::readDecal(const std::vector<unsigned char>& data, size_t& position) {
     SCMAP::Decal result;
-    
+    result.id   = readInt(data,position);
+    result.type = (SCMAP::DecalType)readInt(data, position);
+    readInt(data, position);//2
+    result.path = readString(data, position);
+    readString(data, position);
+
+    result.scale[0] = readFloat(data, position);
+    result.scale[1] = readFloat(data, position);
+    result.scale[2] = readFloat(data, position);
+
+    result.position[0] = readFloat(data, position);
+    result.position[1] = readFloat(data, position);
+    result.position[2] = readFloat(data, position);
+
+    result.rotation[0] = readFloat(data, position);
+    result.rotation[1] = readFloat(data, position);
+    result.rotation[2] = readFloat(data, position);
+
+    result.cutOffLOD = readFloat(data, position);
+    readFloat(data, position);//0
+    readFloat(data, position);//-1
+
     return result;
   }
 
