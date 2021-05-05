@@ -66,6 +66,7 @@ namespace Aezesel {
       float       scale;
     };
     struct Decal {
+      int id;
 
     };
 

@@ -135,7 +135,9 @@ namespace Aezesel {
   }
 
   SCMAP::Decal SCMAP::readDecal(const std::vector<unsigned char>& data, size_t& position) {
-
+    SCMAP::Decal result;
+    
+    return result;
   }
 
   SCMAP::MapHeader SCMAP::readMapHeader(const std::vector<unsigned char>& data, size_t&position) {
