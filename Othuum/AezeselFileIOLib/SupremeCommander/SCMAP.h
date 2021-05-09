@@ -91,12 +91,50 @@ namespace Aezesel {
       std::string      name  ;
       std::vector<int> member;
     };
-
     struct MapHeader {
       int                        versionMajor;
       float                      width;
       float                      height;
       std::vector<unsigned char> previewImageData;
+    };
+    struct Planet {
+      glm::vec3 position;
+      float     rotation;
+      glm::vec2 scale   ;
+      glm::vec4 uv      ;
+    };
+    struct Cirrus {
+      glm::vec2 frequency;
+      float     speed    ;
+      glm::vec2 direction;
+    };
+    struct SkyBox {
+      glm::vec3 position           ;
+      float     horizonHeight      ;
+      float     scale              ;
+      float     subHeight          ;
+      int       subDivAx           ;
+      int       subDivHeight       ;
+      float     zenithHeight       ;
+      glm::vec3 horizonColor       ;
+      glm::vec3 zenithColor        ;
+      float     decalGlowMultiplier;
+
+      std::string         albedo ;
+      std::string         glow   ;
+      std::vector<Planet> planets;
+
+      Iyathuum::Color     midRgbColor;
+
+      float               cirrusMultiplier;
+      glm::vec3           cirrusColor     ;
+      std::string         cirrusTexture   ;
+
+      std::vector<Cirrus> cirrusLayer     ;
+      float               sevenClouds     ;
+    };
+    struct Prop {
+
     };
     struct Map {
       MapHeader header;
@@ -159,19 +197,22 @@ namespace Aezesel {
       std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char, 2>> depthBiasMaskData;
       std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char, 2>> terrainTypeData  ;
 
-
+      SkyBox            skybox;
+      std::vector<Prop> props ;
     };
 
     std::unique_ptr<SCMAP::Map> load(const std::string& filename);
     std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> loadPreview(const std::string& filename);
   private:
-    std::unique_ptr<SCMAP::Map> readMap            (const std::vector<unsigned char>&, size_t&);
-    DecalGroup            readDecalGroup           (const std::vector<unsigned char>&, size_t&);
-    Decal                 readDecal                (const std::vector<unsigned char>&, size_t&);
-    MapHeader             readMapHeader            (const std::vector<unsigned char>&, size_t&);
-    WaveGenerator         readWaveGenerator        (const std::vector<unsigned char>&, size_t&);
-    WaterShaderProperties readWaterShaderProperties(const std::vector<unsigned char>&, size_t&);
-    WaveTexture           readWaveTexture          (const std::vector<unsigned char>&, size_t&);
+    std::unique_ptr<SCMAP::Map> readMap                  (const std::vector<unsigned char>&, size_t&);
+    Prop                        readProp                 (const std::vector<unsigned char>&, size_t&);
+    SkyBox                      readSkyBox               (const std::vector<unsigned char>&, size_t&);
+    DecalGroup                  readDecalGroup           (const std::vector<unsigned char>&, size_t&);
+    Decal                       readDecal                (const std::vector<unsigned char>&, size_t&);
+    MapHeader                   readMapHeader            (const std::vector<unsigned char>&, size_t&);
+    WaveGenerator               readWaveGenerator        (const std::vector<unsigned char>&, size_t&);
+    WaterShaderProperties       readWaterShaderProperties(const std::vector<unsigned char>&, size_t&);
+    WaveTexture                 readWaveTexture          (const std::vector<unsigned char>&, size_t&);
 
     size_t                     _fileposition = 0;
     std::vector<unsigned char> _buffer;

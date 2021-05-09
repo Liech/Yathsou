@@ -183,17 +183,13 @@ namespace Aezesel {
     result->terrainTypeData = std::make_unique<Iyathuum::MultiDimensionalArray<unsigned char, 2>>(result->mapWidth, (result->mapHeight));
     result->terrainTypeData->vector() = read(data, position, result->mapHeight * result->mapWidth);
 
-    //SkyBox skyBox = null;
-    //if (version >= 60) {
-    //  skyBox = readSkyBox();
-    //}
-    //
-    //// props
-    //int propCount = readInt();
-    //Prop[] props = new Prop[propCount];
-    //for (int i = 0; i < propCount; i++) {
-    //  props[i] = readProp();
-    //}
+    result->skybox = readSkyBox(data, position);
+
+    int propCount = readInt(data,position);
+    result->props.resize(propCount);
+    for (int i = 0; i < propCount; i++) {
+      result->props[i] = readProp(data,position);
+    }
 
     return std::move(result);
   }
@@ -322,4 +318,8 @@ namespace Aezesel {
     return result;
   }
 
+  SCMAP::SkyBox SCMAP::readSkyBox(const std::vector<unsigned char>&, size_t&) {
+    SCMAP::SkyBox result;
+    return result;
+  }
 }
