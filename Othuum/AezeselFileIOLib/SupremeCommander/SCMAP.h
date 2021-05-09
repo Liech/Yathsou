@@ -40,7 +40,7 @@ namespace Aezesel {
       float                      sunGlow         ;
       std::string                waterCubemapPath;
       std::string                waterRamp       ;
-      std::array<WaveTexture, 3> waves           ;
+      std::array<WaveTexture, 4> waves           ;
     };
     struct WaveGenerator {
       std::string textureName    ;
@@ -76,13 +76,15 @@ namespace Aezesel {
       GlowMask = 8
     };
     struct Decal {
-      int         id       ;
-      DecalType   type     ;
-      std::string path     ;
-      glm::vec3   scale    ;
-      glm::vec3   position ;
-      glm::vec3   rotation ;
-      float       cutOffLOD;      
+      int                      id           ;       
+      DecalType                type         ;
+      std::vector<std::string> texturePaths ;
+      glm::vec3                scale        ;
+      glm::vec3                position     ;
+      glm::vec3                rotation     ;
+      float                    cutOffLOD    ;      
+      float                    nearCutOffLOD;
+      int                      ownerArmy    ;
     };
     struct DecalGroup {
       int              id    ;
@@ -102,8 +104,8 @@ namespace Aezesel {
       std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> previewImage;
 
       int                        versionMinor;
-      int                        resolutionWidth;
-      int                        resolutionHeight;
+      int                        heightMapWidth;
+      int                        heightMapHeight;
       float                      heightScale;
 
       std::string                       terrainShader;
@@ -142,6 +144,22 @@ namespace Aezesel {
       std::vector<ScaledTexture> terrainNormalPaths;
       std::vector<Decal>         decals;
       std::vector<DecalGroup>    decalGroups;
+
+      int mapWidth;
+      int mapHeight;
+
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> normalMap      ;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> lowTexture     ;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> highTexture    ;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> waterMapTexture;
+
+
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char, 2>> waterFoamMaskData;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char, 2>> flatnessData     ;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char, 2>> depthBiasMaskData;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char, 2>> terrainTypeData  ;
+
+
     };
 
     std::unique_ptr<SCMAP::Map> load(const std::string& filename);

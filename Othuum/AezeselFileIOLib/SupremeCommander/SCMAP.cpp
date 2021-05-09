@@ -41,11 +41,11 @@ namespace Aezesel {
     }
 
     result->versionMinor     = readInt(data, position);
-    result->resolutionWidth  = readInt(data, position);
-    result->resolutionHeight = readInt(data, position);
+    result->heightMapWidth  = readInt(data, position);
+    result->heightMapHeight = readInt(data, position);
     result->heightScale      = readFloat(data, position); //usually 1/128
     {
-      int pixelAmount = ((result->resolutionHeight + 1) * (result->resolutionWidth + 1));
+      int pixelAmount = ((result->heightMapHeight + 1) * (result->heightMapWidth + 1));
       std::vector<unsigned char> rawMap = read(data, position,pixelAmount*2+1);
       //HeightmapData = ReadArray(of Int16))
     }
@@ -110,6 +110,7 @@ namespace Aezesel {
     result->cartographicMapLandStartColor = readInt(data,position);
     result->cartographicMapLandEndColor   = readInt(data,position);
 
+
     for (int i = 0; i < 10; i++) {
       ScaledTexture sub;
       sub.path = readString(data, position);
@@ -123,8 +124,8 @@ namespace Aezesel {
       result->terrainNormalPaths.push_back(sub);
     }
 
-    readInt(data, position);
-    readInt(data, position);
+    int a = readInt(data, position);
+    int b = readInt(data, position);
 
     int decalCount = readInt(data, position);
     result->decals.resize(decalCount);
@@ -133,8 +134,66 @@ namespace Aezesel {
 
     int decalGroupCount = readInt(data, position);
     result->decalGroups.resize(decalGroupCount);
-    for (int i = 0; i < decalCount; i++)
+    for (int i = 0; i < decalGroupCount; i++)
       result->decalGroups[i] = readDecalGroup(data, position);
+
+    result->mapWidth  = readInt(data, position);
+    result->mapHeight = readInt(data, position);
+
+    readInt(data, position);//number of images = 1
+    int lengthOfNormalMap = readInt(data, position);
+    {
+      std::vector<unsigned char> rawPreview = read(data, position, lengthOfNormalMap);
+      result->normalMap = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, rawPreview);
+    }
+
+    int lengthOfLowMap = readInt(data, position);
+    {
+      std::vector<unsigned char> rawPreview = read(data, position, lengthOfNormalMap);
+      result->lowTexture = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, rawPreview);
+    }
+
+    int lengthOfHighMap = readInt(data, position);
+    {
+      std::vector<unsigned char> rawPreview = read(data, position, lengthOfNormalMap);
+      result->highTexture = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, rawPreview);
+    }
+
+    if (readInt(data, position) != 1) {
+      throw std::runtime_error("File not valid SCMap");
+    }
+
+    int lengthOfWaterMapData = readInt(data, position);
+    {
+      std::vector<unsigned char> rawPreview = read(data, position, lengthOfWaterMapData);
+      result->waterMapTexture = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, rawPreview);
+    }
+
+    int halfSize = (result->mapHeight / 2) * (result->mapWidth / 2);
+    
+    result->waterFoamMaskData = std::make_unique<Iyathuum::MultiDimensionalArray<unsigned char, 2>>(result->mapWidth / 2, (result->mapHeight / 2));
+    result->waterFoamMaskData->vector() = read(data, position, halfSize);
+
+    result->flatnessData = std::make_unique<Iyathuum::MultiDimensionalArray<unsigned char, 2>>(result->mapWidth / 2, (result->mapHeight / 2));
+    result->flatnessData->vector() = read(data, position, halfSize);
+
+    result->depthBiasMaskData = std::make_unique<Iyathuum::MultiDimensionalArray<unsigned char, 2>>(result->mapWidth / 2, (result->mapHeight / 2));
+    result->depthBiasMaskData->vector() = read(data, position, halfSize);
+
+    result->terrainTypeData = std::make_unique<Iyathuum::MultiDimensionalArray<unsigned char, 2>>(result->mapWidth, (result->mapHeight));
+    result->terrainTypeData->vector() = read(data, position, result->mapHeight * result->mapWidth);
+
+    //SkyBox skyBox = null;
+    //if (version >= 60) {
+    //  skyBox = readSkyBox();
+    //}
+    //
+    //// props
+    //int propCount = readInt();
+    //Prop[] props = new Prop[propCount];
+    //for (int i = 0; i < propCount; i++) {
+    //  props[i] = readProp();
+    //}
 
     return std::move(result);
   }
@@ -152,11 +211,15 @@ namespace Aezesel {
 
   SCMAP::Decal SCMAP::readDecal(const std::vector<unsigned char>& data, size_t& position) {
     SCMAP::Decal result;
+
     result.id   = readInt(data,position);
-    result.type = (SCMAP::DecalType)readInt(data, position);
-    readInt(data, position);//2
-    result.path = readString(data, position);
-    readString(data, position);
+    result.type = (DecalType)readInt(data, position);
+    int textureCount = readInt(data, position);
+    result.texturePaths.resize(textureCount);
+    for (int i = 0; i < result.texturePaths.size(); i++){
+      int stringLength = readInt(data, position);
+      result.texturePaths[i] = readString(data, position, stringLength);
+    }
 
     result.scale[0] = readFloat(data, position);
     result.scale[1] = readFloat(data, position);
@@ -170,10 +233,9 @@ namespace Aezesel {
     result.rotation[1] = readFloat(data, position);
     result.rotation[2] = readFloat(data, position);
 
-    result.cutOffLOD = readFloat(data, position);
-    readFloat(data, position);//0
-    readFloat(data, position);//-1
-
+    result.cutOffLOD     = readFloat(data, position);
+    result.nearCutOffLOD = readFloat(data, position);
+    result.ownerArmy     = readInt  (data, position);
     return result;
   }
 
