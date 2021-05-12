@@ -194,6 +194,27 @@ namespace Aezesel {
     return std::move(result);
   }
 
+  SCMAP::Prop SCMAP::readProp(const std::vector<unsigned char>& data, size_t& position) {
+    SCMAP::Prop result;
+    result.path = readString(data, position);
+    result.position[0] = readFloat(data, position);
+    result.position[1] = readFloat(data, position);
+    result.position[2] = readFloat(data, position);
+    result.rotationX[0] = readFloat(data, position);
+    result.rotationX[1] = readFloat(data, position);
+    result.rotationX[2] = readFloat(data, position);
+    result.rotationY[0] = readFloat(data, position);
+    result.rotationY[1] = readFloat(data, position);
+    result.rotationY[2] = readFloat(data, position);
+    result.rotationZ[0] = readFloat(data, position);
+    result.rotationZ[1] = readFloat(data, position);
+    result.rotationZ[2] = readFloat(data, position);
+    result.scale    [0] = readFloat(data, position);
+    result.scale    [1] = readFloat(data, position);
+    result.scale    [2] = readFloat(data, position);
+    return result;
+  }
+
   SCMAP::DecalGroup SCMAP::readDecalGroup(const std::vector<unsigned char>&data, size_t&position) {
     SCMAP::DecalGroup result;
     result.id   = readInt   (data, position);
@@ -318,8 +339,72 @@ namespace Aezesel {
     return result;
   }
 
-  SCMAP::SkyBox SCMAP::readSkyBox(const std::vector<unsigned char>&, size_t&) {
+  SCMAP::SkyBox SCMAP::readSkyBox(const std::vector<unsigned char>&data, size_t&position) {
     SCMAP::SkyBox result;
+
+    result.position[0] = readFloat(data,position);
+    result.position[1] = readFloat(data,position);
+    result.position[2] = readFloat(data,position);
+
+    result.horizonHeight = readFloat(data,position);
+    result.scale         = readFloat(data,position);
+    result.subHeight     = readFloat(data,position);
+    result.subDivAx      = readInt  (data,position);
+    result.subDivHeight  = readInt  (data,position);
+    result.zenithHeight  = readFloat(data,position);
+
+    result.horizonColor[0] = readFloat(data, position);
+    result.horizonColor[1] = readFloat(data, position);
+    result.horizonColor[2] = readFloat(data, position);
+    result.zenithColor [0] = readFloat(data, position);
+    result.zenithColor [1] = readFloat(data, position);
+    result.zenithColor [2] = readFloat(data, position);
+
+    result.decalGlowMultiplier = readFloat(data,position);
+
+    result.albedo = readString(data, position);
+    result.glow   = readString(data, position);
+
+    // Array of Planets/Stars
+    int length = readInt(data,position);
+    result.planets.resize(length);
+    for (int i = 0; i < length; i++) {
+      result.planets[i].position[0] = readFloat(data, position);
+      result.planets[i].position[1] = readFloat(data, position);
+      result.planets[i].position[2] = readFloat(data, position);
+      result.planets[i].rotation    = readFloat(data, position);
+      result.planets[i].scale[0]    = readFloat(data, position);
+      result.planets[i].scale[1]    = readFloat(data, position);
+      result.planets[i].uv[0]    = readFloat(data, position);
+      result.planets[i].uv[1]    = readFloat(data, position);
+      result.planets[i].uv[2]    = readFloat(data, position);
+      result.planets[i].uv[3]    = readFloat(data, position);
+    }
+
+    // Mid
+    result.midRgbColor[0] = read(data, position, 1)[0];
+    result.midRgbColor[1] = read(data, position, 1)[0];
+    result.midRgbColor[2] = read(data, position, 1)[0];
+    result.midRgbColor[3] = 255;
+
+    // Cirrus
+    result.cirrusMultiplier = readFloat(data, position);
+    result.cirrusColor[0] = readFloat(data, position);
+    result.cirrusColor[1] = readFloat(data, position);
+    result.cirrusColor[2] = readFloat(data, position);
+    result.cirrusTexture = readString(data, position);
+
+    int cirrusLayerCount = readInt(data,position);
+    result.cirrusLayer.resize(cirrusLayerCount);
+    for (int i = 0; i < cirrusLayerCount; i++) {
+      result.cirrusLayer[i].frequency[0] = readFloat(data, position);
+      result.cirrusLayer[i].frequency[1] = readFloat(data, position);
+      result.cirrusLayer[i].speed        = readFloat(data, position);
+      result.cirrusLayer[i].direction[0] = readFloat(data, position);
+      result.cirrusLayer[i].direction[1] = readFloat(data, position);
+    }
+    result.sevenClouds = readFloat(data, position);
+
     return result;
   }
 }

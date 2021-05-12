@@ -134,7 +134,12 @@ namespace Aezesel {
       float               sevenClouds     ;
     };
     struct Prop {
-
+      std::string path;
+      glm::vec3 position;
+      glm::vec3 rotationX;
+      glm::vec3 rotationY;
+      glm::vec3 rotationZ;
+      glm::vec3 scale;
     };
     struct Map {
       MapHeader header;
