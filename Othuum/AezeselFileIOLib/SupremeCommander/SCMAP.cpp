@@ -46,9 +46,14 @@ namespace Aezesel {
     result->heightScale      = readFloat(data, position); //usually 1/128
     {
       int pixelAmount = ((result->heightMapHeight + 1) * (result->heightMapWidth + 1));
-      std::vector<unsigned char> rawMap = read(data, position,pixelAmount*2+1);
-      //HeightmapData = ReadArray(of Int16))
+      //std::vector<unsigned char> rawMap = read(data, position,pixelAmount*2+1);
+      result->heightMapData = std::make_unique<Iyathuum::MultiDimensionalArray<unsigned short, 2>>(result->heightMapWidth+1, result->heightMapHeight+1);
+      for (size_t i = 0; i < pixelAmount; i++)
+        result->heightMapData->get_linearRef(i) = readUShort(data, position);
+      read(data, position, 1);
     }
+
+
     result->terrainShader =  readString(data, position); //setons: 2363572
     result->background    =  readString(data, position);
     result->skyCubemap    =  readString(data, position);

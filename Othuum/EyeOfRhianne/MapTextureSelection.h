@@ -40,7 +40,7 @@ public:
 
 private:
   void setImage(std::string);
-  void setGeometry(int width, int height, std::function<unsigned char(int x, int y)>);
+  void setGeometry(int width, int height, std::function<float(int x, int y)>);
 
   Graphic&                                   _graphic;
   std::unique_ptr<ListSelection  >           _list = nullptr;
