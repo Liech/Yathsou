@@ -11,6 +11,7 @@
 #include "AhwassaGraphicsLib/PostProcessing/AdditiveComposer.h"
 #include "AhwassaGraphicsLib/PostProcessing/Bloom.h"
 #include "AhwassaGraphicsLib/PostProcessing/CubeReflection.h"
+#include "AhwassaGraphicsLib/Renderer/BoxRenderer.h"
 
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AthanahCommonLib/SupComMeshRendererDef.h"
@@ -23,6 +24,7 @@ Graphic::Graphic(Ahwassa::Window* window) {
   _cubeReflection = std::make_shared<Ahwassa::CubeReflection  >(_window, _window->getWidth(), _window->getHeight());
   _renderer       = std::make_shared<Athanah::SupComMeshRendererDef>(_window->camera());
   _reflectionTexture = std::make_shared<Ahwassa::CubeTexture>("Reflection", 0);
+  _boxRenderer = std::make_shared<Ahwassa::BoxRenderer>(getWindow()->camera());
 
   _textures.push_back(_bloom->getResult());
   _textures.push_back(_cubeReflection->getResult());
@@ -45,10 +47,12 @@ void Graphic::draw() {
   if (_bloomEnabled)
     _bloom->draw(_cubeReflection->getResult(), _composer->getRawTextures()[3], 1);
 
+
   _window->renderer().texture().start();
   _window->renderer().texture().draw(*_textures[_renderedTexture], Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_window->getWidth(), _window->getHeight())), true);
   _window->renderer().texture().end();
 
+  _boxRenderer->draw();
   if (_previewImage) {
     Iyathuum::glmAABB<2> textureLoc(glm::vec2(getWindow()->getWidth() - 400, 0), glm::vec2(400, 400));
     getWindow()->renderer().texture().start();

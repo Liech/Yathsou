@@ -25,6 +25,7 @@ namespace Ahwassa {
     void setLightDir(const glm::vec3&);
 
     void draw();
+    void clear();
   private:
     void shaderCall(const std::vector<glm::mat4>&, const std::vector<glm::vec3>&, size_t amount);
     void makeShader();

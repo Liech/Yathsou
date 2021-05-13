@@ -12,6 +12,7 @@ namespace Ahwassa {
   class CubeTexture;
   class Texture;
   class AdditiveComposer;
+  class BoxRenderer;
 }
 namespace Athanah {
   class SkyBox;
@@ -38,6 +39,7 @@ public:
   std::shared_ptr<Ahwassa::CubeTexture>           _reflectionTexture;
   std::shared_ptr<Ahwassa::Texture>               _previewImage{ nullptr };
   std::shared_ptr<Athanah::Map>                   _currentMap;
+  std::shared_ptr<Ahwassa::BoxRenderer>           _boxRenderer;
 
   Ahwassa::Window* getWindow();
 private:

@@ -10,6 +10,9 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTextRenderer.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
+#include "AhwassaGraphicsLib/Renderer/BoxRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/Box.h"
+#include "AhwassaGraphicsLib/Renderer/Dot.h"
 
 #include "ListSelection.h"
 #include "Graphic.h"
@@ -56,8 +59,12 @@ MapTextureSelection::MapTextureSelection(Iyathuum::glmAABB<2> area, Graphic& gra
 void MapTextureSelection::setImage(std::string img) {
   if (!_graphic._currentMap)
     return;
-  if (img == "None")
-    _graphic._previewImage = nullptr;
+  if (img == "None") {
+    _graphic._previewImage = nullptr; 
+    _graphic._boxRenderer->clear();
+    _boxes.clear();
+    _dots.clear();
+  }
   else if (img == "Preview")
     _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", _graphic._currentMap->scmap().previewImage.get());
   else if (img == "High")
@@ -105,6 +112,7 @@ void MapTextureSelection::setImage(std::string img) {
       clr = result;
     });
     _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", colored.get());
+    setGeometry(colored->getDimension(0), colored->getDimension(1), [im,channel](int x, int y) {return (unsigned char)im->getVal(x, y)[channel]; });
   }
   else {
     Iyathuum::MultiDimensionalArray<unsigned char, 2>* m;
@@ -125,7 +133,25 @@ void MapTextureSelection::setImage(std::string img) {
       clr = result;
     });
     _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", colored.get());
+    setGeometry(colored->getDimension(0), colored->getDimension(1), [m](int x, int y) {return (unsigned char)m->getVal(x, y); });
   }
+}
+
+
+void MapTextureSelection::setGeometry(int width, int height, std::function<unsigned char(int x,int y)> f) {
+  _graphic._boxRenderer->clear();
+  _boxes.clear();
+  _dots.clear();
+  float scale = 0.1f;
+  for (int x = 0; x < width; x++)
+    for (int y = 0; y < height; y++)
+    {
+      //_dots.push_back(_renderer->newDot(glm::vec3(x, f(x, y)*scale, y) * scale, scale));
+      glm::mat4 t(1);
+      t = glm::translate(t,glm::vec3(x, 0, y)*scale);
+      t = glm::scale(t, glm::vec3(scale, scale * scale * f(x, y), scale));
+      _boxes.push_back(_graphic._boxRenderer->newBox(t));
+    }
 }
 
 void MapTextureSelection::setVisible(bool value) {

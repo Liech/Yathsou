@@ -97,6 +97,11 @@ namespace Ahwassa {
     glDepthFunc(GL_LESS);
   }
 
+  void BoxRenderer::clear() {
+    _instances.clear();
+  }
+
+
   void BoxRenderer::makeModelArray(size_t bufferSize) {
     _vars->models = std::make_unique<UniformVecMat4>("models", bufferSize);
     _vars->colors = std::make_unique<UniformVecVec3>("colors", bufferSize);
