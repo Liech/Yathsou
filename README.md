@@ -2,11 +2,9 @@
 
 RTS Engine fragments.
 
-Could also become a RPG one day.
-
 # Goal
 
-In an recreational project the goals may change at any given time. Currently the longterm goal is to create an engine, which is suited for RPG and RTS games. The initial dream, which is still tracked but also still very far away, is to recreate a Supreme Commander total conversion mod.
+In an recreational project the goals may change at any given time. Currently the longterm goal is to create an engine, which is suited for RPG and RTS games. The initial dream, which is still tracked, but also still very far away, is to create a Supreme Commander total conversion mod.
 
 # Current Work
 
@@ -21,10 +19,13 @@ Since the last "Release" it got extended with:
  * .BP blueprint file loading and utilization
    * Showing unit names
    * Showing Unit Icon/Faction/Strategic Icon
+   * sorting units after faction
+ * Maps
+   * FA SCMAP Format can be loaded (The vanilla format is not supported yet)
+   * textures inside the .scmap file can be viewed
+   * scmap textures can be viewed as height map (box renderer -> slow)
 
-Currently there is still work regarding better looking units. Reflection or SSR would look great.
-
-After that map loading will be the topic.
+Currently extending terrain capabilites is the topic.
 
 # Libraries
 
@@ -72,6 +73,7 @@ Offers:
  * forward renderer & deferred renderer
  * post processing system
   * Bloom 
+  * Cubemap reflections
  * play sound (prototype)
  * GUI System
  * interact with vr (prototype)
@@ -90,7 +92,10 @@ Offers:
  * PNG Load Save
  * SCM Load (Supreme Commander Model File)
  * SCA Load (Supreme Commander Animation File)
+ * SCMAP Load (Supreme Commander Map File)
  * MagicaVox loading
+ * Unzip files
+ * load 3d models with assimp (prototype)
 
 ## AthanahCommonLib
 
