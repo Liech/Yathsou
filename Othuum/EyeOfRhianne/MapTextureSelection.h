@@ -24,9 +24,9 @@ namespace Athanah {
   class MapFactory;
 }
 
-class MapSelection {
+class MapTextureSelection {
 public:
-  MapSelection(std::string mapPath, Iyathuum::glmAABB<2> area, Graphic&);
+  MapTextureSelection(Iyathuum::glmAABB<2> area, Graphic&);
 
   void update();
   void draw();
@@ -35,8 +35,8 @@ public:
   bool isVisible();
 
 private:
-                                      
-  std::shared_ptr<Athanah::MapFactory> _factory;
+  void setImage(std::string);
+
   Graphic&                             _graphic;
   std::unique_ptr<ListSelection  >     _list = nullptr;
   Iyathuum::glmAABB<2>                 _area   ;

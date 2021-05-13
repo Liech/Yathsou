@@ -48,6 +48,13 @@ void Graphic::draw() {
   _window->renderer().texture().start();
   _window->renderer().texture().draw(*_textures[_renderedTexture], Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_window->getWidth(), _window->getHeight())), true);
   _window->renderer().texture().end();
+
+  if (_previewImage) {
+    Iyathuum::glmAABB<2> textureLoc(glm::vec2(getWindow()->getWidth() - 400, 0), glm::vec2(400, 400));
+    getWindow()->renderer().texture().start();
+    getWindow()->renderer().texture().draw(*_previewImage, textureLoc);
+    getWindow()->renderer().texture().end();
+  }
 }
 
 Ahwassa::Window* Graphic::getWindow() {

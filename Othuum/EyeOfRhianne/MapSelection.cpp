@@ -32,9 +32,21 @@ MapSelection::MapSelection(std::string mapPath, Iyathuum::glmAABB<2> area, Graph
 
   }
 
-  _list = std::make_unique<ListSelection>(maps, niceNamesMaps, area, _graphic.getWindow(), [mapPath,this](std::string newMap) {
-    _factory->loadMap(newMap)->loadFull();
+  _list = std::make_unique<ListSelection>(maps, niceNamesMaps, area, _graphic.getWindow(), [mapPath, this](std::string newMap) {
+    auto map = _factory->loadMap(newMap);
+    map->loadFull();
 
+    auto& m = map->scmap().terrainTypeData;
+
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> colored = std::make_unique< Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(m->getDimensionVector());
+    colored->apply([&m](size_t pos, Iyathuum::Color& clr) {  
+      unsigned char d = m->get_linearVal(pos);
+      Iyathuum::Color result(d, 0, 0, 255);
+      clr = result;
+    });
+
+    _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", colored.get());
+    _graphic._currentMap = map;
   }, [this](Iyathuum::glmAABB<2> loc, std::string name, bool hovered) {
     _graphic.getWindow()->renderer().rectangle().start();
     _graphic.getWindow()->renderer().rectangle().drawRectangle(loc, hovered ? Iyathuum::Color(0.8f * 255, 0.8f * 255, 0.8f * 255) : Iyathuum::Color(0.4f * 255, 0.4f * 255, 0.4f * 255));
@@ -66,4 +78,5 @@ void MapSelection::update() {
 
 void MapSelection::draw() {
   _list->draw();
+
 }

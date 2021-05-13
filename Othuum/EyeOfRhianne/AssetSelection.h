@@ -16,6 +16,7 @@ class SkyBoxSelection;
 class ListSelection;
 class RendererSelection;
 class MapSelection;
+class MapTextureSelection;
 class Graphic;
 
 class AssetSelection {
@@ -38,10 +39,11 @@ private:
   Graphic&                            _graphic;
   Iyathuum::glmAABB<2>                _area;
 
-  std::shared_ptr<UnitModelSelection> _units    ;
-  std::shared_ptr<AnimationSelection> _animation;
-  std::shared_ptr<SkyBoxSelection   > _skyBox   ;
-  std::shared_ptr<RendererSelection > _renderer ;
-  std::shared_ptr<MapSelection      > _maps     ;
+  std::shared_ptr<UnitModelSelection > _units     ;
+  std::shared_ptr<AnimationSelection > _animation ;
+  std::shared_ptr<SkyBoxSelection    > _skyBox    ;
+  std::shared_ptr<RendererSelection  > _renderer  ;
+  std::shared_ptr<MapSelection       > _maps      ;
+  std::shared_ptr<MapTextureSelection> _mapTexture;
   EyeOfRhianneConfiguration& _config;
 };

@@ -153,6 +153,7 @@
     <ClCompile Include="ListSelection.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapSelection.cpp" />
+    <ClCompile Include="MapTextureSelection.cpp" />
     <ClCompile Include="RendererSelection.cpp" />
     <ClCompile Include="SkyBoxSelection.cpp" />
     <ClCompile Include="UnitModelSelection.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="GraphicOptions.h" />
     <ClInclude Include="MapSelection.h" />
+    <ClInclude Include="MapTextureSelection.h" />
     <ClInclude Include="RendererSelection.h" />
     <ClInclude Include="SkyBoxSelection.h" />
     <ClInclude Include="UnitModelSelection.h" />
