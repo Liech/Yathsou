@@ -2,6 +2,7 @@ license stuff needed for:      |             |
 glm                            |Iyathuum     | Math
 gli                            |aezesel      | load .dds files
 lodepng                        |aezesel      | Load/Save PNG files
+assimp                         |aezesel      | load/save 3d models
 freetype                       |ahwassa      | Font
 glwf                           |ahwassa      | WindowManager
 glad                           |ahwassa      | OpenGL

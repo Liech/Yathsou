@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(ProjectDir)lib\minizip;$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(ProjectDir)lib;$(ProjectDir)lib\minizip;$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -127,7 +127,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-staticd.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-staticd.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;$(ProjectDir)lib/assimp/assimp-vc142-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -138,7 +138,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(ProjectDir)lib\minizip;$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(ProjectDir)lib;$(ProjectDir)lib\minizip;$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -151,11 +151,91 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-static.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-static.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;$(ProjectDir)lib/assimp/assimp-vc142-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ImageIO.h" />
+    <ClInclude Include="lib\assimp\aabb.h" />
+    <ClInclude Include="lib\assimp\ai_assert.h" />
+    <ClInclude Include="lib\assimp\anim.h" />
+    <ClInclude Include="lib\assimp\BaseImporter.h" />
+    <ClInclude Include="lib\assimp\Bitmap.h" />
+    <ClInclude Include="lib\assimp\BlobIOSystem.h" />
+    <ClInclude Include="lib\assimp\ByteSwapper.h" />
+    <ClInclude Include="lib\assimp\camera.h" />
+    <ClInclude Include="lib\assimp\cexport.h" />
+    <ClInclude Include="lib\assimp\cfileio.h" />
+    <ClInclude Include="lib\assimp\cimport.h" />
+    <ClInclude Include="lib\assimp\ColladaMetaData.h" />
+    <ClInclude Include="lib\assimp\color4.h" />
+    <ClInclude Include="lib\assimp\commonMetaData.h" />
+    <ClInclude Include="lib\assimp\Compiler\poppack1.h" />
+    <ClInclude Include="lib\assimp\Compiler\pstdint.h" />
+    <ClInclude Include="lib\assimp\Compiler\pushpack1.h" />
+    <ClInclude Include="lib\assimp\config.h" />
+    <ClInclude Include="lib\assimp\CreateAnimMesh.h" />
+    <ClInclude Include="lib\assimp\DefaultIOStream.h" />
+    <ClInclude Include="lib\assimp\DefaultIOSystem.h" />
+    <ClInclude Include="lib\assimp\DefaultLogger.hpp" />
+    <ClInclude Include="lib\assimp\Defines.h" />
+    <ClInclude Include="lib\assimp\defs.h" />
+    <ClInclude Include="lib\assimp\Exceptional.h" />
+    <ClInclude Include="lib\assimp\Exporter.hpp" />
+    <ClInclude Include="lib\assimp\fast_atof.h" />
+    <ClInclude Include="lib\assimp\GenericProperty.h" />
+    <ClInclude Include="lib\assimp\Hash.h" />
+    <ClInclude Include="lib\assimp\Importer.hpp" />
+    <ClInclude Include="lib\assimp\importerdesc.h" />
+    <ClInclude Include="lib\assimp\IOStream.hpp" />
+    <ClInclude Include="lib\assimp\IOStreamBuffer.h" />
+    <ClInclude Include="lib\assimp\IOSystem.hpp" />
+    <ClInclude Include="lib\assimp\light.h" />
+    <ClInclude Include="lib\assimp\LineSplitter.h" />
+    <ClInclude Include="lib\assimp\LogAux.h" />
+    <ClInclude Include="lib\assimp\Logger.hpp" />
+    <ClInclude Include="lib\assimp\LogStream.hpp" />
+    <ClInclude Include="lib\assimp\material.h" />
+    <ClInclude Include="lib\assimp\MathFunctions.h" />
+    <ClInclude Include="lib\assimp\matrix3x3.h" />
+    <ClInclude Include="lib\assimp\matrix4x4.h" />
+    <ClInclude Include="lib\assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="lib\assimp\mesh.h" />
+    <ClInclude Include="lib\assimp\metadata.h" />
+    <ClInclude Include="lib\assimp\NullLogger.hpp" />
+    <ClInclude Include="lib\assimp\ParsingUtils.h" />
+    <ClInclude Include="lib\assimp\pbrmaterial.h" />
+    <ClInclude Include="lib\assimp\port\AndroidJNI\AndroidJNIIOSystem.h" />
+    <ClInclude Include="lib\assimp\port\AndroidJNI\BundledAssetIOSystem.h" />
+    <ClInclude Include="lib\assimp\postprocess.h" />
+    <ClInclude Include="lib\assimp\Profiler.h" />
+    <ClInclude Include="lib\assimp\ProgressHandler.hpp" />
+    <ClInclude Include="lib\assimp\qnan.h" />
+    <ClInclude Include="lib\assimp\quaternion.h" />
+    <ClInclude Include="lib\assimp\RemoveComments.h" />
+    <ClInclude Include="lib\assimp\scene.h" />
+    <ClInclude Include="lib\assimp\SceneCombiner.h" />
+    <ClInclude Include="lib\assimp\SGSpatialSort.h" />
+    <ClInclude Include="lib\assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="lib\assimp\SmallVector.h" />
+    <ClInclude Include="lib\assimp\SmoothingGroups.h" />
+    <ClInclude Include="lib\assimp\SpatialSort.h" />
+    <ClInclude Include="lib\assimp\StandardShapes.h" />
+    <ClInclude Include="lib\assimp\StreamReader.h" />
+    <ClInclude Include="lib\assimp\StreamWriter.h" />
+    <ClInclude Include="lib\assimp\StringComparison.h" />
+    <ClInclude Include="lib\assimp\StringUtils.h" />
+    <ClInclude Include="lib\assimp\Subdivision.h" />
+    <ClInclude Include="lib\assimp\texture.h" />
+    <ClInclude Include="lib\assimp\TinyFormatter.h" />
+    <ClInclude Include="lib\assimp\types.h" />
+    <ClInclude Include="lib\assimp\vector2.h" />
+    <ClInclude Include="lib\assimp\vector3.h" />
+    <ClInclude Include="lib\assimp\version.h" />
+    <ClInclude Include="lib\assimp\Vertex.h" />
+    <ClInclude Include="lib\assimp\XmlParser.h" />
+    <ClInclude Include="lib\assimp\XMLTools.h" />
+    <ClInclude Include="lib\assimp\ZipArchiveIOSystem.h" />
     <ClInclude Include="lib\gli\clear.hpp" />
     <ClInclude Include="lib\gli\comparison.hpp" />
     <ClInclude Include="lib\gli\convert.hpp" />
@@ -238,6 +318,7 @@
     <ClInclude Include="MagicaVox\typeDICT.h" />
     <ClInclude Include="MagicaVox\typeROTATION.h" />
     <ClInclude Include="MagicaVox\VoxFile.h" />
+    <ClInclude Include="Model3D.h" />
     <ClInclude Include="STLWriter.h" />
     <ClInclude Include="SupremeCommander\IO.h" />
     <ClInclude Include="SupremeCommander\SCA.h" />
@@ -271,6 +352,7 @@
     <ClCompile Include="MagicaVox\typeDICT.cpp" />
     <ClCompile Include="MagicaVox\typeROTATION.cpp" />
     <ClCompile Include="MagicaVox\VoxFile.cpp" />
+    <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="STLWriter.cpp" />
     <ClCompile Include="SupremeCommander\IO.cpp" />
     <ClCompile Include="SupremeCommander\SCA.cpp" />
@@ -280,6 +362,23 @@
     <ClCompile Include="ZIP.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <CopyFileToFolders Include="lib\assimp\assimp-vc142-mt.dll">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="lib\assimp\assimp-vc142-mtd.dll">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)</DestinationFolders>
+    </CopyFileToFolders>
+    <None Include="lib\assimp\color4.inl" />
+    <None Include="lib\assimp\config.h.in" />
+    <None Include="lib\assimp\material.inl" />
+    <None Include="lib\assimp\matrix3x3.inl" />
+    <None Include="lib\assimp\matrix4x4.inl" />
+    <None Include="lib\assimp\quaternion.inl" />
+    <None Include="lib\assimp\SmoothingGroups.inl" />
+    <None Include="lib\assimp\vector2.inl" />
+    <None Include="lib\assimp\vector3.inl" />
     <None Include="lib\gli\core\bc.inl" />
     <None Include="lib\gli\core\clear.inl" />
     <None Include="lib\gli\core\comparison.inl" />

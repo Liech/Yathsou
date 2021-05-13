@@ -1,0 +1,3 @@
+https://github.com/assimp/assimp
+http://assimp.org/
+https://github.com/assimp/assimp/commit/0849f4e57395900ebd29531d679964e65e3904f6
