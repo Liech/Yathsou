@@ -1,4 +1,4 @@
-#include "SupComVertex.h"
+#include "SupCom/SupComVertex.h"
 
 namespace Athanah {
   SupComVertex::SupComVertex() {

@@ -12,8 +12,8 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
-#include "AthanahCommonLib/SupComModelFactory.h"
-#include "AthanahCommonLib/UiTextureFactory.h"
+#include "AthanahCommonLib/SupCom/SupComModelFactory.h"
+#include "AthanahCommonLib/SupCom/UiTextureFactory.h"
 #include "AthanahCommonLib/Blueprint/BlueprintFactory.h"
 #include "AthanahCommonLib/Blueprint/Blueprint.h"
 #include "AthanahCommonLib/Blueprint/BlueprintGeneral.h"

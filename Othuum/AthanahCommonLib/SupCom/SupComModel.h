@@ -8,7 +8,7 @@
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
 #include "AezeselFileIOLib/SupremeCommander/SCA.h"
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
-#include "SupComVertex.h"
+#include "AthanahCommonLib/SupCom/SupComVertex.h"
 
 namespace Ahwassa {
   class Texture;

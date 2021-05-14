@@ -14,7 +14,7 @@
 #include "AhwassaGraphicsLib/Renderer/BoxRenderer.h"
 
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
-#include "AthanahCommonLib/SupComMeshRendererDef.h"
+#include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
 #include "AthanahCommonLib/SkyBox.h"
 
 Graphic::Graphic(Ahwassa::Window* window) {

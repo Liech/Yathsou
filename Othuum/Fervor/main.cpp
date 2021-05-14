@@ -16,10 +16,10 @@
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
 #include "AhwassaGraphicsLib/Util.h"
-#include "AthanahCommonLib/SupComMeshLoader.h"
-#include "AthanahCommonLib/SupComMeshRendererDef.h"
-#include "AthanahCommonLib/SupComModel.h"
-#include "AthanahCommonLib/SupComModelFactory.h"
+#include "AthanahCommonLib/SupCom/SupComMeshLoader.h"
+#include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
+#include "AthanahCommonLib/SupCom/SupComModel.h"
+#include "AthanahCommonLib/SupCom/SupComModelFactory.h"
 
 #include "AthanahCommonLib/Blueprint/BlueprintFactory.h"
 #include "AthanahCommonLib/Blueprint/Blueprint.h"

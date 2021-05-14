@@ -12,8 +12,8 @@
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
-#include "AthanahCommonLib/SupComModelFactory.h"
-#include "AthanahCommonLib/SupComModel.h"
+#include "AthanahCommonLib/SupCom/SupComModelFactory.h"
+#include "AthanahCommonLib/SupCom/SupComModel.h"
 #include "AhwassaGraphicsLib/PostProcessing/Bloom.h"
 
 #include "AezeselFileIOLib/STLWriter.h"

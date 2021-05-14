@@ -6,7 +6,7 @@
 #include <vector>
 #include <functional>
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
-#include "AthanahCommonLib/SupComEnums.h"
+#include "AthanahCommonLib/SupCom/SupComEnums.h"
 
 class ListSelection;
 class AnimationSelection;

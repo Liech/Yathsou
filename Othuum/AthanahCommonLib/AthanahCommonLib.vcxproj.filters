@@ -25,6 +25,12 @@
     <Filter Include="Source Files\Map">
       <UniqueIdentifier>{dbb3dfd8-e54c-45a9-955b-261b11123610}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\SupCom">
+      <UniqueIdentifier>{8a22e262-e1b2-4bb6-9406-ee69d25c835f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SupCom">
+      <UniqueIdentifier>{1e5e1ccc-168c-4bd4-b5a6-366249c6da7b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxVisualization.h">
@@ -33,31 +39,7 @@
     <ClInclude Include="BulletDebugDrawer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SupComMeshLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SupComMeshRenderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SupComVertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SupComModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SupComModelFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SupComMeshRendererDef.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SkyBox.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UiTextureFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SupComEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Blueprint\Blueprint.h">
@@ -84,6 +66,30 @@
     <ClInclude Include="Map\Map.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
+    <ClInclude Include="SupCom\SupComEnums.h">
+      <Filter>Header Files\SupCom</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\SupComMeshLoader.h">
+      <Filter>Header Files\SupCom</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\SupComMeshRenderer.h">
+      <Filter>Header Files\SupCom</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\SupComMeshRendererDef.h">
+      <Filter>Header Files\SupCom</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\SupComModel.h">
+      <Filter>Header Files\SupCom</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\SupComModelFactory.h">
+      <Filter>Header Files\SupCom</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\SupComVertex.h">
+      <Filter>Header Files\SupCom</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\UiTextureFactory.h">
+      <Filter>Header Files\SupCom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletDebugDrawer.cpp">
@@ -92,28 +98,7 @@
     <ClCompile Include="BoxVisualization.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SupComMeshLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SupComMeshRenderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SupComVertex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SupComModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SupComModelFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SupComMeshRendererDef.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SkyBox.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UITextureFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Blueprint\Blueprint.cpp">
@@ -139,6 +124,27 @@
     </ClCompile>
     <ClCompile Include="Map\Scenario.cpp">
       <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\SupComModel.cpp">
+      <Filter>Source Files\SupCom</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\SupComModelFactory.cpp">
+      <Filter>Source Files\SupCom</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\SupComVertex.cpp">
+      <Filter>Source Files\SupCom</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\UITextureFactory.cpp">
+      <Filter>Source Files\SupCom</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\SupComMeshLoader.cpp">
+      <Filter>Source Files\SupCom</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\SupComMeshRenderer.cpp">
+      <Filter>Source Files\SupCom</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\SupComMeshRendererDef.cpp">
+      <Filter>Source Files\SupCom</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

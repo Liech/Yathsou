@@ -1,4 +1,4 @@
-#include "SupComMeshLoader.h"
+#include "SupCom/SupComMeshLoader.h"
 
 namespace Athanah {
   std::shared_ptr<Ahwassa::Mesh<Ahwassa::PositionNormalVertex>> SupComMeshLoader::loadBasic(std::string filename) {

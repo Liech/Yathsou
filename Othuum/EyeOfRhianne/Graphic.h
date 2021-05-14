@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <vector>
-#include "AthanahCommonLib/SupComMeshRendererDef.h"
+#include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
 
 namespace Ahwassa {
   class Window;

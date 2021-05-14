@@ -1,6 +1,6 @@
-#include "SupComModelFactory.h"
+#include "SupCom/SupComModelFactory.h"
 
-#include "SupComModel.h"
+#include "SupCom/SupComModel.h"
 #include <filesystem>
 
 namespace Athanah {

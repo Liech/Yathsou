@@ -6,7 +6,7 @@
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "SupComVertex.h"
+#include "AthanahCommonLib/SupCom/SupComVertex.h"
 
 namespace Ahwassa {
   class ShaderProgram;
@@ -17,6 +17,7 @@ namespace Ahwassa {
   class SSBOvec3;
   class UniformVecVec3;
   class Texture;
+  class FBO;
 }
 
 namespace Athanah {
@@ -29,13 +30,11 @@ namespace Athanah {
     std::vector<glm::mat4>       animation;
   };
 
-  class SupComMeshRenderer {
+  //Def stands for deferred
+  class SupComMeshRendererDef {
   public:
-    SupComMeshRenderer(std::shared_ptr<Ahwassa::Camera> camera);
-    virtual ~SupComMeshRenderer();
-
-    void setLightDirection(glm::vec3 dir);
-    glm::vec3 getLightDirection();
+    SupComMeshRendererDef(std::shared_ptr<Ahwassa::Camera> camera);
+    virtual ~SupComMeshRendererDef();
 
     void addMesh(std::shared_ptr<SupComMesh>);
 
@@ -44,19 +43,19 @@ namespace Athanah {
   private:
     void makeShader();
 
+
     std::shared_ptr<Ahwassa::ShaderProgram>    _shader        ;
     std::shared_ptr<Ahwassa::Camera>           _camera        ;
     glm::vec3                                  _lightDirection;
     
-    std::shared_ptr<Ahwassa::UniformVec3   >   _light    ;
     std::shared_ptr<Ahwassa::Texture       >   _albedo   ;
     std::shared_ptr<Ahwassa::Texture       >   _info     ;
     std::shared_ptr<Ahwassa::Texture       >   _normal   ;
 
-    std::shared_ptr<Ahwassa::SSBOmat4> _animations;
-    std::shared_ptr<Ahwassa::SSBOmat4> _models    ;
-    std::shared_ptr<Ahwassa::SSBOvec3> _colors    ;
-    std::vector<glm::mat4> _animMatrices;
+    std::shared_ptr<Ahwassa::SSBOmat4> _animations ;
+    std::shared_ptr<Ahwassa::SSBOmat4> _models     ;
+    std::shared_ptr<Ahwassa::SSBOmat4> _modelsRot  ;
+    std::shared_ptr<Ahwassa::SSBOvec3> _colors     ;
 
     size_t _bufferSize = 1000;
     size_t _maxBoneSize = 150;
