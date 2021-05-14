@@ -44,15 +44,15 @@ private:
   int                               getNumber(std::string);
 
   std::unique_ptr<ListSelection>                _categories;
-  std::vector<std::unique_ptr<ListSelection>>   _lists;
+  std::vector<std::unique_ptr<ListSelection>>   _lists     ;
 
   int                                           _currentList = 0;
-  Graphic&                                      _graphic;
-  std::string                                   _currentID = "";
-  std::shared_ptr< Athanah::SupComModelFactory> _factory   ;
-  std::shared_ptr< Athanah::BlueprintFactory  > _blueprints;
-  std::shared_ptr< Athanah::UiTextureFactory  > _icons;
-  std::function<void()>                         _disableAllCall;
-  std::vector<std::string> _names;
+  Graphic&                                      _graphic        ;
+  std::string                                   _currentID = "" ;
+  std::shared_ptr< Athanah::SupComModelFactory> _factory        ;
+  std::shared_ptr< Athanah::BlueprintFactory  > _blueprints     ;
+  std::shared_ptr< Athanah::UiTextureFactory  > _icons          ;
+  std::function<void()>                         _disableAllCall ;
+  std::vector<std::string>                      _names          ;
 
 };

@@ -348,6 +348,9 @@
     <ClCompile Include="PostProcessing\AdditiveComposer.cpp">
       <Filter>Source Files\Post Processing</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\RendererTemplate.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
@@ -913,6 +916,9 @@
     </ClInclude>
     <ClInclude Include="PostProcessing\AdditiveComposer.h">
       <Filter>Header Files\PostProcessing</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\RendererTemplate.h">
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

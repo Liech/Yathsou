@@ -90,6 +90,9 @@
     <ClInclude Include="SupCom\UiTextureFactory.h">
       <Filter>Header Files\SupCom</Filter>
     </ClInclude>
+    <ClInclude Include="Model3DRenderer.h">
+      <Filter>Header Files\SupCom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletDebugDrawer.cpp">
@@ -145,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="SupCom\SupComMeshRendererDef.cpp">
       <Filter>Source Files\SupCom</Filter>
+    </ClCompile>
+    <ClCompile Include="Model3DRenderer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -37,6 +37,7 @@
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapFactory.h" />
     <ClInclude Include="Map\Scenario.h" />
+    <ClInclude Include="Model3DRenderer.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SupCom\SupComEnums.h" />
     <ClInclude Include="SupCom\SupComMeshLoader.h" />
@@ -58,6 +59,7 @@
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\MapFactory.cpp" />
     <ClCompile Include="Map\Scenario.cpp" />
+    <ClCompile Include="Model3DRenderer.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SupCom\SupComMeshLoader.cpp" />
     <ClCompile Include="SupCom\SupComMeshRenderer.cpp" />
