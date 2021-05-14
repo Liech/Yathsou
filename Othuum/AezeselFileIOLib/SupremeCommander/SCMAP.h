@@ -197,10 +197,11 @@ namespace Aezesel {
       std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> waterMapTexture;
 
 
-      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char, 2>> waterFoamMaskData;
-      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char, 2>> flatnessData     ;
-      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char, 2>> depthBiasMaskData;
-      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char, 2>> terrainTypeData  ;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned short, 2>> heightMapData    ;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char , 2>> waterFoamMaskData;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char , 2>> flatnessData     ;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char , 2>> depthBiasMaskData;
+      std::unique_ptr<Iyathuum::MultiDimensionalArray<unsigned char , 2>> terrainTypeData  ;
 
       SkyBox            skybox;
       std::vector<Prop> props ;

@@ -28,6 +28,7 @@ MapTextureSelection::MapTextureSelection(Iyathuum::glmAABB<2> area, Graphic& gra
   std::vector<std::string> textures;
   textures.push_back("None");
   textures.push_back("Preview");
+  textures.push_back("Height");
   textures.push_back("High");
   textures.push_back("Low");
   textures.push_back("Water");
@@ -75,6 +76,17 @@ void MapTextureSelection::setImage(std::string img) {
     _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", _graphic._currentMap->scmap().waterMapTexture.get());
   else if (img == "Normal")
     _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", _graphic._currentMap->scmap().normalMap.get());
+  else if (img == "Height") {
+    auto m = _graphic._currentMap->scmap().heightMapData.get();
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> colored = std::make_unique< Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(m->getDimensionVector());
+    colored->apply([&m](size_t pos, Iyathuum::Color& clr) {
+      unsigned char d = m->get_linearVal(pos);
+      Iyathuum::Color result(255 * d / std::numeric_limits<unsigned short>().max(), 0, 0, 255);
+      clr = result;
+    });
+    _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", colored.get());
+    setGeometry(colored->getDimension(0), colored->getDimension(1), [m](int x, int y) {return 10*(float)m->getVal(x, y) / (float)std::numeric_limits<unsigned short>().max(); });
+  }
   else if (
     img == "High Red"    ||
     img == "High Green"  ||
@@ -112,7 +124,7 @@ void MapTextureSelection::setImage(std::string img) {
       clr = result;
     });
     _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", colored.get());
-    setGeometry(colored->getDimension(0), colored->getDimension(1), [im,channel](int x, int y) {return (unsigned char)im->getVal(x, y)[channel]; });
+    setGeometry(colored->getDimension(0), colored->getDimension(1), [im,channel](int x, int y) {return (float)im->getVal(x, y)[channel] / (float)std::numeric_limits<unsigned char>().max(); });
   }
   else {
     Iyathuum::MultiDimensionalArray<unsigned char, 2>* m;
@@ -133,23 +145,25 @@ void MapTextureSelection::setImage(std::string img) {
       clr = result;
     });
     _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", colored.get());
-    setGeometry(colored->getDimension(0), colored->getDimension(1), [m](int x, int y) {return (unsigned char)m->getVal(x, y); });
+    setGeometry(colored->getDimension(0), colored->getDimension(1), [m](int x, int y) {return (float)m->getVal(x, y) / (float)std::numeric_limits<unsigned char>().max(); });
   }
 }
 
 
-void MapTextureSelection::setGeometry(int width, int height, std::function<unsigned char(int x,int y)> f) {
+void MapTextureSelection::setGeometry(int width, int height, std::function<float(int x,int y)> f) {
   _graphic._boxRenderer->clear();
   _boxes.clear();
   _dots.clear();
-  float scale = 0.1f;
+  float boxScale = 0.1f;
+  float distanceScale = 0.1f;
+  float heightScale = 20;
   for (int x = 0; x < width; x++)
     for (int y = 0; y < height; y++)
     {
       //_dots.push_back(_renderer->newDot(glm::vec3(x, f(x, y)*scale, y) * scale, scale));
       glm::mat4 t(1);
-      t = glm::translate(t,glm::vec3(x, 0, y)*scale);
-      t = glm::scale(t, glm::vec3(scale, scale * scale * f(x, y), scale));
+      t = glm::translate(t,glm::vec3(x, 0, y)* distanceScale);
+      t = glm::scale(t, glm::vec3(boxScale, f(x, y)* heightScale, boxScale));
       _boxes.push_back(_graphic._boxRenderer->newBox(t));
     }
 }
