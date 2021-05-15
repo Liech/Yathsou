@@ -36,12 +36,12 @@ namespace Ahwassa {
   }
 
 
-  void VAO::draw(){
+  void VAO::draw() const{
     glBindVertexArray(_id);
     glDrawArrays(GL_TRIANGLES, 0, (GLsizei)_size);
   }
 
-  void VAO::drawInstanced(size_t amount) {
+  void VAO::drawInstanced(size_t amount) const {
     glBindVertexArray(_id);
     glDrawArraysInstanced(GL_TRIANGLES, 0, (GLsizei)_size, amount);
   }

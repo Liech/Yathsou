@@ -35,41 +35,41 @@ namespace Ahwassa {
     }
 
     void draw() {
-      prepare();
-      _shader->bind();
-      _camera->bind();
-      
-      std::set<std::shared_ptr<IMesh>> toDeleteMesh;
+     //prepare();
+     //_shader->bind();
+     //_camera->bind();
+     //
+     //std::set<std::shared_ptr<IMesh>> toDeleteMesh;
+     //
+     //for (auto& meshVector : _meshes) {
+     //   size_t currentPosition = 0;
 
-      for (auto& meshVector : _meshes) {
-        size_t currentPosition = 0;
-
-        std::vector<std::weak_ptr<AdditionalInfo>> toDelete;
-        toDelete.reserve(40);
-        for (size_t i = 0; i < meshVector.second.size(); i++) {
-          auto m = meshVector.second[i].lock();
-          if (!m) {
-            toDelete.push_back(i);
-            continue;
-          }
-          if (currentPosition >= bufferSize()) {
-            drawBatch(*meshVector.first,currentPosition);
-            currentPosition = 0;
-          }
-          vectorize(currentPosition,meshVector.second[i]);
-          currentPosition++;
-        }
-        
-        drawBatch(*meshVector.first,currentPosition);
-
-        for (auto x : toDelete)
-          meshVector.second.erase(x);
-        if (meshVector.second.size() == 0)
-          toDeleteMesh.insert(meshVector.first);
-      }
-      for (auto x : toDeleteMesh)
-        _meshes.erase(x);
-      cleanup();
+        //std::vector<std::shared_ptr<AdditionalInfo>> toDelete;
+        //toDelete.reserve(40);
+        //for (auto x : meshVector.second){
+        //  std::shared_ptr<AdditionalInfo> m = x.lock();
+        //  //if (!m) {
+        //  //  toDelete.push_back(i);
+        //  //  continue;
+        //  //}
+        //  if (currentPosition >= bufferSize()) {
+        //    drawBatch(*meshVector.first,currentPosition);
+        //    currentPosition = 0;
+        //  }
+        //  vectorize(currentPosition,m);
+        //  currentPosition++;
+        //}
+        //
+        //drawBatch(*meshVector.first,currentPosition);
+        //
+        //for (auto x : toDelete)
+        //  meshVector.second.erase(x);
+        //if (meshVector.second.size() == 0)
+        //  toDeleteMesh.insert(meshVector.first);
+      //}
+      //for (auto x : toDeleteMesh)
+      //  _meshes.erase(x);
+      //cleanup();
     }
 
   protected:
@@ -90,6 +90,8 @@ namespace Ahwassa {
     }
 
     virtual size_t bufferSize() const { return 1000; }
+
+    std::shared_ptr<Camera> getCamera() const { return _camera; }
 
   private:
     void drawBatch(const IMesh& mesh ,size_t amount) {

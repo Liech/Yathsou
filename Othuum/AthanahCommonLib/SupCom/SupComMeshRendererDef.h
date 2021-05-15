@@ -12,12 +12,9 @@ namespace Ahwassa {
   class ShaderProgram;
   class Camera;
   class IMesh;
-  class UniformVec3;
   class SSBOmat4;
   class SSBOvec3;
-  class UniformVecVec3;
   class Texture;
-  class FBO;
 }
 
 namespace Athanah {

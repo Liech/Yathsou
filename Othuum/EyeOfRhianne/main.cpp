@@ -31,7 +31,6 @@
 #include "EyeOfRhianneConfiguration.h"
 
 #include "AezeselFileIOLib/SupremeCommander/SCMAP.h"
-#include "AezeselFileIOLib/Model3D.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -44,7 +43,6 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  //Aezesel::Model3D m;
 
   EyeOfRhianneConfiguration config;
   config.fromJsonFile("Configuration.json");

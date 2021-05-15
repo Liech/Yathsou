@@ -11,18 +11,11 @@
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/FBO.h"
-#include "AhwassaGraphicsLib/PostProcessing/Bloom.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
 #include "AhwassaGraphicsLib/Util.h"
-#include "AthanahCommonLib/SupCom/SupComMeshLoader.h"
-#include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
-#include "AthanahCommonLib/SupCom/SupComModel.h"
-#include "AthanahCommonLib/SupCom/SupComModelFactory.h"
-
-#include "AthanahCommonLib/Blueprint/BlueprintFactory.h"
-#include "AthanahCommonLib/Blueprint/Blueprint.h"
+#include "AthanahCommonLib/Model3DRenderer.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -35,10 +28,10 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  //int width = 800;
-  //int height = 600;
-  int height = 1500;
-  int width = 2500;
+  int width = 800;
+  int height = 600;
+  //int height = 1500;
+  //int width = 2500;
 
   Ahwassa::Window w(width, height);
   
@@ -47,62 +40,25 @@ int main(int argc, char** argv) {
     std::unique_ptr<Ahwassa::FPS> fps;
 
     std::shared_ptr<Ahwassa::FreeCamera> freeCam;
-    std::shared_ptr<Athanah::SupComMeshRendererDef> renderer;
     std::shared_ptr<Ahwassa::DeferredComposer> composer;
     std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
-    std::shared_ptr<Athanah::SupComModel> model = std::shared_ptr<Athanah::SupComModel>();
-    std::vector<std::shared_ptr<Athanah::SupComMesh>> meshes;
-    std::shared_ptr<Ahwassa::Bloom> bloom;
-    std::string animName;
-
-    std::string pc = "C:\\Users\\nicol\\Desktop\\units\\";
-    std::string lpt = "C:\\Users\\Niki\\Desktop\\units\\";
-    std::string unit = "UAL0401";
-    //scout "UAL0101";
-    //engi"UEL0208";
-    Athanah::SupComModelFactory factory(pc);
-    Athanah::BlueprintFactory blueprints(pc);
-    auto blueprint = blueprints.loadModel(unit);
-    std::cout << blueprint->description() << std::endl;
+    //std::shared_ptr<Athanah::Model3DRenderer> renderer;
 
     w.Startup = [&]() {
-      renderer = std::make_shared<Athanah::SupComMeshRendererDef>(w.camera());
       composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
       textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
-      int animationNumber = 4;
-      bloom = std::make_shared<Ahwassa::Bloom>(&w, width, height);
-
-      //model = std::make_shared<Athanah::SupComModel>(pc, unit);
-      model = factory.loadModel(unit);
-      animName = model->availableAnimations()[animationNumber];
-      for (int x = 0; x < 2; x++) {
-        std::shared_ptr<Athanah::SupComMesh> mesh = std::make_shared<Athanah::SupComMesh>();
-        mesh->teamColor = Iyathuum::Color(rand() % 255, rand() % 255, rand() % 255);
-        mesh->transformation = glm::translate(glm::mat4(1.0), glm::vec3(x * 100, 0, 0));
-        mesh->model = model;
-
-        mesh->animation = model->getAnimation(animName, model->getAnimationLength(animName) * x / 50.0f);
-        renderer->addMesh(mesh);
-        meshes.push_back(mesh);
-      }
+      //renderer = std::make_shared<Athanah::Model3DRenderer>(w.camera());
 
       freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
       w.input().addUIElement(freeCam.get());
       fps = std::make_unique<Ahwassa::FPS>(&w);
     };
 
-    float t = 0;
     w.Update = [&]() {
-      t += 0.01f;
-      meshes[0]->animation = model->getAnimation(animName, model->getAnimationLength(animName) * std::fmod(t, 1));
-      meshes[1]->animation = {};
-      meshes[1]->transformation = glm::rotate(glm::translate(glm::mat4(1.0), glm::vec3(100, 0, 0)), t, glm::vec3(0, 1, 0));
 
       composer->start();
-      renderer->draw();
+      //renderer->draw();
       composer->end();
-      bloom->draw(composer->getResult(), composer->getRawTextures()[3], 1);
-      b.draw();
 
       textureRenderer->start();
       auto loc = Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(w.getWidth() / 3, w.getHeight() / 3));
@@ -118,9 +74,7 @@ int main(int argc, char** argv) {
       textureRenderer->draw(*composer->getRawTextures()[3], loc4, true);
       textureRenderer->draw(*composer->getResult(), loc5, true);
       textureRenderer->draw(*composer->getDepth(), loc7, true);
-      textureRenderer->draw(*bloom->getResult(), loc6, true);
       textureRenderer->end();
-
 
       fps->draw();
     };

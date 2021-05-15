@@ -15,7 +15,7 @@ namespace Ahwassa {
   class Texture;
   class Rendertarget;
   class VAO;
-  class PositionTextureVertex;
+  struct PositionTextureVertex;
   class UniformVecVec3;
   class UniformVec3;
   class UniformFloat;

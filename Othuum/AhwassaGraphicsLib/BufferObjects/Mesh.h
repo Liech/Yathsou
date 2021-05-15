@@ -27,11 +27,11 @@ namespace Ahwassa {
       _vao = std::make_unique<VAO<Vertex>>(_vbo.get());
     }
 
-    virtual void draw() override {
+    virtual void draw() const override {
       _ibo->draw(_vao.get());
     }
 
-    virtual void drawInstanced(size_t amount) override {
+    virtual void drawInstanced(size_t amount) const override {
       _ibo->drawInstanced(_vao.get(),amount);
     }
 
