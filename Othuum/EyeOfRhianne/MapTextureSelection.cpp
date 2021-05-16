@@ -160,7 +160,6 @@ void MapTextureSelection::setGeometry(int width, int height, std::function<float
   for (int x = 0; x < width; x++)
     for (int y = 0; y < height; y++)
     {
-      //_dots.push_back(_renderer->newDot(glm::vec3(x, f(x, y)*scale, y) * scale, scale));
       glm::mat4 t(1);
       t = glm::translate(t,glm::vec3(x, 0, y)* distanceScale);
       t = glm::scale(t, glm::vec3(boxScale, f(x, y)* heightScale, boxScale));

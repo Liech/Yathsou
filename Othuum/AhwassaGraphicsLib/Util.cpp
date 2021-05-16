@@ -3,6 +3,8 @@
 #include "AhwassaGraphicsLib/lib/glad/include/glad/glad.h"
 #include "AhwassaGraphicsLib/lib/GLWF/include/GLFW/glfw3.h"
 
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
+#include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 
 namespace Ahwassa {
   double Util::getTime() {
@@ -124,5 +126,16 @@ namespace Ahwassa {
       glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     else
       glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+  }
+
+
+  glm::mat4 Util::removeTranslation(const glm::mat4& input) {
+    double dArray[16] = { 0.0 };
+
+    const float* pSource = (const float*)glm::value_ptr(input);
+    for (int i = 0; i < 12; ++i)
+      dArray[i] = pSource[i];
+    dArray[15] = 1;
+    return glm::make_mat4(dArray);
   }
 }

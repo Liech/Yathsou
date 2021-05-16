@@ -16,6 +16,7 @@
 
 #include "AhwassaGraphicsLib/Util.h"
 #include "AthanahCommonLib/Model3DRenderer.h"
+#include "AezeselFileIOLib/Model3D.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -28,11 +29,11 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  int width = 800;
-  int height = 600;
-  //int height = 1500;
-  //int width = 2500;
-
+  //int width = 800;
+  //int height = 600;
+  int height = 1500;
+  int width = 2500;
+  std::shared_ptr<Athanah::Model3DRendererMesh> mesh;
   Ahwassa::Window w(width, height);
   
   {  //better context for window
@@ -42,12 +43,20 @@ int main(int argc, char** argv) {
     std::shared_ptr<Ahwassa::FreeCamera> freeCam;
     std::shared_ptr<Ahwassa::DeferredComposer> composer;
     std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
-    //std::shared_ptr<Athanah::Model3DRenderer> renderer;
+    std::shared_ptr<Athanah::Model3DRenderer> renderer;
 
     w.Startup = [&]() {
       composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
       textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
-      //renderer = std::make_shared<Athanah::Model3DRenderer>(w.camera());
+      renderer = std::make_shared<Athanah::Model3DRenderer>(w.camera());
+      renderer->init();
+
+      
+      mesh = std::make_shared<Athanah::Model3DRendererMesh>();
+      mesh->transformation = glm::mat4(1);
+      Aezesel::Model3D modl("C:\\Users\\nicol\\Seafile\\Sea\\Code\\Soon\\MainProject\\Data\\Modells\\Clonk\\Graphics.mesh.xml");
+      std::shared_ptr<Ahwassa::IMesh> m = renderer->meshFromModel3D(modl);
+      renderer->addInstance(m, mesh);
 
       freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
       w.input().addUIElement(freeCam.get());
@@ -57,7 +66,7 @@ int main(int argc, char** argv) {
     w.Update = [&]() {
 
       composer->start();
-      //renderer->draw();
+      renderer->draw();
       composer->end();
 
       textureRenderer->start();
