@@ -9,6 +9,7 @@
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
+#include "AhwassaGraphicsLib/Input/FileDropper.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/FBO.h"
 
@@ -41,9 +42,11 @@ int main(int argc, char** argv) {
     std::unique_ptr<Ahwassa::FPS> fps;
 
     std::shared_ptr<Ahwassa::FreeCamera> freeCam;
+    std::shared_ptr<Ahwassa::FileDropper> dropper;
     std::shared_ptr<Ahwassa::DeferredComposer> composer;
     std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
     std::shared_ptr<Athanah::Model3DRenderer> renderer;
+    std::shared_ptr<Ahwassa::IMesh> m;
 
     w.Startup = [&]() {
       composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
@@ -55,8 +58,17 @@ int main(int argc, char** argv) {
       mesh = std::make_shared<Athanah::Model3DRendererMesh>();
       mesh->transformation = glm::mat4(1);
       Aezesel::Model3D modl("C:\\Users\\nicol\\Seafile\\Sea\\Code\\Soon\\MainProject\\Data\\Modells\\Clonk\\Graphics.mesh.xml");
-      std::shared_ptr<Ahwassa::IMesh> m = renderer->meshFromModel3D(modl);
+      m = renderer->meshFromModel3D(modl);
       renderer->addInstance(m, mesh);
+
+      dropper = std::make_shared<Ahwassa::FileDropper>([&](const std::string& path) {
+        renderer->clear();
+        Aezesel::Model3D mdl(path);
+        m = renderer->meshFromModel3D(mdl);
+        renderer->addInstance(m, mesh);
+      });
+      dropper->setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2(0, 0), w.camera()->getResolution()));
+      w.input().addUIElement(dropper.get());
 
       freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
       w.input().addUIElement(freeCam.get());

@@ -9,6 +9,7 @@
 namespace Ahwassa {
   void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
   void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+  void drop_callback(GLFWwindow* window, int count, const char** paths);
 
 
   Input* Input::_instance = nullptr;
@@ -23,6 +24,8 @@ namespace Ahwassa {
     _instance      = this;
 
     // Set the required callback functions
+
+    glfwSetDropCallback(_windowGL, drop_callback);
     glfwSetMouseButtonCallback(_windowGL, mouse_button_callback);
     glfwSetKeyCallback(_windowGL, key_callback);
     glfwSetScrollCallback(_windowGL, [](GLFWwindow* window, double xoffset, double yoffset)
@@ -209,5 +212,23 @@ namespace Ahwassa {
     }
     result.resize(used);
     return result;
+  }
+
+  void Input::dropEvent(const std::string& path) {
+    auto inputWidgets = getUIElements();
+    for (auto w : inputWidgets) {
+      if (w->isInside(_cursorpos)) {
+        if (w->dropEvent(path))
+          break;
+      }
+    }
+  }
+
+  void drop_callback(GLFWwindow* window, int count, const char** paths)
+  {
+    int i;
+    for (i = 0; i < count; i++)
+      Input::instance().dropEvent(std::string(paths[i]));
+    
   }
 }

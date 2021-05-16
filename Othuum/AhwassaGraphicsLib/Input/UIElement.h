@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "IyathuumCoreLib/BaseTypes/Keys.h"
@@ -22,6 +23,7 @@ namespace Ahwassa {
     virtual bool mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button                            ) { return false; };
     virtual bool mouseWheelEvent(glm::vec2 movement                                                       ) { return false; };
     virtual bool mouseMoveEvent( glm::vec2 current, glm::vec2 movement                                    ) { return false; };
+    virtual bool dropEvent     (const std::string filePath)                                                 {return false;}
 
     //Position
     const Iyathuum::glmAABB<2>& getLocalPosition()  const;

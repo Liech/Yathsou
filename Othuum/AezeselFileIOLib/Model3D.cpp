@@ -1,6 +1,7 @@
 #include "Model3D.h"
 
 #include <stdexcept>
+#include <iostream>
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -16,6 +17,7 @@ namespace Aezesel {
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
     {
+      std::cout << import.GetErrorString() << std::endl;
       throw std::runtime_error( "ERROR::ASSIMP::" + std::string(import.GetErrorString()));
       return;
     }

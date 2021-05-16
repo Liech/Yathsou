@@ -168,6 +168,7 @@
     <ClCompile Include="Drawables\Background.cpp" />
     <ClCompile Include="Drawables\Drawable.cpp" />
     <ClCompile Include="Drawables\FPS.cpp" />
+    <ClCompile Include="Input\FileDropper.cpp" />
     <ClCompile Include="Input\FreeCamera.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
@@ -250,6 +251,7 @@
     <ClInclude Include="Drawables\Background.h" />
     <ClInclude Include="Drawables\Drawable.h" />
     <ClInclude Include="Drawables\FPS.h" />
+    <ClInclude Include="Input\FileDropper.h" />
     <ClInclude Include="Input\FreeCamera.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />

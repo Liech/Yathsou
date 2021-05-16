@@ -34,6 +34,10 @@ namespace Ahwassa {
 
     }
 
+    void clear() {
+      _meshes.clear();
+    }
+
     void addInstance(std::shared_ptr<IMesh> mesh, std::shared_ptr<AdditionalInfo> info) {
       if (!_initialized)
         throw std::runtime_error("Not initialized");

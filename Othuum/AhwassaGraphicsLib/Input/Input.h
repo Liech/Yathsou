@@ -3,6 +3,7 @@
 #include <memory>
 #include <map>
 #include <vector>
+#include <string>
 
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "IyathuumCoreLib/BaseTypes/Keys.h"
@@ -36,6 +37,7 @@ namespace Ahwassa {
     void update();
     void keyEvent  (Iyathuum::Key key, Iyathuum::KeyStatus status, int mode);
     void mouseEvent(Iyathuum::Key key, Iyathuum::KeyStatus status, int mode);
+    void dropEvent(const std::string&);
 
   private:
     void mouseWheel(double x, double y);
