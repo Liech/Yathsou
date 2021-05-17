@@ -31,6 +31,8 @@ namespace Aezesel {
 
     std::vector<Mesh3D> meshes   ;
     std::string         directory;
+    glm::mat4           rootTransformation;
+    glm::mat4           globalInvertTransformation;
 
   private:
     void   processNode(aiNode* node, const aiScene* scene);

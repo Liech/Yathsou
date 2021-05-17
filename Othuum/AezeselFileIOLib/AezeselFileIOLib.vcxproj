@@ -155,6 +155,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AssimpUtil.h" />
     <ClInclude Include="ImageIO.h" />
     <ClInclude Include="lib\assimp\aabb.h" />
     <ClInclude Include="lib\assimp\ai_assert.h" />
@@ -328,6 +329,7 @@
     <ClInclude Include="ZIP.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssimpUtil.cpp" />
     <ClCompile Include="ImageIO.cpp" />
     <ClCompile Include="lib\gli\core\dummy.cpp" />
     <ClCompile Include="lib\lodepng\include\lodepng\lodepng.cpp" />

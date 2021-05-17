@@ -5,6 +5,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include "AssimpUtil.h"
 
 //https://assimp-docs.readthedocs.io/en/latest/usage/use_the_lib.html
 //https://learnopengl.com/Model-Loading/Model
@@ -15,6 +16,7 @@ namespace Aezesel {
     Assimp::Importer import;
     const aiScene* scene = import.ReadFile(file, aiProcess_Triangulate | aiProcess_FlipUVs);
 
+
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
     {
       std::cout << import.GetErrorString() << std::endl;
@@ -22,6 +24,7 @@ namespace Aezesel {
       return;
     }
     directory = file.substr(0, file.find_last_of('/'));
+    rootTransformation = Private::AssimpUtil::convert(scene->mRootNode->mTransformation);
 
     processNode(scene->mRootNode, scene);
   }
