@@ -17,8 +17,8 @@ namespace Ahwassa {
   class UniformVecVec3;
 
   struct DiffuseMeshRendererMesh {
-    glm::mat4                                   transformation;
-    Iyathuum::Color                             color;
+    glm::mat4                                   transformation = glm::mat4(1.0);
+    Iyathuum::Color                             color = Iyathuum::Color(255, 255, 255);
     std::shared_ptr<Mesh<PositionNormalVertex>> mesh;
   };
 

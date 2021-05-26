@@ -220,7 +220,7 @@ namespace Iyathuum {
       }
     }
 
-    void apply(std::function<void(std::array<size_t, Dimension>, Type&)> func) {
+    void apply(std::function<void(const std::array<size_t, Dimension>&, Type&)> func) {
       int chunkSize = 1000;
       int chunks = ((int)getSize() / chunkSize)+1;
       //if (chunks == 0) chunks = 1;

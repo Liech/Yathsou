@@ -12,6 +12,7 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTextRenderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
 
 namespace Ahwassa {
   Renderer::Renderer(Window* window, std::shared_ptr<Camera> cam) {
@@ -23,6 +24,7 @@ namespace Ahwassa {
     _bRectangle= std::make_shared<BasicRectangleRenderer>(window);
     _bText     = std::make_shared<BasicTextRenderer     >(window);
     _bTexture  = std::make_shared<BasicTexture2DRenderer>(window);
+    _bMesh     = std::make_shared<DiffuseMeshRenderer   >(cam   );
   }
 
   std::shared_ptr<Dot> Renderer::newDot(const glm::vec3& pos, float size, Iyathuum::Color clr) {
@@ -54,6 +56,7 @@ namespace Ahwassa {
     _sphere->draw();
     _box   ->draw();
     _sphere->draw();
+    _bMesh  ->draw();
   }
 
   BasicRectangleRenderer& Renderer::rectangle() {
@@ -66,5 +69,9 @@ namespace Ahwassa {
 
   BasicTexture2DRenderer& Renderer::texture() {
     return *_bTexture;
+  }
+
+  DiffuseMeshRenderer& Renderer::mesh() {
+    return *_bMesh;
   }
 }

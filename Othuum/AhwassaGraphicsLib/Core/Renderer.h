@@ -17,6 +17,7 @@ namespace Ahwassa {
   class BasicTextRenderer;
   class BasicRectangleRenderer;
   class BasicTexture2DRenderer;
+  class DiffuseMeshRenderer;
 
   class Window;
   class Camera;
@@ -33,6 +34,7 @@ namespace Ahwassa {
     BasicRectangleRenderer& rectangle();
     BasicTextRenderer     & text();
     BasicTexture2DRenderer& texture();
+    DiffuseMeshRenderer&    mesh();
 
     void setLightDir(const glm::vec3&);
 
@@ -45,6 +47,7 @@ namespace Ahwassa {
     std::shared_ptr<BasicTextRenderer     > _bText     ;
     std::shared_ptr<BasicRectangleRenderer> _bRectangle;
     std::shared_ptr<BasicTexture2DRenderer> _bTexture  ;
+    std::shared_ptr<DiffuseMeshRenderer   > _bMesh     ;
 
     Window* _window;
   };

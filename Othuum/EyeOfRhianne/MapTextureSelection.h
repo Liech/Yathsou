@@ -18,6 +18,7 @@ namespace Ahwassa {
   class Box;
   class Dot;
   class BoxRenderer;
+  struct DiffuseMeshRendererMesh;
 }
 namespace Aezesel {
   class SCMAP;
@@ -47,5 +48,5 @@ private:
   Iyathuum::glmAABB<2>                       _area   ;
   std::vector<std::shared_ptr<Ahwassa::Box>> _boxes;
   std::vector<std::shared_ptr<Ahwassa::Dot>> _dots;
-
+  std::shared_ptr<Ahwassa::DiffuseMeshRendererMesh> _mesh;
 };

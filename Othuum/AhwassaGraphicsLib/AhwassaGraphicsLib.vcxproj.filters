@@ -112,6 +112,12 @@
     <Filter Include="Source Files\Post Processing">
       <UniqueIdentifier>{ca0109f1-bf34-4e4b-8aab-e1f028a0820a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Geometry">
+      <UniqueIdentifier>{2ad146d3-4a7a-4ef7-ad4b-940407db0861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Geometry">
+      <UniqueIdentifier>{cbe7223f-74f0-4066-83c1-b5649e20ee08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp">
@@ -353,6 +359,9 @@
     </ClCompile>
     <ClCompile Include="Input\FileDropper.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Geometry\HeightFieldMeshGenerator.cpp">
+      <Filter>Source Files\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -925,6 +934,9 @@
     </ClInclude>
     <ClInclude Include="Input\FileDropper.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Geometry\HeightFieldMeshGenerator.h">
+      <Filter>Header Files\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

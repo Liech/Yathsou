@@ -13,6 +13,8 @@
 #include "AhwassaGraphicsLib/Renderer/BoxRenderer.h"
 #include "AhwassaGraphicsLib/Renderer/Box.h"
 #include "AhwassaGraphicsLib/Renderer/Dot.h"
+#include "AhwassaGraphicsLib/Core/Renderer.h"
+#include "AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
 
 #include "ListSelection.h"
 #include "Graphic.h"
@@ -21,6 +23,7 @@
 #include "AthanahCommonLib/Map/MapFactory.h"
 #include "AezeselFileIOLib/ImageIO.h"
 #include "AezeselFileIOLib/SupremeCommander/SCMAP.h"
+#include "AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.h"
 
 MapTextureSelection::MapTextureSelection(Iyathuum::glmAABB<2> area, Graphic& graphic) : _graphic(graphic) {
   _area = area;
@@ -85,7 +88,13 @@ void MapTextureSelection::setImage(std::string img) {
       clr = result;
     });
     _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", colored.get());
-    setGeometry(colored->getDimension(0), colored->getDimension(1), [m](int x, int y) {return 10*(float)m->getVal(x, y) / (float)std::numeric_limits<unsigned short>().max(); });
+    //setGeometry(colored->getDimension(0), colored->getDimension(1), [m](int x, int y) {return 10*(float)m->getVal(x, y) / (float)std::numeric_limits<unsigned short>().max(); });
+
+    _mesh = std::make_shared< Ahwassa::DiffuseMeshRendererMesh>();
+    _graphic.getWindow()->renderer().mesh().addMesh(_mesh);
+    _mesh->mesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short>(*m, 0, std::numeric_limits<unsigned short>().max(), 5, 1);
+    _dots.clear();
+
   }
   else if (
     img == "High Red"    ||
