@@ -2,6 +2,10 @@
 
 RTS Engine fragments.
 
+# Video
+
+[![Youtube Video](https://user-images.githubusercontent.com/16963076/119048618-c3cfce00-b9bf-11eb-8d46-f3d01e0454db.png)](https://youtu.be/8PbduxpR2ak "Youtube Video")
+
 # Goal
 
 In an recreational project the goals may change at any given time. Currently the longterm goal is to create an engine, which is suited for RPG and RTS games. The initial dream, which is still tracked, but also still very far away, is to create a Supreme Commander total conversion mod.
@@ -24,6 +28,7 @@ Since the last "Release" it got extended with:
    * FA SCMAP Format can be loaded (The vanilla format is not supported yet)
    * textures inside the .scmap file can be viewed
    * scmap textures can be viewed as height map (box renderer -> slow)
+ * Loading of assimp compatible data formats
 
 Currently extending terrain capabilites is the topic.
 
