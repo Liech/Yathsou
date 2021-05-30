@@ -4,18 +4,19 @@
 #include "Graphic.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
+#include "HaasScriptingLib/ScriptEngine.h"
 
 RendererSelection::RendererSelection(Iyathuum::glmAABB<2> area,Graphic& graphic) : _graphic(graphic){
-  std::vector<std::string> textureNames;
   for (int i = 0; i < _graphic._textures.size(); i++) {
     _textures[_graphic._textures[i]->getName()] = i;
-    textureNames.push_back(_graphic._textures[i]->getName());
+    _options.push_back(_graphic._textures[i]->getName());
   }
 
-  _list = std::make_unique<ListSelection>(textureNames, textureNames,area, _graphic.getWindow(), [this](std::string newTexture) {
+  _list = std::make_unique<ListSelection>(_options, _options,area, _graphic.getWindow(), [this](std::string newTexture) {
     _graphic._renderedTexture = _textures[newTexture];
   });
   _list->setVisible(false);
+  initScript();
 }
 
 void RendererSelection::setVisible(bool value) {
@@ -32,4 +33,31 @@ void RendererSelection::update() {
 
 void RendererSelection::draw() {
   _list->draw();
+}
+
+void RendererSelection::initScript() {
+  _setRenderer = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    std::string name = input;
+    _graphic._renderedTexture = _textures[name];
+    return 1;
+  }
+  );
+  _getAllRenderer = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    return _options;
+  }
+  );
+  _getRenderer = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    return _graphic._textures[_graphic._renderedTexture]->getName();
+  }
+  );
+  _graphic._scripts->registerFunction("SetRenderer", _setRenderer);
+  _graphic._scripts->registerFunction("GetAllRenderer", _getAllRenderer);
+  _graphic._scripts->registerFunction("GetRenderer", _getRenderer);
+
 }

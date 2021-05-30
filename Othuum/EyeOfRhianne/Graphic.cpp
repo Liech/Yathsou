@@ -13,12 +13,14 @@
 #include "AhwassaGraphicsLib/PostProcessing/CubeReflection.h"
 #include "AhwassaGraphicsLib/Renderer/BoxRenderer.h"
 
+#include "HaasScriptingLib/ScriptEngine.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
 #include "AthanahCommonLib/SkyBox.h"
 
 Graphic::Graphic(Ahwassa::Window* window) {
   _window         = window;
+  _scripts = std::make_shared<Haas::ScriptEngine>();
   _composer       = std::make_shared<Ahwassa::DeferredComposer>(_window, _window->getWidth(), _window->getHeight());
   _bloom          = std::make_shared<Ahwassa::Bloom>(_window, _window->getWidth(), _window->getHeight());
   _cubeReflection = std::make_shared<Ahwassa::CubeReflection  >(_window, _window->getWidth(), _window->getHeight());

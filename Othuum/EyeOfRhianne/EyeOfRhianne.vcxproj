@@ -155,6 +155,7 @@
     <ClCompile Include="MapSelection.cpp" />
     <ClCompile Include="MapTextureSelection.cpp" />
     <ClCompile Include="RendererSelection.cpp" />
+    <ClCompile Include="ScriptSelection.cpp" />
     <ClCompile Include="SkyBoxSelection.cpp" />
     <ClCompile Include="UnitModelSelection.cpp" />
   </ItemGroup>
@@ -167,8 +168,23 @@
     <ClInclude Include="MapSelection.h" />
     <ClInclude Include="MapTextureSelection.h" />
     <ClInclude Include="RendererSelection.h" />
+    <ClInclude Include="ScriptSelection.h" />
     <ClInclude Include="SkyBoxSelection.h" />
     <ClInclude Include="UnitModelSelection.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Scripts\RendererExample.lua">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)Data/scripts</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)Data/scripts</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Scripts\HelloWorld.lua">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)Data/scripts</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)Data/scripts</DestinationFolders>
+    </CopyFileToFolders>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

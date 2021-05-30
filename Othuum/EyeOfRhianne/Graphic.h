@@ -19,7 +19,9 @@ namespace Athanah {
   class SkyBox;
   class Map;
 }
-
+namespace Haas {
+  class ScriptEngine;
+}
 class Graphic {
 public:
   Graphic(Ahwassa::Window*);
@@ -41,6 +43,7 @@ public:
   std::shared_ptr<Ahwassa::Texture>                 _previewImage{ nullptr };
   std::shared_ptr<Athanah::Map>                     _currentMap;
   std::shared_ptr<Ahwassa::BoxRenderer>             _boxRenderer;
+  std::shared_ptr<Haas::ScriptEngine>               _scripts;
   Ahwassa::Window* getWindow();
 private:
   Ahwassa::Window*                                _window  ;

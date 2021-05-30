@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{7a404a18-92a1-4f87-add1-a082a742f972}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,6 +54,9 @@
     <ClCompile Include="MapTextureSelection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ScriptSelection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="UnitModelSelection.h">
@@ -83,5 +89,16 @@
     <ClInclude Include="MapTextureSelection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ScriptSelection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Scripts\RendererExample.lua">
+      <Filter>Scripts</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="Scripts\HelloWorld.lua">
+      <Filter>Scripts</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

@@ -37,7 +37,7 @@ namespace Haas
     }
     else {
       std::cout << lua_tostring(_state, -1)<<std::endl;
-      throw std::runtime_error("File not found");
+      throw std::runtime_error("File not found or Syntax Error");
     }
   }
 

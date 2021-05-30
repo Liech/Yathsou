@@ -7,6 +7,7 @@
 #include "ListSelection.h"
 #include "MapSelection.h"
 #include "MapTextureSelection.h"
+#include "ScriptSelection.h"
 #include "Graphic.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
@@ -24,6 +25,7 @@ AssetSelection::AssetSelection(EyeOfRhianneConfiguration& config, Iyathuum::glmA
   options.push_back("Renderer");
   options.push_back("Load Map");
   options.push_back("Map Texture");
+  options.push_back("Scripts");
 
   _list = std::make_unique<ListSelection>(options, options, area, _graphic.getWindow(), [this](std::string newSelection) {    
     unitVisibility(newSelection);
@@ -42,6 +44,7 @@ void AssetSelection::addSelections() {
   _renderer   = std::make_shared<RendererSelection>  (area,_graphic);
   _maps       = std::make_shared<MapSelection>       (_config.MapPath,area,_graphic);
   _mapTexture = std::make_shared<MapTextureSelection>(area,_graphic);
+  _scripts    = std::make_shared<ScriptSelection>    (area,_graphic);
 }
 
 void AssetSelection::unitVisibility(std::string newMenu) {
@@ -60,6 +63,8 @@ void AssetSelection::unitVisibility(std::string newMenu) {
     _maps->setVisible(!_maps->isVisible());
   if (_current == "Map Texture")
     _mapTexture->setVisible(!_mapTexture->isVisible());
+  if (_current == "Scripts")
+    _scripts->setVisible(!_scripts->isVisible());
 }
 
 void AssetSelection::hideAll() {
@@ -69,6 +74,7 @@ void AssetSelection::hideAll() {
   _renderer  ->setVisible(false);
   _maps      ->setVisible(false);
   _mapTexture->setVisible(false);
+  _scripts   ->setVisible(false);
 }
 
 void AssetSelection::draw() {
@@ -78,6 +84,7 @@ void AssetSelection::draw() {
   _renderer  ->draw();
   _maps      ->draw();
   _mapTexture->draw();
+  _scripts   ->draw();
   _list      ->draw();
 }
 
@@ -88,6 +95,7 @@ void AssetSelection::update() {
   _renderer  ->update();
   _maps      ->update();
   _mapTexture->update();
+  _scripts   ->update();
 }
 
 void AssetSelection::setVisible(bool visible) {

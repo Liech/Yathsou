@@ -3,6 +3,8 @@
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include <memory>
 #include <string>
+#include "HaasScriptingLib/lib/json.hpp"
+#include <functional>
 
 #include "Graphic.h"
 
@@ -18,9 +20,14 @@ public:
   void setVisible(bool);
   bool isVisible();
 private:
+  void initScript();
+
   std::shared_ptr<ListSelection> _list;
   Graphic& _graphic;
   std::map<std::string, int> _textures;
+  std::vector<std::string> _options;
 
-
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setRenderer;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _getRenderer;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _getAllRenderer;
 };
