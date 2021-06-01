@@ -299,6 +299,26 @@
     <ClCompile Include="lib\lua\lzio.c" />
     <ClCompile Include="ScriptEngine.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="lualib\complex.lua">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)Data\lua</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)Data\lua</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">$(TargetDir)Data\lua</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="lualib\inspect.lua">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)Data\lua</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)Data\lua</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">$(TargetDir)Data\lua</DestinationFolders>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="lualib\matrix.lua">
+      <FileType>Document</FileType>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)Data\lua</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)Data\lua</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDbg|x64'">$(TargetDir)Data\lua</DestinationFolders>
+    </CopyFileToFolders>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

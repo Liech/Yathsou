@@ -225,4 +225,15 @@
       <Filter>lib\lua</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="lualib\complex.lua">
+      <Filter>lualib</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="lualib\inspect.lua">
+      <Filter>lualib</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="lualib\matrix.lua">
+      <Filter>lualib</Filter>
+    </CopyFileToFolders>
+  </ItemGroup>
 </Project>

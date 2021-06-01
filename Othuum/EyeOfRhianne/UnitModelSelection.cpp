@@ -4,6 +4,7 @@
 #include "Graphic.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include "HaasScriptingLib/ScriptEngine.h"
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
@@ -36,10 +37,7 @@ UnitModelSelection::UnitModelSelection(const std::string path, Iyathuum::glmAABB
   for (int i = 0; i < categories.size(); i++) {
     auto names = getNames(categories[i]);
     std::unique_ptr<ListSelection> x = std::make_unique<ListSelection>(names.first, names.second, modelArea, _graphic.getWindow(), [this](std::string newModel) {
-      _currentID = newModel;
-      _graphic.setModel(getCurrentModel());
-      float scale = _blueprints->loadModel(_currentID)->display().scale()*30;
-      _graphic._mesh->transformation = glm::scale(glm::mat4(1), glm::vec3(scale,scale,scale));
+      setModel(newModel);
     }, [this](Iyathuum::glmAABB<2> loc, std::string name, bool hovered) {
       drawIcons(loc, name, hovered);
     });
@@ -62,7 +60,17 @@ UnitModelSelection::UnitModelSelection(const std::string path, Iyathuum::glmAABB
     _graphic.getWindow()->renderer().texture().draw(*getFaction(name),loc);
     _graphic.getWindow()->renderer().texture().end();
   });
+
+  initScript();
 }
+
+void UnitModelSelection::setModel(std::string newModel) {
+  _currentID = newModel;
+  _graphic.setModel(getCurrentModel());
+  float scale = _blueprints->loadModel(_currentID)->display().scale() * 30;
+  _graphic._mesh->transformation = glm::scale(glm::mat4(1), glm::vec3(scale, scale, scale));
+}
+
 
 int UnitModelSelection::getNumber(std::string s) {
   if (s == "UEF")
@@ -159,4 +167,31 @@ std::pair<std::vector<std::string>, std::vector<std::string>> UnitModelSelection
     }
   }
   return std::make_pair(names,niceNames);
+}
+
+void UnitModelSelection::initScript() {
+  _setUnit = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    std::string name = input;
+    setModel(name);
+    return 1;
+  }
+  );
+  _getUnit = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    return _currentID;
+  }
+  );
+  _getAllUnits = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    return _factory->getAvailableModels();
+  }
+  );
+  _graphic._scripts->registerFunction("eyeSetUnit"    , _setUnit     );
+  _graphic._scripts->registerFunction("eyeGetAllUnits", _getAllUnits );
+  _graphic._scripts->registerFunction("eyeGetUnit"    , _getUnit      );
+
 }

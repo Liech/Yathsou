@@ -75,8 +75,7 @@ namespace Haas
       This->toJson(input);
       output = (*This->_registry[pos].get())(input);
       This->toTable(output);
-
-      return 0;
+      return 1;
     };
     
     lua_pushlightuserdata(_state, this);
@@ -199,6 +198,9 @@ namespace Haas
   void ScriptEngine::toJson(nlohmann::json& result)
   {
     std::string indent = "";
+    int top = lua_gettop(_state);
+    if (top == 0)
+      return;
 
     if (!lua_istable(_state, -1))
     {
@@ -215,8 +217,10 @@ namespace Haas
       else if (lua_isboolean(_state, -1)) {
         result = lua_toboolean(_state, -1);
       }
-      else
+      else {
+        dumpStack();
         throw std::runtime_error("Unkown type");
+      }
       return;
     }
 

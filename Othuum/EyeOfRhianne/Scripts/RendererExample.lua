@@ -1,8 +1,8 @@
-
+local inspect = require 'Data.lua.inspect'
 
 print("Current Renderer Is: ");
-print(GetRenderer("NULL"));
+print(inspect(eyeGetRenderer()));
 print("List of All Renderer:");
-print(GetAllRenderer("NULL"));
-print("Set Renderer to Bloom");
-SetRenderer("Bloom");
+print(inspect(eyeGetAllRenderer()));
+print("Set Renderer to gNormal");
+eyeSetRenderer("gNormal");

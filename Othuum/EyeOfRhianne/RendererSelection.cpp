@@ -56,8 +56,8 @@ void RendererSelection::initScript() {
     return _graphic._textures[_graphic._renderedTexture]->getName();
   }
   );
-  _graphic._scripts->registerFunction("SetRenderer", _setRenderer);
-  _graphic._scripts->registerFunction("GetAllRenderer", _getAllRenderer);
-  _graphic._scripts->registerFunction("GetRenderer", _getRenderer);
+  _graphic._scripts->registerFunction("eyeSetRenderer"   , _setRenderer   );
+  _graphic._scripts->registerFunction("eyeGetAllRenderer", _getAllRenderer);
+  _graphic._scripts->registerFunction("eyeGetRenderer"   , _getRenderer   );
 
 }

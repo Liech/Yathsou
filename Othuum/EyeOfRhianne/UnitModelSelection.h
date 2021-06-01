@@ -7,6 +7,7 @@
 #include <functional>
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "AthanahCommonLib/SupCom/SupComEnums.h"
+#include "HaasScriptingLib/lib/json.hpp"
 
 class ListSelection;
 class AnimationSelection;
@@ -39,6 +40,8 @@ public:
   std::pair<std::vector<std::string>,std::vector<std::string>> getNames(std::string category);
 
 private:
+  void initScript();
+  void setModel(std::string id);
   void drawIcons(Iyathuum::glmAABB<2>,std::string name, bool hovered);
   std::shared_ptr<Ahwassa::Texture> getFaction(std::string);
   int                               getNumber(std::string);
@@ -54,5 +57,10 @@ private:
   std::shared_ptr< Athanah::UiTextureFactory  > _icons          ;
   std::function<void()>                         _disableAllCall ;
   std::vector<std::string>                      _names          ;
+
+
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setUnit    ;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _getUnit    ;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _getAllUnits;
 
 };
