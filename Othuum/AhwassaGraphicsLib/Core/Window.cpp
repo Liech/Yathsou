@@ -167,6 +167,17 @@ namespace Ahwassa {
     glfwTerminate();
   }
 
+  void Window::frame() {
+    glfwPollEvents();
+    //update
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    input().update();
+    Update();
+    glfwSwapBuffers(_window);
+  }
+
   void Window::close() {
     glfwSetWindowShouldClose(_window, GL_TRUE);
   }

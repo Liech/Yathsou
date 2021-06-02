@@ -24,6 +24,7 @@ namespace Ahwassa {
 
     void run  ();
     void close();
+    void frame();
 
     std::function<void()> Startup = []() {};
     std::function<void()> Update  = []() {};

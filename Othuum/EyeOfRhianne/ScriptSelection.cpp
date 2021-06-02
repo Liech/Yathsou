@@ -82,6 +82,9 @@ void ScriptSelection::initScript() {
   _makeScreenshot = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
     [&](const nlohmann::json& input) -> nlohmann::json
   {
+    _graphic.getWindow()->frame();
+    _graphic.getWindow()->frame();
+    _graphic.getWindow()->frame();
     auto screenshot = _graphic.screenshot();
     std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> mirrored = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(screenshot->getDimensionVector());
     mirrored->apply([&screenshot](const std::array<size_t, 2>& pos, Iyathuum::Color& val) {
