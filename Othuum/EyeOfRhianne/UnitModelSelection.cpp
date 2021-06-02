@@ -15,6 +15,7 @@
 
 #include "AthanahCommonLib/SupCom/SupComModelFactory.h"
 #include "AthanahCommonLib/SupCom/UiTextureFactory.h"
+#include "AthanahCommonLib/SupCom/SupComModel.h"
 #include "AthanahCommonLib/Blueprint/BlueprintFactory.h"
 #include "AthanahCommonLib/Blueprint/Blueprint.h"
 #include "AthanahCommonLib/Blueprint/BlueprintGeneral.h"
@@ -190,8 +191,15 @@ void UnitModelSelection::initScript() {
     return _factory->getAvailableModels();
   }
   );
-  _graphic._scripts->registerFunction("eyeSetUnit"    , _setUnit     );
-  _graphic._scripts->registerFunction("eyeGetAllUnits", _getAllUnits );
-  _graphic._scripts->registerFunction("eyeGetUnit"    , _getUnit      );
+  _getBlueprint = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    return _blueprints->loadModel(input)->getRaw();
+  }
+  );
+  _graphic._scripts->registerFunction("eyeSetUnit"     , _setUnit     );
+  _graphic._scripts->registerFunction("eyeGetAllUnits" , _getAllUnits );
+  _graphic._scripts->registerFunction("eyeGetUnit"     , _getUnit     );
+  _graphic._scripts->registerFunction("eyeGetBlueprint", _getBlueprint);
 
 }

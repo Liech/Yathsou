@@ -103,7 +103,7 @@
     <CopyFileToFolders Include="Scripts\SkyBoxSelection.lua">
       <Filter>Scripts</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="..\x64\Debug\Data\scripts\UnitSelection.lua">
+    <CopyFileToFolders Include="Scripts\UnitExample.lua">
       <Filter>Scripts</Filter>
     </CopyFileToFolders>
   </ItemGroup>

@@ -21,6 +21,8 @@ namespace Athanah {
     _display = std::make_shared<BlueprintDisplay>(input["Display"]);
 
     _id = id;
+
+    _raw = input;
   }
 
   Blueprint::Blueprint(const std::string id) {
@@ -44,5 +46,9 @@ namespace Athanah {
 
   BlueprintDisplay& Blueprint::display() const {
     return *_display;
+  }
+
+  nlohmann::json Blueprint::getRaw() const {
+    return _raw;
   }
 }

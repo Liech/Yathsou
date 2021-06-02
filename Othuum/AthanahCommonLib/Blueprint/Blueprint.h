@@ -16,6 +16,7 @@ namespace Athanah {
     BlueprintGeneral& general()       const;
     BlueprintDisplay& display()       const;
 
+    nlohmann::json getRaw() const;
   private:
     std::string _description;
     std::string _id;
@@ -23,5 +24,7 @@ namespace Athanah {
 
     std::shared_ptr<BlueprintGeneral> _general;
     std::shared_ptr<BlueprintDisplay> _display;
+
+    nlohmann::json _raw;
   };
 }
