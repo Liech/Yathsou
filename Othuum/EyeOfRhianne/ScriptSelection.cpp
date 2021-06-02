@@ -35,6 +35,7 @@ ScriptSelection::ScriptSelection(Iyathuum::glmAABB<2> area, Graphic& graphic) : 
     executeScript(scriptFolder + scriptFile);
   });
   _list->setVisible(false);
+  initScript();
 }
 
 void ScriptSelection::executeScript(std::string filename) {
@@ -75,5 +76,20 @@ void ScriptSelection::update() {
 
 void ScriptSelection::draw() {
   _list->draw();
+}
 
+void ScriptSelection::initScript() {
+  _makeScreenshot = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    auto screenshot = _graphic.screenshot();
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> mirrored = std::make_unique<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(screenshot->getDimensionVector());
+    mirrored->apply([&screenshot](const std::array<size_t, 2>& pos, Iyathuum::Color& val) {
+      val = screenshot->getVal({ pos[0],screenshot->getDimension(1) - pos[1] - 1});
+    });
+    Aezesel::ImageIO::writeImage(input, *mirrored);
+    return "";
+  }
+  );
+  _graphic._scripts->registerFunction("eyeSaveScreenshot", _makeScreenshot);
 }

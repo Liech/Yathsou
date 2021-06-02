@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 #include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 
 namespace Ahwassa {
   class Window;
@@ -27,6 +29,7 @@ public:
   Graphic(Ahwassa::Window*);
 
   void draw();
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color,2>> screenshot();
   void setModel(std::shared_ptr<Athanah::SupComModel>);
 
   std::shared_ptr<Athanah::SupComMesh> _mesh;
@@ -46,6 +49,8 @@ public:
   std::shared_ptr<Haas::ScriptEngine>               _scripts;
   Ahwassa::Window* getWindow();
 private:
+  void drawScene();
+
   Ahwassa::Window*                                _window  ;
   std::shared_ptr<Ahwassa::DeferredComposer>      _composer;
 };

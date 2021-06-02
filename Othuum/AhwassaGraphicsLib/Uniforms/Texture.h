@@ -25,6 +25,8 @@ namespace Ahwassa {
     void         setTextureID(unsigned int tex);
     unsigned int getTextureID() const;
 
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> getImage();
+
     void bind() override;
     void release();
   private:

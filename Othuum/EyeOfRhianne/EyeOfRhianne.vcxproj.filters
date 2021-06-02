@@ -106,5 +106,8 @@
     <CopyFileToFolders Include="Scripts\UnitExample.lua">
       <Filter>Scripts</Filter>
     </CopyFileToFolders>
+    <CopyFileToFolders Include="Scripts\Screenshot.lua">
+      <Filter>Scripts</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

@@ -64,4 +64,18 @@ namespace Ahwassa {
     glBindTexture(GL_TEXTURE_2D, _texture);
     glUniform1i(getLocation(), loc);
   }
+
+  std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> Texture::getImage() {
+    int w, h;
+    int miplevel = 0;
+    glPixelStorei(GL_PACK_ALIGNMENT, 1);
+    glBindTexture(GL_TEXTURE_2D, _texture);
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, miplevel, GL_TEXTURE_WIDTH , &w);
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, miplevel, GL_TEXTURE_HEIGHT, &h);
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique< Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(w,h);
+    
+    glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, result->data());
+    return std::move(result);
+  }
+
 }

@@ -1,0 +1,1 @@
+eyeSaveScreenshot("Image.png");
