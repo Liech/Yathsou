@@ -9,6 +9,7 @@
 #include "AhwassaGraphicsLib/Widgets/Label.h"
 #include "AhwassaGraphicsLib/Widgets/ListLayout.h"
 #include "AhwassaGraphicsLib/PostProcessing/Bloom.h"
+#include "HaasScriptingLib/ScriptEngine.h"
 
 GraphicOptions::GraphicOptions(std::function<void()> disableAllCall, Graphic& graphic): _graphic(graphic){
   _disableAllCall = disableAllCall;
@@ -64,4 +65,44 @@ bool GraphicOptions::isVisible() {
 
 std::shared_ptr<Ahwassa::Texture> GraphicOptions::getCurrentTexture() {
   return _currentTexture;
+}
+
+void GraphicOptions::initScript() {
+  _setBloomQuality = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    _graphic._bloom->setQuality(input);
+    return 1;
+  }
+  );
+  _graphic._scripts->registerFunction("eyeSetBloomQuality", _setBloomQuality);
+
+  _setBloomSize = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    _graphic._bloom->setSize(input);
+    return 1;
+  }
+  );
+  _graphic._scripts->registerFunction("eyeSetBloomSize", _setBloomSize);
+
+
+  _setBloomDirections = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    _graphic._bloom->setDirections(input);
+    return 1;
+  }
+  );
+  _graphic._scripts->registerFunction("eyeSetBloomDirections", _setBloomDirections);
+
+
+  _setBloomIntensity = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    _graphic._bloom->setIntensity(input);
+    return 1;
+  }
+  );
+  _graphic._scripts->registerFunction("eyeSetBloomIntensity", _setBloomIntensity);
 }

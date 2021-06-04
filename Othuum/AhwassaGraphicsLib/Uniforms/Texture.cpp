@@ -68,13 +68,23 @@ namespace Ahwassa {
   std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> Texture::getImage() {
     int w, h;
     int miplevel = 0;
-    glPixelStorei(GL_PACK_ALIGNMENT, 1);
     glBindTexture(GL_TEXTURE_2D, _texture);
-    glGetTexLevelParameteriv(GL_TEXTURE_2D, miplevel, GL_TEXTURE_WIDTH , &w);
+    glGetTexLevelParameteriv(GL_TEXTURE_2D, miplevel, GL_TEXTURE_WIDTH, &w);
     glGetTexLevelParameteriv(GL_TEXTURE_2D, miplevel, GL_TEXTURE_HEIGHT, &h);
-    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique< Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(w,h);
-    
+
+
+    GLuint fbo;
+    glGenFramebuffers(1, &fbo);
+    glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, _texture, 0);
+
+    int data_size = w * h * 4;
+    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> result = std::make_unique< Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(w, h);
     glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, result->data());
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glDeleteFramebuffers(1, &fbo);
+    
     return std::move(result);
   }
 

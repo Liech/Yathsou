@@ -86,8 +86,30 @@ void SkyBoxSelection::initScript() {
     return _currentSkybox;
   }
   );
-  _graphic._scripts->registerFunction("eyeSetSkyBox"   , _setSkyBox  );
-  _graphic._scripts->registerFunction("eyeGetAllSkyBox", _getAllBoxes);
-  _graphic._scripts->registerFunction("eyeGetSkyBox"   , _getSkyBox  );
+  _disableSkyBox = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    _graphic._skyBox = nullptr;
+    return 1;
+  }
+  );
+  _setSkyBoxColor = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> boxTexture;
+    for (int i = 0; i < 6; i++) {
+      auto texture = std::make_unique< Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(1,1);
+      texture->get_linearRef(0) = Iyathuum::Color(input[0],input[1],input[2],input[3]);
+      boxTexture.push_back(std::move(texture));
+    }
+    _graphic._skyBox = std::make_shared<Athanah::SkyBox>(boxTexture, _graphic.getWindow()->camera());
+    return 1;
+  }
+  );
+  _graphic._scripts->registerFunction("eyeSetSkyBox"      , _setSkyBox     );
+  _graphic._scripts->registerFunction("eyeGetAllSkyBox"   , _getAllBoxes   );
+  _graphic._scripts->registerFunction("eyeGetSkyBox"      , _getSkyBox     );
+  _graphic._scripts->registerFunction("eyeDisableSkyBox"  , _disableSkyBox );
+  _graphic._scripts->registerFunction("eyeSetSkyBoxColor" , _setSkyBoxColor);
 
 }

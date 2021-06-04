@@ -21,6 +21,7 @@ public:
 private:
   void initScript();
   void setSkyBox(std::string box);
+  void setSkyBox(Iyathuum::Color);
 
   std::shared_ptr<ListSelection> _list;
   Graphic&                       _graphic;  
@@ -31,4 +32,6 @@ private:
   std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setSkyBox  ;
   std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _getSkyBox  ;
   std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _getAllBoxes;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _disableSkyBox;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setSkyBoxColor;
 };

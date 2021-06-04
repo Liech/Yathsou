@@ -6,3 +6,9 @@ print("List of All Renderer:");
 print(inspect(eyeGetAllRenderer()));
 print("Set Renderer to gNormal");
 eyeSetRenderer("gNormal");
+
+print("Set Renderer to gSpecial");
+eyeSetRenderer("gSpecial");
+--gSpecial.red = reflection;
+--gSpecial.green = glow;
+--gSpecial.blue = specular;

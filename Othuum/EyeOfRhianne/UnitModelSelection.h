@@ -59,7 +59,8 @@ private:
   std::vector<std::string>                      _names          ;
 
 
-  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setUnit    ;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setUnit;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setUnitColor;
   std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _getUnit    ;
   std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _getBlueprint;
   std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _getAllUnits;

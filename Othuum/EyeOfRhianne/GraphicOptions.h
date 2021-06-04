@@ -4,6 +4,7 @@
 #include <functional>
 #include <map>
 #include "Graphic.h"
+#include "HaasScriptingLib/lib/json.hpp"
 
 namespace Ahwassa {
   class Window;
@@ -31,6 +32,7 @@ public:
 
 private:
   void makeBloomOptions();
+  void initScript();
 
   std::shared_ptr<Ahwassa::Button>               _showHide;
   bool                                           _visible = false;
@@ -39,4 +41,10 @@ private:
   std::shared_ptr<Ahwassa::Texture>              _currentTexture;
   std::shared_ptr<Ahwassa::ListLayout>           _bloomOptions;
   Graphic& _graphic;
+
+
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setBloomQuality   ;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setBloomDirections;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setBloomIntensity ;
+  std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> _setBloomSize      ;
 };

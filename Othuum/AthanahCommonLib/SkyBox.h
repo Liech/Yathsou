@@ -3,6 +3,8 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 
 namespace Ahwassa {
   class UniformVecTexture;
@@ -17,6 +19,7 @@ namespace Athanah {
   class SkyBox {
   public:
     SkyBox(std::string filename, std::shared_ptr<Ahwassa::Camera>);
+    SkyBox(std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>&, std::shared_ptr<Ahwassa::Camera>);
 
     void draw();
   private:

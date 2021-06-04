@@ -197,9 +197,18 @@ void UnitModelSelection::initScript() {
     return _blueprints->loadModel(input)->getRaw();
   }
   );
+  _setUnitColor = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
+    [&](const nlohmann::json& input) -> nlohmann::json
+  {
+    Iyathuum::Color clr(input[0], input[1], input[2],input[3]);
+    _graphic._mesh->teamColor = clr;
+    return 1;
+  }
+  );
   _graphic._scripts->registerFunction("eyeSetUnit"     , _setUnit     );
   _graphic._scripts->registerFunction("eyeGetAllUnits" , _getAllUnits );
   _graphic._scripts->registerFunction("eyeGetUnit"     , _getUnit     );
   _graphic._scripts->registerFunction("eyeGetBlueprint", _getBlueprint);
+  _graphic._scripts->registerFunction("eyeSetUnitColor", _setUnitColor);
 
 }

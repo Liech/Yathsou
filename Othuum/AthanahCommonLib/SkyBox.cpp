@@ -21,7 +21,15 @@ namespace Athanah {
     _camera = camera;
     _mesh = makeCube();
     makeShader();
-  }   
+  }
+
+  SkyBox::SkyBox(std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>& img, std::shared_ptr<Ahwassa::Camera> camera) {
+    _textures = std::make_shared <Ahwassa::UniformVecTexture>("textures", img);
+
+    _camera = camera;
+    _mesh = makeCube();
+    makeShader();
+  }
   
   void SkyBox::draw() {
     Ahwassa::Util::enableCulling(false);

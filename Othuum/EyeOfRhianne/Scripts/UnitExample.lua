@@ -13,3 +13,5 @@ print("Faction is " .. eyeGetBlueprint("UAL0401")["General"]["FactionName"]);
 local nameWithTranslation = eyeGetBlueprint("UAL0401")["General"]["UnitName"];
 local name = string.gmatch(nameWithTranslation,'.*>(.*)')(1)
 print("Name is " .. name)
+
+eyeSetUnitColor({255,0,0,255});
