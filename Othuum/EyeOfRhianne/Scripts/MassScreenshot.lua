@@ -1,5 +1,8 @@
 local inspect = require 'Data.lua.inspect'
 
+eyeDisableSkyBox();
+eyeSetSkyBoxColor({0,255,0,255});
+local unitColor = {255,0,0,255};
 
 local allUnitIDs = eyeGetAllUnits();
 
@@ -17,6 +20,7 @@ for key, value in pairs(allUnitIDs) do
         name = name:gsub("%\"", "");
         print(name)
     end
-    eyeSaveScreenshot("screenshots/" .. name .. ".png");
+    eyeSetUnitColor(unitColor);
+    eyeSaveScreenshot(name .. ".png");
 	end
 end
