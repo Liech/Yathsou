@@ -14,23 +14,7 @@ In an recreational project the goals may change at any given time. Currently the
 
 With EyeOfRhianne an program to investigate supremecommander assets is created. 
 
-Since the last "Release" it got extended with:
- * Deferred Rendering
- * Post Processing
-   * Bloom
-   * Cubemap Reflection
- * Can load and display all SupCom SkyBoxes
- * .BP blueprint file loading and utilization
-   * Showing unit names
-   * Showing Unit Icon/Faction/Strategic Icon
-   * sorting units after faction
- * Maps
-   * FA SCMAP Format can be loaded (The vanilla format is not supported yet)
-   * textures inside the .scmap file can be viewed
-   * scmap textures can be viewed as height map (box renderer -> slow)
- * Loading of assimp compatible data formats
-
-Currently extending terrain capabilites is the topic.
+Currently extending terrain capabilites and adding automation scripting is the topic.
 
 # Libraries
 
