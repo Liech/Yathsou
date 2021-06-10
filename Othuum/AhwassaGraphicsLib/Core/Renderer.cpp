@@ -56,7 +56,7 @@ namespace Ahwassa {
     _sphere->draw();
     _box   ->draw();
     _sphere->draw();
-    _bMesh  ->draw();
+    _bMesh ->draw();
   }
 
   BasicRectangleRenderer& Renderer::rectangle() {

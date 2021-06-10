@@ -28,6 +28,7 @@ GraphicOptions::GraphicOptions(std::function<void()> disableAllCall, Graphic& gr
 
   makeBloomOptions();
   setVisible(false);
+  initScript();
 }
 
 void GraphicOptions::makeBloomOptions() {
