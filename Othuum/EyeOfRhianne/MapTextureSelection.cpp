@@ -91,7 +91,7 @@ void MapTextureSelection::setImage(std::string img) {
     //setGeometry(colored->getDimension(0), colored->getDimension(1), [m](int x, int y) {return 10*(float)m->getVal(x, y) / (float)std::numeric_limits<unsigned short>().max(); });
 
     _mesh = std::make_shared< Ahwassa::DiffuseMeshRendererMesh>();
-    _mesh->mesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short>(*m, 0, std::numeric_limits<unsigned short>().max(), 5, 1);
+    _mesh->mesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short>(*m, 0, std::numeric_limits<unsigned short>().max(), 5000, 1);
     _graphic.getWindow()->renderer().mesh().addMesh(_mesh);
     _dots.clear();
 

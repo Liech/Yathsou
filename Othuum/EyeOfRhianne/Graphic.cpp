@@ -61,6 +61,7 @@ void Graphic::drawScene() {
   if (_skyBox)
     _skyBox->draw();
   _renderer->draw();
+  getWindow()->renderer().draw();
   _composer->end();
   _cubeReflection->setTexture(_reflectionTexture);
   _cubeReflection->draw(_window->camera()->getPosition(), _composer->getResult(), _composer->getRawTextures()[3], _composer->getRawTextures()[0], _composer->getRawTextures()[1], 0);
