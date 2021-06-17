@@ -21,42 +21,37 @@ namespace Ahwassa {
       });
       vertecies.apply([&vertecies, cellSize, Min, Max](const std::array<size_t, 2>& position, PositionNormalVertex& vertex) {
         glm::vec3 p = vertecies.getVal(position).position;
-        vertex.normal = glm::vec3(0);
         size_t count = 0;
-        if (position[0] > 0) {
-          vertex.normal += vertecies.getVal({ position[0] - 1,position[1] }).position-p;
-          count++;
-          if (position[1] > 0) {
-            vertex.normal += vertecies.getVal({ position[0] - 1,position[1] - 1 }).position - p;
-            count++;
-          }
-          if (position[1] < vertecies.getDimension(1) - 1) {
-            vertex.normal += vertecies.getVal({ position[0] - 1,position[1] + 1 }).position - p;
-            count++;
-          }
-        }
-        if (position[1] > 0) {
-          vertex.normal += vertecies.getVal({ position[0],position[1]-1 }).position - p;
-          count++;
-          if (position[0] < vertecies.getDimension(0) - 1) {
-            vertex.normal += vertecies.getVal({ position[0] + 1,position[1] - 1 }).position - p;
-            count++;
-          }
-        }
-        if (position[0] < vertecies.getDimension(0) - 1) {
-          vertex.normal += vertecies.getVal({ position[0] + 1,position[1] }).position - p;
-          count++;
-        }
-        if (position[1] < vertecies.getDimension(1) - 1) {
-          vertex.normal += vertecies.getVal({ position[0],position[1] + 1}).position - p;
-          count++;
-        }
-        if (position[1] < vertecies.getDimension(1) - 1 && position[0] < vertecies.getDimension(0) - 1) {
-          vertex.normal += vertecies.getVal({ position[0]+1,position[1] + 1 }).position - p;
-          count++;
-        }
 
-        vertex.normal /= count;
+        bool sm0 = position[0] > 0;
+        bool sp0 = position[0] < vertecies.getDimension(0) - 1;
+        bool s0m = position[1] > 0;
+        bool s0p = position[1] < vertecies.getDimension(1) - 1;
+        bool smm = sm0 && s0m;
+        bool smp = sm0 && s0p;
+        bool spm = sp0 && s0m;
+        bool spp = sp0 && s0p;
+        glm::vec3 up(0, 1, 0);
+
+        vertex.normal = glm::vec3(0);
+        glm::vec3 vm0 = (sm0 ? vertecies.getVal({ position[0] - 1,position[1]     }).position-p : glm::vec3(-1,0, 0));
+        glm::vec3 vp0 = (s0m ? vertecies.getVal({ position[0]    ,position[1] - 1 }).position-p : glm::vec3( 0,0,-1));
+        glm::vec3 v0m = (smm ? vertecies.getVal({ position[0] - 1,position[1] - 1 }).position-p : glm::vec3(-1,0,-1));
+        glm::vec3 v0p = (sp0 ? vertecies.getVal({ position[0] + 1,position[1]     }).position-p : glm::vec3(+1,0, 0));
+        glm::vec3 vmm = (s0p ? vertecies.getVal({ position[0]    ,position[1] + 1 }).position-p : glm::vec3( 0,0,+1));
+        glm::vec3 vmp = (spp ? vertecies.getVal({ position[0] + 1,position[1] + 1 }).position-p : glm::vec3(+1,0,+1));
+        glm::vec3 vpm = (spm ? vertecies.getVal({ position[0] + 1,position[1] - 1 }).position-p : glm::vec3(+1,0,-1));
+        glm::vec3 vpp = (smp ? vertecies.getVal({ position[0] - 1,position[1] + 1 }).position-p : glm::vec3(-1,0,+1));
+
+        vertex.normal += glm::cross(glm::cross(vm0, up), vm0);
+        vertex.normal += glm::cross(glm::cross(vp0, up), vp0);
+        vertex.normal += glm::cross(glm::cross(v0m, up), v0m);
+        vertex.normal += glm::cross(glm::cross(v0p, up), v0p);
+        vertex.normal += glm::cross(glm::cross(vmm, up), vmm);
+        vertex.normal += glm::cross(glm::cross(vmp, up), vmp);
+        vertex.normal += glm::cross(glm::cross(vpm, up), vpm);
+        vertex.normal += glm::cross(glm::cross(vpp, up), vpp);
+
         vertex.normal = glm::normalize(vertex.normal);
       });
       for (int x = 0; x < w - 1; x++) {
