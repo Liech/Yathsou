@@ -30,7 +30,6 @@ namespace Athanah {
   
   private:
     std::shared_ptr<Ahwassa::Camera>        _camera   ;
-    std::unique_ptr<Ahwassa::UniformVec3>   _color    ;
     std::unique_ptr<Ahwassa::UniformMat4>   _transform;
     std::unique_ptr<Ahwassa::UniformVec3>   _light    ;
     std::shared_ptr<Ahwassa::ShaderProgram> _shader   ;

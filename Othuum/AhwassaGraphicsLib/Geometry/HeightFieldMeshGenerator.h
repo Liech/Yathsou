@@ -1,5 +1,7 @@
 #pragma once
 
+#include <functional>
+
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
 #include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
@@ -8,18 +10,18 @@ namespace Ahwassa {
   class HeightFieldMeshGenerator {
   public:
 
-    template<typename Number>
-    static std::shared_ptr<Mesh<PositionNormalVertex>> generate(Iyathuum::MultiDimensionalArray<Number, 2>& map, Number Min, Number Max, float height = 1, float cellSize = 1) {
+    template<typename Number, typename Vertex>
+    static std::shared_ptr<Mesh<Vertex>> generate(Iyathuum::MultiDimensionalArray<Number, 2>& map, Number Min, Number Max, std::function<void(const std::array<size_t,2>,Vertex&)> custom,float height = 1, float cellSize = 1) {
       size_t w = map.getDimension(0);
       size_t h = map.getDimension(1);
       
-      Iyathuum::MultiDimensionalArray<PositionNormalVertex, 2> vertecies(std::vector<size_t>{w,h});
+      Iyathuum::MultiDimensionalArray<Vertex, 2> vertecies(std::vector<size_t>{w,h});
       std::vector<int> indices;
       indices.reserve(vertecies.getSize() * 6);
-      vertecies.apply([&map, cellSize, Min, Max,height](const std::array<size_t, 2>& position, PositionNormalVertex& vertex) {
+      vertecies.apply([&map, cellSize, Min, Max,height](const std::array<size_t, 2>& position, Vertex& vertex) {
         vertex.position = glm::vec3(position[0] * cellSize, height * ((float)map.getVal(position) - (float)Min) / (float)Max, position[1] * cellSize);
       });
-      vertecies.apply([&vertecies, cellSize, Min, Max](const std::array<size_t, 2>& position, PositionNormalVertex& vertex) {
+      vertecies.apply([&vertecies, cellSize, Min, Max](const std::array<size_t, 2>& position, Vertex& vertex) {
         glm::vec3 p = vertecies.getVal(position).position;
         size_t count = 0;
 
@@ -65,9 +67,16 @@ namespace Ahwassa {
           indices.push_back(vertecies.transform(x + 1,y + 1 ));
         }
       }
-      std::shared_ptr<Mesh<PositionNormalVertex>> result = std::make_shared <Mesh<PositionNormalVertex>>(vertecies.vector(), indices);
+      vertecies.apply(custom);
+      std::shared_ptr<Mesh<Vertex>> result = std::make_shared <Mesh<Vertex>>(vertecies.vector(), indices);
       return result;
     }
+
+    template<typename Number>
+    static std::shared_ptr<Mesh<PositionNormalVertex>> generate(Iyathuum::MultiDimensionalArray<Number, 2>& map, Number Min, Number Max, float height = 1, float cellSize = 1) {
+      return generate<Number,PositionNormalVertex>(map, Min, Max, [](const std::array<size_t,2>,PositionNormalVertex&) {}, height, cellSize);
+    }
+
   private:
 
   };

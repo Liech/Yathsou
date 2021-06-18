@@ -15,6 +15,7 @@
 #include "AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/FBO.h"
 #include "AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.h"
+#include "AhwassaGraphicsLib/Vertex/PositionColorNormalVertex.h"
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
@@ -48,7 +49,10 @@ int main(int argc, char** argv) {
   auto map = factory->loadMap(setons);
   map->loadFull();
 
+  for (auto x : map->scmap().terrainTexturePaths)
+    std::cout << x.path << std::endl;
 
+  auto& tex = map->scmap().highTexture;
 
   {  //better context for window
     Ahwassa::Background b(&w);
@@ -58,7 +62,6 @@ int main(int argc, char** argv) {
     std::shared_ptr<Ahwassa::DeferredComposer> composer;
     std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
     std::shared_ptr<Ahwassa::IMesh> m;
-    std::shared_ptr< Ahwassa::DiffuseMeshRendererMesh> mesh;
     std::shared_ptr<Athanah::MapRenderer> mapRenderer;
 
     w.Startup = [&]() {
@@ -67,9 +70,12 @@ int main(int argc, char** argv) {
 
       mapRenderer = std::make_shared<Athanah::MapRenderer>(w.camera());
 
-      mesh = std::make_shared< Ahwassa::DiffuseMeshRendererMesh>();
-      mesh->mesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short>(*map->scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(), 2000, 1);
-      w.renderer().mesh().addMesh(mesh);
+      auto tinter = [](const std::array<size_t,2> position, Ahwassa::PositionColorNormalVertex& v) {
+        v.color = Iyathuum::Color(255, 255, 255).to4();
+      };
+
+      m = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short, Ahwassa::PositionColorNormalVertex>(*map->scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(),tinter, 2000, 1);
+      //w.renderer().mesh().addMesh(m);
       
       freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
       w.input().addUIElement(freeCam.get());
@@ -81,7 +87,7 @@ int main(int argc, char** argv) {
       //composer->start();
       b.draw();
       //w.renderer().draw();
-      mapRenderer->draw(*mesh->mesh);
+      mapRenderer->draw(*m);
       //composer->end();
 
       //textureRenderer->start();
