@@ -42,7 +42,9 @@ int main(int argc, char** argv) {
   std::string mapPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Supreme Commander Forged Alliance\\maps";
 
   auto factory = std::make_shared<Athanah::MapFactory>(mapPath);
-  auto map = factory->loadMap("SCMP_009");
+  std::string setons = "SCMP_009";
+  std::string fields = "SCMP_015";
+  auto map = factory->loadMap(fields);
   map->loadFull();
 
 

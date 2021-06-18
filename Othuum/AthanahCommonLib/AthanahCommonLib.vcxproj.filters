@@ -93,6 +93,9 @@
     <ClInclude Include="Model3DRenderer.h">
       <Filter>Header Files\SupCom</Filter>
     </ClInclude>
+    <ClInclude Include="Map\MapRenderer.h">
+      <Filter>Header Files\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BulletDebugDrawer.cpp">
@@ -151,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="Model3DRenderer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\MapRenderer.cpp">
+      <Filter>Source Files\Map</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
