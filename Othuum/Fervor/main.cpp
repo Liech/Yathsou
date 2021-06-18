@@ -21,6 +21,7 @@
 #include "AhwassaGraphicsLib/Util.h"
 #include "AthanahCommonLib/Map/MapFactory.h"
 #include "AthanahCommonLib/Map/Map.h"
+#include "AthanahCommonLib/Map/MapRenderer.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -33,10 +34,10 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  int width = 800;
-  int height = 600;
-  //int height = 1500;
-  //int width = 2500;
+  //int width = 800;
+  //int height = 600;
+  int height = 1500;
+  int width = 2500;
   Ahwassa::Window w(width, height);
 
   std::string mapPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Supreme Commander Forged Alliance\\maps";
@@ -44,7 +45,7 @@ int main(int argc, char** argv) {
   auto factory = std::make_shared<Athanah::MapFactory>(mapPath);
   std::string setons = "SCMP_009";
   std::string fields = "SCMP_015";
-  auto map = factory->loadMap(fields);
+  auto map = factory->loadMap(setons);
   map->loadFull();
 
 
@@ -58,10 +59,13 @@ int main(int argc, char** argv) {
     std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
     std::shared_ptr<Ahwassa::IMesh> m;
     std::shared_ptr< Ahwassa::DiffuseMeshRendererMesh> mesh;
+    std::shared_ptr<Athanah::MapRenderer> mapRenderer;
 
     w.Startup = [&]() {
       composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
       textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
+
+      mapRenderer = std::make_shared<Athanah::MapRenderer>(w.camera());
 
       mesh = std::make_shared< Ahwassa::DiffuseMeshRendererMesh>();
       mesh->mesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short>(*map->scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(), 2000, 1);
@@ -76,7 +80,8 @@ int main(int argc, char** argv) {
 
       //composer->start();
       b.draw();
-      w.renderer().draw();
+      //w.renderer().draw();
+      mapRenderer->draw(*mesh->mesh);
       //composer->end();
 
       //textureRenderer->start();
