@@ -23,15 +23,17 @@ namespace Ahwassa {
 namespace Athanah { 
   class MapRenderer {
   public:
-    MapRenderer(std::shared_ptr<Ahwassa::Camera> camera);
+    MapRenderer(std::shared_ptr<Ahwassa::Camera> camera, std::array<std::shared_ptr<Ahwassa::Texture>, 5>);
     ~MapRenderer();
 
+    void setTextures(std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures);
     void draw(Ahwassa::IMesh& mesh);
   
   private:
-    std::shared_ptr<Ahwassa::Camera>        _camera   ;
-    std::unique_ptr<Ahwassa::UniformMat4>   _transform;
-    std::unique_ptr<Ahwassa::UniformVec3>   _light    ;
-    std::shared_ptr<Ahwassa::ShaderProgram> _shader   ;
+    std::shared_ptr<Ahwassa::Camera>                 _camera   ;
+    std::unique_ptr<Ahwassa::UniformMat4>            _transform;
+    std::unique_ptr<Ahwassa::UniformVec3>            _light    ;
+    std::shared_ptr<Ahwassa::ShaderProgram>          _shader   ;
+    std::array<std::shared_ptr<Ahwassa::Texture>, 5> _textures ;
   };
 }
