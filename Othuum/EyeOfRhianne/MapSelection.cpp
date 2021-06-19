@@ -10,12 +10,15 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTextRenderer.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
+#include "AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.h"
+#include "AhwassaGraphicsLib/Vertex/PositionColorNormalVertex.h"
 
 #include "ListSelection.h"
 #include "Graphic.h"
 #include "AthanahCommonLib/Map/Scenario.h"
 #include "AthanahCommonLib/Map/Map.h"
 #include "AthanahCommonLib/Map/MapFactory.h"
+#include "AthanahCommonLib/Map/MapRenderer.h"
 #include "AezeselFileIOLib/ImageIO.h"
 #include "AezeselFileIOLib/SupremeCommander/SCMAP.h"
 
@@ -36,16 +39,24 @@ MapSelection::MapSelection(std::string mapPath, Iyathuum::glmAABB<2> area, Graph
     auto map = _factory->loadMap(newMap);
     map->loadFull();
 
-    auto& m = map->scmap().terrainTypeData;
 
-    std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> colored = std::make_unique< Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>(m->getDimensionVector());
-    colored->apply([&m](size_t pos, Iyathuum::Color& clr) {  
-      unsigned char d = m->get_linearVal(pos);
-      Iyathuum::Color result(d, 0, 0, 255);
-      clr = result;
-    });
+    std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures;
+    for (int i = 0; i < 5; i++) {
+      std::string path = "Data" + map->scmap().terrainTexturePaths[i].path;
+      auto img = Aezesel::ImageIO::readImage(path);
+      textures[i] = std::make_shared<Ahwassa::Texture>("TerrainTexture" + std::to_string(i), img.get());
+    }
 
-    _graphic._previewImage = std::make_shared<Ahwassa::Texture>("Preview", colored.get());
+    _graphic._mapRenderer = std::make_shared<Athanah::MapRenderer>(_graphic.getWindow()->camera(), textures);
+
+    auto tinter = [&](const std::array<size_t, 2> position, Ahwassa::PositionColorNormalVertex& v) {
+      std::array<size_t, 2> half = { position[0] / 2,position[1] / 2 };
+      if (position[0] == map->scmap().heightMapData->getDimension(0) - 1) half[0] = (position[0] - 1) / 2;
+      if (position[1] == map->scmap().heightMapData->getDimension(1) - 1) half[1] = (position[1] - 1) / 2;
+      v.color = map->scmap().highTexture->getVal(half).to4();
+    };
+
+    _graphic._mapMesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short, Ahwassa::PositionColorNormalVertex>(*map->scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(), tinter, 2000, 1);
     _graphic._currentMap = map;
   }, [this](Iyathuum::glmAABB<2> loc, std::string name, bool hovered) {
     _graphic.getWindow()->renderer().rectangle().start();

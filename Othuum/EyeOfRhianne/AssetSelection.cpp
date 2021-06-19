@@ -6,7 +6,6 @@
 #include "RendererSelection.h"
 #include "ListSelection.h"
 #include "MapSelection.h"
-#include "MapTextureSelection.h"
 #include "ScriptSelection.h"
 #include "Graphic.h"
 
@@ -23,8 +22,7 @@ AssetSelection::AssetSelection(EyeOfRhianneConfiguration& config, Iyathuum::glmA
   options.push_back("Animation");
   options.push_back("SkyBox");
   options.push_back("Renderer");
-  options.push_back("Load Map");
-  options.push_back("Map Texture");
+  options.push_back("Map");
   options.push_back("Scripts");
 
   _list = std::make_unique<ListSelection>(options, options, area, _graphic.getWindow(), [this](std::string newSelection) {    
@@ -43,7 +41,6 @@ void AssetSelection::addSelections() {
   _skyBox     = std::make_shared<SkyBoxSelection>    (_config.AssetPath + "\\textures\\environment",area, _graphic);
   _renderer   = std::make_shared<RendererSelection>  (area,_graphic);
   _maps       = std::make_shared<MapSelection>       (_config.MapPath,area,_graphic);
-  _mapTexture = std::make_shared<MapTextureSelection>(area,_graphic);
   _scripts    = std::make_shared<ScriptSelection>    (area,_graphic);
 }
 
@@ -59,10 +56,8 @@ void AssetSelection::unitVisibility(std::string newMenu) {
     _skyBox->setVisible(!_skyBox->isVisible());
   if (_current == "Renderer")
     _renderer->setVisible(!_renderer->isVisible());
-  if (_current == "Load Map")
+  if (_current == "Map")
     _maps->setVisible(!_maps->isVisible());
-  if (_current == "Map Texture")
-    _mapTexture->setVisible(!_mapTexture->isVisible());
   if (_current == "Scripts")
     _scripts->setVisible(!_scripts->isVisible());
 }
@@ -73,7 +68,6 @@ void AssetSelection::hideAll() {
   _skyBox    ->setVisible(false);
   _renderer  ->setVisible(false);
   _maps      ->setVisible(false);
-  _mapTexture->setVisible(false);
   _scripts   ->setVisible(false);
 }
 
@@ -83,7 +77,6 @@ void AssetSelection::draw() {
   _skyBox    ->draw();
   _renderer  ->draw();
   _maps      ->draw();
-  _mapTexture->draw();
   _scripts   ->draw();
   _list      ->draw();
 }
@@ -94,7 +87,6 @@ void AssetSelection::update() {
   _skyBox    ->update();
   _renderer  ->update();
   _maps      ->update();
-  _mapTexture->update();
   _scripts   ->update();
 }
 

@@ -18,20 +18,28 @@ namespace Athanah {
       out vec4 clr;
       out vec3 nrm;
       out vec3 pos;
+      out vec3 FragPos;
       void main() {
       
         mat4 view = )" + _camera->getName() + R"(Projection *  )" + _camera->getName() + R"(View;
         gl_Position = view *  model *vec4(position , 1.0);
         clr = color;
-        nrm = normal;
+        nrm    = (model* vec4(normal, 1.0)).xyz;
         pos = position;
+        FragPos   = (model * vec4(position , 1.0)).xyz;
       }
    )";
 
     std::string fragment_shader_source = R"(
+     layout (location = 0) out vec4 gPosition;
+     layout (location = 1) out vec4 gNormal;
+     layout (location = 2) out vec4 gAlbedoSpec;
+     layout (location = 3) out vec4 gSpecial;
+
      in vec4 clr;
      in vec3 nrm;
      in vec3 pos;
+     in vec3 FragPos;
      
      out vec4 frag_color;
      void main() {
@@ -47,13 +55,17 @@ namespace Athanah {
        resultSample = layerBlue  * clr[2] + resultSample * (1-clr[2]);
        resultSample = layerAlpha * clr[3] + resultSample * (1-clr[3]);
 
-       float ambientStrength = 0.5;  
-       float diffuseStrength = 0.5;
-       float diff = max(dot(nrm, Light), 0.0) * diffuseStrength;
      
-       vec4 result = resultSample *  diff + resultSample * ambientStrength;
-       result[3] = 1;
-     	frag_color = result;
+       gAlbedoSpec = resultSample;
+       gAlbedoSpec.a = 1;
+       gNormal.rgb = (normalize(nrm).rgb /2.0 + vec3(0.5,0.5,0.5));  
+       gNormal.a = 1;
+       gPosition.rgb = FragPos.rgb; 	
+       gPosition.a = 1;
+       gSpecial.r = 0;
+       gSpecial.g = 0;
+       gSpecial.b = 0;
+       gSpecial.a = 1;
      }
    )";
 
@@ -80,9 +92,14 @@ namespace Athanah {
 
     Ahwassa::Util::setDepthTest(true);
     Ahwassa::Util::setDepthFuncLess();
+    Ahwassa::Util::depthMask(true);
     _shader->bind();
     _camera->bind();
     mesh.draw();
     Ahwassa::Util::setDepthTest(false);
+  }
+
+  void MapRenderer::setTextures(std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures) {
+    _textures = textures;
   }
 }

@@ -20,6 +20,7 @@ namespace Ahwassa {
 namespace Athanah {
   class SkyBox;
   class Map;
+  class MapRenderer;
 }
 namespace Haas {
   class ScriptEngine;
@@ -43,10 +44,10 @@ public:
   bool                                              _bloomEnabled = true;
   std::shared_ptr<Athanah::SkyBox>                  _skyBox;
   std::shared_ptr<Ahwassa::CubeTexture>             _reflectionTexture;
-  std::shared_ptr<Ahwassa::Texture>                 _previewImage{ nullptr };
   std::shared_ptr<Athanah::Map>                     _currentMap;
-  std::shared_ptr<Ahwassa::BoxRenderer>             _boxRenderer;
   std::shared_ptr<Haas::ScriptEngine>               _scripts;
+  std::shared_ptr<Ahwassa::IMesh>                   _mapMesh = nullptr;
+  std::shared_ptr<Athanah::MapRenderer>             _mapRenderer = nullptr;
   Ahwassa::Window* getWindow();
 private:
   void drawScene();

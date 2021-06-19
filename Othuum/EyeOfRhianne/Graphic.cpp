@@ -19,6 +19,7 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
 #include "AthanahCommonLib/SkyBox.h"
+#include "AthanahCommonLib/Map/MapRenderer.h"
 
 Graphic::Graphic(Ahwassa::Window* window) {
   _window         = window;
@@ -28,7 +29,7 @@ Graphic::Graphic(Ahwassa::Window* window) {
   _cubeReflection = std::make_shared<Ahwassa::CubeReflection  >(_window, _window->getWidth(), _window->getHeight());
   _renderer       = std::make_shared<Athanah::SupComMeshRendererDef>(_window->camera());
   _reflectionTexture = std::make_shared<Ahwassa::CubeTexture>("Reflection", 0);
-  _boxRenderer = std::make_shared<Ahwassa::BoxRenderer>(getWindow()->camera());
+
 
   _textures.push_back(_bloom->getResult());
   _textures.push_back(_cubeReflection->getResult());
@@ -47,19 +48,14 @@ void Graphic::draw() {
   _window->renderer().texture().draw(*_textures[_renderedTexture], Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_window->getWidth(), _window->getHeight())), true);
   _window->renderer().texture().end();
 
-  _boxRenderer->draw();
-  if (_previewImage) {
-    Iyathuum::glmAABB<2> textureLoc(glm::vec2(getWindow()->getWidth() - 400, 0), glm::vec2(400, 400));
-    getWindow()->renderer().texture().start();
-    getWindow()->renderer().texture().draw(*_previewImage, textureLoc);
-    getWindow()->renderer().texture().end();
-  }
 }
 
 void Graphic::drawScene() {
   _composer->start();
   if (_skyBox)
     _skyBox->draw();
+  if (_mapRenderer)
+    _mapRenderer->draw(*_mapMesh);
   _renderer->draw();
   getWindow()->renderer().draw();
   _composer->end();
