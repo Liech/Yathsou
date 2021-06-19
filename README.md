@@ -12,9 +12,11 @@ In an recreational project the goals may change at any given time. Currently the
 
 # Current Work
 
-With EyeOfRhianne an program to investigate supremecommander assets is created. 
+Since the last 'release' the following was implemented:
+ 
+ * Map Renderer with textures
 
-Currently extending terrain capabilites and adding automation scripting is the topic.
+The next greater step is to combine elements of the game and adding units that are able to drive on terrain.
 
 # Libraries
 
@@ -95,6 +97,7 @@ Collection of reusable cross library code (=everything). Will get too big and ne
 Offers:
  * Rendering of Supreme Commander Units & Animation
  * Physics Debug Drawer
+ * Rendering of Supreme Commander Maps
 
 ## SuthanusPhysicsLibrary
 
