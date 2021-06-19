@@ -561,6 +561,12 @@
     <ClInclude Include="AssimpUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="XWB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XSB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageIO.cpp">
@@ -660,6 +666,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AssimpUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XWB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XSB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

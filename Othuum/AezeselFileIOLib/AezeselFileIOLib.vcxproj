@@ -326,6 +326,8 @@
     <ClInclude Include="SupremeCommander\SCM.h" />
     <ClInclude Include="SupremeCommander\SCMAP.h" />
     <ClInclude Include="SupremeCommander\SupremeCommanderAnimator.h" />
+    <ClInclude Include="XSB.h" />
+    <ClInclude Include="XWB.h" />
     <ClInclude Include="ZIP.h" />
   </ItemGroup>
   <ItemGroup>
@@ -361,6 +363,8 @@
     <ClCompile Include="SupremeCommander\SCM.cpp" />
     <ClCompile Include="SupremeCommander\SCMAP.cpp" />
     <ClCompile Include="SupremeCommander\SupremeCommanderAnimator.cpp" />
+    <ClCompile Include="XSB.cpp" />
+    <ClCompile Include="XWB.cpp" />
     <ClCompile Include="ZIP.cpp" />
   </ItemGroup>
   <ItemGroup>
