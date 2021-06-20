@@ -15,6 +15,7 @@ In an recreational project the goals may change at any given time. Currently the
 Since the last 'release' the following was implemented:
  
  * Map Renderer with textures
+ * XACT Sound files (xwb/xsb) can be transformed to wav files
 
 The next greater step is to combine elements of the game and adding units that are able to drive on terrain.
 
@@ -87,6 +88,8 @@ Offers:
  * MagicaVox loading
  * Unzip files
  * load 3d models with assimp (prototype)
+ * Read XACT sound files (.xsb, .xwb)
+ * write WAV files
 
 ## AthanahCommonLib
 
