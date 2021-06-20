@@ -60,15 +60,26 @@ namespace Aezesel {
 
     for (int i = 0; i < entryCount; i++) {
       XWBEntry entry;
-      entry.flags_duration = readUInt(_buffer, _fileposition);
-      entry.format         = readUInt(_buffer, _fileposition);
-      entry.play_offset    = readUInt(_buffer, _fileposition);
-      entry.play_length    = readUInt(_buffer, _fileposition);
-      entry.loop_start     = readUInt(_buffer, _fileposition);
-      entry.loop_total     = readUInt(_buffer, _fileposition);
+      entry.flags_duration   = readUInt(_buffer, _fileposition);
+      entry.format           = readUInt(_buffer, _fileposition);
+      entry.play_offset      = readUInt(_buffer, _fileposition);
+      entry.play_length      = readUInt(_buffer, _fileposition);
+      entry.loop_start       = readUInt(_buffer, _fileposition);
+      entry.loop_total       = readUInt(_buffer, _fileposition);
+      entry.entry_flags      = entry.flags_duration & 0x0000000F;
+      entry.duration         = (entry.flags_duration & 0xFFFFFFF0) >> 4;
+      entry.format_tag       = (XWBFormat)(entry.format & 0x00000003);
+      entry.channels         = (entry.format & 0x0000001C) >> 2;
+      entry.samples_per_sec  = (entry.format & 0x007FFFE0) >> 5;
+      entry.block_align      = (entry.format & 0x7F800000) >> 23;
+      entry.bits_per_sample  = (entry.format & 0x80000000) >> 31;
+      if (XWBFormat::XMA        == entry.format_tag) {}
+      else if (XWBFormat::WMA   == entry.format_tag) {}
+      else if (XWBFormat::PCM   == entry.format_tag) {}
+      else if (XWBFormat::ADPCM == entry.format_tag) {}
       entries.push_back(entry);
     }
-    //line 157
+
 
     _fileposition = entries[0].play_offset;
     auto wavFile = read(_buffer, _fileposition, entries[0].play_length);

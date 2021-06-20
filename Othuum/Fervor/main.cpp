@@ -38,10 +38,10 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  //int width = 800;
-  //int height = 600;
-  int height = 1500;
-  int width = 2500;
+  int width = 800;
+  int height = 600;
+  //int height = 1500;
+  //int width = 2500;
   Ahwassa::Window w(width, height);
 
   std::string scPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Supreme Commander Forged Alliance";
