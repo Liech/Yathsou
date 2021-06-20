@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
   std::string scPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Supreme Commander Forged Alliance";
   std::string mapPath = scPath + "\\maps";
 
-  std::string soundPath = scPath + "\\sounds\\Interface";
+  std::string soundPath = scPath + "\\sounds\\Voice\\US\\XGG";
   //Aezesel::XSB xsbReader;
   //for (auto s : xsbReader.load(soundPath+".xsb"))
   //  std::cout << s << std::endl;

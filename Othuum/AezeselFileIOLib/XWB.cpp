@@ -1,5 +1,7 @@
 #include "XWB.h"
 
+#include "WAV.h"
+
 namespace Aezesel {
   void XWB::load(std::string filename){
     std::ifstream input(filename, std::ios::binary);
@@ -73,13 +75,39 @@ namespace Aezesel {
       entry.samples_per_sec  = (entry.format & 0x007FFFE0) >> 5;
       entry.block_align      = (entry.format & 0x7F800000) >> 23;
       entry.bits_per_sample  = (entry.format & 0x80000000) >> 31;
-      if (XWBFormat::XMA        == entry.format_tag) {}
-      else if (XWBFormat::WMA   == entry.format_tag) {}
-      else if (XWBFormat::PCM   == entry.format_tag) {}
-      else if (XWBFormat::ADPCM == entry.format_tag) {}
+
       entries.push_back(entry);
     }
 
+    for (int i = 0; i < entryCount; i++) {
+      XWBEntry entry = entries[i];
+      int formatTag = 0;
+      int bitsPerSample = 0;
+      int avgBytesPerSec = 0;
+      if (XWBFormat::XMA == entry.format_tag) { throw std::runtime_error("not implemented"); }
+      else if (XWBFormat::WMA == entry.format_tag) { throw std::runtime_error("not implemented"); }
+      else if (XWBFormat::PCM == entry.format_tag) {
+        formatTag = 1;
+        if (entry.bits_per_sample == 1)
+          bitsPerSample = 16;
+        else
+          bitsPerSample = 8;
+        avgBytesPerSec = entry.samples_per_sec * entry.block_align;
+      }
+      else if (XWBFormat::ADPCM == entry.format_tag) { throw std::runtime_error("not implemented"); }
+
+      WAV wavWriter;
+      wavWriter.sampleRate = entry.samples_per_sec;
+      wavWriter.blockAlign = entry.block_align;
+      wavWriter.bytesPerSecond = avgBytesPerSec;
+      wavWriter.channels = entry.channels;
+      wavWriter.formatTag = formatTag;
+      wavWriter.bitsPerSample = bitsPerSample;
+      
+      _fileposition = (size_t)EntryWaveDataOffset + (size_t)entry.play_offset;
+      wavWriter.data = read(_buffer, _fileposition, entry.play_length);
+      wavWriter.writeWav(std::to_string(i) + ".wav");
+    }
 
     _fileposition = entries[0].play_offset;
     auto wavFile = read(_buffer, _fileposition, entries[0].play_length);

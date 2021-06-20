@@ -55,21 +55,37 @@ namespace Aezesel {
     stream.write(data.c_str(), data.length());
   }
 
-  void IO::writeInt(std::ofstream& stream, const int& value) {
+  void IO::writeInt(std::ofstream& stream, const int& value, bool endian) {
     unsigned char bytes[4];
-    bytes[0] = ((value >> 24) & 0xFF);
-    bytes[1] = ((value >> 16) & 0xFF);
-    bytes[2] = ((value >> 8) & 0xFF);
-    bytes[3] = (value & 0xFF);
+    if (!endian) {
+      bytes[0] = ((value >> 24) & 0xFF);
+      bytes[1] = ((value >> 16) & 0xFF);
+      bytes[2] = ((value >> 8) & 0xFF);
+      bytes[3] = (value & 0xFF);
+    }
+    else {
+      bytes[3] = ((value >> 24) & 0xFF);
+      bytes[2] = ((value >> 16) & 0xFF);
+      bytes[1] = ((value >> 8) & 0xFF);
+      bytes[0] = (value & 0xFF);
+    }
     stream.write((const char*)(bytes), 4);
   }
 
-  void IO::writeUInt(std::ofstream& stream, const unsigned int& value) {
+  void IO::writeUInt(std::ofstream& stream, const unsigned int& value, bool endian) {
     unsigned char bytes[4];
-    bytes[0] = ((value >> 24) & 0xFF);
-    bytes[1] = ((value >> 16) & 0xFF);
-    bytes[2] = ((value >> 8) & 0xFF);
-    bytes[3] = (value & 0xFF);
+    if (!endian) {
+      bytes[0] = ((value >> 24) & 0xFF);
+      bytes[1] = ((value >> 16) & 0xFF);
+      bytes[2] = ((value >> 8) & 0xFF);
+      bytes[3] = (value & 0xFF);
+    }else {
+      bytes[3] = ((value >> 24) & 0xFF);
+      bytes[2] = ((value >> 16) & 0xFF);
+      bytes[1] = ((value >> 8) & 0xFF);
+      bytes[0] = (value & 0xFF);
+    }
+
     stream.write((const char*)(bytes), 4);
   }
 
@@ -93,9 +109,17 @@ namespace Aezesel {
     return result;
   }
 
-  void IO::writeUShort(std::ofstream& stream, const unsigned short& data) {
-    unsigned short* p = (unsigned short*)data;
-    stream.write((const char*)p, sizeof(unsigned short));
+  void IO::writeUShort(std::ofstream& stream, const unsigned short& value, bool endian) {
+    unsigned char bytes[2];
+    if (!endian) {
+      bytes[0] = ((value >> 8) & 0xFF);
+      bytes[1] = (value & 0xFF);
+    }
+    else {
+      bytes[1] = ((value >> 8) & 0xFF);
+      bytes[0] = (value & 0xFF);
+    }
+    stream.write((const char*)(bytes), 2);
   }
 
   std::vector<unsigned char> IO::read(const std::vector<unsigned char>& data, size_t& position, size_t size) {
