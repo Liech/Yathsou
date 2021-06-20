@@ -25,6 +25,7 @@
 #include "AthanahCommonLib/Map/MapRenderer.h"
 #include "AezeselFileIOLib/ImageIO.h"
 #include "AezeselFileIOLib/XSB.h"
+#include "AezeselFileIOLib/XWB.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -46,10 +47,13 @@ int main(int argc, char** argv) {
   std::string scPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Supreme Commander Forged Alliance";
   std::string mapPath = scPath + "\\maps";
 
-  std::string soundPath = scPath + "\\sounds\\Interface.xsb";
-  Aezesel::XSB xsbReader;
-  for (auto s : xsbReader.load(soundPath))
-    std::cout << s << std::endl;
+  std::string soundPath = scPath + "\\sounds\\Interface";
+  //Aezesel::XSB xsbReader;
+  //for (auto s : xsbReader.load(soundPath+".xsb"))
+  //  std::cout << s << std::endl;
+
+  Aezesel::XWB xwbReader;
+  xwbReader.load(soundPath + ".xwb");
 
   auto factory = std::make_shared<Athanah::MapFactory>(mapPath);
   std::string setons = "SCMP_009";

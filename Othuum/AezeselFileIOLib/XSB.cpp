@@ -16,6 +16,8 @@ namespace Aezesel {
     //https://docs.python.org/3/library/struct.html
     //4s         | h_sig
     std::string signature = readString(_buffer, _fileposition,4);
+    if (signature != "SDBK")
+      throw std::runtime_error("Magic byte wrong");
     //H ushort   | self.version
     unsigned short version = readUShort(_buffer, _fileposition);
     //H ushort   | self.header_version

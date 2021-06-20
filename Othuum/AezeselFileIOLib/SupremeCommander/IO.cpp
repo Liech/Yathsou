@@ -80,6 +80,10 @@ namespace Aezesel {
     writeInt(stream, data);
   }
 
+  void IO::write(std::ofstream& stream, const std::vector<unsigned char>& data) {
+    stream.write((const char*)(data.data()), data.size());
+  }
+
   unsigned short IO::readUShort(const std::vector<unsigned char>& data, size_t& position)
   {
     unsigned char bytes[] = { data[position],data[position + 1] };

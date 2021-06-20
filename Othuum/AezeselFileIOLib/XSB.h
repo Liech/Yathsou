@@ -4,10 +4,10 @@
 #include <vector>
 #include "SupremeCommander/IO.h"
 
-//http://wiki.xentax.com/index.php/XBOX_XSB
-//https://github.com/fesh0r/xnb_parse/blob/master/xnb_parse/xact/xsb.py
-// https://github.com/vgmstream/vgmstream/blob/master/src/meta/xwb_xsb.h
-//this format does not look like the same. lets just crawl the last entries
+//http://wiki.xentax.com/index.php/XBOX_XSB //this format is wrong?
+//https://github.com/fesh0r/xnb_parse/blob/master/xnb_parse/xact/xsb.py //this is the implemented
+//https://github.com/vgmstream/vgmstream/blob/master/src/meta/xwb_xsb.h //this looks too complicated
+
 namespace Aezesel {
   //Sound bank files (supremme commander and maybe other xbox related games)
   //xsb files contains names for xwb files
