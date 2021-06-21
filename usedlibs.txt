@@ -3,11 +3,11 @@ glm                            |Iyathuum     | Math
 gli                            |aezesel      | load .dds files
 lodepng                        |aezesel      | Load/Save PNG files
 assimp                         |aezesel      | load/save 3d models
+nyquistaudio                   |aezesel      | load wav/mp3
 freetype                       |ahwassa      | Font
 glwf                           |ahwassa      | WindowManager
 glad                           |ahwassa      | OpenGL
 portaudio                      |ahwassa      | play sound
-nyquistaudio                   |ahwassa      | load wav/mp3
 openvr                         |ahwassa      | virtual reality
 bullet                         |suthanus     | physics
 lua                            |haas         | scripting

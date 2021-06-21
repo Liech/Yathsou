@@ -3,7 +3,7 @@
 #include "SupremeCommander/IO.h"
 
 namespace Aezesel {
-  class WAV : private IO{
+  class WAVwriter : private IO{
   public:
     void writeWav(std::string filename);
 

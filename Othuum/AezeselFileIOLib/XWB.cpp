@@ -1,6 +1,6 @@
 #include "XWB.h"
 
-#include "WAV.h"
+#include "WAVwriter.h"
 
 namespace Aezesel {
   void XWB::load(std::string filename){
@@ -96,7 +96,7 @@ namespace Aezesel {
       }
       else if (XWBFormat::ADPCM == entry.format_tag) { throw std::runtime_error("not implemented"); }
 
-      WAV wavWriter;
+      WAVwriter wavWriter;
       wavWriter.sampleRate = entry.samples_per_sec;
       wavWriter.blockAlign = entry.block_align;
       wavWriter.bytesPerSecond = avgBytesPerSec;
@@ -108,10 +108,5 @@ namespace Aezesel {
       wavWriter.data = read(_buffer, _fileposition, entry.play_length);
       wavWriter.writeWav(std::to_string(i) + ".wav");
     }
-
-    _fileposition = entries[0].play_offset;
-    auto wavFile = read(_buffer, _fileposition, entries[0].play_length);
-    std::ofstream outfile("wavtest.wav", std::ofstream::binary);
-    write(outfile, wavFile);
   }
 }

@@ -26,6 +26,7 @@
 #include "AezeselFileIOLib/ImageIO.h"
 #include "AezeselFileIOLib/XSB.h"
 #include "AezeselFileIOLib/XWB.h"
+#include "AezeselFileIOLib/SoundIO.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -54,6 +55,8 @@ int main(int argc, char** argv) {
 
   Aezesel::XWB xwbReader;
   xwbReader.load(soundPath + ".xwb");
+  Aezesel::SoundIO sound;
+  sound.read("0.wav");
 
   auto factory = std::make_shared<Athanah::MapFactory>(mapPath);
   std::string setons = "SCMP_009";

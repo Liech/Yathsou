@@ -127,7 +127,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-staticd.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;$(ProjectDir)lib/assimp/assimp-vc142-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-staticd.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;$(ProjectDir)lib/assimp/assimp-vc142-mtd.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,7 +151,7 @@
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
     </ProjectReference>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-static.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;$(ProjectDir)lib/assimp/assimp-vc142-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-static.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;$(ProjectDir)lib/assimp/assimp-vc142-mt.lib;$(ProjectDir)lib\libnyquist\libnyquist.lib;$(ProjectDir)lib\libnyquist\libopus.lib;$(ProjectDir)lib\libnyquist\libwavpack.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -320,13 +320,14 @@
     <ClInclude Include="MagicaVox\typeROTATION.h" />
     <ClInclude Include="MagicaVox\VoxFile.h" />
     <ClInclude Include="Model3D.h" />
+    <ClInclude Include="SoundIO.h" />
     <ClInclude Include="STLWriter.h" />
     <ClInclude Include="SupremeCommander\IO.h" />
     <ClInclude Include="SupremeCommander\SCA.h" />
     <ClInclude Include="SupremeCommander\SCM.h" />
     <ClInclude Include="SupremeCommander\SCMAP.h" />
     <ClInclude Include="SupremeCommander\SupremeCommanderAnimator.h" />
-    <ClInclude Include="WAV.h" />
+    <ClInclude Include="WAVwriter.h" />
     <ClInclude Include="XSB.h" />
     <ClInclude Include="XWB.h" />
     <ClInclude Include="ZIP.h" />
@@ -358,13 +359,14 @@
     <ClCompile Include="MagicaVox\typeROTATION.cpp" />
     <ClCompile Include="MagicaVox\VoxFile.cpp" />
     <ClCompile Include="Model3D.cpp" />
+    <ClCompile Include="SoundIO.cpp" />
     <ClCompile Include="STLWriter.cpp" />
     <ClCompile Include="SupremeCommander\IO.cpp" />
     <ClCompile Include="SupremeCommander\SCA.cpp" />
     <ClCompile Include="SupremeCommander\SCM.cpp" />
     <ClCompile Include="SupremeCommander\SCMAP.cpp" />
     <ClCompile Include="SupremeCommander\SupremeCommanderAnimator.cpp" />
-    <ClCompile Include="WAV.cpp" />
+    <ClCompile Include="WAVwriter.cpp" />
     <ClCompile Include="XSB.cpp" />
     <ClCompile Include="XWB.cpp" />
     <ClCompile Include="ZIP.cpp" />

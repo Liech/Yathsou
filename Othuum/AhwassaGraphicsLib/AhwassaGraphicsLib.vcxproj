@@ -124,7 +124,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -145,7 +145,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib\portaudio\portaudio_static_x64.lib;$(ProjectDir)lib/GLWF/lib/glfw3.lib;$(ProjectDir)lib/freetype/lib/freetype.lib;$(ProjectDir)lib/openvr/openvr_api.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>

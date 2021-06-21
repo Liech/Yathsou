@@ -1,14 +1,14 @@
-#include "WAV.h"
+#include "WAVwriter.h"
 
 namespace Aezesel {
-  void WAV::writeWav(std::string filename) {
+  void WAVwriter::writeWav(std::string filename) {
     std::ofstream outfile(filename, std::ofstream::binary);
     writeRIFFHeader(outfile);
     writeFMTHeader(outfile);
     writeDataHeader(outfile);
   }
 
-  void WAV::writeRIFFHeader(std::ofstream& out) {
+  void WAVwriter::writeRIFFHeader(std::ofstream& out) {
     writeString(out,"RIFF");
     const int fmtSize = 20;
     const int riffSize = 8;
@@ -17,7 +17,7 @@ namespace Aezesel {
     writeString(out, "WAVE");
   }
 
-  void WAV::writeFMTHeader(std::ofstream& out) {
+  void WAVwriter::writeFMTHeader(std::ofstream& out) {
     writeString(out, "fmt "); //magic byte
     bool endianSwap = true;
     writeUInt(out, 16              , endianSwap); ///header length
@@ -29,7 +29,7 @@ namespace Aezesel {
     writeUShort(out, bitsPerSample , endianSwap);
   }
 
-  void WAV::writeDataHeader(std::ofstream& out) {
+  void WAVwriter::writeDataHeader(std::ofstream& out) {
     writeString(out, "data");
     writeUInt(out, data.size());
     write(out,data);
