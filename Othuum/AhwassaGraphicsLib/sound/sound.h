@@ -7,17 +7,20 @@ namespace nqr
 }
 struct PaStreamCallbackTimeInfo;
 
+namespace Iyathuum {
+  class Sound;
+}
+
 namespace Ahwassa
 {
   class sound
   {
   public:
-    void play();
+    void play(Iyathuum::Sound*);
 
   private:
     size_t                          _position = 0;
-    size_t                          _numberOfChannels = 0;
-    std::shared_ptr<nqr::AudioData> _fileData;
+    Iyathuum::Sound* _sound;
 
     static int patestCallback(const void* inputBuffer, void* outputBuffer,
       unsigned long framesPerBuffer,

@@ -1,11 +1,16 @@
 #pragma once
 
 #include <string>
+#include <memory>
+
+namespace Iyathuum {
+  class Sound;
+}
 
 namespace Aezesel {
   class SoundIO {
   public:
-    void read(std::string filename);
+    std::unique_ptr<Iyathuum::Sound> read(std::string filename);
   private:
   };
 }

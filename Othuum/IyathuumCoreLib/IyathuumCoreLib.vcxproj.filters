@@ -861,6 +861,9 @@
     <ClInclude Include="Util\Scheduler.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
+    <ClInclude Include="BaseTypes\Sound.h">
+      <Filter>Header Files\BaseTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseTypes\AABB.cpp">
@@ -895,6 +898,9 @@
     </ClCompile>
     <ClCompile Include="Util\Scheduler.cpp">
       <Filter>Source Files\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseTypes\Sound.cpp">
+      <Filter>Source Files\BaseTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -228,6 +228,7 @@
     <ClInclude Include="BaseTypes\MultiDimensionalArray.h" />
     <ClInclude Include="BaseTypes\Polygon.h" />
     <ClInclude Include="BaseTypes\PolygonNet.h" />
+    <ClInclude Include="BaseTypes\Sound.h" />
     <ClInclude Include="lib\glm\common.hpp" />
     <ClInclude Include="lib\glm\detail\compute_common.hpp" />
     <ClInclude Include="lib\glm\detail\compute_vector_relational.hpp" />
@@ -495,6 +496,7 @@
     <ClCompile Include="BaseTypes\AABB.cpp" />
     <ClCompile Include="BaseTypes\Color.cpp" />
     <ClCompile Include="BaseTypes\Key.cpp" />
+    <ClCompile Include="BaseTypes\Sound.cpp" />
     <ClCompile Include="lib\glm\detail\glm.cpp" />
     <ClCompile Include="Util\ConstExprHash.cpp" />
     <ClCompile Include="Util\ContentLoader.cpp" />
