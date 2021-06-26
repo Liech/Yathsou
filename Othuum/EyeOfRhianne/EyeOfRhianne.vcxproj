@@ -156,6 +156,7 @@
     <ClCompile Include="RendererSelection.cpp" />
     <ClCompile Include="ScriptSelection.cpp" />
     <ClCompile Include="SkyBoxSelection.cpp" />
+    <ClCompile Include="SoundSelection.cpp" />
     <ClCompile Include="UnitModelSelection.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,7 @@
     <ClInclude Include="RendererSelection.h" />
     <ClInclude Include="ScriptSelection.h" />
     <ClInclude Include="SkyBoxSelection.h" />
+    <ClInclude Include="SoundSelection.h" />
     <ClInclude Include="UnitModelSelection.h" />
   </ItemGroup>
   <ItemGroup>

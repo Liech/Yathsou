@@ -6,7 +6,7 @@ nlohmann::json EyeOfRhianneConfiguration::toJson() const {
   result["ScreenHeight"] = ScreenHeight;
   result["AssetPath"]    = AssetPath   ;
   result["ShowFPS"]      = ShowFPS     ;
-  result["MapPath"]      = MapPath     ;
+  result["SupComPath"]   = SupComPath  ;
   return result;
 }
 
@@ -15,7 +15,7 @@ void EyeOfRhianneConfiguration::fromJson(nlohmann::json from) {
   ScreenHeight = from["ScreenHeight"];
   AssetPath    = from["AssetPath"];
   ShowFPS      = from["ShowFPS"];
-  MapPath      = from["MapPath"];
+  SupComPath   = from["SupComPath"];
 }
 
 Vishala::BinaryPackage EyeOfRhianneConfiguration::toBinary()const {
@@ -24,7 +24,7 @@ Vishala::BinaryPackage EyeOfRhianneConfiguration::toBinary()const {
   Vishala::BinaryPackage::val2bin<int        >(result, ScreenHeight);
   Vishala::BinaryPackage::val2bin<bool       >(result, ShowFPS     );
   Vishala::BinaryPackage::val2bin<std::string>(result, AssetPath   );
-  Vishala::BinaryPackage::val2bin<std::string>(result, MapPath     );
+  Vishala::BinaryPackage::val2bin<std::string>(result, SupComPath  );
   return result;
 }
 
@@ -33,5 +33,5 @@ void EyeOfRhianneConfiguration::fromBinary(Vishala::BinaryPackage& data) {
   ScreenHeight = Vishala::BinaryPackage::bin2val<int        >(data);
   ShowFPS      = Vishala::BinaryPackage::bin2val<bool       >(data);
   AssetPath    = Vishala::BinaryPackage::bin2val<std::string>(data);
-  MapPath      = Vishala::BinaryPackage::bin2val<std::string>(data);
+  SupComPath   = Vishala::BinaryPackage::bin2val<std::string>(data);
 }

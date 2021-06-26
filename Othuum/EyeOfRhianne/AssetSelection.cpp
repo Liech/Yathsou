@@ -6,6 +6,7 @@
 #include "RendererSelection.h"
 #include "ListSelection.h"
 #include "MapSelection.h"
+#include "SoundSelection.h"
 #include "ScriptSelection.h"
 #include "Graphic.h"
 
@@ -24,6 +25,7 @@ AssetSelection::AssetSelection(EyeOfRhianneConfiguration& config, Iyathuum::glmA
   options.push_back("Renderer");
   options.push_back("Map");
   options.push_back("Scripts");
+  options.push_back("Sound");
 
   _list = std::make_unique<ListSelection>(options, options, area, _graphic.getWindow(), [this](std::string newSelection) {    
     unitVisibility(newSelection);
@@ -40,8 +42,9 @@ void AssetSelection::addSelections() {
   _animation  = std::make_shared<AnimationSelection> (area, _graphic);
   _skyBox     = std::make_shared<SkyBoxSelection>    (_config.AssetPath + "\\textures\\environment",area, _graphic);
   _renderer   = std::make_shared<RendererSelection>  (area,_graphic);
-  _maps       = std::make_shared<MapSelection>       (_config.MapPath,area,_graphic);
+  _maps       = std::make_shared<MapSelection>       (_config.SupComPath+ "\\maps",area,_graphic);
   _scripts    = std::make_shared<ScriptSelection>    (area,_graphic);
+  _sounds     = std::make_shared<SoundSelection >    (_config.SupComPath + "\\sounds",area,_graphic);
 }
 
 void AssetSelection::unitVisibility(std::string newMenu) {
@@ -60,6 +63,8 @@ void AssetSelection::unitVisibility(std::string newMenu) {
     _maps->setVisible(!_maps->isVisible());
   if (_current == "Scripts")
     _scripts->setVisible(!_scripts->isVisible());
+  if (_current == "Sound")
+    _sounds->setVisible(!_sounds->isVisible());
 }
 
 void AssetSelection::hideAll() {
@@ -69,6 +74,7 @@ void AssetSelection::hideAll() {
   _renderer  ->setVisible(false);
   _maps      ->setVisible(false);
   _scripts   ->setVisible(false);
+  _sounds    ->setVisible(false);
 }
 
 void AssetSelection::draw() {
@@ -78,6 +84,7 @@ void AssetSelection::draw() {
   _renderer  ->draw();
   _maps      ->draw();
   _scripts   ->draw();
+  _sounds    ->draw();
   _list      ->draw();
 }
 
@@ -88,6 +95,7 @@ void AssetSelection::update() {
   _renderer  ->update();
   _maps      ->update();
   _scripts   ->update();
+  _sounds    ->update();
 }
 
 void AssetSelection::setVisible(bool visible) {

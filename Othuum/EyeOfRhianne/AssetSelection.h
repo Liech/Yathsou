@@ -17,6 +17,7 @@ class ListSelection;
 class RendererSelection;
 class MapSelection;
 class ScriptSelection;
+class SoundSelection;
 class Graphic;
 
 class AssetSelection {
@@ -45,5 +46,6 @@ private:
   std::shared_ptr<RendererSelection  > _renderer  ;
   std::shared_ptr<MapSelection       > _maps      ;
   std::shared_ptr<ScriptSelection    > _scripts   ;
+  std::shared_ptr<SoundSelection     > _sounds    ;
   EyeOfRhianneConfiguration& _config;
 };
