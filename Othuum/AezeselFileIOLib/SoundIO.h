@@ -10,7 +10,8 @@ namespace Iyathuum {
 namespace Aezesel {
   class SoundIO {
   public:
-    std::unique_ptr<Iyathuum::Sound> read(std::string filename);
+    std::unique_ptr<Iyathuum::Sound> read(const std::string& filename);
+    void                             write(const std::string&, const Iyathuum::Sound&);
   private:
   };
 }

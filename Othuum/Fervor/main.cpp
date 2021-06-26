@@ -50,17 +50,18 @@ int main(int argc, char** argv) {
   std::string scPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Supreme Commander Forged Alliance";
   std::string mapPath = scPath + "\\maps";
 
-  std::string soundPath = scPath + "\\sounds\\Voice\\US\\XGG";
+  std::string soundPath = scPath + "\\sounds\\Interface";
   //Aezesel::XSB xsbReader;
   //for (auto s : xsbReader.load(soundPath+".xsb"))
   //  std::cout << s << std::endl;
 
-  //Aezesel::XWB xwbReader;
-  //xwbReader.load(soundPath + ".xwb");
+  Aezesel::XWB xwbReader;
+  auto sounds = xwbReader.load(soundPath + ".xwb");
+  Aezesel::XSB xsbReader;
+  auto names = xsbReader.load(soundPath + ".xsb");
   Aezesel::SoundIO sound;
-  auto zero = sound.read("YolonaOssData/sounds/testsound.wav");
   Ahwassa::sound s;
-  s.play(zero.get());
+  s.play(sounds[5].get());
 
   auto factory = std::make_shared<Athanah::MapFactory>(mapPath);
   std::string setons = "SCMP_009";

@@ -19,7 +19,8 @@ namespace Aezesel {
     int            readInt   (const std::vector<unsigned char>&, size_t& position);
     unsigned int   readUInt  (const std::vector<unsigned char>&, size_t& position);
     float          readFloat (const std::vector<unsigned char>&, size_t& position);
-    unsigned short readUShort(const std::vector<unsigned char>&, size_t& position);
+    unsigned short readUShort(const std::vector<unsigned char>&, size_t& position, bool endian = false);
+             short readShort (const std::vector<unsigned char>&, size_t& position, bool endian = false);
 
   };
 }

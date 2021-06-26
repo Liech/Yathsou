@@ -1,21 +1,41 @@
 #include "XWB.h"
 
-#include "WAVwriter.h"
+#include "IyathuumCoreLib/BaseTypes/Sound.h"
 
 namespace Aezesel {
-  void XWB::load(std::string filename){
+  enum class XWBFormat {
+    PCM = 0,
+    XMA = 1,
+    ADPCM = 2,
+    WMA = 3,
+  };
+
+  struct XWBEntry {
+    unsigned int flags_duration;
+    unsigned int format;
+    unsigned int play_offset;
+    unsigned int play_length;
+    unsigned int loop_start;
+    unsigned int loop_total;
+    unsigned int entry_flags;
+    unsigned int duration;
+    XWBFormat    format_tag;
+    unsigned int channels;
+    unsigned int samples_per_sec;
+    unsigned int block_align;
+    unsigned int bits_per_sample;
+  };
+
+  std::vector<std::unique_ptr<Iyathuum::Sound>> XWB::load(std::string filename){
     std::ifstream input(filename, std::ios::binary);
     if (input.fail())
       throw std::runtime_error("Error opening " + filename);
     _buffer = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
-    loadInternal();
-    //return loadInternal();
+    return loadInternal();
   }
 
-  void XWB::loadInternal() {
-
-    //_WB_HEADER = '4s I I'
-    //(h_sig, self.h_version, self.h_header_version) = stream.unpack(_WB_HEADER)
+  std::vector<std::unique_ptr<Iyathuum::Sound>> XWB::loadInternal() {
+    std::vector<std::unique_ptr<Iyathuum::Sound>> result;
 
     std::string h_sig = readString(_buffer, _fileposition, 4);
     if (h_sig != "WBND")
@@ -89,24 +109,34 @@ namespace Aezesel {
       else if (XWBFormat::PCM == entry.format_tag) {
         formatTag = 1;
         if (entry.bits_per_sample == 1)
-          bitsPerSample = 16;
+          entry.bits_per_sample = 16;
         else
-          bitsPerSample = 8;
+          entry.bits_per_sample = 8;
         avgBytesPerSec = entry.samples_per_sec * entry.block_align;
       }
       else if (XWBFormat::ADPCM == entry.format_tag) { throw std::runtime_error("not implemented"); }
 
-      WAVwriter wavWriter;
-      wavWriter.sampleRate = entry.samples_per_sec;
-      wavWriter.blockAlign = entry.block_align;
-      wavWriter.bytesPerSecond = avgBytesPerSec;
-      wavWriter.channels = entry.channels;
-      wavWriter.formatTag = formatTag;
-      wavWriter.bitsPerSample = bitsPerSample;
-      
+      std::vector<float> floatData;
+      floatData.resize(entry.play_length);
       _fileposition = (size_t)EntryWaveDataOffset + (size_t)entry.play_offset;
-      wavWriter.data = read(_buffer, _fileposition, entry.play_length);
-      wavWriter.writeWav(std::to_string(i) + ".wav");
+
+      if (entry.bits_per_sample == 16) {
+        for (size_t i = 0; i < entry.play_length / 2; i++) {
+          floatData[i] = (float)readShort(_buffer, _fileposition) / (float)std::numeric_limits<short>().max();
+        }
+      }
+      else
+      {
+        throw std::runtime_error("Not yet implemented");
+      }
+
+      std::unique_ptr<Iyathuum::Sound> sub = std::make_unique<Iyathuum::Sound>();
+      sub->setSampleRate((Iyathuum::Sound::SampleRates)entry.samples_per_sec);
+      sub->setNumberOfChannels(entry.channels);
+      
+      sub->setSampleData(floatData);
+      result.push_back(std::move(sub));
     }
+    return result;
   }
 }

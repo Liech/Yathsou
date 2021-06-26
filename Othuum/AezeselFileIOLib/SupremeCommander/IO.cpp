@@ -100,11 +100,24 @@ namespace Aezesel {
     stream.write((const char*)(data.data()), data.size());
   }
 
-  unsigned short IO::readUShort(const std::vector<unsigned char>& data, size_t& position)
+  unsigned short IO::readUShort(const std::vector<unsigned char>& data, size_t& position, bool endian)
   {
     unsigned char bytes[] = { data[position],data[position + 1] };
+    if (endian)
+      std::swap(bytes[0], bytes[1]);
     unsigned short* pInt = (unsigned short*)bytes;
     unsigned short result = *pInt;
+    position += 2;
+    return result;
+  }
+
+  short IO::readShort(const std::vector<unsigned char>& data, size_t& position, bool endian)
+  {
+    unsigned char bytes[] = { data[position],data[position + 1] };
+    if (endian)
+      std::swap(bytes[0], bytes[1]);
+    short* pInt = (short*)bytes;
+    short result = *pInt;
     position += 2;
     return result;
   }

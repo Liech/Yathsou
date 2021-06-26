@@ -567,9 +567,6 @@
     <ClInclude Include="XSB.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WAVwriter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SoundIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -678,9 +675,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="XSB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WAVwriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SoundIO.cpp">
