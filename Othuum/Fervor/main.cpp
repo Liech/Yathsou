@@ -28,7 +28,7 @@
 #include "AezeselFileIOLib/XWB.h"
 #include "AezeselFileIOLib/SoundIO.h"
 #include "IyathuumCoreLib/BaseTypes/Sound.h"
-#include "AhwassaGraphicsLib/Sound/sound.h"
+#include "AhwassaGraphicsLib/Sound/SoundEngine.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -60,8 +60,11 @@ int main(int argc, char** argv) {
   Aezesel::XSB xsbReader;
   auto names = xsbReader.load(soundPath + ".xsb");
   Aezesel::SoundIO sound;
-  Ahwassa::sound s;
-  s.play(sounds[5].get());
+  Ahwassa::SoundEngine s;
+  for (int i = 0; i < 10; i++) {
+    auto handler = s.createHandler(*sounds[i]);
+    handler->play();
+  }
 
   auto factory = std::make_shared<Athanah::MapFactory>(mapPath);
   std::string setons = "SCMP_009";

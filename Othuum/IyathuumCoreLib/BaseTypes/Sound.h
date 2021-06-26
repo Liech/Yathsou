@@ -5,7 +5,7 @@
 namespace Iyathuum {
   class Sound {
   public:
-    enum class SampleRates {
+    enum class SampleRate {
       //https://en.wikipedia.org/wiki/Sampling_(signal_processing)
       BadTelephone     = 8000,
       QuarterCDQuality = 11025,
@@ -20,22 +20,22 @@ namespace Iyathuum {
       //...
     };
 
-    SampleRates sampleRate();
-    void setSampleRate(SampleRates);
+    SampleRate sampleRate() const;
+    void setSampleRate(SampleRate);
 
-    int  numberOfChannels();
+    int  numberOfChannels() const;
     void setNumberOfChannels(int);
 
-    size_t sampleSize();
+    size_t sampleSize() const;
     void   setSampleData(const std::vector<float>&);
-    float  sample(size_t position);
+    float  sample(size_t position) const;
 
-    int    frameSize();
-    double lengthInSeconds();
+    int    frameSize() const;
+    double lengthInSeconds() const;
 
     float* data() { return _samples.data(); }
   private:
-    SampleRates        _sampleRate       = SampleRates::AudioCD;
+    SampleRate        _sampleRate       = SampleRate::AudioCD;
     int                _numberOfChannels = 1;
     std::vector<float> _samples;
   };

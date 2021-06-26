@@ -23,7 +23,7 @@ namespace Aezesel {
     loader.Load(fileData.get(), suffix, memory.buffer); //also mp3 possible
 
     std::unique_ptr<Iyathuum::Sound> result = std::make_unique<Iyathuum::Sound>();
-    result->setSampleRate((Iyathuum::Sound::SampleRates)fileData->sampleRate);
+    result->setSampleRate((Iyathuum::Sound::SampleRate)fileData->sampleRate);
     result->setNumberOfChannels(fileData->channelCount);
     result->setSampleData(fileData->samples);
     return result;

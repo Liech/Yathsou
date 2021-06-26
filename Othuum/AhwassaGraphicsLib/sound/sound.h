@@ -19,7 +19,7 @@ namespace Ahwassa
     void play(Iyathuum::Sound*);
 
   private:
-    size_t                          _position = 0;
+    size_t           _position = 0;
     Iyathuum::Sound* _sound;
 
     static int patestCallback(const void* inputBuffer, void* outputBuffer,

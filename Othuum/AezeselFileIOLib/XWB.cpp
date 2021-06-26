@@ -131,7 +131,7 @@ namespace Aezesel {
       }
 
       std::unique_ptr<Iyathuum::Sound> sub = std::make_unique<Iyathuum::Sound>();
-      sub->setSampleRate((Iyathuum::Sound::SampleRates)entry.samples_per_sec);
+      sub->setSampleRate((Iyathuum::Sound::SampleRate)entry.samples_per_sec);
       sub->setNumberOfChannels(entry.channels);
       
       sub->setSampleData(floatData);

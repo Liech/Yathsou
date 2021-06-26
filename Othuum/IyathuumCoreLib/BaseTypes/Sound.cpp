@@ -4,7 +4,7 @@ namespace Iyathuum {
 
 
 
-  int Sound::numberOfChannels() {
+  int Sound::numberOfChannels()  const {
     return _numberOfChannels;
   }
 
@@ -12,15 +12,15 @@ namespace Iyathuum {
     _numberOfChannels = channels;
   }
 
-  Sound::SampleRates Sound::sampleRate() {
+  Sound::SampleRate Sound::sampleRate()  const {
     return _sampleRate;
   }
 
-  void Sound::setSampleRate(Sound::SampleRates newSampleRate) {
+  void Sound::setSampleRate(Sound::SampleRate newSampleRate) {
     _sampleRate = newSampleRate;
   }
 
-  size_t Sound::sampleSize() {
+  size_t Sound::sampleSize()  const {
     return _samples.size();
   }
 
@@ -28,15 +28,15 @@ namespace Iyathuum {
     _samples = data;
   }
 
-  float Sound::sample(size_t position) {
+  float Sound::sample(size_t position)  const {
     return _samples[position];
   }
 
-  int Sound::frameSize() {
+  int Sound::frameSize() const {
     return 4 * numberOfChannels();
   }
 
-  double Sound::lengthInSeconds() {
+  double Sound::lengthInSeconds()  const {
     return (double)(sampleSize() / frameSize()) / (double)sampleRate();
   }
 
