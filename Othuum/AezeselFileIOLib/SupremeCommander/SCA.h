@@ -8,7 +8,7 @@
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "AezeselFileIOLib/lib/json.hpp"
-#include "IO.h"
+#include "AezeselFileIOLib/IO.h"
 
 //supreme commander animation format
 namespace Aezesel {

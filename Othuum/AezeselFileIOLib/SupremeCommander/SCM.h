@@ -9,7 +9,7 @@
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "AezeselFileIOLib/lib/json.hpp"
-#include "IO.h"
+#include "AezeselFileIOLib/IO.h"
 
 //based on
 //https://github.com/Oygron/SupCom_Import_Export_Blender/blob/master/supcom-importer.py

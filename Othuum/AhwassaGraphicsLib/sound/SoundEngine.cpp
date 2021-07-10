@@ -101,6 +101,11 @@ namespace Ahwassa
       Pa_AbortStream(_stream);    
   }
 
+  void SoundHandler::abort() {
+    if (isRunning())
+      Pa_AbortStream(_stream);
+  }
+
   bool SoundHandler::isRunning() {
     return Pa_IsStreamActive(_stream);
   }
@@ -115,7 +120,7 @@ namespace Ahwassa
     err = Pa_StartStream(_stream);
     if (err != paNoError)
       throw std::runtime_error("Could not start stream");
-    Pa_Sleep((_sound.lengthInSeconds() + 1) * 1000);
+    //Pa_Sleep((_sound.lengthInSeconds() + 1) * 1000);
   }
 
 }

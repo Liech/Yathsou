@@ -14,6 +14,12 @@ namespace Ahwassa {
   class Button;
   class Texture;
   class Window;
+  class SoundEngine;
+  class SoundHandler;
+}
+
+namespace Aezesel {
+  class SoundFactory;
 }
 
 class SoundSelection {
@@ -28,7 +34,11 @@ public:
 
 private:
                                       
-  Graphic&                             _graphic;
-  std::unique_ptr<ListSelection  >     _list = nullptr;
-  Iyathuum::glmAABB<2>                 _area   ;
+  Graphic&                               _graphic;
+  std::shared_ptr<Aezesel::SoundFactory> _factory;
+  std::shared_ptr<Ahwassa::SoundEngine > _soundEngine;
+  std::shared_ptr<Ahwassa::SoundHandler> _currentHandler = nullptr;
+  std::unique_ptr<ListSelection  >       _bankList = nullptr;
+  std::unique_ptr<ListSelection  >       _soundList = nullptr;
+  Iyathuum::glmAABB<2>                   _area   ;
 };

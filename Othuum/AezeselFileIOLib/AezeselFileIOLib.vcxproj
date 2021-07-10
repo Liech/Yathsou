@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="AssimpUtil.h" />
     <ClInclude Include="ImageIO.h" />
+    <ClInclude Include="IO.h" />
     <ClInclude Include="lib\assimp\aabb.h" />
     <ClInclude Include="lib\assimp\ai_assert.h" />
     <ClInclude Include="lib\assimp\anim.h" />
@@ -320,20 +321,21 @@
     <ClInclude Include="MagicaVox\typeROTATION.h" />
     <ClInclude Include="MagicaVox\VoxFile.h" />
     <ClInclude Include="Model3D.h" />
-    <ClInclude Include="SoundIO.h" />
+    <ClInclude Include="Sound\SoundFactory.h" />
+    <ClInclude Include="Sound\SoundIO.h" />
+    <ClInclude Include="Sound\XSB.h" />
+    <ClInclude Include="Sound\XWB.h" />
     <ClInclude Include="STLWriter.h" />
-    <ClInclude Include="SupremeCommander\IO.h" />
     <ClInclude Include="SupremeCommander\SCA.h" />
     <ClInclude Include="SupremeCommander\SCM.h" />
     <ClInclude Include="SupremeCommander\SCMAP.h" />
     <ClInclude Include="SupremeCommander\SupremeCommanderAnimator.h" />
-    <ClInclude Include="XSB.h" />
-    <ClInclude Include="XWB.h" />
     <ClInclude Include="ZIP.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssimpUtil.cpp" />
     <ClCompile Include="ImageIO.cpp" />
+    <ClCompile Include="IO.cpp" />
     <ClCompile Include="lib\gli\core\dummy.cpp" />
     <ClCompile Include="lib\lodepng\include\lodepng\lodepng.cpp" />
     <ClCompile Include="lib\lodepng\include\lodepng\lodepng_util.cpp" />
@@ -358,15 +360,15 @@
     <ClCompile Include="MagicaVox\typeROTATION.cpp" />
     <ClCompile Include="MagicaVox\VoxFile.cpp" />
     <ClCompile Include="Model3D.cpp" />
-    <ClCompile Include="SoundIO.cpp" />
+    <ClCompile Include="Sound\SoundFactory.cpp" />
+    <ClCompile Include="Sound\SoundIO.cpp" />
+    <ClCompile Include="Sound\XSB.cpp" />
+    <ClCompile Include="Sound\XWB.cpp" />
     <ClCompile Include="STLWriter.cpp" />
-    <ClCompile Include="SupremeCommander\IO.cpp" />
     <ClCompile Include="SupremeCommander\SCA.cpp" />
     <ClCompile Include="SupremeCommander\SCM.cpp" />
     <ClCompile Include="SupremeCommander\SCMAP.cpp" />
     <ClCompile Include="SupremeCommander\SupremeCommanderAnimator.cpp" />
-    <ClCompile Include="XSB.cpp" />
-    <ClCompile Include="XWB.cpp" />
     <ClCompile Include="ZIP.cpp" />
   </ItemGroup>
   <ItemGroup>

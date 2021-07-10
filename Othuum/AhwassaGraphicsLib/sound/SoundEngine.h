@@ -16,6 +16,7 @@ namespace Ahwassa
     ~SoundHandler();
     void play();
     bool isRunning();
+    void abort();
 
   private:
     void streamFinised() {};

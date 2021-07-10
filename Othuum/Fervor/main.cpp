@@ -24,9 +24,9 @@
 #include "AthanahCommonLib/Map/Map.h"
 #include "AthanahCommonLib/Map/MapRenderer.h"
 #include "AezeselFileIOLib/ImageIO.h"
-#include "AezeselFileIOLib/XSB.h"
-#include "AezeselFileIOLib/XWB.h"
-#include "AezeselFileIOLib/SoundIO.h"
+#include "AezeselFileIOLib/Sound/XSB.h"
+#include "AezeselFileIOLib/Sound/XWB.h"
+#include "AezeselFileIOLib/Sound/SoundIO.h"
 #include "IyathuumCoreLib/BaseTypes/Sound.h"
 #include "AhwassaGraphicsLib/Sound/SoundEngine.h"
 

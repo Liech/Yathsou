@@ -43,6 +43,12 @@
     <Filter Include="lib\assimp\DLL">
       <UniqueIdentifier>{b79c5e8f-c7e6-4b86-a445-72f886309bb4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Sound">
+      <UniqueIdentifier>{3a669fa8-ad01-4b78-9a46-c0d1e07d5cff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sound">
+      <UniqueIdentifier>{e3facb62-5f50-4d5a-8ab2-e43c93237541}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImageIO.h">
@@ -312,9 +318,6 @@
     <ClInclude Include="STLWriter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SupremeCommander\IO.h">
-      <Filter>Header Files\SupremeCommander</Filter>
-    </ClInclude>
     <ClInclude Include="lib\assimp\Bitmap.h">
       <Filter>lib\assimp</Filter>
     </ClInclude>
@@ -561,13 +564,19 @@
     <ClInclude Include="AssimpUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="XWB.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Sound\SoundFactory.h">
+      <Filter>Header Files\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="XSB.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Sound\SoundIO.h">
+      <Filter>Header Files\Sound</Filter>
     </ClInclude>
-    <ClInclude Include="SoundIO.h">
+    <ClInclude Include="Sound\XSB.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\XWB.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="IO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -662,22 +671,25 @@
     <ClCompile Include="STLWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SupremeCommander\IO.cpp">
-      <Filter>Source Files\SupremeCommander</Filter>
-    </ClCompile>
     <ClCompile Include="Model3D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AssimpUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="XWB.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Sound\SoundFactory.cpp">
+      <Filter>Source Files\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="XSB.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Sound\SoundIO.cpp">
+      <Filter>Source Files\Sound</Filter>
     </ClCompile>
-    <ClCompile Include="SoundIO.cpp">
+    <ClCompile Include="Sound\XSB.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\XWB.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="IO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

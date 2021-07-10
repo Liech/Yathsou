@@ -6,7 +6,7 @@ namespace Aezesel {
   std::vector<std::string> XSB::load(std::string filename) {
     std::ifstream input(filename, std::ios::binary);
     if (input.fail())
-      throw std::runtime_error("Error opening " + filename);
+      return std::vector<std::string>();
     _buffer = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
     return loadInternal();
   }
