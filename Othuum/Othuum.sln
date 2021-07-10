@@ -86,6 +86,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EyeOfRhianne", "EyeOfRhiann
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AhwassaGraphicsLib", "AhwassaGraphicsLib\AhwassaGraphicsLib.vcxproj", "{5CF2749E-0398-4D21-89C8-C6E0B8E8B407}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SuperbCommander", "SuperbCommander\SuperbCommander.vcxproj", "{58368D1D-2067-40F0-B66C-735E0427E25E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -252,6 +254,18 @@ Global
 		{5CF2749E-0398-4D21-89C8-C6E0B8E8B407}.ReleaseWithDbg|x64.Build.0 = Release|x64
 		{5CF2749E-0398-4D21-89C8-C6E0B8E8B407}.ReleaseWithDbg|x86.ActiveCfg = Release|Win32
 		{5CF2749E-0398-4D21-89C8-C6E0B8E8B407}.ReleaseWithDbg|x86.Build.0 = Release|Win32
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.Debug|x64.ActiveCfg = Debug|x64
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.Debug|x64.Build.0 = Debug|x64
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.Debug|x86.ActiveCfg = Debug|Win32
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.Debug|x86.Build.0 = Debug|Win32
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.Release|x64.ActiveCfg = Release|x64
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.Release|x64.Build.0 = Release|x64
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.Release|x86.ActiveCfg = Release|Win32
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.Release|x86.Build.0 = Release|Win32
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.ReleaseWithDbg|x64.ActiveCfg = Release|x64
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.ReleaseWithDbg|x64.Build.0 = Release|x64
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.ReleaseWithDbg|x86.ActiveCfg = Release|Win32
+		{58368D1D-2067-40F0-B66C-735E0427E25E}.ReleaseWithDbg|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -261,6 +275,7 @@ Global
 		{1A0F9355-8480-4496-A81C-D498CA53BD01} = {B445D9C6-8AB1-4097-AA0A-18D555102E17}
 		{29546BF3-E106-4F2A-9DAB-AC637745D56B} = {B445D9C6-8AB1-4097-AA0A-18D555102E17}
 		{A888F597-5E5E-4A8A-85B5-C33C41A5FEB1} = {B445D9C6-8AB1-4097-AA0A-18D555102E17}
+		{58368D1D-2067-40F0-B66C-735E0427E25E} = {B445D9C6-8AB1-4097-AA0A-18D555102E17}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66AC159F-D2F5-48EA-ACFD-17E3536CBC6F}
