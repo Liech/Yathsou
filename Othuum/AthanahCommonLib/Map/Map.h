@@ -23,6 +23,6 @@ namespace Athanah {
     std::string                           _name     ;
     std::shared_ptr<Scenario>             _scenario ;
     std::shared_ptr<Ahwassa::Texture>     _preview  = nullptr;
-    std::unique_ptr< Aezesel::SCMAP::Map> _scmap    ;
+    std::unique_ptr< Aezesel::SCMAP::Map> _scmap    = nullptr;
   };
 }

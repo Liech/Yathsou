@@ -2,8 +2,21 @@
 #include <filesystem>
 
 #include "AhwassaGraphicsLib/Core/Window.h"
+#include "AhwassaGraphicsLib/Core/Camera.h"
 #include "AhwassaGraphicsLib/Drawables/Background.h"
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
+#include "AhwassaGraphicsLib/Input/FreeCamera.h"
+#include "AhwassaGraphicsLib/Input/Input.h"
+#include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/BufferObjects/VAO.h"
+
+#include "IyathuumCoreLib/Singleton/Database.h"
+
+#include "AthanahCommonLib/Map/Map.h"
+
+#include "World.h"
+#include "Config.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -16,24 +29,55 @@ void enforceWorkingDir(std::string exeDir) {
 
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
-  int width = 800;
-  int height = 600;
-  Ahwassa::Window w(width, height);
+  
+  Superb::Config config;
+  config.fromJsonFile("Superb.json");
+  
+  int width  = config.ScreenWidth;
+  int height = config.ScreenHeight;
 
-  Ahwassa::Background b(&w);
-  std::unique_ptr<Ahwassa::FPS> fps;
-
+  Ahwassa::Window                            w(width, height);
+  Ahwassa::Background                        b(&w);
+  std::unique_ptr<Ahwassa::FPS>              fps;
+  std::shared_ptr<Ahwassa::FreeCamera>       freeCam;
+  std::shared_ptr<Ahwassa::DeferredComposer> composer;
+  std::shared_ptr<Superb::World>             world;
+  std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
+  
 
   w.Startup = [&]() {
+    composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
+    textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
+    freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
+    w.input().addUIElement(freeCam.get());
     fps = std::make_unique<Ahwassa::FPS>(&w);
+    world = std::make_shared<Superb::World>(&w,std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps","SCMP_009"));
+
+    w.camera()->setPosition(config.CameraPos);
+    w.camera()->setTarget  (config.CameraTarget);
 
   };
 
   w.Update = [&]() {
+    world->update();
 
+    composer->start();
     b.draw();
+    world->draw();
+    composer->end();
+
+    textureRenderer->start();
+    textureRenderer->draw(*composer->getResult(), Iyathuum::glmAABB<2>(glm::vec2(0),glm::vec2(width,height)),true);
+    textureRenderer->end();
+
+
     fps->draw();
   };
   w.run();
 
+  config.CameraPos    = w.camera()->getPosition();
+  config.CameraTarget = w.camera()->getTarget  ();
+  config.toJsonFile("Superb.json");
+
+  Iyathuum::DatabaseTerminator::terminateAll();
 }

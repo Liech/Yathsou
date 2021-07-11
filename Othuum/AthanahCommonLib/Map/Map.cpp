@@ -25,6 +25,8 @@ namespace Athanah {
   }
 
   void Map::loadFull() {
+    if (_scmap)
+      return;
     Aezesel::SCMAP loader;
     _scmap = std::move(loader.load(_directory + "\\" + _name + "\\" + _name + ".scmap"));
   }
