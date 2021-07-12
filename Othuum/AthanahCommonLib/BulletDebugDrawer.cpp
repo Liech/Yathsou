@@ -11,7 +11,7 @@ namespace Athanah
 	}
 
 	void BulletDebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color) {
-		_box->drawLine(glm::vec3(from[0], from[1], from[2]), glm::vec3(to[0], to[1], to[2]), 0.02f, Iyathuum::Color(255,255, 0, 255));
+		_box->drawLine(glm::vec3(from[0], from[1], from[2]), glm::vec3(to[0], to[1], to[2]), 10, Iyathuum::Color(255,255, 0, 255));
 	}
 
 	void BulletDebugDrawer::drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color) {

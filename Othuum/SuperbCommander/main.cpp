@@ -9,11 +9,15 @@
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
+
+#include "SuthanusPhysicsLib/PhysicEngine.h"
 
 #include "IyathuumCoreLib/Singleton/Database.h"
 
 #include "AthanahCommonLib/Map/Map.h"
+#include "AthanahCommonLib/BulletDebugDrawer.h"
 
 #include "World.h"
 #include "Config.h"
@@ -36,14 +40,15 @@ int main(int argc, char** argv) {
   int width  = config.ScreenWidth;
   int height = config.ScreenHeight;
 
-  Ahwassa::Window                            w(width, height);
-  Ahwassa::Background                        b(&w);
-  std::unique_ptr<Ahwassa::FPS>              fps;
-  std::shared_ptr<Ahwassa::FreeCamera>       freeCam;
-  std::shared_ptr<Ahwassa::DeferredComposer> composer;
-  std::shared_ptr<Superb::World>             world;
+  Ahwassa::Window                                  w(width, height);
+  Ahwassa::Background                              b(&w);
+  std::unique_ptr<Ahwassa::FPS>                    fps;
+  std::shared_ptr<Ahwassa::FreeCamera>             freeCam;
+  std::shared_ptr<Ahwassa::DeferredComposer>       composer;
+  std::shared_ptr<Superb::World>                   world;
   std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
-  
+  std::shared_ptr<Suthanus::PhysicEngine>          physic;
+  std::shared_ptr<Athanah::BulletDebugDrawer>      physicDebug;
 
   w.Startup = [&]() {
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
@@ -51,24 +56,34 @@ int main(int argc, char** argv) {
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
     w.input().addUIElement(freeCam.get());
     fps = std::make_unique<Ahwassa::FPS>(&w);
-    world = std::make_shared<Superb::World>(&w,std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps","SCMP_009"));
 
     w.camera()->setPosition(config.CameraPos);
     w.camera()->setTarget  (config.CameraTarget);
-
+    physic = std::make_shared<Suthanus::PhysicEngine>();
+    physicDebug = std::make_shared<Athanah::BulletDebugDrawer>(w.camera());
+    physic->setDebugDrawer(physicDebug.get());
+    world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
   };
 
   w.Update = [&]() {
+    physic->update();
     world->update();
+    
 
     composer->start();
     b.draw();
     world->draw();
+       
+    
     composer->end();
-
+    
     textureRenderer->start();
     textureRenderer->draw(*composer->getResult(), Iyathuum::glmAABB<2>(glm::vec2(0),glm::vec2(width,height)),true);
     textureRenderer->end();
+
+    physicDebug->_box->start();
+    physic->debugDrawWorld();
+    physicDebug->_box->end();
 
 
     fps->draw();

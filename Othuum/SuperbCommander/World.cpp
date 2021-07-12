@@ -4,16 +4,21 @@
 
 #include "AthanahCommonLib/Map/Map.h"
 #include "AthanahCommonLib/Map/MapRenderer.h"
+
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Vertex/PositionColorNormalVertex.h"
 #include "AhwassaGraphicsLib/BufferObjects/IMesh.h"
 #include "AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.h"
 
+#include "SuthanusPhysicsLib/PhysicEngine.h"
+#include "SuthanusPhysicsLib/Box.h"
+
 namespace Superb {
-  World::World(Ahwassa::Window* window,std::shared_ptr<Athanah::Map> map) {
+  World::World(Ahwassa::Window* window, std::shared_ptr<Suthanus::PhysicEngine> physic,std::shared_ptr<Athanah::Map> map) {
     _map    = map   ;
     _window = window;
+    _physic = physic;
     map->loadFull();
 
     std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures;
@@ -22,6 +27,8 @@ namespace Superb {
       auto img = Aezesel::ImageIO::readImage(path);
       textures[i] = std::make_shared<Ahwassa::Texture>("TerrainTexture" + std::to_string(i), img.get());
     }
+
+    _obj = _physic->newBox(glm::vec3(0, 0, 0), glm::vec3(4, 4, 4), false);
 
     _mapRenderer = std::make_shared<Athanah::MapRenderer>(window->camera(), textures);
 
