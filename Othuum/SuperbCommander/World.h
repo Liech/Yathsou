@@ -14,6 +14,7 @@ namespace Ahwassa {
 namespace Suthanus {
   class PhysicEngine;
   class Box;
+  class HeightMap;
 }
 
 namespace Superb {
@@ -29,6 +30,6 @@ namespace Superb {
     std::shared_ptr<Ahwassa::IMesh>         _mapMesh    ;
     Ahwassa::Window*                        _window     ;
     std::shared_ptr<Suthanus::PhysicEngine> _physic;
-    std::shared_ptr<Suthanus::Box> _obj;
+    std::shared_ptr<Suthanus::HeightMap> _obj;
   };
 }

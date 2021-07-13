@@ -14,7 +14,7 @@ namespace Suthanus
     class HeightMapBullet : public HeightMap
     {
     public:
-      HeightMapBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, glm::vec2 cellSize);//, Iyathuum::MultiDimensionalArray<float,2> content);
+      HeightMapBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, glm::vec2 cellSize, const Iyathuum::MultiDimensionalArray<unsigned short, 2>&,float height);//, Iyathuum::MultiDimensionalArray<float,2> content);
       ~HeightMapBullet();
       virtual glm::vec3       getPosition()                 const override;
       virtual glm::mat4       getTransformation()           const override;

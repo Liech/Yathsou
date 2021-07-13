@@ -7,42 +7,21 @@ namespace Suthanus
 {
   namespace Bullet
   {
-    HeightMapBullet::HeightMapBullet(btDiscreteDynamicsWorld* world,glm::vec3 pos, glm::vec2 cellSize)//, Iyathuum::MultiDimensionalArray<float, 2> content)
+    HeightMapBullet::HeightMapBullet(btDiscreteDynamicsWorld* world,glm::vec3 pos, glm::vec2 cellSize, const Iyathuum::MultiDimensionalArray<unsigned short, 2>& content,float height)
       :_cellSize(cellSize)//, 
        //_content (content)
     {
       _world = world;
 
-      int width  = 10;
-      int length = 10;
+      size_t width  = content.getDimension(0);
+      size_t length = content.getDimension(1);
       float* heightfieldData = new float[width * length];
-      {
-        for (int i = 0; i < width * length; i++)
-        {
-          heightfieldData[i] = 0;
+
+      for (size_t x = 0; x < width; x++)
+        for (size_t y = 0; y < length; y++) {
+          heightfieldData[x + y * width] = height * ((float)content.getVal(x,y) / (float)std::numeric_limits<unsigned short>().max());
         }
-      }
-      heightfieldData[3] = 0;
-      heightfieldData[4] = 0.1;
-      heightfieldData[5] = 1;
-      heightfieldData[6] = 10;
-      //const char* filename = "heightfield128x128.raw";
-      //FILE* heightfieldFile = fopen(filename, "r");
-      //if (!heightfieldFile)
-      //{
-      //  filename = "heightfield128x128.raw";
-      //  heightfieldFile = fopen(filename, "r");
-      //}
-      //if (heightfieldFile)
-      //{
-      //  int numBytes = fread(heightfieldData, 1, width * length, heightfieldFile);
-      //  //btAssert(numBytes);
-      //  if (!numBytes)
-      //  {
-      //    printf("couldn't read heightfield at %s\n", filename);
-      //  }
-      //  fclose(heightfieldFile);
-      //}
+
 
       bool useFloatDatam = false;
       bool flipQuadEdges = false;
@@ -65,7 +44,7 @@ namespace Suthanus
       if (isDynamic)
         colShape->calculateLocalInertia(mass, localInertia);
 
-      startTransform.setOrigin(btVector3(pos[0], pos[1], pos[2]));
+      startTransform.setOrigin(btVector3(pos[0] + cellSize[0]  * ((float)width-1) / 2.0f, pos[1] , pos[2] + cellSize[1] * ((float)length-1) / 2.0f));
       _motionState = new btDefaultMotionState(startTransform);
       btRigidBody::btRigidBodyConstructionInfo rbInfo(mass, _motionState, colShape, localInertia);
 
