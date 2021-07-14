@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 namespace Athanah {
   class Map;
@@ -15,6 +16,7 @@ namespace Suthanus {
   class PhysicEngine;
   class Box;
   class HeightMap;
+  class PhysicObject;
 }
 
 namespace Superb {
@@ -30,6 +32,8 @@ namespace Superb {
     std::shared_ptr<Ahwassa::IMesh>         _mapMesh    ;
     Ahwassa::Window*                        _window     ;
     std::shared_ptr<Suthanus::PhysicEngine> _physic;
+    std::vector<std::shared_ptr<Suthanus::PhysicObject>> _dynObj;
+    std::shared_ptr<Suthanus::PhysicObject> _statObj;
     std::shared_ptr<Suthanus::HeightMap> _obj;
   };
 }
