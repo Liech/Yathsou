@@ -9,7 +9,6 @@
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
@@ -21,6 +20,7 @@
 
 #include "World.h"
 #include "Config.h"
+#include "PhysicsDebugView.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -48,7 +48,7 @@ int main(int argc, char** argv) {
   std::shared_ptr<Superb::World>                   world;
   std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
   std::shared_ptr<Suthanus::PhysicEngine>          physic;
-  std::shared_ptr<Athanah::BulletDebugDrawer>      physicDebug;
+  std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
 
   w.Startup = [&]() {
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
@@ -60,13 +60,13 @@ int main(int argc, char** argv) {
     w.camera()->setPosition(config.CameraPos);
     w.camera()->setTarget  (config.CameraTarget);
     physic = std::make_shared<Suthanus::PhysicEngine>();
-    physicDebug = std::make_shared<Athanah::BulletDebugDrawer>(w.camera());
-    physic->setDebugDrawer(physicDebug.get());
+    physicDebug = std::make_shared<Superb::PhysicsDebugView>(physic,&w,Iyathuum::Key::KEY_F2);    
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
   };
 
   w.Update = [&]() {
     physic->update();
+    physicDebug->update();
     world->update();
     
 
@@ -81,10 +81,7 @@ int main(int argc, char** argv) {
     textureRenderer->draw(*composer->getResult(), Iyathuum::glmAABB<2>(glm::vec2(0),glm::vec2(width,height)),true);
     textureRenderer->end();
 
-    physicDebug->_box->start();
-    physic->debugDrawWorld();
-    physicDebug->_box->end();
-
+    physicDebug->draw();
 
     fps->draw();
   };
