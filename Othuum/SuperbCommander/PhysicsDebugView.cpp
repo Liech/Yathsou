@@ -17,9 +17,12 @@ namespace Superb {
   }
 
   void PhysicsDebugView::update() {
-    if (_window->input().getKeyStatus(_key) == Iyathuum::KeyStatus::PRESS) {
+    if (_window->input().getKeyStatus(_key) == Iyathuum::KeyStatus::PRESS && !_pressed) {
+      _pressed = true;
       _active = !_active;
     }
+    else if (_window->input().getKeyStatus(_key) == Iyathuum::KeyStatus::RELEASE)
+      _pressed = false;
   }
 
   void PhysicsDebugView::draw() {

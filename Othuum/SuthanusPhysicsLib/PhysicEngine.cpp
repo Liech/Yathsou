@@ -135,7 +135,7 @@ namespace Suthanus
     }
     for (auto e : events)
     {
-      std::cout << "Collision" << std::endl;
+      //std::cout << "Collision" << std::endl;
       e.A->collisionEvent(e.B);
       e.B->collisionEvent(e.A);
 

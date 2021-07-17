@@ -20,6 +20,7 @@
 
 #include "World.h"
 #include "Config.h"
+#include "Spheres.h"
 #include "PhysicsDebugView.h"
 
 void enforceWorkingDir(std::string exeDir) {
@@ -49,6 +50,7 @@ int main(int argc, char** argv) {
   std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
   std::shared_ptr<Suthanus::PhysicEngine>          physic;
   std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
+  std::shared_ptr<Superb::Spheres>                 spheres;
 
   w.Startup = [&]() {
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
@@ -60,18 +62,21 @@ int main(int argc, char** argv) {
     w.camera()->setPosition(config.CameraPos);
     w.camera()->setTarget  (config.CameraTarget);
     physic = std::make_shared<Suthanus::PhysicEngine>();
-    physicDebug = std::make_shared<Superb::PhysicsDebugView>(physic,&w,Iyathuum::Key::KEY_F2);    
+    physicDebug = std::make_shared<Superb::PhysicsDebugView>(physic, &w, Iyathuum::Key::KEY_F2);
+    spheres = std::make_shared<Superb::Spheres>(&w,physic);
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
   };
-
+  int asd = 0;
   w.Update = [&]() {
     physic->update();
     physicDebug->update();
     world->update();
+    spheres->update();
     
 
     composer->start();
     b.draw();
+    spheres->draw();
     world->draw();
        
     
@@ -84,6 +89,11 @@ int main(int argc, char** argv) {
     physicDebug->draw();
 
     fps->draw();
+
+
+    asd = (asd+ 1)%2;
+    if (asd == 0 && w.input().getKeyStatus(Iyathuum::Key::MOUSE_BUTTON_2)== Iyathuum::KeyStatus::PRESS)
+      spheres->addSphere(w.camera()->getPosition() + w.camera()->getDir() * 13.0f, 1, Iyathuum::Color(255, 0, 0));
   };
   w.run();
 
