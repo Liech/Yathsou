@@ -21,5 +21,6 @@ namespace Athanah
       void setDebugMode(int debugMode)                                                                                                      override;
       int  getDebugMode() const                                                                                                             override;
       std::shared_ptr<Ahwassa::BasicBoxRenderer> _box;
+      std::shared_ptr<Ahwassa::Camera> _cam;
     };
 }

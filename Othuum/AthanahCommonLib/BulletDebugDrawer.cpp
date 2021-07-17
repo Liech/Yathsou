@@ -7,11 +7,17 @@
 namespace Athanah
 {
 	BulletDebugDrawer::BulletDebugDrawer(std::shared_ptr<Ahwassa::Camera> w) {
+		_cam = w;
 		_box = std::make_shared<Ahwassa::BasicBoxRenderer>(w);
 	}
 
 	void BulletDebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color) {
-		_box->drawLine(glm::vec3(from[0], from[1], from[2]), glm::vec3(to[0], to[1], to[2]), 10, Iyathuum::Color(255,255, 0, 255));
+		auto FROM = glm::vec3(from[0], from[1], from[2]);
+	  auto TO = glm::vec3(to[0], to[1], to[2]);
+		float dist = glm::distance(FROM,_cam->getPosition());
+		if (dist > 100)
+			return;
+		_box->drawLine(FROM,TO, 0.01f, Iyathuum::Color(255,255, 0, 255));
 	}
 
 	void BulletDebugDrawer::drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color) {

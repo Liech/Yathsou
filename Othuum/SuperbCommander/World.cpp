@@ -12,7 +12,7 @@
 #include "AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.h"
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
-#include "SuthanusPhysicsLib/Box.h"
+#include "SuthanusPhysicsLib/HeightMap.h"
 
 namespace Superb {
   World::World(Ahwassa::Window* window, std::shared_ptr<Suthanus::PhysicEngine> physic,std::shared_ptr<Athanah::Map> map) {
@@ -28,7 +28,7 @@ namespace Superb {
       textures[i] = std::make_shared<Ahwassa::Texture>("TerrainTexture" + std::to_string(i), img.get());
     }
 
-    _obj = _physic->newBox(glm::vec3(0, 0, 0), glm::vec3(4, 4, 4), false);
+    _obj = _physic->newHeightMap(glm::vec3(0, 0, 0), *map->scmap().heightMapData,2000);
 
     _mapRenderer = std::make_shared<Athanah::MapRenderer>(window->camera(), textures);
 
@@ -39,10 +39,16 @@ namespace Superb {
       v.color = map->scmap().highTexture->getVal(half).to4();
     };
     _mapMesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short, Ahwassa::PositionColorNormalVertex>(*map->scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(), tinter, 2000, 1);
+
+    //_statObj = _physic->newSphere(_window->camera()->getPosition() + _window->camera()->getDir() * 4.0f + glm::vec3(0.1f,-4,0), 1.0f, false);
   }
-
+  int ASD = 0;
   void World::update() {
-
+    if (ASD == 10) {
+      _dynObj.push_back(_physic->newSphere(_window->camera()->getPosition() + _window->camera()->getDir() * 4.0f, 0.3f, true));
+      ASD = 0;
+    }
+    ASD++;
   }
 
   void World::draw() {

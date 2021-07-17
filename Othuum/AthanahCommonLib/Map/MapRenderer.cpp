@@ -22,7 +22,7 @@ namespace Athanah {
       void main() {
       
         mat4 view = )" + _camera->getName() + R"(Projection *  )" + _camera->getName() + R"(View;
-        gl_Position = view *  model *vec4(position , 1.0);
+        gl_Position = view *vec4(position , 1.0);
         clr = color;
         nrm    = (model* vec4(normal, 1.0)).xyz;
         pos = position;
