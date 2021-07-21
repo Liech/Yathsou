@@ -31,14 +31,14 @@
     <Filter Include="Source Files\SupCom">
       <UniqueIdentifier>{1e5e1ccc-168c-4bd4-b5a6-366249c6da7b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Physic">
+      <UniqueIdentifier>{a9d8f6f9-79bf-4268-94d1-3a0be28c2bfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Physic">
+      <UniqueIdentifier>{54aa8f33-beed-44d4-953e-c01265146cb0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BoxVisualization.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletDebugDrawer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SkyBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -96,14 +96,14 @@
     <ClInclude Include="Map\MapRenderer.h">
       <Filter>Header Files\Map</Filter>
     </ClInclude>
+    <ClInclude Include="Physic\BoxVisualization.h">
+      <Filter>Header Files\Physic</Filter>
+    </ClInclude>
+    <ClInclude Include="Physic\BulletDebugDrawer.h">
+      <Filter>Header Files\Physic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BulletDebugDrawer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxVisualization.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SkyBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -157,6 +157,12 @@
     </ClCompile>
     <ClCompile Include="Map\MapRenderer.cpp">
       <Filter>Source Files\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Physic\BoxVisualization.cpp">
+      <Filter>Source Files\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="Physic\BulletDebugDrawer.cpp">
+      <Filter>Source Files\Physic</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
