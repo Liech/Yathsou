@@ -31,9 +31,7 @@ namespace Superb {
     std::shared_ptr<Athanah::MapRenderer>   _mapRenderer;
     std::shared_ptr<Ahwassa::IMesh>         _mapMesh    ;
     Ahwassa::Window*                        _window     ;
-    std::shared_ptr<Suthanus::PhysicEngine> _physic;
-    std::vector<std::shared_ptr<Suthanus::PhysicObject>> _dynObj;
-    std::shared_ptr<Suthanus::PhysicObject> _statObj;
-    std::shared_ptr<Suthanus::HeightMap> _obj;
+    std::shared_ptr<Suthanus::PhysicEngine> _physic     ;
+    std::shared_ptr<Suthanus::HeightMap>    _obj        ;
   };
 }

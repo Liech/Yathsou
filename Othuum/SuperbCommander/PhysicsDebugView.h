@@ -28,5 +28,6 @@ namespace Superb {
     std::shared_ptr<Suthanus::PhysicEngine>     _physic;
     Iyathuum::Key                               _key;
     bool                                        _active = false;
+    bool                                        _pressed = false;
   };
 }
