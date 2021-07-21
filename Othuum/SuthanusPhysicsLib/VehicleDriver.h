@@ -1,7 +1,7 @@
 #pragma once
 
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
-#include "Vehicle.h"
+#include "Objects/Vehicle.h"
 
 namespace Suthanus
 {

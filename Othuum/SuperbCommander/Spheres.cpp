@@ -4,7 +4,7 @@
 #include "AhwassaGraphicsLib/Renderer/SphereRenderer.h"
 #include "AhwassaGraphicsLib/Renderer/Sphere.h"
 #include "SuthanusPhysicsLib/PhysicEngine.h"
-#include "SuthanusPhysicsLib/Sphere.h"
+#include "SuthanusPhysicsLib/Objects/Sphere.h"
 
 namespace Superb {
   Spheres::Spheres(Ahwassa::Window* window, std::shared_ptr<Suthanus::PhysicEngine> physic) {

@@ -2,7 +2,7 @@
 
 #include "Vehicle.h"
 
-#include "lib/bullet/btBulletDynamicsCommon.h"
+#include "SuthanusPhysicsLib/lib/bullet/btBulletDynamicsCommon.h"
 
 namespace Suthanus
 {

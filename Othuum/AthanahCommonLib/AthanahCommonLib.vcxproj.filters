@@ -102,6 +102,9 @@
     <ClInclude Include="Physic\BulletDebugDrawer.h">
       <Filter>Header Files\Physic</Filter>
     </ClInclude>
+    <ClInclude Include="Physic\NavigationMeshDebugDrawer.h">
+      <Filter>Header Files\Physic</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SkyBox.cpp">
@@ -162,6 +165,9 @@
       <Filter>Source Files\Physic</Filter>
     </ClCompile>
     <ClCompile Include="Physic\BulletDebugDrawer.cpp">
+      <Filter>Source Files\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="Physic\NavigationMeshDebugDrawer.cpp">
       <Filter>Source Files\Physic</Filter>
     </ClCompile>
   </ItemGroup>

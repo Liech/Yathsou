@@ -4,10 +4,10 @@
 #include "IyathuumCoreLib/lib/glm/vec3.hpp"
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 #include <memory>
-#include "Box.h"
-#include "Sphere.h"
-#include "Vehicle.h"
-#include "HeightMap.h"
+#include "Objects/Box.h"
+#include "Objects/Sphere.h"
+#include "Objects/Vehicle.h"
+#include "Objects/HeightMap.h"
 
 class btBroadphaseInterface;
 class btDefaultCollisionConfiguration;

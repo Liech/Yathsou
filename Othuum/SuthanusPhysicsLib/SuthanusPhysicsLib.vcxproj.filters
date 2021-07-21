@@ -13,27 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Headerdateien\Objects">
+      <UniqueIdentifier>{68117e70-5d4a-4712-8bc0-fcbdef4c2183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Objects">
+      <UniqueIdentifier>{f118d318-19e3-4e7c-ac0e-6e5f77a5c0f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Box.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxBullet.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Sphere.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="SphereBullet.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="VehicleBulletRaycast.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="VehicleDriver.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicObject.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="PhysicEngine.cpp">
@@ -42,32 +30,32 @@
     <ClCompile Include="ArtilleryAim.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="HeightMapBullet.cpp">
+    <ClCompile Include="PhysicNavigationMesh.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\HeightMapBullet.cpp">
+      <Filter>Quelldateien\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\PhysicObject.cpp">
+      <Filter>Quelldateien\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Sphere.cpp">
+      <Filter>Quelldateien\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\SphereBullet.cpp">
+      <Filter>Quelldateien\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\VehicleBulletRaycast.cpp">
+      <Filter>Quelldateien\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Box.cpp">
+      <Filter>Quelldateien\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\BoxBullet.cpp">
+      <Filter>Quelldateien\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Box.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxBullet.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Sphere.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicObject.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="SphereBullet.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Vehicle.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="VehicleBulletRaycast.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="VehicleDriver.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -77,11 +65,35 @@
     <ClInclude Include="ArtilleryAim.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="HeightMap.h">
+    <ClInclude Include="PhysicNavigationMesh.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="HeightMapBullet.h">
-      <Filter>Headerdateien</Filter>
+    <ClInclude Include="Objects\HeightMapBullet.h">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\PhysicObject.h">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Sphere.h">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\SphereBullet.h">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Vehicle.h">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\VehicleBulletRaycast.h">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Box.h">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\BoxBullet.h">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\HeightMap.h">
+      <Filter>Headerdateien\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

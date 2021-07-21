@@ -243,28 +243,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ArtilleryAim.cpp" />
-    <ClCompile Include="Box.cpp" />
-    <ClCompile Include="BoxBullet.cpp" />
-    <ClCompile Include="HeightMapBullet.cpp" />
+    <ClCompile Include="Objects\Box.cpp" />
+    <ClCompile Include="Objects\BoxBullet.cpp" />
+    <ClCompile Include="Objects\HeightMapBullet.cpp" />
+    <ClCompile Include="Objects\PhysicObject.cpp" />
+    <ClCompile Include="Objects\Sphere.cpp" />
+    <ClCompile Include="Objects\SphereBullet.cpp" />
+    <ClCompile Include="Objects\VehicleBulletRaycast.cpp" />
     <ClCompile Include="PhysicEngine.cpp" />
-    <ClCompile Include="PhysicObject.cpp" />
-    <ClCompile Include="Sphere.cpp" />
-    <ClCompile Include="SphereBullet.cpp" />
-    <ClCompile Include="VehicleBulletRaycast.cpp" />
+    <ClCompile Include="PhysicNavigationMesh.cpp" />
     <ClCompile Include="VehicleDriver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ArtilleryAim.h" />
-    <ClInclude Include="Box.h" />
-    <ClInclude Include="BoxBullet.h" />
-    <ClInclude Include="HeightMap.h" />
-    <ClInclude Include="HeightMapBullet.h" />
+    <ClInclude Include="Objects\Box.h" />
+    <ClInclude Include="Objects\BoxBullet.h" />
+    <ClInclude Include="Objects\HeightMap.h" />
+    <ClInclude Include="Objects\HeightMapBullet.h" />
+    <ClInclude Include="Objects\PhysicObject.h" />
+    <ClInclude Include="Objects\Sphere.h" />
+    <ClInclude Include="Objects\SphereBullet.h" />
+    <ClInclude Include="Objects\Vehicle.h" />
+    <ClInclude Include="Objects\VehicleBulletRaycast.h" />
     <ClInclude Include="PhysicEngine.h" />
-    <ClInclude Include="PhysicObject.h" />
-    <ClInclude Include="Sphere.h" />
-    <ClInclude Include="SphereBullet.h" />
-    <ClInclude Include="Vehicle.h" />
-    <ClInclude Include="VehicleBulletRaycast.h" />
+    <ClInclude Include="PhysicNavigationMesh.h" />
     <ClInclude Include="VehicleDriver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

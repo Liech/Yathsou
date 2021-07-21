@@ -4,10 +4,10 @@
 #include <vector>
 
 #include "lib/bullet/btBulletDynamicsCommon.h"
-#include "BoxBullet.h"
-#include "SphereBullet.h"
-#include "VehicleBulletRaycast.h"
-#include "HeightMapBullet.h"
+#include "Objects/BoxBullet.h"
+#include "Objects/SphereBullet.h"
+#include "Objects/VehicleBulletRaycast.h"
+#include "Objects/HeightMapBullet.h"
 
 namespace Suthanus
 {

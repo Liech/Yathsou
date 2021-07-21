@@ -1,7 +1,7 @@
 #include "HeightMap.h"
 #include "HeightMapBullet.h"
-#include "lib/bullet/BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h"
-#include "lib/bullet/btBulletDynamicsCommon.h"
+#include "SuthanusPhysicsLib/lib/bullet/BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h"
+#include "SuthanusPhysicsLib/lib/bullet/btBulletDynamicsCommon.h"
 
 namespace Suthanus
 {

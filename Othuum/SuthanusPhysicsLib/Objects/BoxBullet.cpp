@@ -1,6 +1,6 @@
 #include "BoxBullet.h"
 
-#include "lib/bullet/btBulletDynamicsCommon.h"
+#include "SuthanusPhysicsLib/lib/bullet/btBulletDynamicsCommon.h"
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
 namespace Suthanus
 {

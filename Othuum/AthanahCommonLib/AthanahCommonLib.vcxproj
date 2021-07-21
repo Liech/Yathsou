@@ -39,6 +39,7 @@
     <ClInclude Include="Model3DRenderer.h" />
     <ClInclude Include="Physic\BoxVisualization.h" />
     <ClInclude Include="Physic\BulletDebugDrawer.h" />
+    <ClInclude Include="Physic\NavigationMeshDebugDrawer.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SupCom\SupComEnums.h" />
     <ClInclude Include="SupCom\SupComMeshLoader.h" />
@@ -62,6 +63,7 @@
     <ClCompile Include="Model3DRenderer.cpp" />
     <ClCompile Include="Physic\BoxVisualization.cpp" />
     <ClCompile Include="Physic\BulletDebugDrawer.cpp" />
+    <ClCompile Include="Physic\NavigationMeshDebugDrawer.cpp" />
     <ClCompile Include="SkyBox.cpp" />
     <ClCompile Include="SupCom\SupComMeshLoader.cpp" />
     <ClCompile Include="SupCom\SupComMeshRenderer.cpp" />

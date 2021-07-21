@@ -12,7 +12,7 @@
 #include "AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.h"
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
-#include "SuthanusPhysicsLib/HeightMap.h"
+#include "SuthanusPhysicsLib/Objects/HeightMap.h"
 
 namespace Superb {
   World::World(Ahwassa::Window* window, std::shared_ptr<Suthanus::PhysicEngine> physic,std::shared_ptr<Athanah::Map> map) {

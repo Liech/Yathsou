@@ -1,7 +1,7 @@
 #include "PhysicsDebugView.h"
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
-#include "AthanahCommonLib/BulletDebugDrawer.h"
+#include "AthanahCommonLib/Physic/BulletDebugDrawer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
