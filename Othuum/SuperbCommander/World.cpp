@@ -4,6 +4,7 @@
 
 #include "AthanahCommonLib/Map/Map.h"
 #include "AthanahCommonLib/Map/MapRenderer.h"
+#include "AthanahCommonLib/Physic/NavigationMeshDebugDrawer.h"
 
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
@@ -13,6 +14,7 @@
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/Objects/HeightMap.h"
+#include "SuthanusPhysicsLib/PhysicNavigationMesh.h"
 
 namespace Superb {
   World::World(Ahwassa::Window* window, std::shared_ptr<Suthanus::PhysicEngine> physic,std::shared_ptr<Athanah::Map> map) {
@@ -40,6 +42,8 @@ namespace Superb {
     };
     _mapMesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short, Ahwassa::PositionColorNormalVertex>(*map->scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(), tinter, 2000, 1);
 
+    _navGraph = std::make_shared<Suthanus::PhysicNavigationMesh>(*physic, glm::vec3(0, 0, 0), 1);
+    _navGraphVis = std::make_shared<Athanah::NavigationMeshDebugDrawer>(*_navGraph,window->camera());
   }
 
   void World::update() {
@@ -47,5 +51,9 @@ namespace Superb {
 
   void World::draw() {
     _mapRenderer->draw(*_mapMesh);
+  }
+
+  void World::debugDraw() {
+    _navGraphVis->draw();
   }
 }

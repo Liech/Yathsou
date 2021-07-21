@@ -87,6 +87,7 @@ int main(int argc, char** argv) {
     textureRenderer->end();
 
     physicDebug->draw();
+    world->debugDraw();
 
     fps->draw();
 

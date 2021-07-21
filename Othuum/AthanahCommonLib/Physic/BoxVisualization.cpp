@@ -3,7 +3,7 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
-#include "SuthanusPhysicsLib/Box.h"
+#include "SuthanusPhysicsLib/Objects/Box.h"
 
 
 namespace Athanah {
