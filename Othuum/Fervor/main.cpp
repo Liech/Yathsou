@@ -13,6 +13,9 @@
 #include "AhwassaGraphicsLib/Input/FileDropper.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BoxRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/Line.h"
 #include "AhwassaGraphicsLib/BufferObjects/FBO.h"
 #include "AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.h"
 #include "AhwassaGraphicsLib/Vertex/PositionColorNormalVertex.h"
@@ -29,6 +32,7 @@
 #include "AezeselFileIOLib/Sound/SoundIO.h"
 #include "IyathuumCoreLib/BaseTypes/Sound.h"
 #include "AhwassaGraphicsLib/Sound/SoundEngine.h"
+#include "IyathuumCoreLib/Tree/glmOctree.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -37,6 +41,35 @@ void enforceWorkingDir(std::string exeDir) {
     exeDir.erase(last_slash_idx + 1);
   }
   std::filesystem::current_path(exeDir);
+}
+
+void octree(std::shared_ptr<Ahwassa::BasicBoxRenderer>renderer, Iyathuum::glmOctree& tree) {
+  for (const auto& d : tree.findSphere(tree.aabb().getCenter(),0.5f))
+  //for (const auto& d : tree.dumpObj())
+    renderer->drawDot(d->glmPosition(), glm::vec3(0.05f, 0.05f, 0.05f), Iyathuum::Color(255, 128, 0));
+  return;
+  for (const auto& d : tree.dumpAABB()) {
+    float x = d.getSize()[0];
+    float y = d.getSize()[1];
+    float z = d.getSize()[2];
+    float s = 0.01f;
+  
+    renderer->drawLine(d.getPosition() + glm::vec3(0,0,0), d.getPosition() + glm::vec3(0,0,z), s, Iyathuum::Color(255, 0, 0));
+    renderer->drawLine(d.getPosition() + glm::vec3(x,0,0), d.getPosition() + glm::vec3(x,0,z), s, Iyathuum::Color(255, 0, 0));
+    renderer->drawLine(d.getPosition() + glm::vec3(0,y,0), d.getPosition() + glm::vec3(0,y,z), s, Iyathuum::Color(255, 0, 0));
+    renderer->drawLine(d.getPosition() + glm::vec3(x,y,0), d.getPosition() + glm::vec3(x,y,z), s, Iyathuum::Color(255, 0, 0));
+  
+    renderer->drawLine(d.getPosition() + glm::vec3(0, 0, 0), d.getPosition() + glm::vec3(0, y, 0), s, Iyathuum::Color(255, 0, 0));
+    renderer->drawLine(d.getPosition() + glm::vec3(x, 0, 0), d.getPosition() + glm::vec3(x, y, 0), s, Iyathuum::Color(255, 0, 0));
+    renderer->drawLine(d.getPosition() + glm::vec3(0, 0, z), d.getPosition() + glm::vec3(0, y, z), s, Iyathuum::Color(255, 0, 0));
+    renderer->drawLine(d.getPosition() + glm::vec3(x, 0, z), d.getPosition() + glm::vec3(x, y, z), s, Iyathuum::Color(255, 0, 0));
+  
+    renderer->drawLine(d.getPosition() + glm::vec3(0, 0, 0), d.getPosition() + glm::vec3(x, 0, 0), s, Iyathuum::Color(255, 0, 0));
+    renderer->drawLine(d.getPosition() + glm::vec3(0, y, 0), d.getPosition() + glm::vec3(x, y, 0), s, Iyathuum::Color(255, 0, 0));
+    renderer->drawLine(d.getPosition() + glm::vec3(0, 0, z), d.getPosition() + glm::vec3(x, 0, z), s, Iyathuum::Color(255, 0, 0));
+    renderer->drawLine(d.getPosition() + glm::vec3(0, y, z), d.getPosition() + glm::vec3(x, y, z), s, Iyathuum::Color(255, 0, 0));
+  
+  }
 }
 
 int main(int argc, char** argv) {
@@ -51,79 +84,46 @@ int main(int argc, char** argv) {
   std::string mapPath = scPath + "\\maps";
 
   std::string soundPath = scPath + "\\sounds\\Interface";
-  //Aezesel::XSB xsbReader;
-  //for (auto s : xsbReader.load(soundPath+".xsb"))
-  //  std::cout << s << std::endl;
 
-  Aezesel::XWB xwbReader;
-  auto sounds = xwbReader.load(soundPath + ".xwb");
-  Aezesel::XSB xsbReader;
-  auto names = xsbReader.load(soundPath + ".xsb");
-  Aezesel::SoundIO sound;
-  Ahwassa::SoundEngine s;
-  for (int i = 0; i < 10; i++) {
-    auto handler = s.createHandler(*sounds[i]);
-    handler->play();
-  }
-
-  auto factory = std::make_shared<Athanah::MapFactory>(mapPath);
-  std::string setons = "SCMP_009";
-  std::string fields = "SCMP_015";
-  std::string shards = "X1MP_010";
-  auto map = factory->loadMap(setons);
-  map->loadFull();
-
-  for (auto x : map->scmap().terrainTexturePaths)
-    std::cout << x.path << std::endl;
-
-  auto& tex = map->scmap().highTexture;
-
-  {  //better context for window
+  {
     Ahwassa::Background b(&w);
     std::unique_ptr<Ahwassa::FPS> fps;
 
     std::shared_ptr<Ahwassa::FreeCamera> freeCam;
     std::shared_ptr<Ahwassa::DeferredComposer> composer;
     std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
-    std::shared_ptr<Ahwassa::IMesh> m;
-    std::shared_ptr<Athanah::MapRenderer> mapRenderer;
+    std::shared_ptr<Ahwassa::BasicBoxRenderer> boxRenderer;
 
     w.Startup = [&]() {
       composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
       textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
+      boxRenderer = std::make_shared<Ahwassa::BasicBoxRenderer>(w.camera());
 
-      std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures;
-      for (int i = 0; i < 5; i++) {
-        std::string path = "Data" + map->scmap().terrainTexturePaths[i].path;
-        auto img = Aezesel::ImageIO::readImage(path);
-        textures[i] = std::make_shared<Ahwassa::Texture>("TerrainTexture" + std::to_string(i), img.get());
-      }
-
-      mapRenderer = std::make_shared<Athanah::MapRenderer>(w.camera(),textures);
-
-      auto tinter = [&](const std::array<size_t,2> position, Ahwassa::PositionColorNormalVertex& v) {
-        std::array<size_t, 2> half = {position[0]/2,position[1]/2};
-        if (position[0] == map->scmap().heightMapData->getDimension(0) - 1) half[0] = (position[0] - 1) / 2;
-        if (position[1] == map->scmap().heightMapData->getDimension(1) - 1) half[1] = (position[1] - 1) / 2;
-        v.color = map->scmap().highTexture->getVal(half).to4();
-      };
-
-      m = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short, Ahwassa::PositionColorNormalVertex>(*map->scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(),tinter, 2000, 1);
-      //w.renderer().mesh().addMesh(m);
-      
       freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
       w.input().addUIElement(freeCam.get());
       fps = std::make_unique<Ahwassa::FPS>(&w);
     };
 
+    Iyathuum::glmOctree tree(Iyathuum::glmAABB<3>(glm::vec3(0, 0, 0), 3));
+    for (int i = 0; i < 2000; i++) {
+      float x = (float)(rand() % 300) / 100.0f;
+      float y = (float)(rand() % 300) / 100.0f;
+      float z = (float)(rand() % 300) / 100.0f;
+      tree.add(std::make_shared<Iyathuum::glmOctreeObject>(glm::vec3(x, y, z)));
+    }
+
     w.Update = [&]() {
 
       //composer->start();
       b.draw();
-      //w.renderer().draw();
-      mapRenderer->draw(*m);
+      ///
+      //boxRenderer->draw();
+      boxRenderer->start();
+      octree(boxRenderer,tree);
+      boxRenderer->end();
+      ///
       //composer->end();
-
+      //
       //textureRenderer->start();
       //textureRenderer->draw(*composer->getResult(), glm::vec2(0),glm::vec2(width,height));
       //textureRenderer->end();

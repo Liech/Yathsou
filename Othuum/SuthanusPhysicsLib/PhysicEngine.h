@@ -30,7 +30,7 @@ namespace Suthanus
     void setDebugDrawer(btIDebugDraw* drawer);
     void debugDrawWorld();
 
-    PhysicObject* raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint);
+    PhysicObject* raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint) const;
 
     std::shared_ptr<Box      > newBox      (glm::vec3 pos, glm::vec3 size  , bool isDynamic);
     std::shared_ptr<Sphere   > newSphere   (glm::vec3 pos, float     radius, bool isDynamic);

@@ -476,6 +476,7 @@
     <ClInclude Include="Singleton\Database.h" />
     <ClInclude Include="Singleton\Factory.h" />
     <ClInclude Include="Tree\Dijkstra.h" />
+    <ClInclude Include="Tree\glmOctree.h" />
     <ClInclude Include="Tree\GridHash.h" />
     <ClInclude Include="Tree\NMTree.h" />
     <ClInclude Include="Tree\NMTreeDijkstra.h" />
@@ -498,6 +499,7 @@
     <ClCompile Include="BaseTypes\Key.cpp" />
     <ClCompile Include="BaseTypes\Sound.cpp" />
     <ClCompile Include="lib\glm\detail\glm.cpp" />
+    <ClCompile Include="Tree\glmOctree.cpp" />
     <ClCompile Include="Util\ConstExprHash.cpp" />
     <ClCompile Include="Util\ContentLoader.cpp" />
     <ClCompile Include="Util\ImageSubsetUtil.cpp" />

@@ -864,6 +864,9 @@
     <ClInclude Include="BaseTypes\Sound.h">
       <Filter>Header Files\BaseTypes</Filter>
     </ClInclude>
+    <ClInclude Include="Tree\glmOctree.h">
+      <Filter>Header Files\Tree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseTypes\AABB.cpp">
@@ -901,6 +904,9 @@
     </ClCompile>
     <ClCompile Include="BaseTypes\Sound.cpp">
       <Filter>Source Files\BaseTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree\glmOctree.cpp">
+      <Filter>Source Files\Tree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -40,7 +40,7 @@ namespace Suthanus
     _world->setGravity(btVector3(0, -9.81, 0));
   }
 
-  PhysicObject* PhysicEngine::raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint)
+  PhysicObject* PhysicEngine::raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint) const
   {
     btVector3 bOrigin   (origin.x, origin.y, origin.z);
     btVector3 bDirection(direction.x, direction.y, direction.z);

@@ -57,11 +57,13 @@ namespace Iyathuum {
       return true;
     }
 
-    bool intersectsCircle(vec pos, double radius) const{
+    bool intersectsSphere(vec pos, double radius) const{
+      //nearest point of box to sphere center
       vec newPos;
       for (size_t i = 0; i < Dimension; i++) {
         newPos[i] = std::clamp(pos[i], _position[i], _position[i] + _size[i]);
       }
+
       double dist = 0;
       for (size_t i = 0; i < Dimension; i++)
         dist += (pos[i] - newPos[i]) * (pos[i] - newPos[i]);
