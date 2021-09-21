@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "AezeselFileIOLib/SupremeCommander/SCMAP.h"
 
 namespace Ahwassa {
@@ -18,6 +19,8 @@ namespace Athanah {
     Scenario&                         getScenario();
     Aezesel::SCMAP::Map&              scmap();
     void                              loadFull();
+    Iyathuum::glmAABB<3>       aabb();
+
   private:
     std::string                           _directory;
     std::string                           _name     ;

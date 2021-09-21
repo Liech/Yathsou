@@ -23,6 +23,8 @@ namespace Superb {
     _physic = physic;
     map->loadFull();
 
+    
+
     std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures;
     for (int i = 0; i < 5; i++) {
       std::string path = "Data" + map->scmap().terrainTexturePaths[i].path;
@@ -42,7 +44,7 @@ namespace Superb {
     };
     _mapMesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short, Ahwassa::PositionColorNormalVertex>(*map->scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(), tinter, 2000, 1);
 
-    _navGraph = std::make_shared<Suthanus::PhysicNavigationMesh>(*physic, glm::vec3(0, 0, 0), 1);
+    _navGraph = std::make_shared<Suthanus::PhysicNavigationMesh>(*physic,_map->aabb(), glm::vec3(30, 30, 30), 1);
     _navGraphVis = std::make_shared<Athanah::NavigationMeshDebugDrawer>(*_navGraph,window->camera());
   }
 

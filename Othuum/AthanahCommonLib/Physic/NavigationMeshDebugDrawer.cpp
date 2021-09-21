@@ -3,6 +3,9 @@
 #include "SuthanusPhysicsLib/PhysicNavigationMesh.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
 #include "AhwassaGraphicsLib/Renderer/BoxRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/Dot.h"
+#include "AhwassaGraphicsLib/Renderer/Line.h"
+
 
 namespace Athanah {
   NavigationMeshDebugDrawer::NavigationMeshDebugDrawer(const Suthanus::PhysicNavigationMesh& mesh, std::shared_ptr<Ahwassa::Camera> camera) {
@@ -10,8 +13,14 @@ namespace Athanah {
     _nodes = mesh.getNodePositions();
     _renderer = std::make_shared<Ahwassa::BoxRenderer>(camera);
 
-    for (size_t i = 0; i < _nodes.size(); i++) 
-      _boxes.push_back(_renderer->newDot(_nodes[i], 7.0f, Iyathuum::Color(255, 255, 255)));
+    for (size_t i = 0; i < _nodes.size(); i++) {
+      std::shared_ptr<Ahwassa::Dot> ptr = _renderer->newDot(_nodes[i], 0.1f, Iyathuum::Color(255, 255, 255));
+      _boxes.push_back(std::dynamic_pointer_cast<Ahwassa::IBox>(ptr));
+    }
+    for (size_t i = 0; i < _links.size(); i++) {
+      std::shared_ptr<Ahwassa::Line> ptr = _renderer->newLine(_links[i].first, _links[i].second, 0.07f, Iyathuum::Color(0, 255, 255));
+      _boxes.push_back(std::dynamic_pointer_cast<Ahwassa::IBox>(ptr));
+    }
   }
 
   void NavigationMeshDebugDrawer::draw() {
