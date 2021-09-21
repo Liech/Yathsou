@@ -14,6 +14,15 @@ namespace Suthanus {
     std::vector<std::shared_ptr<PhysicNavigationNode>> links;
   };
 
+  class PhysicNavigationTreeNode : public Iyathuum::glmOctreeObject {
+  public:
+    PhysicNavigationTreeNode(glm::vec3 pos, std::shared_ptr<PhysicNavigationNode> node);
+    std::shared_ptr<PhysicNavigationNode> node();
+  private:
+    std::shared_ptr<PhysicNavigationNode> _node;
+  };
+
+
   class PhysicNavigationMesh {
   public:
     PhysicNavigationMesh(const PhysicEngine& engine, const Iyathuum::glmAABB<3>& volume, glm::vec3 seedStart,float sampleDistance = 1, float climbingAngleDeg = 35);
@@ -27,6 +36,7 @@ namespace Suthanus {
     std::vector<std::shared_ptr<PhysicNavigationNode>> _nodes;
 
     Iyathuum::glmAABB<3> _volume;
+    Iyathuum::glmOctree  _tree;
     const PhysicEngine&  _engine;
     float                _sampleDistance = 1;
     float                _climbAngle     = 35;    

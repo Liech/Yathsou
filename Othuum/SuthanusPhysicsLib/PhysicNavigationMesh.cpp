@@ -3,9 +3,20 @@
 #include "PhysicEngine.h"
 
 namespace Suthanus {
+  PhysicNavigationTreeNode::PhysicNavigationTreeNode(glm::vec3 pos, std::shared_ptr<PhysicNavigationNode> n)
+    :
+    Iyathuum::glmOctreeObject(pos), _node(n)
+  {
+  }
+
+  std::shared_ptr<PhysicNavigationNode> PhysicNavigationTreeNode::node() {
+    return _node;
+  }
+
   PhysicNavigationMesh::PhysicNavigationMesh(const PhysicEngine& engine,const Iyathuum::glmAABB<3>& volume,glm::vec3 seedStart,float sampleDistance, float climbingAngleDeg) 
   : _engine(engine),
-  _volume(volume){
+  _volume(volume),
+  _tree(volume){
     _sampleDistance = sampleDistance  ;
     _climbAngle     = climbingAngleDeg;
     initMesh(seedStart);
@@ -35,6 +46,8 @@ namespace Suthanus {
         std::shared_ptr<PhysicNavigationNode> node = std::make_shared<PhysicNavigationNode>();
         node->position = hit;
         _nodes.push_back(node);
+        auto treeNode = std::make_shared<PhysicNavigationTreeNode>(node->position, node);
+        _tree.add(treeNode);
         if (previousRow[z] != nullptr) {
           node          ->links.push_back(previousRow[z]);
           previousRow[z]->links.push_back(node);
