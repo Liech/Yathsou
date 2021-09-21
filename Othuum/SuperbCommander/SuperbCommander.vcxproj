@@ -147,12 +147,14 @@
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NavigationUI.cpp" />
     <ClCompile Include="PhysicsDebugView.cpp" />
     <ClCompile Include="Spheres.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
+    <ClInclude Include="NavigationUI.h" />
     <ClInclude Include="PhysicsDebugView.h" />
     <ClInclude Include="Spheres.h" />
     <ClInclude Include="World.h" />

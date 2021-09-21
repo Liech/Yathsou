@@ -15,16 +15,18 @@ namespace Ahwassa {
 }
 namespace Suthanus {
   class PhysicEngine;
+  class PhysicNavigationMesh;
   class Box;
   class HeightMap;
   class PhysicObject;
-  class PhysicNavigationMesh;
 }
 
 namespace Superb {
   class World {
   public:
     World(Ahwassa::Window*,std::shared_ptr<Suthanus::PhysicEngine>,std::shared_ptr<Athanah::Map> mapFolder);
+
+    std::shared_ptr<Suthanus::PhysicNavigationMesh> navMesh();
 
     void update();
     void draw();

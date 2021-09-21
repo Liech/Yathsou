@@ -21,6 +21,7 @@
 #include "World.h"
 #include "Config.h"
 #include "Spheres.h"
+#include "NavigationUI.h"
 #include "PhysicsDebugView.h"
 
 void enforceWorkingDir(std::string exeDir) {
@@ -46,11 +47,12 @@ int main(int argc, char** argv) {
   std::unique_ptr<Ahwassa::FPS>                    fps;
   std::shared_ptr<Ahwassa::FreeCamera>             freeCam;
   std::shared_ptr<Ahwassa::DeferredComposer>       composer;
-  std::shared_ptr<Superb::World>                   world;
   std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
   std::shared_ptr<Suthanus::PhysicEngine>          physic;
+  std::shared_ptr<Superb::World>                   world;
   std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
   std::shared_ptr<Superb::Spheres>                 spheres;
+  std::shared_ptr<Superb::NavigationUI>            navUI;
 
   w.Startup = [&]() {
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
@@ -65,6 +67,7 @@ int main(int argc, char** argv) {
     physicDebug = std::make_shared<Superb::PhysicsDebugView>(physic, &w, Iyathuum::Key::KEY_F2);
     spheres = std::make_shared<Superb::Spheres>(&w,physic);
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
+    navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh());
   };
   int asd = 0;
   w.Update = [&]() {
@@ -72,7 +75,7 @@ int main(int argc, char** argv) {
     physicDebug->update();
     world->update();
     spheres->update();
-    
+    navUI->update();
 
     composer->start();
     b.draw();
@@ -88,9 +91,9 @@ int main(int argc, char** argv) {
 
     physicDebug->draw();
     world->debugDraw();
+    navUI->debugDraw();
 
     fps->draw();
-
 
     asd = (asd+ 1)%2;
     if (asd == 0 && w.input().getKeyStatus(Iyathuum::Key::MOUSE_BUTTON_2)== Iyathuum::KeyStatus::PRESS)
