@@ -25,6 +25,7 @@ namespace Superb {
     std::shared_ptr<Suthanus::PhysicEngine>         _physic ;
     std::shared_ptr<Suthanus::PhysicNavigationMesh> _navMesh;
 
-    glm::vec3 _hit;
+    glm::vec3 _hit ;
+    glm::vec3 _node;
   };
 }

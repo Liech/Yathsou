@@ -61,7 +61,7 @@ namespace Iyathuum {
       delete _children[i];
   }
   
-  bool glmOctree::hasChildren() {
+  bool glmOctree::hasChildren() const {
     return _children[0] != nullptr;
   }
 
@@ -120,7 +120,7 @@ namespace Iyathuum {
     }
   }
 
-  std::set<std::shared_ptr<glmOctreeObject>> glmOctree::findSphere(glm::vec3 pos, float radius) {
+  std::set<std::shared_ptr<glmOctreeObject>> glmOctree::findSphere(const glm::vec3& pos, float radius) const{
     std::set<std::shared_ptr<glmOctreeObject>> result;
     if (!hasChildren()) {
       for (auto x : _content) {

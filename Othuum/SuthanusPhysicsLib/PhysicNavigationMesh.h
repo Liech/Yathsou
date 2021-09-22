@@ -29,6 +29,7 @@ namespace Suthanus {
 
     std::vector<glm::vec3> getNodePositions() const;
     std::vector<std::pair<glm::vec3, glm::vec3>> getLinks() const;
+    std::shared_ptr<PhysicNavigationNode> findNext(glm::vec3) const;
 
   private:
     void initMesh(glm::vec3 seedStart);   

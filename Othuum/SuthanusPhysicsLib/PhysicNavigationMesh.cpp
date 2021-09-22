@@ -89,4 +89,20 @@ namespace Suthanus {
     return result;
   }
 
+  std::shared_ptr<PhysicNavigationNode> PhysicNavigationMesh::findNext(glm::vec3 pos) const {
+    std::set<std::shared_ptr<Iyathuum::glmOctreeObject>> objs = _tree.findSphere(pos, _sampleDistance * 2);
+    std::vector<std::shared_ptr<PhysicNavigationTreeNode>> nodes;
+    for (auto node : objs)
+      nodes.push_back(std::dynamic_pointer_cast<PhysicNavigationTreeNode>(node));
+    std::sort(nodes.begin(), nodes.end(), [&](const std::shared_ptr<PhysicNavigationTreeNode>& a, const std::shared_ptr<PhysicNavigationTreeNode>& b) -> bool
+    {
+      float la = glm::distance(a->glmPosition(), pos);
+      float lb = glm::distance(b->glmPosition(), pos);
+      return la < lb;
+    });
+    if (nodes.size() > 0)
+      return nodes[0]->node();
+    else
+      return nullptr;
+  }
 }

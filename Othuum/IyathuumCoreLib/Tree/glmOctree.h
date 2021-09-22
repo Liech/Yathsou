@@ -30,7 +30,7 @@ namespace Iyathuum {
     void add(std::shared_ptr<glmOctreeObject>);
     void remove(std::shared_ptr<glmOctreeObject>);
 
-    std::set<std::shared_ptr<glmOctreeObject>> findSphere(glm::vec3 pos, float radius);
+    std::set<std::shared_ptr<glmOctreeObject>> findSphere(const glm::vec3& pos, float radius) const;
 
   private:    
     void       split();
@@ -38,7 +38,7 @@ namespace Iyathuum {
     glmOctree* getLeaf(glm::vec3 position);
     void       createChildren();
     void       killChildren();
-    bool       hasChildren();
+    bool       hasChildren() const;
     glmAABB<3> subVolume(unsigned char childID);
     size_t     contentCount();
 

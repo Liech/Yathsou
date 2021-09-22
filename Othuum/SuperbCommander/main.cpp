@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
     w.camera()->setTarget  (config.CameraTarget);
     physic = std::make_shared<Suthanus::PhysicEngine>();
     physicDebug = std::make_shared<Superb::PhysicsDebugView>(physic, &w, Iyathuum::Key::KEY_F2);
-    spheres = std::make_shared<Superb::Spheres>(&w,physic);
+    //spheres = std::make_shared<Superb::Spheres>(&w,physic);
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh());
   };
@@ -74,12 +74,12 @@ int main(int argc, char** argv) {
     physic->update();
     physicDebug->update();
     world->update();
-    spheres->update();
+    //spheres->update();
     navUI->update();
 
     composer->start();
     b.draw();
-    spheres->draw();
+    //spheres->draw();
     world->draw();
        
     
@@ -96,8 +96,8 @@ int main(int argc, char** argv) {
     fps->draw();
 
     asd = (asd+ 1)%2;
-    if (asd == 0 && w.input().getKeyStatus(Iyathuum::Key::MOUSE_BUTTON_2)== Iyathuum::KeyStatus::PRESS)
-      spheres->addSphere(w.camera()->getPosition() + w.camera()->getDir() * 13.0f, 1, Iyathuum::Color(255, 0, 0));
+    //if (asd == 0 && w.input().getKeyStatus(Iyathuum::Key::MOUSE_BUTTON_2)== Iyathuum::KeyStatus::PRESS)
+    //  spheres->addSphere(w.camera()->getPosition() + w.camera()->getDir() * 13.0f, 1, Iyathuum::Color(255, 0, 0));
   };
   w.run();
 
