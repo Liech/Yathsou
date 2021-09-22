@@ -10,6 +10,7 @@
 #include "AhwassaGraphicsLib/Renderer/Rectangle.h"
 #include "AhwassaGraphicsLib/Renderer/Sphere.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTextRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
@@ -22,6 +23,7 @@ namespace Ahwassa {
     _rectangle = std::make_shared<RectangleRenderer     >(window);
     _sphere    = std::make_shared<SphereRenderer        >(cam   );
     _bRectangle= std::make_shared<BasicRectangleRenderer>(window);
+    _bBox      = std::make_shared<BasicBoxRenderer      >(cam   );
     _bText     = std::make_shared<BasicTextRenderer     >(window);
     _bTexture  = std::make_shared<BasicTexture2DRenderer>(window);
     _bMesh     = std::make_shared<DiffuseMeshRenderer   >(cam   );
@@ -74,4 +76,9 @@ namespace Ahwassa {
   DiffuseMeshRenderer& Renderer::mesh() {
     return *_bMesh;
   }
+
+  BasicBoxRenderer& Renderer::box() {
+    return *_bBox;
+  }
+
 }

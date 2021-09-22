@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include <memory>
 
 namespace Ahwassa {
@@ -23,5 +24,7 @@ namespace Superb {
     Ahwassa::Window*                                _window ;
     std::shared_ptr<Suthanus::PhysicEngine>         _physic ;
     std::shared_ptr<Suthanus::PhysicNavigationMesh> _navMesh;
+
+    glm::vec3 _hit;
   };
 }

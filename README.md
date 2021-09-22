@@ -14,10 +14,13 @@ In an recreational project the goals may change at any given time. Currently the
 
 Since the last 'release' the following was implemented:
  
+ * HeightMap Physics
  * Map Renderer with textures
  * XACT Sound files (xwb/xsb) can be transformed to wav files
 
 The next greater step is to combine elements of the game and adding units that are able to drive on terrain.
+
+Next small step is to click points on Physic and NavMesh.
 
 # Libraries
 

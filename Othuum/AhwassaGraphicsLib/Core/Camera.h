@@ -20,7 +20,7 @@ namespace Ahwassa {
     glm::mat4 getProjectionMatrix();
     glm::mat4 getViewMatrix();
 
-    glm::vec3 getPickRay(float X, float Y);
+    glm::vec3 getPickRay(glm::vec2);
     glm::vec3 viewToWorldCoordTransform(int mouse_x, int mouse_y);
     glm::vec2 worldToViewCoordTransform(glm::vec3 pos);
 

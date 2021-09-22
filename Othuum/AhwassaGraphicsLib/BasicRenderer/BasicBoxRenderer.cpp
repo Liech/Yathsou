@@ -155,6 +155,10 @@ namespace Ahwassa {
     draw(m, color);
   }
 
+  void BasicBoxRenderer::drawDot(glm::vec3 start, float size, Iyathuum::Color color) {
+    drawDot(start, glm::vec3(size, size, size), color);
+  }
+
   void BasicBoxRenderer::drawBox(glm::vec3 start, glm::vec3 size, Iyathuum::Color color) {
     glm::mat4 m = glm::mat4(1);
     m = glm::translate(m, start);

@@ -82,8 +82,8 @@ namespace Ahwassa {
     return glm::vec3(worldPos);
   }
 
-  glm::vec3 Camera::getPickRay(float X, float Y) {
-    glm::vec3 worldMouse = viewToWorldCoordTransform(X, Y);
+  glm::vec3 Camera::getPickRay(glm::vec2 v) {
+    glm::vec3 worldMouse = viewToWorldCoordTransform(v[0], v[1]);
     return worldMouse;
   }
 
