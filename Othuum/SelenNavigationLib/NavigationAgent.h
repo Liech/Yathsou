@@ -20,7 +20,6 @@ namespace Selen {
     NavigationAgent(vec pos, vec velocity) {      
       _position    = pos        ;
       _velocity    = velocity   ;
-      _target      = pos        ;
       _map         = nullptr    ;
     }
 
@@ -38,10 +37,6 @@ namespace Selen {
     
     std::shared_ptr<NavigationMap<Dimension>> getMap() {
       return _map;
-    }
-
-    void setTarget(vec position) {
-      _target = position;
     }
 
     void setPosition(vec position) {
@@ -77,18 +72,17 @@ namespace Selen {
       if (glm::length(velocity) == 0)
         return;
       else if (glm::length(velocity) > _maxForce)
-        _velocity = _velocity+glm::normalize(velocity) * std::clamp(glm::length(velocity), 0.0, _maxForce);
+        _velocity = _velocity+glm::normalize(velocity) * std::clamp(glm::length(velocity), 0.0f, _maxForce);
       else
         _velocity = _velocity+velocity;
       if (glm::length(_velocity) > _maxSpeed)
-        _velocity = glm::normalize(_velocity) * std::clamp(glm::length(_velocity), 0.0, _maxSpeed);
+        _velocity = glm::normalize(_velocity) * std::clamp(glm::length(_velocity), 0.0f, _maxSpeed);
     }
 
-    double                                     _maxSpeed = 0.3                       ;
-    double                                     _maxForce = 0.01                      ;
+    float                                     _maxSpeed = 0.3f                       ;
+    float                                     _maxForce = 0.01f                      ;
 
     vec                                       _position                              ;
-    vec                                       _target                                ;
     vec                                       _velocity                              ;
     std::shared_ptr<NavigationMap<Dimension>> _map                                   ;
   };

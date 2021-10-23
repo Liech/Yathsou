@@ -9,9 +9,12 @@
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/PhysicNavigationMesh.h"
 
+#include "Units.h"
+
 
 namespace Superb {
-  NavigationUI::NavigationUI(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic, std::shared_ptr<Suthanus::PhysicNavigationMesh> nav) {
+  NavigationUI::NavigationUI(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic, std::shared_ptr<Suthanus::PhysicNavigationMesh> nav, std::shared_ptr<Units> units) {
+    _units   = units ;
     _window  = w     ;
     _physic  = physic;
     _navMesh = nav   ;
@@ -28,8 +31,8 @@ namespace Superb {
 
   void NavigationUI::debugDraw() {
     _window->renderer().box().start();
-    _window->renderer().box().drawDot(_start , 0.5f, Iyathuum::Color(0, 0, 255));
-    _window->renderer().box().drawDot(_end, 0.5f, Iyathuum::Color(255, 0, 255));
+    _window->renderer().box().drawDot(_start , 0.5f, Iyathuum::Color(0, 0, 255)  );
+    _window->renderer().box().drawDot(_end   , 0.5f, Iyathuum::Color(255, 0, 255));
     _window->renderer().box().end();
   }
 
@@ -38,6 +41,7 @@ namespace Superb {
       auto node = mouse(localPosition);
       if (node) {
         _end = node->position;
+        _units->setTarget(_end);
         return true;
       }
     }

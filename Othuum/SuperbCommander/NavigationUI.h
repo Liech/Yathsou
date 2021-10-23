@@ -17,9 +17,11 @@ namespace Suthanus {
 
 //window, physic, navmesh
 namespace Superb {
+  class Units;
+
   class NavigationUI : public Ahwassa::UIElement {
   public:
-    NavigationUI(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine>, std::shared_ptr<Suthanus::PhysicNavigationMesh>);
+    NavigationUI(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine>, std::shared_ptr<Suthanus::PhysicNavigationMesh>, std::shared_ptr<Units>);
 
     bool mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) override;
 
@@ -35,6 +37,7 @@ namespace Superb {
     Ahwassa::Window*                                _window ;
     std::shared_ptr<Suthanus::PhysicEngine>         _physic ;
     std::shared_ptr<Suthanus::PhysicNavigationMesh> _navMesh;
+    std::shared_ptr<Units>                          _units  ;
 
     glm::vec3 _end ;
     glm::vec3 _start;

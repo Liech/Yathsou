@@ -21,6 +21,7 @@
 #include "World.h"
 #include "Config.h"
 #include "Spheres.h"
+#include "Units.h"
 #include "NavigationUI.h"
 #include "PhysicsDebugView.h"
 
@@ -50,6 +51,7 @@ int main(int argc, char** argv) {
   std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
   std::shared_ptr<Suthanus::PhysicEngine>          physic;
   std::shared_ptr<Superb::World>                   world;
+  std::shared_ptr<Superb::Units>                   units;
   std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
   std::shared_ptr<Superb::Spheres>                 spheres;
   std::shared_ptr<Superb::NavigationUI>            navUI;
@@ -65,7 +67,8 @@ int main(int argc, char** argv) {
     physicDebug = std::make_shared<Superb::PhysicsDebugView>(physic, &w, Iyathuum::Key::KEY_F2);
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
-    navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh());
+    units = std::make_shared<Superb::Units>(&w);
+    navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh(), units);
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
 
     w.input().addUIElement(freeCam.get());
@@ -76,6 +79,7 @@ int main(int argc, char** argv) {
     physic->update();
     physicDebug->update();
     world->update();
+    units->update();
     //spheres->update();
 
     composer->start();
@@ -93,6 +97,7 @@ int main(int argc, char** argv) {
     physicDebug->draw();
     world->debugDraw();
     navUI->debugDraw();
+    units->debugDraw();
 
     fps->draw();
   };
