@@ -1,5 +1,6 @@
 #pragma once
 
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include <memory>
 #include <array>
 
@@ -10,7 +11,7 @@ namespace Selen {
   template <size_t Dimension>
   class NavigationMap {
   public:
-    using vec = std::array<double, Dimension>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
     virtual void setTarget(const vec targetPosition) = 0;
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* agent) = 0;
   };

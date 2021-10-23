@@ -1,7 +1,7 @@
 #pragma once
 
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "SelenNavigationLib/MapGroup.h"
-#include "IyathuumCoreLib/Util/Geometry.h"
 
 namespace Selen {
 
@@ -10,8 +10,7 @@ namespace Selen {
   //if a unit is near an unit of this map that has arrived it is marked as arrived too
   template <size_t Dimension>
   class InfectiousArrivalMapGroup : public MapGroup<Dimension> {
-    using Math = Iyathuum::Geometry<Dimension>;
-    using vec = std::array<double, Dimension>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     InfectiousArrivalMapGroup(std::shared_ptr<NavigationAgentManager<Dimension>> agents) : MapGroup<Dimension>(){
       _agents = agents;
@@ -25,11 +24,11 @@ namespace Selen {
 
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       if (_arrivedUnits.count(obj)) {
-        return Math::invert(obj->getVelocity());
+        return -obj->getVelocity();
       }
-      else if (Math::length(Math::subtract(MapGroup<Dimension>::_target, obj->getPosition())) < 0.5f) {
+      else if (glm::length(MapGroup<Dimension>::_target - obj->getPosition()) < 0.5f) {
         _arrivedUnits.insert(obj);
-        return Math::invert(obj->getVelocity());
+        return -obj->getVelocity();
       }
       else {
         const float radius = 1;
@@ -37,7 +36,7 @@ namespace Selen {
         for (auto a : agents)
           if (isArrived(a.get())) {
             _arrivedUnits.insert(obj);
-            return Math::invert(obj->getVelocity());
+            return -obj->getVelocity();
           }
       }
 

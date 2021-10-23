@@ -4,6 +4,7 @@
 #include "IyathuumCoreLib/BaseTypes/AABB.h"
 #include "NMTree.h"
 #include <set>
+#include <map>
 
 namespace Iyathuum {
   

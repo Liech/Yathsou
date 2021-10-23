@@ -1,18 +1,17 @@
 #pragma once
 
 #include <memory>
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "SelenNavigationLib/NavigationMap.h"
 #include "IyathuumCoreLib/Tree/Dijkstra.h"
-#include "IyathuumCoreLib/BaseTypes/AABB.h"
+#include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
-#include "IyathuumCoreLib/Util/Geometry.h"
 
 namespace Selen {
   template <size_t Dimension>
   class GradientGridMap :public NavigationMap<Dimension> {
     using self = GradientGridMap<Dimension>;
-    using vec  = std::array<double, Dimension>;
-    using Math = Iyathuum::Geometry<Dimension>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     GradientGridMap(double scale) {
       _scale = scale;
@@ -30,7 +29,7 @@ namespace Selen {
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       if (!_discomfortMap) 
         return vec();
-      vec scaled = Math::multiply(obj->getPosition(), _scale);
+      vec scaled = obj->getPosition() * _scale;
       
       std::array<size_t, Dimension> index;
       for (int i = 0; i < Dimension; i++) {
@@ -40,21 +39,21 @@ namespace Selen {
       }
 
       vec result = getDirectionSuggestion_recurse(index);
-      return Math::subtract(result , obj->getVelocity());
+      return result - obj->getVelocity();
     }
   private:
     vec getDirectionSuggestion_recurse(std::array<size_t, Dimension> position, vec dir = vec(), size_t currentDimension = Dimension-1) {
-      vec result = Math::value(0);
+      vec result = vec(0);
       for (int i = -1; i <= 1; i++) {
         auto newP = position;
         if ((!(newP[currentDimension] == 0 && i == -1)) && (!(newP[currentDimension] == _discomfortMap->getDimension(currentDimension)-1 && i==1)))
           newP[currentDimension] += i;          
         dir[(int)currentDimension] = i;
         if (currentDimension != 0)
-          result = Math::add(result, getDirectionSuggestion_recurse(newP,dir, currentDimension - 1));
+          result = result + getDirectionSuggestion_recurse(newP,dir, currentDimension - 1);
         else {          
           float val = (float)_discomfortMap->getVal(newP);
-          result = Math::add(result, Math::multiply(dir , -val));
+          result = result + (dir * -val);
         }        
       }
       return result;

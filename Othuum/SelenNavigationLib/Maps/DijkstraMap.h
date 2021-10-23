@@ -1,17 +1,16 @@
 #pragma once
 
 #include <memory>
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "SelenNavigationLib/NavigationMap.h"
 #include "IyathuumCoreLib/Tree/Dijkstra.h"
-#include "IyathuumCoreLib/BaseTypes/AABB.h"
-#include "IyathuumCoreLib/Util/Geometry.h"
+#include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 
 namespace Selen {
   template <size_t Dimension>
   class DijkstraMap : public NavigationMap<Dimension> {
     using self = DijkstraMap<Dimension>;
-    using vec = std::array<double, Dimension>;
-    using Math = Iyathuum::Geometry<Dimension>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     DijkstraMap() {
     }
@@ -28,12 +27,12 @@ namespace Selen {
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       vec result;
       if (!_dijkstra)
-        result = Math::normalize(Math::subtract(_target , obj->getPosition()));
+        result = glm::normalize(_target - obj->getPosition());
       else
-        result = Math::normalize(_dijkstra->getDirectionSuggestion(obj->getPosition()));
+        result = glm::normalize(_dijkstra->getDirectionSuggestion(obj->getPosition()));
       if (std::isnan(result[0]))
-        return Math::value(0);
-      return Math::subtract(Math::multiply(result , obj->getMaxSpeed()) , obj->getVelocity());
+        return vec(0);
+      return (result * obj->getMaxSpeed()) - obj->getVelocity();
     }
 
   private:

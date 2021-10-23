@@ -1,9 +1,9 @@
 #pragma once
 
 #include "NavigationAgent.h"
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include <set>
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
-#include "IyathuumCoreLib/Tree/GridHash.h"
 #include "IyathuumCoreLib/Tree/NMTreeSpatialHash.h"
 
 namespace Selen {
@@ -11,7 +11,7 @@ namespace Selen {
   //Auras are areas that are notified by units. E.g. to recognize friends are near, or too near. See Flocking
   template<size_t Dimension>
   class NavigationAgentManager {
-    using vec = std::array<double,Dimension>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     NavigationAgentManager(Iyathuum::AABB<Dimension> location) : _tree(location){
 

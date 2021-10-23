@@ -1,15 +1,15 @@
 #pragma once
 
 #include <memory>
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "SelenNavigationLib/NavigationMap.h"
 #include "SelenNavigationLib/NavigationAgentManager.h"
 
 namespace Selen {
   template <size_t Dimension>
   class AligmentMap :public NavigationMap<Dimension> {
-    using self = DiscomfortMap<Dimension>;
-    using Math = Iyathuum::Geometry<Dimension>;
-    using vec = std::array<double, Dimension>;
+    using self = AligmentMap<Dimension>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     AligmentMap(std::shared_ptr<NavigationAgentManager<Dimension>> agents) {
       _agents = agents;
@@ -23,16 +23,16 @@ namespace Selen {
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       float radius = 2;
       auto agents = _agents->findAgents(obj->getPosition(), radius);
-      vec avg = Math::value(0);
+      vec avg = vec(0);
       if (agents.size() == 1)
         return obj->getVelocity();
       for (auto agent : agents) {
         if (obj == agent.get())
           continue;
-        avg = Math::add(avg,agent->getVelocity());
+        avg = avg + agent->getVelocity();
       }
-      avg = Math::divide(avg , agents.size() - 1);
-      return Math::subtract(avg , obj->getVelocity());
+      avg = avg / (agents.size() - 1);
+      return avg - obj->getVelocity();
     }
   private:
 
