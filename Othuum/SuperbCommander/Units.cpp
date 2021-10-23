@@ -1,6 +1,8 @@
 #include "Units.h"
 
 #include "SelenNavigationLib/Maps/DirectDistanceMap.h"
+#include "SuthanusPhysicsLib/PhysicEngine.h"
+#include "SuthanusPhysicsLib/Objects/Box.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
@@ -8,19 +10,22 @@
 namespace Superb {
   Units::Units(Ahwassa::Window* w) {
     _window = w;
-    _map = std::make_shared<Selen::DirectDistanceMap<3>>();
-    auto firstUnit = std::make_shared<Selen::NavigationAgent<3>>(glm::vec3(0),glm::vec3(0));
-    firstUnit->setMap(_map);
-    _units.push_back(firstUnit);
-  }
+    
+    _selection = std::make_shared<Suthanus::PhysicEngine>();
+    
+    auto firstUnit = std::make_shared<Unit>();
+    firstUnit->agent = std::make_shared<Selen::NavigationAgent<3>>(glm::vec3(0),glm::vec3(0));
+    firstUnit->selector = _selection->newBox(glm::vec3(0, 0, 0), glm::vec3(0.5,0.5,0.5), false);
+    firstUnit->map = std::make_shared<Selen::DirectDistanceMap<3>>();
+    firstUnit->agent->setMap(firstUnit->map);
 
-  void Units::setTarget(glm::vec3 pos) {
-    _map->setTarget(pos);
+    _units[firstUnit->selector] = firstUnit;
   }
 
   void Units::update() {
+    _selection->update();
     for (auto unit : _units)
-      unit->updatePosition();
+      unit.second->agent->updatePosition();
   }
 
   void Units::draw() {
@@ -30,7 +35,15 @@ namespace Superb {
   void Units::debugDraw() {
     _window->renderer().box().start();
     for(auto unit : _units)
-      _window->renderer().box().drawDot(unit->getPosition(), 0.5f, Iyathuum::Color(255, 128, 30));
+      _window->renderer().box().drawDot(unit.second->agent->getPosition(), 0.5f, Iyathuum::Color(255, 128, 30));
     _window->renderer().box().end();
+  }
+
+  std::vector<std::shared_ptr<Unit>> Units::select(glm::vec3 pos, glm::vec3 dir) {
+    glm::vec3 hit;
+    std::shared_ptr<Suthanus::Box> obj = std::dynamic_pointer_cast<Suthanus::Box>(_selection->raycast(pos, dir, hit));
+    if (!obj)
+      return {};
+    return { _units[obj] };
   }
 }

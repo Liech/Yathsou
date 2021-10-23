@@ -1,12 +1,19 @@
 #pragma once
 
 #include <vector>
+#include <map>
+
 #include "SelenNavigationLib/NavigationAgent.h"
 #include "SelenNavigationLib/NavigationMap.h"
-
+#include "Unit.h"
 
 namespace Ahwassa {
   class Window;
+}
+
+namespace Suthanus {
+  class PhysicEngine;
+  class Box;
 }
 
 namespace Superb {
@@ -14,14 +21,16 @@ namespace Superb {
   public:
     Units(Ahwassa::Window* w);
 
-    void setTarget(glm::vec3);
+    std::vector<std::shared_ptr<Unit>> select(glm::vec3 pos, glm::vec3 dir);
 
     void update();
     void draw();
     void debugDraw();
+    
   private:
-    std::vector<std::shared_ptr<Selen::NavigationAgent<3>>>   _units;
-    std::shared_ptr<Selen::NavigationMap<3>>                  _map;
+
+    std::map<std::shared_ptr<Suthanus::Box>,std::shared_ptr<Unit>>       _units    ;
+    std::shared_ptr<Suthanus::PhysicEngine>  _selection;
 
     Ahwassa::Window* _window;
   };

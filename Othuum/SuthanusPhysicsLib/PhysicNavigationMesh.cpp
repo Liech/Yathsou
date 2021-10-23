@@ -37,7 +37,7 @@ namespace Suthanus {
       {
         glm::vec3 current = start + glm::vec3(_sampleDistance*x,0,_sampleDistance*z);
         glm::vec3 hit;
-        bool ok = _engine.raycast(current, glm::vec3(0, 1, 0), hit);
+        bool ok = _engine.raycast(current, glm::vec3(0, 1, 0), hit) != nullptr;
         if (!ok) {
           previousElement = nullptr;
           previousRow[z]  = nullptr;

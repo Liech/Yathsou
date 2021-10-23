@@ -41,14 +41,20 @@ namespace Superb {
       auto node = mouse(localPosition);
       if (node) {
         _end = node->position;
-        _units->setTarget(_end);
+        for (auto selection : _selection)
+          selection->map->setTarget(_end);
         return true;
       }
     }
     if (Iyathuum::Key::MOUSE_BUTTON_LEFT == button) {
       auto node = mouse(localPosition);
       if (node) {
-        _start = node->position;
+        glm::vec2 cursorPos = localPosition;
+        cursorPos[1] = _window->getHeight() - cursorPos[1];
+        glm::vec3 ray = _window->camera()->getPickRay(cursorPos);
+        glm::vec3 origin = _window->camera()->getPosition();      
+
+        _selection = _units->select(ray,origin);
         return true;
       }
     }
@@ -61,7 +67,7 @@ namespace Superb {
     glm::vec3 ray = _window->camera()->getPickRay(cursorPos);
     glm::vec3 origin = _window->camera()->getPosition();
     glm::vec3 hit;
-    bool doesHit = _physic->raycast(origin, ray, hit);
+    bool doesHit = _physic->raycast(origin, ray, hit) != nullptr;
 
     if (doesHit) {
       return _navMesh->findNext(hit);

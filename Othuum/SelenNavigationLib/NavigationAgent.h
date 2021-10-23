@@ -22,6 +22,10 @@ namespace Selen {
       _velocity    = velocity   ;
       _map         = nullptr    ;
     }
+    
+    virtual ~NavigationAgent() {
+
+    }
 
     void updatePosition() {
       if (_map == nullptr)

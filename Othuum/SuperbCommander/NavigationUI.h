@@ -4,6 +4,7 @@
 
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include <memory>
+#include <vector>
 
 namespace Ahwassa {
   class Window;
@@ -18,6 +19,7 @@ namespace Suthanus {
 //window, physic, navmesh
 namespace Superb {
   class Units;
+  class Unit;
 
   class NavigationUI : public Ahwassa::UIElement {
   public:
@@ -39,6 +41,7 @@ namespace Superb {
     std::shared_ptr<Suthanus::PhysicNavigationMesh> _navMesh;
     std::shared_ptr<Units>                          _units  ;
 
+    std::vector<std::shared_ptr<Unit>> _selection;
     glm::vec3 _end ;
     glm::vec3 _start;
   };

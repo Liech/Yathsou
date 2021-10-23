@@ -150,6 +150,7 @@
     <ClCompile Include="NavigationUI.cpp" />
     <ClCompile Include="PhysicsDebugView.cpp" />
     <ClCompile Include="Spheres.cpp" />
+    <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Units.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -158,6 +159,7 @@
     <ClInclude Include="NavigationUI.h" />
     <ClInclude Include="PhysicsDebugView.h" />
     <ClInclude Include="Spheres.h" />
+    <ClInclude Include="Unit.h" />
     <ClInclude Include="Units.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

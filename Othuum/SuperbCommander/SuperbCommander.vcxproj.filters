@@ -36,6 +36,9 @@
     <ClCompile Include="Units.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Units.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
