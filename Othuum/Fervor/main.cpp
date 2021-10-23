@@ -99,7 +99,7 @@ int main(int argc, char** argv) {
       textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
       boxRenderer = std::make_shared<Ahwassa::BasicBoxRenderer>(w.camera());
 
-      freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
+      freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input(), Iyathuum::Key::MOUSE_BUTTON_1);
       w.input().addUIElement(freeCam.get());
       fps = std::make_unique<Ahwassa::FPS>(&w);
     };

@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   w.Startup = [&]() {
     
-    freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
+    freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input(), Iyathuum::Key::MOUSE_BUTTON_1);
     w.camera()->setPosition(glm::vec3(20, 20, 20));
     w.input().addUIElement(freeCam.get());
 

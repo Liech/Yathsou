@@ -6,23 +6,29 @@
 #include "Util.h"
 
 namespace Ahwassa {
-  FreeCamera::FreeCamera(std::shared_ptr<Camera> cam, Input& inp) : _input(inp) {
+  FreeCamera::FreeCamera(std::shared_ptr<Camera> cam, Input& inp, Iyathuum::Key toggleKey) : _input(inp) {
     _camera = cam;
+    _toggleKey = toggleKey;
     setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2(0, 0), cam->getResolution()));
   }
 
-  bool FreeCamera::mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) {
-    if (button != Iyathuum::Key::MOUSE_BUTTON_1)
-      return false;
-    _focus = !_focus;
-    _input.setCursorStatus(_focus?Iyathuum::CursorStatus::HIDDEN:Iyathuum::CursorStatus::NORMAL);
+  bool FreeCamera::isFocus() {
+    return _focus;
+  }
+
+  void FreeCamera::setFocus(bool focus) {
+    _focus = focus;
+    _input.setCursorStatus(_focus ? Iyathuum::CursorStatus::HIDDEN : Iyathuum::CursorStatus::NORMAL);
     _input.setCursorPos(_camera->getResolution() / 2.0f);
     _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+  }
+
+  bool FreeCamera::mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) {
     return true;
   }
 
   bool FreeCamera::mouseMoveEvent(glm::vec2 current, glm::vec2 movement) {
-    if (!_focus)
+    if (!isFocus())
       return false;
     _input.setCursorPos(_camera->getResolution() / 2.0f);
     _input.resetCursorMovement(_camera->getResolution() / 2.0f);
@@ -46,8 +52,18 @@ namespace Ahwassa {
     return true;
   }
 
+  bool FreeCamera::mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) {
+    if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS) {
+      setFocus(!isFocus());
+      return true;
+    }
+    return false;
+  }
+
   bool FreeCamera::keyEvent(Iyathuum::Key button, Iyathuum::KeyStatus status) {
-    if (!_focus)
+    if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS)
+      setFocus(!isFocus());
+    if (!isFocus())
       return false;
     if (button == Iyathuum::Key::KEY_A) {
       if (status == Iyathuum::KeyStatus::PRESS)
@@ -88,6 +104,5 @@ namespace Ahwassa {
     auto dir = _camera->getDir();
     _camera->setPosition(_camera->getPosition() + _moveX * toSide + _moveY * toUp);
     _camera->setDir(dir);
-
   }
 }

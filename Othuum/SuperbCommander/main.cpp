@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh());
-    freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
+    freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
 
     w.input().addUIElement(freeCam.get());
     w.input().addUIElement(navUI.get());
