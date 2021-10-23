@@ -25,6 +25,9 @@ namespace Superb {
 
     virtual bool isInside(glm::vec2, Iyathuum::Key) override;
 
+    glm::vec3 getStart();
+    glm::vec3 getEnd();
+
     void debugDraw();
   private:
     std::shared_ptr<Suthanus::PhysicNavigationNode> mouse(glm::vec2 pos) const;

@@ -122,7 +122,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(TargetDir)AhwassaGraphicsLib.lib;$(TargetDir)VishalaNetworkLib.lib;$(TargetDir)IyathuumCoreLib.lib;$(TargetDir)AezeselFileIOLib.lib;$(TargetDir)AthanahCommonLib.lib;$(TargetDir)SuthanusPhysicsLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(TargetDir)AhwassaGraphicsLib.lib;$(TargetDir)VishalaNetworkLib.lib;$(TargetDir)IyathuumCoreLib.lib;$(TargetDir)AezeselFileIOLib.lib;$(TargetDir)AthanahCommonLib.lib;$(TargetDir)SuthanusPhysicsLib.lib;$(TargetDir)SelenNavigationLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,7 +141,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(TargetDir)AhwassaGraphicsLib.lib;$(TargetDir)VishalaNetworkLib.lib;$(TargetDir)IyathuumCoreLib.lib;$(TargetDir)AezeselFileIOLib.lib;$(TargetDir)AthanahCommonLib.lib;$(TargetDir)SuthanusPhysicsLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(TargetDir)AhwassaGraphicsLib.lib;$(TargetDir)VishalaNetworkLib.lib;$(TargetDir)IyathuumCoreLib.lib;$(TargetDir)AezeselFileIOLib.lib;$(TargetDir)AthanahCommonLib.lib;$(TargetDir)SuthanusPhysicsLib.lib;$(TargetDir)SelenNavigationLib.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -150,6 +150,7 @@
     <ClCompile Include="NavigationUI.cpp" />
     <ClCompile Include="PhysicsDebugView.cpp" />
     <ClCompile Include="Spheres.cpp" />
+    <ClCompile Include="Units.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +158,7 @@
     <ClInclude Include="NavigationUI.h" />
     <ClInclude Include="PhysicsDebugView.h" />
     <ClInclude Include="Spheres.h" />
+    <ClInclude Include="Units.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

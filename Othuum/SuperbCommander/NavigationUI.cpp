@@ -18,6 +18,14 @@ namespace Superb {
     setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2(0, 0), w->camera()->getResolution()));
   }
 
+  glm::vec3 NavigationUI::getStart() {
+    return _start;
+  }
+
+  glm::vec3 NavigationUI::getEnd() {
+    return _end;
+  }
+
   void NavigationUI::debugDraw() {
     _window->renderer().box().start();
     _window->renderer().box().drawDot(_start , 0.5f, Iyathuum::Color(0, 0, 255));
