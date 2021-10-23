@@ -20,19 +20,25 @@ namespace Superb {
 
   void NavigationUI::debugDraw() {
     _window->renderer().box().start();
-    _window->renderer().box().drawDot(_hit , 0.5f, Iyathuum::Color(0, 0, 255));
-    _window->renderer().box().drawDot(_node, 0.5f, Iyathuum::Color(0, 255, 255));
+    _window->renderer().box().drawDot(_start , 0.5f, Iyathuum::Color(0, 0, 255));
+    _window->renderer().box().drawDot(_end, 0.5f, Iyathuum::Color(255, 0, 255));
     _window->renderer().box().end();
   }
 
   bool NavigationUI::mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) {
-    if (Iyathuum::Key::MOUSE_BUTTON_RIGHT != button)
-      return false;
-    auto node = mouse(localPosition);
-    if (node) {        
-      _node = node->position;
-      _hit = _node;
-      return true;
+    if (Iyathuum::Key::MOUSE_BUTTON_RIGHT == button) {
+      auto node = mouse(localPosition);
+      if (node) {
+        _end = node->position;
+        return true;
+      }
+    }
+    if (Iyathuum::Key::MOUSE_BUTTON_LEFT == button) {
+      auto node = mouse(localPosition);
+      if (node) {
+        _start = node->position;
+        return true;
+      }
     }
     return false;
   }
