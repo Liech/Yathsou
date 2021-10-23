@@ -57,8 +57,6 @@ int main(int argc, char** argv) {
   w.Startup = [&]() {
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
     textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
-    freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
-    w.input().addUIElement(freeCam.get());
     fps = std::make_unique<Ahwassa::FPS>(&w);
 
     w.camera()->setPosition(config.CameraPos);
@@ -68,6 +66,10 @@ int main(int argc, char** argv) {
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh());
+    freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input());
+
+    w.input().addUIElement(freeCam.get());
+    w.input().addUIElement(navUI.get());
   };
   int asd = 0;
   w.Update = [&]() {
@@ -75,7 +77,6 @@ int main(int argc, char** argv) {
     physicDebug->update();
     world->update();
     //spheres->update();
-    navUI->update();
 
     composer->start();
     b.draw();
@@ -94,10 +95,6 @@ int main(int argc, char** argv) {
     navUI->debugDraw();
 
     fps->draw();
-
-    asd = (asd+ 1)%2;
-    //if (asd == 0 && w.input().getKeyStatus(Iyathuum::Key::MOUSE_BUTTON_2)== Iyathuum::KeyStatus::PRESS)
-    //  spheres->addSphere(w.camera()->getPosition() + w.camera()->getDir() * 13.0f, 1, Iyathuum::Color(255, 0, 0));
   };
   w.run();
 

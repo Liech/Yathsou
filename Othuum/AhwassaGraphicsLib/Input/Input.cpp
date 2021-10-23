@@ -107,7 +107,7 @@ namespace Ahwassa {
 
     bool hit = false;
     for (auto w : inputWidgets) {
-      if (w->isInside(mousePos)) {
+      if (w->isInside(mousePos,Iyathuum::Key::KEY_NONE)) {
         hit = true;
         if (status == Iyathuum::KeyStatus::PRESS) {
           _pressedWidget = w;
@@ -135,7 +135,7 @@ namespace Ahwassa {
 
     auto c = getCursorPos();
     for (auto w : inputWidgets) {
-      if (!w->isInside(c))
+      if (!w->isInside(c, Iyathuum::Key::KEY_WHEEL))
         continue;
       bool stop = w->mouseWheelEvent(glm::vec2(x, y));
       if (stop) return;
@@ -147,13 +147,13 @@ namespace Ahwassa {
 
     auto inputWidgets = getUIElements();
 
-    if (_currentHover && !_currentHover->isInside(_cursorpos)) {
+    if (_currentHover && !_currentHover->isInside(_cursorpos, Iyathuum::Key::KEY_NONE)) {
       _currentHover->mouseLeaveEvent();
       _currentHover = nullptr;
     }
 
     for (auto w : inputWidgets) {
-      if (w->isInside(_cursorpos)) {
+      if (w->isInside(_cursorpos, Iyathuum::Key::KEY_NONE)) {
         if (_currentFocus == w)
           break;
         if (_currentFocus != nullptr)
@@ -166,7 +166,7 @@ namespace Ahwassa {
 
     if (_cursorpos != _oldMousePos) {
       for (auto w : inputWidgets) {
-        if (w->isInside(_cursorpos)) {
+        if (w->isInside(_cursorpos, Iyathuum::Key::KEY_NONE)) {
           if (w->mouseMoveEvent(_cursorpos - w->getGlobalPosition().getPosition(), _cursorpos - _oldMousePos))
             break;
         }
@@ -217,7 +217,7 @@ namespace Ahwassa {
   void Input::dropEvent(const std::string& path) {
     auto inputWidgets = getUIElements();
     for (auto w : inputWidgets) {
-      if (w->isInside(_cursorpos)) {
+      if (w->isInside(_cursorpos, Iyathuum::Key::KEY_DROP)) {
         if (w->dropEvent(path))
           break;
       }

@@ -15,22 +15,7 @@ namespace Superb {
     _window  = w     ;
     _physic  = physic;
     _navMesh = nav   ;
-  }
-
-  void NavigationUI::update() {
-    glm::vec2 cursorPos = _window->input().getCursorPos();
-    cursorPos[1]        = _window->getHeight()- cursorPos[1];
-    glm::vec3 ray       = _window->camera()->getPickRay(cursorPos);
-    glm::vec3 origin    = _window->camera()->getPosition();
-    glm::vec3 hit;
-    bool doesHit = _physic->raycast(origin, ray, hit);
-
-    if (doesHit) {
-      _hit = hit;
-      auto node = _navMesh->findNext(_hit);
-      if(node)
-        _node = node->position;
-    }
+    setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2(0, 0), w->camera()->getResolution()));
   }
 
   void NavigationUI::debugDraw() {
@@ -39,4 +24,41 @@ namespace Superb {
     _window->renderer().box().drawDot(_node, 0.5f, Iyathuum::Color(0, 255, 255));
     _window->renderer().box().end();
   }
+
+  bool NavigationUI::mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) {
+    if (Iyathuum::Key::MOUSE_BUTTON_RIGHT != button)
+      return false;
+    auto node = mouse(localPosition);
+    if (node) {        
+      _node = node->position;
+      _hit = _node;
+      return true;
+    }
+    return false;
+  }
+
+  std::shared_ptr<Suthanus::PhysicNavigationNode> NavigationUI::mouse(glm::vec2 localPosition) const{
+    glm::vec2 cursorPos = localPosition;
+    cursorPos[1] = _window->getHeight() - cursorPos[1];
+    glm::vec3 ray = _window->camera()->getPickRay(cursorPos);
+    glm::vec3 origin = _window->camera()->getPosition();
+    glm::vec3 hit;
+    bool doesHit = _physic->raycast(origin, ray, hit);
+
+    if (doesHit) {
+      return _navMesh->findNext(hit);
+    }
+    return nullptr;
+  }
+
+  bool NavigationUI::isInside(glm::vec2 pos, Iyathuum::Key k) {
+    if (!Ahwassa::UIElement::isInside(pos,k))
+      return false;
+    if (k != Iyathuum::Key::MOUSE_BUTTON_RIGHT && k != Iyathuum::Key::KEY_NONE)
+      return false;
+    //if (!mouse(pos))
+    //  return false;
+    return true;
+  }
+
 }

@@ -150,6 +150,11 @@ namespace Iyathuum {
     KEY_RIGHT_ALT = 346,
     KEY_RIGHT_SUPER = 347,
     KEY_MENU = 348,
+
+
+    KEY_DROP  = 997,
+    KEY_WHEEL = 998,
+    KEY_NONE  = 999,
   };
 
   class CharacterSets {

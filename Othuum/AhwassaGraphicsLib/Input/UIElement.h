@@ -36,7 +36,7 @@ namespace Ahwassa {
 
     virtual void setVisible(bool visible);
     bool         isVisible() const;
-    bool         isInside(glm::vec2);
+    virtual bool isInside(glm::vec2, Iyathuum::Key);
   private:
     Iyathuum::glmAABB<2> _localPosition;
     UIElement*           _parent  = nullptr;
