@@ -10,14 +10,14 @@ namespace Iyathuum {
   
   template<size_t Dimension>
   class ObjectWithPosition {
-    using vec = std::array<double,Dimension>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     virtual vec getPosition() = 0;
   };
 
   template<typename Content, size_t Dimension,  size_t ArraySize = 2>
   class NMTreeSpatialHash : public ObjectWithAABB <Dimension>{
-    using vec = std::array<double,Dimension>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
     using content_ptr = std::shared_ptr<std::set < std::shared_ptr<Content>>>;
     using Tree = NMTree < content_ptr, ArraySize, Dimension, TreeMergeBehavior::Avg, double >;
     
@@ -82,7 +82,7 @@ namespace Iyathuum {
         vec p;
         for (size_t i = 0; i < Dimension; i++)
           p[i] = r->getPosition()[i];
-        if (Geometry<Dimension>::length(Geometry<Dimension>::subtract(pos, p)) < radius)
+        if (glm::length(pos- p) < radius)
           result.insert(r);
       }
       return result;
@@ -120,7 +120,7 @@ namespace Iyathuum {
               vec p;
               for(size_t i = 0;i < Dimension;i++)
                 p[i] = s->getPosition()[i];
-              if (Geometry<Dimension>::length(Geometry<Dimension>::subtract(pos, p)) < radius)
+              if (glm::length(pos-p) < radius)
                 result.insert(s);
             }
             return result;

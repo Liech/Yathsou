@@ -12,7 +12,7 @@
 namespace Iyathuum {
   template<size_t Dimension>
   class DijkstraI {
-    using vec = std::array<double,Dimension>;
+    using vec = glm::vec<Dimension, float, glm::defaultp>;
   public:
     virtual vec    getDirectionSuggestion(vec currentPosition) = 0;
     virtual double getDistance(vec postion)                    = 0;

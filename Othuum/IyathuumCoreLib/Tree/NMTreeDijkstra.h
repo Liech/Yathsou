@@ -3,7 +3,6 @@
 #include "Dijkstra.h"
 #include "NMTree.h"
 #include "NMTreeNeighbourIndex.h"
-#include "YolonaOss/Util/Util.h"
 
 namespace Iyathuum {
 
@@ -11,7 +10,7 @@ namespace Iyathuum {
   class NMTreeDijkstra : public DijkstraI<Dimension> {
     using Tree  = NMTree<bool, 2, Dimension, Iyathuum::TreeMergeBehavior::Max>;
     using TreeI = NMTreeNeighbourIndex<bool, 2, Dimension, Iyathuum::TreeMergeBehavior::Max>;
-    using vec   = std::array<double,Dimension>;
+    using vec   = glm::vec<Dimension, float, glm::defaultp>;
     using self  = NMTreeDijkstra<Dimension>;
   public:
     NMTreeDijkstra(vec start, Tree* root,std::shared_ptr<TreeI> index, std::function<double(Tree*)> weight)
@@ -30,9 +29,9 @@ namespace Iyathuum {
     virtual vec getDirectionSuggestion(vec currentPosition) override {
       for (size_t i = 0; i < Dimension; i++) {
         if (currentPosition[(int)i] < 0)
-          return Geometry<Dimension>::value(0);
+          return vec(0);
         if (currentPosition[(int)i] >= _root->getSize())
-          return Geometry<Dimension>::value(0);
+          return vec(0);
       }
       std::array<size_t, Dimension> s;
       for (size_t i = 0; i < Dimension; i++)
@@ -40,13 +39,13 @@ namespace Iyathuum {
       Tree* current = _root->getLeaf(s);
       auto next = _dijkstra->getNext(current);
       if (next == nullptr)
-        return Geometry<Dimension>::normalize(Geometry<Dimension>::subtract(_start,currentPosition));
+        return glm::normalize(_start-currentPosition);
       vec nextCenter;
       for(size_t i = 0;i < Dimension;i++)
         nextCenter[i] = next->getPosition()[i];
       for(int i = 0;i < Dimension;i++) 
         nextCenter[i] += (float)next->getSize() / 2.0;
-      vec suggestion = Geometry<Dimension>::normalize(Geometry<Dimension>::subtract(nextCenter,currentPosition));
+      vec suggestion = glm::normalize(nextCenter-currentPosition);
       return suggestion;
     }
 
@@ -61,18 +60,18 @@ namespace Iyathuum {
     }
 
     virtual double getDistance(vec postion) override {
-      return Geometry<Dimension>::length(Geometry<Dimension>::subtract(_start, postion));
+      return glm::length(_start-postion);
     }
 
   private:
     double getDijkstraDistance(Tree* A, Tree* B) {
-      vec a = Geometry<Dimension>::template convert<double,size_t>(A->getPosition());
-      vec b = Geometry<Dimension>::template convert<double,size_t>(B->getPosition());
+      vec a = A->getPosition();
+      vec b = B->getPosition();
       for (int i = 0; i < Dimension; i++)
         a[i] += (float)A->getSize() / 2.0;
       for (int i = 0; i < Dimension; i++)
         b[i] += (float)B->getSize() / 2.0;
-      return Geometry<Dimension>::length(Geometry<Dimension>::subtract(a,b)) * std::max(_getWeight(A), _getWeight(B));
+      return glm::length(a-b) * std::max(_getWeight(A), _getWeight(B));
     }
 
     std::set<Tree*> getDijkstraNeighbours(Tree* node) {

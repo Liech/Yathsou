@@ -477,7 +477,6 @@
     <ClInclude Include="Singleton\Factory.h" />
     <ClInclude Include="Tree\Dijkstra.h" />
     <ClInclude Include="Tree\glmOctree.h" />
-    <ClInclude Include="Tree\GridHash.h" />
     <ClInclude Include="Tree\NMTree.h" />
     <ClInclude Include="Tree\NMTreeDijkstra.h" />
     <ClInclude Include="Tree\NMTreeNeighbourIndex.h" />

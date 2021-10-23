@@ -1,16 +1,17 @@
 #pragma once
 
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include <memory>
 #include <vector>
-#include "Geometry.h"
+#include "IyathuumCoreLib/Util/Geometry.h"
 
 namespace Iyathuum {
   class ImageSubsetUtil {
   public:
 
     template<typename Type, size_t Dimension>
-    static void drawCapsule(MultiDimensionalArray<Type, Dimension>* input, std::array<double, Dimension> start, std::array<double, Dimension> end, double radius, std::function<Type(double distance, Type val)> func) {
+    static void drawCapsule(MultiDimensionalArray<Type, Dimension>* input, glm::vec<Dimension, float, glm::defaultp> start, glm::vec<Dimension, float, glm::defaultp> end, double radius, std::function<Type(double distance, Type val)> func) {
       std::array<size_t, Dimension> min;
       std::array<size_t, Dimension> size;
       for (size_t currentDimension = 0; currentDimension < Dimension; currentDimension++) {

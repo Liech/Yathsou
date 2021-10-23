@@ -825,9 +825,6 @@
     <ClInclude Include="Tree\Dijkstra.h">
       <Filter>Header Files\Tree</Filter>
     </ClInclude>
-    <ClInclude Include="Tree\GridHash.h">
-      <Filter>Header Files\Tree</Filter>
-    </ClInclude>
     <ClInclude Include="Tree\NMTree.h">
       <Filter>Header Files\Tree</Filter>
     </ClInclude>
@@ -849,9 +846,6 @@
     <ClInclude Include="Util\ContentLoader.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
-    <ClInclude Include="Util\Geometry.h">
-      <Filter>Header Files\Util</Filter>
-    </ClInclude>
     <ClInclude Include="View2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -866,6 +860,9 @@
     </ClInclude>
     <ClInclude Include="Tree\glmOctree.h">
       <Filter>Header Files\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Geometry.h">
+      <Filter>Header Files\Util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
