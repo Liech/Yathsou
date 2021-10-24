@@ -71,18 +71,29 @@ namespace Suthanus
     //
     //btBoxShape boxShape(btVector3(1,1,1));
     //btTransform from;
-    
 
-    //btTransform to;
-    //_world->convexSweepTest(&boxShape,from,to,)
+    glm::vec3 dir = glm::normalize(direction1);
+    glm::vec3 end = origin + dir * 20.0f;
+
+    btTransform tsFrom;
+    tsFrom.setOrigin(btVector3(origin[0], origin[1], origin[2]));
+    btTransform tsTo;
+    tsTo.setOrigin(btVector3(end[0], end[1], end[2]));
+
+    auto shape = btSphereShape(0.5);
+    auto penetration = 0.0;
+
+    //struct camCastCallback : public btCollisionWorld::ConvexResultCallback
+    //{
+    //  btScalar addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace) override {
+    //    //convexResult.m_hitCollisionObject;
+    //    std::cout << "hit"<<std::endl;
+    //  }
+    //};
     //
-    //  tsFrom = TransformState.makePos(Point3(0, 0, 0))
-    //  tsTo = TransformState.makePos(Point3(10, 0, 0))
-    //
-    //  shape = BulletSphereShape(0.5)
-    //  penetration = 0.0
-    //
-    //  result = world.sweepTestClosest(shape, tsFrom, tsTo, penetration)
+    //camCastCallback callback;
+    //_world->convexSweepTest(&shape, tsFrom, tsTo,callback , penetration);
+
     return {};
   }
 
