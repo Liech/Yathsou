@@ -13,19 +13,25 @@ namespace Superb {
     
     _selection = std::make_shared<Suthanus::PhysicEngine>();
     
-    auto firstUnit = std::make_shared<Unit>();
-    firstUnit->agent = std::make_shared<Selen::NavigationAgent<3>>(glm::vec3(0),glm::vec3(0));
-    firstUnit->selector = _selection->newBox(glm::vec3(0, 0, 0), glm::vec3(0.5,0.5,0.5), false);
-    firstUnit->map = std::make_shared<Selen::DirectDistanceMap<3>>();
-    firstUnit->agent->setMap(firstUnit->map);
-
-    _units[firstUnit->selector] = firstUnit;
+    auto rnd = []() {return (rand() % 100) / 100.0f; };
+    for (int i = 0; i < 20; i++) {      
+      glm::vec3 pos(rnd()*20 - 10, rnd()*20 - 10, rnd()*20-10);
+      auto firstUnit = std::make_shared<Unit>();
+      firstUnit->agent = std::make_shared<Selen::NavigationAgent<3>>(pos, glm::vec3(0));
+      firstUnit->selector = _selection->newBox(pos, glm::vec3(0.5, 0.5, 0.5), false);
+      firstUnit->map = std::make_shared<Selen::DirectDistanceMap<3>>();
+      firstUnit->map->setTarget(pos);
+      firstUnit->agent->setMap(firstUnit->map);
+      _units[firstUnit->selector] = firstUnit;
+    }
   }
 
   void Units::update() {
     _selection->update();
-    for (auto unit : _units)
+    for (auto unit : _units) {
       unit.second->agent->updatePosition();
+      unit.second->selector->setPosition(unit.second->agent->getPosition());
+    }
   }
 
   void Units::draw() {
@@ -45,5 +51,13 @@ namespace Superb {
     if (!obj)
       return {};
     return { _units[obj] };
+  }
+
+  std::vector<std::shared_ptr<Unit>> Units::selectCameraRect(glm::vec3 origin, glm::vec3 dir1, glm::vec3 dir2) {
+    auto castResult = _selection->cameraCast(origin,dir1,dir2);
+    std::vector<std::shared_ptr<Unit>> result;
+    for (const auto& obj : castResult)
+      result.push_back(_units[std::dynamic_pointer_cast<Suthanus::Box>(obj)]);
+    return result;
   }
 }

@@ -5,6 +5,7 @@
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
+#include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/PhysicNavigationMesh.h"
@@ -21,42 +22,53 @@ namespace Superb {
     setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2(0, 0), w->camera()->getResolution()));
   }
 
-  glm::vec3 NavigationUI::getStart() {
-    return _start;
-  }
-
   glm::vec3 NavigationUI::getEnd() {
-    return _end;
+    return _targetPos;
   }
 
   void NavigationUI::debugDraw() {
     _window->renderer().box().start();
-    _window->renderer().box().drawDot(_start , 0.5f, Iyathuum::Color(0, 0, 255)  );
-    _window->renderer().box().drawDot(_end   , 0.5f, Iyathuum::Color(255, 0, 255));
+    _window->renderer().box().drawDot(_targetPos, 0.5f, Iyathuum::Color(255, 0, 255));
     _window->renderer().box().end();
+    if (_rectangleSelectionActive) {
+      glm::vec2 mousePos = _window->input().getCursorPos();
+      _window->renderer().rectangle().start();
+      _window->renderer().rectangle().drawRectangle(_rectangleStart,mousePos- _rectangleStart,Iyathuum::Color(0,0,0,128));
+      _window->renderer().rectangle().end();
+    }
   }
 
-  bool NavigationUI::mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) {
-    if (Iyathuum::Key::MOUSE_BUTTON_RIGHT == button) {
+  bool NavigationUI::mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) {
+    glm::vec2 cursorPos = localPosition;
+    if (Iyathuum::Key::MOUSE_BUTTON_RIGHT == button && status == Iyathuum::KeyStatus::PRESS) {
       auto node = mouse(localPosition);
       if (node) {
-        _end = node->position;
+        _targetPos = node->position;
         for (auto selection : _selection)
-          selection->map->setTarget(_end);
+          selection->map->setTarget(_targetPos);
         return true;
       }
     }
-    if (Iyathuum::Key::MOUSE_BUTTON_LEFT == button) {
-      auto node = mouse(localPosition);
-      if (node) {
-        glm::vec2 cursorPos = localPosition;
+    if (Iyathuum::Key::MOUSE_BUTTON_LEFT == button && status == Iyathuum::KeyStatus::PRESS) {
+      _rectangleStart = _window->input().getCursorPos();
+      _rectangleSelectionActive = true; 
+    }
+    if (Iyathuum::Key::MOUSE_BUTTON_LEFT == button && status == Iyathuum::KeyStatus::RELEASE && _rectangleSelectionActive) {
+      if (glm::distance(_rectangleStart , cursorPos) < 3) {
         cursorPos[1] = _window->getHeight() - cursorPos[1];
         glm::vec3 ray = _window->camera()->getPickRay(cursorPos);
-        glm::vec3 origin = _window->camera()->getPosition();      
+        glm::vec3 origin = _window->camera()->getPosition();
 
-        _selection = _units->select(ray,origin);
-        return true;
+        _selection = _units->select(origin, ray);
+      } 
+      else {
+        glm::vec3 origin = _window->camera()->getPosition();
+        glm::vec3 ray = _window->camera()->getPickRay(_rectangleStart);
+        glm::vec3 ray2 = _window->camera()->getPickRay(cursorPos);
+        _selection = _units->selectCameraRect(origin, ray, ray2);
       }
+      _rectangleSelectionActive = false;
+      return true;
     }
     return false;
   }

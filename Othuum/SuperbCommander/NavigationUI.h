@@ -25,7 +25,7 @@ namespace Superb {
   public:
     NavigationUI(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine>, std::shared_ptr<Suthanus::PhysicNavigationMesh>, std::shared_ptr<Units>);
 
-    bool mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) override;
+    bool mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) override;
 
     virtual bool isInside(glm::vec2, Iyathuum::Key) override;
 
@@ -42,7 +42,8 @@ namespace Superb {
     std::shared_ptr<Units>                          _units  ;
 
     std::vector<std::shared_ptr<Unit>> _selection;
-    glm::vec3 _end ;
-    glm::vec3 _start;
+    glm::vec3 _targetPos;
+    glm::vec2 _rectangleStart;
+    bool      _rectangleSelectionActive = false;
   };
 }

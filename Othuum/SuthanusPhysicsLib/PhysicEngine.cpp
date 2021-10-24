@@ -62,6 +62,30 @@ namespace Suthanus
     }    
   }
 
+  std::set<std::shared_ptr<PhysicObject>> PhysicEngine::cameraCast(const glm::vec3& origin, const glm::vec3& direction1, const glm::vec3& direction2) const {
+    //glm::vec3 dir1 = glm::normalize(direction1);
+    //glm::vec3 dir2 = glm::normalize(direction2);
+    //glm::vec3 rectPos1 = origin + dir1 * 0.1f;
+    //glm::vec3 rectPos2 = origin + dir1 * 0.1f;
+    //
+    //
+    //btBoxShape boxShape(btVector3(1,1,1));
+    //btTransform from;
+    
+
+    //btTransform to;
+    //_world->convexSweepTest(&boxShape,from,to,)
+    //
+    //  tsFrom = TransformState.makePos(Point3(0, 0, 0))
+    //  tsTo = TransformState.makePos(Point3(10, 0, 0))
+    //
+    //  shape = BulletSphereShape(0.5)
+    //  penetration = 0.0
+    //
+    //  result = world.sweepTestClosest(shape, tsFrom, tsTo, penetration)
+    return {};
+  }
+
   void PhysicEngine::update()
   {
     _world->stepSimulation(1.f / _physicTicksPerSecond, 1);
