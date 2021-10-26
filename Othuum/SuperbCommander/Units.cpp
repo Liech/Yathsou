@@ -54,10 +54,11 @@ namespace Superb {
   }
 
   std::vector<std::shared_ptr<Unit>> Units::selectCameraRect(glm::vec3 origin, glm::vec3 dir1, glm::vec3 dir2) {
-    auto castResult = _selection->cameraCast(origin,dir1,dir2);
-    std::vector<std::shared_ptr<Unit>> result;
-    for (const auto& obj : castResult)
-      result.push_back(_units[std::dynamic_pointer_cast<Suthanus::Box>(obj)]);
-    return result;
+    //auto castResult = _selection->cameraCast(origin,dir1,dir2);
+    //std::vector<std::shared_ptr<Unit>> result;
+    //for (const auto& obj : castResult)
+    //  result.push_back(_units[std::dynamic_pointer_cast<Suthanus::Box>(obj)]);
+    //return result;
+    return {};
   }
 }

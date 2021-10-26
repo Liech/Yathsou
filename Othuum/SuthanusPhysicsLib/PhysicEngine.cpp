@@ -62,41 +62,6 @@ namespace Suthanus
     }    
   }
 
-  std::set<std::shared_ptr<PhysicObject>> PhysicEngine::cameraCast(const glm::vec3& origin, const glm::vec3& direction1, const glm::vec3& direction2) const {
-    //glm::vec3 dir1 = glm::normalize(direction1);
-    //glm::vec3 dir2 = glm::normalize(direction2);
-    //glm::vec3 rectPos1 = origin + dir1 * 0.1f;
-    //glm::vec3 rectPos2 = origin + dir1 * 0.1f;
-    //
-    //
-    //btBoxShape boxShape(btVector3(1,1,1));
-    //btTransform from;
-
-    glm::vec3 dir = glm::normalize(direction1);
-    glm::vec3 end = origin + dir * 20.0f;
-
-    btTransform tsFrom;
-    tsFrom.setOrigin(btVector3(origin[0], origin[1], origin[2]));
-    btTransform tsTo;
-    tsTo.setOrigin(btVector3(end[0], end[1], end[2]));
-
-    auto shape = btSphereShape(0.5);
-    auto penetration = 0.0;
-
-    //struct camCastCallback : public btCollisionWorld::ConvexResultCallback
-    //{
-    //  btScalar addSingleResult(btCollisionWorld::LocalConvexResult& convexResult, bool normalInWorldSpace) override {
-    //    //convexResult.m_hitCollisionObject;
-    //    std::cout << "hit"<<std::endl;
-    //  }
-    //};
-    //
-    //camCastCallback callback;
-    //_world->convexSweepTest(&shape, tsFrom, tsTo,callback , penetration);
-
-    return {};
-  }
-
   void PhysicEngine::update()
   {
     _world->stepSimulation(1.f / _physicTicksPerSecond, 1);
