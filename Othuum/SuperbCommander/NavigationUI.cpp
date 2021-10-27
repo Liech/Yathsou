@@ -42,7 +42,6 @@ namespace Superb {
 
   bool NavigationUI::mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) {
     glm::vec2 cursorPos = localPosition;
-    bool shift = _window->input().getKeyStatus(Iyathuum::Key::KEY_LEFT_SHIFT) == Iyathuum::KeyStatus::PRESS;
     if (Iyathuum::Key::MOUSE_BUTTON_RIGHT == button && status == Iyathuum::KeyStatus::PRESS) {
       auto node = mouse(localPosition);
       if (node) {
@@ -58,15 +57,7 @@ namespace Superb {
     }
     if (Iyathuum::Key::MOUSE_BUTTON_LEFT == button && status == Iyathuum::KeyStatus::RELEASE && _rectangleSelectionActive) {
       if (glm::distance(_rectangleStart , cursorPos) < 3) {
-        cursorPos[1] = _window->getHeight() - cursorPos[1];
-        glm::vec3 ray = _window->camera()->getPickRay(cursorPos);
-        glm::vec3 origin = _window->camera()->getPosition();
-
-        auto newSelection = _units->select(origin, ray);
-        if (shift)
-          _selection.insert(_selection.end(), newSelection.begin(), newSelection.end());
-        else
-          _selection = newSelection;
+        selectSingle();
       } 
       else {
         glm::vec3 origin = _window->camera()->getPosition();
@@ -104,4 +95,18 @@ namespace Superb {
     return true;
   }
 
+  void NavigationUI::selectSingle() {
+    bool shift = _window->input().getKeyStatus(Iyathuum::Key::KEY_LEFT_SHIFT) == Iyathuum::KeyStatus::PRESS;
+
+    glm::vec2 cursorPos = _window->input().getCursorPos();
+    cursorPos[1] = _window->getHeight() - cursorPos[1];
+    glm::vec3 ray = _window->camera()->getPickRay(cursorPos);
+    glm::vec3 origin = _window->camera()->getPosition();
+
+    auto newSelection = _units->select(origin, ray);
+    if (shift)
+      _selection.insert(_selection.end(), newSelection.begin(), newSelection.end());
+    else
+      _selection = newSelection;
+  }
 }

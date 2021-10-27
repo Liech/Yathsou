@@ -4,6 +4,9 @@
 #include <vector>
 
 #include "lib/bullet/btBulletDynamicsCommon.h"
+#include "BulletCollision/CollisionShapes/btBox2dShape.h"
+#include "BulletCollision/CollisionDispatch/btGhostObject.h"
+
 #include "Objects/BoxBullet.h"
 #include "Objects/SphereBullet.h"
 #include "Objects/VehicleBulletRaycast.h"
@@ -118,7 +121,6 @@ namespace Suthanus
       const btRigidBody* obB = static_cast<const btRigidBody*>(man->getBody1());
       PhysicObject* ptrA = (PhysicObject*)obA->getUserPointer();
       PhysicObject* ptrB = (PhysicObject*)obB->getUserPointer();
-      // use user pointers to determine if objects are eligible for destruction.
       std::shared_ptr<PhysicObject> aLock = ptrA->self().lock();
       std::shared_ptr<PhysicObject> bLock = ptrB->self().lock();
       ev e;
@@ -126,21 +128,45 @@ namespace Suthanus
       e.B = bLock;
       if (e.A && e.B)
         events.push_back(e);
-      //  const int numc = man->getNumContacts();
-    //  float totalImpact = 0.0f;
-    //  for (int c = 0; c < numc; ++c)
-    //    totalImpact += man->getContactPoint(c).m_appliedImpulse;
-    //  if (totalImpact > threshold)
-    //  {
-    //    // Here you can break one, or both shapes, if so desired.
-    //  }
     }
     for (auto e : events)
     {
-      //std::cout << "Collision" << std::endl;
       e.A->collisionEvent(e.B);
       e.B->collisionEvent(e.A);
 
     }
+  }
+
+  std::vector<std::shared_ptr<PhysicObject>> PhysicEngine::insideSphere(const glm::vec3& origin, float radius) const {
+    btSphereShape sphere(radius);
+    return insideShape(origin, sphere);
+  }
+
+  std::vector<std::shared_ptr<PhysicObject>> PhysicEngine::insideShape(const glm::vec3& origin, btCollisionShape& shape) const {
+    //https://www.executionunit.com/blog/2015/03/27/bullet-physics-query-objects-with-a-volume/
+    std::vector<std::shared_ptr<PhysicObject>> result;
+
+    btPairCachingGhostObject volume;
+    btTransform xform;
+    xform.setOrigin(btVector3(origin[0], origin[1], origin[2]));
+    volume.setCollisionShape(&shape);
+    volume.setWorldTransform(xform);
+    volume.setUserPointer(&result);
+    volume.setCollisionFlags(volume.getCollisionFlags() | btCollisionObject::CF_NO_CONTACT_RESPONSE);
+
+    struct ContactResultCallbackImpl : btCollisionWorld::ContactResultCallback {
+      btScalar addSingleResult(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1) override {
+        colObj0Wrap->getCollisionObject()->getUserPointer();
+        std::vector<std::shared_ptr<PhysicObject>>* resultLink = (std::vector<std::shared_ptr<PhysicObject>>*)colObj0Wrap->getCollisionObject()->getUserPointer();
+        PhysicObject* obj = (PhysicObject*)colObj1Wrap->getCollisionObject()->getUserPointer();
+        std::shared_ptr<PhysicObject> lock = obj->self().lock();
+        resultLink->push_back(lock);
+        return 0;
+      }
+    };
+
+    ContactResultCallbackImpl cr;
+    _world->contactTest(&volume, cr);
+    return result;
   }
 }

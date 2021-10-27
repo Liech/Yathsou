@@ -48,12 +48,19 @@ namespace Superb {
   std::vector<std::shared_ptr<Unit>> Units::select(glm::vec3 pos, glm::vec3 dir) {
     glm::vec3 hit;
     std::shared_ptr<Suthanus::Box> obj = std::dynamic_pointer_cast<Suthanus::Box>(_selection->raycast(pos, dir, hit));
+    
     if (!obj)
       return {};
     return { _units[obj] };
   }
 
   std::vector<std::shared_ptr<Unit>> Units::selectCameraRect(glm::vec3 origin, glm::vec3 dir1, glm::vec3 dir2) {
+    //std::vector<std::shared_ptr<Unit>> result;
+    //for (std::shared_ptr<Suthanus::PhysicObject> x : _selection->insideSphere(hit, 4))
+    //  result.push_back(_units.at(std::dynamic_pointer_cast<Suthanus::Box>(x)));
+    //return result;
+
+    
     //auto castResult = _selection->cameraCast(origin,dir1,dir2);
     //std::vector<std::shared_ptr<Unit>> result;
     //for (const auto& obj : castResult)

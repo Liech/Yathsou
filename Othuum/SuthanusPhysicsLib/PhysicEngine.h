@@ -18,6 +18,7 @@ class btSequentialImpulseConstraintSolver;
 class btDiscreteDynamicsWorld;
 class btRigidBody;
 class btIDebugDraw;
+class btCollisionShape;
 
 namespace Suthanus
 {
@@ -32,7 +33,8 @@ namespace Suthanus
     void setDebugDrawer(btIDebugDraw* drawer);
     void debugDrawWorld();
 
-    std::shared_ptr<PhysicObject>           raycast    (const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint) const;
+    std::shared_ptr<PhysicObject>              raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint) const;
+    std::vector<std::shared_ptr<PhysicObject>> insideSphere(const glm::vec3& origin, float radius) const;
 
     std::shared_ptr<Box      > newBox      (glm::vec3 pos, glm::vec3 size  , bool isDynamic);
     std::shared_ptr<Sphere   > newSphere   (glm::vec3 pos, float     radius, bool isDynamic);
@@ -40,6 +42,8 @@ namespace Suthanus
     std::shared_ptr<HeightMap> newHeightMap(glm::vec3 pos, const Iyathuum::MultiDimensionalArray<unsigned short, 2>&, float height);
 
   private:
+    std::vector<std::shared_ptr<PhysicObject>> insideShape(const glm::vec3& origin, btCollisionShape&) const;
+
     void handleCollision();
 
     int _physicTicksPerSecond = 30;

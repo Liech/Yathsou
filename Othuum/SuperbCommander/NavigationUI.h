@@ -34,6 +34,8 @@ namespace Superb {
 
     void debugDraw();
   private:
+    void selectSingle();
+
     std::shared_ptr<Suthanus::PhysicNavigationNode> mouse(glm::vec2 pos) const;
 
     Ahwassa::Window*                                _window ;
