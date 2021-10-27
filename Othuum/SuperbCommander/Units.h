@@ -22,7 +22,7 @@ namespace Superb {
     Units(Ahwassa::Window* w);
 
     std::vector<std::shared_ptr<Unit>> select(glm::vec3 pos, glm::vec3 dir);
-    std::vector<std::shared_ptr<Unit>> selectCameraRect(glm::vec3 origin, glm::vec3 dir1, glm::vec3 dir2);
+    std::vector<std::shared_ptr<Unit>> selectCameraRect(glm::vec2 rectangleStart, glm::vec2 rectangleEnd);
 
     void update();
     void draw();

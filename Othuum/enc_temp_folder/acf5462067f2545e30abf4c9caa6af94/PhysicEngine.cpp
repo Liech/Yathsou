@@ -138,24 +138,24 @@ namespace Suthanus
   }
 
   std::vector<std::shared_ptr<PhysicObject>> PhysicEngine::insideFrustum(const glm::vec3& origin, const glm::vec3& dirLeftTop, const glm::vec3& dirRightTop, const glm::vec3& dirLeftBot, const glm::vec3& dirRightBot, float nearPlane, float farPlane) const {
-    //std::vector<glm::vec3> shape;
-    //shape.push_back(dirLeftTop  * nearPlane);
-    //shape.push_back(dirRightTop * nearPlane);
-    //shape.push_back(dirLeftBot  * nearPlane);
-    //shape.push_back(dirRightBot * nearPlane);
-    //shape.push_back(dirLeftTop  * farPlane );
-    //shape.push_back(dirRightTop * farPlane );
-    //shape.push_back(dirLeftBot  * farPlane );
-    //shape.push_back(dirRightBot * farPlane );
-    //std::vector< btVector3> bulletVec;
-    //for (const auto& x : shape)
-    //  bulletVec.push_back(btVector3(x[0], x[1], x[2]));
-    //
-    //btConvexHullShape* btShape = new btConvexHullShape((const btScalar*)&bulletVec,8,12); //<- heap corruption :\
-    //
-    //
-    //
-    //delete btShape;
+    std::vector<glm::vec3> shape;
+    shape.push_back(dirLeftTop  * nearPlane);
+    shape.push_back(dirRightTop * nearPlane);
+    shape.push_back(dirLeftBot  * nearPlane);
+    shape.push_back(dirRightBot * nearPlane);
+    shape.push_back(dirLeftTop  * farPlane );
+    shape.push_back(dirRightTop * farPlane );
+    shape.push_back(dirLeftBot  * farPlane );
+    shape.push_back(dirRightBot * farPlane );
+    std::vector< btVector3> bulletVec;
+    for (const auto& x : shape)
+      bulletVec.push_back(btVector3(x[0], x[1], x[2]));
+
+    btConvexHullShape* btShape = new btConvexHullShape((const btScalar*)&bulletVec,8,12);
+   
+
+
+    delete btShape;
     //std::vector<std::shared_ptr<PhysicObject>> result = insideShape(origin, btShape);
     return {};
     //return result;

@@ -60,10 +60,8 @@ namespace Superb {
         selectSingle();
       } 
       else {
-        glm::vec3 origin = _window->camera()->getPosition();
-        glm::vec3 ray = _window->camera()->getPickRay(_rectangleStart);
-        glm::vec3 ray2 = _window->camera()->getPickRay(cursorPos);
-        _selection = _units->selectCameraRect(origin, ray, ray2);
+
+        _selection = _units->selectCameraRect(_rectangleStart, cursorPos);
       }
       _rectangleSelectionActive = false;
       return true;

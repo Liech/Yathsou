@@ -6,6 +6,7 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
+#include "AhwassaGraphicsLib/Core/Camera.h"
 
 namespace Superb {
   Units::Units(Ahwassa::Window* w) {
@@ -54,18 +55,19 @@ namespace Superb {
     return { _units[obj] };
   }
 
-  std::vector<std::shared_ptr<Unit>> Units::selectCameraRect(glm::vec3 origin, glm::vec3 dir1, glm::vec3 dir2) {
-    //std::vector<std::shared_ptr<Unit>> result;
-    //for (std::shared_ptr<Suthanus::PhysicObject> x : _selection->insideSphere(hit, 4))
-    //  result.push_back(_units.at(std::dynamic_pointer_cast<Suthanus::Box>(x)));
-    //return result;
+  std::vector<std::shared_ptr<Unit>> Units::selectCameraRect(glm::vec2 rectangleStart, glm::vec2 rectangleEnd) {
+    auto c = _window->camera();
+    glm::vec3 topLeft  = c->getPickRay(rectangleStart);
+    glm::vec3 botLeft = c->getPickRay(glm::vec2(rectangleStart[0], rectangleEnd[1]));
+    glm::vec3 topRight = c->getPickRay(glm::vec2(rectangleEnd[0], rectangleStart[1]));
+    glm::vec3 botRight = c->getPickRay(rectangleEnd);
 
-    
-    //auto castResult = _selection->cameraCast(origin,dir1,dir2);
-    //std::vector<std::shared_ptr<Unit>> result;
-    //for (const auto& obj : castResult)
-    //  result.push_back(_units[std::dynamic_pointer_cast<Suthanus::Box>(obj)]);
-    //return result;
-    return {};
+    std::vector<std::shared_ptr<Unit>> result;
+    auto frustumQuery = _selection->insideFrustum(c->getPosition(), topLeft, topRight, botLeft, botRight, c->getNearPlane(), c->getFarPlane());
+    for (auto& x : frustumQuery) {
+      std::shared_ptr<Suthanus::Box> obj = std::dynamic_pointer_cast<Suthanus::Box>(x);
+      result.push_back(_units[obj]);
+    }
+    return result;
   }
 }
