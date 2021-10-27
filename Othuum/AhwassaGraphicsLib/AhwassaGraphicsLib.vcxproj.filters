@@ -363,7 +363,7 @@
     <ClCompile Include="Geometry\HeightFieldMeshGenerator.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
-    <ClCompile Include="Geometry\AreaObjectPicker.cpp">
+    <ClCompile Include="Geometry\BasicShapeGenerator.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
   </ItemGroup>
@@ -941,7 +941,7 @@
     <ClInclude Include="Geometry\HeightFieldMeshGenerator.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
-    <ClInclude Include="Geometry\AreaObjectPicker.h">
+    <ClInclude Include="Geometry\BasicShapeGenerator.h">
       <Filter>Header Files\Geometry</Filter>
     </ClInclude>
   </ItemGroup>

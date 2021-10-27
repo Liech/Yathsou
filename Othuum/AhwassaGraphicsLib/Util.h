@@ -1,7 +1,6 @@
 #pragma once
 
-#include "BufferObjects/Mesh.h"
-#include "Vertex/PositionNormalVertex.h"
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include <utility>
 
 namespace Ahwassa {
@@ -22,7 +21,6 @@ namespace Ahwassa {
 
 
     static glm::mat4 removeTranslation(const glm::mat4& input);
-    static std::shared_ptr<Mesh<PositionNormalVertex>> getCubeMesh();
-    static std::pair<std::vector<PositionNormalVertex>, std::vector<int>> getCube();
+
   };
 }
