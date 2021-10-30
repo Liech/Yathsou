@@ -67,7 +67,7 @@ int main(int argc, char** argv) {
     physicDebug = std::make_shared<Superb::PhysicsDebugView>(physic, &w, Iyathuum::Key::KEY_F2);
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
-    units = std::make_shared<Superb::Units>(&w);
+    units = std::make_shared<Superb::Units>(&w, physic);
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh(), units);
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
 
@@ -81,6 +81,8 @@ int main(int argc, char** argv) {
     world->update();
     units->update();
     //spheres->update();
+    //asd=(asd+1)%20;
+    //if (asd == 0) spheres->addSphere(w.camera()->getPosition(),0.5f,Iyathuum::Color(255,0,0));
 
     composer->start();
     b.draw();

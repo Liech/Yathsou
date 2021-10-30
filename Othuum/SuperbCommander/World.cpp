@@ -23,8 +23,6 @@ namespace Superb {
     _physic = physic;
     map->loadFull();
 
-    
-
     std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures;
     for (int i = 0; i < 5; i++) {
       std::string path = "Data" + map->scmap().terrainTexturePaths[i].path;

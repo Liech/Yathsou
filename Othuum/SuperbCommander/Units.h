@@ -19,7 +19,7 @@ namespace Suthanus {
 namespace Superb {
   class Units {
   public:
-    Units(Ahwassa::Window* w);
+    Units(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic);
 
     std::vector<std::shared_ptr<Unit>> select(glm::vec3 pos, glm::vec3 dir);
     std::vector<std::shared_ptr<Unit>> selectCameraRect(glm::vec2 rectangleStart, glm::vec2 rectangleEnd);
@@ -27,11 +27,13 @@ namespace Superb {
     void update();
     void draw();
     void debugDraw();
+    void spawnUnit(const glm::vec3& position);
     
   private:
 
-    std::map<std::shared_ptr<Suthanus::Box>,std::shared_ptr<Unit>>       _units    ;
-    std::shared_ptr<Suthanus::PhysicEngine>  _selection;
+    std::map<std::shared_ptr<Suthanus::Box>,std::shared_ptr<Unit>> _units    ;
+    std::shared_ptr<Suthanus::PhysicEngine>                        _selection;
+    std::shared_ptr<Suthanus::PhysicEngine>                        _physic;
 
     Ahwassa::Window* _window;
   };

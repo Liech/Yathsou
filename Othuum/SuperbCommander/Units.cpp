@@ -9,21 +9,15 @@
 #include "AhwassaGraphicsLib/Core/Camera.h"
 
 namespace Superb {
-  Units::Units(Ahwassa::Window* w) {
-    _window = w;
-    
+  Units::Units(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic) {
+    _physic    = physic;
+    _window    = w;    
     _selection = std::make_shared<Suthanus::PhysicEngine>();
     
     auto rnd = []() {return (rand() % 100) / 100.0f; };
-    for (int i = 0; i < 20; i++) {      
-      glm::vec3 pos(rnd()*20 - 10, rnd()*20 - 10, rnd()*20-10);
-      auto firstUnit = std::make_shared<Unit>();
-      firstUnit->agent = std::make_shared<Selen::NavigationAgent<3>>(pos, glm::vec3(0));
-      firstUnit->selector = _selection->newBox(pos, glm::vec3(0.5, 0.5, 0.5), false);
-      firstUnit->map = std::make_shared<Selen::DirectDistanceMap<3>>();
-      firstUnit->map->setTarget(pos);
-      firstUnit->agent->setMap(firstUnit->map);
-      _units[firstUnit->selector] = firstUnit;
+    for (int i = 0; i < 200; i++) {      
+      glm::vec3 pos(rnd()*60 + 20, 60, rnd()*60 + 20);
+      spawnUnit(pos);
     }
   }
 
@@ -69,5 +63,18 @@ namespace Superb {
       result.push_back(_units[obj]);
     }
     return result;
+  }
+
+  void Units::spawnUnit(const glm::vec3& position) {
+    glm::vec3 groundPos;
+    if (nullptr == _physic->raycast(position, glm::vec3(0, -1, 0), groundPos))
+      groundPos = position;
+    auto firstUnit = std::make_shared<Unit>();
+    firstUnit->agent = std::make_shared<Selen::NavigationAgent<3>>(groundPos, glm::vec3(0));
+    firstUnit->selector = _selection->newBox(groundPos, glm::vec3(0.5, 0.5, 0.5), false);
+    firstUnit->map = std::make_shared<Selen::DirectDistanceMap<3>>();
+    firstUnit->map->setTarget(groundPos);
+    firstUnit->agent->setMap(firstUnit->map);
+    _units[firstUnit->selector] = firstUnit;
   }
 }

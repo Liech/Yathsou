@@ -15,11 +15,11 @@ namespace Suthanus
       
       size_t width  = content.getDimension(0);
       size_t length = content.getDimension(1);
-      float* heightfieldData = new float[width * length];
+      _fieldData.resize(width * length);
 
       for (size_t x = 0; x < width; x++)
         for (size_t y = 0; y < length; y++) {
-          heightfieldData[x + y * width] = height*((float)content.getVal(x, y) / (float)std::numeric_limits<unsigned short>().max());
+          _fieldData[x + y * width] = height* ((double)content.getVal(x, y) / (double)std::numeric_limits<unsigned short>().max());
         }
 
 
@@ -27,8 +27,8 @@ namespace Suthanus
       bool flipQuadEdges = false;
       int upIndex = 1;
 
-      btHeightfieldTerrainShape* heightFieldShape = new btHeightfieldTerrainShape(width, length, heightfieldData, 1,0, height,upIndex,PHY_ScalarType::PHY_FLOAT, flipQuadEdges);
-      
+      btHeightfieldTerrainShape* heightFieldShape = new btHeightfieldTerrainShape(width, length, _fieldData.data(), 1, 0, height, upIndex, PHY_ScalarType::PHY_DOUBLE, flipQuadEdges);
+
       btCollisionShape* colShape = heightFieldShape;
       heightFieldShape->setUseDiamondSubdivision(true);
 

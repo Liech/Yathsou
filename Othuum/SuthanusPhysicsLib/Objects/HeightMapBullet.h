@@ -30,7 +30,7 @@ namespace Suthanus
       btDiscreteDynamicsWorld*                  _world      ;
       btRigidBody*                              _body       ;
       btDefaultMotionState*                     _motionState;
-
+      std::vector<double>                       _fieldData;
     };
   }
 }

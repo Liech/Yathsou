@@ -36,6 +36,6 @@ namespace Athanah {
   }
 
   Iyathuum::glmAABB<3> Map::aabb() {
-    return Iyathuum::glmAABB<3>(glm::vec3(-50, -50, -50), glm::vec3(200, 200, 200));
+    return Iyathuum::glmAABB<3>(glm::vec3(0, 0, 0), glm::vec3(200, 200, 200));
   }
 }
