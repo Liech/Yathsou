@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "lib/bullet/btBulletDynamicsCommon.h"
+#include "BulletCollision/CollisionShapes/btConvexHullShape.h"
 #include "BulletCollision/CollisionShapes/btBox2dShape.h"
 #include "BulletCollision/CollisionDispatch/btGhostObject.h"
 
@@ -138,27 +139,25 @@ namespace Suthanus
   }
 
   std::vector<std::shared_ptr<PhysicObject>> PhysicEngine::insideFrustum(const glm::vec3& origin, const glm::vec3& dirLeftTop, const glm::vec3& dirRightTop, const glm::vec3& dirLeftBot, const glm::vec3& dirRightBot, float nearPlane, float farPlane) const {
-    //std::vector<glm::vec3> shape;
-    //shape.push_back(dirLeftTop  * nearPlane);
-    //shape.push_back(dirRightTop * nearPlane);
-    //shape.push_back(dirLeftBot  * nearPlane);
-    //shape.push_back(dirRightBot * nearPlane);
-    //shape.push_back(dirLeftTop  * farPlane );
-    //shape.push_back(dirRightTop * farPlane );
-    //shape.push_back(dirLeftBot  * farPlane );
-    //shape.push_back(dirRightBot * farPlane );
-    //std::vector< btVector3> bulletVec;
-    //for (const auto& x : shape)
-    //  bulletVec.push_back(btVector3(x[0], x[1], x[2]));
-    //
-    //btConvexHullShape* btShape = new btConvexHullShape((const btScalar*)&bulletVec,8,12); //<- heap corruption :\
-    //
-    //
-    //
-    //delete btShape;
-    //std::vector<std::shared_ptr<PhysicObject>> result = insideShape(origin, btShape);
-    return {};
-    //return result;
+    std::vector<glm::vec3> shape;
+    shape.push_back(dirLeftTop  * nearPlane);
+    shape.push_back(dirRightTop * nearPlane);
+    shape.push_back(dirLeftBot  * nearPlane);
+    shape.push_back(dirRightBot * nearPlane);
+    shape.push_back(dirLeftTop  * farPlane );
+    shape.push_back(dirRightTop * farPlane );
+    shape.push_back(dirLeftBot  * farPlane );
+    shape.push_back(dirRightBot * farPlane );
+
+    std::vector<std::shared_ptr<PhysicObject>> result;
+    {
+      btConvexHullShape* btShape = new btConvexHullShape();
+      for (const auto& x : shape)
+        btShape->addPoint(btVector3(x[0], x[1], x[2]));
+      result = insideShape(origin, *btShape);
+      delete btShape;
+    }
+    return result;
   }
 
   std::vector<std::shared_ptr<PhysicObject>> PhysicEngine::insideSphere(const glm::vec3& origin, float radius) const {
@@ -172,6 +171,7 @@ namespace Suthanus
 
     btPairCachingGhostObject volume;
     btTransform xform;
+    xform.setIdentity();
     xform.setOrigin(btVector3(origin[0], origin[1], origin[2]));
     volume.setCollisionShape(&shape);
     volume.setWorldTransform(xform);

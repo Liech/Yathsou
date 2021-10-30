@@ -51,7 +51,7 @@ namespace Suthanus
     {
       glm::mat4 result;
       btTransform trans = _body->getWorldTransform();
-      float mat[16];
+      double mat[16];
       trans.getOpenGLMatrix(mat);
       return glm::make_mat4(mat);
     }

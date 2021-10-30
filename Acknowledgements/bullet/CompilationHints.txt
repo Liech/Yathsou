@@ -1,0 +1,13 @@
+Download Source from: https://github.com/bulletphysics/bullet3/releases/tag/3.17
+Follow guide from front page:
+  Build instructions for Bullet using premake. You can also use cmake instead.
+    Windows
+    
+    Click on build_visual_studio_vr_pybullet_double.bat and open build3/vs2010/0_Bullet3Solution.sln When asked, convert the projects to a newer version of Visual Studio. If you installed Python in the C:\ root directory, the batch file should find it automatically. Otherwise, edit this batch file to choose where Python include/lib directories are located.
+remove non library projects from sln
+set every lib to md or mdd (c++/code generation)
+set every lib to link library dependencys yes
+compile
+copy source to Yathsou\Othuum\SuthanusPhysicsLib\lib\bullet
+remove .cpp, lua and txt files
+move all libs to  Yathsou\Othuum\SuthanusPhysicsLib\lib\bullet\lib

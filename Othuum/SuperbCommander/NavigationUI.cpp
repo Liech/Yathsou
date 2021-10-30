@@ -61,7 +61,7 @@ namespace Superb {
       } 
       else {
 
-        _selection = _units->selectCameraRect(_rectangleStart, cursorPos);
+        _selection = _units->selectCameraRect(glm::vec2(_rectangleStart.x, _window->getHeight() - _rectangleStart.y), glm::vec2(localPosition.x, _window->getHeight()- localPosition.y));
       }
       _rectangleSelectionActive = false;
       return true;
