@@ -54,7 +54,7 @@ namespace Superb {
   }
 
   void World::debugDraw() {
-    _navGraphVis->draw();
+    //_navGraphVis->draw();
   }
 
   std::shared_ptr<Suthanus::PhysicNavigationMesh> World::navMesh() {

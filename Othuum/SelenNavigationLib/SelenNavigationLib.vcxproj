@@ -228,6 +228,7 @@
     <ClInclude Include="Maps\DiscomfortMap.h" />
     <ClInclude Include="Maps\GradientGridMap.h" />
     <ClInclude Include="Maps\InfectiousArrivalMapGroup.h" />
+    <ClInclude Include="Maps\PersonalSpaceMap.h" />
     <ClInclude Include="NavigationAgent.h" />
     <ClInclude Include="NavigationAgentManager.h" />
     <ClInclude Include="NavigationMap.h" />
@@ -236,6 +237,7 @@
     <ClCompile Include="Maps\DijkstraMap.cpp" />
     <ClCompile Include="Maps\DirectDistanceMap.cpp" />
     <ClCompile Include="Maps\GradientGridMap.cpp" />
+    <ClCompile Include="Maps\PersonalSpaceMap.cpp" />
     <ClCompile Include="NavigationAgent.cpp" />
     <ClCompile Include="NavigationMap.cpp" />
   </ItemGroup>

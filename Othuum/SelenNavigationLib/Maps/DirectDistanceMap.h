@@ -5,6 +5,9 @@
 #include "SelenNavigationLib/NavigationAgent.h"
 
 namespace Selen {
+  /// <summary>
+  /// guides the target directly to the target. Ignores obstacles
+  /// </summary>
   template <size_t Dimension>
   class DirectDistanceMap : public NavigationMap<Dimension> {
     using vec = glm::vec<Dimension, float, glm::defaultp>;

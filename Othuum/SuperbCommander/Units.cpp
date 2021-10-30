@@ -1,6 +1,9 @@
 #include "Units.h"
 
 #include "SelenNavigationLib/Maps/DirectDistanceMap.h"
+#include "SelenNavigationLib/MapGroup.h"
+
+
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/Objects/Box.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
@@ -13,7 +16,7 @@ namespace Superb {
     _physic    = physic;
     _window    = w;    
     _selection = std::make_shared<Suthanus::PhysicEngine>();
-    
+
     auto rnd = []() {return (rand() % 100) / 100.0f; };
     for (int i = 0; i < 200; i++) {      
       glm::vec3 pos(rnd()*60 + 20, 60, rnd()*60 + 20);
@@ -72,9 +75,20 @@ namespace Superb {
     auto firstUnit = std::make_shared<Unit>();
     firstUnit->agent = std::make_shared<Selen::NavigationAgent<3>>(groundPos, glm::vec3(0));
     firstUnit->selector = _selection->newBox(groundPos, glm::vec3(0.5, 0.5, 0.5), false);
-    firstUnit->map = std::make_shared<Selen::DirectDistanceMap<3>>();
+    auto group = std::make_shared<Selen::MapGroup<3>>();
+    group->addMap(std::make_shared<Selen::DirectDistanceMap<3>>(), 0.5f);
+    group->addMap(std::make_shared<Selen::PersonalSpaceMap<3>>(*this), 0.5f);
+    firstUnit->map = group;
     firstUnit->map->setTarget(groundPos);
     firstUnit->agent->setMap(firstUnit->map);
     _units[firstUnit->selector] = firstUnit;
+  }
+
+  std::vector<glm::vec3> Units::PersonalSpaceQuery(const glm::vec3& pos, float maxDistance) const {
+    auto physObjects = _selection->insideSphere(pos, maxDistance);
+    std::vector<glm::vec3> results;
+    for (auto x : physObjects)
+      results.push_back(x->getPosition());
+    return results;
   }
 }

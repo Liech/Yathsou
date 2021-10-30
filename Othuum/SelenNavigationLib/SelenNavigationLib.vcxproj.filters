@@ -54,6 +54,9 @@
     <ClInclude Include="Maps\DijkstraMap.h">
       <Filter>Header Files\Maps</Filter>
     </ClInclude>
+    <ClInclude Include="Maps\PersonalSpaceMap.h">
+      <Filter>Header Files\Maps</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NavigationMap.cpp">
@@ -69,6 +72,9 @@
       <Filter>Source Files\Maps</Filter>
     </ClCompile>
     <ClCompile Include="Maps\DijkstraMap.cpp">
+      <Filter>Source Files\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="Maps\PersonalSpaceMap.cpp">
       <Filter>Source Files\Maps</Filter>
     </ClCompile>
   </ItemGroup>

@@ -2,9 +2,11 @@
 
 #include <vector>
 #include <map>
+#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 
 #include "SelenNavigationLib/NavigationAgent.h"
 #include "SelenNavigationLib/NavigationMap.h"
+#include "SelenNavigationLib/Maps/PersonalSpaceMap.h"
 #include "Unit.h"
 
 namespace Ahwassa {
@@ -17,7 +19,7 @@ namespace Suthanus {
 }
 
 namespace Superb {
-  class Units {
+  class Units : public Selen::PersonalSpaceMap<3>::PersonalSpaceMapInterface{
   public:
     Units(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic);
 
@@ -29,12 +31,14 @@ namespace Superb {
     void debugDraw();
     void spawnUnit(const glm::vec3& position);
     
+    
+    std::vector<glm::vec3> PersonalSpaceQuery(const glm::vec3&, float maxDistance) const override;
   private:
 
     std::map<std::shared_ptr<Suthanus::Box>,std::shared_ptr<Unit>> _units    ;
     std::shared_ptr<Suthanus::PhysicEngine>                        _selection;
     std::shared_ptr<Suthanus::PhysicEngine>                        _physic;
-
+       
     Ahwassa::Window* _window;
   };
 }
