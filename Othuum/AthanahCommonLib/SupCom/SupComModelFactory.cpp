@@ -5,6 +5,8 @@
 
 namespace Athanah {
   SupComModelFactory::SupComModelFactory(const std::string& unitsFolder) {
+    if (unitsFolder.ends_with(".scd"))
+      throw std::runtime_error("Not yet implemented!");
     _unitsPath = unitsFolder + "\\";
 
     for (const auto& entry : std::filesystem::directory_iterator(_unitsPath)) {

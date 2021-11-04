@@ -10,10 +10,11 @@
 #include "AhwassaGraphicsLib/Core/Camera.h"
 
 namespace Superb {
-  Units::Units(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic) {
-    _physic    = physic;
-    _window    = w;    
-    _selection = std::make_shared<Suthanus::PhysicEngine>();
+  Units::Units(std::string unitFolder, Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic) {
+    _physic     = physic;
+    _window     = w;    
+    _selection  = std::make_shared<Suthanus::PhysicEngine>();
+    _unitFolder = unitFolder;
 
     auto rnd = []() {return (rand() % 500) / 500.0f; };
     for (int i = 0; i < 500; i++) {      
@@ -85,6 +86,10 @@ namespace Superb {
     for (auto x : _units)
       result.push_back(x.second);
     return result;
+  }
+
+  std::string Units::getUnitFolder() {
+    return _unitFolder;
   }
 
 }

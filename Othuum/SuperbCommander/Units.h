@@ -21,7 +21,7 @@ namespace Suthanus {
 namespace Superb {
   class Units : public Selen::PersonalSpaceMap<3>::PersonalSpaceMapInterface{
   public:
-    Units(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic);
+    Units(std::string unitFolder,Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic);
 
     std::vector<std::shared_ptr<Unit>> select(glm::vec3 pos, glm::vec3 dir);
     std::vector<std::shared_ptr<Unit>> selectCameraRect(glm::vec2 rectangleStart, glm::vec2 rectangleEnd);
@@ -31,7 +31,7 @@ namespace Superb {
     void update();
     void spawnUnit(const glm::vec3& position);
     
-    
+    std::string getUnitFolder();
     std::vector<glm::vec3> PersonalSpaceQuery(const glm::vec3&, float maxDistance) const override;
   private:
 
@@ -39,6 +39,7 @@ namespace Superb {
     std::shared_ptr<Suthanus::PhysicEngine>                        _selection;
     std::shared_ptr<Suthanus::PhysicEngine>                        _physic;
        
+    std::string      _unitFolder;
     Ahwassa::Window* _window;
   };
 }

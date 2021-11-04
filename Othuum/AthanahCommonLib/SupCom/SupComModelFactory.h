@@ -14,6 +14,7 @@ namespace Athanah {
 
   class SupComModelFactory {
   public:
+    //unit Folder can also be a zip file ending with .scd
     SupComModelFactory(const std::string& unitsFolder);
 
     std::shared_ptr<SupComModel> loadModel(const std::string&);

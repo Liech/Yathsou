@@ -4,12 +4,14 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
+#include "AthanahCommonLib/SupCom/SupComModelFactory.h"
+#include "AthanahCommonLib/SupCom/SupComModel.h"
 
 namespace Superb {
   UnitsVisualization::UnitsVisualization(Ahwassa::Window* window, Units& data) : 
     _window(window),
     _units(data) {
-
+    //_models = std::make_shared<Athanah::SupComModelFactory>(data.getUnitFolder());
   }
 
   void UnitsVisualization::draw() {

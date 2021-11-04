@@ -13,8 +13,9 @@ namespace Superb {
 
   public:
 
-    std::shared_ptr<Selen::NavigationAgent<3>> agent;
+    std::shared_ptr<Selen::NavigationAgent<3>> agent   ;
     std::shared_ptr<Suthanus::Box>             selector;
-    std::shared_ptr<Selen::NavigationMap<3>>   map;
+    std::shared_ptr<Selen::NavigationMap<3>>   map     ;
+    std::string                                blueprintID = "UEL0201";
   };
 }
