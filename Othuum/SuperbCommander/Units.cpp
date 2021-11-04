@@ -6,9 +6,7 @@
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/Objects/Box.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
-#include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
 
 namespace Superb {
@@ -30,17 +28,6 @@ namespace Superb {
       unit.second->agent->updatePosition();
       unit.second->selector->setPosition(unit.second->agent->getPosition());
     }
-  }
-
-  void Units::draw() {
-
-  }
-
-  void Units::debugDraw() {
-    _window->renderer().box().start();
-    for(auto unit : _units)
-      _window->renderer().box().drawDot(unit.second->agent->getPosition(), 0.5f, Iyathuum::Color(255, 128, 30));
-    _window->renderer().box().end();
   }
 
   std::vector<std::shared_ptr<Unit>> Units::select(glm::vec3 pos, glm::vec3 dir) {
@@ -77,7 +64,7 @@ namespace Superb {
     firstUnit->selector = _selection->newBox(groundPos, glm::vec3(0.5, 0.5, 0.5), false);
     auto group = std::make_shared<Selen::MapGroup<3>>();
     group->addMap(std::make_shared<Selen::DirectDistanceMap<3>>(), 0.5f);
-    group->addMap(std::make_shared<Selen::PersonalSpaceMap<3>>(*this), 0.5f);
+    //group->addMap(std::make_shared<Selen::PersonalSpaceMap<3>>(*this), 0.5f);
     firstUnit->map = group;
     firstUnit->map->setTarget(groundPos);
     firstUnit->agent->setMap(firstUnit->map);
@@ -91,4 +78,13 @@ namespace Superb {
       results.push_back(x->getPosition());
     return results;
   }
+
+  std::vector<std::shared_ptr<Unit>> Units::getUnits() const {
+    std::vector<std::shared_ptr<Unit>> result;
+    result.reserve(_units.size());
+    for (auto x : _units)
+      result.push_back(x.second);
+    return result;
+  }
+
 }

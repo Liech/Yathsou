@@ -152,6 +152,7 @@
     <ClCompile Include="Spheres.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="Units.cpp" />
+    <ClCompile Include="UnitsVisualization.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     <ClInclude Include="Spheres.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="Units.h" />
+    <ClInclude Include="UnitsVisualization.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

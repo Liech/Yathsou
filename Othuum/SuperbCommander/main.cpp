@@ -25,6 +25,7 @@
 #include "Units.h"
 #include "NavigationUI.h"
 #include "PhysicsDebugView.h"
+#include "UnitsVisualization.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -54,6 +55,8 @@ int main(int argc, char** argv) {
   std::shared_ptr<Suthanus::PhysicEngine>          physic;
   std::shared_ptr<Superb::World>                   world;
   std::shared_ptr<Superb::Units>                   units;
+  std::shared_ptr<Superb::UnitsVisualization>      unitsVis;
+
   std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
   std::shared_ptr<Superb::Spheres>                 spheres;
   std::shared_ptr<Superb::NavigationUI>            navUI;
@@ -70,6 +73,7 @@ int main(int argc, char** argv) {
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
     units = std::make_shared<Superb::Units>(&w, physic);
+    unitsVis = std::make_shared<Superb::UnitsVisualization>(&w,*units);
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh(), units);
     freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
     arcCam = std::make_shared<Ahwassa::ArcBallCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F4);
@@ -95,6 +99,7 @@ int main(int argc, char** argv) {
     b.draw();
     //spheres->draw();
     world->draw();
+    unitsVis->draw();
        
     
     composer->end();
@@ -104,9 +109,9 @@ int main(int argc, char** argv) {
     textureRenderer->end();
 
     physicDebug->draw();
-    world->debugDraw();
-    navUI->debugDraw();
-    units->debugDraw();
+    world      ->debugDraw();
+    navUI      ->debugDraw();
+    unitsVis   ->debugDraw();
 
     fps->draw();
   };
