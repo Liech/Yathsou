@@ -6,6 +6,7 @@
 #include "AhwassaGraphicsLib/Drawables/Background.h"
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
+#include "AhwassaGraphicsLib/Input/ArcBallCamera.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
@@ -47,6 +48,7 @@ int main(int argc, char** argv) {
   Ahwassa::Background                              b(&w);
   std::unique_ptr<Ahwassa::FPS>                    fps;
   std::shared_ptr<Ahwassa::FreeCamera>             freeCam;
+  std::shared_ptr<Ahwassa::ArcBallCamera>          arcCam;
   std::shared_ptr<Ahwassa::DeferredComposer>       composer;
   std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
   std::shared_ptr<Suthanus::PhysicEngine>          physic;
@@ -69,9 +71,11 @@ int main(int argc, char** argv) {
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
     units = std::make_shared<Superb::Units>(&w, physic);
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh(), units);
-    freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
+    freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
+    arcCam = std::make_shared<Ahwassa::ArcBallCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F4);
 
     w.input().addUIElement(freeCam.get());
+    w.input().addUIElement(arcCam .get());
     w.input().addUIElement(navUI.get());
   };
   int asd = 0;
@@ -83,6 +87,9 @@ int main(int argc, char** argv) {
     //spheres->update();
     //asd=(asd+1)%20;
     //if (asd == 0) spheres->addSphere(w.camera()->getPosition(),0.5f,Iyathuum::Color(255,0,0));
+
+    if (arcCam->isFocus() && navUI->selection().size() > 0)
+      w.camera()->setTarget(navUI->selection()[0]->agent->getPosition());
 
     composer->start();
     b.draw();

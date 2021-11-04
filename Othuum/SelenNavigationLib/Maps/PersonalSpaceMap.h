@@ -35,7 +35,7 @@ namespace Selen {
 
     virtual vec getVelocitySuggestion(NavigationAgent<Dimension>* obj) override {
       vec average;
-      const float maxDistance = 3;
+      const float maxDistance = 2;
       vec pos = obj->getPosition();
       std::vector<vec> nearStuff = _query.PersonalSpaceQuery(pos,maxDistance);
       for (auto x : nearStuff) {

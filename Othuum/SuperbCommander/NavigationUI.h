@@ -28,6 +28,7 @@ namespace Superb {
     bool mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) override;
 
     virtual bool isInside(glm::vec2, Iyathuum::Key) override;
+    std::vector<std::shared_ptr<Unit>> selection();
 
     glm::vec3 getStart();
     glm::vec3 getEnd();

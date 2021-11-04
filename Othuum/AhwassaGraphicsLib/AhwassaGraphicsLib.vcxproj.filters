@@ -366,6 +366,9 @@
     <ClCompile Include="Geometry\BasicShapeGenerator.cpp">
       <Filter>Source Files\Geometry</Filter>
     </ClCompile>
+    <ClCompile Include="Input\ArcBallCamera.cpp">
+      <Filter>Source Files\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
@@ -943,6 +946,9 @@
     </ClInclude>
     <ClInclude Include="Geometry\BasicShapeGenerator.h">
       <Filter>Header Files\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\ArcBallCamera.h">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

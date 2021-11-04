@@ -107,4 +107,9 @@ namespace Superb {
     else
       _selection = newSelection;
   }
+
+  std::vector<std::shared_ptr<Unit>> NavigationUI::selection() {
+    return _selection;
+  }
+
 }

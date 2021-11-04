@@ -170,6 +170,7 @@
     <ClCompile Include="Drawables\FPS.cpp" />
     <ClCompile Include="Geometry\BasicShapeGenerator.cpp" />
     <ClCompile Include="Geometry\HeightFieldMeshGenerator.cpp" />
+    <ClCompile Include="Input\ArcBallCamera.cpp" />
     <ClCompile Include="Input\FileDropper.cpp" />
     <ClCompile Include="Input\FreeCamera.cpp" />
     <ClCompile Include="Input\Input.cpp" />
@@ -255,6 +256,7 @@
     <ClInclude Include="Drawables\FPS.h" />
     <ClInclude Include="Geometry\BasicShapeGenerator.h" />
     <ClInclude Include="Geometry\HeightFieldMeshGenerator.h" />
+    <ClInclude Include="Input\ArcBallCamera.h" />
     <ClInclude Include="Input\FileDropper.h" />
     <ClInclude Include="Input\FreeCamera.h" />
     <ClInclude Include="Input\Input.h" />
