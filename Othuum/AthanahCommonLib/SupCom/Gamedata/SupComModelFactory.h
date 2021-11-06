@@ -16,13 +16,16 @@ namespace Athanah {
   public:
     //unit Folder can also be a zip file ending with .scd
     SupComModelFactory(const std::string& unitsFolder);
+    SupComModelFactory(std::shared_ptr<Aezesel::SCD> archive);
     virtual ~SupComModelFactory() = default;
     
     std::shared_ptr<SupComModel> loadModel(const std::string&);
     const std::vector<std::string>&     getAvailableModels();
 
   private:
-    std::unique_ptr<Aezesel::SCD>                       _archive;
+    void init();
+
+    std::shared_ptr<Aezesel::SCD>                       _archive;
     std::vector<std::string>                            _availableUnits;
     std::map<std::string, std::shared_ptr<SupComModel>> _loadedUnits;
   };

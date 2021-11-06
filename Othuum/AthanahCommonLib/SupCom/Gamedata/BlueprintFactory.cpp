@@ -11,8 +11,16 @@
 
 namespace Athanah {
   BlueprintFactory::BlueprintFactory(const std::string& unitsFolder) {
-    _archive = std::make_unique<Aezesel::SCD>(unitsFolder);
+    _archive = std::make_shared<Aezesel::SCD>(unitsFolder);
+    init();
+  }
 
+  BlueprintFactory::BlueprintFactory(std::shared_ptr<Aezesel::SCD> archive) {
+    _archive = archive;
+    init();
+  }
+
+  void BlueprintFactory::init() {
     for (const auto& entry : _archive->getDirectories()) {
       if (_archive->fileExists(entry + "\\" + entry + "_unit.bp"))
         _availableUnits.push_back(entry);

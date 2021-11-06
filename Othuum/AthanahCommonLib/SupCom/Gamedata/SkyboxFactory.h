@@ -19,6 +19,7 @@ namespace Athanah {
   class SkyboxFactory {
   public:
     SkyboxFactory(const std::string& path);
+    SkyboxFactory(std::shared_ptr<Aezesel::SCD>);
     virtual ~SkyboxFactory() = default;
 
     std::vector<std::string>              getBoxes();
@@ -27,7 +28,9 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::CubeTexture> loadReflectionCube(const std::string& path);
 
   private:
-    std::unique_ptr<Aezesel::SCD>    _archive  ;
+    void init();
+
+    std::shared_ptr<Aezesel::SCD>    _archive  ;
     std::vector<std::string>         _allBoxes ;
     std::vector<std::string>         _names    ;
   };

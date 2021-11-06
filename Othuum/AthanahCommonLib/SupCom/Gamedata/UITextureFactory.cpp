@@ -6,7 +6,11 @@
 
 namespace Athanah {
   UiTextureFactory::UiTextureFactory(const std::string& path) {
-    _archive = std::make_unique<Aezesel::SCD>(path);
+    _archive = std::make_shared<Aezesel::SCD>(path);
+  }
+
+  UiTextureFactory::UiTextureFactory(std::shared_ptr<Aezesel::SCD> archive) {
+    _archive = archive;
   }
 
   std::shared_ptr<Ahwassa::Texture> UiTextureFactory::getStrategicIcon(std::string iconName, SelectableButtonStatus status) {

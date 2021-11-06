@@ -4,6 +4,7 @@
 #include "UiTextureFactory.h"
 #include "BlueprintFactory.h"
 #include "SkyboxFactory.h"
+#include "AezeselFileIOLib/SupremeCommander/SCD.h"
 
 namespace Athanah {
   Gamedata::Gamedata(std::string supComPath, bool useSCDFiles) {
@@ -11,16 +12,14 @@ namespace Athanah {
     useSCDFiles = true;
 
     std::string modelSCD = supComPath + "/gamedata/units.scd";
-    _model = std::make_unique<SupComModelFactory>(useSCDFiles ? modelSCD : assetPath + "units");
-
+    std::shared_ptr<Aezesel::SCD> units = std::make_shared<Aezesel::SCD>(useSCDFiles ? modelSCD : assetPath + "units");
     std::string textureSCD = supComPath + "/gamedata/textures.scd";
-    _icon = std::make_unique<UiTextureFactory>(useSCDFiles ? textureSCD : assetPath + "textures");
+    std::shared_ptr<Aezesel::SCD> textures = std::make_shared<Aezesel::SCD>(useSCDFiles ? textureSCD : assetPath + "textures");
 
-    std::string blueprintSCD = supComPath + "/gamedata/units.scd";
-    _blueprint = std::make_unique<BlueprintFactory>(useSCDFiles ? blueprintSCD : assetPath + "units");
-
-    std::string skyboxSCD = supComPath + "/gamedata/textures.scd";
-    _skybox = std::make_unique<SkyboxFactory>(useSCDFiles ? skyboxSCD : assetPath + "textures");
+    _icon      = std::make_unique<UiTextureFactory  >(textures);
+    _skybox    = std::make_unique<SkyboxFactory     >(textures);
+    _model     = std::make_unique<SupComModelFactory>(units   );
+    _blueprint = std::make_unique<BlueprintFactory  >(units   );
   }
 
   BlueprintFactory& Gamedata::blueprint() {

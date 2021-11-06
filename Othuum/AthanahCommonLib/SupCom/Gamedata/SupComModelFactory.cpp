@@ -6,8 +6,16 @@
 
 namespace Athanah {
   SupComModelFactory::SupComModelFactory(const std::string& unitsFolder) {
-    _archive = std::make_unique<Aezesel::SCD>(unitsFolder);
+    _archive = std::make_shared<Aezesel::SCD>(unitsFolder);
+    init();
+  }
 
+  SupComModelFactory::SupComModelFactory(std::shared_ptr<Aezesel::SCD> archive) {
+    _archive = archive;
+    init();
+  }
+
+  void SupComModelFactory::init() {
     for (const auto& entry : _archive->getDirectories()) {
       if (_archive->fileExists(entry + "/" + entry + "_lod0.scm"))
         _availableUnits.push_back(entry);

@@ -25,6 +25,7 @@ namespace Athanah {
   class UiTextureFactory {
   public:
     UiTextureFactory(const std::string& path);
+    UiTextureFactory(std::shared_ptr<Aezesel::SCD>);
     virtual ~UiTextureFactory() = default;
 
     std::shared_ptr<Ahwassa::Texture> getStrategicIcon (std::string iconName, SelectableButtonStatus status); //Data\textures\ui\common\game\strategicicons
@@ -34,7 +35,7 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::Texture> getTierIcons     (Faction faction, TechLevel);
 
   private:
-    std::unique_ptr<Aezesel::SCD> _archive;
+    std::shared_ptr<Aezesel::SCD> _archive;
 
     std::shared_ptr<Ahwassa::Texture> loadStrategicIcon(std::string iconName, SelectableButtonStatus status);
     std::shared_ptr<Ahwassa::Texture> loadIcon(std::string iconName);
