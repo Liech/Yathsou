@@ -7,6 +7,7 @@
 #include <functional>
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "AthanahCommonLib/SupCom/SupComEnums.h"
+#include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 #include "HaasScriptingLib/lib/json.hpp"
 
 class ListSelection;
@@ -18,9 +19,6 @@ namespace Ahwassa {
   class Texture;
 }
 namespace Athanah {
-  class SupComModelFactory;
-  class BlueprintFactory;
-  class UiTextureFactory;
   class SupComModel;
 }
 
@@ -28,7 +26,8 @@ class Graphic;
 
 class UnitModelSelection {
 public:
-  UnitModelSelection(const std::string path, Iyathuum::glmAABB<2> area,std::function<void()> disableAllCall, Graphic&);
+  UnitModelSelection(Athanah::Gamedata& gamedata, Iyathuum::glmAABB<2> area,std::function<void()> disableAllCall, Graphic&);
+  virtual ~UnitModelSelection() = default;
 
   void setVisible(bool value);
   bool isVisible();
@@ -51,10 +50,8 @@ private:
 
   int                                           _currentList = 0;
   Graphic&                                      _graphic        ;
+  Athanah::Gamedata&                            _gamedata       ;
   std::string                                   _currentID = "" ;
-  std::shared_ptr< Athanah::SupComModelFactory> _factory        ;
-  std::shared_ptr< Athanah::BlueprintFactory  > _blueprints     ;
-  std::shared_ptr< Athanah::UiTextureFactory  > _icons          ;
   std::function<void()>                         _disableAllCall ;
   std::vector<std::string>                      _names          ;
 

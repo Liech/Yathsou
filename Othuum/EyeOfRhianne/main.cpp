@@ -12,7 +12,6 @@
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
-#include "AthanahCommonLib/SupCom/SupComModelFactory.h"
 #include "AthanahCommonLib/SupCom/SupComModel.h"
 #include "AhwassaGraphicsLib/PostProcessing/Bloom.h"
 
@@ -21,9 +20,6 @@
 #include "AezeselFileIOLib/ImageIO.h"
 
 #include "ListSelection.h"
-#include "AthanahCommonLib/Blueprint/BlueprintFactory.h"
-#include "AthanahCommonLib/Blueprint/Blueprint.h"
-#include "AthanahCommonLib/Blueprint/BlueprintGeneral.h"
 
 #include "AssetSelection.h"
 #include "GraphicOptions.h"
@@ -53,17 +49,17 @@ int main(int argc, char** argv) {
   Ahwassa::Window w(width, height);
   std::unique_ptr<Ahwassa::FPS       > fps;
   
-  std::unique_ptr<AssetSelection> assets   ;
-  std::unique_ptr<Ahwassa::Button> assetButton;
-  std::unique_ptr<GraphicOptions> graphicUI;
-  std::unique_ptr<Graphic> graphic;
+  std::unique_ptr<AssetSelection>    assets   ;
+  std::unique_ptr<Ahwassa::Button>   assetButton;
+  std::unique_ptr<GraphicOptions>    graphicUI;
+  std::unique_ptr<Graphic>           graphic;
 
   std::shared_ptr<Ahwassa::FreeCamera> freeCam;
   w.Startup = [&]() {
     
     freeCam = std::make_shared<Ahwassa::FreeCamera>(w.camera(), w.input(), Iyathuum::Key::MOUSE_BUTTON_1);
     w.camera()->setPosition(glm::vec3(20, 20, 20));
-    w.input().addUIElement(freeCam.get());
+    w.input().addUIElement(freeCam.get(), 1);
 
     std::function<void()> disableAll = [&]() { 
       assets->setVisible(false);

@@ -10,6 +10,10 @@ namespace Ahwassa {
   class Window;
 }
 
+namespace Athanah {
+  class Gamedata;
+}
+
 class UnitModelSelection;
 class AnimationSelection;
 class SkyBoxSelection;
@@ -23,7 +27,7 @@ class Graphic;
 class AssetSelection {
 public:
   AssetSelection(EyeOfRhianneConfiguration&, Iyathuum::glmAABB<2> area,Graphic&);
-
+  virtual ~AssetSelection() = default;
 
   void setVisible(bool);
   bool isVisible();
@@ -39,6 +43,7 @@ private:
   std::unique_ptr<ListSelection>      _list;
   Graphic&                            _graphic;
   Iyathuum::glmAABB<2>                _area;
+  std::unique_ptr<Athanah::Gamedata>  _gamedata;
 
   std::shared_ptr<UnitModelSelection > _units     ;
   std::shared_ptr<AnimationSelection > _animation ;
@@ -47,5 +52,6 @@ private:
   std::shared_ptr<MapSelection       > _maps      ;
   std::shared_ptr<ScriptSelection    > _scripts   ;
   std::shared_ptr<SoundSelection     > _sounds    ;
+ 
   EyeOfRhianneConfiguration& _config;
 };

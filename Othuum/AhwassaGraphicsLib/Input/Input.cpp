@@ -99,20 +99,17 @@ namespace Ahwassa {
 
     auto inputWidgets = getUIElements();
 
-    for (auto w : inputWidgets) {
-      bool stop = w->mouseEvent(mousePos - w->getGlobalPosition().getPosition(), key, status);
-      if (stop)
-        return;
-    }
-
     bool hit = false;
     for (auto w : inputWidgets) {
+      bool eventStop = w->mouseEvent(mousePos - w->getGlobalPosition().getPosition(), key, status);
+      if (eventStop)
+        return;
       if (w->isInside(mousePos,Iyathuum::Key::KEY_NONE)) {
         hit = true;
         if (status == Iyathuum::KeyStatus::PRESS) {
           _pressedWidget = w;
           setFocus(w);
-          break;
+          return;
         }
         else {
           if (status == Iyathuum::KeyStatus::RELEASE && _pressedWidget == w) {
@@ -185,6 +182,10 @@ namespace Ahwassa {
   void Input::addUIElement(UIElement* elem) {
     _uiElements[elem] = _orderpos;
     _orderpos++;
+  }
+
+  void Input::addUIElement(UIElement* elem, size_t orderID) {
+    _uiElements[elem] = orderID;
   }
 
   void Input::removeUIElement(UIElement* elem) {

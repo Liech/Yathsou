@@ -13,6 +13,7 @@ namespace Athanah {
   class BlueprintFactory {
   public:
     BlueprintFactory(const std::string& unitsFolder);
+    ~BlueprintFactory() = default;
 
     std::shared_ptr<const Blueprint> loadModel(const std::string&);
     const std::vector<std::string>& getAvailableModels();

@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Blueprint">
-      <UniqueIdentifier>{e04d6939-fa46-429a-8f7b-49700ee2fb69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Blueprint">
-      <UniqueIdentifier>{220bdfa2-ffca-49b1-99c7-8cdfe0d9976b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Map">
       <UniqueIdentifier>{bd0af324-5cb0-48db-a14d-cddc9b5781ca}</UniqueIdentifier>
     </Filter>
@@ -37,25 +31,22 @@
     <Filter Include="Source Files\Physic">
       <UniqueIdentifier>{54aa8f33-beed-44d4-953e-c01265146cb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SupCom\Gamedata">
+      <UniqueIdentifier>{e2408cc5-4213-4903-94f2-c794c3507129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SupCom\Gamedata">
+      <UniqueIdentifier>{69043e05-6829-4be6-aba3-05abbaa1651d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SupCom\Blueprint">
+      <UniqueIdentifier>{220bdfa2-ffca-49b1-99c7-8cdfe0d9976b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SupCom\Blueprint">
+      <UniqueIdentifier>{e04d6939-fa46-429a-8f7b-49700ee2fb69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SkyBox.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Blueprint\Blueprint.h">
-      <Filter>Header Files\Blueprint</Filter>
-    </ClInclude>
-    <ClInclude Include="Blueprint\BlueprintCommandCaps.h">
-      <Filter>Header Files\Blueprint</Filter>
-    </ClInclude>
-    <ClInclude Include="Blueprint\BlueprintFactory.h">
-      <Filter>Header Files\Blueprint</Filter>
-    </ClInclude>
-    <ClInclude Include="Blueprint\BlueprintGeneral.h">
-      <Filter>Header Files\Blueprint</Filter>
-    </ClInclude>
-    <ClInclude Include="Blueprint\BlueprintDisplay.h">
-      <Filter>Header Files\Blueprint</Filter>
     </ClInclude>
     <ClInclude Include="Map\MapFactory.h">
       <Filter>Header Files\Map</Filter>
@@ -81,13 +72,7 @@
     <ClInclude Include="SupCom\SupComModel.h">
       <Filter>Header Files\SupCom</Filter>
     </ClInclude>
-    <ClInclude Include="SupCom\SupComModelFactory.h">
-      <Filter>Header Files\SupCom</Filter>
-    </ClInclude>
     <ClInclude Include="SupCom\SupComVertex.h">
-      <Filter>Header Files\SupCom</Filter>
-    </ClInclude>
-    <ClInclude Include="SupCom\UiTextureFactory.h">
       <Filter>Header Files\SupCom</Filter>
     </ClInclude>
     <ClInclude Include="Model3DRenderer.h">
@@ -105,25 +90,34 @@
     <ClInclude Include="Physic\NavigationMeshDebugDrawer.h">
       <Filter>Header Files\Physic</Filter>
     </ClInclude>
+    <ClInclude Include="SupCom\Gamedata\Gamedata.h">
+      <Filter>Header Files\SupCom\Gamedata</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\Gamedata\SupComModelFactory.h">
+      <Filter>Header Files\SupCom\Gamedata</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\Gamedata\UiTextureFactory.h">
+      <Filter>Header Files\SupCom\Gamedata</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\Blueprint\Blueprint.h">
+      <Filter>Header Files\SupCom\Blueprint</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\Blueprint\BlueprintCommandCaps.h">
+      <Filter>Header Files\SupCom\Blueprint</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\Blueprint\BlueprintDisplay.h">
+      <Filter>Header Files\SupCom\Blueprint</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\Blueprint\BlueprintGeneral.h">
+      <Filter>Header Files\SupCom\Blueprint</Filter>
+    </ClInclude>
+    <ClInclude Include="SupCom\Gamedata\BlueprintFactory.h">
+      <Filter>Header Files\SupCom\Gamedata</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SkyBox.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Blueprint\Blueprint.cpp">
-      <Filter>Source Files\Blueprint</Filter>
-    </ClCompile>
-    <ClCompile Include="Blueprint\BlueprintCommandCaps.cpp">
-      <Filter>Source Files\Blueprint</Filter>
-    </ClCompile>
-    <ClCompile Include="Blueprint\BlueprintFactory.cpp">
-      <Filter>Source Files\Blueprint</Filter>
-    </ClCompile>
-    <ClCompile Include="Blueprint\BlueprintGeneral.cpp">
-      <Filter>Source Files\Blueprint</Filter>
-    </ClCompile>
-    <ClCompile Include="Blueprint\BlueprintDisplay.cpp">
-      <Filter>Source Files\Blueprint</Filter>
     </ClCompile>
     <ClCompile Include="Map\Map.cpp">
       <Filter>Source Files\Map</Filter>
@@ -137,13 +131,7 @@
     <ClCompile Include="SupCom\SupComModel.cpp">
       <Filter>Source Files\SupCom</Filter>
     </ClCompile>
-    <ClCompile Include="SupCom\SupComModelFactory.cpp">
-      <Filter>Source Files\SupCom</Filter>
-    </ClCompile>
     <ClCompile Include="SupCom\SupComVertex.cpp">
-      <Filter>Source Files\SupCom</Filter>
-    </ClCompile>
-    <ClCompile Include="SupCom\UITextureFactory.cpp">
       <Filter>Source Files\SupCom</Filter>
     </ClCompile>
     <ClCompile Include="SupCom\SupComMeshLoader.cpp">
@@ -169,6 +157,30 @@
     </ClCompile>
     <ClCompile Include="Physic\NavigationMeshDebugDrawer.cpp">
       <Filter>Source Files\Physic</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\Gamedata\UITextureFactory.cpp">
+      <Filter>Source Files\SupCom\Gamedata</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\Gamedata\Gamedata.cpp">
+      <Filter>Source Files\SupCom\Gamedata</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\Gamedata\SupComModelFactory.cpp">
+      <Filter>Source Files\SupCom\Gamedata</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\Blueprint\Blueprint.cpp">
+      <Filter>Source Files\SupCom\Blueprint</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\Blueprint\BlueprintCommandCaps.cpp">
+      <Filter>Source Files\SupCom\Blueprint</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\Blueprint\BlueprintDisplay.cpp">
+      <Filter>Source Files\SupCom\Blueprint</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\Blueprint\BlueprintGeneral.cpp">
+      <Filter>Source Files\SupCom\Blueprint</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\Gamedata\BlueprintFactory.cpp">
+      <Filter>Source Files\SupCom\Gamedata</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

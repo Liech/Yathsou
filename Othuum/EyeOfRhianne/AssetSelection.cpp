@@ -12,12 +12,16 @@
 
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
+#include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Widgets/ListLayout.h"
 
 AssetSelection::AssetSelection(EyeOfRhianneConfiguration& config, Iyathuum::glmAABB<2> area, Graphic& graphic) : _graphic(graphic), _config(config){
   _area = area;
+
+  _gamedata = std::make_unique<Athanah::Gamedata>(config.SupComPath,false);
+
   std::vector<std::string> options;
   options.push_back("Units");
   options.push_back("Animation");
@@ -37,7 +41,7 @@ AssetSelection::AssetSelection(EyeOfRhianneConfiguration& config, Iyathuum::glmA
 void AssetSelection::addSelections() {
   Iyathuum::glmAABB<2> area(_area.getPosition() +glm::vec2(300,0),_area.getSize());
 
-  _units = std::make_shared<UnitModelSelection>(_config.AssetPath,area,[this]() {unitVisibility(false); }, _graphic);
+  _units = std::make_shared<UnitModelSelection>(*_gamedata,area,[this]() {unitVisibility(false); }, _graphic);
 
   _animation  = std::make_shared<AnimationSelection> (area, _graphic);
   _skyBox     = std::make_shared<SkyBoxSelection>    (_config.AssetPath + "\\textures\\environment",area, _graphic);

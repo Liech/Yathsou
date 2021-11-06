@@ -13,21 +13,20 @@
 #include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 
-#include "AthanahCommonLib/SupCom/SupComModelFactory.h"
-#include "AthanahCommonLib/SupCom/UiTextureFactory.h"
+#include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
+#include "AthanahCommonLib/SupCom/Gamedata/SupComModelFactory.h"
+#include "AthanahCommonLib/SupCom/Gamedata/UiTextureFactory.h"
+#include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
 #include "AthanahCommonLib/SupCom/SupComModel.h"
-#include "AthanahCommonLib/Blueprint/BlueprintFactory.h"
-#include "AthanahCommonLib/Blueprint/Blueprint.h"
-#include "AthanahCommonLib/Blueprint/BlueprintGeneral.h"
-#include "AthanahCommonLib/Blueprint/BlueprintDisplay.h"
+#include "AthanahCommonLib/SupCom/Blueprint/Blueprint.h"
+#include "AthanahCommonLib/SupCom/Blueprint/BlueprintGeneral.h"
+#include "AthanahCommonLib/SupCom/Blueprint/BlueprintDisplay.h"
 
-UnitModelSelection::UnitModelSelection(const std::string path, Iyathuum::glmAABB<2> area, std::function<void()> disableAllCall, Graphic& graphic) : _graphic(graphic)
- {
+UnitModelSelection::UnitModelSelection(Athanah::Gamedata& gamedata, Iyathuum::glmAABB<2> area, std::function<void()> disableAllCall, Graphic& graphic) : 
+  _graphic(graphic),
+  _gamedata(gamedata)
+{
   _disableAllCall = disableAllCall;
-
-  _factory    = std::make_shared<Athanah::SupComModelFactory>(path + "\\units");
-  _blueprints = std::make_shared<Athanah::BlueprintFactory  >(path + "\\units");
-  _icons      = std::make_shared<Athanah::UiTextureFactory  >(path);
 
   Iyathuum::glmAABB<2> categoriesArea(area.getPosition()                  , glm::vec2(50                  , area.getSize()[1]));
   Iyathuum::glmAABB<2> modelArea     (area.getPosition() + glm::vec2(50,0), glm::vec2(area.getSize()[0]-50, area.getSize()[1]));
@@ -68,7 +67,7 @@ UnitModelSelection::UnitModelSelection(const std::string path, Iyathuum::glmAABB
 void UnitModelSelection::setModel(std::string newModel) {
   _currentID = newModel;
   _graphic.setModel(getCurrentModel());
-  float scale = _blueprints->loadModel(_currentID)->display().scale() * 30;
+  float scale = _gamedata.blueprint().loadModel(_currentID)->display().scale() * 30;
   _graphic._mesh->transformation = glm::scale(glm::mat4(1), glm::vec3(scale, scale, scale));
 }
 
@@ -88,20 +87,20 @@ int UnitModelSelection::getNumber(std::string s) {
 }
 std::shared_ptr<Ahwassa::Texture> UnitModelSelection::getFaction(std::string s) {
   if (s == "UEF")
-    return _icons->getFactionIcon(Athanah::Faction::Uef, Athanah::FactionIconType::Normal);
+    return _gamedata.icon().getFactionIcon(Athanah::Faction::Uef, Athanah::FactionIconType::Normal);
   else if (s == "Cybran")
-    return _icons->getFactionIcon(Athanah::Faction::Cybran, Athanah::FactionIconType::Normal);
+    return _gamedata.icon().getFactionIcon(Athanah::Faction::Cybran, Athanah::FactionIconType::Normal);
   else if (s == "Aeon")
-    return _icons->getFactionIcon(Athanah::Faction::Aeon, Athanah::FactionIconType::Normal);
+    return _gamedata.icon().getFactionIcon(Athanah::Faction::Aeon, Athanah::FactionIconType::Normal);
   else if (s == "Seraphim")
-    return _icons->getFactionIcon(Athanah::Faction::Seraphim, Athanah::FactionIconType::Normal);
+    return _gamedata.icon().getFactionIcon(Athanah::Faction::Seraphim, Athanah::FactionIconType::Normal);
   else if (s == "Other")
-    return _icons->getFactionIcon(Athanah::Faction::Undefined, Athanah::FactionIconType::Normal);
-  return _icons->getTierIcons(Athanah::Faction::Uef,Athanah::TechLevel::T4);
+    return _gamedata.icon().getFactionIcon(Athanah::Faction::Undefined, Athanah::FactionIconType::Normal);
+  return _gamedata.icon().getTierIcons(Athanah::Faction::Uef,Athanah::TechLevel::T4);
 }
 
 void UnitModelSelection::drawIcons(Iyathuum::glmAABB<2> location, std::string name, bool hovered) {
-  auto bp = _blueprints->loadModel(name);
+  auto bp = _gamedata.blueprint().loadModel(name);
 
   _graphic.getWindow()->renderer().rectangle().start();
   _graphic.getWindow()->renderer().rectangle().drawRectangle(location, hovered ? Iyathuum::Color(0.8f * 255, 0.8f * 255, 0.8f * 255) : Iyathuum::Color(0.4f * 255, 0.4f * 255, 0.4f * 255));
@@ -109,14 +108,14 @@ void UnitModelSelection::drawIcons(Iyathuum::glmAABB<2> location, std::string na
 
   _graphic.getWindow()->renderer().texture().start();
 
-  auto icon = _icons->getIcon(name);
+  auto icon = _gamedata.icon().getIcon(name);
   location.setSize(glm::vec2(location.getSize()[1], location.getSize()[1]));
-  _graphic.getWindow()->renderer().texture().draw(*_icons->getBackgroundIcon(bp->general().icon(),hovered? Athanah::ButtonStatus::Hover:Athanah::ButtonStatus::Normal), location);
+  _graphic.getWindow()->renderer().texture().draw(*_gamedata.icon().getBackgroundIcon(bp->general().icon(),hovered? Athanah::ButtonStatus::Hover:Athanah::ButtonStatus::Normal), location);
   _graphic.getWindow()->renderer().texture().draw(*icon, location);
   Iyathuum::glmAABB<2> factionIconLoc(location.getPosition() + glm::vec2(location.getSize()[0],0), glm::vec2(20, 20));
-  _graphic.getWindow()->renderer().texture().draw(*_icons->getFactionIcon(bp->general().faction(), Athanah::FactionIconType::Normal), factionIconLoc);
+  _graphic.getWindow()->renderer().texture().draw(*_gamedata.icon().getFactionIcon(bp->general().faction(), Athanah::FactionIconType::Normal), factionIconLoc);
   Iyathuum::glmAABB<2> stratIconLoc(location.getPosition() + glm::vec2(location.getSize()[0],location.getSize()[1]-20), glm::vec2(20, 20));
-  _graphic.getWindow()->renderer().texture().draw(*_icons->getStrategicIcon(bp->strategicIcon(), Athanah::SelectableButtonStatus::Normal), stratIconLoc);
+  _graphic.getWindow()->renderer().texture().draw(*_gamedata.icon().getStrategicIcon(bp->strategicIcon(), Athanah::SelectableButtonStatus::Normal), stratIconLoc);
 
   _graphic.getWindow()->renderer().texture().end();
   _graphic.getWindow()->renderer().text().start();
@@ -128,7 +127,7 @@ void UnitModelSelection::drawIcons(Iyathuum::glmAABB<2> location, std::string na
 }
 
 std::shared_ptr<Athanah::SupComModel> UnitModelSelection::getCurrentModel() {
-  return _factory->loadModel(_currentID);
+  return _gamedata.model().loadModel(_currentID);
 }
 
 void UnitModelSelection::setVisible(bool value) {
@@ -152,8 +151,8 @@ std::pair<std::vector<std::string>, std::vector<std::string>> UnitModelSelection
   std::vector<std::string> names    ;
   std::vector<std::string> niceNames;
 
-  for (auto x : _factory->getAvailableModels()) {
-    auto bp = _blueprints->loadModel(x);   
+  for (auto x : _gamedata.model().getAvailableModels()) {
+    auto bp = _gamedata.blueprint().loadModel(x);
     auto faction = bp->general().faction();
     bool ok = 
       (category == "UEF"     && faction == Athanah::Faction::Uef      ) ||
@@ -188,13 +187,13 @@ void UnitModelSelection::initScript() {
   _getAllUnits = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
     [&](const nlohmann::json& input) -> nlohmann::json
   {
-    return _factory->getAvailableModels();
+    return _gamedata.model().getAvailableModels();
   }
   );
   _getBlueprint = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
     [&](const nlohmann::json& input) -> nlohmann::json
   {
-    return _blueprints->loadModel(input)->getRaw();
+    return _gamedata.blueprint().loadModel(input)->getRaw();
   }
   );
   _setUnitColor = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(

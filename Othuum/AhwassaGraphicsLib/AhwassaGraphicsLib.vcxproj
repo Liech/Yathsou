@@ -432,6 +432,7 @@
     <CopyFileToFolders Include="Data\Fonts\arial.ttf">
       <FileType>Document</FileType>
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(OutDir)Data/Fonts</DestinationFolders>
+      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)/Data/Fonts</DestinationFolders>
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>

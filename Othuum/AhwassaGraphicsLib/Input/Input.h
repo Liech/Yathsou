@@ -30,6 +30,7 @@ namespace Ahwassa {
     UIElement* getCurrentFocus();
 
     void addUIElement(UIElement*);
+    void addUIElement(UIElement*, size_t orderID);
     void removeUIElement(UIElement*);
     std::vector<UIElement*> getUIElements();
 
@@ -45,7 +46,7 @@ namespace Ahwassa {
     static Input* _instance;
 
     std::map<UIElement*, size_t> _uiElements;
-    size_t                       _orderpos = 0;
+    size_t                       _orderpos = 1000;
 
     GLFWwindow* _windowGL;
     Window*     _windowAhwassa;

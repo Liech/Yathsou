@@ -27,11 +27,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Blueprint\Blueprint.h" />
-    <ClInclude Include="Blueprint\BlueprintCommandCaps.h" />
-    <ClInclude Include="Blueprint\BlueprintDisplay.h" />
-    <ClInclude Include="Blueprint\BlueprintFactory.h" />
-    <ClInclude Include="Blueprint\BlueprintGeneral.h" />
     <ClInclude Include="Map\Map.h" />
     <ClInclude Include="Map\MapFactory.h" />
     <ClInclude Include="Map\MapRenderer.h" />
@@ -41,21 +36,22 @@
     <ClInclude Include="Physic\BulletDebugDrawer.h" />
     <ClInclude Include="Physic\NavigationMeshDebugDrawer.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="SupCom\Blueprint\Blueprint.h" />
+    <ClInclude Include="SupCom\Blueprint\BlueprintCommandCaps.h" />
+    <ClInclude Include="SupCom\Blueprint\BlueprintDisplay.h" />
+    <ClInclude Include="SupCom\Blueprint\BlueprintGeneral.h" />
+    <ClInclude Include="SupCom\Gamedata\BlueprintFactory.h" />
+    <ClInclude Include="SupCom\Gamedata\Gamedata.h" />
+    <ClInclude Include="SupCom\Gamedata\SupComModelFactory.h" />
+    <ClInclude Include="SupCom\Gamedata\UiTextureFactory.h" />
     <ClInclude Include="SupCom\SupComEnums.h" />
     <ClInclude Include="SupCom\SupComMeshLoader.h" />
     <ClInclude Include="SupCom\SupComMeshRenderer.h" />
     <ClInclude Include="SupCom\SupComMeshRendererDef.h" />
     <ClInclude Include="SupCom\SupComModel.h" />
-    <ClInclude Include="SupCom\SupComModelFactory.h" />
     <ClInclude Include="SupCom\SupComVertex.h" />
-    <ClInclude Include="SupCom\UiTextureFactory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Blueprint\Blueprint.cpp" />
-    <ClCompile Include="Blueprint\BlueprintCommandCaps.cpp" />
-    <ClCompile Include="Blueprint\BlueprintDisplay.cpp" />
-    <ClCompile Include="Blueprint\BlueprintFactory.cpp" />
-    <ClCompile Include="Blueprint\BlueprintGeneral.cpp" />
     <ClCompile Include="Map\Map.cpp" />
     <ClCompile Include="Map\MapFactory.cpp" />
     <ClCompile Include="Map\MapRenderer.cpp" />
@@ -65,13 +61,19 @@
     <ClCompile Include="Physic\BulletDebugDrawer.cpp" />
     <ClCompile Include="Physic\NavigationMeshDebugDrawer.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="SupCom\Blueprint\Blueprint.cpp" />
+    <ClCompile Include="SupCom\Blueprint\BlueprintCommandCaps.cpp" />
+    <ClCompile Include="SupCom\Blueprint\BlueprintDisplay.cpp" />
+    <ClCompile Include="SupCom\Blueprint\BlueprintGeneral.cpp" />
+    <ClCompile Include="SupCom\Gamedata\BlueprintFactory.cpp" />
+    <ClCompile Include="SupCom\Gamedata\Gamedata.cpp" />
+    <ClCompile Include="SupCom\Gamedata\SupComModelFactory.cpp" />
+    <ClCompile Include="SupCom\Gamedata\UITextureFactory.cpp" />
     <ClCompile Include="SupCom\SupComMeshLoader.cpp" />
     <ClCompile Include="SupCom\SupComMeshRenderer.cpp" />
     <ClCompile Include="SupCom\SupComMeshRendererDef.cpp" />
     <ClCompile Include="SupCom\SupComModel.cpp" />
-    <ClCompile Include="SupCom\SupComModelFactory.cpp" />
     <ClCompile Include="SupCom\SupComVertex.cpp" />
-    <ClCompile Include="SupCom\UITextureFactory.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

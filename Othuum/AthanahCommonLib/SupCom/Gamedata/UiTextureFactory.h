@@ -5,7 +5,7 @@
 #include <map>
 #include <utility>
 
-#include "SupComEnums.h"
+#include "AthanahCommonLib/SupCom/SupComEnums.h"
 
 
 namespace Ahwassa {
@@ -22,6 +22,7 @@ namespace Athanah {
   class UiTextureFactory {
   public:
     UiTextureFactory(std::string path);
+    ~UiTextureFactory() = default;
 
     std::shared_ptr<Ahwassa::Texture> getStrategicIcon (std::string iconName, SelectableButtonStatus status); //Data\textures\ui\common\game\strategicicons
     std::shared_ptr<Ahwassa::Texture> getIcon          (std::string unitName); //Data\textures\ui\common\icons
