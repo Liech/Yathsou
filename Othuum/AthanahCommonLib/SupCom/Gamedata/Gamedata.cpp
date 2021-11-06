@@ -12,7 +12,7 @@ namespace Athanah {
     _model = std::make_unique<SupComModelFactory>(useSCDFiles ? modelSCD : assetPath + "units");
 
     std::string textureSCD = supComPath + "/gamedata/textures.scd";
-    _icon = std::make_unique<UiTextureFactory>(useSCDFiles ? modelSCD : assetPath);
+    _icon = std::make_unique<UiTextureFactory>(useSCDFiles ? modelSCD : assetPath + "textures");
 
     std::string blueprintSCD = supComPath + "/gamedata/units.scd";
     _blueprint = std::make_unique<BlueprintFactory>(useSCDFiles ? modelSCD : assetPath + "units");

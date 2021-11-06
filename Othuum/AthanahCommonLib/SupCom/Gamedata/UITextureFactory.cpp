@@ -1,13 +1,12 @@
 #include "UiTextureFactory.h"
 
-#include <filesystem>
-
 #include "AezeselFileIOLib/ImageIO.h"
+#include "AezeselFileIOLib/SupremeCommander/SCD.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
 namespace Athanah {
-  UiTextureFactory::UiTextureFactory(std::string path) {
-    _path = path;
+  UiTextureFactory::UiTextureFactory(const std::string& path) {
+    _archive = std::make_unique<Aezesel::SCD>(path);
   }
 
   std::shared_ptr<Ahwassa::Texture> UiTextureFactory::getStrategicIcon(std::string iconName, SelectableButtonStatus status) {
@@ -60,7 +59,7 @@ namespace Athanah {
 
 
   std::shared_ptr<Ahwassa::Texture> UiTextureFactory::loadStrategicIcon(std::string iconName, SelectableButtonStatus status) {
-    const std::string basepath = "\\textures\\ui\\common\\game\\strategicicons\\";
+    const std::string basepath = "ui\\common\\game\\strategicicons\\";
     std::string statusPath;
     if (status == SelectableButtonStatus::Hover)
       statusPath = "_over";
@@ -70,28 +69,28 @@ namespace Athanah {
       statusPath = "_selectedover";
     else
       statusPath = "_selected";
-    std::string path = _path + basepath + iconName + statusPath + ".dds";
+    std::string path = basepath + iconName + statusPath + ".dds";
 
-    if (!std::filesystem::exists(path))
+    if (!_archive->fileExists(path))
       return std::make_shared<Ahwassa::Texture>("StrategicIcon", 0);
 
-    auto img = Aezesel::ImageIO::readImage(path);
+    auto img = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS,_archive->loadBinaryFile(path));
     return std::make_shared<Ahwassa::Texture>("StrategicIcon", img.get());
   }
 
   std::shared_ptr<Ahwassa::Texture> UiTextureFactory::loadIcon(std::string iconName) {
-    const std::string basepath = "\\textures\\ui\\common\\icons\\units\\";
+    const std::string basepath = "ui\\common\\icons\\units\\";
     std::string statusPath;
-    std::string path = _path + basepath + iconName + ".dds";
+    std::string path = basepath + iconName + ".dds";
 
-    if (!std::filesystem::exists(path)) {
+    if (!_archive->fileExists(path)) {
       if (iconName == "default_icon")
         return std::make_shared<Ahwassa::Texture>("Icon", 0);
       else
         return loadIcon("default_icon");
     }
 
-    auto img = Aezesel::ImageIO::readImage(path);
+    auto img = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, _archive->loadBinaryFile(path));
     return std::make_shared<Ahwassa::Texture>("Icon", img.get());
   }
 
@@ -102,29 +101,29 @@ namespace Athanah {
     std::string icon = "none.dds";
 
     if (faction == Faction::Aeon && type == FactionIconType::Normal)
-      icon = "\\textures\\ui\\common\\faction_icon-lg\\aeon_ico.dds";
+      icon = "ui\\common\\faction_icon-lg\\aeon_ico.dds";
     else if (faction == Faction::Cybran && type == FactionIconType::Normal)
-      icon = "\\textures\\ui\\common\\faction_icon-lg\\cybran_ico.dds";
+      icon = "ui\\common\\faction_icon-lg\\cybran_ico.dds";
     else if (faction == Faction::Seraphim && type == FactionIconType::Normal)
-      icon = "\\textures\\ui\\common\\faction_icon-lg\\seraphim_ico.dds";
+      icon = "ui\\common\\faction_icon-lg\\seraphim_ico.dds";
     else if (faction == Faction::Uef && type == FactionIconType::Normal)
-      icon = "\\textures\\ui\\common\\faction_icon-lg\\uef_ico.dds";
+      icon = "ui\\common\\faction_icon-lg\\uef_ico.dds";
     else if (faction == Faction::Undefined && type == FactionIconType::Normal)
-      icon = "\\textures\\ui\\common\\game\\strategicicons\\pause_rest.dds";
+      icon = "ui\\common\\game\\strategicicons\\pause_rest.dds";
 
-    std::string path = _path + icon;
-    if (!std::filesystem::exists(path)) {
+    std::string path = icon;
+    if (!_archive->fileExists(path)) {
       if (faction == Faction::Undefined && type == FactionIconType::Normal)
         return std::make_shared<Ahwassa::Texture>("Faction", 0);
       else
         return loadFactionIcon(Faction::Undefined,FactionIconType::Normal);
     }
-    auto img = Aezesel::ImageIO::readImage(path);
+    auto img = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, _archive->loadBinaryFile(path));
     return std::make_shared<Ahwassa::Texture>("Faction", img.get());
   }
 
   std::shared_ptr<Ahwassa::Texture> UiTextureFactory::loadBackgroundIcon(std::string iconName, ButtonStatus status) {
-    const std::string basepath = "\\textures\\ui\\common\\icons\\units\\";
+    const std::string basepath = "ui\\common\\icons\\units\\";
     std::string statusPath;
     if (status == ButtonStatus::Hover)
       statusPath = "_over";
@@ -132,12 +131,12 @@ namespace Athanah {
       statusPath = "_up";
     else
       statusPath = "_down";
-    std::string path = _path + basepath + iconName + statusPath + ".dds";
+    std::string path = basepath + iconName + statusPath + ".dds";
 
-    if (!std::filesystem::exists(path))
+    if (!_archive->fileExists(path))
       return std::make_shared<Ahwassa::Texture>("BackgroundIcon", 0);
 
-    auto img = Aezesel::ImageIO::readImage(path);
+    auto img = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS,_archive->loadBinaryFile( path));
     return std::make_shared<Ahwassa::Texture>("BackgroundIcon", img.get());
   }
 }

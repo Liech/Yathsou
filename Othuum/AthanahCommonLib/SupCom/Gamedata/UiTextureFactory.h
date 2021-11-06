@@ -7,6 +7,9 @@
 
 #include "AthanahCommonLib/SupCom/SupComEnums.h"
 
+namespace Aezesel {
+  class SCD;
+}
 
 namespace Ahwassa {
   class Texture;
@@ -21,8 +24,8 @@ namespace Athanah {
 
   class UiTextureFactory {
   public:
-    UiTextureFactory(std::string path);
-    ~UiTextureFactory() = default;
+    UiTextureFactory(const std::string& path);
+    virtual ~UiTextureFactory() = default;
 
     std::shared_ptr<Ahwassa::Texture> getStrategicIcon (std::string iconName, SelectableButtonStatus status); //Data\textures\ui\common\game\strategicicons
     std::shared_ptr<Ahwassa::Texture> getIcon          (std::string unitName); //Data\textures\ui\common\icons
@@ -31,19 +34,18 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::Texture> getTierIcons     (Faction faction, TechLevel);
 
   private:
-    std::string _path;
+    std::unique_ptr<Aezesel::SCD> _archive;
 
     std::shared_ptr<Ahwassa::Texture> loadStrategicIcon(std::string iconName, SelectableButtonStatus status);
     std::shared_ptr<Ahwassa::Texture> loadIcon(std::string iconName);
     std::shared_ptr<Ahwassa::Texture> loadFactionIcon(Faction faction, FactionIconType type);
     std::shared_ptr<Ahwassa::Texture> loadBackgroundIcon(std::string iconName, ButtonStatus status);
 
-
     std::map<std::pair<std::string,SelectableButtonStatus>, std::shared_ptr<Ahwassa::Texture>> _strategicIcons ;
-    std::map<std::string, std::shared_ptr<Ahwassa::Texture>> _icons          ;
-    std::map<std::pair<std::string,ButtonStatus>, std::shared_ptr<Ahwassa::Texture>> _backgroundIcons;
-    std::map<std::pair<Faction,FactionIconType>, std::shared_ptr<Ahwassa::Texture>> _factionIcons;
-    std::map<std::string, std::shared_ptr<Ahwassa::Texture>> _tierIcons      ;
+    std::map<std::string                                  , std::shared_ptr<Ahwassa::Texture>> _icons          ;
+    std::map<std::pair<std::string,ButtonStatus>          , std::shared_ptr<Ahwassa::Texture>> _backgroundIcons;
+    std::map<std::pair<Faction,FactionIconType>           , std::shared_ptr<Ahwassa::Texture>> _factionIcons   ;
+    std::map<std::string                                  , std::shared_ptr<Ahwassa::Texture>> _tierIcons      ;
 
   };
 }
