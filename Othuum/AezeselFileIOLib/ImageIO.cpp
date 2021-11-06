@@ -113,6 +113,11 @@ namespace Aezesel {
     return texture.faces() > 1;
   }
 
+  bool ImageIO::isDDSCube(const std::vector<unsigned char>& data) {
+    gli::texture texture = gli::load_dds((char const*)(data.data()), data.size());
+    return texture.faces() > 1;
+  }
+
   std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> ImageIO::readDDSCube(std::string filename) {
     gli::texture texture = gli::load_dds(filename);
     std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> result;
@@ -125,7 +130,7 @@ namespace Aezesel {
     return result;
   }
 
-  std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> ImageIO::readDDSCube(ImageIO::Format, const std::vector<unsigned char> data) {
+  std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> ImageIO::readDDSCube(ImageIO::Format, const std::vector<unsigned char>& data) {
     gli::texture texture = gli::load_dds((char const*)(data.data()), data.size());
     std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>> result;
     gli::texture_cube cube = gli::texture_cube(texture);

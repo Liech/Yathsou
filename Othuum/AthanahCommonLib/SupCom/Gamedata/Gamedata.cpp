@@ -3,6 +3,7 @@
 #include "SupComModelFactory.h"
 #include "UiTextureFactory.h"
 #include "BlueprintFactory.h"
+#include "SkyboxFactory.h"
 
 namespace Athanah {
   Gamedata::Gamedata(std::string supComPath, bool useSCDFiles) {
@@ -16,6 +17,9 @@ namespace Athanah {
 
     std::string blueprintSCD = supComPath + "/gamedata/units.scd";
     _blueprint = std::make_unique<BlueprintFactory>(useSCDFiles ? modelSCD : assetPath + "units");
+
+    std::string skyboxSCD = supComPath + "/gamedata/textures.scd";
+    _skybox = std::make_unique<SkyboxFactory>(useSCDFiles ? skyboxSCD : assetPath + "textures");
   }
 
   BlueprintFactory& Gamedata::blueprint() {
@@ -30,4 +34,7 @@ namespace Athanah {
     return *_icon;
   }
 
+  SkyboxFactory& Gamedata::skybox() {
+    return *_skybox;
+  }
 }

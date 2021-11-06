@@ -42,6 +42,7 @@
     <ClInclude Include="SupCom\Blueprint\BlueprintGeneral.h" />
     <ClInclude Include="SupCom\Gamedata\BlueprintFactory.h" />
     <ClInclude Include="SupCom\Gamedata\Gamedata.h" />
+    <ClInclude Include="SupCom\Gamedata\SkyboxFactory.h" />
     <ClInclude Include="SupCom\Gamedata\SupComModelFactory.h" />
     <ClInclude Include="SupCom\Gamedata\UiTextureFactory.h" />
     <ClInclude Include="SupCom\SupComEnums.h" />
@@ -67,6 +68,7 @@
     <ClCompile Include="SupCom\Blueprint\BlueprintGeneral.cpp" />
     <ClCompile Include="SupCom\Gamedata\BlueprintFactory.cpp" />
     <ClCompile Include="SupCom\Gamedata\Gamedata.cpp" />
+    <ClCompile Include="SupCom\Gamedata\SkyboxFactory.cpp" />
     <ClCompile Include="SupCom\Gamedata\SupComModelFactory.cpp" />
     <ClCompile Include="SupCom\Gamedata\UITextureFactory.cpp" />
     <ClCompile Include="SupCom\SupComMeshLoader.cpp" />

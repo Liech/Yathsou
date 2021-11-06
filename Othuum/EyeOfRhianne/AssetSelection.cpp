@@ -44,7 +44,7 @@ void AssetSelection::addSelections() {
   _units = std::make_shared<UnitModelSelection>(*_gamedata,area,[this]() {unitVisibility(false); }, _graphic);
 
   _animation  = std::make_shared<AnimationSelection> (area, _graphic);
-  _skyBox     = std::make_shared<SkyBoxSelection>    (_config.AssetPath + "\\textures\\environment",area, _graphic);
+  _skyBox     = std::make_shared<SkyBoxSelection>    (_gamedata->skybox(),area, _graphic);
   _renderer   = std::make_shared<RendererSelection>  (area,_graphic);
   _maps       = std::make_shared<MapSelection>       (_config.SupComPath+ "\\maps",area,_graphic);
   _scripts    = std::make_shared<ScriptSelection>    (area,_graphic);

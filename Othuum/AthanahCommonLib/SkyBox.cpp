@@ -14,6 +14,15 @@
 #include "AezeselFileIOLib/ImageIO.h"
 
 namespace Athanah {
+  SkyBox::SkyBox(const std::vector<unsigned char>& data, std::shared_ptr<Ahwassa::Camera> camera) {
+    auto img = Aezesel::ImageIO::readDDSCube(Aezesel::ImageIO::Format::DDS,data);
+    _textures = std::make_shared <Ahwassa::UniformVecTexture>("textures", img);
+
+    _camera = camera;
+    _mesh = makeCube();
+    makeShader();
+  }
+
   SkyBox::SkyBox(std::string filename, std::shared_ptr<Ahwassa::Camera> camera) {
     auto img = Aezesel::ImageIO::readDDSCube(filename);
     _textures = std::make_shared <Ahwassa::UniformVecTexture>("textures", img);

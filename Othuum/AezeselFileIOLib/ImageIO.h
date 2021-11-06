@@ -24,9 +24,10 @@ namespace Aezesel {
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>               readImage(std::string filename);
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>               readImage(ImageIO::Format,const std::vector<unsigned char>&);
 
+    static bool                                                                               isDDSCube(const std::vector<unsigned char>&);
     static bool                                                                               isDDSCube(std::string filename);
     static std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>  readDDSCube(std::string filename);
-    static std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>  readDDSCube(ImageIO::Format, const std::vector<unsigned char>);
+    static std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>  readDDSCube(ImageIO::Format, const std::vector<unsigned char>&);
 
   private:
     static std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>  readPNG(const std::vector<unsigned char>&);

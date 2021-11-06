@@ -18,6 +18,7 @@ namespace Ahwassa {
 namespace Athanah {
   class SkyBox {
   public:
+    SkyBox(const std::vector<unsigned char>&, std::shared_ptr<Ahwassa::Camera>);
     SkyBox(std::string filename, std::shared_ptr<Ahwassa::Camera>);
     SkyBox(std::vector<std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>>>&, std::shared_ptr<Ahwassa::Camera>);
 
