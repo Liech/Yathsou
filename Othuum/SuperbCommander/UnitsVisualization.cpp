@@ -4,7 +4,7 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
-#include "AthanahCommonLib/SupCom/SupComModelFactory.h"
+#include "AthanahCommonLib/SupCom/Gamedata/SupComModelFactory.h"
 #include "AthanahCommonLib/SupCom/SupComModel.h"
 
 namespace Superb {
