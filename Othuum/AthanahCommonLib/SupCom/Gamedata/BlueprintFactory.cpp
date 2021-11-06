@@ -7,16 +7,15 @@
 
 #include "HaasScriptingLib/ScriptEngine.h"
 #include "AezeselFileIOLib/lib/json.hpp"
+#include "AezeselFileIOLib/SupremeCommander/SCD.h"
 
 namespace Athanah {
   BlueprintFactory::BlueprintFactory(const std::string& unitsFolder) {
-    _unitsPath = unitsFolder;
+    _archive = std::make_unique<Aezesel::SCD>(unitsFolder);
 
-    for (const auto& entry : std::filesystem::directory_iterator(_unitsPath)) {
-      std::string path = entry.path().string();
-      path = path.substr(_unitsPath.size()+1);
-      if (std::filesystem::exists(entry.path().string() + "\\" + path + "_unit.bp"))
-        _availableUnits.push_back(path);
+    for (const auto& entry : _archive->getDirectories()) {
+      if (_archive->fileExists(entry + "\\" + entry + "_unit.bp"))
+        _availableUnits.push_back(entry);
     }
 
     soundCall = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
@@ -44,10 +43,8 @@ namespace Athanah {
     script.registerFunction("UnitBlueprint", UnitBlueprint);
     script.registerFunction("Sound", soundCall);
     
-    std::string path = _unitsPath + "\\" + name + "\\" + name + "_unit.bp";
-    std::ifstream t(path);
-    std::string str((std::istreambuf_iterator<char>(t)),
-      std::istreambuf_iterator<char>());
+    std::string path = name + "\\" + name + "_unit.bp";
+    std::string str = _archive->loadTextFile(path);
     str = Haas::ScriptEngine::cleanComments(str);
     script.executeString(str);
     if (!called) {

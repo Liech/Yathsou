@@ -5,6 +5,8 @@
 
 namespace Aezesel {
   /// <summary>
+  /// Supreme Commander Gamedata Archive
+  /// 
   /// scd files are zip files in disguise
   /// Some files magically appear only if you unzip it with e.g. 7z
   /// The zipper lib of this library is not able to unzip all hidden files
@@ -16,8 +18,9 @@ namespace Aezesel {
     SCD(const std::string& archivePath);
 
     std::vector<std::string>   getDirectories(const std::string& subPath = "") const ;
-    bool                       fileExists(const std::string file) const;
+    bool                       fileExists    (const std::string file) const;
     std::vector<unsigned char> loadBinaryFile(const std::string file) const;
+    std::string                loadTextFile  (const std::string file) const;
 
     std::string getPath()   const;
     bool        isArchive() const;

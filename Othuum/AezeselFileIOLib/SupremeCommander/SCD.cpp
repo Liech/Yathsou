@@ -36,4 +36,11 @@ namespace Aezesel {
       throw std::runtime_error("Error opening " + _archivePath + "/" + file);
     return std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
   }
+
+  std::string SCD::loadTextFile(const std::string file) const {
+    std::ifstream t(_archivePath + "/" + file);
+    std::string str((std::istreambuf_iterator<char>(t)),
+      std::istreambuf_iterator<char>());
+    return str;
+  }
 }
