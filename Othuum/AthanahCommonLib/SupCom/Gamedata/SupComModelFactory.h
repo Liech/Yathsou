@@ -6,7 +6,7 @@
 #include <map>
 
 namespace Aezesel {
-  class ZIP;
+  class SCD;
 }
 
 namespace Athanah {
@@ -16,14 +16,14 @@ namespace Athanah {
   public:
     //unit Folder can also be a zip file ending with .scd
     SupComModelFactory(const std::string& unitsFolder);
-    ~SupComModelFactory() = default;
+    virtual ~SupComModelFactory() = default;
     
     std::shared_ptr<SupComModel> loadModel(const std::string&);
     const std::vector<std::string>&     getAvailableModels();
 
   private:
-    std::string              _unitsPath;
-    std::vector<std::string> _availableUnits;
+    std::unique_ptr<Aezesel::SCD>                       _archive;
+    std::vector<std::string>                            _availableUnits;
     std::map<std::string, std::shared_ptr<SupComModel>> _loadedUnits;
   };
 }

@@ -327,6 +327,7 @@
     <ClInclude Include="Sound\XWB.h" />
     <ClInclude Include="STLWriter.h" />
     <ClInclude Include="SupremeCommander\SCA.h" />
+    <ClInclude Include="SupremeCommander\SCD.h" />
     <ClInclude Include="SupremeCommander\SCM.h" />
     <ClInclude Include="SupremeCommander\SCMAP.h" />
     <ClInclude Include="SupremeCommander\SupremeCommanderAnimator.h" />
@@ -366,6 +367,7 @@
     <ClCompile Include="Sound\XWB.cpp" />
     <ClCompile Include="STLWriter.cpp" />
     <ClCompile Include="SupremeCommander\SCA.cpp" />
+    <ClCompile Include="SupremeCommander\SCD.cpp" />
     <ClCompile Include="SupremeCommander\SCM.cpp" />
     <ClCompile Include="SupremeCommander\SCMAP.cpp" />
     <ClCompile Include="SupremeCommander\SupremeCommanderAnimator.cpp" />

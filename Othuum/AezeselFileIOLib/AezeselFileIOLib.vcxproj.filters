@@ -579,6 +579,9 @@
     <ClInclude Include="IO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SupremeCommander\SCD.h">
+      <Filter>Header Files\SupremeCommander</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImageIO.cpp">
@@ -691,6 +694,9 @@
     </ClCompile>
     <ClCompile Include="IO.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SupremeCommander\SCD.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

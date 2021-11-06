@@ -2,9 +2,9 @@
 
 #include <filesystem>
 #include <fstream>
-#include <filesystem>
 #include <set>
 
+#include "AezeselFileIOLib/SupremeCommander/SCD.h"
 #include "AezeselFileIOLib/SupremeCommander/SCM.h"
 #include "AezeselFileIOLib/ImageIO.h"
 #include "AezeselFileIOLib/SupremeCommander/SupremeCommanderAnimator.h"
@@ -13,16 +13,7 @@
 
 namespace Athanah {
   SupComModel::SupComModel(const std::string& unitDir, const std::string& unitName) {
-    std::cout << "---Loading: " << unitName <<"---"<< std::endl;
-    loadImages(unitDir,unitName);
-
-    std::string fullPath = unitDir + "\\" + unitName + "\\";
-    std::string scmPath = fullPath + unitName + "_lod0.scm";
-    Aezesel::SCM scm;
-    _model = std::make_shared<Aezesel::SCM::data>(scm.load(scmPath));
-
-    loadMesh();
-    loadAnimation(unitDir, unitName);
+    load(unitDir, unitName);
   }
 
   SupComModel::SupComModel(const std::string& unitName, const std::map<std::string, std::vector<unsigned char>>& folder){
@@ -57,6 +48,56 @@ namespace Athanah {
         keyflags.insert(anim->animation[i].flag2str());
       _animator[animationName] = std::make_shared<Aezesel::SupremeCommanderAnimator>(*anim, *_model);
     }
+  }
+
+  SupComModel::SupComModel(Aezesel::SCD& archive, const std::string& unitName) {
+    //std::cout << "---Loading: " << unitName << "---" << std::endl;
+    //Aezesel::SCM scm;
+    //_model = std::make_shared<Aezesel::SCM::data>(scm.load(archive.loadBinaryFile(unitName + "/" + unitName + "_lod0.scm")));
+    //loadMesh();
+    //loadImages(archive, unitName);
+
+    load(archive.getPath(), unitName);
+  }
+
+  void SupComModel::loadImages(Aezesel::SCD& archive, const std::string& unitName) {
+    std::string albedo = unitName + "/" + unitName + "_Albedo.dds";
+    if (archive.fileExists(albedo)) {
+      auto albedoArray = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, archive.loadBinaryFile(albedo));
+      _albedo = std::make_shared<Ahwassa::Texture>("Albedo", albedoArray.get());
+    }
+    else
+      _albedo = std::make_shared<Ahwassa::Texture>("Albedo", 0);
+
+    std::string specTeam = unitName + "/" + unitName + "_SpecTeam.dds";
+    if (archive.fileExists(specTeam)) {
+      auto infoArray = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, archive.loadBinaryFile(specTeam));
+      _info = std::make_shared<Ahwassa::Texture>("TeamSpec", infoArray.get());
+    }
+    else
+      _info = std::make_shared<Ahwassa::Texture>("TeamSpec", 0);
+
+    std::string normal = unitName + "/" + unitName + "_normalsTS.dds";
+    if (archive.fileExists(normal)) {
+      auto normalArray = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, archive.loadBinaryFile(normal));
+      _normal = std::make_shared<Ahwassa::Texture>("Normal", normalArray.get());
+    }
+    else
+      _normal = std::make_shared<Ahwassa::Texture>("Normal", 0);
+
+  }
+
+  void SupComModel::load(const std::string& unitDir, const std::string& unitName) {
+    std::cout << "---Loading: " << unitName << "---" << std::endl;
+    loadImages(unitDir, unitName);
+
+    std::string fullPath = unitDir + "\\" + unitName + "\\";
+    std::string scmPath = fullPath + unitName + "_lod0.scm";
+    Aezesel::SCM scm;
+    _model = std::make_shared<Aezesel::SCM::data>(scm.load(scmPath));
+
+    loadMesh();
+    loadAnimation(unitDir, unitName);
   }
 
   Ahwassa::Mesh<SupComVertex>& SupComModel::mesh() {

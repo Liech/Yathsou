@@ -15,6 +15,7 @@ namespace Ahwassa {
 }
 namespace Aezesel {
   class SupremeCommanderAnimator;
+  class SCD;
 }
 
 namespace Athanah {
@@ -22,7 +23,7 @@ namespace Athanah {
   public:
     SupComModel(const std::string& unitDir, const std::string& unitName);
     SupComModel(const std::string& unitName, const std::map<std::string, std::vector<unsigned char>>& folder);
-
+    SupComModel(Aezesel::SCD&, const std::string& unitName);
 
     Ahwassa::Mesh<SupComVertex>& mesh();
     Ahwassa::Texture&            albedo();
@@ -35,8 +36,10 @@ namespace Athanah {
     std::vector<glm::mat4>   getAnimation(const std::string& name, float time);
 
   private:
+    void load(const std::string& path, const std::string& unitName);
     void loadImages    (const std::string& unitName, const std::map<std::string, std::vector<unsigned char>>& folder);
     void loadImages    (const std::string& unitDir, const std::string& unitName);
+    void loadImages    (Aezesel::SCD& archive, const std::string& unitName);
     void loadMesh      ();
     void loadAnimation (std::string unitDir, std::string unitName);
 
