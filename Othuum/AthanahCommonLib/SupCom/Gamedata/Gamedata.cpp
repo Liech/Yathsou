@@ -8,7 +8,7 @@
 namespace Athanah {
   Gamedata::Gamedata(std::string supComPath, bool useSCDFiles) {
     std::string assetPath = "Data/";
-
+    //useSCDFiles = true;
     std::string modelSCD = supComPath + "/gamedata/units.scd";
     _model = std::make_unique<SupComModelFactory>(useSCDFiles ? modelSCD : assetPath + "units");
 

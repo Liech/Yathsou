@@ -20,8 +20,8 @@ namespace Athanah {
     virtual ~BlueprintFactory() = default;
 
     std::shared_ptr<const Blueprint> loadModel(const std::string&);
-    const std::vector<std::string>& getAvailableModels();
-
+    const std::vector<std::string>&  getAvailableModels();
+    bool                             hasBlueprint(const std::string&) const;
   private:
     std::unique_ptr<Aezesel::SCD>                           _archive;
     std::vector<std::string>                                _availableUnits;

@@ -56,4 +56,10 @@ namespace Athanah {
   const std::vector<std::string>& BlueprintFactory::getAvailableModels() {
     return _availableUnits;
   }
+
+  bool BlueprintFactory::hasBlueprint(const std::string& name) const {
+    std::string path = name + "\\" + name + "_unit.bp";
+    return _archive->fileExists(path);
+  }
+
 }

@@ -152,6 +152,8 @@ std::pair<std::vector<std::string>, std::vector<std::string>> UnitModelSelection
   std::vector<std::string> niceNames;
 
   for (auto x : _gamedata.model().getAvailableModels()) {
+    if (!_gamedata.blueprint().hasBlueprint(x))
+      continue;
     auto bp = _gamedata.blueprint().loadModel(x);
     auto faction = bp->general().faction();
     bool ok = 

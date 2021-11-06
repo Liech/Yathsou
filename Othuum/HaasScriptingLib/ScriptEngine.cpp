@@ -344,7 +344,7 @@ namespace Haas
     while (std::getline(f, current, '\n')) {
       int i = 0;
       for (; i < current.size(); i++) {
-        if (current[i] == '"') {
+        if (current[i] == '"' || current[i] == '\'') {
           stringOpen = !stringOpen;
         }
         if (!stringOpen && current[i] == symbol) {
