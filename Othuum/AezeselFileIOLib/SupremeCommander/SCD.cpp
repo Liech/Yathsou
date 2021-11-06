@@ -46,6 +46,27 @@ namespace Aezesel {
     return result;
   }
 
+  std::vector<std::string> SCD::getFiles(const std::string& subPath) const {
+    std::vector<std::string> result;
+    if (isArchive()) {
+      for (auto x : _archive->getEntries()) {
+        std::string path = _archiveFilename + "/" + subPath;
+        if (x.starts_with(path) && x != _archiveFilename + "/" + subPath) {
+          std::string withoutPrefix = x.substr(_archiveFilename.size() + 1);
+          int firstSlash = withoutPrefix.find_first_of('/');
+          if (withoutPrefix[withoutPrefix.size() - 1] == '/')
+            continue;
+          result.push_back(withoutPrefix);
+        }
+      }
+    }
+    else {
+      for (auto x : std::filesystem::directory_iterator(getPath() + "/" + subPath))
+        result.push_back(x.path().string().substr(_archivePath.size() + 1));
+    }
+    return result;
+  }
+
   bool SCD::fileExists(const std::string file) const {
     if (isArchive()) {
       std::string s = file;
@@ -75,7 +96,6 @@ namespace Aezesel {
     if (isArchive()) {
       std::string s = file;      
       std::replace(s.begin(),s.end(),'\\', '/');
-      std::cout << " - Load " << file << std::endl;
       auto binary = _archive->getFile(_archiveFilename + "/" + s);
       return std::string((const char*)binary.data(),binary.size());
     }

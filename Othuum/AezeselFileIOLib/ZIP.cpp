@@ -1,6 +1,9 @@
 #include "ZIP.h"
 
 #include <iostream>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 #include "lib/zipper/unzipper.h"
 
@@ -8,10 +11,14 @@
 //eg UAL0401_Aactivate.sca is not found...
 //useless :(
 namespace Aezesel {
-  ZIP::ZIP(const std::string& filename, bool fullUnzip) {
+  ZIP::ZIP(const std::string& filename) {
     _filename = filename;
-    _unzipper = std::make_unique<zipper::Unzipper>(filename);
-    
+
+    std::ifstream input(filename, std::ios::binary);
+    _data = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
+
+    _unzipper = std::make_unique<zipper::Unzipper>(_data);    
+
     auto entries =  _unzipper->entries();
     for (auto x : entries)
       _entries.push_back(x.name);

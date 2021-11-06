@@ -8,15 +8,16 @@
 namespace Athanah {
   Gamedata::Gamedata(std::string supComPath, bool useSCDFiles) {
     std::string assetPath = "Data/";
-    //useSCDFiles = true;
+    useSCDFiles = true;
+
     std::string modelSCD = supComPath + "/gamedata/units.scd";
     _model = std::make_unique<SupComModelFactory>(useSCDFiles ? modelSCD : assetPath + "units");
 
     std::string textureSCD = supComPath + "/gamedata/textures.scd";
-    _icon = std::make_unique<UiTextureFactory>(useSCDFiles ? modelSCD : assetPath + "textures");
+    _icon = std::make_unique<UiTextureFactory>(useSCDFiles ? textureSCD : assetPath + "textures");
 
     std::string blueprintSCD = supComPath + "/gamedata/units.scd";
-    _blueprint = std::make_unique<BlueprintFactory>(useSCDFiles ? modelSCD : assetPath + "units");
+    _blueprint = std::make_unique<BlueprintFactory>(useSCDFiles ? blueprintSCD : assetPath + "units");
 
     std::string skyboxSCD = supComPath + "/gamedata/textures.scd";
     _skybox = std::make_unique<SkyboxFactory>(useSCDFiles ? skyboxSCD : assetPath + "textures");

@@ -21,7 +21,8 @@ namespace Aezesel {
     SCD(const std::string& archiveOrFolderPath);
     virtual ~SCD() = default;
 
-    std::vector<std::string>   getDirectories(const std::string& subPath = "") const ;
+    std::vector<std::string>   getDirectories(const std::string& subPath = "") const;
+    std::vector<std::string>   getFiles      (const std::string& subPath = "") const;
     bool                       fileExists    (const std::string file) const;
     std::vector<unsigned char> loadBinaryFile(const std::string file) const;
     std::string                loadTextFile  (const std::string file) const;

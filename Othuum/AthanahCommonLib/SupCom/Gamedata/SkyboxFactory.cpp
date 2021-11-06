@@ -11,7 +11,7 @@ namespace Athanah {
   SkyboxFactory::SkyboxFactory(const std::string& path) {
     _archive = std::make_unique<Aezesel::SCD>(path);
 
-    for (const auto& name : _archive->getDirectories("environment")) {
+    for (const auto& name : _archive->getFiles("environment")) {
       if (name.ends_with(".dds") && Aezesel::ImageIO::isDDSCube(_archive->loadBinaryFile(name))) {
         _allBoxes.push_back(name);
         std::string niceName = std::regex_replace(name, std::regex("SkyCube_"), "");

@@ -13,7 +13,7 @@ namespace zipper {
 namespace Aezesel {
   class ZIP {
   public:
-    ZIP(const std::string& filename, bool fullUnzip = true);
+    ZIP(const std::string& filename);
     ~ZIP();
 
     void unzip(const std::string& targetFolder);
@@ -26,5 +26,6 @@ namespace Aezesel {
     std::string                       _filename;
     std::vector<std::string>          _entries;
     std::set<std::string>             _entriesSet;
+    std::vector<unsigned char>        _data;
   };
 }
