@@ -3,9 +3,12 @@
 #include <memory>
 #include <map>
 #include <vector>
+#include <array>
+#include <string>
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 #include "AhwassaGraphicsLib/Renderer/RendererTemplate.h"
+#include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 
 namespace Aezesel {
   class Model3D;
@@ -21,9 +24,11 @@ namespace Ahwassa {
 }
 
 namespace Athanah { 
+  class Gamedata;
+
   class MapRenderer {
   public:
-    MapRenderer(std::shared_ptr<Ahwassa::Camera> camera, std::array<std::shared_ptr<Ahwassa::Texture>, 5>);
+    MapRenderer(std::shared_ptr<Ahwassa::Camera> camera, std::array<std::string,5> textures, Gamedata&);
     ~MapRenderer();
 
     void setTextures(std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures);

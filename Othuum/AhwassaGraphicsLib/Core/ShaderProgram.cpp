@@ -77,8 +77,8 @@ namespace Ahwassa {
     m2 += std::to_string(line) + " " + s2.substr(currentStart, s2.length() - 1);
 
 
-    std::cout << std::endl << "SHADER VS" << std::endl << m2 << std::endl;
-    std::cout << std::endl << "SHADER FS" << std::endl << m << std::endl;
+    //std::cout << std::endl << "SHADER VS" << std::endl << m2 << std::endl;
+    //std::cout << std::endl << "SHADER FS" << std::endl << m << std::endl;
 
     const char* vs_src = vssrc.c_str();
     const char* fs_src = fssrc.c_str();
@@ -150,9 +150,9 @@ namespace Ahwassa {
       if (_uniform[i]->isBuffer())
         continue;
       _uniformIsActive[i] = activeNames.count(_uniform[i]->getName()) != 0 || activeNames.count(_uniform[i]->getName() + "[0]") != 0;
-      if (!_uniformIsActive[i]) {
-        std::cout << "Uniform is inactive: " << _uniform[i]->getName() << std::endl;
-      }
+      //if (!_uniformIsActive[i]) {
+      //  std::cout << "Uniform is inactive: " << _uniform[i]->getName() << std::endl;
+      //}
     }
 
   }

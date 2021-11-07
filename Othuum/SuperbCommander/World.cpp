@@ -1,10 +1,10 @@
 #include "World.h"
 
-#include "AezeselFileIOLib/ImageIO.h"
 
 #include "AthanahCommonLib/Map/Map.h"
 #include "AthanahCommonLib/Map/MapRenderer.h"
 #include "AthanahCommonLib/Physic/NavigationMeshDebugDrawer.h"
+#include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
@@ -17,22 +17,20 @@
 #include "SuthanusPhysicsLib/PhysicNavigationMesh.h"
 
 namespace Superb {
-  World::World(Ahwassa::Window* window, std::shared_ptr<Suthanus::PhysicEngine> physic,std::shared_ptr<Athanah::Map> map) {
+  World::World(Ahwassa::Window* window, std::shared_ptr<Suthanus::PhysicEngine> physic,std::shared_ptr<Athanah::Map> map, Athanah::Gamedata& gamedata) {
     _map    = map   ;
     _window = window;
     _physic = physic;
     map->loadFull();
 
-    std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures;
+    std::array<std::string,5> textures;
     for (int i = 0; i < 5; i++) {
-      std::string path = "Data" + map->scmap().terrainTexturePaths[i].path;
-      auto img = Aezesel::ImageIO::readImage(path);
-      textures[i] = std::make_shared<Ahwassa::Texture>("TerrainTexture" + std::to_string(i), img.get());
+      textures[i] = map->scmap().terrainTexturePaths[i].path;
     }
 
     _obj = _physic->newHeightMap(glm::vec3(0, 0, 0), *map->scmap().heightMapData,2000);
 
-    _mapRenderer = std::make_shared<Athanah::MapRenderer>(window->camera(), textures);
+    _mapRenderer = std::make_shared<Athanah::MapRenderer>(window->camera(), textures, gamedata);
 
     auto tinter = [&](const std::array<size_t, 2> position, Ahwassa::PositionColorNormalVertex& v) {
       std::array<size_t, 2> half = { position[0] / 2,position[1] / 2 };

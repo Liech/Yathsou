@@ -18,6 +18,7 @@
 
 #include "AthanahCommonLib/Map/Map.h"
 #include "AthanahCommonLib/Physic/BulletDebugDrawer.h"
+#include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 
 #include "World.h"
 #include "Config.h"
@@ -56,6 +57,7 @@ int main(int argc, char** argv) {
   std::shared_ptr<Superb::World>                   world;
   std::shared_ptr<Superb::Units>                   units;
   std::shared_ptr<Superb::UnitsVisualization>      unitsVis;
+  std::shared_ptr<Athanah::Gamedata>               gamedata;
 
   std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
   std::shared_ptr<Superb::Spheres>                 spheres;
@@ -71,7 +73,8 @@ int main(int argc, char** argv) {
     physic = std::make_shared<Suthanus::PhysicEngine>();
     physicDebug = std::make_shared<Superb::PhysicsDebugView>(physic, &w, Iyathuum::Key::KEY_F2);
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
-    world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"));
+    gamedata = std::make_shared<Athanah::Gamedata>(config.SupComPath, true);
+    world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"), *gamedata);
     units = std::make_shared<Superb::Units>(config.SupComPath + "\\gamedata\\units.scd",&w, physic);
     unitsVis = std::make_shared<Superb::UnitsVisualization>(&w,*units);
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh(), units);

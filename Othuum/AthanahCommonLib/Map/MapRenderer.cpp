@@ -5,14 +5,19 @@
 #include "AhwassaGraphicsLib/Uniforms/UniformMat4.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AhwassaGraphicsLib/Util.h"
-#include "AezeselFileIOLib/Model3D.h"
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
+#include "AezeselFileIOLib/Model3D.h"
+#include "AezeselFileIOLib/ImageIO.h"
 
 namespace Athanah {
-  MapRenderer::MapRenderer(std::shared_ptr<Ahwassa::Camera> camera, std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures){
+  MapRenderer::MapRenderer(std::shared_ptr<Ahwassa::Camera> camera, std::array<std::string,5> textures, Gamedata& gamedata){
     _camera = camera;
-    _textures = textures;
 
+    for (int i = 0; i < textures.size(); i++)
+    {
+      auto img = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS,gamedata.loadBinary(textures[i].substr(1)));
+      _textures[i] = std::make_shared<Ahwassa::Texture>("TerrainTexture" + std::to_string(i), img.get());
+    }
 
     std::string vertex_shader_source = R"(
       out vec4 clr;

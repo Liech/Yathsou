@@ -22,11 +22,12 @@ namespace Athanah {
   class SupComModel;
   class Scenario;
   class MapFactory;
+  class Gamedata;
 }
 
 class MapSelection {
 public:
-  MapSelection(std::string mapPath, Iyathuum::glmAABB<2> area, Graphic&);
+  MapSelection(std::string mapPath, Iyathuum::glmAABB<2> area, Graphic&, Athanah::Gamedata&);
 
   void update();
   void draw();
@@ -35,6 +36,7 @@ public:
   bool isVisible();
 
 private:
+  Athanah::Gamedata& _gamedata;
                                       
   std::shared_ptr<Athanah::MapFactory> _factory;
   Graphic&                             _graphic;

@@ -19,10 +19,11 @@
 #include "AthanahCommonLib/Map/Map.h"
 #include "AthanahCommonLib/Map/MapFactory.h"
 #include "AthanahCommonLib/Map/MapRenderer.h"
+#include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 #include "AezeselFileIOLib/ImageIO.h"
 #include "AezeselFileIOLib/SupremeCommander/SCMAP.h"
 
-MapSelection::MapSelection(std::string mapPath, Iyathuum::glmAABB<2> area, Graphic& graphic) : _graphic(graphic) {
+MapSelection::MapSelection(std::string mapPath, Iyathuum::glmAABB<2> area, Graphic& graphic, Athanah::Gamedata& gamedata) : _graphic(graphic), _gamedata(gamedata){
   _area = area;
   _factory = std::make_shared<Athanah::MapFactory>(mapPath);
 
@@ -40,14 +41,12 @@ MapSelection::MapSelection(std::string mapPath, Iyathuum::glmAABB<2> area, Graph
     map->loadFull();
 
 
-    std::array<std::shared_ptr<Ahwassa::Texture>, 5> textures;
+    std::array<std::string, 5> textures;
     for (int i = 0; i < 5; i++) {
-      std::string path = "Data" + map->scmap().terrainTexturePaths[i].path;
-      auto img = Aezesel::ImageIO::readImage(path);
-      textures[i] = std::make_shared<Ahwassa::Texture>("TerrainTexture" + std::to_string(i), img.get());
+      textures[i] = map->scmap().terrainTexturePaths[i].path;
     }
 
-    _graphic._mapRenderer = std::make_shared<Athanah::MapRenderer>(_graphic.getWindow()->camera(), textures);
+    _graphic._mapRenderer = std::make_shared<Athanah::MapRenderer>(_graphic.getWindow()->camera(), textures, _gamedata);
 
     auto tinter = [&](const std::array<size_t, 2> position, Ahwassa::PositionColorNormalVertex& v) {
       std::array<size_t, 2> half = { position[0] / 2,position[1] / 2 };

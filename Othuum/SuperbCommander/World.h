@@ -8,6 +8,7 @@ namespace Athanah {
   class Map;
   class MapRenderer;
   class NavigationMeshDebugDrawer;
+  class Gamedata;
 }
 namespace Ahwassa {
   class Window;
@@ -24,7 +25,7 @@ namespace Suthanus {
 namespace Superb {
   class World {
   public:
-    World(Ahwassa::Window*,std::shared_ptr<Suthanus::PhysicEngine>,std::shared_ptr<Athanah::Map> mapFolder);
+    World(Ahwassa::Window*,std::shared_ptr<Suthanus::PhysicEngine>,std::shared_ptr<Athanah::Map> mapFolder, Athanah::Gamedata&);
 
     std::shared_ptr<Suthanus::PhysicNavigationMesh> navMesh();
 

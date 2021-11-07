@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 #include "lib/zipper/unzipper.h"
 
@@ -24,6 +25,10 @@ namespace Aezesel {
       _entries.push_back(x.name);
 
     _entriesSet.insert(_entries.begin(), _entries.end());
+
+    for (auto x : _entries) {
+      _lowerCaseMap[toNormalForm(x)] = x;
+    }
   }
 
   ZIP::~ZIP() {
@@ -39,10 +44,13 @@ namespace Aezesel {
   }
 
   std::vector<unsigned char> ZIP::getFile(const std::string& name) {
+    std::string entry = toArchiveForm(name);
     std::vector<unsigned char> unzipped_entry;
-    bool success= _unzipper->extractEntryToMemory(name, unzipped_entry);
-    if (!success)
+    bool success= _unzipper->extractEntryToMemory(entry, unzipped_entry);
+    if (!success) {
+      std::cout << name << " -> " << entry << " not found in " << _filename << std::endl;
       throw std::runtime_error("Entry not found");
+    }
     return unzipped_entry;
   }
 
@@ -60,6 +68,18 @@ namespace Aezesel {
   }
 
   bool ZIP::hasFile(const std::string& name) {
-    return _entriesSet.count(name) != 0;
+    return _entriesSet.count(toArchiveForm(name)) != 0;
+  }
+
+  std::string ZIP::toNormalForm(const std::string& input) {
+    std::string result = input;
+    std::replace(result.begin(), result.end(), '\\', '/');
+    std::transform(result.begin(), result.end(), result.begin(),
+      [](unsigned char c) { return std::tolower(c); });
+    return result;
+  }
+
+  std::string ZIP::toArchiveForm(const std::string& input) {
+    return _lowerCaseMap[toNormalForm(input)];
   }
 }
