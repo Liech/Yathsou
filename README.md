@@ -8,19 +8,22 @@ RTS Engine fragments.
 
 # Goal
 
-In an recreational project the goals may change at any given time. Currently the longterm goal is to create an engine, which is suited for RPG and RTS games. The initial dream, which is still tracked, but also still very far away, is to create a Supreme Commander total conversion mod.
+Recreate the Supreme Commander 1 Engine.
+
+Using the same Assets.
+
+It is not the goal to be precise, but modern.
 
 # Current Work
 
 Since the last 'release' the following was implemented:
  
+ * SCD Archives can be used directly (no more unpack everything into the EyeOfRihanne Data Folder)
+ * Basic Unit Single & Rectangle Selection
+ * Basic Unit Move Command Barebone
  * HeightMap Physics
  * Map Renderer with textures
- * XACT Sound files (xwb/xsb) can be transformed to wav files
-
-The next greater step is to combine elements of the game and adding units that are able to drive on terrain.
-
-Next small step is to click points on Physic and NavMesh.
+ * Sound loading / playing (XACT xwb/xsb). Although sound names are mixed up
 
 # Libraries
 
@@ -93,6 +96,7 @@ Offers:
  * load 3d models with assimp (prototype)
  * Read XACT sound files (.xsb, .xwb)
  * write WAV files
+ * SCD Archives (Supreme Commander gamedata)
 
 ## AthanahCommonLib
 
@@ -138,8 +142,6 @@ Most are not worth any mentioning yet.
 # Build and Run
 
 UI and Network demonstration (and maybe later the actual game) are found in Othuum.
-
-Fervor is my personal playground.
 
 EyeOfRhianne is the asset debugging and exploration tool.
 
