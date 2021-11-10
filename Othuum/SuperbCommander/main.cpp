@@ -73,10 +73,10 @@ int main(int argc, char** argv) {
     physic = std::make_shared<Suthanus::PhysicEngine>();
     physicDebug = std::make_shared<Superb::PhysicsDebugView>(physic, &w, Iyathuum::Key::KEY_F2);
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
-    gamedata = std::make_shared<Athanah::Gamedata>(config.SupComPath, true);
+    gamedata = std::make_shared<Athanah::Gamedata>(config.SupComPath, config.useSCDFiles);
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"), *gamedata);
     units = std::make_shared<Superb::Units>(config.SupComPath + "\\gamedata\\units.scd",&w, physic);
-    unitsVis = std::make_shared<Superb::UnitsVisualization>(&w,*units);
+    unitsVis = std::make_shared<Superb::UnitsVisualization>(&w,*gamedata,*units);
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh(), units);
     freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
     arcCam = std::make_shared<Ahwassa::ArcBallCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F4);

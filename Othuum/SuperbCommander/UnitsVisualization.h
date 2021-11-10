@@ -1,23 +1,28 @@
 #pragma once
 
 #include "Units.h"
+#include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 
 namespace Athanah {
-  class SupComModelFactory;
+  class SupComModel;
+  class SupComMeshRendererDef;
+  struct SupComMesh;
 }
 
 namespace Superb {
   class UnitsVisualization {
   public:
-    UnitsVisualization(Ahwassa::Window*, Units&);
+    UnitsVisualization(Ahwassa::Window*, Athanah::Gamedata&, Units&);
+    virtual ~UnitsVisualization() = default;
 
     void draw();
     void debugDraw();
   private:
-
-    std::shared_ptr<Athanah::SupComModelFactory> _models;
-
-    Ahwassa::Window* _window;
-    Units&           _units;
+    std::shared_ptr<Athanah::SupComModel>              _model   ;
+    std::vector<std::shared_ptr<Athanah::SupComMesh>>  _meshes  ;
+    std::unique_ptr<Athanah::SupComMeshRendererDef>       _renderer;
+    Ahwassa::Window*   _window;
+    Units&             _units;
+    Athanah::Gamedata& _gamedata;
   };
 }

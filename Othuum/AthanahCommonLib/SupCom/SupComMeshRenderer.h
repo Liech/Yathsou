@@ -6,7 +6,7 @@
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "SupCom/SupComVertex.h"
+#include "AthanahCommonLib/SupCom/SupComVertex.h"
 
 namespace Ahwassa {
   class ShaderProgram;
