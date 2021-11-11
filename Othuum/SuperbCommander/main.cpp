@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
     gamedata = std::make_shared<Athanah::Gamedata>(config.SupComPath, config.useSCDFiles);
     world = std::make_shared<Superb::World>(&w,physic, std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"), *gamedata);
-    units = std::make_shared<Superb::Units>(config.SupComPath + "\\gamedata\\units.scd",&w, physic);
+    units = std::make_shared<Superb::Units>(*gamedata,&w, physic);
     unitsVis = std::make_shared<Superb::UnitsVisualization>(&w,*gamedata,*units);
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh(), units);
     freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);

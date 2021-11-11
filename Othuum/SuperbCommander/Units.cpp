@@ -3,6 +3,7 @@
 #include "SelenNavigationLib/Maps/DirectDistanceMap.h"
 #include "SelenNavigationLib/MapGroup.h"
 
+#include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/Objects/Box.h"
@@ -10,11 +11,11 @@
 #include "AhwassaGraphicsLib/Core/Camera.h"
 
 namespace Superb {
-  Units::Units(std::string unitFolder, Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic) {
+  Units::Units(Athanah::Gamedata& gamedata, Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic) :
+   _gamedata(gamedata){
     _physic     = physic;
     _window     = w;    
     _selection  = std::make_shared<Suthanus::PhysicEngine>();
-    _unitFolder = unitFolder;
 
     auto rnd = []() {return (rand() % 500) / 500.0f; };
     for (int i = 0; i < 500; i++) {      
@@ -69,6 +70,7 @@ namespace Superb {
     firstUnit->map = group;
     firstUnit->map->setTarget(groundPos);
     firstUnit->agent->setMap(firstUnit->map);
+    firstUnit->blueprint = _gamedata.blueprint().loadModel(firstUnit->blueprintID);
     _units[firstUnit->selector] = firstUnit;
   }
 
@@ -87,9 +89,4 @@ namespace Superb {
       result.push_back(x.second);
     return result;
   }
-
-  std::string Units::getUnitFolder() {
-    return _unitFolder;
-  }
-
 }

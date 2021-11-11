@@ -7,6 +7,7 @@
 #include "AthanahCommonLib/SupCom/Gamedata/SupComModelFactory.h"
 #include "AthanahCommonLib/SupCom/SupComModel.h"
 #include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
+#include "AthanahCommonLib/SupCom/Blueprint/BlueprintDisplay.h"
 
 namespace Superb {
   UnitsVisualization::UnitsVisualization(Ahwassa::Window* window, Athanah::Gamedata& gamedata, Units& data) :
@@ -31,9 +32,14 @@ namespace Superb {
         _meshes[i] = std::make_shared<Athanah::SupComMesh>();
         addIt = true;
       }
+      float unitScale = unit->blueprint->display().scale();
+      glm::mat4 mat(1.0);
+      mat = glm::translate(mat, unit->agent->getPosition());
+      mat = glm::scale(mat, glm::vec3(unitScale, unitScale, unitScale));
+
       _meshes[i]->model = _model;
       _meshes[i]->teamColor = Iyathuum::Color(255, 255, 255, 255);
-      _meshes[i]->transformation = glm::translate(glm::mat4(1.0), unit->agent->getPosition());
+      _meshes[i]->transformation = mat;
       _meshes[i]->animation = { glm::mat4(1.0),glm::mat4(1.0),glm::mat4(1.0),glm::mat4(1.0),
       glm::mat4(1.0), glm::mat4(1.0), glm::mat4(1.0), glm::mat4(1.0),
       glm::mat4(1.0), glm::mat4(1.0), glm::mat4(1.0), glm::mat4(1.0),
