@@ -18,7 +18,7 @@ namespace Superb {
     _selection  = std::make_shared<Suthanus::PhysicEngine>();
 
     auto rnd = []() {return (rand() % 500) / 500.0f; };
-    for (int i = 0; i < 500; i++) {      
+    for (int i = 0; i < 50; i++) {      
       glm::vec3 pos(rnd()*300 + 20, 100, rnd()*300 + 20);
       spawnUnit(pos);
     }

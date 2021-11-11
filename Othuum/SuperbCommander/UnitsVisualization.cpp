@@ -8,6 +8,7 @@
 #include "AthanahCommonLib/SupCom/SupComModel.h"
 #include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
 #include "AthanahCommonLib/SupCom/Blueprint/BlueprintDisplay.h"
+#include "AthanahCommonLib/SupCom/Blueprint/BlueprintGeneral.h"
 
 namespace Superb {
   UnitsVisualization::UnitsVisualization(Ahwassa::Window* window, Athanah::Gamedata& gamedata, Units& data) :
@@ -55,7 +56,13 @@ namespace Superb {
   void UnitsVisualization::debugDraw() {
     _window->renderer().box().start();
     for (auto unit : _units.getUnits())
+    {
       _window->renderer().box().drawDot(unit->agent->getPosition(), 0.1f, Iyathuum::Color(255, 128, 30));
+      //Physics
+        //MeshExtentsX = 0.65,
+        //MeshExtentsY = 0.35,
+        //MeshExtentsZ = 0.95,
+    }
     _window->renderer().box().end();
   }
 }

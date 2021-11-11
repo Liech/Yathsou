@@ -117,6 +117,9 @@
     <ClInclude Include="SupCom\Gamedata\SkyboxFactory.h">
       <Filter>Header Files\SupCom\Gamedata</Filter>
     </ClInclude>
+    <ClInclude Include="SupCom\Blueprint\BlueprintPhysic.h">
+      <Filter>Header Files\SupCom\Blueprint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SkyBox.cpp">
@@ -187,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="SupCom\Gamedata\SkyboxFactory.cpp">
       <Filter>Source Files\SupCom\Gamedata</Filter>
+    </ClCompile>
+    <ClCompile Include="SupCom\Blueprint\BlueprintPhysic.cpp">
+      <Filter>Source Files\SupCom\Blueprint</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

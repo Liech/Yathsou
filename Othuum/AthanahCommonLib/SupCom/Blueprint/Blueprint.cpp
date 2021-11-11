@@ -1,6 +1,7 @@
 #include "Blueprint.h"
 #include "BlueprintGeneral.h"
 #include "BlueprintDisplay.h"
+#include "BlueprintPhysic.h"
 
 namespace Athanah {
   Blueprint::Blueprint(const std::string id, const nlohmann::json& input) {
@@ -19,7 +20,7 @@ namespace Athanah {
 
     _general = std::make_shared<BlueprintGeneral>(input["General"]);
     _display = std::make_shared<BlueprintDisplay>(input["Display"]);
-
+    _physic  = std::make_unique<BlueprintPhysic >(input["Physics"]);
     _id = id;
 
     _raw = input;
@@ -46,6 +47,10 @@ namespace Athanah {
 
   BlueprintDisplay& Blueprint::display() const {
     return *_display;
+  }
+
+  BlueprintPhysic& Blueprint::physic() const {
+    return *_physic;
   }
 
   nlohmann::json Blueprint::getRaw() const {

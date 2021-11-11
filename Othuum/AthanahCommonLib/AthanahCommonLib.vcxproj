@@ -40,6 +40,7 @@
     <ClInclude Include="SupCom\Blueprint\BlueprintCommandCaps.h" />
     <ClInclude Include="SupCom\Blueprint\BlueprintDisplay.h" />
     <ClInclude Include="SupCom\Blueprint\BlueprintGeneral.h" />
+    <ClInclude Include="SupCom\Blueprint\BlueprintPhysic.h" />
     <ClInclude Include="SupCom\Gamedata\BlueprintFactory.h" />
     <ClInclude Include="SupCom\Gamedata\Gamedata.h" />
     <ClInclude Include="SupCom\Gamedata\SkyboxFactory.h" />
@@ -66,6 +67,7 @@
     <ClCompile Include="SupCom\Blueprint\BlueprintCommandCaps.cpp" />
     <ClCompile Include="SupCom\Blueprint\BlueprintDisplay.cpp" />
     <ClCompile Include="SupCom\Blueprint\BlueprintGeneral.cpp" />
+    <ClCompile Include="SupCom\Blueprint\BlueprintPhysic.cpp" />
     <ClCompile Include="SupCom\Gamedata\BlueprintFactory.cpp" />
     <ClCompile Include="SupCom\Gamedata\Gamedata.cpp" />
     <ClCompile Include="SupCom\Gamedata\SkyboxFactory.cpp" />
