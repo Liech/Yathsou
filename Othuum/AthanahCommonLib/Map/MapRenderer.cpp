@@ -98,8 +98,8 @@ namespace Athanah {
     Ahwassa::Util::setDepthTest(true);
     Ahwassa::Util::setDepthFuncLess();
     Ahwassa::Util::depthMask(true);
-    _shader->bind();
     _camera->bind();
+    _shader->bind();
     mesh.draw();
     Ahwassa::Util::setDepthTest(false);
   }

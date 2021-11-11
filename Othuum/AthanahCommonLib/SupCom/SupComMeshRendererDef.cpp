@@ -137,9 +137,9 @@ namespace Athanah {
 
     Ahwassa::Util::setDepthTest(true);
     Ahwassa::Util::setDepthFuncLess();
-    Ahwassa::Util::depthMask(true);
-    _shader->bind();
+    Ahwassa::Util::depthMask(true);    
     _camera->bind();
+    _shader->bind();
 
     for (auto& meshVector : _meshes) {
       std::vector<glm::mat4> models;

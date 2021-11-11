@@ -30,7 +30,7 @@ namespace Superb {
     _window->renderer().box().start();
     _window->renderer().box().drawDot(_targetPos, 0.5f, Iyathuum::Color(255, 0, 255));
     for (auto unit : _selection)
-      _window->renderer().box().drawDot(unit->agent->getPosition(), 0.6f, Iyathuum::Color(128, 128, 128));
+      _window->renderer().box().drawDot(unit->agent->getPosition(), 0.1f, Iyathuum::Color(128, 128, 128));
     _window->renderer().box().end();
     if (_rectangleSelectionActive) {
       glm::vec2 mousePos = _window->input().getCursorPos();
