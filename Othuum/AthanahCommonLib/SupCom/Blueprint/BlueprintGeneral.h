@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AezeselFileIOLib/lib/json.hpp"
+#include "BlueprintBase.h"
 #include <memory>
 #include "AthanahCommonLib/SupCom/SupComEnums.h"
 
@@ -8,7 +9,7 @@ namespace Athanah {
   class BlueprintCommandCaps;
 
 
-  class BlueprintGeneral {
+  class BlueprintGeneral : public BlueprintBase {
   public:
     BlueprintGeneral(const nlohmann::json& input);
     BlueprintGeneral();

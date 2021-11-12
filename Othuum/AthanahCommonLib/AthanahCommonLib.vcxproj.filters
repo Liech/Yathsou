@@ -120,6 +120,9 @@
     <ClInclude Include="SupCom\Blueprint\BlueprintPhysic.h">
       <Filter>Header Files\SupCom\Blueprint</Filter>
     </ClInclude>
+    <ClInclude Include="SupCom\Blueprint\BlueprintBase.h">
+      <Filter>Header Files\SupCom\Blueprint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SkyBox.cpp">

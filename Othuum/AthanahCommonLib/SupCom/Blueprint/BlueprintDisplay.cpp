@@ -2,26 +2,11 @@
 
 namespace Athanah {
   BlueprintDisplay::BlueprintDisplay(const nlohmann::json& input) {
-    if (input.find("UniformScale") != input.end())
-      _scale = input["UniformScale"];
-    else
-      _scale = 1;
-    if (input.find("SpawnRandomRotation") != input.end())
-      _randomSpawnRotation = input["SpawnRandomRotation"]!=0;
-    else
-      _randomSpawnRotation = false;
-    if (input.find("PlaceholderMeshName") != input.end())
-      _placeholderMeshName = input["PlaceholderMeshName"];
-    else
-      _placeholderMeshName = "UXB0000";
-    if (input.find("ForcedBuildSpin") != input.end())
-      _forcedBuildSpin = input["ForcedBuildSpin"];
-    else
-      _forcedBuildSpin = 0;
-    if (input.find("AnimationLand") != input.end())
-      _animationLand = input["AnimationLand"];
-    else
-      _animationLand = "";
+    _scale               = read<float>      ("UniformScale"       , input, 1);
+    _randomSpawnRotation = readBool         ("SpawnRandomRotation", input, false);
+    _placeholderMeshName = read<std::string>("PlaceholderMeshName", input, "UXB0000");
+    _forcedBuildSpin     = read<float>      ("ForcedBuildSpin"    , input, 0);
+    _animationLand       = read<std::string>("AnimationLand"      , input, "");
   }
 
   BlueprintDisplay::BlueprintDisplay() {

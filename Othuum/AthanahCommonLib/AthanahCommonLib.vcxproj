@@ -37,6 +37,7 @@
     <ClInclude Include="Physic\NavigationMeshDebugDrawer.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="SupCom\Blueprint\Blueprint.h" />
+    <ClInclude Include="SupCom\Blueprint\BlueprintBase.h" />
     <ClInclude Include="SupCom\Blueprint\BlueprintCommandCaps.h" />
     <ClInclude Include="SupCom\Blueprint\BlueprintDisplay.h" />
     <ClInclude Include="SupCom\Blueprint\BlueprintGeneral.h" />

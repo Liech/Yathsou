@@ -21,39 +21,15 @@ namespace Athanah {
     else
       _commands = std::make_shared<BlueprintCommandCaps>();
 
-    if (input.find("UnitName") != input.end()) {
-      _unitName = input["UnitName"];
-      _unitName = _unitName.substr(_unitName.find_first_of('>')+1);
-    }
-    else
-      _unitName = "Undefined";
+    _unitName          = read<std::string>("UnitName"         , input, "Undefined");
+    _category          = read<std::string>("Category"         , input, "Undefined");
+    _icon              = read<std::string>("Icon"             , input, "Undefined");
+    _weight            = read<float      >("UnitWeight"       , input, 1.0f);
+    _selectionPriority = read<int        >("SelectionPriority", input, 1);
+    _classification    = read<std::string>("Classification"   , input, "RULEUC_Undefined");
 
-    if (input.find("Icon") != input.end())
-      _icon = input["Icon"];
-    else
-      _icon = "Undefined";
-
-    if (input.find("UnitWeight") != input.end())
-      _weight = input["UnitWeight"];
-    else
-      _weight = 1;
-
-    if (input.find("SelectionPriority") != input.end())
-      _selectionPriority = input["SelectionPriority"];
-    else
-      _selectionPriority = 1;
-
-    if (input.find("Classification") != input.end()) {
-      _classification = input["Classification"];
-      _classification = _classification.substr(std::string("RULEUC_").size());
-    }
-    else
-      _classification = "Undefined";
-
-    if (input.find("Category") != input.end())
-      _category = input["Category"];
-    else
-      _category = "Undefined";
+    _classification = _classification.substr(std::string("RULEUC_").size());
+    _unitName = _unitName.substr(_unitName.find_first_of('>') + 1);
 
     if (input.find("TechLevel") != input.end()) {
       std::string lvl = input["TechLevel"];
