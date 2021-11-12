@@ -15,6 +15,22 @@ namespace Athanah {
   public:
     BlueprintPhysic(const nlohmann::json& input);
     virtual ~BlueprintPhysic() = default;
+
+    float          bankingSlope          () const;
+    float          dragCoefficient       () const;
+    float          maxAcceleratin        () const;
+    float          maxBreak              () const;
+    float          maxSpeed              () const;
+    float          maxSpeedReverse       () const;
+    float          maxSteerForce         () const;
+    float          minSpeedPercent       () const;
+    float          rotateOnSpotThreshold () const;
+    float          turnRadius            () const;
+    float          turnRate              () const;
+    bool           rotateOnSpot          () const;
+    UnitMotionType motionType            () const;
+    glm::vec3      meshExtents           () const;
+
   private:
     float _bankingSlope    = 0   ;
     float _dragCoefficient = 0.2f;
