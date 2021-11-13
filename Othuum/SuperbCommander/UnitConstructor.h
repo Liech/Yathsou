@@ -13,6 +13,7 @@ namespace Suthanus {
 
 namespace Athanah {
   class Gamedata;
+  class Blueprint;
 }
 
 namespace Superb {
@@ -29,10 +30,11 @@ namespace Superb {
     std::shared_ptr<Suthanus::Box> getPhysic()   const;
     std::shared_ptr<Suthanus::Box> getSelector() const;
   private:
-    glm::vec3                                _startPosition;
-    std::string                              _id           ;
-    std::shared_ptr<Suthanus::PhysicEngine>  _physic       ;
-    std::shared_ptr<Suthanus::PhysicEngine>  _selection    ;
-    Athanah::Gamedata&                       _gamedata     ;
+    glm::vec3                                 _startPosition;
+    std::string                               _id           ;
+    std::shared_ptr<Suthanus::PhysicEngine>   _physic       ;
+    std::shared_ptr<Suthanus::PhysicEngine>   _selection    ;
+    Athanah::Gamedata&                        _gamedata     ;
+    std::shared_ptr<const Athanah::Blueprint> _blueprint    ;
   };
 }

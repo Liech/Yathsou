@@ -1,15 +1,19 @@
 #include "UnitConstructor.h"
 
+#include "AthanahCommonLib/SupCom/Blueprint/Blueprint.h"
+#include "AthanahCommonLib/SupCom/Blueprint/BlueprintPhysic.h"
+#include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
+
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/Objects/Box.h"
 
 namespace Superb {
   UnitConstructor::UnitConstructor(Athanah::Gamedata& gamedata) : _gamedata(gamedata) {
-
   }
 
   void UnitConstructor::setId(const std::string& id){
-    _id = id;
+    _id        = id;
+    _blueprint = _gamedata.blueprint().loadModel(id);
   }
 
   void UnitConstructor::setPhysic(std::shared_ptr<Suthanus::PhysicEngine> physic) {
@@ -24,11 +28,11 @@ namespace Superb {
     _startPosition = pos;
   }
 
-  std::shared_ptr<Suthanus::Box> UnitConstructor::getSelector() const{
-    return _selection->newBox(_startPosition, glm::vec3(1, 1, 1), true);
+  std::shared_ptr<Suthanus::Box> UnitConstructor::getSelector() const{    
+    return _selection->newBox(_startPosition, _blueprint->selectionSize(), true);
   }
 
-  std::shared_ptr<Suthanus::Box> UnitConstructor::getPhysic() const {
-    return _physic->newBox(_startPosition, glm::vec3(1,1,1), true);
+  std::shared_ptr<Suthanus::Box> UnitConstructor::getPhysic() const {    
+    return _physic->newBox(_startPosition, _blueprint->physic().meshExtents()*2.0f, true);
   }
 }

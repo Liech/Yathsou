@@ -68,7 +68,7 @@ namespace Superb {
     constructor.setId("UEL0201");
     constructor.setPhysic(_physic);
     constructor.setSelection(_selection);
-    constructor.setStartPosition(groundPos);
+    constructor.setStartPosition(groundPos + glm::vec3(0,1,0));
     auto firstUnit = std::make_shared<Unit>(constructor);//_gamedata.blueprint().loadModel("UEL0201")
     _units[firstUnit->getSelector()] = firstUnit;
   }

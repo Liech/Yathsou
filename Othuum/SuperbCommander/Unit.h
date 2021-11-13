@@ -17,6 +17,7 @@ namespace Superb {
 
     glm::vec3                      getPosition();
     std::shared_ptr<Suthanus::Box> getSelector();
+    std::shared_ptr<Suthanus::Box> getPhysic  ();
 
     void update();
   private:

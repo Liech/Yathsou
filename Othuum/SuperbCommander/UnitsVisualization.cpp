@@ -10,6 +10,7 @@
 #include "AthanahCommonLib/SupCom/Blueprint/BlueprintDisplay.h"
 #include "AthanahCommonLib/SupCom/Blueprint/BlueprintGeneral.h"
 #include "AthanahCommonLib/SupCom/Blueprint/BlueprintPhysic.h"
+#include "AthanahCommonLib/Physic/BoxVisualization.h"
 
 namespace Superb {
   UnitsVisualization::UnitsVisualization(Ahwassa::Window* window, Athanah::Gamedata& gamedata, Units& data) :
@@ -59,8 +60,8 @@ namespace Superb {
     for (auto unit : _units.getUnits())
     {
       auto pos = unit->getPosition();
-      _window->renderer().box().drawDot(pos, 0.1f, Iyathuum::Color(255, 128, 30));
-      glm::vec3 size = glm::vec3(0.65, 0.35, 0.95);        
+      //_window->renderer().box().drawDot(pos, 0.1f, Iyathuum::Color(255, 128, 30));
+      Athanah::BoxVisualization::draw(unit->getPhysic(), Iyathuum::Color(255, 128, 30), _window);
         //unit->blueprint->physic().meshExtents();
       //_window->renderer().box().drawBox(pos - size, size * 2.0f, Iyathuum::Color(255, 0, 0, 255));
     }

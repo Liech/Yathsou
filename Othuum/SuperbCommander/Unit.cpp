@@ -16,8 +16,12 @@ namespace Superb {
 
   std::shared_ptr<Suthanus::Box> Unit::getSelector() {
     return _selector;
-
   }
+
+  std::shared_ptr<Suthanus::Box> Unit::getPhysic() {
+    return _physic;
+  }
+
   void Unit::update() {
     _selector->setPosition(getPosition());
   }
