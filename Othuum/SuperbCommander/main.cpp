@@ -98,7 +98,7 @@ int main(int argc, char** argv) {
     //if (asd == 0) spheres->addSphere(w.camera()->getPosition(),0.5f,Iyathuum::Color(255,0,0));
 
     if (arcCam->isFocus() && navUI->selection().size() > 0)
-      w.camera()->setTarget(navUI->selection()[0]->agent->getPosition());
+      w.camera()->setTarget(navUI->selection()[0]->getPosition());
 
     composer->start();
     b.draw();

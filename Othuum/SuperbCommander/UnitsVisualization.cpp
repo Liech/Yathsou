@@ -34,9 +34,9 @@ namespace Superb {
         _meshes[i] = std::make_shared<Athanah::SupComMesh>();
         addIt = true;
       }
-      float unitScale = unit->blueprint->display().scale();
+      float unitScale = 0.07f;// unit->blueprint->display().scale();
       glm::mat4 mat(1.0);
-      mat = glm::translate(mat, unit->agent->getPosition());
+      mat = glm::translate(mat, unit->getPosition());
       mat = glm::scale(mat, glm::vec3(unitScale, unitScale, unitScale));
 
       _meshes[i]->model = _model;
@@ -58,9 +58,10 @@ namespace Superb {
     _window->renderer().box().start();
     for (auto unit : _units.getUnits())
     {
-      auto pos = unit->agent->getPosition();
+      auto pos = unit->getPosition();
       _window->renderer().box().drawDot(pos, 0.1f, Iyathuum::Color(255, 128, 30));
-      glm::vec3 size = unit->blueprint->physic().meshExtents();
+      glm::vec3 size = glm::vec3(0.65, 0.35, 0.95);        
+        //unit->blueprint->physic().meshExtents();
       //_window->renderer().box().drawBox(pos - size, size * 2.0f, Iyathuum::Color(255, 0, 0, 255));
     }
     _window->renderer().box().end();

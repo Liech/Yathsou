@@ -2,24 +2,25 @@
 
 #include <memory>
 #include <string>
-
-#include "SelenNavigationLib/NavigationAgent.h"
-#include "SelenNavigationLib/NavigationMap.h"
-#include "AthanahCommonLib/SupCom/Blueprint/Blueprint.h"
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 
 namespace Suthanus {
   class Box;
 }
 
 namespace Superb {
-  class Unit {
+  class UnitConstructor;
 
+  class Unit {
   public:
-    std::shared_ptr<Selen::NavigationAgent<3>> agent   ;
-    std::shared_ptr<Suthanus::Box>             selector;
-    std::shared_ptr<Suthanus::Box>             physicBox;
-    std::shared_ptr<Selen::NavigationMap<3>>   map     ;
-    std::shared_ptr<const Athanah::Blueprint>  blueprint;
-    std::string                                blueprintID = "UEL0201";
+    Unit(const UnitConstructor& blueprint);
+
+    glm::vec3                      getPosition();
+    std::shared_ptr<Suthanus::Box> getSelector();
+
+    void update();
+  private:
+    std::shared_ptr<Suthanus::Box> _physic  ;
+    std::shared_ptr<Suthanus::Box> _selector;
   };
 }

@@ -10,6 +10,8 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
 
+#include "UnitConstructor.h"
+
 namespace Superb {
   Units::Units(Athanah::Gamedata& gamedata, Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic) :
    _gamedata(gamedata){
@@ -27,8 +29,9 @@ namespace Superb {
   void Units::update() {
     _selection->update();
     for (auto unit : _units) {
-      unit.second->agent->updatePosition();
-      unit.second->selector->setPosition(unit.second->agent->getPosition());
+      unit.second->update();
+      //unit.second->agent->updatePosition();
+      //unit.second->selector->setPosition(unit.second->agent->getPosition());
     }
   }
 
@@ -61,17 +64,13 @@ namespace Superb {
     glm::vec3 groundPos;
     if (nullptr == _physic->raycast(position, glm::vec3(0, -1, 0), groundPos))
       groundPos = position;
-    auto firstUnit = std::make_shared<Unit>();
-    firstUnit->agent = std::make_shared<Selen::NavigationAgent<3>>(groundPos, glm::vec3(0));
-    firstUnit->selector = _selection->newBox(groundPos, glm::vec3(0.5, 0.5, 0.5), false);
-    auto group = std::make_shared<Selen::MapGroup<3>>();
-    group->addMap(std::make_shared<Selen::DirectDistanceMap<3>>(), 0.5f);
-    //group->addMap(std::make_shared<Selen::PersonalSpaceMap<3>>(*this), 0.5f);
-    firstUnit->map = group;
-    firstUnit->map->setTarget(groundPos);
-    firstUnit->agent->setMap(firstUnit->map);
-    firstUnit->blueprint = _gamedata.blueprint().loadModel(firstUnit->blueprintID);
-    _units[firstUnit->selector] = firstUnit;
+    UnitConstructor constructor(_gamedata);
+    constructor.setId("UEL0201");
+    constructor.setPhysic(_physic);
+    constructor.setSelection(_selection);
+    constructor.setStartPosition(groundPos);
+    auto firstUnit = std::make_shared<Unit>(constructor);//_gamedata.blueprint().loadModel("UEL0201")
+    _units[firstUnit->getSelector()] = firstUnit;
   }
 
   std::vector<glm::vec3> Units::PersonalSpaceQuery(const glm::vec3& pos, float maxDistance) const {

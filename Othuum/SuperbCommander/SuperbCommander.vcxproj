@@ -151,6 +151,7 @@
     <ClCompile Include="PhysicsDebugView.cpp" />
     <ClCompile Include="Spheres.cpp" />
     <ClCompile Include="Unit.cpp" />
+    <ClCompile Include="UnitConstructor.cpp" />
     <ClCompile Include="Units.cpp" />
     <ClCompile Include="UnitsVisualization.cpp" />
     <ClCompile Include="World.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="PhysicsDebugView.h" />
     <ClInclude Include="Spheres.h" />
     <ClInclude Include="Unit.h" />
+    <ClInclude Include="UnitConstructor.h" />
     <ClInclude Include="Units.h" />
     <ClInclude Include="UnitsVisualization.h" />
     <ClInclude Include="World.h" />
