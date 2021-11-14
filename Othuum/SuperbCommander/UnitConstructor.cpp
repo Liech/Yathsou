@@ -33,6 +33,14 @@ namespace Superb {
   }
 
   std::shared_ptr<Suthanus::Box> UnitConstructor::getPhysic() const {    
-    return _physic->newBox(_startPosition, _blueprint->physic().meshExtents()*2.0f, true);
+    return _physic->newBox(_startPosition, _blueprint->physic().meshExtents(), true);
+  }
+
+  std::shared_ptr<const Athanah::Blueprint> UnitConstructor::getBlueprint() const {
+    return _blueprint;
+  }
+
+  std::string UnitConstructor::getId() const {
+    return _id;
   }
 }

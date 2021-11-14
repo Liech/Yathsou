@@ -6,12 +6,18 @@
 
 namespace Superb {
   Unit::Unit(const UnitConstructor& info) {
-    _physic   = info.getPhysic();
-    _selector = info.getSelector();
+    _physic    = info.getPhysic();
+    _selector  = info.getSelector();
+    _blueprint = info.getBlueprint();
+    _id        = info.getId();
   }
 
   glm::vec3 Unit::getPosition() {
     return _physic->getPosition();
+  }
+
+  glm::mat4 Unit::getTransformation() {
+    return _physic->getTransformation();
   }
 
   std::shared_ptr<Suthanus::Box> Unit::getSelector() {
@@ -25,4 +31,13 @@ namespace Superb {
   void Unit::update() {
     _selector->setPosition(getPosition());
   }
+
+  std::shared_ptr<const Athanah::Blueprint> Unit::getBlueprint() const {
+    return _blueprint;
+  }
+
+  std::string Unit::getID() const {
+    return _id;
+  }
+
 }

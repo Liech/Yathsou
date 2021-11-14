@@ -27,8 +27,11 @@ namespace Superb {
     void setPhysic(std::shared_ptr<Suthanus::PhysicEngine>);
     void setSelection(std::shared_ptr<Suthanus::PhysicEngine>);
 
-    std::shared_ptr<Suthanus::Box> getPhysic()   const;
-    std::shared_ptr<Suthanus::Box> getSelector() const;
+    std::shared_ptr<Suthanus::Box>            getPhysic()    const;
+    std::shared_ptr<Suthanus::Box>            getSelector()  const;
+    std::shared_ptr<const Athanah::Blueprint> getBlueprint() const;
+    std::string                               getId()        const;
+
   private:
     glm::vec3                                 _startPosition;
     std::string                               _id           ;

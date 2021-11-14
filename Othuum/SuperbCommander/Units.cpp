@@ -64,8 +64,10 @@ namespace Superb {
     glm::vec3 groundPos;
     if (nullptr == _physic->raycast(position, glm::vec3(0, -1, 0), groundPos))
       groundPos = position;
-    UnitConstructor constructor(_gamedata);
-    constructor.setId("UEL0201");
+    UnitConstructor constructor(_gamedata);//UEL0201
+    std::vector<std::string> possibleIDs = { "UEL0201" };//, "URL0309", "XSS0303", "UEL0401"};
+
+    constructor.setId(possibleIDs[rand()%possibleIDs.size()]);
     constructor.setPhysic(_physic);
     constructor.setSelection(_selection);
     constructor.setStartPosition(groundPos + glm::vec3(0,1,0));

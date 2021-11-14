@@ -18,9 +18,8 @@ namespace Superb {
     void draw();
     void debugDraw();
   private:
-    std::shared_ptr<Athanah::SupComModel>              _model   ;
-    std::vector<std::shared_ptr<Athanah::SupComMesh>>  _meshes  ;
-    std::unique_ptr<Athanah::SupComMeshRendererDef>       _renderer;
+    std::vector<std::shared_ptr<Athanah::SupComMesh>>            _meshes  ;
+    std::unique_ptr<Athanah::SupComMeshRendererDef>              _renderer;
     Ahwassa::Window*   _window;
     Units&             _units;
     Athanah::Gamedata& _gamedata;

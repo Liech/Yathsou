@@ -82,12 +82,14 @@ int main(int argc, char** argv) {
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh(), units);
     freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
     arcCam = std::make_shared<Ahwassa::ArcBallCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F4);
-
+    
     w.input().addUIElement(freeCam.get());
     w.input().addUIElement(arcCam .get());
     w.input().addUIElement(navUI.get());
   };
   int asd = 0;
+  bool pressed = false;
+  bool debugOn = true;
   w.Update = [&]() {
     physic->update();
     physicDebug->update();
@@ -99,6 +101,13 @@ int main(int argc, char** argv) {
 
     if (arcCam->isFocus() && navUI->selection().size() > 0)
       w.camera()->setTarget(navUI->selection()[0]->getPosition());
+
+    if (!pressed && w.input().getKeyStatus(Iyathuum::Key::KEY_F5) == Iyathuum::KeyStatus::PRESS) {
+      pressed = true;
+      debugOn = !debugOn;
+    }
+    else if (w.input().getKeyStatus(Iyathuum::Key::KEY_F5) == Iyathuum::KeyStatus::RELEASE)
+      pressed = false;
 
     composer->start();
     b.draw();
@@ -116,10 +125,12 @@ int main(int argc, char** argv) {
     composer->blitDepth();
 
     physicDebug->draw();
-    world      ->debugDraw();
-    navUI      ->debugDraw();
-    unitsVis   ->debugDraw();
 
+    if (debugOn) {
+      world->debugDraw();
+      navUI->debugDraw();
+      unitsVis->debugDraw();
+    }
     fps->draw();
   };
   w.run();

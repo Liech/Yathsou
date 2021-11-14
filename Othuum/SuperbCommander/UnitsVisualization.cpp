@@ -11,16 +11,16 @@
 #include "AthanahCommonLib/SupCom/Blueprint/BlueprintGeneral.h"
 #include "AthanahCommonLib/SupCom/Blueprint/BlueprintPhysic.h"
 #include "AthanahCommonLib/Physic/BoxVisualization.h"
+#include "AthanahCommonLib/SupCom/Blueprint/Blueprint.h"
+#include "AthanahCommonLib/SupCom/Blueprint/BlueprintDisplay.h"
 
 namespace Superb {
   UnitsVisualization::UnitsVisualization(Ahwassa::Window* window, Athanah::Gamedata& gamedata, Units& data) :
     _window(window),
     _units(data),
     _gamedata(gamedata){
-    _model = _gamedata.model().loadModel("UEL0201");
     _renderer = std::make_unique<Athanah::SupComMeshRendererDef>(_window->camera());
     auto mesh = std::make_shared<Athanah::SupComMesh>();
-    mesh->model = _model;
     mesh->teamColor = Iyathuum::Color(255,255,255,255);
     mesh->transformation = glm::mat4(1.0);
     _meshes.push_back(mesh);
@@ -29,18 +29,18 @@ namespace Superb {
   void UnitsVisualization::draw() {
     _meshes.resize(_units.getUnits().size());
     size_t i = 0;
-    for (auto unit : _units.getUnits()) {
+    for (auto unit : _units.getUnits()) {      
       bool addIt = false;
       if (_meshes[i] == nullptr) {
         _meshes[i] = std::make_shared<Athanah::SupComMesh>();
         addIt = true;
       }
-      float unitScale = 0.07f;// unit->blueprint->display().scale();
-      glm::mat4 mat(1.0);
-      mat = glm::translate(mat, unit->getPosition());
+      float unitScale = unit->getBlueprint()->display().scale();
+      glm::mat4 mat = unit->getTransformation();      
+      mat = glm::translate(mat, glm::vec3(0, -unit->getBlueprint()->physic().meshExtents()[1]/2.0f, 0));
       mat = glm::scale(mat, glm::vec3(unitScale, unitScale, unitScale));
 
-      _meshes[i]->model = _model;
+      _meshes[i]->model = _gamedata.model().loadModel(unit->getID());
       _meshes[i]->teamColor = Iyathuum::Color(255, 255, 255, 255);
       _meshes[i]->transformation = mat;
       _meshes[i]->animation = { glm::mat4(1.0),glm::mat4(1.0),glm::mat4(1.0),glm::mat4(1.0),
@@ -60,10 +60,7 @@ namespace Superb {
     for (auto unit : _units.getUnits())
     {
       auto pos = unit->getPosition();
-      //_window->renderer().box().drawDot(pos, 0.1f, Iyathuum::Color(255, 128, 30));
       Athanah::BoxVisualization::draw(unit->getPhysic(), Iyathuum::Color(255, 128, 30), _window);
-        //unit->blueprint->physic().meshExtents();
-      //_window->renderer().box().drawBox(pos - size, size * 2.0f, Iyathuum::Color(255, 0, 0, 255));
     }
     _window->renderer().box().end();
   }
