@@ -153,6 +153,15 @@ namespace Ahwassa {
     _resultCanvas->end();
   }
 
+  void DeferredComposer::blitDepth() {
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, _fbo->getID());
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // write to default framebuffer
+    glBlitFramebuffer(
+      0, 0, _width, _height, 0, 0, _width, _height, GL_DEPTH_BUFFER_BIT, GL_NEAREST
+    );
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  }
+
   std::vector<std::shared_ptr<Texture>> DeferredComposer::getRawTextures() {
     return _fbo->getUniforms();
   }

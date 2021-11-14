@@ -112,6 +112,8 @@ int main(int argc, char** argv) {
     textureRenderer->start();
     textureRenderer->draw(*composer->getResult(), Iyathuum::glmAABB<2>(glm::vec2(0),glm::vec2(width,height)),true);
     textureRenderer->end();
+    
+    composer->blitDepth();
 
     physicDebug->draw();
     world      ->debugDraw();

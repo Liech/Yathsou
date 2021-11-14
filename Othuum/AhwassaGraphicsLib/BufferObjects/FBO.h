@@ -14,6 +14,7 @@ namespace Ahwassa {
     
     std::vector<std::shared_ptr<Texture>> getUniforms();
     std::shared_ptr<Texture> getDepth();
+    unsigned int getID();
 
   private:
     unsigned int getGL_COLOR_ATTACHMENT(int number);

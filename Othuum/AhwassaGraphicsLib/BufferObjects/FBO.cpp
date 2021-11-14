@@ -89,4 +89,8 @@ namespace Ahwassa {
   std::shared_ptr<Texture> FBO::getDepth() {
     return _depth;
   }
+
+  unsigned int FBO::getID() {
+    return _id;
+  }
 }

@@ -30,6 +30,7 @@ namespace Ahwassa {
     std::shared_ptr<Texture> getResult();
     std::shared_ptr<Texture> getDepth();
     void draw();
+    void blitDepth();
   private:
     const int MAXLIGHT = 32;
     std::shared_ptr<Rendertarget>           _resultCanvas;
