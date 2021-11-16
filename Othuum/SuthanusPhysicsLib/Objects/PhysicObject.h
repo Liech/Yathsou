@@ -10,7 +10,7 @@ namespace Suthanus
   class PhysicObject
   {
   public:
-    virtual ~PhysicObject() = default;
+    virtual ~PhysicObject();
     virtual glm::vec3 getPosition       ()                    const = 0;
     virtual glm::mat4 getTransformation ()                    const = 0;
     virtual glm::quat getRotation       ()                    const = 0;
@@ -25,8 +25,12 @@ namespace Suthanus
     void initialize(std::weak_ptr<PhysicObject> self);
     void setCollisionCallback(std::function<void(std::weak_ptr<PhysicObject>)>);
     void collisionEvent      (std::weak_ptr<PhysicObject> other);
+
+    bool isDisposed() const;
+    virtual void dispose();
   private:
     std::function<void(std::weak_ptr<PhysicObject>)> _collsionCallback = [](std::weak_ptr<PhysicObject>) {};
     std::weak_ptr<PhysicObject> _self;
+    bool                        _deleted = false;
   };
 }

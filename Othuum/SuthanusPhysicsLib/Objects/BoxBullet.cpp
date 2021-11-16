@@ -1,7 +1,9 @@
 #include "BoxBullet.h"
 
+#include <stdexcept>
 #include "SuthanusPhysicsLib/lib/bullet/btBulletDynamicsCommon.h"
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
+
 namespace Suthanus
 {
   namespace Bullet
@@ -36,10 +38,15 @@ namespace Suthanus
 
     BoxBullet::~BoxBullet()
     {
+    }
+
+    void BoxBullet::dispose()
+    {
       _world->removeRigidBody(_body);
       delete _motionState;
       delete _body;
     }
+
 
     glm::vec3 BoxBullet::getPosition() const
     {

@@ -24,7 +24,7 @@ namespace Suthanus
       virtual void      setAngularVelocity(glm::vec3)    override;
       virtual void      setRotation(glm::quat)           override;
 
-
+      virtual void dispose() override;
     private:
       glm::vec3                _size;
       btDiscreteDynamicsWorld* _world;
