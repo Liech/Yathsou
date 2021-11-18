@@ -27,6 +27,7 @@
 #include "NavigationUI.h"
 #include "PhysicsDebugView.h"
 #include "UnitsVisualization.h"
+#include "DriveInterface.h"
 
 #include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
 
@@ -64,6 +65,7 @@ int main(int argc, char** argv) {
   std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
   std::shared_ptr<Superb::Spheres>                 spheres;
   std::shared_ptr<Superb::NavigationUI>            navUI;
+  std::shared_ptr<Superb::DriveInterface>          driveUI;
 
   w.Startup = [&]() {
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
@@ -82,7 +84,8 @@ int main(int argc, char** argv) {
     navUI = std::make_shared <Superb::NavigationUI>(&w, physic, world->navMesh(), units);
     freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
     arcCam = std::make_shared<Ahwassa::ArcBallCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F4);
-    
+    driveUI = std::make_shared<Superb::DriveInterface>(w.input());
+
     w.input().addUIElement(freeCam.get());
     w.input().addUIElement(arcCam .get());
     w.input().addUIElement(navUI.get());
@@ -95,12 +98,17 @@ int main(int argc, char** argv) {
     physicDebug->update();
     world->update();
     units->update();
+    driveUI->update();
     //spheres->update();
     //asd=(asd+1)%20;
     //if (asd == 0) spheres->addSphere(w.camera()->getPosition(),0.5f,Iyathuum::Color(255,0,0));
 
-    if (arcCam->isFocus() && navUI->selection().size() > 0)
+    if (arcCam->isFocus() && navUI->selection().size() > 0) {
       w.camera()->setTarget(navUI->selection()[0]->getPosition());
+      driveUI->setTarget(navUI->selection()[0]->getPhysic());
+    }
+    else
+      driveUI->setTarget(nullptr);
 
     if (!pressed && w.input().getKeyStatus(Iyathuum::Key::KEY_F5) == Iyathuum::KeyStatus::PRESS) {
       pressed = true;
