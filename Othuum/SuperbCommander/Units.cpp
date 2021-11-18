@@ -20,8 +20,8 @@ namespace Superb {
     _selection  = std::make_shared<Suthanus::PhysicEngine>();
 
     auto rnd = []() {return (rand() % 500) / 500.0f; };
-    for (int i = 0; i < 50; i++) {      
-      glm::vec3 pos(rnd()*300 + 20, 100, rnd()*300 + 20);
+    for (int i = 0; i < 200; i++) {      
+      glm::vec3 pos(rnd()*400 + 20, 100, rnd()*400 + 20);
       spawnUnit(pos);
     }
   }
@@ -62,7 +62,7 @@ namespace Superb {
 
   void Units::spawnUnit(const glm::vec3& position) {
     glm::vec3 groundPos;
-    if (nullptr == _physic->raycast(position, glm::vec3(0, -1, 0), groundPos))
+    if (nullptr == _physic->raycast(position, glm::vec3(0, -20, 0), groundPos))
       groundPos = position;
     UnitConstructor constructor(_gamedata);//UEL0201
     std::vector<std::string> possibleIDs = { "UEL0201" };//, "URL0309", "XSS0303", "UEL0401"};

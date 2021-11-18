@@ -3,6 +3,7 @@
 #include <array>
 #include <set>
 #include <memory>
+#include <map>
 
 #include "IyathuumCoreLib/lib/glm/vec3.hpp"
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
@@ -55,6 +56,7 @@ namespace Suthanus
     btCollisionDispatcher               * _dispatcher            ;
     btSequentialImpulseConstraintSolver * _solver                ;
     btDiscreteDynamicsWorld             * _world                 ;
-    btRigidBody                         * _body                  ;
+
+    std::map<PhysicObject*, std::weak_ptr<PhysicObject>> _allObjects;
   };
 }

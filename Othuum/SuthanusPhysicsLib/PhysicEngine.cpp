@@ -77,6 +77,7 @@ namespace Suthanus
     Bullet::BoxBullet* result = new Bullet::BoxBullet(_world, pos, size, isDynamic);
     std::shared_ptr<Box> ptr =  std::shared_ptr<Box>(dynamic_cast<Box*>(result));
     ptr->initialize(ptr);
+    _allObjects[result] = ptr;
     return ptr;
   }
 
@@ -85,6 +86,7 @@ namespace Suthanus
     Bullet::SphereBullet* result = new Bullet::SphereBullet(_world, pos, radius, isDynamic);
     auto ptr = std::shared_ptr<Sphere>(dynamic_cast<Sphere*>(result));
     ptr->initialize(ptr);
+    _allObjects[result] = ptr;
     return ptr;
   }
 
@@ -93,6 +95,7 @@ namespace Suthanus
     Bullet::VehicleBulletRaycast* result = new Bullet::VehicleBulletRaycast(_world, pos);
     auto ptr =  std::shared_ptr<Vehicle>(dynamic_cast<Vehicle*>(result));
     ptr->initialize(ptr);
+    _allObjects[result] = ptr;
     return ptr;
   }
 
@@ -102,6 +105,7 @@ namespace Suthanus
     Bullet::HeightMapBullet* result = new Bullet::HeightMapBullet(_world, pos, cellSize, content,height);
     auto ptr = std::shared_ptr<HeightMap>(dynamic_cast<HeightMap*>(result));
     ptr->initialize(ptr);
+    _allObjects[result] = ptr;
     return ptr;
   }
 
@@ -130,11 +134,26 @@ namespace Suthanus
       if (e.A && e.B)
         events.push_back(e);
     }
+    std::vector<PhysicObject*> toDelete;
+    for (auto o : _allObjects) {
+      std::shared_ptr<PhysicObject> ptr;
+      if (ptr = o.second.lock()) {
+        ptr->clearContacts();
+      }
+      else
+        toDelete.push_back(o.first);
+    }
+    for (auto o : toDelete)
+      _allObjects.erase(o);
     for (auto e : events)
     {
-      e.A->collisionEvent(e.B);
-      e.B->collisionEvent(e.A);
-
+      e.A->collisionEventFirstPass(e.B);
+      e.B->collisionEventFirstPass(e.A);
+    }
+    for (auto e : events)
+    {
+      e.A->collisionEventSecondPass(e.B);
+      e.B->collisionEventSecondPass(e.A);
     }
   }
 

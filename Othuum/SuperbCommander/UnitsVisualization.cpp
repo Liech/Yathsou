@@ -13,6 +13,7 @@
 #include "AthanahCommonLib/Physic/BoxVisualization.h"
 #include "AthanahCommonLib/SupCom/Blueprint/Blueprint.h"
 #include "AthanahCommonLib/SupCom/Blueprint/BlueprintDisplay.h"
+#include "SuthanusPhysicsLib/Objects/Box.h"
 
 namespace Superb {
   UnitsVisualization::UnitsVisualization(Ahwassa::Window* window, Athanah::Gamedata& gamedata, Units& data) :

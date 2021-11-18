@@ -7,7 +7,14 @@ namespace Suthanus
     _collsionCallback = callback;
   }
 
-  void PhysicObject::collisionEvent(std::weak_ptr<PhysicObject> other)
+  void PhysicObject::collisionEventFirstPass(std::weak_ptr<PhysicObject> other)
+  {
+    std::shared_ptr<PhysicObject> ptr = other.lock();
+    if (ptr)
+      _contacts.insert(ptr);
+  }
+
+  void PhysicObject::collisionEventSecondPass(std::weak_ptr<PhysicObject> other)
   {
     _collsionCallback(other);
   }
@@ -22,5 +29,13 @@ namespace Suthanus
     glm::mat4 trans = getTransformation();
     trans[3] = glm::vec4(0, 0, 0, 1);
     return trans;
+  }
+
+  void PhysicObject::clearContacts() {
+    _contacts.clear();
+  }
+
+  const std::set<std::shared_ptr<PhysicObject>>& PhysicObject::currentContacts() const{
+    return _contacts;
   }
 }
