@@ -8,6 +8,8 @@ class btDefaultMotionState;
 
 namespace Suthanus
 {
+  class BulletCore;
+
   namespace Bullet
   {
     class BoxBullet : public Box
@@ -30,6 +32,8 @@ namespace Suthanus
       btDiscreteDynamicsWorld* _world;
       btDefaultMotionState*    _motionState;
       btRigidBody*             _body;
+
+      std::unique_ptr<BulletCore> _core;
     };
   }
 }

@@ -2,6 +2,8 @@
 
 #include "SuthanusPhysicsLib/lib/bullet/btBulletDynamicsCommon.h"
 #include "IyathuumCoreLib/lib/glm/gtc/type_ptr.hpp"
+#include "SuthanusPhysicsLib/Objects/BulletCore.h"
+
 namespace Suthanus
 {
   namespace Bullet
@@ -33,6 +35,7 @@ namespace Suthanus
       _body->setUserPointer(this);
       _world->addRigidBody(_body);
       _body->setCollisionFlags(_body->getCollisionFlags() | btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+      _core = std::make_unique<BulletCore>(_body);
     }
 
     SphereBullet::~SphereBullet()
@@ -44,17 +47,12 @@ namespace Suthanus
 
     glm::vec3 SphereBullet::getPosition() const
     {
-      auto trans = _body->getWorldTransform().getOrigin();
-      return glm::vec3(trans[0], trans[1], trans[2]);
+      return _core->getPosition();
     }
 
     glm::mat4 SphereBullet::getTransformation() const
     {
-      glm::mat4 result;
-      btTransform trans = _body->getWorldTransform();
-      double mat[16];
-      trans.getOpenGLMatrix(mat);
-      return glm::make_mat4(mat);
+      return _core->getTransformation();
     }
 
     float SphereBullet::getRadius() const
@@ -63,35 +61,24 @@ namespace Suthanus
     }
 
     void SphereBullet::setPosition(glm::vec3 pos) {
-      btTransform transform = _body->getCenterOfMassTransform();
-      transform.setOrigin(btVector3(pos[0], pos[1], pos[2]));
-      _body->setCenterOfMassTransform(transform);
+      _core->setPosition(pos);
     }
 
     void SphereBullet::setVelocity(glm::vec3 pos) {
-      _body->setLinearVelocity(btVector3(pos[0], pos[1], pos[2]));
+      _core->setVelocity(pos);
     }
 
     void SphereBullet::setAngularVelocity(glm::vec3 rot) {
-      _body->setAngularVelocity(btVector3(rot[0], rot[1], rot[2]));
+      _core->setAngularVelocity(rot);
     }
 
     glm::quat SphereBullet::getRotation() const
     {
-      btTransform transform = _body->getCenterOfMassTransform();
-      auto rot = transform.getRotation();
-      return glm::quat(rot.x(), rot.y(), rot.z(), rot.w());
+      return _core->getRotation();
     }
 
     void SphereBullet::setRotation(glm::quat rot) {
-      btTransform transform = _body->getCenterOfMassTransform();
-      btQuaternion q;
-      q.setX(rot.x);
-      q.setY(rot.y);
-      q.setZ(rot.z);
-      q.setW(rot.w);
-      transform.setRotation(q);
-      _body->setCenterOfMassTransform(transform);
+      _core->setRotation(rot);
     }
   }
 }

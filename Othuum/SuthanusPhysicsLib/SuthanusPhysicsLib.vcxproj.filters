@@ -99,6 +99,9 @@
     <ClCompile Include="Objects\BoxBullet.cpp">
       <Filter>Quelldateien\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\BulletCore.cpp">
+      <Filter>Quelldateien\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VehicleDriver.h">
@@ -988,6 +991,9 @@
     </ClInclude>
     <ClInclude Include="lib\bullet\BulletCollision\NarrowPhaseCollision\btVoronoiSimplexSolver.h">
       <Filter>bullet\BulletCollision\Gimpact</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\BulletCore.h">
+      <Filter>Headerdateien\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

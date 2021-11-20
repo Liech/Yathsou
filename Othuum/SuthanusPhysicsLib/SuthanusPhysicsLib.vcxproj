@@ -246,6 +246,7 @@
     <ClCompile Include="ArtilleryAim.cpp" />
     <ClCompile Include="Objects\Box.cpp" />
     <ClCompile Include="Objects\BoxBullet.cpp" />
+    <ClCompile Include="Objects\BulletCore.cpp" />
     <ClCompile Include="Objects\HeightMapBullet.cpp" />
     <ClCompile Include="Objects\PhysicObject.cpp" />
     <ClCompile Include="Objects\Sphere.cpp" />
@@ -542,6 +543,7 @@
     <ClInclude Include="lib\bullet\BulletCollision\NarrowPhaseCollision\btVoronoiSimplexSolver.h" />
     <ClInclude Include="Objects\Box.h" />
     <ClInclude Include="Objects\BoxBullet.h" />
+    <ClInclude Include="Objects\BulletCore.h" />
     <ClInclude Include="Objects\HeightMap.h" />
     <ClInclude Include="Objects\HeightMapBullet.h" />
     <ClInclude Include="Objects\PhysicObject.h" />
