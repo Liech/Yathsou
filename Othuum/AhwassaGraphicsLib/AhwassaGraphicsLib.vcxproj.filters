@@ -118,6 +118,15 @@
     <Filter Include="Source Files\Geometry">
       <UniqueIdentifier>{cbe7223f-74f0-4066-83c1-b5649e20ee08}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib\dear imgui">
+      <UniqueIdentifier>{b26e5ce8-20bb-480a-bc77-31ce2defc718}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GUI">
+      <UniqueIdentifier>{25e007b0-a49d-4e57-9c60-8bb0060db461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GUI">
+      <UniqueIdentifier>{8765b8d0-4e21-43f7-8a52-b0d4bbb7c99f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp">
@@ -368,6 +377,30 @@
     </ClCompile>
     <ClCompile Include="Input\ArcBallCamera.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\DearIMGUI\imgui_impl_glfw.cpp">
+      <Filter>lib\dear imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\DearIMGUI\imgui_impl_opengl3.cpp">
+      <Filter>lib\dear imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\DearIMGUI\imgui_tables.cpp">
+      <Filter>lib\dear imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\DearIMGUI\imgui_widgets.cpp">
+      <Filter>lib\dear imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\DearIMGUI\imgui.cpp">
+      <Filter>lib\dear imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\DearIMGUI\imgui_demo.cpp">
+      <Filter>lib\dear imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\DearIMGUI\imgui_draw.cpp">
+      <Filter>lib\dear imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="GUI\UI.cpp">
+      <Filter>Source Files\GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -949,6 +982,36 @@
     </ClInclude>
     <ClInclude Include="Input\ArcBallCamera.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\DearIMGUI\imgui_impl_glfw.h">
+      <Filter>lib\dear imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\DearIMGUI\imgui_impl_opengl3.h">
+      <Filter>lib\dear imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\DearIMGUI\imgui_internal.h">
+      <Filter>lib\dear imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\DearIMGUI\imstb_rectpack.h">
+      <Filter>lib\dear imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\DearIMGUI\imstb_textedit.h">
+      <Filter>lib\dear imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\DearIMGUI\imstb_truetype.h">
+      <Filter>lib\dear imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\DearIMGUI\imconfig.h">
+      <Filter>lib\dear imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\DearIMGUI\imgui.h">
+      <Filter>lib\dear imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\DearIMGUI\imgui_impl_opengl3_loader.h">
+      <Filter>lib\dear imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI\UI.h">
+      <Filter>Header Files\GUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

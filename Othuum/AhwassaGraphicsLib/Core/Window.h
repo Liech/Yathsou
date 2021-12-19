@@ -32,6 +32,7 @@ namespace Ahwassa {
     int getWidth () { return _width; }
     int getHeight() { return _height; }
 
+    GLFWwindow* ptr();
   private:
     int _width  = 1920;
     int _height = 1080;

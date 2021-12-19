@@ -194,4 +194,9 @@ namespace Ahwassa {
   std::shared_ptr<Camera> Window::camera() {
     return _camera;
   }
+
+  GLFWwindow* Window::ptr() {
+    return _window;
+  }
+
 }
