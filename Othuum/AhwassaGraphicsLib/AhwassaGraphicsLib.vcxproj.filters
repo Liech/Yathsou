@@ -121,6 +121,9 @@
     <Filter Include="lib\dear imgui">
       <UniqueIdentifier>{b26e5ce8-20bb-480a-bc77-31ce2defc718}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib\dear imgui filedialog">
+      <UniqueIdentifier>{42efb85f-5457-41ed-bbb5-5c97a8302f75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp">
@@ -395,6 +398,9 @@
     </ClCompile>
     <ClCompile Include="Input\IMGUIRenderer.cpp">
       <Filter>Source Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="lib\IMGUIFileDialog\ImGuiFileDialog.cpp">
+      <Filter>lib\dear imgui filedialog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1006,6 +1012,21 @@
     </ClInclude>
     <ClInclude Include="Input\IMGUIRenderer.h">
       <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\IMGUIFileDialog\ImGuiFileDialog.h">
+      <Filter>lib\dear imgui filedialog</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\IMGUIFileDialog\ImGuiFileDialogConfig.h">
+      <Filter>lib\dear imgui filedialog</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\IMGUIFileDialog\stb\stb_image_resize.h">
+      <Filter>lib\dear imgui filedialog</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\IMGUIFileDialog\stb\stb_image.h">
+      <Filter>lib\dear imgui filedialog</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\IMGUIFileDialog\dirent\dirent.h">
+      <Filter>lib\dear imgui filedialog</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

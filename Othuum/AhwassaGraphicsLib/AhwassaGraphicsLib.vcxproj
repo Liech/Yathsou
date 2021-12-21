@@ -114,7 +114,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(ProjectDir)lib/glad/include;$(ProjectDir)lib/GLWF/include;$(ProjectDir)lib/freetype/include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -134,7 +134,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir);$(ProjectDir)lib/glad/include;$(ProjectDir)lib/GLWF/include;$(ProjectDir)lib/freetype/include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -185,6 +185,7 @@
     <ClCompile Include="lib\DearIMGUI\imgui_tables.cpp" />
     <ClCompile Include="lib\DearIMGUI\imgui_widgets.cpp" />
     <ClCompile Include="lib\glad\src\glad.c" />
+    <ClCompile Include="lib\IMGUIFileDialog\ImGuiFileDialog.cpp" />
     <ClCompile Include="PostProcessing\AdditiveComposer.cpp" />
     <ClCompile Include="PostProcessing\Bloom.cpp" />
     <ClCompile Include="PostProcessing\DeferredComposer.cpp" />
@@ -376,6 +377,11 @@
     <ClInclude Include="lib\glad\include\KHR\khrplatform.h" />
     <ClInclude Include="lib\GLWF\include\GLFW\glfw3.h" />
     <ClInclude Include="lib\GLWF\include\GLFW\glfw3native.h" />
+    <ClInclude Include="lib\IMGUIFileDialog\dirent\dirent.h" />
+    <ClInclude Include="lib\IMGUIFileDialog\ImGuiFileDialog.h" />
+    <ClInclude Include="lib\IMGUIFileDialog\ImGuiFileDialogConfig.h" />
+    <ClInclude Include="lib\IMGUIFileDialog\stb\stb_image.h" />
+    <ClInclude Include="lib\IMGUIFileDialog\stb\stb_image_resize.h" />
     <ClInclude Include="lib\libnyquist\Common.h" />
     <ClInclude Include="lib\libnyquist\Decoders.h" />
     <ClInclude Include="lib\libnyquist\Encoders.h" />

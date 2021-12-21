@@ -11,6 +11,7 @@ namespace Superb {
   class Overlay;
   class Terrain;
   class Physic;
+  class Database;
 
   class Game {
   public:
@@ -22,11 +23,13 @@ namespace Superb {
     void drawLastLayer();
     void drawMenu();
 
-    Physic& physic();
+    Physic&   physic();
+    Database& database();
   private:
     std::unique_ptr<Ahwassa::IMGUIRenderer> _ui;
-    std::unique_ptr<Overlay>        _overlay;
-    std::unique_ptr<Terrain>        _terrain;
-    std::unique_ptr<Physic >        _physic ;
+    std::unique_ptr<Overlay>        _overlay ;
+    std::unique_ptr<Terrain>        _terrain ;
+    std::unique_ptr<Physic >        _physic  ;
+    std::unique_ptr<Database>       _database;
   };
 }

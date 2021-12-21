@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="DriveInterface.cpp" />
+    <ClCompile Include="Game\Database.cpp" />
     <ClCompile Include="Game\Game.cpp" />
     <ClCompile Include="Game\Overlay.cpp" />
     <ClCompile Include="Game\Physic.cpp" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="DriveInterface.h" />
+    <ClInclude Include="Game\Database.h" />
     <ClInclude Include="Game\Game.h" />
     <ClInclude Include="Game\Overlay.h" />
     <ClInclude Include="Game\Physic.h" />

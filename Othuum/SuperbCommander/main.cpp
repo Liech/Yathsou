@@ -28,6 +28,7 @@
 #include "DriveInterface.h"
 #include "Game/Game.h"
 #include "Game/Physic.h"
+#include "Game/Database.h"
 
 #include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
 
@@ -57,7 +58,6 @@ int main(int argc, char** argv) {
   std::shared_ptr<Superb::World>                   world;
   std::shared_ptr<Superb::Units>                   units;
   std::shared_ptr<Superb::UnitsVisualization>      unitsVis;
-  std::shared_ptr<Athanah::Gamedata>               gamedata;
 
   std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
   std::shared_ptr<Superb::Spheres>                 spheres;
@@ -75,10 +75,9 @@ int main(int argc, char** argv) {
     w.camera()->setTarget  (config.CameraTarget);
     physicDebug = std::make_shared<Superb::PhysicsDebugView>(game->physic().physic(), &w, Iyathuum::Key::KEY_F2);
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
-    gamedata = std::make_shared<Athanah::Gamedata>(config.SupComPath, config.useSCDFiles);
-    world = std::make_shared<Superb::World>(&w, game->physic().physic(), std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"), *gamedata);
-    units = std::make_shared<Superb::Units>(*gamedata,&w, game->physic().physic());
-    unitsVis = std::make_shared<Superb::UnitsVisualization>(&w,*gamedata,*units);
+    world = std::make_shared<Superb::World>(&w, game->physic().physic(), std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"), game->database().gamedata());
+    units = std::make_shared<Superb::Units>(game->database().gamedata(),&w, game->physic().physic());
+    unitsVis = std::make_shared<Superb::UnitsVisualization>(&w, game->database().gamedata(),*units);
     navUI = std::make_shared <Superb::NavigationUI>(&w, game->physic().physic(), world->navMesh(), units);
     freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
     arcCam = std::make_shared<Ahwassa::ArcBallCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F4);

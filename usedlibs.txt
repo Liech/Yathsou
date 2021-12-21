@@ -10,6 +10,9 @@ glad                           |ahwassa      | OpenGL
 portaudio                      |ahwassa      | play sound
 openvr                         |ahwassa      | virtual reality
 dear imgui                     |ahwassa      | User Interface
+aiekick/ImGuiFileDialog        |ahwassa      | File Dialog for imgui
+stb                            |Aiekick      | Dependency from lib above
+dirent                         |Aiekick      | Dependency from lib above
 bullet                         |suthanus     | physics
 lua                            |haas         | scripting
 lua-matrix                     |haas         | matrix operations lua script
