@@ -39,7 +39,7 @@
     <ClCompile Include="NavigationUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Units.cpp">
+    <ClCompile Include="UnitsOld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Unit.cpp">
@@ -72,6 +72,9 @@
     <ClCompile Include="Game\Database.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Units.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -89,7 +92,7 @@
     <ClInclude Include="NavigationUI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Units.h">
+    <ClInclude Include="UnitsOld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Unit.h">
@@ -120,6 +123,9 @@
       <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="Game\Database.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Units.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

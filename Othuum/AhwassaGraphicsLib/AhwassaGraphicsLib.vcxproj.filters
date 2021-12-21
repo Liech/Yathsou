@@ -402,6 +402,9 @@
     <ClCompile Include="lib\IMGUIFileDialog\ImGuiFileDialog.cpp">
       <Filter>lib\dear imgui filedialog</Filter>
     </ClCompile>
+    <ClCompile Include="lib\DearIMGUI\imgui_stdlib.cpp">
+      <Filter>lib\dear imgui filedialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
@@ -1026,6 +1029,9 @@
       <Filter>lib\dear imgui filedialog</Filter>
     </ClInclude>
     <ClInclude Include="lib\IMGUIFileDialog\dirent\dirent.h">
+      <Filter>lib\dear imgui filedialog</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\DearIMGUI\imgui_stdlib.h">
       <Filter>lib\dear imgui filedialog</Filter>
     </ClInclude>
   </ItemGroup>

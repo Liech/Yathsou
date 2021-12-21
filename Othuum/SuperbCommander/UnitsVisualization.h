@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Units.h"
+#include "UnitsOld.h"
 #include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 
 namespace Athanah {
@@ -12,7 +12,7 @@ namespace Athanah {
 namespace Superb {
   class UnitsVisualization {
   public:
-    UnitsVisualization(Ahwassa::Window*, Athanah::Gamedata&, Units&);
+    UnitsVisualization(Ahwassa::Window*, Athanah::Gamedata&, UnitsOld&);
     virtual ~UnitsVisualization() = default;
 
     void draw();
@@ -21,7 +21,7 @@ namespace Superb {
     std::vector<std::shared_ptr<Athanah::SupComMesh>>            _meshes  ;
     std::unique_ptr<Athanah::SupComMeshRendererDef>              _renderer;
     Ahwassa::Window*   _window;
-    Units&             _units;
+    UnitsOld&             _units;
     Athanah::Gamedata& _gamedata;
   };
 }

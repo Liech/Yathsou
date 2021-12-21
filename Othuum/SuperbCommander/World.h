@@ -24,18 +24,17 @@ namespace Suthanus {
 namespace Superb {
   class World {
   public:
-    World(Ahwassa::Window*,std::shared_ptr<Suthanus::PhysicEngine>,std::shared_ptr<Athanah::Map> mapFolder, Athanah::Gamedata&);
+    World(std::shared_ptr<Suthanus::PhysicEngine>,std::shared_ptr<Athanah::Map> mapFolder, Athanah::Gamedata&);
+    virtual ~World() = default;
 
     std::shared_ptr<Suthanus::PhysicNavigationMesh> navMesh();
 
     void update();
-    void draw();
-    void debugDraw();
+    Athanah::Map& map();
   private:
     Ahwassa::Window* _window;
 
     std::shared_ptr<Athanah::Map>                       _map        ;
-    std::shared_ptr<Ahwassa::IMesh>                     _mapMesh    ;
     std::shared_ptr<Suthanus::PhysicEngine>             _physic     ;
     std::shared_ptr<Suthanus::HeightMap>                _obj        ;
     std::shared_ptr<Suthanus::PhysicNavigationMesh>     _navGraph   ;

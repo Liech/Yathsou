@@ -21,7 +21,7 @@
 #include "World.h"
 #include "Config.h"
 #include "Spheres.h"
-#include "Units.h"
+#include "UnitsOld.h"
 #include "NavigationUI.h"
 #include "PhysicsDebugView.h"
 #include "UnitsVisualization.h"
@@ -29,6 +29,8 @@
 #include "Game/Game.h"
 #include "Game/Physic.h"
 #include "Game/Database.h"
+#include "Game/Terrain.h"
+#include "Game/Units.h"
 
 #include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
 
@@ -55,8 +57,6 @@ int main(int argc, char** argv) {
   std::shared_ptr<Ahwassa::ArcBallCamera>          arcCam;
   std::shared_ptr<Ahwassa::DeferredComposer>       composer;
   std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
-  std::shared_ptr<Superb::World>                   world;
-  std::shared_ptr<Superb::Units>                   units;
   std::shared_ptr<Superb::UnitsVisualization>      unitsVis;
 
   std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
@@ -75,10 +75,8 @@ int main(int argc, char** argv) {
     w.camera()->setTarget  (config.CameraTarget);
     physicDebug = std::make_shared<Superb::PhysicsDebugView>(game->physic().physic(), &w, Iyathuum::Key::KEY_F2);
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
-    world = std::make_shared<Superb::World>(&w, game->physic().physic(), std::make_shared<Athanah::Map>(config.SupComPath + "\\" + "maps", "SCMP_009"), game->database().gamedata());
-    units = std::make_shared<Superb::Units>(game->database().gamedata(),&w, game->physic().physic());
-    unitsVis = std::make_shared<Superb::UnitsVisualization>(&w, game->database().gamedata(),*units);
-    navUI = std::make_shared <Superb::NavigationUI>(&w, game->physic().physic(), world->navMesh(), units);
+    unitsVis = std::make_shared<Superb::UnitsVisualization>(&w, game->database().gamedata(),game->units().units());
+    navUI = std::make_shared <Superb::NavigationUI>(&w, game->physic().physic(), game->terrain().world().navMesh(), game->units().units());
     freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
     arcCam = std::make_shared<Ahwassa::ArcBallCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F4);
     driveUI = std::make_shared<Superb::DriveInterface>(w.input());
@@ -93,8 +91,6 @@ int main(int argc, char** argv) {
   w.Update = [&]() {
     game->update();
     physicDebug->update();
-    world->update();
-    units->update();
     driveUI->update();
     //spheres->update();
     //asd=(asd+1)%20;
@@ -118,7 +114,6 @@ int main(int argc, char** argv) {
 
     game->drawFirstLayer();
     //spheres->draw();
-    world->draw();
     unitsVis->draw();
        
     
@@ -133,7 +128,6 @@ int main(int argc, char** argv) {
     physicDebug->draw();
 
     if (debugOn) {
-      world->debugDraw();
       navUI->debugDraw();
       unitsVis->debugDraw();
     }

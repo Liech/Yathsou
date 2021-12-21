@@ -182,6 +182,7 @@
     <ClCompile Include="lib\DearIMGUI\imgui_draw.cpp" />
     <ClCompile Include="lib\DearIMGUI\imgui_impl_glfw.cpp" />
     <ClCompile Include="lib\DearIMGUI\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="lib\DearIMGUI\imgui_stdlib.cpp" />
     <ClCompile Include="lib\DearIMGUI\imgui_tables.cpp" />
     <ClCompile Include="lib\DearIMGUI\imgui_widgets.cpp" />
     <ClCompile Include="lib\glad\src\glad.c" />
@@ -278,6 +279,7 @@
     <ClInclude Include="lib\DearIMGUI\imgui_impl_opengl3.h" />
     <ClInclude Include="lib\DearIMGUI\imgui_impl_opengl3_loader.h" />
     <ClInclude Include="lib\DearIMGUI\imgui_internal.h" />
+    <ClInclude Include="lib\DearIMGUI\imgui_stdlib.h" />
     <ClInclude Include="lib\DearIMGUI\imstb_rectpack.h" />
     <ClInclude Include="lib\DearIMGUI\imstb_textedit.h" />
     <ClInclude Include="lib\DearIMGUI\imstb_truetype.h" />

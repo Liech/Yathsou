@@ -20,9 +20,9 @@ namespace Suthanus {
 }
 
 namespace Superb {
-  class Units : public Selen::PersonalSpaceMap<3>::PersonalSpaceMapInterface{
+  class UnitsOld : public Selen::PersonalSpaceMap<3>::PersonalSpaceMapInterface{
   public:
-    Units(Athanah::Gamedata& gamedata,Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic);
+    UnitsOld(Athanah::Gamedata& gamedata, std::shared_ptr<Suthanus::PhysicEngine> physic);
 
     std::vector<std::shared_ptr<Unit>> select(glm::vec3 pos, glm::vec3 dir);
     std::vector<std::shared_ptr<Unit>> selectCameraRect(glm::vec2 rectangleStart, glm::vec2 rectangleEnd);
@@ -40,6 +40,5 @@ namespace Superb {
     std::shared_ptr<Suthanus::PhysicEngine>                        _physic;
        
     Athanah::Gamedata& _gamedata;
-    Ahwassa::Window*   _window;
   };
 }

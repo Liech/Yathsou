@@ -10,12 +10,11 @@
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/PhysicNavigationMesh.h"
 
-#include "Units.h"
+#include "UnitsOld.h"
 
 
 namespace Superb {
-  NavigationUI::NavigationUI(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic, std::shared_ptr<Suthanus::PhysicNavigationMesh> nav, std::shared_ptr<Units> units) {
-    _units   = units ;
+  NavigationUI::NavigationUI(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine> physic, std::shared_ptr<Suthanus::PhysicNavigationMesh> nav, UnitsOld& units) : _units(units){
     _window  = w     ;
     _physic  = physic;
     _navMesh = nav   ;
@@ -60,8 +59,7 @@ namespace Superb {
         selectSingle();
       } 
       else {
-
-        _selection = _units->selectCameraRect(glm::vec2(_rectangleStart.x, _window->getHeight() - _rectangleStart.y), glm::vec2(localPosition.x, _window->getHeight()- localPosition.y));
+        _selection = _units.selectCameraRect(glm::vec2(_rectangleStart.x, _window->getHeight() - _rectangleStart.y), glm::vec2(localPosition.x, _window->getHeight()- localPosition.y));
       }
       _rectangleSelectionActive = false;
       return true;
@@ -101,7 +99,7 @@ namespace Superb {
     glm::vec3 ray = _window->camera()->getPickRay(cursorPos);
     glm::vec3 origin = _window->camera()->getPosition();
 
-    auto newSelection = _units->select(origin, ray);
+    auto newSelection = _units.select(origin, ray);
     if (shift)
       _selection.insert(_selection.end(), newSelection.begin(), newSelection.end());
     else

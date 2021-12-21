@@ -16,6 +16,7 @@ namespace Superb {
     void menu();
     
     Athanah::Gamedata& gamedata();
+    std::string supComPath();
   private:
     bool        _useSCDData = false;
     std::string _supComPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Supreme Commander Forged Alliance";

@@ -16,7 +16,7 @@
 #include "SuthanusPhysicsLib/Objects/Box.h"
 
 namespace Superb {
-  UnitsVisualization::UnitsVisualization(Ahwassa::Window* window, Athanah::Gamedata& gamedata, Units& data) :
+  UnitsVisualization::UnitsVisualization(Ahwassa::Window* window, Athanah::Gamedata& gamedata, UnitsOld& data) :
     _window(window),
     _units(data),
     _gamedata(gamedata){

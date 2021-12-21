@@ -16,14 +16,11 @@ namespace Superb {
 
   class Visualization {
   public:
-    Visualization(const Ahwassa::Window&, const Game&);
+    Visualization(Ahwassa::Window&, Game&);
     virtual ~Visualization() = default;
 
     void menu();
     void draw();
-
-  private:
-    void gather();
 
   private:
     const Game&            _game;

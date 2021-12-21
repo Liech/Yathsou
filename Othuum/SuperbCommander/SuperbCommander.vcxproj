@@ -153,6 +153,7 @@
     <ClCompile Include="Game\Overlay.cpp" />
     <ClCompile Include="Game\Physic.cpp" />
     <ClCompile Include="Game\Terrain.cpp" />
+    <ClCompile Include="Game\Units.cpp" />
     <ClCompile Include="Game\Visualization.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NavigationUI.cpp" />
@@ -160,7 +161,7 @@
     <ClCompile Include="Spheres.cpp" />
     <ClCompile Include="Unit.cpp" />
     <ClCompile Include="UnitConstructor.cpp" />
-    <ClCompile Include="Units.cpp" />
+    <ClCompile Include="UnitsOld.cpp" />
     <ClCompile Include="UnitsVisualization.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -172,13 +173,14 @@
     <ClInclude Include="Game\Overlay.h" />
     <ClInclude Include="Game\Physic.h" />
     <ClInclude Include="Game\Terrain.h" />
+    <ClInclude Include="Game\Units.h" />
     <ClInclude Include="Game\Visualization.h" />
     <ClInclude Include="NavigationUI.h" />
     <ClInclude Include="PhysicsDebugView.h" />
     <ClInclude Include="Spheres.h" />
     <ClInclude Include="Unit.h" />
     <ClInclude Include="UnitConstructor.h" />
-    <ClInclude Include="Units.h" />
+    <ClInclude Include="UnitsOld.h" />
     <ClInclude Include="UnitsVisualization.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>
