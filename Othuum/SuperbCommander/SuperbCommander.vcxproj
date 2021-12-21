@@ -118,6 +118,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir);$(SolutionDir)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
+      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,9 +148,12 @@
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="DriveInterface.cpp" />
+    <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="Game\Overlay.cpp" />
+    <ClCompile Include="Game\Physic.cpp" />
+    <ClCompile Include="Game\Terrain.cpp" />
+    <ClCompile Include="Game\Visualization.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Menu\MainMenu.cpp" />
-    <ClCompile Include="Menu\OverlayMenu.cpp" />
     <ClCompile Include="NavigationUI.cpp" />
     <ClCompile Include="PhysicsDebugView.cpp" />
     <ClCompile Include="Spheres.cpp" />
@@ -162,8 +166,11 @@
   <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="DriveInterface.h" />
-    <ClInclude Include="Menu\MainMenu.h" />
-    <ClInclude Include="Menu\OverlayMenu.h" />
+    <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Game\Overlay.h" />
+    <ClInclude Include="Game\Physic.h" />
+    <ClInclude Include="Game\Terrain.h" />
+    <ClInclude Include="Game\Visualization.h" />
     <ClInclude Include="NavigationUI.h" />
     <ClInclude Include="PhysicsDebugView.h" />
     <ClInclude Include="Spheres.h" />

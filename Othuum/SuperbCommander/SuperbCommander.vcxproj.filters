@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Menu">
-      <UniqueIdentifier>{3b478f39-bca9-47f5-8a5b-6ebef238eae5}</UniqueIdentifier>
+    <Filter Include="Source Files\Game">
+      <UniqueIdentifier>{4ad780a0-c765-44e1-b4da-70a33e41aa9f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Menu">
-      <UniqueIdentifier>{01815ee7-4b5d-4672-b0b1-479813857f8e}</UniqueIdentifier>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{b593fec5-c5d9-4640-977c-53fa74b1aa8c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,11 +54,20 @@
     <ClCompile Include="DriveInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Menu\OverlayMenu.cpp">
-      <Filter>Source Files\Menu</Filter>
+    <ClCompile Include="Game\Game.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Menu\MainMenu.cpp">
-      <Filter>Source Files\Menu</Filter>
+    <ClCompile Include="Game\Overlay.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Terrain.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Visualization.cpp">
+      <Filter>Source Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Physic.cpp">
+      <Filter>Source Files\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,11 +101,20 @@
     <ClInclude Include="DriveInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Menu\OverlayMenu.h">
-      <Filter>Header Files\Menu</Filter>
+    <ClInclude Include="Game\Terrain.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Menu\MainMenu.h">
-      <Filter>Header Files\Menu</Filter>
+    <ClInclude Include="Game\Game.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Overlay.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Visualization.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Physic.h">
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

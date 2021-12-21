@@ -10,10 +10,10 @@ namespace Ahwassa {
 }
 
 namespace Superb {
-  class OverlayMenu {
+  class Overlay {
   public:
-    OverlayMenu(Ahwassa::Window&);
-    virtual ~OverlayMenu() = default;
+    Overlay(Ahwassa::Window&);
+    virtual ~Overlay() = default;
 
     void menu();
     void drawFirstLayer();

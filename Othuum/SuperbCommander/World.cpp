@@ -2,7 +2,6 @@
 
 
 #include "AthanahCommonLib/Map/Map.h"
-#include "AthanahCommonLib/Map/MapRenderer.h"
 #include "AthanahCommonLib/Physic/NavigationMeshDebugDrawer.h"
 #include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 
@@ -30,7 +29,6 @@ namespace Superb {
 
     _obj = _physic->newHeightMap(glm::vec3(0, 0, 0), *map->scmap().heightMapData,2000);
 
-    _mapRenderer = std::make_shared<Athanah::MapRenderer>(window->camera(), textures, gamedata);
 
     auto tinter = [&](const std::array<size_t, 2> position, Ahwassa::PositionColorNormalVertex& v) {
       std::array<size_t, 2> half = { position[0] / 2,position[1] / 2 };
@@ -48,7 +46,6 @@ namespace Superb {
   }
 
   void World::draw() {
-    _mapRenderer->draw(*_mapMesh);
   }
 
   void World::debugDraw() {

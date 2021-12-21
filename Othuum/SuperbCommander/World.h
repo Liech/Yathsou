@@ -6,7 +6,6 @@
 
 namespace Athanah {
   class Map;
-  class MapRenderer;
   class NavigationMeshDebugDrawer;
   class Gamedata;
 }
@@ -33,10 +32,10 @@ namespace Superb {
     void draw();
     void debugDraw();
   private:
+    Ahwassa::Window* _window;
+
     std::shared_ptr<Athanah::Map>                       _map        ;
-    std::shared_ptr<Athanah::MapRenderer>               _mapRenderer;
     std::shared_ptr<Ahwassa::IMesh>                     _mapMesh    ;
-    Ahwassa::Window*                                    _window     ;
     std::shared_ptr<Suthanus::PhysicEngine>             _physic     ;
     std::shared_ptr<Suthanus::HeightMap>                _obj        ;
     std::shared_ptr<Suthanus::PhysicNavigationMesh>     _navGraph   ;
