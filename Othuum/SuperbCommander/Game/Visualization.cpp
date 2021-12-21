@@ -6,16 +6,21 @@
 #include "Terrain.h"
 #include "Database.h"
 #include "Units.h"
+#include "Physic.h"
 
 #include "SuperbCommander/World.h"
 #include "SuperbCommander/UnitsOld.h"
 #include "SuperbCommander/UnitsVisualization.h"
+#include "SuperbCommander/PhysicsDebugView.h"
 
-#include "AhwassaGraphicsLib/Core/Window.h"
 #include "AthanahCommonLib/Map/MapRenderer.h"
 #include "AthanahCommonLib/Map/Map.h"
+
+#include "AhwassaGraphicsLib/Core/Window.h"
+#include "AhwassaGraphicsLib/Drawables/Background.h"
 #include "AhwassaGraphicsLib/Vertex/PositionColorNormalVertex.h"
 #include "AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.h"
+#include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 
 namespace Superb {
   Visualization::Visualization(Ahwassa::Window& w, Game& g) : _window(w), _game(g) {    
@@ -34,23 +39,95 @@ namespace Superb {
     };
     _mapMesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short, Ahwassa::PositionColorNormalVertex>(*g.terrain().world().map().scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(), tinter, 2000, 1);
     _mapRenderer = std::make_unique<Athanah::MapRenderer>(w.camera(), textures, g.database().gamedata());
+    //terrain end
+
+    _background = std::make_unique<Ahwassa::Background>(&w);
+
+    _physicDebug = std::make_unique<Superb::PhysicsDebugView>(g.physic().physic(), &w);
+
+    _composer = std::make_unique<Ahwassa::DeferredComposer>(&w, w.getWidth(), w.getHeight());
+    _textureRenderer = std::make_unique< Ahwassa::BasicTexture2DRenderer>(&w);
   }
 
   void Visualization::menu() {
+    ImGui::ColorEdit3("Background Color", (float*)&_backgroundColor);
     ImGui::Checkbox("Draw Terrain", &_drawTerrain);
     ImGui::Checkbox("Unit View", &_unitsView);
     ImGui::Checkbox("Debug Unit View", &_debugUnitView);
+    ImGui::Checkbox("Debug Physic View", &_debugPhysicView);    
+    if (ImGui::BeginCombo("Renderer", getRendererNames(_currentRendererMode).c_str(), 0)) {
+      if (ImGui::Selectable("Result", _currentRendererMode == RendererModes::Result))
+        _currentRendererMode = RendererModes::Result;
+      if (ImGui::Selectable("Depth", _currentRendererMode == RendererModes::Depth))
+        _currentRendererMode = RendererModes::Depth;
+      if (ImGui::Selectable("gPosition", _currentRendererMode == RendererModes::gPosition))
+        _currentRendererMode = RendererModes::gPosition;
+      if (ImGui::Selectable("gNormal", _currentRendererMode == RendererModes::gNormal))
+        _currentRendererMode = RendererModes::gNormal;
+      if (ImGui::Selectable("gAlbedoSpec", _currentRendererMode == RendererModes::gAlbedoSpec))
+        _currentRendererMode = RendererModes::gAlbedoSpec;
+      if (ImGui::Selectable("gSpecial", _currentRendererMode == RendererModes::gSpecial))
+        _currentRendererMode = RendererModes::gSpecial;
+
+      ImGui::EndCombo();
+    }
+  }
+
+  std::string Visualization::getRendererNames(RendererModes mode) {
+    if (mode == RendererModes::Result)
+      return "Result";
+    else if (mode == RendererModes::Depth)
+      return "Depth";
+    else if (mode == RendererModes::gPosition)
+      return "gPosition";
+    else if (mode == RendererModes::gNormal)
+      return "gNormal";
+    else if (mode == RendererModes::gAlbedoSpec)
+      return "gAlbedoSpec";
+    else if (mode == RendererModes::gSpecial)
+      return "gSpecial";
+    return "Unkown";
   }
 
   void Visualization::draw() {
+    _composer->start();
+
+    _background->setColor(Iyathuum::Color(_backgroundColor));
+    _background->draw();
+
     if (_mapRenderer && _mapMesh && _drawTerrain)
       _mapRenderer->draw(*_mapMesh);
     if (_unitsView)
     _unitsVis->draw();
 
+    _composer->end();
+
+    _textureRenderer->start();
+
+    std::shared_ptr<Ahwassa::Texture> tex;
+    if (_currentRendererMode == RendererModes::Result)
+      tex = _composer->getResult();
+    else if (_currentRendererMode == RendererModes::Depth)
+      tex = _composer->getDepth();
+    else if (_currentRendererMode == RendererModes::gPosition)
+      tex = _composer->getRawTextures()[0];
+    else if (_currentRendererMode == RendererModes::gNormal)
+      tex = _composer->getRawTextures()[1];
+    else if (_currentRendererMode == RendererModes::gAlbedoSpec)
+      tex = _composer->getRawTextures()[2];
+    else if (_currentRendererMode == RendererModes::gSpecial)
+      tex = _composer->getRawTextures()[3];
+    else throw std::runtime_error("Unkown render mode");
+
+    _textureRenderer->draw(*tex, Iyathuum::glmAABB<2>(glm::vec2(0), glm::vec2(_window.getWidth(), _window.getHeight())), true);
+    _textureRenderer->end();
+
+    _composer->blitDepth();
   }
 
   void Visualization::drawLastLayer() {
+    if (_debugPhysicView)
+      _physicDebug->draw();
     if (_debugUnitView)
       _unitsVis->debugDraw();
   }

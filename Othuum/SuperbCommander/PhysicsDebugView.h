@@ -18,16 +18,12 @@ namespace Athanah {
 namespace Superb {
   class PhysicsDebugView {
   public:
-    PhysicsDebugView(std::shared_ptr<Suthanus::PhysicEngine>, Ahwassa::Window*, Iyathuum::Key = Iyathuum::Key::KEY_F1);
+    PhysicsDebugView(std::shared_ptr<Suthanus::PhysicEngine>, Ahwassa::Window*);
 
-    void update();
     void draw();
   private:
     Ahwassa::Window*                            _window;
     std::shared_ptr<Athanah::BulletDebugDrawer> _debug;
     std::shared_ptr<Suthanus::PhysicEngine>     _physic;
-    Iyathuum::Key                               _key;
-    bool                                        _active = false;
-    bool                                        _pressed = false;
   };
 }

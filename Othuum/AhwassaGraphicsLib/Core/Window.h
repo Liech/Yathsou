@@ -29,8 +29,8 @@ namespace Ahwassa {
     std::function<void()> Startup = []() {};
     std::function<void()> Update  = []() {};
 
-    int getWidth () { return _width; }
-    int getHeight() { return _height; }
+    int getWidth () const { return _width; }
+    int getHeight() const { return _height; }
 
     GLFWwindow* ptr();
   private:

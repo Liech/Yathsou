@@ -6,7 +6,6 @@
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
 #include "AhwassaGraphicsLib/Input/ArcBallCamera.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
-#include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
 
@@ -23,7 +22,6 @@
 #include "Spheres.h"
 #include "UnitsOld.h"
 #include "NavigationUI.h"
-#include "PhysicsDebugView.h"
 #include "DriveInterface.h"
 #include "Game/Game.h"
 #include "Game/Physic.h"
@@ -54,10 +52,7 @@ int main(int argc, char** argv) {
   Ahwassa::Window                                  w(width, height);
   std::shared_ptr<Ahwassa::FreeCamera>             freeCam;
   std::shared_ptr<Ahwassa::ArcBallCamera>          arcCam;
-  std::shared_ptr<Ahwassa::DeferredComposer>       composer;
-  std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
 
-  std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
   std::shared_ptr<Superb::Spheres>                 spheres;
   std::shared_ptr<Superb::NavigationUI>            navUI;
   std::shared_ptr<Superb::DriveInterface>          driveUI;
@@ -66,12 +61,9 @@ int main(int argc, char** argv) {
 
   w.Startup = [&]() {
     game = std::make_unique<Superb::Game>(w);
-    composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
-    textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
 
     w.camera()->setPosition(config.CameraPos);
     w.camera()->setTarget  (config.CameraTarget);
-    physicDebug = std::make_shared<Superb::PhysicsDebugView>(game->physic().physic(), &w, Iyathuum::Key::KEY_F2);
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
     navUI = std::make_shared <Superb::NavigationUI>(&w, game->physic().physic(), game->terrain().world().navMesh(), game->units().units());
     freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
@@ -87,7 +79,6 @@ int main(int argc, char** argv) {
   bool debugOn = true;
   w.Update = [&]() {
     game->update();
-    physicDebug->update();
     driveUI->update();
     //spheres->update();
     //asd=(asd+1)%20;
@@ -107,19 +98,9 @@ int main(int argc, char** argv) {
     else if (w.input().getKeyStatus(Iyathuum::Key::KEY_F5) == Iyathuum::KeyStatus::RELEASE)
       pressed = false;
 
-    composer->start();
 
     game->drawFirstLayer();
     //spheres->draw();
-    composer->end();
-    
-    textureRenderer->start();
-    textureRenderer->draw(*composer->getResult(), Iyathuum::glmAABB<2>(glm::vec2(0),glm::vec2(width,height)),true);
-    textureRenderer->end();
-    
-    composer->blitDepth();
-
-    physicDebug->draw();
 
     if (debugOn) {
       navUI->debugDraw();

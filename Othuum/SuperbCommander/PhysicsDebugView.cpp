@@ -7,8 +7,7 @@
 #include "AhwassaGraphicsLib/Input/Input.h"
 
 namespace Superb {
-  PhysicsDebugView::PhysicsDebugView(std::shared_ptr<Suthanus::PhysicEngine> physic,Ahwassa::Window* window, Iyathuum::Key key) {
-    _key = key;
+  PhysicsDebugView::PhysicsDebugView(std::shared_ptr<Suthanus::PhysicEngine> physic,Ahwassa::Window* window) {
     _physic = physic;
     _window = window;
 
@@ -16,22 +15,10 @@ namespace Superb {
     physic->setDebugDrawer(_debug.get());
   }
 
-  void PhysicsDebugView::update() {
-    if (_window->input().getKeyStatus(_key) == Iyathuum::KeyStatus::PRESS && !_pressed) {
-      _pressed = true;
-      _active = !_active;
-    }
-    else if (_window->input().getKeyStatus(_key) == Iyathuum::KeyStatus::RELEASE)
-      _pressed = false;
-  }
-
   void PhysicsDebugView::draw() {
-    if (_active)
-    {
-      _debug->_box->start();
-      _physic->debugDrawWorld();
-      _debug->_box->end();
-    }
+    _debug->_box->start();
+    _physic->debugDrawWorld();
+    _debug->_box->end();
   }
 
 }
