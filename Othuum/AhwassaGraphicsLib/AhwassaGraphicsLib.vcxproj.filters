@@ -121,12 +121,6 @@
     <Filter Include="lib\dear imgui">
       <UniqueIdentifier>{b26e5ce8-20bb-480a-bc77-31ce2defc718}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GUI">
-      <UniqueIdentifier>{25e007b0-a49d-4e57-9c60-8bb0060db461}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GUI">
-      <UniqueIdentifier>{8765b8d0-4e21-43f7-8a52-b0d4bbb7c99f}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp">
@@ -399,8 +393,8 @@
     <ClCompile Include="lib\DearIMGUI\imgui_draw.cpp">
       <Filter>lib\dear imgui</Filter>
     </ClCompile>
-    <ClCompile Include="GUI\UI.cpp">
-      <Filter>Source Files\GUI</Filter>
+    <ClCompile Include="Input\IMGUIRenderer.cpp">
+      <Filter>Source Files\Input</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1010,8 +1004,8 @@
     <ClInclude Include="lib\DearIMGUI\imgui_impl_opengl3_loader.h">
       <Filter>lib\dear imgui</Filter>
     </ClInclude>
-    <ClInclude Include="GUI\UI.h">
-      <Filter>Header Files\GUI</Filter>
+    <ClInclude Include="Input\IMGUIRenderer.h">
+      <Filter>Header Files\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

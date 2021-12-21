@@ -8,8 +8,8 @@
 #include "AhwassaGraphicsLib/PostProcessing/DeferredComposer.h"
 #include "AhwassaGraphicsLib/Drawables/Background.h"
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
-#include "AhwassaGraphicsLib/GUI/UI.h"
-
+#include "AhwassaGraphicsLib/Input/IMGUIRenderer.h"
+#include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -40,18 +40,41 @@ int main(int argc, char** argv) {
     std::shared_ptr<Ahwassa::DeferredComposer> composer;
     std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
     std::shared_ptr<Ahwassa::BasicBoxRenderer> boxRenderer;
-    std::unique_ptr<Ahwassa::UI> ui;
+    std::unique_ptr<Ahwassa::IMGUIRenderer> ui;
 
     w.Startup = [&]() {
-      ui = std::make_unique<Ahwassa::UI>(&w);
+      ui = std::make_unique<Ahwassa::IMGUIRenderer>(&w);
       fps = std::make_unique<Ahwassa::FPS>(&w);
     };
+    int counter = 0;
+    bool show_demo_window = true;
+    glm::vec4 clear_color(1,1,1,1);
+    float f = 0;
 
     w.Update = [&]() {
 
       b.draw();
 
-      ui->draw();
+      ui->start();
+
+      ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+
+      ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
+      ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
+      //ImGui::Checkbox("Another Window", &show_another_window);
+
+      ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+      ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
+
+      if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+        counter++;
+      ImGui::SameLine();
+      ImGui::Text("counter = %d", counter);
+
+      ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+      ImGui::End();
+
+      ui->end();
 
       fps->draw();
     };

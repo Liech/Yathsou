@@ -170,10 +170,10 @@
     <ClCompile Include="Drawables\FPS.cpp" />
     <ClCompile Include="Geometry\BasicShapeGenerator.cpp" />
     <ClCompile Include="Geometry\HeightFieldMeshGenerator.cpp" />
-    <ClCompile Include="GUI\UI.cpp" />
     <ClCompile Include="Input\ArcBallCamera.cpp" />
     <ClCompile Include="Input\FileDropper.cpp" />
     <ClCompile Include="Input\FreeCamera.cpp" />
+    <ClCompile Include="Input\IMGUIRenderer.cpp" />
     <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Input\UIElement.cpp" />
     <ClCompile Include="lib\DearIMGUI\imgui.cpp" />
@@ -264,10 +264,10 @@
     <ClInclude Include="Drawables\FPS.h" />
     <ClInclude Include="Geometry\BasicShapeGenerator.h" />
     <ClInclude Include="Geometry\HeightFieldMeshGenerator.h" />
-    <ClInclude Include="GUI\UI.h" />
     <ClInclude Include="Input\ArcBallCamera.h" />
     <ClInclude Include="Input\FileDropper.h" />
     <ClInclude Include="Input\FreeCamera.h" />
+    <ClInclude Include="Input\IMGUIRenderer.h" />
     <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Input\UIElement.h" />
     <ClInclude Include="lib\DearIMGUI\imconfig.h" />
