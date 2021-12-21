@@ -17,6 +17,10 @@ namespace Ahwassa {
     ImGui_ImplOpenGL3_Init(glsl_version);
   }
 
+  IMGUIRenderer::~IMGUIRenderer() {
+
+  }
+
   void IMGUIRenderer::start() {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();

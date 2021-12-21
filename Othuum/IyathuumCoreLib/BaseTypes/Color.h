@@ -10,6 +10,8 @@ namespace Iyathuum {
   public:
     Color();
     Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 255);
+    Color(glm::vec3);
+    Color(glm::vec4);
     ~Color();
 
     unsigned char& r() { return _color[0]; }

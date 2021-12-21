@@ -6,6 +6,8 @@ namespace Ahwassa {
   class IMGUIRenderer {
   public:
     IMGUIRenderer(Ahwassa::Window*);
+    virtual ~IMGUIRenderer();
+
     void start();
     void end();
   };

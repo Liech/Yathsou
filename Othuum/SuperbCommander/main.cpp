@@ -3,8 +3,6 @@
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
-#include "AhwassaGraphicsLib/Drawables/Background.h"
-#include "AhwassaGraphicsLib/Drawables/FPS.h"
 #include "AhwassaGraphicsLib/Input/FreeCamera.h"
 #include "AhwassaGraphicsLib/Input/ArcBallCamera.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
@@ -28,6 +26,7 @@
 #include "PhysicsDebugView.h"
 #include "UnitsVisualization.h"
 #include "DriveInterface.h"
+#include "Menu/MainMenu.h"
 
 #include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
 
@@ -50,8 +49,6 @@ int main(int argc, char** argv) {
   int height = config.ScreenHeight;
 
   Ahwassa::Window                                  w(width, height);
-  Ahwassa::Background                              b(&w);
-  std::unique_ptr<Ahwassa::FPS>                    fps;
   std::shared_ptr<Ahwassa::FreeCamera>             freeCam;
   std::shared_ptr<Ahwassa::ArcBallCamera>          arcCam;
   std::shared_ptr<Ahwassa::DeferredComposer>       composer;
@@ -67,10 +64,11 @@ int main(int argc, char** argv) {
   std::shared_ptr<Superb::NavigationUI>            navUI;
   std::shared_ptr<Superb::DriveInterface>          driveUI;
 
+  std::unique_ptr<Superb::MainMenu>                mainMenu;
+
   w.Startup = [&]() {
     composer = std::make_shared<Ahwassa::DeferredComposer>(&w, width, height);
     textureRenderer = std::make_shared< Ahwassa::BasicTexture2DRenderer>(&w);
-    fps = std::make_unique<Ahwassa::FPS>(&w);
 
     w.camera()->setPosition(config.CameraPos);
     w.camera()->setTarget  (config.CameraTarget);
@@ -89,6 +87,7 @@ int main(int argc, char** argv) {
     w.input().addUIElement(freeCam.get());
     w.input().addUIElement(arcCam .get());
     w.input().addUIElement(navUI.get());
+    mainMenu = std::make_unique<Superb::MainMenu>(w);
   };
   int asd = 0;
   bool pressed = false;
@@ -118,7 +117,8 @@ int main(int argc, char** argv) {
       pressed = false;
 
     composer->start();
-    b.draw();
+
+    mainMenu->drawFirstLayer();
     //spheres->draw();
     world->draw();
     unitsVis->draw();
@@ -139,7 +139,9 @@ int main(int argc, char** argv) {
       navUI->debugDraw();
       unitsVis->debugDraw();
     }
-    fps->draw();
+
+    mainMenu->drawLastLayer();
+    mainMenu->drawMenu();
   };
   w.run();
 

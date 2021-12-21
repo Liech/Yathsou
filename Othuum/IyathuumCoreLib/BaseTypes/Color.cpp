@@ -13,8 +13,21 @@ namespace Iyathuum {
     _color[1] = g;
     _color[2] = b;
     _color[3] = a;
+  }    
+  
+  Color::Color(glm::vec3 v) {
+    _color[0] = v[0]*255;
+    _color[1] = v[1]*255;
+    _color[2] = v[2]*255;
+    _color[3] = 255;
   }
 
+  Color::Color(glm::vec4 v) {
+    _color[0] = v[0]*255;
+    _color[1] = v[1]*255;
+    _color[2] = v[2]*255;
+    _color[3] = v[3]*255;
+  }
 
   Color::~Color()
   {

@@ -148,6 +148,8 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="DriveInterface.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu\MainMenu.cpp" />
+    <ClCompile Include="Menu\OverlayMenu.cpp" />
     <ClCompile Include="NavigationUI.cpp" />
     <ClCompile Include="PhysicsDebugView.cpp" />
     <ClCompile Include="Spheres.cpp" />
@@ -160,6 +162,8 @@
   <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="DriveInterface.h" />
+    <ClInclude Include="Menu\MainMenu.h" />
+    <ClInclude Include="Menu\OverlayMenu.h" />
     <ClInclude Include="NavigationUI.h" />
     <ClInclude Include="PhysicsDebugView.h" />
     <ClInclude Include="Spheres.h" />
