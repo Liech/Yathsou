@@ -31,6 +31,7 @@ namespace Superb {
     _overlay ->menu();
     _physic  ->menu();
     _database->menu();
+    _visualization->menu();
 
     ImGui::End();
     _ui->end();
@@ -42,6 +43,7 @@ namespace Superb {
   }
 
   void Game::drawLastLayer() {
+    _visualization->drawLastLayer();
     _overlay->drawLastLayer();
   }
 

@@ -24,7 +24,6 @@
 #include "UnitsOld.h"
 #include "NavigationUI.h"
 #include "PhysicsDebugView.h"
-#include "UnitsVisualization.h"
 #include "DriveInterface.h"
 #include "Game/Game.h"
 #include "Game/Physic.h"
@@ -57,7 +56,6 @@ int main(int argc, char** argv) {
   std::shared_ptr<Ahwassa::ArcBallCamera>          arcCam;
   std::shared_ptr<Ahwassa::DeferredComposer>       composer;
   std::shared_ptr<Ahwassa::BasicTexture2DRenderer> textureRenderer;
-  std::shared_ptr<Superb::UnitsVisualization>      unitsVis;
 
   std::shared_ptr<Superb::PhysicsDebugView>        physicDebug;
   std::shared_ptr<Superb::Spheres>                 spheres;
@@ -75,7 +73,6 @@ int main(int argc, char** argv) {
     w.camera()->setTarget  (config.CameraTarget);
     physicDebug = std::make_shared<Superb::PhysicsDebugView>(game->physic().physic(), &w, Iyathuum::Key::KEY_F2);
     //spheres = std::make_shared<Superb::Spheres>(&w,physic);
-    unitsVis = std::make_shared<Superb::UnitsVisualization>(&w, game->database().gamedata(),game->units().units());
     navUI = std::make_shared <Superb::NavigationUI>(&w, game->physic().physic(), game->terrain().world().navMesh(), game->units().units());
     freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
     arcCam = std::make_shared<Ahwassa::ArcBallCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F4);
@@ -114,9 +111,6 @@ int main(int argc, char** argv) {
 
     game->drawFirstLayer();
     //spheres->draw();
-    unitsVis->draw();
-       
-    
     composer->end();
     
     textureRenderer->start();
@@ -129,7 +123,6 @@ int main(int argc, char** argv) {
 
     if (debugOn) {
       navUI->debugDraw();
-      unitsVis->debugDraw();
     }
 
     game->drawLastLayer();

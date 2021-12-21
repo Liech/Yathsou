@@ -1,10 +1,16 @@
 #include "Visualization.h"
 
+#include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
+
 #include "Game.h"
 #include "Terrain.h"
 #include "Database.h"
+#include "Units.h"
 
 #include "SuperbCommander/World.h"
+#include "SuperbCommander/UnitsOld.h"
+#include "SuperbCommander/UnitsVisualization.h"
+
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AthanahCommonLib/Map/MapRenderer.h"
 #include "AthanahCommonLib/Map/Map.h"
@@ -12,7 +18,10 @@
 #include "AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.h"
 
 namespace Superb {
-  Visualization::Visualization(Ahwassa::Window& w, Game& g) : _window(w), _game(g) {
+  Visualization::Visualization(Ahwassa::Window& w, Game& g) : _window(w), _game(g) {    
+    _unitsVis = std::make_unique<Superb::UnitsVisualization>(&w, g.database().gamedata(), g.units().units());
+    
+    // terrain
     std::array<std::string, 5> textures;
     for (int i = 0; i < 5; i++) {
       textures[i] = g.terrain().world().map().scmap().terrainTexturePaths[i].path;
@@ -28,11 +37,21 @@ namespace Superb {
   }
 
   void Visualization::menu() {
-
+    ImGui::Checkbox("Draw Terrain", &_drawTerrain);
+    ImGui::Checkbox("Unit View", &_unitsView);
+    ImGui::Checkbox("Debug Unit View", &_debugUnitView);
   }
 
   void Visualization::draw() {
-    if (_mapRenderer && _mapMesh)
+    if (_mapRenderer && _mapMesh && _drawTerrain)
       _mapRenderer->draw(*_mapMesh);
+    if (_unitsView)
+    _unitsVis->draw();
+
+  }
+
+  void Visualization::drawLastLayer() {
+    if (_debugUnitView)
+      _unitsVis->debugDraw();
   }
 }
