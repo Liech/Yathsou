@@ -17,8 +17,8 @@ namespace Superb {
     ImGui::SameLine();
     // open Dialog Simple
     if (ImGui::Button("..."))
-      ImGuiFileDialog::Instance()->OpenDialog("ChooseFileDlgKey", "Choose File",nullptr, ".");
-    if (ImGuiFileDialog::Instance()->Display("ChooseFileDlgKey"))
+      ImGuiFileDialog::Instance()->OpenDialog("SCFAPath", "Choose SupComPath",nullptr, ".");
+    if (ImGuiFileDialog::Instance()->Display("SCFAPath"))
     {
       if (ImGuiFileDialog::Instance()->IsOk())
       {

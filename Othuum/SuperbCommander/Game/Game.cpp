@@ -31,11 +31,12 @@ namespace Superb {
     _ui->start();
     ImGui::Begin("Main Menu");                          // Create a window called "Hello, world!" and append into it.
 
-    _overlay ->menu();
-    _physic  ->menu();
-    _database->menu();
+    _overlay      ->menu();
+    _physic       ->menu();
+    _database     ->menu();
     _visualization->menu();
-    _control->menu();
+    _control      ->menu();
+    _terrain      ->menu();
 
     ImGui::End();
     _ui->end();

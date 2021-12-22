@@ -26,5 +26,6 @@ namespace Superb {
 
       std::unique_ptr<World> _world;
 
+      std::string _mapPath = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Supreme Commander Forged Alliance\\maps\\SCMP_009";
   };
 }
