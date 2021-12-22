@@ -49,11 +49,11 @@ namespace Superb {
   }
 
   void Control::save(nlohmann::json& output) {
-
+    output["NavigationUIDebugView"] = _navUIDebugDraw;
   }
 
   void Control::load(nlohmann::json& input) {
-
+    _navUIDebugDraw = input["NavigationUIDebugView"];
   }
 
   void Control::start() {

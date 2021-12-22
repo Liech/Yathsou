@@ -1,6 +1,7 @@
 #include "Visualization.h"
 
 #include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
+#include "AhwassaGraphicsLib/lib/DearIMGUI/imgui_stdlib.h"
 
 #include "Game.h"
 #include "Terrain.h"
@@ -49,6 +50,8 @@ namespace Superb {
 
       ImGui::EndCombo();
     }
+    ImGui::InputInt("Resolution X", &_screenWidth);
+    ImGui::InputInt("Resolution Y", &_screenHeight);
   }
 
   std::string Visualization::getRendererNames(RendererModes mode) {

@@ -11,11 +11,11 @@ namespace Superb{
   }
 
   void Overlay::menu() {
-    ImGui::Checkbox("Show FPS", &showFPS);
+    ImGui::Checkbox("Show FPS", &_showFps);
   }
 
   void Overlay::drawLastLayer() {
-    if (showFPS)
+    if (_showFps)
       _fps->draw();
   }
 
@@ -23,11 +23,11 @@ namespace Superb{
   }
 
   void Overlay::save(nlohmann::json& output) {
-
+    output["ShowFPS"] = _showFps;
   }
 
   void Overlay::load(nlohmann::json& input) {
-
+    _showFps = input["ShowFPS"];
   }
 
   void Overlay::start() {

@@ -38,11 +38,13 @@ namespace Superb {
   }
 
   void Database::save(nlohmann::json& output) {
-
+    output["SupComPath"] = _supComPath;
+    output["UseSCD"]     = _useSCDData;
   }
 
   void Database::load(nlohmann::json& input) {
-
+    _supComPath = input["SupComPath"];
+    _useSCDData = input["UseSCD"];
   }
 
   void Database::start() {

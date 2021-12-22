@@ -25,7 +25,7 @@ namespace Superb {
   private:
     Ahwassa::Window& _window;
 
-    std::unique_ptr<Ahwassa::FPS>           _fps;
-    bool showFPS = true;
+    std::unique_ptr<Ahwassa::FPS> _fps;
+    bool                          _showFps = true;
   };
 }

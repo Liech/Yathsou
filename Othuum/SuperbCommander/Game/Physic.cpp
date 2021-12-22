@@ -21,11 +21,11 @@ namespace Superb {
   }
 
   void Physic::save(nlohmann::json& output) {
-
+    output["FreezePhysic"] = _freezePhysic;
   }
 
   void Physic::load(nlohmann::json& input) {
-
+    _freezePhysic = input["FreezePhysic"];
   }
 
   void Physic::start() {
