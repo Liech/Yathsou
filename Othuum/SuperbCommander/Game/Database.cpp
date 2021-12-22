@@ -7,7 +7,6 @@
 
 namespace Superb {
   Database::Database() {
-    _gamedata = std::make_unique<Athanah::Gamedata>(_supComPath, _useSCDData);
 
   }
 
@@ -38,4 +37,15 @@ namespace Superb {
     return _supComPath;
   }
 
+  void Database::save(nlohmann::json& output) {
+
+  }
+
+  void Database::load(nlohmann::json& input) {
+
+  }
+
+  void Database::start() {
+    _gamedata = std::make_unique<Athanah::Gamedata>(_supComPath, _useSCDData);
+  }
 }

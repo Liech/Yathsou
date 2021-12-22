@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <string>
-
+#include "AezeselFileIOLib/lib/json.hpp"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 
 namespace Athanah {
@@ -34,18 +34,23 @@ namespace Superb {
     void menu();
     void draw();
     void drawLastLayer();
+    void save(nlohmann::json&);
+    void load(nlohmann::json&);
+    void start();
 
   private:
     std::string getRendererNames(RendererModes);
 
   private:
-    const Game&                                      _game;
-    const Ahwassa::Window&                           _window;
+    Game&                                      _game;
+    Ahwassa::Window&                           _window;
 
     //defered renderering
     std::unique_ptr<Ahwassa::DeferredComposer>       _composer;
     std::shared_ptr<Ahwassa::BasicTexture2DRenderer> _textureRenderer;
     RendererModes                                    _currentRendererMode = RendererModes::Result;
+    int _screenWidth  = 700;
+    int _screenHeight = 700;
 
     //background
     std::unique_ptr<Ahwassa::Background> _background;
@@ -58,7 +63,7 @@ namespace Superb {
 
     //units
     bool _debugUnitView = true;
-    bool _unitsView = true;
+    bool _unitsView     = true;
     std::unique_ptr<UnitsVisualization> _unitsVis;
 
     //physic

@@ -42,11 +42,24 @@ void enforceWorkingDir(std::string exeDir) {
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
   
-  Superb::Config config;
-  config.fromJsonFile("Superb.json");
-  
-  int width  = config.ScreenWidth;
-  int height = config.ScreenHeight;
+  nlohmann::json gameConfig;
+  if (std::filesystem::exists("GameConfiguration.json")) {
+    std::ifstream inputStream("GameConfiguration.json");
+    std::string content((std::istreambuf_iterator<char>(inputStream)), std::istreambuf_iterator<char>());
+    inputStream.close();
+    gameConfig = nlohmann::json::parse(content);
+  }
+
+  int width ;
+  int height;
+  try {
+    width  = gameConfig["ScreenWidth"];
+    height = gameConfig["ScreenHeight"];
+  }
+  catch (...) {
+    width  = 700;
+    height = 700;
+  }
 
   Ahwassa::Window w(width, height);
 
@@ -55,8 +68,13 @@ int main(int argc, char** argv) {
   w.Startup = [&]() {
     game = std::make_unique<Superb::Game>(w);
 
-    w.camera()->setPosition(config.CameraPos);
-    w.camera()->setTarget  (config.CameraTarget);
+    try {
+      game->load(gameConfig);
+    }
+    catch (...){
+
+    }
+    game->start();
   };
   w.Update = [&]() {
     game->update();
@@ -65,9 +83,12 @@ int main(int argc, char** argv) {
   };
   w.run();
 
-  config.CameraPos    = w.camera()->getPosition();
-  config.CameraTarget = w.camera()->getTarget  ();
-  config.toJsonFile("Superb.json");
+  std::ofstream stream;
+  stream.open("GameConfiguration.json");
+  nlohmann::json j;
+  game->save(j);
+  stream << j.dump(4);
+  stream.close();
 
   Iyathuum::DatabaseTerminator::terminateAll();
 }

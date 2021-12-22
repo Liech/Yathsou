@@ -73,6 +73,34 @@ namespace Superb {
   Overlay& Game::overlay() {
     return *_overlay;
   }
+            
+  void Game::save(nlohmann::json& output) {
+    _overlay      ->save(output);
+    _terrain      ->save(output);
+    _physic       ->save(output);
+    _database     ->save(output);
+    _units        ->save(output);
+    _visualization->save(output);
+    _control      ->save(output);
+  }
 
+  void Game::load(nlohmann::json& input) {
+    _overlay      ->load(input);
+    _terrain      ->load(input);
+    _physic       ->load(input);
+    _database     ->load(input);
+    _units        ->load(input);
+    _visualization->load(input);
+    _control      ->load(input);
+  }
+  void Game::start() {
+    _overlay      ->start();
+    _physic       ->start();
+    _database     ->start();
+    _terrain      ->start();
+    _units        ->start();
+    _visualization->start();
+    _control      ->start();
+  } 
 
 }

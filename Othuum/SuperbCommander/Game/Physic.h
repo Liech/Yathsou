@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include "AezeselFileIOLib/lib/json.hpp"
 
 namespace Suthanus {
   class PhysicEngine;
@@ -14,6 +15,9 @@ namespace Superb {
 
     void menu();
     void update();
+    void save(nlohmann::json&);
+    void load(nlohmann::json&);
+    void start();
 
     std::shared_ptr<Suthanus::PhysicEngine> physic();
   private:

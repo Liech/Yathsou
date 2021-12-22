@@ -21,13 +21,7 @@
 
 namespace Superb {
   Control::Control(Ahwassa::Window& w, Game& g) : _game(g), _window(w) {
-    _freeCam = std::make_unique<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
-    _arcCam  = std::make_unique<Ahwassa::ArcBallCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F4);
-    w.input().addUIElement(_freeCam.get());
-    w.input().addUIElement(_arcCam.get());
-    _navUI = std::make_unique <Superb::NavigationUI>(&w, g.physic().physic(), g.terrain().world().navMesh(), g.units().units());
-    w.input().addUIElement(_navUI.get());
-    _driveUI = std::make_unique<Superb::DriveInterface>(w.input());
+
   }
 
   void Control::menu() {    
@@ -52,5 +46,23 @@ namespace Superb {
 
   Ahwassa::ArcBallCamera& Control::arcCamera() {
     return *_arcCam;
+  }
+
+  void Control::save(nlohmann::json& output) {
+
+  }
+
+  void Control::load(nlohmann::json& input) {
+
+  }
+
+  void Control::start() {
+    _freeCam = std::make_unique<Ahwassa::FreeCamera   >(_window.camera(), _window.input(), Iyathuum::Key::KEY_F3);
+    _arcCam = std::make_unique<Ahwassa::ArcBallCamera>(_window.camera(), _window.input(), Iyathuum::Key::KEY_F4);
+    _window.input().addUIElement(_freeCam.get());
+    _window.input().addUIElement(_arcCam.get());
+    _navUI = std::make_unique <Superb::NavigationUI>(&_window, _game.physic().physic(), _game.terrain().world().navMesh(), _game.units().units());
+    _window.input().addUIElement(_navUI.get());
+    _driveUI = std::make_unique<Superb::DriveInterface>(_window.input());
   }
 }

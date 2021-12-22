@@ -7,8 +7,7 @@
 #include "AhwassaGraphicsLib/Drawables/FPS.h"
 
 namespace Superb{
-  Overlay::Overlay(Ahwassa::Window& w) {
-    _fps     = std::make_unique<Ahwassa::FPS>(&w);    
+  Overlay::Overlay(Ahwassa::Window& w) : _window(w){  
   }
 
   void Overlay::menu() {
@@ -21,5 +20,17 @@ namespace Superb{
   }
 
   void Overlay::drawFirstLayer() {
+  }
+
+  void Overlay::save(nlohmann::json& output) {
+
+  }
+
+  void Overlay::load(nlohmann::json& input) {
+
+  }
+
+  void Overlay::start() {
+    _fps = std::make_unique<Ahwassa::FPS>(&_window);
   }
 }

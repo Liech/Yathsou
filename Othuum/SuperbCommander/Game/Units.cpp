@@ -5,8 +5,7 @@
 #include "SuperbCommander/UnitsOld.h"
 
 namespace Superb {
-  Units::Units(Physic& physic, Database& database) {
-    _units = std::make_unique<Superb::UnitsOld>(database.gamedata(), physic.physic());
+  Units::Units(Physic& physic, Database& database) : _physic(physic),_database(database) {
 
   }
 
@@ -18,4 +17,15 @@ namespace Superb {
     return *_units;
   }
 
+  void Units::save(nlohmann::json& output) {
+
+  }
+
+  void Units::load(nlohmann::json& input) {
+
+  }
+
+  void Units::start() {
+    _units = std::make_unique<Superb::UnitsOld>(_database.gamedata(), _physic.physic());
+  }
 }

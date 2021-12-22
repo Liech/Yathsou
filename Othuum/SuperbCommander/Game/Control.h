@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include "AezeselFileIOLib/lib/json.hpp"
 
 namespace Ahwassa {
   class Window;
@@ -21,6 +22,9 @@ namespace Superb {
     void menu();
     void update();
     void debugDraw();
+    void save(nlohmann::json&);
+    void load(nlohmann::json&);
+    void start();
 
     Ahwassa::ArcBallCamera& arcCamera();
   private:

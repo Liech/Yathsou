@@ -8,9 +8,8 @@
 
 
 namespace Superb {
-  Terrain::Terrain(Physic& physic, Database& database) {
-    auto map = std::make_shared<Athanah::Map>(database.supComPath() + "\\" + "maps", "SCMP_009");
-    _world = std::make_unique<Superb::World>(physic.physic(), map, database.gamedata());
+  Terrain::Terrain(Physic& physic, Database& database) :_physic(physic),_database(database) {
+
   }
 
   void Terrain::menu() {
@@ -25,4 +24,16 @@ namespace Superb {
     return *_world;
   }
 
+  void Terrain::save(nlohmann::json& output) {
+
+  }
+
+  void Terrain::load(nlohmann::json& input) {
+
+  }
+
+  void Terrain::start() {
+    auto map = std::make_shared<Athanah::Map>(_database.supComPath() + "\\" + "maps", "SCMP_009");
+    _world   = std::make_unique<Superb::World>(_physic.physic(), map, _database.gamedata());
+  }
 }

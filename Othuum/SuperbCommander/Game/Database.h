@@ -2,6 +2,7 @@
 
 #include <string>
 #include <memory>
+#include "AezeselFileIOLib/lib/json.hpp"
 
 namespace Athanah {
   class Gamedata;
@@ -14,7 +15,10 @@ namespace Superb {
     virtual ~Database() = default;
 
     void menu();
-    
+    void save(nlohmann::json&);
+    void load(nlohmann::json&);
+    void start();
+
     Athanah::Gamedata& gamedata();
     std::string supComPath();
   private:

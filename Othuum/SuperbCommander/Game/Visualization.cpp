@@ -24,29 +24,7 @@
 
 namespace Superb {
   Visualization::Visualization(Ahwassa::Window& w, Game& g) : _window(w), _game(g) {    
-    _unitsVis = std::make_unique<Superb::UnitsVisualization>(&w, g.database().gamedata(), g.units().units());
-    
-    // terrain
-    std::array<std::string, 5> textures;
-    for (int i = 0; i < 5; i++) {
-      textures[i] = g.terrain().world().map().scmap().terrainTexturePaths[i].path;
-    }
-    auto tinter = [&](const std::array<size_t, 2> position, Ahwassa::PositionColorNormalVertex& v) {
-      std::array<size_t, 2> half = { position[0] / 2,position[1] / 2 };
-      if (position[0] == g.terrain().world().map().scmap().heightMapData->getDimension(0) - 1) half[0] = (position[0] - 1) / 2;
-      if (position[1] == g.terrain().world().map().scmap().heightMapData->getDimension(1) - 1) half[1] = (position[1] - 1) / 2;
-      v.color = g.terrain().world().map().scmap().highTexture->getVal(half).to4();
-    };
-    _mapMesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short, Ahwassa::PositionColorNormalVertex>(*g.terrain().world().map().scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(), tinter, 2000, 1);
-    _mapRenderer = std::make_unique<Athanah::MapRenderer>(w.camera(), textures, g.database().gamedata());
-    //terrain end
 
-    _background = std::make_unique<Ahwassa::Background>(&w);
-
-    _physicDebug = std::make_unique<Superb::PhysicsDebugView>(g.physic().physic(), &w);
-
-    _composer = std::make_unique<Ahwassa::DeferredComposer>(&w, w.getWidth(), w.getHeight());
-    _textureRenderer = std::make_unique< Ahwassa::BasicTexture2DRenderer>(&w);
   }
 
   void Visualization::menu() {
@@ -130,5 +108,59 @@ namespace Superb {
       _physicDebug->draw();
     if (_debugUnitView)
       _unitsVis->debugDraw();
+  }
+
+  void Visualization::save(nlohmann::json& output) {
+    output["DrawTerrain"]     = _drawTerrain;
+    output["DebugPhysicView"] = _debugPhysicView;
+    output["UnitsView"]       = _unitsView;
+    output["BackgroundColor"] = { _backgroundColor[0],_backgroundColor[1],_backgroundColor[2] };
+    output["RendererMode"]    = (int)_currentRendererMode;
+    output["ScreenWidth"]     = _screenWidth ;
+    output["ScreenHeight"]    = _screenHeight;
+
+    auto p = _window.camera()->getPosition();
+    output["CameraPosition"] = { p[0],p[1],p[2] };
+    auto t = _window.camera()->getTarget();
+    output["CameraTarget"] = { t[0],t[1],t[2] };
+  }
+
+  void Visualization::load(nlohmann::json& input) {
+    _drawTerrain         = input["DrawTerrain"];
+    _debugPhysicView     = input["DebugPhysicView"];
+    _unitsView           = input["UnitsView"];
+    _backgroundColor[0]  = input["BackgroundColor"][0];
+    _backgroundColor[1]  = input["BackgroundColor"][1];
+    _backgroundColor[2]  = input["BackgroundColor"][2];
+    _currentRendererMode = (RendererModes)input["RendererMode"];
+    _screenWidth  = input["ScreenWidth"];
+    _screenHeight = input["ScreenHeight"];
+
+    _window.camera()->setPosition(glm::vec3(input["CameraPosition"][0],input["CameraPosition"][1],input["CameraPosition"][2]));
+    _window.camera()->setTarget  (glm::vec3(input["CameraTarget"][0],input["CameraTarget"][1],input["CameraTarget"][2]));
+  }
+
+  void Visualization::start() {
+    _unitsVis = std::make_unique<Superb::UnitsVisualization>(&_window, _game.database().gamedata(), _game.units().units());
+
+    // terrain
+    std::array<std::string, 5> textures;
+    for (int i = 0; i < 5; i++) {
+      textures[i] = _game.terrain().world().map().scmap().terrainTexturePaths[i].path;
+    }
+    auto tinter = [&](const std::array<size_t, 2> position, Ahwassa::PositionColorNormalVertex& v) {
+      std::array<size_t, 2> half = { position[0] / 2,position[1] / 2 };
+      if (position[0] == _game.terrain().world().map().scmap().heightMapData->getDimension(0) - 1) half[0] = (position[0] - 1) / 2;
+      if (position[1] == _game.terrain().world().map().scmap().heightMapData->getDimension(1) - 1) half[1] = (position[1] - 1) / 2;
+      v.color = _game.terrain().world().map().scmap().highTexture->getVal(half).to4();
+    };
+    _mapMesh = Ahwassa::HeightFieldMeshGenerator::generate<unsigned short, Ahwassa::PositionColorNormalVertex>(*_game.terrain().world().map().scmap().heightMapData, 0, std::numeric_limits<unsigned short>().max(), tinter, 2000, 1);
+    _mapRenderer = std::make_unique<Athanah::MapRenderer>(_window.camera(), textures, _game.database().gamedata());
+    //terrain end
+
+    _background = std::make_unique<Ahwassa::Background>(&_window);
+    _physicDebug = std::make_unique<Superb::PhysicsDebugView>(_game.physic().physic(), &_window);
+    _composer = std::make_unique<Ahwassa::DeferredComposer>(&_window, _window.getWidth(), _window.getHeight());
+    _textureRenderer = std::make_unique< Ahwassa::BasicTexture2DRenderer>(&_window);
   }
 }

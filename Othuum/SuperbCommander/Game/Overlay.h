@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include "AezeselFileIOLib/lib/json.hpp"
 
 namespace Ahwassa {
   class Window;
@@ -17,8 +18,12 @@ namespace Superb {
     void menu();
     void drawFirstLayer();
     void drawLastLayer();
+    void save(nlohmann::json&);
+    void load(nlohmann::json&);
+    void start();
 
   private:
+    Ahwassa::Window& _window;
 
     std::unique_ptr<Ahwassa::FPS>           _fps;
     bool showFPS = true;
