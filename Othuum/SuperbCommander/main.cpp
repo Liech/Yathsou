@@ -3,11 +3,10 @@
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
-#include "AhwassaGraphicsLib/Input/FreeCamera.h"
-#include "AhwassaGraphicsLib/Input/ArcBallCamera.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
+#include "AhwassaGraphicsLib/Input/ArcBallCamera.h"
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 
@@ -21,13 +20,13 @@
 #include "Config.h"
 #include "Spheres.h"
 #include "UnitsOld.h"
-#include "NavigationUI.h"
-#include "DriveInterface.h"
+
 #include "Game/Game.h"
 #include "Game/Physic.h"
 #include "Game/Database.h"
 #include "Game/Terrain.h"
 #include "Game/Units.h"
+#include "Game/Control.h"
 
 #include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
 
@@ -49,64 +48,19 @@ int main(int argc, char** argv) {
   int width  = config.ScreenWidth;
   int height = config.ScreenHeight;
 
-  Ahwassa::Window                                  w(width, height);
-  std::shared_ptr<Ahwassa::FreeCamera>             freeCam;
-  std::shared_ptr<Ahwassa::ArcBallCamera>          arcCam;
+  Ahwassa::Window w(width, height);
 
-  std::shared_ptr<Superb::Spheres>                 spheres;
-  std::shared_ptr<Superb::NavigationUI>            navUI;
-  std::shared_ptr<Superb::DriveInterface>          driveUI;
-
-  std::unique_ptr<Superb::Game>                    game;
+  std::unique_ptr<Superb::Game> game;
 
   w.Startup = [&]() {
     game = std::make_unique<Superb::Game>(w);
 
     w.camera()->setPosition(config.CameraPos);
     w.camera()->setTarget  (config.CameraTarget);
-    //spheres = std::make_shared<Superb::Spheres>(&w,physic);
-    navUI = std::make_shared <Superb::NavigationUI>(&w, game->physic().physic(), game->terrain().world().navMesh(), game->units().units());
-    freeCam = std::make_shared<Ahwassa::FreeCamera   >(w.camera(), w.input(), Iyathuum::Key::KEY_F3);
-    arcCam = std::make_shared<Ahwassa::ArcBallCamera>(w.camera(), w.input(), Iyathuum::Key::KEY_F4);
-    driveUI = std::make_shared<Superb::DriveInterface>(w.input());
-
-    w.input().addUIElement(freeCam.get());
-    w.input().addUIElement(arcCam .get());
-    w.input().addUIElement(navUI.get());
   };
-  int asd = 0;
-  bool pressed = false;
-  bool debugOn = true;
   w.Update = [&]() {
     game->update();
-    driveUI->update();
-    //spheres->update();
-    //asd=(asd+1)%20;
-    //if (asd == 0) spheres->addSphere(w.camera()->getPosition(),0.5f,Iyathuum::Color(255,0,0));
-
-    if (arcCam->isFocus() && navUI->selection().size() > 0) {
-      w.camera()->setTarget(navUI->selection()[0]->getPosition());
-      driveUI->setTarget(navUI->selection()[0]->getPhysic());
-    }
-    else
-      driveUI->setTarget(nullptr);
-
-    if (!pressed && w.input().getKeyStatus(Iyathuum::Key::KEY_F5) == Iyathuum::KeyStatus::PRESS) {
-      pressed = true;
-      debugOn = !debugOn;
-    }
-    else if (w.input().getKeyStatus(Iyathuum::Key::KEY_F5) == Iyathuum::KeyStatus::RELEASE)
-      pressed = false;
-
-
-    game->drawFirstLayer();
-    //spheres->draw();
-
-    if (debugOn) {
-      navUI->debugDraw();
-    }
-
-    game->drawLastLayer();
+    game->draw();
     game->drawMenu();
   };
   w.run();

@@ -14,6 +14,7 @@ namespace Superb {
   class Database;
   class Units;
   class Visualization;
+  class Control;
 
   class Game {
   public:
@@ -21,14 +22,14 @@ namespace Superb {
     virtual ~Game() = default;
 
     void update();
-    void drawFirstLayer();
-    void drawLastLayer();
+    void draw();
     void drawMenu();
 
     Physic&   physic();
     Database& database();
     Terrain&  terrain();
     Units&    units();
+    Overlay&  overlay();
   private:
     std::unique_ptr<Ahwassa::IMGUIRenderer> _ui;
     std::unique_ptr<Overlay>        _overlay ;
@@ -37,5 +38,6 @@ namespace Superb {
     std::unique_ptr<Database>       _database;
     std::unique_ptr<Units   >       _units   ;
     std::unique_ptr<Visualization>  _visualization;
+    std::unique_ptr<Control>        _control;
   };
 }

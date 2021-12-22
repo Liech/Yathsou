@@ -11,6 +11,7 @@
 #include "Database.h"
 #include "Units.h"
 #include "Visualization.h"
+#include "Control.h"
 
 namespace Superb {
   Game::Game(Ahwassa::Window& w) {
@@ -21,7 +22,9 @@ namespace Superb {
     _database      = std::make_unique<Database>();
     _terrain       = std::make_unique<Terrain >(*_physic, *_database);
     _units         = std::make_unique<Units   >(*_physic, *_database);
+    
     _visualization = std::make_unique<Visualization>(w,*this);
+    _control       = std::make_unique<Control>(w,*this);
   }
 
   void Game::drawMenu() {
@@ -32,24 +35,23 @@ namespace Superb {
     _physic  ->menu();
     _database->menu();
     _visualization->menu();
+    _control->menu();
 
     ImGui::End();
     _ui->end();
   }
 
-  void Game::drawFirstLayer() {
+  void Game::draw() {
     _overlay->drawFirstLayer();
     _visualization->draw();
-  }
-
-  void Game::drawLastLayer() {
     _visualization->drawLastLayer();
     _overlay->drawLastLayer();
   }
 
   void Game::update() {
-    _physic->update();
-    _units ->update();
+    _physic ->update();
+    _units  ->update();
+    _control->update();
   }
 
   Physic& Game::physic() {
@@ -67,5 +69,10 @@ namespace Superb {
   Units& Game::units() {
     return *_units;
   }
+
+  Overlay& Game::overlay() {
+    return *_overlay;
+  }
+
 
 }

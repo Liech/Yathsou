@@ -17,9 +17,10 @@ namespace Superb {
     void menu();
     void drawFirstLayer();
     void drawLastLayer();
+
   private:
 
-    std::unique_ptr<Ahwassa::FPS>        fps;
+    std::unique_ptr<Ahwassa::FPS>           _fps;
     bool showFPS = true;
   };
 }
