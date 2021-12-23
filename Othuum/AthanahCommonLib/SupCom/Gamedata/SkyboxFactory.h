@@ -28,6 +28,7 @@ namespace Athanah {
     std::shared_ptr<Ahwassa::CubeTexture> loadReflectionCube(const std::string& path);
 
   private:
+    bool _initialized = false;
     void init();
 
     std::shared_ptr<Aezesel::SCD>    _archive  ;

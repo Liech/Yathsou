@@ -31,11 +31,23 @@ namespace Suthanus {
     size_t amountX = _volume.getSize()[0] / _sampleDistance;
     size_t amountZ = _volume.getSize()[2] / _sampleDistance;
 
+    std::vector<glm::vec3> positions;
+    int amountFull = amountX * amountZ;
+    positions.resize(amountFull);
+    #pragma omp parallel for
+    for (int i = 1; i < amountFull; ++i)
+    {
+      int x = i % amountX;
+      int z = i / amountZ;
+      positions[i] = start + glm::vec3(_sampleDistance * x, 0, _sampleDistance * z);
+    }
+
+
     for (size_t x = 0; x < amountX;x++) {
       previousElement = nullptr;
       for (size_t z = 0;z < amountZ;z++)
       {
-        glm::vec3 current = start + glm::vec3(_sampleDistance*x,0,_sampleDistance*z);
+        glm::vec3 current = positions[z + x * amountX];
         glm::vec3 hit;
         bool ok = _engine.raycast(current, glm::vec3(0, 1, 0), hit) != nullptr;
         if (!ok) {

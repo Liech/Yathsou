@@ -10,12 +10,10 @@
 namespace Athanah {
   SkyboxFactory::SkyboxFactory(const std::string& path) {
     _archive = std::make_shared<Aezesel::SCD>(path);
-    init();
   }
 
   SkyboxFactory::SkyboxFactory(std::shared_ptr<Aezesel::SCD> archive) {
     _archive = archive;
-    init();
   }
 
   std::shared_ptr<Athanah::SkyBox> SkyboxFactory::load(const std::string& path, std::shared_ptr<Ahwassa::Camera> camera) {
@@ -28,14 +26,19 @@ namespace Athanah {
   }
 
   std::vector<std::string> SkyboxFactory::getBoxes() {
+    if (!_initialized)
+      init();
     return _allBoxes;
   }
 
   std::vector<std::string> SkyboxFactory::getNames() {
+    if (!_initialized)
+      init();
     return _names;
   }
 
   void SkyboxFactory::init() {
+    _initialized = true;
     for (const auto& name : _archive->getFiles("environment")) {
       if (name.ends_with(".dds") && Aezesel::ImageIO::isDDSCube(_archive->loadBinaryFile(name))) {
         _allBoxes.push_back(name);
