@@ -56,6 +56,7 @@ namespace Suthanus
     btCollisionDispatcher               * _dispatcher            ;
     btSequentialImpulseConstraintSolver * _solver                ;
     btDiscreteDynamicsWorld             * _world                 ;
+    btIDebugDraw*                         _debugDrawer           = nullptr; 
 
     std::map<PhysicObject*, std::weak_ptr<PhysicObject>> _allObjects;
   };

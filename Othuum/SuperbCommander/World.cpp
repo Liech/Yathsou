@@ -19,7 +19,7 @@ namespace Superb {
     map->loadFull();
 
 
-    _obj = _physic->newHeightMap(glm::vec3(0, 0, 0), *map->scmap().heightMapData,2000);
+    //_obj = _physic->newHeightMap(glm::vec3(0, 0, 0), *map->scmap().heightMapData,2000);
 
 
 

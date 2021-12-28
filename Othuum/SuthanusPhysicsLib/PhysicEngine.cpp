@@ -26,7 +26,8 @@ namespace Suthanus
   }
 
   void PhysicEngine::debugDrawWorld() {
-    _world->debugDrawWorld();
+    if (_debugDrawer)
+      _world->debugDrawWorld();
   }
 
   void PhysicEngine::setTicksPerSecond(int amount)
@@ -37,6 +38,7 @@ namespace Suthanus
   void PhysicEngine::setDebugDrawer(btIDebugDraw* drawer)
   {
     _world->setDebugDrawer(drawer);
+    _debugDrawer = drawer;
   }
 
   void PhysicEngine::go()
