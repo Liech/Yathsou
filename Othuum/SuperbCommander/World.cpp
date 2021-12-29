@@ -17,7 +17,12 @@ namespace Superb {
     _map    = map   ;
     _physic = physic;
     map->loadFull();
-    _obj = _physic->newHeightMap(glm::vec3(0, 0, 0), *map->scmap().heightMapData,2000);
+
+
+    //_obj = _physic->newHeightMap(glm::vec3(0, 0, 0), *map->scmap().heightMapData,2000);
+
+
+
     _navGraph = std::make_shared<Suthanus::PhysicNavigationMesh>(*physic,_map->aabb(), glm::vec3(30, 30, 30), 1);
     //_navGraphVis = std::make_shared<Athanah::NavigationMeshDebugDrawer>(*_navGraph,window->camera());
   }

@@ -1,6 +1,6 @@
 /*
 Bullet Continuous Collision Detection and Physics Library
-Copyright (c) 2003-2006 Erwin Coumans  https://bulletphysics.org
+Copyright (c) 2003-2006 Erwin Coumans  http://continuousphysics.com/Bullet/
 
 This software is provided 'as-is', without any express or implied warranty.
 In no event will the authors be held liable for any damages arising from the use of this software.
@@ -223,12 +223,10 @@ public:
 	/* sCti is Softbody contact info	*/
 	struct sCti
 	{
-		const btCollisionObject* m_colObj; /* Rigid body			        */
-		btVector3 m_normal;                /* Outward normal		        */
-		mutable btVector3 m_impulse;	   /* Applied impulse        	    */
-		btScalar m_offset;                 /* Offset from origin	        */
+		const btCollisionObject* m_colObj; /* Rigid body			*/
+		btVector3 m_normal;                /* Outward normal		*/
+		btScalar m_offset;                 /* Offset from origin	*/
 		btVector3 m_bary;                  /* Barycentric weights for faces */
-		sCti() : m_impulse(0, 0, 0) {}
 	};
 
 	/* sMedium		*/
@@ -894,7 +892,7 @@ public:
 				   int node1) const;
 	bool checkLink(const Node* node0,
 				   const Node* node1) const;
-	/* Check for existing face												*/
+	/* Check for existring face												*/
 	bool checkFace(int node0,
 				   int node1,
 				   int node2) const;
@@ -1319,8 +1317,8 @@ public:
 		}
 		for (int k = 0; k < m_faceNodeContacts.size(); ++k)
 		{
-			int idx = indices[k];
-			btSoftBody::DeformableFaceNodeContact& c = m_faceNodeContacts[idx];
+			int i = indices[k];
+			btSoftBody::DeformableFaceNodeContact& c = m_faceNodeContacts[i];
 			btSoftBody::Node* node = c.m_node;
 			btSoftBody::Face* face = c.m_face;
 			const btVector3& w = c.m_bary;

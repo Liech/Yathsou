@@ -41,7 +41,7 @@ namespace Suthanus
 
     std::shared_ptr<Box      > newBox      (glm::vec3 pos, glm::vec3 size  , bool isDynamic);
     std::shared_ptr<Sphere   > newSphere   (glm::vec3 pos, float     radius, bool isDynamic);
-    //std::shared_ptr<Vehicle  > newVehicle  (glm::vec3 pos);
+    std::shared_ptr<Vehicle  > newVehicle  (glm::vec3 pos);
     std::shared_ptr<HeightMap> newHeightMap(glm::vec3 pos, const Iyathuum::MultiDimensionalArray<unsigned short, 2>&, float height);
 
   private:

@@ -15,13 +15,14 @@
 
 namespace Suthanus
 {
-  PhysicEngine::PhysicEngine()
+  PhysicEngine::PhysicEngine() :
+    _broadphase(new btDbvtBroadphase())
+    , _collisionConfiguration(new btDefaultCollisionConfiguration())
+    , _dispatcher(new btCollisionDispatcher(_collisionConfiguration))
+    , _solver(new btSequentialImpulseConstraintSolver())
+    , _world(new btDiscreteDynamicsWorld(_dispatcher, new btDbvtBroadphase(), _solver, _collisionConfiguration))
   {
-    _broadphase             = new btDbvtBroadphase()                                                                            ;
-    _collisionConfiguration = new btDefaultCollisionConfiguration()                                                             ;
-    _dispatcher             = new btCollisionDispatcher(_collisionConfiguration)                                                ;
-    _solver                 = new btSequentialImpulseConstraintSolver()                                                         ;
-    _world                  = new btDiscreteDynamicsWorld(_dispatcher, new btDbvtBroadphase(), _solver, _collisionConfiguration);
+
   }
 
   void PhysicEngine::debugDrawWorld() {
@@ -91,14 +92,14 @@ namespace Suthanus
     return ptr;
   }
 
-  //std::shared_ptr<Vehicle> PhysicEngine::newVehicle(glm::vec3 pos)
-  //{
-  //  Bullet::VehicleBulletRaycast* result = new Bullet::VehicleBulletRaycast(_world, pos);
-  //  auto ptr =  std::shared_ptr<Vehicle>(dynamic_cast<Vehicle*>(result));
-  //  ptr->initialize(ptr);
-  //  _allObjects[result] = ptr;
-  //  return ptr;
-  //}
+  std::shared_ptr<Vehicle> PhysicEngine::newVehicle(glm::vec3 pos)
+  {
+    Bullet::VehicleBulletRaycast* result = new Bullet::VehicleBulletRaycast(_world, pos);
+    auto ptr =  std::shared_ptr<Vehicle>(dynamic_cast<Vehicle*>(result));
+    ptr->initialize(ptr);
+    _allObjects[result] = ptr;
+    return ptr;
+  }
 
   std::shared_ptr<HeightMap> PhysicEngine::newHeightMap(glm::vec3 pos, const Iyathuum::MultiDimensionalArray<unsigned short, 2>& content, float height)
   {
