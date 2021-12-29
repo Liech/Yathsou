@@ -25,7 +25,7 @@ subject to the following restrictions:
 #include <float.h>
 
 /* SVN $Revision$ on $Date$ from http://bullet.googlecode.com*/
-#define BT_BULLET_VERSION 317
+#define BT_BULLET_VERSION 320
 
 inline int btGetVersion()
 {
@@ -306,15 +306,15 @@ inline int btIsDoublePrecision()
 
 
 ///The btScalar type abstracts floating point numbers, to easily switch between double and single floating point precision.
-#if defined(BT_USE_DOUBLE_PRECISION)
-	typedef double btScalar;
-	//this number could be bigger in double precision
-	#define BT_LARGE_FLOAT 1e30
-#else
+//#if defined(BT_USE_DOUBLE_PRECISION)
+//	typedef double btScalar;
+//	//this number could be bigger in double precision
+//	#define BT_LARGE_FLOAT 1e30
+//#else
 	typedef float btScalar;
 	//keep BT_LARGE_FLOAT*BT_LARGE_FLOAT < FLT_MAX
 	#define BT_LARGE_FLOAT 1e18f
-#endif
+//#endif
 
 #ifdef BT_USE_SSE
 	typedef __m128 btSimdFloat4;

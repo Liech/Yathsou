@@ -6,6 +6,9 @@
 
 namespace Athanah
 {
+	std::shared_ptr<Ahwassa::BasicBoxRenderer> BulletDebugDrawer::_box;
+	std::shared_ptr<Ahwassa::Camera>           BulletDebugDrawer::_cam;
+
 	BulletDebugDrawer::BulletDebugDrawer(std::shared_ptr<Ahwassa::Camera> w) {
 		_cam = w;
 		_box = std::make_shared<Ahwassa::BasicBoxRenderer>(w);

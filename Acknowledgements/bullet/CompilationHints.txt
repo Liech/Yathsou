@@ -4,6 +4,8 @@ Follow guide from front page:
     Windows
     
     Click on build_visual_studio_vr_pybullet_double.bat and open build3/vs2010/0_Bullet3Solution.sln When asked, convert the projects to a newer version of Visual Studio. If you installed Python in the C:\ root directory, the batch file should find it automatically. Otherwise, edit this batch file to choose where Python include/lib directories are located.
+	
+	do this but remove --double from the build_visual_studio_vr_pybullet_double.bat file
 remove non library projects from sln
 set every lib to md or mdd (c++/code generation)
 set every lib to link library dependencys yes

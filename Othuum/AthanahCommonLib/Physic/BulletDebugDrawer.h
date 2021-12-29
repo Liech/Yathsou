@@ -20,7 +20,7 @@ namespace Athanah
       void draw3dText(const btVector3& location, const char* textString)                                                                    override;
       void setDebugMode(int debugMode)                                                                                                      override;
       int  getDebugMode() const                                                                                                             override;
-      std::shared_ptr<Ahwassa::BasicBoxRenderer> _box;
-      std::shared_ptr<Ahwassa::Camera> _cam;
+      static std::shared_ptr<Ahwassa::BasicBoxRenderer> _box;
+      static std::shared_ptr<Ahwassa::Camera> _cam;
     };
 }
