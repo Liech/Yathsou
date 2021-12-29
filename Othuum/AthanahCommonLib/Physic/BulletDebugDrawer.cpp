@@ -15,8 +15,8 @@ namespace Athanah
 		auto FROM = glm::vec3(from[0], from[1], from[2]);
 	  auto TO = glm::vec3(to[0], to[1], to[2]);
 		float dist = glm::distance(FROM,_cam->getPosition());
-		if (dist > 100)
-			return;
+		//if (dist > 100)
+		//	return;
 		_box->drawLine(FROM,TO, 0.01f, Iyathuum::Color(255,255, 0, 255));
 	}
 

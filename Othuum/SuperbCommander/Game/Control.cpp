@@ -41,7 +41,8 @@ namespace Superb {
   }
 
   void Control::debugDraw() {
-    _navUI->debugDraw();
+    if (_navUIDebugDraw)
+      _navUI->debugDraw();
   }
 
   Ahwassa::ArcBallCamera& Control::arcCamera() {

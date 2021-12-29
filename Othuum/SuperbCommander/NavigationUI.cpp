@@ -28,8 +28,12 @@ namespace Superb {
   void NavigationUI::debugDraw() {
     _window->renderer().box().start();
     _window->renderer().box().drawDot(_targetPos, 0.5f, Iyathuum::Color(255, 0, 255));
-    for (auto unit : _selection)
-      _window->renderer().box().drawDot(unit->getPosition(), 0.1f, Iyathuum::Color(128, 128, 128));
+    for (auto unit : _selection) {
+      _window->renderer().box().drawDot(unit->getPosition(), 0.7f, Iyathuum::Color(128, 128, 128));
+      for (int i = 0; i < unit->getPhysic()->currentContacts().size(); i++) {
+        _window->renderer().box().drawDot(unit->getPosition() + glm::vec3(0,1+i,0), 0.3f, Iyathuum::Color(128, 128, 128));
+      }
+    }
     _window->renderer().box().end();
     if (_rectangleSelectionActive) {
       glm::vec2 mousePos = _window->input().getCursorPos();
@@ -59,7 +63,7 @@ namespace Superb {
         selectSingle();
       } 
       else {
-        _selection = _units.selectCameraRect(glm::vec2(_rectangleStart.x, _window->getHeight() - _rectangleStart.y), glm::vec2(localPosition.x, _window->getHeight()- localPosition.y));
+        _selection = _units.selectCameraRect(glm::vec2(_rectangleStart.x, _window->getHeight() - _rectangleStart.y), glm::vec2(localPosition.x, _window->getHeight()- localPosition.y), *_window);
       }
       _rectangleSelectionActive = false;
       return true;

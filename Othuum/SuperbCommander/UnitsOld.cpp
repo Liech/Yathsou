@@ -43,19 +43,19 @@ namespace Superb {
     return { _units[obj] };
   }
 
-  std::vector<std::shared_ptr<Unit>> UnitsOld::selectCameraRect(glm::vec2 rectangleStart, glm::vec2 rectangleEnd) {
-    //auto c = _window->camera();
-    //glm::vec3 topLeft  = c->getPickRay(rectangleStart);
-    //glm::vec3 botLeft = c->getPickRay(glm::vec2(rectangleStart[0], rectangleEnd[1]));
-    //glm::vec3 topRight = c->getPickRay(glm::vec2(rectangleEnd[0], rectangleStart[1]));
-    //glm::vec3 botRight = c->getPickRay(rectangleEnd);
+  std::vector<std::shared_ptr<Unit>> UnitsOld::selectCameraRect(glm::vec2 rectangleStart, glm::vec2 rectangleEnd, Ahwassa::Window& window) {
+    auto c = window.camera();
+    glm::vec3 topLeft  = c->getPickRay(rectangleStart);
+    glm::vec3 botLeft = c->getPickRay(glm::vec2(rectangleStart[0], rectangleEnd[1]));
+    glm::vec3 topRight = c->getPickRay(glm::vec2(rectangleEnd[0], rectangleStart[1]));
+    glm::vec3 botRight = c->getPickRay(rectangleEnd);
 
     std::vector<std::shared_ptr<Unit>> result;
-    //auto frustumQuery = _selection->insideFrustum(c->getPosition(), topLeft, topRight, botLeft, botRight, c->getNearPlane(), c->getFarPlane());
-    //for (auto& x : frustumQuery) {
-    //  std::shared_ptr<Suthanus::Box> obj = std::dynamic_pointer_cast<Suthanus::Box>(x);
-    //  result.push_back(_units[obj]);
-    //}
+    auto frustumQuery = _selection->insideFrustum(c->getPosition(), topLeft, topRight, botLeft, botRight, c->getNearPlane(), c->getFarPlane());
+    for (auto& x : frustumQuery) {
+      std::shared_ptr<Suthanus::Box> obj = std::dynamic_pointer_cast<Suthanus::Box>(x);
+      result.push_back(_units[obj]);
+    }
     return result;
   }
 

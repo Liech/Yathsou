@@ -25,7 +25,7 @@ namespace Superb {
     UnitsOld(Athanah::Gamedata& gamedata, std::shared_ptr<Suthanus::PhysicEngine> physic);
 
     std::vector<std::shared_ptr<Unit>> select(glm::vec3 pos, glm::vec3 dir);
-    std::vector<std::shared_ptr<Unit>> selectCameraRect(glm::vec2 rectangleStart, glm::vec2 rectangleEnd);
+    std::vector<std::shared_ptr<Unit>> selectCameraRect(glm::vec2 rectangleStart, glm::vec2 rectangleEnd, Ahwassa::Window& window);
     
     std::vector<std::shared_ptr<Unit>> getUnits() const;
 

@@ -123,7 +123,7 @@ namespace Suthanus
     const int numManifolds = dp->getNumManifolds();
     for (int m = 0; m < numManifolds; ++m)
     {
-      btPersistentManifold* man = dp->getManifoldByIndexInternal(m);
+      btPersistentManifold* man = dp->getManifoldByIndexInternal(m);      
       const btRigidBody* obA = static_cast<const btRigidBody*>(man->getBody0());
       const btRigidBody* obB = static_cast<const btRigidBody*>(man->getBody1());
       PhysicObject* ptrA = (PhysicObject*)obA->getUserPointer();
@@ -133,7 +133,7 @@ namespace Suthanus
       ev e;
       e.A = aLock;
       e.B = bLock;
-      if (e.A && e.B)
+      if (e.A && e.B && man->getNumContacts() > 0)
         events.push_back(e);
     }
     std::vector<PhysicObject*> toDelete;

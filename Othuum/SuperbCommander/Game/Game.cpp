@@ -29,7 +29,7 @@ namespace Superb {
 
   void Game::drawMenu() {
     _ui->start();
-    ImGui::Begin("Main Menu");                          // Create a window called "Hello, world!" and append into it.
+    ImGui::Begin("Main Menu");
 
     _overlay      ->menu();
     _physic       ->menu();
@@ -47,6 +47,7 @@ namespace Superb {
     _visualization->draw();
     _visualization->drawLastLayer();
     _overlay->drawLastLayer();
+    _control->debugDraw();
   }
 
   void Game::update() {
