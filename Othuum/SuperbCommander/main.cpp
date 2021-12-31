@@ -29,6 +29,7 @@
 #include "Game/Control.h"
 
 #include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
+#include "SuthanusPhysicsLib/PhysicEngineReact.h"
 
 void enforceWorkingDir(std::string exeDir) {
   const size_t last_slash_idx = exeDir.find_last_of("\\/");
@@ -42,6 +43,8 @@ void enforceWorkingDir(std::string exeDir) {
 int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
   
+  Suthanus::PhysicEngineReact react;
+
   nlohmann::json gameConfig;
   if (std::filesystem::exists("GameConfiguration.json")) {
     std::ifstream inputStream("GameConfiguration.json");

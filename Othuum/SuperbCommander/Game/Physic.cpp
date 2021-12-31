@@ -1,6 +1,6 @@
 #include "Physic.h"
 
-#include "SuthanusPhysicsLib/PhysicEngine.h"
+#include "SuthanusPhysicsLib/PhysicEngineBullet.h"
 #include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
 
 namespace Superb {
@@ -29,6 +29,6 @@ namespace Superb {
   }
 
   void Physic::start() {
-    _physic = std::make_shared<Suthanus::PhysicEngine>();
+    _physic = std::make_shared<Suthanus::PhysicEngineBullet>();
   }
 }

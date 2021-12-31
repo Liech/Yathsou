@@ -167,9 +167,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;BT_USE_DOUBLE_PRECISION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;BT_USE_DOUBLE_PRECISION;_CRT_SECURE_NO_WARNINGS;IS_RP3D_DOUBLE_PRECISION_ENABLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib/bullet;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib/bullet;$(ProjectDir)lib;$(SolutionDir);$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OpenMPSupport>true</OpenMPSupport>
@@ -181,7 +181,7 @@
     </Link>
     <Lib />
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib/bullet/lib/gtest_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletRobotics_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/ConvexDecomposition_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletXmlWorldImporter_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/vhacd_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/HACD_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet2FileLoader_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet3OpenCL_clew_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletCollision_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet3Dynamics_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet3Collision_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet3Geometry_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletDynamics_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/LinearMath_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletSoftBody_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletInverseDynamics_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletInverseDynamicsUtils_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletWorldImporter_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletFileLoader_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BussIK_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/enet_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet3Common_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/clsocket_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/gwen_vs2010_x64_debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib/bullet/lib/gtest_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletRobotics_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/ConvexDecomposition_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletXmlWorldImporter_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/vhacd_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/HACD_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet2FileLoader_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet3OpenCL_clew_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletCollision_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet3Dynamics_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet3Collision_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet3Geometry_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletDynamics_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/LinearMath_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletSoftBody_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletInverseDynamics_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletInverseDynamicsUtils_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletWorldImporter_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BulletFileLoader_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/BussIK_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/enet_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/Bullet3Common_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/clsocket_vs2010_x64_debug.lib;$(ProjectDir)lib/bullet/lib/gwen_vs2010_x64_debug.lib;$(ProjectDir)lib/reactphysics3d/lib/debug/reactphysics3d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Verbose>true</Verbose>
     </Lib>
     <ProjectReference>
@@ -194,9 +194,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;BT_USE_DOUBLE_PRECISION;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;BT_USE_DOUBLE_PRECISION;IS_RP3D_DOUBLE_PRECISION_ENABLED;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib/bullet;$(SolutionDir);$(ProjectDir)lib/bullet/lib/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib/bullet;$(ProjectDir)lib;$(SolutionDir);$(ProjectDir)lib/bullet/lib/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OpenMPSupport>true</OpenMPSupport>
@@ -209,7 +209,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalDependencies>$(ProjectDir)lib/bullet/lib/gtest_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletRobotics_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/ConvexDecomposition_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletXmlWorldImporter_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/vhacd_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/HACD_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet2FileLoader_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet3OpenCL_clew_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletCollision_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet3Dynamics_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet3Collision_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet3Geometry_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletDynamics_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/LinearMath_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletSoftBody_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletInverseDynamics_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletInverseDynamicsUtils_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletWorldImporter_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletFileLoader_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BussIK_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/enet_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet3Common_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/clsocket_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/gwen_vs2010_x64_release.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(ProjectDir)lib/bullet/lib/gtest_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletRobotics_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/ConvexDecomposition_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletXmlWorldImporter_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/vhacd_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/HACD_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet2FileLoader_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet3OpenCL_clew_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletCollision_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet3Dynamics_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet3Collision_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet3Geometry_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletDynamics_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/LinearMath_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletSoftBody_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletInverseDynamics_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletInverseDynamicsUtils_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletWorldImporter_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BulletFileLoader_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/BussIK_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/enet_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/Bullet3Common_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/clsocket_vs2010_x64_release.lib;$(ProjectDir)lib/bullet/lib/gwen_vs2010_x64_release.lib;$(ProjectDir)lib/reactphysics3d/lib/release/reactphysics3d.lib</AdditionalDependencies>
     </Lib>
     <ProjectReference>
       <LinkLibraryDependencies>true</LinkLibraryDependencies>
@@ -223,7 +223,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)lib/bullet;$(SolutionDir);$(ProjectDir)lib/bullet/lib/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)lib/bullet;$(ProjectDir)lib/reactphysics3d/include;$(SolutionDir);$(ProjectDir)lib/bullet/lib/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <OpenMPSupport>true</OpenMPSupport>
@@ -252,7 +252,8 @@
     <ClCompile Include="Objects\Sphere.cpp" />
     <ClCompile Include="Objects\SphereBullet.cpp" />
     <ClCompile Include="Objects\VehicleBulletRaycast.cpp" />
-    <ClCompile Include="PhysicEngine.cpp" />
+    <ClCompile Include="PhysicEngineBullet.cpp" />
+    <ClCompile Include="PhysicEngineReact.cpp" />
     <ClCompile Include="PhysicNavigationMesh.cpp" />
     <ClCompile Include="VehicleDriver.cpp" />
   </ItemGroup>
@@ -552,6 +553,8 @@
     <ClInclude Include="Objects\Vehicle.h" />
     <ClInclude Include="Objects\VehicleBulletRaycast.h" />
     <ClInclude Include="PhysicEngine.h" />
+    <ClInclude Include="PhysicEngineBullet.h" />
+    <ClInclude Include="PhysicEngineReact.h" />
     <ClInclude Include="PhysicNavigationMesh.h" />
     <ClInclude Include="VehicleDriver.h" />
   </ItemGroup>

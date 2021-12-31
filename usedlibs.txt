@@ -25,3 +25,4 @@ nlohmann/json                  |vishala, haas| Human Readable Config Files
 zlib                           |zipper       | zipper library
 minizip                        |zipper       | zipper library
 zipper                         |aezesel      | access to .zip files
+reactphysics3d                 |suthanus     | physics engine

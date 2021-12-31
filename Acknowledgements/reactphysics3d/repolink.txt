@@ -1,0 +1,3 @@
+https://www.reactphysics3d.com/
+https://github.com/DanielChappuis/reactphysics3d/releases/tag/v0.8.0
+https://github.com/DanielChappuis/reactphysics3d

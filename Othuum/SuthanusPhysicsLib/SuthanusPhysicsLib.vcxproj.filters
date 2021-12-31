@@ -69,7 +69,7 @@
     <ClCompile Include="VehicleDriver.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicEngine.cpp">
+    <ClCompile Include="PhysicEngineBullet.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="ArtilleryAim.cpp">
@@ -102,12 +102,15 @@
     <ClCompile Include="Objects\BulletCore.cpp">
       <Filter>Quelldateien\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicEngineReact.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VehicleDriver.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicEngine.h">
+    <ClInclude Include="PhysicEngineBullet.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ArtilleryAim.h">
@@ -994,6 +997,12 @@
     </ClInclude>
     <ClInclude Include="Objects\BulletCore.h">
       <Filter>Headerdateien\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicEngineReact.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicEngine.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

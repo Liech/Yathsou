@@ -5,7 +5,7 @@
 
 #include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
 
-#include "SuthanusPhysicsLib/PhysicEngine.h"
+#include "SuthanusPhysicsLib/PhysicEngineBullet.h"
 #include "SuthanusPhysicsLib/Objects/Box.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
@@ -16,7 +16,7 @@ namespace Superb {
   UnitsOld::UnitsOld(Athanah::Gamedata& gamedata, std::shared_ptr<Suthanus::PhysicEngine> physic) :
    _gamedata(gamedata){
     _physic     = physic;
-    _selection  = std::make_shared<Suthanus::PhysicEngine>();
+    _selection  = std::make_shared<Suthanus::PhysicEngineBullet>();
 
     auto rnd = []() {return (rand() % 500) / 500.0f; };
     for (int i = 0; i < 200; i++) {      

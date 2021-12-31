@@ -12,12 +12,12 @@ namespace Superb {
     _window = window;
 
     _debug = std::make_shared<Athanah::BulletDebugDrawer>(_window->camera());
-    physic->setDebugDrawer(_debug.get());
+    //physic->setDebugDrawer(_debug.get());
   }
 
   void PhysicsDebugView::draw() {
     _debug->_box->start();
-    _physic->debugDrawWorld();
+    //_physic->debugDrawWorld();
     _debug->_box->end();
   }
 
