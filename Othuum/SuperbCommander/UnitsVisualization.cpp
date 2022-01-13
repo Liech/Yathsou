@@ -56,12 +56,27 @@ namespace Superb {
 
   }
 
-  void UnitsVisualization::debugDraw() {
+  void UnitsVisualization::debugDraw(bool box, bool dirs) {
+    if (!box && !dirs)
+      return;
     _window->renderer().box().start();
     for (auto unit : _units.getUnits())
     {
       auto pos = unit->getPosition();
-      Athanah::BoxVisualization::draw(unit->getPhysic(), Iyathuum::Color(255, 128, 30), _window);
+      if (box)
+        Athanah::BoxVisualization::draw(unit->getPhysic(), Iyathuum::Color(255, 128, 30), _window);
+      if (dirs) {
+        auto rot = unit->getPhysic()->getRotation();
+
+        glm::vec3 x = glm::mat4_cast(rot) * glm::vec4(1, 0, 0, 1);
+        glm::vec3 y = glm::mat4_cast(rot) * glm::vec4(0, 1, 0, 1);
+        glm::vec3 z = glm::mat4_cast(rot) * glm::vec4(0, 0, 1, 1);
+
+        _window->renderer().box().drawLine(unit->getPosition(), unit->getPosition() + x, 0.1f, Iyathuum::Color(255, 0, 0));
+        _window->renderer().box().drawLine(unit->getPosition(), unit->getPosition() + y, 0.1f, Iyathuum::Color(0, 255, 0));
+        _window->renderer().box().drawLine(unit->getPosition(), unit->getPosition() + z, 0.1f, Iyathuum::Color(0, 0, 255));
+        _window->renderer().box().drawLine(unit->getPosition(), unit->getPosition() + glm::vec3(0, 2, 0), 0.15f, Iyathuum::Color(255, 0, 255));
+      }
     }
     _window->renderer().box().end();
   }

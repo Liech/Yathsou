@@ -5,7 +5,7 @@
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 
 namespace Iyathuum {
-  struct Color;
+  class Color;
 }
 
 namespace Ahwassa {

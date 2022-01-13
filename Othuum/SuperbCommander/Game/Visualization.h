@@ -64,6 +64,7 @@ namespace Superb {
     //units
     bool _debugUnitView = true;
     bool _unitsView     = true;
+    bool _debugUnitDirs = true;
     std::unique_ptr<UnitsVisualization> _unitsVis;
 
     //physic

@@ -26,13 +26,19 @@ namespace Superb {
     void setId(const std::string& id);
     void setPhysic(std::shared_ptr<Suthanus::PhysicEngine>);
     void setSelection(std::shared_ptr<Suthanus::PhysicEngine>);
+    void setRotation(const glm::vec3& normal);
 
-    std::shared_ptr<Suthanus::Box>            getPhysic()    const;
-    std::shared_ptr<Suthanus::Box>            getSelector()  const;
-    std::shared_ptr<const Athanah::Blueprint> getBlueprint() const;
-    std::string                               getId()        const;
+    std::shared_ptr<Suthanus::Box>            getPhysic()         const;
+    std::shared_ptr<Suthanus::Box>            getSelector()       const;
+    std::shared_ptr<const Athanah::Blueprint> getBlueprint()      const;
+    std::string                               getId()             const;
+    glm::vec3                                 getNormal()         const;
+    glm::vec3                                 getSidewardsTangent() const;
+    glm::vec3                                 getForwardTangent() const;
 
   private:
+    float                                     _direction     = 0;
+    glm::vec3                                 _groundNormal  = glm::vec3(1,0,0);
     glm::vec3                                 _startPosition;
     std::string                               _id           ;
     std::shared_ptr<Suthanus::PhysicEngine>   _physic       ;

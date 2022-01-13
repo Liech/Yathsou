@@ -33,6 +33,7 @@ namespace Superb {
     ImGui::Checkbox("Draw Terrain", &_drawTerrain);
     ImGui::Checkbox("Unit View", &_unitsView);
     ImGui::Checkbox("Debug Unit View", &_debugUnitView);
+    ImGui::Checkbox("Debug Unit Dirs", &_debugUnitDirs);
     ImGui::Checkbox("Debug Physic View", &_debugPhysicView);    
     if (ImGui::BeginCombo("Renderer", getRendererNames(_currentRendererMode).c_str(), 0)) {
       if (ImGui::Selectable("Result", _currentRendererMode == RendererModes::Result))
@@ -109,13 +110,14 @@ namespace Superb {
   void Visualization::drawLastLayer() {
     if (_debugPhysicView)
       _physicDebug->draw();
-    if (_debugUnitView)
-      _unitsVis->debugDraw();
+    _unitsVis->debugDraw(_debugUnitView,_debugUnitDirs);
   }
 
   void Visualization::save(nlohmann::json& output) {
     output["DrawTerrain"]     = _drawTerrain;
     output["DebugPhysicView"] = _debugPhysicView;
+    output["DebugUnitDirs"] = _debugUnitDirs;
+    output["DebugUnitPhys"] = _debugUnitView;
     output["UnitsView"]       = _unitsView;
     output["BackgroundColor"] = { _backgroundColor[0],_backgroundColor[1],_backgroundColor[2] };
     output["RendererMode"]    = (int)_currentRendererMode;
@@ -132,6 +134,8 @@ namespace Superb {
     _drawTerrain         = input["DrawTerrain"];
     _debugPhysicView     = input["DebugPhysicView"];
     _unitsView           = input["UnitsView"];
+    _debugUnitView       = input["DebugUnitPhys"];
+    _debugUnitDirs       = input["DebugUnitDirs"];
     _backgroundColor[0]  = input["BackgroundColor"][0];
     _backgroundColor[1]  = input["BackgroundColor"][1];
     _backgroundColor[2]  = input["BackgroundColor"][2];

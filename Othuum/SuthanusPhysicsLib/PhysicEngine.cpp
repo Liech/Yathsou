@@ -46,7 +46,12 @@ namespace Suthanus
     _world->setGravity(btVector3(0, -9.81, 0));
   }
 
-  std::shared_ptr<PhysicObject> PhysicEngine::raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint) const
+  std::shared_ptr<PhysicObject> PhysicEngine::raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint) const {
+    glm::vec3 normal;
+    return raycast(origin, direction, hitPoint,normal);
+  }
+
+  std::shared_ptr<PhysicObject> PhysicEngine::raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint, glm::vec3& normal) const
   {
     btVector3 bOrigin   (origin.x, origin.y, origin.z);
     btVector3 bDirection(direction.x, direction.y, direction.z);
@@ -56,11 +61,13 @@ namespace Suthanus
     _world->rayTest(bOrigin, bTarget, result);
     if (!result.hasHit()) {
       hitPoint = glm::vec3(0, 0, 0);
+      normal   = glm::vec3(0, 0, 0);
       return nullptr;
     }
     else
     {
       hitPoint = glm::vec3(result.m_hitPointWorld.x(), result.m_hitPointWorld.y(), result.m_hitPointWorld.z());
+      normal   = glm::vec3(result.m_hitNormalWorld.x(), result.m_hitNormalWorld.y(), result.m_hitNormalWorld.z());
       PhysicObject* ptr = (PhysicObject*)result.m_collisionObject->getUserPointer();
       if (!ptr)
         return nullptr;

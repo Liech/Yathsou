@@ -80,7 +80,7 @@ namespace Suthanus
     {
       btTransform transform = _body->getCenterOfMassTransform();
       auto rot = transform.getRotation();
-      return glm::quat(rot.x(), rot.y(), rot.z(), rot.w());
+      return glm::quat(rot.w(),rot.x(), rot.y(), rot.z());
     }
 
     void HeightMapBullet::setVelocity(glm::vec3 pos)

@@ -35,7 +35,8 @@ namespace Suthanus
     void debugDrawWorld();
 
     std::shared_ptr<PhysicObject>              raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint) const;
-    
+    std::shared_ptr<PhysicObject>              raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint, glm::vec3& normal) const;
+
     std::vector<std::shared_ptr<PhysicObject>> insideSphere (const glm::vec3& origin, float radius) const;
     std::vector<std::shared_ptr<PhysicObject>> insideFrustum(const glm::vec3& origin, const glm::vec3& dirLeftTop, const glm::vec3& dirRightTop, const glm::vec3& dirLeftBot, const glm::vec3& dirRightBot, float nearPlane, float farPlane) const;
 
