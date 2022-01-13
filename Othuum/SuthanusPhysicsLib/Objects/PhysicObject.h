@@ -9,9 +9,13 @@
 
 namespace Suthanus
 {
+  class PhysicEngine;
+
   class PhysicObject
   {
   public:
+    PhysicObject(PhysicEngine&);
+
     virtual ~PhysicObject() = default;
     virtual glm::vec3 getPosition       ()                    const = 0;
     virtual glm::mat4 getTransformation ()                    const = 0;
@@ -31,7 +35,11 @@ namespace Suthanus
     void collisionEventSecondPass(std::weak_ptr<PhysicObject> other);
     void collisionEventFirstPass (std::weak_ptr<PhysicObject> other);
     void clearContacts(); 
+
+    PhysicEngine& engine();
+
   private:
+    PhysicEngine& _engine;
     std::function<void(std::weak_ptr<PhysicObject>)> _collsionCallback = [](std::weak_ptr<PhysicObject>) {};
     std::weak_ptr<PhysicObject> _self;
 

@@ -7,7 +7,7 @@ namespace Suthanus
   namespace Bullet
   {
 
-    VehicleBulletRaycast::VehicleBulletRaycast(btDiscreteDynamicsWorld* world, glm::vec3 pos)
+    VehicleBulletRaycast::VehicleBulletRaycast(PhysicEngine& engine, btDiscreteDynamicsWorld* world, glm::vec3 pos) : Vehicle(engine)
     {
       _world = world;
       btVector3 spawnPos = btVector3(pos[0], pos[1], pos[2]);

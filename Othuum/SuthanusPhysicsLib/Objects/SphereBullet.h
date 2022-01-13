@@ -15,7 +15,7 @@ namespace Suthanus
     class SphereBullet : public Sphere
     {
     public:
-      SphereBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, float size, bool isDynamic = true);
+      SphereBullet(PhysicEngine& engine, btDiscreteDynamicsWorld* world, glm::vec3 pos, float size, bool isDynamic = true);
       virtual ~SphereBullet();
       virtual glm::vec3 getPosition()               const override;
       virtual glm::mat4 getTransformation()         const override;

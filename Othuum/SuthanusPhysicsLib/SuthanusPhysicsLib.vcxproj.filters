@@ -102,6 +102,12 @@
     <ClCompile Include="Objects\BulletCore.cpp">
       <Filter>Quelldateien\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\HeightMap.cpp">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Vehicle.cpp">
+      <Filter>Headerdateien\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VehicleDriver.h">

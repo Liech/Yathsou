@@ -2,5 +2,7 @@
 
 namespace Suthanus
 {
+  Box::Box(PhysicEngine& engine) : PhysicObject(engine) {
 
+  }
 }

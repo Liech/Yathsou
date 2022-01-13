@@ -8,7 +8,7 @@ namespace Suthanus
 {
   namespace Bullet
   {
-    BoxBullet::BoxBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, glm::vec3 size, bool isDynamic)
+    BoxBullet::BoxBullet(PhysicEngine& engine, btDiscreteDynamicsWorld* world, glm::vec3 pos, glm::vec3 size, bool isDynamic) : Box(engine)
     {
       _world = world;
       _size = size;

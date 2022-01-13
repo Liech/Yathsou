@@ -2,5 +2,7 @@
 
 namespace Suthanus
 {
+  Sphere::Sphere(PhysicEngine& engine) : PhysicObject(engine) {
 
+  }
 }

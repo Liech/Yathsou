@@ -4,9 +4,14 @@
 
 namespace Suthanus
 {
+  class PhysicEngine;
+
   class HeightMap : public PhysicObject
   {
   public:
+    HeightMap(PhysicEngine&);
+    ~HeightMap() = default;
+
     struct Mesh
     {
       std::vector<int> indices;

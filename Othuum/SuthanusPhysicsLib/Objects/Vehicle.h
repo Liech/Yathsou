@@ -4,9 +4,14 @@
 
 namespace Suthanus
 {
+  class PhysicEngine;
+
   class Vehicle : public PhysicObject
   {
   public:
+    Vehicle(PhysicEngine&);
+    virtual ~Vehicle() = default;
+
     virtual glm::vec3 getSize()              = 0;
                                              
     virtual float     maxSteering()          = 0;

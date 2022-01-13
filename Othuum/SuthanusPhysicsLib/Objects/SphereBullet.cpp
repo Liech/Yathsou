@@ -8,7 +8,7 @@ namespace Suthanus
 {
   namespace Bullet
   {
-    SphereBullet::SphereBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, float radius, bool isDynamic)
+    SphereBullet::SphereBullet(PhysicEngine& engine, btDiscreteDynamicsWorld* world, glm::vec3 pos, float radius, bool isDynamic) : Sphere(engine)
     {
       _world = world;
       _radius = radius;

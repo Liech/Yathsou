@@ -5,9 +5,14 @@
 class btRigidBody;
 namespace Suthanus
 {
+  class PhysicEngine;
+
   class Sphere : public PhysicObject
   {
-  public:
+  public:    
+    Sphere(PhysicEngine&);
+    ~Sphere() = default;
+
     virtual float getRadius() const = 0;
   };
 }

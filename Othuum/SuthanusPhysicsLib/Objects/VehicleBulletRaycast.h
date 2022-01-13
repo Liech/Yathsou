@@ -6,12 +6,14 @@
 
 namespace Suthanus
 {
+  class PhysicEngine;
+
   namespace Bullet
   {
     class VehicleBulletRaycast : public Vehicle
     {
     public:
-      VehicleBulletRaycast(btDiscreteDynamicsWorld* world, glm::vec3 pos);
+      VehicleBulletRaycast(PhysicEngine&, btDiscreteDynamicsWorld* world, glm::vec3 pos);
       ~VehicleBulletRaycast();
       glm::vec3 getSize();
 

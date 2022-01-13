@@ -9,13 +9,14 @@ class btDefaultMotionState;
 namespace Suthanus
 {
   class BulletCore;
+  class PhysicEngine;
 
   namespace Bullet
   {
     class BoxBullet : public Box
     {
     public:
-      BoxBullet(btDiscreteDynamicsWorld* world, glm::vec3 pos, glm::vec3 size, bool isDynamic = true);
+      BoxBullet(PhysicEngine& engine, btDiscreteDynamicsWorld* world, glm::vec3 pos, glm::vec3 size, bool isDynamic = true);
       ~BoxBullet();
       virtual glm::vec3 getPosition()              const override;
       virtual glm::mat4 getTransformation()        const override;

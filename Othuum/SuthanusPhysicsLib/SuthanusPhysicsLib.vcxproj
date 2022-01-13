@@ -247,10 +247,12 @@
     <ClCompile Include="Objects\Box.cpp" />
     <ClCompile Include="Objects\BoxBullet.cpp" />
     <ClCompile Include="Objects\BulletCore.cpp" />
+    <ClCompile Include="Objects\HeightMap.cpp" />
     <ClCompile Include="Objects\HeightMapBullet.cpp" />
     <ClCompile Include="Objects\PhysicObject.cpp" />
     <ClCompile Include="Objects\Sphere.cpp" />
     <ClCompile Include="Objects\SphereBullet.cpp" />
+    <ClCompile Include="Objects\Vehicle.cpp" />
     <ClCompile Include="Objects\VehicleBulletRaycast.cpp" />
     <ClCompile Include="PhysicEngine.cpp" />
     <ClCompile Include="PhysicNavigationMesh.cpp" />

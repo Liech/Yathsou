@@ -60,19 +60,13 @@ namespace Superb {
   }
 
   void UnitsOld::spawnUnit(const glm::vec3& position) {
-    glm::vec3 groundPos;
-    glm::vec3 normal;
-    if (nullptr == _physic->raycast(position, glm::vec3(0, -60, 0), groundPos, normal)) {
-      groundPos = position;      
-    }
     UnitConstructor constructor(_gamedata);//UEL0201
     std::vector<std::string> possibleIDs = { "UEL0201" };//, "URL0309", "XSS0303", "UEL0401"};
 
     constructor.setId(possibleIDs[rand()%possibleIDs.size()]);
     constructor.setPhysic(_physic);
     constructor.setSelection(_selection);
-    constructor.setStartPosition(groundPos + glm::vec3(0,0,0));
-    constructor.setRotation(normal);
+    constructor.setStartPosition(position);
     auto firstUnit = std::make_shared<Unit>(constructor);//_gamedata.blueprint().loadModel("UEL0201")
     _units[firstUnit->getSelector()] = firstUnit;
   }

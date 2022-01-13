@@ -72,47 +72,7 @@ namespace Superb {
 
   std::shared_ptr<Suthanus::Box> UnitConstructor::getPhysic() const {    
     auto result = _physic->newBox(_startPosition, _blueprint->physic().meshExtents(), false);
-    //glm::quat q = glm::lookAt(glm::vec3(0, 0, 0), _normal, glm::vec3(0, 1, 0));
-    glm::mat4 rotation = glm::rotate(glm::identity<glm::mat4>(), _direction, _groundNormal);
-    glm::vec4 r = glm::vec4(getForwardTangent(),1) * rotation;
-    //glm::quat q = glm::lookAt(glm::vec3(0, 0, 0), glm::vec3(r[0], r[1], r[2]), _groundNormal);
-    //glm::quat q = LookAt(glm::vec3(0, 0, 0), glm::vec3(r[0], r[1], r[2]), _groundNormal);
-    std::cout << "UnitConstructor::getPhysic(glm::vec3(" << r[0] << ", " << r[1] << ", " << r[2] << "), glm::vec3(" << _groundNormal[0]<<", "<< _groundNormal[1] <<", "<< _groundNormal[2] << "));" << std::endl;
-    
-    glm::vec3 x = getForwardTangent();
-    glm::vec3 y = _groundNormal;
-    glm::vec3 z = getSidewardsTangent();
-    
-    //glm::mat4 m = glm::mat4{
-    //  x[0],y[0],z[0],0,
-    //  x[1],y[1],z[1],0,
-    //  x[2],y[2],z[2],0,
-    //  x[3],y[3],z[3],1    
-    //};
-    glm::mat4 m = glm::mat4{
-      x[0],x[1],x[2],0,
-      y[0],y[1],y[2],0,
-      z[0],z[1],z[2],0,
-         0,   0,   0,1    
-    };
-
-    glm::quat q = glm::quat_cast(m);
-    result->setRotation(q);
-
     return result;
-  }
-
-  glm::vec3 UnitConstructor::getSidewardsTangent() const {
-    return glm::cross(glm::vec3(1, 0, 0), _groundNormal);
-  }
-
-  glm::vec3 UnitConstructor::getForwardTangent() const {
-    
-    //glm::vec3 cross = glm::cross(glm::vec3(1, 0, 0), _groundNormal);
-    glm::vec3 cross = glm::cross(_groundNormal, getSidewardsTangent());
-    //glm::vec3 cross = glm::cross(glm::cross(glm::vec3(1, 0, 0), _groundNormal),_groundNormal);
-    //glm::vec3 cross = glm::cross(_groundNormal,glm::cross(glm::vec3(1, 0, 0), _groundNormal));
-    return cross;
   }
 
   std::shared_ptr<const Athanah::Blueprint> UnitConstructor::getBlueprint() const {
@@ -121,25 +81,5 @@ namespace Superb {
 
   std::string UnitConstructor::getId() const {
     return _id;
-  }
-
-  void UnitConstructor::setRotation(const glm::vec3& normal) {
-    glm::vec3 x = glm::normalize(normal);
-    std::cout << "UnitConstructor::setRotation(glm::vec3(" << x[0] << ", " << x[1] << ", " << x[2] << "));" << std::endl;
-    //glm::vec3 direction = glm::vec3(1, 0, 0);
-    //glm::vec3 z = glm::cross(x, direction);    
-    //glm::vec3 y = glm::cross(z,y);
-    //glm::vec3 z = glm::cross(x, y);
-    //_transformation = glm::mat4 {
-    //  x[0],y[0],z[0],0,
-    //  x[1],y[1],z[1],0,
-    //  x[2],y[2],z[2],0,
-    //  x[3],y[3],z[3],1    
-    //};
-    _groundNormal = x;
-  }
-
-  glm::vec3 UnitConstructor::getNormal() const {
-    return _groundNormal;
   }
 }

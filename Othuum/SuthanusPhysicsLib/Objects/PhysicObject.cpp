@@ -1,7 +1,13 @@
 #include "PhysicObject.h"
 
+#include "SuthanusPhysicsLib/PhysicEngine.h"
+
 namespace Suthanus
 {
+  PhysicObject::PhysicObject(PhysicEngine& engine) : _engine(engine) {
+
+  }
+
   void PhysicObject::setCollisionCallback(std::function<void(std::weak_ptr<PhysicObject>)> callback)
   {
     _collsionCallback = callback;
@@ -37,5 +43,9 @@ namespace Suthanus
 
   const std::set<std::shared_ptr<PhysicObject>>& PhysicObject::currentContacts() const{
     return _contacts;
+  }
+
+  PhysicEngine& PhysicObject::engine() {
+    return _engine;
   }
 }

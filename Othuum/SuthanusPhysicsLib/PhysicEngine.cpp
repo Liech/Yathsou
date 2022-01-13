@@ -83,7 +83,7 @@ namespace Suthanus
 
   std::shared_ptr<Box> PhysicEngine::newBox(glm::vec3 pos, glm::vec3 size, bool isDynamic)
   {
-    Bullet::BoxBullet* result = new Bullet::BoxBullet(_world, pos, size, isDynamic);
+    Bullet::BoxBullet* result = new Bullet::BoxBullet(*this,_world, pos, size, isDynamic);
     std::shared_ptr<Box> ptr =  std::shared_ptr<Box>(dynamic_cast<Box*>(result));
     ptr->initialize(ptr);
     _allObjects[result] = ptr;
@@ -92,7 +92,7 @@ namespace Suthanus
 
   std::shared_ptr<Sphere> PhysicEngine::newSphere(glm::vec3 pos, float radius, bool isDynamic)
   {
-    Bullet::SphereBullet* result = new Bullet::SphereBullet(_world, pos, radius, isDynamic);
+    Bullet::SphereBullet* result = new Bullet::SphereBullet(*this,_world, pos, radius, isDynamic);
     auto ptr = std::shared_ptr<Sphere>(dynamic_cast<Sphere*>(result));
     ptr->initialize(ptr);
     _allObjects[result] = ptr;
@@ -101,7 +101,7 @@ namespace Suthanus
 
   std::shared_ptr<Vehicle> PhysicEngine::newVehicle(glm::vec3 pos)
   {
-    Bullet::VehicleBulletRaycast* result = new Bullet::VehicleBulletRaycast(_world, pos);
+    Bullet::VehicleBulletRaycast* result = new Bullet::VehicleBulletRaycast(*this,_world, pos);
     auto ptr =  std::shared_ptr<Vehicle>(dynamic_cast<Vehicle*>(result));
     ptr->initialize(ptr);
     _allObjects[result] = ptr;
@@ -111,7 +111,7 @@ namespace Suthanus
   std::shared_ptr<HeightMap> PhysicEngine::newHeightMap(glm::vec3 pos, const Iyathuum::MultiDimensionalArray<unsigned short, 2>& content, float height)
   {
     glm::vec2 cellSize(1,1);
-    Bullet::HeightMapBullet* result = new Bullet::HeightMapBullet(_world, pos, cellSize, content,height);
+    Bullet::HeightMapBullet* result = new Bullet::HeightMapBullet(*this,_world, pos, cellSize, content,height);
     auto ptr = std::shared_ptr<HeightMap>(dynamic_cast<HeightMap*>(result));
     ptr->initialize(ptr);
     _allObjects[result] = ptr;

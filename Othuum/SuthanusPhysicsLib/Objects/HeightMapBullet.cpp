@@ -7,8 +7,8 @@ namespace Suthanus
 {
   namespace Bullet
   {
-    HeightMapBullet::HeightMapBullet(btDiscreteDynamicsWorld* world,glm::vec3 pos, glm::vec2 cellSize, const Iyathuum::MultiDimensionalArray<unsigned short, 2>& content,float height)
-      :_cellSize(cellSize)//, 
+    HeightMapBullet::HeightMapBullet(PhysicEngine& engine, btDiscreteDynamicsWorld* world,glm::vec3 pos, glm::vec2 cellSize, const Iyathuum::MultiDimensionalArray<unsigned short, 2>& content,float height)
+      : HeightMap(engine),_cellSize(cellSize)//, 
        //_content (content)
     {
       _world = world;
