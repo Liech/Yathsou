@@ -65,7 +65,7 @@ namespace Superb {
     };
     
     glm::quat q = glm::quat_cast(m);
-    _physic->setPosition(groundPos);
+    _physic->setPosition(groundPos + glm::vec3(0,getPhysic()->getSize()[1]/2.0f,0));
     _physic->setRotation(q);
     return true;
   }
