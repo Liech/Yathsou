@@ -1,6 +1,7 @@
-#include "Unit.h"
+#include "Unit/Unit.h"
 
-#include "UnitConstructor.h"
+#include "Unit/UnitConstructor.h"
+#include "UnitAgentInterface.h"
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/Objects/Box.h"
@@ -11,6 +12,7 @@ namespace Superb {
     _selector  = info.getSelector();
     _blueprint = info.getBlueprint();
     _id        = info.getId();
+    _agent     = info.getAgent();
     placeOnGround();
   }
 
@@ -31,7 +33,12 @@ namespace Superb {
   }
 
   void Unit::update() {
+    _agent->update();
     _selector->setPosition(getPosition());
+  }
+
+  void Unit::debugDraw() {
+    _agent->debugDraw();
   }
 
   std::shared_ptr<const Athanah::Blueprint> Unit::getBlueprint() const {
@@ -88,7 +95,15 @@ namespace Superb {
 
   void Unit::rotate(const float& radian) {
     _rotation = _rotation + radian;
-    std::cout << _rotation << std::endl;
     placeOnGround();
+  }
+
+  glm::vec3 Unit::getDirection() const {
+    auto rot = getPhysic()->getRotation();
+    return glm::mat4_cast(rot) * glm::vec4(1, 0, 0, 1);
+  }
+
+  UnitAgentInterface& Unit::agent() {
+    return *_agent;
   }
 }

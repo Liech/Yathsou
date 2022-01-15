@@ -57,6 +57,9 @@
     <ClInclude Include="Maps\PersonalSpaceMap.h">
       <Filter>Header Files\Maps</Filter>
     </ClInclude>
+    <ClInclude Include="AgentMovementInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NavigationMap.cpp">

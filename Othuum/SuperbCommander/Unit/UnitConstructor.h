@@ -17,6 +17,7 @@ namespace Athanah {
 }
 
 namespace Superb {
+  class UnitAgentInterface;
 
   class UnitConstructor {
   public:
@@ -31,6 +32,8 @@ namespace Superb {
     std::shared_ptr<Suthanus::Box>            getSelector()       const;
     std::shared_ptr<const Athanah::Blueprint> getBlueprint()      const;
     std::string                               getId()             const;
+
+    std::unique_ptr<UnitAgentInterface>       getAgent() const;
 
   private:
     float                                     _direction     = 0;

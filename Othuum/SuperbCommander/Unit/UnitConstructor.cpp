@@ -1,6 +1,8 @@
-#include "UnitConstructor.h"
+#include "Unit/UnitConstructor.h"
 
 #include <iostream>
+
+#include "WheeledSteeringAgent.h"
 
 #include "AthanahCommonLib/SupCom/Blueprint/Blueprint.h"
 #include "AthanahCommonLib/SupCom/Blueprint/BlueprintPhysic.h"
@@ -81,5 +83,9 @@ namespace Superb {
 
   std::string UnitConstructor::getId() const {
     return _id;
+  }
+
+  std::unique_ptr<UnitAgentInterface> UnitConstructor::getAgent() const{
+    return std::make_unique<WheeledSteeringAgent>();
   }
 }

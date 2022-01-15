@@ -62,9 +62,10 @@ namespace Superb {
     std::shared_ptr<Ahwassa::IMesh>       _mapMesh     = nullptr;
 
     //units
-    bool _debugUnitView = true;
-    bool _unitsView     = true;
-    bool _debugUnitDirs = true;
+    bool _debugUnitView  = true;
+    bool _unitsView      = true;
+    bool _debugUnitDirs  = true;
+    bool _debugAgentView = true;
     std::unique_ptr<UnitsVisualization> _unitsVis;
 
     //physic

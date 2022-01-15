@@ -34,7 +34,8 @@ namespace Superb {
     ImGui::Checkbox("Unit View", &_unitsView);
     ImGui::Checkbox("Debug Unit View", &_debugUnitView);
     ImGui::Checkbox("Debug Unit Dirs", &_debugUnitDirs);
-    ImGui::Checkbox("Debug Physic View", &_debugPhysicView);    
+    ImGui::Checkbox("Debug Physic View", &_debugPhysicView);
+    ImGui::Checkbox("Debug Agent View", &_debugAgentView);
     if (ImGui::BeginCombo("Renderer", getRendererNames(_currentRendererMode).c_str(), 0)) {
       if (ImGui::Selectable("Result", _currentRendererMode == RendererModes::Result))
         _currentRendererMode = RendererModes::Result;
@@ -110,7 +111,7 @@ namespace Superb {
   void Visualization::drawLastLayer() {
     if (_debugPhysicView)
       _physicDebug->draw();
-    _unitsVis->debugDraw(_debugUnitView,_debugUnitDirs);
+    _unitsVis->debugDraw(_debugUnitView,_debugUnitDirs, _debugAgentView);
   }
 
   void Visualization::save(nlohmann::json& output) {
@@ -123,6 +124,7 @@ namespace Superb {
     output["RendererMode"]    = (int)_currentRendererMode;
     output["ScreenWidth"]     = _screenWidth ;
     output["ScreenHeight"]    = _screenHeight;
+    output["DebugAgentView"]       = _debugAgentView;
 
     auto p = _window.camera()->getPosition();
     output["CameraPosition"] = { p[0],p[1],p[2] };
@@ -136,6 +138,7 @@ namespace Superb {
     _unitsView           = input["UnitsView"];
     _debugUnitView       = input["DebugUnitPhys"];
     _debugUnitDirs       = input["DebugUnitDirs"];
+    _debugAgentView      = input["DebugAgentView"];
     _backgroundColor[0]  = input["BackgroundColor"][0];
     _backgroundColor[1]  = input["BackgroundColor"][1];
     _backgroundColor[2]  = input["BackgroundColor"][2];

@@ -7,7 +7,7 @@
 #include "SelenNavigationLib/NavigationAgent.h"
 #include "SelenNavigationLib/NavigationMap.h"
 #include "SelenNavigationLib/Maps/PersonalSpaceMap.h"
-#include "Unit.h"
+#include "Unit/Unit.h"
 #include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 
 namespace Ahwassa {
@@ -30,6 +30,7 @@ namespace Superb {
     std::vector<std::shared_ptr<Unit>> getUnits() const;
 
     void update();
+    void debugDraw();
     void spawnUnit(const glm::vec3& position);
     
     std::vector<glm::vec3> PersonalSpaceQuery(const glm::vec3&, float maxDistance) const override;

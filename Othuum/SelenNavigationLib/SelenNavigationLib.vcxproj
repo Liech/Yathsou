@@ -220,6 +220,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AgentMovementInterface.h" />
     <ClInclude Include="MapGroup.h" />
     <ClInclude Include="Maps\AligmentMap.h" />
     <ClInclude Include="Maps\ComfortMap.h" />

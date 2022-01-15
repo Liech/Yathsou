@@ -14,6 +14,7 @@
 #include "AthanahCommonLib/SupCom/Blueprint/Blueprint.h"
 #include "AthanahCommonLib/SupCom/Blueprint/BlueprintDisplay.h"
 #include "SuthanusPhysicsLib/Objects/Box.h"
+#include "Unit/UnitAgentInterface.h"
 
 namespace Superb {
   UnitsVisualization::UnitsVisualization(Ahwassa::Window* window, Athanah::Gamedata& gamedata, UnitsOld& data) :
@@ -56,12 +57,14 @@ namespace Superb {
 
   }
 
-  void UnitsVisualization::debugDraw(bool box, bool dirs) {
+  void UnitsVisualization::debugDraw(bool box, bool dirs, bool agent) {
     if (!box && !dirs)
       return;
     _window->renderer().box().start();
     for (auto unit : _units.getUnits())
     {
+      if (agent)
+        unit->agent().debugDraw();
       auto pos = unit->getPosition();
       if (box)
         Athanah::BoxVisualization::draw(unit->getPhysic(), Iyathuum::Color(255, 128, 30), _window);

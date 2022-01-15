@@ -19,6 +19,12 @@
     <Filter Include="Header Files\Game">
       <UniqueIdentifier>{b593fec5-c5d9-4640-977c-53fa74b1aa8c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Unit">
+      <UniqueIdentifier>{5c937c74-0609-4e13-b5cc-c98b756baba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Unit">
+      <UniqueIdentifier>{001ccc59-dd5e-4800-a193-ce6fe58a9806}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,13 +48,7 @@
     <ClCompile Include="UnitsOld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Unit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="UnitsVisualization.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitConstructor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DriveInterface.cpp">
@@ -78,6 +78,15 @@
     <ClCompile Include="Game\Control.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Unit\Unit.cpp">
+      <Filter>Source Files\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit\WheeledSteeringAgent.cpp">
+      <Filter>Source Files\Unit</Filter>
+    </ClCompile>
+    <ClCompile Include="Unit\UnitConstructor.cpp">
+      <Filter>Source Files\Unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -98,13 +107,7 @@
     <ClInclude Include="UnitsOld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Unit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="UnitsVisualization.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="UnitConstructor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DriveInterface.h">
@@ -133,6 +136,18 @@
     </ClInclude>
     <ClInclude Include="Game\Control.h">
       <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit\Unit.h">
+      <Filter>Header Files\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit\WheeledSteeringAgent.h">
+      <Filter>Header Files\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit\UnitConstructor.h">
+      <Filter>Header Files\Unit</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit\UnitAgentInterface.h">
+      <Filter>Header Files\Unit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

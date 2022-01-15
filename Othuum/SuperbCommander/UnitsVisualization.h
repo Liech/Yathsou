@@ -16,7 +16,7 @@ namespace Superb {
     virtual ~UnitsVisualization() = default;
 
     void draw();
-    void debugDraw(bool box, bool dirs);
+    void debugDraw(bool box, bool dirs, bool agent);
   private:
     std::vector<std::shared_ptr<Athanah::SupComMesh>>            _meshes  ;
     std::unique_ptr<Athanah::SupComMeshRendererDef>              _renderer;

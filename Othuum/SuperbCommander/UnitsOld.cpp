@@ -10,7 +10,7 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
 
-#include "UnitConstructor.h"
+#include "Unit/UnitConstructor.h"
 
 namespace Superb {
   UnitsOld::UnitsOld(Athanah::Gamedata& gamedata, std::shared_ptr<Suthanus::PhysicEngine> physic) :
@@ -32,6 +32,11 @@ namespace Superb {
       //unit.second->agent->updatePosition();
       //unit.second->selector->setPosition(unit.second->agent->getPosition());
     }
+  }
+
+  void UnitsOld::debugDraw() {
+    for (auto unit : _units)
+      unit.second->debugDraw();
   }
 
   std::vector<std::shared_ptr<Unit>> UnitsOld::select(glm::vec3 pos, glm::vec3 dir) {
