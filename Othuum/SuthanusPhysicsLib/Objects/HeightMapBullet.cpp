@@ -83,24 +83,24 @@ namespace Suthanus
       return glm::quat(rot.w(),rot.x(), rot.y(), rot.z());
     }
 
-    void HeightMapBullet::setVelocity(glm::vec3 pos)
+    void HeightMapBullet::setVelocity(const glm::vec3&)
     {
-      _body->setLinearVelocity(btVector3(pos[0], pos[1], pos[2]));
+
     }
 
-    void HeightMapBullet::setPosition(glm::vec3 pos)
+    void HeightMapBullet::setPosition(const glm::vec3& pos)
     {
       btTransform transform = _body->getCenterOfMassTransform();
       transform.setOrigin(btVector3(pos[0], pos[1], pos[2]));
       _body->setCenterOfMassTransform(transform);
     }
 
-    void HeightMapBullet::setAngularVelocity(glm::vec3 velocity)
+    void HeightMapBullet::setAngularVelocity(const glm::vec3&)
     {
-      _body->setAngularVelocity(btVector3(velocity[0], velocity[1], velocity[2]));
+
     }
 
-    void HeightMapBullet::setRotation(glm::quat rot)
+    void HeightMapBullet::setRotation(const glm::quat& rot)
     {
       btTransform transform = _body->getCenterOfMassTransform();
       btQuaternion q;
@@ -118,6 +118,10 @@ namespace Suthanus
       HeightMap::Mesh result;
 
       return result;
+    }
+
+    void HeightMapBullet::addForce(const glm::vec3&, const glm::vec3&) {
+
     }
   }
 }

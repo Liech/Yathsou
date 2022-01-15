@@ -158,17 +158,17 @@ namespace Suthanus
       return glm::vec3(0.4, 0.4, 1);
     }
 
-    void VehicleBulletRaycast::setPosition(glm::vec3 pos) {
+    void VehicleBulletRaycast::setPosition(const glm::vec3& pos) {
       btTransform transform = _body->getCenterOfMassTransform();
       transform.setOrigin(btVector3(pos[0], pos[1], pos[2]));
       _body->setCenterOfMassTransform(transform);
     }
 
-    void VehicleBulletRaycast::setVelocity(glm::vec3 pos) {
+    void VehicleBulletRaycast::setVelocity(const glm::vec3& pos) {
       _body->setLinearVelocity(btVector3(pos[0], pos[1], pos[2]));
     }
 
-    void VehicleBulletRaycast::setAngularVelocity(glm::vec3 rot){
+    void VehicleBulletRaycast::setAngularVelocity(const glm::vec3& rot){
       _body->setAngularVelocity(btVector3(rot[0], rot[1], rot[2]));
     }
 
@@ -179,7 +179,7 @@ namespace Suthanus
       return glm::quat(rot.x(), rot.y(), rot.z(), rot.w());
     }
 
-    void VehicleBulletRaycast::setRotation(glm::quat rot){
+    void VehicleBulletRaycast::setRotation(const glm::quat& rot){
       btTransform transform = _body->getCenterOfMassTransform();
       btQuaternion q;
       q.setX(rot.x);
@@ -188,6 +188,10 @@ namespace Suthanus
       q.setW(rot.w);
       transform.setRotation(q);
       _body->setCenterOfMassTransform(transform);
+    }
+
+    void VehicleBulletRaycast::addForce(const glm::vec3& force, const glm::vec3& offset) {
+      _body->applyForce(btVector3(force[0], force[1], force[2]), btVector3(offset[0], offset[1], offset[2]));
     }
 
   }

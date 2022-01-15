@@ -17,13 +17,14 @@ namespace Suthanus
     PhysicObject(PhysicEngine&);
 
     virtual ~PhysicObject() = default;
-    virtual glm::vec3 getPosition       ()                    const = 0;
-    virtual glm::mat4 getTransformation ()                    const = 0;
-    virtual glm::quat getRotation       ()                    const = 0;
-    virtual void      setVelocity       (glm::vec3)                 = 0;
-    virtual void      setPosition       (glm::vec3)                 = 0;
-    virtual void      setAngularVelocity(glm::vec3)                 = 0;
-    virtual void      setRotation       (glm::quat)                 = 0;
+    virtual glm::vec3 getPosition       ()                           const = 0;
+    virtual glm::mat4 getTransformation ()                           const = 0;
+    virtual glm::quat getRotation       ()                           const = 0;
+    virtual void      setVelocity       (const glm::vec3&)                 = 0;
+    virtual void      setPosition       (const glm::vec3&)                 = 0;
+    virtual void      setAngularVelocity(const glm::vec3&)                 = 0;
+    virtual void      setRotation       (const glm::quat&)                 = 0;
+    virtual void      addForce(const glm::vec3& force, const glm::vec3& offset) = 0;
 
     const std::set<std::shared_ptr<PhysicObject>>& currentContacts() const;
     glm::mat4 getRotationTransformation() const;

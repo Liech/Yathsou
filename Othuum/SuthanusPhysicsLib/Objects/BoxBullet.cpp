@@ -60,15 +60,15 @@ namespace Suthanus
       return _size;
     }
 
-    void BoxBullet::setPosition(glm::vec3 pos) {
+    void BoxBullet::setPosition(const glm::vec3& pos) {
       _core->setPosition(pos);
     }
 
-    void BoxBullet::setVelocity(glm::vec3 pos) {
+    void BoxBullet::setVelocity(const glm::vec3& pos) {
       _core->setVelocity(pos);
     }
 
-    void BoxBullet::setAngularVelocity(glm::vec3 velocity)
+    void BoxBullet::setAngularVelocity(const glm::vec3& velocity)
     {
       _core->setVelocity(velocity);
     }
@@ -78,8 +78,12 @@ namespace Suthanus
       return _core->getRotation();
     }
 
-    void BoxBullet::setRotation(glm::quat rot) {
+    void BoxBullet::setRotation(const glm::quat& rot) {
       _core->setRotation(rot);
+    }
+
+    void BoxBullet::addForce(const glm::vec3& force, const glm::vec3& offset) {
+      _core->addForce(force, offset);
     }
   }
 }

@@ -31,7 +31,7 @@ namespace Superb {
   }
 
   std::shared_ptr<Suthanus::Box> UnitConstructor::getSelector() const{    
-    return _selection->newBox(_startPosition, _blueprint->selectionSize(), false);
+    return _selection->newBox(_startPosition, _blueprint->selectionSize(), true);
   }
 
   // just in case you need that function also
@@ -71,7 +71,7 @@ namespace Superb {
   }
 
   std::shared_ptr<Suthanus::Box> UnitConstructor::getPhysic() const {    
-    auto result = _physic->newBox(_startPosition, _blueprint->physic().meshExtents(), false);
+    auto result = _physic->newBox(_startPosition, _blueprint->physic().meshExtents(), true);
     return result;
   }
 

@@ -60,15 +60,15 @@ namespace Suthanus
       return _radius;
     }
 
-    void SphereBullet::setPosition(glm::vec3 pos) {
+    void SphereBullet::setPosition(const glm::vec3& pos) {
       _core->setPosition(pos);
     }
 
-    void SphereBullet::setVelocity(glm::vec3 pos) {
+    void SphereBullet::setVelocity(const glm::vec3& pos) {
       _core->setVelocity(pos);
     }
 
-    void SphereBullet::setAngularVelocity(glm::vec3 rot) {
+    void SphereBullet::setAngularVelocity(const glm::vec3& rot) {
       _core->setAngularVelocity(rot);
     }
 
@@ -77,8 +77,12 @@ namespace Suthanus
       return _core->getRotation();
     }
 
-    void SphereBullet::setRotation(glm::quat rot) {
+    void SphereBullet::setRotation(const glm::quat& rot) {
       _core->setRotation(rot);
+    }
+    
+    void SphereBullet::addForce(const glm::vec3& force, const glm::vec3& offset) {
+      _core->addForce(force, offset);
     }
   }
 }

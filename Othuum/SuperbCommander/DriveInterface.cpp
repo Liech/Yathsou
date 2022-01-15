@@ -1,4 +1,5 @@
 #include "DriveInterface.h"
+#include <iostream>
 
 #include "SuthanusPhysicsLib/Objects/PhysicObject.h"
 
@@ -10,12 +11,23 @@ namespace Superb {
   void DriveInterface::update() {
     if (!_target)
       return;
-
-    if (_input.getKeyStatus(Iyathuum::Key::KEY_SPACE) == Iyathuum::KeyStatus::PRESS) {
-      _target->setVelocity(glm::vec3(0, 4, 0));
-    }
+    if (_target->currentContacts().size() == 0)
+      return;
     if (_input.getKeyStatus(Iyathuum::Key::KEY_UP) == Iyathuum::KeyStatus::PRESS) {
       _target->setVelocity(_target->getRotationTransformation() * glm::vec4(0, 0, 4, 1));
+      std::cout << "UP" << std::endl;
+    }
+    if (_input.getKeyStatus(Iyathuum::Key::KEY_DOWN) == Iyathuum::KeyStatus::PRESS) {
+      _target->setVelocity(_target->getRotationTransformation() * glm::vec4(0, 0, -4, 1));
+      std::cout << "DOWN" << std::endl;
+    }
+    if (_input.getKeyStatus(Iyathuum::Key::KEY_RIGHT) == Iyathuum::KeyStatus::PRESS) {
+      _target->addForce(_target->getRotationTransformation() * glm::vec4(-0.03, 0, 0, 1), glm::vec3(0,0,0));
+      std::cout << "RIGHT" << std::endl;
+    }
+    if (_input.getKeyStatus(Iyathuum::Key::KEY_LEFT) == Iyathuum::KeyStatus::PRESS) {
+      _target->addForce(_target->getRotationTransformation() * glm::vec4(-0.03, 0, 0, 1), glm::vec3(0,0,0));
+      std::cout << "LEFT" << std::endl;
     }
   }
 

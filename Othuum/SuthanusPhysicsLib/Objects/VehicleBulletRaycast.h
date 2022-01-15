@@ -33,11 +33,12 @@ namespace Suthanus
 
       virtual glm::vec3 getPosition()              const override;
       virtual glm::mat4 getTransformation()        const override;
-      virtual void      setPosition(glm::vec3 pos)       override;
+      virtual void      setPosition(const glm::vec3& pos)       override;
       virtual glm::quat getRotation()              const override;
-      virtual void      setVelocity(glm::vec3 pos)       override;
-      virtual void      setAngularVelocity(glm::vec3)    override;
-      virtual void      setRotation(glm::quat)           override;
+      virtual void      setVelocity(const glm::vec3& pos)       override;
+      virtual void      setAngularVelocity(const glm::vec3&)    override;
+      virtual void      setRotation(const glm::quat&)           override;
+      virtual void      addForce(const glm::vec3& force, const glm::vec3& offset) override;
     };
   }
 }
