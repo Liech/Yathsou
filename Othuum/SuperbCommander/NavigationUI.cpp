@@ -10,6 +10,8 @@
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/PhysicNavigationMesh.h"
 
+#include "SelenNavigationLib/DirectTargetMovement.h"
+
 #include "UnitsOld.h"
 
 
@@ -49,8 +51,11 @@ namespace Superb {
       auto node = mouse(localPosition);
       if (node) {
         _targetPos = node->position;
-        //for (auto selection : _selection)
-        //  selection->map->setTarget(_targetPos);
+        for (auto selection : _selection) {
+          Selen::AgentMovementInterface<3>& agent = (Selen::AgentMovementInterface<3>&)selection->agent();
+          auto cmd = std::make_shared<Selen::DirectTargetMovement<3>>(agent, _targetPos);
+          selection->setCommand(cmd);
+        }
         return true;
       }
     }

@@ -13,6 +13,7 @@ namespace Superb {
     _blueprint = info.getBlueprint();
     _id        = info.getId();
     _agent     = info.getAgent();
+    _agent->setTarget(this);
     placeOnGround();
   }
 
@@ -108,7 +109,7 @@ namespace Superb {
 
   glm::vec3 Unit::getDirection() const {
     auto rot = getPhysic()->getRotation();
-    return glm::mat4_cast(rot) * glm::vec4(1, 0, 0, 1);
+    return glm::mat4_cast(rot) * glm::vec4(0, 1, 0, 1);
   }
 
   UnitAgentInterface& Unit::agent() {

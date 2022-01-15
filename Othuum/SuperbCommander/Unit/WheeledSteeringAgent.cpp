@@ -1,5 +1,10 @@
 #include "WheeledSteeringAgent.h"
 
+#include <iostream>
+
+#include "IyathuumCoreLib/lib/glm/gtx/vector_angle.hpp"
+#include "IyathuumCoreLib/Util/Geometry.h"
+
 #include "Unit.h"
 
 namespace Superb {
@@ -12,7 +17,15 @@ namespace Superb {
   }
 
   void WheeledSteeringAgent::update() {
-
+    if (glm::length(_desiredDirection) < 1e-5)
+      return;
+    auto current = glm::vec2(std::cos(_target->getRotation() + glm::pi<float>() / 2.0), std::sin(_target->getRotation() + glm::pi<float>() / 2.0));
+    auto desired = glm::vec2(getDesiredDirection()[0], getDesiredDirection()[2]);
+    float angleDiff = glm::orientedAngle(glm::normalize(current), glm::normalize(desired));
+    std::cout << "C: " << current[0]<<"/"<<current[1] << " D: " << desired[0] <<"/"<<desired[1] << " Diff: " << angleDiff << std::endl;
+    _target->rotate(angleDiff / 15.0f);
+    _target->move(glm::vec2(getDesiredSpeed(), 0));
+    
   }
 
   void WheeledSteeringAgent::setDesiredDirection(const WheeledSteeringAgent::v3& dir) {
@@ -40,7 +53,7 @@ namespace Superb {
   }
 
   float WheeledSteeringAgent::getMaximumSpeed() const {
-    return 1;
+    return 0.1;
   }
 
   float WheeledSteeringAgent::getBreakSpeed() const {

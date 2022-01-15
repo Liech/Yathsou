@@ -59,7 +59,7 @@ namespace Superb {
   }
 
   void UnitsVisualization::debugDraw(bool box, bool dirs, bool agent) {
-    if (!box && !dirs)
+    if (!box && !dirs && !agent)
       return;
     _window->renderer().box().start();
     for (auto unit : _units.getUnits())

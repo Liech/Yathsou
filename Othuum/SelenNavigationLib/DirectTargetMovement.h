@@ -10,21 +10,22 @@ namespace Selen {
   public:
     using vec = glm::vec<Dimension, float, glm::defaultp>;
 
-    DirectTargetMovement(AgentMovementInterface<Dimension>& agent, float fullfillmentDistance = 1) : _agent(agent) {
+    DirectTargetMovement(AgentMovementInterface<Dimension>& agent, const glm::vec3& target, float fullfillmentDistance = 1) : _agent(agent) {
       _fullfillmentDistance = fullfillmentDistance;
+      _target = target;
     }
 
     virtual ~DirectTargetMovement() = default;
 
-    virtual bool isFullfilled() override {
-      float distance = glm::distance(_target, _agent->getPosition());
+    virtual bool isFullfilled() const override {
+      float distance = glm::distance(_target, _agent.getPosition());
       return distance < _fullfillmentDistance;
     }
 
     virtual void update() override {
-      vec   diff = _target - _agent->getPosition();
-      _agent->setDesiredDirection(glm::normalize(diff));
-      _agent->setDesiredSpeed(_agent->getMaximumSpeed());
+      vec   diff = _target - _agent.getPosition();
+      _agent.setDesiredDirection(glm::normalize(diff));
+      _agent.setDesiredSpeed(_agent.getMaximumSpeed());
     }
 
     void setTarget(const vec& target) {
@@ -32,8 +33,8 @@ namespace Selen {
     }
 
     virtual void cleanup() override{
-      _agent->setDesiredSpeed(0);
-      _agent->setDesiredDirection(vec(0));
+      _agent.setDesiredSpeed(0);
+      _agent.setDesiredDirection(vec(0));
     }
 
   private:
