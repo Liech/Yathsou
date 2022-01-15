@@ -33,12 +33,20 @@ namespace Superb {
   }
 
   void Unit::update() {
+    if (hasCommand()) {
+      if (_command->isFullfilled()) {
+        _command->cleanup();
+        _command = nullptr;
+      }
+      else
+        _command->update();
+    }
     _agent->update();
     _selector->setPosition(getPosition());
   }
 
   void Unit::debugDraw() {
-    _agent->debugDraw();
+    
   }
 
   std::shared_ptr<const Athanah::Blueprint> Unit::getBlueprint() const {
@@ -106,4 +114,15 @@ namespace Superb {
   UnitAgentInterface& Unit::agent() {
     return *_agent;
   }
+
+  void Unit::setCommand(std::shared_ptr<Iyathuum::Command> command) {
+    if (hasCommand())
+      _command->cleanup();
+    _command = command;
+  }
+
+  bool Unit::hasCommand() {
+    return _command != nullptr;
+  }
+
 }

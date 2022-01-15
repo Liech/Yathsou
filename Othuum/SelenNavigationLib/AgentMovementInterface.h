@@ -13,7 +13,8 @@ namespace Selen {
     virtual void  setDesiredDirection (const vec&) = 0;
     virtual void  setDesiredSpeed     (float)      = 0;
 
-    virtual vec   getCurrentDirection () const     = 0;
+    virtual vec   getPosition         () const     = 0;
+    virtual vec   getDirection        () const     = 0;
     virtual float getMaximumSpeed     () const     = 0;
     virtual float getBreakSpeed       () const     = 0;
   private:

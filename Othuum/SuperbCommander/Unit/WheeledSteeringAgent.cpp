@@ -15,20 +15,28 @@ namespace Superb {
 
   }
 
-  void WheeledSteeringAgent::debugDraw() {
-
+  void WheeledSteeringAgent::setDesiredDirection(const WheeledSteeringAgent::v3& dir) {
+    _desiredDirection = dir;
   }
 
-  void WheeledSteeringAgent::setDesiredDirection(const WheeledSteeringAgent::v3&) {
-
+  glm::vec3 WheeledSteeringAgent::getDesiredDirection() {
+    return _desiredDirection;
   }
 
-  void WheeledSteeringAgent::setDesiredSpeed(float) {
-
+  void WheeledSteeringAgent::setDesiredSpeed(float speed) {
+    _desiredSpeed = speed;
   }
 
-  WheeledSteeringAgent::v3 WheeledSteeringAgent::getCurrentDirection() const {
+  float WheeledSteeringAgent::getDesiredSpeed() {
+    return _desiredSpeed;
+  }
+
+  WheeledSteeringAgent::v3 WheeledSteeringAgent::getDirection() const {
     return _target->getDirection();
+  }
+
+  WheeledSteeringAgent::v3 WheeledSteeringAgent::getPosition() const {
+    return _target->getPosition();
   }
 
   float WheeledSteeringAgent::getMaximumSpeed() const {

@@ -864,6 +864,9 @@
     <ClInclude Include="Util\Geometry.h">
       <Filter>Header Files\Util</Filter>
     </ClInclude>
+    <ClInclude Include="BaseTypes\Command.h">
+      <Filter>Header Files\BaseTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseTypes\AABB.cpp">

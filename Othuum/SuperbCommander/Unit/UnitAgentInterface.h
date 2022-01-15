@@ -11,7 +11,6 @@ namespace Superb {
 
     virtual void update()         = 0;    
     virtual void setTarget(Unit*) = 0;
-    virtual void debugDraw()      = 0;
 
   };
 }

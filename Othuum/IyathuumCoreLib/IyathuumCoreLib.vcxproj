@@ -222,6 +222,7 @@
   <ItemGroup>
     <ClInclude Include="BaseTypes\AABB.h" />
     <ClInclude Include="BaseTypes\Color.h" />
+    <ClInclude Include="BaseTypes\Command.h" />
     <ClInclude Include="BaseTypes\glmAABB.h" />
     <ClInclude Include="BaseTypes\Keys.h" />
     <ClInclude Include="BaseTypes\Line.h" />

@@ -15,6 +15,7 @@
 #include "AthanahCommonLib/SupCom/Blueprint/BlueprintDisplay.h"
 #include "SuthanusPhysicsLib/Objects/Box.h"
 #include "Unit/UnitAgentInterface.h"
+#include "Unit/WheeledSteeringAgent.h"
 
 namespace Superb {
   UnitsVisualization::UnitsVisualization(Ahwassa::Window* window, Athanah::Gamedata& gamedata, UnitsOld& data) :
@@ -63,8 +64,10 @@ namespace Superb {
     _window->renderer().box().start();
     for (auto unit : _units.getUnits())
     {
-      if (agent)
-        unit->agent().debugDraw();
+      if (agent) {
+        WheeledSteeringAgent& agent = (WheeledSteeringAgent&)unit->agent();        
+        _window->renderer().box().drawLine(unit->getPosition(), unit->getPosition() + agent.getDesiredDirection()*agent.getDesiredSpeed(), 0.1f, Iyathuum::Color(128, 128, 255));
+      }
       auto pos = unit->getPosition();
       if (box)
         Athanah::BoxVisualization::draw(unit->getPhysic(), Iyathuum::Color(255, 128, 30), _window);

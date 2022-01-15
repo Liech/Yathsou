@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include "IyathuumCoreLib/BaseTypes/Command.h"
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
 
 namespace Athanah {
@@ -32,6 +33,8 @@ namespace Superb {
 
     UnitAgentInterface&                       agent();
 
+    void setCommand(std::shared_ptr<Iyathuum::Command>);
+    bool hasCommand();
 
     void move(const glm::vec2& direction);
     void rotate(const float& radian);
@@ -49,5 +52,6 @@ namespace Superb {
     std::shared_ptr<const Athanah::Blueprint>         _blueprint;    
     std::string                                       _id;
     std::unique_ptr<UnitAgentInterface>               _agent;
+    std::shared_ptr<Iyathuum::Command>                _command = nullptr;
   };
 }
