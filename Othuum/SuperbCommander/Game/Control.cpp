@@ -33,7 +33,7 @@ namespace Superb {
 
     if (arcCamera().isFocus() && _navUI->selection().size() > 0) {
       _window.camera()->setTarget(_navUI->selection()[0]->getPosition());
-      _driveUI->setTarget(_navUI->selection()[0]->getPhysic());
+      _driveUI->setTarget(_navUI->selection()[0]);
     }
     else
       _driveUI->setTarget(nullptr);

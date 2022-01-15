@@ -8,14 +8,16 @@ namespace Suthanus {
 }
 
 namespace Superb {
+  class Unit;
+
   class DriveInterface {
   public:
     DriveInterface(Ahwassa::Input& input);
 
-    void setTarget(std::shared_ptr<Suthanus::PhysicObject>);
+    void setTarget(std::shared_ptr<Unit>);
     void update();
   private:
-    std::shared_ptr<Suthanus::PhysicObject> _target = nullptr;
+    std::shared_ptr<Unit> _target = nullptr;
     Ahwassa::Input&                         _input;
   };
 }

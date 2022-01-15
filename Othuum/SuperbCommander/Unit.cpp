@@ -49,13 +49,10 @@ namespace Superb {
     if (nullptr == _physic->engine().raycast(getPosition(), glm::vec3(0, -60, 0), groundPos, groundNormal)) {
       return false;
     }
-    
-    glm::mat4 rotation = glm::rotate(glm::identity<glm::mat4>(), getRotation(), groundNormal);
-    glm::vec4 r = glm::vec4(getForwardTangent(groundNormal), 1) * rotation;
-    
-    glm::vec3 x = getForwardTangent(groundNormal);
+
+    glm::vec3 x = getSidewards(groundNormal);
     glm::vec3 y = groundNormal;
-    glm::vec3 z = getSidewardsTangent(groundNormal);
+    glm::vec3 z = getForwards(groundNormal);
     
     glm::mat4 m = glm::mat4{
       x[0],x[1],x[2],0,
@@ -70,15 +67,28 @@ namespace Superb {
     return true;
   }
 
-  glm::vec3 Unit::getSidewardsTangent(glm::vec3 groundNormal) const {
-    return glm::cross(glm::vec3(1, 0, 0), groundNormal);
+  glm::vec3 Unit::getForwards(glm::vec3 groundNormal) const {
+    return glm::cross(glm::vec3(std::cos(_rotation), 0, std::sin(_rotation)), groundNormal);
   }
 
-  glm::vec3 Unit::getForwardTangent(glm::vec3 groundNormal) const {
-    return glm::cross(groundNormal, getSidewardsTangent(groundNormal));
+  glm::vec3 Unit::getSidewards(glm::vec3 groundNormal) const {
+    return glm::cross(groundNormal, getForwards(groundNormal));
   }
 
   float Unit::getRotation() const {
-    return 0;
+    return _rotation;
+  }
+
+  void Unit::move(const glm::vec2& position) {
+    auto rot = getPhysic()->getRotation();
+    glm::vec3 normal = glm::mat4_cast(rot) * glm::vec4(0, 1, 0, 1);
+    _physic->setPosition(getPosition() + getSidewards(normal) * position[1] + getForwards(normal) * position[0]);
+    placeOnGround();
+  }
+
+  void Unit::rotate(const float& radian) {
+    _rotation = _rotation + radian;
+    std::cout << _rotation << std::endl;
+    placeOnGround();
   }
 }

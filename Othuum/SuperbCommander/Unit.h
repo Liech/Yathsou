@@ -27,12 +27,16 @@ namespace Superb {
     std::shared_ptr<const Athanah::Blueprint> getBlueprint()      const;
     std::string                               getID()             const;
 
+    void move(const glm::vec2& direction);
+    void rotate(const float& radian);
+
     void update();
   private:
-    glm::vec3 getSidewardsTangent(glm::vec3 groundNormal) const;
-    glm::vec3 getForwardTangent  (glm::vec3 groundNormal) const;
+    glm::vec3 getForwards(glm::vec3 groundNormal) const;
+    glm::vec3 getSidewards  (glm::vec3 groundNormal) const;
     bool placeOnGround();
 
+    float                                     _rotation = 0;
     std::shared_ptr<Suthanus::Box>            _physic  ;
     std::shared_ptr<Suthanus::Box>            _selector;
     std::shared_ptr<const Athanah::Blueprint> _blueprint;    
