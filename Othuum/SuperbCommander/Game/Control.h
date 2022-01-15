@@ -31,11 +31,12 @@ namespace Superb {
     Game&            _game;
     Ahwassa::Window& _window;
 
-    std::unique_ptr<Ahwassa::FreeCamera>    _freeCam;
+    //std::unique_ptr<Ahwassa::FreeCamera>    _freeCam;
     std::unique_ptr<Ahwassa::ArcBallCamera> _arcCam;
     std::unique_ptr<Superb::DriveInterface> _driveUI;
     std::unique_ptr<Superb::NavigationUI>   _navUI;
 
+    bool _hadTarget = false;
     bool _navUIDebugDraw = true;
   };
 }

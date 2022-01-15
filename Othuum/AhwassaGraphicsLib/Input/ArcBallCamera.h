@@ -21,7 +21,9 @@ namespace Ahwassa {
     bool mouseMoveEvent(glm::vec2 current, glm::vec2 movement) override;
     void update() override;
   private:
+    void move(const glm::vec2& mouse, const glm::vec2& wheel);
 
+    glm::vec3               _lastTargetPosition;
     bool                    _focus = false;
     std::shared_ptr<Camera> _camera;
     Input&                  _input;
