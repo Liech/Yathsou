@@ -1,11 +1,12 @@
 #include "NonGame.h"
 
 #include "Formation/FormationDialog.h"
+#include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
 
 namespace Superb {
-  NonGame::NonGame() {
-    _formationDialog = std::make_unique<FormationDialog>();
+  NonGame::NonGame(Ahwassa::Window& window) {
+    _formationDialog = std::make_unique<FormationDialog>(window);
   }
 
   void NonGame::menu() {

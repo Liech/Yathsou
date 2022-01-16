@@ -27,7 +27,7 @@ namespace Superb {
     _visualization = std::make_unique<Visualization>(w,*this);
     _control       = std::make_unique<Control>(w,*this);
 
-    _nonGame = std::make_unique<NonGame>();
+    _nonGame = std::make_unique<NonGame>(w);
   }
 
   void Game::drawMenu() {

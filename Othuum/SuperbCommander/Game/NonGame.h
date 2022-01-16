@@ -1,13 +1,18 @@
 #pragma once
 
+#include <memory>
 #include "AezeselFileIOLib/lib/json.hpp"
+
+namespace Ahwassa {
+  class Window;
+}
 
 namespace Superb {
   class FormationDialog;
-
+  
   class NonGame {
   public:
-    NonGame();
+    NonGame(Ahwassa::Window&);
     virtual ~NonGame() = default;
 
     void menu();
