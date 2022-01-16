@@ -21,17 +21,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MapGroup.h">
+    <ClInclude Include="AgentMovementInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NavigationAgent.h">
+    <ClInclude Include="DirectTargetMovement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NavigationAgentManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Maps\NavigationMap.h">
+      <Filter>Header Files\Maps</Filter>
     </ClInclude>
-    <ClInclude Include="NavigationMap.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Maps\PersonalSpaceMap.h">
+      <Filter>Header Files\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="Maps\AligmentMap.h">
+      <Filter>Header Files\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="Maps\ComfortMap.h">
+      <Filter>Header Files\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="Maps\DijkstraMap.h">
+      <Filter>Header Files\Maps</Filter>
     </ClInclude>
     <ClInclude Include="Maps\DirectDistanceMap.h">
       <Filter>Header Files\Maps</Filter>
@@ -45,42 +54,36 @@
     <ClInclude Include="Maps\InfectiousArrivalMapGroup.h">
       <Filter>Header Files\Maps</Filter>
     </ClInclude>
-    <ClInclude Include="Maps\AligmentMap.h">
+    <ClInclude Include="Maps\MapGroup.h">
       <Filter>Header Files\Maps</Filter>
     </ClInclude>
-    <ClInclude Include="Maps\ComfortMap.h">
+    <ClInclude Include="Maps\NavigationAgent.h">
       <Filter>Header Files\Maps</Filter>
     </ClInclude>
-    <ClInclude Include="Maps\DijkstraMap.h">
+    <ClInclude Include="Maps\NavigationAgentManager.h">
       <Filter>Header Files\Maps</Filter>
-    </ClInclude>
-    <ClInclude Include="Maps\PersonalSpaceMap.h">
-      <Filter>Header Files\Maps</Filter>
-    </ClInclude>
-    <ClInclude Include="AgentMovementInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DirectTargetMovement.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="NavigationMap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="NavigationAgent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Maps\DirectDistanceMap.cpp">
+    <ClCompile Include="Maps\MapGroup.cpp">
       <Filter>Source Files\Maps</Filter>
     </ClCompile>
-    <ClCompile Include="Maps\GradientGridMap.cpp">
+    <ClCompile Include="Maps\NavigationAgent.cpp">
+      <Filter>Source Files\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="Maps\NavigationMap.cpp">
+      <Filter>Source Files\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="Maps\PersonalSpaceMap.cpp">
       <Filter>Source Files\Maps</Filter>
     </ClCompile>
     <ClCompile Include="Maps\DijkstraMap.cpp">
       <Filter>Source Files\Maps</Filter>
     </ClCompile>
-    <ClCompile Include="Maps\PersonalSpaceMap.cpp">
+    <ClCompile Include="Maps\DirectDistanceMap.cpp">
+      <Filter>Source Files\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="Maps\GradientGridMap.cpp">
       <Filter>Source Files\Maps</Filter>
     </ClCompile>
   </ItemGroup>

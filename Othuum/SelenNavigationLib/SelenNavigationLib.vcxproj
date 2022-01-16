@@ -222,7 +222,6 @@
   <ItemGroup>
     <ClInclude Include="AgentMovementInterface.h" />
     <ClInclude Include="DirectTargetMovement.h" />
-    <ClInclude Include="MapGroup.h" />
     <ClInclude Include="Maps\AligmentMap.h" />
     <ClInclude Include="Maps\ComfortMap.h" />
     <ClInclude Include="Maps\DijkstraMap.h" />
@@ -230,18 +229,20 @@
     <ClInclude Include="Maps\DiscomfortMap.h" />
     <ClInclude Include="Maps\GradientGridMap.h" />
     <ClInclude Include="Maps\InfectiousArrivalMapGroup.h" />
+    <ClInclude Include="Maps\MapGroup.h" />
+    <ClInclude Include="Maps\NavigationAgent.h" />
+    <ClInclude Include="Maps\NavigationAgentManager.h" />
+    <ClInclude Include="Maps\NavigationMap.h" />
     <ClInclude Include="Maps\PersonalSpaceMap.h" />
-    <ClInclude Include="NavigationAgent.h" />
-    <ClInclude Include="NavigationAgentManager.h" />
-    <ClInclude Include="NavigationMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Maps\DijkstraMap.cpp" />
     <ClCompile Include="Maps\DirectDistanceMap.cpp" />
     <ClCompile Include="Maps\GradientGridMap.cpp" />
+    <ClCompile Include="Maps\MapGroup.cpp" />
+    <ClCompile Include="Maps\NavigationAgent.cpp" />
+    <ClCompile Include="Maps\NavigationMap.cpp" />
     <ClCompile Include="Maps\PersonalSpaceMap.cpp" />
-    <ClCompile Include="NavigationAgent.cpp" />
-    <ClCompile Include="NavigationMap.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

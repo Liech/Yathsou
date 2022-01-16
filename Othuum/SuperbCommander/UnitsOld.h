@@ -4,9 +4,6 @@
 #include <map>
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 
-#include "SelenNavigationLib/NavigationAgent.h"
-#include "SelenNavigationLib/NavigationMap.h"
-#include "SelenNavigationLib/Maps/PersonalSpaceMap.h"
 #include "Unit/Unit.h"
 #include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 
@@ -20,7 +17,7 @@ namespace Suthanus {
 }
 
 namespace Superb {
-  class UnitsOld : public Selen::PersonalSpaceMap<3>::PersonalSpaceMapInterface{
+  class UnitsOld {
   public:
     UnitsOld(Athanah::Gamedata& gamedata, std::shared_ptr<Suthanus::PhysicEngine> physic);
 
@@ -33,7 +30,6 @@ namespace Superb {
     void debugDraw();
     void spawnUnit(const glm::vec3& position);
     
-    std::vector<glm::vec3> PersonalSpaceQuery(const glm::vec3&, float maxDistance) const override;
   private:
 
     std::map<std::shared_ptr<Suthanus::Box>,std::shared_ptr<Unit>> _units    ;

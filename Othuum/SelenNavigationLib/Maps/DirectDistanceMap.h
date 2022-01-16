@@ -1,8 +1,8 @@
 #pragma once
 
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
-#include "SelenNavigationLib/NavigationMap.h"
-#include "SelenNavigationLib/NavigationAgent.h"
+#include "NavigationMap.h"
+#include "NavigationAgent.h"
 
 namespace Selen {
   /// <summary>

@@ -1,8 +1,5 @@
 #include "UnitsOld.h"
 
-#include "SelenNavigationLib/Maps/DirectDistanceMap.h"
-#include "SelenNavigationLib/MapGroup.h"
-
 #include "AthanahCommonLib/SupCom/Gamedata/BlueprintFactory.h"
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
@@ -74,14 +71,6 @@ namespace Superb {
     constructor.setStartPosition(position);
     auto firstUnit = std::make_shared<Unit>(constructor);//_gamedata.blueprint().loadModel("UEL0201")
     _units[firstUnit->getSelector()] = firstUnit;
-  }
-
-  std::vector<glm::vec3> UnitsOld::PersonalSpaceQuery(const glm::vec3& pos, float maxDistance) const {
-    auto physObjects = _selection->insideSphere(pos, maxDistance);
-    std::vector<glm::vec3> results;
-    for (auto x : physObjects)
-      results.push_back(x->getPosition());
-    return results;
   }
 
   std::vector<std::shared_ptr<Unit>> UnitsOld::getUnits() const {
