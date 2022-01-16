@@ -12,6 +12,7 @@
 #include "Units.h"
 #include "Visualization.h"
 #include "Control.h"
+#include "NonGame.h"
 
 namespace Superb {
   Game::Game(Ahwassa::Window& w) {
@@ -25,6 +26,8 @@ namespace Superb {
     
     _visualization = std::make_unique<Visualization>(w,*this);
     _control       = std::make_unique<Control>(w,*this);
+
+    _nonGame = std::make_unique<NonGame>();
   }
 
   void Game::drawMenu() {
@@ -37,12 +40,14 @@ namespace Superb {
     _visualization->menu();
     _control      ->menu();
     _terrain      ->menu();
+    _nonGame      ->menu();
 
     ImGui::End();
     _ui->end();
   }
 
   void Game::draw() {
+    _nonGame->preDraw();
     _overlay->drawFirstLayer();
     _visualization->draw();
     _visualization->drawLastLayer();
@@ -84,6 +89,7 @@ namespace Superb {
     _units        ->save(output);
     _visualization->save(output);
     _control      ->save(output);
+    _nonGame      ->save(output);
   }
 
   void Game::load(nlohmann::json& input) {
@@ -94,6 +100,7 @@ namespace Superb {
     _units        ->load(input);
     _visualization->load(input);
     _control      ->load(input);
+    _nonGame      ->load(input);
   }
   void Game::start() {
     _overlay      ->start();
@@ -103,6 +110,7 @@ namespace Superb {
     _units        ->start();
     _visualization->start();
     _control      ->start();
+    _nonGame      ->start();
   } 
 
 }

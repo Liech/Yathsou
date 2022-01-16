@@ -16,6 +16,7 @@ namespace Superb {
   class Units;
   class Visualization;
   class Control;
+  class NonGame;
 
   class Game {
   public:
@@ -43,5 +44,6 @@ namespace Superb {
     std::unique_ptr<Units   >       _units        ;
     std::unique_ptr<Visualization>  _visualization;
     std::unique_ptr<Control>        _control      ;
+    std::unique_ptr<NonGame>        _nonGame      ; 
   };
 }

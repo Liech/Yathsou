@@ -148,9 +148,11 @@
   <ItemGroup>
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="DriveInterface.cpp" />
+    <ClCompile Include="Formation\FormationDialog.cpp" />
     <ClCompile Include="Game\Control.cpp" />
     <ClCompile Include="Game\Database.cpp" />
     <ClCompile Include="Game\Game.cpp" />
+    <ClCompile Include="Game\NonGame.cpp" />
     <ClCompile Include="Game\Overlay.cpp" />
     <ClCompile Include="Game\Physic.cpp" />
     <ClCompile Include="Game\Terrain.cpp" />
@@ -170,9 +172,11 @@
   <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="DriveInterface.h" />
+    <ClInclude Include="Formation\FormationDialog.h" />
     <ClInclude Include="Game\Control.h" />
     <ClInclude Include="Game\Database.h" />
     <ClInclude Include="Game\Game.h" />
+    <ClInclude Include="Game\NonGame.h" />
     <ClInclude Include="Game\Overlay.h" />
     <ClInclude Include="Game\Physic.h" />
     <ClInclude Include="Game\Terrain.h" />
