@@ -28,7 +28,6 @@ namespace Suthanus
   {
   public:
     PhysicEngineBullet();
-    void go()                          override;
     void update()                      override;
     void setTicksPerSecond(int amount) override;
 
@@ -40,10 +39,10 @@ namespace Suthanus
     std::vector<std::shared_ptr<PhysicObject>> insideSphere (const glm::vec3& origin, float radius) const override;
     std::vector<std::shared_ptr<PhysicObject>> insideFrustum(const glm::vec3& origin, const glm::vec3& dirLeftTop, const glm::vec3& dirRightTop, const glm::vec3& dirLeftBot, const glm::vec3& dirRightBot, float nearPlane, float farPlane) const override;
 
-    std::shared_ptr<Box      > newBox      (glm::vec3 pos, glm::vec3 size  , bool isDynamic) override;
-    std::shared_ptr<Sphere   > newSphere   (glm::vec3 pos, float     radius, bool isDynamic) override;
-    std::shared_ptr<Vehicle  > newVehicle  (glm::vec3 pos) override;
-    std::shared_ptr<HeightMap> newHeightMap(glm::vec3 pos, const Iyathuum::MultiDimensionalArray<unsigned short, 2>&, float height) override;
+    std::shared_ptr<Box      > newBox      (const glm::vec3& pos, const glm::vec3& size  , bool isDynamic) override;
+    std::shared_ptr<Sphere   > newSphere   (const glm::vec3& pos, float     radius, bool isDynamic) override;
+    std::shared_ptr<Vehicle  > newVehicle  (const glm::vec3& pos);
+    std::shared_ptr<HeightMap> newHeightMap(const glm::vec3& pos, const Iyathuum::MultiDimensionalArray<unsigned short, 2>&, float height) override;
 
   private:
     std::vector<std::shared_ptr<PhysicObject>> insideShape(const glm::vec3& origin, btCollisionShape&) const;

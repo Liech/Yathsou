@@ -251,6 +251,7 @@
     <ClCompile Include="Objects\PhysicObject.cpp" />
     <ClCompile Include="Objects\Sphere.cpp" />
     <ClCompile Include="Objects\SphereBullet.cpp" />
+    <ClCompile Include="Objects\SphereReact.cpp" />
     <ClCompile Include="Objects\VehicleBulletRaycast.cpp" />
     <ClCompile Include="PhysicEngineBullet.cpp" />
     <ClCompile Include="PhysicEngineReact.cpp" />
@@ -550,6 +551,7 @@
     <ClInclude Include="Objects\PhysicObject.h" />
     <ClInclude Include="Objects\Sphere.h" />
     <ClInclude Include="Objects\SphereBullet.h" />
+    <ClInclude Include="Objects\SphereReact.h" />
     <ClInclude Include="Objects\Vehicle.h" />
     <ClInclude Include="Objects\VehicleBulletRaycast.h" />
     <ClInclude Include="PhysicEngine.h" />

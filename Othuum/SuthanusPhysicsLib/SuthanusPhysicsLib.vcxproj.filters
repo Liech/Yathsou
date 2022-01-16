@@ -105,6 +105,9 @@
     <ClCompile Include="PhysicEngineReact.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Objects\SphereReact.cpp">
+      <Filter>Quelldateien\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VehicleDriver.h">
@@ -1003,6 +1006,9 @@
     </ClInclude>
     <ClInclude Include="PhysicEngine.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\SphereReact.h">
+      <Filter>Headerdateien\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

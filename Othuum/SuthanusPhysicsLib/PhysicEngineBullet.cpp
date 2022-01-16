@@ -39,11 +39,6 @@ namespace Suthanus
     _world->setDebugDrawer(drawer);
   }
 
-  void PhysicEngineBullet::go()
-  {
-    _world->setGravity(btVector3(0, -9.81, 0));
-  }
-
   std::shared_ptr<PhysicObject> PhysicEngineBullet::raycast(const glm::vec3& origin, const glm::vec3& direction, glm::vec3& hitPoint) const
   {
     btVector3 bOrigin   (origin.x, origin.y, origin.z);
@@ -72,7 +67,7 @@ namespace Suthanus
     handleCollision();
   }
 
-  std::shared_ptr<Box> PhysicEngineBullet::newBox(glm::vec3 pos, glm::vec3 size, bool isDynamic)
+  std::shared_ptr<Box> PhysicEngineBullet::newBox(const glm::vec3& pos, const glm::vec3& size, bool isDynamic)
   {
     Bullet::BoxBullet* result = new Bullet::BoxBullet(_world, pos, size, isDynamic);
     std::shared_ptr<Box> ptr =  std::shared_ptr<Box>(dynamic_cast<Box*>(result));
@@ -81,7 +76,7 @@ namespace Suthanus
     return ptr;
   }
 
-  std::shared_ptr<Sphere> PhysicEngineBullet::newSphere(glm::vec3 pos, float radius, bool isDynamic)
+  std::shared_ptr<Sphere> PhysicEngineBullet::newSphere(const glm::vec3& pos, float radius, bool isDynamic)
   {
     Bullet::SphereBullet* result = new Bullet::SphereBullet(_world, pos, radius, isDynamic);
     auto ptr = std::shared_ptr<Sphere>(dynamic_cast<Sphere*>(result));
@@ -90,7 +85,7 @@ namespace Suthanus
     return ptr;
   }
 
-  std::shared_ptr<Vehicle> PhysicEngineBullet::newVehicle(glm::vec3 pos)
+  std::shared_ptr<Vehicle> PhysicEngineBullet::newVehicle(const glm::vec3& pos)
   {
     Bullet::VehicleBulletRaycast* result = new Bullet::VehicleBulletRaycast(_world, pos);
     auto ptr =  std::shared_ptr<Vehicle>(dynamic_cast<Vehicle*>(result));
@@ -99,7 +94,7 @@ namespace Suthanus
     return ptr;
   }
 
-  std::shared_ptr<HeightMap> PhysicEngineBullet::newHeightMap(glm::vec3 pos, const Iyathuum::MultiDimensionalArray<unsigned short, 2>& content, float height)
+  std::shared_ptr<HeightMap> PhysicEngineBullet::newHeightMap(const glm::vec3& pos, const Iyathuum::MultiDimensionalArray<unsigned short, 2>& content, float height)
   {
     glm::vec2 cellSize(1,1);
     Bullet::HeightMapBullet* result = new Bullet::HeightMapBullet(_world, pos, cellSize, content,height);
