@@ -12,7 +12,7 @@
 #include "SuperbCommander/DriveInterface.h"
 #include "SuperbCommander/NavigationUI.h"
 #include "SuperbCommander/World.h"
-#include "SuperbCommander/Unit.h"
+#include "SuperbCommander/Unit/Unit.h"
 
 #include "Game.h"
 #include "Terrain.h"

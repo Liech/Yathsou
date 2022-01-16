@@ -24,7 +24,7 @@ namespace Superb {
     virtual v3    getPosition ()                 const override;
     virtual float getMaximumSpeed()              const override;
     virtual float getBreakSpeed()                const override;
-    virtual float getRadius()                    const override;
+    virtual std::array<float, 3> getSize() const override;
   private:
     Unit* _target = nullptr;    
 

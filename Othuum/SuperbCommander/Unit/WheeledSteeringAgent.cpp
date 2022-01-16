@@ -52,15 +52,14 @@ namespace Superb {
   }
 
   float WheeledSteeringAgent::getMaximumSpeed() const {
-    return 0.1;
+    return 0.1f;
   }
 
   float WheeledSteeringAgent::getBreakSpeed() const {
     return 1;
   }
-  
-  float WheeledSteeringAgent::getRadius() const {
-    return std::max(_target->getPhysic()->getSize()[0], _target->getPhysic()->getSize()[1], _target->getPhysic()->getSize()[2]);
-  }
 
+  std::array<float, 3> WheeledSteeringAgent::getSize() const {
+    return {_target->getPhysic()->getSize()[0],_target->getPhysic()->getSize()[1],_target->getPhysic()->getSize()[2]};
+  }
 }
