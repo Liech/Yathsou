@@ -63,6 +63,9 @@
     <ClInclude Include="Maps\NavigationAgentManager.h">
       <Filter>Header Files\Maps</Filter>
     </ClInclude>
+    <ClInclude Include="AgentGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Maps\MapGroup.cpp">
@@ -85,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="Maps\GradientGridMap.cpp">
       <Filter>Source Files\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="AgentGroup.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

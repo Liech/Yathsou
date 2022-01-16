@@ -5,6 +5,7 @@
 #include "IyathuumCoreLib/lib/glm/gtx/vector_angle.hpp"
 #include "IyathuumCoreLib/Util/Geometry.h"
 
+#include "SuthanusPhysicsLib/Objects/Box.h"
 #include "Unit.h"
 
 namespace Superb {
@@ -56,6 +57,10 @@ namespace Superb {
 
   float WheeledSteeringAgent::getBreakSpeed() const {
     return 1;
+  }
+  
+  float WheeledSteeringAgent::getRadius() const {
+    return std::max(_target->getPhysic()->getSize()[0], _target->getPhysic()->getSize()[1], _target->getPhysic()->getSize()[2]);
   }
 
 }

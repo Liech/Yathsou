@@ -220,6 +220,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AgentGroup.h" />
     <ClInclude Include="AgentMovementInterface.h" />
     <ClInclude Include="DirectTargetMovement.h" />
     <ClInclude Include="Maps\AligmentMap.h" />
@@ -236,6 +237,7 @@
     <ClInclude Include="Maps\PersonalSpaceMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AgentGroup.cpp" />
     <ClCompile Include="Maps\DijkstraMap.cpp" />
     <ClCompile Include="Maps\DirectDistanceMap.cpp" />
     <ClCompile Include="Maps\GradientGridMap.cpp" />

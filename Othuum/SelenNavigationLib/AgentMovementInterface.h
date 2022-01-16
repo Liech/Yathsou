@@ -17,6 +17,7 @@ namespace Selen {
     virtual vec   getDirection        () const     = 0;
     virtual float getMaximumSpeed     () const     = 0;
     virtual float getBreakSpeed       () const     = 0;
+    virtual float getRadius           () const     = 0;
   private:
   };
 }
