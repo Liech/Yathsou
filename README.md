@@ -1,23 +1,26 @@
 # Yathsou
 
-RTS Engine fragments.
-
-# Video
-
-[![Youtube Video](https://user-images.githubusercontent.com/16963076/119048618-c3cfce00-b9bf-11eb-8d46-f3d01e0454db.png)](https://youtu.be/8PbduxpR2ak "Youtube Video")
-
-# Goal
-
-Recreate the Supreme Commander 1 Engine.
+Recreating the Supreme Commander 1 Engine.
 
 Using the same Assets.
 
 It is not the goal to be precise, but modern.
 
+# Showcase
+
+Eye Of Rhianne is an interactive asset explorer for supreme commander 1. It is a byproduct on the journey to the full rts game.
+
+[![Youtube Video](https://user-images.githubusercontent.com/16963076/119048618-c3cfce00-b9bf-11eb-8d46-f3d01e0454db.png)](https://youtu.be/8PbduxpR2ak "Youtube Video")
+
 # Current Work
+
+The current working topic is unit movement.
 
 Since the last 'release' the following was implemented:
  
+ * Basic Wheeled Unit Movement (only direct steering)
+ * Unit Selection & Rectangle Selection
+ * Added Dear IMGUI for greater debugging capabilities
  * SCD Archives can be used directly (no more unpack everything into the EyeOfRihanne Data Folder)
  * Basic Unit Single & Rectangle Selection
  * Basic Unit Move Command Barebone
@@ -25,126 +28,14 @@ Since the last 'release' the following was implemented:
  * Map Renderer with textures
  * Sound loading / playing (XACT xwb/xsb). Although sound names are mixed up
 
-# Libraries
+# Contribute
 
-All Names are from Supreme Commander Units. Mainly Seraphim faction. See https://unitdb.faforever.com/
+It would be great if you are willing to help. Hit me up on Discord.
 
-## IyathuumCoreLib
-Depends on    | Purpose
-------------- | -------------
-glm           | Math
-
-General Util, BaseType and Helper classes.
-
-## VishalaNetworkLib
-Depends on    | Purpose
-------------- | -------------
-Iyathuum      | Core
-nlohman::json | serialization
-enet          | network
-snappy        | compression
-xdelta3       | delta compression
-moodycamel::concurrentqueue.h | thread communication
-
-Network and Serialization Library. 
-
-Offers:
- * Network Connection
- * json/binary serialization/deserialization
- * Higherlevel Command based Game Synchronization (prototype)
-
-## AhwassaGraphicsLib
-Depends on    | Purpose
-------------- | -------------
-Iyathuum      | Core
-glad          | OpenGL 
-glfw          | Window Manager
-freetype      | Font
-libnyquist    | load wav/mp3
-portaudio     | play sound
-openrvr       | virtual reality
-
-Graphics and Media Library
-
-Offers:
- * wrapper to opengl
- * forward renderer & deferred renderer
- * post processing system
-  * Bloom 
-  * Cubemap reflections
- * play sound (prototype)
- * GUI System
- * interact with vr (prototype)
-
-## AezeselFileIOLib
-Depends on    | Purpose
-------------- | -------------
-Iyathuum      | Core
-gli           | Load DDS files (Supreme Commander texture format) 
-lodepng       | Load/Write PNG Files
-
-File IO Library
-
-Offers:
- * DDS Load
- * PNG Load Save
- * SCM Load (Supreme Commander Model File)
- * SCA Load (Supreme Commander Animation File)
- * SCMAP Load (Supreme Commander Map File)
- * MagicaVox loading
- * Unzip files
- * load 3d models with assimp (prototype)
- * Read XACT sound files (.xsb, .xwb)
- * write WAV files
- * SCD Archives (Supreme Commander gamedata)
-
-## AthanahCommonLib
-
-Depends on soon ~every Project of the Solution.
-
-Collection of reusable cross library code (=everything). Will get too big and needs to be split up.
-
-Offers:
- * Rendering of Supreme Commander Units & Animation
- * Physics Debug Drawer
- * Rendering of Supreme Commander Maps
-
-## SuthanusPhysicsLibrary
-
-Depends on    | Purpose
-------------- | -------------
-Iyathuum      | Core
-Bullet        | Physics Engine 
-
-Offers:
- * Physic Engine access
- * Artillery calculations
-
-## HaasScriptingLibrary
-
-Depends on    | Purpose
-------------- | -------------
-Iyathuum      | Core
-lua           | scripting
-nlohmann json | lua table access
-
-Offers:
- * script engine access
- * lua table <-> nlohmann::json
- * can read supreme commander .bp files with minimal effort
-
-## Other Libs
-
-Not all Libs are listed yet.
-
-Most are not worth any mentioning yet.
+I am able to communicate in English and German.
 
 # Build and Run
 
-UI and Network demonstration (and maybe later the actual game) are found in Othuum.
+Use Visual Studio 2019 (or above) and Windows.
 
-EyeOfRhianne is the asset debugging and exploration tool.
-
-Use Visual Studio 2019 and Windows.
-
-Linux should be possible, but is not done yet.
+Planning to move to cmake at some point. After that Linux is theoretical also possible.
