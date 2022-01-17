@@ -20,6 +20,7 @@ namespace Ahwassa {
     void end();
     void drawRectangle(glm::vec2 pos, glm::vec2 size, Iyathuum::Color color);
     void drawRectangle(Iyathuum::glmAABB<2> box, Iyathuum::Color color);
+    void drawLine(glm::vec2 posA, glm::vec2 posB, float thicknessPx, Iyathuum::Color color);
     void setClippingRectangle(Iyathuum::glmAABB<2> box);
     void disableClipping();
 

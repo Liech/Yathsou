@@ -7,7 +7,7 @@
 
 namespace Superb {
   FormationDialog::FormationDialog(Ahwassa::Window& w) : _window(w){
-    _canvas = std::make_unique<FormationWidget>();
+    _canvas = std::make_unique<FormationWidget>(_window);
   }
 
   void FormationDialog::menu() {    
@@ -28,9 +28,19 @@ namespace Superb {
   }  
  
   void FormationDialog::menuContent() {
-    ImGui::Text("Formation can be edited here. Not yet implemented.\n\n");
-    //ImGui::ImageButton(myImage, ImVec2(200.f, 200.f));
+    {
+      ImGui::BeginGroup();
+      ImGui::Button("AAA");
+      ImGui::Button("AAA");
+      ImGui::Button("AAA");
+      ImGui::Button("AAA");
+      ImGui::Button("AAA");
+      ImGui::Button("AAA");
+      ImGui::EndGroup();
+    }
+    ImGui::SameLine();
     _canvas->menu();
+
   }
 
   void FormationDialog::preDraw() {

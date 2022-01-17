@@ -69,6 +69,29 @@ namespace Ahwassa {
     _vars->vao->draw();
   }
 
+  void BasicRectangleRenderer::drawLine(glm::vec2 posA, glm::vec2 posB, float thicknessPx, Iyathuum::Color color) {
+    if (_inRenderProcess == false)
+      throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
+
+    _vars->color->setValue(color.to3());
+
+    glm::vec2 dir = glm::normalize(posB - posA);
+    glm::vec2 ortho = glm::vec2(dir.y, -dir.x) * thicknessPx * 0.5f;
+
+    std::vector<PositionVertex> vertices = {
+      PositionVertex(glm::vec3(posA[0] + ortho[0],posA[0] + ortho[1],0)),
+      PositionVertex(glm::vec3(posB[0] + ortho[0],posB[0] + ortho[1], 0)),
+      PositionVertex(glm::vec3(posB[0] - ortho[0],posB[0] - ortho[1], 0)),
+      PositionVertex(glm::vec3(posB[0] - ortho[0],posB[0] - ortho[1], 0)),
+      PositionVertex(glm::vec3(posA[0] - ortho[0],posA[0] - ortho[1], 0)),
+      PositionVertex(glm::vec3(posA[0] + ortho[0],posA[0] + ortho[1], 0))
+    };
+
+    _vars->color->bind();
+    _vars->vbo->setData(vertices);
+    _vars->vao->draw();
+  }
+
   void BasicRectangleRenderer::start() {
     if (_inRenderProcess == true)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
