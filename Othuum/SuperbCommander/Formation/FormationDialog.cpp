@@ -1,14 +1,16 @@
 #include "FormationDialog.h"
 
+#include "FormationWidget.h"
+
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
 
 namespace Superb {
   FormationDialog::FormationDialog(Ahwassa::Window& w) : _window(w){
+    _canvas = std::make_unique<FormationWidget>();
   }
 
-  void FormationDialog::menu() {
-    
+  void FormationDialog::menu() {    
     if (ImGui::Button("Formation Dialog"))
       ImGui::OpenPopup("Formation");
 
@@ -28,6 +30,10 @@ namespace Superb {
   void FormationDialog::menuContent() {
     ImGui::Text("Formation can be edited here. Not yet implemented.\n\n");
     //ImGui::ImageButton(myImage, ImVec2(200.f, 200.f));
+    _canvas->menu();
   }
 
+  void FormationDialog::preDraw() {
+    _canvas->preDraw();
+  }
 }

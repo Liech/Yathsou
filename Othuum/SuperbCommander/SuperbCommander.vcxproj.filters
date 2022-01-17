@@ -99,6 +99,9 @@
     <ClCompile Include="Game\NonGame.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="Formation\FormationWidget.cpp">
+      <Filter>Source Files\Formation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -166,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="Game\NonGame.h">
       <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Formation\FormationWidget.h">
+      <Filter>Header Files\Formation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

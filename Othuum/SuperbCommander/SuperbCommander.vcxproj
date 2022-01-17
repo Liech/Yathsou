@@ -149,6 +149,7 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="DriveInterface.cpp" />
     <ClCompile Include="Formation\FormationDialog.cpp" />
+    <ClCompile Include="Formation\FormationWidget.cpp" />
     <ClCompile Include="Game\Control.cpp" />
     <ClCompile Include="Game\Database.cpp" />
     <ClCompile Include="Game\Game.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="DriveInterface.h" />
     <ClInclude Include="Formation\FormationDialog.h" />
+    <ClInclude Include="Formation\FormationWidget.h" />
     <ClInclude Include="Game\Control.h" />
     <ClInclude Include="Game\Database.h" />
     <ClInclude Include="Game\Game.h" />

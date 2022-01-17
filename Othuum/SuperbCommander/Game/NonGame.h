@@ -22,6 +22,8 @@ namespace Superb {
     void load(nlohmann::json&);
 
   private:
+    Ahwassa::Window& _window;
+
     bool _dearIMGUIDemoWindow = false;
 
     std::unique_ptr<FormationDialog> _formationDialog;

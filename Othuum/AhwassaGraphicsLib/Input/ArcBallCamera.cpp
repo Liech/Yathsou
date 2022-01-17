@@ -30,13 +30,15 @@ namespace Ahwassa {
   bool ArcBallCamera::mouseMoveEvent(glm::vec2 current, glm::vec2 movement) {
     if (!isFocus())
       return false;
-    move(movement, glm::vec2(0, 0));
+    move(movement, glm::vec2(0, 0), true);
     return true;
   }
 
-  void ArcBallCamera::move(const glm::vec2& mouse, const glm::vec2& wheel) {
-    _input.setCursorPos(_camera->getResolution() / 2.0f);
-    _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+  void ArcBallCamera::move(const glm::vec2& mouse, const glm::vec2& wheel, bool setCursor) {
+    if (setCursor) {
+      _input.setCursorPos(_camera->getResolution() / 2.0f);
+      _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+    }
 
     glm::vec3 toSide = glm::cross(_camera->getDir(), _camera->getUp());
     glm::vec4 lookDir = glm::vec4(_camera->getDir(), 1);
@@ -52,7 +54,7 @@ namespace Ahwassa {
   }
 
   bool ArcBallCamera::mouseWheelEvent(glm::vec2 movement) {
-    move(glm::vec2(0, 0), movement);
+    move(glm::vec2(0, 0), movement, false);
     return true;
   }
 

@@ -5,8 +5,7 @@
 #include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
 
 namespace Superb {
-  NonGame::NonGame(Ahwassa::Window& window) {
-    _formationDialog = std::make_unique<FormationDialog>(window);
+  NonGame::NonGame(Ahwassa::Window& window) : _window(window) {
   }
 
   void NonGame::menu() {
@@ -17,11 +16,11 @@ namespace Superb {
   }
 
   void NonGame::preDraw() {
-
+    _formationDialog->preDraw();
   }
 
   void NonGame::start() {
-
+    _formationDialog = std::make_unique<FormationDialog>(_window);
   }
 
   void NonGame::save(nlohmann::json& output) {
