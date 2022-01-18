@@ -1,4 +1,5 @@
 #include "FormationWidget.h"
+#include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Uniforms/Rendertarget.h"
 #include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
@@ -13,7 +14,10 @@ namespace Superb {
     ImVec2 canvas = ImGui::GetContentRegionAvail();
     _resolutionX = canvas.x;
     _resolutionY = canvas.y;
-    ImGui::Image((void*)_canvas->getTextureID(), ImVec2(_resolutionX, _resolutionY-30));
+    ImGui::ImageButton((void*)_canvas->getTextureID(), ImVec2(_resolutionX, _resolutionY-30));
+    auto y = _window.input().getCursorPos();
+    auto x = ImGui::GetItemRectMin();
+    _mousePos = glm::vec2(y[0] - x[0], _window.getHeight()- y[1] - x[1]);
   }
 
   void FormationWidget::preDraw() {
@@ -26,8 +30,7 @@ namespace Superb {
     _canvas->start();
     _renderer->start();
 
-
-    _renderer->drawRectangle(glm::vec2(0, 0), glm::vec2(40, 40), Iyathuum::Color(255, 0, 0));
+    _renderer->drawRectangle(_mousePos, glm::vec2(4, 4), Iyathuum::Color(255, 0, 0));
     _renderer->drawLine(glm::vec2(40, 40), glm::vec2(_resolutionX-20, _resolutionY-20), 9, Iyathuum::Color(255, 255, 0));
 
     _renderer->end();

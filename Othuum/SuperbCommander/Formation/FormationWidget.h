@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include "IyathuumCoreLib/lib/glm/glm.hpp"
 
 namespace Ahwassa {
   class Rendertarget;
@@ -24,5 +25,6 @@ namespace Superb {
     Ahwassa::Window& _window;
     std::unique_ptr<Ahwassa::Rendertarget>      _canvas  ;
     std::unique_ptr<Ahwassa::BasicRectangleRenderer> _renderer;
+    glm::vec2 _mousePos;
   };
 }
