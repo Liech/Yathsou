@@ -63,4 +63,8 @@ namespace Ahwassa {
   void Rendertarget::bind() {
     glBindTexture(GL_TEXTURE_2D, _texture);
   }
+
+  glm::ivec2 Rendertarget::getResolution() {
+    return glm::ivec2(_nX, _nY);
+  }
 }

@@ -19,7 +19,7 @@ namespace Superb {
     
   private:
     int _resolutionX = 400;
-    int _resolutionY = 400;
+    int _resolutionY = 400;    
 
     Ahwassa::Window& _window;
     std::unique_ptr<Ahwassa::Rendertarget>      _canvas  ;

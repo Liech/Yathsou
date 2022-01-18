@@ -6,13 +6,15 @@ namespace Ahwassa {
   class Rendertarget : public Uniform {
   public:
     Rendertarget(std::string name, size_t nX, size_t nY);
-    ~Rendertarget();
+    virtual ~Rendertarget();
 
     void start();
     void end();
     void bind() override;
     virtual std::string getType() override;
     unsigned int getTextureID() { return _texture; }
+
+    glm::ivec2 getResolution();
 
   private:
     unsigned int _texture      = 0;

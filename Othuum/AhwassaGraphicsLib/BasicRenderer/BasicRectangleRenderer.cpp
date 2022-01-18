@@ -26,6 +26,7 @@ namespace Ahwassa {
   };
 
   BasicRectangleRenderer::BasicRectangleRenderer(Window* w) {
+    _resolution = glm::ivec2(w->getWidth(), w->getHeight());
     _vars = std::make_shared<BasicRectangleRenderer::RenderVars>();
     _vars->window = w;
     makeShader();
@@ -79,7 +80,7 @@ namespace Ahwassa {
     glm::vec2 ortho = glm::vec2(dir.y, -dir.x) * thicknessPx * 0.5f;
 
     std::vector<PositionVertex> vertices = {
-      PositionVertex(glm::vec3(posA[0] + ortho[0],posA[0] + ortho[1],0)),
+      PositionVertex(glm::vec3(posA[0] + ortho[0],posA[0] + ortho[1], 0)),
       PositionVertex(glm::vec3(posB[0] + ortho[0],posB[0] + ortho[1], 0)),
       PositionVertex(glm::vec3(posB[0] - ortho[0],posB[0] - ortho[1], 0)),
       PositionVertex(glm::vec3(posB[0] - ortho[0],posB[0] - ortho[1], 0)),
@@ -132,7 +133,7 @@ namespace Ahwassa {
 
     std::vector<Uniform*> uniforms;
     _vars->projection = std::make_unique<UniformMat4>("projection");
-    _vars->projection->setValue(glm::ortho(0.0f, (float)_vars->window->getWidth(), 0.0f, (float)_vars->window->getHeight()));
+    _vars->projection->setValue(glm::ortho(0.0f, (float)_resolution[0], 0.0f, (float)_resolution[1]));
     _vars->color = std::make_unique<UniformVec3>("textColor");
     uniforms.push_back(_vars->projection.get());
     uniforms.push_back(_vars->color.get());
@@ -143,6 +144,12 @@ namespace Ahwassa {
     _vars->vao = std::make_unique<VAO>(_vars->vbo.get());
     _vars->shader = std::make_unique<ShaderProgram>(PositionVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
+
+  void BasicRectangleRenderer::setResolution(glm::ivec2 newResolution) {
+    _resolution = newResolution;
+    _vars->projection->setValue(glm::ortho(0.0f, (float)_resolution[0], 0.0f, (float)_resolution[1]));
+  }
+
   void BasicRectangleRenderer::setClippingRectangle(Iyathuum::glmAABB<2> box) {
     _clipping = true;
     _clippingBox = box;

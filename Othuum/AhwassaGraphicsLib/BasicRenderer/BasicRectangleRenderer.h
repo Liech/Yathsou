@@ -23,12 +23,13 @@ namespace Ahwassa {
     void drawLine(glm::vec2 posA, glm::vec2 posB, float thicknessPx, Iyathuum::Color color);
     void setClippingRectangle(Iyathuum::glmAABB<2> box);
     void disableClipping();
-
+    void setResolution(glm::ivec2 resolution);
   private:
     struct RenderVars;
 
     void makeShader();
 
+    glm::ivec2           _resolution;
     bool                 _inRenderProcess = false;
     bool                 _clipping        = false;
     Iyathuum::glmAABB<2> _clippingBox;
