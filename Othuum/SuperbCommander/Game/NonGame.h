@@ -25,6 +25,7 @@ namespace Superb {
     Ahwassa::Window& _window;
 
     bool _dearIMGUIDemoWindow = false;
+    float _fontScale = 1;
 
     std::unique_ptr<FormationDialog> _formationDialog;
   };

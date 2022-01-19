@@ -32,7 +32,7 @@ namespace Superb {
 
   void Game::drawMenu() {
     _ui->start();
-    ImGui::Begin("Main Menu");
+    ImGui::Begin("Main Menu",0,ImGuiWindowFlags_AlwaysAutoResize);
 
     _overlay      ->menu();
     _physic       ->menu();

@@ -13,6 +13,9 @@ namespace Superb {
     if (_dearIMGUIDemoWindow)
       ImGui::ShowDemoWindow();
     _formationDialog->menu();
+
+    ImGui::DragFloat("window scale", &_fontScale, 0.005f, 0.05, 4, "%.2f", ImGuiSliderFlags_AlwaysClamp);
+    ImGui::SetWindowFontScale(_fontScale);
   }
 
   void NonGame::preDraw() {
@@ -24,10 +27,12 @@ namespace Superb {
   }
 
   void NonGame::save(nlohmann::json& output) {
-    output["IMGUIDemo"] = _dearIMGUIDemoWindow;
+    output["IMGUIDemo"]      = _dearIMGUIDemoWindow;
+    output["IMGUIFontScale"] = _fontScale;
   }
 
   void NonGame::load(nlohmann::json& input) {
     _dearIMGUIDemoWindow = input["IMGUIDemo"];
+    _fontScale           = input["IMGUIFontScale"];
   }
 }
