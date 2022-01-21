@@ -23,7 +23,7 @@ namespace Superb {
   }
 
   void NonGame::start() {
-    _formationDialog = std::make_unique<FormationDialog>(_window);
+    _formationDialog = std::make_unique<Formation::FormationDialog>(_window);
   }
 
   void NonGame::save(nlohmann::json& output) {

@@ -2,14 +2,12 @@
 
 #include <memory>
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
-#include "SelenNavigationLib/NavigationMap.h"
+#include "SelenNavigationLib/Maps/NavigationMap.h"
 #include "IyathuumCoreLib/Tree/Dijkstra.h"
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
 
 namespace Selen {
-
-
   /// <summary>
   /// guides the agent away from stuff that is too near, does not pursuit the target
   /// </summary>

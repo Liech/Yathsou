@@ -150,6 +150,10 @@
     <ClCompile Include="DriveInterface.cpp" />
     <ClCompile Include="Formation\FormationDialog.cpp" />
     <ClCompile Include="Formation\FormationWidget.cpp" />
+    <ClCompile Include="Formation\Shapes\CircleShape.cpp" />
+    <ClCompile Include="Formation\Shapes\FormationShape.cpp" />
+    <ClCompile Include="Formation\Shapes\RectangleShape.cpp" />
+    <ClCompile Include="Formation\Shapes\TriangleShape.cpp" />
     <ClCompile Include="Game\Control.cpp" />
     <ClCompile Include="Game\Database.cpp" />
     <ClCompile Include="Game\Game.cpp" />
@@ -175,6 +179,10 @@
     <ClInclude Include="DriveInterface.h" />
     <ClInclude Include="Formation\FormationDialog.h" />
     <ClInclude Include="Formation\FormationWidget.h" />
+    <ClInclude Include="Formation\Shapes\CircleShape.h" />
+    <ClInclude Include="Formation\Shapes\FormationShape.h" />
+    <ClInclude Include="Formation\Shapes\RectangleShape.h" />
+    <ClInclude Include="Formation\Shapes\TriangleShape.h" />
     <ClInclude Include="Game\Control.h" />
     <ClInclude Include="Game\Database.h" />
     <ClInclude Include="Game\Game.h" />

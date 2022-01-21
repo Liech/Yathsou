@@ -14,12 +14,12 @@ namespace Iyathuum {
       _size = vec();
     }
 
-    glmAABB(vec start, vec size) {
+    glmAABB(const vec& start, const vec& size) {
       _position = start;
       _size = size;
     }
 
-    glmAABB(vec start, double size) {
+    glmAABB(const vec& start, double size) {
       _position = start;
       for (size_t i = 0; i < Dimension; i++)
         _size[i] = size;
@@ -33,15 +33,19 @@ namespace Iyathuum {
       return _size;
     }
 
-    void setSize(vec size) {
+    void setSize(const vec& size) {
       _size = size;
     }
 
-    void setPosition(vec pos) {
+    void setPosition(const vec& pos) {
       _position = pos;
     }
 
-    bool isInside(vec pos) const {
+    void setCenter(const vec& pos) {
+      _position = pos - _size / 2.0f;
+    }
+
+    bool isInside(const vec& pos) const {
       for (size_t i = 0; i < Dimension; i++) {
         if (pos[i] < getPosition()[i] || pos[i] >= getPosition()[i] + getSize()[i])
           return false;
@@ -49,7 +53,7 @@ namespace Iyathuum {
       return true;
     }
 
-    bool intersects(glmAABB<Dimension> d) const{
+    bool intersects(const glmAABB<Dimension>& d) const{
       if (d.getPosition()[0] + d.getSize()[0] < getPosition()[0]) return false;
       if (d.getPosition()[1] + d.getSize()[1] < getPosition()[1]) return false;
       if (d.getPosition()[0] > getPosition()[0] + getSize()[0]) return false;
@@ -78,7 +82,7 @@ namespace Iyathuum {
       return result;
     }
 
-    glmAABB<Dimension> getIntersection(glmAABB<Dimension> other) const {
+    glmAABB<Dimension> getIntersection(const glmAABB<Dimension>& other) const {
 
       vec otherPosition  = other.getPosition();
       vec otherSize      = other.getSize();

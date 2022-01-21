@@ -32,16 +32,18 @@ namespace Ahwassa {
     makeShader();
   }
 
-  void BasicRectangleRenderer::drawRectangle(glm::vec2 pos, glm::vec2 size, Iyathuum::Color color) {
+  void BasicRectangleRenderer::drawRectangle(const glm::vec2& pos, const glm::vec2& size, const Iyathuum::Color& color) {
     Iyathuum::glmAABB<2> box;
     box.setPosition(pos);
     box.setSize(size);
     drawRectangle(box, color);
   }
   
-  void BasicRectangleRenderer::drawRectangle(Iyathuum::glmAABB<2> box, Iyathuum::Color color) {
+  void BasicRectangleRenderer::drawRectangle(const Iyathuum::glmAABB<2>& Box, const Iyathuum::Color& color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
+
+    Iyathuum::glmAABB<2> box = Box;
 
     _vars->color->setValue(color.to3());
 
@@ -70,7 +72,7 @@ namespace Ahwassa {
     _vars->vao->draw();
   }
 
-  void BasicRectangleRenderer::drawLine(glm::vec2 posA, glm::vec2 posB, float thicknessPx, Iyathuum::Color color) {
+  void BasicRectangleRenderer::drawLine(const glm::vec2& posA, const glm::vec2& posB, float thicknessPx, const Iyathuum::Color& color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
@@ -80,12 +82,12 @@ namespace Ahwassa {
     glm::vec2 ortho = glm::vec2(dir.y, -dir.x) * thicknessPx * 0.5f;
 
     std::vector<PositionVertex> vertices = {
-      PositionVertex(glm::vec3(posA[0] + ortho[0],posA[0] + ortho[1], 0)),
-      PositionVertex(glm::vec3(posB[0] + ortho[0],posB[0] + ortho[1], 0)),
-      PositionVertex(glm::vec3(posB[0] - ortho[0],posB[0] - ortho[1], 0)),
-      PositionVertex(glm::vec3(posB[0] - ortho[0],posB[0] - ortho[1], 0)),
-      PositionVertex(glm::vec3(posA[0] - ortho[0],posA[0] - ortho[1], 0)),
-      PositionVertex(glm::vec3(posA[0] + ortho[0],posA[0] + ortho[1], 0))
+      PositionVertex(glm::vec3(posA[0] + ortho[0],posA[1] + ortho[1], 0)),
+      PositionVertex(glm::vec3(posB[0] + ortho[0],posB[1] + ortho[1], 0)),
+      PositionVertex(glm::vec3(posB[0] - ortho[0],posB[1] - ortho[1], 0)),
+      PositionVertex(glm::vec3(posB[0] - ortho[0],posB[1] - ortho[1], 0)),
+      PositionVertex(glm::vec3(posA[0] - ortho[0],posA[1] - ortho[1], 0)),
+      PositionVertex(glm::vec3(posA[0] + ortho[0],posA[1] + ortho[1], 0))
     };
 
     _vars->color->bind();
@@ -145,12 +147,12 @@ namespace Ahwassa {
     _vars->shader = std::make_unique<ShaderProgram>(PositionVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
-  void BasicRectangleRenderer::setResolution(glm::ivec2 newResolution) {
+  void BasicRectangleRenderer::setResolution(const glm::ivec2& newResolution) {
     _resolution = newResolution;
     _vars->projection->setValue(glm::ortho(0.0f, (float)_resolution[0], 0.0f, (float)_resolution[1]));
   }
 
-  void BasicRectangleRenderer::setClippingRectangle(Iyathuum::glmAABB<2> box) {
+  void BasicRectangleRenderer::setClippingRectangle(const Iyathuum::glmAABB<2>& box) {
     _clipping = true;
     _clippingBox = box;
   }
@@ -158,4 +160,23 @@ namespace Ahwassa {
   void BasicRectangleRenderer::disableClipping() {
     _clipping = false;
   }
+
+  void BasicRectangleRenderer::drawCircle(const glm::vec2& center, const glm::vec2& radius, float rotation, float thickness, const Iyathuum::Color& clr, float precision) {
+    float rad_angle = glm::radians(rotation);
+    auto rotatedEllipse = [&radius, rad_angle](float deg_t) {
+      //https://math.stackexchange.com/questions/2645689/what-is-the-parametric-equation-of-a-rotated-ellipse-given-the-angle-of-rotatio
+      float rad_t = glm::radians(deg_t);
+      float rx = radius[0] * std::cos(rad_angle) * std::cos(rad_t) - radius[1] * std::sin(rad_angle) * std::sin(rad_t);
+      float ry = radius[0] * std::cos(rad_angle) * std::sin(rad_t) + radius[1] * std::sin(rad_angle) * std::cos(rad_t);
+      return glm::vec2(rx, ry);
+    };
+    
+    glm::vec2 previous = rotatedEllipse(-precision);
+    for (float current = 0; current < 360; current += precision) {
+      glm::vec2 now  = rotatedEllipse(current);
+      drawLine(center + previous, center + now, thickness, clr);
+      previous = now;
+    }
+  }
+
 }

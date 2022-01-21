@@ -2,7 +2,7 @@
 
 #include <memory>
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
-#include "SelenNavigationLib/NavigationMap.h"
+#include "SelenNavigationLib/Maps/NavigationMap.h"
 #include "IyathuumCoreLib/Tree/Dijkstra.h"
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 

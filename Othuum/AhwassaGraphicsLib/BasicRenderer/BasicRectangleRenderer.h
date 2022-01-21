@@ -18,12 +18,13 @@ namespace Ahwassa {
     virtual ~BasicRectangleRenderer() {}
     void start();
     void end();
-    void drawRectangle(glm::vec2 pos, glm::vec2 size, Iyathuum::Color color);
-    void drawRectangle(Iyathuum::glmAABB<2> box, Iyathuum::Color color);
-    void drawLine(glm::vec2 posA, glm::vec2 posB, float thicknessPx, Iyathuum::Color color);
-    void setClippingRectangle(Iyathuum::glmAABB<2> box);
+    void drawRectangle(const glm::vec2& pos, const glm::vec2& size, const Iyathuum::Color& color);
+    void drawRectangle(const Iyathuum::glmAABB<2>& box, const Iyathuum::Color& color);
+    void drawLine(const glm::vec2& posA, const glm::vec2& posB, float thicknessPx, const Iyathuum::Color& color);
+    void drawCircle(const glm::vec2& center, const glm::vec2& radius, float rotation, float thickness, const Iyathuum::Color&, float precision = 5);
+    void setClippingRectangle(const Iyathuum::glmAABB<2>& box);
     void disableClipping();
-    void setResolution(glm::ivec2 resolution);
+    void setResolution(const glm::ivec2& resolution);
   private:
     struct RenderVars;
 

@@ -31,6 +31,12 @@
     <Filter Include="Header Files\Formation">
       <UniqueIdentifier>{3a0ac78b-f30a-46b8-b970-993ad53343be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Formation\Shapes">
+      <UniqueIdentifier>{527b7c02-5223-4e20-82b3-9903dca4f170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Formation\Shapes">
+      <UniqueIdentifier>{3deaacb1-b30a-42f3-9cde-a30124cc518d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -102,6 +108,18 @@
     <ClCompile Include="Formation\FormationWidget.cpp">
       <Filter>Source Files\Formation</Filter>
     </ClCompile>
+    <ClCompile Include="Formation\Shapes\CircleShape.cpp">
+      <Filter>Source Files\Formation\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Formation\Shapes\FormationShape.cpp">
+      <Filter>Source Files\Formation\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Formation\Shapes\RectangleShape.cpp">
+      <Filter>Source Files\Formation\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Formation\Shapes\TriangleShape.cpp">
+      <Filter>Source Files\Formation\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -172,6 +190,18 @@
     </ClInclude>
     <ClInclude Include="Formation\FormationWidget.h">
       <Filter>Header Files\Formation</Filter>
+    </ClInclude>
+    <ClInclude Include="Formation\Shapes\FormationShape.h">
+      <Filter>Header Files\Formation\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Formation\Shapes\CircleShape.h">
+      <Filter>Header Files\Formation\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Formation\Shapes\RectangleShape.h">
+      <Filter>Header Files\Formation\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Formation\Shapes\TriangleShape.h">
+      <Filter>Header Files\Formation\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

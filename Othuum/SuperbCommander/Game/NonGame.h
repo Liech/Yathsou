@@ -8,8 +8,9 @@ namespace Ahwassa {
 }
 
 namespace Superb {
-  class FormationDialog;
-  
+  namespace Formation {
+    class FormationDialog;
+  }
   class NonGame {
   public:
     NonGame(Ahwassa::Window&);
@@ -27,6 +28,6 @@ namespace Superb {
     bool _dearIMGUIDemoWindow = false;
     float _fontScale = 1;
 
-    std::unique_ptr<FormationDialog> _formationDialog;
+    std::unique_ptr<Formation::FormationDialog> _formationDialog;
   };
 }

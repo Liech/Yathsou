@@ -7,22 +7,24 @@ namespace Ahwassa {
 }
 
 namespace Superb {
-  class FormationWidget;
+  namespace Formation {
+    class FormationWidget;
 
-  class FormationDialog {
-  public:
-    FormationDialog(Ahwassa::Window&);
-    virtual ~FormationDialog() = default;
+    class FormationDialog {
+    public:
+      FormationDialog(Ahwassa::Window&);
+      virtual ~FormationDialog() = default;
 
-    void menu();
-    void preDraw();
+      void menu();
+      void preDraw();
 
-  private:
-    void menuContent();
+    private:
+      void menuContent();
 
 
-    Ahwassa::Window& _window;   
+      Ahwassa::Window& _window;
 
-    std::unique_ptr<FormationWidget> _canvas;
-  };
+      std::unique_ptr<FormationWidget> _canvas;
+    };
+  }
 }
