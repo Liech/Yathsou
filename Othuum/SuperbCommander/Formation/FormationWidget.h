@@ -21,6 +21,7 @@ namespace Superb {
     enum class FormationWidgetMode {
       None,
       PlaceObject,
+      Rotate
     };
 
     class FormationWidget : public Ahwassa::UIElement {
@@ -34,10 +35,13 @@ namespace Superb {
 
       void startShape(std::shared_ptr<FormationShape>);
 
+      virtual bool mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status);
       virtual bool mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) override;
+      virtual bool mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement);
 
     private:
-      void drawHover(const Iyathuum::glmAABB<2>&, const Iyathuum::Color& clr);
+      void drawHover();
+      void drawSelection();
       std::shared_ptr<FormationShape> getHover();
 
       int _resolutionX = 400;

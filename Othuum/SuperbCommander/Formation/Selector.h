@@ -9,15 +9,22 @@ namespace Ahwassa {
 
 namespace Superb {
   namespace Formation {
-    class SelectionRender {
+    class Selector {
     public:
-      virtual ~SelectionRender() = default;
+      virtual ~Selector() = default;
 
+      void setSelected(bool);
+      void setColor(const Iyathuum::Color&);
       void setPosition(const Iyathuum::glmAABB<2> &);
-      void draw(Ahwassa::BasicRectangleRenderer&, const Iyathuum::Color&);
+      
+      void draw(Ahwassa::BasicRectangleRenderer&);
+
+      bool insideRotate(const glm::vec2&) { return false; }
 
     private:
       Iyathuum::glmAABB<2> _position;
+      Iyathuum::Color      _color;
+      bool                 _selected = false;
     };
   }
 }

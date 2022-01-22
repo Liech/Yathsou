@@ -1,7 +1,7 @@
 #include "FormationWidget.h"
 
 #include "Shapes/FormationShape.h"
-#include "SelectionRender.h"
+#include "Selector.h"
 
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
@@ -38,12 +38,29 @@ namespace Superb {
         }
       }
       else if (FormationWidgetMode::None == _mode) {
-        if (button == Iyathuum::Key::MOUSE_BUTTON_LEFT) {
+        if (button == Iyathuum::Key::MOUSE_BUTTON_LEFT && _selected != _hover) {
           _selected = _hover;
           return true;
+        }        
+      }
+      return false;
+    }
+
+    bool FormationWidget::mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
+      if (FormationWidgetMode::None == _mode && _selected != nullptr) {
+        Selector s;
+        s.setPosition(_selected->getPosition());
+        if (s.insideRotate(_mousePos) && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::PRESS) {
+          _mode = FormationWidgetMode::Rotate;
         }
       }
+      else if (FormationWidgetMode::Rotate == _mode && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::RELEASE) {
+        _mode = FormationWidgetMode::None;
+      }
+      return false;
+    }
 
+    bool FormationWidget::mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement) {
       return false;
     }
 
@@ -72,9 +89,9 @@ namespace Superb {
       //_renderer->drawRectangle(_mousePos, glm::vec2(4, 4), Iyathuum::Color(255, 0, 0));
 
       if (_hover != nullptr)
-        drawHover(_hover->getPosition(), Iyathuum::Color(128, 128, 128));
+        drawHover();
       if (_selected != nullptr)
-        drawHover(_selected->getPosition(), Iyathuum::Color(255,255,255));
+        drawSelection();
 
       for (auto& x : _shapes)
         x->draw(*_renderer);
@@ -89,10 +106,19 @@ namespace Superb {
       _shapes.push_back(std::move(newObj));
     }
 
-    void FormationWidget::drawHover(const Iyathuum::glmAABB<2>& area, const Iyathuum::Color& clr) {
-      SelectionRender r;
-      r.setPosition(area);
-      r.draw(*_renderer, clr);
+    void FormationWidget::drawHover() {
+      Selector r;
+      r.setPosition(_hover->getPosition());
+      r.setColor(Iyathuum::Color(128,128,128));
+      r.draw(*_renderer);
+    }
+
+    void FormationWidget::drawSelection() {
+      Selector r;
+      r.setPosition(_selected->getPosition());
+      r.setColor(Iyathuum::Color(255,255,255));
+      r.setSelected(true);
+      r.draw(*_renderer);
     }
 
     std::shared_ptr<FormationShape> FormationWidget::getHover() {
