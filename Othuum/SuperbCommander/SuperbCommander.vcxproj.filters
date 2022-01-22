@@ -120,6 +120,9 @@
     <ClCompile Include="Formation\Shapes\TriangleShape.cpp">
       <Filter>Source Files\Formation\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="Formation\SelectionRender.cpp">
+      <Filter>Source Files\Formation</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="World.h">
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="Formation\Shapes\TriangleShape.h">
       <Filter>Header Files\Formation\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Formation\SelectionRender.h">
+      <Filter>Header Files\Formation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

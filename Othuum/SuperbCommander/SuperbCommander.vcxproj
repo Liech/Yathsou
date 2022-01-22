@@ -149,6 +149,7 @@
     <ClCompile Include="Config.cpp" />
     <ClCompile Include="DriveInterface.cpp" />
     <ClCompile Include="Formation\FormationDialog.cpp" />
+    <ClCompile Include="Formation\SelectionRender.cpp" />
     <ClCompile Include="Formation\FormationWidget.cpp" />
     <ClCompile Include="Formation\Shapes\CircleShape.cpp" />
     <ClCompile Include="Formation\Shapes\FormationShape.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="Config.h" />
     <ClInclude Include="DriveInterface.h" />
     <ClInclude Include="Formation\FormationDialog.h" />
+    <ClInclude Include="Formation\SelectionRender.h" />
     <ClInclude Include="Formation\FormationWidget.h" />
     <ClInclude Include="Formation\Shapes\CircleShape.h" />
     <ClInclude Include="Formation\Shapes\FormationShape.h" />

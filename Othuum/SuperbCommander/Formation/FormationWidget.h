@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
+#include "IyathuumCoreLib/BaseTypes/Color.h"
 #include "AhwassaGraphicsLib/Input/UIElement.h"
 
 namespace Ahwassa {
@@ -15,6 +16,8 @@ namespace Ahwassa {
 namespace Superb {
   namespace Formation {
     class FormationShape;
+    class SelectionRender;
+
     enum class FormationWidgetMode {
       None,
       PlaceObject,
@@ -34,7 +37,7 @@ namespace Superb {
       virtual bool mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) override;
 
     private:
-      void drawHover(const Iyathuum::glmAABB<2>&);
+      void drawHover(const Iyathuum::glmAABB<2>&, const Iyathuum::Color& clr);
       std::shared_ptr<FormationShape> getHover();
 
       int _resolutionX = 400;
@@ -46,7 +49,8 @@ namespace Superb {
       std::unique_ptr<Ahwassa::BasicRectangleRenderer> _renderer;
       glm::vec2 _mousePos;
 
-      std::shared_ptr<FormationShape> _hover = nullptr;
+      std::shared_ptr<FormationShape> _hover    = nullptr;
+      std::shared_ptr<FormationShape> _selected = nullptr;
       std::vector<std::shared_ptr<FormationShape>> _shapes;
     };
   }

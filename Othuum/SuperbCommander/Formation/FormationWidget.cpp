@@ -1,6 +1,7 @@
 #include "FormationWidget.h"
 
 #include "Shapes/FormationShape.h"
+#include "SelectionRender.h"
 
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
@@ -29,10 +30,20 @@ namespace Superb {
     }
 
     bool FormationWidget::mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) {
-      if (button == Iyathuum::Key::MOUSE_BUTTON_LEFT && FormationWidgetMode::PlaceObject == _mode) {
-        _mode = FormationWidgetMode::None;
-        return true;
+      if (FormationWidgetMode::PlaceObject == _mode) {
+        if (button == Iyathuum::Key::MOUSE_BUTTON_LEFT) {
+          _mode = FormationWidgetMode::None;
+          _selected = _shapes.back();
+          return true;
+        }
       }
+      else if (FormationWidgetMode::None == _mode) {
+        if (button == Iyathuum::Key::MOUSE_BUTTON_LEFT) {
+          _selected = _hover;
+          return true;
+        }
+      }
+
       return false;
     }
 
@@ -58,10 +69,12 @@ namespace Superb {
 
       _renderer->drawRectangle(Iyathuum::glmAABB<2>(glm::vec2(0, 0), res), Iyathuum::Color(50, 50, 50)); //background
 
-      _renderer->drawRectangle(_mousePos, glm::vec2(4, 4), Iyathuum::Color(255, 0, 0));
+      //_renderer->drawRectangle(_mousePos, glm::vec2(4, 4), Iyathuum::Color(255, 0, 0));
 
       if (_hover != nullptr)
-        drawHover(_hover->getPosition());
+        drawHover(_hover->getPosition(), Iyathuum::Color(128, 128, 128));
+      if (_selected != nullptr)
+        drawHover(_selected->getPosition(), Iyathuum::Color(255,255,255));
 
       for (auto& x : _shapes)
         x->draw(*_renderer);
@@ -76,8 +89,10 @@ namespace Superb {
       _shapes.push_back(std::move(newObj));
     }
 
-    void FormationWidget::drawHover(const Iyathuum::glmAABB<2>& area) {
-      _renderer->drawCircle(area.getCenter(), glm::vec2(5, 5), 0, 6, Iyathuum::Color(255, 255, 0));
+    void FormationWidget::drawHover(const Iyathuum::glmAABB<2>& area, const Iyathuum::Color& clr) {
+      SelectionRender r;
+      r.setPosition(area);
+      r.draw(*_renderer, clr);
     }
 
     std::shared_ptr<FormationShape> FormationWidget::getHover() {
