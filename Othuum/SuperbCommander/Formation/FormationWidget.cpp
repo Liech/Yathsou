@@ -60,12 +60,12 @@ namespace Superb {
           _mode = FormationWidgetMode::Rotate;
           return true;
         }
-        else if (_selector->insideSelect(_mousePos)) {
+        else if (_selector->insideSelect(_mousePos) && button == Iyathuum::Key::MOUSE_BUTTON_LEFT) {
           _mode = FormationWidgetMode::Move;
           _moveOffset = _selected->getPosition().getCenter() - _mousePos;
           return true;
         }
-        else if (edge != SelectedEdge::None) {
+        else if (edge != SelectedEdge::None && button == Iyathuum::Key::MOUSE_BUTTON_LEFT) {
           if (edge == SelectedEdge::MM)
             _mode = FormationWidgetMode::ResizeMM;
           else if (edge == SelectedEdge::PM)
@@ -75,6 +75,11 @@ namespace Superb {
           else if (edge == SelectedEdge::PP)
             _mode = FormationWidgetMode::ResizePP;
         }
+        //else if (_selector->insideSelect(_mousePos) && button == Iyathuum::Key::MOUSE_BUTTON_RIGHT) {
+        //  _mode = FormationWidgetMode::ContextMenu;
+        //  _contextMenuPosition = _window.input().getCursorPos();
+        //  return true;
+        //}
       }
       else if (FormationWidgetMode::Rotate == _mode && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::RELEASE) {
         _mode = FormationWidgetMode::None;
@@ -133,6 +138,20 @@ namespace Superb {
       auto x = ImGui::GetItemRectMin();
       _mousePos = glm::vec2(y[0] - x[0], _window.getHeight() - y[1] - x[1]);
       setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2(x[0],x[1]),glm::vec2(_resolutionX,_resolutionY)));
+
+      bool canBeOpened = _mode == FormationWidgetMode::None && _selected != nullptr && _selector->insideSelect(_mousePos);
+      if ((canBeOpened || _mode == FormationWidgetMode::ContextMenu) && ImGui::BeginPopupContextItem())
+      {
+        _mode = FormationWidgetMode::ContextMenu;
+        int groupNumber = _selected->getGroup();
+        ImGui::InputInt("Group", &groupNumber);
+        _selected->setGroup(groupNumber);
+        ImGui::EndPopup();
+      }
+      else if (_mode == FormationWidgetMode::ContextMenu)
+        _mode = FormationWidgetMode::None;
+        
+
     }
 
     void FormationWidget::preDraw() {

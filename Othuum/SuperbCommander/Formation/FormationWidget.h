@@ -26,7 +26,8 @@ namespace Superb {
       ResizeMM,
       ResizeMP,
       ResizePM,
-      ResizePP
+      ResizePP,
+      ContextMenu
     };
 
     class FormationWidget : public Ahwassa::UIElement {
@@ -55,6 +56,7 @@ namespace Superb {
 
       FormationWidgetMode _mode = FormationWidgetMode::None;
       glm::vec2           _moveOffset = glm::vec2(0, 0);
+      glm::vec2           _contextMenuPosition;
 
       Ahwassa::Window& _window;
       std::unique_ptr<Ahwassa::Rendertarget>           _canvas;

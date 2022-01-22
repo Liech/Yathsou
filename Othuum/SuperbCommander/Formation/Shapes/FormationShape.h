@@ -15,11 +15,15 @@ namespace Superb {
       void                        setPosition(const Iyathuum::glmAABB<2>&);
       float                       getRotation() const;
       void                        setRotation(float degree);
+      int                         getGroup() const;
+      void                        setGroup(int group);
+
       virtual void                draw(Ahwassa::BasicRectangleRenderer& renderer) {};
 
     private:
       Iyathuum::glmAABB<2> _position;
-      float                _rotation = 0;
+      float                _rotation = 0;    
+      int                  _group    = 0;
     };
   }
 }

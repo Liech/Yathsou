@@ -18,5 +18,12 @@ namespace Superb {
       _rotation = degree;
     }
 
+    int FormationShape::getGroup() const {
+      return _group;
+    }
+
+    void FormationShape::setGroup(int group) {
+      _group = group;
+    }
   }
 }
