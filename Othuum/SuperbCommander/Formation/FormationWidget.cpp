@@ -16,6 +16,9 @@ namespace Superb {
     FormationWidget::FormationWidget(Ahwassa::Window& window) : _window(window) {
       _renderer = std::make_unique<Ahwassa::BasicRectangleRenderer>(&window);
       window.input().addUIElement(this);
+      _selector = std::make_unique<Selector>();
+      _selector->setColor(Iyathuum::Color(255, 255, 255));
+      _selector->setSelected(true);
     }
 
     FormationWidget::~FormationWidget() {
@@ -43,30 +46,48 @@ namespace Superb {
         if (button == Iyathuum::Key::MOUSE_BUTTON_LEFT && _selected != _hover) {
           _selected = _hover;
           return true;
-        }        
+        }
       }
       return false;
     }
 
     bool FormationWidget::mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
       if (FormationWidgetMode::None == _mode && _selected != nullptr) {
-        Selector s;
-        s.setPosition(_selected->getPosition());
-        if (s.insideRotate(_mousePos) && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::PRESS) {
+        _selector->setPosition(_selected->getPosition());
+        _selector->setRotation(_selected->getRotation());
+        if (_selector->insideRotate(_mousePos) && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::PRESS) {
           _mode = FormationWidgetMode::Rotate;
+          return true;
+        }
+        else if (_selector->insideSelect(_mousePos)) {
+          _mode = FormationWidgetMode::Move;
+          _moveOffset = _selected->getPosition().getCenter() - _mousePos;
+          return true;
         }
       }
       else if (FormationWidgetMode::Rotate == _mode && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::RELEASE) {
         _mode = FormationWidgetMode::None;
+        return true;
+      }
+      else if (FormationWidgetMode::Move == _mode && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::RELEASE) {
+        _mode = FormationWidgetMode::None;
+        return true;
       }
       return false;
     }
 
-    bool FormationWidget::mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement) {      
+    bool FormationWidget::mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement) {
       if (FormationWidgetMode::Rotate == _mode && _selected != nullptr) {
         glm::vec2 null(0, -1);
         glm::vec2 vec = glm::normalize(_mousePos - _selected->getPosition().getCenter());
-        _selected->setRotation(glm::degrees(glm::orientedAngle(null,vec)));
+        _selected->setRotation(glm::degrees(glm::orientedAngle(null, vec)));
+        return true;
+      }
+      else if (FormationWidgetMode::Move == _mode && _selected != nullptr){
+        auto pos = _selected->getPosition();
+        pos.setCenter(_mousePos + _moveOffset);
+        _selected->setPosition(pos);
+        return true;
       }
       return false;
     }
@@ -93,8 +114,6 @@ namespace Superb {
 
       _renderer->drawRectangle(Iyathuum::glmAABB<2>(glm::vec2(0, 0), res), Iyathuum::Color(50, 50, 50)); //background
 
-      //_renderer->drawRectangle(_mousePos, glm::vec2(4, 4), Iyathuum::Color(255, 0, 0));
-
       if (_hover != nullptr)
         drawHover();
       if (_selected != nullptr)
@@ -118,22 +137,25 @@ namespace Superb {
     void FormationWidget::drawHover() {
       Selector r;
       r.setPosition(_hover->getPosition());
-      r.setColor(Iyathuum::Color(128,128,128));
+      r.setRotation(_hover->getRotation());
+      r.setColor(Iyathuum::Color(128, 128, 128));
       r.draw(*_renderer);
     }
 
     void FormationWidget::drawSelection() {
       Selector r;
-      r.setPosition(_selected->getPosition());
-      r.setColor(Iyathuum::Color(255,255,255));
-      r.setSelected(true);
-      r.draw(*_renderer);
+      _selector->setPosition(_selected->getPosition());
+      _selector->setRotation(_selected->getRotation());
+      _selector->draw(*_renderer);
     }
 
     std::shared_ptr<FormationShape> FormationWidget::getHover() {
       std::shared_ptr<FormationShape> bestResult = nullptr;
       for (auto& x : _shapes) {
-        if (x->getPosition().isInside(_mousePos)){
+        Selector r;
+        r.setPosition(x->getPosition());
+        r.setRotation(x->getRotation());
+        if (r.insideSelect(_mousePos)){
           if (bestResult == nullptr)
             bestResult = x;
           else {

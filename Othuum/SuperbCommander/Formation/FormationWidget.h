@@ -16,12 +16,13 @@ namespace Ahwassa {
 namespace Superb {
   namespace Formation {
     class FormationShape;
-    class SelectionRender;
-
+    class Selector;
+    
     enum class FormationWidgetMode {
       None,
       PlaceObject,
-      Rotate
+      Rotate,
+      Move
     };
 
     class FormationWidget : public Ahwassa::UIElement {
@@ -46,11 +47,15 @@ namespace Superb {
 
       int _resolutionX = 400;
       int _resolutionY = 400;
+
+
       FormationWidgetMode _mode = FormationWidgetMode::None;
+      glm::vec2           _moveOffset = glm::vec2(0, 0);
 
       Ahwassa::Window& _window;
       std::unique_ptr<Ahwassa::Rendertarget>           _canvas;
       std::unique_ptr<Ahwassa::BasicRectangleRenderer> _renderer;
+      std::unique_ptr<Selector>                        _selector;
       glm::vec2 _mousePos;
 
       std::shared_ptr<FormationShape> _hover    = nullptr;
