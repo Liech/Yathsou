@@ -9,7 +9,7 @@ namespace Superb {
       const auto& pos = getPosition();
       glm::vec2 a = pos.getPosition();
       glm::vec2 b = pos.getPosition() + glm::vec2(pos.getSize()[0], 0);
-      glm::vec2 c = pos.getPosition() + pos.getSize()[0];
+      glm::vec2 c = pos.getPosition() + pos.getSize();
       glm::vec2 d = pos.getPosition() + glm::vec2(0, pos.getSize()[1]);
 
       glm::vec3 center = glm::vec3(pos.getCenter()[0], pos.getCenter()[1], 0);      

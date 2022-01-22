@@ -55,6 +55,7 @@ namespace Superb {
       if (FormationWidgetMode::None == _mode && _selected != nullptr) {
         _selector->setPosition(_selected->getPosition());
         _selector->setRotation(_selected->getRotation());
+        auto edge = _selector->getSelectedEdge(_mousePos);
         if (_selector->insideRotate(_mousePos) && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::PRESS) {
           _mode = FormationWidgetMode::Rotate;
           return true;
@@ -64,12 +65,27 @@ namespace Superb {
           _moveOffset = _selected->getPosition().getCenter() - _mousePos;
           return true;
         }
+        else if (edge != SelectedEdge::None) {
+          if (edge == SelectedEdge::MM)
+            _mode = FormationWidgetMode::ResizeMM;
+          else if (edge == SelectedEdge::PM)
+            _mode = FormationWidgetMode::ResizePM;
+          else if (edge == SelectedEdge::MP)
+            _mode = FormationWidgetMode::ResizeMP;
+          else if (edge == SelectedEdge::PP)
+            _mode = FormationWidgetMode::ResizePP;
+        }
       }
       else if (FormationWidgetMode::Rotate == _mode && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::RELEASE) {
         _mode = FormationWidgetMode::None;
         return true;
       }
       else if (FormationWidgetMode::Move == _mode && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::RELEASE) {
+        _mode = FormationWidgetMode::None;
+        return true;
+      }
+      else if ((FormationWidgetMode::ResizeMM == _mode || FormationWidgetMode::ResizePM == _mode || FormationWidgetMode::ResizeMP == _mode || FormationWidgetMode::ResizePP == _mode )
+        && button == Iyathuum::Key::MOUSE_BUTTON_LEFT && status == Iyathuum::KeyStatus::RELEASE) {
         _mode = FormationWidgetMode::None;
         return true;
       }
@@ -89,6 +105,23 @@ namespace Superb {
         _selected->setPosition(pos);
         return true;
       }
+      else if (FormationWidgetMode::ResizeMM == _mode) {
+        auto newPos = _selector->setEdge(_mousePos, SelectedEdge::MM);
+        _selected->setPosition(newPos);
+      }
+      else if (FormationWidgetMode::ResizeMP == _mode) {
+        auto newPos = _selector->setEdge(_mousePos, SelectedEdge::MP);
+        _selected->setPosition(newPos);
+      }
+      else if (FormationWidgetMode::ResizePM == _mode) {
+        auto newPos = _selector->setEdge(_mousePos, SelectedEdge::PM);
+        _selected->setPosition(newPos);
+      }
+      else if (FormationWidgetMode::ResizePP == _mode) {
+        auto newPos = _selector->setEdge(_mousePos, SelectedEdge::PP);
+        _selected->setPosition(newPos);
+      }
+
       return false;
     }
 

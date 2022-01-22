@@ -22,7 +22,11 @@ namespace Superb {
       None,
       PlaceObject,
       Rotate,
-      Move
+      Move,
+      ResizeMM,
+      ResizeMP,
+      ResizePM,
+      ResizePP
     };
 
     class FormationWidget : public Ahwassa::UIElement {

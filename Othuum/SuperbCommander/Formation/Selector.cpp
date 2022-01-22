@@ -22,7 +22,7 @@ namespace Superb {
       renderer.drawLine(rot(p2), rot(p2 + glm::vec2(-10, 0)), 3, _color);
       renderer.drawLine(rot(p2), rot(p2 + glm::vec2(0, 10) ), 3 , _color);
       
-      const auto p3 = p + glm::vec2(0, s[0]);
+      const auto p3 = p + glm::vec2(0, s[1]);
       renderer.drawLine(rot(p3), rot(p3 + glm::vec2(10, 0) ), 3 , _color);
       renderer.drawLine(rot(p3), rot(p3 + glm::vec2(0, -10)), 3, _color);
       
@@ -64,14 +64,17 @@ namespace Superb {
     }
 
     bool Selector::insideSelect(const glm::vec2& mousePos) {
+      return _position.isInside(mouse2local(mousePos));
+    }
+
+    glm::vec2 Selector::mouse2local(const glm::vec2& mousePos) {
       glm::vec3 center = glm::vec3(_position.getCenter()[0], _position.getCenter()[1], 0);
       glm::mat4 rotation = glm::translate(glm::mat4(1.0), center);
       rotation = glm::rotate(rotation, -glm::radians(_rotation), glm::vec3(0, 0, 1));
       rotation = glm::translate(rotation, -center);
 
       glm::vec4 v = rotation * glm::vec4(mousePos[0], mousePos[1], 0, 1);
-      glm::vec2 mp = glm::vec2(v[0], v[1]);      
-      return _position.isInside(mp);
+      return glm::vec2(v[0], v[1]);
     }
 
     glm::vec2 Selector::rotatorPosition() {
@@ -81,5 +84,64 @@ namespace Superb {
       return rot(p - glm::vec2(0, 10));
     }
 
+    SelectedEdge Selector::getSelectedEdge(const glm::vec2& mousepos) {
+      if (insideSelect(mousepos))
+        return SelectedEdge::None;
+      updateMatrix();
+
+      const float extra = 3;
+      const auto p = _position.getPosition() - glm::vec2(extra, extra);
+      const auto s = _position.getSize() + glm::vec2(extra * 2, extra * 2);
+      const auto p2 = p + glm::vec2(s[0], 0);
+      const auto p3 = p + glm::vec2(0, s[1]);
+      const auto p4 = p + s;
+
+      if (glm::distance(rot(p), mousepos) < 20)
+        return SelectedEdge::MM;
+      else if (glm::distance(rot(p2), mousepos) < 20)
+        return SelectedEdge::PM;
+      else if (glm::distance(rot(p3), mousepos) < 20)
+        return SelectedEdge::MP;
+      else if (glm::distance(rot(p4), mousepos) < 20)
+        return SelectedEdge::PP;
+      else
+        return SelectedEdge::None;
+    }
+
+    Iyathuum::glmAABB<2> Selector::setEdge(const glm::vec2& mousePos, SelectedEdge edge) {
+      updateMatrix();
+      Iyathuum::glmAABB<2> result;
+       
+      auto localMouse = mouse2local(mousePos);
+      auto center = _position.getCenter();
+      if (edge == SelectedEdge::MM) {
+        auto diff = localMouse - _position.getPosition();
+        result.setSize(_position.getSize() - diff);//
+        result.setCenter(center);
+        return result;
+      }
+      else if (edge == SelectedEdge::MP) {
+        auto p = _position.getPosition() + glm::vec2(0, _position.getSize()[1]);
+        auto diff = localMouse - p;
+        result.setSize(_position.getSize() + glm::vec2(-diff[0],diff[1]));//
+        result.setCenter(center);
+        return result;
+      }
+      else if (edge == SelectedEdge::PM) {
+        auto p = _position.getPosition() + glm::vec2(_position.getSize()[0], 0);
+        auto diff = localMouse - p;
+        result.setSize(_position.getSize() + glm::vec2(diff[0], -diff[1]));//
+        result.setCenter(center);
+        return result;
+      }
+      else if (edge == SelectedEdge::PP) {
+        auto p = _position.getPosition() + _position.getSize();
+        auto diff = localMouse - p;
+        result.setSize(_position.getSize() + diff);//
+        result.setCenter(center);
+        return result;
+      }
+      return _position;
+    }
   }
 }
