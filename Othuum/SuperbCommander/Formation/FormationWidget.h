@@ -9,6 +9,7 @@ namespace Ahwassa {
   class Rendertarget;
   class Window;
   class BasicRectangleRenderer;
+  class Background;
 }
 
 namespace Superb {
@@ -38,7 +39,7 @@ namespace Superb {
       FormationWidgetMode _mode = FormationWidgetMode::None;
 
       Ahwassa::Window& _window;
-      std::unique_ptr<Ahwassa::Rendertarget>      _canvas;
+      std::unique_ptr<Ahwassa::Rendertarget>           _canvas;
       std::unique_ptr<Ahwassa::BasicRectangleRenderer> _renderer;
       glm::vec2 _mousePos;
 

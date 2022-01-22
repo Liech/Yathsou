@@ -38,7 +38,7 @@ namespace Superb {
     void FormationWidget::menu(const glm::ivec2& size) {
       _resolutionX = std::max(100,size.x);
       _resolutionY = std::max(100,size.y);
-      ImGui::Image((void*)_canvas->getTextureID(), ImVec2(_resolutionX, _resolutionY));
+      ImGui::ImageButton((void*)_canvas->getTextureID(), ImVec2(_resolutionX, _resolutionY),ImVec2(0,0),ImVec2(1,1),0);
       auto y = _window.input().getCursorPos();
       auto x = ImGui::GetItemRectMin();
       _mousePos = glm::vec2(y[0] - x[0], _window.getHeight() - y[1] - x[1]);
@@ -54,6 +54,8 @@ namespace Superb {
 
       _canvas->start();
       _renderer->start();
+
+      _renderer->drawRectangle(Iyathuum::glmAABB<2>(glm::vec2(0, 0), res), Iyathuum::Color(50, 50, 50)); //background
 
       _renderer->drawRectangle(_mousePos, glm::vec2(4, 4), Iyathuum::Color(255, 0, 0));
 
