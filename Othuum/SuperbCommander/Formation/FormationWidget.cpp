@@ -8,6 +8,8 @@
 #include "AhwassaGraphicsLib/Uniforms/Rendertarget.h"
 #include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
 #include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
+#include "IyathuumCoreLib/lib/glm/gtx/vector_angle.hpp"
+
 
 namespace Superb {
   namespace Formation {
@@ -60,7 +62,12 @@ namespace Superb {
       return false;
     }
 
-    bool FormationWidget::mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement) {
+    bool FormationWidget::mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement) {      
+      if (FormationWidgetMode::Rotate == _mode && _selected != nullptr) {
+        glm::vec2 null(0, -1);
+        glm::vec2 vec = glm::normalize(_mousePos - _selected->getPosition().getCenter());
+        _selected->setRotation(glm::degrees(glm::orientedAngle(null,vec)));
+      }
       return false;
     }
 
@@ -92,6 +99,8 @@ namespace Superb {
         drawHover();
       if (_selected != nullptr)
         drawSelection();
+      if (FormationWidgetMode::Rotate == _mode && _selected != nullptr)
+        _renderer->drawLine(_selected->getPosition().getCenter(), _mousePos, 1, Iyathuum::Color(255, 255, 255));
 
       for (auto& x : _shapes)
         x->draw(*_renderer);

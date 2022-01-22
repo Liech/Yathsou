@@ -29,7 +29,8 @@ namespace Superb {
       renderer.drawLine(p4, p4 + glm::vec2(0, -10), 3, _color);
 
       if (_selected) {
-
+        const glm::vec2 rotatorPosition = p - glm::vec2(10, 10);
+        renderer.drawCircle(rotatorPosition, glm::vec2(5,5), 0, 1, _color);
       }
     }
 
@@ -39,6 +40,13 @@ namespace Superb {
 
     void Selector::setColor(const Iyathuum::Color& clr) {
       _color = clr;
+    }
+
+    bool Selector::insideRotate(const glm::vec2& mousePos) {
+      const float extra = 3;
+      const auto p = _position.getPosition() - glm::vec2(extra, extra);
+      const glm::vec2 rotatorPosition = p - glm::vec2(10, 10);
+      return glm::distance(mousePos, rotatorPosition) < 5;
     }
   }
 }

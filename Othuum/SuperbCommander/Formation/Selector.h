@@ -19,7 +19,7 @@ namespace Superb {
       
       void draw(Ahwassa::BasicRectangleRenderer&);
 
-      bool insideRotate(const glm::vec2&) { return false; }
+      bool insideRotate(const glm::vec2&);
 
     private:
       Iyathuum::glmAABB<2> _position;
