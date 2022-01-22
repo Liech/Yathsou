@@ -1,6 +1,9 @@
 #include "FormationDialog.h"
 
 #include "FormationWidget.h"
+#include "Shapes/CircleShape.h"
+#include "Shapes/TriangleShape.h"
+#include "Shapes/RectangleShape.h"
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
@@ -31,16 +34,20 @@ namespace Superb {
     void FormationDialog::menuContent() {
       {
         ImGui::BeginGroup();
-        bool circle = ImGui::Button("Circle");
-        ImGui::Button("AAA");
-        ImGui::Button("AAA");
+        bool circle    = ImGui::Button("Circle");
+        bool triangle  = ImGui::Button("Triangle");
+        bool rectangle = ImGui::Button("Rectangle");
         ImGui::Button("AAA");
         ImGui::Button("AAA");
         ImGui::Button("AAA");
         ImGui::EndGroup();
 
         if (circle)
-          _canvas->startCircle();
+          _canvas->startShape(std::make_unique<CircleShape>());
+        if (triangle)
+          _canvas->startShape(std::make_unique<TriangleShape>());
+        if (rectangle)
+          _canvas->startShape(std::make_unique<RectangleShape>());
       }
       ImGui::SameLine();
 
@@ -50,6 +57,10 @@ namespace Superb {
 
     void FormationDialog::preDraw() {
       _canvas->preDraw();
+    }
+
+    void FormationDialog::update() {
+      _canvas->update();
     }
   }
 }

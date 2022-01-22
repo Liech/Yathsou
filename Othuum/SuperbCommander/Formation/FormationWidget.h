@@ -3,6 +3,7 @@
 #include <vector>
 #include <memory>
 #include "IyathuumCoreLib/lib/glm/glm.hpp"
+#include "AhwassaGraphicsLib/Input/UIElement.h"
 
 namespace Ahwassa {
   class Rendertarget;
@@ -18,15 +19,18 @@ namespace Superb {
       PlaceObject,
     };
 
-    class FormationWidget {
+    class FormationWidget : public Ahwassa::UIElement {
     public:
       FormationWidget(Ahwassa::Window&);
-      virtual ~FormationWidget() = default;
+      virtual ~FormationWidget();
 
+      void update();
       void menu(const glm::ivec2&);
       void preDraw();
 
-      void startCircle();
+      void startShape(std::unique_ptr<FormationShape>);
+
+      virtual bool mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) override;
 
     private:
       int _resolutionX = 400;

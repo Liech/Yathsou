@@ -59,6 +59,7 @@ namespace Superb {
     _physic ->update();
     _units  ->update();
     _control->update();
+    _nonGame->update();
   }
 
   Physic& Game::physic() {

@@ -5,7 +5,6 @@
 namespace Superb {
   namespace Formation {
     void TriangleShape::draw(Ahwassa::BasicRectangleRenderer& renderer) {
-      renderer.drawCircle(getPosition().getCenter(), getPosition().getSize() / 2.0f, 0, 2, Iyathuum::Color(255, 0, 0));
       const auto& pos = getPosition();
       glm::vec2 a = pos.getPosition() + glm::vec2(pos.getSize()[0] / 2.0f,0);
       glm::vec2 b = pos.getPosition() + glm::vec2(0, pos.getSize()[1]);

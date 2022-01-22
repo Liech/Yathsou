@@ -15,6 +15,7 @@ namespace Superb {
       FormationDialog(Ahwassa::Window&);
       virtual ~FormationDialog() = default;
 
+      void update();
       void menu();
       void preDraw();
 

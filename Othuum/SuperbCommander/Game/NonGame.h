@@ -16,6 +16,7 @@ namespace Superb {
     NonGame(Ahwassa::Window&);
     virtual ~NonGame() = default;
 
+    void update();
     void menu();
     void preDraw();
     void start();

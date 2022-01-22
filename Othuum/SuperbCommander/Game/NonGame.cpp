@@ -18,6 +18,10 @@ namespace Superb {
     ImGui::SetWindowFontScale(_fontScale);
   }
 
+  void NonGame::update() {
+    _formationDialog->update();
+  }
+
   void NonGame::preDraw() {
     _formationDialog->preDraw();
   }
