@@ -165,9 +165,9 @@ namespace Ahwassa {
     float rad_angle = glm::radians(rotation);
     auto rotatedEllipse = [&radius, rad_angle](float deg_t) {
       //https://math.stackexchange.com/questions/2645689/what-is-the-parametric-equation-of-a-rotated-ellipse-given-the-angle-of-rotatio
-      float rad_t = glm::radians(deg_t);
-      float rx = radius[0] * std::cos(rad_angle) * std::cos(rad_t) - radius[1] * std::sin(rad_angle) * std::sin(rad_t);
-      float ry = radius[0] * std::cos(rad_angle) * std::sin(rad_t) + radius[1] * std::sin(rad_angle) * std::cos(rad_t);
+      float rad_t = glm::radians(deg_t); 
+      float rx = radius[0] * std::cos(rad_t) * std::cos(rad_angle) - radius[1] * std::sin(rad_t) * std::sin(rad_angle);
+      float ry = radius[0] * std::cos(rad_t) * std::sin(rad_angle) + radius[1] * std::sin(rad_t) * std::cos(rad_angle);
       return glm::vec2(rx, ry);
     };
     
