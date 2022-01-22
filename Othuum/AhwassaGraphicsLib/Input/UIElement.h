@@ -17,18 +17,18 @@ namespace Ahwassa {
     virtual void endFocusEvent  () {};
     virtual void mouseEnterEvent() {};
     virtual void mouseLeaveEvent() {};
-    virtual bool focusKeyEvent(                           Iyathuum::Key button, Iyathuum::KeyStatus status) { return false; };
-    virtual bool      keyEvent(                           Iyathuum::Key button, Iyathuum::KeyStatus status) { return false; };
-    virtual bool mouseEvent(     glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) { return false; };
-    virtual bool mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button                            ) { return false; };
-    virtual bool mouseWheelEvent(glm::vec2 movement                                                       ) { return false; };
-    virtual bool mouseMoveEvent( glm::vec2 current, glm::vec2 movement                                    ) { return false; };
-    virtual bool dropEvent     (const std::string filePath)                                                 {return false;}
+    virtual bool focusKeyEvent(                           const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) { return false; };
+    virtual bool      keyEvent(                           const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) { return false; };
+    virtual bool mouseEvent(     const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) { return false; };
+    virtual bool mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button                            ) { return false; };
+    virtual bool mouseWheelEvent(const glm::vec2& movement                                                       ) { return false; };
+    virtual bool mouseMoveEvent( const glm::vec2& current, const glm::vec2& movement                             ) { return false; };
+    virtual bool dropEvent     (const std::string& filePath)                                                 {return false;}
 
     //Position
     const Iyathuum::glmAABB<2>& getLocalPosition()  const;
     const Iyathuum::glmAABB<2>  getGlobalPosition() const;
-    void                        setLocalPosition(Iyathuum::glmAABB<2>);
+    void                        setLocalPosition(const Iyathuum::glmAABB<2>&);
     void                        setSize(const glm::vec2&);
 
     void        setParent(UIElement* parent);
@@ -36,7 +36,7 @@ namespace Ahwassa {
 
     virtual void setVisible(bool visible);
     bool         isVisible() const;
-    virtual bool isInside(glm::vec2, Iyathuum::Key);
+    virtual bool isInside(const glm::vec2&, const Iyathuum::Key&);
   private:
     Iyathuum::glmAABB<2> _localPosition;
     UIElement*           _parent  = nullptr;

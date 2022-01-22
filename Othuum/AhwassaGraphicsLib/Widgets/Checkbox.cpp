@@ -50,7 +50,7 @@ namespace Ahwassa {
     _name = t;
   }
 
-  bool Checkbox::mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key Checkbox) {
+  bool Checkbox::mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& Checkbox) {
     _checked = !_checked;
     _clickedFunction(_checked);
     return true;

@@ -37,17 +37,15 @@ namespace Superb {
         bool circle    = ImGui::Button("Circle");
         bool triangle  = ImGui::Button("Triangle");
         bool rectangle = ImGui::Button("Rectangle");
-        ImGui::Button("AAA");
-        ImGui::Button("AAA");
-        ImGui::Button("AAA");
+
         ImGui::EndGroup();
 
         if (circle)
-          _canvas->startShape(std::make_unique<CircleShape>());
+          _canvas->startShape(std::make_shared<CircleShape>());
         if (triangle)
-          _canvas->startShape(std::make_unique<TriangleShape>());
+          _canvas->startShape(std::make_shared<TriangleShape>());
         if (rectangle)
-          _canvas->startShape(std::make_unique<RectangleShape>());
+          _canvas->startShape(std::make_shared<RectangleShape>());
       }
       ImGui::SameLine();
 

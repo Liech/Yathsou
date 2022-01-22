@@ -18,8 +18,8 @@ namespace Ahwassa {
 
     virtual void mouseEnterEvent() override;
     virtual void mouseLeaveEvent() override;
-    virtual bool mouseMoveEvent(glm::vec2 current, glm::vec2 movement) override;
-    virtual bool mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) override;
+    virtual bool mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement) override;
+    virtual bool mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) override;
 
     float getValue() { return _currentValue; }
     void   setValue(float value, bool emit = true);

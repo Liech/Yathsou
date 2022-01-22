@@ -25,9 +25,10 @@ namespace Superb {
         aabb.setCenter(_mousePos);
         _shapes.back()->setPosition(aabb);
       }
+      _hover = getHover();
     }
 
-    bool FormationWidget::mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) {
+    bool FormationWidget::mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) {
       if (button == Iyathuum::Key::MOUSE_BUTTON_LEFT && FormationWidgetMode::PlaceObject == _mode) {
         _mode = FormationWidgetMode::None;
         return true;
@@ -59,6 +60,8 @@ namespace Superb {
 
       _renderer->drawRectangle(_mousePos, glm::vec2(4, 4), Iyathuum::Color(255, 0, 0));
 
+      if (_hover != nullptr)
+        drawHover(_hover->getPosition());
 
       for (auto& x : _shapes)
         x->draw(*_renderer);
@@ -67,10 +70,31 @@ namespace Superb {
       _canvas->end();
     }
 
-    void FormationWidget::startShape(std::unique_ptr<FormationShape> newObj){
+    void FormationWidget::startShape(std::shared_ptr<FormationShape> newObj){
       _mode = FormationWidgetMode::PlaceObject;
       newObj->setPosition(Iyathuum::glmAABB<2>(glm::vec2(0,0),glm::vec2(40,40)));
       _shapes.push_back(std::move(newObj));
+    }
+
+    void FormationWidget::drawHover(const Iyathuum::glmAABB<2>& area) {
+      _renderer->drawCircle(area.getCenter(), glm::vec2(5, 5), 0, 6, Iyathuum::Color(255, 255, 0));
+    }
+
+    std::shared_ptr<FormationShape> FormationWidget::getHover() {
+      std::shared_ptr<FormationShape> bestResult = nullptr;
+      for (auto& x : _shapes) {
+        if (x->getPosition().isInside(_mousePos)){
+          if (bestResult == nullptr)
+            bestResult = x;
+          else {
+            float newCenter = glm::distance(x->getPosition().getCenter(),_mousePos);
+            float oldCenter = glm::distance(bestResult->getPosition().getCenter(),_mousePos);
+            if (newCenter < oldCenter)
+              bestResult = x;
+          }
+        }
+      }
+      return bestResult;
     }
   }
 }

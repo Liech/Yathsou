@@ -211,7 +211,7 @@ namespace Ahwassa {
     return potential - maximum;
   }
 
-  bool ListLayout::mouseWheelEvent(glm::vec2 movement) {
+  bool ListLayout::mouseWheelEvent(const glm::vec2& movement) {
     float max = getMaximumScroll();
     if (max > 0) {
       bool shift = getWindow()->input().getKeyStatus(Iyathuum::Key::KEY_LEFT_SHIFT) == Iyathuum::KeyStatus::PRESS;

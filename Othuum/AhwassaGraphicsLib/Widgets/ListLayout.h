@@ -33,7 +33,7 @@ namespace Ahwassa {
     void setHorizontal(bool horizontal);
     virtual void setVisible(bool visible)        override;
     void adjustSize();
-    virtual bool mouseWheelEvent(glm::vec2 movement) override;
+    virtual bool mouseWheelEvent(const glm::vec2& movement) override;
 
     void setMaximumSize(glm::vec2 size) { _maximumSize = size; }
 

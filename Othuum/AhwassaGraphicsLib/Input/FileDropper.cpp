@@ -5,7 +5,7 @@ namespace Ahwassa {
     _callback = call;
   }
 
-  bool FileDropper::dropEvent(const std::string filePath) {
+  bool FileDropper::dropEvent(const std::string& filePath) {
     _callback(filePath);
     return true;
   }

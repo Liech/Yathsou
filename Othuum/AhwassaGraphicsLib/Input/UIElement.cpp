@@ -32,7 +32,7 @@ namespace Ahwassa {
     return result;
   }
 
-  void UIElement::setLocalPosition(Iyathuum::glmAABB<2> pos) {
+  void UIElement::setLocalPosition(const Iyathuum::glmAABB<2>& pos) {
     _localPosition = pos;
   }
 
@@ -40,7 +40,7 @@ namespace Ahwassa {
     _localPosition.setSize(v);
   }
 
-  bool UIElement::isInside(glm::vec2 position, Iyathuum::Key key) {
+  bool UIElement::isInside(const glm::vec2& position, const Iyathuum::Key& key) {
     UIElement* current = this;
     while (current != nullptr) {
       if (!current->getGlobalPosition().isInside(position))

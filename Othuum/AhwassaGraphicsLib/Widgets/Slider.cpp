@@ -81,7 +81,7 @@ namespace Ahwassa {
     _hovered = false;
   };
 
-  bool Slider::mouseMoveEvent(glm::vec2 current, glm::vec2 movement) {
+  bool Slider::mouseMoveEvent(const glm::vec2& current, const  glm::vec2& movement) {
     Iyathuum::glmAABB<2> myPos = getGlobalPosition();
     if (_pressed) {
       float min = leftPad * myPos.getSize()[0];
@@ -95,7 +95,7 @@ namespace Ahwassa {
     return true;
   }
 
-  bool Slider::mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) {
+  bool Slider::mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
     if (button == Iyathuum::Key::MOUSE_BUTTON_1 && isInside(getGlobalPosition().getPosition() + localPosition, Iyathuum::Key::MOUSE_BUTTON_1)) {
       if (status == Iyathuum::KeyStatus::PRESS && !_pressed) {
         Iyathuum::glmAABB<2> b = getSliderLocation();

@@ -45,7 +45,7 @@ namespace Superb {
     }
   }
 
-  bool NavigationUI::mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) {
+  bool NavigationUI::mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
     glm::vec2 cursorPos = localPosition;
     if (Iyathuum::Key::MOUSE_BUTTON_RIGHT == button && status == Iyathuum::KeyStatus::PRESS) {
       auto node = mouse(localPosition);
@@ -90,7 +90,7 @@ namespace Superb {
     return nullptr;
   }
 
-  bool NavigationUI::isInside(glm::vec2 pos, Iyathuum::Key k) {
+  bool NavigationUI::isInside(const glm::vec2& pos, const Iyathuum::Key& k) {
     if (!Ahwassa::UIElement::isInside(pos,k))
       return false;
     if (k != Iyathuum::Key::MOUSE_BUTTON_RIGHT && k != Iyathuum::Key::KEY_NONE)

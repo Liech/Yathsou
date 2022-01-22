@@ -14,11 +14,11 @@ namespace Ahwassa {
     bool isFocus();
     void setFocus(bool focus);
 
-    bool keyEvent(Iyathuum::Key button, Iyathuum::KeyStatus status) override;
-    bool mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) override;
-    bool mouseWheelEvent(glm::vec2 movement) override;
-    bool mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) override;
-    bool mouseMoveEvent(glm::vec2 current, glm::vec2 movement) override;
+    bool keyEvent(const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) override;
+    bool mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) override;
+    bool mouseWheelEvent(const glm::vec2& movement) override;
+    bool mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) override;
+    bool mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement) override;
     void update() override;
   private:
     void move(const glm::vec2& mouse, const glm::vec2& wheel, bool setCursor);

@@ -23,11 +23,11 @@ namespace Ahwassa {
     _input.resetCursorMovement(_camera->getResolution() / 2.0f);
   }
 
-  bool ArcBallCamera::mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) {
+  bool ArcBallCamera::mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) {
     return true;
   }
 
-  bool ArcBallCamera::mouseMoveEvent(glm::vec2 current, glm::vec2 movement) {
+  bool ArcBallCamera::mouseMoveEvent(const glm::vec2& current, const  glm::vec2& movement) {
     if (!isFocus())
       return false;
     move(movement, glm::vec2(0, 0), true);
@@ -53,12 +53,12 @@ namespace Ahwassa {
     _camera->setPosition(_camera->getTarget() - rotationResult * distance);
   }
 
-  bool ArcBallCamera::mouseWheelEvent(glm::vec2 movement) {
+  bool ArcBallCamera::mouseWheelEvent(const glm::vec2& movement) {
     move(glm::vec2(0, 0), movement, false);
     return true;
   }
 
-  bool ArcBallCamera::mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) {
+  bool ArcBallCamera::mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
     if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS) {
       setFocus(!isFocus());
       return true;
@@ -72,7 +72,7 @@ namespace Ahwassa {
     _camera->setPosition(_camera->getPosition());
   }
 
-  bool ArcBallCamera::keyEvent(Iyathuum::Key button, Iyathuum::KeyStatus status) {
+  bool ArcBallCamera::keyEvent(const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
     if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS) {
       setFocus(!isFocus());
       return true;

@@ -16,7 +16,7 @@ namespace Ahwassa {
     
     virtual void draw() override;
 
-    virtual bool mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) override;
+    virtual bool mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) override;
 
     virtual void mouseEnterEvent() override;
     virtual void mouseLeaveEvent() override;

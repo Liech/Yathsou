@@ -23,11 +23,11 @@ namespace Ahwassa {
     _input.resetCursorMovement(_camera->getResolution() / 2.0f);
   }
 
-  bool FreeCamera::mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) {
+  bool FreeCamera::mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) {
     return true;
   }
 
-  bool FreeCamera::mouseMoveEvent(glm::vec2 current, glm::vec2 movement) {
+  bool FreeCamera::mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement) {
     if (!isFocus())
       return false;
     _input.setCursorPos(_camera->getResolution() / 2.0f);
@@ -45,14 +45,14 @@ namespace Ahwassa {
     return true;
   }
 
-  bool FreeCamera::mouseWheelEvent(glm::vec2 movement) {
+  bool FreeCamera::mouseWheelEvent(const glm::vec2& movement) {
     auto dir = _camera->getDir();
     _camera->setPosition(_camera->getPosition() + _camera->getDir() * movement[1]);
     _camera->setDir(dir);
     return true;
   }
 
-  bool FreeCamera::mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) {
+  bool FreeCamera::mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
     if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS) {
       setFocus(!isFocus());
       return true;
@@ -60,7 +60,7 @@ namespace Ahwassa {
     return false;
   }
 
-  bool FreeCamera::keyEvent(Iyathuum::Key button, Iyathuum::KeyStatus status) {
+  bool FreeCamera::keyEvent(const Iyathuum::Key& button, const  Iyathuum::KeyStatus& status) {
     if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS)
       setFocus(!isFocus());
     if (!isFocus())

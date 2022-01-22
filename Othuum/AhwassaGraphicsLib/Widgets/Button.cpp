@@ -56,7 +56,7 @@ namespace Ahwassa {
     _name = t;
   }
 
-  bool Button::mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) {
+  bool Button::mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) {
     _clickedFunction();
     return true;
   }

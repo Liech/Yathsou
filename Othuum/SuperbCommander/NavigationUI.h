@@ -26,9 +26,9 @@ namespace Superb {
     NavigationUI(Ahwassa::Window* w, std::shared_ptr<Suthanus::PhysicEngine>, std::shared_ptr<Suthanus::PhysicNavigationMesh>, UnitsOld&);
     virtual ~NavigationUI() = default;
 
-    bool mouseEvent(glm::vec2 localPosition, Iyathuum::Key button, Iyathuum::KeyStatus status) override;
+    bool mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) override;
 
-    virtual bool isInside(glm::vec2, Iyathuum::Key) override;
+    virtual bool isInside(const glm::vec2&, const Iyathuum::Key&) override;
     std::vector<std::shared_ptr<Unit>> selection();
 
     glm::vec3 getStart();

@@ -29,11 +29,14 @@ namespace Superb {
       void menu(const glm::ivec2&);
       void preDraw();
 
-      void startShape(std::unique_ptr<FormationShape>);
+      void startShape(std::shared_ptr<FormationShape>);
 
-      virtual bool mouseClickEvent(glm::vec2 localPosition, Iyathuum::Key button) override;
+      virtual bool mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) override;
 
     private:
+      void drawHover(const Iyathuum::glmAABB<2>&);
+      std::shared_ptr<FormationShape> getHover();
+
       int _resolutionX = 400;
       int _resolutionY = 400;
       FormationWidgetMode _mode = FormationWidgetMode::None;
@@ -43,7 +46,8 @@ namespace Superb {
       std::unique_ptr<Ahwassa::BasicRectangleRenderer> _renderer;
       glm::vec2 _mousePos;
 
-      std::vector<std::unique_ptr<FormationShape>> _shapes;
+      std::shared_ptr<FormationShape> _hover = nullptr;
+      std::vector<std::shared_ptr<FormationShape>> _shapes;
     };
   }
 }
