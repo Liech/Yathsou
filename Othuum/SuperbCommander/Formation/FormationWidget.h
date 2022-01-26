@@ -46,6 +46,7 @@ namespace Superb {
       virtual bool mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement);
 
     private:
+      void contextMenu();
       void drawHover();
       void drawSelection();
       std::shared_ptr<FormationShape> getHover();

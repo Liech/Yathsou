@@ -143,15 +143,36 @@ namespace Superb {
       if ((canBeOpened || _mode == FormationWidgetMode::ContextMenu) && ImGui::BeginPopupContextItem())
       {
         _mode = FormationWidgetMode::ContextMenu;
-        int groupNumber = _selected->getGroup();
-        ImGui::InputInt("Group", &groupNumber);
-        _selected->setGroup(groupNumber);
+        contextMenu();
         ImGui::EndPopup();
       }
       else if (_mode == FormationWidgetMode::ContextMenu)
-        _mode = FormationWidgetMode::None;
-        
+        _mode = FormationWidgetMode::None;       
+    }
 
+    void FormationWidget::contextMenu() {
+      int groupNumber = _selected->getGroup();
+      ImGui::InputInt("Group", &groupNumber);
+      _selected->setGroup(groupNumber);
+      
+      bool directed  = _selected->getGradientType() == FormationShapeGradientType::Directed;
+      bool spherical = _selected->getGradientType() == FormationShapeGradientType::Spherical;
+
+      if (ImGui::BeginCombo("Gradient Type", FormationShape::ShapeGradientType2String(_selected->getGradientType()).c_str(), 0))
+      {
+        if (ImGui::Selectable(FormationShape::ShapeGradientType2String(FormationShapeGradientType::Directed).c_str(), directed))
+          _selected->setGradientType(FormationShapeGradientType::Directed);
+        if (directed)
+          ImGui::SetItemDefaultFocus();
+        
+        if (ImGui::Selectable(FormationShape::ShapeGradientType2String(FormationShapeGradientType::Spherical).c_str(), spherical))
+          _selected->setGradientType(FormationShapeGradientType::Spherical);
+        if (spherical)
+          ImGui::SetItemDefaultFocus();
+
+          // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+        ImGui::EndCombo();
+      }
     }
 
     void FormationWidget::preDraw() {

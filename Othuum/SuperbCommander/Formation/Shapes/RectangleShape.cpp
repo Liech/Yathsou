@@ -26,6 +26,7 @@ namespace Superb {
       renderer.drawLine(glm::vec2(br[0], br[1]), glm::vec2(cr[0], cr[1]), 1, Iyathuum::Color(255, 0, 0));
       renderer.drawLine(glm::vec2(cr[0], cr[1]), glm::vec2(dr[0], dr[1]), 1, Iyathuum::Color(255, 0, 0));
       renderer.drawLine(glm::vec2(dr[0], dr[1]), glm::vec2(ar[0], ar[1]), 1, Iyathuum::Color(255, 0, 0));
+      FormationShape::draw(renderer);
      }
   }
 }

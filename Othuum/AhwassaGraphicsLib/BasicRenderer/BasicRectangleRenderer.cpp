@@ -178,5 +178,9 @@ namespace Ahwassa {
       previous = now;
     }
   }
-
+  
+  void BasicRectangleRenderer::drawDot(const glm::vec2& pos, float size, const Iyathuum::Color& color) {
+    auto aabb = Iyathuum::glmAABB<2>(pos - glm::vec2(size, size), glm::vec2(size*2, size*2));
+    drawRectangle(aabb, color);
+  }
 }
