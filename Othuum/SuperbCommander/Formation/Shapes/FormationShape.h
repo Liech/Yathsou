@@ -34,6 +34,7 @@ namespace Superb {
       virtual void                draw(Ahwassa::BasicRectangleRenderer& renderer);
 
       static std::string          ShapeGradientType2String(FormationShapeGradientType);
+ 
 
     private:
       Iyathuum::glmAABB<2> _position;

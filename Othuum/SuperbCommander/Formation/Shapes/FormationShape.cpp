@@ -69,10 +69,10 @@ namespace Superb {
       if (_gradientType == FormationShapeGradientType::Spherical) {
         glm::vec4 r = glm::vec4(getGradientCenter()[0]+_position.getCenter()[0], getGradientCenter()[1]+_position.getCenter()[1], 0, 1);
         glm::vec2 pos = rotation * r;
-        float buttonSize = 5;
-        renderer.drawCircle(pos, glm::vec2(4, 4), 0, 1, Iyathuum::Color(255, 0, 0));
-        renderer.drawCircle(pos, glm::vec2(10, 10), 0, 1, Iyathuum::Color(255, 0, 0));
-        renderer.drawCircle(pos, glm::vec2(15, 15), 0, 1, Iyathuum::Color(255, 0, 0));
+        float buttonSize = 15;
+        renderer.drawCircle(pos, glm::vec2(buttonSize/3, buttonSize/3), 0, 1, Iyathuum::Color(255, 0, 0));
+        renderer.drawCircle(pos, glm::vec2(buttonSize/2, buttonSize/2), 0, 1, Iyathuum::Color(255, 0, 0));
+        renderer.drawCircle(pos, glm::vec2(buttonSize, buttonSize), 0, 1, Iyathuum::Color(255, 0, 0));
       }
       else if (_gradientType == FormationShapeGradientType::Directed) {
         const float arrowLength = 20;
