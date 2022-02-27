@@ -12,7 +12,7 @@
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
   AdditiveComposer::AdditiveComposer(Ahwassa::Window* window, std::vector<std::shared_ptr<Ahwassa::Texture>> textures, int width, int height) : PostProcessingEffect("Composition",window,width,height) {

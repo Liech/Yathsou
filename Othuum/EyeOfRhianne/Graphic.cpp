@@ -16,7 +16,7 @@
 #include "AhwassaGraphicsLib/Uniforms/Rendertarget.h"
 
 #include "HaasScriptingLib/ScriptEngine.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 #include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
 #include "AthanahCommonLib/SkyBox.h"
 #include "AthanahCommonLib/Map/MapRenderer.h"

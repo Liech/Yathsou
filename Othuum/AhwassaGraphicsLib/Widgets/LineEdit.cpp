@@ -1,8 +1,8 @@
 #include "LineEdit.h"
 
 #include "IyathuumCoreLib/Singleton/Database.h"
-#include "BasicRenderer/BasicRectangleRenderer.h"
-#include "BasicRenderer/BasicTextRenderer.h"
+#include "Renderer/BasicRectangleRenderer.h"
+#include "Renderer/BasicTextRenderer.h"
 #include "Core/Window.h"
 #include "Input/Input.h"
 #include "Core/Renderer.h"

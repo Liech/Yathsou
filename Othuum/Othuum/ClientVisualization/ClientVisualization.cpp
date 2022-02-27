@@ -7,7 +7,7 @@
 #include "UyanahGameServer/Components/Transform2D.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicRectangleRenderer.h"
 
 ClientVisualization::ClientVisualization(std::shared_ptr<Uyanah::Scene>& scene, Ahwassa::Window* w)
 : _scene(scene), Drawable(w){

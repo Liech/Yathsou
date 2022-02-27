@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\BasicRenderer">
-      <UniqueIdentifier>{85fddfd8-f101-4386-b45c-6a5c96c02a15}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\BufferObjects">
       <UniqueIdentifier>{40c73439-446c-4596-b6eb-4b11542a6a23}</UniqueIdentifier>
     </Filter>
@@ -45,9 +42,6 @@
     </Filter>
     <Filter Include="Header Files\Widgets">
       <UniqueIdentifier>{6187406b-5aa5-4df8-8b18-2d2689fbbc67}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\BasicRenderer">
-      <UniqueIdentifier>{103d9189-37c3-42b6-bc48-1ca2c74abc34}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\BufferObjects">
       <UniqueIdentifier>{9f4ffcfd-a6c8-4566-a58d-a0637e302343}</UniqueIdentifier>
@@ -126,21 +120,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp">
-      <Filter>Source Files\BasicRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicRenderer\BasicBoxRenderer.cpp">
-      <Filter>Source Files\BasicRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicRenderer\BasicMeshRenderer.cpp">
-      <Filter>Source Files\BasicRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicRenderer\BasicRectangleRenderer.cpp">
-      <Filter>Source Files\BasicRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp">
-      <Filter>Source Files\BasicRenderer</Filter>
-    </ClCompile>
     <ClCompile Include="BufferObjects\VBO.cpp">
       <Filter>Source Files\BufferObjects</Filter>
     </ClCompile>
@@ -405,23 +384,29 @@
     <ClCompile Include="lib\DearIMGUI\imgui_stdlib.cpp">
       <Filter>lib\dear imgui filedialog</Filter>
     </ClCompile>
+    <ClCompile Include="Renderer\BasicBoxRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\BasicMeshRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\BasicRectangleRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\BasicTextRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\BasicTexture2DRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\DecalRenderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\Decal.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h">
-      <Filter>Header Files\BasicRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicRenderer\BasicBoxRenderer.h">
-      <Filter>Header Files\BasicRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicRenderer\BasicMeshRenderer.h">
-      <Filter>Header Files\BasicRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicRenderer\BasicRectangleRenderer.h">
-      <Filter>Header Files\BasicRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="BasicRenderer\BasicTextRenderer.h">
-      <Filter>Header Files\BasicRenderer</Filter>
-    </ClInclude>
     <ClInclude Include="BufferObjects\VAO.h">
       <Filter>Header Files\BufferObjects</Filter>
     </ClInclude>
@@ -1033,6 +1018,27 @@
     </ClInclude>
     <ClInclude Include="lib\DearIMGUI\imgui_stdlib.h">
       <Filter>lib\dear imgui filedialog</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\BasicBoxRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\BasicMeshRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\BasicRectangleRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\BasicTextRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\BasicTexture2DRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\DecalRenderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\Decal.h">
+      <Filter>Header Files\Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

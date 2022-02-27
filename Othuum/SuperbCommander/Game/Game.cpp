@@ -53,6 +53,7 @@ namespace Superb {
     _visualization->drawLastLayer();
     _overlay->drawLastLayer();
     _control->debugDraw();
+    _nonGame->draw();
   }
 
   void Game::update() {

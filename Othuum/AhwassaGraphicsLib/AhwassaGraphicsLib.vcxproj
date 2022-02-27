@@ -150,11 +150,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BasicRenderer\BasicBoxRenderer.cpp" />
-    <ClCompile Include="BasicRenderer\BasicMeshRenderer.cpp" />
-    <ClCompile Include="BasicRenderer\BasicRectangleRenderer.cpp" />
-    <ClCompile Include="BasicRenderer\BasicTextRenderer.cpp" />
-    <ClCompile Include="BasicRenderer\BasicTexture2DRenderer.cpp" />
     <ClCompile Include="BufferObjects\FBO.cpp" />
     <ClCompile Include="BufferObjects\IBO.cpp" />
     <ClCompile Include="BufferObjects\IVBO.cpp" />
@@ -192,8 +187,15 @@
     <ClCompile Include="PostProcessing\DeferredComposer.cpp" />
     <ClCompile Include="PostProcessing\PostProcessingEffect.cpp" />
     <ClCompile Include="PostProcessing\CubeReflection.cpp" />
+    <ClCompile Include="Renderer\BasicBoxRenderer.cpp" />
+    <ClCompile Include="Renderer\BasicMeshRenderer.cpp" />
+    <ClCompile Include="Renderer\BasicRectangleRenderer.cpp" />
+    <ClCompile Include="Renderer\BasicTextRenderer.cpp" />
+    <ClCompile Include="Renderer\BasicTexture2DRenderer.cpp" />
     <ClCompile Include="Renderer\Box.cpp" />
     <ClCompile Include="Renderer\BoxRenderer.cpp" />
+    <ClCompile Include="Renderer\Decal.cpp" />
+    <ClCompile Include="Renderer\DecalRenderer.cpp" />
     <ClCompile Include="Renderer\DiffuseMeshRenderer.cpp" />
     <ClCompile Include="Renderer\Dot.cpp" />
     <ClCompile Include="Renderer\Line.cpp" />
@@ -245,11 +247,6 @@
     <ClCompile Include="Widgets\Slider.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicRenderer\BasicBoxRenderer.h" />
-    <ClInclude Include="BasicRenderer\BasicMeshRenderer.h" />
-    <ClInclude Include="BasicRenderer\BasicRectangleRenderer.h" />
-    <ClInclude Include="BasicRenderer\BasicTextRenderer.h" />
-    <ClInclude Include="BasicRenderer\BasicTexture2DRenderer.h" />
     <ClInclude Include="BufferObjects\FBO.h" />
     <ClInclude Include="BufferObjects\IBO.h" />
     <ClInclude Include="BufferObjects\IMesh.h" />
@@ -404,7 +401,14 @@
     <ClInclude Include="PostProcessing\DeferredComposer.h" />
     <ClInclude Include="PostProcessing\PostProcessingEffect.h" />
     <ClInclude Include="PostProcessing\CubeReflection.h" />
+    <ClInclude Include="Renderer\BasicBoxRenderer.h" />
+    <ClInclude Include="Renderer\BasicMeshRenderer.h" />
+    <ClInclude Include="Renderer\BasicRectangleRenderer.h" />
+    <ClInclude Include="Renderer\BasicTextRenderer.h" />
+    <ClInclude Include="Renderer\BasicTexture2DRenderer.h" />
     <ClInclude Include="Renderer\BoxRenderer.h" />
+    <ClInclude Include="Renderer\Decal.h" />
+    <ClInclude Include="Renderer\DecalRenderer.h" />
     <ClInclude Include="Renderer\DiffuseMeshRenderer.h" />
     <ClInclude Include="Renderer\Dot.h" />
     <ClInclude Include="Renderer\IBox.h" />

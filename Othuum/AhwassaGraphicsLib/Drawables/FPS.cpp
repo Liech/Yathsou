@@ -1,7 +1,7 @@
 #include "FPS.h"
 
 #include "glad/glad.h"
-#include "BasicRenderer/BasicTextRenderer.h"
+#include "Renderer/BasicTextRenderer.h"
 #include "Core/Window.h"
 
 namespace Ahwassa {

@@ -9,10 +9,10 @@
 #include "AhwassaGraphicsLib/Renderer/Line.h"
 #include "AhwassaGraphicsLib/Renderer/Rectangle.h"
 #include "AhwassaGraphicsLib/Renderer/Sphere.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTextRenderer.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicTextRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicBoxRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicRectangleRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
 
 namespace Ahwassa {

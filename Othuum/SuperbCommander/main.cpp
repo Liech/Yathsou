@@ -4,7 +4,7 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
 #include "AhwassaGraphicsLib/Input/ArcBallCamera.h"
 

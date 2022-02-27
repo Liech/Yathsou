@@ -1,6 +1,6 @@
 #include "TriangleShape.h"  
 
-#include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicRectangleRenderer.h"
 #include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
 
 namespace Superb {

@@ -3,7 +3,7 @@
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicBoxRenderer.h"
 #include "AthanahCommonLib/SupCom/Gamedata/SupComModelFactory.h"
 #include "AthanahCommonLib/SupCom/SupComModel.h"
 #include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"

@@ -9,9 +9,9 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Widgets/Button.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTextRenderer.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicTextRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicRectangleRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 
 #include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 #include "AthanahCommonLib/SupCom/Gamedata/SupComModelFactory.h"

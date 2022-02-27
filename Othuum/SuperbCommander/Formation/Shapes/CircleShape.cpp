@@ -1,6 +1,6 @@
 #include "CircleShape.h"  
 
-#include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicRectangleRenderer.h"
 
 namespace Superb {
   namespace Formation {

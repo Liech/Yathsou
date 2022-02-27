@@ -4,8 +4,8 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Input/Input.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicBoxRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicRectangleRenderer.h"
 
 #include "SuthanusPhysicsLib/PhysicEngine.h"
 #include "SuthanusPhysicsLib/PhysicNavigationMesh.h"

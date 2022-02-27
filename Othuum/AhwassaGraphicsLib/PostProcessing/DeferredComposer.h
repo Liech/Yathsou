@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 #include "AhwassaGraphicsLib/Vertex/PositionTextureVertex.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/VBO.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformMat4.h"
 

@@ -1,6 +1,6 @@
 #include "BulletDebugDrawer.h"
 
-#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicBoxRenderer.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 

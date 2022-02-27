@@ -7,7 +7,7 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Uniforms/Rendertarget.h"
 #include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicRectangleRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicRectangleRenderer.h"
 #include "IyathuumCoreLib/lib/glm/gtx/vector_angle.hpp"
 
 

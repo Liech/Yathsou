@@ -1,6 +1,6 @@
 #include "BoxVisualization.h"
 
-#include "AhwassaGraphicsLib/BasicRenderer/BasicBoxRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicBoxRenderer.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "SuthanusPhysicsLib/Objects/Box.h"

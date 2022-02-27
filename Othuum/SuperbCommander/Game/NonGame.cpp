@@ -3,9 +3,13 @@
 #include "Formation/FormationDialog.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
+#include "AhwassaGraphicsLib/Renderer/DecalRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/Decal.h"
 
 namespace Superb {
   NonGame::NonGame(Ahwassa::Window& window) : _window(window) {
+    _decalRenderer = std::make_unique<Ahwassa::DecalRenderer>(window.camera());
+    _decal = _decalRenderer->newDecal(glm::mat4(1.0), Iyathuum::Color(255, 255, 0));
   }
 
   void NonGame::menu() {
@@ -24,6 +28,10 @@ namespace Superb {
 
   void NonGame::preDraw() {
     _formationDialog->preDraw();
+  }
+
+  void NonGame::draw() {
+    _decalRenderer->draw();
   }
 
   void NonGame::start() {

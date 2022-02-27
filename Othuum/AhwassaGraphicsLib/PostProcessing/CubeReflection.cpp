@@ -14,7 +14,7 @@
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
-#include "AhwassaGraphicsLib/BasicRenderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
   CubeReflection::CubeReflection(Ahwassa::Window* window, int width, int height) : PostProcessingEffect("CubeReflection", window, width, height) {
