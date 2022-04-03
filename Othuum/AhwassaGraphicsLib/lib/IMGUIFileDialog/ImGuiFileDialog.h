@@ -635,7 +635,7 @@ struct IGFD_Thumbnail_Info
 
 #ifdef __cplusplus
 
-#include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
+#include <imgui/imgui.h>
 
 #include <cfloat>
 #include <utility>

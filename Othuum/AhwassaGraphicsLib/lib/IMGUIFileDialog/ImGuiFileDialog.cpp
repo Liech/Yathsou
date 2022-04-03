@@ -72,11 +72,11 @@ SOFTWARE.
 	#define PATH_SEP '/'
 #endif // defined(__linux__) || defined(__FreeBSD__) || defined(__NetBSD__) || defined(__APPLE__)
 
-#include "AhwassaGraphicsLib/lib/DearIMGUI/imgui.h"
+#include "imgui/imgui.h"
 #ifndef IMGUI_DEFINE_MATH_OPERATORS
 	#define IMGUI_DEFINE_MATH_OPERATORS
 #endif // IMGUI_DEFINE_MATH_OPERATORS
-#include "AhwassaGraphicsLib/lib/DearIMGUI/imgui_internal.h"
+#include "imgui/imgui_internal.h"
 
 #include <cstdlib>
 #include <algorithm>

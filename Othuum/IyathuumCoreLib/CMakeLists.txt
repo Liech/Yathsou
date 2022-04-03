@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 2.8...3.23)
 
 project(IyathuumCoreLib)
 
@@ -9,7 +9,6 @@ FetchContent_Declare(
   GIT_TAG        bf71a834948186f4097caa076cd2663c69a10e1e
 )
 FetchContent_MakeAvailable(glm)
-
 
 ############################################################################
 ############################################################################
@@ -117,7 +116,9 @@ set(ALL_FILES
 add_library(IyathuumCoreLib ${ALL_FILES})
 set_property(TARGET IyathuumCoreLib PROPERTY CXX_STANDARD 20)
 
-target_include_directories(IyathuumCoreLib PUBLIC ${glm_SOURCE_DIR})
-target_include_directories(IyathuumCoreLib PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Source)
+target_include_directories(IyathuumCoreLib PRIVATE
+${glm_SOURCE_DIR} 
+${CMAKE_CURRENT_SOURCE_DIR}/Source
+)
 
 add_dependencies(IyathuumCoreLib glm)

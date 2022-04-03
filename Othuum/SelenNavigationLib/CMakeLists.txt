@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 2.8...3.23)
 project(SelenNavigationLib)
 
 ############################################################################
@@ -63,6 +63,7 @@ target_link_libraries(SelenNavigationLib IyathuumCoreLib)
 target_include_directories(SelenNavigationLib PRIVATE 
 ${CMAKE_CURRENT_SOURCE_DIR}/Source/SelenNavigationLib
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
+${glm_SOURCE_DIR} 
 )
 
 add_dependencies(SelenNavigationLib IyathuumCoreLib)

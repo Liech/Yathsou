@@ -1,3 +1,6 @@
 [submodule "Othuum/SuthanusPhysicsLib/ThirdParty/bullet"]
 	path = Othuum/SuthanusPhysicsLib/ThirdParty/bullet
 	url = https://github.com/bulletphysics/bullet3.git
+[submodule "Othuum/AhwassaGraphicsLib/lib/imgui"]
+	path = Othuum/AhwassaGraphicsLib/lib/imgui
+	url = https://github.com/ocornut/imgui.git
