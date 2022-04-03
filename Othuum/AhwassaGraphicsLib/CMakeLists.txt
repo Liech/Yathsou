@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.23)
 project(AhwassaGraphicsLib)
-
 include(FetchContent)
+
 FetchContent_Declare(
   glfw
   GIT_REPOSITORY https://github.com/glfw/glfw.git
@@ -11,7 +11,6 @@ option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
 option(GLFW_INSTALL "Generate installation target" OFF)
 FetchContent_MakeAvailable(glfw)
 
-include(FetchContent)
 FetchContent_Declare(
   imgui
   GIT_REPOSITORY https://github.com/ocornut/imgui.git
@@ -19,15 +18,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(imgui)
 
-include(FetchContent)
-FetchContent_Declare(
-  freetype
-  GIT_REPOSITORY https://github.com/freetype/freetype.git
-  GIT_TAG        aee6b9472732c627ff844d4fb75a588d388b6570
-)
-FetchContent_MakeAvailable(freetype)
-
-include(FetchContent)
 FetchContent_Declare(
   portaudio
   GIT_REPOSITORY https://github.com/PortAudio/portaudio.git
@@ -35,14 +25,12 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(portaudio)
 
-include(FetchContent)
 FetchContent_Declare(
   openvr
   GIT_REPOSITORY https://github.com/ValveSoftware/openvr
   GIT_TAG        4c85abcb7f7f1f02adaf3812018c99fc593bc341
 )
 FetchContent_MakeAvailable(openvr)
-
 
 
 
@@ -393,7 +381,7 @@ set(ALL_FILES
     ${Source_Files__Vertex}
     ${Source_Files__Widgets}
     ${lib__glad}
-	${lib__dear_imgui}
+	  ${lib__dear_imgui}
     ${lib__dear_imgui_filedialog}
 )
 
@@ -403,6 +391,9 @@ set(ALL_FILES
 
 add_library(AhwassaGraphicsLib ${ALL_FILES})
 set_property(TARGET AhwassaGraphicsLib PROPERTY CXX_STANDARD 20)
+
+add_subdirectory(${AhwassaGraphicsLib_SOURCE_DIR}/lib/freetype/)
+
 
 target_link_libraries(AhwassaGraphicsLib
 glm
@@ -418,13 +409,14 @@ target_include_directories(AhwassaGraphicsLib PRIVATE
 "${AhwassaGraphicsLib_SOURCE_DIR}/lib/glad/include"
 "${AhwassaGraphicsLib_SOURCE_DIR}/lib/"
 "${AhwassaGraphicsLib_SOURCE_DIR}/lib/imgui"
+"${AhwassaGraphicsLib_SOURCE_DIR}/lib/freetype/include"
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
 "${glfw_SOURCE_DIR}/Source"
-"${freetype_SOURCE_DIR}/Source"
 "${portaudio_SOURCE_DIR}"
 "${openvr_SOURCE_DIR}/headers"
 )
 
+add_dependencies(AhwassaGraphicsLib freetype)
 add_dependencies(AhwassaGraphicsLib glm)
 add_dependencies(AhwassaGraphicsLib glfw)
 add_dependencies(AhwassaGraphicsLib IyathuumCoreLib)

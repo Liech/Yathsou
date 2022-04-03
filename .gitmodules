@@ -4,3 +4,6 @@
 [submodule "Othuum/AhwassaGraphicsLib/lib/imgui"]
 	path = Othuum/AhwassaGraphicsLib/lib/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "Othuum/AhwassaGraphicsLib/lib/freetype"]
+	path = Othuum/AhwassaGraphicsLib/lib/freetype
+	url = https://github.com/freetype/freetype.git

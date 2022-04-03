@@ -53,7 +53,7 @@ namespace Ahwassa {
 
     UIElement* _pressedWidget;
     UIElement* _currentFocus ;
-    UIElement* _currentHover ;
+    UIElement* _currentHover  = nullptr;
     glm::vec2  _oldMousePos;
     glm::vec2  _cursorpos;
   };
