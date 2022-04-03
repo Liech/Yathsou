@@ -410,7 +410,7 @@ IyathuumCoreLib
 glfw
 freetype
 portaudio
-openvr
+${OPENVR_LIBRARIES}
 )
 
 target_include_directories(AhwassaGraphicsLib PRIVATE 
@@ -427,5 +427,4 @@ target_include_directories(AhwassaGraphicsLib PRIVATE
 
 add_dependencies(AhwassaGraphicsLib glm)
 add_dependencies(AhwassaGraphicsLib glfw)
-add_dependencies(AhwassaGraphicsLib openvr)
 add_dependencies(AhwassaGraphicsLib IyathuumCoreLib)
