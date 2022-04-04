@@ -24,7 +24,7 @@ namespace Ahwassa {
     _sphere    = std::make_shared<SphereRenderer        >(cam   );
     _bRectangle= std::make_shared<BasicRectangleRenderer>(window);
     _bBox      = std::make_shared<BasicBoxRenderer      >(cam   );
-    //_bText     = std::make_shared<BasicTextRenderer     >(window);
+    _bText     = std::make_shared<BasicTextRenderer     >(window);
     _bTexture  = std::make_shared<BasicTexture2DRenderer>(window);
     _bMesh     = std::make_shared<DiffuseMeshRenderer   >(cam   );
   }

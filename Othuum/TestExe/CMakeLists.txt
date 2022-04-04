@@ -28,3 +28,8 @@ add_custom_command(TARGET TestExe POST_BUILD
                COMMAND ${CMAKE_COMMAND} -E copy_if_different
                "${AhwassaGraphicsLib_SOURCE_DIR}/lib/zlib/zlib.dll"              
                 $<TARGET_FILE_DIR:TestExe>)
+
+add_custom_command(TARGET TestExe POST_BUILD 
+               COMMAND ${CMAKE_COMMAND} -E copy_if_different
+               "${AhwassaGraphicsLib_SOURCE_DIR}/Data/Fonts/arial.ttf"              
+                $<TARGET_FILE_DIR:TestExe>/Data/Fonts/arial.ttf)
