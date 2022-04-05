@@ -5,6 +5,7 @@ add_subdirectory(IyathuumCoreLib)
 add_subdirectory(SelenNavigationLib)
 add_subdirectory(SuthanusPhysicsLib)
 add_subdirectory(AhwassaGraphicsLib)
+add_subdirectory(HaasScriptingLib)
 add_subdirectory(TestExe)
 
 set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT TestExe)

@@ -2,11 +2,10 @@
 
 #include <stdexcept>
 #include <sstream>
-#include "lua.hpp"
-#include "lstate.h"
-#include "IyathuumCoreLib/Util/lambdaCapture2functionPointer.h"
+#include <lua/lua.hpp>
+#include <lua/lstate.h>
 #include <iostream>
-#include "lib/json.hpp"
+#include <nlohmann/json.hpp>
 
 namespace Haas
 {

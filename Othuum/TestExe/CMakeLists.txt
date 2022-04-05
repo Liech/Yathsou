@@ -3,11 +3,21 @@ project(TestExe)
 add_executable(TestExe main.cpp)
 set_property(TARGET TestExe PROPERTY CXX_STANDARD 20)
 
+
+include(FetchContent)
+FetchContent_Declare(
+  json
+  GIT_REPOSITORY https://github.com/nlohmann/json.git
+  GIT_TAG        v3.10.5
+)
+FetchContent_MakeAvailable(json)
+
 target_link_libraries(TestExe 
 IyathuumCoreLib 
 SelenNavigationLib
 SuthanusPhysicLib
 AhwassaGraphicsLib
+HaasScriptingLib
 )
 
 target_include_directories(TestExe PRIVATE 
@@ -15,6 +25,8 @@ target_include_directories(TestExe PRIVATE
 "${SelenNavigationLib_SOURCE_DIR}/Source"
 "${SuthanusPhysicLib_SOURCE_DIR}/Source"
 "${AhwassaGraphicsLib_SOURCE_DIR}/Source"
+"${HaasScriptingLib_SOURCE_DIR}/Source"
+"${json_SOURCE_DIR}/Include"
 )
 
 add_dependencies(TestExe 
@@ -22,6 +34,7 @@ IyathuumCoreLib
 SelenNavigationLib
 SuthanusPhysicLib
 AhwassaGraphicsLib
+HaasScriptingLib
 )
 
 add_custom_command(TARGET TestExe POST_BUILD 
