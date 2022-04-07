@@ -5,6 +5,7 @@
 #include <SuthanusPhysicsLib/PhysicEngine.h>
 #include <AhwassaGraphicsLib/Core/Window.h>
 #include <HaasScriptingLib/ScriptEngine.h>
+#include <AezeselFileIOLib/ZIP.h>
 #include <filesystem>
 
 
@@ -25,6 +26,7 @@ int main(int argc, char** argv) {
   Suthanus::PhysicEngine engine;  
   Ahwassa::Window win(100, 100);
   Haas::ScriptEngine engin;
+  Aezesel::ZIP z("");
   win.run();
   return 0;
 }

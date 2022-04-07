@@ -18,6 +18,7 @@ SelenNavigationLib
 SuthanusPhysicLib
 AhwassaGraphicsLib
 HaasScriptingLib
+AezeselFileIOLib
 )
 
 target_include_directories(TestExe PRIVATE 
@@ -26,6 +27,7 @@ target_include_directories(TestExe PRIVATE
 "${SuthanusPhysicLib_SOURCE_DIR}/Source"
 "${AhwassaGraphicsLib_SOURCE_DIR}/Source"
 "${HaasScriptingLib_SOURCE_DIR}/Source"
+"${AezeselFileIOLib_SOURCE_DIR}/Source"
 "${json_SOURCE_DIR}/Include"
 )
 
@@ -35,6 +37,7 @@ SelenNavigationLib
 SuthanusPhysicLib
 AhwassaGraphicsLib
 HaasScriptingLib
+AezeselFileIOLib
 )
 
 add_custom_command(TARGET TestExe POST_BUILD 

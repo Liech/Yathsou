@@ -1,0 +1,9 @@
+[submodule "minizip"]
+	path = minizip
+	url = https://github.com/Lecrapouille/minizip.git
+	branch = master
+
+[submodule "zlib"]
+	path = zlib
+	url = https://github.com/Lecrapouille/zlib
+	branch = develop-fixes

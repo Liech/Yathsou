@@ -7,3 +7,9 @@
 [submodule "Othuum/AhwassaGraphicsLib/lib/freetype"]
 	path = Othuum/AhwassaGraphicsLib/lib/freetype
 	url = https://github.com/freetype/freetype.git
+[submodule "Othuum/AezeselFileIOLib/lib/lodepng"]
+	path = Othuum/AezeselFileIOLib/lib/lodepng
+	url = https://github.com/lvandeve/lodepng.git
+[submodule "Othuum/AezeselFileIOLib/lib/zipper"]
+	path = Othuum/AezeselFileIOLib/lib/zipper
+	url = https://github.com/sebastiandev/zipper.git

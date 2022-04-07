@@ -2,7 +2,7 @@
 [x] Selen
 [x] Ahwassa
 [x] Suthanus
-[ ] Haas
+[x] Haas
 [ ] Aezesel
 [ ] Vishala
 [ ] Uyanah
