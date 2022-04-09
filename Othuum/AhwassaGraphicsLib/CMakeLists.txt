@@ -12,13 +12,6 @@ option(GLFW_INSTALL "Generate installation target" OFF)
 FetchContent_MakeAvailable(glfw)
 
 FetchContent_Declare(
-  imgui
-  GIT_REPOSITORY https://github.com/ocornut/imgui.git
-  GIT_TAG        c71a50deb5ddf1ea386b91e60fa2e4a26d080074
-)
-FetchContent_MakeAvailable(imgui)
-
-FetchContent_Declare(
   portaudio
   GIT_REPOSITORY https://github.com/PortAudio/portaudio.git
   GIT_TAG        147dd722548358763a8b649b3e4b41dfffbcfbb6
@@ -31,6 +24,28 @@ FetchContent_Declare(
   GIT_TAG        4c85abcb7f7f1f02adaf3812018c99fc593bc341
 )
 FetchContent_MakeAvailable(openvr)
+
+FetchContent_Declare(
+  freetype
+  GIT_REPOSITORY https://github.com/freetype/freetype.git
+  GIT_TAG        a1ca70102373fec0b98ac525885b34771c2604aa
+)
+FetchContent_MakeAvailable(freetype)
+
+FetchContent_Declare(
+  freetype
+  GIT_REPOSITORY https://github.com/freetype/freetype.git
+  GIT_TAG        a1ca70102373fec0b98ac525885b34771c2604aa
+)
+FetchContent_MakeAvailable(freetype)
+
+FetchContent_Declare(
+  imgui
+  GIT_REPOSITORY https://github.com/ocornut/imgui.git
+  GIT_TAG        v1.87
+)
+FetchContent_MakeAvailable(imgui)
+
 
 
 
@@ -321,28 +336,28 @@ source_group("lib\\glad" FILES ${lib__glad})
 
 
 set(lib__dear_imgui
-    "lib/imgui/imconfig.h"
-    "lib/imgui/imgui.cpp"
-    "lib/imgui/imgui.h"
-    "lib/imgui/imgui_demo.cpp"
-    "lib/imgui/imgui_draw.cpp"
-    "lib/imgui/backends/imgui_impl_glfw.cpp"
-    "lib/imgui/backends/imgui_impl_glfw.h"
-    "lib/imgui/backends/imgui_impl_opengl3.cpp"
-    "lib/imgui/backends/imgui_impl_opengl3.h"
-    "lib/imgui/backends/imgui_impl_opengl3_loader.h"
-    "lib/imgui/imgui_internal.h"
-    "lib/imgui/imgui_tables.cpp"
-    "lib/imgui/imgui_widgets.cpp"
-    "lib/imgui/imstb_rectpack.h"
-    "lib/imgui/imstb_textedit.h"
-    "lib/imgui/imstb_truetype.h"
+    "${imgui_SOURCE_DIR}/imconfig.h"
+    "${imgui_SOURCE_DIR}/imgui.cpp"
+    "${imgui_SOURCE_DIR}/imgui.h"
+    "${imgui_SOURCE_DIR}/imgui_demo.cpp"
+    "${imgui_SOURCE_DIR}/imgui_draw.cpp"
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp"
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.h"
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp"
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.h"
+    "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3_loader.h"
+    "${imgui_SOURCE_DIR}/imgui_internal.h"
+    "${imgui_SOURCE_DIR}/imgui_tables.cpp"
+    "${imgui_SOURCE_DIR}/imgui_widgets.cpp"
+    "${imgui_SOURCE_DIR}/imstb_rectpack.h"
+    "${imgui_SOURCE_DIR}/imstb_textedit.h"
+    "${imgui_SOURCE_DIR}/imstb_truetype.h"
 )
 source_group("lib\\dear imgui" FILES ${lib__dear_imgui})
 
 set(lib__dear_imgui_filedialog
-    "lib/imgui/misc/cpp/imgui_stdlib.cpp"
-    "lib/imgui/misc/cpp/imgui_stdlib.h"
+    "${imgui_SOURCE_DIR}/misc/cpp/imgui_stdlib.cpp"
+    "${imgui_SOURCE_DIR}/misc/cpp/imgui_stdlib.h"
     "lib/IMGUIFileDialog/dirent/dirent.h"
     "lib/IMGUIFileDialog/ImGuiFileDialog.cpp"
     "lib/IMGUIFileDialog/ImGuiFileDialog.h"
@@ -392,9 +407,6 @@ set(ALL_FILES
 add_library(AhwassaGraphicsLib ${ALL_FILES})
 set_property(TARGET AhwassaGraphicsLib PROPERTY CXX_STANDARD 20)
 
-add_subdirectory(${AhwassaGraphicsLib_SOURCE_DIR}/lib/freetype/)
-
-
 target_link_libraries(AhwassaGraphicsLib
 glm
 IyathuumCoreLib
@@ -414,6 +426,7 @@ target_include_directories(AhwassaGraphicsLib PRIVATE
 "${glfw_SOURCE_DIR}/Source"
 "${portaudio_SOURCE_DIR}"
 "${openvr_SOURCE_DIR}/headers"
+"${freetype_SOURCE_DIR}/include"
 )
 
 add_dependencies(AhwassaGraphicsLib freetype)

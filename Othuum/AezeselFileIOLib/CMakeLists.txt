@@ -24,7 +24,6 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(gli)
 
-
 FetchContent_Declare(
   libnyquist
   GIT_REPOSITORY https://github.com/ddiakopoulos/libnyquist.git
@@ -32,6 +31,19 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(libnyquist)
 
+FetchContent_Declare(
+  lodepng
+  GIT_REPOSITORY https://github.com/lvandeve/lodepng.git
+  GIT_TAG        5601b8272a6850b7c5d693dd0c0e16da50be8d8d
+)
+FetchContent_MakeAvailable(lodepng)
+
+FetchContent_Declare(
+  zipper
+  GIT_REPOSITORY https://github.com/sebastiandev/zipper.git
+  GIT_TAG        v1.0.0
+)
+FetchContent_MakeAvailable(zipper)
 
 ############################################################################
 ############################################################################
@@ -136,10 +148,10 @@ set(Source_Files__SupremeCommander
 source_group("Source Files\\SupremeCommander" FILES ${Source_Files__SupremeCommander})
 
 set(lib__lodepng
-    "lib/lodepng/lodepng.cpp"
-    "lib/lodepng/lodepng.h"
-    "lib/lodepng/lodepng_util.cpp"
-    "lib/lodepng/lodepng_util.h"
+    "${lodepng_SOURCE_DIR}/lodepng.cpp"
+    "${lodepng_SOURCE_DIR}/lodepng.h"
+    "${lodepng_SOURCE_DIR}/lodepng_util.cpp"
+    "${lodepng_SOURCE_DIR}/lodepng_util.h"
 )
 source_group("lib\\lodepng" FILES ${lib__lodepng})
 

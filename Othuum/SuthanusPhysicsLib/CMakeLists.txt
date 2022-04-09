@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 2.8...3.23)
 project(SuthanusPhysicLib)
+include(FetchContent)
 
+FetchContent_Declare(
+  bullet
+  GIT_REPOSITORY https://github.com/bulletphysics/bullet3.git
+  GIT_TAG        3.22b
+)
+FetchContent_MakeAvailable(bullet)
 
 ############################################################################
 ############################################################################
@@ -64,9 +71,6 @@ set(ALL_FILES
 add_library(SuthanusPhysicLib ${ALL_FILES})
 set_property(TARGET SuthanusPhysicLib PROPERTY CXX_STANDARD 20)
 
-add_subdirectory(ThirdParty/bullet EXCLUDE_FROM_ALL)
-
-
 target_link_libraries(SuthanusPhysicLib
 glm
 IyathuumCoreLib
@@ -79,6 +83,7 @@ BulletDynamics
 target_include_directories(SuthanusPhysicLib PRIVATE 
 "${SuthanusPhysicLib_SOURCE_DIR}/Source/SuthanusPhysicsLib"
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
+"${bullet_SOURCE_DIR}/src"
 )
 
 include_directories(ThirdParty/bullet/src)
