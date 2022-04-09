@@ -6,6 +6,7 @@ FetchContent_Declare(
   bullet
   GIT_REPOSITORY https://github.com/bulletphysics/bullet3.git
   GIT_TAG        3.22b
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(bullet)
 

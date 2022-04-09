@@ -15,6 +15,7 @@ FetchContent_Declare(
   portaudio
   GIT_REPOSITORY https://github.com/PortAudio/portaudio.git
   GIT_TAG        147dd722548358763a8b649b3e4b41dfffbcfbb6
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(portaudio)
 
@@ -22,6 +23,7 @@ FetchContent_Declare(
   openvr
   GIT_REPOSITORY https://github.com/ValveSoftware/openvr
   GIT_TAG        4c85abcb7f7f1f02adaf3812018c99fc593bc341
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(openvr)
 
@@ -29,6 +31,7 @@ FetchContent_Declare(
   freetype
   GIT_REPOSITORY https://github.com/freetype/freetype.git
   GIT_TAG        a1ca70102373fec0b98ac525885b34771c2604aa
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(freetype)
 
@@ -36,6 +39,7 @@ FetchContent_Declare(
   freetype
   GIT_REPOSITORY https://github.com/freetype/freetype.git
   GIT_TAG        a1ca70102373fec0b98ac525885b34771c2604aa
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(freetype)
 
@@ -43,6 +47,7 @@ FetchContent_Declare(
   imgui
   GIT_REPOSITORY https://github.com/ocornut/imgui.git
   GIT_TAG        v1.87
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(imgui)
 
@@ -427,6 +432,7 @@ target_include_directories(AhwassaGraphicsLib PRIVATE
 "${portaudio_SOURCE_DIR}"
 "${openvr_SOURCE_DIR}/headers"
 "${freetype_SOURCE_DIR}/include"
+"${imgui_SOURCE_DIR}"
 )
 
 add_dependencies(AhwassaGraphicsLib freetype)

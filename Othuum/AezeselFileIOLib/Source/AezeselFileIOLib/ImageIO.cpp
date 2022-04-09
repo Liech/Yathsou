@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include <lodepng/lodepng.h>
+#include <lodepng.h>
 #include <gli/load_dds.hpp>
 #include <gli/texture2d.hpp>
 #include <gli/texture_cube.hpp>

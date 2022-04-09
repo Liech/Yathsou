@@ -6,6 +6,7 @@ FetchContent_Declare(
   json
   GIT_REPOSITORY https://github.com/nlohmann/json.git
   GIT_TAG        v3.10.5
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(json)
 
@@ -13,6 +14,7 @@ FetchContent_Declare(
   assimp
   GIT_REPOSITORY https://github.com/assimp/assimp.git
   GIT_TAG        v5.2.3
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(assimp)
 
@@ -21,6 +23,7 @@ FetchContent_Declare(
   gli
   GIT_REPOSITORY https://github.com/g-truc/gli.git
   GIT_TAG        0.8.2.0
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(gli)
 
@@ -28,6 +31,7 @@ FetchContent_Declare(
   libnyquist
   GIT_REPOSITORY https://github.com/ddiakopoulos/libnyquist.git
   GIT_TAG        d389ac419dae89a95f83f202a956e3f4846313c3
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(libnyquist)
 
@@ -35,15 +39,9 @@ FetchContent_Declare(
   lodepng
   GIT_REPOSITORY https://github.com/lvandeve/lodepng.git
   GIT_TAG        5601b8272a6850b7c5d693dd0c0e16da50be8d8d
+  EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(lodepng)
-
-FetchContent_Declare(
-  zipper
-  GIT_REPOSITORY https://github.com/sebastiandev/zipper.git
-  GIT_TAG        v1.0.0
-)
-FetchContent_MakeAvailable(zipper)
 
 ############################################################################
 ############################################################################
@@ -196,6 +194,7 @@ ${glm_SOURCE_DIR}
 ${gli_SOURCE_DIR} 
 ${zipper_SOURCE_DIR} 
 ${zipper_SOURCE_DIR}/include
+"${lodepng_SOURCE_DIR}"
 )
 
 add_dependencies(IyathuumCoreLib glm)
