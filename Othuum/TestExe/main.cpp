@@ -1,10 +1,10 @@
 #include <iostream>
 
 #include <IyathuumCoreLib/Singleton/Database.h>
-#include <SelenNavigationLib/Maps/NavigationAgent.h>
-#include <SuthanusPhysicsLib/PhysicEngine.h>
-#include <AhwassaGraphicsLib/Core/Window.h>
-#include <HaasScriptingLib/ScriptEngine.h>
+//#include <SelenNavigationLib/Maps/NavigationAgent.h>
+//#include <SuthanusPhysicsLib/PhysicEngine.h>
+//#include <AhwassaGraphicsLib/Core/Window.h>
+//#include <HaasScriptingLib/ScriptEngine.h>
 #include <AezeselFileIOLib/ZIP.h>
 #include <filesystem>
 
@@ -22,11 +22,11 @@ int main(int argc, char** argv) {
   enforceWorkingDir(std::string(argv[0]));
 
   Iyathuum::Database<int>::terminate();
-  Selen::NavigationAgent<2> agent(glm::vec2(0,0),glm::vec2(0,0));
-  Suthanus::PhysicEngine engine;  
-  Ahwassa::Window win(100, 100);
-  Haas::ScriptEngine engin;
+  //Selen::NavigationAgent<2> agent(glm::vec2(0,0),glm::vec2(0,0));
+  //Suthanus::PhysicEngine engine;  
+  //Ahwassa::Window win(100, 100);
+  //Haas::ScriptEngine engin;
   Aezesel::ZIP z("");
-  win.run();
+  //win.run();
   return 0;
 }

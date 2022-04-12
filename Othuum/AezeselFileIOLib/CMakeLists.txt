@@ -7,14 +7,6 @@ find_package(assimp REQUIRED)
 find_package(gli REQUIRED)
 find_package(lodepng REQUIRED)
 
-FetchContent_Declare(
-  libnyquist
-  GIT_REPOSITORY https://github.com/ddiakopoulos/libnyquist.git
-  GIT_TAG        d389ac419dae89a95f83f202a956e3f4846313c3
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(libnyquist)
-
 ############################################################################
 ############################################################################
 ############################################################################
@@ -134,6 +126,7 @@ set(ALL_FILES
 ############################################################################
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/zipper)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/libnyquist)
 
 add_library(AezeselFileIOLib ${ALL_FILES})
 set_property(TARGET AezeselFileIOLib PROPERTY CXX_STANDARD 20)
@@ -141,8 +134,8 @@ set_property(TARGET AezeselFileIOLib PROPERTY CXX_STANDARD 20)
 target_link_libraries(AezeselFileIOLib 
 IyathuumCoreLib 
 gli 
-assimp 
-zipper
+${ASSIMP_LIBRARIES} 
+staticZipper
 libnyquist
 nlohmann_json::nlohmann_json
 )
