@@ -2,57 +2,14 @@ cmake_minimum_required(VERSION 3.23)
 project(AhwassaGraphicsLib)
 include(FetchContent)
 
-FetchContent_Declare(
-  glfw
-  GIT_REPOSITORY https://github.com/glfw/glfw.git
-  GIT_TAG        7d5a16ce714f0b5f4efa3262de22e4d948851525
-)
-option(GLFW_BUILD_DOCS "Build the GLFW documentation" OFF)
-option(GLFW_INSTALL "Generate installation target" OFF)
-FetchContent_MakeAvailable(glfw)
+find_package(glm)
+find_package(glfw3 REQUIRED)
+find_package(portaudio REQUIRED)
+find_package(Freetype REQUIRED)
+find_package(imgui REQUIRED)
 
-FetchContent_Declare(
-  portaudio
-  GIT_REPOSITORY https://github.com/PortAudio/portaudio.git
-  GIT_TAG        147dd722548358763a8b649b3e4b41dfffbcfbb6
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(portaudio)
-
-FetchContent_Declare(
-  openvr
-  GIT_REPOSITORY https://github.com/ValveSoftware/openvr
-  GIT_TAG        4c85abcb7f7f1f02adaf3812018c99fc593bc341
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(openvr)
-
-FetchContent_Declare(
-  freetype
-  GIT_REPOSITORY https://github.com/freetype/freetype.git
-  GIT_TAG        a1ca70102373fec0b98ac525885b34771c2604aa
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(freetype)
-
-FetchContent_Declare(
-  freetype
-  GIT_REPOSITORY https://github.com/freetype/freetype.git
-  GIT_TAG        a1ca70102373fec0b98ac525885b34771c2604aa
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(freetype)
-
-FetchContent_Declare(
-  imgui
-  GIT_REPOSITORY https://github.com/ocornut/imgui.git
-  GIT_TAG        v1.87
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(imgui)
-
-
-
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+find_package(OpenVR REQUIRED)
 
 ############################################################################
 ############################################################################
@@ -339,30 +296,7 @@ set(lib__glad
 )
 source_group("lib\\glad" FILES ${lib__glad})
 
-
-set(lib__dear_imgui
-    "${imgui_SOURCE_DIR}/imconfig.h"
-    "${imgui_SOURCE_DIR}/imgui.cpp"
-    "${imgui_SOURCE_DIR}/imgui.h"
-    "${imgui_SOURCE_DIR}/imgui_demo.cpp"
-    "${imgui_SOURCE_DIR}/imgui_draw.cpp"
-    "${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.cpp"
-    "${imgui_SOURCE_DIR}/backends/imgui_impl_glfw.h"
-    "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.cpp"
-    "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3.h"
-    "${imgui_SOURCE_DIR}/backends/imgui_impl_opengl3_loader.h"
-    "${imgui_SOURCE_DIR}/imgui_internal.h"
-    "${imgui_SOURCE_DIR}/imgui_tables.cpp"
-    "${imgui_SOURCE_DIR}/imgui_widgets.cpp"
-    "${imgui_SOURCE_DIR}/imstb_rectpack.h"
-    "${imgui_SOURCE_DIR}/imstb_textedit.h"
-    "${imgui_SOURCE_DIR}/imstb_truetype.h"
-)
-source_group("lib\\dear imgui" FILES ${lib__dear_imgui})
-
 set(lib__dear_imgui_filedialog
-    "${imgui_SOURCE_DIR}/misc/cpp/imgui_stdlib.cpp"
-    "${imgui_SOURCE_DIR}/misc/cpp/imgui_stdlib.h"
     "lib/IMGUIFileDialog/dirent/dirent.h"
     "lib/IMGUIFileDialog/ImGuiFileDialog.cpp"
     "lib/IMGUIFileDialog/ImGuiFileDialog.h"
@@ -401,7 +335,6 @@ set(ALL_FILES
     ${Source_Files__Vertex}
     ${Source_Files__Widgets}
     ${lib__glad}
-	  ${lib__dear_imgui}
     ${lib__dear_imgui_filedialog}
 )
 
@@ -413,10 +346,10 @@ add_library(AhwassaGraphicsLib ${ALL_FILES})
 set_property(TARGET AhwassaGraphicsLib PROPERTY CXX_STANDARD 20)
 
 target_link_libraries(AhwassaGraphicsLib
-glm
+glm::glm
 IyathuumCoreLib
 glfw
-freetype
+Freetype
 portaudio
 ${OPENVR_LIBRARIES}
 )
@@ -434,8 +367,3 @@ target_include_directories(AhwassaGraphicsLib PRIVATE
 "${freetype_SOURCE_DIR}/include"
 "${imgui_SOURCE_DIR}"
 )
-
-add_dependencies(AhwassaGraphicsLib freetype)
-add_dependencies(AhwassaGraphicsLib glm)
-add_dependencies(AhwassaGraphicsLib glfw)
-add_dependencies(AhwassaGraphicsLib IyathuumCoreLib)

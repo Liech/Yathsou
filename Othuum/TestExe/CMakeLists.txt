@@ -10,7 +10,7 @@ target_link_libraries(TestExe
 IyathuumCoreLib 
 #SelenNavigationLib
 #SuthanusPhysicLib
-#AhwassaGraphicsLib
+AhwassaGraphicsLib
 #HaasScriptingLib
 AezeselFileIOLib
 )
@@ -19,7 +19,7 @@ target_include_directories(TestExe PRIVATE
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
 #"${SelenNavigationLib_SOURCE_DIR}/Source"
 #"${SuthanusPhysicLib_SOURCE_DIR}/Source"
-#"${AhwassaGraphicsLib_SOURCE_DIR}/Source"
+"${AhwassaGraphicsLib_SOURCE_DIR}/Source"
 #"${HaasScriptingLib_SOURCE_DIR}/Source"
 "${AezeselFileIOLib_SOURCE_DIR}/Source"
 "${json_SOURCE_DIR}/Include"
@@ -29,7 +29,7 @@ add_dependencies(TestExe
 IyathuumCoreLib 
 #SelenNavigationLib
 #SuthanusPhysicLib
-#AhwassaGraphicsLib
+AhwassaGraphicsLib
 #HaasScriptingLib
 AezeselFileIOLib
 )

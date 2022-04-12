@@ -6,6 +6,14 @@
 	  "lodepng",
 	  "gli",
     "nlohmann-json",
-    "glm"
+    "glm",
+	"glfw3",
+	"portaudio",
+	"openvr",
+	"freetype",	
+	{
+	  "name" : "imgui",
+	  "features" : ["glfw-binding", "opengl3-binding"]
+	}	
   ]
 }
