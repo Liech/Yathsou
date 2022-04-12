@@ -1,14 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|Win32">
-      <Configuration>Debug</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|Win32">
-      <Configuration>Release</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
@@ -17,426 +12,336 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{02EEFA63-D971-3CEF-BB90-1D292AC00739}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1690e851-1424-484a-ae4a-cb998160bf18}</ProjectGuid>
-    <RootNamespace>AezeselFileIOLib</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <VcpkgEnabled>false</VcpkgEnabled>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>AezeselFileIOLib</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="Shared">
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="do_not_import_user.props" Condition="exists('do_not_import_user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AezeselFileIOLib.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AezeselFileIOLib</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AezeselFileIOLib.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AezeselFileIOLib</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">AezeselFileIOLib.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">AezeselFileIOLib</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">AezeselFileIOLib.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">AezeselFileIOLib</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-    </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(ProjectDir)lib;$(ProjectDir)lib\minizip;$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
-      <ObjectFileName>$(IntDir)/%(RelativeDir)/</ObjectFileName>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;JSON_USE_IMPLICIT_CONVERSIONS=1;JSON_DIAGNOSTICS=0;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-    </ProjectReference>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;JSON_USE_IMPLICIT_CONVERSIONS=1;JSON_DIAGNOSTICS=0;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-staticd.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;$(ProjectDir)lib/assimp/assimp-vc142-mtd.lib;$(ProjectDir)lib\libnyquist\libnyquist_d.lib;$(ProjectDir)lib\libnyquist\libopus_d.lib;$(ProjectDir)lib\libnyquist\libwavpack_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir);$(ProjectDir);$(ProjectDir)lib;$(ProjectDir)lib\minizip;$(SolutionDir)IyathuumCoreLib/lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;JSON_USE_IMPLICIT_CONVERSIONS=1;JSON_DIAGNOSTICS=0;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
     </ClCompile>
-    <Link>
-      <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-    </Link>
-    <ProjectReference>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-    </ProjectReference>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;JSON_USE_IMPLICIT_CONVERSIONS=1;JSON_DIAGNOSTICS=0;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
     <Lib>
-      <AdditionalDependencies>$(SolutionDir)x64/$(ConfigurationName)/IyathuumCoreLib.lib;$(ProjectDir)lib/zipper/Zipper-static.lib;$(ProjectDir)lib/zipper/zlibstatic.lib;$(ProjectDir)lib/assimp/assimp-vc142-mt.lib;$(ProjectDir)lib\libnyquist\libnyquist.lib;$(ProjectDir)lib\libnyquist\libopus.lib;$(ProjectDir)lib\libnyquist\libwavpack.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;JSON_USE_IMPLICIT_CONVERSIONS=1;JSON_DIAGNOSTICS=0;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;JSON_USE_IMPLICIT_CONVERSIONS=1;JSON_DIAGNOSTICS=0;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;JSON_USE_IMPLICIT_CONVERSIONS=1;JSON_DIAGNOSTICS=0;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;JSON_USE_IMPLICIT_CONVERSIONS=1;JSON_DIAGNOSTICS=0;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\Source;\include;\..;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\lib\zipper\include;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\_deps\libnyquist-src;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AssimpUtil.h" />
-    <ClInclude Include="ImageIO.h" />
-    <ClInclude Include="IO.h" />
-    <ClInclude Include="lib\assimp\aabb.h" />
-    <ClInclude Include="lib\assimp\ai_assert.h" />
-    <ClInclude Include="lib\assimp\anim.h" />
-    <ClInclude Include="lib\assimp\BaseImporter.h" />
-    <ClInclude Include="lib\assimp\Bitmap.h" />
-    <ClInclude Include="lib\assimp\BlobIOSystem.h" />
-    <ClInclude Include="lib\assimp\ByteSwapper.h" />
-    <ClInclude Include="lib\assimp\camera.h" />
-    <ClInclude Include="lib\assimp\cexport.h" />
-    <ClInclude Include="lib\assimp\cfileio.h" />
-    <ClInclude Include="lib\assimp\cimport.h" />
-    <ClInclude Include="lib\assimp\ColladaMetaData.h" />
-    <ClInclude Include="lib\assimp\color4.h" />
-    <ClInclude Include="lib\assimp\commonMetaData.h" />
-    <ClInclude Include="lib\assimp\Compiler\poppack1.h" />
-    <ClInclude Include="lib\assimp\Compiler\pstdint.h" />
-    <ClInclude Include="lib\assimp\Compiler\pushpack1.h" />
-    <ClInclude Include="lib\assimp\config.h" />
-    <ClInclude Include="lib\assimp\CreateAnimMesh.h" />
-    <ClInclude Include="lib\assimp\DefaultIOStream.h" />
-    <ClInclude Include="lib\assimp\DefaultIOSystem.h" />
-    <ClInclude Include="lib\assimp\DefaultLogger.hpp" />
-    <ClInclude Include="lib\assimp\Defines.h" />
-    <ClInclude Include="lib\assimp\defs.h" />
-    <ClInclude Include="lib\assimp\Exceptional.h" />
-    <ClInclude Include="lib\assimp\Exporter.hpp" />
-    <ClInclude Include="lib\assimp\fast_atof.h" />
-    <ClInclude Include="lib\assimp\GenericProperty.h" />
-    <ClInclude Include="lib\assimp\Hash.h" />
-    <ClInclude Include="lib\assimp\Importer.hpp" />
-    <ClInclude Include="lib\assimp\importerdesc.h" />
-    <ClInclude Include="lib\assimp\IOStream.hpp" />
-    <ClInclude Include="lib\assimp\IOStreamBuffer.h" />
-    <ClInclude Include="lib\assimp\IOSystem.hpp" />
-    <ClInclude Include="lib\assimp\light.h" />
-    <ClInclude Include="lib\assimp\LineSplitter.h" />
-    <ClInclude Include="lib\assimp\LogAux.h" />
-    <ClInclude Include="lib\assimp\Logger.hpp" />
-    <ClInclude Include="lib\assimp\LogStream.hpp" />
-    <ClInclude Include="lib\assimp\material.h" />
-    <ClInclude Include="lib\assimp\MathFunctions.h" />
-    <ClInclude Include="lib\assimp\matrix3x3.h" />
-    <ClInclude Include="lib\assimp\matrix4x4.h" />
-    <ClInclude Include="lib\assimp\MemoryIOWrapper.h" />
-    <ClInclude Include="lib\assimp\mesh.h" />
-    <ClInclude Include="lib\assimp\metadata.h" />
-    <ClInclude Include="lib\assimp\NullLogger.hpp" />
-    <ClInclude Include="lib\assimp\ParsingUtils.h" />
-    <ClInclude Include="lib\assimp\pbrmaterial.h" />
-    <ClInclude Include="lib\assimp\port\AndroidJNI\AndroidJNIIOSystem.h" />
-    <ClInclude Include="lib\assimp\port\AndroidJNI\BundledAssetIOSystem.h" />
-    <ClInclude Include="lib\assimp\postprocess.h" />
-    <ClInclude Include="lib\assimp\Profiler.h" />
-    <ClInclude Include="lib\assimp\ProgressHandler.hpp" />
-    <ClInclude Include="lib\assimp\qnan.h" />
-    <ClInclude Include="lib\assimp\quaternion.h" />
-    <ClInclude Include="lib\assimp\RemoveComments.h" />
-    <ClInclude Include="lib\assimp\scene.h" />
-    <ClInclude Include="lib\assimp\SceneCombiner.h" />
-    <ClInclude Include="lib\assimp\SGSpatialSort.h" />
-    <ClInclude Include="lib\assimp\SkeletonMeshBuilder.h" />
-    <ClInclude Include="lib\assimp\SmallVector.h" />
-    <ClInclude Include="lib\assimp\SmoothingGroups.h" />
-    <ClInclude Include="lib\assimp\SpatialSort.h" />
-    <ClInclude Include="lib\assimp\StandardShapes.h" />
-    <ClInclude Include="lib\assimp\StreamReader.h" />
-    <ClInclude Include="lib\assimp\StreamWriter.h" />
-    <ClInclude Include="lib\assimp\StringComparison.h" />
-    <ClInclude Include="lib\assimp\StringUtils.h" />
-    <ClInclude Include="lib\assimp\Subdivision.h" />
-    <ClInclude Include="lib\assimp\texture.h" />
-    <ClInclude Include="lib\assimp\TinyFormatter.h" />
-    <ClInclude Include="lib\assimp\types.h" />
-    <ClInclude Include="lib\assimp\vector2.h" />
-    <ClInclude Include="lib\assimp\vector3.h" />
-    <ClInclude Include="lib\assimp\version.h" />
-    <ClInclude Include="lib\assimp\Vertex.h" />
-    <ClInclude Include="lib\assimp\XmlParser.h" />
-    <ClInclude Include="lib\assimp\XMLTools.h" />
-    <ClInclude Include="lib\assimp\ZipArchiveIOSystem.h" />
-    <ClInclude Include="lib\gli\clear.hpp" />
-    <ClInclude Include="lib\gli\comparison.hpp" />
-    <ClInclude Include="lib\gli\convert.hpp" />
-    <ClInclude Include="lib\gli\copy.hpp" />
-    <ClInclude Include="lib\gli\core\bc.hpp" />
-    <ClInclude Include="lib\gli\core\clear.hpp" />
-    <ClInclude Include="lib\gli\core\convert_func.hpp" />
-    <ClInclude Include="lib\gli\core\coord.hpp" />
-    <ClInclude Include="lib\gli\core\file.hpp" />
-    <ClInclude Include="lib\gli\core\filter.hpp" />
-    <ClInclude Include="lib\gli\core\filter_compute.hpp" />
-    <ClInclude Include="lib\gli\core\flip.hpp" />
-    <ClInclude Include="lib\gli\core\mipmaps_compute.hpp" />
-    <ClInclude Include="lib\gli\core\s3tc.hpp" />
-    <ClInclude Include="lib\gli\core\storage_linear.hpp" />
-    <ClInclude Include="lib\gli\duplicate.hpp" />
-    <ClInclude Include="lib\gli\dx.hpp" />
-    <ClInclude Include="lib\gli\format.hpp" />
-    <ClInclude Include="lib\gli\generate_mipmaps.hpp" />
-    <ClInclude Include="lib\gli\gl.hpp" />
-    <ClInclude Include="lib\gli\gli.hpp" />
-    <ClInclude Include="lib\gli\image.hpp" />
-    <ClInclude Include="lib\gli\levels.hpp" />
-    <ClInclude Include="lib\gli\load.hpp" />
-    <ClInclude Include="lib\gli\load_dds.hpp" />
-    <ClInclude Include="lib\gli\load_kmg.hpp" />
-    <ClInclude Include="lib\gli\load_ktx.hpp" />
-    <ClInclude Include="lib\gli\make_texture.hpp" />
-    <ClInclude Include="lib\gli\reduce.hpp" />
-    <ClInclude Include="lib\gli\sampler.hpp" />
-    <ClInclude Include="lib\gli\sampler1d.hpp" />
-    <ClInclude Include="lib\gli\sampler1d_array.hpp" />
-    <ClInclude Include="lib\gli\sampler2d.hpp" />
-    <ClInclude Include="lib\gli\sampler2d_array.hpp" />
-    <ClInclude Include="lib\gli\sampler3d.hpp" />
-    <ClInclude Include="lib\gli\sampler_cube.hpp" />
-    <ClInclude Include="lib\gli\sampler_cube_array.hpp" />
-    <ClInclude Include="lib\gli\save.hpp" />
-    <ClInclude Include="lib\gli\save_dds.hpp" />
-    <ClInclude Include="lib\gli\save_kmg.hpp" />
-    <ClInclude Include="lib\gli\save_ktx.hpp" />
-    <ClInclude Include="lib\gli\target.hpp" />
-    <ClInclude Include="lib\gli\texture.hpp" />
-    <ClInclude Include="lib\gli\texture1d.hpp" />
-    <ClInclude Include="lib\gli\texture1d_array.hpp" />
-    <ClInclude Include="lib\gli\texture2d.hpp" />
-    <ClInclude Include="lib\gli\texture2d_array.hpp" />
-    <ClInclude Include="lib\gli\texture3d.hpp" />
-    <ClInclude Include="lib\gli\texture_cube.hpp" />
-    <ClInclude Include="lib\gli\texture_cube_array.hpp" />
-    <ClInclude Include="lib\gli\transform.hpp" />
-    <ClInclude Include="lib\gli\type.hpp" />
-    <ClInclude Include="lib\gli\view.hpp" />
-    <ClInclude Include="lib\json.hpp" />
-    <ClInclude Include="lib\json_fwd.hpp" />
-    <ClInclude Include="lib\lodepng\include\lodepng\lodepng.h" />
-    <ClInclude Include="lib\lodepng\include\lodepng\lodepng_util.h" />
-    <ClInclude Include="lib\lodepng\lodepng.h" />
-    <ClInclude Include="lib\lodepng\lodepng_util.h" />
-    <ClInclude Include="lib\zipper\CDirEntry.h" />
-    <ClInclude Include="lib\zipper\defs.h" />
-    <ClInclude Include="lib\zipper\tools.h" />
-    <ClInclude Include="lib\zipper\unzipper.h" />
-    <ClInclude Include="lib\zipper\zipper.h" />
-    <ClInclude Include="MagicaVox\Chunk.h" />
-    <ClInclude Include="MagicaVox\ChunkFactory.h" />
-    <ClInclude Include="MagicaVox\ChunkLAYR.h" />
-    <ClInclude Include="MagicaVox\ChunkMAIN.h" />
-    <ClInclude Include="MagicaVox\ChunkMATL.h" />
-    <ClInclude Include="MagicaVox\ChunknGRP.h" />
-    <ClInclude Include="MagicaVox\ChunknSHP.h" />
-    <ClInclude Include="MagicaVox\ChunknTRN.h" />
-    <ClInclude Include="MagicaVox\ChunkPACK.h" />
-    <ClInclude Include="MagicaVox\ChunkRGBA.h" />
-    <ClInclude Include="MagicaVox\ChunkrOBJ.h" />
-    <ClInclude Include="MagicaVox\ChunkSIZE.h" />
-    <ClInclude Include="MagicaVox\ChunkXYZI.h" />
-    <ClInclude Include="MagicaVox\Import.h" />
-    <ClInclude Include="MagicaVox\Reader.h" />
-    <ClInclude Include="MagicaVox\typeDICT.h" />
-    <ClInclude Include="MagicaVox\typeROTATION.h" />
-    <ClInclude Include="MagicaVox\VoxFile.h" />
-    <ClInclude Include="Model3D.h" />
-    <ClInclude Include="Sound\SoundFactory.h" />
-    <ClInclude Include="Sound\SoundIO.h" />
-    <ClInclude Include="Sound\XSB.h" />
-    <ClInclude Include="Sound\XWB.h" />
-    <ClInclude Include="STLWriter.h" />
-    <ClInclude Include="SupremeCommander\SCA.h" />
-    <ClInclude Include="SupremeCommander\SCD.h" />
-    <ClInclude Include="SupremeCommander\SCM.h" />
-    <ClInclude Include="SupremeCommander\SCMAP.h" />
-    <ClInclude Include="SupremeCommander\SupremeCommanderAnimator.h" />
-    <ClInclude Include="ZIP.h" />
+    <CustomBuild Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/AezeselFileIOLib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/nicol/Documents/GitHub/Yathsou/Othuum -BC:/Users/nicol/Documents/GitHub/Yathsou/Othuum --check-stamp-file C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/AezeselFileIOLib/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-3.23\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\SelectLibraryConfigurations.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\gli\gliConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\gli\gliTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-config.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-config.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\utf8cpp\utf8cppConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\zlib\vcpkg-cmake-wrapper.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/AezeselFileIOLib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/nicol/Documents/GitHub/Yathsou/Othuum -BC:/Users/nicol/Documents/GitHub/Yathsou/Othuum --check-stamp-file C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/AezeselFileIOLib/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-3.23\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\SelectLibraryConfigurations.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\gli\gliConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\gli\gliTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-config.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-config.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\utf8cpp\utf8cppConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\zlib\vcpkg-cmake-wrapper.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/AezeselFileIOLib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/nicol/Documents/GitHub/Yathsou/Othuum -BC:/Users/nicol/Documents/GitHub/Yathsou/Othuum --check-stamp-file C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/AezeselFileIOLib/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-3.23\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\SelectLibraryConfigurations.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\gli\gliConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\gli\gliTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-config.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-config.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\utf8cpp\utf8cppConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\zlib\vcpkg-cmake-wrapper.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/AezeselFileIOLib/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/nicol/Documents/GitHub/Yathsou/Othuum -BC:/Users/nicol/Documents/GitHub/Yathsou/Othuum --check-stamp-file C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/AezeselFileIOLib/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.23\Modules\CMakeFindDependencyMacro.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FetchContent.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FetchContent\CMakeLists.cmake.in;C:\Program Files\CMake\share\cmake-3.23\Modules\FindGit.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindPackageMessage.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\FindZLIB.cmake;C:\Program Files\CMake\share\cmake-3.23\Modules\SelectLibraryConfigurations.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\assimp\assimpConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\gli\gliConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\gli\gliTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-config.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\irrlicht\irrlicht-targets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\kubazip\kubazipTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-config.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\lodepng\lodepng-targets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\minizip\minizipTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfigVersion.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_jsonTargets.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\poly2tri\poly2triConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig-debug.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig-release.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\polyclipping\polyclippingConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\utf8cpp\utf8cppConfig.cmake;C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\zlib\vcpkg-cmake-wrapper.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AssimpUtil.cpp" />
-    <ClCompile Include="ImageIO.cpp" />
-    <ClCompile Include="IO.cpp" />
-    <ClCompile Include="lib\gli\core\dummy.cpp" />
-    <ClCompile Include="lib\lodepng\include\lodepng\lodepng.cpp" />
-    <ClCompile Include="lib\lodepng\include\lodepng\lodepng_util.cpp" />
-    <ClCompile Include="lib\lodepng\lodepng.cpp" />
-    <ClCompile Include="lib\lodepng\lodepng_util.cpp" />
-    <ClCompile Include="MagicaVox\Chunk.cpp" />
-    <ClCompile Include="MagicaVox\ChunkFactory.cpp" />
-    <ClCompile Include="MagicaVox\ChunkLAYR.cpp" />
-    <ClCompile Include="MagicaVox\ChunkMAIN.cpp" />
-    <ClCompile Include="MagicaVox\ChunkMATL.cpp" />
-    <ClCompile Include="MagicaVox\ChunknGRP.cpp" />
-    <ClCompile Include="MagicaVox\ChunknSHP.cpp" />
-    <ClCompile Include="MagicaVox\ChunknTRN.cpp" />
-    <ClCompile Include="MagicaVox\ChunkPACK.cpp" />
-    <ClCompile Include="MagicaVox\ChunkRGBA.cpp" />
-    <ClCompile Include="MagicaVox\ChunkrOBJ.cpp" />
-    <ClCompile Include="MagicaVox\ChunkSIZE.cpp" />
-    <ClCompile Include="MagicaVox\ChunkXYZI.cpp" />
-    <ClCompile Include="MagicaVox\Import.cpp" />
-    <ClCompile Include="MagicaVox\Reader.cpp" />
-    <ClCompile Include="MagicaVox\typeDICT.cpp" />
-    <ClCompile Include="MagicaVox\typeROTATION.cpp" />
-    <ClCompile Include="MagicaVox\VoxFile.cpp" />
-    <ClCompile Include="Model3D.cpp" />
-    <ClCompile Include="Sound\SoundFactory.cpp" />
-    <ClCompile Include="Sound\SoundIO.cpp" />
-    <ClCompile Include="Sound\XSB.cpp" />
-    <ClCompile Include="Sound\XWB.cpp" />
-    <ClCompile Include="STLWriter.cpp" />
-    <ClCompile Include="SupremeCommander\SCA.cpp" />
-    <ClCompile Include="SupremeCommander\SCD.cpp" />
-    <ClCompile Include="SupremeCommander\SCM.cpp" />
-    <ClCompile Include="SupremeCommander\SCMAP.cpp" />
-    <ClCompile Include="SupremeCommander\SupremeCommanderAnimator.cpp" />
-    <ClCompile Include="ZIP.cpp" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\AssimpUtil.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\ImageIO.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\IO.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Model3D.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\STLWriter.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\ZIP.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Chunk.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkFactory.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkLAYR.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkMAIN.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkMATL.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknGRP.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknSHP.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknTRN.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkPACK.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkRGBA.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkrOBJ.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkSIZE.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkXYZI.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Import.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Reader.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\typeDICT.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\typeROTATION.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\VoxFile.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\SoundFactory.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\SoundIO.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\XSB.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\XWB.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCA.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCD.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCM.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCMAP.h" />
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SupremeCommanderAnimator.h" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\AssimpUtil.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\ImageIO.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\IO.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Model3D.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\STLWriter.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\ZIP.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Chunk.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkFactory.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkLAYR.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkMAIN.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkMATL.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknGRP.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknSHP.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknTRN.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkPACK.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkRGBA.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkrOBJ.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkSIZE.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkXYZI.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Import.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Reader.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\typeDICT.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\typeROTATION.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\VoxFile.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\SoundFactory.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\SoundIO.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\XSB.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\XWB.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCA.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCD.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCM.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCMAP.cpp" />
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SupremeCommanderAnimator.cpp" />
+    <Natvis Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_json.natvis">
+    </Natvis>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="lib\assimp\assimp-vc142-mt.dll">
-      <FileType>Document</FileType>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(TargetDir)</DestinationFolders>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="lib\assimp\assimp-vc142-mtd.dll">
-      <FileType>Document</FileType>
-      <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(TargetDir)</DestinationFolders>
-    </CopyFileToFolders>
-    <None Include="lib\assimp\color4.inl" />
-    <None Include="lib\assimp\config.h.in" />
-    <None Include="lib\assimp\material.inl" />
-    <None Include="lib\assimp\matrix3x3.inl" />
-    <None Include="lib\assimp\matrix4x4.inl" />
-    <None Include="lib\assimp\quaternion.inl" />
-    <None Include="lib\assimp\SmoothingGroups.inl" />
-    <None Include="lib\assimp\vector2.inl" />
-    <None Include="lib\assimp\vector3.inl" />
-    <None Include="lib\gli\core\bc.inl" />
-    <None Include="lib\gli\core\clear.inl" />
-    <None Include="lib\gli\core\comparison.inl" />
-    <None Include="lib\gli\core\convert.inl" />
-    <None Include="lib\gli\core\copy.inl" />
-    <None Include="lib\gli\core\duplicate.inl" />
-    <None Include="lib\gli\core\dx.inl" />
-    <None Include="lib\gli\core\file.inl" />
-    <None Include="lib\gli\core\filter.inl" />
-    <None Include="lib\gli\core\flip.inl" />
-    <None Include="lib\gli\core\format.inl" />
-    <None Include="lib\gli\core\generate_mipmaps.inl" />
-    <None Include="lib\gli\core\gl.inl" />
-    <None Include="lib\gli\core\image.inl" />
-    <None Include="lib\gli\core\levels.inl" />
-    <None Include="lib\gli\core\load.inl" />
-    <None Include="lib\gli\core\load_dds.inl" />
-    <None Include="lib\gli\core\load_kmg.inl" />
-    <None Include="lib\gli\core\load_ktx.inl" />
-    <None Include="lib\gli\core\make_texture.inl" />
-    <None Include="lib\gli\core\reduce.inl" />
-    <None Include="lib\gli\core\s3tc.inl" />
-    <None Include="lib\gli\core\sampler.inl" />
-    <None Include="lib\gli\core\sampler1d.inl" />
-    <None Include="lib\gli\core\sampler1d_array.inl" />
-    <None Include="lib\gli\core\sampler2d.inl" />
-    <None Include="lib\gli\core\sampler2d_array.inl" />
-    <None Include="lib\gli\core\sampler3d.inl" />
-    <None Include="lib\gli\core\sampler_cube.inl" />
-    <None Include="lib\gli\core\sampler_cube_array.inl" />
-    <None Include="lib\gli\core\save.inl" />
-    <None Include="lib\gli\core\save_dds.inl" />
-    <None Include="lib\gli\core\save_kmg.inl" />
-    <None Include="lib\gli\core\save_ktx.inl" />
-    <None Include="lib\gli\core\storage_linear.inl" />
-    <None Include="lib\gli\core\texture.inl" />
-    <None Include="lib\gli\core\texture1d.inl" />
-    <None Include="lib\gli\core\texture1d_array.inl" />
-    <None Include="lib\gli\core\texture2d.inl" />
-    <None Include="lib\gli\core\texture2d_array.inl" />
-    <None Include="lib\gli\core\texture3d.inl" />
-    <None Include="lib\gli\core\texture_cube.inl" />
-    <None Include="lib\gli\core\texture_cube_array.inl" />
-    <None Include="lib\gli\core\transform.inl" />
-    <None Include="lib\gli\core\view.inl" />
+    <ProjectReference Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\ZERO_CHECK.vcxproj">
+      <Project>{C4DDAADA-9996-3FD2-A7B7-31DB326BB163}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\IyathuumCoreLib\IyathuumCoreLib.vcxproj">
+      <Project>{58F6BF85-8B11-3FD6-AF67-3BE9D8A9C1F2}</Project>
+      <Name>IyathuumCoreLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

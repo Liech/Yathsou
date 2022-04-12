@@ -1,0 +1,11 @@
+{
+  "name": "othuum",
+  "version-string": "0.0.1",
+  "dependencies": [
+    "assimp",
+	  "lodepng",
+	  "gli",
+    "nlohmann-json",
+    "glm"
+  ]
+}

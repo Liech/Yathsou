@@ -1,874 +1,237 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\AssimpUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\ImageIO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\IO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Model3D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\STLWriter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\ZIP.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Chunk.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkFactory.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkLAYR.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkMAIN.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkMATL.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknGRP.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknSHP.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknTRN.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkPACK.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkRGBA.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkrOBJ.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkSIZE.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkXYZI.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Import.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Reader.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\typeDICT.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\typeROTATION.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\VoxFile.cpp">
+      <Filter>Source Files\MagickaVox</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\SoundFactory.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\SoundIO.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\XSB.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\XWB.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCA.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCD.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCM.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCMAP.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SupremeCommanderAnimator.cpp">
+      <Filter>Source Files\SupremeCommander</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\AssimpUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\ImageIO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\IO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Model3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\STLWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\ZIP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Chunk.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkFactory.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkLAYR.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkMAIN.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkMATL.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknGRP.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknSHP.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunknTRN.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkPACK.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkRGBA.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkrOBJ.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkSIZE.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\ChunkXYZI.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Import.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\Reader.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\typeDICT.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\typeROTATION.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\MagicaVox\VoxFile.h">
+      <Filter>Header Files\MagickaVox</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\SoundFactory.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\SoundIO.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\XSB.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\Sound\XWB.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCA.h">
+      <Filter>Header Files\SupremeCommander</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCD.h">
+      <Filter>Header Files\SupremeCommander</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCM.h">
+      <Filter>Header Files\SupremeCommander</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SCMAP.h">
+      <Filter>Header Files\SupremeCommander</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\Source\AezeselFileIOLib\SupremeCommander\SupremeCommanderAnimator.h">
+      <Filter>Header Files\SupremeCommander</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\AezeselFileIOLib\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="C:\Users\nicol\Documents\GitHub\Yathsou\Othuum\vcpkg_installed\x64-windows\share\nlohmann_json\nlohmann_json.natvis" />
+  </ItemGroup>
+  <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="lib">
-      <UniqueIdentifier>{ef05e3c3-d036-43d7-a90a-fd8785a6f40f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\gli">
-      <UniqueIdentifier>{1b04ef8d-ede9-4cef-8b3e-6c64fcc73ef1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\lodepng">
-      <UniqueIdentifier>{ca2d24df-30b7-4755-a43c-67ef57c304b9}</UniqueIdentifier>
+      <UniqueIdentifier>{256DA6EE-715C-3215-BEB6-4E87AB39DB8D}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\MagickaVox">
-      <UniqueIdentifier>{4857814f-eb33-4bf9-8073-da04aad2ebcd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\MagickaVox">
-      <UniqueIdentifier>{baa9811b-84ac-4c02-9590-5e8b1c202063}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\SupremeCommander">
-      <UniqueIdentifier>{ad08238e-2633-414c-8d82-9250d9aab28e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\SupremeCommander">
-      <UniqueIdentifier>{e7600ba7-507e-4039-a770-86ea96ec0b82}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\zipper">
-      <UniqueIdentifier>{7cb3eeb3-0aeb-47db-aefe-20062e844a10}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\assimp">
-      <UniqueIdentifier>{bef5cb7c-efb6-4da3-ae55-0d9bfc19bc9c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="lib\assimp\DLL">
-      <UniqueIdentifier>{b79c5e8f-c7e6-4b86-a445-72f886309bb4}</UniqueIdentifier>
+      <UniqueIdentifier>{06A43BF9-FC17-35FA-BB9D-7702694DEA5B}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Sound">
-      <UniqueIdentifier>{3a669fa8-ad01-4b78-9a46-c0d1e07d5cff}</UniqueIdentifier>
+      <UniqueIdentifier>{BA4A6CF1-A59C-3BBA-BA08-DF4B58AF1D75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SupremeCommander">
+      <UniqueIdentifier>{DE47E426-B2E4-3A68-BBD2-7CE438B02201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{826433D6-4C7F-39CA-8D6C-F73FE4188019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MagickaVox">
+      <UniqueIdentifier>{570332F0-BBDA-32DA-9DA2-4D3C67CA5FA7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Sound">
-      <UniqueIdentifier>{e3facb62-5f50-4d5a-8ab2-e43c93237541}</UniqueIdentifier>
+      <UniqueIdentifier>{4EE41B9A-B7CA-31D4-81EB-DC56905E5705}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ImageIO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\lodepng\include\lodepng\lodepng.h">
-      <Filter>lib\lodepng</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\lodepng\include\lodepng\lodepng_util.h">
-      <Filter>lib\lodepng</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\lodepng\lodepng.h">
-      <Filter>lib\lodepng</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\lodepng\lodepng_util.h">
-      <Filter>lib\lodepng</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\clear.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\comparison.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\convert.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\copy.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\bc.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\clear.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\convert_func.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\coord.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\file.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\filter.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\filter_compute.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\flip.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\mipmaps_compute.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\s3tc.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\core\storage_linear.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\duplicate.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\dx.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\format.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\generate_mipmaps.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\gl.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\gli.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\image.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\levels.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\load.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\load_dds.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\load_kmg.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\load_ktx.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\make_texture.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\reduce.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\sampler.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\sampler1d.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\sampler1d_array.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\sampler2d.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\sampler2d_array.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\sampler3d.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\sampler_cube.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\sampler_cube_array.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\save.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\save_dds.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\save_kmg.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\save_ktx.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\target.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\texture.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\texture1d.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\texture1d_array.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\texture2d.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\texture2d_array.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\texture3d.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\texture_cube.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\texture_cube_array.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\transform.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\type.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\gli\view.hpp">
-      <Filter>lib\gli</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\Import.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\Reader.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\typeDICT.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\typeROTATION.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\VoxFile.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\Chunk.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunkFactory.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunkLAYR.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunkMAIN.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunkMATL.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunknGRP.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunknSHP.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunknTRN.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunkPACK.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunkRGBA.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunkrOBJ.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunkSIZE.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicaVox\ChunkXYZI.h">
-      <Filter>Header Files\MagickaVox</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\json.hpp">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\json_fwd.hpp">
-      <Filter>lib</Filter>
-    </ClInclude>
-    <ClInclude Include="SupremeCommander\SCMAP.h">
-      <Filter>Header Files\SupremeCommander</Filter>
-    </ClInclude>
-    <ClInclude Include="SupremeCommander\SupremeCommanderAnimator.h">
-      <Filter>Header Files\SupremeCommander</Filter>
-    </ClInclude>
-    <ClInclude Include="SupremeCommander\SCA.h">
-      <Filter>Header Files\SupremeCommander</Filter>
-    </ClInclude>
-    <ClInclude Include="SupremeCommander\SCM.h">
-      <Filter>Header Files\SupremeCommander</Filter>
-    </ClInclude>
-    <ClInclude Include="ZIP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\zipper\defs.h">
-      <Filter>lib\zipper</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\zipper\tools.h">
-      <Filter>lib\zipper</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\zipper\unzipper.h">
-      <Filter>lib\zipper</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\zipper\zipper.h">
-      <Filter>lib\zipper</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\zipper\CDirEntry.h">
-      <Filter>lib\zipper</Filter>
-    </ClInclude>
-    <ClInclude Include="STLWriter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Bitmap.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\BlobIOSystem.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\ByteSwapper.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\camera.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\cexport.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\cfileio.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\cimport.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\ColladaMetaData.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\color4.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\commonMetaData.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\config.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\CreateAnimMesh.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\DefaultIOStream.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\DefaultIOSystem.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\DefaultLogger.hpp">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Defines.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\defs.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Exceptional.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Exporter.hpp">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\fast_atof.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\GenericProperty.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Hash.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Importer.hpp">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\importerdesc.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\IOStream.hpp">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\IOStreamBuffer.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\IOSystem.hpp">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\light.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\LineSplitter.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\LogAux.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Logger.hpp">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\LogStream.hpp">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\material.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\MathFunctions.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\matrix3x3.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\matrix4x4.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\MemoryIOWrapper.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\mesh.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\metadata.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\NullLogger.hpp">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\ParsingUtils.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\pbrmaterial.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\postprocess.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Profiler.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\ProgressHandler.hpp">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\qnan.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\quaternion.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\RemoveComments.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\scene.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\SceneCombiner.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\SGSpatialSort.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\SkeletonMeshBuilder.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\SmallVector.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\SmoothingGroups.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\SpatialSort.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\StandardShapes.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\StreamReader.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\StreamWriter.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\StringComparison.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\StringUtils.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Subdivision.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\texture.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\TinyFormatter.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\types.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\vector2.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\vector3.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\version.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Vertex.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\XmlParser.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\XMLTools.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\ZipArchiveIOSystem.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Compiler\poppack1.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Compiler\pstdint.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\Compiler\pushpack1.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\port\AndroidJNI\AndroidJNIIOSystem.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\port\AndroidJNI\BundledAssetIOSystem.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\aabb.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\ai_assert.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\anim.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="lib\assimp\BaseImporter.h">
-      <Filter>lib\assimp</Filter>
-    </ClInclude>
-    <ClInclude Include="Model3D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AssimpUtil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\SoundFactory.h">
-      <Filter>Header Files\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\SoundIO.h">
-      <Filter>Header Files\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\XSB.h">
-      <Filter>Header Files\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\XWB.h">
-      <Filter>Header Files\Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="IO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SupremeCommander\SCD.h">
-      <Filter>Header Files\SupremeCommander</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="ImageIO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\lodepng\include\lodepng\lodepng.cpp">
-      <Filter>lib\lodepng</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\lodepng\include\lodepng\lodepng_util.cpp">
-      <Filter>lib\lodepng</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\lodepng\lodepng.cpp">
-      <Filter>lib\lodepng</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\lodepng\lodepng_util.cpp">
-      <Filter>lib\lodepng</Filter>
-    </ClCompile>
-    <ClCompile Include="lib\gli\core\dummy.cpp">
-      <Filter>lib\gli</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\Chunk.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunkFactory.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunkLAYR.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunkMAIN.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunkMATL.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunknGRP.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunknSHP.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunknTRN.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunkPACK.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunkRGBA.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunkrOBJ.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunkSIZE.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\ChunkXYZI.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\Import.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\Reader.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\typeDICT.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\typeROTATION.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicaVox\VoxFile.cpp">
-      <Filter>Source Files\MagickaVox</Filter>
-    </ClCompile>
-    <ClCompile Include="SupremeCommander\SCA.cpp">
-      <Filter>Source Files\SupremeCommander</Filter>
-    </ClCompile>
-    <ClCompile Include="SupremeCommander\SCM.cpp">
-      <Filter>Source Files\SupremeCommander</Filter>
-    </ClCompile>
-    <ClCompile Include="SupremeCommander\SCMAP.cpp">
-      <Filter>Source Files\SupremeCommander</Filter>
-    </ClCompile>
-    <ClCompile Include="SupremeCommander\SupremeCommanderAnimator.cpp">
-      <Filter>Source Files\SupremeCommander</Filter>
-    </ClCompile>
-    <ClCompile Include="ZIP.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="STLWriter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Model3D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AssimpUtil.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound\SoundFactory.cpp">
-      <Filter>Source Files\Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound\SoundIO.cpp">
-      <Filter>Source Files\Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound\XSB.cpp">
-      <Filter>Source Files\Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound\XWB.cpp">
-      <Filter>Source Files\Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="IO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SupremeCommander\SCD.cpp">
-      <Filter>Source Files\SupremeCommander</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="lib\gli\core\bc.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\clear.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\comparison.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\convert.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\copy.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\duplicate.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\dx.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\file.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\filter.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\flip.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\format.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\generate_mipmaps.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\gl.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\image.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\levels.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\load.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\load_dds.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\load_kmg.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\load_ktx.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\make_texture.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\reduce.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\s3tc.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\sampler.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\sampler1d.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\sampler1d_array.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\sampler2d.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\sampler2d_array.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\sampler3d.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\sampler_cube.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\sampler_cube_array.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\save.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\save_dds.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\save_kmg.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\save_ktx.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\storage_linear.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\texture.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\texture1d.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\texture1d_array.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\texture2d.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\texture2d_array.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\texture3d.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\texture_cube.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\texture_cube_array.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\transform.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\gli\core\view.inl">
-      <Filter>lib\gli</Filter>
-    </None>
-    <None Include="lib\assimp\color4.inl">
-      <Filter>lib\assimp</Filter>
-    </None>
-    <None Include="lib\assimp\config.h.in">
-      <Filter>lib\assimp</Filter>
-    </None>
-    <None Include="lib\assimp\material.inl">
-      <Filter>lib\assimp</Filter>
-    </None>
-    <None Include="lib\assimp\matrix3x3.inl">
-      <Filter>lib\assimp</Filter>
-    </None>
-    <None Include="lib\assimp\matrix4x4.inl">
-      <Filter>lib\assimp</Filter>
-    </None>
-    <None Include="lib\assimp\quaternion.inl">
-      <Filter>lib\assimp</Filter>
-    </None>
-    <None Include="lib\assimp\SmoothingGroups.inl">
-      <Filter>lib\assimp</Filter>
-    </None>
-    <None Include="lib\assimp\vector2.inl">
-      <Filter>lib\assimp</Filter>
-    </None>
-    <None Include="lib\assimp\vector3.inl">
-      <Filter>lib\assimp</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <CopyFileToFolders Include="lib\assimp\assimp-vc142-mtd.dll">
-      <Filter>lib\assimp\DLL</Filter>
-    </CopyFileToFolders>
-    <CopyFileToFolders Include="lib\assimp\assimp-vc142-mt.dll">
-      <Filter>lib\assimp\DLL</Filter>
-    </CopyFileToFolders>
+    <Filter Include="Source Files\SupremeCommander">
+      <UniqueIdentifier>{2D2855F8-D653-3C18-9BCF-04C65D488501}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

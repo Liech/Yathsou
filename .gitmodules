@@ -1,0 +1,3 @@
+[submodule "Othuum/vcpkg"]
+	path = Othuum/vcpkg
+	url = https://github.com/microsoft/vcpkg.git

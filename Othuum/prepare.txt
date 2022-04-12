@@ -1,0 +1,10 @@
+set Environement Variable VCPKG_DEFAULT_TRIPLET = x64-windows
+./vcpkg/bootstrap-vcpkg
+./vcpkg/vcpkg.exe integrate install
+./vcpkg/vcpkg install --feature-flags=manifests
+open cmake gui
+choose \Yathsou\Othuum as where is the source code
+choose any or Yathsou\Othuum\out as where to build binaries
+click configure
+select specify toolchain file for cross compiling
+select any visual studio version

@@ -1,15 +1,8 @@
-cmake_minimum_required(VERSION 2.8...3.23)
+cmake_minimum_required(VERSION 2.8...3.20)
 
 project(IyathuumCoreLib)
 
-include(FetchContent)
-FetchContent_Declare(
-  glm
-  GIT_REPOSITORY https://github.com/g-truc/glm.git
-  GIT_TAG        bf71a834948186f4097caa076cd2663c69a10e1e
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(glm)
+find_package(glm REQUIRED)
 
 ############################################################################
 ############################################################################
@@ -117,9 +110,9 @@ set(ALL_FILES
 add_library(IyathuumCoreLib ${ALL_FILES})
 set_property(TARGET IyathuumCoreLib PROPERTY CXX_STANDARD 20)
 
+target_link_libraries(IyathuumCoreLib glm::glm)
+
 target_include_directories(IyathuumCoreLib PRIVATE
 ${glm_SOURCE_DIR} 
 ${CMAKE_CURRENT_SOURCE_DIR}/Source
 )
-
-add_dependencies(IyathuumCoreLib glm)

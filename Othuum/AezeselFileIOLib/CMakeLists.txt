@@ -1,31 +1,11 @@
-cmake_minimum_required(VERSION 2.8...3.23)
+cmake_minimum_required(VERSION 2.8...3.20)
 project(AezeselFileIOLib)
 include(FetchContent)
 
-FetchContent_Declare(
-  json
-  GIT_REPOSITORY https://github.com/nlohmann/json.git
-  GIT_TAG        v3.10.5
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(json)
-
-FetchContent_Declare(
-  assimp
-  GIT_REPOSITORY https://github.com/assimp/assimp.git
-  GIT_TAG        v5.2.3
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(assimp)
-
-set(GLI_TEST_ENABLE OFF CACHE INTERNAL "")
-FetchContent_Declare(
-  gli
-  GIT_REPOSITORY https://github.com/g-truc/gli.git
-  GIT_TAG        0.8.2.0
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(gli)
+find_package(nlohmann_json REQUIRED)
+find_package(assimp REQUIRED)
+find_package(gli REQUIRED)
+find_package(lodepng REQUIRED)
 
 FetchContent_Declare(
   libnyquist
@@ -34,14 +14,6 @@ FetchContent_Declare(
   EXCLUDE_FROM_ALL    TRUE
 )
 FetchContent_MakeAvailable(libnyquist)
-
-FetchContent_Declare(
-  lodepng
-  GIT_REPOSITORY https://github.com/lvandeve/lodepng.git
-  GIT_TAG        5601b8272a6850b7c5d693dd0c0e16da50be8d8d
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(lodepng)
 
 ############################################################################
 ############################################################################
@@ -145,14 +117,6 @@ set(Source_Files__SupremeCommander
 )
 source_group("Source Files\\SupremeCommander" FILES ${Source_Files__SupremeCommander})
 
-set(lib__lodepng
-    "${lodepng_SOURCE_DIR}/lodepng.cpp"
-    "${lodepng_SOURCE_DIR}/lodepng.h"
-    "${lodepng_SOURCE_DIR}/lodepng_util.cpp"
-    "${lodepng_SOURCE_DIR}/lodepng_util.h"
-)
-source_group("lib\\lodepng" FILES ${lib__lodepng})
-
 set(ALL_FILES
     ${Header_Files}
     ${Header_Files__MagickaVox}
@@ -162,7 +126,6 @@ set(ALL_FILES
     ${Source_Files__MagickaVox}
     ${Source_Files__Sound}
     ${Source_Files__SupremeCommander}
-    ${lib__lodepng}
 )
 
 
@@ -181,13 +144,13 @@ gli
 assimp 
 zipper
 libnyquist
+nlohmann_json::nlohmann_json
 )
 
 target_include_directories(AezeselFileIOLib PRIVATE 
 ${CMAKE_CURRENT_SOURCE_DIR}/Source/AezeselFileIOLib
 ${CMAKE_CURRENT_SOURCE_DIR}/lib
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
-${json_SOURCE_DIR}/include
 ${assimp_SOURCE_DIR}/include
 ${assimp_SOURCE_DIR}/..
 ${glm_SOURCE_DIR} 
@@ -195,6 +158,5 @@ ${gli_SOURCE_DIR}
 ${zipper_SOURCE_DIR} 
 ${zipper_SOURCE_DIR}/include
 "${lodepng_SOURCE_DIR}"
+${libnyquist_SOURCE_DIR}
 )
-
-add_dependencies(IyathuumCoreLib glm)

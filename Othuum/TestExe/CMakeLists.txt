@@ -1,16 +1,10 @@
-cmake_minimum_required(VERSION 2.8...3.23)
+cmake_minimum_required(VERSION 2.8...3.20)
 project(TestExe)
 add_executable(TestExe main.cpp)
 set_property(TARGET TestExe PROPERTY CXX_STANDARD 20)
 
 
-include(FetchContent)
-FetchContent_Declare(
-  json
-  GIT_REPOSITORY https://github.com/nlohmann/json.git
-  GIT_TAG        v3.10.5
-)
-FetchContent_MakeAvailable(json)
+find_package(nlohmann_json REQUIRED)
 
 target_link_libraries(TestExe 
 IyathuumCoreLib 
@@ -39,11 +33,6 @@ AhwassaGraphicsLib
 HaasScriptingLib
 AezeselFileIOLib
 )
-
-add_custom_command(TARGET TestExe POST_BUILD 
-               COMMAND ${CMAKE_COMMAND} -E copy_if_different
-               "${AhwassaGraphicsLib_SOURCE_DIR}/lib/zlib/zlib.dll"              
-                $<TARGET_FILE_DIR:TestExe>)
 
 add_custom_command(TARGET TestExe POST_BUILD 
                COMMAND ${CMAKE_COMMAND} -E copy_if_different
