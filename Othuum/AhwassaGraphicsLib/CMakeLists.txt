@@ -349,7 +349,7 @@ target_link_libraries(AhwassaGraphicsLib
 glm::glm
 IyathuumCoreLib
 glfw
-Freetype
+Freetype::Freetype
 portaudio
 ${OPENVR_LIBRARIES}
 )

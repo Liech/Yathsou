@@ -125,8 +125,10 @@ set(ALL_FILES
 ############################################################################
 ############################################################################
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/zipper)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/libnyquist)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/zipper EXCLUDE_FROM_ALL)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/libnyquist EXCLUDE_FROM_ALL)
+
+
 
 add_library(AezeselFileIOLib ${ALL_FILES})
 set_property(TARGET AezeselFileIOLib PROPERTY CXX_STANDARD 20)
@@ -153,3 +155,7 @@ ${zipper_SOURCE_DIR}/include
 "${lodepng_SOURCE_DIR}"
 ${libnyquist_SOURCE_DIR}
 )
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+set_target_properties(staticZipper PROPERTIES FOLDER "External")
+set_target_properties(libnyquist PROPERTIES FOLDER "External")
