@@ -67,7 +67,7 @@ set(ALL_FILES
 add_library(SuthanusPhysicLib ${ALL_FILES})
 set_property(TARGET SuthanusPhysicLib PROPERTY CXX_STANDARD 20)
 
-target_link_libraries(SuthanusPhysicLib
+target_link_libraries(SuthanusPhysicLib PRIVATE
 glm::glm
 IyathuumCoreLib
 ${BULLET_LIBRARIES}

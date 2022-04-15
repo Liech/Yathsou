@@ -2,7 +2,7 @@
 
 #include "BlueprintBase.h"
 
-#include "IyathuumCoreLib/lib/glm/glm.hpp"
+#include <glm/glm.hpp>
 #include <memory>
 
 namespace Athanah {

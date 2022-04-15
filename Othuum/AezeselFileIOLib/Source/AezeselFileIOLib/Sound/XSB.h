@@ -2,7 +2,7 @@
 
 #include <string>
 #include <vector>
-#include "IO.h"
+#include "AezeselFileIOLib/IO.h"
 
 //http://wiki.xentax.com/index.php/XBOX_XSB //this format is wrong?
 //https://github.com/fesh0r/xnb_parse/blob/master/xnb_parse/xact/xsb.py //this is the implemented

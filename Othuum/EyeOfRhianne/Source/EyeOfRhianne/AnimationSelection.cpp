@@ -1,7 +1,7 @@
 #include "AnimationSelection.h"
 
-#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
-#include "AthanahCommonLib/SupCom/SupComModel.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include <AthanahCommonLib/SupCom/SupComModel.h>
 #include "AezeselFileIOLib/STLWriter.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Widgets/Button.h"

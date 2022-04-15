@@ -1,7 +1,7 @@
 #pragma once
 
-#include "AezeselFileIOLib/lib/json.hpp"
-#include "IyathuumCoreLib/lib/glm/glm.hpp"
+#include <nlohmann/json.hpp>
+#include <glm/glm.hpp>
 
 namespace Athanah {
   class BlueprintGeneral;
@@ -34,7 +34,7 @@ namespace Athanah {
 
     std::shared_ptr<BlueprintGeneral> _general;
     std::shared_ptr<BlueprintDisplay> _display;
-    std::unique_ptr<BlueprintPhysic > _physic ;
+    std::shared_ptr<BlueprintPhysic > _physic ;
 
     nlohmann::json _raw;
   };

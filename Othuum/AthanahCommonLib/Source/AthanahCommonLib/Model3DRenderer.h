@@ -3,8 +3,8 @@
 #include <memory>
 #include <map>
 #include <vector>
-#include "IyathuumCoreLib/lib/glm/glm.hpp"
-#include "AhwassaGraphicsLib/Renderer/RendererTemplate.h"
+#include <glm/glm.hpp>
+#include <AhwassaGraphicsLib/Renderer/RendererTemplate.h>
 
 namespace Aezesel {
   class Model3D;

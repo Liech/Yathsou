@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "BaseTypes/AABB.h"
+#include <IyathuumCoreLib/BaseTypes/AABB.h>
 
 namespace Iyathuum {
   

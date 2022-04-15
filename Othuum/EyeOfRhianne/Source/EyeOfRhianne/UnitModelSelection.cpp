@@ -3,7 +3,7 @@
 #include "ListSelection.h"
 #include "Graphic.h"
 
-#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "HaasScriptingLib/ScriptEngine.h"
 
 #include "AhwassaGraphicsLib/Core/Window.h"

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "BaseTypes/MultiDimensionalArray.h"
+#include <IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h>
 #include <set>
-#include "Util/ImageSubsetUtil.h"
+#include <IyathuumCoreLib/Util/ImageSubsetUtil.h>
 //NM Tree means N^M Tree
 //I don't know whats the real name is
 //2^3 Tree is formaly known as Octree

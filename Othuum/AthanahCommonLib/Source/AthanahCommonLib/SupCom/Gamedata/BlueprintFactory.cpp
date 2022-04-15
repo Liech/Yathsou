@@ -6,7 +6,7 @@
 #include <filesystem>
 
 #include "HaasScriptingLib/ScriptEngine.h"
-#include "AezeselFileIOLib/lib/json.hpp"
+#include <nlohmann/json.hpp>
 #include "AezeselFileIOLib/SupremeCommander/SCD.h"
 
 namespace Athanah {

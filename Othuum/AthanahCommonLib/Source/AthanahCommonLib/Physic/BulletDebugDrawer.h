@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "SuthanusPhysicsLib/lib/bullet/btBulletDynamicsCommon.h"
+#include <bullet/btBulletDynamicsCommon.h>
 
 namespace Ahwassa {
   class BasicBoxRenderer;

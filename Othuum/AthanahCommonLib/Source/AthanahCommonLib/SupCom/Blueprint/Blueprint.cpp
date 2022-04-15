@@ -23,7 +23,7 @@ namespace Athanah {
     readSize(input);
     _general = std::make_shared<BlueprintGeneral>(input["General"]);
     _display = std::make_shared<BlueprintDisplay>(input["Display"]);
-    _physic  = std::make_unique<BlueprintPhysic >(input["Physics"]);
+    _physic  = std::make_shared<BlueprintPhysic >(input["Physics"]);
     _id = id;
 
     _raw = input;

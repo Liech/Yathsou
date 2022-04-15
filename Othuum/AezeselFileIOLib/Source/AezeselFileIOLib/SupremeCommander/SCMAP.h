@@ -6,7 +6,7 @@
 #include <map>
 
 #include <glm/glm.hpp>
-#include "IO.h"
+#include "AezeselFileIOLib/IO.h"
 
 #include <IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h>
 #include <IyathuumCoreLib/BaseTypes/Color.h>

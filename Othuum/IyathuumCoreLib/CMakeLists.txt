@@ -110,7 +110,9 @@ set(ALL_FILES
 add_library(IyathuumCoreLib ${ALL_FILES})
 set_property(TARGET IyathuumCoreLib PROPERTY CXX_STANDARD 20)
 
-target_link_libraries(IyathuumCoreLib glm::glm)
+target_link_libraries(IyathuumCoreLib PRIVATE
+glm::glm
+)
 
 target_include_directories(IyathuumCoreLib PRIVATE
 ${glm_SOURCE_DIR} 

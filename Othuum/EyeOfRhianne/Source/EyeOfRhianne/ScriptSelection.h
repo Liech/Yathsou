@@ -1,13 +1,13 @@
 #pragma once
 
-#include <IyathuumCoreLib/lib/glm/glm.hpp>
+#include <glm/glm.hpp>
 #include <string>
 #include <memory>
 #include <map>
 #include <vector>
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "Graphic.h"
-#include "HaasScriptingLib/lib/json.hpp"
+#include <nlohmann/json.hpp>
 
 class ListSelection;
 

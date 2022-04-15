@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "AhwassaGraphicsLib/Core/AttributeDescription.h"
-#include <IyathuumCoreLib/lib/glm/glm.hpp>
+#include <glm/glm.hpp>
 
 namespace Athanah {
   struct SupComVertex {

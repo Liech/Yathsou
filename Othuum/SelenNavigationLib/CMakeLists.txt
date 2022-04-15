@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8...3.23)
 project(SelenNavigationLib)
 
+find_package(glm REQUIRED)
+
 ############################################################################
 ############################################################################
 ############################################################################
@@ -59,7 +61,11 @@ set(ALL_FILES
 add_library(SelenNavigationLib ${ALL_FILES})
 set_property(TARGET SelenNavigationLib PROPERTY CXX_STANDARD 20)
 
-target_link_libraries(SelenNavigationLib IyathuumCoreLib)
+target_link_libraries(SelenNavigationLib PRIVATE
+IyathuumCoreLib
+glm::glm
+)
+
 target_include_directories(SelenNavigationLib PRIVATE 
 ${CMAKE_CURRENT_SOURCE_DIR}/Source/SelenNavigationLib
 "${IyathuumCoreLib_SOURCE_DIR}/Source"

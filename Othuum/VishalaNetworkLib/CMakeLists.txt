@@ -166,7 +166,7 @@ set(ALL_FILES
 add_library(VishalaNetworkLib ${ALL_FILES})
 set_property(TARGET VishalaNetworkLib PROPERTY CXX_STANDARD 20)
 
-target_link_libraries(VishalaNetworkLib
+target_link_libraries(VishalaNetworkLib PRIVATE
 glm::glm
 IyathuumCoreLib
 Snappy::snappy

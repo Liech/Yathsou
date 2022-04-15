@@ -4,7 +4,7 @@
 #include <functional>
 #include <map>
 #include "Graphic.h"
-#include "HaasScriptingLib/lib/json.hpp"
+#include <nlohmann/json.hpp>
 
 namespace Ahwassa {
   class Window;

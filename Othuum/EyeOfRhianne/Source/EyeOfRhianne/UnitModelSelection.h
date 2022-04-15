@@ -1,6 +1,6 @@
 #pragma once
 
-#include <IyathuumCoreLib/lib/glm/glm.hpp>
+#include <glm/glm.hpp>
 #include <string>
 #include <memory>
 #include <vector>
@@ -8,7 +8,7 @@
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "AthanahCommonLib/SupCom/SupComEnums.h"
 #include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
-#include "HaasScriptingLib/lib/json.hpp"
+#include <nlohmann/json.hpp>
 
 class ListSelection;
 class AnimationSelection;

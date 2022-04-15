@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 
-#include "ZIP.h"
+#include "AezeselFileIOLib/ZIP.h"
 
 namespace Aezesel {
   /// <summary>

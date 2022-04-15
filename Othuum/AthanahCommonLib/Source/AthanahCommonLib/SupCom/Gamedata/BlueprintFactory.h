@@ -5,7 +5,7 @@
 #include <vector>
 #include <map>
 #include <functional>
-#include "AezeselFileIOLib/lib/json.hpp"
+#include <nlohmann/json.hpp>
 
 namespace Aezesel {
   class SCD;

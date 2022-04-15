@@ -2,7 +2,7 @@
 
 #include <string>
 #include <iostream>
-#include "AezeselFileIOLib/lib/json.hpp"
+#include <nlohmann/json.hpp>
 
 namespace Athanah {
   class BlueprintBase {

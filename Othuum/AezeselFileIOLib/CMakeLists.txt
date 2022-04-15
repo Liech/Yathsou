@@ -133,19 +133,21 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/libnyquist EXCLUDE_FROM_ALL)
 add_library(AezeselFileIOLib ${ALL_FILES})
 set_property(TARGET AezeselFileIOLib PROPERTY CXX_STANDARD 20)
 
-target_link_libraries(AezeselFileIOLib 
+target_link_libraries(AezeselFileIOLib PRIVATE
 IyathuumCoreLib 
 gli 
 ${ASSIMP_LIBRARIES} 
 staticZipper
 libnyquist
 nlohmann_json::nlohmann_json
+lodepng
 )
 
 target_include_directories(AezeselFileIOLib PRIVATE 
 ${CMAKE_CURRENT_SOURCE_DIR}/Source/AezeselFileIOLib
 ${CMAKE_CURRENT_SOURCE_DIR}/lib
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
+"${AezeselFileIOLib_SOURCE_DIR}/Source"
 ${assimp_SOURCE_DIR}/include
 ${assimp_SOURCE_DIR}/..
 ${glm_SOURCE_DIR} 

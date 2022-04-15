@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AezeselFileIOLib/lib/json.hpp"
+#include <nlohmann/json.hpp>
 
 namespace Athanah {
   class BlueprintCommandCaps {

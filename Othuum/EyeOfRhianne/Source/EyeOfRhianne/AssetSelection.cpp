@@ -10,7 +10,7 @@
 #include "ScriptSelection.h"
 #include "Graphic.h"
 
-#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
 

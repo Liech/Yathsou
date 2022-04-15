@@ -1,7 +1,7 @@
 #pragma once
 
 #include "SpatialHash.h"
-#include "BaseTypes/AABB.h"
+#include <IyathuumCoreLib/BaseTypes/AABB.h>
 #include "NMTree.h"
 #include <set>
 #include <map>

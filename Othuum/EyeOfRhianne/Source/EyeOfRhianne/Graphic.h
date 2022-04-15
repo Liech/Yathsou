@@ -2,9 +2,9 @@
 
 #include <memory>
 #include <vector>
-#include "AthanahCommonLib/SupCom/SupComMeshRendererDef.h"
-#include "IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h"
-#include "IyathuumCoreLib/BaseTypes/Color.h"
+#include <AthanahCommonLib/SupCom/SupComMeshRendererDef.h>
+#include <IyathuumCoreLib/BaseTypes/MultiDimensionalArray.h>
+#include <IyathuumCoreLib/BaseTypes/Color.h>
 
 namespace Ahwassa {
   class Window;

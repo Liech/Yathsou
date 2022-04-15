@@ -3,7 +3,7 @@
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include <memory>
 #include <string>
-#include "HaasScriptingLib/lib/json.hpp"
+#include <nlohmann/json.hpp>
 
 #include "Graphic.h"
 #include "AthanahCommonLib/SupCom/Gamedata/SkyboxFactory.h"

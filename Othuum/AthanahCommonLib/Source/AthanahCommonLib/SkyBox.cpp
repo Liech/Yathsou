@@ -1,6 +1,6 @@
 #include "SkyBox.h"
 
-#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "AhwassaGraphicsLib/Core/Camera.h"
 #include "AhwassaGraphicsLib/Core/ShaderProgram.h"

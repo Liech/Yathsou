@@ -1,7 +1,7 @@
 #include "Graphic.h"
 
 #include <filesystem>
-#include <IyathuumCoreLib/lib/glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"

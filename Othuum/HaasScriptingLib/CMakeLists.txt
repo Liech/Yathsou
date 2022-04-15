@@ -31,6 +31,10 @@ set(ALL_FILES
 add_library(HaasScriptingLib ${ALL_FILES})
 set_property(TARGET HaasScriptingLib PROPERTY CXX_STANDARD 20)
 
-target_link_libraries(HaasScriptingLib nlohmann_json::nlohmann_json lua)
+target_link_libraries(HaasScriptingLib PRIVATE
+nlohmann_json::nlohmann_json 
+lua
+)
+
 target_include_directories(HaasScriptingLib PRIVATE 
 )

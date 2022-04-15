@@ -345,7 +345,7 @@ set(ALL_FILES
 add_library(AhwassaGraphicsLib ${ALL_FILES})
 set_property(TARGET AhwassaGraphicsLib PROPERTY CXX_STANDARD 20)
 
-target_link_libraries(AhwassaGraphicsLib
+target_link_libraries(AhwassaGraphicsLib PRIVATE
 glm::glm
 IyathuumCoreLib
 glfw

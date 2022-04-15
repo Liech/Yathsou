@@ -8,7 +8,7 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/glm.hpp"
 #include <nlohmann/json.hpp>
-#include "IO.h"
+#include "AezeselFileIOLib/IO.h"
 
 //supreme commander animation format
 namespace Aezesel {

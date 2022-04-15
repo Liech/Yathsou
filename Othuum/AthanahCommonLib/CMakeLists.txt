@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 2.8...3.23)
 project(AthanahCommonLib)
 
+find_package(glm REQUIRED)
 
 ############################################################################
 ############################################################################
 ############################################################################
 
 set(Header_Files
-    "SkyBox.h"
+    "Source/AthanahCommonLib/SkyBox.h"
 )
 source_group("Header Files" FILES ${Header_Files})
 
@@ -127,19 +128,26 @@ set(ALL_FILES
 add_library(AthanahCommonLib ${ALL_FILES})
 set_property(TARGET AthanahCommonLib PROPERTY CXX_STANDARD 20)
 
-target_link_libraries(AthanahCommonLib
+target_link_libraries(AthanahCommonLib PRIVATE
 glm::glm
 IyathuumCoreLib
 AhwassaGraphicsLib
 HaasScriptingLib
 SelenNavigationLib
-SuthanusPhysicsLib
+SuthanusPhysicLib
 VishalaNetworkLib
 )
 
 target_include_directories(AthanahCommonLib PRIVATE 
 "${AthanahCommonLib_SOURCE_DIR}/Source/AthanahCommonLib"
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
+"${SelenNavigationLib_SOURCE_DIR}/Source"
+"${SuthanusPhysicLib_SOURCE_DIR}/Source"
+"${AhwassaGraphicsLib_SOURCE_DIR}/Source"
+"${HaasScriptingLib_SOURCE_DIR}/Source"
+"${AezeselFileIOLib_SOURCE_DIR}/Source"
+"${VishalaNetworkLib_SOURCE_DIR}/Source"
+"${AthanahCommonLib_SOURCE_DIR}/Source"
 )
 
 add_dependencies(AthanahCommonLib IyathuumCoreLib)

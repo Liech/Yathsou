@@ -4,7 +4,7 @@
 #include <vector>
 #include <memory>
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
-#include "IyathuumCoreLib/lib/glm/glm.hpp"
+#include <glm/glm.hpp>
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 #include "AthanahCommonLib/SupCom/SupComVertex.h"
 

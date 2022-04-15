@@ -1,7 +1,7 @@
 #pragma once
 
 #include "BlueprintBase.h"
-#include "AezeselFileIOLib/lib/json.hpp"
+#include <nlohmann/json.hpp>
 #include <memory>
 #include <string>
 #include "AthanahCommonLib/SupCom/SupComEnums.h"

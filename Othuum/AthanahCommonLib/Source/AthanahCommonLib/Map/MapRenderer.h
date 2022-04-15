@@ -5,10 +5,10 @@
 #include <vector>
 #include <array>
 #include <string>
-#include "IyathuumCoreLib/lib/glm/glm.hpp"
-#include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "AhwassaGraphicsLib/Renderer/RendererTemplate.h"
-#include "AthanahCommonLib/SupCom/Gamedata/Gamedata.h"
+#include <glm/glm.hpp>
+#include <IyathuumCoreLib/BaseTypes/Color.h>
+#include <AhwassaGraphicsLib/Renderer/RendererTemplate.h>
+#include <AthanahCommonLib/SupCom/Gamedata/Gamedata.h>
 
 namespace Aezesel {
   class Model3D;

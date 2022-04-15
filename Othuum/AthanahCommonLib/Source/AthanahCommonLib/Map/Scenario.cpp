@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "AezeselFileIOLib/lib/json.hpp"
+#include <nlohmann/json.hpp>
 #include "HaasScriptingLib/ScriptEngine.h"
 
 namespace Athanah {
