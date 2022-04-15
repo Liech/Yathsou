@@ -5,6 +5,7 @@
 #include <set>
 #include <memory>
 #include <nlohmann/json_fwd.hpp>
+
 struct lua_State;
 
 namespace Haas

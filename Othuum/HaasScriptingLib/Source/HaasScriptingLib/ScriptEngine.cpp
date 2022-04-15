@@ -2,8 +2,7 @@
 
 #include <stdexcept>
 #include <sstream>
-#include <lua/lua.hpp>
-#include <lua/lstate.h>
+#include <lua.hpp>
 #include <iostream>
 #include <nlohmann/json.hpp>
 

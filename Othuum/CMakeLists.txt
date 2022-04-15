@@ -2,10 +2,10 @@ cmake_minimum_required(VERSION 3.23)
 project(Othuum)
 
 add_subdirectory(IyathuumCoreLib)
-#add_subdirectory(SelenNavigationLib)
-#add_subdirectory(SuthanusPhysicsLib)
+add_subdirectory(SelenNavigationLib)
+add_subdirectory(SuthanusPhysicsLib)
 add_subdirectory(AhwassaGraphicsLib)
-#add_subdirectory(HaasScriptingLib)
+add_subdirectory(HaasScriptingLib)
 add_subdirectory(AezeselFileIOLib)
 add_subdirectory(TestExe)
 

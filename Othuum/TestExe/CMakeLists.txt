@@ -3,38 +3,34 @@ project(TestExe)
 add_executable(TestExe main.cpp)
 set_property(TARGET TestExe PROPERTY CXX_STANDARD 20)
 
-
-find_package(nlohmann_json REQUIRED)
-
 target_link_libraries(TestExe 
 IyathuumCoreLib 
-#SelenNavigationLib
-#SuthanusPhysicLib
+SelenNavigationLib
+SuthanusPhysicLib
 AhwassaGraphicsLib
-#HaasScriptingLib
+HaasScriptingLib
 AezeselFileIOLib
 )
 
 target_include_directories(TestExe PRIVATE 
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
-#"${SelenNavigationLib_SOURCE_DIR}/Source"
-#"${SuthanusPhysicLib_SOURCE_DIR}/Source"
+"${SelenNavigationLib_SOURCE_DIR}/Source"
+"${SuthanusPhysicLib_SOURCE_DIR}/Source"
 "${AhwassaGraphicsLib_SOURCE_DIR}/Source"
-#"${HaasScriptingLib_SOURCE_DIR}/Source"
+"${HaasScriptingLib_SOURCE_DIR}/Source"
 "${AezeselFileIOLib_SOURCE_DIR}/Source"
-"${json_SOURCE_DIR}/Include"
 )
 
 add_dependencies(TestExe 
 IyathuumCoreLib 
-#SelenNavigationLib
-#SuthanusPhysicLib
+SelenNavigationLib
+SuthanusPhysicLib
 AhwassaGraphicsLib
-#HaasScriptingLib
+HaasScriptingLib
 AezeselFileIOLib
 )
 
-#add_custom_command(TARGET TestExe POST_BUILD 
-#               COMMAND ${CMAKE_COMMAND} -E copy_if_different
-#               "${AhwassaGraphicsLib_SOURCE_DIR}/Data/Fonts/arial.ttf"              
-#                $<TARGET_FILE_DIR:TestExe>/Data/Fonts/arial.ttf)
+add_custom_command(TARGET TestExe POST_BUILD 
+               COMMAND ${CMAKE_COMMAND} -E copy_if_different
+               "${AhwassaGraphicsLib_SOURCE_DIR}/Data/Fonts/arial.ttf"              
+                $<TARGET_FILE_DIR:TestExe>/Data/Fonts/arial.ttf)

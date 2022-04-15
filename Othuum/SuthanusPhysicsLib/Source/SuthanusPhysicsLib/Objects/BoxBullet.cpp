@@ -1,6 +1,6 @@
 #include "BoxBullet.h"
 
-#include <btBulletDynamicsCommon.h>
+#include <bullet/btBulletDynamicsCommon.h>
 #include <glm/gtc/type_ptr.hpp>
 #include "BulletCore.h"
 

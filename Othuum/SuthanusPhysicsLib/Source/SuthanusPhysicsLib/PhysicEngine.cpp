@@ -3,10 +3,10 @@
 #include <iostream>
 #include <vector>
 
-#include <btBulletDynamicsCommon.h>
-#include <BulletCollision/CollisionShapes/btConvexHullShape.h>
-#include <BulletCollision/CollisionShapes/btBox2dShape.h>
-#include <BulletCollision/CollisionDispatch/btGhostObject.h>
+#include <bullet/btBulletDynamicsCommon.h>
+#include <bullet/BulletCollision/CollisionShapes/btConvexHullShape.h>
+#include <bullet/BulletCollision/CollisionShapes/btBox2dShape.h>
+#include <bullet/BulletCollision/CollisionDispatch/btGhostObject.h>
 
 #include "Objects/BoxBullet.h"
 #include "Objects/SphereBullet.h"

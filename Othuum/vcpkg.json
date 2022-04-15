@@ -11,6 +11,8 @@
 	"portaudio",
 	"openvr",
 	"freetype",	
+	"bullet3",
+	"lua",
 	{
 	  "name" : "imgui",
 	  "features" : ["glfw-binding", "opengl3-binding"]

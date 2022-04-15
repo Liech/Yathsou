@@ -2,13 +2,8 @@ cmake_minimum_required(VERSION 2.8...3.23)
 project(SuthanusPhysicLib)
 include(FetchContent)
 
-FetchContent_Declare(
-  bullet
-  GIT_REPOSITORY https://github.com/bulletphysics/bullet3.git
-  GIT_TAG        3.22b
-  EXCLUDE_FROM_ALL    TRUE
-)
-FetchContent_MakeAvailable(bullet)
+find_package(Bullet REQUIRED)
+find_package(glm REQUIRED)
 
 ############################################################################
 ############################################################################
@@ -73,21 +68,16 @@ add_library(SuthanusPhysicLib ${ALL_FILES})
 set_property(TARGET SuthanusPhysicLib PROPERTY CXX_STANDARD 20)
 
 target_link_libraries(SuthanusPhysicLib
-glm
+glm::glm
 IyathuumCoreLib
-LinearMath
-Bullet3Common
-BulletCollision
-BulletDynamics
+${BULLET_LIBRARIES}
 )
 
 target_include_directories(SuthanusPhysicLib PRIVATE 
 "${SuthanusPhysicLib_SOURCE_DIR}/Source/SuthanusPhysicsLib"
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
-"${bullet_SOURCE_DIR}/src"
 )
 
-include_directories(ThirdParty/bullet/src)
+include_directories("${CMAKE_BINARY_DIR}/vcpkg_installed/${VCPKG_TARGET_TRIPLET}/include/bullet") #todo: might be a future problem, make it unecessary
 
-add_dependencies(SuthanusPhysicLib glm)
 add_dependencies(SuthanusPhysicLib IyathuumCoreLib)
