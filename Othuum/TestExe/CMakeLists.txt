@@ -10,6 +10,7 @@ SuthanusPhysicLib
 AhwassaGraphicsLib
 HaasScriptingLib
 AezeselFileIOLib
+VishalaNetworkLib
 )
 
 target_include_directories(TestExe PRIVATE 
@@ -19,6 +20,8 @@ target_include_directories(TestExe PRIVATE
 "${AhwassaGraphicsLib_SOURCE_DIR}/Source"
 "${HaasScriptingLib_SOURCE_DIR}/Source"
 "${AezeselFileIOLib_SOURCE_DIR}/Source"
+"${VishalaNetworkLib_SOURCE_DIR}/Source"
+
 )
 
 add_dependencies(TestExe 
@@ -28,6 +31,7 @@ SuthanusPhysicLib
 AhwassaGraphicsLib
 HaasScriptingLib
 AezeselFileIOLib
+VishalaNetworkLib
 )
 
 add_custom_command(TARGET TestExe POST_BUILD 

@@ -13,6 +13,9 @@
 	"freetype",	
 	"bullet3",
 	"lua",
+	"enet",
+	"snappy",
+	"concurrentqueue",
 	{
 	  "name" : "imgui",
 	  "features" : ["glfw-binding", "opengl3-binding"]

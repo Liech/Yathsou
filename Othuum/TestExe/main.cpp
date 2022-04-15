@@ -6,6 +6,7 @@
 #include <AhwassaGraphicsLib/Core/Window.h>
 #include <HaasScriptingLib/ScriptEngine.h>
 #include <AezeselFileIOLib/ZIP.h>
+#include <VishalaNetworkLib/Core/Connection.h>
 #include <filesystem>
 
 
@@ -28,5 +29,6 @@ int main(int argc, char** argv) {
   Haas::ScriptEngine engin;
   win.run();
   Aezesel::ZIP z("");
+  Vishala::Connection con();
   return 0;
 }
