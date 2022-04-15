@@ -177,6 +177,7 @@ nlohmann_json::nlohmann_json
 
 target_include_directories(VishalaNetworkLib PRIVATE 
 "${VishalaNetworkLib_SOURCE_DIR}/Source/VishalaNetworkLib"
+"${VishalaNetworkLib_SOURCE_DIR}/Source"
 "${VishalaNetworkLib_SOURCE_DIR}/lib"
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
 )

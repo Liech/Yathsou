@@ -1,8 +1,8 @@
 #pragma once
 
 #include <future>
-#include "VishalaNetworkLib/Core/Connection.h"
-#include "VishalaNetworkLib/lib/concurrentqueue.h"
+#include <VishalaNetworkLib/Core/Connection.h>
+#include <concurrentqueue/concurrentqueue.h>
 
 namespace Iavish {
   class ConnectionTest {

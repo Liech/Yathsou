@@ -352,14 +352,13 @@ glfw
 Freetype::Freetype
 portaudio
 ${OPENVR_LIBRARIES}
+imgui::imgui
 )
 
 target_include_directories(AhwassaGraphicsLib PRIVATE 
 "${AhwassaGraphicsLib_SOURCE_DIR}/Source"
 "${AhwassaGraphicsLib_SOURCE_DIR}/lib/glad/include"
 "${AhwassaGraphicsLib_SOURCE_DIR}/lib/"
-"${AhwassaGraphicsLib_SOURCE_DIR}/lib/imgui"
-"${AhwassaGraphicsLib_SOURCE_DIR}/lib/freetype/include"
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
 "${glfw_SOURCE_DIR}/Source"
 "${portaudio_SOURCE_DIR}"

@@ -6,7 +6,7 @@
 #include <set>
 #include <map>
 
-#include "Core/Connection.h"
+#include "VishalaNetworkLib/Core/Connection.h"
 
 namespace Vishala {
   class ServerConfiguration;
