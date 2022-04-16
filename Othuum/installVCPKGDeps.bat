@@ -1,1 +1,0 @@
-"./vcpkg/vcpkg.exe" install --feature-flags=manifests

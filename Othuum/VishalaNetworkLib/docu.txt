@@ -1,8 +1,0 @@
-Server hosts Lobby.h
-Client creates LobbyConnector.h
-LobbyConnector asks lobby.h for ip&port
-Lobby and LobbyConnector uses this ip&port for new connection
-both new connections are handed to custom protocolls
-custom protocolls cover authentication, game discovery, joining
-joining initiates proctoll on host&client they try to connector to eachother
-

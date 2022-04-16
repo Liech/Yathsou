@@ -1,0 +1,1 @@
+"./vcpkg/vcpkg.exe" integrate install

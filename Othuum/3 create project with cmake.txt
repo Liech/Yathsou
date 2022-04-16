@@ -1,0 +1,18 @@
+open cmake gui
+choose \Yathsou\Othuum as where is the source code
+choose any or Yathsou\Othuum\out as where to build binaries
+click configure
+select specify toolchain file for cross compiling
+select any visual studio version
+
+Use Output of "1 install vcpkg.bat" as toolchain file
+    Applied user-wide integration for this vcpkg root.
+    
+    All MSBuild C++ projects can now #include any installed libraries.
+    Linking will be handled automatically.
+    Installing new libraries will make them instantly available.
+    
+    CMake projects should use: "-DCMAKE_TOOLCHAIN_FILE=C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/vcpkg/scripts/buildsystems/vcpkg.cmake"
+	
+This is the toolchain file:
+   C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/vcpkg/scripts/buildsystems/vcpkg.cmake
