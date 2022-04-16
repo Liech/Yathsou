@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SuthanusPhysicsLib/lib/bullet/btBulletDynamicsCommon.h"
+#include <bullet/btBulletDynamicsCommon.h>
 
 namespace Ahwassa {
   class Window;

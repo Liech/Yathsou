@@ -1,9 +1,9 @@
 #pragma once
 
 #include <functional>
-#include "Core/Connection.h"
-#include "Core/ConnectionMultiplexer.h"
-#include "Core/Serialization.h"
+#include "VishalaNetworkLib/Core/Connection.h"
+#include "VishalaNetworkLib/Core/ConnectionMultiplexer.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
 
 //very very simple network class
 //keeps serializable intelligently one way synchronized (delta compression & compression)

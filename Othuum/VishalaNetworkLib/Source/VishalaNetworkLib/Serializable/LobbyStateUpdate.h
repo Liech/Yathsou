@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "Lobby/LobbyGame.h"
-#include "Core/Serialization.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
 
 namespace Vishala {
   class LobbyStateUpdate : public Serialization {

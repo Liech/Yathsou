@@ -3,7 +3,7 @@
 #include <iomanip>
 
 #include "IyathuumCoreLib/Singleton/Database.h"
-#include <IyathuumCoreLib/lib/glm/gtx/intersect.hpp>
+#include <glm/gtx/intersect.hpp>
 #include "IyathuumCoreLib/Util/UpdateTimer.h"
 
 #include "AhwassaGraphicsLib/Core/Window.h"

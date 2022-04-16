@@ -3,8 +3,8 @@
 #include <string>
 #include <memory>
 
-#include "Core/Connection.h"
-#include "Serializable/SelfBriefing.h"
+#include "VishalaNetworkLib/Core/Connection.h"
+#include "VishalaNetworkLib/Serializable/SelfBriefing.h"
 
 
 namespace Vishala {

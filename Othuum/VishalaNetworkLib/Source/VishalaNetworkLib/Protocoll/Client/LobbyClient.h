@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Core/Connection.h"
-#include "Serializable/Client2LobbyMessage.h"
-#include "Serializable/LobbyStateUpdate.h"
-#include "Serializable/GameLobbyStateUpdate.h"
+#include "VishalaNetworkLib/Core/Connection.h"
+#include "VishalaNetworkLib/Serializable/Client2LobbyMessage.h"
+#include "VishalaNetworkLib/Serializable/LobbyStateUpdate.h"
+#include "VishalaNetworkLib/Serializable/GameLobbyStateUpdate.h"
 
 namespace Vishala {
   class LobbyModel;

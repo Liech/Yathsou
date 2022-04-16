@@ -3,7 +3,7 @@
 #include <memory>
 #include <functional>
 #include <map>
-#include "Core/BinaryPackage.h"
+#include "VishalaNetworkLib/Core/BinaryPackage.h"
 
 namespace Vishala {
   class Connection;

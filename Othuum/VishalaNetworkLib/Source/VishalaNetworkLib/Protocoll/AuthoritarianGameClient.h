@@ -4,12 +4,12 @@
 #include <functional>
 #include <iostream>
 
-#include "Core/Serialization.h"
-#include "Core/NetworkMemory.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
+#include "VishalaNetworkLib/Core/NetworkMemory.h"
 
-#include "Core/Command.h"
-#include "Core/Connection.h"
-#include "Core/NetworkMemory.h"
+#include "VishalaNetworkLib/Core/Command.h"
+#include "VishalaNetworkLib/Core/Connection.h"
+#include "VishalaNetworkLib/Core/NetworkMemory.h"
 #include <IyathuumCoreLib/Util/UpdateTimer.h>
 
 namespace Vishala {

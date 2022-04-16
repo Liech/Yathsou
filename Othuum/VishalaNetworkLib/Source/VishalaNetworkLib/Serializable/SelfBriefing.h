@@ -3,7 +3,7 @@
 #include <string>
 #include <array>
 
-#include "Core/Serialization.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
 
 namespace Vishala {
   class SelfBriefing : public Serialization{

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Serialization.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
 
 #include "CreateGameRequest.h"
 #include "JoinGameRequest.h"

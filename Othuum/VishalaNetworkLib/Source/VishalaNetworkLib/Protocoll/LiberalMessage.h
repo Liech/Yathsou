@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Core/Serialization.h"
-#include "Core/Command.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
+#include "VishalaNetworkLib/Core/Command.h"
 
 namespace Vishala {
   struct LiberalMessage : Serialization {

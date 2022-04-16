@@ -1,7 +1,7 @@
 #pragma once
 
 #include "UyanahGameServer/Component.h"
-#include "IyathuumCoreLib/lib/glm/glm.hpp"
+#include <glm/glm.hpp>
 
 namespace Uyanah {
   namespace Components {

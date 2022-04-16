@@ -7,9 +7,9 @@
 #include <IyathuumCoreLib/Util/UpdateTimer.h>
 #include <IyathuumCoreLib/Util/Scheduler.h>
 
-#include "Core/Command.h"
-#include "Core/Connection.h"
-#include "Protocoll/LiberalMessage.h"
+#include "VishalaNetworkLib/Core/Command.h"
+#include "VishalaNetworkLib/Core/Connection.h"
+#include "VishalaNetworkLib/Protocoll/LiberalMessage.h"
 
 namespace Vishala {
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/Serialization.h"
+#include "VishalaNetworkLib/Core/Serialization.h"
 
 namespace Vishala {
   class ICommand : public Vishala::Serialization {

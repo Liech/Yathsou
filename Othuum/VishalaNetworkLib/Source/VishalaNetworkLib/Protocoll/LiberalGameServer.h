@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <functional>
-#include "Core/Command.h"
+#include "VishalaNetworkLib/Core/Command.h"
 
 namespace Iyathuum {
   class UpdateTimer;
