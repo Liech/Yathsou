@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.23)
-project(Othuum)
+project(Yathsou)
 
 add_subdirectory(IyathuumCoreLib)
 add_subdirectory(SelenNavigationLib)

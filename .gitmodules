@@ -1,6 +1,6 @@
-[submodule "Othuum/vcpkg"]
-	path = Othuum/vcpkg
+[submodule "vcpkg"]
+	path = vcpkg
 	url = https://github.com/microsoft/vcpkg.git
-[submodule "Othuum/AezeselFileIOLib/lib/libnyquist"]
-	path = Othuum/AezeselFileIOLib/lib/libnyquist
+[submodule "AezeselFileIOLib/lib/libnyquist"]
+	path = AezeselFileIOLib/lib/libnyquist
 	url = https://github.com/ddiakopoulos/libnyquist.git
