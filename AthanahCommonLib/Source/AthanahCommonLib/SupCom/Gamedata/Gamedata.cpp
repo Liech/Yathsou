@@ -14,13 +14,6 @@ namespace Athanah {
 
     std::cout << "Loading Gamedata:" << std::endl;
     
-    if (useSCDFiles)
-    {
-        std::cout << "Loading Data from SCD files..." << std::endl;
-        std::cout << "Hint: " << std::endl;
-        std::cout << "  Loading times are faster when extracting SCD files with 7z in to the Data Folder" << std::endl;
-        std::cout << "  SCD File Location: Steam\\steamapps\\common\\Supreme Commander Forged Alliance\\gamedata" << std::endl;
-    }
     std::cout << "...Loading Units Archive" << std::endl;
     std::string modelSCD = supComPath + "/gamedata/units.scd";
     _units = std::make_shared<Aezesel::SCD>(useSCDFiles ? modelSCD : assetPath + "units");
