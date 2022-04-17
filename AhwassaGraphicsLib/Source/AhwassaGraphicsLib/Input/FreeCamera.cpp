@@ -4,6 +4,7 @@
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <imgui.h>
 
 namespace Ahwassa {
   FreeCamera::FreeCamera(std::shared_ptr<Camera> cam, Input& inp, Iyathuum::Key toggleKey) : _input(inp) {
@@ -19,8 +20,10 @@ namespace Ahwassa {
   void FreeCamera::setFocus(bool focus) {
     _focus = focus;
     _input.setCursorStatus(_focus ? Iyathuum::CursorStatus::HIDDEN : Iyathuum::CursorStatus::NORMAL);
-    _input.setCursorPos(_camera->getResolution() / 2.0f);
-    _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+    if (focus) {
+      _input.setCursorPos(_camera->getResolution() / 2.0f);
+      _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+    }
   }
 
   bool FreeCamera::mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) {
@@ -53,6 +56,10 @@ namespace Ahwassa {
   }
 
   bool FreeCamera::mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
+    if (ImGui::GetIO().WantCaptureMouse) {
+      setFocus(false);
+      return true;
+    }
     if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS) {
       setFocus(!isFocus());
       return true;
@@ -104,5 +111,10 @@ namespace Ahwassa {
     auto dir = _camera->getDir();
     _camera->setPosition(_camera->getPosition() + _moveX * toSide + _moveY * toUp);
     _camera->setDir(dir);
+  }   
+  
+  void FreeCamera::endFocusEvent() {
+    setFocus(false);
   }
+
 }

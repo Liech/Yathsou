@@ -4,6 +4,7 @@
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include "AhwassaGraphicsLib/Util.h"
+#include <imgui.h>
 
 namespace Ahwassa {
   ArcBallCamera::ArcBallCamera(std::shared_ptr<Camera> cam, Input& inp, Iyathuum::Key toggleKey) : _input(inp) {
@@ -19,8 +20,10 @@ namespace Ahwassa {
   void ArcBallCamera::setFocus(bool focus) {
     _focus = focus;
     _input.setCursorStatus(_focus ? Iyathuum::CursorStatus::HIDDEN : Iyathuum::CursorStatus::NORMAL);
-    _input.setCursorPos(_camera->getResolution() / 2.0f);
-    _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+    if (focus) {
+      _input.setCursorPos(_camera->getResolution() / 2.0f);
+      _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+    }
   }
 
   bool ArcBallCamera::mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) {
@@ -54,11 +57,19 @@ namespace Ahwassa {
   }
 
   bool ArcBallCamera::mouseWheelEvent(const glm::vec2& movement) {
+    if (ImGui::GetIO().WantCaptureMouse) {
+      return true;
+    }
     move(glm::vec2(0, 0), movement, false);
     return true;
   }
 
   bool ArcBallCamera::mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
+    if (ImGui::GetIO().WantCaptureMouse) {
+      setFocus(false);
+      return true;
+    }
+
     if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS) {
       setFocus(!isFocus());
       return true;
@@ -73,6 +84,10 @@ namespace Ahwassa {
   }
 
   bool ArcBallCamera::keyEvent(const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
+    if (ImGui::GetIO().WantCaptureMouse) {
+      setFocus(false);
+      return true;
+    }
     if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS) {
       setFocus(!isFocus());
       return true;

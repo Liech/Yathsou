@@ -20,6 +20,7 @@ namespace Ahwassa {
     bool mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) override;
     bool mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement) override;
     void update() override;
+    virtual void endFocusEvent() override;
   private:
 
     bool                    _focus = false;
