@@ -15,4 +15,4 @@ Use Output of "1 install vcpkg.bat" as toolchain file
     CMake projects should use: "-DCMAKE_TOOLCHAIN_FILE=C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/vcpkg/scripts/buildsystems/vcpkg.cmake"
 	
 This is the toolchain file:
-   C:/Users/nicol/Documents/GitHub/Yathsou/Othuum/vcpkg/scripts/buildsystems/vcpkg.cmake
+   Yathsou/vcpkg/scripts/buildsystems/vcpkg.cmake
