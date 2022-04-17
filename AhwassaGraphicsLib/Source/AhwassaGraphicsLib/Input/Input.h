@@ -51,8 +51,8 @@ namespace Ahwassa {
     GLFWwindow* _windowGL;
     Window*     _windowAhwassa;
 
-    UIElement* _pressedWidget;
-    UIElement* _currentFocus ;
+    UIElement* _pressedWidget = nullptr;
+    UIElement* _currentFocus  = nullptr;
     UIElement* _currentHover  = nullptr;
     glm::vec2  _oldMousePos;
     glm::vec2  _cursorpos;
