@@ -1,6 +1,0 @@
-[submodule "vcpkg"]
-	path = vcpkg
-	url = https://github.com/microsoft/vcpkg.git
-[submodule "AezeselFileIOLib/lib/libnyquist"]
-	path = AezeselFileIOLib/lib/libnyquist
-	url = https://github.com/ddiakopoulos/libnyquist.git
