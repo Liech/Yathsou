@@ -10,7 +10,7 @@ namespace Ahwassa {
     float getValue();
 
     void bind() override;
-    std::string getType() override { return "float"; }
+    std::string getType() const override { return "float"; }
 
   private:
     float _value = 0;

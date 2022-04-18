@@ -10,12 +10,12 @@ namespace Ahwassa {
     ~InstancedVecMat4();
     void  setValue(const std::vector<glm::mat4>& val);
     const std::vector<glm::mat4>& getValue();
-    virtual int getNumberOfLocationsUsed() override;
+    virtual int getNumberOfLocationsUsed() const override;
     virtual std::string getArrayPostfix();
 
     void bind() override;
-    std::string getType() override;
-    virtual bool isAttribute() override { return true; };
+    std::string getType() const override;
+    virtual bool isAttribute() const override { return true; };
 
   private:
     std::vector<glm::mat4> _value;

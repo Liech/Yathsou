@@ -12,12 +12,12 @@ namespace Ahwassa {
     SSBOuint(const std::string& name, const std::vector<unsigned int>& content);
     virtual ~SSBOuint();
 
-    virtual std::string toGLSL() override;
+    virtual std::string toGLSL() const override;
     virtual void bind() override;
-    virtual std::string getType() override { return "uint"; }
+    virtual std::string getType() const override { return "uint"; }
     void setData(const std::vector<unsigned int>& content);
 
-    virtual bool isBuffer() override { return true; }
+    virtual bool isBuffer() const override { return true; }
 
   private:
     unsigned int _ssbo;

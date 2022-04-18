@@ -16,7 +16,7 @@ namespace Ahwassa {
 
   class PostProcessingEffect {
     public:
-      PostProcessingEffect(std::string name, Ahwassa::Window* w, int width, int height);
+      PostProcessingEffect(std::string name, Ahwassa::Window* w, const glm::ivec2& resolution);
 
       std::shared_ptr<Ahwassa::Texture> getResult();
       void drawResult();
@@ -42,8 +42,7 @@ namespace Ahwassa {
       std::vector<Ahwassa::PositionTextureVertex>                   _vertices  ;
 
       std::string                                                   _name;
-      int                                                           _width ;
-      int                                                           _height;
+      glm::ivec2                                                    _resolution;
       Ahwassa::Window*                                              _window;
       bool                                                          _enabled = true;
   };

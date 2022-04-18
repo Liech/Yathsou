@@ -11,7 +11,7 @@ namespace Ahwassa {
     glm::mat4 getValue();
 
     void bind() override;
-    std::string getType() override { return "mat4"; }
+    std::string getType() const override { return "mat4"; }
 
   private:
     glm::mat4 _value = glm::mat4(1.0);

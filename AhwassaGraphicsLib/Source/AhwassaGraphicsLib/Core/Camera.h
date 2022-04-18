@@ -11,37 +11,38 @@
 namespace Ahwassa {
   class Camera {
   public:  
-    Camera(std::string name, int width, int height);
+    Camera(const std::string& name, const glm::ivec2& resolution);
   
     void bind();
     std::vector<Uniform*> getUniforms();
-    std::string getName();
+    std::string getName() const;
 
-    glm::mat4 getProjectionMatrix();
-    glm::mat4 getViewMatrix();
+    glm::mat4 getProjectionMatrix() const;
+    glm::mat4 getViewMatrix()       const;
 
-    glm::vec3 getPickRay(glm::vec2);
-    glm::vec3 viewToWorldCoordTransform(int mouse_x, int mouse_y);
-    glm::vec2 worldToViewCoordTransform(glm::vec3 pos);
+    glm::vec3 getPickRay(const glm::vec2&)                        const;
+    glm::vec3 viewToWorldCoordTransform(int mouse_x, int mouse_y) const;
+    glm::vec2 worldToViewCoordTransform(const glm::vec3& pos)     const;
 
-    glm::vec2 getResolution();
-    glm::vec3 getPosition  ();
-    void      setPosition  (glm::vec3 v);
-    glm::vec3 getUp        ();
-    void      setUp        (glm::vec3 v);
-    glm::vec3 getTarget    ();
-    void      setTarget    (glm::vec3 v);
-    glm::vec3 getDir       ();
-    void      setDir       (glm::vec3 v);
-    float     getFOV       ();
-    void      setFOV       (float v);
-    bool      is2D         ();
-    void      set2D        (bool);
-    float     getNearPlane ();
-    float     getFarPlane  ();
+    glm::ivec2 getResolution()                                  const;
+    void       setResolution(const glm::ivec2& newResolution);
+    glm::vec3  getPosition  ()                                  const;
+    void       setPosition  (const glm::vec3& v);
+    glm::vec3  getUp        ()                                  const;
+    void       setUp        (const glm::vec3& v);
+    glm::vec3  getTarget    ()                                  const;
+    void       setTarget    (const glm::vec3& v);
+    glm::vec3  getDir       ()                                  const;
+    void       setDir       (const glm::vec3& v);
+    float      getFOV       ()                                  const;
+    void       setFOV       (float v);
+    bool       is2D         ()                                  const;
+    void       set2D        (bool);
+    float      getNearPlane ()                                  const;
+    float      getFarPlane  ()                                  const;
 
-    void                 set2DView(Iyathuum::glmAABB<2> view);
-    Iyathuum::glmAABB<2> getView();
+    void                 set2DView(const Iyathuum::glmAABB<2>& view);
+    Iyathuum::glmAABB<2> getView() const;
 
   private:  
     UniformMat4 _view       ;    
@@ -49,14 +50,13 @@ namespace Ahwassa {
     UniformMat4 _invViewProj;
     UniformVec3 _cameraPos ;
 
-    float                _fov      = 45;
-    glm::vec3            _position = glm::vec3(4, 3, 3);
-    glm::vec3            _up       = glm::vec3(0, 1, 0);
-    glm::vec3            _target   = glm::vec3(0, 0, 0);
-    int                  _width     ;
-    int                  _height    ;
-    bool                 _is2D     = false;
-    Iyathuum::glmAABB<2> _view2D    ;
+    float                _fov        = 45;
+    glm::vec3            _position   = glm::vec3(4, 3, 3);
+    glm::vec3            _up         = glm::vec3(0, 1, 0);
+    glm::vec3            _target     = glm::vec3(0, 0, 0);
+    glm::ivec2           _resolution = glm::ivec2(0, 0);
+    bool                 _is2D       = false;
+    Iyathuum::glmAABB<2> _view2D;
     std::string          _name;
   };
 }

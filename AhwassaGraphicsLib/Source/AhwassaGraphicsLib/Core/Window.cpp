@@ -16,14 +16,14 @@
 namespace Ahwassa {
   Window* win;
 
-  Window::Window(int width, int height)
+  Window::Window(const glm::ivec2& resolution)
   {
-    _width = width;
-    _height = height;
+    _resolution = resolution;
   }
 
   Window::~Window()
   {
+    _instanceMap.erase(ptr());
   }
 
   void APIENTRY glDebugOutput(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
@@ -95,6 +95,15 @@ namespace Ahwassa {
   }
 
 
+  void Window::windowResized(GLFWwindow* window, int width, int height) {
+    auto instance = _instanceMap[window];
+    auto newReso = glm::ivec2(width, height);
+    
+    instance->_resolution = newReso;
+    instance->_camera->setResolution(newReso);
+    instance->Resize(newReso);
+  }
+
   void Window::run() {
     std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
     // Init GLFW
@@ -104,11 +113,12 @@ namespace Ahwassa {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
     // Create a GLFWwindow object that we can use for GLFW's functions
-    _window = glfwCreateWindow(_width, _height, "GL", NULL, NULL);
+    _window = glfwCreateWindow(getResolution()[0], getResolution()[1], "GL", NULL, NULL);
+    _instanceMap[_window] = this;
     win = this;
     glfwMakeContextCurrent(_window);
     if (_window == NULL)
@@ -136,11 +146,13 @@ namespace Ahwassa {
       glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
     }
 
-    _camera   = std::make_shared<Camera>("Camera",_width,_height);
+    glfwSetWindowSizeCallback(_window, windowResized);
+
+    _camera   = std::make_shared<Camera>("Camera",getResolution());
     _renderer = std::make_unique<Renderer>(this,_camera);
     Startup();
     // Define the viewport dimensions
-    glViewport(0, 0, _width, _height);
+    glViewport(0, 0, getResolution()[0], getResolution()[1]);
     glDepthFunc(GL_LESS);
 
     auto start = std::chrono::steady_clock::now();
@@ -169,7 +181,6 @@ namespace Ahwassa {
 
   void Window::frame() {
     glfwPollEvents();
-    //update
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -199,4 +210,7 @@ namespace Ahwassa {
     return _window;
   }
 
+  glm::ivec2 Window::getResolution() const{
+    return _resolution;
+  }
 }

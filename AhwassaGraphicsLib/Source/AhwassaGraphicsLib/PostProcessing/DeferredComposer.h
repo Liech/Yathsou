@@ -23,7 +23,7 @@ namespace Ahwassa {
 
   class DeferredComposer {
   public:
-    DeferredComposer(Window* w, int width, int height);
+    DeferredComposer(Window* w, const glm::vec2& resolution);
     void start();
     void end();
     std::vector<std::shared_ptr<Texture>> getRawTextures();
@@ -48,8 +48,8 @@ namespace Ahwassa {
     std::shared_ptr<UniformFloat>      _numberOfLights;
     std::vector<glm::vec3> lights;
     std::vector<glm::vec3> clrs;
-    int _width;
-    int _height;
+    
+    glm::ivec2 _resolution;
     Window* _window;
   };
 }

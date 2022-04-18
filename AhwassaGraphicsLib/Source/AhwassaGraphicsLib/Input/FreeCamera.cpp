@@ -21,8 +21,8 @@ namespace Ahwassa {
     _focus = focus;
     _input.setCursorStatus(_focus ? Iyathuum::CursorStatus::HIDDEN : Iyathuum::CursorStatus::NORMAL);
     if (focus) {
-      _input.setCursorPos(_camera->getResolution() / 2.0f);
-      _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+      _input.setCursorPos((glm::vec2)_camera->getResolution() / 2.0f);
+      _input.resetCursorMovement((glm::vec2)_camera->getResolution() / 2.0f);
     }
   }
 
@@ -33,8 +33,8 @@ namespace Ahwassa {
   bool FreeCamera::mouseMoveEvent(const glm::vec2& current, const glm::vec2& movement) {
     if (!isFocus())
       return false;
-    _input.setCursorPos(_camera->getResolution() / 2.0f);
-    _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+    _input.setCursorPos((glm::vec2)_camera->getResolution() / 2.0f);
+    _input.resetCursorMovement((glm::vec2)_camera->getResolution() / 2.0f);
 
     glm::vec3 toSide = glm::cross(_camera->getDir(), _camera->getUp());
     glm::vec4 lookDir = glm::vec4(_camera->getDir(),1);

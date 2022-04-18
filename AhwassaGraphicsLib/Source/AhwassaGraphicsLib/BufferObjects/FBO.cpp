@@ -8,9 +8,8 @@
 //https://learnopengl.com/Advanced-Lighting/Deferred-Shading
 
 namespace Ahwassa {
-  FBO::FBO(unsigned int width,unsigned int height, const std::vector<std::string>& textureNames, const std::vector<TextureFormat>& formats){
-    _width = width;
-    _height = height;
+  FBO::FBO(const glm::ivec2& resolution, const std::vector<std::string>& textureNames, const std::vector<TextureFormat>& formats){
+    _resolution = resolution;
     
     glGenFramebuffers(1, &_id);
     glBindFramebuffer(GL_FRAMEBUFFER, _id);
@@ -18,7 +17,7 @@ namespace Ahwassa {
 
     _textures.resize(textureNames.size());
     for (int i = 0; i < textureNames.size(); i++) {
-      std::shared_ptr<Texture> texture = std::make_shared<Texture>(textureNames[i],_width,_height, formats[i]);
+      std::shared_ptr<Texture> texture = std::make_shared<Texture>(textureNames[i],_resolution, formats[i]);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
       glFramebufferTexture2D(GL_FRAMEBUFFER, getGL_COLOR_ATTACHMENT(i), GL_TEXTURE_2D, texture->getTextureID(), 0);
@@ -43,7 +42,7 @@ namespace Ahwassa {
     //_depth = std::make_shared<Texture>("DepthBuffer", d,false);
     glGenTextures(1, &d);
     glBindTexture(GL_TEXTURE_2D, d);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, width, height, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, _resolution[0], _resolution[1], 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -70,7 +69,7 @@ namespace Ahwassa {
   void FBO::start() {
     _oldViewPort.resize(4);
     glGetIntegeri_v(GL_VIEWPORT, 0, _oldViewPort.data());
-    glViewport(0, 0, (GLsizei)_width, (GLsizei)_height);
+    glViewport(0, 0, (GLsizei)_resolution[0], (GLsizei)_resolution[1]);
     glBindFramebuffer(GL_FRAMEBUFFER, _id);
     glClearColor(0,0,0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

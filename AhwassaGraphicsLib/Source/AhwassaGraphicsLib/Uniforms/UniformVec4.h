@@ -11,7 +11,7 @@ namespace Ahwassa {
     glm::vec4 getValue();
 
     void bind() override;
-    std::string getType() override { return "vec4"; }
+    std::string getType() const override { return "vec4"; }
 
   private:
     glm::vec4 _value = glm::vec4(0, 0, 0, 0);

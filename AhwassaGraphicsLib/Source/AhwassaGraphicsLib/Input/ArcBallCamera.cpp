@@ -21,8 +21,8 @@ namespace Ahwassa {
     _focus = focus;
     _input.setCursorStatus(_focus ? Iyathuum::CursorStatus::HIDDEN : Iyathuum::CursorStatus::NORMAL);
     if (focus) {
-      _input.setCursorPos(_camera->getResolution() / 2.0f);
-      _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+      _input.setCursorPos((glm::vec2)_camera->getResolution() / 2.0f);
+      _input.resetCursorMovement((glm::vec2)_camera->getResolution() / 2.0f);
     }
   }
 
@@ -39,8 +39,8 @@ namespace Ahwassa {
 
   void ArcBallCamera::move(const glm::vec2& mouse, const glm::vec2& wheel, bool setCursor) {
     if (setCursor) {
-      _input.setCursorPos(_camera->getResolution() / 2.0f);
-      _input.resetCursorMovement(_camera->getResolution() / 2.0f);
+      _input.setCursorPos((glm::vec2)_camera->getResolution() / 2.0f);
+      _input.resetCursorMovement((glm::vec2)_camera->getResolution() / 2.0f);
     }
 
     glm::vec3 toSide = glm::cross(_camera->getDir(), _camera->getUp());

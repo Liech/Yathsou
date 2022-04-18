@@ -23,8 +23,8 @@ namespace Ahwassa {
     double seconds = diff.count();
     _avFPS = (1.0 / seconds) * 0.005f + 0.995 * _avFPS;
     _renderer->start();
-    _renderer->drawText("Frametime: " + std::to_string(seconds)         , glm::vec2(getWindow()->getWidth() - 250.0f, getWindow()->getHeight() - 40.0f), 0.5f);
-    _renderer->drawText("FPS:            " + std::to_string((int)_avFPS), glm::vec2(getWindow()->getWidth() - 250.0f, getWindow()->getHeight() - 20.0f), 0.5f);
+    _renderer->drawText("Frametime: " + std::to_string(seconds)         , glm::vec2(getWindow()->getResolution()[0] - 250.0f, getWindow()->getResolution()[1] - 40.0f), 0.5f);
+    _renderer->drawText("FPS:            " + std::to_string((int)_avFPS), glm::vec2(getWindow()->getResolution()[0] - 250.0f, getWindow()->getResolution()[1] - 20.0f), 0.5f);
     _renderer->end();
 
 

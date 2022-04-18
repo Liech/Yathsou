@@ -26,7 +26,7 @@ namespace Ahwassa {
   };
 
   BasicRectangleRenderer::BasicRectangleRenderer(Window* w) {
-    _resolution = glm::ivec2(w->getWidth(), w->getHeight());
+    _resolution = w->getResolution();
     _vars = std::make_shared<BasicRectangleRenderer::RenderVars>();
     _vars->window = w;
     makeShader();

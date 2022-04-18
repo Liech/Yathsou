@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <map>
 #include <functional>
 #include <glm/glm.hpp>
 
@@ -15,7 +16,7 @@ namespace Ahwassa {
   class Window
   {
   public:
-    Window(int width, int height);
+    Window(const glm::ivec2& resolution);
     virtual ~Window();
 
     Input&                  input   ();
@@ -28,17 +29,20 @@ namespace Ahwassa {
 
     std::function<void()> Startup = []() {};
     std::function<void()> Update  = []() {};
+    std::function<void(const glm::ivec2&)> Resize  = [](const glm::ivec2&) {};
 
-    int getWidth () const { return _width; }
-    int getHeight() const { return _height; }
+    glm::ivec2 getResolution() const;
 
     GLFWwindow* ptr();
   private:
-    int _width  = 1920;
-    int _height = 1080;
+    static void windowResized(GLFWwindow* window, int width, int height);
+
+    glm::ivec2 _resolution;
     GLFWwindow* _window = nullptr;
     std::unique_ptr<Input>    _input;
     std::unique_ptr<Renderer> _renderer;
     std::shared_ptr<Camera>   _camera;
+
+    inline static std::map<GLFWwindow*, Window*> _instanceMap;
   };
 }

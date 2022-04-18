@@ -48,7 +48,7 @@ namespace Ahwassa {
   glm::vec2 Input::getCursorPos() const {
     double xpos, ypos;
     glfwGetCursorPos(_windowGL, &xpos, &ypos);
-    return glm::vec2(xpos, _windowAhwassa->getHeight() - ypos);
+    return glm::vec2(xpos, _windowAhwassa->getResolution()[1] - ypos);
   }
 
   void Input::setCursorPos(glm::vec2 cursorPos) {

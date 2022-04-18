@@ -21,11 +21,11 @@ namespace Ahwassa {
     glDeleteBuffers(1, &instanceVBO);
   }
 
-  int InstancedVecMat4::getNumberOfLocationsUsed(){
+  int InstancedVecMat4::getNumberOfLocationsUsed() const {
     return 4; 
   }
 
-  std::string InstancedVecMat4::getType() {
+  std::string InstancedVecMat4::getType() const {
     return "mat4"; 
   }
 

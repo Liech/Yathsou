@@ -110,7 +110,7 @@ namespace Ahwassa {
 
     std::vector<Uniform*> uniforms;
     _vars->projection = std::make_unique<UniformMat4>("projection");
-    _vars->projection->setValue(glm::ortho(0.0f, (float)_vars->window->getWidth(), 0.0f, (float)_vars->window->getHeight()));
+    _vars->projection->setValue(glm::ortho(0.0f, (float)_vars->window->getResolution()[0], 0.0f, (float)_vars->window->getResolution()[1]));
 
     uniforms.push_back(_vars->projection.get());
     uniforms.push_back(_vars->models.get());

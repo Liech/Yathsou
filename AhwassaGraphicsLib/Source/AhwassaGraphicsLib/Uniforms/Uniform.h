@@ -16,21 +16,21 @@ namespace Ahwassa {
 
     virtual void bind() = 0;
 
-            std::string getName();
+            std::string getName()                 const;
             void        setLocation(int location);
-            int         getLocation();
-            bool        isActive();
-            bool        isBindable();
+            int         getLocation()             const;
+            bool        isActive()                const;
+            bool        isBindable()              const;
             void        setBindable(bool val);
-    virtual bool        isTexture();
+    virtual bool        isTexture()               const;
             void        setTextureLocation(int location);
-            int         getTextureLocation();
-    virtual std::string getArrayPostfix();
-    virtual int         getNumberOfLocationsUsed();
-    virtual std::string toGLSL();
-    virtual std::string getType() = 0;
-    virtual bool        isBuffer();
-    virtual bool        isAttribute();
+            int         getTextureLocation()      const;
+    virtual std::string getArrayPostfix()         const;
+    virtual int         getNumberOfLocationsUsed()const;
+    virtual std::string toGLSL()                  const;
+    virtual std::string getType()                 const = 0;
+    virtual bool        isBuffer()                const;
+    virtual bool        isAttribute()             const;
   private:
     std::string _name;
     int         _location = -1;

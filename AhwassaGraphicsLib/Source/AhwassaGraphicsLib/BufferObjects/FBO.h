@@ -8,7 +8,7 @@
 namespace Ahwassa {
   class FBO {
   public:
-    FBO(unsigned int width, unsigned int height, const std::vector<std::string>& textureNames, const std::vector<TextureFormat>& formats);
+    FBO(const glm::ivec2& resolution, const std::vector<std::string>& textureNames, const std::vector<TextureFormat>& formats);
     void start();//set as rendertargets
     void end();  //unset as rendertargets
     
@@ -20,8 +20,7 @@ namespace Ahwassa {
     unsigned int getGL_COLOR_ATTACHMENT(int number);
     unsigned int getGL_TEXTURE(int number);
 
-    unsigned int _width;
-    unsigned int _height;
+    glm::ivec2   _resolution;
     unsigned int _id;
 
     std::shared_ptr<Texture>              _depth;
