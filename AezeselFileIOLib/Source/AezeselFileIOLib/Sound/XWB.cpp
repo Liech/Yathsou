@@ -27,6 +27,7 @@ namespace Aezesel {
   };
 
   std::vector<std::unique_ptr<Iyathuum::Sound>> XWB::load(std::string filename){
+    _fileposition = 0;
     std::ifstream input(filename, std::ios::binary);
     if (input.fail())
       throw std::runtime_error("Error opening " + filename);

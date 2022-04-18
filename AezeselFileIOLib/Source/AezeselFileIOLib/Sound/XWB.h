@@ -20,7 +20,7 @@ namespace Aezesel {
   private:
     std::vector<std::unique_ptr<Iyathuum::Sound>> loadInternal();
 
-    size_t                     _fileposition;
+    size_t                     _fileposition = 0;
     std::vector<unsigned char> _buffer;
   };
 }

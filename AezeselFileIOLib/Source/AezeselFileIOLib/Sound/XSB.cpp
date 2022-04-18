@@ -4,6 +4,7 @@
 
 namespace Aezesel {
   std::vector<std::string> XSB::load(std::string filename) {
+    _fileposition = 0;
     std::ifstream input(filename, std::ios::binary);
     if (input.fail())
       return std::vector<std::string>();
