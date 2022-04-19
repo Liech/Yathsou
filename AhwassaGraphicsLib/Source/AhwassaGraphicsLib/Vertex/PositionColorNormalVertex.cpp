@@ -24,7 +24,7 @@ namespace Ahwassa {
     return result;
   }
 
-  std::vector<AttributeDescription> PositionColorNormalVertex::binding() {
+  std::vector<AttributeDescription> PositionColorNormalVertex::binding() const {
     return PositionColorNormalVertex::getBinding();
   }
 

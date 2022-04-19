@@ -35,10 +35,10 @@ namespace Ahwassa {
     makeFreetype();
   }
 
-  void BasicTextRenderer::drawText(std::string text, glm::vec2 pos, float scale, Iyathuum::Color color) {
+  void BasicTextRenderer::drawText(const std::string& text, const glm::vec2& pos, float scale, const Iyathuum::Color& color) {
     drawText(text, pos[0], pos[1], scale, color);
   }
-  void BasicTextRenderer::drawText(std::string text, const float startX, const float startY, float scale, Iyathuum::Color color) {
+  void BasicTextRenderer::drawText(const std::string& text, float startX, float startY, float scale, const Iyathuum::Color& color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
@@ -94,7 +94,7 @@ namespace Ahwassa {
     }
   }
 
-  glm::vec2 BasicTextRenderer::getTextSize(std::string text, float scale) {
+  glm::vec2 BasicTextRenderer::getTextSize(const std::string& text, float scale) {
     float maxWidth = 0;
     glm::vec2 result(0, 0);
     std::string::const_iterator c;

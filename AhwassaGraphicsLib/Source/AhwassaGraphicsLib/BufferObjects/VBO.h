@@ -19,7 +19,7 @@ namespace Ahwassa{
     {
     }
 
-    virtual std::vector<AttributeDescription> getBinding() override{
+    virtual std::vector<AttributeDescription> getBinding() const override{
       Struct s;
       return s.getBinding();
     }

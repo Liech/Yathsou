@@ -11,7 +11,7 @@ namespace Ahwassa {
   public:
     FreeCamera(std::shared_ptr<Camera>, Input& inp, Iyathuum::Key);
 
-    bool isFocus();
+    bool isFocus() const;
     void setFocus(bool focus);
 
     bool keyEvent(const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) override;

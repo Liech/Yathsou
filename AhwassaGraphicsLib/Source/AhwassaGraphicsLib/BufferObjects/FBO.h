@@ -12,13 +12,13 @@ namespace Ahwassa {
     void start();//set as rendertargets
     void end();  //unset as rendertargets
     
-    std::vector<std::shared_ptr<Texture>> getUniforms();
-    std::shared_ptr<Texture> getDepth();
-    unsigned int getID();
+    std::vector<std::shared_ptr<Texture>> getUniforms() const;
+    std::shared_ptr<Texture> getDepth() const;
+    unsigned int getID() const;
 
   private:
-    unsigned int getGL_COLOR_ATTACHMENT(int number);
-    unsigned int getGL_TEXTURE(int number);
+    unsigned int getGL_COLOR_ATTACHMENT(int number) const;
+    unsigned int getGL_TEXTURE(int number) const;
 
     glm::ivec2   _resolution;
     unsigned int _id;

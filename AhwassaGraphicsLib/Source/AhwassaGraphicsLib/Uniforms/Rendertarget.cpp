@@ -6,11 +6,11 @@
 
 
 namespace Ahwassa {
-  std::string Rendertarget::getType() {
+  std::string Rendertarget::getType() const {
     return "sampler2D"; 
   }
 
-  Rendertarget::Rendertarget(std::string name, const glm::ivec2& resolution) : Uniform(name) {
+  Rendertarget::Rendertarget(const std::string& name, const glm::ivec2& resolution) : Uniform(name) {
     _resolution = resolution;
     glGenFramebuffers(1, &_framebuffer);
     glBindFramebuffer(GL_FRAMEBUFFER, _framebuffer);

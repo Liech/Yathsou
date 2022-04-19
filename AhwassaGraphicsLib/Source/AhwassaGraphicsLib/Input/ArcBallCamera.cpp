@@ -7,13 +7,13 @@
 #include <imgui.h>
 
 namespace Ahwassa {
-  ArcBallCamera::ArcBallCamera(std::shared_ptr<Camera> cam, Input& inp, Iyathuum::Key toggleKey) : _input(inp) {
+  ArcBallCamera::ArcBallCamera(std::shared_ptr<Camera> cam, Input& inp, const Iyathuum::Key& toggleKey) : _input(inp) {
     _camera = cam;
     _toggleKey = toggleKey;
     setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2(0, 0), cam->getResolution()));
   }
 
-  bool ArcBallCamera::isFocus() {
+  bool ArcBallCamera::isFocus() const{
     return _focus;
   }
 

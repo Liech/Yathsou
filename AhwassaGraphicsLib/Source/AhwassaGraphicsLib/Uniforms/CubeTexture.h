@@ -16,8 +16,8 @@ namespace Ahwassa {
     CubeTexture(const std::string& name, unsigned int tex, CubeTextureReleaseBehavior released = CubeTextureReleaseBehavior::KeepTextureOnDeconstructor);
     virtual ~CubeTexture() override;
 
-    virtual bool isTexture()      override;
-    virtual std::string getType() override;
+    virtual bool isTexture()      const override;
+    virtual std::string getType() const override;
 
     void         setTextureID(unsigned int tex);
     unsigned int getTextureID() const;

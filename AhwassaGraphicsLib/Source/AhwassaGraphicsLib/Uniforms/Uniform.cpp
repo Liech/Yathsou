@@ -7,11 +7,11 @@ namespace Ahwassa {
     _name = name; 
   }
 
-  std::string Uniform::toGLSL() {
+  std::string Uniform::toGLSL() const {
     return "layout(location = " + std::to_string(getLocation()) + ") uniform " + getType() + " " + getName() + getArrayPostfix() + ";\n";
   }
 
-  std::string Uniform::getName() { 
+  std::string Uniform::getName() const {
     return _name; 
   }
 
@@ -19,15 +19,15 @@ namespace Ahwassa {
     _location = location; 
   }
 
-  int  Uniform::getLocation() {
+  int  Uniform::getLocation() const {
     return _location; 
   }
 
-  bool Uniform::isActive() {
+  bool Uniform::isActive() const {
     return _location == -1;
   }
 
-  bool Uniform::isBindable() { 
+  bool Uniform::isBindable() const {
     return _bindable; 
   }
 
@@ -35,7 +35,7 @@ namespace Ahwassa {
     _bindable = val; 
   }
 
-  bool Uniform::isTexture() {
+  bool Uniform::isTexture() const {
     return false;
   }
 
@@ -45,24 +45,24 @@ namespace Ahwassa {
     _texLoc = location; 
   }
 
-  int Uniform::getTextureLocation() {
+  int Uniform::getTextureLocation() const {
     assert(isTexture()); 
     return _texLoc;
   }
 
-  std::string Uniform::getArrayPostfix() {
+  std::string Uniform::getArrayPostfix() const {
     return ""; 
   }
 
-  int Uniform::getNumberOfLocationsUsed() {
+  int Uniform::getNumberOfLocationsUsed() const {
     return 1;
   }
 
-  bool Uniform::isBuffer() {
+  bool Uniform::isBuffer() const {
     return false;
   }
   
-  bool Uniform::isAttribute() {
+  bool Uniform::isAttribute() const {
     return false;
   }
 

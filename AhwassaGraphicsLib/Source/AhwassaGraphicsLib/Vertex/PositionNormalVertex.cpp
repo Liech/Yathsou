@@ -22,7 +22,7 @@ namespace Ahwassa {
     return result;
   }
 
-  std::vector<AttributeDescription> PositionNormalVertex::binding() {
+  std::vector<AttributeDescription> PositionNormalVertex::binding() const {
     return PositionNormalVertex::getBinding();
   }
 }

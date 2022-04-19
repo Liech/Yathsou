@@ -4,7 +4,7 @@
 #include "glad/glad.h"
 
 namespace Ahwassa {
-  InstancedVecMat4::InstancedVecMat4(std::string name, int size) : Uniform(name) { 
+  InstancedVecMat4::InstancedVecMat4(const std::string& name, int size) : Uniform(name) { 
     _value.resize(size); 
     _size = size; 
     for (size_t i = 0; i < _value.size(); i++) {
@@ -21,11 +21,11 @@ namespace Ahwassa {
     glDeleteBuffers(1, &instanceVBO);
   }
 
-  int InstancedVecMat4::getNumberOfLocationsUsed(){
+  int InstancedVecMat4::getNumberOfLocationsUsed() const {
     return 4; 
   }
 
-  std::string InstancedVecMat4::getType() {
+  std::string InstancedVecMat4::getType() const {
     return "mat4"; 
   }
 
@@ -33,7 +33,7 @@ namespace Ahwassa {
     return ""; 
   }
 
-  const std::vector<glm::mat4>& InstancedVecMat4::getValue() {
+  const std::vector<glm::mat4>& InstancedVecMat4::getValue() const {
     return _value;
   }
 

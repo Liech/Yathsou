@@ -7,10 +7,10 @@ namespace Ahwassa {
   public:
     UniformFloat(const std::string& name) : Uniform(name) {};
     void  setValue(float val);
-    float getValue();
+    float getValue() const;
 
     void bind() override;
-    std::string getType() override { return "float"; }
+    std::string getType() const override { return "float"; }
 
   private:
     float _value = 0;

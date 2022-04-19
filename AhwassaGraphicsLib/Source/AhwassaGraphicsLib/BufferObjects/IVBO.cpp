@@ -16,13 +16,14 @@ namespace Ahwassa {
   }
 
 
-  unsigned int IVBO::getID() {
+  unsigned int IVBO::getID() const {
     return _id;
   }
 
-  size_t IVBO::getSize() {
+  size_t IVBO::getSize() const {
     return _size;
   }
+
   void IVBO::setRawData(const void* pos, size_t size) {
     glBindBuffer(GL_ARRAY_BUFFER, _id);
     glBufferSubData(GL_ARRAY_BUFFER, 0, size * _structsize, pos);

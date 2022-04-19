@@ -41,7 +41,7 @@ namespace Ahwassa {
   }
 
 
-  std::string UniformVecTexture::getArrayPostfix() {
+  std::string UniformVecTexture::getArrayPostfix() const {
     return "";
   }
 }

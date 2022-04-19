@@ -15,6 +15,6 @@ namespace Ahwassa {
     PositionColorVertex(glm::vec3 Position, glm::vec4 Color);
 
     static std::vector<AttributeDescription> getBinding();
-    std::vector<AttributeDescription> binding();
+    std::vector<AttributeDescription> binding() const;
   };
 }

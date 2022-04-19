@@ -22,7 +22,7 @@ namespace Ahwassa {
     return result;
   }
 
-  std::vector<AttributeDescription> PositionColorVertex::binding() {
+  std::vector<AttributeDescription> PositionColorVertex::binding() const {
     return PositionColorVertex::getBinding();
   }
 }

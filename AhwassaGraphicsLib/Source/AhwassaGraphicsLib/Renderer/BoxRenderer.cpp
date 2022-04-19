@@ -159,19 +159,19 @@ namespace Ahwassa {
     _vars->ibo->drawInstanced(_vars->vao.get(),amount);
   }
 
-  std::shared_ptr<Dot> BoxRenderer::newDot(const glm::vec3& pos, float size, Iyathuum::Color clr) {
+  std::shared_ptr<Dot> BoxRenderer::newDot(const glm::vec3& pos, float size, const Iyathuum::Color& clr) {
     std::shared_ptr<Dot> result = std::make_shared<Dot>(pos,size,clr);
     _instances.push_back(result);
     return result;
   }
 
-  std::shared_ptr<Line> BoxRenderer::newLine(const glm::vec3& start, const glm::vec3& end, float size, Iyathuum::Color clr) {
+  std::shared_ptr<Line> BoxRenderer::newLine(const glm::vec3& start, const glm::vec3& end, float size, const Iyathuum::Color& clr) {
     std::shared_ptr<Line> result = std::make_shared<Line>(start, end, size, clr);
     _instances.push_back(result);
     return result;
   }
 
-  std::shared_ptr<Box> BoxRenderer::newBox(const glm::mat4& mat, Iyathuum::Color clr) {
+  std::shared_ptr<Box> BoxRenderer::newBox(const glm::mat4& mat, const Iyathuum::Color& clr) {
     std::shared_ptr<Box> result = std::make_shared<Box>(mat,clr);
     _instances.push_back(result);
     return result;

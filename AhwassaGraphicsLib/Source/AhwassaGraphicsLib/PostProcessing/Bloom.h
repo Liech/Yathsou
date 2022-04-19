@@ -19,13 +19,13 @@ namespace Ahwassa {
     void draw(std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> bloom, int channel);
 
     void setIntensity(float);
-    float intensity();
+    float intensity()        const;
     void  setSize(float);
-    float size();
+    float size()             const;
     void  setQuality(float);
-    float quality();
+    float quality()          const;
     void  setDirections(float);
-    float directions();
+    float directions()       const;
   private:
     std::shared_ptr<Ahwassa::ShaderProgram> _shader;
 

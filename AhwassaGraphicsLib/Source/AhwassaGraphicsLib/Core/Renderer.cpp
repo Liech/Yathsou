@@ -41,7 +41,7 @@ namespace Ahwassa {
     return _box->newBox(mat, clr);
   }
 
-  std::shared_ptr<Rectangle> Renderer::newRectangle(Iyathuum::glmAABB<2> loc, Iyathuum::Color clr) {
+  std::shared_ptr<Rectangle> Renderer::newRectangle(const Iyathuum::glmAABB<2>& loc, Iyathuum::Color clr) {
     return _rectangle->newRectangle(loc, clr);
   }
 

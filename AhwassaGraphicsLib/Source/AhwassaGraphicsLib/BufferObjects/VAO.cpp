@@ -31,7 +31,7 @@ namespace Ahwassa {
     glDeleteVertexArrays(1, &_id);
   }
 
-  unsigned int VAO::getID() {
+  unsigned int VAO::getID() const{
     return _id;
   }
 

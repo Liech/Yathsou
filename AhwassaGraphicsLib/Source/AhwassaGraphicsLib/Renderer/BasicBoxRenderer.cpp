@@ -139,7 +139,7 @@ namespace Ahwassa {
     glDepthFunc(GL_LESS);    
   }
 
-  void BasicBoxRenderer::draw(glm::mat4 m, Iyathuum::Color color) {
+  void BasicBoxRenderer::draw(const glm::mat4& m, const Iyathuum::Color& color) {
     _vars->_mat->setValue(m);
     _vars->_mat->bind();
     _vars->_color->setValue(color.to4());
@@ -147,7 +147,7 @@ namespace Ahwassa {
     _vars->_ibo->draw(_vars->_vao.get());
   }
 
-  void BasicBoxRenderer::drawDot(glm::vec3 start, glm::vec3 size, Iyathuum::Color color) {
+  void BasicBoxRenderer::drawDot(const glm::vec3& start, const glm::vec3& size, const Iyathuum::Color& color) {
     glm::mat4 m = glm::mat4(1);
     m = glm::translate(m, start);
     m = glm::scale(m, size);
@@ -155,18 +155,18 @@ namespace Ahwassa {
     draw(m, color);
   }
 
-  void BasicBoxRenderer::drawDot(glm::vec3 start, float size, Iyathuum::Color color) {
+  void BasicBoxRenderer::drawDot(const glm::vec3& start, float size, const Iyathuum::Color& color) {
     drawDot(start, glm::vec3(size, size, size), color);
   }
 
-  void BasicBoxRenderer::drawBox(glm::vec3 start, glm::vec3 size, Iyathuum::Color color) {
+  void BasicBoxRenderer::drawBox(const glm::vec3& start, const glm::vec3& size, const Iyathuum::Color& color) {
     glm::mat4 m = glm::mat4(1);
     m = glm::translate(m, start);
     m = glm::scale(m, size);
     draw(m, color);
   }
 
-  void BasicBoxRenderer::drawLine(glm::vec3 start, glm::vec3 end, float thickness, Iyathuum::Color color)
+  void BasicBoxRenderer::drawLine(const glm::vec3& start, const glm::vec3& end, float thickness, const Iyathuum::Color& color)
   {
     glm::mat4 m = glm::mat4(1);
     m = glm::translate(m, start);

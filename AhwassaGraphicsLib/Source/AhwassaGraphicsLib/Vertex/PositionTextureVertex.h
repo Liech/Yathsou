@@ -15,6 +15,6 @@ namespace Ahwassa {
     PositionTextureVertex(glm::vec3 Position, glm::vec2 Texture);
 
     static std::vector<AttributeDescription> getBinding();
-    std::vector<AttributeDescription> binding();
+    std::vector<AttributeDescription> binding() const;
   };
 }

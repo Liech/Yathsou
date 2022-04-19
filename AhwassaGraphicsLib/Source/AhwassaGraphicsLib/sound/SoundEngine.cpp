@@ -106,7 +106,7 @@ namespace Ahwassa
       Pa_AbortStream(_stream);
   }
 
-  bool SoundHandler::isRunning() {
+  bool SoundHandler::isRunning() const {
     return Pa_IsStreamActive(_stream);
   }
 

@@ -161,15 +161,15 @@ namespace Ahwassa {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
 
-  std::vector<std::shared_ptr<Texture>> DeferredComposer::getRawTextures() {
+  std::vector<std::shared_ptr<Texture>> DeferredComposer::getRawTextures() const {
     return _fbo->getUniforms();
   }
 
-  std::shared_ptr<Texture> DeferredComposer::getDepth() {
+  std::shared_ptr<Texture> DeferredComposer::getDepth() const {
     return _fbo->getDepth();
   }
   
-  std::shared_ptr<Texture> DeferredComposer::getResult() {
+  std::shared_ptr<Texture> DeferredComposer::getResult() const {
     std::shared_ptr<Ahwassa::Texture> result = std::make_shared<Ahwassa::Texture>("Deferred", _resultCanvas->getTextureID());
     result->release();
     return result;

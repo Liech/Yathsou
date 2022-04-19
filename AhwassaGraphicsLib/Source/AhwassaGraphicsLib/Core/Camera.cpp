@@ -6,7 +6,7 @@
 #include "GLFW/glfw3.h"
 
 namespace Ahwassa {
-  Camera::Camera(std::string name, const glm::ivec2& resolution):
+  Camera::Camera(const std::string& name, const glm::ivec2& resolution):
     _view(name + "View"),
     _projection(name + "Projection"),
     _cameraPos(name + "Position"),
@@ -16,7 +16,7 @@ namespace Ahwassa {
     _resolution = resolution;
   }
 
-  std::string Camera::getName() {
+  std::string Camera::getName() const {
     return _name;
   }
 
@@ -40,7 +40,7 @@ namespace Ahwassa {
     return std::vector<Uniform*> {&_view, & _projection, & _cameraPos, & _invViewProj};
   }
 
-  glm::mat4 Camera::getProjectionMatrix() {
+  glm::mat4 Camera::getProjectionMatrix() const {
     if (_is2D) {
       glm::vec2 p = _view2D.getPosition();
       return glm::ortho(p[0], p[0] + _view2D.getSize()[0], p[1] + _view2D.getSize()[1], p[1] + 0.0f, 0.1f, 100.0f);
@@ -48,13 +48,13 @@ namespace Ahwassa {
     return glm::perspective(glm::radians(getFOV()), getResolution()[0] / getResolution()[1], getNearPlane(), getFarPlane());
   }
 
-  glm::mat4 Camera::getViewMatrix() {
+  glm::mat4 Camera::getViewMatrix() const {
     if (_is2D)
       return glm::lookAt(glm::vec3(0.f, 0.f, 2.0f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.0f, 1.0f, 0.0f));
     return glm::lookAt(getPosition(), getTarget(), getUp());
   }
 
-  glm::vec2 Camera::worldToViewCoordTransform(glm::vec3 worldPos)
+  glm::vec2 Camera::worldToViewCoordTransform(const glm::vec3& worldPos) const
   {
     //https://stackoverflow.com/questions/8491247/c-opengl-convert-world-coords-to-screen2d-coords
     glm::vec4 clipSpacePos = getProjectionMatrix() * (getViewMatrix() * glm::vec4(worldPos, 1.0));
@@ -65,7 +65,7 @@ namespace Ahwassa {
   }
 
   // SCREEN SPACE: mouse_x and mouse_y are screen space
-  glm::vec3 Camera::viewToWorldCoordTransform(int mouse_x, int mouse_y) {
+  glm::vec3 Camera::viewToWorldCoordTransform(int mouse_x, int mouse_y) const {
     // NORMALISED DEVICE SPACE
     double x = 2.0 * mouse_x / getResolution()[0] - 1;
     double y = 2.0 * mouse_y / getResolution()[1] - 1;
@@ -81,12 +81,12 @@ namespace Ahwassa {
     return glm::vec3(worldPos);
   }
 
-  glm::vec3 Camera::getPickRay(glm::vec2 v) {
+  glm::vec3 Camera::getPickRay(const glm::vec2& v) const {
     glm::vec3 worldMouse = viewToWorldCoordTransform(v[0], v[1]);
     return worldMouse;
   }
 
-  bool Camera::is2D() {
+  bool Camera::is2D() const {
     return _is2D;
   }
 
@@ -94,51 +94,51 @@ namespace Ahwassa {
     _is2D = on;
   }
 
-  void Camera::set2DView(Iyathuum::glmAABB<2> view) {
+  void Camera::set2DView(const Iyathuum::glmAABB<2>& view) {
     _view2D = view;
   }
 
-  Iyathuum::glmAABB<2> Camera::getView() {
+  Iyathuum::glmAABB<2> Camera::getView() const {
     return _view2D;
   }
 
-  float Camera::getNearPlane() {
+  float Camera::getNearPlane() const {
     return 3; 
   }
 
-  float Camera::getFarPlane() {
+  float Camera::getFarPlane() const {
     return 2000.0f;
   }
 
-  glm::vec2 Camera::getResolution() {
+  glm::vec2 Camera::getResolution() const {
     return glm::vec2(_resolution[0], _resolution[1]);
   }
 
-  glm::vec3 Camera::getPosition() {
+  glm::vec3 Camera::getPosition() const {
     return _position; 
   }
 
-  void Camera::setPosition(glm::vec3 v) {
+  void Camera::setPosition(const glm::vec3& v) {
     _position = v; 
   }
 
-  glm::vec3 Camera::getUp() {
+  glm::vec3 Camera::getUp() const {
     return _up; 
   }
 
-  void Camera::setUp(glm::vec3 v) {
+  void Camera::setUp(const glm::vec3& v) {
     _up = v; 
   }
 
-  glm::vec3 Camera::getTarget() {
+  glm::vec3 Camera::getTarget() const {
     return _target; 
   }
 
-  void Camera::setTarget(glm::vec3 v) {
+  void Camera::setTarget(const glm::vec3& v) {
     _target = v; 
   }
 
-  float Camera::getFOV() {
+  float Camera::getFOV() const {
     return _fov; 
   }
 
@@ -146,11 +146,11 @@ namespace Ahwassa {
     _fov = v; 
   }
 
-  glm::vec3 Camera::getDir() {
+  glm::vec3 Camera::getDir() const {
     return glm::normalize(_target - _position);
   }
 
-  void Camera::setDir(glm::vec3 v) {
+  void Camera::setDir(const glm::vec3& v) {
     setTarget(_position + v);
   }
 

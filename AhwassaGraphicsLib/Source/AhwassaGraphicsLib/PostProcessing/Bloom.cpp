@@ -98,7 +98,7 @@ namespace Ahwassa {
     _intensity->setValue(value);
   }
 
-  float Bloom::intensity() {
+  float Bloom::intensity() const {
     return _intensity->getValue();
   }
 
@@ -106,7 +106,7 @@ namespace Ahwassa {
     _size->setValue(value);
   }
 
-  float Bloom::size() {
+  float Bloom::size() const {
     return _size->getValue();
   }
 
@@ -114,7 +114,7 @@ namespace Ahwassa {
     _quality->setValue(value);
   }
 
-  float Bloom::quality() {
+  float Bloom::quality() const {
     return _quality->getValue();
   }
 
@@ -122,7 +122,7 @@ namespace Ahwassa {
     _directions->setValue(value);
   }
 
-  float Bloom::directions() {
+  float Bloom::directions() const {
     return _directions->getValue();
   }
 }

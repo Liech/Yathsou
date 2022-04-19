@@ -38,7 +38,7 @@ namespace Ahwassa {
       glBindBufferBase(GL_SHADER_STORAGE_BUFFER, getLocation(), _ssbo);
     }
 
-    std::string SSBOvec4::toGLSL() {
+    std::string SSBOvec4::toGLSL() const {
       std::string result = "";
       result += "layout (std430, binding=" + std::to_string(getLocation()) + ") buffer type" + getName() + "\n";
       result += "{\n";

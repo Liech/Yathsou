@@ -20,19 +20,19 @@ namespace Ahwassa {
 
     Input(GLFWwindow*, Window*);
 
-    Iyathuum::KeyStatus  getKeyStatus(Iyathuum::Key key) const;
-    void                 setCursorStatus(Iyathuum::CursorStatus);
+    Iyathuum::KeyStatus  getKeyStatus(const Iyathuum::Key& key) const;
+    void                 setCursorStatus(const Iyathuum::CursorStatus&);
     glm::vec2            getCursorPos() const;
-    void                 setCursorPos(glm::vec2 pos);
-    void                 resetCursorMovement(glm::vec2 v);
+    void                 setCursorPos(const glm::vec2& pos);
+    void                 resetCursorMovement(const glm::vec2& v);
 
     void setFocus(UIElement* newFocus);
-    UIElement* getCurrentFocus();
+    UIElement* getCurrentFocus() const;
 
     void addUIElement(UIElement*);
     void addUIElement(UIElement*, size_t orderID);
     void removeUIElement(UIElement*);
-    std::vector<UIElement*> getUIElements();
+    std::vector<UIElement*> getUIElements() const;
 
   //pseudo private:
     void update();

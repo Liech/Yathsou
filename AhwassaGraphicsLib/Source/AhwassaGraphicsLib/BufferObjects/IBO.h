@@ -11,8 +11,8 @@ namespace Ahwassa {
     IBO(const std::vector<int>& content);
     ~IBO();
 
-    unsigned int getID();
-    size_t       getSize();
+    unsigned int getID() const;
+    size_t       getSize() const;
     void         draw(VAO* vertexBuffer) const;
     void         drawInstanced(VAO* vertexBuffer,size_t amount)const;
 

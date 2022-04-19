@@ -34,14 +34,14 @@ namespace Ahwassa {
     });
   }
 
-  Iyathuum::KeyStatus Input::getKeyStatus(Iyathuum::Key key) const{
+  Iyathuum::KeyStatus Input::getKeyStatus(const Iyathuum::Key& key) const{
     if ((int)key <= 7)
       return (Iyathuum::KeyStatus)((int)glfwGetMouseButton(_windowGL, (int)key));
     else
       return (Iyathuum::KeyStatus)((int)glfwGetKey(_windowGL, (int)key));
   }
 
-  void Input::setCursorStatus(Iyathuum::CursorStatus status) {
+  void Input::setCursorStatus(const Iyathuum::CursorStatus& status) {
     glfwSetInputMode(_windowGL, GLFW_CURSOR, (int)status);
   }
 
@@ -51,7 +51,7 @@ namespace Ahwassa {
     return glm::vec2(xpos, _windowAhwassa->getResolution()[1] - ypos);
   }
 
-  void Input::setCursorPos(glm::vec2 cursorPos) {
+  void Input::setCursorPos(const glm::vec2& cursorPos) {
     glfwSetCursorPos(_windowGL, cursorPos.x, cursorPos.y);
     _cursorpos = cursorPos;
   }
@@ -79,7 +79,7 @@ namespace Ahwassa {
       newFocus->startFocusEvent();
   }
 
-  UIElement* Input::getCurrentFocus() {
+  UIElement* Input::getCurrentFocus() const {
     return _currentFocus;;
   }
 
@@ -175,7 +175,7 @@ namespace Ahwassa {
     _oldMousePos = _cursorpos;
   }
 
-  void Input::resetCursorMovement(glm::vec2 v) {
+  void Input::resetCursorMovement(const glm::vec2& v) {
     _oldMousePos = v;
   }
 
@@ -192,7 +192,7 @@ namespace Ahwassa {
     _uiElements.erase(elem);
   }
 
-  std::vector<UIElement*> Input::getUIElements() {
+  std::vector<UIElement*> Input::getUIElements() const {
     struct compare {
       bool operator()(std::pair<UIElement*, size_t> const& left,
         std::pair<UIElement*, size_t> const& right) const {

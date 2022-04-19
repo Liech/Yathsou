@@ -17,11 +17,11 @@ namespace Ahwassa {
     glDeleteBuffers(1, &_ibo);
   }
 
-  unsigned int IBO::getID() {
+  unsigned int IBO::getID() const{
     return _ibo;
   }
 
-  size_t IBO::getSize() {
+  size_t IBO::getSize() const {
     return _size;
   }
 

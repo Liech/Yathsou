@@ -13,7 +13,7 @@ namespace Ahwassa {
     setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2(0, 0), cam->getResolution()));
   }
 
-  bool FreeCamera::isFocus() {
+  bool FreeCamera::isFocus() const{
     return _focus;
   }
 

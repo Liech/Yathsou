@@ -26,9 +26,9 @@ namespace Ahwassa {
     DeferredComposer(Window* w, const glm::ivec2& resolution);
     void start();
     void end();
-    std::vector<std::shared_ptr<Texture>> getRawTextures();
-    std::shared_ptr<Texture> getResult();
-    std::shared_ptr<Texture> getDepth();
+    std::vector<std::shared_ptr<Texture>> getRawTextures() const;
+    std::shared_ptr<Texture> getResult()                   const;
+    std::shared_ptr<Texture> getDepth()                    const;
     void draw();
     void blitDepth();
   private:

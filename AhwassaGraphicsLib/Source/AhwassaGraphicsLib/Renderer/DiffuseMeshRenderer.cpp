@@ -23,11 +23,11 @@ namespace Ahwassa {
   }
 
 
-  void DiffuseMeshRenderer::setLightDirection(glm::vec3 dir) {
+  void DiffuseMeshRenderer::setLightDirection(const glm::vec3& dir) {
     _lightDirection = dir;
   }
 
-  glm::vec3 DiffuseMeshRenderer::getLightDirection() {
+  glm::vec3 DiffuseMeshRenderer::getLightDirection() const {
     return _lightDirection;
   }
 

@@ -36,17 +36,18 @@ namespace Ahwassa {
     makeShader();
   }
 
-  void BasicTexture2DRenderer::draw(const Texture& texture,glm::vec2 pos, glm::vec2 size) {
+  void BasicTexture2DRenderer::draw(const Texture& texture, const glm::vec2& pos, const glm::vec2& size) {
     Iyathuum::glmAABB<2> box;
     box.setPosition(pos);
     box.setSize(size);
     draw(texture, box);
   }
   
-  void BasicTexture2DRenderer::draw(const Texture& texture,Iyathuum::glmAABB<2> box,bool yswap) {
+  void BasicTexture2DRenderer::draw(const Texture& texture,const Iyathuum::glmAABB<2>& b,bool yswap) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
+    Iyathuum::glmAABB<2> box = b;
     if (_clipping)
       box = _clippingBox.getIntersection(box);
 
@@ -134,7 +135,7 @@ namespace Ahwassa {
     _vars->shader = std::make_unique<ShaderProgram>(PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
-  void BasicTexture2DRenderer::setClippingRectangle(Iyathuum::glmAABB<2> box) {
+  void BasicTexture2DRenderer::setClippingRectangle(const Iyathuum::glmAABB<2>& box) {
     _clipping = true;
     _clippingBox = box;
   }

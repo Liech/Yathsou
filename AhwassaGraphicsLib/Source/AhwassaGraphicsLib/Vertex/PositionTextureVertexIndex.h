@@ -16,6 +16,6 @@ namespace Ahwassa {
     PositionTextureVertexIndex(glm::vec3 Position, glm::vec2 Texture, float index);
 
     static std::vector<AttributeDescription> getBinding();
-    std::vector<AttributeDescription> binding();
+    std::vector<AttributeDescription> binding() const;
   };
 }

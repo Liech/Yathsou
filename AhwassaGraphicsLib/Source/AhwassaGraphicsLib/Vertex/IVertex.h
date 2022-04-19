@@ -12,12 +12,12 @@ namespace Ahwassa {
 
   class IVertex {
   public:    
-    int getOffset(std::string name);
-    glm::vec3 getVec2(int offset);
-    glm::vec2 getVec3(int offset);
-    glm::vec4 getVec4(int offset);
+    int getOffset(std::string name) const;
+    glm::vec3 getVec2(int offset)   const;
+    glm::vec2 getVec3(int offset)   const;
+    glm::vec4 getVec4(int offset)   const;
 
-    virtual std::vector<AttributeDescription> binding() = 0;
+    virtual std::vector<AttributeDescription> binding() const = 0;
   private:
   };
 }

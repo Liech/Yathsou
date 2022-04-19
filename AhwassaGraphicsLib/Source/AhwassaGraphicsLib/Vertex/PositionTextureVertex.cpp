@@ -22,7 +22,7 @@ namespace Ahwassa {
     return result;
   }
 
-  std::vector<AttributeDescription> PositionTextureVertex::binding() {
+  std::vector<AttributeDescription> PositionTextureVertex::binding() const {
     return PositionTextureVertex::getBinding();
   }
 }

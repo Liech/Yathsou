@@ -27,8 +27,8 @@ namespace Ahwassa {
     DiffuseMeshRenderer(std::shared_ptr<Camera> camera);
     virtual ~DiffuseMeshRenderer();
 
-    void setLightDirection(glm::vec3 dir);
-    glm::vec3 getLightDirection();
+    void setLightDirection(const glm::vec3& dir);
+    glm::vec3 getLightDirection() const;
 
     void addMesh(std::shared_ptr<DiffuseMeshRendererMesh>);
 

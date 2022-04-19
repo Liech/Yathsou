@@ -26,17 +26,17 @@ namespace Ahwassa {
   class Renderer {
   public:
     Renderer(Window*, std::shared_ptr<Camera>);
-    std::shared_ptr<Dot      > newDot(const glm::vec3& pos, float size                                                       , Iyathuum::Color = Iyathuum::Color(255, 255, 255));
-    std::shared_ptr<Line     > newLine(const glm::vec3& start, const glm::vec3& end, float size                              , Iyathuum::Color = Iyathuum::Color(255, 255, 255));
-    std::shared_ptr<Box      > newBox(const glm::mat4&                                                                       , Iyathuum::Color = Iyathuum::Color(255, 255, 255));
-    std::shared_ptr<Rectangle> newRectangle(Iyathuum::glmAABB<2> = Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(100, 100)), Iyathuum::Color = Iyathuum::Color(255, 255, 255));
-    std::shared_ptr<Sphere   > newSphere(const glm::vec3& pos, float size                                                    , Iyathuum::Color = Iyathuum::Color(255, 255, 255));
+    std::shared_ptr<Dot      > newDot      (const glm::vec3& pos, float size                                                       , Iyathuum::Color = Iyathuum::Color(255, 255, 255));
+    std::shared_ptr<Line     > newLine     (const glm::vec3& start, const glm::vec3& end, float size                              , Iyathuum::Color = Iyathuum::Color(255, 255, 255));
+    std::shared_ptr<Box      > newBox      (const glm::mat4&                                                                       , Iyathuum::Color = Iyathuum::Color(255, 255, 255));
+    std::shared_ptr<Rectangle> newRectangle(const Iyathuum::glmAABB<2>& = Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(100, 100)), Iyathuum::Color = Iyathuum::Color(255, 255, 255));
+    std::shared_ptr<Sphere   > newSphere   (const glm::vec3& pos, float size                                                    , Iyathuum::Color = Iyathuum::Color(255, 255, 255));
 
     BasicRectangleRenderer& rectangle();
-    BasicTextRenderer     & text();
-    BasicTexture2DRenderer& texture();
-    BasicBoxRenderer      & box();
-    DiffuseMeshRenderer&    mesh();
+    BasicTextRenderer     & text()     ;
+    BasicTexture2DRenderer& texture()  ;
+    BasicBoxRenderer      & box()      ;
+    DiffuseMeshRenderer&    mesh()     ;
 
     void setLightDir(const glm::vec3&);
 

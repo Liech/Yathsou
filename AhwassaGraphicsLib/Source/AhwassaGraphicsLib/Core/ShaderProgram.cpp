@@ -123,7 +123,7 @@ namespace Ahwassa {
     checkUsageOfUniforms();
   }
 
-  unsigned int ShaderProgram::getID() { 
+  unsigned int ShaderProgram::getID() const { 
     return _program; 
   };
 
@@ -168,7 +168,7 @@ namespace Ahwassa {
   {
   }
 
-  std::string ShaderProgram::toGLSL_vs(std::string shader) {
+  std::string ShaderProgram::toGLSL_vs(const std::string& shader) const {
     std::string result = "#version 460\n";
     for (int i = 0; i < _uniform.size(); i++)
       result += _uniform[i]->toGLSL();
@@ -177,7 +177,7 @@ namespace Ahwassa {
     return result;
   }
 
-  std::string ShaderProgram::toGLSL_fs(std::string shader) {
+  std::string ShaderProgram::toGLSL_fs(const std::string& shader) const{
     std::string result = "#version 460\n";
     for (int i = 0; i < _uniform.size(); i++)
       result += _uniform[i]->toGLSL();
@@ -185,7 +185,7 @@ namespace Ahwassa {
     return result;
   }
 
-  std::string ShaderProgram::AttributetoGLSL(size_t locationOffset) {
+  std::string ShaderProgram::AttributetoGLSL(size_t locationOffset) const {
     std::string result = "\n";
     for (int i = 0; i < _attributes.size(); i++) {
       result += "layout(location = ";

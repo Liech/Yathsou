@@ -17,10 +17,10 @@ namespace Ahwassa {
   public:
     BoxRenderer(std::shared_ptr<Camera> camera);
 
-    std::shared_ptr<Dot > newDot (const glm::vec3& pos                        , float size, Iyathuum::Color = Iyathuum::Color(255, 255, 255));
-    std::shared_ptr<Line> newLine(const glm::vec3& start, const glm::vec3& end, float size, Iyathuum::Color = Iyathuum::Color(255, 255, 255));
-    std::shared_ptr<Box > newBox (const glm::mat4&                                        , Iyathuum::Color = Iyathuum::Color(255, 255, 255));
-
+    std::shared_ptr<Dot > newDot (const glm::vec3& pos                        , float size, const Iyathuum::Color& = Iyathuum::Color(255, 255, 255));
+    std::shared_ptr<Line> newLine(const glm::vec3& start, const glm::vec3& end, float size, const Iyathuum::Color& = Iyathuum::Color(255, 255, 255));
+    std::shared_ptr<Box > newBox (const glm::mat4&                                        , const Iyathuum::Color& = Iyathuum::Color(255, 255, 255));
+                                                                                            
     glm::vec3 getLightDir()const;
     void setLightDir(const glm::vec3&);
 

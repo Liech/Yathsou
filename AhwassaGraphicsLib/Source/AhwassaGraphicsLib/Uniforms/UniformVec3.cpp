@@ -4,7 +4,7 @@
 #include "glad/glad.h"
 
 namespace Ahwassa {
-  glm::vec3 UniformVec3::getValue() {
+  glm::vec3 UniformVec3::getValue() const {
     return _value;
   }
 

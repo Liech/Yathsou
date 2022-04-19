@@ -15,6 +15,6 @@ namespace Ahwassa {
     PositionNormalVertex(glm::vec3 Position, glm::vec3 Normal);
 
     static std::vector<AttributeDescription> getBinding();
-    std::vector<AttributeDescription> binding();
+    std::vector<AttributeDescription> binding() const;
   };
 }

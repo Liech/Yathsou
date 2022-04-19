@@ -15,13 +15,13 @@ namespace Ahwassa {
     ~UniformVecTexture();
 
     void  setValue(const std::vector<std::shared_ptr<Ahwassa::Texture>>& val);
-    const std::vector<std::shared_ptr<Ahwassa::Texture>>& getValue();
-    virtual int getNumberOfLocationsUsed() override { return 1; }
-    virtual std::string getArrayPostfix();
+    const std::vector<std::shared_ptr<Ahwassa::Texture>>& getValue() const;
+    virtual int getNumberOfLocationsUsed() const override { return 1; }
+    virtual std::string getArrayPostfix() const;
 
     void bind() override;
-    std::string getType() override { return "sampler2DArray"; }
-    virtual bool isTexture() override { return true; }
+    std::string getType()    const override { return "sampler2DArray"; }
+    virtual bool isTexture() const override { return true; }
 
   private:
     unsigned int _id;

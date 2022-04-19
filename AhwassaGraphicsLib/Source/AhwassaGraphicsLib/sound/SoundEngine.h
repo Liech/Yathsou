@@ -15,7 +15,7 @@ namespace Ahwassa
     SoundHandler(const Iyathuum::Sound&);
     ~SoundHandler();
     void play();
-    bool isRunning();
+    bool isRunning() const;
     void abort();
 
   private:

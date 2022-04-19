@@ -141,7 +141,7 @@ namespace Ahwassa {
     _vars->vao->drawInstanced(amount);
   }
 
-  std::shared_ptr<Rectangle> RectangleRenderer::newRectangle(Iyathuum::glmAABB<2> location, Iyathuum::Color color) {
+  std::shared_ptr<Rectangle> RectangleRenderer::newRectangle(const Iyathuum::glmAABB<2>& location, const Iyathuum::Color& color) {
     std::shared_ptr<Rectangle> result = std::make_shared<Rectangle>();
     result->location = location;
     result->color    = color   ;

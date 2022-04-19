@@ -9,9 +9,9 @@ namespace Ahwassa {
 
   class ArcBallCamera : public UIElement {
   public:
-    ArcBallCamera(std::shared_ptr<Camera>, Input& inp, Iyathuum::Key);
+    ArcBallCamera(std::shared_ptr<Camera>, Input& inp, const Iyathuum::Key&);
 
-    bool isFocus();
+    bool isFocus() const;
     void setFocus(bool focus);
 
     bool keyEvent(const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) override;

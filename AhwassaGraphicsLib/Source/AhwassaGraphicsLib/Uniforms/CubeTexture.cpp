@@ -39,11 +39,11 @@ namespace Ahwassa {
       glDeleteTextures(1, &_texture);
   }
 
-  bool CubeTexture::isTexture() {
+  bool CubeTexture::isTexture() const {
     return true; 
   }
 
-  std::string CubeTexture::getType() {
+  std::string CubeTexture::getType() const {
     return "samplerCube";
   }
 

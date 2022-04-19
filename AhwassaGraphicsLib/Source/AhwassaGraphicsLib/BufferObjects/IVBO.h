@@ -10,9 +10,9 @@ namespace Ahwassa {
     IVBO(size_t size, size_t structsize, const void* pos);
     virtual ~IVBO();
 
-    unsigned int getID();
-    size_t       getSize();
-    virtual std::vector<AttributeDescription> getBinding() = 0;
+    unsigned int getID()   const;
+    size_t       getSize() const;
+    virtual std::vector<AttributeDescription> getBinding() const = 0;
   protected:
     void setRawData(const void* pos, size_t size);
   private:

@@ -24,7 +24,7 @@ namespace Ahwassa {
     return result;
   }
 
-  std::vector<AttributeDescription> PositionNormalTextureVertex::binding() {
+  std::vector<AttributeDescription> PositionNormalTextureVertex::binding() const {
     return PositionNormalTextureVertex::getBinding();
   }
 }

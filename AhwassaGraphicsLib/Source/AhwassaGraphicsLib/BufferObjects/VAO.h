@@ -10,8 +10,8 @@ namespace Ahwassa {
     VAO(IVBO* vbo);
     VAO(std::vector<IVBO*> vbo);
     virtual ~VAO();
-    unsigned int getID();
-    void draw() const;
+    unsigned int getID()              const;
+    void draw()                       const;
     void drawInstanced(size_t amount) const;
 
   protected:

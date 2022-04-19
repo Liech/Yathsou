@@ -17,7 +17,7 @@ namespace Ahwassa {
 
     _textures.resize(textureNames.size());
     for (int i = 0; i < textureNames.size(); i++) {
-      std::shared_ptr<Texture> texture = std::make_shared<Texture>(textureNames[i],_width,_height, formats[i]);
+      std::shared_ptr<Texture> texture = std::make_shared<Texture>(textureNames[i],_resolution, formats[i]);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
       glFramebufferTexture2D(GL_FRAMEBUFFER, getGL_COLOR_ATTACHMENT(i), GL_TEXTURE_2D, texture->getTextureID(), 0);
@@ -58,11 +58,11 @@ namespace Ahwassa {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
 
-  unsigned int FBO::getGL_COLOR_ATTACHMENT(int number) {
+  unsigned int FBO::getGL_COLOR_ATTACHMENT(int number) const {
     return GL_COLOR_ATTACHMENT0 + number;
   }
 
-  unsigned int FBO::getGL_TEXTURE(int number) {
+  unsigned int FBO::getGL_TEXTURE(int number) const {
     return GL_TEXTURE0 + number;
   }
 
@@ -81,15 +81,15 @@ namespace Ahwassa {
     glViewport(_oldViewPort[0], _oldViewPort[1], _oldViewPort[2], _oldViewPort[3]);
   }
 
-  std::vector<std::shared_ptr<Texture>> FBO::getUniforms() {
+  std::vector<std::shared_ptr<Texture>> FBO::getUniforms() const{
     return _textures;
   }
 
-  std::shared_ptr<Texture> FBO::getDepth() {
+  std::shared_ptr<Texture> FBO::getDepth() const {
     return _depth;
   }
 
-  unsigned int FBO::getID() {
+  unsigned int FBO::getID() const{
     return _id;
   }
 }

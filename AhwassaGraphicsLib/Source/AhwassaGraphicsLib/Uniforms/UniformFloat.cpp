@@ -3,7 +3,7 @@
 #include "glad/glad.h"
 
 namespace Ahwassa {
-  float UniformFloat::getValue() {
+  float UniformFloat::getValue() const {
     return _value;
   }
 

@@ -15,7 +15,7 @@ namespace Ahwassa {
     glDeleteBuffers(1, &instanceVBO);
   }
 
-  const std::vector<glm::vec3>& InstancedVecVec3::getValue() {
+  const std::vector<glm::vec3>& InstancedVecVec3::getValue() const {
     return _value;
   }
 

@@ -11,37 +11,37 @@
 namespace Ahwassa {
   class Camera {
   public:  
-    Camera(std::string name, const glm::ivec2& resolution);
+    Camera(const std::string& name, const glm::ivec2& resolution);
   
     void bind();
     std::vector<Uniform*> getUniforms();
-    std::string getName();
+    std::string getName() const;
 
-    glm::mat4 getProjectionMatrix();
-    glm::mat4 getViewMatrix();
+    glm::mat4 getProjectionMatrix() const;
+    glm::mat4 getViewMatrix() const;
 
-    glm::vec3 getPickRay(glm::vec2);
-    glm::vec3 viewToWorldCoordTransform(int mouse_x, int mouse_y);
-    glm::vec2 worldToViewCoordTransform(glm::vec3 pos);
+    glm::vec3 getPickRay(const glm::vec2&)                               const;
+    glm::vec3 viewToWorldCoordTransform(int mouse_x, int mouse_y) const;
+    glm::vec2 worldToViewCoordTransform(const glm::vec3& pos)            const;
 
-    glm::vec2 getResolution();
-    glm::vec3 getPosition  ();
-    void      setPosition  (glm::vec3 v);
-    glm::vec3 getUp        ();
-    void      setUp        (glm::vec3 v);
-    glm::vec3 getTarget    ();
-    void      setTarget    (glm::vec3 v);
-    glm::vec3 getDir       ();
-    void      setDir       (glm::vec3 v);
-    float     getFOV       ();
+    glm::vec2 getResolution()             const;
+    glm::vec3 getPosition  ()             const;
+    void      setPosition  (const glm::vec3& v);
+    glm::vec3 getUp        ()             const;
+    void      setUp        (const glm::vec3& v);
+    glm::vec3 getTarget    ()             const;
+    void      setTarget    (const glm::vec3& v);
+    glm::vec3 getDir       ()             const;
+    void      setDir       (const glm::vec3& v);
+    float     getFOV       ()             const;
     void      setFOV       (float v);
-    bool      is2D         ();
+    bool      is2D         ()             const;
     void      set2D        (bool);
-    float     getNearPlane ();
-    float     getFarPlane  ();
+    float     getNearPlane ()             const;
+    float     getFarPlane  ()             const;
 
-    void                 set2DView(Iyathuum::glmAABB<2> view);
-    Iyathuum::glmAABB<2> getView();
+    void                 set2DView(const Iyathuum::glmAABB<2>& view);
+    Iyathuum::glmAABB<2> getView() const;
 
   private:  
     UniformMat4 _view       ;    

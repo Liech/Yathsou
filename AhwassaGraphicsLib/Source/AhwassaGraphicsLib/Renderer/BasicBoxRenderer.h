@@ -17,11 +17,11 @@ namespace Ahwassa {
     void start();
     void end();
 
-    void drawLine(glm::vec3 start, glm::vec3 end, float thickness, Iyathuum::Color color);
-    void drawDot (glm::vec3 start, glm::vec3 size                , Iyathuum::Color color);
-    void drawDot (glm::vec3 start, float     size                , Iyathuum::Color color);
-    void drawBox (glm::vec3 start, glm::vec3 size                , Iyathuum::Color color);
-    void draw    (glm::mat4 mat                                  , Iyathuum::Color color);
+    void drawLine(const glm::vec3& start, const glm::vec3& end, float thickness, const Iyathuum::Color& color);
+    void drawDot (const glm::vec3& start, const glm::vec3& size                , const Iyathuum::Color& color);
+    void drawDot (const glm::vec3& start, float     size                       , const Iyathuum::Color& color);
+    void drawBox (const glm::vec3& start, const glm::vec3& size                , const Iyathuum::Color& color);
+    void draw    (const glm::mat4& mat                                         , const Iyathuum::Color& color);
   private:
     struct RenderVars;
     std::shared_ptr<RenderVars> _vars;

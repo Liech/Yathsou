@@ -20,7 +20,7 @@ namespace Ahwassa {
     return result;
   }
 
-  std::vector<AttributeDescription> PositionVertex::binding() {
+  std::vector<AttributeDescription> PositionVertex::binding() const {
     return PositionVertex::getBinding();
   }
 }
