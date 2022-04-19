@@ -110,6 +110,10 @@ namespace Ahwassa {
     return 2000.0f;
   }
 
+  void Camera::setResolution(const glm::ivec2& resolution)     {
+    _resolution = resolution;
+  }
+
   glm::vec2 Camera::getResolution() const {
     return glm::vec2(_resolution[0], _resolution[1]);
   }

@@ -23,6 +23,7 @@ namespace Ahwassa {
 
   Window::~Window()
   {
+    _instanceMap.erase(ptr());
   }
 
   void APIENTRY glDebugOutput(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam) {
@@ -80,19 +81,27 @@ namespace Ahwassa {
       break;
     }
 
-	
-	
+
+
     if (msgSeverity == "MEDIUM" /*|| msgSeverity == "LOW"*/) {
       printf("glDebugMessage:\n%s \n type = %s source = %s severity = %s\n", message, msgType.c_str(), msgSource.c_str(), msgSeverity.c_str());
       printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
     }
-  if (msgSeverity == "HIGH") {
-    printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
-    std::cout << message << std::endl;
-    throw std::runtime_error("OPENGL ERROR:" + std::string(message));
-  }
+    if (msgSeverity == "HIGH") {
+      printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
+      std::cout << message << std::endl;
+      throw std::runtime_error("OPENGL ERROR:" + std::string(message));
+    }
   }
 
+  void Window::windowResized(GLFWwindow* window, int width, int height) {
+    auto instance = _instanceMap[window];
+    auto newReso = glm::ivec2(width, height);
+
+    instance->_resolution = newReso;
+    instance->_camera->setResolution(newReso);
+    instance->Resize(newReso);
+  }
 
   void Window::run() {
     std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
@@ -103,11 +112,12 @@ namespace Ahwassa {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+    glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
     // Create a GLFWwindow object that we can use for GLFW's functions
     _window = glfwCreateWindow(_resolution[0], _resolution[1], "GL", NULL, NULL);
+    _instanceMap[_window] = this;
     win = this;
     glfwMakeContextCurrent(_window);
     if (_window == NULL)
@@ -136,6 +146,7 @@ namespace Ahwassa {
     }
 
     _camera   = std::make_shared<Camera>("Camera",getResolution());
+    glfwSetWindowSizeCallback(_window, windowResized);
     _renderer = std::make_unique<Renderer>(this,_camera);
     Startup();
     // Define the viewport dimensions

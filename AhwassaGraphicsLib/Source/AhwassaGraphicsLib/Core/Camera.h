@@ -20,11 +20,12 @@ namespace Ahwassa {
     glm::mat4 getProjectionMatrix() const;
     glm::mat4 getViewMatrix() const;
 
-    glm::vec3 getPickRay(const glm::vec2&)                               const;
+    glm::vec3 getPickRay(const glm::vec2&) const;
     glm::vec3 viewToWorldCoordTransform(int mouse_x, int mouse_y) const;
-    glm::vec2 worldToViewCoordTransform(const glm::vec3& pos)            const;
+    glm::vec2 worldToViewCoordTransform(const glm::vec3& pos) const;
 
     glm::vec2 getResolution()             const;
+    void      setResolution(const glm::ivec2&);
     glm::vec3 getPosition  ()             const;
     void      setPosition  (const glm::vec3& v);
     glm::vec3 getUp        ()             const;
