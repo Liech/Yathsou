@@ -9,6 +9,7 @@ namespace Ahwassa {
   class FBO {
   public:
     FBO(const glm::ivec2& resolution, const std::vector<std::string>& textureNames, const std::vector<TextureFormat>& formats);
+    ~FBO();
     void start();//set as rendertargets
     void end();  //unset as rendertargets
     

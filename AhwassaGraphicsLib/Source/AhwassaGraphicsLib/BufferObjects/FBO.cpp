@@ -14,7 +14,6 @@ namespace Ahwassa {
     glGenFramebuffers(1, &_id);
     glBindFramebuffer(GL_FRAMEBUFFER, _id);
 
-
     _textures.resize(textureNames.size());
     for (int i = 0; i < textureNames.size(); i++) {
       std::shared_ptr<Texture> texture = std::make_shared<Texture>(textureNames[i],_resolution, formats[i]);
@@ -56,6 +55,10 @@ namespace Ahwassa {
     if (status != GL_FRAMEBUFFER_COMPLETE)
       throw std::runtime_error("Framebuffer not complete!");
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+  }
+
+  FBO::~FBO() {
+    glDeleteTextures(1, &_id);
   }
 
   unsigned int FBO::getGL_COLOR_ATTACHMENT(int number) const {

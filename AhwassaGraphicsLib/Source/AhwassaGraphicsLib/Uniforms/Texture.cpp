@@ -4,7 +4,11 @@
 
 
 namespace Ahwassa {
+  int numberOfTexturesGlobally = 0;
+
   Texture::Texture(const std::string& name, Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>* input, TextureFormat format) : Uniform(name) {
+    numberOfTexturesGlobally++;
+    std::cout << "T#" << numberOfTexturesGlobally << std::endl;
     glGenTextures(1, &_texture);
     glBindTexture(GL_TEXTURE_2D, _texture);
     int f = GL_RGBA;
@@ -16,6 +20,7 @@ namespace Ahwassa {
   }
 
   Texture::Texture(const std::string& name, const glm::ivec2& resolution, TextureFormat format) : Uniform(name) {
+    numberOfTexturesGlobally++;
     int f = GL_RGBA;
     if (format == TextureFormat::RGBA32)
       f = GL_RGBA32F;
@@ -32,8 +37,10 @@ namespace Ahwassa {
   }
 
   Texture::~Texture() {
-    if (!_released)
+    if (!_released) {
       glDeleteTextures(1, &_texture);
+      std::cout <<"T#" << numberOfTexturesGlobally << std::endl;
+    }
   }
 
   bool Texture::isTexture() const {

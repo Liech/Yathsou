@@ -180,4 +180,8 @@ namespace Ahwassa {
     r.draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0,0), glm::vec2(_resolution[0], _resolution[1])),true);
     r.end();
   }
+  
+  void DeferredComposer::setResolution(const glm::ivec2& resolution) {
+    //_fbo = std::make_shared<Ahwassa::FBO>(resolution, std::vector<std::string> {"gPosition", "gNormal", "gAlbedoSpec", "gSpecial"}, std::vector<TextureFormat>{TextureFormat::RGBA32, TextureFormat::RGBA, TextureFormat::RGBA, TextureFormat::RGBA});
+  }
 }

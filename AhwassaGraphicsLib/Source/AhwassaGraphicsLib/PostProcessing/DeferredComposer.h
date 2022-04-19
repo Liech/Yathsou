@@ -31,6 +31,7 @@ namespace Ahwassa {
     std::shared_ptr<Texture> getDepth()                    const;
     void draw();
     void blitDepth();
+    void setResolution(const glm::ivec2&);
   private:
     const int MAXLIGHT = 32;
     std::shared_ptr<Rendertarget>           _resultCanvas;
