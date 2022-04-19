@@ -16,7 +16,7 @@ namespace Ahwassa {
 
   class CubeReflection : public PostProcessingEffect {
   public:
-    CubeReflection(Ahwassa::Window* w, int width, int height);
+    CubeReflection(Ahwassa::Window* w, const glm::ivec2& resolution);
     void draw(glm::vec3 viewPos, std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> reflections, std::shared_ptr<Ahwassa::Texture> gPosition, std::shared_ptr<Ahwassa::Texture> normal, int channel);
     void setTexture(std::shared_ptr<Ahwassa::CubeTexture>);
   private:

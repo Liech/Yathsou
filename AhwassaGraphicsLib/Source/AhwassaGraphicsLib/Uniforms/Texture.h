@@ -15,7 +15,7 @@ namespace Ahwassa {
   class Texture : public Uniform {
   public:
     Texture(const std::string& name, Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>* tex, TextureFormat format = TextureFormat::RGBA);
-    Texture(const std::string& name, int width, int height, TextureFormat format = TextureFormat::RGBA);
+    Texture(const std::string& name, const glm::ivec2& resolution, TextureFormat format = TextureFormat::RGBA);
     Texture(const std::string& name, unsigned int tex, ReleaseBehavior released = ReleaseBehavior::KeepTextureOnDeconstructor);
     virtual ~Texture() override;
 

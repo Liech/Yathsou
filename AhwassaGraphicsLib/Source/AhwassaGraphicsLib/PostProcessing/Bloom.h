@@ -15,7 +15,7 @@ namespace Ahwassa {
 
   class Bloom : public PostProcessingEffect {
   public:
-    Bloom(Ahwassa::Window* w, int width, int height);
+    Bloom(Ahwassa::Window* w, const glm::ivec2&);
     void draw(std::shared_ptr<Ahwassa::Texture> input, std::shared_ptr<Ahwassa::Texture> bloom, int channel);
 
     void setIntensity(float);

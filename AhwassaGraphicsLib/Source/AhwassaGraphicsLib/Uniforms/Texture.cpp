@@ -15,14 +15,14 @@ namespace Ahwassa {
     glGenerateMipmap(GL_TEXTURE_2D);
   }
 
-  Texture::Texture(const std::string& name, int width, int height, TextureFormat format) : Uniform(name) {
+  Texture::Texture(const std::string& name, const glm::ivec2& resolution, TextureFormat format) : Uniform(name) {
     int f = GL_RGBA;
     if (format == TextureFormat::RGBA32)
       f = GL_RGBA32F;
     
     glGenTextures(1, &_texture);
     glBindTexture(GL_TEXTURE_2D, _texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, resolution[0], resolution[1], 0, GL_RGBA, GL_FLOAT, NULL);
   }
 
   Texture::Texture(const std::string& name, unsigned int tex, ReleaseBehavior released) : Uniform(name) {

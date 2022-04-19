@@ -18,11 +18,10 @@
 #include "AhwassaGraphicsLib/Core/Camera.h"
 
 namespace Ahwassa {
-  DeferredComposer::DeferredComposer(Window* window, int width, int height) :r(window) {
-    _fbo = std::make_shared<Ahwassa::FBO>(width, height, std::vector<std::string> {"gPosition", "gNormal", "gAlbedoSpec", "gSpecial"}, std::vector<TextureFormat>{TextureFormat::RGBA32,TextureFormat::RGBA,TextureFormat::RGBA,TextureFormat::RGBA});
-    _resultCanvas = std::make_shared<Ahwassa::Rendertarget>("Result", width, height);
-    _width = width;
-    _height = height;
+  DeferredComposer::DeferredComposer(Window* window, const glm::ivec2& resolution) :r(window) {
+    _resolution = resolution;
+    _fbo = std::make_shared<Ahwassa::FBO>(resolution, std::vector<std::string> {"gPosition", "gNormal", "gAlbedoSpec", "gSpecial"}, std::vector<TextureFormat>{TextureFormat::RGBA32,TextureFormat::RGBA,TextureFormat::RGBA,TextureFormat::RGBA});
+    _resultCanvas = std::make_shared<Ahwassa::Rendertarget>("Result", _resolution);
     _window = window;
 
     std::string vertex_shader_source = R"(
@@ -75,7 +74,7 @@ namespace Ahwassa {
     std::vector<Uniform*> uniforms;
     _projection = std::make_unique<UniformMat4>("projection");
     uniforms.push_back(_projection.get());
-    _projection->setValue(glm::ortho(0.0f, (float)width, 0.0f, (float)height));
+    _projection->setValue(glm::ortho(0.0f, (float)_resolution[0], 0.0f, (float)_resolution[1]));
 
     _lightPositions = std::make_shared<UniformVecVec3>("LightPositions", MAXLIGHT);
     _lightColors    = std::make_shared<UniformVecVec3>("LightColors"   , MAXLIGHT);
@@ -132,8 +131,8 @@ namespace Ahwassa {
     GLfloat x = 0;
     GLfloat y = 0;
 
-    GLfloat w = _width;
-    GLfloat h = _height;
+    GLfloat w = _resolution[0];
+    GLfloat h = _resolution[1];
 
     _vertices = {
        PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 1.0)),
@@ -157,7 +156,7 @@ namespace Ahwassa {
     glBindFramebuffer(GL_READ_FRAMEBUFFER, _fbo->getID());
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // write to default framebuffer
     glBlitFramebuffer(
-      0, 0, _width, _height, 0, 0, _width, _height, GL_DEPTH_BUFFER_BIT, GL_NEAREST
+      0, 0, _resolution[0], _resolution[1], 0, 0, _resolution[0], _resolution[1], GL_DEPTH_BUFFER_BIT, GL_NEAREST
     );
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
@@ -178,7 +177,7 @@ namespace Ahwassa {
 
   void DeferredComposer::draw() {
     r.start();
-    r.draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0,0), glm::vec2(_width,_height)),true);
+    r.draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0,0), glm::vec2(_resolution[0], _resolution[1])),true);
     r.end();
   }
 }

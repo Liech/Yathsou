@@ -16,10 +16,9 @@
 namespace Ahwassa {
   Window* win;
 
-  Window::Window(int width, int height)
+  Window::Window(const glm::ivec2& resolution)
   {
-    _width = width;
-    _height = height;
+    _resolution = resolution;
   }
 
   Window::~Window()
@@ -108,7 +107,7 @@ namespace Ahwassa {
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
     // Create a GLFWwindow object that we can use for GLFW's functions
-    _window = glfwCreateWindow(_width, _height, "GL", NULL, NULL);
+    _window = glfwCreateWindow(_resolution[0], _resolution[1], "GL", NULL, NULL);
     win = this;
     glfwMakeContextCurrent(_window);
     if (_window == NULL)
@@ -136,11 +135,11 @@ namespace Ahwassa {
       glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
     }
 
-    _camera   = std::make_shared<Camera>("Camera",_width,_height);
+    _camera   = std::make_shared<Camera>("Camera",getResolution());
     _renderer = std::make_unique<Renderer>(this,_camera);
     Startup();
     // Define the viewport dimensions
-    glViewport(0, 0, _width, _height);
+    glViewport(0, 0, _resolution[0], _resolution[1]);
     glDepthFunc(GL_LESS);
 
     auto start = std::chrono::steady_clock::now();
@@ -199,4 +198,7 @@ namespace Ahwassa {
     return _window;
   }
 
+  glm::ivec2 Window::getResolution() const     {
+    return _resolution;
+  }
 }

@@ -14,10 +14,9 @@
 #include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
-  PostProcessingEffect::PostProcessingEffect(std::string name, Ahwassa::Window* window, int width, int height) {
-    _result = std::make_shared<Ahwassa::Rendertarget>(name, width, height);
-    _width  = width;
-    _height = height;
+  PostProcessingEffect::PostProcessingEffect(std::string name, Ahwassa::Window* window, const glm::ivec2& resolution) {
+    _result = std::make_shared<Ahwassa::Rendertarget>(name, resolution);
+    _resolution = resolution;
     _window = window;
     _name   = name;
 
@@ -32,7 +31,7 @@ namespace Ahwassa {
     };
 
     _projection = std::make_unique<Ahwassa::UniformMat4>("projection");
-    _projection->setValue(glm::ortho(0.0f, (float)width, 0.0f, (float)height));
+    _projection->setValue(glm::ortho(0.0f, (float)_resolution[0], 0.0f, (float)_resolution[1]));
     _vbo = std::make_unique<Ahwassa::VBO<Ahwassa::PositionTextureVertex>>(_vertices);
     _vao = std::make_unique<Ahwassa::VAO>(_vbo.get());
   }
@@ -48,8 +47,8 @@ namespace Ahwassa {
   void PostProcessingEffect::end() {
     float x = 0;
     float y = 0;
-    float w = _width;
-    float h = _height;
+    float w = _resolution[0];
+    float h = _resolution[1];
     _vertices = {
       Ahwassa::PositionTextureVertex(glm::vec3(x + 0, y + h, 0),glm::vec2(0.0, 1.0)),
       Ahwassa::PositionTextureVertex(glm::vec3(x + 0, y + 0, 0),glm::vec2(0.0, 0.0)),
@@ -73,16 +72,12 @@ namespace Ahwassa {
 
   void PostProcessingEffect::drawResult() {
     _window->renderer().texture().start();
-    _window->renderer().texture().draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_width, _height)), true);
+    _window->renderer().texture().draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0, 0), glm::vec2(_resolution[0], _resolution[1])), true);
     _window->renderer().texture().end();
   }
-
-  int PostProcessingEffect::getWidth() {
-    return _width;
-  }
-
-  int PostProcessingEffect::getHeight() {
-    return _height;
+  
+  glm::ivec2 PostProcessingEffect::getResolution() const {
+    return _resolution;
   }
 
   Ahwassa::Window* PostProcessingEffect::getWindow() {

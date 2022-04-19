@@ -17,7 +17,7 @@
 #include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
-  CubeReflection::CubeReflection(Ahwassa::Window* window, int width, int height) : PostProcessingEffect("CubeReflection", window, width, height) {
+  CubeReflection::CubeReflection(Ahwassa::Window* window, const glm::ivec2& resolution) : PostProcessingEffect("CubeReflection", window, resolution) {
 
     std::string vertex_shader_source = R"(
     out vec2 TexCoords;

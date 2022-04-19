@@ -11,7 +11,7 @@
 namespace Ahwassa {
   class Camera {
   public:  
-    Camera(std::string name, int width, int height);
+    Camera(std::string name, const glm::ivec2& resolution);
   
     void bind();
     std::vector<Uniform*> getUniforms();
@@ -53,7 +53,7 @@ namespace Ahwassa {
     glm::vec3            _position = glm::vec3(4, 3, 3);
     glm::vec3            _up       = glm::vec3(0, 1, 0);
     glm::vec3            _target   = glm::vec3(0, 0, 0);
-    int                  _width     ;
+    glm::ivec2           _resolution;
     int                  _height    ;
     bool                 _is2D     = false;
     Iyathuum::glmAABB<2> _view2D    ;

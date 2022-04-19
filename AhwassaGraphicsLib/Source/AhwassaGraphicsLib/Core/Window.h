@@ -15,7 +15,7 @@ namespace Ahwassa {
   class Window
   {
   public:
-    Window(int width, int height);
+    Window(const glm::ivec2& resolution);
     virtual ~Window();
 
     Input&                  input   ();
@@ -29,14 +29,12 @@ namespace Ahwassa {
     std::function<void()> Startup = []() {};
     std::function<void()> Update  = []() {};
 
-    int getWidth () const { return _width; }
-    int getHeight() const { return _height; }
+    glm::ivec2 getResolution() const;
 
     GLFWwindow* ptr();
   private:
-    int _width  = 1920;
-    int _height = 1080;
-    GLFWwindow* _window = nullptr;
+    glm::ivec2                _resolution  = glm::ivec2(1920,1080);
+    GLFWwindow*               _window = nullptr;
     std::unique_ptr<Input>    _input;
     std::unique_ptr<Renderer> _renderer;
     std::shared_ptr<Camera>   _camera;

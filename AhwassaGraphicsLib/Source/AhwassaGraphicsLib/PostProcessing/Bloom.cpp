@@ -15,7 +15,7 @@
 #include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
-  Bloom::Bloom(Ahwassa::Window* window, int width, int height) : PostProcessingEffect("Bloom",window,width,height) {
+  Bloom::Bloom(Ahwassa::Window* window, const glm::ivec2& resolution) : PostProcessingEffect("Bloom",window,resolution) {
 
     std::string vertex_shader_source = R"(
     out vec2 TexCoords;

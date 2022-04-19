@@ -15,7 +15,7 @@ namespace Ahwassa {
 
   class AdditiveComposer : public PostProcessingEffect {
   public:
-    AdditiveComposer(Ahwassa::Window* w, std::vector<std::shared_ptr<Ahwassa::Texture>> textures, int width, int height);
+    AdditiveComposer(Ahwassa::Window* w, std::vector<std::shared_ptr<Ahwassa::Texture>> textures, const glm::ivec2& resolution);
     void draw();
 
   private:

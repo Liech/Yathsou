@@ -6,15 +6,14 @@
 #include "GLFW/glfw3.h"
 
 namespace Ahwassa {
-  Camera::Camera(std::string name, int width, int height):
+  Camera::Camera(std::string name, const glm::ivec2& resolution):
     _view(name + "View"),
     _projection(name + "Projection"),
     _cameraPos(name + "Position"),
     _invViewProj(name + "inv") 
   {
     _name   = name;
-    _width  = width ;
-    _height = height;
+    _resolution = resolution;
   }
 
   std::string Camera::getName() {
@@ -112,7 +111,7 @@ namespace Ahwassa {
   }
 
   glm::vec2 Camera::getResolution() {
-    return glm::vec2(_width, _height); 
+    return glm::vec2(_resolution[0], _resolution[1]);
   }
 
   glm::vec3 Camera::getPosition() {
