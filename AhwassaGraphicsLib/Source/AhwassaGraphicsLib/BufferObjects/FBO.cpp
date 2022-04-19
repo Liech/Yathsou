@@ -17,7 +17,7 @@ namespace Ahwassa {
 
     _textures.resize(textureNames.size());
     for (int i = 0; i < textureNames.size(); i++) {
-      std::shared_ptr<Texture> texture = std::make_shared<Texture>(textureNames[i], _resolution, formats[i]);
+      std::shared_ptr<Texture> texture = std::make_shared<Texture>(textureNames[i],_width,_height, formats[i]);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
       glFramebufferTexture2D(GL_FRAMEBUFFER, getGL_COLOR_ATTACHMENT(i), GL_TEXTURE_2D, texture->getTextureID(), 0);
