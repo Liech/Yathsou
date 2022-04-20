@@ -90,12 +90,17 @@ namespace Ahwassa {
     return result;
   }
 
-
-  bool  PostProcessingEffect::enabled() {
+  bool PostProcessingEffect::enabled() {
     return _enabled;
   }
 
-  void  PostProcessingEffect::setEnabled(bool value) {
+  void PostProcessingEffect::setEnabled(bool value) {
     _enabled = value;
+  }
+
+  void PostProcessingEffect::setResolution(const glm::ivec2& resolution) {
+    _resolution = resolution;
+    _projection->setValue(glm::ortho(0.0f, (float)_resolution[0], 0.0f, (float)_resolution[1]));
+    _result->setResolution(resolution);
   }
 }

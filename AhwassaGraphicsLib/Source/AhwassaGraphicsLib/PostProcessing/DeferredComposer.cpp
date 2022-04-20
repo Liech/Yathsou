@@ -109,6 +109,7 @@ namespace Ahwassa {
   }
 
   void DeferredComposer::start() {
+    _projection->setValue(glm::ortho(0.0f, (float)_resolution[0], 0.0f, (float)_resolution[1]));
     _fbo->start();
     glClearColor(1,1,1, 1);
   }
@@ -116,7 +117,7 @@ namespace Ahwassa {
   void DeferredComposer::end() {
     _fbo->end();
     _resultCanvas->start();
-   
+
     glEnable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -182,6 +183,8 @@ namespace Ahwassa {
   }
   
   void DeferredComposer::setResolution(const glm::ivec2& resolution) {
-    //_fbo = std::make_shared<Ahwassa::FBO>(resolution, std::vector<std::string> {"gPosition", "gNormal", "gAlbedoSpec", "gSpecial"}, std::vector<TextureFormat>{TextureFormat::RGBA32, TextureFormat::RGBA, TextureFormat::RGBA, TextureFormat::RGBA});
+    _resolution = resolution;
+    _fbo->setResolution(resolution);
+    _resultCanvas->setResolution(resolution);
   }
 }

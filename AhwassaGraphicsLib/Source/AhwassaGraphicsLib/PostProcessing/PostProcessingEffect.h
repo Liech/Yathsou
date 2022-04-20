@@ -20,6 +20,7 @@ namespace Ahwassa {
 
       std::shared_ptr<Ahwassa::Texture> getResult();
       void drawResult();
+      virtual void setResolution(const glm::ivec2&);
 
     protected:
       virtual void start();

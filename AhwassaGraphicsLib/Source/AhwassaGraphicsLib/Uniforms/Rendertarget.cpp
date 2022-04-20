@@ -35,7 +35,6 @@ namespace Ahwassa {
 
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, _renderbuffer);
 
-
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
       throw std::runtime_error("Framebuffer error");
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -45,8 +44,7 @@ namespace Ahwassa {
     glDeleteTextures(1, &_texture);
   }
 
-  void Rendertarget::start() {
-    
+  void Rendertarget::start() {    
     _oldViewPort.resize(4);
     glGetIntegeri_v(GL_VIEWPORT, 0, _oldViewPort.data());
     glViewport(0, 0, (GLsizei)_resolution[0], (GLsizei)_resolution[1]);
@@ -65,7 +63,18 @@ namespace Ahwassa {
     glBindTexture(GL_TEXTURE_2D, _texture);
   }
 
-  glm::ivec2 Rendertarget::getResolution() {
+  glm::ivec2 Rendertarget::getResolution() const {
     return _resolution;
+  }
+
+  void Rendertarget::setResolution(const glm::ivec2& newResolution) {
+    _resolution = newResolution;
+    glBindTexture(GL_TEXTURE_2D, _texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, (GLsizei)_resolution[0], (GLsizei)_resolution[1], 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindRenderbuffer(GL_RENDERBUFFER, _renderbuffer);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, (GLsizei)_resolution[0], (GLsizei)_resolution[1]);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+
   }
 }

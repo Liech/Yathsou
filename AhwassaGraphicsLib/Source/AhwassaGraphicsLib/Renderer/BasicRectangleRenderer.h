@@ -25,13 +25,11 @@ namespace Ahwassa {
     void drawCircle   (const glm::vec2& center, const glm::vec2& radius, float rotation, float thickness, const Iyathuum::Color&, float precision = 5);
     void setClippingRectangle(const Iyathuum::glmAABB<2>& box);
     void disableClipping();
-    void setResolution(const glm::ivec2& resolution);
   private:
     struct RenderVars;
 
     void makeShader();
 
-    glm::ivec2           _resolution;
     bool                 _inRenderProcess = false;
     bool                 _clipping        = false;
     Iyathuum::glmAABB<2> _clippingBox;

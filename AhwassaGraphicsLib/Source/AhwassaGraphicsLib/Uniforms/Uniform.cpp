@@ -1,6 +1,7 @@
 #include "Uniform.h"
 
 #include <cassert>
+#include <stdexcept>
 
 namespace Ahwassa {
   Uniform::Uniform(const std::string& name) { 
@@ -47,6 +48,8 @@ namespace Ahwassa {
 
   int Uniform::getTextureLocation() const {
     assert(isTexture()); 
+    if (_texLoc == -1)
+      throw std::runtime_error("Texture ID Not Set");
     return _texLoc;
   }
 

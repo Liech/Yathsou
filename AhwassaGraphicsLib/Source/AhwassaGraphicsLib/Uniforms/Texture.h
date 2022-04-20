@@ -9,7 +9,7 @@ namespace Ahwassa {
     DeleteOnDeconstructor, KeepTextureOnDeconstructor
   };
   enum class TextureFormat {
-    RGBA, RGBA32
+    RGBA, RGBA32, Unkown
   };
 
   class Texture : public Uniform {
@@ -27,10 +27,13 @@ namespace Ahwassa {
 
     std::unique_ptr<Iyathuum::MultiDimensionalArray<Iyathuum::Color, 2>> getImage();
 
+    TextureFormat getFormat() const;
+
     void bind() override;
     void release();
   private:
-    unsigned int _texture;
-    bool   _released = false;
+    unsigned int  _texture;
+    bool          _released = false;
+    TextureFormat _format = TextureFormat::Unkown;
   };
 }

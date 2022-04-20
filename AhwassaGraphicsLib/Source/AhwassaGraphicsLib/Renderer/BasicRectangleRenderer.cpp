@@ -26,7 +26,6 @@ namespace Ahwassa {
   };
 
   BasicRectangleRenderer::BasicRectangleRenderer(Window* w) {
-    _resolution = w->getResolution();
     _vars = std::make_shared<BasicRectangleRenderer::RenderVars>();
     _vars->window = w;
     makeShader();
@@ -99,6 +98,7 @@ namespace Ahwassa {
     if (_inRenderProcess == true)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
     _inRenderProcess = true;
+    _vars->projection->setValue(glm::ortho(0.0f, (float)_vars->window->getResolution()[0], 0.0f, (float)_vars->window->getResolution()[1]));
     glEnable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -135,7 +135,7 @@ namespace Ahwassa {
 
     std::vector<Uniform*> uniforms;
     _vars->projection = std::make_unique<UniformMat4>("projection");
-    _vars->projection->setValue(glm::ortho(0.0f, (float)_resolution[0], 0.0f, (float)_resolution[1]));
+    _vars->projection->setValue(glm::ortho(0.0f, (float)_vars->window->getResolution()[0], 0.0f, (float)_vars->window->getResolution()[1]));
     _vars->color = std::make_unique<UniformVec3>("textColor");
     uniforms.push_back(_vars->projection.get());
     uniforms.push_back(_vars->color.get());
@@ -145,11 +145,6 @@ namespace Ahwassa {
     _vars->vbo = std::make_unique<VBO<PositionVertex>>(input);
     _vars->vao = std::make_unique<VAO>(_vars->vbo.get());
     _vars->shader = std::make_unique<ShaderProgram>(PositionVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
-  }
-
-  void BasicRectangleRenderer::setResolution(const glm::ivec2& newResolution) {
-    _resolution = newResolution;
-    _vars->projection->setValue(glm::ortho(0.0f, (float)_resolution[0], 0.0f, (float)_resolution[1]));
   }
 
   void BasicRectangleRenderer::setClippingRectangle(const Iyathuum::glmAABB<2>& box) {

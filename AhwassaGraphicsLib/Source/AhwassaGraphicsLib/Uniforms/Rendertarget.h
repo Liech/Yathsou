@@ -12,9 +12,10 @@ namespace Ahwassa {
     void end();
     void bind() override;
     virtual std::string getType() const override;
-    unsigned int getTextureID() { return _texture; }
+    unsigned int getTextureID() const { return _texture; }
 
-    glm::ivec2 getResolution();
+    glm::ivec2 getResolution() const;
+    void setResolution(const glm::ivec2&);
 
   private:
     unsigned int _texture      = 0;

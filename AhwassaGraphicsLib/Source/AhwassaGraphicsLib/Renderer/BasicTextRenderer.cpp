@@ -116,6 +116,7 @@ namespace Ahwassa {
     if (_inRenderProcess == true)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
     _inRenderProcess = true;
+    _vars->projection->setValue(glm::ortho(0.0f, (float)_vars->window->getResolution()[0], 0.0f, (float)_vars->window->getResolution()[1]));
     glEnable(GL_BLEND);
     glDisable(GL_DEPTH_TEST);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);

@@ -17,14 +17,17 @@ namespace Ahwassa {
     std::shared_ptr<Texture> getDepth() const;
     unsigned int getID() const;
 
+    void setResolution(const glm::ivec2& resolution);
+
   private:
+    void initDepthBuffer();
     unsigned int getGL_COLOR_ATTACHMENT(int number) const;
     unsigned int getGL_TEXTURE(int number) const;
 
     glm::ivec2   _resolution;
     unsigned int _id;
 
-    std::shared_ptr<Texture>              _depth;
+    std::shared_ptr<Texture>              _depth = nullptr;
     std::vector<std::shared_ptr<Texture>> _textures;
     std::vector<int>                      _oldViewPort;
   };
