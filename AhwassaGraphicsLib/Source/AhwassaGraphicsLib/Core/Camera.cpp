@@ -14,6 +14,7 @@ namespace Ahwassa {
   {
     _name   = name;
     _resolution = resolution;
+    _right = glm::cross(getDir(),getUp());
   }
 
   std::string Camera::getName() const {
@@ -51,7 +52,7 @@ namespace Ahwassa {
   glm::mat4 Camera::getViewMatrix() const {
     if (_is2D)
       return glm::lookAt(glm::vec3(0.f, 0.f, 2.0f), glm::vec3(0.f, 0.f, 0.f), glm::vec3(0.0f, 1.0f, 0.0f));
-    return glm::lookAt(getPosition(), getTarget(), getUp());
+    return glm::lookAt(getPosition(), getTarget(), getCamUp());
   }
 
   glm::vec2 Camera::worldToViewCoordTransform(const glm::vec3& worldPos) const
@@ -74,7 +75,7 @@ namespace Ahwassa {
     glm::vec4 screenPos = glm::vec4(x, -y, -1.0f, 1.0f);
 
     // Projection/Eye Space
-    glm::mat4 ProjectView = getProjectionMatrix() * glm::lookAt(glm::vec3(0, 0, 0), glm::normalize(getTarget() - getPosition()), getUp());// getViewMatrix();
+    glm::mat4 ProjectView = getProjectionMatrix() * glm::lookAt(glm::vec3(0, 0, 0), glm::normalize(getTarget() - getPosition()), getCamUp());// getViewMatrix();
     glm::mat4 viewProjectionInverse = inverse(ProjectView);
 
     glm::vec4 worldPos = viewProjectionInverse * screenPos;
@@ -158,4 +159,15 @@ namespace Ahwassa {
     setTarget(_position + v);
   }
 
+  glm::vec3 Camera::getRight() const{
+    return _right;
+  }
+
+  void Camera::setRight(const glm::vec3& v) {
+    _right = v;
+  }    
+  
+  glm::vec3 Camera::getCamUp() const {
+    return glm::cross(getRight(), getDir());
+  }
 }

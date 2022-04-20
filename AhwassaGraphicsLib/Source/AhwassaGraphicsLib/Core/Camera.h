@@ -30,10 +30,13 @@ namespace Ahwassa {
     void      setPosition  (const glm::vec3& v);
     glm::vec3 getUp        ()             const;
     void      setUp        (const glm::vec3& v);
+    glm::vec3 getCamUp     ()             const;
     glm::vec3 getTarget    ()             const;
     void      setTarget    (const glm::vec3& v);
     glm::vec3 getDir       ()             const;
     void      setDir       (const glm::vec3& v);
+    glm::vec3 getRight     ()             const;
+    void      setRight     (const glm::vec3& v);
     float     getFOV       ()             const;
     void      setFOV       (float v);
     bool      is2D         ()             const;
@@ -53,6 +56,7 @@ namespace Ahwassa {
     float                _fov      = 45;
     glm::vec3            _position = glm::vec3(4, 3, 3);
     glm::vec3            _up       = glm::vec3(0, 1, 0);
+    glm::vec3            _right    = glm::vec3(0, 0, 0);
     glm::vec3            _target   = glm::vec3(0, 0, 0);
     glm::ivec2           _resolution;
     int                  _height    ;
