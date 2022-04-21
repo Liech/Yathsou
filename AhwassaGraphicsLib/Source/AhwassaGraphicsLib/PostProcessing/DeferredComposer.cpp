@@ -41,19 +41,19 @@ namespace Ahwassa {
     void main()
     {    
       vec3 FragPos   = texture(gPosition  , TexCoords).rgb;
-      vec3 Normal    = (texture(gNormal    , TexCoords).rgb - vec3(0.5,0.5,0.5))*2;
+      vec3 Normal    = (texture(gNormal   , TexCoords).rgb - vec3(0.5,0.5,0.5))*2;
       vec3 Albedo    = texture(gAlbedoSpec, TexCoords).rgb;
       vec3 Special   = texture(gSpecial   , TexCoords).rgb;
-      float Specular = Special.b;
+      float Specular = Special.b * SpecularValue;
 
-      vec3 lighting = Albedo * 0.5;
+      vec3 lighting = Albedo * 0.5 * AmbientValue;
       vec3 viewDir = normalize(CamPos - FragPos);
       for(int i = 0; i < NumberOfLights; ++i)
       {
           // diffuse
           vec3 lightDir = normalize(LightPositions[i] - FragPos);
           vec3 reflectDir = reflect(-lightDir, Normal);  
-          vec3 diffuse = max(dot(Normal, lightDir), 0.0) * Albedo * LightColors[i];
+          vec3 diffuse = max(dot(Normal, lightDir), 0.0) * Albedo * LightColors[i] * DiffuseValue;
           float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
           vec3 specular = Specular * spec * LightColors[i];  
           lighting += diffuse + specular;
@@ -82,6 +82,16 @@ namespace Ahwassa {
     uniforms.push_back(_lightPositions.get());
     uniforms.push_back(_lightColors   .get());
     uniforms.push_back(_numberOfLights.get());
+
+   _specular = std::make_shared<UniformFloat  >("SpecularValue");
+   _diffuse  = std::make_shared<UniformFloat  >("DiffuseValue");
+   _ambient  = std::make_shared<UniformFloat  >("AmbientValue");
+   _specular ->setValue(1);
+   _diffuse  ->setValue(1);
+   _ambient  ->setValue(1);
+   uniforms.push_back(_specular.get());
+   uniforms.push_back(_diffuse .get());
+   uniforms.push_back(_ambient .get());
 
     _camPos = std::make_shared<UniformVec3  >("CamPos");
     uniforms.push_back(_camPos.get());
@@ -186,5 +196,29 @@ namespace Ahwassa {
     _resolution = resolution;
     _fbo->setResolution(resolution);
     _resultCanvas->setResolution(resolution);
+  }
+
+  float DeferredComposer::ambient() const {
+    return _ambient->getValue();
+  }
+
+  void DeferredComposer::setAmbient(float value) {
+    _ambient->setValue(value);
+  }
+
+  float DeferredComposer::specular() const{
+    return _specular->getValue();
+  }
+
+  void DeferredComposer::setSpecular(float value) {
+    _specular->setValue(value);
+  }
+
+  float DeferredComposer::diffuse() const {
+    return _diffuse->getValue();
+  }
+
+  void DeferredComposer::setDiffuse(float value) {
+    _diffuse->setValue(value);
   }
 }

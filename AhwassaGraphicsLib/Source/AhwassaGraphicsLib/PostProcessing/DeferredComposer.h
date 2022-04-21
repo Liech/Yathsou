@@ -32,6 +32,14 @@ namespace Ahwassa {
     void draw();
     void blitDepth();
     void setResolution(const glm::ivec2&);
+
+    float ambient() const;
+    void  setAmbient(float value);
+    float specular() const;
+    void  setSpecular(float value);
+    float diffuse() const;
+    void  setDiffuse(float value);
+
   private:
     const int MAXLIGHT = 32;
     std::shared_ptr<Rendertarget>           _resultCanvas;
@@ -47,6 +55,9 @@ namespace Ahwassa {
     std::shared_ptr<UniformVecVec3>    _lightColors;
     std::shared_ptr<UniformVec3>       _camPos;
     std::shared_ptr<UniformFloat>      _numberOfLights;
+    std::shared_ptr<UniformFloat>      _specular;
+    std::shared_ptr<UniformFloat>      _diffuse;
+    std::shared_ptr<UniformFloat>      _ambient;
     std::vector<glm::vec3> lights;
     std::vector<glm::vec3> clrs;
     glm::ivec2 _resolution;
