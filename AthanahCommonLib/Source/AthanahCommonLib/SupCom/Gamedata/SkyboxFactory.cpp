@@ -31,21 +31,19 @@ namespace Athanah {
     return _allBoxes;
   }
 
-  std::vector<std::string> SkyboxFactory::getNames() {
-    if (!_initialized)
-      init();
-    return _names;
+  std::string SkyboxFactory::getName(const std::string& ID) {
+    std::string niceName = std::regex_replace(ID, std::regex("SkyCube_"), "");
+    niceName = niceName.substr(std::string("environement\\").size()-1);
+    niceName = std::regex_replace(niceName, std::regex(".dds"), "");
+    return niceName;
   }
 
   void SkyboxFactory::init() {
     _initialized = true;
-    //for (const auto& name : _archive->getFiles("environment")) {
-    //  if (name.ends_with(".dds") && Aezesel::ImageIO::isDDSCube(_archive->loadBinaryFile(name))) {
-    //    _allBoxes.push_back(name);
-    //    std::string niceName = std::regex_replace(name, std::regex("SkyCube_"), "");
-    //    niceName = std::regex_replace(niceName, std::regex(".dds"), "");
-    //    _names.push_back(niceName);
-    //  }
-    //}
+    for (const auto& name : _archive->getFiles("environment")) {
+      if (name.ends_with(".dds") && Aezesel::ImageIO::isDDSCube(_archive->loadBinaryFile(name))) {
+        _allBoxes.push_back(name);
+      }
+    }
   }
 }

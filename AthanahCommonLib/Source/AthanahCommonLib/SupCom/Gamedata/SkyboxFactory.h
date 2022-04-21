@@ -23,7 +23,7 @@ namespace Athanah {
     virtual ~SkyboxFactory() = default;
 
     std::vector<std::string>              getBoxes();
-    std::vector<std::string>              getNames();
+    std::string                           getName(const std::string& ID);
     std::shared_ptr<SkyBox>               load(const std::string& path, std::shared_ptr<Ahwassa::Camera>);
     std::shared_ptr<Ahwassa::CubeTexture> loadReflectionCube(const std::string& path);
 
