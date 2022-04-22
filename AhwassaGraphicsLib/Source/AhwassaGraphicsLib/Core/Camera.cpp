@@ -10,7 +10,8 @@ namespace Ahwassa {
     _view(name + "View"),
     _projection(name + "Projection"),
     _cameraPos(name + "Position"),
-    _invViewProj(name + "inv") 
+    _invViewProj(name + "inv"),
+    _viewRot(name + "ViewRot")
   {
     _name   = name;
     _resolution = resolution;
@@ -31,14 +32,15 @@ namespace Ahwassa {
     glm::mat4 Model = glm::mat4(1.0f);
     glm::mat4 mvp = Projection * View;
 
-    _view.setValue(View);
+    _view.setValue(View);    
+    _viewRot.setValue(glm::translate(View, -(glm::vec3)View[3]));
     _projection.setValue(Projection);
     _invViewProj.setValue(glm::inverse(mvp));
     _cameraPos.setValue(getPosition());
   }
 
   std::vector<Uniform*> Camera::getUniforms() {
-    return std::vector<Uniform*> {&_view, & _projection, & _cameraPos, & _invViewProj};
+    return std::vector<Uniform*> {&_view, & _projection, & _cameraPos, & _invViewProj, &_viewRot};
   }
 
   glm::mat4 Camera::getProjectionMatrix() const {
@@ -125,6 +127,12 @@ namespace Ahwassa {
 
   void Camera::setPosition(const glm::vec3& v) {
     _position = v; 
+  }
+
+  void Camera::moveTo(const glm::vec3& v) {
+    auto diff = v - _target;
+    _target = v;
+    _position += diff;
   }
 
   glm::vec3 Camera::getUp() const {

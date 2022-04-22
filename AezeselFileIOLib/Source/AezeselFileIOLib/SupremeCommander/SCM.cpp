@@ -47,7 +47,7 @@ namespace Aezesel {
 
     result.boneNames = readBoneNames(boneoffset);
     result.bones     = readBones(boneoffset, totalbonecount, result.boneNames);
-    result.vertecies = readVertices(vertoffset, vertcount);
+    result.vertecies = readVertices(vertoffset, vertcount,result.aabb);
     result.indices   = readInidices(indexoffset, indexcount);
     result.info      = readInfo(infooffset, infocount);
 
@@ -76,10 +76,13 @@ namespace Aezesel {
     return result;
   }
 
-  std::vector<SCM::vertex> SCM::readVertices(int vertoffset, int vertcount)
+  std::vector<SCM::vertex> SCM::readVertices(int vertoffset, int vertcount, Iyathuum::glmAABB<3>& aabb)
   {
     std::vector<vertex> result;
     _fileposition = vertoffset;
+
+    glm::vec3 max(std::numeric_limits<float>::min(), std::numeric_limits<float>::min(), std::numeric_limits<float>::min());
+    glm::vec3 min(std::numeric_limits<float>::max(), std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
 
     for (int i = 0; i < vertcount; i++)
     {
@@ -87,6 +90,9 @@ namespace Aezesel {
       subresult.position[0] = readFloat(_buffer, _fileposition);
       subresult.position[1] = readFloat(_buffer, _fileposition);
       subresult.position[2] = readFloat(_buffer, _fileposition);
+
+      max = glm::vec3(std::max(max[0], subresult.position[0]), std::max(max[1], subresult.position[1]), std::max(max[2], subresult.position[2]));
+      min = glm::vec3(std::min(min[0], subresult.position[0]), std::min(min[1], subresult.position[1]), std::min(min[2], subresult.position[2]));
 
       subresult.normal[0] = readFloat(_buffer, _fileposition);
       subresult.normal[1] = readFloat(_buffer, _fileposition);
@@ -113,7 +119,7 @@ namespace Aezesel {
 
       result.push_back(subresult);
     }
-
+    aabb = Iyathuum::glmAABB<3>(min, max - min);
     return result;
   }
 

@@ -8,6 +8,7 @@
 #include <glm/vec3.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/glm.hpp>
+#include <IyathuumCoreLib/BaseTypes/glmAABB.h>
 #include <nlohmann/json.hpp>
 #include "AezeselFileIOLib/IO.h"
 
@@ -56,6 +57,7 @@ namespace Aezesel {
       std::vector<vertex>       vertecies;
       std::vector<tri>          indices;
       std::vector<std::string>  info;
+      Iyathuum::glmAABB<3>      aabb;
 
       nlohmann::json toJson();
       void fromJson(const nlohmann::json&);
@@ -68,7 +70,7 @@ namespace Aezesel {
 
     std::vector<std::string> readBoneNames(int offset);
     std::vector<bone>        readBones(int offset, int count, std::vector<std::string> boneNames);
-    std::vector<vertex>      readVertices(int offset, int count);
+    std::vector<vertex>      readVertices(int offset, int count, Iyathuum::glmAABB<3>& aabb);
     std::vector<tri>         readInidices(int offset, int count);
     std::vector<std::string> readInfo(int offset, int count);
 
@@ -80,6 +82,6 @@ namespace Aezesel {
     static void writeInfo     (std::ofstream&,const SCM::data&);
 
     size_t      _fileposition = 0;
-    std::vector<unsigned char> _buffer;
+    std::vector<unsigned char> _buffer;    
   };
 }

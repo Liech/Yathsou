@@ -28,6 +28,7 @@ namespace Ahwassa {
     void      setResolution(const glm::ivec2&);
     glm::vec3 getPosition  ()             const;
     void      setPosition  (const glm::vec3& v);
+    void      moveTo       (const glm::vec3& v);
     glm::vec3 getUp        ()             const;
     void      setUp        (const glm::vec3& v);
     glm::vec3 getCamUp     ()             const;
@@ -49,6 +50,7 @@ namespace Ahwassa {
 
   private:  
     UniformMat4 _view       ;    
+    UniformMat4 _viewRot    ;    
     UniformMat4 _projection ;
     UniformMat4 _invViewProj;
     UniformVec3 _cameraPos ;
