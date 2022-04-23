@@ -6,7 +6,11 @@
 
 namespace Athanah {
   Blueprint::Blueprint(const std::string id, const nlohmann::json& input) {
-    std::cout << id << std::endl;
+    if (input.find("Display") == input.end()) {
+      _invalid = true;
+      return;
+    }
+    
     if (input.find("Description") != input.end()) {
       _description = input["Description"];
       _description = _description.substr(_description.find_first_of('>')+1);
@@ -20,8 +24,10 @@ namespace Athanah {
     else if (input.find("StrategicIconName") != input.end())
       _strategicIcon = "";
 
+    readCategories(input["Categories"]);
+
     readSize(input);
-    _general = std::make_shared<BlueprintGeneral>(input["General"]);
+    _general = std::make_shared<BlueprintGeneral>(input["General"]);    
     _display = std::make_shared<BlueprintDisplay>(input["Display"]);
     _physic  = std::make_shared<BlueprintPhysic >(input["Physics"]);
     _id = id;
@@ -99,4 +105,37 @@ namespace Athanah {
     else
       _selectionSize[2] = 1;
   }
+
+  void Blueprint::readCategories(const nlohmann::json& input){
+    for (auto& x : input) {
+      UnitCategory cat = str2UnitCategory(x);
+      _categories.insert(cat);
+    }
+  }
+
+  TechLevel Blueprint::techLevel() const {
+    if (_categories.count(UnitCategory::Tech1))
+      return TechLevel::T1;
+    else if (_categories.count(UnitCategory::Tech2))
+      return TechLevel::T2;
+    else if (_categories.count(UnitCategory::Tech3))
+      return TechLevel::T3;
+    else if (_categories.count(UnitCategory::Experimental))
+      return TechLevel::T4;
+    else
+      return TechLevel::T0;
+  }
+  
+  bool Blueprint::hasCategory(UnitCategory cat) const {
+    return _categories.count(cat) != 0;
+  }
+
+  const std::set<UnitCategory>& Blueprint::categories() const {
+    return _categories;
+  }
+
+  bool Blueprint::invalid() const {
+    return _invalid;
+  }
+
 }

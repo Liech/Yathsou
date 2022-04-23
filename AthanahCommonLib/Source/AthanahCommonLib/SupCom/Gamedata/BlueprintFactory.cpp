@@ -21,17 +21,20 @@ namespace Athanah {
   }
 
   void BlueprintFactory::init() {
-    for (const auto& entry : _archive->getDirectories()) {
-      if (_archive->fileExists(entry + "\\" + entry + "_unit.bp"))
-        _availableUnits.push_back(entry);
-    }
-
     soundCall = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
-      [](const nlohmann::json& input) -> nlohmann::json
-    {
-      return 1;
-    }
+      [](const nlohmann::json& input) -> nlohmann::json {
+        return 1;
+      }
     );
+
+    for (const auto& entry : _archive->getDirectories()) {
+      if (_archive->fileExists(entry + "\\" + entry + "_unit.bp")) {
+        auto modl = loadModel(entry);
+        if (modl->invalid())
+          continue;
+        _availableUnits.push_back(entry);
+      }
+    }
   }
 
   std::shared_ptr<const Blueprint> BlueprintFactory::loadModel(const std::string& name) {
@@ -70,4 +73,23 @@ namespace Athanah {
     return _archive->fileExists(path);
   }
 
+  std::set<std::string> BlueprintFactory::getModelsByCategory(UnitCategory cat) {
+    std::set<std::string> result;
+    for (auto& x : _availableUnits) {
+      if (loadModel(x)->hasCategory(cat))
+        result.insert(x);
+    }
+    return result;
+  }
+
+  std::set<std::string> BlueprintFactory::getModelsByCategory(const std::set<UnitCategory>& filter) {
+    std::set<std::string> units(getAvailableModels().begin(), getAvailableModels().end());
+    for (auto& x : filter) {
+      std::set<std::string> intersection;
+      auto intersecter = getModelsByCategory(x);
+      std::set_intersection(units.begin(), units.end(), intersecter.begin(), intersecter.end(), std::inserter(intersection, intersection.begin()));
+      units = intersection;
+    }
+    return units;
+  }
 }

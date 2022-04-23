@@ -18,8 +18,6 @@ namespace Athanah {
     const Faction     faction();
     const std::string icon();
     const std::string unitName();
-    const TechLevel   techLevel();
-    const std::string techLevelString();
 
     float weight();
     int   selectionPriority();
@@ -32,7 +30,6 @@ namespace Athanah {
 
     Faction     _faction;
     std::string _unitName;
-    TechLevel   _techLevel;
     std::string _icon;
     float       _weight;
     int         _selectionPriority;

@@ -27,7 +27,7 @@ namespace Athanah {
   std::shared_ptr<Ahwassa::Texture> UiTextureFactory::getIcon(std::string iconName) {
     if (_icons.count(iconName) == 0)
     {
-      auto ico = loadIcon(iconName + "_icon");
+      auto ico = loadUnitIcon(iconName + "_icon");
       _icons[iconName] = ico;
       return ico;
     }
@@ -47,8 +47,7 @@ namespace Athanah {
 
   std::shared_ptr<Ahwassa::Texture> UiTextureFactory::getFactionIcon(Faction faction, FactionIconType type) {
     auto p = std::make_pair(faction, type);
-    if (_factionIcons.count(p) == 0)
-    {
+    if (_factionIcons.count(p) == 0) {
       auto ico = loadFactionIcon(faction, type);
       _factionIcons[p] = ico;
       return ico;
@@ -56,11 +55,62 @@ namespace Athanah {
     return _factionIcons[p];
   }
 
-  std::shared_ptr<Ahwassa::Texture> UiTextureFactory::getTierIcons(Faction faction, TechLevel) {
-    //Data\textures\ui\cybran\game\avatar - engineers - panel
-    return std::make_shared<Ahwassa::Texture>("Icon", 0);
+  std::shared_ptr<Ahwassa::Texture> UiTextureFactory::getTierIcon(Faction faction, TechLevel type, SelectableButtonStatus status) {
+    auto p = std::make_tuple(faction, type, status);
+    if (_tierIcons.count(p) == 0) {
+      auto ico = loadTierIcon(faction, type, status);
+      _tierIcons[p] = ico;
+      return ico;
+    }
+    return _tierIcons[p];
   }
 
+  std::shared_ptr<Ahwassa::Texture> UiTextureFactory::loadTierIcon(Faction faction, TechLevel tier, SelectableButtonStatus status) {
+    std::string path = "ui\\";
+
+    if (faction == Faction::Aeon)
+      path += "aeon";
+    else if (faction == Faction::Cybran)
+      path += "cybran";
+    else if (faction == Faction::Uef)
+      path += "uef";
+    else if (faction == Faction::Seraphim)
+      path += "seraphim";
+    else
+      path += "uef";
+
+    path += "\\game\\construct-tech_btn\\";
+
+    if (tier == TechLevel::T0)
+      return std::make_shared<Ahwassa::Texture>("TierIcon", 0);
+    else if (tier == TechLevel::T1)
+      path += "t1";
+    else if (tier == TechLevel::T2)
+      path += "t2";
+    else if (tier == TechLevel::T3)
+      path += "t3";
+    else if (tier == TechLevel::T4)
+      path += "t4";
+
+    if (status == SelectableButtonStatus::Hover)
+      path += "_btn_over";
+    else if (status == SelectableButtonStatus::Normal)
+      path += "_btn_up";
+    else if (status == SelectableButtonStatus::SelectedHover)
+      path += "_btn_down";
+    else
+      path += "_btn_selected";
+
+    if (!_archive->fileExists(path + ".dds"))
+      return std::make_shared<Ahwassa::Texture>("TierIcon", 0);
+    auto img = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, _archive->loadBinaryFile(path + ".dds"));
+    return std::make_shared<Ahwassa::Texture>("TierIcon", img.get());
+  }
+
+
+  //pause/play: Data\textures\ui\cybran\game\pause_btn
+  //diplomacy/menu/objectives: Data\textures\ui\cybran\game\options_tab
+  //pin/close/extern: Data\textures\ui\cybran\game\menu-btns
 
   std::shared_ptr<Ahwassa::Texture> UiTextureFactory::loadStrategicIcon(std::string iconName, SelectableButtonStatus status) {
     const std::string basepath = "ui\\common\\game\\strategicicons\\";
@@ -82,7 +132,7 @@ namespace Athanah {
     return std::make_shared<Ahwassa::Texture>("StrategicIcon", img.get());
   }
 
-  std::shared_ptr<Ahwassa::Texture> UiTextureFactory::loadIcon(std::string iconName) {
+  std::shared_ptr<Ahwassa::Texture> UiTextureFactory::loadUnitIcon(std::string iconName) {
     const std::string basepath = "ui\\common\\icons\\units\\";
     std::string statusPath;
     std::string path = basepath + iconName + ".dds";
@@ -91,9 +141,11 @@ namespace Athanah {
       if (iconName == "default_icon")
         return std::make_shared<Ahwassa::Texture>("Icon", 0);
       else
-        return loadIcon("default_icon");
+        return loadUnitIcon("default_icon");
     }
 
+    if (!_archive->fileExists(path))
+      return std::make_shared<Ahwassa::Texture>("Icon", 0);
     auto img = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS, _archive->loadBinaryFile(path));
     return std::make_shared<Ahwassa::Texture>("Icon", img.get());
   }

@@ -4,8 +4,10 @@
 #include <memory>
 #include <vector>
 #include <map>
+#include <set>
 #include <functional>
 #include <nlohmann/json.hpp>
+#include "AthanahCommonLib/SupCom/SupComEnums.h"
 
 namespace Aezesel {
   class SCD;
@@ -22,6 +24,8 @@ namespace Athanah {
 
     std::shared_ptr<const Blueprint> loadModel(const std::string&);
     const std::vector<std::string>&  getAvailableModels();
+    std::set<std::string>            getModelsByCategory(UnitCategory);
+    std::set<std::string>            getModelsByCategory(const std::set<UnitCategory>&);
     bool                             hasBlueprint(const std::string&) const;
   private:
     void init();
