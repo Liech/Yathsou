@@ -2,8 +2,5 @@
 
 namespace Ahwassa
 {
-  class SoundHandler
-  {
 
-  };
 }

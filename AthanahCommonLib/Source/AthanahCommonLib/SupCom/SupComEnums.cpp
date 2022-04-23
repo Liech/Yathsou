@@ -4,7 +4,15 @@
 #include <stdexcept>
 
 namespace Athanah {
-  UnitCategory str2UnitCategory(const std::string& input) {
+  SoundLodCutOff EnumConvert::str2SoundLodCutOff(const std::string& input) {
+    if (input == "UnitMove_LodCutoff")
+      return SoundLodCutOff::UnitMove;
+    if (input == "Weapon_LodCutoff")
+      return SoundLodCutOff::Weapon;
+    throw std::runtime_error("Unkown LodCutOff");
+  }
+
+  UnitCategory EnumConvert::str2UnitCategory(const std::string& input) {
     static std::map<std::string, UnitCategory> categoryMap;
     if (categoryMap.size() == 0) {
       categoryMap["PRODUCTDL"                   ] = UnitCategory::ProductDL;
@@ -167,7 +175,7 @@ namespace Athanah {
     throw std::runtime_error("Category not found");
   }
 
-  std::string unitCategory2niceString(UnitCategory input) {
+  std::string EnumConvert::unitCategory2niceString(UnitCategory input) {
     static std::map<UnitCategory,std::string> categoryMap;
     if (categoryMap.size() == 0) {
       categoryMap[UnitCategory::ProductDL                 ] = "ProductDL";
@@ -329,7 +337,7 @@ namespace Athanah {
     throw std::runtime_error("Category not found");
   }
 
-  std::vector<UnitCategory>& allUnitCategories() {
+  std::vector<UnitCategory>& EnumConvert::allUnitCategories() {
     static std::vector<UnitCategory> all = { 
       UnitCategory::AbilityButton,
       UnitCategory::Aeon,

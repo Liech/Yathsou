@@ -45,6 +45,7 @@ set(Header_Files__SupCom__Blueprint
     "Source/AthanahCommonLib/SupCom/Blueprint/BlueprintDisplay.h"
     "Source/AthanahCommonLib/SupCom/Blueprint/BlueprintGeneral.h"
     "Source/AthanahCommonLib/SupCom/Blueprint/BlueprintPhysic.h"
+    "Source/AthanahCommonLib/SupCom/Blueprint/BlueprintSound.h"
 )
 source_group("Header Files\\SupCom\\Blueprint" FILES ${Header_Files__SupCom__Blueprint})
 
@@ -80,6 +81,7 @@ source_group("Source Files\\Physic" FILES ${Source_Files__Physic})
 
 set(Source_Files__SupCom
     "Source/AthanahCommonLib/SupCom/SupComMeshLoader.cpp"
+    "Source/AthanahCommonLib/SupCom/SupComEnums.cpp"
     "Source/AthanahCommonLib/SupCom/SupComMeshRenderer.cpp"
     "Source/AthanahCommonLib/SupCom/SupComMeshRendererDef.cpp"
     "Source/AthanahCommonLib/SupCom/SupComModel.cpp"
@@ -93,6 +95,7 @@ set(Source_Files__SupCom__Blueprint
     "Source/AthanahCommonLib/SupCom/Blueprint/BlueprintDisplay.cpp"
     "Source/AthanahCommonLib/SupCom/Blueprint/BlueprintGeneral.cpp"
     "Source/AthanahCommonLib/SupCom/Blueprint/BlueprintPhysic.cpp"
+    "Source/AthanahCommonLib/SupCom/Blueprint/BlueprintSound.cpp"
 )
 source_group("Source Files\\SupCom\\Blueprint" FILES ${Source_Files__SupCom__Blueprint})
 

@@ -2,6 +2,7 @@
 #include "BlueprintGeneral.h"
 #include "BlueprintDisplay.h"
 #include "BlueprintPhysic.h"
+#include "BlueprintSound.h"
 #include <iostream>
 
 namespace Athanah {
@@ -25,6 +26,9 @@ namespace Athanah {
       _strategicIcon = "";
 
     readCategories(input["Categories"]);
+    
+    if (input.find("Audio") != input.end())
+      readSound(input["Audio"]);
 
     readSize(input);
     _general = std::make_shared<BlueprintGeneral>(input["General"]);    
@@ -108,7 +112,7 @@ namespace Athanah {
 
   void Blueprint::readCategories(const nlohmann::json& input){
     for (auto& x : input) {
-      UnitCategory cat = str2UnitCategory(x);
+      UnitCategory cat = EnumConvert::str2UnitCategory(x);
       _categories.insert(cat);
     }
   }
@@ -138,4 +142,20 @@ namespace Athanah {
     return _invalid;
   }
 
+  BlueprintSound& Blueprint::sound(const std::string& input) const {
+    return *_sounds.at(input);
+  }
+
+  std::vector<std::string> Blueprint::allSounds() const {
+    std::vector<std::string> result;
+    for (auto x : _sounds)
+      result.push_back(x.first);
+    return result;
+  }
+
+  void Blueprint::readSound(const nlohmann::json& input) {
+    for (auto s : input.items()) {
+      _sounds[s.key()] = std::make_shared<BlueprintSound>(s.value());
+    }
+  }
 }

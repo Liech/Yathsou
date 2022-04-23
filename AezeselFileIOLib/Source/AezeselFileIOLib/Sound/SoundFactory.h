@@ -14,13 +14,13 @@ namespace Aezesel {
   public:
     SoundFactory(std::string folder);
 
-    std::shared_ptr<Iyathuum::Sound> load(std::string bank, std::string name);
-    std::vector<std::string>         getAllBanks();
-    std::vector<std::string>         getAllSoundsInBank(std::string bank);
-
+    bool                             hasSound(const std::string& bank, const std::string& name);
+    std::shared_ptr<Iyathuum::Sound> load(const std::string& bank, const std::string& name);
+    const std::vector<std::string>&  getAllBanks() const;
+    std::vector<std::string>         getAllSoundsInBank(const std::string& bank);
   private:
-    void loadBank(std::string bankName);
-    std::vector<std::shared_ptr<Iyathuum::Sound>> loadSounds(std::string bank);
+    void loadBank(const std::string& bankName);
+    std::vector<std::shared_ptr<Iyathuum::Sound>> loadSounds(const std::string& bank);
 
     std::string _folder;
 

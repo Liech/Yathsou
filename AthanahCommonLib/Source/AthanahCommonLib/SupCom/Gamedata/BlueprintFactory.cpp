@@ -23,7 +23,7 @@ namespace Athanah {
   void BlueprintFactory::init() {
     soundCall = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
       [](const nlohmann::json& input) -> nlohmann::json {
-        return 1;
+        return input;
       }
     );
 

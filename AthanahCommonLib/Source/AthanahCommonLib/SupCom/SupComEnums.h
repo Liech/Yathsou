@@ -17,6 +17,12 @@ namespace Athanah {
   enum class Faction {
     Aeon, Cybran, Uef, Seraphim, Undefined
   };
+  
+  
+  enum class SoundLodCutOff {
+    UnitMove, Weapon, None, Unknown
+  };
+
   enum class UnitCategory {
     AbilityButton,
     Aeon,
@@ -173,7 +179,12 @@ namespace Athanah {
 
     Unkown
   };
-  UnitCategory str2UnitCategory(const std::string&);
-  std::string  unitCategory2niceString(UnitCategory);
-  std::vector<UnitCategory>& allUnitCategories();
+
+  class EnumConvert {
+    public:
+      static SoundLodCutOff str2SoundLodCutOff(const std::string&);
+      static UnitCategory str2UnitCategory(const std::string&);
+      static std::string  unitCategory2niceString(UnitCategory);
+      static std::vector<UnitCategory>& allUnitCategories();
+  };
 }

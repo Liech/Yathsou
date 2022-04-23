@@ -1,11 +1,13 @@
 #include "SoundFactory.h"
 
+#include <filesystem>
+#include <set>
+
 #include "IyathuumCoreLib/BaseTypes/Sound.h"
 
 #include "Sound/XSB.h"
 #include "Sound/XWB.h"
 
-#include <filesystem>
 
 namespace Aezesel {
   SoundFactory::SoundFactory(std::string foldername) {
@@ -21,21 +23,29 @@ namespace Aezesel {
     }
   }
 
-  std::shared_ptr<Iyathuum::Sound> SoundFactory::load(std::string bank, std::string name) {
+  bool SoundFactory::hasSound(const std::string& bank, const std::string& name) {    
+    std::set<std::string> banks(getAllBanks().begin(), getAllBanks().end());
+    if (!banks.contains(bank))
+      return false;    
+    loadBank(bank);
+    return _banks[bank].sounds.count(name) != 0;
+  }
+
+  std::shared_ptr<Iyathuum::Sound> SoundFactory::load(const std::string& bank, const std::string& name) {
     loadBank(bank);
     return _banks[bank].sounds[name];
   }
 
-  std::vector<std::string> SoundFactory::getAllBanks() {
+  const std::vector<std::string>& SoundFactory::getAllBanks() const{
     return _bankNames;
   }
 
-  std::vector<std::string> SoundFactory::getAllSoundsInBank(std::string bank) {
+  std::vector<std::string> SoundFactory::getAllSoundsInBank(const std::string& bank) {
     loadBank(bank);
     return _banks[bank].soundNames;
   }
 
-  void SoundFactory::loadBank(std::string bankName) {
+  void SoundFactory::loadBank(const std::string& bankName) {
     if (_banks.count(bankName) != 0)
       return;
     
@@ -56,7 +66,7 @@ namespace Aezesel {
       b.sounds[names[i]] = sounds[i];
   }
 
-  std::vector<std::shared_ptr<Iyathuum::Sound>> SoundFactory::loadSounds(std::string bank) {
+  std::vector<std::shared_ptr<Iyathuum::Sound>> SoundFactory::loadSounds(const std::string& bank) {
     std::vector<std::shared_ptr<Iyathuum::Sound>> result;
     Aezesel::XWB xwbReader;
     auto sounds = xwbReader.load(_folder + "\\" + bank + ".xwb");
