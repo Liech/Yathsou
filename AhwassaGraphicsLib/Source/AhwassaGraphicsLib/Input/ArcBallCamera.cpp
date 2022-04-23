@@ -8,19 +8,9 @@
 #include <imgui.h>
 
 namespace Ahwassa {
-  ArcBallCamera::ArcBallCamera(std::shared_ptr<Camera> cam, Input& inp, const Iyathuum::Key& toggleKey) : _input(inp) {
+  ArcBallCamera::ArcBallCamera(std::shared_ptr<Camera> cam, Input& inp) : _input(inp) {
     _camera = cam;
-    _toggleKey = toggleKey;
     setLocalPosition(Iyathuum::glmAABB<2>(glm::vec2(0, 0), cam->getResolution()));
-  }
-
-  bool ArcBallCamera::isFocus() const{
-    return _focus;
-  }
-
-  void ArcBallCamera::setFocus(bool focus) {
-    _focus = focus;
-    _input.setCursorStatus(_focus ? Iyathuum::CursorStatus::HIDDEN : Iyathuum::CursorStatus::NORMAL);
   }
 
   bool ArcBallCamera::mouseClickEvent(const glm::vec2& localPosition, const Iyathuum::Key& button) {
@@ -28,9 +18,12 @@ namespace Ahwassa {
   }
 
   bool ArcBallCamera::mouseMoveEvent(const glm::vec2& current, const  glm::vec2& movement) {
-    if (!isFocus())
-      return false;
-    move(movement, glm::vec2(0, 0), true);
+    if (_arcAround)
+      move(movement, glm::vec2(0, 0), true);
+    if (_panAround) {
+      float distance = glm::distance(_camera->getTarget(), _camera->getPosition());
+      _camera->moveTo(_camera->getTarget() - distance * 0.001f * _camera->getRight() * movement[0] - distance * 0.001f * _camera->getCamUp() * movement[1]);
+    }
     return true;
   }
 
@@ -70,19 +63,30 @@ namespace Ahwassa {
 
   bool ArcBallCamera::mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
     if (ImGui::GetIO().WantCaptureMouse) {
-      setFocus(false);
+      _arcAround = false;
       return true;
+    }
+    bool returnValue = false;
+
+    if (button == Iyathuum::Key::MOUSE_BUTTON_1 && status == Iyathuum::KeyStatus::PRESS) {
+      _arcAround = true;
+      returnValue = true;
+    }
+    else if (button == Iyathuum::Key::MOUSE_BUTTON_1 && status == Iyathuum::KeyStatus::RELEASE) {
+      _arcAround = false;
+      returnValue = true;
     }
 
-    if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS) {
-      setFocus(true);
-      return true;
+    bool pan = button == Iyathuum::Key::MOUSE_BUTTON_3 || button == Iyathuum::Key::MOUSE_BUTTON_2;
+    if (pan && status == Iyathuum::KeyStatus::PRESS) {
+      _panAround = true;
+      returnValue = true;
     }
-    if (button == _toggleKey && status == Iyathuum::KeyStatus::RELEASE) {
-      setFocus(false);
-      return true;
+    if (pan && status == Iyathuum::KeyStatus::RELEASE) {
+      _panAround = false;
+      returnValue = true;
     }
-    return false;
+    return returnValue;
   }
 
   void ArcBallCamera::update() {
@@ -93,11 +97,11 @@ namespace Ahwassa {
 
   bool ArcBallCamera::keyEvent(const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) {
     if (ImGui::GetIO().WantCaptureMouse) {
-      setFocus(false);
+      _arcAround = false;
       return true;
     }
-    if (button == _toggleKey && status == Iyathuum::KeyStatus::PRESS) {
-      setFocus(!isFocus());
+    if (button == Iyathuum::Key::MOUSE_BUTTON_1 && status == Iyathuum::KeyStatus::PRESS) {
+      _arcAround = !_arcAround;
       return true;
     }
     return false;

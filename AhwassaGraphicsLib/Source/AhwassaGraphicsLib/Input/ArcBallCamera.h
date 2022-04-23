@@ -9,10 +9,7 @@ namespace Ahwassa {
 
   class ArcBallCamera : public UIElement {
   public:
-    ArcBallCamera(std::shared_ptr<Camera>, Input& inp, const Iyathuum::Key&);
-
-    bool isFocus() const;
-    void setFocus(bool focus);
+    ArcBallCamera(std::shared_ptr<Camera>, Input& inp);
 
     bool keyEvent(const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) override;
     bool mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) override;
@@ -24,9 +21,9 @@ namespace Ahwassa {
     void move(const glm::vec2& mouse, const glm::vec2& wheel, bool setCursor);
 
     glm::vec3               _lastTargetPosition;
-    bool                    _focus = false;
+    bool                    _arcAround = false;
+    bool                    _panAround = false;
     std::shared_ptr<Camera> _camera;
     Input&                  _input;
-    Iyathuum::Key           _toggleKey;
   };
 }
