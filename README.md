@@ -14,10 +14,13 @@ Eye Of Rhianne is an interactive asset explorer for supreme commander 1. It is a
 
 # Current Work
 
-The current working topic is unit movement.
+The current working topic is improving animations.
 
 Since the last 'release' the following was implemented:
  
+ * EyeOfRhianne is greatly enhanced and uses imgui as gui library
+ * The executeables are in seperated repositories
+ * cmake & vcpkg is now used as buildsystem
  * Basic Wheeled Unit Movement (only direct steering)
  * Unit Selection & Rectangle Selection
  * Added Dear IMGUI for greater debugging capabilities
@@ -36,6 +39,11 @@ I am able to communicate in English and German.
 
 # Build and Run
 
-Use Visual Studio 2019 (or above) and Windows.
+This library collection has no executeable. Take a look at my other projects.
 
-Planning to move to cmake at some point. After that Linux is theoretical also possible.
+ * You need git, cmake and Visual Studio (Any other IDE is fine, but may require other steps)
+ * After checking out this project make sure all submodules are up to date.
+ * Then execute the 0,1 and 2 .bat files to set up vcpkg.
+ * If you are using Linux: Good Luck, it could work but is not tested.
+ * If you are used to cmake: Make sure to set the vcpkg toolchain file
+ * If not read the 3 file or ask me personally
