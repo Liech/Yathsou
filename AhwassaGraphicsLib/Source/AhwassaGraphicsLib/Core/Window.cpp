@@ -95,6 +95,8 @@ namespace Ahwassa {
   }
 
   void Window::windowResized(GLFWwindow* window, int width, int height) {
+    if (width == 0 || height == 0)
+      return;
     glViewport(0, 0, width, height);
     auto instance = _instanceMap[window];
     auto newReso = glm::ivec2(width, height);
