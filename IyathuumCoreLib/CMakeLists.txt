@@ -64,6 +64,9 @@ set(Header_Files__Util
     "Source/IyathuumCoreLib/Util/lambdaCapture2functionPointer.h"
     "Source/IyathuumCoreLib/Util/Scheduler.h"
     "Source/IyathuumCoreLib/Util/UpdateTimer.h"
+    "Source/IyathuumCoreLib/Util/StateMachine.h"
+    "Source/IyathuumCoreLib/Util/State.h"
+    "Source/IyathuumCoreLib/Util/StateTransition.h"
 )
 source_group("Header Files\\Util" FILES ${Header_Files__Util})
 
@@ -87,6 +90,9 @@ set(Source_Files__Util
     "Source/IyathuumCoreLib/Util/ImageUtil.cpp"
     "Source/IyathuumCoreLib/Util/Scheduler.cpp"
     "Source/IyathuumCoreLib/Util/UpdateTimer.cpp"
+    "Source/IyathuumCoreLib/Util/StateMachine.cpp"
+    "Source/IyathuumCoreLib/Util/State.cpp"
+    "Source/IyathuumCoreLib/Util/StateTransition.cpp"
 )
 source_group("Source Files\\Util" FILES ${Source_Files__Util})
 

@@ -10,6 +10,7 @@ namespace Ahwassa {
   class ArcBallCamera : public UIElement {
   public:
     ArcBallCamera(std::shared_ptr<Camera>, Input& inp);
+    virtual ~ArcBallCamera() = default;
 
     bool keyEvent(const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) override;
     bool mouseEvent(const glm::vec2& localPosition, const Iyathuum::Key& button, const Iyathuum::KeyStatus& status) override;
