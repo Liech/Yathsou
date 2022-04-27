@@ -3,8 +3,8 @@
   "version-string": "0.0.1",
   "dependencies": [
     "assimp",
-	  "lodepng",
-	  "gli",
+	"lodepng",
+	"gli",
     "nlohmann-json",
     "glm",
 	"glfw3",

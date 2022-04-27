@@ -135,7 +135,7 @@ set_property(TARGET AezeselFileIOLib PROPERTY CXX_STANDARD 20)
 target_link_libraries(AezeselFileIOLib PRIVATE
 IyathuumCoreLib 
 gli 
-${ASSIMP_LIBRARIES} 
+assimp::assimp
 staticZipper
 libnyquist
 nlohmann_json::nlohmann_json
