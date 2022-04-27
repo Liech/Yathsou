@@ -5,8 +5,10 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
+#include <filesystem>
 
 #include <zipper/unzipper.h>
+#include <mio/mmap.hpp>
 
 //does not work for supreme commander units.sca...
 //eg UAL0401_Aactivate.sca is not found...
@@ -15,8 +17,10 @@ namespace Aezesel {
   ZIP::ZIP(const std::string& filename) {
     _filename = filename;
 
-    std::ifstream input(filename, std::ios::binary);
-    _data = std::vector<unsigned char>(std::istreambuf_iterator<char>(input), {});
+    std::uintmax_t size = std::filesystem::file_size(filename);
+    _data.resize(size);
+    mio::mmap_source mmap(filename, 0, size);
+    std::memcpy(_data.data(), mmap.begin(), size);
 
     _unzipper = std::make_unique<zipper::Unzipper>(_data);    
 

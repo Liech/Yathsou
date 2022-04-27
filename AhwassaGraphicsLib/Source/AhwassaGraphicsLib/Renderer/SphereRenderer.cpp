@@ -103,7 +103,7 @@ namespace Ahwassa {
   }
 
   void SphereRenderer::makeShader() {
-    std::cout << "Load Shader" << std::endl;
+    //std::cout << "Load Shader" << std::endl;
     genSphere();
 
     std::string vertex_shader_source = R"(

@@ -16,8 +16,9 @@
 namespace Ahwassa {
   Window* win;
 
-  Window::Window(const glm::ivec2& resolution)
+  Window::Window(const std::string& title, const glm::ivec2& resolution)
   {
+    _title = title;
     _resolution = resolution;
   }
 
@@ -107,7 +108,6 @@ namespace Ahwassa {
   }
 
   void Window::run() {
-    std::cout << "Starting GLFW context, OpenGL 3.3" << std::endl;
     // Init GLFW
     glfwInit();
     // Set all the required options for GLFW
@@ -119,7 +119,7 @@ namespace Ahwassa {
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
     // Create a GLFWwindow object that we can use for GLFW's functions
-    _window = glfwCreateWindow(_resolution[0], _resolution[1], "GL", NULL, NULL);
+    _window = glfwCreateWindow(_resolution[0], _resolution[1], _title.c_str(), NULL, NULL);
     _instanceMap[_window] = this;
     win = this;
     glfwMakeContextCurrent(_window);

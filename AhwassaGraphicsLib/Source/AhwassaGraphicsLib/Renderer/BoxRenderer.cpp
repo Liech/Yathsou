@@ -108,7 +108,7 @@ namespace Ahwassa {
   }
 
   void BoxRenderer::makeShader() {
-    std::cout << "Load Shader" << std::endl;
+    //std::cout << "Load Shader" << std::endl;
     makeGeometry();
 
     std::string vertex_shader_source = R"(

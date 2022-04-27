@@ -6,6 +6,7 @@ find_package(nlohmann_json REQUIRED)
 find_package(assimp REQUIRED)
 find_package(gli REQUIRED)
 find_package(lodepng REQUIRED)
+find_package(mio REQUIRED)
 
 ############################################################################
 ############################################################################
@@ -128,8 +129,6 @@ set(ALL_FILES
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/zipper EXCLUDE_FROM_ALL)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lib/libnyquist EXCLUDE_FROM_ALL)
 
-
-
 add_library(AezeselFileIOLib ${ALL_FILES})
 set_property(TARGET AezeselFileIOLib PROPERTY CXX_STANDARD 20)
 
@@ -141,6 +140,7 @@ staticZipper
 libnyquist
 nlohmann_json::nlohmann_json
 lodepng
+mio::mio
 )
 
 target_include_directories(AezeselFileIOLib PRIVATE 
@@ -152,6 +152,7 @@ ${assimp_SOURCE_DIR}/include
 ${assimp_SOURCE_DIR}/..
 ${glm_SOURCE_DIR} 
 ${gli_SOURCE_DIR} 
+${mio_SOURCE_DIR} 
 ${zipper_SOURCE_DIR} 
 ${zipper_SOURCE_DIR}/include
 "${lodepng_SOURCE_DIR}"

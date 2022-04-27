@@ -33,21 +33,22 @@ namespace Athanah {
   void SupComModel::loadAnimation(Aezesel::SCD& archive, const std::string& unitName) {
     for (const auto& entry : archive.getDirectories(unitName))
     {
-      if (entry.ends_with(".sca"))
-      {
-        size_t      animSeperator = entry.find_last_of('\\');
-        std::string animationName = entry.substr(animSeperator + 1/*\\*/ + unitName.size() + 2/*_A*/);
-        std::cout << "Loading Animation: " << animationName << std::endl;
-        animationName = animationName.substr(0, animationName.size() - 4);
-        Aezesel::SCA animLoader;
-        std::shared_ptr<Aezesel::SCA::data> anim = std::make_shared<Aezesel::SCA::data>(animLoader.load(archive.loadBinaryFile(entry)));
-        _animations[animationName] = anim;
+      for (auto& x : archive.getFiles(entry)) {
+        if (x.ends_with(".sca")) {
+          size_t      animSeperator = x.find_last_of('\\');
+          std::string animationName = x.substr(animSeperator + 1/*\\*/ + unitName.size() + 2/*_A*/);
+          std::cout << "Loading Animation: " << animationName << std::endl;
+          animationName = animationName.substr(0, animationName.size() - 4);
+          Aezesel::SCA animLoader;
+          std::shared_ptr<Aezesel::SCA::data> anim = std::make_shared<Aezesel::SCA::data>(animLoader.load(archive.loadBinaryFile(x)));
+          _animations[animationName] = anim;
 
-        std::cout << animationName << std::endl;
-        std::set<std::string> keyflags;
-        for (int i = 0; i < anim->animation.size(); i++)
-          keyflags.insert(anim->animation[i].flag2str());
-        _animator[animationName] = std::make_shared<Aezesel::SupremeCommanderAnimator>(*anim, *_model);
+          std::cout << animationName << std::endl;
+          std::set<std::string> keyflags;
+          for (int i = 0; i < anim->animation.size(); i++)
+            keyflags.insert(anim->animation[i].flag2str());
+          _animator[animationName] = std::make_shared<Aezesel::SupremeCommanderAnimator>(*anim, *_model);
+        }
       }
     }
   }

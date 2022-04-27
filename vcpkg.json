@@ -15,6 +15,7 @@
 	"lua",
 	"enet",
 	"snappy",
+	"mio",
 	"concurrentqueue",
 	{
 	  "name" : "imgui",

@@ -114,7 +114,7 @@ namespace Ahwassa {
   }
 
   void BasicRectangleRenderer::makeShader() {
-    std::cout << "Load Shader" << std::endl;
+    //std::cout << "Load Shader" << std::endl;
 
     std::string vertex_shader_source = R"(
 

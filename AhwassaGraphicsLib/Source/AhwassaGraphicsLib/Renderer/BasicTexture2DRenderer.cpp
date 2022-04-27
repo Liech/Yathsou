@@ -96,7 +96,7 @@ namespace Ahwassa {
   }
 
   void BasicTexture2DRenderer::makeShader() {
-    std::cout << "Load Shader" << std::endl;
+    //std::cout << "Load Shader" << std::endl;
 
     std::string vertex_shader_source = R"(
     out vec2 TexCoords;

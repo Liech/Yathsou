@@ -16,7 +16,7 @@ namespace Ahwassa {
   class Window
   {
   public:
-    Window(const glm::ivec2& resolution);
+    Window(const std::string& title, const glm::ivec2& resolution);
     virtual ~Window();
 
     Input&                  input   ();
@@ -42,6 +42,7 @@ namespace Ahwassa {
     std::unique_ptr<Input>    _input;
     std::unique_ptr<Renderer> _renderer;
     std::shared_ptr<Camera>   _camera;
+    std::string               _title;
 
     inline static std::map<GLFWwindow*, Window*> _instanceMap;
   };

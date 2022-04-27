@@ -19,7 +19,7 @@ namespace Iyathuum {
       for (auto& x : _transitions[currentState()->name()]) {
         if (x->conditionIsFullfilled()) {
           workDone = true;
-          std::cout << "State Transition from: \"" << currentState()->name() << "\" to \"" << x->stateTo()->name() << "\"" << std::endl;
+          //std::cout << "State Transition from: \"" << currentState()->name() << "\" to \"" << x->stateTo()->name() << "\"" << std::endl;
           _currentState->leave();
           _currentState = x->stateTo();
           _currentState->enter();
