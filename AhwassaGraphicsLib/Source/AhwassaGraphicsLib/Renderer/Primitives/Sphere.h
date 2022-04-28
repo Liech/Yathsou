@@ -1,13 +1,13 @@
 #pragma once
 
-#include "IyathuumCoreLib/BaseTypes/glmAABB.h"
-#include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "AhwassaGraphicsLib/Renderer/IBox.h"
+#include <IyathuumCoreLib/BaseTypes/glmAABB.h>
+#include <IyathuumCoreLib/BaseTypes/Color.h>
+#include "AhwassaGraphicsLib/Renderer/Primitives/IBox.h"
 
 namespace Ahwassa {
-  class Dot : public IBox {
+  class Sphere : public IBox {
   public:
-    Dot(const glm::vec3& pos, const float& size, const Iyathuum::Color& clr);
+    Sphere(const glm::vec3& pos, const float& size, const Iyathuum::Color& clr);
 
     void setPosition(const glm::vec3& pos);
     glm::vec3 getPosition() const;

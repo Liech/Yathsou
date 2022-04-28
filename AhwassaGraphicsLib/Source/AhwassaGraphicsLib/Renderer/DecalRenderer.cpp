@@ -16,7 +16,7 @@
 #include "AhwassaGraphicsLib/BufferObjects/IBO.h"
 #include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
 
-#include "Decal.h"
+#include "Primitives/Decal.h"
 #include "AhwassaGraphicsLib/Util.h"
 
 

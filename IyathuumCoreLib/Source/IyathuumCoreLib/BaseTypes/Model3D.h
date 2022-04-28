@@ -2,20 +2,22 @@
 
 #include <vector>
 #include <string>
-
 #include <glm/glm.hpp>
 
-
-struct aiNode;
-struct aiScene;
-struct aiMaterial;
-struct aiMesh;
-
-namespace Aezesel {
+namespace Iyathuum {
   struct Vertex {
-    glm::vec3 Position;
-    glm::vec3 Normal;
-    glm::vec2 TexCoords;
+    glm::vec3 position ;
+    glm::vec3 normal   ;
+    glm::vec3 bitangent;
+    glm::vec3 tangent  ;
+    glm::vec2 texCoords;
+  };
+
+  struct Bone {
+    std::string        name;
+    glm::mat4          offset;
+    std::vector<int  > index;
+    std::vector<float> weight;
   };
 
   class Mesh3D {
@@ -23,11 +25,12 @@ namespace Aezesel {
     std::vector<Vertex>       vertices;
     std::vector<unsigned int> indices;
     std::vector<std::string>  textures;
+    std::vector<Bone>         bone;
   };
 
   class Model3D {
   public:
-    Model3D(const std::string& file);
+    Model3D();
 
     std::vector<Mesh3D> meshes   ;
     std::string         directory;
@@ -35,9 +38,6 @@ namespace Aezesel {
     glm::mat4           globalInvertTransformation;
 
   private:
-    void   processNode(aiNode* node, const aiScene* scene);
-    Mesh3D processMesh(aiMesh* mesh, const aiScene* scene);
-    std::vector<std::string> loadMaterialTextures(aiMaterial* mat, int type, std::string typeName);
 
   };
 }

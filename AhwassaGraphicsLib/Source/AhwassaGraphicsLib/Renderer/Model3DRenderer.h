@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #include <AhwassaGraphicsLib/Renderer/RendererTemplate.h>
 
-namespace Aezesel {
+namespace Iyathuum {
   class Model3D;
 }
 
@@ -17,7 +17,7 @@ namespace Ahwassa {
   class Texture;
 }
 
-namespace Athanah {
+namespace Ahwassa {
   struct Model3DRendererMesh {
     glm::mat4 transformation;
   };
@@ -26,7 +26,7 @@ namespace Athanah {
   public:
     Model3DRenderer(std::shared_ptr<Ahwassa::Camera> camera);
     virtual ~Model3DRenderer();
-    std::shared_ptr<Ahwassa::IMesh> meshFromModel3D(const Aezesel::Model3D&);
+    static std::shared_ptr<Ahwassa::IMesh> meshFromModel3D(const Iyathuum::Model3D&);
 
   protected:
     virtual std::string vertexShader()   override;

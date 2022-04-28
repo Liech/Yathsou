@@ -5,7 +5,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Rectangle.h"
+#include "Primitives/Rectangle.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/ShaderProgram.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformVecVec3.h"

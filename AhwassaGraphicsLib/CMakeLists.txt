@@ -79,19 +79,24 @@ set(Header_Files__Renderer
     "Source/AhwassaGraphicsLib/Renderer/BasicTextRenderer.h"
     "Source/AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
     "Source/AhwassaGraphicsLib/Renderer/BoxRenderer.h"
-    "Source/AhwassaGraphicsLib/Renderer/Decal.h"
     "Source/AhwassaGraphicsLib/Renderer/DecalRenderer.h"
     "Source/AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.h"
-    "Source/AhwassaGraphicsLib/Renderer/Dot.h"
-    "Source/AhwassaGraphicsLib/Renderer/IBox.h"
-    "Source/AhwassaGraphicsLib/Renderer/Line.h"
-    "Source/AhwassaGraphicsLib/Renderer/Rectangle.h"
     "Source/AhwassaGraphicsLib/Renderer/RectangleRenderer.h"
     "Source/AhwassaGraphicsLib/Renderer/RendererTemplate.h"
-    "Source/AhwassaGraphicsLib/Renderer/Sphere.h"
     "Source/AhwassaGraphicsLib/Renderer/SphereRenderer.h"
+    "Source/AhwassaGraphicsLib/Renderer/Model3DRenderer.h"
 )
 source_group("Header Files\\Renderer" FILES ${Header_Files__Renderer})
+
+set(Header_Files__RendererPrimitives
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Dot.h"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/IBox.h"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Line.h"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Rectangle.h"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Sphere.h"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Decal.h"
+)
+source_group("Header Files\\Renderer\\Primitives" FILES ${Header_Files__RendererPrimitives})
 
 set(Header_Files__Sound
     "Source/AhwassaGraphicsLib/sound/sound.h"
@@ -214,21 +219,27 @@ set(Source_Files__Renderer
     "Source/AhwassaGraphicsLib/Renderer/BasicRectangleRenderer.cpp"
     "Source/AhwassaGraphicsLib/Renderer/BasicTextRenderer.cpp"
     "Source/AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.cpp"
-    "Source/AhwassaGraphicsLib/Renderer/Box.cpp"
     "Source/AhwassaGraphicsLib/Renderer/BoxRenderer.cpp"
-    "Source/AhwassaGraphicsLib/Renderer/Decal.cpp"
     "Source/AhwassaGraphicsLib/Renderer/DecalRenderer.cpp"
     "Source/AhwassaGraphicsLib/Renderer/DiffuseMeshRenderer.cpp"
-    "Source/AhwassaGraphicsLib/Renderer/Dot.cpp"
-    "Source/AhwassaGraphicsLib/Renderer/Line.cpp"
-    "Source/AhwassaGraphicsLib/Renderer/Rectangle.cpp"
     "Source/AhwassaGraphicsLib/Renderer/RectangleRenderer.cpp"
     "Source/AhwassaGraphicsLib/Renderer/RendererTemplate.cpp"
-    "Source/AhwassaGraphicsLib/Renderer/Sphere.cpp"
     "Source/AhwassaGraphicsLib/Renderer/SphereRenderer.cpp"
-    "Source/AhwassaGraphicsLib/Renderer/Text.cpp"
+    "Source/AhwassaGraphicsLib/Renderer/Model3DRenderer.cpp"
 )
 source_group("Source Files\\Renderer" FILES ${Source_Files__Renderer})
+
+set(Source_Files__RendererPrimitives
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Box.cpp"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Decal.cpp"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Dot.cpp"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Line.cpp"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Rectangle.cpp"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Sphere.cpp"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Text.cpp"
+    "Source/AhwassaGraphicsLib/Renderer/Primitives/Decal.cpp"
+)
+source_group("Source Files\\Renderer\\Primitives" FILES ${Source_Files__RendererPrimitives})
 
 set(Source_Files__Sound
     "Source/AhwassaGraphicsLib/sound/sound.cpp"
@@ -316,6 +327,7 @@ set(ALL_FILES
     ${Header_Files__Input}
     ${Header_Files__PostProcessing}
     ${Header_Files__Renderer}
+    ${Header_Files__RendererPrimitives}
     ${Header_Files__Sound}
     ${Header_Files__Uniforms}
     ${Header_Files__VR}
@@ -329,6 +341,7 @@ set(ALL_FILES
     ${Source_Files__Input}
     ${Source_Files__Post_Processing}
     ${Source_Files__Renderer}
+    ${Source_Files__RendererPrimitives}
     ${Source_Files__Sound}
     ${Source_Files__Uniforms}
     ${Source_Files__VR}
@@ -366,3 +379,5 @@ target_include_directories(AhwassaGraphicsLib PRIVATE
 "${freetype_SOURCE_DIR}/include"
 "${imgui_SOURCE_DIR}"
 )
+
+set_target_properties(AhwassaGraphicsLib PROPERTIES FOLDER "Yathsou")

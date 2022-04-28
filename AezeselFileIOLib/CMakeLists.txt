@@ -13,10 +13,8 @@ find_package(mio REQUIRED)
 ############################################################################
 
 set(Header_Files
-    "Source/AezeselFileIOLib/AssimpUtil.h"
     "Source/AezeselFileIOLib/ImageIO.h"
     "Source/AezeselFileIOLib/IO.h"
-    "Source/AezeselFileIOLib/Model3D.h"
     "Source/AezeselFileIOLib/STLWriter.h"
     "Source/AezeselFileIOLib/ZIP.h"
 )
@@ -61,11 +59,16 @@ set(Header_Files__SupremeCommander
 )
 source_group("Header Files\\SupremeCommander" FILES ${Header_Files__SupremeCommander})
 
+set(Header_Files__Model3d
+    "Source/AezeselFileIOLib/Model3D/Scene.h"
+    "Source/AezeselFileIOLib/Model3D/AssimpUtil.h"
+    "Source/AezeselFileIOLib/Model3D/Model3DLoader.h"
+)
+source_group("Header Files\\Model3d" FILES ${Header_Files__Model3d})
+
 set(Source_Files
-    "Source/AezeselFileIOLib/AssimpUtil.cpp"
     "Source/AezeselFileIOLib/ImageIO.cpp"
     "Source/AezeselFileIOLib/IO.cpp"
-    "Source/AezeselFileIOLib/Model3D.cpp"
     "Source/AezeselFileIOLib/STLWriter.cpp"
     "Source/AezeselFileIOLib/ZIP.cpp"
 )
@@ -110,6 +113,15 @@ set(Source_Files__SupremeCommander
 )
 source_group("Source Files\\SupremeCommander" FILES ${Source_Files__SupremeCommander})
 
+
+set(Source_Files__Model3d
+    "Source/AezeselFileIOLib/Model3D/AssimpUtil.cpp"
+    "Source/AezeselFileIOLib/Model3D/Scene.cpp"
+    "Source/AezeselFileIOLib/Model3D/Model3DLoader.cpp"
+)
+source_group("Source Files\\Model3D" FILES ${Source_Files__Model3d})
+
+
 set(ALL_FILES
     ${Header_Files}
     ${Header_Files__MagickaVox}
@@ -119,6 +131,8 @@ set(ALL_FILES
     ${Source_Files__MagickaVox}
     ${Source_Files__Sound}
     ${Source_Files__SupremeCommander}
+    ${Header_Files__Model3d}
+    ${Source_Files__Model3d}
 )
 
 
@@ -158,6 +172,7 @@ ${zipper_SOURCE_DIR}/include
 "${lodepng_SOURCE_DIR}"
 ${libnyquist_SOURCE_DIR}
 )
+set_target_properties(AezeselFileIOLib PROPERTIES FOLDER "Yathsou")
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_target_properties(staticZipper PROPERTIES FOLDER "External")

@@ -70,3 +70,4 @@ target_include_directories(SelenNavigationLib PRIVATE
 ${CMAKE_CURRENT_SOURCE_DIR}/Source/SelenNavigationLib
 "${IyathuumCoreLib_SOURCE_DIR}/Source"
 )
+set_target_properties(SelenNavigationLib PROPERTIES FOLDER "Yathsou")

@@ -28,7 +28,6 @@ set(Header_Files__Physic
 source_group("Header Files\\Physic" FILES ${Header_Files__Physic})
 
 set(Header_Files__SupCom
-    "Source/AthanahCommonLib/Model3DRenderer.h"
     "Source/AthanahCommonLib/SupCom/SupComEnums.h"
     "Source/AthanahCommonLib/SupCom/SupComMeshLoader.h"
     "Source/AthanahCommonLib/SupCom/SupComMeshRenderer.h"
@@ -59,7 +58,6 @@ set(Header_Files__SupCom__Gamedata
 source_group("Header Files\\SupCom\\Gamedata" FILES ${Header_Files__SupCom__Gamedata})
 
 set(Source_Files
-    "Source/AthanahCommonLib/Model3DRenderer.cpp"
     "Source/AthanahCommonLib/SkyBox.cpp"
 )
 source_group("Source Files" FILES ${Source_Files})
@@ -154,3 +152,4 @@ target_include_directories(AthanahCommonLib PRIVATE
 )
 
 add_dependencies(AthanahCommonLib IyathuumCoreLib)
+set_target_properties(AthanahCommonLib PROPERTIES FOLDER "Yathsou")

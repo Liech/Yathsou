@@ -1,14 +1,14 @@
 #include "Model3DRenderer.h"
 
-#include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
-#include "AhwassaGraphicsLib/Uniforms/SSBOmat4.h"
-#include "AhwassaGraphicsLib/Uniforms/Texture.h"
-#include "AhwassaGraphicsLib/Uniforms/SSBOmat4.h"
-#include "AhwassaGraphicsLib/Util.h"
-#include "AezeselFileIOLib/Model3D.h"
-#include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
+#include <IyathuumCoreLib/BaseTypes/Model3D.h>
+#include <AhwassaGraphicsLib/Vertex/PositionNormalVertex.h>
+#include <AhwassaGraphicsLib/Uniforms/SSBOmat4.h>
+#include <AhwassaGraphicsLib/Uniforms/Texture.h>
+#include <AhwassaGraphicsLib/Uniforms/SSBOmat4.h>
+#include <AhwassaGraphicsLib/Util.h>
+#include <AhwassaGraphicsLib/BufferObjects/Mesh.h>
 
-namespace Athanah {
+namespace Ahwassa {
   Model3DRenderer::Model3DRenderer(std::shared_ptr<Ahwassa::Camera> camera) : 
     Ahwassa::RendererTemplate<Model3DRendererMesh>(camera,Ahwassa::PositionNormalVertex::getBinding()){
     _matrices.resize(bufferSize());
@@ -83,7 +83,7 @@ namespace Athanah {
     _modelsRot->bind();
   }
 
-  std::shared_ptr<Ahwassa::IMesh> Model3DRenderer::meshFromModel3D(const Aezesel::Model3D& modl) {
+  std::shared_ptr<Ahwassa::IMesh> Model3DRenderer::meshFromModel3D(const Iyathuum::Model3D& modl) {
 
     if (modl.meshes.size() != 1)
       throw std::runtime_error(":(");
@@ -97,7 +97,7 @@ namespace Athanah {
     auto& v = modl.meshes[0].vertices;
     vertices.resize(v.size());
     for (int i = 0; i < v.size(); i++)
-      vertices[i] = Ahwassa::PositionNormalVertex(v[i].Position, v[i].Normal);
+      vertices[i] = Ahwassa::PositionNormalVertex(v[i].position, v[i].normal);
 
     auto result = std::make_shared<Ahwassa::Mesh<Ahwassa::PositionNormalVertex>>(vertices,indices);
     return result;

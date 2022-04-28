@@ -2,7 +2,7 @@
 
 #include "IyathuumCoreLib/BaseTypes/glmAABB.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
-#include "AhwassaGraphicsLib/Renderer/IBox.h"
+#include "AhwassaGraphicsLib/Renderer/Primitives/IBox.h"
 
 namespace Ahwassa {
   class Line : public IBox {

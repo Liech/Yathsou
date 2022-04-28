@@ -183,3 +183,4 @@ target_include_directories(VishalaNetworkLib PRIVATE
 )
 
 add_dependencies(VishalaNetworkLib IyathuumCoreLib)
+set_target_properties(VishalaNetworkLib PROPERTIES FOLDER "Yathsou")

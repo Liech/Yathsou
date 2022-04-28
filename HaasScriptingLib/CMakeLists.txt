@@ -38,3 +38,4 @@ lua
 
 target_include_directories(HaasScriptingLib PRIVATE 
 )
+set_target_properties(HaasScriptingLib PROPERTIES FOLDER "Yathsou")

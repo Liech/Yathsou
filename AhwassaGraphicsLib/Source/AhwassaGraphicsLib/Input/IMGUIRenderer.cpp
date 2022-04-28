@@ -1,6 +1,6 @@
 #include "IMGUIRenderer.h"
 
-#include "AhwassaGraphicsLib/Renderer/Box.h"
+#include "AhwassaGraphicsLib/Renderer/Primitives/Box.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
@@ -8,8 +8,6 @@
 
 namespace Ahwassa {
   IMGUIRenderer::IMGUIRenderer(Ahwassa::Window* window) {
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window->ptr(), true);

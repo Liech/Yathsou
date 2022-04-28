@@ -6,7 +6,6 @@
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
-#include "AezeselFileIOLib/Model3D.h"
 #include "AezeselFileIOLib/ImageIO.h"
 
 namespace Athanah {

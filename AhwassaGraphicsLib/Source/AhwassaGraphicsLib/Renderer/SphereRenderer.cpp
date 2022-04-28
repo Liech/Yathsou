@@ -18,7 +18,7 @@
 #include "AhwassaGraphicsLib/BufferObjects/IBO.h"
 #include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
 
-#include "Sphere.h"
+#include "Primitives/Sphere.h"
 #include "AhwassaGraphicsLib/Util.h"
 
 

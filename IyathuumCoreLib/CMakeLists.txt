@@ -29,6 +29,7 @@ set(Header_Files__BaseTypes
     "Source/IyathuumCoreLib/BaseTypes/Polygon.h"
     "Source/IyathuumCoreLib/BaseTypes/PolygonNet.h"
     "Source/IyathuumCoreLib/BaseTypes/Sound.h"
+    "Source/IyathuumCoreLib/BaseTypes/Model3D.h"
 )
 source_group("Header Files\\BaseTypes" FILES ${Header_Files__BaseTypes})
 
@@ -75,6 +76,7 @@ set(Source_Files__BaseTypes
     "Source/IyathuumCoreLib/BaseTypes/Color.cpp"
     "Source/IyathuumCoreLib/BaseTypes/Key.cpp"
     "Source/IyathuumCoreLib/BaseTypes/Sound.cpp"
+    "Source/IyathuumCoreLib/BaseTypes/Model3D.cpp"
 )
 source_group("Source Files\\BaseTypes" FILES ${Source_Files__BaseTypes})
 
@@ -124,3 +126,4 @@ target_include_directories(IyathuumCoreLib PRIVATE
 ${glm_SOURCE_DIR} 
 ${CMAKE_CURRENT_SOURCE_DIR}/Source
 )
+set_target_properties(IyathuumCoreLib PROPERTIES FOLDER "Yathsou")

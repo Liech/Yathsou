@@ -3,8 +3,8 @@
 #include "SuthanusPhysicsLib/PhysicNavigationMesh.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
 #include "AhwassaGraphicsLib/Renderer/BoxRenderer.h"
-#include "AhwassaGraphicsLib/Renderer/Dot.h"
-#include "AhwassaGraphicsLib/Renderer/Line.h"
+#include "AhwassaGraphicsLib/Renderer/Primitives/Dot.h"
+#include "AhwassaGraphicsLib/Renderer/Primitives/Line.h"
 
 
 namespace Athanah {

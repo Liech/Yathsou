@@ -5,6 +5,7 @@
 #include <functional>
 #include <chrono>
 #include <thread>
+#include <imgui.h>
 
 #include "AhwassaGraphicsLib/Input/Input.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
@@ -18,6 +19,8 @@ namespace Ahwassa {
 
   Window::Window(const std::string& title, const glm::ivec2& resolution)
   {
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
     _title = title;
     _resolution = resolution;
   }

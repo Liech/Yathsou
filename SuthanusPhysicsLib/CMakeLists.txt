@@ -81,3 +81,4 @@ target_include_directories(SuthanusPhysicLib PRIVATE
 include_directories("${CMAKE_BINARY_DIR}/vcpkg_installed/${VCPKG_TARGET_TRIPLET}/include/bullet") #todo: might be a future problem, make it unecessary
 
 add_dependencies(SuthanusPhysicLib IyathuumCoreLib)
+set_target_properties(SuthanusPhysicLib PROPERTIES FOLDER "Yathsou")

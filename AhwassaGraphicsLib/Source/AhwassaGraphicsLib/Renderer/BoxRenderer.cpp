@@ -16,9 +16,9 @@
 #include "AhwassaGraphicsLib/BufferObjects/IBO.h"
 #include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
 
-#include "Dot.h"
-#include "Line.h"
-#include "Box.h"
+#include "Primitives/Dot.h"
+#include "Primitives/Line.h"
+#include "Primitives/Box.h"
 #include "AhwassaGraphicsLib/Util.h"
 
 
