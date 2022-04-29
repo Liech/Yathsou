@@ -24,6 +24,7 @@ namespace Ahwassa {
     virtual bool mouseWheelEvent(const glm::vec2& movement                                                       ) { return false; };
     virtual bool mouseMoveEvent( const glm::vec2& current, const glm::vec2& movement                             ) { return false; };
     virtual bool dropEvent     (const std::string& filePath)                                                 {return false;}
+    virtual bool wantFocus() { return true; }
 
     //Position
     const Iyathuum::glmAABB<2>& getLocalPosition()  const;

@@ -6,7 +6,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "AhwassaGraphicsLib/BufferObjects/FBO.h"
-#include "AhwassaGraphicsLib/BufferObjects/VAO.h"
 #include "AhwassaGraphicsLib/Uniforms/Rendertarget.h"
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformMat4.h"
@@ -16,6 +15,7 @@
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/ShaderProgram.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
+#include "AhwassaGraphicsLib/BufferObjects/VAO.h"
 
 namespace Ahwassa {
   DeferredComposer::DeferredComposer(Window* window, const glm::ivec2& resolution) :r(window) {
@@ -102,7 +102,7 @@ namespace Ahwassa {
     }
 
     _vbo = std::make_unique<VBO<PositionTextureVertex>>(_vertices);
-    _vao = std::make_unique<VAO>(_vbo.get());
+    _vao = std::make_shared<VAO>(_vbo.get());
     _shader = std::make_shared<ShaderProgram>(PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
 
 

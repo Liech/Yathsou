@@ -144,6 +144,7 @@ set(Header_Files__Vertex
     "Source/AhwassaGraphicsLib/Vertex/PositionTextureVertexIndex.h"
     "Source/AhwassaGraphicsLib/Vertex/PositionVertex.h"
     "Source/AhwassaGraphicsLib/Vertex/SupComVertex.h"
+    "Source/AhwassaGraphicsLib/Vertex/Model3DVertex.h"
 )
 source_group("Header Files\\Vertex" FILES ${Header_Files__Vertex})
 
@@ -287,6 +288,7 @@ set(Source_Files__Vertex
     "Source/AhwassaGraphicsLib/Vertex/PositionTextureVertexIndex.cpp"
     "Source/AhwassaGraphicsLib/Vertex/PositionVertex.cpp"
     "Source/AhwassaGraphicsLib/Vertex/SupComVertex.cpp"
+    "Source/AhwassaGraphicsLib/Vertex/Model3DVertex.cpp"
 )
 source_group("Source Files\\Vertex" FILES ${Source_Files__Vertex})
 

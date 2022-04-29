@@ -104,14 +104,14 @@ namespace Ahwassa {
       bool eventStop = w->mouseEvent(mousePos - w->getGlobalPosition().getPosition(), key, status);
       if (eventStop)
         return;
-      if (w->isInside(mousePos,Iyathuum::Key::KEY_NONE)) {
+      if (w->wantFocus() && w->isInside(mousePos,Iyathuum::Key::KEY_NONE)) {
         hit = true;
         if (status == Iyathuum::KeyStatus::PRESS) {
           _pressedWidget = w;
           setFocus(w);
           return;
         }
-        else {
+        else if(w->wantFocus()) {
           if (status == Iyathuum::KeyStatus::RELEASE && _pressedWidget == w) {
             bool stop = w->mouseClickEvent(mousePos - w->getGlobalPosition().getPosition(), key);
             if (stop)

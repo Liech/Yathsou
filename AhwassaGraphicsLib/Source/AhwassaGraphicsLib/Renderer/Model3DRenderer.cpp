@@ -1,7 +1,7 @@
 #include "Model3DRenderer.h"
 
 #include <IyathuumCoreLib/BaseTypes/Model3D.h>
-#include <AhwassaGraphicsLib/Vertex/PositionNormalVertex.h>
+#include <AhwassaGraphicsLib/Vertex/Model3DVertex.h>
 #include <AhwassaGraphicsLib/Uniforms/SSBOmat4.h>
 #include <AhwassaGraphicsLib/Uniforms/Texture.h>
 #include <AhwassaGraphicsLib/Uniforms/SSBOmat4.h>
@@ -10,7 +10,7 @@
 
 namespace Ahwassa {
   Model3DRenderer::Model3DRenderer(std::shared_ptr<Ahwassa::Camera> camera) : 
-    Ahwassa::RendererTemplate<Model3DRendererMesh>(camera,Ahwassa::PositionNormalVertex::getBinding()){
+    Ahwassa::RendererTemplate<Model3DRendererMesh>(camera,Ahwassa::Model3DVertex::getBinding()){
     _matrices.resize(bufferSize());
     _rotationMatrices.resize(bufferSize());
   }
@@ -56,11 +56,10 @@ namespace Ahwassa {
        gPosition.rgb = fragPos.rgb; 	
        gPosition.a = 1;
 
-       gSpecial.r = 0;
-       gSpecial.g = 0;
-       gSpecial.b = 0;
-       gSpecial.a = 1;
-
+       gSpecial.r = 0; // reflection
+       gSpecial.g = 0; // bloom
+       gSpecial.b = 0; // specular
+       gSpecial.a = 1; // unused
      }
     )";
   }
@@ -93,13 +92,24 @@ namespace Ahwassa {
     for(size_t i =0;i < modl.meshes[0].indices.size();i++)
       indices[i] = modl.meshes[0].indices[i];
 
-    std::vector< Ahwassa::PositionNormalVertex> vertices;
+    std::vector< Ahwassa::Model3DVertex> vertices;
     auto& v = modl.meshes[0].vertices;
     vertices.resize(v.size());
     for (int i = 0; i < v.size(); i++)
-      vertices[i] = Ahwassa::PositionNormalVertex(v[i].position, v[i].normal);
+      vertices[i] = Ahwassa::Model3DVertex(v[i].position, v[i].normal, v[i].bitangent,v[i].tangent,v[i].texCoords,glm::vec4(-1,-1,-1,1),glm::vec4());
+    
+    for (size_t bone = 0; bone < modl.meshes[0].bone.size(); bone++) {
+      auto& b = modl.meshes[0].bone[bone];
+      for (size_t i = 0; i < b.index.size(); i++) {
+        vertices[b.index[i]].boneIndex .x = bone;
+        vertices[b.index[i]].boneWeight.x = b.weight[i];
+        vertices[b.index[i]].boneIndex.y = 0;
+        vertices[b.index[i]].boneIndex.z = 0;
+        vertices[b.index[i]].boneIndex.w = 0;
+      }
+    }
 
-    auto result = std::make_shared<Ahwassa::Mesh<Ahwassa::PositionNormalVertex>>(vertices,indices);
+    auto result = std::make_shared<Ahwassa::Mesh<Ahwassa::Model3DVertex>>(vertices,indices);
     return result;
   }
 }

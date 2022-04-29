@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <vector>
+#include <glm/glm.hpp>
 #include "AhwassaGraphicsLib/Vertex/PositionTextureVertex.h"
 #include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/VBO.h"
@@ -47,7 +48,7 @@ namespace Ahwassa {
     BasicTexture2DRenderer r;
 
     std::unique_ptr<VBO<PositionTextureVertex>>              _vbo;
-    std::unique_ptr<VAO>               _vao;
+    std::shared_ptr<VAO>               _vao;
     std::vector<PositionTextureVertex> _vertices;
     std::shared_ptr<ShaderProgram>     _shader;
     std::unique_ptr<UniformMat4>       _projection;
