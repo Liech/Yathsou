@@ -85,6 +85,7 @@ set(Header_Files__Renderer
     "Source/AhwassaGraphicsLib/Renderer/RendererTemplate.h"
     "Source/AhwassaGraphicsLib/Renderer/SphereRenderer.h"
     "Source/AhwassaGraphicsLib/Renderer/Model3DRenderer.h"
+    "Source/AhwassaGraphicsLib/Renderer/Model3DBoneRenderer.h"
 )
 source_group("Header Files\\Renderer" FILES ${Header_Files__Renderer})
 
@@ -227,6 +228,7 @@ set(Source_Files__Renderer
     "Source/AhwassaGraphicsLib/Renderer/RendererTemplate.cpp"
     "Source/AhwassaGraphicsLib/Renderer/SphereRenderer.cpp"
     "Source/AhwassaGraphicsLib/Renderer/Model3DRenderer.cpp"
+    "Source/AhwassaGraphicsLib/Renderer/Model3DBoneRenderer.cpp"
 )
 source_group("Source Files\\Renderer" FILES ${Source_Files__Renderer})
 
