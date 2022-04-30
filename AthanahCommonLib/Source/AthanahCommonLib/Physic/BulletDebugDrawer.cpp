@@ -1,6 +1,6 @@
 #include "BulletDebugDrawer.h"
 
-#include "AhwassaGraphicsLib/Renderer/BasicBoxRenderer.h"
+//#include "AhwassaGraphicsLib/Renderer/Private/DirectBoxRenderer.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
 #include "IyathuumCoreLib/BaseTypes/Color.h"
 
@@ -8,7 +8,8 @@ namespace Athanah
 {
 	BulletDebugDrawer::BulletDebugDrawer(std::shared_ptr<Ahwassa::Camera> w) {
 		_cam = w;
-		_box = std::make_shared<Ahwassa::BasicBoxRenderer>(w);
+		throw std::runtime_error("Update to new RendererAPI");
+		//_box = std::make_shared<Ahwassa::DirectBoxRenderer>(w);
 	}
 
 	void BulletDebugDrawer::drawLine(const btVector3& from, const btVector3& to, const btVector3& color) {
@@ -17,7 +18,7 @@ namespace Athanah
 		float dist = glm::distance(FROM,_cam->getPosition());
 		//if (dist > 100)
 		//	return;
-		_box->drawLine(FROM,TO, 0.01f, Iyathuum::Color(255,255, 0, 255));
+		//_box->drawLine(FROM,TO, 0.01f, Iyathuum::Color(255,255, 0, 255));
 	}
 
 	void BulletDebugDrawer::drawContactPoint(const btVector3& PointOnB, const btVector3& normalOnB, btScalar distance, int lifeTime, const btVector3& color) {

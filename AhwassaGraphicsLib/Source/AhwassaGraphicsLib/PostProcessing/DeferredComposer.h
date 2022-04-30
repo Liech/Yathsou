@@ -4,7 +4,6 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "AhwassaGraphicsLib/Vertex/PositionTextureVertex.h"
-#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 #include "AhwassaGraphicsLib/BufferObjects/VBO.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformMat4.h"
 
@@ -21,6 +20,7 @@ namespace Ahwassa {
   class UniformVec3;
   class UniformFloat;
   class Window;
+  class DirectTexture2DRenderer;
 
   class DeferredComposer {
   public:
@@ -43,9 +43,9 @@ namespace Ahwassa {
 
   private:
     const int MAXLIGHT = 32;
-    std::shared_ptr<Rendertarget>           _resultCanvas;
-    std::shared_ptr<FBO>                    _fbo;
-    BasicTexture2DRenderer r;
+    std::shared_ptr<Rendertarget>            _resultCanvas;
+    std::shared_ptr<FBO>                     _fbo;
+    std::shared_ptr<DirectTexture2DRenderer> _textureRenderer;
 
     std::unique_ptr<VBO<PositionTextureVertex>>              _vbo;
     std::shared_ptr<VAO>               _vao;

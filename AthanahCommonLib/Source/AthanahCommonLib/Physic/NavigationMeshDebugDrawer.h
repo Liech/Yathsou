@@ -9,7 +9,7 @@ namespace Suthanus {
 }
 
 namespace Ahwassa {
-  class BoxRenderer;
+  //class BoxRenderer;
   class IBox;
   class Camera;
 }
@@ -22,7 +22,7 @@ namespace Athanah {
     void draw();
 
   private:
-    std::shared_ptr<Ahwassa::BoxRenderer>      _renderer;
+    //std::shared_ptr<Ahwassa::BoxRenderer>      _renderer;
     std::vector<std::shared_ptr<Ahwassa::IBox>> _boxes   ;
 
     std::vector<std::pair<glm::vec3, glm::vec3>> _links;

@@ -2,7 +2,6 @@
 
 #include <IyathuumCoreLib/BaseTypes/Model3D.h>
 #include <AhwassaGraphicsLib/Vertex/Model3DVertex.h>
-#include <AhwassaGraphicsLib/Renderer/BoxRenderer.h>
 
 namespace Ahwassa {
   Model3DBoneRenderer::Model3DBoneRenderer(std::shared_ptr<Ahwassa::Camera> camera) {
@@ -12,7 +11,8 @@ namespace Ahwassa {
 
   }
 
-  void Model3DBoneRenderer::draw(Iyathuum::Model3D& ) {
+  void Model3DBoneRenderer::draw(Iyathuum::Model3D& modl) {
+    
 
   }
 }

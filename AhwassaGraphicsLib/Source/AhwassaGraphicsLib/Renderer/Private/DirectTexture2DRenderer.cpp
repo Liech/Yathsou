@@ -1,4 +1,4 @@
-#include "BasicTexture2DRenderer.h"
+#include "DirectTexture2DRenderer.h"
 
 #include "glad/glad.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -15,7 +15,7 @@
 #include "AhwassaGraphicsLib/Vertex/PositionTextureVertex.h"
 
 namespace Ahwassa {
-  struct BasicTexture2DRenderer::RenderVars {
+  struct DirectTexture2DRenderer::RenderVars {
     std::unique_ptr<VBO<PositionTextureVertex>> vbo;
     std::unique_ptr<VAO>                        vao;
     std::vector<PositionTextureVertex>          vertices;
@@ -28,22 +28,22 @@ namespace Ahwassa {
     virtual ~RenderVars() {}
   };
 
-  BasicTexture2DRenderer::BasicTexture2DRenderer(Window* w) {
-    _vars = std::make_shared<BasicTexture2DRenderer::RenderVars>();
+  DirectTexture2DRenderer::DirectTexture2DRenderer(Window* w) {
+    _vars = std::make_shared<DirectTexture2DRenderer::RenderVars>();
     _vars->window = w;
 
 
     makeShader();
   }
 
-  void BasicTexture2DRenderer::draw(const Texture& texture, const glm::vec2& pos, const glm::vec2& size) {
+  void DirectTexture2DRenderer::draw(const Texture& texture, const glm::vec2& pos, const glm::vec2& size) {
     Iyathuum::glmAABB<2> box;
     box.setPosition(pos);
     box.setSize(size);
     draw(texture, box);
   }
   
-  void BasicTexture2DRenderer::draw(const Texture& texture,const Iyathuum::glmAABB<2>& b,bool yswap) {
+  void DirectTexture2DRenderer::draw(const Texture& texture,const Iyathuum::glmAABB<2>& b,bool yswap) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
@@ -76,7 +76,7 @@ namespace Ahwassa {
     _vars->vao->draw();
   }
 
-  void BasicTexture2DRenderer::start() {
+  void DirectTexture2DRenderer::start() {
     if (_inRenderProcess == true)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
     _inRenderProcess = true;
@@ -87,7 +87,7 @@ namespace Ahwassa {
     _vars->shader->bind();
   }
 
-  void BasicTexture2DRenderer::end() {
+  void DirectTexture2DRenderer::end() {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in endTextRender");
     _inRenderProcess = false;
@@ -95,7 +95,7 @@ namespace Ahwassa {
     glEnable(GL_DEPTH_TEST);
   }
 
-  void BasicTexture2DRenderer::makeShader() {
+  void DirectTexture2DRenderer::makeShader() {
     //std::cout << "Load Shader" << std::endl;
 
     std::string vertex_shader_source = R"(
@@ -136,12 +136,12 @@ namespace Ahwassa {
     _vars->shader = std::make_unique<ShaderProgram>(PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
-  void BasicTexture2DRenderer::setClippingRectangle(const Iyathuum::glmAABB<2>& box) {
+  void DirectTexture2DRenderer::setClippingRectangle(const Iyathuum::glmAABB<2>& box) {
     _clipping = true;
     _clippingBox = box;
   }
 
-  void BasicTexture2DRenderer::disableClipping() {
+  void DirectTexture2DRenderer::disableClipping() {
     _clipping = false;
   }
 }

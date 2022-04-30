@@ -16,13 +16,17 @@
 #include "AhwassaGraphicsLib/Core/ShaderProgram.h"
 #include "AhwassaGraphicsLib/Core/Camera.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
+#include "AhwassaGraphicsLib/Core/Renderer.h"
+#include "AhwassaGraphicsLib/Renderer/Private/DirectTexture2DRenderer.h"
+
 
 namespace Ahwassa {
-  DeferredComposer::DeferredComposer(Window* window, const glm::ivec2& resolution) :r(window) {
+  DeferredComposer::DeferredComposer(Window* window, const glm::ivec2& resolution) {
     _resolution = resolution;
     _fbo = std::make_shared<Ahwassa::FBO>(resolution, std::vector<std::string> {"gPosition", "gNormal", "gAlbedoSpec", "gSpecial"}, std::vector<TextureFormat>{TextureFormat::RGBA32,TextureFormat::RGBA,TextureFormat::RGBA,TextureFormat::RGBA});
     _resultCanvas = std::make_shared<Ahwassa::Rendertarget>("Result", _resolution);
     _window = window;
+    _textureRenderer = std::make_shared<Ahwassa::DirectTexture2DRenderer>(window);
 
     std::string vertex_shader_source = R"(
     out vec2 TexCoords;
@@ -122,9 +126,11 @@ namespace Ahwassa {
     _projection->setValue(glm::ortho(0.0f, (float)_resolution[0], 0.0f, (float)_resolution[1]));
     _fbo->start();
     glClearColor(1,1,1, 1);
+    _window->renderer().setRenderMode(GlobalRenderMode::Deferred);
   }
 
   void DeferredComposer::end() {
+    _window->renderer().setRenderMode(GlobalRenderMode::Direct);
     _fbo->end();
     _resultCanvas->start();
 
@@ -187,9 +193,9 @@ namespace Ahwassa {
   }
 
   void DeferredComposer::draw() {
-    r.start();
-    r.draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0,0), glm::vec2(_resolution[0], _resolution[1])),true);
-    r.end();
+    _textureRenderer->start();
+    _textureRenderer->draw(*getResult(), Iyathuum::glmAABB<2>(glm::vec2(0,0), glm::vec2(_resolution[0], _resolution[1])),true);
+    _textureRenderer->end();
   }
   
   void DeferredComposer::setResolution(const glm::ivec2& resolution) {

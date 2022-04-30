@@ -1,4 +1,4 @@
-#include "BasicTextRenderer.h"
+#include "DirectTextRenderer.h"
 
 #include "glad/glad.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -17,28 +17,28 @@
 #include "AhwassaGraphicsLib/Uniforms/Texture.h"
 
 namespace Ahwassa {
-  struct BasicTextRenderer::RenderVars {
-    std::unique_ptr<VBO<PositionTextureVertex>> vbo;
-    std::unique_ptr<VAO>                        vao;
-    std::unique_ptr<ShaderProgram>              shader;
-    Window*                                     window;
-    std::map<char, BasicTextRenderer_Character> characters;
-    std::unique_ptr<UniformMat4>                projection;
-    std::unique_ptr<UniformVec3>                textColor;
-    std::unique_ptr<Texture    >                fontTexture;
+  struct DirectTextRenderer::RenderVars {
+    std::unique_ptr<VBO<PositionTextureVertex>>  vbo;
+    std::unique_ptr<VAO>                         vao;
+    std::unique_ptr<ShaderProgram>               shader;
+    Window*                                      window;
+    std::map<char, DirectTextRenderer_Character> characters;
+    std::unique_ptr<UniformMat4>                 projection;
+    std::unique_ptr<UniformVec3>                 textColor;
+    std::unique_ptr<Texture    >                 fontTexture;
   };
 
-  BasicTextRenderer::BasicTextRenderer(Window* w) {
-    _vars = std::make_shared<BasicTextRenderer::RenderVars>();
+  DirectTextRenderer::DirectTextRenderer(Window* w) {
+    _vars = std::make_shared<DirectTextRenderer::RenderVars>();
     _vars->window = w;
     makeShader();
     makeFreetype();
   }
 
-  void BasicTextRenderer::drawText(const std::string& text, const glm::vec2& pos, float scale, const Iyathuum::Color& color) {
+  void DirectTextRenderer::drawText(const std::string& text, const glm::vec2& pos, float scale, const Iyathuum::Color& color) {
     drawText(text, pos[0], pos[1], scale, color);
   }
-  void BasicTextRenderer::drawText(const std::string& text, float startX, float startY, float scale, const Iyathuum::Color& color) {
+  void DirectTextRenderer::drawText(const std::string& text, float startX, float startY, float scale, const Iyathuum::Color& color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
@@ -52,7 +52,7 @@ namespace Ahwassa {
     std::string::const_iterator c;
     for (c = text.begin(); c != text.end(); c++)
     {
-      BasicTextRenderer_Character ch = _vars->characters[*c];
+      DirectTextRenderer_Character ch = _vars->characters[*c];
 
       if (*c == '\n') {
         x = startX;
@@ -94,12 +94,12 @@ namespace Ahwassa {
     }
   }
 
-  glm::vec2 BasicTextRenderer::getTextSize(const std::string& text, float scale) {
+  glm::vec2 DirectTextRenderer::getTextSize(const std::string& text, float scale) {
     float maxWidth = 0;
     glm::vec2 result(0, 0);
     std::string::const_iterator c;
     for (c = text.begin(); c != text.end(); c++) {      
-      BasicTextRenderer_Character ch = _vars->characters[*c];
+      DirectTextRenderer_Character ch = _vars->characters[*c];
       if (*c == '\n') {
         result[1] += (float)_maxHeight * scale;
         maxWidth = std::max(maxWidth, result[0]);
@@ -112,7 +112,7 @@ namespace Ahwassa {
     return result;
   }
 
-  void BasicTextRenderer::start() {
+  void DirectTextRenderer::start() {
     if (_inRenderProcess == true)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
     _inRenderProcess = true;
@@ -123,7 +123,7 @@ namespace Ahwassa {
     _vars->shader->bind();
   }
 
-  void BasicTextRenderer::end() {
+  void DirectTextRenderer::end() {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in endTextRender");
     _inRenderProcess = false;
@@ -131,7 +131,7 @@ namespace Ahwassa {
     glEnable(GL_DEPTH_TEST);
   }
 
-  void BasicTextRenderer::makeFreetype() {
+  void DirectTextRenderer::makeFreetype() {
     std::cout << "Load Freetype" << std::endl;
     std::filesystem::path cwd = std::filesystem::current_path();
     std::string path = cwd.string() + "/" + "Data/Fonts/arial.ttf";
@@ -177,14 +177,14 @@ namespace Ahwassa {
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       // Now store character for later use
-      BasicTextRenderer_Character character = {
+      DirectTextRenderer_Character character = {
         (int)texture,
         glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
         glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
         face->glyph->advance.x
       };
       _maxHeight = (int)std::max(character.Size[1], _maxHeight);
-      _vars->characters.insert(std::pair<GLchar, BasicTextRenderer_Character>(c, character));
+      _vars->characters.insert(std::pair<GLchar, DirectTextRenderer_Character>(c, character));
       glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
     }
@@ -192,7 +192,7 @@ namespace Ahwassa {
     FT_Done_FreeType(ft);
   }
 
-  void BasicTextRenderer::makeShader() {
+  void DirectTextRenderer::makeShader() {
     //std::cout << "Load Shader" << std::endl;
 
     std::string vertex_shader_source = R"(
@@ -232,12 +232,12 @@ namespace Ahwassa {
     _vars->shader = std::make_unique<ShaderProgram>(PositionTextureVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
-  void BasicTextRenderer::setClippingRectangle(Iyathuum::glmAABB<2> box) {
+  void DirectTextRenderer::setClippingRectangle(Iyathuum::glmAABB<2> box) {
     _clipping = true;
     _clippingBox = box;
   }
 
-  void BasicTextRenderer::disableClipping() {
+  void DirectTextRenderer::disableClipping() {
     _clipping = false;
   }
 }

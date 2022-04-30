@@ -1,8 +1,8 @@
 #include "Label.h"
 
 #include <IyathuumCoreLib/Singleton/Database.h>
-#include "AhwassaGraphicsLib/Renderer/BasicRectangleRenderer.h"
-#include "AhwassaGraphicsLib/Renderer/BasicTextRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/Private/DirectRectangleRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/Private/DirectTextRenderer.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 

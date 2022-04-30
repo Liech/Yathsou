@@ -1,11 +1,11 @@
-#include "AhwassaGraphicsLib/Renderer/RectangleRenderer.h"
+#include "RectangleRenderer.h"
 
 #include <iostream>
 #include "glad/glad.h"
 
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Primitives/Rectangle.h"
+#include "AhwassaGraphicsLib/Renderer/Primitives/Rectangle.h"
 #include "AhwassaGraphicsLib/Core/Window.h"
 #include "AhwassaGraphicsLib/Core/ShaderProgram.h"
 #include "AhwassaGraphicsLib/Uniforms/UniformVecVec3.h"

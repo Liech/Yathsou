@@ -12,7 +12,6 @@
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
-#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
   AdditiveComposer::AdditiveComposer(Ahwassa::Window* window, std::vector<std::shared_ptr<Ahwassa::Texture>> textures, const glm::ivec2& resolution) : PostProcessingEffect("Composition",window,resolution) {

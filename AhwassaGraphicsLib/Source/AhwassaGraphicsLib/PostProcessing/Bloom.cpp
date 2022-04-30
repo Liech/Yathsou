@@ -12,7 +12,6 @@
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
-#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
   Bloom::Bloom(Ahwassa::Window* window, const glm::ivec2& resolution) : PostProcessingEffect("Bloom",window,resolution) {

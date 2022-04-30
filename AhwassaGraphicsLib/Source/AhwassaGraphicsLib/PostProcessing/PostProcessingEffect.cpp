@@ -11,7 +11,7 @@
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
-#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
+#include "AhwassaGraphicsLib/Renderer/Private/DirectTexture2DRenderer.h"
 
 namespace Ahwassa {
   PostProcessingEffect::PostProcessingEffect(std::string name, Ahwassa::Window* window, const glm::ivec2& resolution) {

@@ -50,39 +50,38 @@ namespace Ahwassa {
     void draw() {
       if (!_initialized)
         throw std::runtime_error("Not initialized");
-      
-     prepare();
-     _shader->bind();
-     _camera->bind();
-     
-     std::set<std::shared_ptr<IMesh>> toDeleteMesh;
-     for (auto& meshVector : _meshes) {
+
+      prepare();
+      _shader->bind();
+      _camera->bind();
+
+      std::set<std::shared_ptr<IMesh>> toDeleteMesh;
+      for (auto& meshVector : _meshes) {
         size_t currentPosition = 0;
 
         std::vector<int> toDelete;
         toDelete.reserve(40);
-        for (auto x : meshVector.second){
+        for (auto x : meshVector.second) {
           std::shared_ptr<AdditionalInfo> m = x.lock();
           if (!m) {
             continue;//removed at the end
           }
           if (currentPosition >= bufferSize()) {
-            drawBatch(*meshVector.first,currentPosition);
+            drawBatch(*meshVector.first, currentPosition);
             currentPosition = 0;
           }
-          vectorize(currentPosition,m);
+          vectorize(currentPosition, m);
           currentPosition++;
         }
-        
-        drawBatch(*meshVector.first,currentPosition);
-        
-        auto IsMarkedToDelete = [](const std::weak_ptr<AdditionalInfo>& o)
-        {
+
+        drawBatch(*meshVector.first, currentPosition);
+
+        auto IsMarkedToDelete = [](const std::weak_ptr<AdditionalInfo>& o) {
           return o.lock() == nullptr;
         };
 
         meshVector.second.erase(std::remove_if(meshVector.second.begin(), meshVector.second.end(), IsMarkedToDelete), meshVector.second.end());
-        
+
         if (meshVector.second.size() == 0)
           toDeleteMesh.insert(meshVector.first);
       }

@@ -11,16 +11,16 @@
 namespace Ahwassa {
   class Window;
 
-  struct BasicTextRenderer_Character {
+  struct DirectTextRenderer_Character {
     int        TextureID;  // ID handle of the glyph texture
     glm::ivec2 Size;       // Size of glyph
     glm::ivec2 Bearing;    // Offset from baseline to left/top of glyph
     int        Advance;    // Offset to advance to next glyph
   };
-  class BasicTextRenderer {
+  class DirectTextRenderer {
   public:
-    BasicTextRenderer(Window*);
-    virtual   ~BasicTextRenderer() {}
+    DirectTextRenderer(Window*);
+    virtual   ~DirectTextRenderer() {}
     void      start();
     void      end();
     void      drawText   (const std::string& text, float x, float y    , float scale, const Iyathuum::Color& color = Iyathuum::Color(0,0,0));

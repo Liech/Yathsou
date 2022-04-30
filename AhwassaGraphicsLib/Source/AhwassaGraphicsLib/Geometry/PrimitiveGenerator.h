@@ -1,12 +1,12 @@
 #pragma once
 
-#include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
+#include <glm/glm.hpp>
 #include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
 
 namespace Ahwassa {
-  class BasicShapeGenerator {
+  class PrimitiveGenerator {
   public:
-    static std::shared_ptr<Mesh<PositionNormalVertex>> getCubeMesh();
     static std::pair<std::vector<PositionNormalVertex>, std::vector<int>> getCube();
+    static std::pair<std::vector<PositionNormalVertex>, std::vector<int>> getSphere();
   };
 }

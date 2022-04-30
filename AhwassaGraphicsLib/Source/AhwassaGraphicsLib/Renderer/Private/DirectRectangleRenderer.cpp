@@ -1,4 +1,4 @@
-#include "BasicRectangleRenderer.h"
+#include "DirectRectangleRenderer.h"
 
 #include "glad/glad.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -14,7 +14,7 @@
 #include "AhwassaGraphicsLib/Vertex/PositionVertex.h"
 
 namespace Ahwassa {
-  struct BasicRectangleRenderer::RenderVars {
+  struct DirectRectangleRenderer::RenderVars {
     std::unique_ptr<VBO<PositionVertex>>   vbo;
     std::unique_ptr<VAO>                   vao;
     std::unique_ptr<ShaderProgram>         shader;
@@ -25,20 +25,20 @@ namespace Ahwassa {
     virtual ~RenderVars() {}
   };
 
-  BasicRectangleRenderer::BasicRectangleRenderer(Window* w) {
-    _vars = std::make_shared<BasicRectangleRenderer::RenderVars>();
+  DirectRectangleRenderer::DirectRectangleRenderer(Window* w) {
+    _vars = std::make_shared<DirectRectangleRenderer::RenderVars>();
     _vars->window = w;
     makeShader();
   }
 
-  void BasicRectangleRenderer::drawRectangle(const glm::vec2& pos, const glm::vec2& size, const Iyathuum::Color& color) {
+  void DirectRectangleRenderer::drawRectangle(const glm::vec2& pos, const glm::vec2& size, const Iyathuum::Color& color) {
     Iyathuum::glmAABB<2> box;
     box.setPosition(pos);
     box.setSize(size);
     drawRectangle(box, color);
   }
   
-  void BasicRectangleRenderer::drawRectangle(const Iyathuum::glmAABB<2>& Box, const Iyathuum::Color& color) {
+  void DirectRectangleRenderer::drawRectangle(const Iyathuum::glmAABB<2>& Box, const Iyathuum::Color& color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
@@ -71,7 +71,7 @@ namespace Ahwassa {
     _vars->vao->draw();
   }
 
-  void BasicRectangleRenderer::drawLine(const glm::vec2& posA, const glm::vec2& posB, float thicknessPx, const Iyathuum::Color& color) {
+  void DirectRectangleRenderer::drawLine(const glm::vec2& posA, const glm::vec2& posB, float thicknessPx, const Iyathuum::Color& color) {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in drawText");
 
@@ -94,7 +94,7 @@ namespace Ahwassa {
     _vars->vao->draw();
   }
 
-  void BasicRectangleRenderer::start() {
+  void DirectRectangleRenderer::start() {
     if (_inRenderProcess == true)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in startTextRender");
     _inRenderProcess = true;
@@ -105,7 +105,7 @@ namespace Ahwassa {
     _vars->shader->bind();
   }
 
-  void BasicRectangleRenderer::end() {
+  void DirectRectangleRenderer::end() {
     if (_inRenderProcess == false)
       throw std::runtime_error("First call startTextRender, than multiple times drawText and in the end endTextRender. Error in endTextRender");
     _inRenderProcess = false;
@@ -113,7 +113,7 @@ namespace Ahwassa {
     glEnable(GL_DEPTH_TEST);
   }
 
-  void BasicRectangleRenderer::makeShader() {
+  void DirectRectangleRenderer::makeShader() {
     //std::cout << "Load Shader" << std::endl;
 
     std::string vertex_shader_source = R"(
@@ -147,16 +147,16 @@ namespace Ahwassa {
     _vars->shader = std::make_unique<ShaderProgram>(PositionVertex::getBinding(), uniforms, vertex_shader_source, fragment_shader_source);
   }
 
-  void BasicRectangleRenderer::setClippingRectangle(const Iyathuum::glmAABB<2>& box) {
+  void DirectRectangleRenderer::setClippingRectangle(const Iyathuum::glmAABB<2>& box) {
     _clipping = true;
     _clippingBox = box;
   }
 
-  void BasicRectangleRenderer::disableClipping() {
+  void DirectRectangleRenderer::disableClipping() {
     _clipping = false;
   }
 
-  void BasicRectangleRenderer::drawCircle(const glm::vec2& center, const glm::vec2& radius, float rotation, float thickness, const Iyathuum::Color& clr, float precision) {
+  void DirectRectangleRenderer::drawCircle(const glm::vec2& center, const glm::vec2& radius, float rotation, float thickness, const Iyathuum::Color& clr, float precision) {
     float rad_angle = glm::radians(rotation);
     auto rotatedEllipse = [&radius, rad_angle](float deg_t) {
       //https://math.stackexchange.com/questions/2645689/what-is-the-parametric-equation-of-a-rotated-ellipse-given-the-angle-of-rotatio
@@ -174,7 +174,7 @@ namespace Ahwassa {
     }
   }
   
-  void BasicRectangleRenderer::drawDot(const glm::vec2& pos, float size, const Iyathuum::Color& color) {
+  void DirectRectangleRenderer::drawDot(const glm::vec2& pos, float size, const Iyathuum::Color& color) {
     auto aabb = Iyathuum::glmAABB<2>(pos - glm::vec2(size, size), glm::vec2(size*2, size*2));
     drawRectangle(aabb, color);
   }

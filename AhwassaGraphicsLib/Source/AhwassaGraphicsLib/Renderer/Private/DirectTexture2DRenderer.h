@@ -13,10 +13,10 @@ namespace Ahwassa {
   class Window;
   class Texture;
 
-  class BasicTexture2DRenderer {
+  class DirectTexture2DRenderer {
   public:
-    BasicTexture2DRenderer(Window*);
-    virtual ~BasicTexture2DRenderer() {}
+    DirectTexture2DRenderer(Window*);
+    virtual ~DirectTexture2DRenderer() {}
     void start();
     void end();
     void draw(const Texture& texture, const glm::vec2& pos, const glm::vec2& size);

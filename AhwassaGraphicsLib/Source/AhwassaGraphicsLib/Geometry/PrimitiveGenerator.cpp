@@ -1,8 +1,11 @@
-#include "BasicShapeGenerator.h"
+#include "PrimitiveGenerator.h"
+
+#include <glm/gtc/constants.hpp>
+
 
 namespace Ahwassa {
 
-  std::pair<std::vector<PositionNormalVertex>, std::vector<int>> BasicShapeGenerator::getCube() {
+  std::pair<std::vector<PositionNormalVertex>, std::vector<int>> PrimitiveGenerator::getCube() {
     std::vector<PositionNormalVertex> input;
     float start = 0;
     float end = 1;
@@ -53,8 +56,54 @@ namespace Ahwassa {
     return std::make_pair(input, indices);
   }
 
-  std::shared_ptr<Mesh<PositionNormalVertex>> BasicShapeGenerator::getCubeMesh() {
-    auto cube = getCube();
-    return std::make_shared< Mesh<PositionNormalVertex>>(cube.first, cube.second);
+  std::pair<std::vector<PositionNormalVertex>, std::vector<int>> PrimitiveGenerator::getSphere() {
+    //https://stackoverflow.com/questions/7687148/drawing-sphere-in-opengl-without-using-glusphere
+    std::vector<PositionNormalVertex> vertecies;
+    int uResolution = 15;
+    int vResolution = 15;
+    float r = 1;
+    auto F = [](float u, float v, float r) {return glm::vec3(cos(u) * sin(v) * r, cos(v) * r, sin(u) * sin(v) * r); };
+    auto triangle = [](glm::vec3 a, glm::vec3 b, glm::vec3 c) {};
+    float startU = 0;
+    float startV = 0;
+    float endU = glm::pi<float>() * 2;
+    float endV = glm::pi<float>();
+    float stepU = (endU - startU) / uResolution; // step size between U-points on the grid
+    float stepV = (endV - startV) / vResolution; // step size between V-points on the grid
+    for (int i = 0; i < uResolution; i++) { // U-points
+      for (int j = 0; j < vResolution; j++) { // V-points
+        float u = i * stepU + startU;
+        float v = j * stepV + startV;
+        float un = (i + 1 == uResolution) ? endU : (i + 1) * stepU + startU;
+        float vn = (j + 1 == vResolution) ? endV : (j + 1) * stepV + startV;
+        // Find the four points of the grid
+        // square by evaluating the parametric
+        // surface function
+        glm::vec3 p0 = F(u, v, r);
+        glm::vec3 p1 = F(u, vn, r);
+        glm::vec3 p2 = F(un, v, r);
+        glm::vec3 p3 = F(un, vn, r);
+        // NOTE: For spheres, the normal is just the normalized
+        // version of each vertex point; this generally won't be the case for
+        // other parametric surfaces.
+        // Output the first triangle of this grid square
+        glm::vec3 offset(0, 0, 0);
+        vertecies.push_back(PositionNormalVertex(p0 + offset, -glm::cross(p0 - p2, p1)));
+        vertecies.push_back(PositionNormalVertex(p2 + offset, -glm::cross(p0 - p2, p1)));
+        vertecies.push_back(PositionNormalVertex(p1 + offset, -glm::cross(p0 - p2, p1)));
+        vertecies.push_back(PositionNormalVertex(p3 + offset, glm::cross(p3 - p1, p2)));
+        vertecies.push_back(PositionNormalVertex(p1 + offset, glm::cross(p3 - p1, p2)));
+        vertecies.push_back(PositionNormalVertex(p2 + offset, glm::cross(p3 - p1, p2)));
+      }
+    }
+    std::vector<int> indices;
+    indices.resize(vertecies.size());
+    for (size_t i = 0; i < vertecies.size(); i++)
+      indices[i] = i;
+
+    std::pair<std::vector<PositionNormalVertex>, std::vector<int>> result;
+    result.first  = vertecies;
+    result.second = indices;
+    return result;
   }
 }

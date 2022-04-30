@@ -14,7 +14,6 @@
 #include "AhwassaGraphicsLib/Core/Renderer.h"
 #include "AhwassaGraphicsLib/Util.h"
 #include "AhwassaGraphicsLib/BufferObjects/VAO.h"
-#include "AhwassaGraphicsLib/Renderer/BasicTexture2DRenderer.h"
 
 namespace Ahwassa {
   CubeReflection::CubeReflection(Ahwassa::Window* window, const glm::ivec2& resolution) : PostProcessingEffect("CubeReflection", window, resolution) {
