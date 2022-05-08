@@ -2,6 +2,7 @@
 
 #include <set>
 #include <iostream>
+#include <sstream>
 
 #include <glad/glad.h>
 #include "AhwassaGraphicsLib/Uniforms/Uniform.h"
@@ -93,6 +94,9 @@ namespace Ahwassa {
     if (0 == compile_ok)
     {
       glGetShaderInfoLog(vs, sizeof(logBuf), &len, logBuf);
+      std::cout << numberLines(vs_src) << std::endl;
+      std::cout << "-----------" << std::endl;
+      std::cout << logBuf << std::endl;
       throw std::runtime_error(logBuf);
     }
 
@@ -103,6 +107,9 @@ namespace Ahwassa {
     if (0 == compile_ok)
     {
       glGetShaderInfoLog(fs, sizeof(logBuf), &len, logBuf);
+      std::cout << numberLines(fs_src) << std::endl;
+      std::cout << "-----------" << std::endl;
+      std::cout << logBuf << std::endl;
       throw std::runtime_error(logBuf);
     }
 
@@ -207,6 +214,21 @@ namespace Ahwassa {
       result += ";\n";
     }
 
+    return result;
+  }
+
+  std::string ShaderProgram::numberLines(const std::string& shader) const {
+    std::string    result = "";
+    size_t         lineNo = 0;
+    std::istringstream iss(shader);
+
+    for (std::string line; std::getline(iss, line); ) {
+      lineNo++;
+      std::string l = std::to_string(lineNo);
+      l.insert(l.begin(), 3 - l.size(), ' ');
+
+      result += l + " " + line + "\n";
+    }
     return result;
   }
 }

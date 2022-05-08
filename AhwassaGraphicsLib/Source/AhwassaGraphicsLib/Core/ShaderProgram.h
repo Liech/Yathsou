@@ -27,5 +27,6 @@ namespace Ahwassa {
     std::string toGLSL_fs(const std::string& shader) const;
     void checkUsageOfUniforms();
     std::string AttributetoGLSL(size_t locationOffset = 0) const;
+    std::string numberLines(const std::string& shader) const;
   };
 }
