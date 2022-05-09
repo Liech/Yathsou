@@ -20,6 +20,7 @@ namespace Ahwassa {
     std::shared_ptr<Decal> newDecal(const glm::mat4&, Iyathuum::Color = Iyathuum::Color(255, 255, 255));
 
     void draw(std::shared_ptr<Texture> depthTexture);
+    void debugDraw();
     void clear();
   private:
     void shaderCall(const std::vector<glm::mat4>&, const std::vector<glm::mat4>&, const std::vector<glm::vec3>&, size_t amount);

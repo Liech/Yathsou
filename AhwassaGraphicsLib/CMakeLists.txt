@@ -60,6 +60,7 @@ set(Header_Files__Input
     "Source/AhwassaGraphicsLib/Input/IMGUIRenderer.h"
     "Source/AhwassaGraphicsLib/Input/Input.h"
     "Source/AhwassaGraphicsLib/Input/UIElement.h"
+    "Source/AhwassaGraphicsLib/Input/ArrowHandle.h"
 )
 source_group("Header Files\\Input" FILES ${Header_Files__Input})
 
@@ -204,6 +205,7 @@ set(Source_Files__Input
     "Source/AhwassaGraphicsLib/Input/IMGUIRenderer.cpp"
     "Source/AhwassaGraphicsLib/Input/Input.cpp"
     "Source/AhwassaGraphicsLib/Input/UIElement.cpp"
+    "Source/AhwassaGraphicsLib/Input/ArrowHandle.cpp"
 )
 source_group("Source Files\\Input" FILES ${Source_Files__Input})
 

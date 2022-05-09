@@ -17,6 +17,7 @@
 #include "AhwassaGraphicsLib/BufferObjects/VBO.h"
 #include "AhwassaGraphicsLib/BufferObjects/IBO.h"
 #include "AhwassaGraphicsLib/Vertex/PositionNormalVertex.h"
+#include "AhwassaGraphicsLib/Renderer/BasicBoxRenderer.h"
 
 #include "Primitives/Decal.h"
 #include "AhwassaGraphicsLib/Util.h"
@@ -36,6 +37,7 @@ namespace Ahwassa {
     std::shared_ptr<Camera>                    camera;
     std::shared_ptr<Texture>                   texture;
     std::shared_ptr<Texture>                   depth;
+    std::unique_ptr< BasicBoxRenderer>         boxRenderer;
 
     virtual ~RenderVars() {}
   };
@@ -45,6 +47,7 @@ namespace Ahwassa {
     _lightDir = glm::normalize(glm::vec3(25, 31, -21));
     _vars->camera = camera;
     _bufferSize = (Util::maxUniformAmount() - 10) / 2;
+    _vars->boxRenderer = std::make_unique<BasicBoxRenderer>(camera);
     makeModelArray(_bufferSize);
     makeShader();
   }
@@ -262,4 +265,17 @@ namespace Ahwassa {
     _vars->vao = std::make_unique<VAO>(_vars->vbo.get());
   }
 
+  void DecalRenderer::debugDraw() {
+    _vars->boxRenderer->start();
+
+    for (auto& x : _instances) {
+      auto decal = x.lock();
+      if (decal) {
+        _vars->boxRenderer->drawDot(decal->getMatrix() * glm::vec4(0, 0, 0, 1), 0.1f, Iyathuum::Color(0, 0, 255));
+        _vars->boxRenderer->drawLine(decal->getMatrix() * glm::vec4(0, 0, 0, 1), decal->getMatrix() * glm::vec4(1, 0, 0, 1),0.05f, Iyathuum::Color(0, 0, 255));
+      }
+    }
+
+    _vars->boxRenderer->end();
+  }
 }
