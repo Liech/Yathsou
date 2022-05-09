@@ -15,9 +15,13 @@ namespace Ahwassa {
     void setColor(const Iyathuum::Color&);
     Iyathuum::Color getColor() const;
 
+    void setTextureID(int textureID);
+    int  textureID() const;
+
     glm::mat4 matrix() const;
   private:
     glm::mat4       _matrix;
     Iyathuum::Color _color;
+    int             _textureID;
   };
 }

@@ -28,4 +28,13 @@ namespace Ahwassa {
   glm::mat4 Decal::matrix() const {
     return _matrix;
   }
+
+  void Decal::setTextureID(int textureID) {
+    _textureID = textureID;
+  }
+
+  int Decal::textureID() const {
+    return _textureID;
+  }
+
 }

@@ -166,9 +166,7 @@ namespace Ahwassa {
   void DeferredComposer::blitDepth() {
     glBindFramebuffer(GL_READ_FRAMEBUFFER, _fbo->getID());
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // write to default framebuffer
-    glBlitFramebuffer(
-      0, 0, _resolution[0], _resolution[1], 0, 0, _resolution[0], _resolution[1], GL_DEPTH_BUFFER_BIT, GL_NEAREST
-    );
+    glBlitFramebuffer(0, 0, _resolution[0], _resolution[1], 0, 0, _resolution[0], _resolution[1], GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
 

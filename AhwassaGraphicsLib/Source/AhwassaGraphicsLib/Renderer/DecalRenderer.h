@@ -11,6 +11,7 @@ namespace Ahwassa {
   class Decal;
   class Line;
   class Camera;
+  class Texture;
 
   class DecalRenderer {
   public:
@@ -18,10 +19,10 @@ namespace Ahwassa {
 
     std::shared_ptr<Decal> newDecal(const glm::mat4&, Iyathuum::Color = Iyathuum::Color(255, 255, 255));
 
-    void draw();
+    void draw(std::shared_ptr<Texture> depthTexture);
     void clear();
   private:
-    void shaderCall(const std::vector<glm::mat4>&, const std::vector<glm::vec3>&, size_t amount);
+    void shaderCall(const std::vector<glm::mat4>&, const std::vector<glm::mat4>&, const std::vector<glm::vec3>&, size_t amount);
     void makeShader();
     void makeGeometry();
     void makeModelArray(size_t bufferSize);
