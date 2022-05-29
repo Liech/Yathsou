@@ -7,7 +7,6 @@
 #include <string>
 #include <glm/glm.hpp>
 #include <IyathuumCoreLib/BaseTypes/Color.h>
-#include <AhwassaGraphicsLib/Renderer/RendererTemplate.h>
 #include <AthanahCommonLib/SupCom/Gamedata/Gamedata.h>
 
 namespace Aezesel {

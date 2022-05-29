@@ -7,6 +7,8 @@
 #include "AhwassaGraphicsLib/Util.h"
 #include "AhwassaGraphicsLib/BufferObjects/Mesh.h"
 #include "AezeselFileIOLib/ImageIO.h"
+#include "AhwassaGraphicsLib/Core/Camera.h"
+#include "AhwassaGraphicsLib/Core/ShaderProgram.h"
 
 namespace Athanah {
   MapRenderer::MapRenderer(std::shared_ptr<Ahwassa::Camera> camera, std::array<std::string,5> textures, Gamedata& gamedata){
@@ -17,7 +19,7 @@ namespace Athanah {
       auto img = Aezesel::ImageIO::readImage(Aezesel::ImageIO::Format::DDS,gamedata.loadBinary(textures[i].substr(1)));
       _textures[i] = std::make_shared<Ahwassa::Texture>("TerrainTexture" + std::to_string(i), img.get());
     }
-
+    
     std::string vertex_shader_source = R"(
       out vec4 clr;
       out vec3 nrm;

@@ -79,6 +79,7 @@ set(Header_Files__Renderer
     "Source/AhwassaGraphicsLib/Renderer/PrimitiveRenderer.h"
     "Source/AhwassaGraphicsLib/Renderer/Renderer2D.h"
     "Source/AhwassaGraphicsLib/Renderer/RendererTemplate.h"
+    "Source/AhwassaGraphicsLib/Renderer/ColorAndTransformation.h"
 )
 source_group("Header Files\\Renderer" FILES ${Header_Files__Renderer})
 
@@ -87,6 +88,7 @@ set(Header_Files__RendererPrivate
     "Source/AhwassaGraphicsLib/Renderer/Private/DirectTextRenderer.h"
     "Source/AhwassaGraphicsLib/Renderer/Private/DirectTexture2DRenderer.h"
     "Source/AhwassaGraphicsLib/Renderer/Private/RectangleRenderer.h"
+    "Source/AhwassaGraphicsLib/Renderer/Private/DiffuseDirectMeshRenderer.h"
 )
 source_group("Header Files\\Renderer\\Private" FILES ${Header_Files__RendererPrivate})
 
@@ -221,6 +223,7 @@ set(Source_Files__RendererPrivate
     "Source/AhwassaGraphicsLib/Renderer/Private/DirectTextRenderer.cpp"
     "Source/AhwassaGraphicsLib/Renderer/Private/DirectTexture2DRenderer.cpp"
     "Source/AhwassaGraphicsLib/Renderer/Private/RectangleRenderer.cpp"
+    "Source/AhwassaGraphicsLib/Renderer/Private/DiffuseDirectMeshRenderer.cpp"
 )
 source_group("Source Files\\Renderer\\Private" FILES ${Source_Files__RendererPrivate})
 
