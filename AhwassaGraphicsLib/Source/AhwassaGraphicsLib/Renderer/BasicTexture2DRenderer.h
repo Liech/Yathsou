@@ -12,10 +12,12 @@
 namespace Ahwassa {
   class Window;
   class Texture;
+  class Uniform;
 
   class BasicTexture2DRenderer {
   public:
     BasicTexture2DRenderer(Window*);
+    BasicTexture2DRenderer(Window*, const std::string& vs, const std::string& fs, std::vector<std::shared_ptr<Ahwassa::Uniform>>);
     virtual ~BasicTexture2DRenderer() {}
     void start();
     void end();

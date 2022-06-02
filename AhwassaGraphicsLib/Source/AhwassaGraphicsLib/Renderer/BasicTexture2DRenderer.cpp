@@ -32,8 +32,26 @@ namespace Ahwassa {
     _vars = std::make_shared<BasicTexture2DRenderer::RenderVars>();
     _vars->window = w;
 
-
     makeShader();
+  }
+
+  BasicTexture2DRenderer::BasicTexture2DRenderer(Window*, const std::string& vs, const std::string& fs, std::vector<std::shared_ptr<Ahwassa::Uniform>> inputUniforms) {
+    std::vector<Uniform*> uniforms;
+    _vars->projection = std::make_unique<UniformMat4>("projection");
+    _vars->projection->setValue(glm::ortho(0.0f, (float)_vars->window->getResolution()[0], 0.0f, (float)_vars->window->getResolution()[1]));
+    _vars->shownTexture = std::make_unique<Texture>("shownTexture", 0);
+    _vars->shownTexture->setBindable(false);
+
+    for (auto& u : inputUniforms)
+      uniforms.push_back(u.get());
+    uniforms.push_back(_vars->projection.get());
+    uniforms.push_back(_vars->shownTexture.get());
+
+    std::vector<PositionTextureVertex> input;
+    input.resize(6);
+    _vars->vbo = std::make_unique<VBO<PositionTextureVertex>>(input);
+    _vars->vao = std::make_unique<VAO>(_vars->vbo.get());
+    _vars->shader = std::make_unique<ShaderProgram>(PositionTextureVertex::getBinding(), uniforms, vs, fs);
   }
 
   void BasicTexture2DRenderer::draw(const Texture& texture, const glm::vec2& pos, const glm::vec2& size) {

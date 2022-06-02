@@ -16,10 +16,11 @@
 	"enet",
 	"snappy",
 	"mio",
+  "nethost",
 	"concurrentqueue",
 	{
 	  "name" : "imgui",
 	  "features" : ["glfw-binding", "opengl3-binding"]
-	}	
+	}
   ]
 }
