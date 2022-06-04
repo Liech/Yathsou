@@ -3,23 +3,19 @@ project(HaasScriptingLib)
 
 find_package(nlohmann_json REQUIRED)
 find_package(lua REQUIRED)
-find_path(NETHOST_INCLUDE_DIRS nethost.h)
-find_library(NETHOST_LIBRARY NAMES libnethost nethost)
-    
+
 ############################################################################
 ############################################################################
 ############################################################################
 set(Header_Files
     "Source/HaasScriptingLib/ScriptEngine.h"
-    "Source/HaasScriptingLib/DotNet.h"
-    "Source/HaasScriptingLib/Dll.h"
+    "Source/HaasScriptingLib/PythonEngine.h"
 )
 source_group("Header Files" FILES ${Header_Files})
 
 set(Source_Files
     "Source/HaasScriptingLib/ScriptEngine.cpp"
-    "Source/HaasScriptingLib/DotNet.cpp"
-    "Source/HaasScriptingLib/Dll.cpp"
+    "Source/HaasScriptingLib/PythonEngine.cpp"
 )
 source_group("Source Files" FILES ${Source_Files})
 
@@ -29,20 +25,40 @@ set(ALL_FILES
     ${lib}
 )
 
+############################################################################
+############################################################################
+############################################################################
 
-############################################################################
-############################################################################
-############################################################################
 
 add_library(HaasScriptingLib ${ALL_FILES})
 set_property(TARGET HaasScriptingLib PROPERTY CXX_STANDARD 20)
 
+find_package(Python3 REQUIRED COMPONENTS Development)
+#target_include_directories(HaasScriptingLib SYSTEM PRIVATE ${Python3_INCLUDE_DIRS})
+
+find_library(pythonlibrary
+    NAMES python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR}
+    HINTS "${CMAKE_PREFIX_PATH}/lib"
+    REQUIRED
+)
+
+find_library(pythonlibraryDebug
+    NAMES python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR}_d
+    HINTS "${CMAKE_PREFIX_PATH}/lib"
+    REQUIRED
+)
+
+target_link_libraries(HaasScriptingLib PRIVATE
+debug ${pythonlibraryDebug}
+optimized ${pythonlibrary}
+)
+
+
 target_link_libraries(HaasScriptingLib PRIVATE
 nlohmann_json::nlohmann_json 
 lua
-${NETHOST_LIBRARY}
+
 )
 
-target_include_directories(HaasScriptingLib PRIVATE ${NETHOST_INCLUDE_DIRS})
- 
+
 set_target_properties(HaasScriptingLib PROPERTIES FOLDER "Yathsou")
