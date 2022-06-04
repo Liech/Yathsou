@@ -33,8 +33,7 @@ set(ALL_FILES
 add_library(HaasScriptingLib ${ALL_FILES})
 set_property(TARGET HaasScriptingLib PROPERTY CXX_STANDARD 20)
 
-find_package(Python3 REQUIRED COMPONENTS Development)
-#target_include_directories(HaasScriptingLib SYSTEM PRIVATE ${Python3_INCLUDE_DIRS})
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 
 find_library(pythonlibrary
     NAMES python${Python3_VERSION_MAJOR}${Python3_VERSION_MINOR}
@@ -47,17 +46,19 @@ find_library(pythonlibraryDebug
     HINTS "${CMAKE_PREFIX_PATH}/lib"
     REQUIRED
 )
+target_include_directories(HaasScriptingLib SYSTEM PRIVATE ${Python3_INCLUDE_DIRS})
 
 target_link_libraries(HaasScriptingLib PRIVATE
 debug ${pythonlibraryDebug}
 optimized ${pythonlibrary}
 )
 
+find_package(pybind11 CONFIG REQUIRED)
 
 target_link_libraries(HaasScriptingLib PRIVATE
 nlohmann_json::nlohmann_json 
 lua
-
+pybind11::headers
 )
 
 
