@@ -4,7 +4,7 @@
 namespace Haas {
   PythonEngine::PythonEngine() {
     Py_SetProgramName(L"Haas");
-    Py_SetPythonHome(L"C:\\Users\\Niki\\Documents\\GitHub\\AssimpSupCom\\out2\\vcpkg_installed\\x64-windows\\tools\\python3");
+    Py_SetPythonHome(L"Data/python");
     Py_Initialize();
     PyObject* sys = PyImport_ImportModule("sys");
     PyRun_SimpleString("from time import time,ctime\n"
