@@ -17,6 +17,7 @@ find_package(OpenVR REQUIRED)
 
 set(Header_Files
     "Source/AhwassaGraphicsLib/Util.h"
+    "Source/AhwassaGraphicsLib/API.h"
 )
 source_group("Header Files" FILES ${Header_Files})
 
@@ -52,6 +53,11 @@ set(Header_Files__Geometry
     "Source/AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.h"
 )
 source_group("Header Files\\Geometry" FILES ${Header_Files__Geometry})
+
+set(Header_Files__API
+    "Source/AhwassaGraphicsLib/API/WindowAPI.h"
+)
+source_group("Header Files\\API" FILES ${Header_Files__API})
 
 set(Header_Files__Input
     "Source/AhwassaGraphicsLib/Input/ArcBallCamera.h"
@@ -163,6 +169,7 @@ source_group("Header Files\\Widgets" FILES ${Header_Files__Widgets})
 
 set(Source_Files
     "Source/AhwassaGraphicsLib/Util.cpp"
+    "Source/AhwassaGraphicsLib/API.cpp"
 )
 source_group("Source Files" FILES ${Source_Files})
 
@@ -197,6 +204,11 @@ set(Source_Files__Geometry
     "Source/AhwassaGraphicsLib/Geometry/HeightFieldMeshGenerator.cpp"
 )
 source_group("Source Files\\Geometry" FILES ${Source_Files__Geometry})
+
+set(Source_Files__API
+    "Source/AhwassaGraphicsLib/API/WindowAPI.cpp"
+)
+source_group("Source Files\\API" FILES ${Source_Files__API})
 
 set(Source_Files__Input
     "Source/AhwassaGraphicsLib/Input/ArcBallCamera.cpp"
@@ -357,6 +369,8 @@ set(ALL_FILES
     ${Source_Files__Widgets}
     ${lib__glad}
     ${lib__dear_imgui_filedialog}
+    ${Source_Files__API}
+    ${Header_Files__API}
 )
 
 ############################################################################

@@ -4,26 +4,36 @@
 #include <pybind11/embed.h>
 
 namespace Haas {
+  PythonEngine& PythonEngine::instance() {
+    static PythonEngine engine;
+    return engine;
+  }
 
   void greetTheWorld() {
     std::cout << "Hallo Welt" << std::endl;
   }
+  
+  PYBIND11_EMBEDDED_MODULE(HaasModule, m) {
+    m.def("add", [](int i, int j) {
+      std::cout << "Waahhh" << std::endl;
+      return i + j;
+      });
+  } 
 
   PythonEngine::PythonEngine() {
-    //Py_SetProgramName(L"Haas");
     Py_SetPythonHome(L"Data/python");
-    //Py_Initialize();
+    _interpreterScope = std::make_unique< pybind11::scoped_interpreter>();
 
-    pybind11::scoped_interpreter guard{};
+    auto module = pybind11::module_::import("HaasModule");
+    //auto locals = pybind11::dict(**module.attr("__dict__"));
+    //
+    //pybind11::exec(R"(
+    //    print('EXEC :D')
+    //    add(1,1);
+    //)", pybind11::globals(), locals);
+  }
 
-    pybind11::print("Hello, World!");
-
-    pybind11::exec(R"(
-        kwargs = dict(name="World", number=42)
-        message = "Hello, {name}! The answer is {number}".format(**kwargs)
-        print(message)
-    )");
-
+  PythonEngine::~PythonEngine() {
 
   }
 }

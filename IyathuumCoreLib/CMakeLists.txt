@@ -33,6 +33,13 @@ set(Header_Files__BaseTypes
 )
 source_group("Header Files\\BaseTypes" FILES ${Header_Files__BaseTypes})
 
+set(Header_Files__API
+    "Source/IyathuumCoreLib/API/API.h"
+    "Source/IyathuumCoreLib/API/APIFunction.h"
+    "Source/IyathuumCoreLib/API/FunctionRelay.h"
+)
+source_group("Header Files\\API" FILES ${Header_Files__API})
+
 set(Header_Files__Mesh
     "Source/IyathuumCoreLib/Mesh/MarchingConvexPolygon.h"
     "Source/IyathuumCoreLib/Mesh/MarchingConvexPolygonNet.h"
@@ -80,6 +87,14 @@ set(Source_Files__BaseTypes
 )
 source_group("Source Files\\BaseTypes" FILES ${Source_Files__BaseTypes})
 
+set(Source_Files__API
+    "Source/IyathuumCoreLib/API/API.cpp"
+    "Source/IyathuumCoreLib/API/APIFunction.cpp"
+    "Source/IyathuumCoreLib/API/FunctionRelay.h"
+)
+source_group("Source Files\\API" FILES ${Source_Files__API})
+
+
 set(Source_Files__Tree
     "Source/IyathuumCoreLib/Tree/glmOctree.cpp"
 )
@@ -109,6 +124,8 @@ set(ALL_FILES
     ${Source_Files__BaseTypes}
     ${Source_Files__Tree}
     ${Source_Files__Util}
+    ${Header_Files__API}
+    ${Source_Files__API}
 )
 
 ############################################################################

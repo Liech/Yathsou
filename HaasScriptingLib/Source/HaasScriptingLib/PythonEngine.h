@@ -1,10 +1,21 @@
 #pragma once
 
+#include <memory>
+
+namespace pybind11 {
+  class scoped_interpreter;
+}
+
 namespace Haas {
   class PythonEngine {
-    public:
+  public:
+    static PythonEngine& instance();
+    virtual ~PythonEngine();
+    
+     
+  private:
     PythonEngine();
-    private:
+    std::unique_ptr<pybind11::scoped_interpreter> _interpreterScope = nullptr;
 
   };
 }
