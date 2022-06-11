@@ -46,7 +46,10 @@ find_library(pythonlibraryDebug
     HINTS "${CMAKE_PREFIX_PATH}/lib"
     REQUIRED
 )
-target_include_directories(HaasScriptingLib SYSTEM PRIVATE ${Python3_INCLUDE_DIRS})
+target_include_directories(HaasScriptingLib SYSTEM PRIVATE 
+${Python3_INCLUDE_DIRS}
+"${IyathuumCoreLib_SOURCE_DIR}/Source"
+)
 
 target_link_libraries(HaasScriptingLib PRIVATE
 debug ${pythonlibraryDebug}
@@ -60,6 +63,8 @@ nlohmann_json::nlohmann_json
 lua
 pybind11::headers
 )
+
+
 
 
 set_target_properties(HaasScriptingLib PROPERTIES FOLDER "Yathsou")

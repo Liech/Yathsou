@@ -13,8 +13,9 @@ namespace Ahwassa {
 
   void WindowAPI::add(Iyathuum::API& api, Iyathuum::FunctionRelay& relay) {
     
-    std::unique_ptr<Iyathuum::APIFunction> hamlo = std::make_unique<Iyathuum::APIFunction>("Hallo", [](const nlohmann::json&) {
+    std::unique_ptr<Iyathuum::APIFunction> hamlo = std::make_unique<Iyathuum::APIFunction>("Hallo", [](const nlohmann::json& input) {
       std::cout << "Hallo" << std::endl;
+      std::cout << input.dump(4) << std::endl;
       return 0;
       });
     hamlo->setDescription("Hamlo :§");

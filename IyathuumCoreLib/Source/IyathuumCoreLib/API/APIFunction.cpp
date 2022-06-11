@@ -17,4 +17,8 @@ namespace Iyathuum {
   std::string APIFunction::getDescription() const {
     return _description;
   }
+
+  std::string APIFunction::getName() const {
+    return _name;
+  }
 }

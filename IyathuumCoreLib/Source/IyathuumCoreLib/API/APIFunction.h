@@ -15,6 +15,7 @@ namespace Iyathuum {
 
       nlohmann::json call(const nlohmann::json&) const;
       std::string    getDescription() const;
+      std::string    getName() const;
     private:
       std::function<nlohmann::json(const nlohmann::json&)> _func       ;
       std::string                                          _name       ;
