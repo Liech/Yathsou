@@ -50,7 +50,7 @@ namespace Haas {
     auto locals = pybind11::dict(**module.attr("__dict__"));
     try {
       pybind11::exec(R"(
-      Hallo({'X' : 1});
+      print(str(Hallo({'X' : 31, 'ASD':321})));
     )", pybind11::globals(), locals);
     }
     catch (pybind11::error_already_set& e) {
@@ -72,13 +72,27 @@ namespace Haas {
     return *_apis[number];
   }
 
-  nlohmann::json PythonEngine::py2j(const pybind11::dict&) {
-    return 1;
+  nlohmann::json PythonEngine::py2j(const pybind11::dict& input) {
+    nlohmann::json result;
+
+    for (auto& x : input) {
+      result[x.first.str()] = x.second.cast<int>();
+    }
+
+    return result;
   }
 
-  pybind11::dict PythonEngine::j2py(const nlohmann::json&) {
+  pybind11::dict PythonEngine::j2py(const nlohmann::json& input) {
     using namespace pybind11::literals;
-    return pybind11::dict("eggs"_a = 52);
+
+    pybind11::dict result;
+
+    for (auto& x : input.items()) {
+      int v = x.value();
+      result[x.key().c_str()] =  v;
+    }
+
+    return result;
   }
 
   class FRMOCK : public Iyathuum::FunctionRelay {
