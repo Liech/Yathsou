@@ -13,14 +13,20 @@
 
 
 namespace Haas {
+  class PythonEngine::pimpl {
+    public:
+      pybind11::module_ mainModule;
+  };
+
   PythonEngine& PythonEngine::instance() {
     static PythonEngine engine;
     return engine;
   }
 
   PythonEngine::~PythonEngine() {
+    if (_initialized)
+      throw std::runtime_error("Please dispose the PythonEngine correctly");
   }
-
 
   PythonEngine::PythonEngine() {
   }
@@ -32,9 +38,9 @@ namespace Haas {
       auto& api = engine.getAPI(apiID);
       for (size_t f = 0; f < api.numberOfFunctions(); f++) {
         auto& func = api.getFunction(f);
-        m.def(func.getName().c_str(), [&func](pybind11::dict input) {
+        m.def(func.getName().c_str(), [&func](const pybind11::object& input) {
           return PythonEngine::j2py(func.call(PythonEngine::py2j(input))); 
-          }, pybind11::arg("input") = pybind11::dict());
+          }, pybind11::arg("input") = pybind11::none());
       }
     }
   } 
@@ -42,21 +48,35 @@ namespace Haas {
   void PythonEngine::initialize() {
     assert(!_initialized);
     _initialized = true;
+    _pimpl = std::make_unique<PythonEngine::pimpl>();
 
-    Py_SetPythonHome(L"Data/python");
-    _interpreterScope = std::make_unique< pybind11::scoped_interpreter>();
-    auto module = pybind11::module_::import("HaasModule");
-
-    auto locals = pybind11::dict(**module.attr("__dict__"));
     try {
-      pybind11::exec(R"(
-      print(str(Hallo({'X' : 31, 'ASD':321})));
-    )", pybind11::globals(), locals);
+      Py_SetPythonHome(L"Data/python");
+      pybind11::initialize_interpreter();
+      _pimpl->mainModule = pybind11::module_::import("HaasModule");
     }
     catch (pybind11::error_already_set& e) {
       std::cout << e.what() << std::endl;
       throw;
+    } 
+  }
+
+  void PythonEngine::execute(const std::string& pythonCode) {
+    try {
+      auto locals = pybind11::dict(**_pimpl->mainModule.attr("__dict__"));
+      pybind11::exec(pythonCode, pybind11::globals(), locals);
+    } 
+    catch (pybind11::error_already_set& e) {
+      std::cout << e.what() << std::endl;
+      throw;
     }
+  }
+
+  void PythonEngine::dispose() {
+    assert(_initialized);
+    _pimpl = nullptr;
+    pybind11::finalize_interpreter();
+    _initialized = false;
   }
 
   void PythonEngine::addAPI(std::unique_ptr<Iyathuum::API> api) {
@@ -72,27 +92,62 @@ namespace Haas {
     return *_apis[number];
   }
 
-  nlohmann::json PythonEngine::py2j(const pybind11::dict& input) {
-    nlohmann::json result;
+  nlohmann::json PythonEngine::py2j(const pybind11::object& input) {
+    //maybe this is a better way if it would work: https://github.com/pybind/pybind11/issues/1914
+    auto typ = input.get_type().str().cast<std::string>();
 
-    for (auto& x : input) {
-      result[x.first.str()] = x.second.cast<int>();
+    if (typ == "<class 'float'>")
+      return input.cast<float>();
+    else if (typ == "<class 'int'>")
+      return input.cast<int>();
+    else if (typ == "<class 'str'>")
+      return input.cast<std::string>();
+    else if (typ == "<class 'dict'>") {
+      nlohmann::json result;
+      pybind11::dict d = input;
+      for (auto& x : d) {
+        result[x.first.cast<std::string>()] = py2j(x.second.cast<pybind11::object>());
+      }
+      return result;
+    }
+    else if (typ == "<class 'list'>") {
+      nlohmann::json result = nlohmann::json::array();
+      pybind11::list d = input;
+      for (auto& x : d)
+        result.push_back(py2j(x.cast<pybind11::object>()));
+      return result;
     }
 
-    return result;
+    else throw std::runtime_error("Unkown pybind11 object type to json conversion");
   }
 
-  pybind11::dict PythonEngine::j2py(const nlohmann::json& input) {
-    using namespace pybind11::literals;
-
-    pybind11::dict result;
-
-    for (auto& x : input.items()) {
-      int v = x.value();
-      result[x.key().c_str()] =  v;
+  pybind11::object PythonEngine::j2py(const nlohmann::json& input) {
+    if (input.is_boolean())
+      return pybind11::cast((bool)input);
+    else if (input.is_number_unsigned())
+      return pybind11::cast((unsigned int)input);
+    else if (input.is_number_integer())
+      return pybind11::cast((int)input);
+    else if (input.is_number_float())
+      return pybind11::cast((float)input);
+    else if (input.is_string())
+      return pybind11::cast((std::string)input);
+    else if (input.is_object()) {      
+      pybind11::dict result;
+      for (auto& x : input.items()) {
+        auto& val = x.value();
+        result[x.key().c_str()] = j2py(val);
+      }
+      return result;
     }
-
-    return result;
+    else if (input.is_array()) {
+      pybind11::list result;
+      for (int i = 0; i < input.size(); i++)
+        result.append(j2py(input[i]));
+      return result;
+    }
+    else
+      throw std::runtime_error("Unkown json to pybind11 object type conversion");
   }
 
   class FRMOCK : public Iyathuum::FunctionRelay {

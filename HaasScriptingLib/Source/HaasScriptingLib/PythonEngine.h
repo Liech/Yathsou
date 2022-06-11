@@ -10,8 +10,7 @@ namespace Iyathuum {
   class FunctionRelay;
 }
 namespace pybind11 {
-  class scoped_interpreter;
-  class dict;
+  class object;
 }
 
 namespace Haas {
@@ -22,19 +21,24 @@ namespace Haas {
 
     void addAPI(std::unique_ptr<Iyathuum::API>);
     void initialize();
+    void dispose();
     
+    void execute(const std::string& pythonCode);
+
     size_t numberOfApis() const;
     Iyathuum::API& getAPI(size_t number);
     Iyathuum::FunctionRelay& getRelay();
      
-    static nlohmann::json py2j(const pybind11::dict&);
-    static pybind11::dict j2py(const nlohmann::json&);
+    static nlohmann::json   py2j(const pybind11::object&);
+    static pybind11::object j2py(const nlohmann::json&);
   private:
     PythonEngine();
 
-    std::unique_ptr<pybind11::scoped_interpreter> _interpreterScope = nullptr;
     bool                                          _initialized = false;
     std::vector<std::unique_ptr<Iyathuum::API>>   _apis;
     std::unique_ptr<Iyathuum::FunctionRelay>      _relay = nullptr;
+
+    class pimpl;
+    std::unique_ptr<pimpl> _pimpl;
   };
 }
