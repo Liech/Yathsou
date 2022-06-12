@@ -4,6 +4,7 @@
 
 #include "IyathuumCoreLib/API/API.h"
 #include "IyathuumCoreLib/API/APIFunction.h"
+#include "IyathuumCoreLib/API/FunctionRelay.h"
 
 namespace Ahwassa {
   WindowAPI& WindowAPI::instance() {
@@ -13,9 +14,10 @@ namespace Ahwassa {
 
   void WindowAPI::add(Iyathuum::API& api, Iyathuum::FunctionRelay& relay) {
     
-    std::unique_ptr<Iyathuum::APIFunction> hamlo = std::make_unique<Iyathuum::APIFunction>("Hallo", [](const nlohmann::json& input) {
+    std::unique_ptr<Iyathuum::APIFunction> hamlo = std::make_unique<Iyathuum::APIFunction>("Hallo", [&relay](const nlohmann::json& input) {
       std::cout << "Hallo" << std::endl;
       std::cout << input.dump(4) << std::endl;
+      std::cout << "Relay: " << relay.call(input["FUN"], 123) << std::endl;
       return input;
       });
     hamlo->setDescription("Hamlo :§");
