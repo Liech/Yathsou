@@ -22,7 +22,7 @@ namespace Haas {
       nlohmann::json result;
       pybind11::dict d = input;
       for (auto& x : d) {
-        result[x.first.cast<std::string>()] = py2j(x.second.cast<pybind11::object>(),relay);
+        result[x.first.cast<std::string>()] = py2j(x.second.cast<pybind11::object>(), relay);
       }
       return result;
     }
@@ -30,12 +30,14 @@ namespace Haas {
       nlohmann::json result = nlohmann::json::array();
       pybind11::list d = input;
       for (auto& x : d)
-        result.push_back(py2j(x.cast<pybind11::object>(),relay));
+        result.push_back(py2j(x.cast<pybind11::object>(), relay));
       return result;
     }
     else if (typ == "<class 'function'>") {
       return relay.addFunction(input);
     }
+    else if (typ == "<class 'NoneType'>")
+      return nlohmann::json();
     else
       throw std::runtime_error("Unkown pybind11 object type to json conversion");
   }
@@ -51,6 +53,8 @@ namespace Haas {
       return pybind11::cast((float)input);
     else if (input.is_string())
       return pybind11::cast((std::string)input);
+    else if (input.is_null())
+      return pybind11::none();
     else if (input.is_object()) {
       pybind11::dict result;
       for (auto& x : input.items()) {

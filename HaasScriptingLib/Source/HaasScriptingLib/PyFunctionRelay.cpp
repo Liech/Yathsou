@@ -8,11 +8,17 @@
 #include <pybind11/complex.h>
 
 namespace Haas {
+  class pyobjcmp {
+    public:
+    bool operator()(const pybind11::object& x, const pybind11::object& y) const{
+      return x.ptr() > y.ptr();
+    }
+  };
+
   class PyFunctionRelay::pimpl {
     public:
     std::map<size_t, pybind11::object> functionMap;
-    std::map<pybind11::object, size_t> objectMap;
-
+    std::map<pybind11::object, size_t, pyobjcmp> objectMap;
   };
 
   PyFunctionRelay::PyFunctionRelay() {
