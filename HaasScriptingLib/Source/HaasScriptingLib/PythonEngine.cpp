@@ -117,8 +117,11 @@ namespace Haas {
         result.push_back(py2j(x.cast<pybind11::object>()));
       return result;
     }
-
-    else throw std::runtime_error("Unkown pybind11 object type to json conversion");
+    else if (typ == "<class 'function'>") {
+      return py2j(input(6));
+    }
+    else 
+      throw std::runtime_error("Unkown pybind11 object type to json conversion");
   }
 
   pybind11::object PythonEngine::j2py(const nlohmann::json& input) {
