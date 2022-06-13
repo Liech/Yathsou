@@ -29,14 +29,11 @@ namespace Haas {
     Iyathuum::API& getAPI(size_t number);
     Iyathuum::FunctionRelay& getRelay();
      
-    static nlohmann::json   py2j(const pybind11::object&);
-    static pybind11::object j2py(const nlohmann::json&);
   private:
     PythonEngine();
 
     bool                                          _initialized = false;
     std::vector<std::unique_ptr<Iyathuum::API>>   _apis;
-    std::unique_ptr<Iyathuum::FunctionRelay>      _relay = nullptr;
 
     class pimpl;
     std::unique_ptr<pimpl> _pimpl;

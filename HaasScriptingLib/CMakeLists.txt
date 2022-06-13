@@ -10,12 +10,16 @@ find_package(lua REQUIRED)
 set(Header_Files
     "Source/HaasScriptingLib/LuaEngine.h"
     "Source/HaasScriptingLib/PythonEngine.h"
+    "Source/HaasScriptingLib/PyFunctionRelay.h"
+    "Source/HaasScriptingLib/PyConversion.h"
 )
 source_group("Header Files" FILES ${Header_Files})
 
 set(Source_Files
     "Source/HaasScriptingLib/LuaEngine.cpp"
     "Source/HaasScriptingLib/PythonEngine.cpp"
+    "Source/HaasScriptingLib/PyFunctionRelay.cpp"
+    "Source/HaasScriptingLib/PyConversion.cpp"
 )
 source_group("Source Files" FILES ${Source_Files})
 

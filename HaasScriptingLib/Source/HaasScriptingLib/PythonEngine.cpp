@@ -1,5 +1,8 @@
 #include "PythonEngine.h"
 
+#include "PyFunctionRelay.h"
+#include "PyConversion.h"
+
 #include <IyathuumCoreLib/API/API.h>
 #include <IyathuumCoreLib/API/APIFunction.h>
 #include <IyathuumCoreLib/API/FunctionRelay.h>
@@ -16,6 +19,7 @@ namespace Haas {
   class PythonEngine::pimpl {
     public:
       pybind11::module_ mainModule;
+      std::unique_ptr<PyFunctionRelay> relay = nullptr;
   };
 
   PythonEngine& PythonEngine::instance() {
@@ -25,10 +29,13 @@ namespace Haas {
 
   PythonEngine::~PythonEngine() {
     if (_initialized)
-      throw std::runtime_error("Please dispose the PythonEngine correctly");
+      throw std::runtime_error("Please dispose() the PythonEngine correctly");
   }
 
   PythonEngine::PythonEngine() {
+    _pimpl = std::make_unique<PythonEngine::pimpl>();
+    _pimpl->relay = std::make_unique<PyFunctionRelay>();
+
   }
   
   PYBIND11_EMBEDDED_MODULE(HaasModule, m) {
@@ -39,7 +46,8 @@ namespace Haas {
       for (size_t f = 0; f < api.numberOfFunctions(); f++) {
         auto& func = api.getFunction(f);
         m.def(func.getName().c_str(), [&func](const pybind11::object& input) {
-          return PythonEngine::j2py(func.call(PythonEngine::py2j(input))); 
+          auto& r = (PyFunctionRelay&)PythonEngine::instance().getRelay();
+          return PyConversion::j2py(func.call(PyConversion::py2j(input, r)));
           }, pybind11::arg("input") = pybind11::none());
       }
     }
@@ -48,7 +56,10 @@ namespace Haas {
   void PythonEngine::initialize() {
     assert(!_initialized);
     _initialized = true;
-    _pimpl = std::make_unique<PythonEngine::pimpl>();
+    if (!_pimpl) {
+      _pimpl = std::make_unique<PythonEngine::pimpl>();
+      _pimpl->relay = std::make_unique<PyFunctionRelay>();
+    }
 
     try {
       Py_SetPythonHome(L"Data/python");
@@ -92,72 +103,7 @@ namespace Haas {
     return *_apis[number];
   }
 
-  nlohmann::json PythonEngine::py2j(const pybind11::object& input) {
-    //maybe this is a better way if it would work: https://github.com/pybind/pybind11/issues/1914
-    auto typ = input.get_type().str().cast<std::string>();
-
-    if (typ == "<class 'float'>")
-      return input.cast<float>();
-    else if (typ == "<class 'int'>")
-      return input.cast<int>();
-    else if (typ == "<class 'str'>")
-      return input.cast<std::string>();
-    else if (typ == "<class 'dict'>") {
-      nlohmann::json result;
-      pybind11::dict d = input;
-      for (auto& x : d) {
-        result[x.first.cast<std::string>()] = py2j(x.second.cast<pybind11::object>());
-      }
-      return result;
-    }
-    else if (typ == "<class 'list'>") {
-      nlohmann::json result = nlohmann::json::array();
-      pybind11::list d = input;
-      for (auto& x : d)
-        result.push_back(py2j(x.cast<pybind11::object>()));
-      return result;
-    }
-
-    else throw std::runtime_error("Unkown pybind11 object type to json conversion");
-  }
-
-  pybind11::object PythonEngine::j2py(const nlohmann::json& input) {
-    if (input.is_boolean())
-      return pybind11::cast((bool)input);
-    else if (input.is_number_unsigned())
-      return pybind11::cast((unsigned int)input);
-    else if (input.is_number_integer())
-      return pybind11::cast((int)input);
-    else if (input.is_number_float())
-      return pybind11::cast((float)input);
-    else if (input.is_string())
-      return pybind11::cast((std::string)input);
-    else if (input.is_object()) {      
-      pybind11::dict result;
-      for (auto& x : input.items()) {
-        auto& val = x.value();
-        result[x.key().c_str()] = j2py(val);
-      }
-      return result;
-    }
-    else if (input.is_array()) {
-      pybind11::list result;
-      for (int i = 0; i < input.size(); i++)
-        result.append(j2py(input[i]));
-      return result;
-    }
-    else
-      throw std::runtime_error("Unkown json to pybind11 object type conversion");
-  }
-
-  class FRMOCK : public Iyathuum::FunctionRelay {
-
-    virtual nlohmann::json call(size_t id, const nlohmann::json&) override{
-      throw std::runtime_error("AWASDASD");
-    }
-  };
-
   Iyathuum::FunctionRelay& PythonEngine::getRelay() {
-    return *new FRMOCK();
+    return *_pimpl->relay;
   }
 }
