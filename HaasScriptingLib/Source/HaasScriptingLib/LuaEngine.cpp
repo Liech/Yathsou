@@ -1,4 +1,4 @@
-#include "ScriptEngine.h"
+#include "LuaEngine.h"
 
 #include <stdexcept>
 #include <sstream>
@@ -8,7 +8,7 @@
 
 namespace Haas
 {
-  ScriptEngine::ScriptEngine()
+  LuaEngine::LuaEngine()
   {
     _state = luaL_newstate();
     luaL_openlibs(_state);
@@ -19,12 +19,12 @@ namespace Haas
 
   }
 
-  ScriptEngine::~ScriptEngine()
+  LuaEngine::~LuaEngine()
   {
     lua_close(_state);
   }
   
-  void ScriptEngine::executeFile(const std::string& filename)
+  void LuaEngine::executeFile(const std::string& filename)
   {
     if (luaL_loadfile(_state, filename.c_str()) == LUA_OK) {
       int returnCode = lua_pcall(_state, 0, LUA_MULTRET, 0);
@@ -39,7 +39,7 @@ namespace Haas
     }
   }
 
-  void ScriptEngine::executeString(const std::string& str) {
+  void LuaEngine::executeString(const std::string& str) {
     int returnCode = luaL_dostring(_state, str.c_str());    
     if (returnCode != LUA_OK) {
       std::string lined = "";
@@ -57,7 +57,7 @@ namespace Haas
     }
   }
 
-  void ScriptEngine::registerFunction(const std::string& name, std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> call)
+  void LuaEngine::registerFunction(const std::string& name, std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> call)
   {
     //https://stackoverflow.com/questions/61071267/how-to-reference-this-in-a-lambda-used-with-a-lua-script
     _registry.push_back(call);
@@ -65,7 +65,7 @@ namespace Haas
    
     auto callFunction = [](lua_State* L) -> int
     {
-      ScriptEngine* This = (ScriptEngine*)lua_topointer(L, lua_upvalueindex(1));
+      LuaEngine* This = (LuaEngine*)lua_topointer(L, lua_upvalueindex(1));
       int pos = (int)lua_topointer(L, lua_upvalueindex(2));
       
       nlohmann::json input;
@@ -83,7 +83,7 @@ namespace Haas
 
   }
 
-  nlohmann::json ScriptEngine::callScript(const std::string& name, const nlohmann::json& input)
+  nlohmann::json LuaEngine::callScript(const std::string& name, const nlohmann::json& input)
   {
     nlohmann::json result;
     lua_getglobal(_state, name.c_str());
@@ -99,7 +99,7 @@ namespace Haas
     return result;
   }
 
-  void ScriptEngine::dumpStack()
+  void LuaEngine::dumpStack()
   {
     int top = lua_gettop(_state);
     //printf("(%s,%d) top=%d\n", func, line, top);
@@ -127,7 +127,7 @@ namespace Haas
     }
   }
 
-  void ScriptEngine::dumpGlobalVariables(bool fullPrint)
+  void LuaEngine::dumpGlobalVariables(bool fullPrint)
   {
     lua_pushglobaltable(_state);       // Get global table
     lua_pushnil(_state);               // put a nil key on stack
@@ -140,7 +140,7 @@ namespace Haas
     lua_pop(_state, 1);                 // remove global table(-1)
   }
 
-  std::string ScriptEngine::popStr(int pos)
+  std::string LuaEngine::popStr(int pos)
   {
     if (lua_isnumber(_state, pos))
       return std::to_string(lua_tonumber(_state, pos));
@@ -150,7 +150,7 @@ namespace Haas
     throw std::runtime_error("Unkown");
   }
 
-  void ScriptEngine::printTop(int indentation)
+  void LuaEngine::printTop(int indentation)
   {
     std::string indent = "";
     for (int i = 0; i < indentation; i++)
@@ -193,7 +193,7 @@ namespace Haas
    }
   }
 
-  void ScriptEngine::toJson(nlohmann::json& result)
+  void LuaEngine::toJson(nlohmann::json& result)
   {
     std::string indent = "";
     int top = lua_gettop(_state);
@@ -263,7 +263,7 @@ namespace Haas
     }
   }
 
-  void ScriptEngine::toTable(const nlohmann::json& value)
+  void LuaEngine::toTable(const nlohmann::json& value)
   {
     if (value.type_name() == "number")
     {
@@ -319,12 +319,12 @@ namespace Haas
     }
   }
 
-  void ScriptEngine::setVar(const std::string& name, const nlohmann::json& value) {
+  void LuaEngine::setVar(const std::string& name, const nlohmann::json& value) {
     toTable(value);
     lua_setglobal(_state, name.c_str());
   }
 
-  nlohmann::json ScriptEngine::getVar(const std::string& name)
+  nlohmann::json LuaEngine::getVar(const std::string& name)
   {
     lua_getglobal(_state, name.c_str());
     nlohmann::json result;
@@ -333,7 +333,7 @@ namespace Haas
     return result;
   }
 
-  std::string ScriptEngine::cleanComments(const std::string& code, char symbol){
+  std::string LuaEngine::cleanComments(const std::string& code, char symbol){
     std::string result = "";
     std::string current = "";
     std::istringstream f(code);

@@ -5,7 +5,7 @@
 #include <fstream>
 #include <filesystem>
 
-#include "HaasScriptingLib/ScriptEngine.h"
+#include "HaasScriptingLib/LuaEngine.h"
 #include <nlohmann/json.hpp>
 #include "AezeselFileIOLib/SupremeCommander/SCD.h"
 
@@ -50,13 +50,13 @@ namespace Athanah {
       return 1;
     }
     );
-    Haas::ScriptEngine script;
+    Haas::LuaEngine script;
     script.registerFunction("UnitBlueprint", UnitBlueprint);
     script.registerFunction("Sound", soundCall);
     
     std::string path = name + "\\" + name + "_unit.bp";
     std::string str = _archive->loadTextFile(path);
-    str = Haas::ScriptEngine::cleanComments(str);
+    str = Haas::LuaEngine::cleanComments(str);
     script.executeString(str);
     if (!called) {
       _loadedUnits[name] = std::make_shared<const Blueprint>(name);

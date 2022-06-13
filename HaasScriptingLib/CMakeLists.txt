@@ -8,13 +8,13 @@ find_package(lua REQUIRED)
 ############################################################################
 ############################################################################
 set(Header_Files
-    "Source/HaasScriptingLib/ScriptEngine.h"
+    "Source/HaasScriptingLib/LuaEngine.h"
     "Source/HaasScriptingLib/PythonEngine.h"
 )
 source_group("Header Files" FILES ${Header_Files})
 
 set(Source_Files
-    "Source/HaasScriptingLib/ScriptEngine.cpp"
+    "Source/HaasScriptingLib/LuaEngine.cpp"
     "Source/HaasScriptingLib/PythonEngine.cpp"
 )
 source_group("Source Files" FILES ${Source_Files})

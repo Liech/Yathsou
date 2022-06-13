@@ -10,11 +10,11 @@ struct lua_State;
 
 namespace Haas
 {
-  class ScriptEngine
+  class LuaEngine
   {
   public:
-    ScriptEngine();
-    ~ScriptEngine();
+    LuaEngine();
+    ~LuaEngine();
 
     static std::string cleanComments(const std::string& code, char symbol = '#'); //supreme commander bp files uses this unauthorized comment
 
