@@ -24,6 +24,7 @@ namespace Haas {
     void dispose();
     
     void execute(const std::string& pythonCode);
+    void executeFile(const std::string& filename);
 
     size_t numberOfApis() const;
     Iyathuum::API& getAPI(size_t number);

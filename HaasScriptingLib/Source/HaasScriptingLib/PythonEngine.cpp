@@ -13,6 +13,8 @@
 #include <pybind11/complex.h>
 
 #include <iostream>
+#include <fstream>
+#include <filesystem>
 
 
 namespace Haas {
@@ -81,6 +83,16 @@ namespace Haas {
       std::cout << e.what() << std::endl;
       throw;
     }
+  }
+
+  void PythonEngine::executeFile(const std::string& filename) {
+    if (!std::filesystem::exists(filename))
+      throw std::runtime_error("File not found!");
+
+    std::ifstream t(filename);
+    std::string str((std::istreambuf_iterator<char>(t)),
+      std::istreambuf_iterator<char>());
+    execute(str);
   }
 
   void PythonEngine::dispose() {
