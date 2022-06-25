@@ -6,8 +6,12 @@
 #include <iostream>
 #include <nlohmann/json.hpp>
 
+#include <IyathuumCoreLib/API/API.h>
+#include <IyathuumCoreLib/API/APIFunction.h>
+
 #include "Conversion.h"
 #include "FunctionRelay.h"
+
 
 namespace Haas {
   namespace Lua {
@@ -20,11 +24,27 @@ namespace Haas {
 
 
     LuaEngine::LuaEngine() {
+      initialize();
+    }
+
+    LuaEngine::LuaEngine(std::vector<std::unique_ptr<Iyathuum::API>>& apis) {
+      initialize();
+
+      for (auto& x : apis) {
+        for (size_t i = 0; i < x->numberOfFunctions(); i++) {
+          auto fun = x->getFunction(i);
+          registerFunction(fun.getName(), [&fun](const nlohmann::json& input) { return fun.call(input); });
+        }
+        _apis.push_back(std::move(x));
+      }
+    }
+
+    void LuaEngine::initialize() {
       _pimpl = std::make_unique<Lua::LuaEngine::pimpl>();
-      _relay      = std::make_unique<Lua::FunctionRelay>();
-      _pimpl->_state      = luaL_newstate();
+      _relay = std::make_unique<Lua::FunctionRelay>();
+      _pimpl->_state = luaL_newstate();
       _pimpl->_conversion = std::make_unique<Lua::Conversion>(_pimpl->_state, *_relay);
-      
+
       luaL_openlibs(_pimpl->_state);
     }
 
@@ -189,6 +209,10 @@ namespace Haas {
         result = result + current.substr(0, i) + "\n";
       }
       return result;
+    }
+
+    Iyathuum::FunctionRelay& LuaEngine::getRelay() {
+      return *_relay;
     }
   }
 }
