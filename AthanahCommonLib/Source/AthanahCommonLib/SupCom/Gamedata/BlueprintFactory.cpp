@@ -5,7 +5,7 @@
 #include <fstream>
 #include <filesystem>
 
-#include "HaasScriptingLib/LuaEngine.h"
+#include "HaasScriptingLib/Lua/LuaEngine.h"
 #include <nlohmann/json.hpp>
 #include "AezeselFileIOLib/SupremeCommander/SCD.h"
 
@@ -21,11 +21,9 @@ namespace Athanah {
   }
 
   void BlueprintFactory::init() {
-    soundCall = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
-      [](const nlohmann::json& input) -> nlohmann::json {
-        return input;
-      }
-    );
+    soundCall = [](const nlohmann::json& input) -> nlohmann::json {
+      return input;
+    };
 
     for (const auto& entry : _archive->getDirectories()) {
       if (_archive->fileExists(entry + "\\" + entry + "_unit.bp")) {
@@ -42,21 +40,19 @@ namespace Athanah {
       return _loadedUnits[name];
 
     bool called = false;
-    std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> UnitBlueprint = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
-      [&](const nlohmann::json& input) -> nlohmann::json
-    {
+    std::function<nlohmann::json(const nlohmann::json&)> UnitBlueprint = [&](const nlohmann::json& input) -> nlohmann::json {
       called = true;
-      _loadedUnits[name] = std::make_shared<const Blueprint>(name,input);
+      _loadedUnits[name] = std::make_shared<const Blueprint>(name, input);
       return 1;
-    }
-    );
-    Haas::LuaEngine script;
+    };
+
+    Haas::Lua::LuaEngine script;
     script.registerFunction("UnitBlueprint", UnitBlueprint);
     script.registerFunction("Sound", soundCall);
     
     std::string path = name + "\\" + name + "_unit.bp";
     std::string str = _archive->loadTextFile(path);
-    str = Haas::LuaEngine::cleanComments(str);
+    str = Haas::Lua::LuaEngine::cleanComments(str);
     script.executeString(str);
     if (!called) {
       _loadedUnits[name] = std::make_shared<const Blueprint>(name);

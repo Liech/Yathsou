@@ -34,6 +34,6 @@ namespace Athanah {
     std::vector<std::string>                                _availableUnits;
     std::map<std::string, std::shared_ptr<const Blueprint>> _loadedUnits;
 
-    std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> soundCall;
+    std::function<nlohmann::json(const nlohmann::json&)> soundCall;
   };
 }

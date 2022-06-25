@@ -7,25 +7,40 @@ find_package(lua REQUIRED)
 ############################################################################
 ############################################################################
 ############################################################################
-set(Header_Files
-    "Source/HaasScriptingLib/LuaEngine.h"
-    "Source/HaasScriptingLib/PythonEngine.h"
-    "Source/HaasScriptingLib/PyFunctionRelay.h"
-    "Source/HaasScriptingLib/PyConversion.h"
+set(Header_FilesLua
+    "Source/HaasScriptingLib/Lua/LuaEngine.h"
+    "Source/HaasScriptingLib/Lua/Conversion.h"
+    "Source/HaasScriptingLib/Lua/FunctionRelay.h"
 )
-source_group("Header Files" FILES ${Header_Files})
+source_group("Header Files/Lua" FILES ${Header_FilesLua})
 
-set(Source_Files
-    "Source/HaasScriptingLib/LuaEngine.cpp"
-    "Source/HaasScriptingLib/PythonEngine.cpp"
-    "Source/HaasScriptingLib/PyFunctionRelay.cpp"
-    "Source/HaasScriptingLib/PyConversion.cpp"
+set(Source_FilesLua
+    "Source/HaasScriptingLib/Lua/LuaEngine.cpp"
+    "Source/HaasScriptingLib/Lua/Conversion.cpp"
+    "Source/HaasScriptingLib/Lua/FunctionRelay.cpp"
 )
-source_group("Source Files" FILES ${Source_Files})
+source_group("Source Files/Lua" FILES ${Source_FilesLua})
+
+set(Header_FilesPy
+    "Source/HaasScriptingLib/Python/PythonEngine.h"
+    "Source/HaasScriptingLib/Python/FunctionRelay.h"
+    "Source/HaasScriptingLib/Python/Conversion.h"
+)
+source_group("Header Files/Python" FILES ${Header_FilesPy})
+
+set(Source_FilesPy
+    "Source/HaasScriptingLib/Python/PythonEngine.cpp"
+    "Source/HaasScriptingLib/Python/FunctionRelay.cpp"
+    "Source/HaasScriptingLib/Python/Conversion.cpp"
+)
+source_group("Source Files/Python" FILES ${Source_FilesPy})
+
 
 set(ALL_FILES
-    ${Header_Files}
-    ${Source_Files}
+    ${Header_FilesPy}
+    ${Source_FilesPy}
+    ${Header_FilesLua}
+    ${Source_FilesLua}
     ${lib}
 )
 

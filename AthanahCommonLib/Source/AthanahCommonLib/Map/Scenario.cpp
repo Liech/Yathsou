@@ -4,19 +4,17 @@
 #include <fstream>
 
 #include <nlohmann/json.hpp>
-#include "HaasScriptingLib/LuaEngine.h"
+#include "HaasScriptingLib/Lua/LuaEngine.h"
 
 namespace Athanah {
   Scenario::Scenario(const std::string& path) {
     _path = path;
 
-    Haas::LuaEngine script;
-    std::shared_ptr<std::function<nlohmann::json(const nlohmann::json&)>> STRING = std::make_shared< std::function<nlohmann::json(const nlohmann::json&)>>(
-      [&](const nlohmann::json& input) -> nlohmann::json
-    {
+    Haas::Lua::LuaEngine script;
+    auto STRING = [&](const nlohmann::json& input) -> nlohmann::json {
       return 1;
-    }
-    );
+    };
+
     script.registerFunction("STRING", STRING);
 
 
@@ -25,7 +23,7 @@ namespace Athanah {
     std::ifstream t(path);
     std::string str((std::istreambuf_iterator<char>(t)),
       std::istreambuf_iterator<char>());
-    str = Haas::LuaEngine::cleanComments(str);
+    str = Haas::Lua::LuaEngine::cleanComments(str);
 
     script.executeString(str);
     nlohmann::json version = script.getVar("version");
