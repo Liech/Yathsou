@@ -35,7 +35,6 @@ namespace Haas {
       PythonEngine();
 
       bool                                          _initialized = false;
-      std::vector<std::unique_ptr<Iyathuum::API>>   _apis;
 
       class pimpl;
       std::unique_ptr<pimpl> _pimpl;

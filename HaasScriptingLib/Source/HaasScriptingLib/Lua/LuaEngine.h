@@ -4,6 +4,7 @@
 #include <functional>
 #include <set>
 #include <memory>
+#include <vector>
 #include <nlohmann/json_fwd.hpp>
 
 namespace Iyathuum {
@@ -21,8 +22,9 @@ namespace Haas {
     class LuaEngine {
       public:
       LuaEngine();
-      LuaEngine(std::vector<std::unique_ptr<Iyathuum::API>>&);
       ~LuaEngine();
+
+      void addApi(std::unique_ptr<Iyathuum::API>);
 
       static std::string cleanComments(const std::string& code, char symbol = '#'); //supreme commander bp files uses this unauthorized comment
 
@@ -40,7 +42,6 @@ namespace Haas {
       void dumpGlobalVariables(bool fullPrint);
 
       std::unique_ptr<Lua::FunctionRelay>         _relay;
-      std::vector<std::unique_ptr<Iyathuum::API>> _apis;
 
       class pimpl; //for handing over in registerFunction
       std::unique_ptr<pimpl> _pimpl; 

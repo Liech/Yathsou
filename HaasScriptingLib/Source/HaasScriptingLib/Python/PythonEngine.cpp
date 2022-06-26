@@ -23,6 +23,7 @@ namespace Haas {
       public:
       pybind11::module_ mainModule;
       std::unique_ptr<Python::FunctionRelay> relay = nullptr;
+      std::vector<std::unique_ptr<Iyathuum::API>>   _apis;
     };
 
     PythonEngine& PythonEngine::instance() {
@@ -103,15 +104,15 @@ namespace Haas {
 
     void PythonEngine::addAPI(std::unique_ptr<Iyathuum::API> api) {
       assert(!_initialized);
-      _apis.push_back(std::move(api));
+      _pimpl->_apis.push_back(std::move(api));
     }
 
     size_t PythonEngine::numberOfApis() const {
-      return _apis.size();
+      return _pimpl->_apis.size();
     }
 
     Iyathuum::API& PythonEngine::getAPI(size_t number) {
-      return *_apis[number];
+      return *_pimpl->_apis[number];
     }
 
     Iyathuum::FunctionRelay& PythonEngine::getRelay() {

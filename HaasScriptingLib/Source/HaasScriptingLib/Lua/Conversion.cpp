@@ -2,6 +2,8 @@
 
 #include <lua.hpp>
 
+#include "FunctionRelay.h"
+
 namespace Haas {
   namespace Lua {
     Conversion::Conversion(lua_State* state, Lua::FunctionRelay& relay) 
@@ -60,7 +62,7 @@ namespace Haas {
         return;
       }
 
-      auto assign = [this](nlohmann::json& target, nlohmann::json value) {
+      auto assign = [this](nlohmann::json& target, const nlohmann::json& value) {
 
         if (lua_isnumber(_state, -2)) {
           float nr = lua_tonumber(_state, -2);
@@ -94,6 +96,9 @@ namespace Haas {
           nlohmann::json sub;
           toJson(sub);
           assign(result, sub);
+        }
+        else if (lua_isfunction(_state, -1)) {
+          assign(result,_relay.addFunction());
         }
         else
           throw std::runtime_error("Unkown Type");

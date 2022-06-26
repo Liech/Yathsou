@@ -19,7 +19,8 @@ namespace Haas {
       public:
       lua_State*                                                        _state;
       std::unique_ptr<Lua::Conversion>                                  _conversion;
-      std::vector<std::function<nlohmann::json(const nlohmann::json&)>> _registry;
+      std::vector<std::function<nlohmann::json(const nlohmann::json&)>> _registry;      
+      std::vector<std::unique_ptr<Iyathuum::API>> _apis;
     };
 
 
@@ -27,22 +28,21 @@ namespace Haas {
       initialize();
     }
 
-    LuaEngine::LuaEngine(std::vector<std::unique_ptr<Iyathuum::API>>& apis) {
-      initialize();
-
-      for (auto& x : apis) {
-        for (size_t i = 0; i < x->numberOfFunctions(); i++) {
-          auto fun = x->getFunction(i);
-          registerFunction(fun.getName(), [&fun](const nlohmann::json& input) { return fun.call(input); });
-        }
-        _apis.push_back(std::move(x));
+    void LuaEngine::addApi(std::unique_ptr<Iyathuum::API> api){
+      int apiIndex = _pimpl->_apis.size();
+      for (size_t i = 0; i < api->numberOfFunctions(); i++) {
+        auto fun = api->getFunction(i);
+        registerFunction(fun.getName(), [this, i,apiIndex](const nlohmann::json& input) {
+          return _pimpl->_apis[apiIndex]->getFunction(i).call(input);
+          });
       }
+      _pimpl->_apis.push_back(std::move(api));
     }
 
-    void LuaEngine::initialize() {
+    void LuaEngine::initialize() { 
       _pimpl = std::make_unique<Lua::LuaEngine::pimpl>();
-      _relay = std::make_unique<Lua::FunctionRelay>();
       _pimpl->_state = luaL_newstate();
+      _relay = std::make_unique<Lua::FunctionRelay>(_pimpl->_state);
       _pimpl->_conversion = std::make_unique<Lua::Conversion>(_pimpl->_state, *_relay);
 
       luaL_openlibs(_pimpl->_state);
