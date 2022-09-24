@@ -33,8 +33,10 @@ namespace Ahwassa {
       size_t resize  = input["Resize" ];
 
       _window = std::make_unique<Window>(title, resolution);
-      _window->Startup = [&relay, startup]() {relay.call(startup, nlohmann::json()); };
-      _window->Update  = [&relay, update ]() {relay.call(update , nlohmann::json()); };
+      _window->Startup = [&relay, startup]() {
+        relay.call(startup, nlohmann::json()); };
+      _window->Update  = [&relay, update ]() {
+        relay.call(update , nlohmann::json()); };
 
       _window->Resize  = [&relay, resize ](const glm::ivec2& resolution) {
         nlohmann::json res = nlohmann::json::array( { resolution[0],resolution[1]});

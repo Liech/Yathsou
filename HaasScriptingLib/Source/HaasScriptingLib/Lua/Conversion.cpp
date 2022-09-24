@@ -11,7 +11,6 @@ namespace Haas {
       _state = state;
     }
 
-
     void Conversion::toJson(nlohmann::json& result) {
       std::string indent = "";
       int top = lua_gettop(_state);
@@ -31,6 +30,9 @@ namespace Haas {
         }
         else if (lua_isboolean(_state, -1)) {
           result = lua_toboolean(_state, -1);
+        }
+        else if (lua_isnil(_state, -1)) {
+          result = nlohmann::json();
         }
         else {
             int top = lua_gettop(_state);
@@ -107,7 +109,8 @@ namespace Haas {
     }
 
     void Conversion::toTable(const nlohmann::json& value) {
-      if (value.type_name() == "number") {
+      std::string t = value.type_name();
+      if (t == "number"|| t == "number_integer") {
         if (value.is_number_float()) {
           float v = value;
           lua_pushnumber(_state, v);
@@ -117,18 +120,18 @@ namespace Haas {
           lua_pushnumber(_state, v);
         }
       }
-      else if (value.type_name() == "boolean") {
+      else if (t == "boolean") {
         bool v = value;
         lua_pushboolean(_state, v);
       }
-      else if (value.type_name() == "string") {
+      else if (t == "string") {
         std::string v = value;
         lua_pushstring(_state, v.c_str());
       }
-      else if (value.type_name() == "binary") {
+      else if (t == "binary") {
         throw std::runtime_error("Not implemented yet!");
       }
-      else if (value.type_name() == "array") {
+      else if (t == "array") {
         lua_newtable(_state);
         int count = 1;
         for (auto item : value.items()) {
@@ -139,7 +142,7 @@ namespace Haas {
           count++;
         }
       }
-      else if (value.type_name() == "object") {
+      else if (t == "object") {
         lua_newtable(_state);
         for (auto item : value.items()) {
           std::string    key = item.key();
@@ -148,6 +151,9 @@ namespace Haas {
           toTable(value);
           lua_settable(_state, -3);
         }
+      }
+      else if (value.is_null())         {
+        lua_pushnil(_state);
       }
     }
 
