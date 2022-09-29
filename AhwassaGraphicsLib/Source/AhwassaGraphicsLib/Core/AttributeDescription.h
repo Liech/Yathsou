@@ -2,6 +2,7 @@
 
 #include <string>
 #include <stdexcept>
+#include <nlohmann/json.hpp>
 
 namespace Ahwassa {
   struct AttributeDescription {
@@ -12,6 +13,7 @@ namespace Ahwassa {
     };
 
     AttributeDescription(const std::string& _name, const int& _size, const DataType& _type, bool instancing = false);
+    AttributeDescription(const nlohmann::json&);
 
     size_t                         getSize()         const;
     size_t                         getSizeOf()       const;
@@ -21,9 +23,9 @@ namespace Ahwassa {
     bool                           isInstancing()    const;
 
   private:
-    std::string name;
-    int         size;
-    DataType    type;
+    std::string name              ;
+    int         size              ;
+    DataType    type              ;
     bool        instancing = false;
   };
 }

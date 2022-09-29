@@ -9,6 +9,26 @@ namespace Ahwassa {
     instancing = _instancing;
   }
 
+  AttributeDescription::AttributeDescription(const nlohmann::json& input){
+    name       = input["Name"];
+    size       = input["Size"];
+
+    if (input.contains("Instancing"))
+      instancing = input["Instancing"];
+    else
+      instancing = false;
+
+    std::string strType = input["Type"];
+    if (strType == "Float")
+      type = DataType::Float;
+    else if (strType == "Char")
+      type = DataType::Char;
+    else if (strType == "UInt")
+      type = DataType::UInt;
+    else
+      throw std::runtime_error("Unkown Type. Use Float/Char/UInt");
+  }
+
   std::string AttributeDescription::getName() const {
     return name;
   }
