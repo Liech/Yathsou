@@ -7,7 +7,7 @@
 #include "IyathuumCoreLib/API/APIFunction.h"
 #include "IyathuumCoreLib/API/FunctionRelay.h"
 
-#include "AhwassaGraphicsLib/BufferObjects/VBO.h"
+#include "AhwassaGraphicsLib/BufferObjects/SVBO.h"
 
 namespace Ahwassa {
   BufferAPI& BufferAPI::instance() {
@@ -27,21 +27,62 @@ namespace Ahwassa {
     std::unique_ptr<Iyathuum::APIFunction> create = std::make_unique<Iyathuum::APIFunction>("createVBO", [&relay, this](const nlohmann::json& input) {
       std::cout << "scripting:createVBO" << std::endl;
 
-      std::vector<AttributeDescription> desc;
+      std::vector<AttributeDescription> description;
       for (auto& x : input["Description"])
-        desc.push_back(AttributeDescription(x));
+        description.push_back(AttributeDescription(x));
 
       int structSize = 0;
-      for (auto& x : desc)
+      for (auto& x : description)
         structSize += x.getSize();
 
       const nlohmann::json& vertecies = input["Data"];
+      size_t amountVertices = vertecies.size();
 
       std::vector<unsigned char> rawData;
+      rawData.resize(amountVertices * structSize);
+      size_t position = 0;
+      for (size_t i = 0; i < amountVertices; i++) {
+        const nlohmann::json& vertex = vertecies[i];
+        for (auto& desc : description) {
+          int dimensions = desc.getSize();
+          for (int dimension = 0; i < dimensions; dimension++) {
+            if (desc.getType() == AttributeDescription::DataType::Char) {
+              int data;
+              if (dimensions == 1)
+                data = vertex[desc.getName()];
+              else
+                data = vertex[desc.getName()][dimension];
+              *(rawData.data() + position) = (char)data;
 
-      throw std::runtime_error("Raw data out of serialized data is hard :(");
+              const int charSize = 1;
+              position += charSize;
+            }
+            else if (desc.getType() == AttributeDescription::DataType::Float) {
+              float data;
+              if (dimensions == 1)
+                data = vertex[desc.getName()];
+              else
+                data = vertex[desc.getName()][dimension];
+              *(rawData.data() + position) = data;
 
-      std::shared_ptr<IVBO> buffer = std::make_shared<IVBO>(vertecies.size(), structSize, rawData.data());
+              const int floatSize = 4;
+              position += floatSize;
+            }
+            else if (desc.getType() == AttributeDescription::DataType::UInt) {
+              unsigned int data;
+              if (dimensions == 1)
+                data = vertex[desc.getName()];
+              else
+                data = vertex[desc.getName()][dimension];
+              *(rawData.data() + position) = data;
+
+              const int uintSize = 4;
+              position += uintSize;
+            }
+          }
+        }
+      }
+      std::shared_ptr<SVBO> buffer = std::make_shared<SVBO>(amountVertices, rawData.data(), description);
       _vbos[input["Name"]] = buffer;
       return nlohmann::json();
       });

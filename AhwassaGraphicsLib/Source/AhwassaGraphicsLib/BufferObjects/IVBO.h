@@ -5,7 +5,7 @@
 namespace Ahwassa {
   struct AttributeDescription;
 
-  class IVBO {
+  class IVBO { //VBO Interface
   public:
     IVBO(size_t size, size_t structsize, const void* pos);
     virtual ~IVBO();

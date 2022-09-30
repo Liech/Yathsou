@@ -10,6 +10,8 @@ namespace Iyathuum {
 }
 
 namespace Ahwassa {
+  class IVBO;
+
   class BufferAPI {
     public:
     static BufferAPI& instance();
