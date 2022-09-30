@@ -17,7 +17,7 @@ namespace Haas {
   namespace Lua {
     class LuaEngine::pimpl {
       public:
-      lua_State*                                                        _state;
+      lua_State*                                                        _state     = nullptr;
       std::unique_ptr<Lua::Conversion>                                  _conversion;
       std::vector<std::function<nlohmann::json(const nlohmann::json&)>> _registry;      
       std::vector<std::unique_ptr<Iyathuum::API>> _apis;

@@ -4,6 +4,7 @@
 
 #include "API/WindowAPI.h"
 #include "API/ShaderAPI.h"
+#include "API/BufferAPI.h"
 
 namespace Ahwassa {
   std::unique_ptr<Iyathuum::API> API::getAPI(Iyathuum::FunctionRelay& relay) {
@@ -11,7 +12,7 @@ namespace Ahwassa {
 
     WindowAPI::instance().add(*result, relay);
     ShaderAPI::instance().add(*result, relay);
-    
+    BufferAPI::instance().add(*result, relay);
 
     return std::move(result);
   }
