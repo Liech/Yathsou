@@ -22,6 +22,8 @@ namespace Ahwassa {
     AttributeDescription::DataType getType()         const;
     bool                           isInstancing()    const;
 
+    nlohmann::json toJson() const;
+
   private:
     std::string name              ;
     int         size              ;

@@ -89,7 +89,8 @@ namespace Haas {
             assign(result, number);
         }
         else if (lua_isboolean(_state, -1)) {
-          assign(result, lua_toboolean(_state, -1));
+          bool val = lua_toboolean(_state, -1);
+          assign(result, val);
         }
         else if (lua_isstring(_state, -1)) {
           assign(result, popStr(-1));

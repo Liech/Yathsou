@@ -14,7 +14,7 @@ namespace Ahwassa {
     size       = input["Size"];
 
     if (input.contains("Instancing"))
-      instancing = input["Instancing"];
+      instancing = (bool)input["Instancing"];
     else
       instancing = false;
 
@@ -81,4 +81,22 @@ namespace Ahwassa {
     }
     throw std::runtime_error("unkown type");
   }
+  
+  nlohmann::json AttributeDescription::toJson() const{
+    nlohmann::json result;
+
+    result["Name"]       = name;
+    result["Size"]       = size;
+    result["Instancing"] = instancing;
+
+    if (type == DataType::Float)
+      result["Type"] = "Float";
+    else if (type == DataType::Char)
+      result["Type"] = "Char";
+    else if (type == DataType::UInt)
+      result["Type"] = "UInt";
+    
+    return result;
+  }
+
 }

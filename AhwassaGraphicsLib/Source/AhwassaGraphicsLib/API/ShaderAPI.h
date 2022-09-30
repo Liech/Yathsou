@@ -24,8 +24,10 @@ namespace Ahwassa {
     private:
       ShaderAPI() = default;
 
-      void createFloatUniform(Iyathuum::API&, Iyathuum::FunctionRelay& relay);
-      void createShader      (Iyathuum::API&, Iyathuum::FunctionRelay& relay);
+      void setValueFloatUniform(Iyathuum::API&, Iyathuum::FunctionRelay& relay);
+      void createFloatUniform  (Iyathuum::API&, Iyathuum::FunctionRelay& relay);
+      void createShader        (Iyathuum::API&, Iyathuum::FunctionRelay& relay);
+      void positionVertex      (Iyathuum::API&, Iyathuum::FunctionRelay& relay);
 
       std::map<std::string, std::shared_ptr<Uniform>>       _uniforms;
       std::map<std::string, std::unique_ptr<ShaderProgram>> _programs;
