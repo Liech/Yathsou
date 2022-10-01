@@ -8,6 +8,7 @@
 #include "IyathuumCoreLib/API/FunctionRelay.h"
 
 #include "AhwassaGraphicsLib/BufferObjects/SVBO.h"
+#include "AhwassaGraphicsLib/BufferObjects/IBO.h"
 
 namespace Ahwassa {
   BufferAPI& BufferAPI::instance() {
@@ -20,7 +21,47 @@ namespace Ahwassa {
   }
 
   void BufferAPI::add(Iyathuum::API& api, Iyathuum::FunctionRelay& relay) {
-    createVBO(api, relay);
+    createVBO (api, relay);
+    createIBO (api, relay);
+    drawBuffer(api, relay);
+  }
+
+  void BufferAPI::drawBuffer(Iyathuum::API& api, Iyathuum::FunctionRelay& relay) {
+    std::unique_ptr<Iyathuum::APIFunction> create = std::make_unique<Iyathuum::APIFunction>("drawIBO", [&relay, this](const nlohmann::json& input) {
+      std::cout << "scripting:drawBuffer" << std::endl;
+      nlohmann::json result = nlohmann::json::array();
+      return result;
+      });
+    create->setDescription(
+      R"(
+
+    )");
+    api.addFunction(std::move(create));
+  }
+
+  void BufferAPI::createIBO(Iyathuum::API& api, Iyathuum::FunctionRelay& relay) {
+    std::unique_ptr<Iyathuum::APIFunction> create = std::make_unique<Iyathuum::APIFunction>("createIBO", [&relay, this](const nlohmann::json& input) {
+      std::cout << "scripting:createIBO" << std::endl;
+      nlohmann::json result = nlohmann::json::array();
+      std::string name = input["Name"];
+      std::vector<int> data;
+      data.reserve(input["Data"].size());
+      for (auto& x : input["Data"])
+        result.push_back(x);
+      _ibos[name] = std::make_shared<IBO>(data);
+      return result;
+      });
+    create->setDescription(
+      R"(
+Creates an Index Buffer
+
+Syntax:
+  {
+    "Name" : "Name",
+    "Data" : [0,1,2,3,4,...]
+  }
+    )");
+    api.addFunction(std::move(create));
   }
 
   void BufferAPI::createVBO(Iyathuum::API& api, Iyathuum::FunctionRelay& relay) {
