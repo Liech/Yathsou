@@ -12,6 +12,7 @@ namespace Iyathuum {
 namespace Ahwassa {
   class IVBO;
   class IBO;
+  class VAO;
 
   class BufferAPI {
     public:
@@ -29,6 +30,7 @@ namespace Ahwassa {
       void createIBO (Iyathuum::API&, Iyathuum::FunctionRelay& relay);
 
       std::map<std::string, std::shared_ptr<IVBO>> _vbos;
+      std::map<std::string, std::shared_ptr<VAO>>  _vaos;
       std::map<std::string, std::shared_ptr<IBO>>  _ibos;
   };
 }

@@ -29,7 +29,8 @@ namespace Haas {
             result = number;
         }
         else if (lua_isboolean(_state, -1)) {
-          result = lua_toboolean(_state, -1);
+          bool val = lua_toboolean(_state, -1);
+          result = val;
         }
         else if (lua_isnil(_state, -1)) {
           result = nlohmann::json();

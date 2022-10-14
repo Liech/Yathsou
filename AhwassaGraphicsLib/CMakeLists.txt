@@ -59,6 +59,8 @@ set(Header_Files__API
     "Source/AhwassaGraphicsLib/API/WindowAPI.h"
     "Source/AhwassaGraphicsLib/API/ShaderAPI.h"
     "Source/AhwassaGraphicsLib/API/BufferAPI.h"
+    "Source/AhwassaGraphicsLib/API/UtilAPI.h"
+    "Source/AhwassaGraphicsLib/API/GeometryAPI.h"
 )
 source_group("Header Files\\API" FILES ${Header_Files__API})
 
@@ -213,6 +215,8 @@ set(Source_Files__API
     "Source/AhwassaGraphicsLib/API/WindowAPI.cpp"
     "Source/AhwassaGraphicsLib/API/ShaderAPI.cpp"
     "Source/AhwassaGraphicsLib/API/BufferAPI.cpp"
+    "Source/AhwassaGraphicsLib/API/UtilAPI.cpp"
+    "Source/AhwassaGraphicsLib/API/GeometryAPI.cpp"
 )
 source_group("Source Files\\API" FILES ${Source_Files__API})
 

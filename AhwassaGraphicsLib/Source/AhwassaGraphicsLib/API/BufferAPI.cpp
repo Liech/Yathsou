@@ -9,6 +9,7 @@
 
 #include "AhwassaGraphicsLib/BufferObjects/SVBO.h"
 #include "AhwassaGraphicsLib/BufferObjects/IBO.h"
+#include "AhwassaGraphicsLib/BufferObjects/VAO.h"
 
 namespace Ahwassa {
   BufferAPI& BufferAPI::instance() {
@@ -29,12 +30,23 @@ namespace Ahwassa {
   void BufferAPI::drawBuffer(Iyathuum::API& api, Iyathuum::FunctionRelay& relay) {
     std::unique_ptr<Iyathuum::APIFunction> create = std::make_unique<Iyathuum::APIFunction>("drawIBO", [&relay, this](const nlohmann::json& input) {
       std::cout << "scripting:drawBuffer" << std::endl;
+
+      std::string indexBufferName  = input["IndexBuffer"];
+      std::string vertexBufferName = input["VertexBuffer"];
+
+      _ibos[indexBufferName]->draw(_vaos[vertexBufferName].get());
+
       nlohmann::json result = nlohmann::json::array();
       return result;
       });
     create->setDescription(
       R"(
+        Draws
 
+        {
+            "IndexBuffer" : "Name",
+            "VertexBuffer" : "Name"
+        }
     )");
     api.addFunction(std::move(create));
   }
@@ -125,6 +137,7 @@ Syntax:
       }
       std::shared_ptr<SVBO> buffer = std::make_shared<SVBO>(amountVertices, rawData.data(), description);
       _vbos[input["Name"]] = buffer;
+      _vaos[input["Name"]] = std::make_shared<VAO>(buffer.get());
       return nlohmann::json();
       });
     create->setDescription(
