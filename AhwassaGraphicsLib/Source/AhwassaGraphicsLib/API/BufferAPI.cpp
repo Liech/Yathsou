@@ -28,13 +28,20 @@ namespace Ahwassa {
   }
 
   void BufferAPI::drawBuffer(Iyathuum::API& api, Iyathuum::FunctionRelay& relay) {
-    std::unique_ptr<Iyathuum::APIFunction> create = std::make_unique<Iyathuum::APIFunction>("drawIBO", [&relay, this](const nlohmann::json& input) {
+    std::unique_ptr<Iyathuum::APIFunction> create = std::make_unique<Iyathuum::APIFunction>("drawBuffer", [&relay, this](const nlohmann::json& input) {
       std::cout << "scripting:drawBuffer" << std::endl;
 
-      std::string indexBufferName  = input["IndexBuffer"];
       std::string vertexBufferName = input["VertexBuffer"];
 
-      _ibos[indexBufferName]->draw(_vaos[vertexBufferName].get());
+      if (input.contains("IndexBuffer"))
+      {
+        std::string indexBufferName = input["IndexBuffer"];
+        _ibos[indexBufferName]->draw(_vaos[vertexBufferName].get());
+      }
+      else
+      {
+        _vaos[vertexBufferName]->draw();
+      }
 
       nlohmann::json result = nlohmann::json::array();
       return result;
@@ -44,7 +51,7 @@ namespace Ahwassa {
         Draws
 
         {
-            "IndexBuffer" : "Name",
+            "IndexBuffer" : "Name",  # optional
             "VertexBuffer" : "Name"
         }
     )");
@@ -97,8 +104,8 @@ Syntax:
       for (size_t i = 0; i < amountVertices; i++) {
         const nlohmann::json& vertex = vertecies[i];
         for (auto& desc : description) {
-          int dimensions = desc.getSize();
-          for (int dimension = 0; i < dimensions; dimension++) {
+          int dimensions = vertex[desc.getName()].size();
+          for (int dimension = 0; dimension < dimensions; dimension++) {
             if (desc.getType() == AttributeDescription::DataType::Char) {
               int data;
               if (dimensions == 1)
@@ -146,6 +153,7 @@ Creates an Vertex Buffer containing vertex data
 
 Syntax:
   {
+     "Name": "BufferName",
      "Description" : [{"Name": "position", "Type" : "Float", "Size": 3}, {"Name": "Other",...],
      "Data" : [
        {"position" : [0.0,0.0,0.0]}, "Other" : ...}

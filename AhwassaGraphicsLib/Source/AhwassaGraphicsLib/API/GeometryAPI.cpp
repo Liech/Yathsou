@@ -50,9 +50,19 @@ namespace Ahwassa {
       R"(
         Creates Cube
 
+        input:
         {
-           "Scale":1
+           
         }
+
+        output:
+        [
+          {
+           position=[0,0,0],
+           normal = [0,0,0]
+          },
+          ...
+        ]
     )");
     api.addFunction(std::move(create));
   }
